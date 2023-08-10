@@ -1,0 +1,206 @@
+---
+title: "Web of Science prelim analysis"
+format: html
+editor: visual
+---
+
+```{r setup}
+library(tidyverse)
+library(bib2df)
+library(here)
+library(litsearchr) ### remotes::install_github("elizagrames/litsearchr", ref = "main")
+library(igraph)
+library(ggraph)
+library(ggrepel)
+```
+
+## Description
+
+This script takes the top 2000 most relevant results from a Web of Science search using the following terms:
+
+<center>
+("satellite" <b>OR</b> "space-based" <b>OR</b> "remote observation" <b>OR</b> "remote sensing" <b>OR</b> "earth observation")
+<br><b>AND</b><br>
+("decision" <b>OR</b> "optimization" <b>OR</b> "risk analysis" <b>OR</b> "operational context" <b>OR</b> “management” <b>OR</b> “policy”)
+<br><b>AND</b><br>
+(“value\*” <b>OR</b> “valuation” <b>OR</b> “benefit\*”)
+</center>
+
+These results, in bibtex format including the full record and all citations, must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
+
+```{r clean bibtex}
+bib_raw_fs <- list.files(here('bibtex_raw'), full.names = TRUE)
+for(f in bib_raw_fs) {
+  # f <- bib_raw_fs[1]
+  bib_raw <- read_file(f)
+  bib_clean <- str_replace_all(bib_raw, '\\n   ', ' ')
+  f_out <- str_replace(f, '_raw', '_clean')
+  write_file(bib_clean, f_out)
+}
+```
+
+Now clean, read in the bibtex files and bind into a data.frame.
+
+```{r}
+bib_clean_fs <- list.files(here('bibtex_clean'), full.names = TRUE)
+
+all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
+  bind_rows() %>%
+  janitor::clean_names()
+
+topic_df <- all_fields_df %>%
+  select(category, year, 
+         title, abstract, keywords, keywords_plus, 
+         web_of_science_categories, research_areas)
+```
+
+## Use `litsearchr` functionality
+
+### Identify useful terms from title
+
+Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::extract_terms`, as well as stop word elimination, to extract useful terms from titles.
+
+```{r}
+stop_vec <- stopwords::stopwords('en')
+title_terms <- extract_terms(text = topic_df$title,
+                             method = "fakerake", min_freq = 3, min_n = 2,
+                             stopwords = stop_vec)
+
+# abstr_terms <- extract_terms(text = topic_df$abstract,
+#                              method = "fakerake", min_freq = 3, min_n = 2,
+#                              stopwords = stop_vec)
+```
+ 
+
+### Create Co-Occurrence Network
+
+>We will consider the title and abstract of each article to represent the article’s “content” and we will consider a term to have appeared in the article if it appears in either the title or abstract. Based on this we will create the document-feature matrix, where the “documents” are our articles (title and abstract) and the “features” are the search terms. The Co-Occurrence Network is computed using this document-feature matrix.
+
+Uses `litsearchr::create_dfm()` to create a document-feature matrix and `litsearchr::create_network()` to create the co-occurrence network.
+
+```{r}
+topic_docs <- paste(topic_df$title, topic_df$abstract) 
+  ### we will consider title and abstract of each article to represent the article's "content"
+
+topic_dfm <- create_dfm(elements = topic_docs, 
+                        features = title_terms)
+
+topic_coocnet <- create_network(topic_dfm, min_studies = 3)
+
+ggraph(topic_coocnet, layout = "stress") +
+  coord_fixed() +
+  expand_limits(x = c(-3, 3)) +
+  geom_edge_link(aes(alpha = weight)) +
+  geom_node_point(shape = "circle filled", fill = "white") +
+  geom_node_text(aes(label = name), hjust = "outward", check_overlap = TRUE) +
+  guides(edge_alpha = "none") +
+  theme_void()
+```
+
+
+
+ 
+
+### Prune the Network based on node strength
+
+#### Compute node strength
+Node strength in a network is calculated by summing up the weights of all edges connected to the respective node.Thus, node strength investigates how strongly it is directly connected to other nodes in the network.
+
+# Prune the Network based on node strength
+gs_node_strength <- igraph::strength(gs_coocnet)
+gs_node_rankstrenght <- data.frame(term = names(gs_node_strength), strength = gs_node_strength, row.names = NULL)
+gs_node_rankstrenght$rank <- rank(gs_node_rankstrenght$strength, ties.method = "min")
+gs_node_rankstrenght <- gs_node_rankstrenght[order(gs_node_rankstrenght$rank),]
+gs_plot_strenght <-
+ggplot(gs_node_rankstrenght, aes(x = rank, y = strength, label = term)) +
+geom_line(lwd = 0.8) +
+geom_point() +
+ggrepel::geom_text_repel(size = 3, hjust = "right", nudge_y = 3, max.overlaps = 30) +
+theme_bw()
+gs_plot_strenght
+
+5.1 Prune based on chosen criteria
+We want to keep only those nodes that have high strength, but how will we decide how many to prune out? litsearchr::find_cutoff() provides us with two ways to decide: cumulative cutoff and change points. The cumulative cutoff method simply retains a certain proportion of the total strength. The change points method uses changepoint::cpt.mean() under the hood to calculate optimal cutoff positions where the trend in strength shows sharp changes.
+
+Again, we will use the heuristic when in doubt, pool results together, i.e. we will use the change point nearest the to the cumulative cutoff value we set.
+
+# Cumulatively - retain a certain proportion (e.g. 80%) of the total strength of the network of search terms
+gs_cutoff_cum <- litsearchr::find_cutoff(gs_coocnet, method = "cumulative", percent = 0.8)
+# Changepoints - certain points along the ranking of terms where the strength of the next strongest term is much greater than that of the previous one
+gs_cutoff_change <- litsearchr::find_cutoff(gs_coocnet, method = "changepoint", knot_num = 3)
+gs_plot_strenght +
+geom_hline(yintercept = gs_cutoff_cum, color = "red", lwd = 0.7, linetype = "longdash", alpha = 0.6) +
+geom_hline(yintercept = gs_cutoff_change, color = "orange", lwd = 0.7, linetype = "dashed", alpha = 0.6)
+
+gs_cutoff_crit <- gs_cutoff_change[which.min(abs(gs_cutoff_change - gs_cutoff_cum))] # e.g. nearest cutpoint to cumulative criterion (cumulative produces one value, changepoints may be many)
+gs_maxselected_terms <- litsearchr::get_keywords(litsearchr::reduce_graph(gs_coocnet, gs_cutoff_crit))
+Inspect selected terms:
+
+gs_maxselected_terms
+## [1] "-assisted psychotherapy" "assisted psychotherapy"
+## [3] "clinical trial" "cognitive processing"
+## [5] "cognitive processing therapy" "controlled trial"
+## [7] "evidence-based psychotherapy" "exposure therapy"
+## [9] "mdma-assisted psychotherapy" "post-traumatic stress"
+## [11] "post-traumatic stress disorder" "posttraumatic stress"
+## [13] "posttraumatic stress disorder" "processing therapy"
+## [15] "prolonged exposure" "prolonged exposure therapy"
+## [17] "randomized clinical" "randomized clinical trial"
+## [19] "randomized controlled" "randomized controlled trial"
+## [21] "stress disorder" "systematic review"
+## [23] "traumatic stress" "traumatic stress disorder"
+Some expression already contain others. For example, “mdma-assisted psychotherapy” is an instance of “-assisted psychotherapy” which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it’s results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring
+
+Keep only shortest unique substrings:
+
+superstring <- rep(FALSE, length(gs_maxselected_terms))
+for(i in seq_len(length(gs_maxselected_terms))) {
+superstring[i] <- any(stringr::str_detect(gs_maxselected_terms[i], gs_maxselected_terms[-which(gs_maxselected_terms == gs_maxselected_terms[i])]))
+}
+gs_selected_terms <- gs_maxselected_terms[!superstring]
+We will also manually do two other changes: (1) we are not interested in “systematic reviews” so we will remove it; (2) we will add the terms “psychotherapy” and “ptsd” as they are not already present in their simplest form.
+
+gs_selected_terms <- gs_selected_terms[-which(gs_selected_terms == "systematic review")]
+gs_selected_terms <- c(gs_selected_terms, "psychotherapy", "ptsd")
+Inspect selected terms:
+
+gs_selected_terms
+## [1] "assisted psychotherapy" "clinical trial"
+## [3] "cognitive processing" "controlled trial"
+## [5] "evidence-based psychotherapy" "exposure therapy"
+## [7] "processing therapy" "prolonged exposure"
+## [9] "randomized clinical" "randomized controlled"
+## [11] "stress disorder" "traumatic stress"
+## [13] "psychotherapy" "ptsd"
+We see that term groupings are obvious: type of study (design), type of intervention, disorder/symptoms, and population.
+
+ 
+
+6. Manual grouping into clusters
+# Manual grouping into clusters - for more rigorous search we will need a combination of OR and AND operators
+design <- gs_selected_terms[c(2, 4, 9, 10)]
+intervention <- gs_selected_terms[c(1, 3, 5, 6, 7, 8, 13)]
+disorder <- gs_selected_terms[c(11, 12, 14)]
+# all.equal(length(gs_selected_terms),
+# sum(length(design), length(intervention), length(disorder))
+# ) # check that we grouped all terms
+gs_gruped_selected_terms <- list(
+design = design,
+intervention = intervention,
+disorder = disorder
+)
+ 
+
+7. Automatically write the search string
+# Write the search
+litsearchr::write_search(
+gs_gruped_selected_terms,
+languages = "English",
+exactphrase = TRUE,
+stemming = FALSE,
+closure = "left",
+writesearch = FALSE
+)
+## [1] "English is written"
+## [1] "((\"clinical trial\" OR \"controlled trial\" OR \"randomized clinical\" OR \"randomized controlled\") AND (\"assisted psychotherapy\" OR \"cognitive processing\" OR \"evidence-based psychotherapy\" OR \"exposure therapy\" OR \"processing therapy\" OR \"prolonged exposure\" OR psychotherapy) AND (\"stress disorder\" OR \"traumatic stress\" OR ptsd))"
+ 
