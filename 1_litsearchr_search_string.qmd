@@ -1,5 +1,5 @@
 ---
-title: "Web of Science prelim analysis"
+title: 'Web of Science prelim analysis'
 format: html
 editor: visual
 ---
@@ -8,7 +8,7 @@ editor: visual
 library(tidyverse)
 library(bib2df)
 library(here)
-library(litsearchr) ### remotes::install_github("elizagrames/litsearchr", ref = "main")
+library(litsearchr) ### remotes::install_github('elizagrames/litsearchr', ref = 'main')
 library(igraph)
 library(ggraph)
 library(ggrepel)
@@ -16,17 +16,34 @@ library(ggrepel)
 
 ## Description
 
-This script takes the top 2000 most relevant results from a Web of Science search using the following terms:
+This script works with several search sets to help methodically identify search strings for a more inclusive literature database search.  
 
-<center>
-("satellite" <b>OR</b> "space-based" <b>OR</b> "remote observation" <b>OR</b> "remote sensing" <b>OR</b> "earth observation")
-<br><b>AND</b><br>
-("decision" <b>OR</b> "optimization" <b>OR</b> "risk analysis" <b>OR</b> "operational context" <b>OR</b> “management” <b>OR</b> “policy”)
-<br><b>AND</b><br>
-(“value\*” <b>OR</b> “valuation” <b>OR</b> “benefit\*”)
-</center>
+### Web of Science
 
-These results, in bibtex format including the full record and all citations, must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
+Data includes bibtex entries for the top most relevant results from a Web of Science search using the following terms:
+
+<center>('satellite' <b>OR</b> 'space-based' <b>OR</b> 'remote observation' <b>OR</b> 'remote sensing' <b>OR</b> 'earth observation')
+<br><b>AND</b><br>
+('decision' <b>OR</b> 'optimization' <b>OR</b> 'risk analysis' <b>OR</b> 'operational context' <b>OR</b> 'management' <b>OR</b> 'policy')
+<br><b>AND</b><br>
+('value\*' <b>OR</b> 'valuation' <b>OR</b> 'benefit\*')</center>
+<br><b>AND</b> _(for Web of Science search #2 only)_ <br>
+('social' OR 'societal' OR 'cultural' OR 'socioeconomic')
+
+These results, in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
+
+### CONVEI Zotero library
+
+Data includes two different sets of records from the CONVEI Zotero library:
+
+* Bibtex records for all documents in the CONVEI library
+* Bibtex records for only those documents in the CONVEI benchmark collection.
+
+These bibtex records are in better shape than those from Web of Science, but cleaning them won't hurt.
+
+### Cleaning the bibtex
+
+The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly.  Replace those problematic line breaks (a line break `\n`, followed by a three-space indentation) with a single blank space.
 
 ```{r clean bibtex}
 bib_raw_fs <- list.files(here('bibtex_raw'), full.names = TRUE)
@@ -57,9 +74,59 @@ topic_df <- all_fields_df %>%
          title, abstract, keywords)
 ```
 
+## Check benchmarks against Web of Science search #2
+
+```{r}
+clean_author <- function(df) {
+  df <- df %>%
+    unnest(author) %>%
+    group_by(title, journal, year, doi) %>%
+    filter(author == first(author)) %>%
+    ungroup() %>%
+    mutate(author = str_remove_all(tolower(author), '[^a-z ]') %>% str_squish())
+}
+
+clean_title <- function(df, len = 40) {
+  df <- df %>%
+    mutate(title = str_remove_all(tolower(title), '[^a-z ]' %>% str_squish())) %>%
+    mutate(title = str_sub(title, 1, len))
+}
+
+wos2_df  <- all_fields_df %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi) %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(across(is.character, tolower))
+
+bench_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi) %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(across(is.character, tolower)) %>%
+  distinct()
+
+doi_match <- bench_df %>%
+  filter(!is.na(doi)) %>%
+  filter(doi %in% wos2_df$doi)
+
+info_match <- bench_df %>%
+  select(-doi) %>%
+  inner_join(wos2_df)
+  
+match_df <- bind_rows(doi_match, info_match) %>%
+  distinct()
+
+pct_match <- nrow(match_df) / nrow(bench_df) * 100
+
+```
+
+Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is `r round(pct_match, 1)`%%.
+
 ## Use `litsearchr` functionality
 
-This section is based heavily on https://www.r-bloggers.com/2023/03/automated-systematic-literature-search-using-r-litsearchr-and-google-scholar-web-scraping/.  Code is adapted for bibtex data accessed from Web of Science and the CONVEI Zotero library.  Where instruction text is (more or less) verbatim from the blog post, it is indicated by block quotes.
+This section is based heavily on https://www.r-bloggers.com/2023/03/automated-systematic-literature-search-using-r-litsearchr-and-google-scholar-web-scraping/. Code is adapted for bibtex data accessed from Web of Science and the CONVEI Zotero library. Where instruction text is (more or less) verbatim from the blog post, it is indicated by block quotes.
 
 ### Identify useful terms from title
 
@@ -68,46 +135,44 @@ Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::ex
 ```{r}
 stop_vec <- stopwords::stopwords('en')
 title_terms <- extract_terms(text = topic_df$title,
-                             method = "fakerake", min_freq = 3, min_n = 2,
+                             method = 'fakerake', min_freq = 3, min_n = 2,
                              stopwords = stop_vec)
 
 # abstr_terms <- extract_terms(text = topic_df$abstract,
-#                              method = "fakerake", min_freq = 3, min_n = 2,
+#                              method = 'fakerake', min_freq = 3, min_n = 2,
 #                              stopwords = stop_vec)
 
 ```
- 
 
 ### Create Co-Occurrence Network
 
->We will consider the title and abstract of each article to represent the article’s “content” and we will consider a term to have appeared in the article if it appears in either the title or abstract. Based on this we will create the document-feature matrix, where the “documents” are our articles (title and abstract) and the “features” are the search terms. The Co-Occurrence Network is computed using this document-feature matrix.
+> We will consider the title and abstract of each article to represent the article's 'content' and we will consider a term to have appeared in the article if it appears in either the title or abstract. Based on this we will create the document-feature matrix, where the 'documents' are our articles (title and abstract) and the 'features' are the search terms. The Co-Occurrence Network is computed using this document-feature matrix.
 
 Uses `litsearchr::create_dfm()` to create a document-feature matrix and `litsearchr::create_network()` to create the co-occurrence network.
 
 ```{r}
 topic_docs <- paste(topic_df$title, topic_df$abstract) 
-  ### we will consider title and abstract of each article to represent the article's "content"
+  ### we will consider title and abstract of each article to represent the article's 'content'
 
 topic_dfm <- create_dfm(elements = topic_docs, 
                         features = title_terms)
 
 topic_coocnet <- create_network(topic_dfm, min_studies = 3)
 
-ggraph(topic_coocnet, layout = "stress") +
+ggraph(topic_coocnet, layout = 'stress') +
   coord_fixed() +
   expand_limits(x = c(-3, 3)) +
   geom_edge_link(aes(alpha = weight)) +
-  geom_node_point(shape = "circle filled", fill = "white") +
-  geom_node_text(aes(label = name), hjust = "outward", check_overlap = TRUE) +
-  guides(edge_alpha = "none") +
+  geom_node_point(shape = 'circle filled', fill = 'white') +
+  geom_node_text(aes(label = name), hjust = 'outward', check_overlap = TRUE) +
+  guides(edge_alpha = 'none') +
   theme_void()
 ```
-
 
 ### Prune the Network based on node strength
 
 #### Compute node strength
- 
+
 > Node strength in a network is calculated by summing up the weights of all edges connected to the respective node.Thus, node strength investigates how strongly it is directly connected to other nodes in the network.
 
 ```{r}
@@ -117,41 +182,39 @@ topic_node_rankstrength <- data.frame(term = names(topic_node_strength),
                                       strength = topic_node_strength, 
                                       row.names = NULL)
 topic_node_rankstrength$rank <- rank(topic_node_rankstrength$strength, 
-                                     ties.method = "min")
+                                     ties.method = 'min')
 topic_node_rankstrength <- topic_node_rankstrength[order(topic_node_rankstrength$rank),]
 topic_plot_strength <- ggplot(topic_node_rankstrength, 
                               aes(x = rank, y = strength, label = term)) +
   geom_line(lwd = 0.8) +
   geom_point() +
-  geom_text_repel(size = 3, hjust = "right", nudge_y = 3, max.overlaps = 30) +
+  geom_text_repel(size = 3, hjust = 'right', nudge_y = 3, max.overlaps = 30) +
   theme_bw()
 
 topic_plot_strength
 ```
 
-
-
 #### Prune based on chosen criteria
 
 > We want to keep only those nodes that have high strength, but how will we decide how many to prune out? `litsearchr::find_cutoff()` provides us with two ways to decide: cumulative cutoff and change points. The cumulative cutoff method simply retains a certain proportion of the total strength. The change points method uses `changepoint::cpt.mean()` under the hood to calculate optimal cutoff positions where the trend in strength shows sharp changes.
 >
->Again, we will use the heuristic when in doubt, pool results together, i.e. we will use the change point nearest the to the cumulative cutoff value we set.
+> Again, we will use the heuristic when in doubt, pool results together, i.e. we will use the change point nearest the to the cumulative cutoff value we set.
 
 ```{r}
 ### Cumulatively - retain a certain proportion (e.g. 80%) of the total strength
 ### of the network of search terms
-topic_cutoff_cum <- find_cutoff(topic_coocnet, method = "cumulative", 
-                                percent = 0.6)
+topic_cutoff_cum <- find_cutoff(topic_coocnet, method = 'cumulative', 
+                                percent = 0.8)
 
 ### Changepoints - certain points along the ranking of terms where the strength 
 ### of the next strongest term is much greater than that of the previous one
-topic_cutoff_change <- find_cutoff(topic_coocnet, method = "changepoint", knot_num = 5)
+topic_cutoff_change <- find_cutoff(topic_coocnet, method = 'changepoint', knot_num = 5)
 
 topic_plot_strength +
   geom_hline(yintercept = topic_cutoff_cum, 
-             color = "red", lwd = 0.7, linetype = "longdash", alpha = 0.6) +
+             color = 'red', lwd = 0.7, linetype = 'longdash', alpha = 0.6) +
   geom_hline(yintercept = topic_cutoff_change, 
-             color = "orange", lwd = 0.7, linetype = "dashed", alpha = 0.6)
+             color = 'orange', lwd = 0.7, linetype = 'dashed', alpha = 0.6)
 
 topic_cutoff_crit <- topic_cutoff_change[which.min(abs(topic_cutoff_change - topic_cutoff_cum))] 
   ### e.g. nearest cutpoint to cumulative criterion (cumulative produces one value, changepoints may be many)
@@ -164,10 +227,9 @@ Inspect selected terms:
 
 `r topic_maxselected_terms`
 
+> Some expression already contain others. For example, 'mdma-assisted psychotherapy' is an instance of '-assisted psychotherapy' which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it's results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring
 
-> Some expression already contain others. For example, “mdma-assisted psychotherapy” is an instance of “-assisted psychotherapy” which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it’s results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring
-
-In our case, "earth observations" and "earth observation system" are instances of "earth observation"... similar for "ecosystem service[s| value]"...
+In our case, 'earth observations' and 'earth observation system' are instances of 'earth observation'... similar for 'ecosystem service\[s\| value\]'...
 
 ```{r}
 ### Keep only shortest unique substrings:
@@ -182,50 +244,40 @@ for(i in seq_along(topic_maxselected_terms)) {
 topic_selected_terms <- topic_maxselected_terms[!superstring]
 ```
 
+> We will also manually do two other changes: (1) we are not interested in 'systematic reviews' so we will remove it; (2) we will add the terms 'psychotherapy' and 'ptsd' as they are not already present in their simplest form.
 
-> We will also manually do two other changes: (1) we are not interested in “systematic reviews” so we will remove it; (2) we will add the terms “psychotherapy” and “ptsd” as they are not already present in their simplest form.
+For our purposes, let's focus on the things not already in our preliminary search terms.  Pull those out, then inspect what's left for relevant terms to include.
 
-topic_selected_terms <- topic_selected_terms[-which(topic_selected_terms == "systematic review")]
-topic_selected_terms <- c(topic_selected_terms, "psychotherapy", "ptsd")
-Inspect selected terms:
- 
-topic_selected_terms
-## [1] "assisted psychotherapy" "clinical trial"
-## [3] "cognitive processing" "controlled trial"
-## [5] "evidence-based psychotherapy" "exposure therapy"
-## [7] "processing therapy" "prolonged exposure"
-## [9] "randomized clinical" "randomized controlled"
-## [11] "stress disorder" "traumatic stress"
-## [13] "psychotherapy" "ptsd"
-We see that term groupings are obvious: type of study (design), type of intervention, disorder/symptoms, and population.
+```{r}
+esi_terms <- 'satellite|space.based|remote observation|remote sensing|earth observation'
+decision_terms <- 'decision|optimization|risk analysis|operational context|management|policy'
+val_terms1 <- 'value|valuation|benefit'
+val_terms2 <- 'social|societal|cultural|socioeconomic'
 
- 
+all_terms <- paste(esi_terms, decision_terms, val_terms1, val_terms2, sep = '|')
 
-6. Manual grouping into clusters
-# Manual grouping into clusters - for more rigorous search we will need a combination of OR and AND operators
-design <- topic_selected_terms[c(2, 4, 9, 10)]
-intervention <- topic_selected_terms[c(1, 3, 5, 6, 7, 8, 13)]
-disorder <- topic_selected_terms[c(11, 12, 14)]
-# all.equal(length(topic_selected_terms),
-# sum(length(design), length(intervention), length(disorder))
-# ) # check that we grouped all terms
-topic_gruped_selected_terms <- list(
-design = design,
-intervention = intervention,
-disorder = disorder
-)
- 
+topics_new <- topic_selected_terms[!str_detect(topic_selected_terms, all_terms)]
 
-7. Automatically write the search string
-# Write the search
-litsearchr::write_search(
-topic_gruped_selected_terms,
-languages = "English",
-exactphrase = TRUE,
-stemming = FALSE,
-closure = "left",
-writesearch = FALSE
-)
-## [1] "English is written"
-## [1] "((\"clinical trial\" OR \"controlled trial\" OR \"randomized clinical\" OR \"randomized controlled\") AND (\"assisted psychotherapy\" OR \"cognitive processing\" OR \"evidence-based psychotherapy\" OR \"exposure therapy\" OR \"processing therapy\" OR \"prolonged exposure\" OR psychotherapy) AND (\"stress disorder\" OR \"traumatic stress\" OR ptsd))"
- 
+topics_new
+```
+
+Looking for new key terms in the three Venn diagram areas of: "value", "decision", and "earth science information".  
+
+* ESI: Many terms such as "machine learning," "information system," "spatial resolution" may fit here but are too generic to apply specifically to satellite or remote sensing.  Some possibilities to include:
+    * aerial vehicle (incl unmanned aerial)
+    * remotely sensed
+* Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that they do an adequate job of capturing the major connections here.
+* Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., "vegetation cover," "river basin," "mangrove forest," "urban areas," but without specifically noting a value or benefit related to these.  A few possiblilites appear, however:
+    * terms relating to quality, service, or health (value, benefit)
+        * ecosytem service
+        * ecosystem health
+        * environmental quality
+        * water quality
+    * terms relating to goals or implied importance (value)
+        * development goals (incl sustainable development)
+        * protected areas
+        * heritage sites (incl world heritage)
+
+6.  Manual grouping into clusters \# Manual grouping into clusters - for more rigorous search we will need a combination of OR and AND operators design \<- topic_selected_terms\[c(2, 4, 9, 10)\] intervention \<- topic_selected_terms\[c(1, 3, 5, 6, 7, 8, 13)\] disorder \<- topic_selected_terms\[c(11, 12, 14)\] \# all.equal(length(topic_selected_terms), \# sum(length(design), length(intervention), length(disorder)) \# ) \# check that we grouped all terms topic_gruped_selected_terms \<- list( design = design, intervention = intervention, disorder = disorder )
+
+7.  Automatically write the search string \# Write the search litsearchr::write_search( topic_gruped_selected_terms, languages = 'English', exactphrase = TRUE, stemming = FALSE, closure = 'left', writesearch = FALSE ) \## \[1\] 'English is written' \## \[1\] '(('clinical trial' OR 'controlled trial' OR 'randomized clinical' OR 'randomized controlled') AND ('assisted psychotherapy' OR 'cognitive processing' OR 'evidence-based psychotherapy' OR 'exposure therapy' OR 'processing therapy' OR 'prolonged exposure' OR psychotherapy) AND ('stress disorder' OR 'traumatic stress' OR ptsd))'
