@@ -111,9 +111,11 @@ wos_df  <- all_fields_df %>%
   clean_title() %>%
   mutate(across(is.character, tolower))
 
-bench_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
+bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
   janitor::clean_names() %>%
-  select(author, title, journal, year, doi) %>%
+  select(author, title, journal, year, doi)
+
+bench_df <- bench_raw_df %>%
   clean_author() %>%
   clean_title() %>%
   mutate(across(is.character, tolower)) %>%
