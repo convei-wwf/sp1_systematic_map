@@ -6,6 +6,7 @@ editor: visual
 
 ```{r setup}
 library(tidyverse)
+library(tidytext)
 library(bib2df)
 library(here)
 library(litsearchr) ### remotes::install_github('elizagrames/litsearchr', ref = 'main')
@@ -46,7 +47,7 @@ These bibtex records are in better shape than those from Web of Science, but cle
 The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly.  Replace those problematic line breaks (a line break `\n`, followed by a three-space indentation) with a single blank space.
 
 ```{r clean bibtex}
-bib_raw_fs <- list.files(here('bibtex_raw'), full.names = TRUE)
+bib_raw_fs <- list.files(here('bibtex_raw'), pattern = '.bib$', full.names = TRUE)
 for(f in bib_raw_fs) {
   # f <- bib_raw_fs[1]
   bib_raw <- read_file(f)
@@ -60,7 +61,7 @@ Now clean, read in the bibtex files and bind into a data.frame.
 
 ```{r}
 # bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos2_', full.names = TRUE)
+bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
 # bib_clean_fs <- here('bibtex_clean/zot_all.bib')
 # bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
 
@@ -74,25 +75,36 @@ topic_df <- all_fields_df %>%
          title, abstract, keywords)
 ```
 
-## Check benchmarks against Web of Science search #2
+## Check benchmarks against Web of Science search
 
 ```{r}
 clean_author <- function(df) {
-  df <- df %>%
+  df1 <- df %>%
     unnest(author) %>%
     group_by(title, journal, year, doi) %>%
     filter(author == first(author)) %>%
     ungroup() %>%
-    mutate(author = str_remove_all(tolower(author), '[^a-z ]') %>% str_squish())
+    mutate(author = tolower(author) %>%    ### drop caps
+             str_remove(',.*') %>%         ### keep only last name
+             str_remove_all('[^a-z ]') %>% ### drop punct
+             str_squish())                ### drop whitespace
 }
 
 clean_title <- function(df, len = 40) {
-  df <- df %>%
-    mutate(title = str_remove_all(tolower(title), '[^a-z ]' %>% str_squish())) %>%
-    mutate(title = str_sub(title, 1, len))
+  df2 <- df
+  df1 <- df %>%
+    select(author, title, journal, year, doi) %>%
+    unnest_tokens(output = title_word, input = title) %>%
+    anti_join(stop_words, by = c('title_word' = 'word')) %>%
+    group_by(author, journal, year, doi) %>%
+    summarize(title = paste(title_word, collapse = ' '), .groups = 'drop')
+  df_out <- df2 %>%
+    select(-title) %>%
+    full_join(df1)
+  return(df_out)
 }
 
-wos2_df  <- all_fields_df %>%
+wos_df  <- all_fields_df %>%
   janitor::clean_names() %>%
   select(author, title, journal, year, doi) %>%
   clean_author() %>%
@@ -109,17 +121,19 @@ bench_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
 
 doi_match <- bench_df %>%
   filter(!is.na(doi)) %>%
-  filter(doi %in% wos2_df$doi)
+  filter(doi %in% wos_df$doi)
 
 info_match <- bench_df %>%
-  select(-doi) %>%
-  inner_join(wos2_df)
+  select(-doi, -journal) %>%
+  inner_join(wos_df)
   
 match_df <- bind_rows(doi_match, info_match) %>%
   distinct()
 
 pct_match <- nrow(match_df) / nrow(bench_df) * 100
 
+missed <- bench_df %>%
+  anti_join(match_df %>% select(-journal, -doi))
 ```
 
 Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is `r round(pct_match, 1)`%%.
@@ -132,7 +146,7 @@ This section is based heavily on https://www.r-bloggers.com/2023/03/automated-sy
 
 Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::extract_terms`, as well as stop word elimination, to extract useful terms from titles.
 
-```{r}
+```{r extract title terms}
 stop_vec <- stopwords::stopwords('en')
 title_terms <- extract_terms(text = topic_df$title,
                              method = 'fakerake', min_freq = 3, min_n = 2,
@@ -150,7 +164,7 @@ title_terms <- extract_terms(text = topic_df$title,
 
 Uses `litsearchr::create_dfm()` to create a document-feature matrix and `litsearchr::create_network()` to create the co-occurrence network.
 
-```{r}
+```{r create cooccurrence network}
 topic_docs <- paste(topic_df$title, topic_df$abstract) 
   ### we will consider title and abstract of each article to represent the article's 'content'
 
@@ -175,8 +189,7 @@ ggraph(topic_coocnet, layout = 'stress') +
 
 > Node strength in a network is calculated by summing up the weights of all edges connected to the respective node.Thus, node strength investigates how strongly it is directly connected to other nodes in the network.
 
-```{r}
-# Prune the Network based on node strength
+```{r Prune the Network based on node strength}
 topic_node_strength <- igraph::strength(topic_coocnet)
 topic_node_rankstrength <- data.frame(term = names(topic_node_strength), 
                                       strength = topic_node_strength, 
@@ -200,7 +213,7 @@ topic_plot_strength
 >
 > Again, we will use the heuristic when in doubt, pool results together, i.e. we will use the change point nearest the to the cumulative cutoff value we set.
 
-```{r}
+```{r Prune based on chosen criteria}
 ### Cumulatively - retain a certain proportion (e.g. 80%) of the total strength
 ### of the network of search terms
 topic_cutoff_cum <- find_cutoff(topic_coocnet, method = 'cumulative', 
@@ -231,9 +244,7 @@ Inspect selected terms:
 
 In our case, 'earth observations' and 'earth observation system' are instances of 'earth observation'... similar for 'ecosystem service\[s\| value\]'...
 
-```{r}
-### Keep only shortest unique substrings:
-
+```{r keep shortest unique substrings}
 superstring <- rep(FALSE, length(topic_maxselected_terms))
 for(i in seq_along(topic_maxselected_terms)) {
   ### i <- 1
@@ -248,7 +259,7 @@ topic_selected_terms <- topic_maxselected_terms[!superstring]
 
 For our purposes, let's focus on the things not already in our preliminary search terms.  Pull those out, then inspect what's left for relevant terms to include.
 
-```{r}
+```{r id new terms}
 esi_terms <- 'satellite|space.based|remote observation|remote sensing|earth observation'
 decision_terms <- 'decision|optimization|risk analysis|operational context|management|policy'
 val_terms1 <- 'value|valuation|benefit'

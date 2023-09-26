@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -60,12 +94,456 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'purrr' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.0     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.1     ✔ tibble    3.1.8
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidytext' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bib2df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'bib2df' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at C:/Users/casey/Documents/github/convei_systematic_map</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(litsearchr) <span class="do">### remotes::install_github('elizagrames/litsearchr', ref = 'main')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'litsearchr'
+
+The following object is masked from 'package:tidytext':
+
+    get_stopwords</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'igraph' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'igraph'
+
+The following objects are masked from 'package:lubridate':
+
+    %--%, union
+
+The following objects are masked from 'package:dplyr':
+
+    as_data_frame, groups, union
+
+The following objects are masked from 'package:purrr':
+
+    compose, simplify
+
+The following object is masked from 'package:tidyr':
+
+    crossing
+
+The following object is masked from 'package:tibble':
+
+    as_data_frame
+
+The following objects are masked from 'package:stats':
+
+    decompose, spectrum
+
+The following object is masked from 'package:base':
+
+    union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggraph' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This script takes the top 2000 most relevant results from a Web of Science search using the following terms:</p>
+<p>This script works with several search sets to help methodically identify search strings for a more inclusive literature database search.</p>
+<section id="web-of-science" class="level3">
+<h3 class="anchored" data-anchor-id="web-of-science">Web of Science</h3>
+<p>Data includes bibtex entries for the top most relevant results from a Web of Science search using the following terms:</p>
 <center>
-(“satellite” <b>OR</b> “space-based” <b>OR</b> “remote observation” <b>OR</b> “remote sensing” <b>OR</b> “earth observation”) <br><b>AND</b><br> (“decision” <b>OR</b> “optimization” <b>OR</b> “risk analysis” <b>OR</b> “operational context” <b>OR</b> “management” <b>OR</b> “policy”) <br><b>AND</b><br> (“value*” <b>OR</b> “valuation” <b>OR</b> “benefit*”)
+(‘satellite’ <b>OR</b> ‘space-based’ <b>OR</b> ‘remote observation’ <b>OR</b> ‘remote sensing’ <b>OR</b> ‘earth observation’) <br><b>AND</b><br> (‘decision’ <b>OR</b> ‘optimization’ <b>OR</b> ‘risk analysis’ <b>OR</b> ‘operational context’ <b>OR</b> ‘management’ <b>OR</b> ‘policy’) <br><b>AND</b><br> (‘value*’ <b>OR</b> ‘valuation’ <b>OR</b> ‘benefit*’)
 </center>
+<p><br><b>AND</b> <em>(for Web of Science search #2 only)</em> <br> (‘social’ OR ‘societal’ OR ‘cultural’ OR ‘socioeconomic’)</p>
+<p>These results, in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the <code>bib2df</code> package to parse it properly.</p>
+</section>
+<section id="convei-zotero-library" class="level3">
+<h3 class="anchored" data-anchor-id="convei-zotero-library">CONVEI Zotero library</h3>
+<p>Data includes two different sets of records from the CONVEI Zotero library:</p>
+<ul>
+<li>Bibtex records for all documents in the CONVEI library</li>
+<li>Bibtex records for only those documents in the CONVEI benchmark collection.</li>
+</ul>
+<p>These bibtex records are in better shape than those from Web of Science, but cleaning them won’t hurt.</p>
+</section>
+<section id="cleaning-the-bibtex" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-the-bibtex">Cleaning the bibtex</h3>
+<p>The Web of Science records contain line breaks that disrupt the ability of the <code>bib2df</code> package to work properly. Replace those problematic line breaks (a line break <code>\n</code>, followed by a three-space indentation) with a single blank space.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(f <span class="cf">in</span> bib_raw_fs) {</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># f &lt;- bib_raw_fs[1]</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  bib_clean <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(bib_raw, <span class="st">'</span><span class="sc">\\</span><span class="st">n   '</span>, <span class="st">' '</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  f_out <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(f, <span class="st">'_raw'</span>, <span class="st">'_clean'</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_file</span>(bib_clean, f_out)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now clean, read in the bibtex files and bind into a data.frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bib_clean_fs &lt;- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>bib_clean_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'bibtex_clean'</span>), <span class="at">pattern =</span> <span class="st">'wos_'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bib_clean_fs &lt;- here('bibtex_clean/zot_all.bib')</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># bib_clean_fs &lt;- here('bibtex_clean/zot_benchmark.bib')</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>all_fields_df <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bib_clean_fs, bib2df<span class="sc">::</span>bib2df) <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `as_data_frame()` was deprecated in tibble 2.0.0.
+ℹ Please use `as_tibble()` instead.
+ℹ The signature and semantics have changed, see `?as_tibble`.
+ℹ The deprecated feature was likely used in the bib2df package.
+  Please report the issue to the authors.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>topic_df <span class="ot">&lt;-</span> all_fields_df <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(category, year, </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="co"># keywords_plus, web_of_science_categories, research_areas,</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>         title, abstract, keywords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="check-benchmarks-against-web-of-science-search" class="level2">
+<h2 class="anchored" data-anchor-id="check-benchmarks-against-web-of-science-search">Check benchmarks against Web of Science search</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>clean_author <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  df1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(author) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(title, journal, year, doi) <span class="sc">%&gt;%</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(author <span class="sc">==</span> <span class="fu">first</span>(author)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">author =</span> <span class="fu">tolower</span>(author) <span class="sc">%&gt;%</span>    <span class="do">### drop caps</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">str_remove</span>(<span class="st">',.*'</span>) <span class="sc">%&gt;%</span>         <span class="do">### keep only last name</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">str_remove_all</span>(<span class="st">'[^a-z ]'</span>) <span class="sc">%&gt;%</span> <span class="do">### drop punct</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">str_squish</span>())                <span class="do">### drop whitespace</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>clean_title <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">len =</span> <span class="dv">40</span>) {</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  df1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(author, title, journal, year, doi) <span class="sc">%&gt;%</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_tokens</span>(<span class="at">output =</span> title_word, <span class="at">input =</span> title) <span class="sc">%&gt;%</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'title_word'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(author, journal, year, doi) <span class="sc">%&gt;%</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">title =</span> <span class="fu">paste</span>(title_word, <span class="at">collapse =</span> <span class="st">' '</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>  df_out <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>title) <span class="sc">%&gt;%</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(df1)</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df_out)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>wos_df  <span class="ot">&lt;-</span> all_fields_df <span class="sc">%&gt;%</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(author, title, journal, year, doi) <span class="sc">%&gt;%</span></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_author</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_title</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(is.character, tolower))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(author, journal, year, doi)`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `across(is.character, tolower)`.
+Caused by warning:
+! Use of bare predicate functions was deprecated in tidyselect 1.1.0.
+ℹ Please use wrap predicates in `where()` instead.
+  # Was:
+  data %&gt;% select(is.character)
+
+  # Now:
+  data %&gt;% select(where(is.character))</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>bench_df <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(<span class="fu">here</span>(<span class="st">'bibtex_clean'</span>, <span class="st">'zot_benchmark.bib'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(author, title, journal, year, doi) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_author</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_title</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(is.character, tolower)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(author, journal, year, doi)`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>doi_match <span class="ot">&lt;-</span> bench_df <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(doi)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(doi <span class="sc">%in%</span> wos_df<span class="sc">$</span>doi)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>info_match <span class="ot">&lt;-</span> bench_df <span class="sc">%&gt;%</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>doi, <span class="sc">-</span>journal) <span class="sc">%&gt;%</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(wos_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(author, year, title)`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>match_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(doi_match, info_match) <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>pct_match <span class="ot">&lt;-</span> <span class="fu">nrow</span>(match_df) <span class="sc">/</span> <span class="fu">nrow</span>(bench_df) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>missed <span class="ot">&lt;-</span> bench_df <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(match_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>journal, <span class="sc">-</span>doi))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(author, year, title)`</code></pre>
+</div>
+</div>
+<p>Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is 42.9%%.</p>
+</section>
+<section id="use-litsearchr-functionality" class="level2">
+<h2 class="anchored" data-anchor-id="use-litsearchr-functionality">Use <code>litsearchr</code> functionality</h2>
+<p>This section is based heavily on https://www.r-bloggers.com/2023/03/automated-systematic-literature-search-using-r-litsearchr-and-google-scholar-web-scraping/. Code is adapted for bibtex data accessed from Web of Science and the CONVEI Zotero library. Where instruction text is (more or less) verbatim from the blog post, it is indicated by block quotes.</p>
+<section id="identify-useful-terms-from-title" class="level3">
+<h3 class="anchored" data-anchor-id="identify-useful-terms-from-title">Identify useful terms from title</h3>
+<p>Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from <code>litsearchr::extract_terms</code>, as well as stop word elimination, to extract useful terms from titles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>stop_vec <span class="ot">&lt;-</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">'en'</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>title_terms <span class="ot">&lt;-</span> <span class="fu">extract_terms</span>(<span class="at">text =</span> topic_df<span class="sc">$</span>title,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">method =</span> <span class="st">'fakerake'</span>, <span class="at">min_freq =</span> <span class="dv">3</span>, <span class="at">min_n =</span> <span class="dv">2</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">stopwords =</span> stop_vec)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># abstr_terms &lt;- extract_terms(text = topic_df$abstract,</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                              method = 'fakerake', min_freq = 3, min_n = 2,</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                              stopwords = stop_vec)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-co-occurrence-network" class="level3">
+<h3 class="anchored" data-anchor-id="create-co-occurrence-network">Create Co-Occurrence Network</h3>
+<blockquote class="blockquote">
+<p>We will consider the title and abstract of each article to represent the article’s ‘content’ and we will consider a term to have appeared in the article if it appears in either the title or abstract. Based on this we will create the document-feature matrix, where the ‘documents’ are our articles (title and abstract) and the ‘features’ are the search terms. The Co-Occurrence Network is computed using this document-feature matrix.</p>
+</blockquote>
+<p>Uses <code>litsearchr::create_dfm()</code> to create a document-feature matrix and <code>litsearchr::create_network()</code> to create the co-occurrence network.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>topic_docs <span class="ot">&lt;-</span> <span class="fu">paste</span>(topic_df<span class="sc">$</span>title, topic_df<span class="sc">$</span>abstract) </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">### we will consider title and abstract of each article to represent the article's 'content'</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>topic_dfm <span class="ot">&lt;-</span> <span class="fu">create_dfm</span>(<span class="at">elements =</span> topic_docs, </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">features =</span> title_terms)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>topic_coocnet <span class="ot">&lt;-</span> <span class="fu">create_network</span>(topic_dfm, <span class="at">min_studies =</span> <span class="dv">3</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(topic_coocnet, <span class="at">layout =</span> <span class="st">'stress'</span>) <span class="sc">+</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">alpha =</span> weight)) <span class="sc">+</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">shape =</span> <span class="st">'circle filled'</span>, <span class="at">fill =</span> <span class="st">'white'</span>) <span class="sc">+</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">hjust =</span> <span class="st">'outward'</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">edge_alpha =</span> <span class="st">'none'</span>) <span class="sc">+</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using the `size` aesthetic in this geom was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` in the `default_aes` field and elsewhere instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="1_litsearchr_search_string_files/figure-html/create%20cooccurrence%20network-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="prune-the-network-based-on-node-strength" class="level3">
+<h3 class="anchored" data-anchor-id="prune-the-network-based-on-node-strength">Prune the Network based on node strength</h3>
+<section id="compute-node-strength" class="level4">
+<h4 class="anchored" data-anchor-id="compute-node-strength">Compute node strength</h4>
+<blockquote class="blockquote">
+<p>Node strength in a network is calculated by summing up the weights of all edges connected to the respective node.Thus, node strength investigates how strongly it is directly connected to other nodes in the network.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>topic_node_strength <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">strength</span>(topic_coocnet)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>topic_node_rankstrength <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">term =</span> <span class="fu">names</span>(topic_node_strength), </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">strength =</span> topic_node_strength, </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">row.names =</span> <span class="cn">NULL</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>topic_node_rankstrength<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">rank</span>(topic_node_rankstrength<span class="sc">$</span>strength, </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">ties.method =</span> <span class="st">'min'</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>topic_node_rankstrength <span class="ot">&lt;-</span> topic_node_rankstrength[<span class="fu">order</span>(topic_node_rankstrength<span class="sc">$</span>rank),]</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>topic_plot_strength <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(topic_node_rankstrength, </span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> strength, <span class="at">label =</span> term)) <span class="sc">+</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">hjust =</span> <span class="st">'right'</span>, <span class="at">nudge_y =</span> <span class="dv">3</span>, <span class="at">max.overlaps =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>topic_plot_strength</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: ggrepel: 411 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="1_litsearchr_search_string_files/figure-html/Prune%20the%20Network%20based%20on%20node%20strength-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="prune-based-on-chosen-criteria" class="level4">
+<h4 class="anchored" data-anchor-id="prune-based-on-chosen-criteria">Prune based on chosen criteria</h4>
+<blockquote class="blockquote">
+<p>We want to keep only those nodes that have high strength, but how will we decide how many to prune out? <code>litsearchr::find_cutoff()</code> provides us with two ways to decide: cumulative cutoff and change points. The cumulative cutoff method simply retains a certain proportion of the total strength. The change points method uses <code>changepoint::cpt.mean()</code> under the hood to calculate optimal cutoff positions where the trend in strength shows sharp changes.</p>
+<p>Again, we will use the heuristic when in doubt, pool results together, i.e.&nbsp;we will use the change point nearest the to the cumulative cutoff value we set.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Cumulatively - retain a certain proportion (e.g. 80%) of the total strength</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="do">### of the network of search terms</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>topic_cutoff_cum <span class="ot">&lt;-</span> <span class="fu">find_cutoff</span>(topic_coocnet, <span class="at">method =</span> <span class="st">'cumulative'</span>, </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">percent =</span> <span class="fl">0.8</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Changepoints - certain points along the ranking of terms where the strength </span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="do">### of the next strongest term is much greater than that of the previous one</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>topic_cutoff_change <span class="ot">&lt;-</span> <span class="fu">find_cutoff</span>(topic_coocnet, <span class="at">method =</span> <span class="st">'changepoint'</span>, <span class="at">knot_num =</span> <span class="dv">5</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>topic_plot_strength <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> topic_cutoff_cum, </span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="fl">0.7</span>, <span class="at">linetype =</span> <span class="st">'longdash'</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> topic_cutoff_change, </span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">'orange'</span>, <span class="at">lwd =</span> <span class="fl">0.7</span>, <span class="at">linetype =</span> <span class="st">'dashed'</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: ggrepel: 411 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="1_litsearchr_search_string_files/figure-html/Prune%20based%20on%20chosen%20criteria-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>topic_cutoff_crit <span class="ot">&lt;-</span> topic_cutoff_change[<span class="fu">which.min</span>(<span class="fu">abs</span>(topic_cutoff_change <span class="sc">-</span> topic_cutoff_cum))] </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">### e.g. nearest cutpoint to cumulative criterion (cumulative produces one value, changepoints may be many)</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>topic_maxselected_terms <span class="ot">&lt;-</span> litsearchr<span class="sc">::</span><span class="fu">get_keywords</span>(litsearchr<span class="sc">::</span><span class="fu">reduce_graph</span>(topic_coocnet, topic_cutoff_crit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Inspect selected terms:</p>
+<p>aerial vehicle, climate change, coastal areas, cover change, cover changes, decision making, decision support, developing countries, driving factors, earth engine, earth observation, ecological environment, ecological environmental, ecological index, ecological restoration, economic development, economic value, ecosystem service, ecosystem service value, ecosystem service values, ecosystem services, ecosystem services value, environmental factors, environmental impact, environmental management, environmental monitoring, environmental protection, environmental quality, environmental variables, forest cover, geographic information, geographic information system, google earth, google earth engine, hierarchy process, human activities, information system, information systems, land-use change, landscape pattern, machine learning, management practices, natural resource, natural resources, neural network, protected areas, random forest, rapid urbanization, regional scale, remote sensing, remote sensing image, remote sensing imagery, remote sensing images, remote sensing technology, remotely sensed, resolution satellite, resource management, river basin, satellite image, satellite imagery, satellite images, satellite remote, satellite remote sensing, sensing image, sensing imagery, sensing images, sensing technology, service value, service values, services value, societal benefit, spatial analysis, spatial distribution, spatial pattern, spatial patterns, spatial resolution, surface temperature, sustainable development, sustainable management, unmanned aerial, unmanned aerial vehicle, urban areas, urban expansion, using remote, using remote sensing, using satellite, vegetation cover, vegetation index, vegetation indices, water quality, water resource, water resources</p>
+<blockquote class="blockquote">
+<p>Some expression already contain others. For example, ‘mdma-assisted psychotherapy’ is an instance of ‘-assisted psychotherapy’ which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it’s results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring</p>
+</blockquote>
+<p>In our case, ‘earth observations’ and ‘earth observation system’ are instances of ‘earth observation’… similar for ‘ecosystem service[s| value]’…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>superstring <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">FALSE</span>, <span class="fu">length</span>(topic_maxselected_terms))</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(topic_maxselected_terms)) {</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">### i &lt;- 1</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  this_term   <span class="ot">&lt;-</span> topic_maxselected_terms[i]</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  other_terms <span class="ot">&lt;-</span> topic_maxselected_terms[<span class="sc">-</span>i]</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  superstring[i] <span class="ot">&lt;-</span> <span class="fu">any</span>(<span class="fu">str_detect</span>(this_term, other_terms))</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>topic_selected_terms <span class="ot">&lt;-</span> topic_maxselected_terms[<span class="sc">!</span>superstring]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>We will also manually do two other changes: (1) we are not interested in ‘systematic reviews’ so we will remove it; (2) we will add the terms ‘psychotherapy’ and ‘ptsd’ as they are not already present in their simplest form.</p>
+</blockquote>
+<p>For our purposes, let’s focus on the things not already in our preliminary search terms. Pull those out, then inspect what’s left for relevant terms to include.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>esi_terms <span class="ot">&lt;-</span> <span class="st">'satellite|space.based|remote observation|remote sensing|earth observation'</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>decision_terms <span class="ot">&lt;-</span> <span class="st">'decision|optimization|risk analysis|operational context|management|policy'</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>val_terms1 <span class="ot">&lt;-</span> <span class="st">'value|valuation|benefit'</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>val_terms2 <span class="ot">&lt;-</span> <span class="st">'social|societal|cultural|socioeconomic'</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>all_terms <span class="ot">&lt;-</span> <span class="fu">paste</span>(esi_terms, decision_terms, val_terms1, val_terms2, <span class="at">sep =</span> <span class="st">'|'</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>topics_new <span class="ot">&lt;-</span> topic_selected_terms[<span class="sc">!</span><span class="fu">str_detect</span>(topic_selected_terms, all_terms)]</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>topics_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "aerial vehicle"           "climate change"          
+ [3] "coastal areas"            "cover change"            
+ [5] "developing countries"     "driving factors"         
+ [7] "earth engine"             "ecological environment"  
+ [9] "ecological index"         "ecological restoration"  
+[11] "economic development"     "ecosystem service"       
+[13] "environmental factors"    "environmental impact"    
+[15] "environmental monitoring" "environmental protection"
+[17] "environmental quality"    "environmental variables" 
+[19] "forest cover"             "geographic information"  
+[21] "google earth"             "hierarchy process"       
+[23] "human activities"         "information system"      
+[25] "land-use change"          "landscape pattern"       
+[27] "machine learning"         "natural resource"        
+[29] "neural network"           "protected areas"         
+[31] "random forest"            "rapid urbanization"      
+[33] "regional scale"           "remotely sensed"         
+[35] "river basin"              "sensing image"           
+[37] "sensing technology"       "spatial analysis"        
+[39] "spatial distribution"     "spatial pattern"         
+[41] "spatial resolution"       "surface temperature"     
+[43] "sustainable development"  "unmanned aerial"         
+[45] "urban areas"              "urban expansion"         
+[47] "using remote"             "vegetation cover"        
+[49] "vegetation index"         "vegetation indices"      
+[51] "water quality"            "water resource"          </code></pre>
+</div>
+</div>
+<p>Looking for new key terms in the three Venn diagram areas of: “value”, “decision”, and “earth science information”.</p>
+<ul>
+<li>ESI: Many terms such as “machine learning,” “information system,” “spatial resolution” may fit here but are too generic to apply specifically to satellite or remote sensing. Some possibilities to include:
+<ul>
+<li>aerial vehicle (incl unmanned aerial)</li>
+<li>remotely sensed</li>
+</ul></li>
+<li>Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that they do an adequate job of capturing the major connections here.</li>
+<li>Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., “vegetation cover,” “river basin,” “mangrove forest,” “urban areas,” but without specifically noting a value or benefit related to these. A few possiblilites appear, however:
+<ul>
+<li>terms relating to quality, service, or health (value, benefit)
+<ul>
+<li>ecosytem service</li>
+<li>ecosystem health</li>
+<li>environmental quality</li>
+<li>water quality</li>
+</ul></li>
+<li>terms relating to goals or implied importance (value)
+<ul>
+<li>development goals (incl sustainable development)</li>
+<li>protected areas</li>
+<li>heritage sites (incl world heritage)</li>
+</ul></li>
+</ul></li>
+</ul>
+<ol start="6" type="1">
+<li><p>Manual grouping into clusters # Manual grouping into clusters - for more rigorous search we will need a combination of OR and AND operators design &lt;- topic_selected_terms[c(2, 4, 9, 10)] intervention &lt;- topic_selected_terms[c(1, 3, 5, 6, 7, 8, 13)] disorder &lt;- topic_selected_terms[c(11, 12, 14)] # all.equal(length(topic_selected_terms), # sum(length(design), length(intervention), length(disorder)) # ) # check that we grouped all terms topic_gruped_selected_terms &lt;- list( design = design, intervention = intervention, disorder = disorder )</p></li>
+<li><p>Automatically write the search string # Write the search litsearchr::write_search( topic_gruped_selected_terms, languages = ‘English’, exactphrase = TRUE, stemming = FALSE, closure = ‘left’, writesearch = FALSE ) ## [1] ‘English is written’ ## [1] ‘((’clinical trial’ OR ‘controlled trial’ OR ‘randomized clinical’ OR ‘randomized controlled’) AND (‘assisted psychotherapy’ OR ‘cognitive processing’ OR ‘evidence-based psychotherapy’ OR ‘exposure therapy’ OR ‘processing therapy’ OR ‘prolonged exposure’ OR psychotherapy) AND (‘stress disorder’ OR ‘traumatic stress’ OR ptsd))’</p></li>
+</ol>
+</section>
+</section>
 </section>
 
 </main>
