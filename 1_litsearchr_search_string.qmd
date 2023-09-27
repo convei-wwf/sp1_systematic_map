@@ -79,70 +79,8 @@ topic_df <- all_fields_df %>%
          title, abstract, keywords)
 ```
 
-## Check benchmarks against Web of Science search
 
-```{r}
-clean_author <- function(df) {
-  df1 <- df %>%
-    unnest(author) %>%
-    group_by(title, journal, year, doi) %>%
-    filter(author == first(author)) %>%
-    ungroup() %>%
-    mutate(author = tolower(author) %>%    ### drop caps
-             str_remove(',.*') %>%         ### keep only last name
-             str_remove_all('[^a-z ]') %>% ### drop punct
-             str_squish())                ### drop whitespace
-}
-
-clean_title <- function(df, len = 40) {
-  df2 <- df
-  df1 <- df %>%
-    select(author, title, journal, year, doi) %>%
-    unnest_tokens(output = title_word, input = title) %>%
-    anti_join(stop_words, by = c('title_word' = 'word')) %>%
-    group_by(author, journal, year, doi) %>%
-    summarize(title = paste(title_word, collapse = ' '), .groups = 'drop')
-  df_out <- df2 %>%
-    select(-title) %>%
-    full_join(df1)
-  return(df_out)
-}
-
-wos_df  <- all_fields_df %>%
-  janitor::clean_names() %>%
-  select(author, title, journal, year, doi) %>%
-  clean_author() %>%
-  clean_title() %>%
-  mutate(across(is.character, tolower))
-
-bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
-  janitor::clean_names() %>%
-  select(author, title, journal, year, doi)
-
-bench_df <- bench_raw_df %>%
-  clean_author() %>%
-  clean_title() %>%
-  mutate(across(is.character, tolower)) %>%
-  distinct()
-
-doi_match <- bench_df %>%
-  filter(!is.na(doi)) %>%
-  filter(doi %in% wos_df$doi)
-
-info_match <- bench_df %>%
-  select(-doi, -journal) %>%
-  inner_join(wos_df)
-
-match_df <- bind_rows(doi_match, info_match) %>%
-  distinct()
-
-pct_match <- nrow(match_df) / nrow(bench_df) * 100
-
-missed <- bench_df %>%
-  anti_join(match_df %>% select(-journal, -doi))
-```
-
-Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is `r round(pct_match, 1)`%%.  Scanning titles and abstracts, add the following terms:
+Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is 23%.  Scanning titles and abstracts, add the following terms:
 
 * Earth Science Info domain:
     * "cost benefit analysis"
@@ -306,51 +244,8 @@ Looking for new key terms in the three Venn diagram areas of: "value", "decision
 
 All told, these added criteria expand the search results from 1163 to 6419 (on Aug 14 2023).
 
-## Compare new set against benchmark articles
+Additional term ideas based on scanning benchmarks: 
 
-```{r}
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos2_', 
-                           full.names = TRUE)
-# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
-# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
-
-wos2_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
-  bind_rows() %>%
-  janitor::clean_names() %>%
-  select(author, title, journal, year, doi) %>%
-  clean_author() %>%
-  clean_title() %>%
-  mutate(across(is.character, tolower))
-
-bench_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
-  janitor::clean_names() %>%
-  select(author, title, journal, year, doi) %>%
-  clean_author() %>%
-  clean_title() %>%
-  mutate(across(is.character, tolower)) %>%
-  distinct()
-
-doi_match <- bench_df %>%
-  filter(!is.na(doi)) %>%
-  filter(doi %in% wos2_df$doi)
-
-info_match <- bench_df %>%
-  select(-doi) %>%
-  inner_join(wos2_df)
-  
-match_df <- bind_rows(doi_match, info_match) %>%
-  distinct()
-
-no_match <- bench_df %>%
-  anti_join(match_df %>% select(-doi))
-
-pct_match <- nrow(match_df) / nrow(bench_df) * 100
-
-knitr::kable(no_match)
-```
-
-Match now improves from 5 of 21 benchmarks to 10 of 21 benchmarks... hmm... still not great!  Additional term ideas based on scanning benchmarks: 
-
-* add "investment" as a value decision (+80 hits) as well as "cost benefit analysis" (+81)
+* add "investment" as a decision (+80 hits) as well as "cost benefit analysis" (+81)
 * explictly include "economic" (+883 hits) and "environmental" (+1711) in value term
 * include "*equit*" (only +39, equitable/inequities etc)

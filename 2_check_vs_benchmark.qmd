@@ -1,0 +1,91 @@
+---
+title: "Compare search results to benchmark"
+author: "O'Hara"
+format: html
+---
+
+## Check benchmarks against Web of Science search
+
+```{r load bibtex}
+bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
+# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
+# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
+
+all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
+  bind_rows() %>%
+  janitor::clean_names()
+
+```
+
+```{r}
+clean_author <- function(df) {
+  df1 <- df %>%
+    unnest(author) %>%
+    group_by(title, journal, year, doi) %>%
+    filter(author == first(author)) %>%
+    ungroup() %>%
+    mutate(author = tolower(author) %>%    ### drop caps
+             str_remove(',.*') %>%         ### keep only last name
+             str_remove_all('[^a-z ]') %>% ### drop punct
+             str_squish())                ### drop whitespace
+}
+
+clean_title <- function(df, len = 40) {
+  df2 <- df
+  df1 <- df %>%
+    select(author, title, journal, year, doi) %>%
+    unnest_tokens(output = title_word, input = title) %>%
+    anti_join(stop_words, by = c('title_word' = 'word')) %>%
+    group_by(author, journal, year, doi) %>%
+    summarize(title = paste(title_word, collapse = ' '), .groups = 'drop')
+  df_out <- df2 %>%
+    select(-title) %>%
+    full_join(df1)
+  return(df_out)
+}
+```
+
+```{r compare to bench}
+
+wos_df  <- all_fields_df %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi) %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(across(is.character, tolower))
+
+bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi)
+
+bench_df <- bench_raw_df %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(across(is.character, tolower)) %>%
+  distinct()
+
+doi_match <- bench_df %>%
+  filter(!is.na(doi)) %>%
+  filter(doi %in% wos_df$doi)
+
+info_match <- bench_df %>%
+  select(-doi, -journal) %>%
+  inner_join(wos_df)
+
+match_df <- bind_rows(doi_match, info_match) %>%
+  distinct()
+
+pct_match <- nrow(match_df) / nrow(bench_df) * 100
+
+missed <- bench_df %>%
+  anti_join(match_df %>% select(-journal, -doi))
+```
+
+## Check missed sources
+
+Examining missed sources (Sept 27):
+
+* Missing a "value" clause term: Angelstam, Charreire, Haas, Kalluri, Mathai, Pettorelli (x2)
+    * assess? quality? analyze/analysis, evaluate? utility? natural capital?
+* Missing a "social" clause term: Eom
+* Not in WoS database: Druckenmiller (white paper/grey lit?), Cooke, Lombardo, Reid
