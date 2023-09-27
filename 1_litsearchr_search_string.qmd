@@ -2,6 +2,10 @@
 title: 'Web of Science prelim analysis'
 format: html
 editor: visual
+execute:
+  echo: false
+  warning: false
+  message: false
 ---
 
 ```{r setup}
@@ -20,17 +24,16 @@ This script works with several search sets to help methodically identify search 
 
 ### Web of Science
 
-Data includes bibtex entries for the top most relevant results from a Web of Science search using the following terms:
+Data includes bibtex entries for the top most relevant results from a Web of Science search using the following terms within the "topic" (i.e., title, abstract, keywords, keywords-plus):
 
 <center>('satellite' <b>OR</b> 'space-based' <b>OR</b> 'remote observation' <b>OR</b> 'remote sensing' <b>OR</b> 'earth observation')
 <br><b>AND</b><br>
 ('decision' <b>OR</b> 'optimization' <b>OR</b> 'risk analysis' <b>OR</b> 'operational context' <b>OR</b> 'management' <b>OR</b> 'policy')
 <br><b>AND</b><br>
-('value\*' <b>OR</b> 'valuation' <b>OR</b> 'benefit\*')</center>
-<br><b>AND</b> _(for Web of Science search #2 only)_ <br>
-('social' OR 'societal' OR 'cultural' OR 'socioeconomic')
+('value\*' <b>OR</b> 'valuation' <b>OR</b> 'benefit\*') <b>AND</b> ('social' OR 'societal' OR 'cultural' OR 'socioeconomic')
+</center>
 
-These results, in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
+A search using these terms on August 10, 2023, generated 1158 results, which were downloaded in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
 
 ### CONVEI Zotero library
 
@@ -60,7 +63,8 @@ Now clean, read in the bibtex files and bind into a data.frame.
 
 ```{r}
 # bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos2_', full.names = TRUE)
+bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos1_', 
+                           full.names = TRUE)
 # bib_clean_fs <- here('bibtex_clean/zot_all.bib')
 # bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
 
@@ -92,7 +96,7 @@ clean_title <- function(df, len = 40) {
     mutate(title = str_sub(title, 1, len))
 }
 
-wos2_df  <- all_fields_df %>%
+wos1_df  <- all_fields_df %>%
   janitor::clean_names() %>%
   select(author, title, journal, year, doi) %>%
   clean_author() %>%
@@ -109,11 +113,11 @@ bench_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
 
 doi_match <- bench_df %>%
   filter(!is.na(doi)) %>%
-  filter(doi %in% wos2_df$doi)
+  filter(doi %in% wos1_df$doi)
 
 info_match <- bench_df %>%
   select(-doi) %>%
-  inner_join(wos2_df)
+  inner_join(wos1_df)
   
 match_df <- bind_rows(doi_match, info_match) %>%
   distinct()
@@ -122,7 +126,15 @@ pct_match <- nrow(match_df) / nrow(bench_df) * 100
 
 ```
 
-Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is `r round(pct_match, 1)`%%.
+Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is `r round(pct_match, 1)`%%.  Scanning titles and abstracts, add the following terms:
+
+* Earth Science Info domain:
+    * "cost benefit analysis"
+* Decision support domain:
+    * "cost benefit analysis"
+* Value domain (second clause):
+    * "environmental"
+    * "\*economic" (catches "socioeconomic", "socio economic", and maybe other variations)
 
 ## Use `litsearchr` functionality
 
@@ -264,20 +276,68 @@ topics_new
 Looking for new key terms in the three Venn diagram areas of: "value", "decision", and "earth science information".  
 
 * ESI: Many terms such as "machine learning," "information system," "spatial resolution" may fit here but are too generic to apply specifically to satellite or remote sensing.  Some possibilities to include:
-    * aerial vehicle (incl unmanned aerial)
-    * remotely sensed
-* Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that they do an adequate job of capturing the major connections here.
+    * aerial vehicle (and/or unmanned aerial) (+63 hits)
+        * let's focus on satellites, not drones yet...
+    * remotely sensed (+35 hits as "remotely sens\*")
+* Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that no additional terms relevant to this domain showed up as important in the co-occurrence network.
 * Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., "vegetation cover," "river basin," "mangrove forest," "urban areas," but without specifically noting a value or benefit related to these.  A few possiblilites appear, however:
     * terms relating to quality, service, or health (value, benefit)
-        * ecosytem service
-        * ecosystem health
-        * environmental quality
-        * water quality
+        * ecosytem service (+612 hits)
+        * ecosystem health (+32 hits)
+        * environmental quality (+63 hits, but included in "environmental" noted above)
+        * water quality (+384 hits!)
     * terms relating to goals or implied importance (value)
-        * development goals (incl sustainable development)
-        * protected areas
-        * heritage sites (incl world heritage)
+        * sustainable development goal (+60 hits)
+        * protected area (+211 hits)
+        * heritage site (+19 hits)
 
-6.  Manual grouping into clusters \# Manual grouping into clusters - for more rigorous search we will need a combination of OR and AND operators design \<- topic_selected_terms\[c(2, 4, 9, 10)\] intervention \<- topic_selected_terms\[c(1, 3, 5, 6, 7, 8, 13)\] disorder \<- topic_selected_terms\[c(11, 12, 14)\] \# all.equal(length(topic_selected_terms), \# sum(length(design), length(intervention), length(disorder)) \# ) \# check that we grouped all terms topic_gruped_selected_terms \<- list( design = design, intervention = intervention, disorder = disorder )
+All told, these added criteria expand the search results from 1163 to 6419 (on Aug 14 2023).
 
-7.  Automatically write the search string \# Write the search litsearchr::write_search( topic_gruped_selected_terms, languages = 'English', exactphrase = TRUE, stemming = FALSE, closure = 'left', writesearch = FALSE ) \## \[1\] 'English is written' \## \[1\] '(('clinical trial' OR 'controlled trial' OR 'randomized clinical' OR 'randomized controlled') AND ('assisted psychotherapy' OR 'cognitive processing' OR 'evidence-based psychotherapy' OR 'exposure therapy' OR 'processing therapy' OR 'prolonged exposure' OR psychotherapy) AND ('stress disorder' OR 'traumatic stress' OR ptsd))'
+## Compare new set against benchmark articles
+
+```{r}
+bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos2_', 
+                           full.names = TRUE)
+# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
+# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
+
+wos2_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
+  bind_rows() %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi) %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(across(is.character, tolower))
+
+bench_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi) %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(across(is.character, tolower)) %>%
+  distinct()
+
+doi_match <- bench_df %>%
+  filter(!is.na(doi)) %>%
+  filter(doi %in% wos2_df$doi)
+
+info_match <- bench_df %>%
+  select(-doi) %>%
+  inner_join(wos2_df)
+  
+match_df <- bind_rows(doi_match, info_match) %>%
+  distinct()
+
+no_match <- bench_df %>%
+  anti_join(match_df %>% select(-doi))
+
+pct_match <- nrow(match_df) / nrow(bench_df) * 100
+
+knitr::kable(no_match)
+```
+
+Match now improves from 5 of 21 benchmarks to 10 of 21 benchmarks... hmm... still not great!  Additional term ideas based on scanning benchmarks: 
+
+* add "investment" as a value decision (+80 hits) as well as "cost benefit analysis" (+81)
+* explictly include "economic" (+883 hits) and "environmental" (+1711) in value term
+* include "*equit*" (only +39, equitable/inequities etc)

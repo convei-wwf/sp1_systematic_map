@@ -62,10 +62,254 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This script takes the top 2000 most relevant results from a Web of Science search using the following terms:</p>
+<p>This script works with several search sets to help methodically identify search strings for a more inclusive literature database search.</p>
+<section id="web-of-science" class="level3">
+<h3 class="anchored" data-anchor-id="web-of-science">Web of Science</h3>
+<p>Data includes bibtex entries for the top most relevant results from a Web of Science search using the following terms within the “topic” (i.e., title, abstract, keywords, keywords-plus):</p>
 <center>
-(“satellite” <b>OR</b> “space-based” <b>OR</b> “remote observation” <b>OR</b> “remote sensing” <b>OR</b> “earth observation”) <br><b>AND</b><br> (“decision” <b>OR</b> “optimization” <b>OR</b> “risk analysis” <b>OR</b> “operational context” <b>OR</b> “management” <b>OR</b> “policy”) <br><b>AND</b><br> (“value*” <b>OR</b> “valuation” <b>OR</b> “benefit*”)
+(‘satellite’ <b>OR</b> ‘space-based’ <b>OR</b> ‘remote observation’ <b>OR</b> ‘remote sensing’ <b>OR</b> ‘earth observation’) <br><b>AND</b><br> (‘decision’ <b>OR</b> ‘optimization’ <b>OR</b> ‘risk analysis’ <b>OR</b> ‘operational context’ <b>OR</b> ‘management’ <b>OR</b> ‘policy’) <br><b>AND</b><br> (‘value*’ <b>OR</b> ‘valuation’ <b>OR</b> ‘benefit*’)
 </center>
+<p><br><b>AND</b> <em>(for Web of Science search #2 only)</em> <br> (‘social’ OR ‘societal’ OR ‘cultural’ OR ‘socioeconomic’)</p>
+<p>A search using these terms on August 10, 2023, generated 1158 results, which were downloaded in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the <code>bib2df</code> package to parse it properly.</p>
+</section>
+<section id="convei-zotero-library" class="level3">
+<h3 class="anchored" data-anchor-id="convei-zotero-library">CONVEI Zotero library</h3>
+<p>Data includes two different sets of records from the CONVEI Zotero library:</p>
+<ul>
+<li>Bibtex records for all documents in the CONVEI library</li>
+<li>Bibtex records for only those documents in the CONVEI benchmark collection.</li>
+</ul>
+<p>These bibtex records are in better shape than those from Web of Science, but cleaning them won’t hurt.</p>
+</section>
+<section id="cleaning-the-bibtex" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-the-bibtex">Cleaning the bibtex</h3>
+<p>The Web of Science records contain line breaks that disrupt the ability of the <code>bib2df</code> package to work properly. Replace those problematic line breaks (a line break <code>\n</code>, followed by a three-space indentation) with a single blank space.</p>
+<p>Now clean, read in the bibtex files and bind into a data.frame.</p>
+</section>
+</section>
+<section id="check-benchmarks-against-web-of-science-search-2" class="level2">
+<h2 class="anchored" data-anchor-id="check-benchmarks-against-web-of-science-search-2">Check benchmarks against Web of Science search #2</h2>
+<p>Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is 23.8%%.</p>
+</section>
+<section id="use-litsearchr-functionality" class="level2">
+<h2 class="anchored" data-anchor-id="use-litsearchr-functionality">Use <code>litsearchr</code> functionality</h2>
+<p>This section is based heavily on https://www.r-bloggers.com/2023/03/automated-systematic-literature-search-using-r-litsearchr-and-google-scholar-web-scraping/. Code is adapted for bibtex data accessed from Web of Science and the CONVEI Zotero library. Where instruction text is (more or less) verbatim from the blog post, it is indicated by block quotes.</p>
+<section id="identify-useful-terms-from-title" class="level3">
+<h3 class="anchored" data-anchor-id="identify-useful-terms-from-title">Identify useful terms from title</h3>
+<p>Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from <code>litsearchr::extract_terms</code>, as well as stop word elimination, to extract useful terms from titles.</p>
+</section>
+<section id="create-co-occurrence-network" class="level3">
+<h3 class="anchored" data-anchor-id="create-co-occurrence-network">Create Co-Occurrence Network</h3>
+<blockquote class="blockquote">
+<p>We will consider the title and abstract of each article to represent the article’s ‘content’ and we will consider a term to have appeared in the article if it appears in either the title or abstract. Based on this we will create the document-feature matrix, where the ‘documents’ are our articles (title and abstract) and the ‘features’ are the search terms. The Co-Occurrence Network is computed using this document-feature matrix.</p>
+</blockquote>
+<p>Uses <code>litsearchr::create_dfm()</code> to create a document-feature matrix and <code>litsearchr::create_network()</code> to create the co-occurrence network.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="1_litsearchr_search_string_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="prune-the-network-based-on-node-strength" class="level3">
+<h3 class="anchored" data-anchor-id="prune-the-network-based-on-node-strength">Prune the Network based on node strength</h3>
+<section id="compute-node-strength" class="level4">
+<h4 class="anchored" data-anchor-id="compute-node-strength">Compute node strength</h4>
+<blockquote class="blockquote">
+<p>Node strength in a network is calculated by summing up the weights of all edges connected to the respective node.Thus, node strength investigates how strongly it is directly connected to other nodes in the network.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="1_litsearchr_search_string_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="prune-based-on-chosen-criteria" class="level4">
+<h4 class="anchored" data-anchor-id="prune-based-on-chosen-criteria">Prune based on chosen criteria</h4>
+<blockquote class="blockquote">
+<p>We want to keep only those nodes that have high strength, but how will we decide how many to prune out? <code>litsearchr::find_cutoff()</code> provides us with two ways to decide: cumulative cutoff and change points. The cumulative cutoff method simply retains a certain proportion of the total strength. The change points method uses <code>changepoint::cpt.mean()</code> under the hood to calculate optimal cutoff positions where the trend in strength shows sharp changes.</p>
+<p>Again, we will use the heuristic when in doubt, pool results together, i.e.&nbsp;we will use the change point nearest the to the cumulative cutoff value we set.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="1_litsearchr_search_string_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Inspect selected terms:</p>
+<p>aerial vehicle, benefit areas, carbon sequestration, carbon storage, change detection, climate change, cover change, cover changes, cover mapping, cultural ecosystem, cultural ecosystem services, cultural heritage, decision making, decision support, developing countries, development goals, disaster management, driving forces, earth engine, earth observation, earth observation system, earth observations, ecological environment, ecosystem health, ecosystem service, ecosystem service value, ecosystem service values, ecosystem services, ecosystem services value, environmental quality, forest cover, forest management, geographic information, geographic information systems, global earth, global earth observation, global earth observation system, google earth, google earth engine, green space, green spaces, heritage sites, hierarchy process, information system, information systems, integrated approach, land-use change, machine learning, management policies, mangrove forest, natural hazards, natural resources, neural network, observation system, observing system, protected areas, rapid urbanization, remote sensing, remote sensing images, remote sensing techniques, remotely sensed, resource management, river basin, satellite imagery, satellite images, satellite remote, satellite remote sensing, sensing images, sensing techniques, service value, service values, services value, social media, societal benefit, societal benefit areas, societal benefits, socioeconomic development, spatial analysis, spatial resolution, spatially explicit, surface temperature, surface water, sustainable development, sustainable development goals, sustainable management, united states, unmanned aerial, unmanned aerial vehicle, urban areas, urban development, urban green, urban green space, urban growth, urban planning, urban sprawl, using remote, using remote sensing, using satellite, vegetation cover, water quality, water resources, world heritage</p>
+<blockquote class="blockquote">
+<p>Some expression already contain others. For example, ‘mdma-assisted psychotherapy’ is an instance of ‘-assisted psychotherapy’ which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it’s results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring</p>
+</blockquote>
+<p>In our case, ‘earth observations’ and ‘earth observation system’ are instances of ‘earth observation’… similar for ‘ecosystem service[s| value]’…</p>
+<blockquote class="blockquote">
+<p>We will also manually do two other changes: (1) we are not interested in ‘systematic reviews’ so we will remove it; (2) we will add the terms ‘psychotherapy’ and ‘ptsd’ as they are not already present in their simplest form.</p>
+</blockquote>
+<p>For our purposes, let’s focus on the things not already in our preliminary search terms. Pull those out, then inspect what’s left for relevant terms to include.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "aerial vehicle"          "carbon sequestration"   
+ [3] "carbon storage"          "change detection"       
+ [5] "climate change"          "cover change"           
+ [7] "cover mapping"           "developing countries"   
+ [9] "development goals"       "driving forces"         
+[11] "earth engine"            "ecological environment" 
+[13] "ecosystem health"        "ecosystem service"      
+[15] "environmental quality"   "forest cover"           
+[17] "geographic information"  "global earth"           
+[19] "google earth"            "green space"            
+[21] "heritage sites"          "hierarchy process"      
+[23] "information system"      "integrated approach"    
+[25] "land-use change"         "machine learning"       
+[27] "mangrove forest"         "natural hazards"        
+[29] "natural resources"       "neural network"         
+[31] "observation system"      "observing system"       
+[33] "protected areas"         "rapid urbanization"     
+[35] "remotely sensed"         "river basin"            
+[37] "sensing images"          "sensing techniques"     
+[39] "spatial analysis"        "spatial resolution"     
+[41] "spatially explicit"      "surface temperature"    
+[43] "surface water"           "sustainable development"
+[45] "united states"           "unmanned aerial"        
+[47] "urban areas"             "urban development"      
+[49] "urban green"             "urban growth"           
+[51] "urban planning"          "urban sprawl"           
+[53] "using remote"            "vegetation cover"       
+[55] "water quality"           "water resources"        
+[57] "world heritage"         </code></pre>
+</div>
+</div>
+<p>Looking for new key terms in the three Venn diagram areas of: “value”, “decision”, and “earth science information”.</p>
+<ul>
+<li>ESI: Many terms such as “machine learning,” “information system,” “spatial resolution” may fit here but are too generic to apply specifically to satellite or remote sensing. Some possibilities to include:
+<ul>
+<li>aerial vehicle (and/or unmanned aerial) (+63 hits)</li>
+<li>remotely sensed (+35 hits)</li>
+</ul></li>
+<li>Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that no additional terms relevant to this domain showed up as important in the co-occurrence network.</li>
+<li>Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., “vegetation cover,” “river basin,” “mangrove forest,” “urban areas,” but without specifically noting a value or benefit related to these. A few possiblilites appear, however:
+<ul>
+<li>terms relating to quality, service, or health (value, benefit)
+<ul>
+<li>ecosytem service (+1684 hits)</li>
+<li>ecosystem health (+166 hits)</li>
+<li>environmental quality (+216 hits)</li>
+<li>water quality (+1588 hits)</li>
+</ul></li>
+<li>terms relating to goals or implied importance (value)
+<ul>
+<li>development goals (+347 hits) (and/or sustainable development +317 hits)</li>
+<li>protected areas (+1141 hits)</li>
+<li>heritage sites (+132 hits) (and/or world heritage +63 hits)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>All told, these added criteria expand the search results from 1163 to 6419 (on Aug 14 2023).</p>
+</section>
+</section>
+</section>
+<section id="compare-new-set-against-benchmark-articles" class="level2">
+<h2 class="anchored" data-anchor-id="compare-new-set-against-benchmark-articles">Compare new set against benchmark articles</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 22%">
+<col style="width: 44%">
+<col style="width: 2%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">author</th>
+<th style="text-align: left;">title</th>
+<th style="text-align: left;">journal</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">doi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">angelstam per</td>
+<td style="text-align: left;">assessing village authenticity with sate</td>
+<td style="text-align: left;">ambio: a journal of the human environment</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">10.1579/0044-7447-32.8.594</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">charreire h</td>
+<td style="text-align: left;">using remote sensing to define environme</td>
+<td style="text-align: left;">health &amp; place</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">10.1016/j.healthplace.2013.09.017</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cooke roger</td>
+<td style="text-align: left;">value of information for climate observi</td>
+<td style="text-align: left;">environment systems and decisions</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: left;">10.1007/s10669-013-9451-8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">druckenmiller hannah</td>
+<td style="text-align: left;">opportunities for increasing the impact</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2023</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">eom young sook</td>
+<td style="text-align: left;">measuring the economic benefits of an en</td>
+<td style="text-align: left;">space policy</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: left;">10.1016/j.spacepol.2013.06.003</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">florio massimo</td>
+<td style="text-align: left;">earth observation and economic studies a</td>
+<td style="text-align: left;">space policy</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: left;">10.1016/j.spacepol.2021.101429</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">haas jan</td>
+<td style="text-align: left;">mapping and monitoring urban ecosystem s</td>
+<td style="text-align: left;">ieee journal of selected topics in applied earth observations and remote sensing</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: left;">10.1109/jstars.2016.2586582</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kalluri s</td>
+<td style="text-align: left;">the potential of remote sensing data for</td>
+<td style="text-align: left;">environmental science &amp; policy</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">10.1016/j.envsci.2003.08.002</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lombardo seamus</td>
+<td style="text-align: left;">utilizing satellite earth observation an</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">macauley molly k</td>
+<td style="text-align: left;">the value of information measuring the c</td>
+<td style="text-align: left;">space policy</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">10.1016/j.spacepol.2006.08.003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">morretta valentina</td>
+<td style="text-align: left;">the socioeconomic value of scientific pu</td>
+<td style="text-align: left;">technological forecasting and social change</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: left;">10.1016/j.techfore.2022.121730</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Match now improves from 5 of 21 benchmarks to 10 of 21 benchmarks… hmm… still not great!</p>
 </section>
 
 </main>
