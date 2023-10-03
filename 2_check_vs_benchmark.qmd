@@ -4,6 +4,12 @@ author: "O'Hara"
 format: html
 ---
 
+```{r}
+library(tidyverse)
+library(here)
+library(tidytext)
+```
+
 ## Check benchmarks against Web of Science search
 
 ```{r load bibtex}
@@ -83,9 +89,10 @@ missed <- bench_df %>%
 
 ## Check missed sources
 
-Examining missed sources (Sept 27):
+Examining missed sources (Oct 2):
 
-* Missing a "value" clause term: Angelstam, Charreire, Haas, Kalluri, Mathai, Pettorelli (x2)
+* Missing a "value" clause term: Kalluri, Mathai
     * assess? quality? analyze/analysis, evaluate? utility? natural capital?
 * Missing a "social" clause term: Eom
-* Not in WoS database: Druckenmiller (white paper/grey lit?), Cooke, Lombardo, Reid
+    * "non-use value"? accuracy? pollution?
+* Not in WoS database (white paper/grey lit?): Cooke, Lombardo, Reid, Bernknopf (#2), Kroetz, Mullan

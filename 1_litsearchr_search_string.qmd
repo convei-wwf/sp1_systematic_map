@@ -36,60 +36,6 @@ Data includes bibtex entries for the top most relevant results from a Web of Sci
 
 A search using these terms on August 10, 2023, generated 1158 results, which were downloaded in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
 
-### CONVEI Zotero library
-
-Data includes two different sets of records from the CONVEI Zotero library:
-
-* Bibtex records for all documents in the CONVEI library
-* Bibtex records for only those documents in the CONVEI benchmark collection.
-
-These bibtex records are in better shape than those from Web of Science, but cleaning them won't hurt.
-
-### Cleaning the bibtex
-
-The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly.  Replace those problematic line breaks (a line break `\n`, followed by a three-space indentation) with a single blank space.
-
-```{r clean bibtex}
-bib_raw_fs <- list.files(here('bibtex_raw'), pattern = '.bib$', full.names = TRUE)
-for(f in bib_raw_fs) {
-  # f <- bib_raw_fs[1]
-  bib_raw <- read_file(f)
-  bib_clean <- str_replace_all(bib_raw, '\\n   ', ' ')
-  f_out <- str_replace(f, '_raw', '_clean')
-  write_file(bib_clean, f_out)
-}
-```
-
-Now clean, read in the bibtex files and bind into a data.frame.
-
-```{r}
-# bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
-# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
-
-all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
-  bind_rows() %>%
-  janitor::clean_names()
-
-topic_df <- all_fields_df %>%
-  select(category, year, 
-         # keywords_plus, web_of_science_categories, research_areas,
-         title, abstract, keywords)
-```
-
-
-Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is 23%.  Scanning titles and abstracts, add the following terms:
-
-* Earth Science Info domain:
-    * "cost benefit analysis"
-* Decision support domain:
-    * "cost benefit analysis"
-* Value domain (second clause):
-    * "environmental"
-    * "\*economic" (catches "socioeconomic", "socio economic", and maybe other variations)
-
 ## Use `litsearchr` functionality
 
 This section is based heavily on https://www.r-bloggers.com/2023/03/automated-systematic-literature-search-using-r-litsearchr-and-google-scholar-web-scraping/. Code is adapted for bibtex data accessed from Web of Science and the CONVEI Zotero library. Where instruction text is (more or less) verbatim from the blog post, it is indicated by block quotes.
