@@ -60,7 +60,7 @@ wos_df  <- all_fields_df %>%
   clean_title() %>%
   mutate(across(is.character, tolower))
 
-bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark.bib')) %>%
+bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark_a.bib')) %>%
   janitor::clean_names() %>%
   select(author, title, journal, year, doi)
 
@@ -91,8 +91,4 @@ missed <- bench_df %>%
 
 Examining missed sources (Oct 2):
 
-* Missing a "value" clause term: Kalluri, Mathai
-    * assess? quality? analyze/analysis, evaluate? utility? natural capital?
-* Missing a "social" clause term: Eom
-    * "non-use value"? accuracy? pollution?
 * Not in WoS database (white paper/grey lit?): Cooke, Lombardo, Reid, Bernknopf (#2), Kroetz, Mullan
