@@ -2,6 +2,11 @@
 title: "Compare search results to benchmark"
 author: "O'Hara"
 format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
 ---
 
 ```{r}
@@ -85,6 +90,8 @@ pct_match <- nrow(match_df) / nrow(bench_df) * 100
 
 missed <- bench_df %>%
   anti_join(match_df %>% select(-journal, -doi))
+
+DT::datatable(missed)
 ```
 
 ## Check missed sources
