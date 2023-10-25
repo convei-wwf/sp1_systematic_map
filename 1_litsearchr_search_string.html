@@ -71,36 +71,6 @@ ul.task-list li input[type="checkbox"] {
 </center>
 <p>A search using these terms on August 10, 2023, generated 1158 results, which were downloaded in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the <code>bib2df</code> package to parse it properly.</p>
 </section>
-<section id="convei-zotero-library" class="level3">
-<h3 class="anchored" data-anchor-id="convei-zotero-library">CONVEI Zotero library</h3>
-<p>Data includes two different sets of records from the CONVEI Zotero library:</p>
-<ul>
-<li>Bibtex records for all documents in the CONVEI library</li>
-<li>Bibtex records for only those documents in the CONVEI benchmark collection.</li>
-</ul>
-<p>These bibtex records are in better shape than those from Web of Science, but cleaning them won’t hurt.</p>
-</section>
-<section id="cleaning-the-bibtex" class="level3">
-<h3 class="anchored" data-anchor-id="cleaning-the-bibtex">Cleaning the bibtex</h3>
-<p>The Web of Science records contain line breaks that disrupt the ability of the <code>bib2df</code> package to work properly. Replace those problematic line breaks (a line break <code>\n</code>, followed by a three-space indentation) with a single blank space.</p>
-<p>Now clean, read in the bibtex files and bind into a data.frame.</p>
-<p>Prior to improving the search terms, the percent of benchmark articles contained in the Web of Science search is 23%. Scanning titles and abstracts, add the following terms:</p>
-<ul>
-<li>Earth Science Info domain:
-<ul>
-<li>“cost benefit analysis”</li>
-</ul></li>
-<li>Decision support domain:
-<ul>
-<li>“cost benefit analysis”</li>
-</ul></li>
-<li>Value domain (second clause):
-<ul>
-<li>“environmental”</li>
-<li>“*economic” (catches “socioeconomic”, “socio economic”, and maybe other variations)</li>
-</ul></li>
-</ul>
-</section>
 </section>
 <section id="use-litsearchr-functionality" class="level2">
 <h2 class="anchored" data-anchor-id="use-litsearchr-functionality">Use <code>litsearchr</code> functionality</h2>
@@ -108,6 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="identify-useful-terms-from-title" class="level3">
 <h3 class="anchored" data-anchor-id="identify-useful-terms-from-title">Identify useful terms from title</h3>
 <p>Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from <code>litsearchr::extract_terms</code>, as well as stop word elimination, to extract useful terms from titles.</p>
+<p>Now clean, read in the bibtex files and bind into a data.frame.</p>
 </section>
 <section id="create-co-occurrence-network" class="level3">
 <h3 class="anchored" data-anchor-id="create-co-occurrence-network">Create Co-Occurrence Network</h3>
@@ -146,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <p>Inspect selected terms:</p>
-<p>aerial vehicle, climate change, coastal areas, cover change, cover changes, decision making, decision support, developing countries, driving factors, earth engine, earth observation, ecological environment, ecological environmental, ecological index, ecological restoration, economic development, economic value, ecosystem service, ecosystem service value, ecosystem service values, ecosystem services, ecosystem services value, environmental factors, environmental impact, environmental management, environmental monitoring, environmental protection, environmental quality, environmental variables, forest cover, geographic information, geographic information system, google earth, google earth engine, hierarchy process, human activities, information system, information systems, land-use change, landscape pattern, machine learning, management practices, natural resource, natural resources, neural network, protected areas, random forest, rapid urbanization, regional scale, remote sensing, remote sensing image, remote sensing imagery, remote sensing images, remote sensing technology, remotely sensed, resolution satellite, resource management, river basin, satellite image, satellite imagery, satellite images, satellite remote, satellite remote sensing, sensing image, sensing imagery, sensing images, sensing technology, service value, service values, services value, societal benefit, spatial analysis, spatial distribution, spatial pattern, spatial patterns, spatial resolution, surface temperature, sustainable development, sustainable management, unmanned aerial, unmanned aerial vehicle, urban areas, urban expansion, using remote, using remote sensing, using satellite, vegetation cover, vegetation index, vegetation indices, water quality, water resource, water resources</p>
+<p>aerial vehicle, benefit areas, carbon sequestration, carbon storage, change detection, climate change, cover change, cover changes, cover mapping, cultural ecosystem, cultural ecosystem services, cultural heritage, decision making, decision support, developing countries, development goals, disaster management, driving forces, earth engine, earth observation, earth observation system, earth observations, ecological environment, ecosystem health, ecosystem service, ecosystem service value, ecosystem service values, ecosystem services, ecosystem services value, environmental quality, forest cover, forest management, geographic information, geographic information systems, global earth, global earth observation, global earth observation system, google earth, google earth engine, green space, green spaces, heritage sites, hierarchy process, information system, information systems, integrated approach, land-use change, machine learning, management policies, mangrove forest, natural hazards, natural resources, neural network, observation system, observing system, protected areas, rapid urbanization, remote sensing, remote sensing images, remote sensing techniques, remotely sensed, resource management, river basin, satellite imagery, satellite images, satellite remote, satellite remote sensing, sensing images, sensing techniques, service value, service values, services value, social media, societal benefit, societal benefit areas, societal benefits, socioeconomic development, spatial analysis, spatial resolution, spatially explicit, surface temperature, surface water, sustainable development, sustainable development goals, sustainable management, united states, unmanned aerial, unmanned aerial vehicle, urban areas, urban development, urban green, urban green space, urban growth, urban planning, urban sprawl, using remote, using remote sensing, using satellite, vegetation cover, water quality, water resources, world heritage</p>
 <blockquote class="blockquote">
 <p>Some expression already contain others. For example, ‘mdma-assisted psychotherapy’ is an instance of ‘-assisted psychotherapy’ which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it’s results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring</p>
 </blockquote>
@@ -157,71 +128,139 @@ ul.task-list li input[type="checkbox"] {
 <p>For our purposes, let’s focus on the things not already in our preliminary search terms. Pull those out, then inspect what’s left for relevant terms to include.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "aerial vehicle"           "climate change"          
- [3] "coastal areas"            "cover change"            
- [5] "developing countries"     "driving factors"         
- [7] "earth engine"             "ecological environment"  
- [9] "ecological index"         "ecological restoration"  
-[11] "economic development"     "ecosystem service"       
-[13] "environmental factors"    "environmental impact"    
-[15] "environmental monitoring" "environmental protection"
-[17] "environmental quality"    "environmental variables" 
-[19] "forest cover"             "geographic information"  
-[21] "google earth"             "hierarchy process"       
-[23] "human activities"         "information system"      
-[25] "land-use change"          "landscape pattern"       
-[27] "machine learning"         "natural resource"        
-[29] "neural network"           "protected areas"         
-[31] "random forest"            "rapid urbanization"      
-[33] "regional scale"           "remotely sensed"         
-[35] "river basin"              "sensing image"           
-[37] "sensing technology"       "spatial analysis"        
-[39] "spatial distribution"     "spatial pattern"         
-[41] "spatial resolution"       "surface temperature"     
-[43] "sustainable development"  "unmanned aerial"         
-[45] "urban areas"              "urban expansion"         
-[47] "using remote"             "vegetation cover"        
-[49] "vegetation index"         "vegetation indices"      
-[51] "water quality"            "water resource"          </code></pre>
+<pre><code> [1] "aerial vehicle"          "carbon sequestration"   
+ [3] "carbon storage"          "change detection"       
+ [5] "climate change"          "cover change"           
+ [7] "cover mapping"           "developing countries"   
+ [9] "development goals"       "driving forces"         
+[11] "earth engine"            "ecological environment" 
+[13] "ecosystem health"        "ecosystem service"      
+[15] "environmental quality"   "forest cover"           
+[17] "geographic information"  "global earth"           
+[19] "google earth"            "green space"            
+[21] "heritage sites"          "hierarchy process"      
+[23] "information system"      "integrated approach"    
+[25] "land-use change"         "machine learning"       
+[27] "mangrove forest"         "natural hazards"        
+[29] "natural resources"       "neural network"         
+[31] "observation system"      "observing system"       
+[33] "protected areas"         "rapid urbanization"     
+[35] "remotely sensed"         "river basin"            
+[37] "sensing images"          "sensing techniques"     
+[39] "spatial analysis"        "spatial resolution"     
+[41] "spatially explicit"      "surface temperature"    
+[43] "surface water"           "sustainable development"
+[45] "united states"           "unmanned aerial"        
+[47] "urban areas"             "urban development"      
+[49] "urban green"             "urban growth"           
+[51] "urban planning"          "urban sprawl"           
+[53] "using remote"            "vegetation cover"       
+[55] "water quality"           "water resources"        
+[57] "world heritage"         </code></pre>
 </div>
 </div>
 <p>Looking for new key terms in the three Venn diagram areas of: “value”, “decision”, and “earth science information”.</p>
 <ul>
 <li>ESI: Many terms such as “machine learning,” “information system,” “spatial resolution” may fit here but are too generic to apply specifically to satellite or remote sensing. Some possibilities to include:
 <ul>
-<li>aerial vehicle (and/or unmanned aerial) (+63 hits)
+<li>aerial vehicle (and/or unmanned aerial)
 <ul>
 <li>let’s focus on satellites, not drones yet…</li>
 </ul></li>
-<li>remotely sensed (+35 hits as “remotely sens*”)</li>
+<li>remotely sensed</li>
 </ul></li>
 <li>Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that no additional terms relevant to this domain showed up as important in the co-occurrence network.</li>
 <li>Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., “vegetation cover,” “river basin,” “mangrove forest,” “urban areas,” but without specifically noting a value or benefit related to these. A few possiblilites appear, however:
 <ul>
 <li>terms relating to quality, service, or health (value, benefit)
 <ul>
-<li>ecosytem service (+612 hits)</li>
-<li>ecosystem health (+32 hits)</li>
-<li>environmental quality (+63 hits, but included in “environmental” noted above)</li>
-<li>water quality (+384 hits!)</li>
+<li>ecosytem service</li>
+<li>ecosystem health</li>
+<li>environmental quality</li>
+<li>water quality</li>
 </ul></li>
 <li>terms relating to goals or implied importance (value)
 <ul>
-<li>sustainable development goal (+60 hits)</li>
-<li>protected area (+211 hits)</li>
-<li>heritage site (+19 hits)</li>
+<li>sustainable development goal</li>
+<li>protected area</li>
+<li>heritage site</li>
 </ul></li>
 </ul></li>
 </ul>
 <p>All told, these added criteria expand the search results from 1163 to 6419 (on Aug 14 2023).</p>
 <p>Additional term ideas based on scanning benchmarks:</p>
 <ul>
-<li>add “investment” as a decision (+80 hits) as well as “cost benefit analysis” (+81)</li>
-<li>explictly include “economic” (+883 hits) and “environmental” (+1711) in value term</li>
-<li>include “<em>equit</em>” (only +39, equitable/inequities etc)</li>
+<li>add “investment” as a decision as well as “cost benefit analysis”</li>
+<li>explictly include “economic” and “environmental” in value term</li>
+<li>include “<em>equit</em>”</li>
 </ul>
 </section>
 </section>
+</section>
+<section id="final-search-terms" class="level2">
+<h2 class="anchored" data-anchor-id="final-search-terms">Final search terms</h2>
+<p>Here are the “final” search terms, including number of individual hits for the term. Number of <em>unique</em> hits is based on subtracting that term (within its Venn bubble) holding all other terms constant and determining the hits that no longer appear (performed on Oct 23, 2023, with 3742 total hits with all terms included).</p>
+<ul>
+<li>Earth science information (all connected with OR)
+<ul>
+<li>“satellite” (+838 hits)</li>
+<li>“space-based” (+57 hits)</li>
+<li>“remote observation” (+0 hits) - dropped</li>
+<li>“remote sensing” (+1050 hits)</li>
+<li>“earth observation” (+66 hits)</li>
+<li>“remotely sens*” (+97 hits)</li>
+<li>“modis” (+54 hits)</li>
+<li>“landsat” (+163 hits)</li>
+<li><em>(other satellites?)</em></li>
+</ul></li>
+<li>Decision making context (all connected with OR)
+<ul>
+<li>“decision” (+346)</li>
+<li>“optimiz*” (+245)</li>
+<li>“risk analysis” (+9)</li>
+<li>“management” (+1951)</li>
+<li>“policy” (+278)</li>
+<li>“cost benefit analysis” (+18)</li>
+<li>“benefit cost analysis” (+1)</li>
+<li>“investment” (+50)</li>
+<li>“contingent valuation” (+9)</li>
+<li>“counterfactual” (+0) - dropped</li>
+</ul></li>
+<li>societal value - value clause AND social, ecological, economic clause
+<ul>
+<li>Value context (all connected with OR)
+<ul>
+<li>“value” (+2259)</li>
+<li>“valuation” (+83)</li>
+<li>“benefit” (+651)</li>
+<li>“utility” (+413)</li>
+<li><em>maybe “quality” (+3577) or “assess<em>” (+7792) or ”evaluat</em>” (+5132)</em> - NO, these blow it up too much</li>
+</ul></li>
+<li>AND</li>
+<li>Societal context (all connected with OR):
+<ul>
+<li>“social” (+101)</li>
+<li>“societal” (+31)</li>
+<li>“cultural” (+38)</li>
+<li>“*economic” (+393)</li>
+<li>“environmental” (+688)</li>
+<li>“ecosystem service” (+65)</li>
+<li>“sustainable development goal” (+5 hits)</li>
+<li>“protected area” (+10 hits)</li>
+<li>“heritage site” (+2 hits)</li>
+<li>“non use value” (+0 hits)</li>
+<li><em>NASA Applied Science themes:</em></li>
+<li>“capacity building” (+6)</li>
+<li>“disaster” (+185)</li>
+<li>“water resource*” (+299)</li>
+<li>“climate resilience” (+2 hits)</li>
+<li>“air quality” (+52)</li>
+<li>“conservation” (+462)</li>
+<li>“wildland fire*” (+8)</li>
+<li>“wildfire” (+55)</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 
 </main>
