@@ -21,18 +21,13 @@ library(ggrepel)
 
 ## Description
 
-This script works with several search sets to help methodically identify search strings for a more inclusive literature database search.  
+This script works with several search sets to help methodically identify search strings for a more inclusive literature database search.
 
 ### Web of Science
 
 Data includes bibtex entries for the top most relevant results from a Web of Science search using the following terms within the "topic" (i.e., title, abstract, keywords, keywords-plus):
 
-<center>('satellite' <b>OR</b> 'space-based' <b>OR</b> 'remote observation' <b>OR</b> 'remote sensing' <b>OR</b> 'earth observation')
-<br><b>AND</b><br>
-('decision' <b>OR</b> 'optimization' <b>OR</b> 'risk analysis' <b>OR</b> 'operational context' <b>OR</b> 'management' <b>OR</b> 'policy')
-<br><b>AND</b><br>
-('value\*' <b>OR</b> 'valuation' <b>OR</b> 'benefit\*') <b>AND</b> ('social' OR 'societal' OR 'cultural' OR 'socioeconomic')
-</center>
+<center>('satellite' <b>OR</b> 'space-based' <b>OR</b> 'remote observation' <b>OR</b> 'remote sensing' <b>OR</b> 'earth observation') <br><b>AND</b><br> ('decision' <b>OR</b> 'optimization' <b>OR</b> 'risk analysis' <b>OR</b> 'operational context' <b>OR</b> 'management' <b>OR</b> 'policy') <br><b>AND</b><br> ('value\*' <b>OR</b> 'valuation' <b>OR</b> 'benefit\*') <b>AND</b> ('social' OR 'societal' OR 'cultural' OR 'socioeconomic')</center>
 
 A search using these terms on August 10, 2023, generated 1158 results, which were downloaded in bibtex format including the full record and all citations (for the Web of Science), must be cleaned to remove forced line breaks for the `bib2df` package to parse it properly.
 
@@ -173,7 +168,7 @@ topic_selected_terms <- topic_maxselected_terms[!superstring]
 
 > We will also manually do two other changes: (1) we are not interested in 'systematic reviews' so we will remove it; (2) we will add the terms 'psychotherapy' and 'ptsd' as they are not already present in their simplest form.
 
-For our purposes, let's focus on the things not already in our preliminary search terms.  Pull those out, then inspect what's left for relevant terms to include.
+For our purposes, let's focus on the things not already in our preliminary search terms. Pull those out, then inspect what's left for relevant terms to include.
 
 ```{r id new terms}
 esi_terms <- 'satellite|space.based|remote observation|remote sensing|earth observation'
@@ -188,83 +183,82 @@ topics_new <- topic_selected_terms[!str_detect(topic_selected_terms, all_terms)]
 topics_new
 ```
 
-Looking for new key terms in the three Venn diagram areas of: "value", "decision", and "earth science information".  
+Looking for new key terms in the three Venn diagram areas of: "value", "decision", and "earth science information".
 
-* ESI: Many terms such as "machine learning," "information system," "spatial resolution" may fit here but are too generic to apply specifically to satellite or remote sensing.  Some possibilities to include:
-    * aerial vehicle (and/or unmanned aerial) 
-        * let's focus on satellites, not drones yet...
-    * remotely sensed 
-* Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that no additional terms relevant to this domain showed up as important in the co-occurrence network.
-* Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., "vegetation cover," "river basin," "mangrove forest," "urban areas," but without specifically noting a value or benefit related to these.  A few possiblilites appear, however:
-    * terms relating to quality, service, or health (value, benefit)
-        * ecosytem service 
-        * ecosystem health 
-        * environmental quality 
-        * water quality 
-    * terms relating to goals or implied importance (value)
-        * sustainable development goal 
-        * protected area 
-        * heritage site
+-   ESI: Many terms such as "machine learning," "information system," "spatial resolution" may fit here but are too generic to apply specifically to satellite or remote sensing. Some possibilities to include:
+    -   aerial vehicle (and/or unmanned aerial)
+        -   let's focus on satellites, not drones yet...
+    -   remotely sensed
+-   Decision support: no terms here seem to fall into this category; we have excluded our preliminary search terms, which implies that no additional terms relevant to this domain showed up as important in the co-occurrence network.
+-   Value/benefit: Many of the terms here seem to refer to some state of the world, e.g., "vegetation cover," "river basin," "mangrove forest," "urban areas," but without specifically noting a value or benefit related to these. A few possiblilites appear, however:
+    -   terms relating to quality, service, or health (value, benefit)
+        -   ecosytem service
+        -   ecosystem health
+        -   environmental quality
+        -   water quality
+    -   terms relating to goals or implied importance (value)
+        -   sustainable development goal
+        -   protected area
+        -   heritage site
 
 All told, these added criteria expand the search results from 1163 to 6419 (on Aug 14 2023).
 
-Additional term ideas based on scanning benchmarks: 
+Additional term ideas based on scanning benchmarks:
 
-* add "investment" as a decision as well as "cost benefit analysis"
-* explictly include "economic" and "environmental" in value term
-* include "*equit*" 
+-   add "investment" as a decision as well as "cost benefit analysis"
+-   explictly include "economic" and "environmental" in value term
+-   include "*equit*"
 
 ## Final search terms
 
-Here are the "final" search terms, including number of individual hits for the term.  Number of _unique_ hits is based on subtracting that term (within its Venn bubble) holding all other terms constant and determining the hits that no longer appear (performed on Oct 23, 2023, with 3742 total hits with all terms included).
+Here are the "final" search terms, including number of individual hits for the term. Number of *unique* hits is based on subtracting that term (within its Venn bubble) holding all other terms constant and determining the hits that no longer appear (performed on Oct 23, 2023, with 3742 total hits with all terms included).
 
-* Earth science information (all connected with OR)
-    * "satellite" (+838 hits)
-    * "space-based" (+57 hits)
-    * "remote observation" (+0 hits) - dropped
-    * "remote sensing" (+1050 hits)
-    * "earth observation" (+66 hits)
-    * "remotely sens*" (+97 hits)
-    * "modis"  (+54 hits)
-    * "landsat" (+163 hits)
-    * _(other satellites?)_
-* Decision making context (all connected with OR)
-    * "decision" (+346)
-    * "optimiz*" (+245)
-    * "risk analysis" (+9)
-    * "management" (+1951)
-    * "policy" (+278)
-    * "cost benefit analysis" (+18)
-    * "benefit cost analysis" (+1)
-    * "investment" (+50)
-    * "contingent valuation" (+9)
-    * "counterfactual" (+0) - dropped
-* societal value - value clause AND social, ecological, economic clause
-    * Value context (all connected with OR)
-        * "value" (+2259)
-        * "valuation" (+83)
-        * "benefit" (+651)
-        * "utility" (+413)
-        * _maybe "quality" (+3577) or "assess*" (+7792) or "evaluat*" (+5132)_ - NO, these blow it up too much
-    * AND
-    * Societal context (all connected with OR): 
-        * "social" (+101)
-        * "societal" (+31)
-        * "cultural" (+38)
-        * "*economic" (+393)
-        * "environmental" (+688)
-        * "ecosystem service" (+65)
-        * "sustainable development goal" (+5 hits)
-        * "protected area" (+10 hits)
-        * "heritage site" (+2 hits)
-        * "non use value" (+0 hits)
-        * _NASA Applied Science themes:_
-        * "capacity building" (+6)
-        * "disaster" (+185)
-        * "water resource*" (+299)
-        * "climate resilience" (+2 hits)
-        * "air quality" (+52)
-        * "conservation" (+462)
-        * "wildland fire*" (+8)
-        * "wildfire" (+55)
- 
+-   Earth science information (all connected with OR)
+    -   "satellite" (+838 hits)
+    -   "space-based" (+57 hits)
+    -   "remote observation" (+0 hits) - dropped
+    -   "remote sensing" (+1050 hits)
+    -   "earth observation" (+66 hits)
+    -   "remotely sens\*" (+97 hits)
+    -   "modis" (+54 hits)
+    -   "landsat" (+163 hits)
+    -   *(other satellites?)*
+-   Decision making context (all connected with OR)
+    -   "decision" (+346)
+    -   "optimiz\*" (+245)
+    -   "risk analysis" (+9)
+    -   "management" (+1951)
+    -   "policy" (+278)
+    -   "cost benefit analysis" (+18)
+    -   "benefit cost analysis" (+1)
+    -   "investment" (+50)
+    -   "contingent valuation" (+9)
+    -   "counterfactual" (+0) - dropped
+-   societal value - value clause AND social, ecological, economic clause
+    -   Value context (all connected with OR)
+        -   "value" (+2259)
+        -   "valuation" (+83)
+        -   "benefit" (+651)
+        -   "utility" (+413)
+        -   *maybe "quality" (+3577) or "assess" (+7792) or "evaluat*" (+5132) - NO, these blow it up too much
+    -   AND
+    -   Societal context (all connected with OR):
+        -   "social" (+101)
+        -   "societal" (+31)
+        -   "cultural" (+38)
+        -   "\*economic" (+393)
+        -   "environmental" (+688)
+        -   "ecosystem service" (+65)
+        -   "sustainable development goal" (+5 hits)
+        -   "protected area" (+10 hits)
+        -   "heritage site" (+2 hits)
+        -   "non use value" (+0 hits)
+        -   *NASA Applied Science themes:*
+        -   "capacity building" (+6)
+        -   "disaster" (+185)
+        -   "water resource\*" (+299)
+        -   "climate resilience" (+2 hits)
+        -   "air quality" (+52)
+        -   "conservation" (+462)
+        -   "wildland fire\*" (+8)
+        -   "wildfire" (+55)
