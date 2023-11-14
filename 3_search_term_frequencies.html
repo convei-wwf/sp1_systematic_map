@@ -323,6 +323,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="extract-bigrams-of-terms" class="level2">
+<h2 class="anchored" data-anchor-id="extract-bigrams-of-terms">Extract bigrams of terms</h2>
+<p>To look for inappropriate results, examine bigrams of occurrences of search terms. For example, “satellite” may be used in context of “satellite offices” of hospitals etc. For now, this will focus on single-word terms, not multi-word terms (e.g., not “cost-benefit analysis”) as those are already reasonably specific…</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>all_key <span class="ot">&lt;-</span> <span class="fu">paste</span>(decision_key, esi_key, value_key, societal_key, <span class="at">sep =</span> <span class="st">'|'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>all_terms <span class="ot">&lt;-</span> all_key <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">|'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>single_terms <span class="ot">&lt;-</span> all_terms[<span class="sc">!</span><span class="fu">str_detect</span>(all_terms, <span class="st">'[^a-z]'</span>)]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>single_key <span class="ot">&lt;-</span> <span class="fu">paste</span>(single_terms, <span class="at">collapse =</span> <span class="st">'|'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>bigram_df <span class="ot">&lt;-</span> topic_df <span class="sc">%&gt;%</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">### break into sentences or clauses based on periods, semicolons, and commas</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text2 =</span> <span class="fu">str_split</span>(text, <span class="st">'[;,.]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(text2) <span class="sc">%&gt;%</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text2 =</span> <span class="fu">str_squish</span>(text2)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">### break clauses into bigrams</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text2, <span class="at">output =</span> bigram, <span class="at">token =</span> <span class="st">'ngrams'</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(bigram, single_key))</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>bigram_clean_df <span class="ot">&lt;-</span> bigram_df <span class="sc">%&gt;%</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(bigram, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">'first'</span>, <span class="st">'second'</span>), <span class="at">sep =</span> <span class="st">' '</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">### because one of the two terms is a keyword, antijoin on stop words in</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="do">### each column to drop unhelpful bigrams</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'first'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'second'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(bigram, first, second, <span class="at">sep =</span> <span class="st">' '</span>)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>bigram_summary <span class="ot">&lt;-</span> bigram_clean_df <span class="sc">%&gt;%</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(bigram, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">str_extract</span>(bigram, single_key))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
 
 </main>
 <!-- /main column -->
