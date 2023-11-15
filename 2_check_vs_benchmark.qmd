@@ -1,7 +1,9 @@
 ---
 title: "Compare search results to benchmark"
 author: "O'Hara"
-format: html
+format: 
+  html:
+    code-fold: true
 execute:
   echo: true
   warning: false
@@ -41,14 +43,31 @@ clean_author <- function(df) {
              str_squish())                ### drop whitespace
 }
 
-clean_title <- function(df, len = 40) {
+clip_to_last_word <- function(s, len = 72) {
+  if(nchar(s) <= len) return(s)
+  ### otherwise, locate last space prior to `len` + 1
+  spaces <- str_locate_all(s, ' ') %>% 
+    unlist() %>% 
+    unique()
+  ### (len + 1 b/c if space is at len + 1, then the last character is at len)
+  last_char <- max(spaces[spaces <= len + 1]) - 1
+
+  return(str_sub(s, start = 1, end = last_char))
+}
+
+clean_title <- function(df) {
   df2 <- df
+    
   df1 <- df %>%
     select(author, title, journal, year, doi) %>%
+    rowwise() %>%
+    mutate(title = clip_to_last_word(title)) %>%
+    ungroup() %>%
     unnest_tokens(output = title_word, input = title) %>%
     anti_join(stop_words, by = c('title_word' = 'word')) %>%
     group_by(author, journal, year, doi) %>%
     summarize(title = paste(title_word, collapse = ' '), .groups = 'drop')
+  
   df_out <- df2 %>%
     select(-title) %>%
     full_join(df1)
@@ -61,29 +80,42 @@ clean_title <- function(df, len = 40) {
 wos_df  <- all_fields_df %>%
   janitor::clean_names() %>%
   select(author, title, journal, year, doi) %>%
+  mutate(title = str_remove_all(title, '[{}]'),
+         title_wos = title) %>%
+  mutate(journal = str_remove_all(tolower(journal), '[^a-z ]')) %>%
   clean_author() %>%
   clean_title() %>%
   mutate(across(is.character, tolower))
 
+w_df <- wos_df %>% filter(author == 'sawyer')
+
 bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark_a.bib')) %>%
   janitor::clean_names() %>%
-  select(author, title, journal, year, doi)
+  select(author, title, journal, year, doi) %>%
+  mutate(title = str_remove_all(title, '[{}]'),
+         title_zot = title)
+
 
 bench_df <- bench_raw_df %>%
   clean_author() %>%
   clean_title() %>%
+  mutate(journal = str_remove_all(tolower(journal), '[^a-z ]')) %>%
   mutate(across(is.character, tolower)) %>%
   distinct()
+
+b_df <- bench_df %>% filter(author == 'sawyer')
 
 doi_match <- bench_df %>%
   filter(!is.na(doi)) %>%
   filter(doi %in% wos_df$doi)
 
 info_match <- bench_df %>%
-  select(-doi, -journal) %>%
-  inner_join(wos_df)
+  select(author, year, title, title_zot) %>%
+  inner_join(wos_df) %>%
+  distinct()
 
 match_df <- bind_rows(doi_match, info_match) %>%
+  select(-title_wos) %>%
   distinct()
 
 pct_match <- nrow(match_df) / nrow(bench_df) * 100
@@ -91,11 +123,23 @@ pct_match <- nrow(match_df) / nrow(bench_df) * 100
 missed <- bench_df %>%
   anti_join(match_df %>% select(-journal, -doi))
 
-DT::datatable(missed)
+DT::datatable(missed %>% select(-title))
 ```
 
 ## Check missed sources
 
-Examining missed sources (Oct 2):
+Examining missed sources (Nov 15):
 
-* Not in WoS database (white paper/grey lit?): Cooke, Lombardo, Reid, Bernknopf (#2), Kroetz, Mullan
+* Not in WoS database (white paper/grey lit?): Cooke, Bernknopf (whales), Kroetz, Lombardo, Mullan, Reid
+
+## Hit rate
+
+```{r}
+bench_checked_df <- bench_df %>%
+  filter(!author %in% c('cooke', 'kroetz', 'lombardo', 'mullan', 'reid')) %>%
+  filter(!(author == 'bernknopf' & str_detect(title_zot, 'blue whale')))
+
+hit_rate <- round(nrow(match_df) / nrow(bench_checked_df) * 100)
+```
+
+There are `r nrow(bench_checked_df)` articles in the benchmark set that are known to be available in Web of Science.  The current search terms successfully identify these benchmark articles `r hit_rate`% of the time.
