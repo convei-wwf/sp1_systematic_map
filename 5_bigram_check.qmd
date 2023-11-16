@@ -1,0 +1,86 @@
+---
+title: "Examine bigram frequencies"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(tidytext)
+library(igraph)
+library(ggraph)
+
+source(here('common_fxns.R'))
+```
+
+Bigram analysis and network mapping based on https://www.tidytextmining.com/ngrams.
+
+## Load search results
+
+```{r load bibtex}
+topic_df <- load_articles(pattern = 'wos_')
+```
+
+## Extract bigrams of terms
+
+To look for inappropriate results, examine bigrams of occurrences of search terms.  For example, "satellite" may be used in context of "satellite offices" of hospitals etc.  Word pairs across sentence or clause breaks will not be grouped (i.e., the last word of a sentence won't be paired with the first word of the next sentence!)
+
+```{r}
+bigram_df <- topic_df %>%
+  filter(topic == 'abstract') %>%
+  select(title, abstract = text, year) %>%
+  distinct() %>%
+  ### break into sentences or clauses based on periods, semicolons, and commas
+  mutate(text2 = str_split(abstract, '[;,.]')) %>%
+  unnest(text2) %>%
+  mutate(text2 = str_squish(text2)) %>%
+  ### break clauses into bigrams
+  unnest_tokens(input = text2, output = bigram, token = 'ngrams', n = 2) 
+
+bigram_sum_df <- bigram_df %>%
+  ### filter out numbers and underscores
+  filter(!str_detect(bigram, '[0-9_]')) %>%
+  ### count instances
+  group_by(bigram) %>%
+  summarize(n = n()) %>%
+  ungroup()
+
+bigram_clean_df <- bigram_sum_df %>%
+  ### split bigrams
+  separate(bigram, into = c('first', 'second'), sep = ' ') %>%
+  ### antijoin on stop words in each column to drop unhelpful bigrams
+  anti_join(stop_words, by = c('first' = 'word')) %>%
+  anti_join(stop_words, by = c('second' = 'word'))
+
+```
+
+## Plotting bigram network
+
+Create a graph object from the dataframe
+
+```{r}
+bigram_graph <- bigram_clean_df %>%
+  filter(n > 50) %>%
+  igraph::graph_from_data_frame()
+
+set.seed(42)
+
+ggraph(bigram_graph, layout = 'fr') +
+  geom_edge_link(aes(edge_alpha = log(n)), 
+                 arrow = grid::arrow(type = "closed", length = unit(.05, "inches")),
+                 end_cap = circle(0.07, 'inches'),
+                 show.legend = FALSE) +
+  geom_node_point(color = 'lightblue', size = 2) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1, size = 3) +
+  theme_void()
+```
+

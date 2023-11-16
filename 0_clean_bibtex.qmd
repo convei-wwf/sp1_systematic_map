@@ -13,6 +13,8 @@ library(tidyverse)
 library(tidytext)
 library(bib2df)
 library(here)
+
+source(here('common_fxns.R'))
 ```
 
 ## Description
@@ -52,6 +54,6 @@ topic_df <- all_fields_df %>%
          # keywords_plus, web_of_science_categories, research_areas,
          title, abstract, keywords)
 
-head(topic_df$abstract)
+head(topic_df, 10)
 ```
 

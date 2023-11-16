@@ -16,26 +16,14 @@ editor: source
 library(tidyverse)
 library(here)
 library(tidytext)
+
+source(here('common_fxns.R'))
 ```
 
 ## Load search results
 
 ```{r load bibtex}
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
-# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
-
-all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
-  bind_rows() %>%
-  janitor::clean_names()
-
-topic_df <- all_fields_df %>%
-  select(author, journal, year, title, abstract, keywords, keywords_plus, web_of_science_categories) %>%
-  mutate(title_protect = title) %>%
-  pivot_longer(cols = c(title, abstract, keywords, keywords_plus), names_to = 'topic', values_to = 'text') %>%
-  rename(title = title_protect) %>%
-  mutate(text = tolower(text)) %>%
-  filter(!is.na(text))
+topic_df <- load_articles(pattern = 'wos_')
 ```
 
 ## Examine Web of Science category areas
@@ -238,41 +226,3 @@ ggplot(societal_p_list$count, aes(y = n_terms)) +
   theme_minimal() +
   labs(x = 'Search result count', y = 'Number of distinct terms')
 ```
-
-## Extract bigrams of terms
-
-To look for inappropriate results, examine bigrams of occurrences of search terms.  For example, "satellite" may be used in context of "satellite offices" of hospitals etc.  For now, this will focus on single-word terms, not multi-word terms (e.g., not "cost-benefit analysis") as those are already reasonably specific...
-
-```{r}
-all_key <- paste(decision_key, esi_key, value_key, societal_key, sep = '|')
-all_terms <- all_key %>%
-  str_split('\\|') %>% 
-  unlist()
-
-single_terms <- all_terms[!str_detect(all_terms, '[^a-z]')]
-single_key <- paste(single_terms, collapse = '|')
-
-bigram_df <- topic_df %>%
-  ### break into sentences or clauses based on periods, semicolons, and commas
-  mutate(text2 = str_split(text, '[;,.]')) %>%
-  unnest(text2) %>%
-  mutate(text2 = str_squish(text2)) %>%
-  ### break clauses into bigrams
-  unnest_tokens(input = text2, output = bigram, token = 'ngrams', n = 2) %>%
-  filter(str_detect(bigram, single_key))
-
-bigram_clean_df <- bigram_df %>%
-  separate(bigram, into = c('first', 'second'), sep = ' ') %>%
-  ### because one of the two terms is a keyword, antijoin on stop words in
-  ### each column to drop unhelpful bigrams
-  anti_join(stop_words, by = c('first' = 'word')) %>%
-  anti_join(stop_words, by = c('second' = 'word')) %>%
-  unite(bigram, first, second, sep = ' ')
-
-bigram_summary <- bigram_clean_df %>%
-  filter(!str_detect(bigram, '[0-9]')) %>%
-  group_by(bigram) %>%
-  summarize(n = n()) %>%
-  mutate(term = str_extract(bigram, single_key))
-```
-
