@@ -1,6 +1,9 @@
 ---
 title: 'Web of Science clean bibtex'
-format: html
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
 execute:
   echo: true
   warning: false
@@ -26,34 +29,12 @@ This script cleans bibtex files from Web of Science and the CONVEI Zotero librar
 The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly. Replace those problematic line breaks (a carriage return `\r`, followed by a line break `\n`, followed by a three-space indentation) with a single blank space.
 
 ```{r clean bibtex}
-bib_raw_fs <- list.files(here('bibtex_raw'), pattern = '.bib$', full.names = TRUE)
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = '.bib$', full.names = TRUE)
 for(f in bib_raw_fs) {
-  # f <- bib_raw_fs[1]
+  # f <- bib_raw_fs[7]
   bib_raw <- read_file(f)
-  bib_clean <- str_replace_all(bib_raw, '\\r\\n   ', ' ')
+  bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
   f_out <- str_replace(f, '_raw', '_clean')
   write_file(bib_clean, f_out)
 }
 ```
-
-Now clean, read in the bibtex files and bind into a data.frame.
-
-```{r}
-# bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
-# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
-
-all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
-  bind_rows() %>%
-  janitor::clean_names()
-
-topic_df <- all_fields_df %>%
-  select(category, year, 
-         # keywords_plus, web_of_science_categories, research_areas,
-         title, abstract, keywords)
-
-head(topic_df, 10)
-```
-

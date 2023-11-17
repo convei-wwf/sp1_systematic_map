@@ -1,6 +1,8 @@
 ---
 title: 'Web of Science prelim analysis'
-format: html
+format: 
+  html:
+    code-fold: true
 editor: visual
 execute:
   echo: false
@@ -41,19 +43,10 @@ This section is based heavily on https://www.r-bloggers.com/2023/03/automated-sy
 
 Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::extract_terms`, as well as stop word elimination, to extract useful terms from titles.
 
-Now clean, read in the bibtex files and bind into a data.frame.
+Now clean, read in the bibtex files and bind into a data.frame.  Those with a prefix 'wosnaive_' are the first pass with the initial set of search terms into Web of Science.
 
 ```{r}
-# bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wosnaive_', full.names = TRUE)
-# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
-# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
-
-all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
-  bind_rows() %>%
-  janitor::clean_names()
-
-topic_df <- all_fields_df %>%
+topic_df <- load_articles(pattern = 'wosnaive_', aspect = 'wide') %>%
   select(category, year, 
          # keywords_plus, web_of_science_categories, research_areas,
          title, abstract, keywords)

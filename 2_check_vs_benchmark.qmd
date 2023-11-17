@@ -22,14 +22,7 @@ source(here('common_fxns.R'))
 ## Check benchmarks against Web of Science search
 
 ```{r load bibtex}
-bib_clean_fs <- list.files(here('bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-# bib_clean_fs <- here('bibtex_clean/zot_all.bib')
-# bib_clean_fs <- here('bibtex_clean/zot_benchmark.bib')
-
-all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
-  bind_rows() %>%
-  janitor::clean_names()
-
+all_fields_df <- load_articles(pattern = 'wos_', aspect = 'wide')
 ```
 
 ```{r}
@@ -91,8 +84,7 @@ wos_df  <- all_fields_df %>%
 
 w_df <- wos_df %>% filter(author == 'sawyer')
 
-bench_raw_df <- bib2df::bib2df(here('bibtex_clean', 'zot_benchmark_a.bib')) %>%
-  janitor::clean_names() %>%
+bench_raw_df <- load_articles(pattern = 'zot_benchmark_a.bib', aspect = 'wide') %>%
   select(author, title, journal, year, doi) %>%
   mutate(title = str_remove_all(title, '[{}]'),
          title_zot = title)
