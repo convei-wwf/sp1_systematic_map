@@ -1,0 +1,54 @@
+---
+title: "Label topics using ChatGPT"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(tidytext)
+
+source(here('common_fxns.R'))
+```
+
+From the results of the LDA process, let's try to use ChatGPT to help label topics based on the most important topic words!
+
+```{r read in topic terms}
+term_f <- here('_output/lda_terms_k50.csv')
+
+topic_terms_df <- read_csv(term_f)
+
+topic_terms_text <- topic_terms_df %>%
+  group_by(topic) %>%
+  summarize(text = paste0(term, collapse = ' ')) %>%
+  mutate(topic_num = as.numeric(str_extract(topic, '[0-9]+'))) %>%
+  mutate(text = paste0(topic, ': ', text)) %>%
+  arrange(topic_num) %>%
+  select(text)
+
+write_csv(topic_terms_text, here('tmp', 'topic_terms_txt.csv'))
+```
+
+I put this list of topic terms into ChatGPT with the prompt similar to: "Here is a list of topics, each with a set of terms associated with each topic.  For each topic, provide a topic name of three words or fewer."  I then provided the list of topics, with associated terms saved above, to the ChatGPT interface.  The results were saved in `_data/chatgpt/three_word_topics.csv`.
+
+```{r}
+chatgpt_topic_names <- read_csv(here('_data/chatgpt/three_word_topics.csv')) %>%
+  mutate(topic = paste('topic', 1:n())) %>%
+  select(topic, chatgpt_topic) %>%
+  left_join(topic_terms_df, by = 'topic') %>%
+  mutate(prob = round(prob, 3))
+
+DT::datatable(chatgpt_topic_names)
+```
+
+
+ 
