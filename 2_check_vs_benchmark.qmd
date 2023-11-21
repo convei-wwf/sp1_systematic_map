@@ -1,5 +1,5 @@
 ---
-title: "Compare search results to benchmark"
+title: "Systematic map: Benchmark test"
 author: "O'Hara"
 format: 
   html:
@@ -19,35 +19,26 @@ library(tidytext)
 source(here('common_fxns.R'))
 ```
 
-## Check benchmarks against Web of Science search
+## Check benchmarks against Web of Science and Scopus search
 
 ```{r load bibtex}
-all_fields_df <- load_articles(pattern = 'wos_', aspect = 'wide')
+all_fields_df <- load_bibtex(pattern = 'wos_|scopus', aspect = 'wide')
 ```
 
 ```{r}
 clean_author <- function(df) {
+  c_names <- names(df)[names(df) != 'author']
+  
   df1 <- df %>%
     unnest(author) %>%
-    group_by(title, journal, year, doi) %>%
+    group_by(pick({{ c_names }})) %>%
     filter(author == first(author)) %>%
     ungroup() %>%
     mutate(author = tolower(author) %>%    ### drop caps
              str_remove(',.*') %>%         ### keep only last name
              str_remove_all('[^a-z ]') %>% ### drop punct
-             str_squish())                ### drop whitespace
-}
-
-clip_to_last_word <- function(s, len = 72) {
-  if(nchar(s) <= len) return(s)
-  ### otherwise, locate last space prior to `len` + 1
-  spaces <- str_locate_all(s, ' ') %>% 
-    unlist() %>% 
-    unique()
-  ### (len + 1 b/c if space is at len + 1, then the last character is at len)
-  last_char <- max(spaces[spaces <= len + 1]) - 1
-
-  return(str_sub(s, start = 1, end = last_char))
+             str_squish()) %>%             ### drop whitespace
+    distinct()
 }
 
 clean_title <- function(df) {
@@ -55,85 +46,114 @@ clean_title <- function(df) {
     
   df1 <- df %>%
     select(author, title, journal, year, doi) %>%
-    rowwise() %>%
-    mutate(title = clip_to_last_word(title)) %>%
-    ungroup() %>%
-    unnest_tokens(output = title_word, input = title) %>%
-    anti_join(stop_words, by = c('title_word' = 'word')) %>%
-    group_by(author, journal, year, doi) %>%
-    summarize(title = paste(title_word, collapse = ' '), .groups = 'drop')
+    distinct() %>%
+    mutate(title2 = tolower(title) %>%
+             str_replace_all('[^a-z0-9]+', ' ') %>%
+             str_squish())
   
   df_out <- df2 %>%
-    select(-title) %>%
-    full_join(df1)
+    full_join(df1, by = c('author', 'title', 'journal', 'year', 'doi')) %>%
+    select(-title, title = title2) %>%
+    distinct()
   return(df_out)
 }
 ```
 
 ```{r compare to bench}
 
-wos_df  <- all_fields_df %>%
+result_df  <- all_fields_df %>%
   janitor::clean_names() %>%
   select(author, title, journal, year, doi) %>%
-  mutate(title = str_remove_all(title, '[{}]'),
-         title_wos = title) %>%
-  mutate(journal = str_remove_all(tolower(journal), '[^a-z ]')) %>%
   clean_author() %>%
   clean_title() %>%
-  mutate(across(is.character, tolower))
+  mutate(journal = str_remove_all(journal, '[^A-z ]')) %>%
+  mutate(across(where(is.character), tolower))
 
-w_df <- wos_df %>% filter(author == 'sawyer')
-
-bench_raw_df <- load_articles(pattern = 'zot_benchmark_a.bib', aspect = 'wide') %>%
-  select(author, title, journal, year, doi) %>%
-  mutate(title = str_remove_all(title, '[{}]'),
-         title_zot = title)
+bench_raw_df <- load_bibtex(pattern = 'zot_benchmark_a.bib', aspect = 'wide') %>%
+  select(author, title, journal, year, doi)
 
 
 bench_df <- bench_raw_df %>%
   clean_author() %>%
   clean_title() %>%
-  mutate(journal = str_remove_all(tolower(journal), '[^a-z ]')) %>%
+  mutate(journal = str_remove_all(journal, '[^A-z ]')) %>%
   mutate(across(is.character, tolower)) %>%
   distinct()
 
-b_df <- bench_df %>% filter(author == 'sawyer')
-
 doi_match <- bench_df %>%
   filter(!is.na(doi)) %>%
-  filter(doi %in% wos_df$doi)
+  filter(doi %in% result_df$doi)
 
 info_match <- bench_df %>%
-  select(author, year, title, title_zot) %>%
-  inner_join(wos_df) %>%
+  select(author, year, title) %>%
+  inner_join(result_df) %>%
   distinct()
 
 match_df <- bind_rows(doi_match, info_match) %>%
-  select(-title_wos) %>%
+  select(-doi, -journal) %>%
   distinct()
 
 pct_match <- nrow(match_df) / nrow(bench_df) * 100
 
-missed <- bench_df %>%
-  anti_join(match_df %>% select(-journal, -doi))
+missed <- bench_df %>% 
+  anti_join(match_df)
 
-DT::datatable(missed %>% select(-title))
+knitr::kable(missed %>% select(author, year, title))
 ```
 
 ## Check missed sources
 
-Examining missed sources (Nov 15):
+Examining missed sources (Nov 20):
 
-* Not in WoS database (white paper/grey lit?): Cooke, Bernknopf (whales), Kroetz, Lombardo, Mullan, Reid
+* Not in WoS or Scopus databases (white paper/grey lit?): Cooke, Bernknopf (whales), Kroetz, Mullan
 
 ## Hit rate
 
 ```{r}
 bench_checked_df <- bench_df %>%
-  filter(!author %in% c('cooke', 'kroetz', 'lombardo', 'mullan', 'reid')) %>%
-  filter(!(author == 'bernknopf' & str_detect(title_zot, 'blue whale')))
+  filter(!author %in% c('cooke', 'kroetz', 'mullan')) %>%
+  filter(!(author == 'bernknopf' & str_detect(title, 'blue whale')))
 
 hit_rate <- round(nrow(match_df) / nrow(bench_checked_df) * 100)
 ```
 
-There are `r nrow(bench_checked_df)` articles in the benchmark set that are known to be available in Web of Science.  The current search terms successfully identify these benchmark articles `r hit_rate`% of the time.
+There are `r nrow(bench_checked_df)` articles in the benchmark set that are known to be available in Web of Science and/or Scopus.  The current search terms successfully identify these benchmark articles `r hit_rate`% of the time.
+
+## Pull together results and save out
+
+Save out a cleaned-up version of the Bibtex results, with a smaller number of variables, and duplicates identified and removed.  Only first author included; all text cleaned and lower-cased.
+
+```{r}
+results_all_df <- load_bibtex(pattern = 'wos_|scopus', aspect = 'long') %>%
+  clean_author() %>%
+  clean_title() %>%
+  mutate(journal = str_replace_all(tolower(journal), '[^A-z0-9]+', ' '))
+
+source_df <- results_all_df %>%
+  group_by(author, title, journal, year, doi) %>%
+  summarize(bibtex_source = paste(unique(bibtex_source), collapse = ';'),
+            .groups = 'drop') %>%
+  arrange(author, title, -year) %>%
+  mutate(doc_id = 1:n())
+
+clean_results_df <- results_all_df %>%
+  select(-bibtex_source) %>%
+  left_join(source_df) %>%
+  select(-title) %>%
+  distinct()
+
+### lots of duplicates... 
+### * in both Scopus and Web of Science
+### * alternate journal names (e.g., New Space vs. New Space: The Journal of Space Entrepreneurship)
+### * same first author/title but in different journals/different years
+###.    * check multi-authors; are they really the same paper?
+
+check_dupes <- clean_results_df %>%
+  filter(topic == 'title') %>%
+  select(-topic, -doc_id, -bibtex_source) %>%
+  distinct() %>%
+  janitor::get_dupes(author, text)
+
+write_csv(clean_results_df, here('_data/results_clean.csv'))
+```
+

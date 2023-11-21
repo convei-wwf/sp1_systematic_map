@@ -43,10 +43,10 @@ This section is based heavily on https://www.r-bloggers.com/2023/03/automated-sy
 
 Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::extract_terms`, as well as stop word elimination, to extract useful terms from titles.
 
-Now clean, read in the bibtex files and bind into a data.frame.  Those with a prefix 'wosnaive_' are the first pass with the initial set of search terms into Web of Science.
+Now clean, read in the bibtex files and bind into a data.frame. Those with a prefix 'wosnaive\_' are the first pass with the initial set of search terms into Web of Science.
 
 ```{r}
-topic_df <- load_articles(pattern = 'wosnaive_', aspect = 'wide') %>%
+topic_df <- load_bibtex(pattern = 'wosnaive_', aspect = 'wide') %>%
   select(category, year, 
          # keywords_plus, web_of_science_categories, research_areas,
          title, abstract, keywords)

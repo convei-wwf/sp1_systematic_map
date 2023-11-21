@@ -27,7 +27,7 @@ Bigram analysis and network mapping based on https://www.tidytextmining.com/ngra
 ## Load search results
 
 ```{r load bibtex}
-topic_df <- load_articles(pattern = 'wos_')
+topic_df <- load_articles()
 ```
 
 ## Extract bigrams of terms
@@ -37,7 +37,7 @@ To look for inappropriate results, examine bigrams of occurrences of search term
 ```{r}
 bigram_df <- topic_df %>%
   filter(topic == 'abstract') %>%
-  select(title, abstract = text, year) %>%
+  select(doc_id, abstract = text, year) %>%
   distinct() %>%
   ### break into sentences or clauses based on periods, semicolons, and commas
   mutate(text2 = str_split(abstract, '[;,.]')) %>%

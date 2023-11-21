@@ -23,7 +23,7 @@ source(here('common_fxns.R'))
 ## Load search results
 
 ```{r load bibtex}
-topic_df <- load_articles(pattern = 'wos_')
+topic_df <- load_articles()
 ```
 
 ## Examine term frequency across abstracts
@@ -40,13 +40,13 @@ The product $tf \times idf$ indicates words that are relatively important to one
 ```{r}
 abstr_df <- topic_df %>%
   filter(topic == 'abstract') %>%
-  select(title, text)
+  select(doc_id, text)
   
 abstr_words <- abstr_df %>%
   unnest_tokens(input = text, output = word, token = 'words') %>%
-  group_by(title, word) %>%
+  group_by(doc_id, word) %>%
   summarize(n = n()) %>%
-  group_by(title) %>%
+  group_by(doc_id) %>%
   mutate(term_freq = n / sum(n)) %>%
   ungroup()
 ```
@@ -55,10 +55,12 @@ abstr_words <- abstr_df %>%
 
 ```{r}
 abstr_freq_by_rank <- abstr_words %>%
-  group_by(title) %>%
+  group_by(doc_id) %>%
   arrange(desc(term_freq)) %>%
   mutate(rank = 1:n()) %>%
-  ungroup()
+  ungroup() %>%
+  anti_join(stop_words, by = c('word')) %>%
+  filter(nchar(word) > 2)
 
 rank_subset <- abstr_freq_by_rank %>% 
   filter(rank < 50)
@@ -69,8 +71,8 @@ freq_rank_lm <- lm(log10(term_freq) ~ log10(rank), data = rank_subset)
 #     -1.1059      -0.7098
 
 ggplot(abstr_freq_by_rank, 
-       aes(x = rank, y = term_freq, color = title)) +
-  geom_line(alpha = .1, linewidth = .1, show.legend = FALSE) +
+       aes(x = rank, y = term_freq, color = doc_id)) +
+  geom_point(alpha = .3, size = .1, show.legend = FALSE) +
   geom_abline(intercept = freq_rank_lm$coefficients[1],
               slope = freq_rank_lm$coefficients[2],
               linetype = 'dashed') +
@@ -84,9 +86,9 @@ Zipf's law: Frequency of a word is inversely proportional to rank... log-log plo
 
 ```{r}
 abstr_idf <- abstr_words %>%
-  mutate(n_titles = n_distinct(title)) %>%
+  mutate(n_titles = n_distinct(doc_id)) %>%
   group_by(word) %>%
-  summarize(idf = -log(n_distinct(title) / first(n_titles)))
+  summarize(idf = -log(n_distinct(doc_id) / first(n_titles)))
 
 abstr_tf_idf <- abstr_words %>%
   left_join(abstr_idf, by = c('word')) %>%

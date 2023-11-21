@@ -32,13 +32,13 @@ One goal of topic modeling in this case is to potentially identify topics within
 ## Load search results, unnest abstract to words
 
 ```{r load bibtex}
-abstr_df <- load_articles(pattern = 'wos_') %>%
+abstr_df <- load_articles() %>%
   filter(topic == 'abstract')
 
 abstr_words_df <- abstr_df %>%
   unnest_tokens(input = text, output = word, token = 'words') %>%
   anti_join(stop_words, by = 'word') %>%
-  group_by(title, word) %>%
+  group_by(doc_id, word) %>%
   summarize(n = n(), .groups = 'drop') 
 ```
 
@@ -54,14 +54,14 @@ Examine processing time (values plotted in graphs are based on computation time 
 
 ### Processing time as function of $n$ (number of articles)
 
-As $n$ increases (more articles), the number of terms in the DTM will increase as well, so if LDA processing time is linear with matrix size, then it will be marginally increasing with $n$.
+As $n$ increases (more articles), the number of terms in the DTM will increase as well, so if LDA processing time is linear with matrix size, then it will be marginally increasing with $n$.  These analyses are performed just on the Web of Science subset... not the full article set including Scopus results.
 
 ```{r how does term count change with n}
 sample_abstr <- function(n, df = abstr_words_df) {
-  titles_vec <- df$title %>% unique()
-  titles_sample <- sample(titles_vec, size = n, replace = FALSE)
+  id_vec <- df$doc_id %>% unique()
+  id_sample <- sample(id_vec, size = n, replace = FALSE)
   out_df <- df %>%
-    filter(title %in% titles_sample)  
+    filter(doc_id %in% id_sample)  
   return(out_df)
 }
 words_per_sample <- function(n, df = abstr_words_df) {
@@ -107,7 +107,7 @@ Processing time seems approximately linear with number of articles...
 
 ```{r}
 abstr_sample_dtm <- sample_abstr(n = 1000) %>%
-  cast_dtm(title, word, n)
+  cast_dtm(doc_id, word, n)
 system.time({
   abstr_lda <- topicmodels::LDA(abstr_sample_dtm, k = 2)
 })
@@ -240,10 +240,10 @@ if(any(!file.exists(topic_outf, terms_outf))) {
     anti_join(stop_words, by = 'word') %>%
     filter(nchar(word) > 2) %>%
     filter(!str_detect(word, '[0-9]')) %>%
-    group_by(title, word) %>%
+    group_by(doc_id, word) %>%
     summarize(n = n(), .groups = 'drop')
   
-  abstr_words_dtm <- cast_dtm(abstr_words_df, document = title, term = word, value = n)
+  abstr_words_dtm <- cast_dtm(abstr_words_df, document = doc_id, term = word, value = n)
   
   set.seed(4321)
   message('Processing the full abstract set of ', nrow(abstr_df), ' titles, with k = 25...')

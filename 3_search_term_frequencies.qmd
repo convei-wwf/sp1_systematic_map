@@ -23,32 +23,8 @@ source(here('common_fxns.R'))
 ## Load search results
 
 ```{r load bibtex}
-topic_df <- load_articles(pattern = 'wos_')
+topic_df <- load_articles()
 ```
-
-## Examine Web of Science category areas
-
-```{r}
-wos_cats_df <- topic_df %>%
-  mutate(cat = str_split(web_of_science_categories, '; ')) %>%
-  unnest(cat) %>%
-  mutate(cat = str_squish(cat)) %>%
-  filter(!is.na(cat)) %>%
-  group_by(cat) %>%
-  summarize(n = n()) %>%
-  mutate(cat = fct_reorder(cat, n)) %>%
-  arrange(-n)
-
-ggplot(wos_cats_df %>% head(10) %>% mutate(cat = fct_drop(cat))) +
-  geom_col(aes(y = cat, x = n)) +
-  labs(title = 'top 10 Web of Science categories')
-
-ggplot(wos_cats_df %>% filter(n < 10) %>% mutate(cat = fct_drop(cat))) +
-  geom_col(aes(y = cat, x = n)) +
-  labs(title = 'Categories with 10 or fewer instances')
-
-```
-
 
 ## Examine keywords
 
@@ -60,13 +36,13 @@ wos_kws_df <- topic_df %>%
   mutate(kw = str_squish(kw)) %>%
   filter(!is.na(kw)) %>%
   group_by(kw) %>%
-  summarize(n = n()) %>%
+  summarize(n = n_distinct(doc_id)) %>%
   mutate(kw = fct_reorder(kw, n)) %>%
   arrange(-n)
 
 ggplot(wos_kws_df %>% head(20) %>% mutate(kw = fct_drop(kw))) +
   geom_col(aes(y = kw, x = n)) +
-  labs(title = 'top 10 Web of Science keywords')
+  labs(title = 'top 20 Web of Science or Scopus keywords')
 
 # wos_kws_df %>% filter(n == 1) %>% DT::datatable()
 
@@ -102,14 +78,14 @@ This documents how many distinct papers (lit search results) note the use of eac
 ```{r function to tally frequency of terms}
 tally_results <- function(term_df) {
   term_freq_df <- term_df %>%
-    select(author, year, title, topic, term) %>%
+    select(doc_id, topic, term) %>%
     distinct() %>%
     group_by(term, topic) %>%
     mutate(freq_term = n()) %>%
     ungroup() %>%
     mutate(term = fct_reorder(term, freq_term))
   term_count_df <- term_df %>%
-    group_by(author, year, title, topic) %>%
+    group_by(doc_id, topic) %>%
     summarize(n_terms = n_distinct(term))
   return(list('freq' = term_freq_df, 'count' = term_count_df))
 }
