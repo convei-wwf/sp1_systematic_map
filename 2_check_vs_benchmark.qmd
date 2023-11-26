@@ -121,7 +121,7 @@ There are `r nrow(bench_checked_df)` articles in the benchmark set that are know
 
 ## Pull together results and save out
 
-Save out a cleaned-up version of the Bibtex results, with a smaller number of variables, and duplicates identified and removed.  Only first author included; all text cleaned and lower-cased.
+Save out a cleaned-up version of the Bibtex results, with a smaller number of variables, and duplicates identified and removed.  Only first author included; all text cleaned and lower-cased.  Note also which papers are included in the benchmark set.
 
 ```{r}
 results_all_df <- load_bibtex(pattern = 'wos_|scopus', aspect = 'long') %>%
@@ -129,18 +129,24 @@ results_all_df <- load_bibtex(pattern = 'wos_|scopus', aspect = 'long') %>%
   clean_title() %>%
   mutate(journal = str_replace_all(tolower(journal), '[^A-z0-9]+', ' '))
 
+bench_bool <- bench_checked_df %>%
+  select(author, year, title) %>%
+  mutate(benchmark = TRUE)
+
 source_df <- results_all_df %>%
   group_by(author, title, journal, year, doi) %>%
   summarize(bibtex_source = paste(unique(bibtex_source), collapse = ';'),
             .groups = 'drop') %>%
   arrange(author, title, -year) %>%
-  mutate(doc_id = 1:n())
+  mutate(doc_id = 1:n()) %>%
+  left_join(bench_bool)
 
 clean_results_df <- results_all_df %>%
   select(-bibtex_source) %>%
   left_join(source_df) %>%
   select(-title) %>%
-  distinct()
+  distinct() %>%
+  mutate(benchmark = ifelse(is.na(benchmark), FALSE, benchmark))
 
 ### lots of duplicates... 
 ### * in both Scopus and Web of Science
@@ -149,11 +155,32 @@ clean_results_df <- results_all_df %>%
 ###.    * check multi-authors; are they really the same paper?
 
 check_dupes <- clean_results_df %>%
-  filter(topic == 'title') %>%
-  select(-topic, -doc_id, -bibtex_source) %>%
+  filter(field == 'title') %>%
+  select(-field, -doc_id, -bibtex_source) %>%
   distinct() %>%
   janitor::get_dupes(author, text)
 
-write_csv(clean_results_df, here('_data/results_clean.csv'))
+### select most recent year, anti-join this to check_dupes (to keep duplicates beyond
+### that most recent year), and then anti-join *that* to the clean_results_df...
+### NOTE: this leaves some doc_id values missing... is that a problem?
+keep_dupes_df <- check_dupes %>%
+  group_by(author, text) %>%
+  arrange(-benchmark, -year, journal) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(author, text, year, journal, doi)
+
+drop_dupes_df <- check_dupes %>%
+  anti_join(keep_dupes_df) %>%
+  select(author, text, year, journal, doi) %>%
+  inner_join(clean_results_df) %>%
+  select(doc_id)
+
+clean_nodupes_df <- clean_results_df %>%
+  anti_join(drop_dupes_df)
+
+# clean_nodupes_df %>% filter(field == 'title') %>% .$benchmark %>% sum
+
+write_csv(clean_nodupes_df, here('_data/results_clean.csv'))
 ```
 

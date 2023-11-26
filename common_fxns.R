@@ -9,7 +9,7 @@ load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos_', aspe
     distinct()
   
   if(aspect == 'long') {
-    topic_df <- all_fields_df %>%
+    field_df <- all_fields_df %>%
       select(author, journal, year, title, doi,
              abstract, contains('keyword'),
              web_of_science_categories,
@@ -17,13 +17,13 @@ load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos_', aspe
       distinct() %>%
       mutate(title_protect = title) %>%
       pivot_longer(cols = c(title, abstract, web_of_science_categories, contains('keyword')), 
-                   names_to = 'topic', values_to = 'text') %>%
+                   names_to = 'field', values_to = 'text') %>%
       rename(title = title_protect) %>%
       mutate(text = tolower(text)) %>%
       filter(!is.na(text)) %>%
       distinct()
     
-    return(topic_df)
+    return(field_df)
   }
   if(aspect == 'wide') {
     return(all_fields_df)

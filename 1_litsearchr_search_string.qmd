@@ -46,7 +46,7 @@ Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::ex
 Now clean, read in the bibtex files and bind into a data.frame. Those with a prefix 'wosnaive\_' are the first pass with the initial set of search terms into Web of Science.
 
 ```{r}
-topic_df <- load_bibtex(pattern = 'wosnaive_', aspect = 'wide') %>%
+article_df <- load_bibtex(pattern = 'wosnaive_', aspect = 'wide') %>%
   select(category, year, 
          # keywords_plus, web_of_science_categories, research_areas,
          title, abstract, keywords)
@@ -54,11 +54,11 @@ topic_df <- load_bibtex(pattern = 'wosnaive_', aspect = 'wide') %>%
 
 ```{r extract title terms}
 stop_vec <- stopwords::stopwords('en')
-title_terms <- extract_terms(text = topic_df$title,
+title_terms <- extract_terms(text = article_df$title,
                              method = 'fakerake', min_freq = 3, min_n = 2,
                              stopwords = stop_vec)
 
-# abstr_terms <- extract_terms(text = topic_df$abstract,
+# abstr_terms <- extract_terms(text = article_df$abstract,
 #                              method = 'fakerake', min_freq = 3, min_n = 2,
 #                              stopwords = stop_vec)
 
@@ -71,15 +71,15 @@ title_terms <- extract_terms(text = topic_df$title,
 Uses `litsearchr::create_dfm()` to create a document-feature matrix and `litsearchr::create_network()` to create the co-occurrence network.
 
 ```{r create cooccurrence network}
-topic_docs <- paste(topic_df$title, topic_df$abstract) 
+article_docs <- paste(article_df$title, article_df$abstract) 
   ### we will consider title and abstract of each article to represent the article's 'content'
 
-topic_dfm <- create_dfm(elements = topic_docs, 
-                        features = title_terms)
+article_dfm <- create_dfm(elements = article_docs, 
+                          features = title_terms)
 
-topic_coocnet <- create_network(topic_dfm, min_studies = 3)
+article_coocnet <- create_network(article_dfm, min_studies = 3)
 
-ggraph(topic_coocnet, layout = 'stress') +
+ggraph(article_coocnet, layout = 'stress') +
   coord_fixed() +
   expand_limits(x = c(-3, 3)) +
   geom_edge_link(aes(alpha = weight)) +
@@ -96,21 +96,21 @@ ggraph(topic_coocnet, layout = 'stress') +
 > Node strength in a network is calculated by summing up the weights of all edges connected to the respective node.Thus, node strength investigates how strongly it is directly connected to other nodes in the network.
 
 ```{r Prune the Network based on node strength}
-topic_node_strength <- igraph::strength(topic_coocnet)
-topic_node_rankstrength <- data.frame(term = names(topic_node_strength), 
-                                      strength = topic_node_strength, 
-                                      row.names = NULL)
-topic_node_rankstrength$rank <- rank(topic_node_rankstrength$strength, 
-                                     ties.method = 'min')
-topic_node_rankstrength <- topic_node_rankstrength[order(topic_node_rankstrength$rank),]
-topic_plot_strength <- ggplot(topic_node_rankstrength, 
-                              aes(x = rank, y = strength, label = term)) +
+article_node_strength <- igraph::strength(article_coocnet)
+article_node_rankstrength <- data.frame(term = names(article_node_strength), 
+                                        strength = article_node_strength, 
+                                        row.names = NULL)
+article_node_rankstrength$rank <- rank(article_node_rankstrength$strength, 
+                                       ties.method = 'min')
+article_node_rankstrength <- article_node_rankstrength[order(article_node_rankstrength$rank),]
+article_plot_strength <- ggplot(article_node_rankstrength, 
+                                aes(x = rank, y = strength, label = term)) +
   geom_line(lwd = 0.8) +
   geom_point() +
   geom_text_repel(size = 3, hjust = 'right', nudge_y = 3, max.overlaps = 30) +
   theme_bw()
 
-topic_plot_strength
+article_plot_strength
 ```
 
 #### Prune based on chosen criteria
@@ -122,43 +122,43 @@ topic_plot_strength
 ```{r Prune based on chosen criteria}
 ### Cumulatively - retain a certain proportion (e.g. 80%) of the total strength
 ### of the network of search terms
-topic_cutoff_cum <- find_cutoff(topic_coocnet, method = 'cumulative', 
-                                percent = 0.8)
+article_cutoff_cum <- find_cutoff(article_coocnet, method = 'cumulative', 
+                                  percent = 0.8)
 
 ### Changepoints - certain points along the ranking of terms where the strength 
 ### of the next strongest term is much greater than that of the previous one
-topic_cutoff_change <- find_cutoff(topic_coocnet, method = 'changepoint', knot_num = 5)
+article_cutoff_change <- find_cutoff(article_coocnet, method = 'changepoint', knot_num = 5)
 
-topic_plot_strength +
-  geom_hline(yintercept = topic_cutoff_cum, 
+article_plot_strength +
+  geom_hline(yintercept = article_cutoff_cum, 
              color = 'red', lwd = 0.7, linetype = 'longdash', alpha = 0.6) +
-  geom_hline(yintercept = topic_cutoff_change, 
+  geom_hline(yintercept = article_cutoff_change, 
              color = 'orange', lwd = 0.7, linetype = 'dashed', alpha = 0.6)
 
-topic_cutoff_crit <- topic_cutoff_change[which.min(abs(topic_cutoff_change - topic_cutoff_cum))] 
+article_cutoff_crit <- article_cutoff_change[which.min(abs(article_cutoff_change - article_cutoff_cum))] 
   ### e.g. nearest cutpoint to cumulative criterion (cumulative produces one value, changepoints may be many)
 
-topic_maxselected_terms <- litsearchr::get_keywords(litsearchr::reduce_graph(topic_coocnet, topic_cutoff_crit))
+article_maxselected_terms <- litsearchr::get_keywords(litsearchr::reduce_graph(article_coocnet, article_cutoff_crit))
 
 ```
 
 Inspect selected terms:
 
-`r topic_maxselected_terms`
+`r article_maxselected_terms`
 
 > Some expression already contain others. For example, 'mdma-assisted psychotherapy' is an instance of '-assisted psychotherapy' which is a very important key term that defines psychotherapies that use pharmacological means or other tools to achieve it's results. This happens for a lot of strings, and generally, we would like to keep only the shortest unique substring
 
 In our case, 'earth observations' and 'earth observation system' are instances of 'earth observation'... similar for 'ecosystem service\[s\| value\]'...
 
 ```{r keep shortest unique substrings}
-superstring <- rep(FALSE, length(topic_maxselected_terms))
-for(i in seq_along(topic_maxselected_terms)) {
+superstring <- rep(FALSE, length(article_maxselected_terms))
+for(i in seq_along(article_maxselected_terms)) {
   ### i <- 1
-  this_term   <- topic_maxselected_terms[i]
-  other_terms <- topic_maxselected_terms[-i]
+  this_term   <- article_maxselected_terms[i]
+  other_terms <- article_maxselected_terms[-i]
   superstring[i] <- any(str_detect(this_term, other_terms))
 }
-topic_selected_terms <- topic_maxselected_terms[!superstring]
+article_selected_terms <- article_maxselected_terms[!superstring]
 ```
 
 > We will also manually do two other changes: (1) we are not interested in 'systematic reviews' so we will remove it; (2) we will add the terms 'psychotherapy' and 'ptsd' as they are not already present in their simplest form.
@@ -173,7 +173,7 @@ val_terms2 <- 'social|societal|cultural|socioeconomic'
 
 all_terms <- paste(esi_terms, decision_terms, val_terms1, val_terms2, sep = '|')
 
-topics_new <- topic_selected_terms[!str_detect(topic_selected_terms, all_terms)]
+topics_new <- article_selected_terms[!str_detect(article_selected_terms, all_terms)]
 
 topics_new
 ```

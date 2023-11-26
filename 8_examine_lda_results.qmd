@@ -1,0 +1,63 @@
+---
+title: "Examine results of LDA topic analysis"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(tidytext)
+library(topicmodels)
+
+source(here('common_fxns.R'))
+```
+
+## Term frequency across topics
+
+If many terms show up in multiple topics, that can indicate too many topics... here, let's examine the top terms for each topic and see how many are duplicated across multiple topics.
+
+```{r}
+
+k <- 25
+
+topic_outf <- sprintf(here('_output/lda_topic_k%s.csv'), k)
+terms_outf <- sprintf(here('_output/lda_terms_k%s.csv'), k)
+
+abstr_terms <- read_csv(terms_outf)
+
+term_multitopic <- abstr_terms %>%
+  group_by(term) %>%
+  summarize(n_topics = n_distinct(topic),
+            topics = paste(topic, collapse = '; '))
+
+DT::datatable(term_multitopic)
+```
+
+The terms that appear frequently across topics don't seem too problematic.  Perhaps cooccurrence analysis or like a PCA style check can show term clusters among topics.
+
+## PCA on papers by topic
+
+Let's try a PCA on the various papers, and how they map to the various topics.  With so many topics, which presumably will maximize distance among topics courtesy of LDA, seems unlikely that we'll capture much of the variation in only a few principal components; but looking at a scree plot may help identify a number of topics beyond which diminishing returns kicks in.  Add in the benchmark articles to see how they map out.
+
+```{r}
+abstr_topics <- read_csv(topic_outf)
+
+abstr_tpx_wide <- abstr_topics %>%
+  pivot_wider(names_from = topic, values_from = prob, values_fill = 0)
+
+abstr_tpx_mtx <- abstr_tpx_wide %>%
+  select(-title) %>%
+  as.matrix()
+
+abstr_tpx_pca <- pca(abstr_tpx_mtx)
+```
+
