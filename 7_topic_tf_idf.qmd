@@ -65,6 +65,23 @@ topic_pairs <- top2_prob_df %>%
   summarize(n = n())
 ```
 
+Examine a correlation matrix to see if any topics are closely correlated...
+
+```{r}
+topic_mtx <- topic_df %>%
+  pivot_wider(names_from = topic, values_from = prob) %>%
+  column_to_rownames('doc_id') %>%
+  as.matrix()
+
+cor_mtx <- cor(topic_mtx)
+ggcorrplot::ggcorrplot(cor_mtx)
+
+cor_vec <- as.vector(cor_mtx) %>%
+  .[. != 1]
+summary(cor_vec)
+```
+
+The correlations all seem quite low.  This probably makes sense since, like a PCA or similar, the LDA is probably coming up with fairly orthogonal definitions of topics.
 
 ## Examine term frequency across abstracts
 
