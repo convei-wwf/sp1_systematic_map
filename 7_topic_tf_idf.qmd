@@ -25,9 +25,9 @@ Here we will iterate topic-by-topic to identify, using the TF-IDF concept, words
 * The TF-IDF analysis identifies words that are uncommon across the articles, but show up frequently in one or two articles.  This may show odd terms that indicate articles that came up in the search but are focused on something else entirely.
 * A term frequency analysis can highlight terms that show up commonly across the corpus, perhaps revealing commonalities.  This will be useful when looking at "value" related terms and bigrams in particular.
 
-## Load search results
+## Load search results and LDA results
 
-Load the articles and the results of the LDA on topics.  J
+Load the articles and the results of the LDA on topics.  Examine the LDA results briefly to see if there are any troubling issues.
 
 ```{r load bibtex}
 article_df <- load_articles()
@@ -35,8 +35,9 @@ article_df <- load_articles()
 topic_df <- read_csv(here('_output/lda_topic_k25.csv'))
 
 top_prob_df <- topic_df %>%
+  arrange(doc_id, -prob, topic) %>%
   group_by(doc_id) %>%
-  filter(prob == max(prob))
+  slice_head(n = 1)
 
 ggplot(top_prob_df, aes(x = prob)) +
   geom_histogram() +
@@ -94,7 +95,7 @@ $$idf = - \ln \left(\frac{n_{\text{abstracts containing terms}}}{n_{\text{abstra
 
 The product $tf \times idf$ indicates words that are relatively important to one abstract (based on frequency of the term within that abstract) within the overall collection of abstracts (based on how infrequently the term shows up in other abstracts).  Terms that show up in all abstracts (e.g., stop words) will have an $idf \rightarrow 0$ equal to or near 0, as the ratio $\rightarrow 1$.
 
-```{r}
+```{r summarize term freq by word}
 abstr_df <- article_df %>%
   filter(field == 'abstract') %>%
   select(doc_id, text) %>%
@@ -110,9 +111,10 @@ abstr_words <- abstr_df %>%
   ungroup()
 ```
 
-### Plot rank vs frequency
+<!-- ### Plot rank vs frequency -->
 
 ```{r}
+
 abstr_freq_by_rank <- abstr_words %>%
   group_by(doc_id, topic) %>%
   arrange(desc(term_freq)) %>%
@@ -129,22 +131,23 @@ freq_rank_lm <- lm(log10(term_freq) ~ log10(rank), data = rank_subset)
 # (Intercept)  log10(rank)  
 #     -1.1059      -0.7098
 
-ggplot(abstr_freq_by_rank, 
-       aes(x = rank, y = term_freq, color = doc_id)) +
-  geom_point(alpha = .3, size = .1, show.legend = FALSE) +
-  geom_abline(intercept = freq_rank_lm$coefficients[1],
-              slope = freq_rank_lm$coefficients[2],
-              linetype = 'dashed') +
-  scale_x_log10() +
-  scale_y_log10() +
-  facet_wrap(~ topic)
+# ggplot(abstr_freq_by_rank, 
+#        aes(x = rank, y = term_freq, color = doc_id)) +
+#   geom_point(alpha = .3, size = .1, show.legend = FALSE) +
+#   geom_abline(intercept = freq_rank_lm$coefficients[1],
+#               slope = freq_rank_lm$coefficients[2],
+#               linetype = 'dashed') +
+#   scale_x_log10() +
+#   scale_y_log10() +
+#   facet_wrap(~ topic)
 ```
 
 Zipf's law: Frequency of a word is inversely proportional to rank... log-log plot shows a (basically) constant slope of `r round(freq_rank_lm$coefficients[2], 3)` for terms ranked less than 50.
 
+
 ### Calculate $idf$ and $tf-idf$
 
-```{r}
+```{r calc tf idf for words}
 abstr_idf <- abstr_words %>%
   group_by(topic) %>%
   mutate(n_abstr = n_distinct(doc_id)) %>%
@@ -169,11 +172,20 @@ DT::datatable(top_tf_idf_by_topic)
 
 ```
 
+```{r}
+wordcloud_df <- abstr_idf %>%
+  anti_join(stop_words, by = c('word')) %>%
+  filter(nchar(word) > 2) %>%
+  filter(!str_detect(word, '[0-9]')) %>%
+  group_by(topic, word) %>%
+  slice_max()
+```
+
 ## Examine "value" bigram frequency across abstracts
 
 Similar to above, except here, let's break the abstracts into bigrams and focus on those that include one of the "value" search terms.
 
-```{r}
+```{r summarize bigrams}
 abstr_bigrams_all <- abstr_df %>%
   ### first divide sentences so bigrams don't continue over sentence breaks
   mutate(text = str_split(text, pattern = '[.;]')) %>%
@@ -206,7 +218,7 @@ value_bigrams <- abstr_bigrams_all %>%
 
 ### Calculate $idf$ and $tf-idf$
 
-```{r}
+```{r calc tf idf for bigrams}
 value_bigram_idf <- value_bigrams %>%
   group_by(topic) %>%
   mutate(n_abstr = n_distinct(doc_id)) %>%
@@ -224,7 +236,7 @@ top_tf_idf_by_topic <- value_bigram_tf_idf %>%
   group_by(topic) %>%
   slice_max(tf_idf, n = 5) %>%
   mutate(across(.cols = c(bigram_freq, idf, tf_idf), .fns = ~round(.x, 4))) %>%
-  select(doc_id, topic, word, bigram_freq, idf, tf_idf)
+  select(doc_id, topic, bigram, bigram_freq, idf, tf_idf)
 
 DT::datatable(top_tf_idf_by_topic)
 
@@ -235,7 +247,7 @@ DT::datatable(top_tf_idf_by_topic)
 
 Similar to above, except here, let's break the abstracts into _tri_grams and focus on those that include one of the "value" search terms.
 
-```{r}
+```{r summarize trigrams}
 abstr_trigrams_all <- abstr_df %>%
   ### first divide sentences so trigrams don't continue over sentence breaks
   mutate(text = str_split(text, pattern = '[.;]')) %>%
@@ -264,11 +276,13 @@ value_trigrams <- abstr_trigrams_all %>%
   # filter(nchar(word1) > 2 & nchar(word2) > 2) %>%
   ### reunite the trigram
   unite(col = 'trigram', word1, word2, word3, sep = ' ')
+
+
 ```
 
 ### Calculate $idf$ and $tf-idf$
 
-```{r}
+```{r calc tf idf for trigrams}
 value_trigram_idf <- value_trigrams %>%
   group_by(topic) %>%
   mutate(n_abstr = n_distinct(doc_id)) %>%
@@ -286,8 +300,10 @@ top_tf_idf_by_topic <- value_trigram_tf_idf %>%
   group_by(topic) %>%
   slice_max(tf_idf, n = 5) %>%
   mutate(across(.cols = c(trigram_freq, idf, tf_idf), .fns = ~round(.x, 4))) %>%
-  select(doc_id, topic, word, trigram_freq, idf, tf_idf)
+  select(doc_id, topic, trigram, trigram_freq, idf, tf_idf)
 
 DT::datatable(top_tf_idf_by_topic)
 
 ```
+
+## 

@@ -32,5 +32,48 @@ load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos_', aspe
 }
 
 load_articles <- function() {
-  data.table::fread(here('_data/results_clean.csv'))
+  df <- data.table::fread(here('_data/results_clean.csv'))
+}
+
+clean_author <- function(df) {
+  c_names <- names(df)[names(df) != 'author']
+  
+  df1 <- df %>%
+    unnest(author) %>%
+    group_by(pick({{ c_names }})) %>%
+    filter(author == first(author)) %>%
+    ungroup() %>%
+    mutate(author = tolower(author) %>%    ### drop caps
+             stringi::stri_trans_general('Latin-ASCII') %>% ### drop diacritical marks
+             str_remove(',.*') %>%         ### keep only last name
+             str_remove_all('[^a-z ]') %>% ### drop punct
+             str_squish()) %>%             ### drop whitespace
+    distinct()
+}
+
+clean_text <- function(txt) {
+  ### drop idiosyncratic punctuation:
+  ### * diacritical marks
+  ### * html tags
+  ### * emdash -> dash; formatted quotes to unformatted; spaced-dash to no space
+  ### * weird quote approximations: e.g., < ``carta della natura{''} >
+  txt_out <- txt %>%
+    tolower() %>%
+    ### drop diacritical marks
+    stringi::stri_trans_general('Latin-ASCII') %>%
+    ### drop HTML tags using lazy regex
+    str_remove_all('<.+?>') %>%
+    ### replace funky non-standard punctuation
+    str_replace_all('–|—', '-') %>%
+    str_replace_all(' - ', '-') %>%
+    ### fix quotes
+    str_replace_all('“|”', '"') %>%
+    str_replace_all("‘|’", "'") %>%
+    str_replace_all('``|\\{\'\'(\\})?', '"') %>%
+    ### escape backslashes and remaining curly braces
+    str_remove_all('\\\\|\\{|\\}') %>%
+    ### remove excess white space
+    str_squish()
+  
+  return(txt_out)
 }

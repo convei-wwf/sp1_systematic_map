@@ -1,0 +1,428 @@
+---
+title: "Systematic map: clean data and save out"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(tidytext)
+
+source(here('common_fxns.R'))
+```
+
+# Pull together results and save out as a clean csv
+
+Save out a cleaned-up version of the Bibtex results, with a smaller number of variables, and duplicates identified and removed.  Only first author included; all text cleaned and lower-cased.  Note also which papers are included in the benchmark set.
+
+Note that some matches by author/title etc have slight variations in fields that don't get dropped in a call to `distinct()` - so resolve those separately!
+
+## Clean dataset
+
+### Define functions
+
+```{r}
+resolve_dupe_titles <- function(df) {
+  ### lots of duplicates... 
+  ### * in both Scopus and Web of Science
+  ### * alternate journal names (e.g., New Space vs. New Space: The Journal of Space Entrepreneurship)
+  ### * same first author/title but in different journals/different years
+  ###.    * check multi-authors; are they really the same paper?
+  check_multi_id_dupes <- df %>%
+    filter(field == 'title') %>%
+    select(-field, -bibtex_source) %>%
+    distinct() %>%
+    janitor::get_dupes(author, text)
+  if(nrow(check_multi_id_dupes) == 0) {
+    return(df)
+  }
+  
+  message('Resolving duplicate titles with multiple doc IDs...')
+  
+  ### select most recent year, anti-join this to check_dupes (to keep duplicates beyond
+  ### that most recent year), and then anti-join *that* to the clean_results_df...
+  ### NOTE: this leaves some doc_id values missing... is that a problem?
+  keep_dupes_df <- check_multi_id_dupes %>%
+    group_by(author, text) %>%
+    arrange(-benchmark, -year, journal) %>%
+    slice(1) %>%
+    ungroup() %>%
+    select(author, text, year, journal, doi)
+  
+  drop_dupes_df <- check_multi_id_dupes %>%
+    anti_join(keep_dupes_df, by = names(keep_dupes_df)) %>%
+    select(author, text, year, journal, doi) %>%
+    inner_join(clean_results_df, by = names(.)) %>%
+    select(doc_id)
+  
+  multi_id_dupes_resolved <- df %>%
+    anti_join(drop_dupes_df, by = 'doc_id') %>%
+    distinct()
+  
+  ### now resolve dupes with multiple titles per doc_id - 
+  ### generally issues of punctiation or kanji characters
+  dupe_title_df <- multi_id_dupes_resolved %>%
+    filter(field == 'title') %>%
+    janitor::get_dupes(doc_id)
+  
+  if(nrow(dupe_title_df) == 0) {
+    return(multi_id_dupes_resolved)
+  }
+
+  message('Resolving duplicate titles same doc ID...')
+
+  ### Get variable names from df for joining silently
+  var_names <- names(multi_id_dupes_resolved)
+  
+  first_dupe_df <- dupe_title_df %>%
+    group_by(doc_id) %>%
+    slice(1)
+  
+  last_dupe_df <- dupe_title_df %>%
+    group_by(doc_id) %>%
+    slice(2)
+  
+  mismatches <- full_join(first_dupe_df, last_dupe_df %>%
+                            rename(text2 = text),
+                          by = var_names[!var_names == 'text']) %>%
+    mutate(t1 = str_remove_all(text, '[^a-z ]') %>% str_sub(end = 20),
+           t2 = str_remove_all(text, '[^a-z ]') %>% str_sub(end = 20)) %>%
+    mutate(match = t1 == t2) %>%
+    filter(!match)
+  if(nrow(mismatches) > 0) {
+    stop('Resolving duplicated titles, but mismatch in titles for docs ', 
+         mismatches$doc_id %>% paste(collapse = '; '), '!')
+  }
+  dupes_resolved <- multi_id_dupes_resolved %>%
+    anti_join(last_dupe_df, by = var_names)
+  
+  return(dupes_resolved)
+}
+
+resolve_dupe_abstracts <- function(df) {
+  dupe_abstr_df <- df %>%
+    filter(field == 'abstract') %>%
+    janitor::get_dupes(doc_id)
+  
+  if(nrow(dupe_abstr_df) == 0) {
+    return(df)
+  }
+
+  message('Duplicate abstracts detected! resolving...')
+
+  ### Get variable names from df for joining silently
+  var_names <- names(df)
+  
+  first_dupe_df <- dupe_abstr_df %>%
+    group_by(doc_id) %>%
+    slice(1)
+  
+  last_dupe_df <- dupe_abstr_df %>%
+    group_by(doc_id) %>%
+    slice(2)
+  
+  mismatches <- full_join(first_dupe_df, last_dupe_df %>%
+                            rename(text2 = text),
+                          by = var_names[!var_names == 'text']) %>%
+    mutate(t1 = str_remove_all(text, '[^a-z ]') %>% str_sub(end = 20),
+           t2 = str_remove_all(text, '[^a-z ]') %>% str_sub(end = 20)) %>%
+    mutate(match = t1 == t2) %>%
+    filter(!match)
+  if(nrow(mismatches) > 0) {
+    stop('Resolving duplicated abstracts, but mismatch in abstracts for docs ', 
+         mismatches$doc_id %>% paste(collapse = '; '), '!')
+  }
+  dupes_resolved <- df %>%
+    anti_join(last_dupe_df, by = var_names)
+  
+  return(dupes_resolved)
+}
+
+resolve_dupe_keywords <- function(df) {
+  dupe_kw_df <- df %>%
+    filter(field == 'keywords') %>%
+    janitor::get_dupes(doc_id)
+  
+  if(nrow(dupe_kw_df) == 0) {
+    return(df)
+  }
+
+  message('Duplicate keyword fields detected! resolving...')
+
+  doc_info_df <- df %>%
+    select(-field, -text) %>%
+    distinct()
+    
+  kw_updated_df <- dupe_kw_df %>%
+    mutate(text = str_split(text, '; ')) %>%
+    unnest(text) %>%
+    group_by(doc_id) %>%
+    summarize(field = 'keywords',
+              text = paste0(unique(text), collapse = '; ')) 
+  
+  kw_resolved_df <- kw_updated_df %>%
+    inner_join(doc_info_df, by = 'doc_id')
+  
+  ### first, anti-join with the dupes df to remove all duped instances,
+  ### then bind rows with the resolved keywords df
+  dupes_resolved <- df %>%
+    anti_join(dupe_kw_df, by = names(.)) %>%
+    bind_rows(kw_resolved_df)
+  
+  return(dupes_resolved)
+}
+
+reset_doc_ids <- function(df) {
+  message('Resetting doc_id field...')
+  df_renum <- df %>%
+    select(author, year, journal, title, doi) %>%
+    distinct() %>%
+    arrange(author, -year, title) %>%
+    mutate(doc_id = 1:n())
+  df_out <- df %>%
+    select(-doc_id) %>%
+    inner_join(df_renum, by = c('author', 'year', 'journal', 'title', 'doi')) %>%
+    select(-title)
+  
+  return(df_out)
+}
+
+```
+
+### Read bibtex and first-pass cleaning
+
+This step expands and unnests the author list, selecting only the first author, then cleans the text in general - remove/replace diacriticals, odd punctuation, backslashes, html tags.  Some titles include foreign language translations (in one source but not the other) - drop these to allow better matching of titles instances.  Remove punctuation from journal names to allow for improved matching.
+
+```{r read in data and perform first pass cleaning}
+results_all_df_raw <- load_bibtex(pattern = 'wos_|scopus', aspect = 'long') 
+
+results_all_df <- results_all_df_raw %>%
+  clean_author() %>%
+  mutate(across(where(is.character), clean_text)) %>%
+  ### remove foreign language translations of titles
+  mutate(title = str_remove(title, '(; )?\\[.+\\] ?')) %>%
+  ### remove punctuation from journal name
+  mutate(journal = str_replace_all(tolower(journal), '[^a-z0-9]+', ' ')) %>%
+  mutate(title_short = str_sub(title, end = 40))
+```
+
+## Check for problems
+
+### Probs with author names
+
+Some author names have typos/variations that end up not matching properly.  Match by title, DOI, journal, year to see where these agree but author name does not agree.  Choose the shorter version of the name to keep, drop the longer.  Using `anti_join`, so create dataframes of the things we'd like to _drop_.
+
+```{r resolve author name mismatches}
+name_mismatch <- results_all_df %>%
+  select(title_short, journal, year, author, doi) %>%
+  distinct() %>%
+  group_by(title_short, journal, year) %>%
+  filter(n_distinct(author) > 1) %>%
+  ungroup()
+
+names_drop <- name_mismatch %>%
+  filter(!is.na(doi)) %>%
+  group_by(title_short, journal, year, doi) %>%
+  ### drop names longer than the shortest
+  filter(n() == 1 | nchar(author) != min(nchar(author))) %>%
+  ### in case of ties, drop all but the first alphabetically
+  filter(n() == 1 | author != min(author)) %>%
+  ungroup()
+
+name_resolved_df <- results_all_df %>%
+  anti_join(names_drop)
+```
+
+### Probs with journal names
+
+Some journal names have typos/variations that end up not matching properly.  Match by title, DOI, author, year to see where these agree but journal name does not agree.  Choose the shorter version of the name to keep, drop the longer.
+
+```{r resolve journal mismatches}
+journal_mismatch <- name_resolved_df %>%
+  select(title_short, journal, year, author, doi) %>%
+  distinct() %>%
+  group_by(title_short, author, year, doi) %>%
+  filter(n_distinct(journal) > 1) %>%
+  ungroup()
+
+journal_na_drop <- journal_mismatch %>%
+  filter(is.na(journal))
+
+### some journal names include subtitles; keep the subtitle (longer) version...
+journal_subtitle_drop <- journal_mismatch %>%
+  anti_join(journal_na_drop) %>%
+  group_by(title_short, author, year) %>%
+  ### if first in group is fully contained in the last (or vice versa), keep!
+  filter(str_detect(last(journal), first(journal)) |
+           str_detect(first(journal), last(journal))) %>%
+  filter(nchar(journal) == min(nchar(journal))) %>%
+  ungroup()
+
+journal_match_check <- journal_mismatch %>%
+  anti_join(journal_na_drop) %>%
+  anti_join(journal_subtitle_drop) %>%
+  group_by(title_short, author, year, doi) %>%
+  filter(n() > 1) %>%
+  ungroup() %>%
+  mutate(head = str_sub(journal, start = 1, end = 10),
+         tail = str_sub(journal, start = -10, end = -1)) 
+
+journal_match_drop <- journal_match_check %>%
+  group_by(title_short, author, year) %>%
+  filter(n_distinct(head) == 1 & n_distinct(tail) == 1) %>%
+  ### from these, unimportant name variations (e.g., including "and")
+  filter(nchar(journal) == min(nchar(journal))) %>%
+  ungroup() %>%
+  select(-head, -tail)
+
+journal_close_match_drop <- journal_match_check %>%
+  group_by(title_short, author, year) %>%
+  filter(n_distinct(head) > 1 | n_distinct(tail) > 1) %>%
+  ### from these, there are a few common variations: 
+  ### * e.g., gcb = global change biology, or agriculture basel vs agriculture switzerland...
+  ### we'll drop the shortest version (keep that one here for anti-joining later)
+  filter(nchar(journal) == min(nchar(journal))) %>%
+  ungroup() %>%
+  select(-head, -tail)
+
+journals_unresolved_to_drop <- journal_mismatch %>%
+  anti_join(journal_na_drop) %>%
+  anti_join(journal_subtitle_drop) %>%
+  anti_join(journal_match_drop) %>%
+  anti_join(journal_close_match_drop) %>%
+  group_by(title_short, author, year, doi) %>%
+  filter(n() > 1) %>%
+  ungroup()
+### all journal name mismatches have been resolved!
+
+journal_resolved_df <- name_resolved_df %>%
+  anti_join(journal_na_drop) %>%
+  anti_join(journal_subtitle_drop) %>%
+  anti_join(journal_match_drop) %>%
+  anti_join(journal_close_match_drop)
+```
+
+
+### Probs with titles
+
+Some titles have typos/variations that end up not matching properly.  Match by journal, DOI, author, year to see where these agree but title does not agree.  Choose the shorter version of the title to keep, drop the longer.
+
+```{r resolve title mismatches}
+title_mismatch <- journal_resolved_df %>%
+  filter(field == 'title') %>%
+  select(journal, title, title_short, year, author, doi) %>%
+  distinct() %>%
+  group_by(journal, author, year, doi) %>%
+  filter(n_distinct(title) > 1) %>%
+  ungroup()
+
+### some title names are subsets of a longer version; keep the shorter version...
+### (keep the longer one here, for anti-joining)
+title_subset_drop <- title_mismatch %>%
+  group_by(journal, author, year) %>%
+  ### if first in group is fully contained in the last (or vice versa), keep!
+  filter(str_detect(last(title), first(title)) | str_detect(first(title), last(title))) %>%
+  filter(nchar(title) == max(nchar(title))) %>%
+  ungroup()
+
+title_match_check <- title_mismatch %>%
+  anti_join(title_subset_drop) %>%
+  group_by(journal, author, year, doi) %>%
+  filter(n() > 1) %>%
+  ungroup() %>%
+  mutate(head = str_sub(title, start = 1, end = 10),
+         tail = str_sub(title, start = -10, end = -1)) 
+
+title_match_drop <- title_match_check %>%
+  group_by(journal, author, year) %>%
+  filter(n_distinct(head) == 1 & n_distinct(tail) == 1) %>%
+  ### from these, unimportant name variations (e.g., including "and") - keep longest for anti-join
+  filter(nchar(title) == max(nchar(title))) %>%
+  ungroup() %>%
+  select(-head, -tail)
+
+title_close_match_drop <- title_match_check %>%
+  group_by(title_short, author, year) %>%
+  filter(n_distinct(head) > 1 | n_distinct(tail) > 1) %>%
+  ### quick scan shows matching with slight variations...
+  ### we'll drop the longer version (keep that one here for anti-joining later)
+  filter(nchar(title) == max(nchar(title))) %>%
+  ungroup() %>%
+  select(-head, -tail)
+
+titles_unresolved_to_drop <- title_mismatch %>%
+  anti_join(title_subset_drop) %>%
+  anti_join(title_match_drop) %>%
+  anti_join(title_close_match_drop) %>%
+  group_by(title_short, author, year, doi) %>%
+  filter(n() > 1) %>%
+  ungroup()
+### all title mismatches have been resolved!
+
+title_resolved_df <- journal_resolved_df %>%
+  anti_join(title_subset_drop) %>%
+  anti_join(title_match_drop) %>%
+  anti_join(title_close_match_drop)
+```
+
+## Align with benchmark set
+
+Attach the benchmark set of documents, using a boolean flag to indicate document in benchmark set.
+
+```{r read and attach benchmark set}
+bench_df <- read_csv(here('_data/benchmark_matched.csv')) %>%
+  mutate(benchmark = TRUE) %>%
+  mutate(title_short = str_sub(title, end = 40)) %>%
+  select(-title)
+
+source_df <- title_resolved_df %>%
+  group_by(author, title_short, journal, year, doi) %>%
+  summarize(bibtex_source = paste(unique(bibtex_source), collapse = ';'),
+            .groups = 'drop') %>%
+  arrange(author, -year, title_short) %>%
+  mutate(doc_id = 1:n()) %>%
+  left_join(bench_df)  %>%
+  mutate(benchmark = ifelse(is.na(benchmark), FALSE, benchmark))
+
+check_df <- source_df %>% filter(benchmark)
+```
+
+### Identifying duplicates...
+
+```{r resolve dupes}
+
+clean_results_df <- source_df %>%
+  left_join(title_resolved_df %>%
+              select(-bibtex_source),
+            by = c('author', 'journal', 'year', 'doi', 'title_short')) %>%
+  select(-title_short) %>%
+  distinct()
+
+clean_nodupes_df <- clean_results_df %>%
+  resolve_dupe_titles() %>%
+  resolve_dupe_abstracts() %>%
+  resolve_dupe_keywords() %>% 
+  reset_doc_ids()
+
+# clean_nodupes_df %>% filter(field == 'title') %>% .$benchmark %>% sum
+clean_doc_info <- clean_nodupes_df %>%
+  select(-field, -text) %>%
+  distinct()
+write_csv(clean_doc_info, here('_data/results_clean_info.csv'))
+
+clean_doc_text <- clean_nodupes_df %>%
+  select(doc_id, field, text) %>%
+  distinct()
+write_csv(clean_doc_text, here('_data/results_clean_text.csv'))
+```
+
+
+

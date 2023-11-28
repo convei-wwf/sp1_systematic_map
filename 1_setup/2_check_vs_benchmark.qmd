@@ -1,0 +1,96 @@
+---
+title: "Systematic map: Benchmark test"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(tidytext)
+
+source(here('common_fxns.R'))
+```
+
+## Check benchmarks against Web of Science and Scopus search
+
+```{r load bibtex}
+all_fields_df <- load_bibtex(pattern = 'wos_|scopus', aspect = 'wide')
+```
+
+
+```{r compare to bench}
+
+result_df  <- all_fields_df %>%
+  janitor::clean_names() %>%
+  select(author, title, journal, year, doi) %>%
+  clean_author() %>%
+  mutate(across(where(is.character), clean_text)) %>%
+  ### remove foreign language translations of titles
+  mutate(title = str_remove(title, '(; )?\\[.+\\] ?')) %>%
+  ### remove punctuation from journal name
+  mutate(journal = str_replace_all(tolower(journal), '[^a-z0-9]+', ' '))
+
+bench_raw_df <- load_bibtex(pattern = 'zot_benchmark_a.bib', aspect = 'wide') %>%
+  select(author, title, journal, year, doi)
+
+
+bench_df <- bench_raw_df %>%
+  clean_author() %>%
+  mutate(across(where(is.character), clean_text)) %>%
+  ### remove foreign language translations of titles
+  mutate(title = str_remove(title, '(; )?\\[.+\\] ?')) %>%
+  ### remove punctuation from journal name
+  mutate(journal = str_replace_all(tolower(journal), '[^a-z0-9]+', ' ')) %>%
+  distinct()
+
+doi_match <- bench_df %>%
+  filter(!is.na(doi)) %>%
+  filter(doi %in% result_df$doi)
+
+info_match <- bench_df %>%
+  select(author, year, title) %>%
+  inner_join(result_df) %>%
+  distinct()
+
+match_df <- bind_rows(doi_match, info_match) %>%
+  select(-doi, -journal) %>%
+  distinct() %>%
+  inner_join(result_df) %>%
+  distinct()
+
+pct_match <- nrow(match_df) / nrow(bench_df) * 100
+
+missed <- bench_df %>% 
+  anti_join(match_df)
+
+knitr::kable(missed %>% select(author, year, title))
+```
+
+## Check missed sources
+
+Examining missed sources (Nov 20):
+
+* Not in WoS or Scopus databases (white paper/grey lit?): Cooke, Bernknopf (whales), Kroetz, Mullan
+
+## Hit rate
+
+```{r}
+bench_checked_df <- bench_df %>%
+  filter(!author %in% c('cooke', 'kroetz', 'mullan')) %>%
+  filter(!(author == 'bernknopf' & str_detect(title, 'blue whale')))
+
+hit_rate <- round(nrow(match_df) / nrow(bench_checked_df) * 100)
+
+write_csv(match_df, here('_data/benchmark_matched.csv'))
+```
+
+There are `r nrow(bench_checked_df)` articles in the benchmark set that are known to be available in Web of Science and/or Scopus.  The current search terms successfully identify these benchmark articles `r hit_rate`% of the time.
+

@@ -255,8 +255,8 @@ if(any(!file.exists(topic_outf, terms_outf))) {
   abstr_topics <- posterior(abstr_lda)$topic %>%
     as.data.frame() %>%
     mutate(doc_id = rownames(.)) %>%
-    pivot_longer(cols = -title, names_to = 'topic', values_to = 'prob') %>%
-    mutate(topic = paste('topic ', topic),
+    pivot_longer(cols = -doc_id, names_to = 'topic', values_to = 'prob') %>%
+    mutate(topic = paste('topic', topic),
            prob = round(prob, 4)) # %>%
     # filter(prob > 0.05)
   
