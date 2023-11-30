@@ -1,0 +1,99 @@
+---
+title: "Investigating topic breakdowns"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(tidytext)
+
+source(here('common_fxns.R'))
+```
+
+## Label topics
+
+From the results of the LDA process, let's try to use ChatGPT to help label topics based on the most important topic words!
+
+```{r read in topic terms}
+term_f <- here('_output/lda_terms_k25.csv')
+
+topic_terms_df <- read_csv(term_f)
+
+topic_terms_text <- topic_terms_df %>%
+  group_by(topic) %>%
+  summarize(text = paste0(term, collapse = ' ')) %>%
+  mutate(topic_num = as.numeric(str_extract(topic, '[0-9]+'))) %>%
+  mutate(text = paste0(topic, ': ', text)) %>%
+  arrange(topic_num) %>%
+  select(text)
+
+write_csv(topic_terms_text, here('tmp', 'topic_terms_txt.csv'))
+```
+
+I put this list of topic terms into ChatGPT with the prompt similar to: "Here is a list of topics, each with a set of terms associated with each topic.  For each topic, provide a topic name of three words or fewer."  I then provided the list of topics, with associated terms saved above, to the ChatGPT interface.  The results were saved in `_data/chatgpt/three_word_topics.csv`.
+
+```{r}
+chatgpt_topic_names <- read_csv(here('_data/chatgpt/topic_labels.csv')) %>%
+  mutate(topic = paste('topic', 1:n())) %>%
+  select(topic, chatgpt_topic) %>%
+  left_join(topic_terms_df, by = 'topic') %>%
+  mutate(prob = round(prob, 3))
+
+DT::datatable(chatgpt_topic_names)
+```
+
+## Article topics
+
+For each article, how many topics were identified, and what is the probability distribution of membership in each topic?  Articles where no topics were dominant might be only tangentially related to our search.
+
+```{r}
+topic_names <- read_csv(here('_data/chatgpt/topic_labels_k25.csv')) %>%
+  mutate(topic = paste('topic', rownames(.)))
+article_topics <- read_csv(here('_output/lda_topic_k25.csv')) %>%
+  mutate(topic = str_squish(topic)) %>%
+  left_join(topic_names, by = 'topic')
+# article_topics <- read_csv(here('_output/lda_topic_k25_wos_only.csv'))
+```
+
+```{r}
+top_match_df <- article_topics %>%
+  group_by(title) %>%
+  filter(prob == max(prob))
+
+ggplot(top_match_df, aes(x = prob)) +
+  geom_histogram() +
+  labs('Highest topic percent match per article')
+
+top2_match_df <- article_topics %>%
+  group_by(title) %>%
+  slice_max(prob, n = 2) %>%
+  summarize(prob2 = sum(prob))
+
+ggplot(top2_match_df, aes(x = prob2)) +
+  geom_histogram() +
+  labs('Top-two topic percent match per article')
+
+```
+
+If we classify each article according to its top topic match, what is the distribution of articles per topic?
+
+```{r}
+topic_top_match <- top_match_df %>%
+  group_by(topic, chatgpt_topic) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  mutate(chatgpt_topic = fct_reorder(chatgpt_topic, n))
+ggplot(topic_top_match, aes(y = chatgpt_topic, x = n)) +
+  geom_col() +
+  theme(axis.title.y = element_blank())
+```
+

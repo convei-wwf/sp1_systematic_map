@@ -32,7 +32,9 @@ load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos_', aspe
 }
 
 load_articles <- function() {
-  df <- data.table::fread(here('_data/results_clean.csv'))
+  df <- data.table::fread(here('_data/results_clean_info.csv')) %>%
+    oharac::dt_join(data.table::fread(here('_data/results_clean_text.csv')), 
+                    by = 'doc_id', type = 'inner')
 }
 
 clean_author <- function(df) {
