@@ -37,7 +37,7 @@ topic_df <- read_csv(here('_output/lda_topic_k25.csv'))
 top_prob_df <- topic_df %>%
   arrange(doc_id, -prob, topic) %>%
   group_by(doc_id) %>%
-  slice_head(n = 1)
+  filter(prob == max(prob))
 
 ggplot(top_prob_df, aes(x = prob)) +
   geom_histogram() +
