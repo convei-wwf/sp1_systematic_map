@@ -17,6 +17,7 @@ library(tidyverse)
 library(here)
 library(tidytext)
 library(topicmodels)
+library(textstem)
 
 source(here('common_fxns.R'))
 ```
@@ -29,19 +30,60 @@ For an example of topic modeling on which this script is based, see: https://www
 
 One goal of topic modeling in this case is to potentially identify topics within the search results that are not relevant to the work of CONVEI.  Another goal is to potentially identify clusters of articles that might partition search results into various disciplines, applied sciences catagories, or especially information valuation methods.
 
-## Load search results, unnest abstract to words
+To help produce better results, let's lemmatize the text so common prefixes/suffixes and variations on words are properly grouped together.
+
+## Load search results
+
+Here we load the cleaned up results, filter to just abstracts, lemmatize the text within, then tokenize and count instances of each term in each abstract.
 
 ```{r load articles}
 abstr_df <- load_articles() %>%
   filter(field == 'abstract')
 
-abstr_words_df <- abstr_df %>%
+lemma_dict_f <- here('_data/abstract_lemmatized.csv')
+### From the abstracts, use textstem::make_lemma_dictionary for lemmatization
+### of words prior to LDA.  For now stick with default hunspell engine; consider
+### using TreeTagger external application: https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/
+# if(!file.exists(lemma_dict_f)) {
+#   # lemma_dict <- make_lemma_dictionary(abstr_df$text, engine = 'hunspell')
+#   lemma_dict <- make_lemma_dictionary(abstr_df$text, engine = 'treetagger',
+#                                       path = 'C:/TreeTagger')
+#   write_csv(lemma_dict, lemma_dict_f)
+# }
+### This method throws an error: 
+# results@TT.res[c("token", "lemma")], !lemma %in%  : 
+#   no slot of name "TT.res" for this object of class "kRp.text"
+
+### Alternately, use `spaCy` package in Python via `spacyr` R package.  
+### * Install spaCy (e.g., pip install spacy) if not already in existing install
+### * download language model, (e.g., python -m spacy download en_core_web_sm) 
+if(!file.exists(lemma_dict_f)) {
+  library(spacyr)
+  spacy_initialize(model = 'en_core_web_sm') 
+    ### 17 sec to initialize en_core_web_lg, vs. 15 for en_core_web_sm
+  system.time(lemma_dict <- spacy_parse(abstr_df$text))
+    ### 263 s for small language model library
+    ### note doc_id column in output is probably not same as doc_id in abstr_df
+  abstr_lemma_df <- lemma_dict %>%
+    anti_join(stop_words, by = c('token' = 'word')) %>%
+    group_by(doc_id) %>%
+    summarize(abstr_lemma = paste0(lemma, collapse = ' ')) %>%
+    ### doc_id in abstr_df is not continuous (some NA abstracts) - but in same
+    ### *order* as the lemma_dict doc_id field so just sub in
+    mutate(doc_id = abstr_df$doc_id)
+
+  write_csv(abstr_lemma_df, lemma_dict_f)
+}
+abstr_lemma_df <- read_csv(lemma_dict_f)
+
+abstr_words_df <- abstr_lemma_df %>%
+  select(doc_id, text = abstr_lemma) %>%
   unnest_tokens(input = text, output = word, token = 'words') %>%
-  anti_join(stop_words, by = 'word') %>%
   filter(!str_detect(word, '[0-9]')) %>%
   filter(nchar(word) > 2) %>%
   group_by(doc_id, word) %>%
   summarize(n = n(), .groups = 'drop') 
+
 ```
 
 ## Considerations for LDA algorithm
@@ -224,51 +266,107 @@ ggplot(perp_vs_k_df, aes(x = k, y = perplexity)) +
   theme_minimal()
 ```
 
-Based on this sample analysis, we see low perplexities below $k$ of 10 topics.  However, in the vignette for `topicmodels`, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on $k$ of 30, so perhaps a higher $k$ is warranted in our case.  Since we have 8 NASA Applied Science themes, let's go for a smaller $k$, looks like 9 has a slightly lower perplexity than anything else above 3.
+Based on this sample analysis, we see low perplexities from $k$ of about 10 to 30, then increasing.  In the vignette for `topicmodels`, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on $k$ of 30, so perhaps a higher $k$ is warranted in our case.  Let's try two $k$ values: 14 and 30.
 
 ## Running LDA on full corpus
 
-Now let's take the entire abstract set and apply the LDA process, choosing a $k$ and allowing the algorithm to estimate $\alpha$.  Extract the most likely topic for each paper, and extract the top 100 terms for each topic, with probability.  Write out as .csv files.
+Now let's take the entire abstract set and apply the LDA process, choosing a $k$ and allowing the algorithm to estimate $\alpha$.  Extract the most likely topic for each paper, and extract the top terms for each topic, with probability.  Write out as .csv files.
+
 
 ```{r perform LDA on full abstract set}
 
-k <- 09
+k_vec <- c(14, 30)
 
-topic_outf <- sprintf(here('_output/lda_topic_k%s.csv'), k)
-terms_outf <- sprintf(here('_output/lda_terms_k%s.csv'), k)
-
-if(any(!file.exists(topic_outf, terms_outf))) {
-
-  set.seed(4321)
+for(k in k_vec) {
+  topic_outf <- sprintf(here('_output/lda_topic_k%s.csv'), k)
+  terms_outf <- sprintf(here('_output/lda_terms_k%s.csv'), k)
   
-  message('Processing the full abstract set of ', nrow(abstr_df), 
-          ' titles, with k = ', k, '...')
+  if(any(!file.exists(topic_outf, terms_outf))) {
   
-  abstr_words_dtm <- cast_dtm(abstr_words_df, 
-                              document = doc_id, term = word, value = n)
-  
-  abstr_lda <- LDA(abstr_words_dtm, k = k)
-  
-  ### Extract topics for each doc by probability
-  abstr_topics <- posterior(abstr_lda)$topic %>%
-    as.data.frame() %>%
-    mutate(doc_id = rownames(.)) %>%
-    pivot_longer(cols = -doc_id, names_to = 'topic', values_to = 'prob') %>%
-    mutate(topic = paste('topic', topic)) #,
-           # prob = round(prob, 4)) # %>%
-    # filter(prob > 0.05)
-  
-  write_csv(abstr_topics, topic_outf)
-  
-  ### Extract terms for each topic by probability
-  abstr_terms  <- posterior(abstr_lda)$term %>%
-    as.data.frame() %>%
-    mutate(topic = paste('topic', rownames(.))) %>%
-    pivot_longer(cols = -topic, names_to = 'term', values_to = 'prob') %>%
-    group_by(topic) %>%
-    slice_max(order_by = prob, n = 100)
-  
-  write_csv(abstr_terms, terms_outf)
+    set.seed(4321)
+    
+    message('Processing the full abstract set of ', nrow(abstr_df), 
+            ' titles, with k = ', k, '...')
+    
+    abstr_words_dtm <- cast_dtm(abstr_words_df, 
+                                document = doc_id, term = word, value = n)
+    
+    abstr_lda <- LDA(abstr_words_dtm, k = k)
+    
+    ### Extract topics for each doc by probability
+    abstr_topics <- posterior(abstr_lda)$topic %>%
+      as.data.frame() %>%
+      mutate(doc_id = rownames(.)) %>%
+      pivot_longer(cols = -doc_id, names_to = 'topic', values_to = 'prob') %>%
+      mutate(topic = paste('topic', topic)) #,
+             # prob = round(prob, 4)) # %>%
+      # filter(prob > 0.05)
+    
+    write_csv(abstr_topics, topic_outf)
+    
+    ### Extract terms for each topic by probability
+    abstr_terms  <- posterior(abstr_lda)$term %>%
+      as.data.frame() %>%
+      mutate(topic = paste('topic', rownames(.))) %>%
+      pivot_longer(cols = -topic, names_to = 'term', values_to = 'prob') %>%
+      group_by(topic) %>%
+      slice_max(order_by = prob, n = 100)
+    
+    write_csv(abstr_terms, terms_outf)
+  }
 }
 ```
 
+```{r perform LDA on WOS only abstract set}
+
+k_vec <- c(14, 30)
+
+abstr_wos_df <- abstr_df %>%
+  filter(str_detect(bibtex_source, 'wos'))
+abstr_wos_words_df <- abstr_wos_df %>%
+  unnest_tokens(input = text, output = word, token = 'words') %>%
+  anti_join(stop_words, by = 'word') %>%
+  filter(!str_detect(word, '[0-9]')) %>%
+  filter(nchar(word) > 2) %>%
+  group_by(doc_id, word) %>%
+  summarize(n = n(), .groups = 'drop') 
+
+for(k in k_vec) {
+  topic_outf <- sprintf(here('_output/lda_topic_k%s_wos_only.csv'), k)
+  terms_outf <- sprintf(here('_output/lda_terms_k%s_wos_only.csv'), k)
+  
+  if(any(!file.exists(topic_outf, terms_outf))) {
+  
+    set.seed(4321)
+    
+    message('Processing the WOS-only abstract set of ', nrow(abstr_wos_df), 
+            ' titles, with k = ', k, '...')
+    
+    abstr_words_dtm <- cast_dtm(abstr_wos_words_df, 
+                                document = doc_id, term = word, value = n)
+    
+    abstr_lda <- LDA(abstr_words_dtm, k = k)
+    
+    ### Extract topics for each doc by probability
+    abstr_topics <- posterior(abstr_lda)$topic %>%
+      as.data.frame() %>%
+      mutate(doc_id = rownames(.)) %>%
+      pivot_longer(cols = -doc_id, names_to = 'topic', values_to = 'prob') %>%
+      mutate(topic = paste('topic', topic)) #,
+             # prob = round(prob, 4)) # %>%
+      # filter(prob > 0.05)
+    
+    write_csv(abstr_topics, topic_outf)
+    
+    ### Extract terms for each topic by probability
+    abstr_terms  <- posterior(abstr_lda)$term %>%
+      as.data.frame() %>%
+      mutate(topic = paste('topic', rownames(.))) %>%
+      pivot_longer(cols = -topic, names_to = 'term', values_to = 'prob') %>%
+      group_by(topic) %>%
+      slice_max(order_by = prob, n = 100)
+    
+    write_csv(abstr_terms, terms_outf)
+  }
+}
+```

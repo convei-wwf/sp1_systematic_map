@@ -131,8 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>abstr_words_df <span class="ot">&lt;-</span> abstr_df <span class="sc">%&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">'word'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -176,13 +178,13 @@ lm(formula = term_count ~ sqrt(n), data = words_vs_n_df)
 
 Coefficients:
 (Intercept)      sqrt(n)  
-     -896.9        536.2  </code></pre>
+     -520.2        447.6  </code></pre>
 </div>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(words_vs_n_df, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> term_count)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="sc">-</span><span class="dv">729</span> <span class="sc">+</span> <span class="dv">499</span> <span class="sc">*</span> <span class="fu">sqrt</span>(x), <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">linetype =</span> <span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="sc">-</span><span class="dv">608</span> <span class="sc">+</span><span class="dv">538</span> <span class="sc">*</span> <span class="fu">sqrt</span>(x), <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">linetype =</span> <span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="2_perform_lda_files/figure-html/how%20does%20term%20count%20change%20with%20n-1.png" class="img-fluid" width="672"></p>
@@ -300,33 +302,34 @@ Coefficients:
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(k_optim_file)) {</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  sample_size <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  earliest_yr <span class="ot">&lt;-</span> <span class="dv">2010</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  k_optim_sample_df <span class="ot">&lt;-</span> abstr_df <span class="sc">%&gt;%</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">### drop oldest articles</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;=</span> earliest_yr) <span class="sc">%&gt;%</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="do">### sample articles</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(sample_size) <span class="sc">%&gt;%</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="do">### randomize an index for each article - to separate into training/testing</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>sample_size, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="do">### unnest tokens</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="do">### drop unnecessary words</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">'word'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="do">### summarize</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(doc_id, word, index) <span class="sc">%&gt;%</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) </span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  k_optim_train_dtm <span class="ot">&lt;-</span> k_optim_sample_df <span class="sc">%&gt;%</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(index <span class="sc">&lt;=</span> <span class="dv">750</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cast_dtm</span>(<span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  k_optim_test_dtm <span class="ot">&lt;-</span> k_optim_sample_df <span class="sc">%&gt;%</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(index <span class="sc">&gt;</span> <span class="dv">750</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cast_dtm</span>(<span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  train_size  <span class="ot">&lt;-</span> <span class="fl">0.80</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  earliest_yr <span class="ot">&lt;-</span> <span class="dv">2010</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  k_optim_sample_df <span class="ot">&lt;-</span> abstr_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="do">### drop oldest articles</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;=</span> earliest_yr) <span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="do">### sample articles</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(sample_size) <span class="sc">%&gt;%</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="do">### randomize an index for each article - to separate into training/testing</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>sample_size, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="do">### unnest tokens</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="do">### drop unnecessary words</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">'word'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="do">### summarize</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(doc_id, word, index) <span class="sc">%&gt;%</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  k_optim_train_dtm <span class="ot">&lt;-</span> k_optim_sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(index <span class="sc">&lt;=</span> sample_size <span class="sc">*</span> train_size) <span class="sc">%&gt;%</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cast_dtm</span>(<span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  k_optim_test_dtm <span class="ot">&lt;-</span> k_optim_sample_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(index <span class="sc">&gt;</span> sample_size <span class="sc">*</span> train_size) <span class="sc">%&gt;%</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cast_dtm</span>(<span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now iterate over <span class="math inline">\(k\)</span> values, create values of perplexity vs.&nbsp;<span class="math inline">\(k\)</span> for identifying potential optimum.</p>
@@ -334,7 +337,7 @@ Coefficients:
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(k_optim_file)) {</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  k_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">seq</span>(<span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">2</span>), <span class="fu">seq</span>(<span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">5</span>), <span class="dv">75</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">250</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  k_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">seq</span>(<span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">2</span>), <span class="fu">seq</span>(<span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">5</span>), <span class="dv">75</span>, <span class="dv">100</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  perp_vs_k_df <span class="ot">&lt;-</span> <span class="fu">lapply</span>(k_vec, </span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">FUN =</span> <span class="cf">function</span>(k) {</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="do">### k &lt;- k_vec[2]</span></span>
@@ -360,57 +363,109 @@ Coefficients:
 <p><img src="2_perform_lda_files/figure-html/iterate%20to%20find%20complexity%20vs%20k-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Based on this sample analysis, we see low perplexities below <span class="math inline">\(k\)</span> of 10 topics. However, in the vignette for <code>topicmodels</code>, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on <span class="math inline">\(k\)</span> of 30, so perhaps a higher <span class="math inline">\(k\)</span> is warranted in our case. Since we have 8 NASA Applied Science themes, let’s go for a smaller <span class="math inline">\(k\)</span>, looks like 9 has a slightly lower perplexity than anything else above 3.</p>
+<p>Based on this sample analysis, we see low perplexities from <span class="math inline">\(k\)</span> of about 10 to 30, then increasing. In the vignette for <code>topicmodels</code>, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on <span class="math inline">\(k\)</span> of 30, so perhaps a higher <span class="math inline">\(k\)</span> is warranted in our case. Let’s try two <span class="math inline">\(k\)</span> values: 14 and 30.</p>
 </section>
 <section id="running-lda-on-full-corpus" class="level2">
 <h2 class="anchored" data-anchor-id="running-lda-on-full-corpus">Running LDA on full corpus</h2>
-<p>Now let’s take the entire abstract set and apply the LDA process, choosing a <span class="math inline">\(k\)</span> and allowing the algorithm to estimate <span class="math inline">\(\alpha\)</span>. Extract the most likely topic for each paper, and extract the top 100 terms for each topic, with probability. Write out as .csv files.</p>
+<p>Now let’s take the entire abstract set and apply the LDA process, choosing a <span class="math inline">\(k\)</span> and allowing the algorithm to estimate <span class="math inline">\(\alpha\)</span>. Extract the most likely topic for each paper, and extract the top terms for each topic, with probability. Write out as .csv files.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">09</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>k_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">30</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>topic_outf <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="fu">here</span>(<span class="st">'_output/lda_topic_k%s.csv'</span>), k)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>terms_outf <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="fu">here</span>(<span class="st">'_output/lda_terms_k%s.csv'</span>), k)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="sc">!</span><span class="fu">file.exists</span>(topic_outf, terms_outf))) {</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  abstr_words_df <span class="ot">&lt;-</span> abstr_df <span class="sc">%&gt;%</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">'word'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  abstr_words_dtm <span class="ot">&lt;-</span> <span class="fu">cast_dtm</span>(abstr_words_df, </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                              <span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">'Processing the full abstract set of '</span>, <span class="fu">nrow</span>(abstr_df), </span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>          <span class="st">' titles, with k = '</span>, k, <span class="st">'...'</span>)</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  abstr_lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(abstr_words_dtm, <span class="at">k =</span> k)</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Extract topics for each doc by probability (drop less than 5% prob)</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  abstr_topics <span class="ot">&lt;-</span> <span class="fu">posterior</span>(abstr_lda)<span class="sc">$</span>topic <span class="sc">%&gt;%</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>doc_id, <span class="at">names_to =</span> <span class="st">'topic'</span>, <span class="at">values_to =</span> <span class="st">'prob'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">'topic'</span>, topic),</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">prob =</span> <span class="fu">round</span>(prob, <span class="dv">4</span>)) <span class="co"># %&gt;%</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter(prob &gt; 0.05)</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(abstr_topics, topic_outf)</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  <span class="do">### Extract terms for each topic by probability</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  abstr_terms  <span class="ot">&lt;-</span> <span class="fu">posterior</span>(abstr_lda)<span class="sc">$</span>term <span class="sc">%&gt;%</span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">'topic'</span>, <span class="fu">rownames</span>(.))) <span class="sc">%&gt;%</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>topic, <span class="at">names_to =</span> <span class="st">'term'</span>, <span class="at">values_to =</span> <span class="st">'prob'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> prob, <span class="at">n =</span> <span class="dv">100</span>)</span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(abstr_terms, terms_outf)</span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> k_vec) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  topic_outf <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="fu">here</span>(<span class="st">'_output/lda_topic_k%s.csv'</span>), k)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  terms_outf <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="fu">here</span>(<span class="st">'_output/lda_terms_k%s.csv'</span>), k)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(<span class="sc">!</span><span class="fu">file.exists</span>(topic_outf, terms_outf))) {</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">'Processing the full abstract set of '</span>, <span class="fu">nrow</span>(abstr_df), </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">' titles, with k = '</span>, k, <span class="st">'...'</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    abstr_words_dtm <span class="ot">&lt;-</span> <span class="fu">cast_dtm</span>(abstr_words_df, </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                                <span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    abstr_lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(abstr_words_dtm, <span class="at">k =</span> k)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="do">### Extract topics for each doc by probability</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    abstr_topics <span class="ot">&lt;-</span> <span class="fu">posterior</span>(abstr_lda)<span class="sc">$</span>topic <span class="sc">%&gt;%</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>doc_id, <span class="at">names_to =</span> <span class="st">'topic'</span>, <span class="at">values_to =</span> <span class="st">'prob'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">'topic'</span>, topic)) <span class="co">#,</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>             <span class="co"># prob = round(prob, 4)) # %&gt;%</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>      <span class="co"># filter(prob &gt; 0.05)</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write_csv</span>(abstr_topics, topic_outf)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="do">### Extract terms for each topic by probability</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    abstr_terms  <span class="ot">&lt;-</span> <span class="fu">posterior</span>(abstr_lda)<span class="sc">$</span>term <span class="sc">%&gt;%</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">'topic'</span>, <span class="fu">rownames</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>topic, <span class="at">names_to =</span> <span class="st">'term'</span>, <span class="at">values_to =</span> <span class="st">'prob'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_max</span>(<span class="at">order_by =</span> prob, <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write_csv</span>(abstr_terms, terms_outf)</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>k_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">30</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>abstr_wos_df <span class="ot">&lt;-</span> abstr_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(bibtex_source, <span class="st">'wos'</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>abstr_wos_words_df <span class="ot">&lt;-</span> abstr_wos_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">'word'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> k_vec) {</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  topic_outf <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="fu">here</span>(<span class="st">'_output/lda_topic_k%s_wos_only.csv'</span>), k)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  terms_outf <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="fu">here</span>(<span class="st">'_output/lda_terms_k%s_wos_only.csv'</span>), k)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(<span class="sc">!</span><span class="fu">file.exists</span>(topic_outf, terms_outf))) {</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">'Processing the WOS-only abstract set of '</span>, <span class="fu">nrow</span>(abstr_wos_df), </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">' titles, with k = '</span>, k, <span class="st">'...'</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    abstr_words_dtm <span class="ot">&lt;-</span> <span class="fu">cast_dtm</span>(abstr_wos_words_df, </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                                <span class="at">document =</span> doc_id, <span class="at">term =</span> word, <span class="at">value =</span> n)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    abstr_lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(abstr_words_dtm, <span class="at">k =</span> k)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="do">### Extract topics for each doc by probability</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    abstr_topics <span class="ot">&lt;-</span> <span class="fu">posterior</span>(abstr_lda)<span class="sc">$</span>topic <span class="sc">%&gt;%</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>doc_id, <span class="at">names_to =</span> <span class="st">'topic'</span>, <span class="at">values_to =</span> <span class="st">'prob'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">'topic'</span>, topic)) <span class="co">#,</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>             <span class="co"># prob = round(prob, 4)) # %&gt;%</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>      <span class="co"># filter(prob &gt; 0.05)</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write_csv</span>(abstr_topics, topic_outf)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    <span class="do">### Extract terms for each topic by probability</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>    abstr_terms  <span class="ot">&lt;-</span> <span class="fu">posterior</span>(abstr_lda)<span class="sc">$</span>term <span class="sc">%&gt;%</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">'topic'</span>, <span class="fu">rownames</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>topic, <span class="at">names_to =</span> <span class="st">'term'</span>, <span class="at">values_to =</span> <span class="st">'prob'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_max</span>(<span class="at">order_by =</span> prob, <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write_csv</span>(abstr_terms, terms_outf)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
