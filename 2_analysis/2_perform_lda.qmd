@@ -17,7 +17,7 @@ library(tidyverse)
 library(here)
 library(tidytext)
 library(topicmodels)
-library(textstem)
+# library(textstem)
 
 source(here('common_fxns.R'))
 ```
@@ -74,7 +74,8 @@ if(!file.exists(lemma_dict_f)) {
 
   write_csv(abstr_lemma_df, lemma_dict_f)
 }
-abstr_lemma_df <- read_csv(lemma_dict_f)
+abstr_lemma_df <- read_csv(lemma_dict_f) %>%
+  left_join(abstr_df, by = 'doc_id')
 
 abstr_words_df <- abstr_lemma_df %>%
   select(doc_id, text = abstr_lemma) %>%
@@ -212,7 +213,7 @@ if(!file.exists(k_optim_file)) {
   train_size  <- 0.80
   earliest_yr <- 2010
   
-  k_optim_sample_df <- abstr_df %>%
+  k_optim_sample_df <- abstr_lemma_df %>%
     ### drop oldest articles
     filter(year >= earliest_yr) %>%
     ### sample articles
@@ -243,8 +244,11 @@ Now iterate over $k$ values, create values of perplexity vs. $k$ for identifying
 
 ```{r iterate to find complexity vs k}
 if(!file.exists(k_optim_file)) {
-  k_vec <- c(2:10, seq(12, 20, 2), seq(25, 50, 5), 75, 100)
-  perp_vs_k_df <- lapply(k_vec, 
+  k_vec <- c(2:10, seq(12, 20, 2), seq(25, 50, 5), 75, 100) %>%
+    sample()
+    ### shuffle randomly for maybe not stacking the highest values together in mclapply!
+  
+  perp_vs_k_df <- parallel::mclapply(k_vec, mc.cores = 6,
     FUN = function(k) {
       ### k <- k_vec[2]
       message('Processing LDA for k = ', k, '...')
@@ -257,16 +261,20 @@ if(!file.exists(k_optim_file)) {
       
       return(data.frame(k = k, perplexity = perp))
     }) %>%
-    bind_rows()
+    bind_rows() %>%
+    arrange(k)
   write_csv(perp_vs_k_df, k_optim_file)
 }
 perp_vs_k_df <- read_csv(k_optim_file)
 ggplot(perp_vs_k_df, aes(x = k, y = perplexity)) +
   geom_line() +
   theme_minimal()
+
+perp_vs_k_df %>%
+  slice_min(n = 5, order_by = perplexity)
 ```
 
-Based on this sample analysis, we see low perplexities from $k$ of about 10 to 30, then increasing.  In the vignette for `topicmodels`, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on $k$ of 30, so perhaps a higher $k$ is warranted in our case.  Let's try two $k$ values: 14 and 30.
+Based on this sample analysis, we see low perplexities from $k$ of about 10 to 30, then increasing.  In the vignette for `topicmodels`, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on $k$ of 30, so perhaps a higher $k$ is warranted in our case.  Let's try two $k$ values: 10 and 20.
 
 ## Running LDA on full corpus
 
@@ -275,7 +283,7 @@ Now let's take the entire abstract set and apply the LDA process, choosing a $k$
 
 ```{r perform LDA on full abstract set}
 
-k_vec <- c(14, 30)
+k_vec <- c(10, 20)
 
 for(k in k_vec) {
   topic_outf <- sprintf(here('_output/lda_topic_k%s.csv'), k)
@@ -285,7 +293,7 @@ for(k in k_vec) {
   
     set.seed(4321)
     
-    message('Processing the full abstract set of ', nrow(abstr_df), 
+    message('Processing the full abstract set of ', nrow(abstr_lemma_df), 
             ' titles, with k = ', k, '...')
     
     abstr_words_dtm <- cast_dtm(abstr_words_df, 

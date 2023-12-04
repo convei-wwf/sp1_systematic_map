@@ -32,11 +32,15 @@ Load the articles and the results of the LDA on topics.  Examine the LDA results
 ```{r load articles}
 article_df <- load_articles()
 
-topic14_df <- read_csv(here('_output/lda_topic_k30.csv')) %>% mutate(k = 14)
+topic10_df <- read_csv(here('_output/lda_topic_k10.csv')) %>% mutate(k = 10)
+topic20_df <- read_csv(here('_output/lda_topic_k20.csv')) %>% mutate(k = 20)
+topic14_df <- read_csv(here('_output/lda_topic_k14.csv')) %>% mutate(k = 14)
 topic30_df <- read_csv(here('_output/lda_topic_k30.csv')) %>% mutate(k = 30)
 
 
-top_prob_df <- topic14_df %>%
+top_prob_df <- topic10_df %>%
+  bind_rows(topic20_df) %>%
+  bind_rows(topic14_df) %>%
   bind_rows(topic30_df) %>%
   arrange(k, doc_id, -prob, topic) %>%
   group_by(doc_id, k) %>%
@@ -46,7 +50,7 @@ ggplot(top_prob_df, aes(x = prob)) +
   geom_histogram() +
   theme_minimal() +
   labs(title = 'highest probability of single topic') +
-  facet_wrap( ~ k, ncol = 1)
+  facet_wrap( ~ k, ncol = 1, scales = 'free_y')
 ```
 
 The histogram shows that for many articles, the top topic match (by highest probability) is still only around 50% match.  This means that many articles are indicated as sharing a couple of topics.
