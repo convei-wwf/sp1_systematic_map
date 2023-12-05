@@ -205,7 +205,7 @@ Of the 2000 sampled articles, set aside 25% for testing, holding the other 75% f
 Processing this is slow, so save out the perplexity-vs-$k$ data for later access.
 
 ```{r k optimization create training and testing document-term matrices}
-k_optim_file <- here('tmp', 'perplexity_vs_k.csv')
+k_optim_file <- here('int', 'perplexity_vs_k.csv')
 
 if(!file.exists(k_optim_file)) {
   set.seed(42)

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="O’Hara">
+
+<title>Examine TF-IDF on documents by topic</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="3_topic_tf_idf_files/libs/clipboard/clipboard.min.js"></script>
+<script src="3_topic_tf_idf_files/libs/quarto-html/quarto.js"></script>
+<script src="3_topic_tf_idf_files/libs/quarto-html/popper.min.js"></script>
+<script src="3_topic_tf_idf_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="3_topic_tf_idf_files/libs/quarto-html/anchor.min.js"></script>
+<link href="3_topic_tf_idf_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="3_topic_tf_idf_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="3_topic_tf_idf_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="3_topic_tf_idf_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="3_topic_tf_idf_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="3_topic_tf_idf_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="3_topic_tf_idf_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="3_topic_tf_idf_files/libs/datatables-binding-0.30/datatables.js"></script>
+<script src="3_topic_tf_idf_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="3_topic_tf_idf_files/libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="3_topic_tf_idf_files/libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="3_topic_tf_idf_files/libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="3_topic_tf_idf_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="3_topic_tf_idf_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Examine TF-IDF on documents by topic</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>O’Hara </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">'common_fxns.R'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Here we will iterate topic-by-topic to identify, using the TF-IDF concept, words and bigrams that are particularly important for a small number of articles, as well as those that come up frequently across all articles in the topic.</p>
+<ul>
+<li>The TF-IDF analysis identifies words that are uncommon across the articles, but show up frequently in one or two articles. This may show odd terms that indicate articles that came up in the search but are focused on something else entirely.</li>
+<li>A term frequency analysis can highlight terms that show up commonly across the corpus, perhaps revealing commonalities. This will be useful when looking at “value” related terms and bigrams in particular.</li>
+</ul>
+<section id="load-search-results-and-lda-results" class="level2">
+<h2 class="anchored" data-anchor-id="load-search-results-and-lda-results">Load search results and LDA results</h2>
+<p>Load the articles and the results of the LDA on topics.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>article_df <span class="ot">&lt;-</span> <span class="fu">load_articles</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>topic_labels <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">'_data/chatgpt/topic_labels_k10.csv'</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>topic_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">'_output/lda_topic_k10.csv'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(topic_labels, <span class="at">by =</span> <span class="st">'topic'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>top_prob_df <span class="ot">&lt;-</span> topic_df <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id) <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(prob <span class="sc">==</span> <span class="fu">max</span>(prob)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="examine-term-frequency-across-all-abstracts" class="level2">
+<h2 class="anchored" data-anchor-id="examine-term-frequency-across-all-abstracts">Examine term frequency across all abstracts</h2>
+<p>Across all abstracts in the results set, identify most commonly used words (whether keywords or search terms or otherwise), using a <span class="math inline">\(tf-idf\)</span> (term frequency x inverse doc frequency) approach, where <span class="math display">\[tf_{\text{word}} = \frac{n_{\text{word}}} {n_{\text{all words}}}\]</span> and <span class="math display">\[idf = \ln \left(\frac{n_{\text{abstracts}}}{n_{\text{abstracts containing term}}}\right)\]</span> or in other words, <span class="math display">\[idf = - \ln \left(\frac{n_{\text{abstracts containing terms}}}{n_{\text{abstracts}}}\right)\]</span></p>
+<p>The product <span class="math inline">\(tf \times idf\)</span> indicates words that are relatively important to one abstract (based on frequency of the term within that abstract) within the overall collection of abstracts (based on how infrequently the term shows up in other abstracts). Terms that show up in all abstracts (e.g., stop words) will have an <span class="math inline">\(idf \rightarrow 0\)</span> equal to or near 0, as the ratio <span class="math inline">\(\rightarrow 1\)</span>.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>abstr_all_df <span class="ot">&lt;-</span> article_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(field <span class="sc">==</span> <span class="st">'abstract'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc_id, text) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>abstr_words <span class="ot">&lt;-</span> abstr_all_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">'word'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, word) <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term_freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<!-- ### Plot rank vs frequency -->
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>abstr_freq_by_rank <span class="ot">&lt;-</span> abstr_words <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(term_freq)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>rank_subset <span class="ot">&lt;-</span> abstr_freq_by_rank <span class="sc">%&gt;%</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">&lt;</span> <span class="dv">50</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>freq_rank_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(term_freq) <span class="sc">~</span> <span class="fu">log10</span>(rank), <span class="at">data =</span> rank_subset)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept)  log10(rank)  </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     -1.1059      -0.7098</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abstr_freq_by_rank <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="dv">2000</span>),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> term_freq, <span class="at">color =</span> doc_id)) <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">3</span>, <span class="at">size =</span> .<span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> freq_rank_lm<span class="sc">$</span>coefficients[<span class="dv">1</span>],</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope =</span> freq_rank_lm<span class="sc">$</span>coefficients[<span class="dv">2</span>],</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">'dashed'</span>) <span class="sc">+</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="3_topic_tf_idf_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Zipf’s law: Frequency of a word is inversely proportional to rank… log-log plot shows a (basically) constant slope of -0.552 for terms ranked less than 50.</p>
+<section id="calculate-idf-and-tf-idf" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-idf-and-tf-idf">Calculate <span class="math inline">\(idf\)</span> and <span class="math inline">\(tf-idf\)</span></h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>abstr_idf <span class="ot">&lt;-</span> abstr_words <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_abstr =</span> <span class="fu">n_distinct</span>(doc_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_abstr_w_term =</span> <span class="fu">n_distinct</span>(doc_id),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_abstr =</span> <span class="fu">first</span>(n_abstr), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">idf =</span> <span class="sc">-</span><span class="fu">log</span>(n_abstr_w_term <span class="sc">/</span> n_abstr))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>abstr_tf_idf <span class="ot">&lt;-</span> abstr_words <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(abstr_idf, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tf_idf =</span> term_freq <span class="sc">*</span> idf) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>top_tf_idf_all_docs <span class="ot">&lt;-</span> abstr_tf_idf <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(tf_idf, <span class="at">n =</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(term_freq, idf, tf_idf), <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc_id, word, term_freq, idf, tf_idf)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(top_tf_idf_all_docs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ed443610f3a188dacb38" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ed443610f3a188dacb38">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[3840,5745,4001,10588,9529,2416,546,9888,1768,2464,3988,3770,11256,4745,646,3564,9892,7714,8239,9633,8018,11796,3007,10919,6327,448,3181,10572,9164,4405,9884,10650,4738,8645,10521,11218,4053,10463,10684,11990,4137,3191,4765,5685,8018,2573,2996,12018,4578,10277],["ptsc","smfi","telework","upgs","shd","airnow","meat","ginseng","epc","pfes","modularity","ewd","poc","underground","hazelnut","lodging","potato","bcr","gomishan","dmc","chilling","ugs","nstlr","flcc","mhealth","microrefugia","nsat","mariculture","parking","railroad","tt","muscle","coppice","alcohol","tsa","greenland","cospec","pr","qigong","flywheel","gep","oim","crime","tunnels","injury","lng","libraries","quarry","epc","osmlanduse"],[0.1187,0.1089,0.1159,0.1053,0.106,0.09760000000000001,0.125,0.09229999999999999,0.1029,0.0977,0.1111,0.0877,0.0926,0.1429,0.1,0.1016,0.1232,0.0833,0.0833,0.1148,0.09660000000000001,0.1186,0.08210000000000001,0.08210000000000001,0.08210000000000001,0.0815,0.0814,0.1024,0.1081,0.09089999999999999,0.09089999999999999,0.093,0.0897,0.1048,0.1042,0.0948,0.0784,0.1064,0.0781,0.0769,0.09520000000000001,0.07530000000000001,0.0978,0.0921,0.108,0.0736,0.1053,0.0878,0.0823,0.07190000000000001],[9.4091,9.4091,8.715999999999999,9.4091,8.715999999999999,9.4091,7.0112,9.4091,8.310499999999999,8.715999999999999,7.4632,9.4091,8.715999999999999,5.6479,8.0228,7.7997,6.3646,9.4091,9.4091,6.7701,8.0228,6.5187,9.4091,9.4091,9.4091,9.4091,9.4091,7.4632,7.0112,8.310499999999999,8.310499999999999,8.0228,8.310499999999999,7.1065,7.1065,7.7997,9.4091,6.9242,9.4091,9.4091,7.4632,9.4091,7.2119,7.6173,6.4647,9.4091,6.5759,7.7997,8.310499999999999,9.4091],[1.1173,1.0248,1.0105,0.9903999999999999,0.9235,0.918,0.8764,0.8685,0.8555,0.8519,0.8292,0.8254,0.8070000000000001,0.8068,0.8023,0.7925,0.7843,0.7841,0.7841,0.7769,0.7749,0.7734,0.7727000000000001,0.7727000000000001,0.7724,0.767,0.7659,0.7643,0.758,0.7554999999999999,0.7554999999999999,0.7463,0.7453,0.745,0.7403,0.7396,0.738,0.7366,0.7351,0.7238,0.7108,0.7089,0.7055,0.7016,0.6979,0.6927,0.6922,0.6851,0.6838,0.6768999999999999]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>doc_id<\/th>\n      <th>word<\/th>\n      <th>term_freq<\/th>\n      <th>idf<\/th>\n      <th>tf_idf<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="word-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="word-frequency">Word frequency</h3>
+<p>Visualize terms to find themes - exclude terms from the ESI and value terms. Also remove common but uninformative terms like “study”, “based”, and “management” that show up frequently.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>exclude_terms <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'value'</span>, <span class="st">'benefit'</span>, <span class="st">'satellite'</span>, </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'remote'</span>, <span class="st">'sensing'</span>, <span class="st">'spatial'</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'study'</span>, <span class="st">'analysis'</span>, <span class="st">'results'</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'based'</span>, <span class="st">'management'</span>, <span class="st">'model'</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'data'</span>, <span class="st">'information'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="at">collapse =</span> <span class="st">'|'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>wordcloud_df <span class="ot">&lt;-</span> abstr_idf <span class="sc">%&gt;%</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, exclude_terms)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc_freq =</span> n_abstr_w_term <span class="sc">/</span> n_abstr) <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> doc_freq, <span class="at">n =</span> <span class="dv">50</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wordcloud_df, <span class="fu">aes</span>(<span class="at">label =</span> word, <span class="at">size =</span> doc_freq)) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  ggwordcloud<span class="sc">::</span><span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="3_topic_tf_idf_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="examine-term-frequency-across-abstracts-by-topic" class="level2">
+<h2 class="anchored" data-anchor-id="examine-term-frequency-across-abstracts-by-topic">Examine term frequency across abstracts, by topic</h2>
+<p>Repeat the above analysis, except here grouping by topic to identify common words that show up in each topic.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>abstr_topic_df <span class="ot">&lt;-</span> article_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(field <span class="sc">==</span> <span class="st">'abstract'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc_id, text) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(top_prob_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'doc_id'</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>abstr_topic_words <span class="ot">&lt;-</span> abstr_topic_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> word, <span class="at">token =</span> <span class="st">'words'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, topic, label, word) <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, topic) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term_freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="calculate-idf-and-tf-idf-1" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-idf-and-tf-idf-1">Calculate <span class="math inline">\(idf\)</span> and <span class="math inline">\(tf-idf\)</span></h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>abstr_topic_idf <span class="ot">&lt;-</span> abstr_topic_words <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_abstr =</span> <span class="fu">n_distinct</span>(doc_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic, label, word) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_abstr_w_term =</span> <span class="fu">n_distinct</span>(doc_id),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_abstr =</span> <span class="fu">first</span>(n_abstr), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">idf =</span> <span class="sc">-</span><span class="fu">log</span>(n_abstr_w_term <span class="sc">/</span> n_abstr))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>abstr_topic_tf_idf <span class="ot">&lt;-</span> abstr_topic_words <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(abstr_topic_idf, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'topic'</span>, <span class="st">'label'</span>, <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tf_idf =</span> term_freq <span class="sc">*</span> idf) <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>top_tf_idf_by_topic <span class="ot">&lt;-</span> abstr_topic_tf_idf <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(tf_idf, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(term_freq, idf, tf_idf), <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc_id, topic, label, word, term_freq, idf, tf_idf)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(top_tf_idf_by_topic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-301c63c3ab24883f9881" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-301c63c3ab24883f9881">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100"],[5745,646,10572,5285,1192,6791,10919,7742,3007,2996,4745,9633,10650,3762,10463,7236,5634,4137,9002,448,9594,7263,8541,5577,2714,1230,11990,9264,7586,6734,8645,12106,9452,10647,9149,6693,2672,10665,9651,2133,546,11242,8018,8018,3988,4001,8596,9697,10521,11533,9892,11256,10588,1864,3181,5906,5970,5302,3770,4053,5685,4765,11171,11762,2123,4635,11762,7703,11372,11235,3840,9529,4578,4400,1654,5105,3840,4242,928,928,2416,9884,3799,9105,5688,2752,1817,5627,2732,6744,3564,1768,9888,11796,10398,1595,1595,2464,6327,2628],["topic 1","topic 1","topic 1","topic 1","topic 1","topic 1","topic 1","topic 1","topic 1","topic 1","topic 10","topic 10","topic 10","topic 10","topic 10","topic 10","topic 10","topic 10","topic 10","topic 10","topic 2","topic 2","topic 2","topic 2","topic 2","topic 2","topic 2","topic 2","topic 2","topic 2","topic 3","topic 3","topic 3","topic 3","topic 3","topic 3","topic 3","topic 3","topic 3","topic 3","topic 4","topic 4","topic 4","topic 4","topic 4","topic 4","topic 4","topic 4","topic 4","topic 4","topic 5","topic 5","topic 5","topic 5","topic 5","topic 5","topic 5","topic 5","topic 5","topic 5","topic 6","topic 6","topic 6","topic 6","topic 6","topic 6","topic 6","topic 6","topic 6","topic 6","topic 7","topic 7","topic 7","topic 7","topic 7","topic 7","topic 7","topic 7","topic 7","topic 7","topic 8","topic 8","topic 8","topic 8","topic 8","topic 8","topic 8","topic 8","topic 8","topic 8","topic 9","topic 9","topic 9","topic 9","topic 9","topic 9","topic 9","topic 9","topic 9","topic 9"],["Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications"],["smfi","hazelnut","mariculture","tea","pension","tourism","flcc","typhoon","nstlr","libraries","underground","dmc","muscle","rot","pr","eto","alterniflora","gep","lightning","microrefugia","ceos","seabed","beach","salvage","gdv","es","flywheel","fallow","cocoa","greenspace","alcohol","desertification","faa","vwc","bus","svr","ice","ugs","hf","mz","meat","consolidation","chilling","injury","modularity","telework","lc","uavs","tsa","salsa","potato","poc","upgs","geoss","nsat","hemodialysis","vod","pipeline","ewd","cospec","tunnels","crime","ph","gold","haze","margins","mine","coalfield","agb","ssc","ptsc","shd","epc","cta","greenspace","ssps","mss","pest","lunar","propellant","airnow","tt","methane","angular","ph","conflict","gw","ugs","asm","refueling","lodging","epc","ginseng","ugs","manure","bri","laos","pfes","mhealth","tourism"],[0.06510000000000001,0.0547,0.058,0.06270000000000001,0.0482,0.0794,0.0471,0.0631,0.0456,0.0529,0.0968,0.0633,0.0561,0.0463,0.0565,0.0447,0.0444,0.0526,0.0489,0.044,0.0603,0.0543,0.0645,0.0455,0.0438,0.0645,0.041,0.056,0.045,0.0441,0.0634,0.06850000000000001,0.0449,0.0434,0.0429,0.053,0.0631,0.0456,0.0404,0.0402,0.0765,0.0605,0.0605,0.06759999999999999,0.0562,0.0559,0.06419999999999999,0.0569,0.0446,0.0422,0.0707,0.0526,0.0513,0.07190000000000001,0.0483,0.0478,0.0465,0.0547,0.0457,0.0444,0.0526,0.0577,0.066,0.0542,0.0575,0.0467,0.0591,0.0436,0.0558,0.0434,0.07389999999999999,0.0548,0.0506,0.0483,0.0556,0.0468,0.07000000000000001,0.0575,0.0506,0.0506,0.06900000000000001,0.0529,0.0633,0.0526,0.0629,0.06859999999999999,0.0471,0.05,0.0458,0.0409,0.0597,0.0617,0.055,0.06759999999999999,0.0526,0.0506,0.0506,0.05,0.048,0.089],[7.5121,7.5121,6.8189,6.1258,7.5121,4.5163,7.5121,5.5662,7.5121,6.4135,4.6088,7.0067,7.0067,7.0067,5.6204,7.0067,7.0067,5.9081,6.3135,7.0067,6.0047,6.4102,5.1574,7.1033,7.1033,4.7054,7.1033,5.1574,6.4102,6.4102,7.0817,5.1358,7.0817,7.0817,7.0817,5.6954,4.6838,6.3886,7.0817,7.0817,5.9017,7.0003,7.0003,5.9017,7.0003,7.0003,5.0544,5.614,7.0003,7.0003,6.0822,6.7754,6.7754,4.8295,6.7754,6.7754,6.7754,5.6768,6.7754,6.7754,6.2729,5.5797,4.6634,5.5797,5.1743,6.2729,4.8866,6.2729,4.8866,6.2729,7.1349,7.1349,7.1349,7.1349,6.0363,7.1349,4.5699,5.5255,6.0363,6.0363,7.0613,7.0613,5.4519,6.3682,4.8641,4.4223,6.3682,5.9627,6.3682,7.0613,7.5679,6.8747,7.5679,5.9584,7.5679,7.5679,7.5679,7.5679,7.5679,4.0714],[0.489,0.4108,0.3956,0.3843,0.362,0.3584,0.3538,0.351,0.3424,0.3395,0.446,0.4439,0.3934,0.3244,0.3175,0.3133,0.3114,0.311,0.3087,0.3082,0.3621,0.348,0.3327,0.3229,0.3111,0.3036,0.2911,0.2888,0.2883,0.2825,0.4491,0.3516,0.3178,0.307,0.3039,0.3017,0.2954,0.2916,0.2861,0.2847,0.4515,0.4236,0.4235,0.399,0.3938,0.3916,0.3246,0.3193,0.3125,0.2955,0.4297,0.3566,0.3475,0.3472,0.3271,0.324,0.3151,0.3104,0.3094,0.3011,0.3302,0.3219,0.308,0.3023,0.2974,0.2931,0.2889,0.2733,0.2725,0.2721,0.5275,0.391,0.3609,0.3444,0.3353,0.3336,0.3201,0.3176,0.3056,0.3056,0.487,0.3736,0.3452,0.3352,0.3057,0.3035,0.2997,0.2981,0.2914,0.2889,0.4522,0.424,0.4166,0.403,0.3983,0.3832,0.3832,0.3784,0.3635,0.3625]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>doc_id<\/th>\n      <th>topic<\/th>\n      <th>label<\/th>\n      <th>word<\/th>\n      <th>term_freq<\/th>\n      <th>idf<\/th>\n      <th>tf_idf<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,5,6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="importantunique-words-that-show-up-across-multiple-topics" class="level3">
+<h3 class="anchored" data-anchor-id="importantunique-words-that-show-up-across-multiple-topics">Important/unique words that show up across multiple topics</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(top_tf_idf_by_topic <span class="sc">%&gt;%</span> janitor<span class="sc">::</span><span class="fu">get_dupes</span>(word))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 39%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">dupe_count</th>
+<th style="text-align: right;">doc_id</th>
+<th style="text-align: left;">topic</th>
+<th style="text-align: left;">label</th>
+<th style="text-align: right;">term_freq</th>
+<th style="text-align: right;">idf</th>
+<th style="text-align: right;">tf_idf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ugs</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">10665</td>
+<td style="text-align: left;">topic 3</td>
+<td style="text-align: left;">Satellite-Based Environmental Modeling</td>
+<td style="text-align: right;">0.0456</td>
+<td style="text-align: right;">6.3886</td>
+<td style="text-align: right;">0.2916</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ugs</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5627</td>
+<td style="text-align: left;">topic 8</td>
+<td style="text-align: left;">Remote Sensing &amp; Image Classification</td>
+<td style="text-align: right;">0.0500</td>
+<td style="text-align: right;">5.9627</td>
+<td style="text-align: right;">0.2981</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ugs</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">11796</td>
+<td style="text-align: left;">topic 9</td>
+<td style="text-align: left;">Satellite Technology Applications</td>
+<td style="text-align: right;">0.0676</td>
+<td style="text-align: right;">5.9584</td>
+<td style="text-align: right;">0.4030</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">epc</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4578</td>
+<td style="text-align: left;">topic 7</td>
+<td style="text-align: left;">Vegetation &amp; Crop Analysis</td>
+<td style="text-align: right;">0.0506</td>
+<td style="text-align: right;">7.1349</td>
+<td style="text-align: right;">0.3609</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">epc</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1768</td>
+<td style="text-align: left;">topic 9</td>
+<td style="text-align: left;">Satellite Technology Applications</td>
+<td style="text-align: right;">0.0617</td>
+<td style="text-align: right;">6.8747</td>
+<td style="text-align: right;">0.4240</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">greenspace</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6734</td>
+<td style="text-align: left;">topic 2</td>
+<td style="text-align: left;">Forest Fire Management</td>
+<td style="text-align: right;">0.0441</td>
+<td style="text-align: right;">6.4102</td>
+<td style="text-align: right;">0.2825</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">greenspace</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1654</td>
+<td style="text-align: left;">topic 7</td>
+<td style="text-align: left;">Vegetation &amp; Crop Analysis</td>
+<td style="text-align: right;">0.0556</td>
+<td style="text-align: right;">6.0363</td>
+<td style="text-align: right;">0.3353</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ph</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11171</td>
+<td style="text-align: left;">topic 6</td>
+<td style="text-align: left;">Landslide Prediction Modeling</td>
+<td style="text-align: right;">0.0660</td>
+<td style="text-align: right;">4.6634</td>
+<td style="text-align: right;">0.3080</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ph</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5688</td>
+<td style="text-align: left;">topic 8</td>
+<td style="text-align: left;">Remote Sensing &amp; Image Classification</td>
+<td style="text-align: right;">0.0629</td>
+<td style="text-align: right;">4.8641</td>
+<td style="text-align: right;">0.3057</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tourism</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6791</td>
+<td style="text-align: left;">topic 1</td>
+<td style="text-align: left;">Urban Ecosystem Dynamics</td>
+<td style="text-align: right;">0.0794</td>
+<td style="text-align: right;">4.5163</td>
+<td style="text-align: right;">0.3584</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tourism</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2628</td>
+<td style="text-align: left;">topic 9</td>
+<td style="text-align: left;">Satellite Technology Applications</td>
+<td style="text-align: right;">0.0890</td>
+<td style="text-align: right;">4.0714</td>
+<td style="text-align: right;">0.3625</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wordcloud_topic_df <span class="ot">&lt;-</span> abstr_topic_idf <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, exclude_terms)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">nchar</span>(word) <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">'[0-9]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc_freq =</span> n_abstr_w_term <span class="sc">/</span> n_abstr) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic, label) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> doc_freq, <span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wordcloud_topic_df, <span class="fu">aes</span>(<span class="at">label =</span> word, <span class="at">size =</span> doc_freq)) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  ggwordcloud<span class="sc">::</span><span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="3_topic_tf_idf_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="examine-value-bigram-frequency-across-abstracts" class="level2">
+<h2 class="anchored" data-anchor-id="examine-value-bigram-frequency-across-abstracts">Examine “value” bigram frequency across abstracts</h2>
+<p>Similar to above, except here, let’s break the abstracts into bigrams and focus on those that include one of the “value” search terms.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>abstr_bigrams_all <span class="ot">&lt;-</span> abstr_topic_df <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">### first divide sentences so bigrams don't continue over sentence breaks</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_split</span>(text, <span class="at">pattern =</span> <span class="st">'[.;]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(text) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">### now break into bigrams</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> bigram, <span class="at">token =</span> <span class="st">'ngrams'</span>, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, topic, label, bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, topic) <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bigram_freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_bigrams =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>value_terms <span class="ot">&lt;-</span> <span class="st">'value|valuation|benefit|utility'</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>value_bigrams <span class="ot">&lt;-</span> abstr_bigrams_all <span class="sc">%&gt;%</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">### filter to keep those bigrams with an instance of a value term</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(bigram, value_terms)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">### separate out for dropping stop words</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> bigram, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">'word1'</span>, <span class="st">'word2'</span>), <span class="at">sep =</span> <span class="st">' '</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="do">### drop rows where the initial or final word is a stop word</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word1'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word2'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="do">### drop rows where any term is less than three characters long</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(nchar(word1) &gt; 2 &amp; nchar(word2) &gt; 2) %&gt;%</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="do">### reunite the bigram</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> <span class="st">'bigram'</span>, word1, word2, <span class="at">sep =</span> <span class="st">' '</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="calculate-idf-and-tf-idf-2" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-idf-and-tf-idf-2">Calculate <span class="math inline">\(idf\)</span> and <span class="math inline">\(tf-idf\)</span></h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>value_bigram_idf <span class="ot">&lt;-</span> value_bigrams <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_abstr =</span> <span class="fu">n_distinct</span>(doc_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic, bigram) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_abstr_w_term =</span> <span class="fu">n_distinct</span>(doc_id),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_abstr =</span> <span class="fu">first</span>(n_abstr), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">idf =</span> <span class="sc">-</span><span class="fu">log</span>(n_abstr_w_term <span class="sc">/</span> n_abstr))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>value_bigram_tf_idf <span class="ot">&lt;-</span> value_bigrams <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(value_bigram_idf, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'topic'</span>, <span class="st">'bigram'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tf_idf =</span> bigram_freq <span class="sc">*</span> idf) <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>top_tf_idf_by_topic <span class="ot">&lt;-</span> value_bigram_tf_idf <span class="sc">%&gt;%</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(tf_idf, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(bigram_freq, idf, tf_idf), <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc_id, topic, label, bigram, bigram_freq, idf, tf_idf)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(top_tf_idf_by_topic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-421e63aba91928eb6a50" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-421e63aba91928eb6a50">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[11358,11360,9554,9664,9554,10748,1642,3983,6064,1642,9576,5390,9576,9785,8468,10232,4276,10793,6001,6426,11868,3610,12117,9777,4351,4013,8121,11329,6885,8986,5685,574,10807,6648,574,1374,7502,8050,11800,11894,8421,2416,4459,1596,3472,2141,11045,7728,10007,5911],["topic 1","topic 1","topic 1","topic 1","topic 1","topic 10","topic 10","topic 10","topic 10","topic 10","topic 2","topic 2","topic 2","topic 2","topic 2","topic 3","topic 3","topic 3","topic 3","topic 3","topic 4","topic 4","topic 4","topic 4","topic 4","topic 5","topic 5","topic 5","topic 5","topic 5","topic 6","topic 6","topic 6","topic 6","topic 6","topic 7","topic 7","topic 7","topic 7","topic 7","topic 8","topic 8","topic 8","topic 8","topic 8","topic 9","topic 9","topic 9","topic 9","topic 9"],["Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Urban Ecosystem Dynamics","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Coastal Habitat Conservation","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Forest Fire Management","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","Satellite-Based Environmental Modeling","River Basin Management","River Basin Management","River Basin Management","River Basin Management","River Basin Management","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Air Pollution Impact Analysis","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Landslide Prediction Modeling","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Vegetation &amp; Crop Analysis","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Remote Sensing &amp; Image Classification","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications","Satellite Technology Applications"],["social benefit","utility services","utility district","socioeconomic benefits","public utility","environment benefits","farmland values","δ15n values","social benefit","land values","benefit analysis","es values","cost benefit","benefits national","erosion values","spad values","conservation values","ecological benefits","benefit space","service values","bioecological benefits","5 values","fractal eigenvalues","utility scale","habitat evaluation","conservation values","interpolation values","benefits identified","utility space","social benefit","utility tunnels","values derived","economic benefit","local benefit","reflectance values","swe values","significant benefits","fdi values","pd values","cooling benefits","values recorded","benefits evaluation","utility function","dfi values","pnpi values","es values","critical benefits","aai values","land valuation","wetland evaluation"],[0.0353,0.0294,0.0208,0.0201,0.0208,0.0216,0.0159,0.0157,0.0143,0.0159,0.0314,0.0221,0.0314,0.02,0.0142,0.026,0.0243,0.0263,0.0168,0.0255,0.0369,0.0193,0.0162,0.0179,0.0161,0.0198,0.0198,0.0154,0.0147,0.0138,0.0547,0.0172,0.0179,0.0146,0.0172,0.0271,0.0233,0.0188,0.018,0.0179,0.0204,0.0179,0.0169,0.0148,0.0139,0.0209,0.0196,0.0187,0.0193,0.0166],[6.8937,6.8937,6.8937,6.2005,5.795,6.4085,6.4085,6.4085,6.4085,5.7154,4.8721,6.4816,4.179,6.4816,6.4816,6.4457,5.3471,4.1431,6.4457,3.9608,6.3818,6.3818,6.3818,5.6887,5.6887,6.1506,6.1506,6.1506,6.1506,6.1506,5.6204,5.6204,4.9273,5.6204,4.011,6.5132,5.8201,6.5132,6.5132,5.8201,6.4003,6.4003,6.4003,6.4003,6.4003,6.9838,6.9838,6.9838,6.2906,6.9838],[0.2433,0.2028,0.1436,0.1246,0.1207,0.1383,0.1017,0.1009,0.0916,0.0907,0.1531,0.143,0.1313,0.1296,0.0922,0.1679,0.13,0.109,0.1083,0.101,0.2355,0.1232,0.1033,0.102,0.09180000000000001,0.122,0.1218,0.0946,0.0905,0.0848,0.3074,0.0969,0.08799999999999999,0.0822,0.0692,0.1766,0.1354,0.1225,0.1171,0.1044,0.1306,0.1143,0.1079,0.0948,0.08890000000000001,0.1461,0.1369,0.1303,0.1216,0.1158]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>doc_id<\/th>\n      <th>topic<\/th>\n      <th>label<\/th>\n      <th>bigram<\/th>\n      <th>bigram_freq<\/th>\n      <th>idf<\/th>\n      <th>tf_idf<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,5,6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="examine-value-trigram-frequency-across-abstracts" class="level2">
+<h2 class="anchored" data-anchor-id="examine-value-trigram-frequency-across-abstracts">Examine “value” trigram frequency across abstracts</h2>
+<p>Similar to above, except here, let’s break the abstracts into _tri_grams and focus on those that include one of the “value” search terms.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>abstr_trigrams_all <span class="ot">&lt;-</span> abstr_topic_df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">### first divide sentences so trigrams don't continue over sentence breaks</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_split</span>(text, <span class="at">pattern =</span> <span class="st">'[.;]'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(text) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">### now break into trigrams</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> text, <span class="at">output =</span> trigram, <span class="at">token =</span> <span class="st">'ngrams'</span>, <span class="at">n =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, topic, label, trigram) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_id, topic) <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trigram_freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_trigrams =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>value_terms <span class="ot">&lt;-</span> <span class="st">'value|valuation|benefit|utility'</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>value_trigrams <span class="ot">&lt;-</span> abstr_trigrams_all <span class="sc">%&gt;%</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">### filter to keep those trigrams with an instance of a value term</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(trigram, value_terms)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">### separate out for dropping stop words</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> trigram, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">'word1'</span>, <span class="st">'word2'</span>, <span class="st">'word3'</span>), <span class="at">sep =</span> <span class="st">' '</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="do">### drop rows where the initial or final word is a stop word</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word1'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'word3'</span> <span class="ot">=</span> <span class="st">'word'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="do">### drop rows where any term is less than three characters long</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(nchar(word1) &gt; 2 &amp; nchar(word2) &gt; 2) %&gt;%</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="do">### reunite the trigram</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="at">col =</span> <span class="st">'trigram'</span>, word1, word2, word3, <span class="at">sep =</span> <span class="st">' '</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="calculate-idf-and-tf-idf-3" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-idf-and-tf-idf-3">Calculate <span class="math inline">\(idf\)</span> and <span class="math inline">\(tf-idf\)</span></h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>value_trigram_idf <span class="ot">&lt;-</span> value_trigrams <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_abstr =</span> <span class="fu">n_distinct</span>(doc_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic, trigram) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_abstr_w_term =</span> <span class="fu">n_distinct</span>(doc_id),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_abstr =</span> <span class="fu">first</span>(n_abstr), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">idf =</span> <span class="sc">-</span><span class="fu">log</span>(n_abstr_w_term <span class="sc">/</span> n_abstr))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>value_trigram_tf_idf <span class="ot">&lt;-</span> value_trigrams <span class="sc">%&gt;%</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(value_trigram_idf, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'topic'</span>, <span class="st">'trigram'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tf_idf =</span> trigram_freq <span class="sc">*</span> idf) <span class="sc">%&gt;%</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>top_tf_idf_by_topic <span class="ot">&lt;-</span> value_trigram_tf_idf <span class="sc">%&gt;%</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(tf_idf, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(trigram_freq, idf, tf_idf), <span class="at">.fns =</span> <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(doc_id, topic, trigram, trigram_freq, idf, tf_idf)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(top_tf_idf_by_topic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-62997a33244e3695a3c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-62997a33244e3695a3c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52"],[11358,9554,9554,8289,8289,10748,2849,1642,1155,6064,9576,9785,10766,8468,5378,4991,4991,6001,1793,11552,2590,2590,9777,11868,3743,3743,6989,6989,6314,6314,6519,6519,5685,574,574,9646,9646,7502,912,8576,3518,3518,2416,2416,457,9571,1651,11045,11045,11045,8852,7382],["topic 1","topic 1","topic 1","topic 1","topic 1","topic 10","topic 10","topic 10","topic 10","topic 10","topic 2","topic 2","topic 2","topic 2","topic 2","topic 3","topic 3","topic 3","topic 3","topic 3","topic 4","topic 4","topic 4","topic 4","topic 4","topic 4","topic 5","topic 5","topic 5","topic 5","topic 5","topic 5","topic 6","topic 6","topic 6","topic 6","topic 6","topic 7","topic 7","topic 7","topic 7","topic 7","topic 8","topic 8","topic 8","topic 8","topic 8","topic 9","topic 9","topic 9","topic 9","topic 9"],["benefit of china","county public utility","public utility district","operations silviculture utility","silviculture utility corridors","eco environment benefits","evaluation of wetland","agricultural land values","benefit of remote","nice social benefit","cost benefit analysis","benefits national management","service value caused","soil erosion values","biodiversity status values","technologies and values","values their application","reputation and benefit","values are superior","global health benefits","benefits of compliance","impact and benefits","utility scale solar","benefits of gi","function value loss","market value loss","benefit analysis method","cbam cost benefit","assess the benefits","benefits of future","application and utility","utility of relaying","cables into utility","field reflectance values","reflectance values derived","benefits to satisfy","capabilities and benefits","benefits to utilizing","utilitystudy will beperformed","benefits of remote","benefit from advances","candidates to benefit","processor socioeconomic benefits","socioeconomic benefits evaluation","storage and valuation","predict the utility","bma et values","benefits including enhanced","critical benefits including","yield critical benefits","path loss values","benefits that follow"],[0.025,0.0227,0.0227,0.0182,0.0182,0.0229,0.0208,0.0164,0.0149,0.0149,0.033,0.0208,0.017,0.0156,0.0146,0.0256,0.0256,0.0175,0.0163,0.0155,0.0169,0.0169,0.0185,0.0156,0.0145,0.0145,0.0179,0.0179,0.0172,0.0172,0.0172,0.0172,0.0246,0.0182,0.0182,0.0143,0.0143,0.0244,0.0189,0.0175,0.0139,0.0139,0.0192,0.0192,0.0171,0.0154,0.015,0.0217,0.0217,0.0217,0.0208,0.0189],[7.0605,7.0605,7.0605,7.0605,7.0605,6.5681,6.5681,6.5681,6.5681,6.5681,5.2704,6.6567,6.6567,6.6567,6.6567,6.6606,6.6606,6.6606,6.6606,6.6606,6.5862,6.5862,5.893,6.5862,6.5862,6.5862,6.3244,6.3244,6.3244,6.3244,6.3244,6.3244,5.8289,5.8289,5.8289,5.8289,5.8289,6.6946,6.6946,6.0014,6.6946,6.6946,6.6241,6.6241,6.6241,6.6241,6.6241,7.1389,7.1389,7.1389,7.1389,7.1389],[0.1765,0.1605,0.1605,0.1284,0.1284,0.1504,0.1368,0.1077,0.098,0.098,0.1738,0.1387,0.1133,0.104,0.09719999999999999,0.1708,0.1708,0.1169,0.1083,0.1033,0.1116,0.1116,0.1091,0.1025,0.0955,0.0955,0.1129,0.1129,0.109,0.109,0.109,0.109,0.1433,0.106,0.106,0.0833,0.0833,0.1633,0.1263,0.1053,0.093,0.093,0.1274,0.1274,0.1136,0.1019,0.0992,0.1552,0.1552,0.1552,0.1487,0.1347]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>doc_id<\/th>\n      <th>topic<\/th>\n      <th>trigram<\/th>\n      <th>trigram_freq<\/th>\n      <th>idf<\/th>\n      <th>tf_idf<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

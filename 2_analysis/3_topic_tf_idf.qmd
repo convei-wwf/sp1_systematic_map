@@ -27,74 +27,25 @@ Here we will iterate topic-by-topic to identify, using the TF-IDF concept, words
 
 ## Load search results and LDA results
 
-Load the articles and the results of the LDA on topics.  Examine the LDA results briefly to see if there are any troubling issues.
+Load the articles and the results of the LDA on topics.
 
 ```{r load articles}
 article_df <- load_articles()
 
-topic10_df <- read_csv(here('_output/lda_topic_k10.csv')) %>% mutate(k = 10)
-topic20_df <- read_csv(here('_output/lda_topic_k20.csv')) %>% mutate(k = 20)
-topic14_df <- read_csv(here('_output/lda_topic_k14.csv')) %>% mutate(k = 14)
-topic30_df <- read_csv(here('_output/lda_topic_k30.csv')) %>% mutate(k = 30)
+topic_labels <- read_csv(here('_data/chatgpt/topic_labels_k10.csv'))
 
+topic_df <- read_csv(here('_output/lda_topic_k10.csv')) %>%
+  left_join(topic_labels, by = 'topic')
 
-top_prob_df <- topic10_df %>%
-  bind_rows(topic20_df) %>%
-  bind_rows(topic14_df) %>%
-  bind_rows(topic30_df) %>%
-  arrange(k, doc_id, -prob, topic) %>%
-  group_by(doc_id, k) %>%
-  filter(prob == max(prob))
-
-ggplot(top_prob_df, aes(x = prob)) +
-  geom_histogram() +
-  theme_minimal() +
-  labs(title = 'highest probability of single topic') +
-  facet_wrap( ~ k, ncol = 1, scales = 'free_y')
-```
-
-The histogram shows that for many articles, the top topic match (by highest probability) is still only around 50% match.  This means that many articles are indicated as sharing a couple of topics.
-
-```{r}
-top2_prob_df <- topic_df %>%
-  mutate(topic = str_remove(topic, 'topic  ')) %>%
+top_prob_df <- topic_df %>%
   group_by(doc_id) %>%
-  slice_max(prob, n = 2) %>%
-  filter(prob > 0) %>%
-  summarize(topic = paste(sort(topic), collapse = '-'),
-            prob = sum(prob))
-
-ggplot(top2_prob_df, aes(x = prob)) +
-  geom_histogram() +
-  theme_minimal() +
-  labs(title = 'highest probability of top 2 topics')
-
-topic_pairs <- top2_prob_df %>%
-  group_by(topic) %>%
-  summarize(n = n())
+  filter(prob == max(prob)) %>%
+  ungroup()
 ```
 
-Examine a correlation matrix to see if any topics are closely correlated...
+## Examine term frequency across all abstracts
 
-```{r}
-topic_mtx <- topic_df %>%
-  pivot_wider(names_from = topic, values_from = prob) %>%
-  column_to_rownames('doc_id') %>%
-  as.matrix()
-
-cor_mtx <- cor(topic_mtx)
-ggcorrplot::ggcorrplot(cor_mtx)
-
-cor_vec <- as.vector(cor_mtx) %>%
-  .[. != 1]
-summary(cor_vec)
-```
-
-The correlations all seem quite low.  This probably makes sense since, like a PCA or similar, the LDA is probably coming up with fairly orthogonal definitions of topics.
-
-## Examine term frequency across abstracts
-
-Across all abstracts in each topic, identify most commonly used words (whether keywords or search terms or otherwise), using a $tf-idf$ (term frequency x inverse doc frequency) approach, where 
+Across all abstracts in the results set, identify most commonly used words (whether keywords or search terms or otherwise), using a $tf-idf$ (term frequency x inverse doc frequency) approach, where 
 $$tf_{\text{word}} = \frac{n_{\text{word}}} {n_{\text{all words}}}$$
 and 
 $$idf = \ln \left(\frac{n_{\text{abstracts}}}{n_{\text{abstracts containing term}}}\right)$$
@@ -104,17 +55,17 @@ $$idf = - \ln \left(\frac{n_{\text{abstracts containing terms}}}{n_{\text{abstra
 The product $tf \times idf$ indicates words that are relatively important to one abstract (based on frequency of the term within that abstract) within the overall collection of abstracts (based on how infrequently the term shows up in other abstracts).  Terms that show up in all abstracts (e.g., stop words) will have an $idf \rightarrow 0$ equal to or near 0, as the ratio $\rightarrow 1$.
 
 ```{r summarize term freq by word}
-abstr_df <- article_df %>%
+abstr_all_df <- article_df %>%
   filter(field == 'abstract') %>%
   select(doc_id, text) %>%
-  distinct() %>%
-  left_join(top_prob_df, by = c('doc_id'))
+  distinct()
 
-abstr_words <- abstr_df %>%
+abstr_words <- abstr_all_df %>%
   unnest_tokens(input = text, output = word, token = 'words') %>%
-  group_by(doc_id, topic, word) %>%
+  anti_join(stop_words, by = 'word') %>%
+  group_by(doc_id, word) %>%
   summarize(n = n(), .groups = 'drop') %>%
-  group_by(doc_id, topic) %>%
+  group_by(doc_id) %>%
   mutate(term_freq = n / sum(n)) %>%
   ungroup()
 ```
@@ -122,9 +73,8 @@ abstr_words <- abstr_df %>%
 <!-- ### Plot rank vs frequency -->
 
 ```{r}
-
 abstr_freq_by_rank <- abstr_words %>%
-  group_by(doc_id, topic) %>%
+  group_by(doc_id) %>%
   arrange(desc(term_freq)) %>%
   mutate(rank = 1:n()) %>%
   ungroup() %>%
@@ -140,7 +90,7 @@ freq_rank_lm <- lm(log10(term_freq) ~ log10(rank), data = rank_subset)
 #     -1.1059      -0.7098
 
 ggplot(abstr_freq_by_rank %>% sample_n(2000),
-       aes(x = rank, y = term_freq, color = topic)) +
+       aes(x = rank, y = term_freq, color = doc_id)) +
   geom_point(alpha = .3, size = .1, show.legend = FALSE) +
   geom_abline(intercept = freq_rank_lm$coefficients[1],
               slope = freq_rank_lm$coefficients[2],
@@ -156,41 +106,118 @@ Zipf's law: Frequency of a word is inversely proportional to rank... log-log plo
 
 ```{r calc tf idf for words}
 abstr_idf <- abstr_words %>%
-  group_by(topic) %>%
   mutate(n_abstr = n_distinct(doc_id)) %>%
-  group_by(topic, word) %>%
+  group_by(word) %>%
   summarize(n_abstr_w_term = n_distinct(doc_id),
             n_abstr = first(n_abstr), .groups = 'drop') %>%
   mutate(idf = -log(n_abstr_w_term / n_abstr))
 
 abstr_tf_idf <- abstr_words %>%
-  left_join(abstr_idf, by = c('topic', 'word')) %>%
+  left_join(abstr_idf, by = c('word')) %>%
   mutate(tf_idf = term_freq * idf) %>%
   arrange(desc(tf_idf))
 
-top_tf_idf_by_topic <- abstr_tf_idf %>%
-  group_by(topic) %>%
-  slice_max(tf_idf, n = 5) %>%
+top_tf_idf_all_docs <- abstr_tf_idf %>%
+  slice_max(tf_idf, n = 50) %>%
   mutate(across(.cols = c(term_freq, idf, tf_idf), .fns = ~round(.x, 4))) %>%
-  select(doc_id, topic, word, term_freq, idf, tf_idf)
+  select(doc_id, word, term_freq, idf, tf_idf)
 
-DT::datatable(top_tf_idf_by_topic)
+DT::datatable(top_tf_idf_all_docs)
 
 ```
 
+### Word frequency
+
+Visualize terms to find themes - exclude terms from the ESI and value terms.  Also remove common but uninformative terms like "study", "based", and "management" that show up frequently.
+
 ```{r}
+exclude_terms <- c('value', 'benefit', 'satellite', 
+                   'remote', 'sensing', 'spatial',
+                   'study', 'analysis', 'results',
+                   'based', 'management', 'model',
+                   'data', 'information') %>%
+  paste0(collapse = '|')
+
 wordcloud_df <- abstr_idf %>%
   anti_join(stop_words, by = c('word')) %>%
+  filter(!str_detect(word, exclude_terms)) %>%
   filter(nchar(word) > 2) %>%
   filter(!str_detect(word, '[0-9]')) %>%
   mutate(doc_freq = n_abstr_w_term / n_abstr) %>%
-  group_by(topic) %>%
-  slice_max(order_by = doc_freq, n = 20)
+  slice_max(order_by = doc_freq, n = 50)
 
 ggplot(wordcloud_df, aes(label = word, size = doc_freq)) +
   ggwordcloud::geom_text_wordcloud() +
+  theme_minimal()
+  
+```
+
+
+## Examine term frequency across abstracts, by topic
+
+Repeat the above analysis, except here grouping by topic to identify common words that show up in each topic.
+
+```{r summarize term freq by word and topic}
+abstr_topic_df <- article_df %>%
+  filter(field == 'abstract') %>%
+  select(doc_id, text) %>%
+  distinct() %>%
+  left_join(top_prob_df, by = c('doc_id'))
+
+abstr_topic_words <- abstr_topic_df %>%
+  unnest_tokens(input = text, output = word, token = 'words') %>%
+  group_by(doc_id, topic, label, word) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  group_by(doc_id, topic) %>%
+  mutate(term_freq = n / sum(n)) %>%
+  ungroup()
+```
+
+### Calculate $idf$ and $tf-idf$
+
+```{r calc tf idf for words by topic}
+abstr_topic_idf <- abstr_topic_words %>%
+  group_by(topic) %>%
+  mutate(n_abstr = n_distinct(doc_id)) %>%
+  group_by(topic, label, word) %>%
+  summarize(n_abstr_w_term = n_distinct(doc_id),
+            n_abstr = first(n_abstr), .groups = 'drop') %>%
+  mutate(idf = -log(n_abstr_w_term / n_abstr))
+
+abstr_topic_tf_idf <- abstr_topic_words %>%
+  left_join(abstr_topic_idf, by = c('topic', 'label', 'word')) %>%
+  mutate(tf_idf = term_freq * idf) %>%
+  arrange(desc(tf_idf))
+
+top_tf_idf_by_topic <- abstr_topic_tf_idf %>%
+  group_by(topic) %>%
+  slice_max(tf_idf, n = 10) %>%
+  mutate(across(.cols = c(term_freq, idf, tf_idf), .fns = ~round(.x, 4))) %>%
+  select(doc_id, topic, label, word, term_freq, idf, tf_idf)
+
+DT::datatable(top_tf_idf_by_topic)
+```
+
+### Important/unique words that show up across multiple topics
+```{r}
+knitr::kable(top_tf_idf_by_topic %>% janitor::get_dupes(word))
+```
+
+
+```{r}
+wordcloud_topic_df <- abstr_topic_idf %>%
+  anti_join(stop_words, by = c('word')) %>%
+  filter(!str_detect(word, exclude_terms)) %>%
+  filter(nchar(word) > 2) %>%
+  filter(!str_detect(word, '[0-9]')) %>%
+  mutate(doc_freq = n_abstr_w_term / n_abstr) %>%
+  group_by(topic, label) %>%
+  slice_max(order_by = doc_freq, n = 20)
+
+ggplot(wordcloud_topic_df, aes(label = word, size = doc_freq)) +
+  ggwordcloud::geom_text_wordcloud() +
   theme_minimal() +
-  facet_wrap( ~ topic)
+  facet_wrap( ~ label)
   
 ```
 
@@ -199,13 +226,13 @@ ggplot(wordcloud_df, aes(label = word, size = doc_freq)) +
 Similar to above, except here, let's break the abstracts into bigrams and focus on those that include one of the "value" search terms.
 
 ```{r summarize bigrams}
-abstr_bigrams_all <- abstr_df %>%
+abstr_bigrams_all <- abstr_topic_df %>%
   ### first divide sentences so bigrams don't continue over sentence breaks
   mutate(text = str_split(text, pattern = '[.;]')) %>%
   unnest(text) %>%
   ### now break into bigrams
   unnest_tokens(input = text, output = bigram, token = 'ngrams', n = 2) %>%
-  group_by(doc_id, topic, bigram) %>%
+  group_by(doc_id, topic, label, bigram) %>%
   summarize(n = n(), .groups = 'drop') %>%
   group_by(doc_id, topic) %>%
   mutate(bigram_freq = n / sum(n)) %>%
@@ -249,7 +276,7 @@ top_tf_idf_by_topic <- value_bigram_tf_idf %>%
   group_by(topic) %>%
   slice_max(tf_idf, n = 5) %>%
   mutate(across(.cols = c(bigram_freq, idf, tf_idf), .fns = ~round(.x, 4))) %>%
-  select(doc_id, topic, bigram, bigram_freq, idf, tf_idf)
+  select(doc_id, topic, label, bigram, bigram_freq, idf, tf_idf)
 
 DT::datatable(top_tf_idf_by_topic)
 
@@ -261,13 +288,13 @@ DT::datatable(top_tf_idf_by_topic)
 Similar to above, except here, let's break the abstracts into _tri_grams and focus on those that include one of the "value" search terms.
 
 ```{r summarize trigrams}
-abstr_trigrams_all <- abstr_df %>%
+abstr_trigrams_all <- abstr_topic_df %>%
   ### first divide sentences so trigrams don't continue over sentence breaks
   mutate(text = str_split(text, pattern = '[.;]')) %>%
   unnest(text) %>%
   ### now break into trigrams
-  unnest_tokens(input = text, output = trigram, token = 'trigrams', n = 3) %>%
-  group_by(doc_id, topic, trigram) %>%
+  unnest_tokens(input = text, output = trigram, token = 'ngrams', n = 3) %>%
+  group_by(doc_id, topic, label, trigram) %>%
   summarize(n = n(), .groups = 'drop') %>%
   group_by(doc_id, topic) %>%
   mutate(trigram_freq = n / sum(n)) %>%
