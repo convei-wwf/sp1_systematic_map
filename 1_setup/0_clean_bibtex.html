@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cell">
 <details>
-<summary>Show me the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bib2df)</span>
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is already pretty clean… no real processing required!</p>
 <div class="cell">
 <details>
-<summary>Show me the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'zot.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(f <span class="cf">in</span> bib_raw_fs) {</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># f &lt;- bib_raw_fs[1]</span></span>
@@ -138,15 +138,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The Web of Science records contain line breaks that disrupt the ability of the <code>bib2df</code> package to work properly. Replace those problematic line breaks (a carriage return <code>\r</code>, followed by a line break <code>\n</code>, followed by a three-space indentation) with a single blank space.</p>
 <div class="cell">
 <details>
-<summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'wos.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(f <span class="cf">in</span> bib_raw_fs) {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># f &lt;- bib_raw_fs[1]</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  bib_clean <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(bib_raw, <span class="st">'(</span><span class="sc">\\</span><span class="st">r)?</span><span class="sc">\\</span><span class="st">n   '</span>, <span class="st">' '</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  f_out <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(f, <span class="st">'_raw'</span>, <span class="st">'_clean'</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_file</span>(bib_clean, f_out)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'wosnaive.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bib_clean <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bib_raw_fs, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">FUN =</span> <span class="cf">function</span>(f) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                bib_clean <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(bib_raw, <span class="st">'(</span><span class="sc">\\</span><span class="st">r)?</span><span class="sc">\\</span><span class="st">n   '</span>, <span class="st">' '</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>              }) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="at">collapse =</span> <span class="st">'</span><span class="sc">\\</span><span class="st">n</span><span class="sc">\\</span><span class="st">n'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">'_data/bibtex_clean'</span>, <span class="st">'wos_naive.bib'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write_file</span>(bib_clean, f_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'wos_.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bib_clean <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bib_raw_fs, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">FUN =</span> <span class="cf">function</span>(f) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                bib_clean <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(bib_raw, <span class="st">'(</span><span class="sc">\\</span><span class="st">r)?</span><span class="sc">\\</span><span class="st">n   '</span>, <span class="st">' '</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>              }) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="at">collapse =</span> <span class="st">'</span><span class="sc">\\</span><span class="st">n</span><span class="sc">\\</span><span class="st">n'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">'_data/bibtex_clean'</span>, <span class="st">'wos.bib'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write_file</span>(bib_clean, f_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -158,29 +173,29 @@ In readLines(file) :
   incomplete final line found on '/Users/caseyohara/github/convei_systematic_map/_data/bibtex_clean/scopus.bib'</code></pre>
 <div class="cell">
 <details>
-<summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bib_check_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_clean'</span>), <span class="at">pattern =</span> <span class="st">'scop.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>bib_check <span class="ot">&lt;-</span> <span class="fu">read_file</span>(bib_check_fs[<span class="dv">1</span>])</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>at_vec <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(bib_check, <span class="st">'@[a-zA-Z]+(?=</span><span class="sc">\\</span><span class="st">{)'</span>) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># table(at_vec)</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">### 11887 instances of @ARTICLE, @BOOK, @CONFERENCE</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>test_df <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(bib_check_fs[<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">### only 11769 articles listed... missing 118 articles?</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">### Check for first line: @DOCTYPE{bibtex_key,</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>check_vec1 <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(bib_check, <span class="st">'@[a-zA-Z]+</span><span class="sc">\\</span><span class="st">{.+(?=</span><span class="sc">\n</span><span class="st">)'</span>) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="do">### the À-ž allows for upper/lower diacritics - 11887 results</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> check_vec1) <span class="sc">%&gt;%</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bibtexkey =</span> <span class="fu">str_remove_all</span>(t, <span class="st">'.+</span><span class="sc">\\</span><span class="st">{|,'</span>))</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># n_distinct(df$bibtexkey) </span><span class="al">###</span><span class="co"> 10998 unique bibtex keys...</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>missing_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(test_df, <span class="at">by =</span> <span class="st">'bibtexkey'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bib_check_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_clean'</span>), <span class="at">pattern =</span> <span class="st">'scop.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>bib_check <span class="ot">&lt;-</span> <span class="fu">read_file</span>(bib_check_fs[<span class="dv">1</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>at_vec <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(bib_check, <span class="st">'@[a-zA-Z]+(?=</span><span class="sc">\\</span><span class="st">{)'</span>) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># table(at_vec)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">### 11887 instances of @ARTICLE, @BOOK, @CONFERENCE</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>test_df <span class="ot">&lt;-</span> bib2df<span class="sc">::</span><span class="fu">bib2df</span>(bib_check_fs[<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">### only 11769 articles listed... missing 118 articles?</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">### Check for first line: @DOCTYPE{bibtex_key,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>check_vec1 <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(bib_check, <span class="st">'@[a-zA-Z]+</span><span class="sc">\\</span><span class="st">{.+(?=</span><span class="sc">\n</span><span class="st">)'</span>) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">### the À-ž allows for upper/lower diacritics - 11887 results</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> check_vec1) <span class="sc">%&gt;%</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bibtexkey =</span> <span class="fu">str_remove_all</span>(t, <span class="st">'.+</span><span class="sc">\\</span><span class="st">{|,'</span>))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># n_distinct(df$bibtexkey) </span><span class="al">###</span><span class="co"> 10998 unique bibtex keys...</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>missing_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(test_df, <span class="at">by =</span> <span class="st">'bibtexkey'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Additionally, with the above code (not run) a few entries were found that are missing a line break after the previous entry - e.g.,</p>
@@ -189,22 +204,22 @@ In readLines(file) :
    ... &lt;faulty entry stuff&gt;</code></pre>
 <div class="cell">
 <details>
-<summary>Show me the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'scop.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(f <span class="cf">in</span> bib_raw_fs) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># f &lt;- bib_raw_fs[1]</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  first_at <span class="ot">&lt;-</span> <span class="fu">str_locate</span>(bib_raw, <span class="st">'@'</span>)[<span class="dv">1</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  bib_clean <span class="ot">&lt;-</span> bib_raw <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">### keep everything from the first @ and go to the end</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_sub</span>(<span class="at">start =</span> first_at, <span class="at">end =</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># str_replace_all('(\\r)?\\n   ', ' ') %&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">}@'</span>, <span class="st">'}</span><span class="sc">\n</span><span class="st">@'</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  bib_clean <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bib_clean, <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  f_out <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(f, <span class="st">'_raw'</span>, <span class="st">'_clean'</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_file</span>(bib_clean, f_out)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'scop.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(f <span class="cf">in</span> bib_raw_fs) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># f &lt;- bib_raw_fs[1]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  first_at <span class="ot">&lt;-</span> <span class="fu">str_locate</span>(bib_raw, <span class="st">'@'</span>)[<span class="dv">1</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  bib_clean <span class="ot">&lt;-</span> bib_raw <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">### keep everything from the first @ and go to the end</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_sub</span>(<span class="at">start =</span> first_at, <span class="at">end =</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># str_replace_all('(\\r)?\\n   ', ' ') %&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">}@'</span>, <span class="st">'}</span><span class="sc">\n</span><span class="st">@'</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  bib_clean <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bib_clean, <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  f_out <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(f, <span class="st">'_raw'</span>, <span class="st">'_clean'</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_file</span>(bib_clean, f_out)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>

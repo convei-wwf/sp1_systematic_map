@@ -49,15 +49,28 @@ for(f in bib_raw_fs) {
 
 The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly. Replace those problematic line breaks (a carriage return `\r`, followed by a line break `\n`, followed by a three-space indentation) with a single blank space.
 
-```{r clean bibtex from web of science}
-bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'wos.+.bib$', full.names = TRUE)
-for(f in bib_raw_fs) {
-  # f <- bib_raw_fs[1]
-  bib_raw <- read_file(f)
-  bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
-  f_out <- str_replace(f, '_raw', '_clean')
-  write_file(bib_clean, f_out)
-}
+```{r clean bibtex from web of science naive search}
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'wosnaive.+.bib$', full.names = TRUE)
+bib_clean <- lapply(bib_raw_fs, 
+              FUN = function(f) {
+                bib_raw <- read_file(f)
+                bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
+              }) %>%
+  paste0(collapse = '\\n\\n')
+f_out <- here('_data/bibtex_clean', 'wos_naive.bib')
+write_file(bib_clean, f_out)
+```
+
+```{r clean bibtex from web of science full search}
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'wos_.+.bib$', full.names = TRUE)
+bib_clean <- lapply(bib_raw_fs, 
+              FUN = function(f) {
+                bib_raw <- read_file(f)
+                bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
+              }) %>%
+  paste0(collapse = '\\n\\n')
+f_out <- here('_data/bibtex_clean', 'wos.bib')
+write_file(bib_clean, f_out)
 ```
 
 ## Cleaning the records from SCOPUS
