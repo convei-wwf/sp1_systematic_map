@@ -267,8 +267,12 @@ if(!file.exists(k_optim_file)) {
 }
 perp_vs_k_df <- read_csv(k_optim_file)
 ggplot(perp_vs_k_df, aes(x = k, y = perplexity)) +
-  geom_line() +
-  theme_minimal()
+  geom_line(linewidth = 1, color = hcl.colors(1)) +
+  geom_vline(xintercept = c(10, 20), linewidth = .5, linetype = 'dashed', color = hcl.colors(1)) +
+  geom_text(x = 9, y = 2410, label = 'k = 10', color = hcl.colors(1), angle = 90, hjust = 0, vjust = 0) +
+  geom_text(x = 19, y = 2410, label = 'k = 20', color = hcl.colors(1), angle = 90, hjust = 0, vjust = 0) +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
 
 perp_vs_k_df %>%
   slice_min(n = 5, order_by = perplexity)

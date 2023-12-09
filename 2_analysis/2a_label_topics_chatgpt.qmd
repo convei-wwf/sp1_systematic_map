@@ -82,13 +82,8 @@ table(n_topics$n)
 ```{r}
 top_match_df <- article_topics %>%
   group_by(doc_id, title) %>%
-  filter(prob == max(prob))
-
-ggplot(top_match_df, aes(x = prob)) +
-  geom_histogram() +
-  labs(x = 'Highest topic percent match per article',
-       y = 'Number of articles') +
-  theme_minimal()
+  filter(prob == max(prob)) %>%
+  mutate(type = 'Top single topic')
 
 top2_match_df <- article_topics %>%
   mutate(topic = str_extract(topic, '[0-9]+') %>% as.numeric()) %>%
@@ -96,14 +91,36 @@ top2_match_df <- article_topics %>%
   slice_max(prob, n = 2) %>%
   arrange(topic) %>%
   summarize(prob = sum(prob),
-            tpx = paste0(topic, collapse = '-'))
+            tpx = paste0(topic, collapse = '-')) %>%
+  mutate(type = 'Top two topics')
 
-ggplot(top2_match_df, aes(x = prob)) +
-  geom_histogram() +
-  labs(x = 'Top-two topic percent match per article',
+top_matches_df <- bind_rows(top_match_df, top2_match_df)
+
+summary_matches_df <- top_matches_df %>%
+  group_by(type) %>%
+  summarize(med = median(prob),
+            label = paste0('median: ', round(100 * med), '%'))
+
+p <- ggplot(top_matches_df, aes(x = prob)) +
+  geom_hline(yintercept = 0, color = 'grey20') +
+  geom_histogram(fill = hcl.colors(1), show.legend = FALSE, bins = 21) +
+  geom_vline(data = summary_matches_df, aes(xintercept = med), color = 'lightyellow') +
+  geom_text(data = summary_matches_df, aes(x = med, label = label), y = 10, 
+            angle = 90, hjust = 0, vjust = 0, nudge_y = 10, nudge_x = -.01, 
+            size = 3, color = 'lightyellow') +
+  labs(x = 'Topic probability',
        y = 'Number of articles') +
-  theme_minimal()
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        axis.title.y = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank()) +
+  xlim(c(0, NA)) +
+  facet_wrap(~ type, ncol = 1, scales = 'free_y',
+             strip.position = 'left')
 
+ggsave('topic_prob.png', width = 6, height = 3)
+knitr::include_graphics('topic_prob.png')
 ```
 
 Compare the $k=10$ set to other pulled versions: $k=20$ (post-lemmatization), $k=14, 30$ (pre-lemmatization).
@@ -139,14 +156,28 @@ If we classify each article according to its top topic matches, weighted by prob
 
 ```{r}
 topic_top_match <- article_topics %>%
-  group_by(label) %>%
+  group_by(topic, label) %>%
   summarize(sum_prob = sum(prob), .groups = 'drop') %>%
-  mutate(label = fct_reorder(label, sum_prob))
-ggplot(topic_top_match, aes(y = label, x = sum_prob)) +
-  geom_col() +
-  theme(axis.title.y = element_blank()) +
+  mutate(label = fct_reorder(label, sum_prob)) %>%
+  mutate(topic = fct_reorder(topic, sum_prob),
+         lbl_pos = ifelse(sum_prob > 400, 0, sum_prob),
+         lbl_clr = ifelse(sum_prob > 400, 'light', 'dark'))
+
+p <- ggplot(topic_top_match, aes(y = topic, x = sum_prob)) +
+  geom_col(fill = hcl.colors(1)) +
+  geom_text(aes(label = label, x = lbl_pos + 10, color = lbl_clr), 
+            size = 3, hjust = 0, show.legend = FALSE) +
   theme_minimal() +
-  labs(x = 'Probability-weighted article count')
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_color_manual(values = c('dark' = hcl.colors(1), 'light' = 'lightyellow')) +
+  labs(x = 'Probability-weighted count of documents') +
+  theme(axis.title.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank())
+
+ggsave('article_weight_per_topic.png', width = 6, height = 3)
+
+knitr::include_graphics('article_weight_per_topic.png')
 ```
 
 ## Topic correlation
@@ -160,14 +191,25 @@ topic_singles <- top2_match_df %>%
   group_by(topic) %>%
   summarize(n = n()) %>%
   left_join(topic_labels, by = 'topic') %>%
-  mutate(topic = fct_reorder(topic, n))
+  mutate(topic = fct_reorder(topic, n),
+         lbl_pos = ifelse(n > 400, 0, n),
+         lbl_clr = ifelse(n > 400, 'light', 'dark'))
 
-ggplot(topic_singles, aes(y = topic, x = n)) +
+p <- ggplot(topic_singles, aes(y = topic, x = n)) +
   geom_col(fill = hcl.colors(1)) +
-  geom_text(aes(label = label), x = 10, color = 'grey50', hjust = 0) +
+  geom_text(aes(label = label, x = lbl_pos + 10, color = lbl_clr), 
+            size = 3, hjust = 0, show.legend = FALSE) +
   theme_minimal() +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_color_manual(values = c(hcl.colors(1), 'lightyellow')) +
   labs(x = 'Number of single-topic documents') +
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank())
+
+ggsave('article_count_per_topic.png', width = 6, height = 3)
+
+knitr::include_graphics('article_count_per_topic.png')
 
 topic_pairs <- top2_match_df %>%
   filter(str_detect(tpx, '-')) %>%
