@@ -202,7 +202,7 @@ reset_doc_ids <- function(df) {
 This step expands and unnests the author list, selecting only the first author, then cleans the text in general - remove/replace diacriticals, odd punctuation, backslashes, html tags.  Some titles include foreign language translations (in one source but not the other) - drop these to allow better matching of titles instances.  Remove punctuation from journal names to allow for improved matching.
 
 ```{r read in data and perform first pass cleaning}
-results_all_df_raw <- load_bibtex(pattern = 'wos_|scopus', aspect = 'long') 
+results_all_df_raw <- load_bibtex(pattern = 'wos.bib|scopus.bib', aspect = 'long') 
 
 results_all_df <- results_all_df_raw %>%
   clean_author() %>%

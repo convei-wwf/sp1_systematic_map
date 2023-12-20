@@ -139,14 +139,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'wosnaive.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bib_raw_fs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">'_data/bibtex_raw'</span>), <span class="at">pattern =</span> <span class="st">'wosnaive_.+.bib$'</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bib_clean <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bib_raw_fs, </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">FUN =</span> <span class="cf">function</span>(f) {</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                bib_raw <span class="ot">&lt;-</span> <span class="fu">read_file</span>(f)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                bib_clean <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(bib_raw, <span class="st">'(</span><span class="sc">\\</span><span class="st">r)?</span><span class="sc">\\</span><span class="st">n   '</span>, <span class="st">' '</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>              }) <span class="sc">%&gt;%</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="at">collapse =</span> <span class="st">'</span><span class="sc">\\</span><span class="st">n</span><span class="sc">\\</span><span class="st">n'</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">'_data/bibtex_clean'</span>, <span class="st">'wos_naive.bib'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>f_out <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">'_data/bibtex_clean'</span>, <span class="st">'wosnaive.bib'</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write_file</span>(bib_clean, f_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>

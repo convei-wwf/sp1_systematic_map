@@ -1,7 +1,9 @@
-load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos_', aspect = 'long') {
+load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos.bib', aspect = 'long') {
+  
+  ### NOTE: library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+
   bib_clean_fs <- list.files(path = dir, pattern = pattern, full.names = TRUE)
 
-  
   all_fields_df <- lapply(bib_clean_fs, bib2df::bib2df) %>%
     lapply(janitor::clean_names) %>%
     setNames(basename(bib_clean_fs)) %>%

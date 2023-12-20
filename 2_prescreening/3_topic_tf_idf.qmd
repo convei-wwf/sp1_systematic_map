@@ -27,11 +27,9 @@ Here we will iterate topic-by-topic to identify, using the TF-IDF concept, words
 
 ## Load search results and LDA results
 
-Load the articles and the results of the LDA on topics.
+Load the results of the LDA on topics.
 
-```{r load articles}
-article_df <- load_articles()
-
+```{r load LDA topics}
 topic_labels <- read_csv(here('_data/chatgpt/topic_labels_k10.csv'))
 
 topic_df <- read_csv(here('_output/lda_topic_k10.csv')) %>%
@@ -45,6 +43,8 @@ top_prob_df <- topic_df %>%
 
 ## Examine term frequency across all abstracts
 
+This will function on the *lemmatized* abstracts created in the LDA script.
+
 Across all abstracts in the results set, identify most commonly used words (whether keywords or search terms or otherwise), using a $tf-idf$ (term frequency x inverse doc frequency) approach, where 
 $$tf_{\text{word}} = \frac{n_{\text{word}}} {n_{\text{all words}}}$$
 and 
@@ -55,12 +55,15 @@ $$idf = - \ln \left(\frac{n_{\text{abstracts containing terms}}}{n_{\text{abstra
 The product $tf \times idf$ indicates words that are relatively important to one abstract (based on frequency of the term within that abstract) within the overall collection of abstracts (based on how infrequently the term shows up in other abstracts).  Terms that show up in all abstracts (e.g., stop words) will have an $idf \rightarrow 0$ equal to or near 0, as the ratio $\rightarrow 1$.
 
 ```{r summarize term freq by word}
-abstr_all_df <- article_df %>%
-  filter(field == 'abstract') %>%
-  select(doc_id, text) %>%
-  distinct()
+lemma_dict_f <- here('_data/abstract_lemmatized.csv')
+if(!file.exists(lemma_dict_f)) {
+  stop('Lemmatized abstract file does not exist - run the LDA script to create it!')
+}
 
-abstr_words <- abstr_all_df %>%
+abstr_lemmatized_df <- read_csv(lemma_dict_f) %>%
+  rename(text = abstr_lemma)
+
+abstr_words <- abstr_lemmatized_df %>%
   unnest_tokens(input = text, output = word, token = 'words') %>%
   anti_join(stop_words, by = 'word') %>%
   group_by(doc_id, word) %>%
@@ -158,10 +161,7 @@ ggplot(wordcloud_df, aes(label = word, size = doc_freq)) +
 Repeat the above analysis, except here grouping by topic to identify common words that show up in each topic.
 
 ```{r summarize term freq by word and topic}
-abstr_topic_df <- article_df %>%
-  filter(field == 'abstract') %>%
-  select(doc_id, text) %>%
-  distinct() %>%
+abstr_topic_df <- abstr_lemmatized_df %>%
   left_join(top_prob_df, by = c('doc_id'))
 
 abstr_topic_words <- abstr_topic_df %>%
