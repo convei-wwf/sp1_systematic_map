@@ -42,16 +42,52 @@ if(packageVersion('bib2df') < '1.1.2.0') {
        '... Update bib2df from github: remotes::install_github("ropensci/bib2df"')
 }
 
-### Load bibtex data
-# message('Loading bibtex data...')
-# bib_clean_fs <- list.files(path = here('_data/bibtex_clean'), 
-#                            pattern = 'wos.bib|scopus.bib',
-#                            full.names = TRUE)
-#   
-# screened_df <- bib2df(here('shiny_title_screen/app_out/title_screened.bib')) %>%
-#   sample_n(5) %>%
-#   mutate(EXTRA = 'some stuff')
-# df2bib(screened_df, here('shiny_title_screen/app_out/title_screened.bib'))
+### read bibtex given file selection (input$bibtex_fs) and action (input$load_bibtex)
+fs <- list.files(here('_data/bibtex_clean'),
+                 pattern = 'zot_benchmark_a.bib',
+                 # pattern = 'wos.bib|scopus.bib',
+                 full.names = TRUE)
+message('Loading bibtex from ', paste(basename(fs), collapse = ', '))
+docs_df <- lapply(fs, bib2df::bib2df) %>%
+  setNames(basename(fs)) %>%
+  bind_rows(.id = 'bibtex_source') %>%
+  distinct()
+message('In full docs list, ', nrow(full_df), ' documents found...')
+
+bib_outf <- here('shiny_title_screen/app_out/title_screened.bib')
+if(file.exists(bib_outf)) {
+  screened <- bib2df::bib2df(bib_outf)
+  message('Found, ', nrow(screened), ' documents already screened...')
+  
+  docs_df <- docs_df %>%
+    anti_join(screened %>% select(-EXTRA))
+}
+message('Returning, ', nrow(docs_df), ' documents to be screened...')
+
+### stitch a search term string
+esi_terms <- 'satellite|space.based|remote observation|remote sensing|earth observation|remotely.sens[a-z]+|modis|landsat'
+dec_terms <- 'decision|optimization|risk analysis|management|policy|cost.benefit analysis|benefit.cost analysis|investment|contingent valuation|counterfactual|value of information'
+value_terms <- 'value|valuation|benefit|utility'
+social_terms <- 'social|societal|cultural|[a-z]+-?economic|environmental|ecosystem service|sustainable development|protected area|heritage site|non.?use value'
+
+search_terms <- paste(esi_terms, dec_terms, value_terms, social_terms, sep = '|')
+
+embolden <- function(text, terms = search_terms) {
+  indices <- str_locate_all(text, terms) 
+  ### increase index of end positions:
+  indices[[1]][ , 2] <- indices[[1]][ , 2] + 1
+  ### set up as vector and go from the end to the start!
+  i_vec <- indices %>% unlist() %>% sort(decreasing = TRUE)
+  text_sub <- str_to_sentence(text)
+  for(i in i_vec) {
+    ### i <- 7
+    stringi::stri_sub(text_sub, i, i-1) <- '**'
+  }
+  text_out <- markdown(text_sub)
+  return(text_out)
+}
+
+
 
 ### Define UI for application
 ui <- fluidPage(
@@ -67,16 +103,12 @@ ui <- fluidPage(
         ### Sidebar with a DT::datatable of the entire bib set?
         sidebarLayout(
           sidebarPanel(
-            actionButton(
-              inputId = 'load_bibtex',
-              label = 'Load bibtex!'
-            )
           ), ### end sidebar panel
           
           ### Show a preview of the loaded bibtex
           mainPanel(
-            h2('Preview loaded bibtex:'),
-            DTOutput('toscreen_table')
+            h2('Preview loaded bibtex (all loaded, minus ones already screened):'),
+            DTOutput('toscreen_preview')
           ) ### end main panel
         )
       ), ### end Welcome tabPanel
@@ -87,10 +119,10 @@ ui <- fluidPage(
         ### Sidebar with checkboxes for title screening criteria 
         sidebarLayout(
           sidebarPanel(
-            ### Checkboxes for criteria:
-            ### * Explicitly mentions satellite or earth obs in title
-            ### * Explicitly mentions comparison context
-            ### * Explicitly mentions a societal benefit
+            actionButton(
+              inputId = 'next_doc',
+              label = 'Next document!'
+            ),
             checkboxGroupInput(
               inputId = 'criteria',
               label = 'Screening criteria:',
@@ -100,10 +132,6 @@ ui <- fluidPage(
               ), ### end of checkboxGroupInput
             
             ### Radio buttons for categorization
-            ### * Definitely in scope
-            ### * Maybe (keep)
-            ### * Definitely out of scope
-            ### Action button to store values and select new title
             radioButtons(
               inputId = 'screen_decision',
               label = 'Screening decision:',
@@ -114,16 +142,14 @@ ui <- fluidPage(
               ), ### end of radio buttons
             ### * Append record to an output bibtex file with categorization in extra field
             actionButton(
-              inputId = 'screen_act',
-              label = 'Do it!'
+              inputId = 'screen_action',
+              label = 'Log it!'
             )
           ), ### end sidebar panel
       
           ### Show information on a selected title
           mainPanel(
-            ### Display the title with search terms highlighted
-            ### Display author(s), year, journal
-            ### Display the abstract with search terms highlighted
+            htmlOutput('doc_fields_text')
           ) ### end main panel
           
         ) ### end sidebarLayout
@@ -138,36 +164,11 @@ server <- function(input, output) {
   ### Read and display raw bibtex ###
   ###################################
 
-  ### Function to read bibtex given file selection (input$bibtex_fs) and action (input$load_bibtex)
-  alldocs_df <- eventReactive(
-    input$load_bibtex, {
-      message('in alldocs_df() reactive')
-      fs <- list.files(here('_data/bibtex_clean'),
-                       pattern = 'zot_benchmark_a.bib',
-                       # pattern = 'wos.bib|scopus.bib',
-                       full.names = TRUE)
-      df <- lapply(fs, bib2df::bib2df) %>%
-        setNames(basename(fs)) %>%
-        bind_rows(.id = 'bibtex_source') %>%
-        distinct()
-      return(df)
-    }
-  )
-  toscreen_df <- reactive({
-    message('in toscreen_df() reactive')
-    screened <- bib2df::bib2df('app_out/title_screened.bib')
-
-    toscreen <- alldocs_df() %>%
-      anti_join(screened %>% select(-EXTRA))
-    message('... data frame in toscreen_df() has ', nrow(toscreen), ' rows!')
-    return(toscreen)
-  })
-  
-  output$toscreen_table <- renderDataTable({
-    df <- toscreen_df() %>%
+  output$toscreen_preview <- renderDataTable({
+    df <- docs_df %>%
       head(20) %>%
       select(TITLE, JOURNAL, YEAR, AUTHOR) %>%
-      ### unspool authors and select the first author only
+      ### select the first author only
       unnest(AUTHOR) %>%
       group_by(TITLE, JOURNAL, YEAR) %>%
       slice(1) %>%
@@ -178,12 +179,45 @@ server <- function(input, output) {
     DT::datatable(df)
   })
   
-  ### Function to anti_join with existing screened output
+  doc <- eventReactive({ input$next_doc }, {
+    message('in doc eventReactive')
+    ### update the checkbox input to blank out selections
+    updateCheckboxGroupInput(inputId = 'criteria', selected = character(0))
+    updateRadioButtons(inputId = 'screen_decision', selected = 'keep')
+    ### choose the first row to operate upon, and then drop it from docs_df
+    doc <- docs_df %>%
+      slice(1)
+    return(doc)
+  })
   
+  observeEvent({ input$screen_action }, {
+    message('in screen_action observeEvent')
+    ### create an extra field in the current doc() line
+    extra_criteria <- paste('tex.criteria:', paste(input$criteria, collapse = ', '))
+    extra_decision <- paste('tex.screen_decision:', input$screen_decision)
+    doc_extra <- doc() %>%
+      mutate(extra = paste(extra_criteria, extra_decision, sep = ';'))
+    
+    ### anti_join updated row to unscreened docs df, and assign to global env
+    docs_df <<- anti_join(docs_df, doc_extra)
+
+    ### Append doc() line with extra field to the screened output file
+    df2bib(doc_extra, file = bib_outf, append = TRUE)
+  })
   
-  ### output to display screened output
-  ### output to display unscreened output
+  output$doc_fields_text <- renderUI({
   ### output to display selected doc for screening: highlight search terms in title and abstract
+    title <- doc()$TITLE %>% tolower() %>% str_remove_all('\\{|\\}')
+    title_out <- embolden(text = title) %>%
+      str_replace_all('p>', 'h3>') ### turn into a header instead of paragraph
+    
+    authors <- doc()$AUTHOR %>% unlist() %>% str_to_title() %>% 
+      paste(collapse = '; ') %>% markdown()
+    journal <- doc()$JOURNAL %>% str_to_title() %>% markdown()
+    abstract <- doc()$ABSTRACT %>% embolden()
+    html_out <- paste(title_out, '<hr>', authors, journal, abstract)
+    return(HTML(html_out))
+  })
 
 }
 
