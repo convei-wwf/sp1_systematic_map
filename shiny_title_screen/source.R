@@ -11,23 +11,6 @@
 ### Criteria are displayed and the user can classify accordingly, then
 ### click "next" to move on to the next doc.
 
-### Checkboxes for criteria:
-### * Explicitly mentions satellite or earth obs in title
-### * Explicitly mentions value/benefit/utility with respect to EO data
-### * Explicitly mentions a societal benefit
-### Radio buttons for categorization
-### * Definitely in scope
-### * Maybe (keep)
-### * Definitely out of scope
-### Action button to store values and select new title
-### * Append record to an output bibtex file with categorization in 'extra' field
-### * How to keep track of uncategorized vs categorized - maybe on startup:
-###    * read in full records
-###    * read in categorized records
-###    * anti-join categorized records to full records, dropping the 'extra' field (since that changes with categorization)
-###    * the resulting df is uncategorized - start from the top!
-###    * NOTE: verified that anti_join works on columns of list objects (author, editor)
-
 library(shiny)
 library(shinyFiles)
 library(tidyverse)
@@ -52,8 +35,10 @@ docs_df <- lapply(fs, bib2df::bib2df) %>%
   setNames(basename(fs)) %>%
   bind_rows(.id = 'bibtex_source') %>%
   distinct()
-message('In full docs list, ', nrow(full_df), ' documents found...')
+message('In full docs list, ', nrow(docs_df), ' documents found...')
 
+### if a file of screened docs already exists, anti_join to the full docs list
+### to just leave to-be-screened docs
 bib_outf <- here('shiny_title_screen/app_out/title_screened.bib')
 if(file.exists(bib_outf)) {
   screened <- bib2df::bib2df(bib_outf)

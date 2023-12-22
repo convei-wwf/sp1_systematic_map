@@ -34,11 +34,17 @@ server <- function(input, output) {
   
   observeEvent({ input$screen_action }, {
     message('in screen_action observeEvent')
-    ### create an extra field in the current doc() line
-    extra_criteria <- paste('tex.criteria:', paste(input$criteria, collapse = ', '))
-    extra_decision <- paste('tex.screen_decision:', input$screen_decision)
+    ### create an EXTRA field in the current doc() line
+    extra_ncrit <- paste('tex.title_n_criteria:', length(input$criteria))
+    extra_crit  <- paste('tex.title_criteria:', paste(input$criteria, collapse = ', '))
+    extra_dec   <- paste('tex.title_screen_decision:', input$screen_decision)
+    if('EXTRA' %in% names(doc())) {
+      extra_text <- paste(doc()$extra, extra_ncrit, extra_crit, extra_dec, sep = ';')
+    } else {
+      extra_text <- paste(extra_ncrit, extra_crit, extra_dec, sep = ';')
+    }
     doc_extra <- doc() %>%
-      mutate(extra = paste(extra_criteria, extra_decision, sep = ';'))
+      mutate(EXTRA = extra_text)
     
     ### anti_join updated row to unscreened docs df, and assign to global env
     docs_df <<- anti_join(docs_df, doc_extra)
