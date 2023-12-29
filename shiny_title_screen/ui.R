@@ -9,44 +9,40 @@ ui <- fluidPage(
     ### Set up a tabset panel layout
     tabsetPanel(
       
-      ### First panel: Welcome/introduction
-      tabPanel(title = 'Welcome',
-        ### Sidebar with a DT::datatable of the entire bib set?
-        sidebarLayout(
-          sidebarPanel(
-          ), ### end sidebar panel
-          
-          ### Show a preview of the loaded bibtex
-          mainPanel(
-            h2('Preview loaded bibtex (all loaded, minus ones already screened):'),
-            DTOutput('toscreen_preview')
-          ) ### end main panel
-        )
-      ), ### end Welcome tabPanel
+      # ### First panel: Welcome/introduction
+      # tabPanel(title = 'Welcome',
+      #   ### Sidebar with a DT::datatable of the entire bib set?
+      #   sidebarLayout(
+      #     sidebarPanel(
+      #     ), ### end sidebar panel
+      #     
+      #     ### Show a preview of the loaded bibtex
+      #     mainPanel(
+      #       h2('Preview loaded bibtex (all loaded, minus ones already screened):'),
+      #       DTOutput('toscreen_preview')
+      #     ) ### end main panel
+      #   )
+      # ), ### end Welcome tabPanel
       
       ### Second panel: perform the screening
-      tabPanel(title = 'Screening',
+      tabPanel(title = 'Screening titles for benchmark potential',
                
         ### Sidebar with checkboxes for title screening criteria 
         sidebarLayout(
           sidebarPanel(
-            actionButton(
-              inputId = 'next_doc',
-              label = 'Next document!'
-            ),
-            checkboxGroupInput(
-              inputId = 'criteria',
-              label = 'Screening criteria:',
-              choices = c('Satellite/EO data?'      = 'earth obs', 
-                          'Comparison context?'     = 'comparison',
-                          'Societal value/benefit?' = 'soc value')
-              ), ### end of checkboxGroupInput
+            # checkboxGroupInput(
+            #   inputId = 'criteria',
+            #   label = 'Screening criteria:',
+            #   choices = c('Satellite/EO data?'      = 'earth obs', 
+            #               'Comparison context?'     = 'comparison',
+            #               'Societal value/benefit?' = 'soc value')
+            #   ), ### end of checkboxGroupInput
             
             ### Radio buttons for categorization
             radioButtons(
               inputId = 'screen_decision',
-              label = 'Screening decision:',
-              choices = c('In scope'        = 'keep',
+              label = 'Benchmark paper according to title?:',
+              choices = c('Definitely in scope' = 'keep',
                           'Likely (keep)'   = 'likely',
                           'Unlikely (keep)' = 'unlikely',
                           'Out of scope'    = 'omit')
@@ -55,6 +51,10 @@ ui <- fluidPage(
             actionButton(
               inputId = 'screen_action',
               label = 'Log it!'
+            ),
+            actionButton(
+              inputId = 'next_doc',
+              label = 'Next document!'
             )
           ), ### end sidebar panel
       

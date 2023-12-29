@@ -25,7 +25,7 @@ server <- function(input, output) {
     message('in doc eventReactive')
     ### update the checkbox input to blank out selections
     updateCheckboxGroupInput(inputId = 'criteria', selected = character(0))
-    updateRadioButtons(inputId = 'screen_decision', selected = 'keep')
+    updateRadioButtons(inputId = 'screen_decision', selected = character(0))
     ### choose the first row to operate upon, and then drop it from docs_df
     doc <- docs_df %>%
       slice(1)
@@ -34,6 +34,14 @@ server <- function(input, output) {
   
   observeEvent({ input$screen_action }, {
     message('in screen_action observeEvent')
+    if(length(input$screen_decision) == 0) {
+      message('No decision selected! (zero length)')
+      return(NULL)
+    }
+    if(is.null(input$screen_decision)) {
+      message('No decision selected! (null)')
+      return(NULL)
+    }
     ### create an EXTRA field in the current doc() line
     extra_ncrit <- paste('tex.title_n_criteria:', length(input$criteria))
     extra_crit  <- paste('tex.title_criteria:', paste(input$criteria, collapse = ', '))
@@ -64,6 +72,7 @@ server <- function(input, output) {
     journal <- doc()$JOURNAL %>% str_to_title() %>% markdown()
     abstract <- doc()$ABSTRACT %>% embolden()
     html_out <- paste(title_out, '<hr>', authors, journal, abstract)
+    # html_out <- paste(title_out, '<hr>', authors, journal)
     return(HTML(html_out))
   })
 
