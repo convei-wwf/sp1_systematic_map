@@ -11,23 +11,24 @@
 ### Criteria are displayed and the user can classify accordingly, then
 ### click "next" to move on to the next doc.
 
+message('Loading source.R...')
 library(shiny)
 library(shinyFiles)
 library(tidyverse)
 library(DT)
 library(here)
 
-library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
 if(packageVersion('bib2df') < '1.1.2.0') {
   ### should be version 1.1.2.0 or higher (1.1.1 is on CRAN)
-  ### use dev version: remotes::install_github("ropensci/bib2df")
   stop('Package bib2df version: ', packageVersion(bib2df),
        '... Update bib2df from github: remotes::install_github("ropensci/bib2df"')
 }
+library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+
 
 ### read bibtex given file selection (input$bibtex_fs) and action (input$load_bibtex)
 fs <- list.files(here('_data/bibtex_clean'),
-                 # pattern = 'zot_benchmark_a.bib',
+                 # pattern = 'zot_benchmark_a.bib', ### use for quick testing
                  pattern = 'wos.bib|scopus.bib',
                  full.names = TRUE)
 message('Loading bibtex from ', paste(basename(fs), collapse = ', '))
@@ -42,7 +43,7 @@ message('In full docs list, ', nrow(docs_df), ' documents found...')
 bib_outf <- here('shiny_title_screen/app_out/title_screened.bib')
 if(file.exists(bib_outf)) {
   screened <- bib2df::bib2df(bib_outf)
-  message('Found, ', nrow(screened), ' documents already screened...')
+  message('Omitting ', nrow(screened), ' documents already screened...')
   
   docs_df <- docs_df %>%
     anti_join(screened %>% select(-EXTRA))
@@ -53,7 +54,7 @@ message('Returning, ', nrow(docs_df), ' documents to be screened...')
 esi_terms <- 'satellite|space.based|remote observation|remote sensing|earth observation|remotely.sens[a-z]+|modis|landsat'
 dec_terms <- 'decision|optimization|risk analysis|management|policy|cost.benefit analysis|benefit.cost analysis|investment|contingent valuation|counterfactual|value of information'
 value_terms <- 'value|valuation|benefit|utility'
-social_terms <- 'social|societal|cultural|[a-z]+-?economic|environmental|ecosystem service|sustainable development|protected area|heritage site|non.?use value'
+social_terms <- 'social|societal|cultural|([a-z]+-?)?economic|environmental|ecosystem service|sustainable development|protected area|heritage site|non.?use value'
 
 search_terms <- paste(esi_terms, dec_terms, value_terms, social_terms, sep = '|')
 
@@ -68,7 +69,8 @@ embolden <- function(text, terms = search_terms) {
     ### i <- 7
     stringi::stri_sub(text_sub, i, i-1) <- '**'
   }
-  text_out <- markdown(text_sub)
+  text_out <- markdown(text_sub) %>%
+    str_replace_all('<strong>', '<strong style="color:#FF0000";>')
   return(text_out)
 }
 
