@@ -1,0 +1,132 @@
+---
+title: 'Systematic Map: Remove duplicate records'
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+library(here)
+
+source(here('common_fxns.R'))
+```
+
+# Summary
+
+This script will ingest Bibtex files of records and:
+
+* check for and resolve duplicated records
+* from Web of Science, Scopus, and the CONVEI Zotero Library
+
+# Methods
+
+## Remove duplicates and save out for Colandr ingestion
+
+Pull in all cleaned bibtex data.  Identify duplicates by first author and title.  Save only one version (Web of Science vs Scopus?).  Remove also any documents that have been screened - i.e., the benchmark documents, as these will be uploaded separately (and create duplicates if records still exist in WoS or Scopus uploads).
+
+```{r}
+#| eval: false
+
+### This chunk is to test the duplicates within the raw .bib exported from Scopus.
+
+x_txt <- read_file(here('_data/bibtex_raw/scopus_240109.bib'))
+
+x_hdr <- x_txt %>% str_extract_all('@[A-Z]+\\{[A-Za-z0-9]+,\\n\\t.+?\\n\\t.+?\\n\\tyear = \\{.+?\\}')
+
+x_df <- data.frame(hdr = unlist(x_hdr)) %>%
+  mutate(author = str_extract(hdr, 'author = \\{.+?\\}'),
+         title  = str_extract(hdr, 'title = \\{.+?\\}'),
+         year   = str_extract(hdr, 'year = \\{.+?\\}'),
+         key    = str_remove(hdr, '@[A-Z]+\\{') %>% str_extract('^[A-z0-9]+'))
+
+y_df <- x_df %>% group_by(author, title, year, key) %>% summarize(n = n())
+
+### The fact that from 16000+ obs in x_df, there are only 3600 *distinct* 
+### combinations of author/title/year shows that the problem is not being
+### introduced by my cleaning or by bib2df functionality...
+```
+
+```{r read in all the cleaned bibtex}
+scopus_fs <- list.files(here('_data/bibtex_clean'), pattern = 'scopus_', full.names = TRUE)
+scopus_all <- lapply(scopus_fs, bib2df) %>% 
+  bind_rows() %>% 
+  mutate(src = 'scopus') 
+
+scopus_distinct <- scopus_all %>%
+  distinct()
+
+wos_fs <- list.files(here('_data/bibtex_clean'), pattern = 'wos_', full.names = TRUE)
+wos_all <- lapply(wos_fs, bib2df) %>% 
+  bind_rows() %>% 
+  mutate(src = 'wos') 
+
+wos_distinct <- wos_all %>%
+  distinct()
+
+benchmark_all <- bib2df(here('_data/bibtex_clean/zot_benchmark_a.bib')) %>%
+  mutate(src = 'benchmark') %>%
+  mutate(TITLE = str_remove_all(TITLE, '\\{\\{|\\}\\}'))
+```
+
+```{r combine and drop duplicates}
+all_docs <- bind_rows(scopus_distinct, wos_distinct, benchmark_all) %>%
+  mutate(doc_id = 1:n()) 
+
+all_docs_distinct <- all_docs %>%
+  rowwise() %>%
+  mutate(first_author = tolower(AUTHOR[1]) %>% str_remove(',.+')) %>%
+  ungroup() %>%
+  mutate(title = tolower(TITLE)) %>%
+  group_by(first_author, title) %>%
+  mutate(n = n()) %>%
+  ungroup()
+
+bench_out <- all_docs_distinct %>%
+  group_by(first_author, title) %>%
+  filter(any(src == 'benchmark')) %>%
+  ungroup()
+
+dupes_dropped <- all_docs_distinct %>% 
+  group_by(first_author, title) %>%
+  ### drop any author/title combos that show up in the benchmark set
+  filter(!any(src == 'benchmark')) %>%
+  arrange(desc(YEAR)) %>%
+  slice(1) %>%
+  ungroup()
+```
+
+## Write out by source
+
+```{r write out cleaned bibliographies}
+clean_scopus <- dupes_dropped %>%
+  filter(src == 'scopus') %>%
+  select(-first_author, -title, -src, -doc_id, -n) %>%
+  select(where(~ any(!is.na(.))))
+
+clean_wos <- dupes_dropped %>%
+  filter(src == 'wos') %>%
+  select(-first_author, -title, -src, -doc_id, -n) %>%
+  select(where(~ any(!is.na(.))))
+
+clean_bench <- bench_out %>%
+  filter(src == 'benchmark') %>%
+  select(-first_author, -title, -src, -doc_id, -n) %>%
+  select(where(~ any(!is.na(.)))) 
+
+df2bib(clean_scopus, here('_data/output_for_colandr/scopus_clean_240109.bib'))
+df2bib(clean_wos,    here('_data/output_for_colandr/wos_clean_240111.bib'))
+df2bib(clean_bench,  here('_data/output_for_colandr/bench_clean_240109.bib'))
+
+```
+
+

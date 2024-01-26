@@ -1,4 +1,4 @@
-load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern = 'wos.bib', aspect = 'long') {
+load_bibtex <- function(dir = here('_data/bibtex_clean'), pattern, aspect = 'long') {
   
   ### NOTE: library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
 

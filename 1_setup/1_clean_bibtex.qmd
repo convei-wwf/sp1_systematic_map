@@ -1,0 +1,204 @@
+---
+title: 'Systematic Map: Clean bibtex records'
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+library(here)
+
+source(here('common_fxns.R'))
+```
+
+# Summary
+
+This script will ingest Bibtex files of records and:
+
+-   clean up the bibtex for idiosyncratic formatting
+-   from Web of Science, Scopus, and the CONVEI Zotero Library
+
+# Methods
+
+## Cleaning the bibtex from the CONVEI Zotero library
+
+This is already pretty clean... no real processing required!
+
+```{r clean bibtex from zotero library}
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'zot.+.bib$', full.names = TRUE)
+for(f in bib_raw_fs) {
+  # f <- bib_raw_fs[1]
+  bib_raw <- read_file(f)
+  bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
+  f_out <- str_replace(f, '_raw', '_clean')
+  write_file(bib_clean, f_out)
+}
+```
+
+## Cleaning the bibtex from Web of Science
+
+The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly. Replace those problematic line breaks (a carriage return `\r`, followed by a line break `\n`, followed by a three-space indentation) with a single blank space.
+
+```{r clean bibtex from web of science naive search}
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'wosnaive_.+.bib$', full.names = TRUE)
+bib_clean <- lapply(bib_raw_fs, 
+              FUN = function(f) {
+                bib_raw <- read_file(f)
+                bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
+              }) %>%
+  paste0(collapse = '\\n\\n')
+f_out <- here('_data/bibtex_clean', 'wosnaive.bib')
+write_file(bib_clean, f_out)
+```
+
+For the Web of Science retrieved items from the final search, grab the date tag at the end of the filename of the various raw files, and append to the cleaned file name. The date will be a six-figure number, `YYMMDD` format.
+
+Also, fix titles with oddball quotes, e.g., ``` ``land cover classification system{''} ``` or `` `fruitful' ``
+
+
+```{r clean bibtex from web of science full search}
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'wos_.+.bib$', full.names = TRUE)
+wos_date <- basename(bib_raw_fs[1]) %>% str_extract('[0-9]{6}')
+
+if(is.na(wos_date)) stop('Whoops, check the date flag on the raw Bibtex exports from Web of Science!')
+
+bib_clean <- lapply(bib_raw_fs, 
+              FUN = function(f) {
+                bib_raw <- read_file(f)
+                bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ') %>%
+                  str_replace_all("``|\\{''\\}", '"') %>%
+                  str_replace_all('`', "'")
+              }) %>%
+  paste0(collapse = '\\n\\n')
+f_out <- here('_data/bibtex_clean', sprintf('wos_%s.bib', wos_date))
+write_file(bib_clean, f_out)
+```
+
+## Cleaning the records from SCOPUS
+
+The SCOPUS records start with a export date notice; let's drop that. Also, to avoid warning, add a blank line at the end:
+
+```         
+Warning message:
+In readLines(file) :
+  incomplete final line found on '/Users/caseyohara/github/convei_systematic_map/_data/bibtex_clean/scopus.bib'
+```
+
+Some Scopus entries are having a hard time importing into Zotero. Some issues:
+
+1.  Dollar signs that are ambiguous re: LaTeX vs money. If we just swap all dollar signs with backslash-dollar, the latex will not be encoded properly but that should be fine - rare, and still readable...
+2.  Bibtex keys with spaces in them.
+
+```{r check scopus for malformed entries}
+#| eval: false
+bib_check_f <- here('_data/bibtex_clean',  'scopus_240109.bib')
+
+bib_check <- read_file(bib_check_f)
+
+test_df <- bib2df::bib2df(bib_check_fs[1]) %>%
+  janitor::clean_names()
+### only 11769 articles listed... missing 118 articles?
+
+### Check for first line: @DOCTYPE{bibtex_key,
+check_vec1 <- str_extract_all(bib_check, '@(ARTICLE|BOOK|CONFERENCE)+\\{.+(?=\n)') %>% unlist()
+### the À-ž allows for upper/lower diacritics - 11887 results
+
+df <- data.frame(t = check_vec1) %>%
+  mutate(bibtexkey = str_remove_all(t, '.+\\{|,'))
+# n_distinct(df$bibtexkey) ### 10998 unique bibtex keys...
+
+missing_df <- df %>%
+  anti_join(test_df, by = 'bibtexkey')
+```
+
+Additionally, with the above code (not run) a few entries were found that are missing a line break after the previous entry - e.g.,
+
+```         
+   ... <previous entry stuff>
+}@ARTICLE{Liu2023238,      <-- missing a line break here!
+   ... <faulty entry stuff>
+```
+
+```{r clean bibtex from scopus}
+bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'scop.+.bib$', full.names = TRUE)
+scopus_date <- basename(bib_raw_fs[1]) %>% str_extract('[0-9]{6}')
+
+if(is.na(scopus_date)) stop('Whoops, check the date flag on the raw Bibtex exports from Scopus!')
+
+if(length(bib_raw_fs) > 1) stop('Whoops, should be only one Scopus bibtex export file!')
+
+f <- bib_raw_fs[1]
+
+bib_raw <- read_file(f)
+
+### Skip the header with the export date - go straight to the first @ARTICLE
+first_at <- str_locate(bib_raw, '@')[1]
+
+bib_fix1 <- bib_raw %>%
+  ### keep everything from the first @ and go to the end
+  str_sub(start = first_at, end = - 1) %>%
+  ### add newline between a closing curly brace and a new @
+  str_replace_all('\\}@', '}\n@') %>%
+  ### Replace dollar signs with escaped dollar signs
+  str_replace_all('\\$', '\\\\$')
+
+### Replace spaces in bibtex keys with underscores
+bibkey_locs_df <- str_locate_all(bib_fix1, '@(ARTICLE|BOOK|CONFERENCE)+\\{.+(?=\n)')[[1]] %>%
+  as.data.frame() %>%
+  mutate(txt = str_extract_all(bib_fix1, '@(ARTICLE|BOOK|CONFERENCE)+\\{.+(?=\n)')[[1]]) %>%
+  filter(str_detect(txt, ' ')) %>%
+  mutate(txt_clean = str_replace_all(txt, ' ', '_')) %>%
+  mutate(check_length = nchar(txt) == nchar(txt_clean))
+
+bib_fix2 <- bib_fix1
+system.time({
+  for(k in 1:nrow(bibkey_locs_df)) {
+    ### k <- 1
+    substr(bib_fix2, bibkey_locs_df$start[k], bibkey_locs_df$end[k]) <- bibkey_locs_df$txt_clean[k]
+}
+})
+# bibtexkey_check <- str_extract_all(bib_fix2, '@(ARTICLE|BOOK|CONFERENCE)+\\{.+(?=\n)') %>% unlist()
+# bibtexkey_check[str_detect(bibtexkey_check, ' ')]
+ 
+### Loading the entire set into Zotero seems to encounter an error, with only
+### 16000 of the 18000+ articles importing. 
+### Colandr also has a max size of file for importing.
+
+article_starts <- str_locate_all(bib_fix2, '@ARTICLE|@BOOK|@CONFERENCE')[[1]]
+
+art_start_df <- data.frame(start = article_starts[ , 1]) %>%
+  mutate(end = lead(start) - 1,
+         doc = 1:n(),
+         end = ifelse(doc == n(), nchar(bib_fix2), end))
+
+# art_indiv_df <- art_start_df %>% slice(1:100) %>% mutate(art_text = unlist(art_indiv))
+
+n_chunks <- 5
+
+art_chunk_df <- art_start_df %>%
+  mutate(chunk = ntile(doc, n_chunks)) %>%
+  group_by(chunk) %>%
+  summarize(chunk_start = min(start), chunk_end = max(end))
+
+for(i in 1:n_chunks) {
+  # i <- 2
+  bib_tmp <- bib_fix2 %>%
+    str_sub(start = art_chunk_df$chunk_start[i],
+            end   = art_chunk_df$chunk_end[i])
+  bib_clean <- paste0(bib_tmp, '\n')
+
+  f_out <- here('_data/bibtex_clean', sprintf('scopus_%s_%s.bib', i, scopus_date))
+  write_file(bib_clean, f_out)
+}
+
+```
