@@ -100,7 +100,7 @@ dupes_dropped <- all_docs_distinct %>%
   group_by(first_author, title) %>%
   ### drop any author/title combos that show up in the benchmark set
   filter(!any(src == 'benchmark')) %>%
-  arrange(desc(YEAR)) %>%
+  arrange(desc(YEAR), src) %>%
   slice(1) %>%
   ungroup()
 ```
@@ -124,7 +124,7 @@ clean_bench <- bench_out %>%
   select(where(~ any(!is.na(.)))) 
 
 df2bib(clean_scopus, here('_data/output_for_colandr/scopus_clean_240109.bib'))
-df2bib(clean_wos,    here('_data/output_for_colandr/wos_clean_240111.bib'))
+df2bib(clean_wos,    here('_data/output_for_colandr/wos_clean_240126.bib'))
 df2bib(clean_bench,  here('_data/output_for_colandr/bench_clean_240109.bib'))
 
 ```
