@@ -16,6 +16,8 @@ editor: source
 library(tidyverse)
 library(tidytext)
 library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+# library(revtools)
+library(synthesisr)
 library(here)
 
 source(here('common_fxns.R'))
@@ -23,7 +25,7 @@ source(here('common_fxns.R'))
 
 # Summary
 
-This script will ingest Bibtex files of records and:
+This script will ingest Bibtex and RIS files of records and:
 
 -   clean up the bibtex for idiosyncratic formatting
 -   from Web of Science, Scopus, and the CONVEI Zotero Library
@@ -114,73 +116,83 @@ for(i in 1:n_chunks) {
 }
 ```
 
-## Cleaning the records from SCOPUS
+## Cleaning the records from Scopus
 
-The SCOPUS records start with a export date notice; let's drop that. Also, to avoid warning, add a blank line at the end:
+NOTE: the most recent Scopus records are in .ris format, not .bib.  Previous versions of this script accessed Scopus records as .bib, so if necessary to go back to that format, examine the version history.
 
-```         
-Warning message:
-In readLines(file) :
-  incomplete final line found on '/Users/caseyohara/github/convei_systematic_map/_data/bibtex_clean/scopus.bib'
+The single .ris file is very large, so we can break it out into smaller chunks for file size and parallel processing.
+
+### .ris file format details:
+
+From https://library.mskcc.org/blog/2022/09/the-ris-file-format-explained:
+
+> The RIS (file format) is a standardized tag format developed by Research Information Systems company. The tag includes two letters, two spaces, and a hyphen to express bibliographic citation information. Each tag supports a different field. Below are some examples of tags for various field codes in a reference.
+
+```
+TY  -        "Type of reference" (eg. JOUR - always first tag)
+AU  -        "Author"
+PY  -        "Publication Year"
+T1  -        "Primary Title" 
+T2  -        "Secondary Title" (eg. journal title)
+SP  -        "Start Page"
+EP  -        "End Page"
+VL  -        "Volume"
+IS  -        "Issue"
 ```
 
-Some Scopus entries are having a hard time importing into Zotero. Some issues:
+Note, `revtools::read_bibliography(f, return_df = TRUE)` fails on the raw .ris file:
 
-1.  Dollar signs that are ambiguous re: LaTeX vs money. If we just swap all dollar signs with backslash-dollar, the latex will not be encoded properly but that should be fine - rare, and still readable...
-2.  Bibtex keys with spaces in them.
+```
+Error in data.frame(start = which(z_dframe$ris == start_tag), end = which(z_dframe$ris ==  : 
+  arguments imply differing number of rows: 18546, 18548
+```
 
-```{r check scopus for malformed entries}
+In a [bug issue dated May 25, 2020 on the revtools Github repo](https://github.com/mjwestgate/revtools/issues/29#issuecomment-633827687), the package owner Martin Westgate explained (related to a similar but not identical problem to mine):
+
+> Hi! This isn't fixed in revtools yet; but it should be fixed in `synthesisr`, which is the package that revtools will use for data import in future. If you import your files using `synthesisr::read_refs` instead of `revtools::read_bibliography`, then you can export using `synthesisr::write_refs` without getting this error.
+
+
+```{r break up giant ris from scopus}
+ris_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'scop.+.ris$', full.names = TRUE)
+scopus_date <- basename(ris_raw_fs[1]) %>% str_extract('[0-9]{6}')
+
+if(is.na(scopus_date)) stop('Whoops, check the date flag on the raw .ris exports from Scopus!')
+
+if(length(ris_raw_fs) > 1) stop('Whoops, should be only one Scopus .ris export file!')
+
+f <- ris_raw_fs[1]
+
+ris_raw <- read_file(f)
+
+n_chunks <- 5
+
+ris_index_df <- data.frame(
+    start = str_locate_all(ris_raw, 'TY  -')[[1]][ , 1],
+    end   = str_locate_all(ris_raw, 'ER  -')[[1]][ , 2]
+  ) %>%
+  mutate(doc_id = 1:n()) %>%
+  mutate(chunk = ntile(doc_id, n_chunks))
+
+out_fstem <- here('_data/bibtex_clean/scopus_%s_%s.ris')
+for(i in 1:n_chunks) {
+  ### i <- 1
+  out_f <- sprintf(out_fstem, i, scopus_date)
+  x <- ris_index_df %>%
+    filter(chunk == i) %>%
+    summarize(start = min(start), end = max(end))
+  chunk <- str_sub(ris_raw, start = x$start, end = x$end)
+  write_file(chunk, out_f)
+}
+```
+
+```{r}
 #| eval: false
-bib_check_f <- here('_data/bibtex_clean',  'scopus_240109.bib')
 
-bib_check <- read_file(bib_check_f)
-
-test_df <- bib2df::bib2df(bib_check_fs[1]) %>%
-  janitor::clean_names()
-### only 11769 articles listed... missing 118 articles?
-
-### Check for first line: @DOCTYPE{bibtex_key,
-check_vec1 <- str_extract_all(bib_check, '@(ARTICLE|BOOK|CONFERENCE)+\\{.+(?=\n)') %>% unlist()
-### the À-ž allows for upper/lower diacritics - 11887 results
-
-df <- data.frame(t = check_vec1) %>%
-  mutate(bibtexkey = str_remove_all(t, '.+\\{|,'))
-# n_distinct(df$bibtexkey) ### 10998 unique bibtex keys...
-
-missing_df <- df %>%
-  anti_join(test_df, by = 'bibtexkey')
+system.time({
+  ris_results <- synthesisr::read_refs(out_f)
+})  ### 98 seconds to read a 1/5th split file
 ```
 
-Additionally, with the above code (not run) a few entries were found that are missing a line break after the previous entry - e.g.,
-
-```         
-   ... <previous entry stuff>
-}@ARTICLE{Liu2023238,      <-- missing a line break here!
-   ... <faulty entry stuff>
-```
-
-```{r clean bibtex from scopus}
-bib_raw_fs <- list.files(here('_data/bibtex_raw'), pattern = 'scop.+.bib$', full.names = TRUE)
-scopus_date <- basename(bib_raw_fs[1]) %>% str_extract('[0-9]{6}')
-
-if(is.na(scopus_date)) stop('Whoops, check the date flag on the raw Bibtex exports from Scopus!')
-
-if(length(bib_raw_fs) > 1) stop('Whoops, should be only one Scopus bibtex export file!')
-
-f <- bib_raw_fs[1]
-
-bib_raw <- read_file(f)
-
-### Skip the header with the export date - go straight to the first @ARTICLE
-first_at <- str_locate(bib_raw, '@')[1]
-
-bib_fix1 <- bib_raw %>%
-  ### keep everything from the first @ and go to the end
-  str_sub(start = first_at, end = - 1) %>%
-  ### add newline between a closing curly brace and a new @
-  str_replace_all('\\}@', '}\n@') %>%
-  ### Replace dollar signs with escaped dollar signs
-  str_replace_all('\\$', '\\\\$')
 
 ### Replace spaces in bibtex keys with underscores
 bibkey_locs_df <- str_locate_all(bib_fix1, '@(ARTICLE|BOOK|CONFERENCE)+\\{.+(?=\n)')[[1]] %>%

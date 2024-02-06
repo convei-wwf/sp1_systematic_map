@@ -1,0 +1,99 @@
+---
+title: "Systematic map: Benchmark test Web of Science"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(tidytext)
+library(bib2df)
+
+source(here('common_fxns.R'))
+```
+
+## Check benchmarks against Web of Science search
+
+```{r load bibtex}
+fs <- list.files(here('_data/bibtex_clean'), pattern = 'wos_', full.names = TRUE)
+all_fields_df <- lapply(fs, bib2df) %>% bind_rows()
+```
+
+```{r}
+polish_records <- function(df) {
+  df %>% 
+    janitor::clean_names() %>%
+    select(author, title, doi) %>%
+    rowwise() %>%
+    mutate(author = author[1] %>% str_remove(',.*')) %>%
+    ungroup() %>%
+    mutate(across(where(is.character), clean_text)) %>%
+    ### remove foreign language translations of titles
+    mutate(title = str_remove(title, '(; )?\\[.+\\] ?'))
+}
+```
+
+
+```{r compare to bench}
+
+result_df  <- all_fields_df %>%
+  polish_records()
+
+bench_df <- bib2df(here('_data/bibtex_clean/zot_benchmark_a.bib')) %>%
+  polish_records() %>%
+  mutate(title = str_remove_all(title, '\\{\\{|\\}\\}'))
+
+doi_match <- bench_df %>%
+  filter(!is.na(doi)) %>%
+  filter(doi %in% result_df$doi)
+
+info_match <- bench_df %>%
+  select(author, title) %>%
+  inner_join(result_df) %>%
+  distinct()
+
+match_df <- bind_rows(doi_match, info_match) %>%
+  select(-doi) %>%
+  distinct() %>%
+  inner_join(result_df) %>%
+  distinct()
+
+pct_match <- nrow(match_df) / nrow(bench_df) * 100
+
+missed <- bench_df %>% 
+  select(author, title) %>%
+  anti_join(match_df)
+
+knitr::kable(missed %>% select(author, title))
+```
+
+## Check missed sources
+
+Examining missed sources (Nov 20):
+
+* Not in WoS database (white paper/grey lit?): Cooke, Bernknopf (whales), Kroetz, Mullan, Lombardo
+
+## Hit rate
+
+```{r}
+bench_checked_df <- bench_df %>%
+  filter(!author %in% c('cooke', 'kroetz', 'mullan', 'lombardo')) %>%
+  filter(!(author == 'bernknopf' & str_detect(title, 'blue whale')))
+
+hit_rate <- round(nrow(match_df) / nrow(bench_checked_df) * 100)
+
+write_csv(match_df, here('_data/benchmark_matched.csv'))
+```
+
+There are `r nrow(bench_checked_df)` articles in the benchmark set that are known to be available in Web of Science.  The current search terms successfully identify these benchmark articles `r hit_rate`% of the time.
+
+
