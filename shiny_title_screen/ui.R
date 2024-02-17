@@ -2,6 +2,7 @@ source('source.R')
 
 ### Define UI for application
 ui <- fluidPage(
+    theme = bslib::bs_theme(bootswatch = 'morph'),
 
     ### Application title
     titlePanel("Shiny Title Screening"),

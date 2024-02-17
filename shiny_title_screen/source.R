@@ -17,25 +17,19 @@ library(shinyFiles)
 library(tidyverse)
 library(DT)
 library(here)
-
-if(packageVersion('bib2df') < '1.1.2.0') {
-  ### should be version 1.1.2.0 or higher (1.1.1 is on CRAN)
-  stop('Package bib2df version: ', packageVersion(bib2df),
-       '... Update bib2df from github: remotes::install_github("ropensci/bib2df"')
-}
-library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
-
+library(synthesisr)
 
 ### read bibtex given file selection (input$bibtex_fs) and action (input$load_bibtex)
-fs <- list.files(here('_data/bibtex_clean'),
-                 # pattern = 'zot_benchmark_a.bib', ### use for quick testing
-                 pattern = 'wos.bib|scopus.bib',
-                 full.names = TRUE)
-message('Loading bibtex from ', paste(basename(fs), collapse = ', '))
-docs_df <- lapply(fs, bib2df::bib2df) %>%
-  setNames(basename(fs)) %>%
-  bind_rows(.id = 'bibtex_source') %>%
-  distinct()
+f <- here('_data/output_for_colandr', 'sample.ris')
+
+message('Loading refs from ', f)
+
+docs_df <- read_file(f) 
+begin <- docs_df %>% str_locate_all()
+
+
+%>% parse_ris()
+
 message('In full docs list, ', nrow(docs_df), ' documents found...')
 
 ### if a file of screened docs already exists, anti_join to the full docs list

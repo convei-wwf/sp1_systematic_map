@@ -1,6 +1,8 @@
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+  
+  # bslib::bs_themer()
 
   ###################################
   ### Read and display raw bibtex ###
