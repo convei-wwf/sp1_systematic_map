@@ -1,17 +1,8 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-### The app reads in a Bibtex file and displays a title, author, year, journal, 
+### The app reads in a bibliography file and displays a title, author, year, journal, 
 ### and which search terms appear in the abstract, to give a little context.
 ### Criteria are displayed and the user can classify accordingly, then
 ### click "next" to move on to the next doc.
 
-message('Loading source.R...')
 library(shiny)
 library(shinyFiles)
 library(tidyverse)
