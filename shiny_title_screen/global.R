@@ -8,38 +8,39 @@ library(shinyFiles)
 library(tidyverse)
 library(DT)
 library(here)
-
-if(packageVersion('bib2df') < '1.1.2.0') {
-  ### should be version 1.1.2.0 or higher (1.1.1 is on CRAN)
-  stop('Package bib2df version: ', packageVersion(bib2df),
-       '... Update bib2df from github: remotes::install_github("ropensci/bib2df"')
-}
-library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+library(synthesisr)
 
 
-### read bibtex given file selection (input$bibtex_fs) and action (input$load_bibtex)
-fs <- list.files(here('_data/bibtex_clean'),
-                 # pattern = 'zot_benchmark_a.bib', ### use for quick testing
-                 pattern = 'wos.bib|scopus.bib',
-                 full.names = TRUE)
-message('Loading bibtex from ', paste(basename(fs), collapse = ', '))
-docs_df <- lapply(fs, bib2df::bib2df) %>%
-  setNames(basename(fs)) %>%
-  bind_rows(.id = 'bibtex_source') %>%
-  distinct()
-message('In full docs list, ', nrow(docs_df), ' documents found...')
-
-### if a file of screened docs already exists, anti_join to the full docs list
-### to just leave to-be-screened docs
-bib_outf <- here('shiny_title_screen/app_out/title_screened.bib')
-if(file.exists(bib_outf)) {
-  screened <- bib2df::bib2df(bib_outf)
-  message('Omitting ', nrow(screened), ' documents already screened...')
+clean_bib <- function(bib_df, ext = '.ris') {
+  if(nrow(bib_df) == 0) bib_df <- null_bib
   
-  docs_df <- docs_df %>%
-    anti_join(screened %>% select(-EXTRA))
+  bib_clean_df <- bib_df %>%
+    janitor::clean_names() %>%
+    select(source_type, author, title, journal, year, abstract) %>%
+    ### select the first author last name only
+    mutate(author = str_remove_all(author, ',.+')) %>%
+    # rename(first_author = author) %>%
+    mutate(title = str_remove_all(title, '\\{|\\}')) %>%
+    mutate(title = str_to_sentence(title),
+           journal = str_to_title(journal),
+           author = str_to_title(author))
+    
+  return(bib_clean_df)
+    
 }
-message('Returning, ', nrow(docs_df), ' documents to be screened...')
+
+null_bib <- data.frame(source_type = NA, author = NA, title = NA, journal = NA, year = NA, abstract = NA)
+
+bib_all <- read_refs(here('_data/output_for_colandr/sample.ris')) %>% clean_bib()
+
+bib_screened_f <- here('_data/output_for_colandr/title_screened_cco.ris')
+if(file.size(bib_screened_f) > 0 & file.exists(bib_screened_f)) {
+  bib_screened <- read_refs(bib_screened_f) %>% clean_bib()
+} else {
+  bib_screened <- null_bib
+}
+
+bib_toscreen <- anti_join(bib_all, bib_screened)
 
 ### stitch a search term string
 esi_terms <- 'satellite|space.based|remote observation|remote sensing|earth observation|remotely.sens[a-z]+|modis|landsat'

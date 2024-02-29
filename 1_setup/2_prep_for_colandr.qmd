@@ -16,6 +16,7 @@ editor: source
 library(tidyverse)
 library(tidytext)
 library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+library(synthesisr)
 library(here)
 
 source(here('common_fxns.R'))
@@ -34,98 +35,141 @@ This script will ingest Bibtex files of records and:
 
 Pull in all cleaned bibtex data.  Identify duplicates by first author and title.  Save only one version (Web of Science vs Scopus?).  Remove also any documents that have been screened - i.e., the benchmark documents, as these will be uploaded separately (and create duplicates if records still exist in WoS or Scopus uploads).
 
-```{r}
-#| eval: false
-
-### This chunk is to test the duplicates within the raw .bib exported from Scopus.
-
-x_txt <- read_file(here('_data/bibtex_raw/scopus_240109.bib'))
-
-x_hdr <- x_txt %>% str_extract_all('@[A-Z]+\\{[A-Za-z0-9]+,\\n\\t.+?\\n\\t.+?\\n\\tyear = \\{.+?\\}')
-
-x_df <- data.frame(hdr = unlist(x_hdr)) %>%
-  mutate(author = str_extract(hdr, 'author = \\{.+?\\}'),
-         title  = str_extract(hdr, 'title = \\{.+?\\}'),
-         year   = str_extract(hdr, 'year = \\{.+?\\}'),
-         key    = str_remove(hdr, '@[A-Z]+\\{') %>% str_extract('^[A-z0-9]+'))
-
-y_df <- x_df %>% group_by(author, title, year, key) %>% summarize(n = n())
-
-### The fact that from 16000+ obs in x_df, there are only 3600 *distinct* 
-### combinations of author/title/year shows that the problem is not being
-### introduced by my cleaning or by bib2df functionality...
-```
-
-```{r read in all the cleaned bibtex}
-scopus_fs <- list.files(here('_data/bibtex_clean'), pattern = 'scopus_', full.names = TRUE)
-scopus_all <- lapply(scopus_fs, bib2df) %>% 
-  bind_rows() %>% 
-  mutate(src = 'scopus') 
-
-scopus_distinct <- scopus_all %>%
-  distinct()
-
-wos_fs <- list.files(here('_data/bibtex_clean'), pattern = 'wos_', full.names = TRUE)
-wos_all <- lapply(wos_fs, bib2df) %>% 
+```{r read in the cleaned bibtex references}
+wos_fs <- list.files(here('_data/refs_clean'), pattern = 'wos_', full.names = TRUE)
+wos_all <- parallel::mclapply(wos_fs, read_refs, mc.cores = 5) %>% 
   bind_rows() %>% 
   mutate(src = 'wos') 
 
+wos_date <- str_extract(basename(wos_fs), '[0-9]{6}') %>% unique()
+
 wos_distinct <- wos_all %>%
+  select(source_type = type, src, author, 
+         title, journal, year, abstract, doi,
+         contains('keywords'),
+         research_areas, web_of_science_categories) %>%
   distinct()
 
-benchmark_all <- bib2df(here('_data/bibtex_clean/zot_benchmark_a.bib')) %>%
+benchmark_all <- read_refs(here('_data/refs_clean/zot_benchmark_a.bib')) %>%
   mutate(src = 'benchmark') %>%
-  mutate(TITLE = str_remove_all(TITLE, '\\{\\{|\\}\\}'))
+  mutate(title = str_remove_all(title, '\\{\\{|\\}\\}')) %>%
+  select(source_type = type, src, author, 
+       title, journal, year, abstract, doi,
+       contains('keywords'))
 ```
 
-```{r combine and drop duplicates}
+```{r read in the cleaned ris references}
+
+scopus_fs <- list.files(here('_data/refs_clean'), pattern = 'scopus_', full.names = TRUE)
+
+scopus_date <- str_extract(basename(scopus_fs), '[0-9]{6}') %>% unique()
+
+system.time({
+scopus_all <- parallel::mclapply(scopus_fs, read_refs, mc.cores = 5) %>% 
+  bind_rows() %>%
+  mutate(src = 'scopus') 
+})
+#    user  system elapsed 
+# 660.872   9.182 144.292
+
+scopus_distinct <- scopus_all %>%
+  select(source_type, src, author, title, journal = source, year, abstract, doi,
+         contains('keywords')) %>%
+  distinct()
+```
+
+## Clean up
+
+```{r combine and clean up some messy columns}
 all_docs <- bind_rows(scopus_distinct, wos_distinct, benchmark_all) %>%
+  filter(!is.na(author) & !is.na(title) & !is.na(abstract)) %>%
   mutate(doc_id = 1:n()) 
 
-all_docs_distinct <- all_docs %>%
-  rowwise() %>%
-  mutate(first_author = tolower(AUTHOR[1]) %>% str_remove(',.+')) %>%
-  ungroup() %>%
-  mutate(title = tolower(TITLE)) %>%
-  group_by(first_author, title) %>%
-  mutate(n = n()) %>%
-  ungroup()
+all_docs_clean <- all_docs %>%
+  mutate(first_author = str_remove(tolower(author), ' and .+') %>%
+           str_remove('(?<=(, [a-z])).+'),
+         title = str_to_title(title),
+         abstr_short = tolower(abstract) %>% str_sub(1, 100),
+         year = str_extract(year, '[0-9]{4}') %>% as.numeric())
+```
 
-bench_out <- all_docs_distinct %>%
+## Check benchmark papers
+
+```{r}
+bench_check <- all_docs_clean %>%
   group_by(first_author, title) %>%
-  filter(any(src == 'benchmark')) %>%
-  ungroup()
+  filter('benchmark' %in% src) %>%
+  mutate(n = n()) %>%
+  ungroup() %>%
+  select(src, first_author, title, abstract, year, n)
+
+DT::datatable(bench_check)
+```
+
+As of Feb. 9, 2024, 13 of 18 papers show up in both WoS and Scopus.  One shows up only in Scopus, but is known to not be available in WoS with direct search.  Four do not show up in either dataset, all known to not be available in either source with direct search.  Therefore, 100% retrieval rate of all papers known to be in each source.
+
+## Filter out duplicates
+
+Here we discard duplicated references, keeping the most recent version (if multiple years) and (arbitrarily) the Web of Science record if found in both sources.   Papers in the benchmark set are also removed so they can be flagged separately as screened papers.
+
+```{r}
+all_docs_distinct <- all_docs_clean %>%
+  group_by(first_author, title, abstr_short) %>%
+  mutate(n = n()) %>%
+  ungroup() %>%
+  mutate(source_type = str_to_upper(source_type))
 
 dupes_dropped <- all_docs_distinct %>% 
-  group_by(first_author, title) %>%
+  group_by(first_author, title, abstr_short) %>%
   ### drop any author/title combos that show up in the benchmark set
   filter(!any(src == 'benchmark')) %>%
-  arrange(desc(YEAR), src) %>%
+  arrange(desc(year), desc(src)) %>%
   slice(1) %>%
   ungroup()
+
 ```
 
 ## Write out by source
 
+Write out as .ris for easier import into Colandr.
+
 ```{r write out cleaned bibliographies}
-clean_scopus <- dupes_dropped %>%
-  filter(src == 'scopus') %>%
-  select(-first_author, -title, -src, -doc_id, -n) %>%
-  select(where(~ any(!is.na(.))))
-
-clean_wos <- dupes_dropped %>%
-  filter(src == 'wos') %>%
-  select(-first_author, -title, -src, -doc_id, -n) %>%
-  select(where(~ any(!is.na(.))))
-
-clean_bench <- bench_out %>%
+bench_clean <- all_docs_distinct %>% 
   filter(src == 'benchmark') %>%
-  select(-first_author, -title, -src, -doc_id, -n) %>%
-  select(where(~ any(!is.na(.)))) 
+  as.data.frame()
 
-df2bib(clean_scopus, here('_data/output_for_colandr/scopus_clean_240109.bib'))
-df2bib(clean_wos,    here('_data/output_for_colandr/wos_clean_240126.bib'))
-df2bib(clean_bench,  here('_data/output_for_colandr/bench_clean_240109.bib'))
+write_refs(bench_clean,  format = 'ris',
+           file = here('_data/output_for_colandr/bench_clean.ris'))
+
+
+refs_ready <- dupes_dropped %>%
+  select(-first_author, -title, -doc_id, -n) %>%
+  select(where(~ any(!is.na(.))))
+  
+set.seed(42)
+clean_sample_for_title_screen <- dupes_dropped %>%
+  sample_n(1000) %>%
+  ### write_refs can't handle tbl?
+  as.data.frame()
+
+write_refs(clean_sample_for_title_screen, format = 'ris',
+           file = here('_data/output_for_colandr/sample.ris'))
+
+
+clean_scopus <- refs_ready %>%
+  filter(src == 'scopus') %>% select(-src) %>%
+  ### write_refs can't handle tbl?
+  as.data.frame()
+
+clean_wos <- refs_ready %>%
+  filter(src == 'wos') %>% select(-src) %>%
+  ### write_refs can't handle tbl?
+  as.data.frame()
+
+write_refs(clean_scopus, format = 'ris',
+           file = sprintf(here('_data/output_for_colandr/scopus_clean_%s.ris'), scopus_date))
+write_refs(clean_wos,    format = 'ris',  
+           file = sprintf(here('_data/output_for_colandr/wos_clean_%s.ris'), wos_date))
 
 ```
 

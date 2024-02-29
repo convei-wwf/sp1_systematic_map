@@ -2,6 +2,7 @@
 ### Define UI for application
 ui <- navbarPage(
   title = "Shiny Title Screening",
+  theme = bslib::bs_theme(bootswatch = 'morph'),
 
 
   # ### First panel: Welcome/introduction
@@ -9,18 +10,31 @@ ui <- navbarPage(
     ### Sidebar with a DT::datatable of the entire bib set?
     sidebarLayout(
       sidebarPanel(
-        h3('Choose a bibliography file:'),
-        fileInput(
-          inputId = 'bib_file',
-          label = 'choose file...'),
-        actionButton(inputId = 'load_bib',
-          label = 'read file', 
-          icon = icon('file'))
+      #   shinyFilesButton(
+      #     id = 'bib_file',
+      #     label = 'choose bib file...',
+      #     title = 'Select a bibliography file...',
+      #     multiple = FALSE),
+      #   
+      #   shinyFilesButton(
+      #     id = 'screened_file',
+      #     label = 'choose screened file...',
+      #     title = 'Select a file for screening results...',
+      #     multiple = FALSE),
+      #   
+      #   actionButton(
+      #     inputId = 'merge_bibs',
+      #     label = 'Prep to screen', icon = icon('book')),
+        
+        radioButtons(
+          inputId = 'df_preview',
+          label = 'Preview:',
+          choices = c('all', 'screened', 'to screen' = 'toscreen'),
+          selected = 'all'),
       ), ### end sidebar panel
 
       ### Show a preview of the loaded bibtex
       mainPanel(
-        h2('Preview loaded bibtex (all loaded, minus ones already screened):'),
         DTOutput('toscreen_preview')
       ) ### end main panel
     )
@@ -28,43 +42,42 @@ ui <- navbarPage(
   
   ### Second panel: perform the screening
   tabPanel(title = 'Screening',
-           
-    ### Sidebar with checkboxes for title screening criteria 
+
+    ### Sidebar with checkboxes for title screening criteria
     sidebarLayout(
       sidebarPanel(
-        # checkboxGroupInput(
-        #   inputId = 'criteria',
-        #   label = 'Screening criteria:',
-        #   choices = c('Satellite/EO data?'      = 'earth obs', 
-        #               'Comparison context?'     = 'comparison',
-        #               'Societal value/benefit?' = 'soc value')
-        #   ), ### end of checkboxGroupInput
-        
+        includeMarkdown('criteria.md'),
+
         ### Radio buttons for categorization
         radioButtons(
           inputId = 'screen_decision',
           label = 'Benchmark paper according to title?:',
-          choices = c('Definitely in scope' = 'keep',
-                      'Likely (keep)'   = 'likely',
-                      'Unlikely (keep)' = 'unlikely',
-                      'Out of scope'    = 'omit')
+          choices = c('Definitely in scope',
+                      'Earth Observation context',
+                      'Applied Science context',
+                      'Not in scope'),
+          selected = character(0)
           ), ### end of radio buttons
         ### * Append record to an output bibtex file with categorization in extra field
+        actionButton(
+          inputId = 'reveal_abstr',
+          label = 'Reveal abstract?'
+        ),
         actionButton(
           inputId = 'screen_action',
           label = 'Log it!'
         ),
         actionButton(
-          inputId = 'next_doc',
-          label = 'Next document!'
+          inputId = 'skip_doc',
+          label = 'Skip document!'
         )
       ), ### end sidebar panel
-  
+
       ### Show information on a selected title
       mainPanel(
         htmlOutput('doc_fields_text')
       ) ### end main panel
-      
+
     ) ### end sidebarLayout
   ) ### end tabPanel for screening
 

@@ -1,0 +1,196 @@
+---
+title: 'Systematic Map: Clean bibtex records'
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
+# library(revtools)
+library(synthesisr)
+library(here)
+
+source(here('common_fxns.R'))
+```
+
+# Summary
+
+This script will ingest Bibtex and RIS files of records and:
+
+-   clean up the bibtex for idiosyncratic formatting
+-   from Web of Science, Scopus, and the CONVEI Zotero Library
+
+# Methods
+
+## Cleaning the bibtex from the CONVEI Zotero library
+
+This is already pretty clean... no real processing required!
+
+```{r clean bibtex from zotero library}
+bib_raw_fs <- list.files(here('_data/refs_raw'), pattern = 'zot.+.bib$', full.names = TRUE)
+for(f in bib_raw_fs) {
+  # f <- bib_raw_fs[1]
+  bib_raw <- read_file(f)
+  bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
+  f_out <- str_replace(f, '_raw', '_clean')
+  write_file(bib_clean, f_out)
+}
+```
+
+## Cleaning the bibtex from Web of Science
+
+The Web of Science records contain line breaks that disrupt the ability of the `bib2df` package to work properly. Replace those problematic line breaks (a carriage return `\r`, followed by a line break `\n`, followed by a three-space indentation) with a single blank space.
+
+```{r clean bibtex from web of science naive search}
+bib_raw_fs <- list.files(here('_data/refs_raw'), pattern = 'wosnaive_.+.bib$', full.names = TRUE)
+bib_clean <- lapply(bib_raw_fs, 
+              FUN = function(f) {
+                bib_raw <- read_file(f)
+                bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
+              }) %>%
+  paste0(collapse = '\\n\\n')
+f_out <- here('_data/refs_clean', 'wosnaive.bib')
+write_file(bib_clean, f_out)
+```
+
+For the Web of Science retrieved items from the final search, grab the date tag at the end of the filename of the various raw files, and append to the cleaned file name. The date will be a six-figure number, `YYMMDD` format.
+
+Also, fix titles with oddball quotes, e.g., ``` ``land cover classification system{''} ``` or `` `fruitful' ``
+
+
+```{r clean bibtex from web of science full search}
+wos_raw_fs <- list.files(here('_data/refs_raw'), pattern = 'wos_.+.bib$', full.names = TRUE)
+wos_date <- basename(wos_raw_fs[1]) %>% str_extract('[0-9]{6}')
+
+if(is.na(wos_date)) stop('Whoops, check the date flag on the raw Bibtex exports from Web of Science!')
+
+wos_clean <- lapply(wos_raw_fs, 
+              FUN = function(f) {
+                wos_raw <- read_file(f)
+                wos_cleaned <- str_replace_all(wos_raw, '(\\r)?\\n   ', ' ') %>%
+                  str_replace_all("``|\\{''\\}", '"') %>%
+                  str_replace_all('`', "'")
+              }) %>%
+  paste0(collapse = '\\n\\n')
+# f_out <- here('_data/refs_clean', sprintf('wos_%s.bib', wos_date))
+# write_file(wos_clean, f_out)
+```
+
+```{r}
+
+article_starts <- str_locate_all(wos_clean, '@article|@incollection|@inproceedings')[[1]]
+
+art_start_df <- data.frame(start = article_starts[ , 1]) %>%
+  mutate(end = lead(start) - 1,
+         doc = 1:n(),
+         end = ifelse(doc == n(), nchar(wos_clean), end))
+
+# art_indiv_df <- art_start_df %>% slice(1:100) %>% mutate(art_text = unlist(art_indiv))
+
+n_chunks <- 5
+
+art_chunk_df <- art_start_df %>%
+  mutate(chunk = ntile(doc, n_chunks)) %>%
+  group_by(chunk) %>%
+  summarize(chunk_start = min(start), chunk_end = max(end))
+
+for(i in 1:n_chunks) {
+  # i <- 2
+  wos_tmp <- wos_clean %>%
+    str_sub(start = art_chunk_df$chunk_start[i],
+            end   = art_chunk_df$chunk_end[i])
+  wos_out <- paste0(wos_tmp, '\n')
+
+  f_out <- here('_data/refs_clean', sprintf('wos_%s_%s.bib', i, wos_date))
+  write_file(wos_out, f_out)
+}
+```
+
+## Cleaning the records from Scopus
+
+NOTE: the most recent Scopus records are in .ris format, not .bib.  Previous versions of this script accessed Scopus records as .bib, so if necessary to go back to that format, examine the version history.
+
+The single .ris file is very large, so we can break it out into smaller chunks for file size and parallel processing.
+
+### .ris file format details:
+
+From https://library.mskcc.org/blog/2022/09/the-ris-file-format-explained:
+
+> The RIS (file format) is a standardized tag format developed by Research Information Systems company. The tag includes two letters, two spaces, and a hyphen to express bibliographic citation information. Each tag supports a different field. Below are some examples of tags for various field codes in a reference.
+
+```
+TY  -        "Type of reference" (eg. JOUR - always first tag)
+AU  -        "Author"
+PY  -        "Publication Year"
+T1  -        "Primary Title" 
+T2  -        "Secondary Title" (eg. journal title)
+SP  -        "Start Page"
+EP  -        "End Page"
+VL  -        "Volume"
+IS  -        "Issue"
+```
+
+Note, `revtools::read_bibliography(f, return_df = TRUE)` fails on the raw .ris file:
+
+```
+Error in data.frame(start = which(z_dframe$ris == start_tag), end = which(z_dframe$ris ==  : 
+  arguments imply differing number of rows: 18546, 18548
+```
+
+In a [bug issue dated May 25, 2020 on the revtools Github repo](https://github.com/mjwestgate/revtools/issues/29#issuecomment-633827687), the package owner Martin Westgate explained (related to a similar but not identical problem to mine):
+
+> Hi! This isn't fixed in revtools yet; but it should be fixed in `synthesisr`, which is the package that revtools will use for data import in future. If you import your files using `synthesisr::read_refs` instead of `revtools::read_bibliography`, then you can export using `synthesisr::write_refs` without getting this error.
+
+
+```{r break up giant ris from scopus}
+ris_raw_fs <- list.files(here('_data/refs_raw'), 
+                         pattern = 'scop.+.ris$', full.names = TRUE)
+scopus_date <- basename(ris_raw_fs[1]) %>% str_extract('[0-9]{6}')
+
+if(is.na(scopus_date)) stop('Whoops, check the date flag on the raw .ris exports from Scopus!')
+
+if(length(ris_raw_fs) > 1) stop('Whoops, should be only one Scopus .ris export file!')
+
+f <- ris_raw_fs[1]
+
+ris_raw <- read_file(f)
+
+n_chunks <- 5
+
+ris_index_df <- data.frame(
+    start = str_locate_all(ris_raw, 'TY  -')[[1]][ , 1],
+    end   = str_locate_all(ris_raw, 'ER  -')[[1]][ , 2]
+  ) %>%
+  mutate(doc_id = 1:n()) %>%
+  mutate(chunk = ntile(doc_id, n_chunks))
+
+out_fstem <- here('_data/refs_clean/scopus_%s_%s.ris')
+for(i in 1:n_chunks) {
+  ### i <- 1
+  out_f <- sprintf(out_fstem, i, scopus_date)
+  x <- ris_index_df %>%
+    filter(chunk == i) %>%
+    summarize(start = min(start), end = max(end))
+  chunk <- str_sub(ris_raw, start = x$start, end = x$end)
+  write_file(chunk, out_f)
+}
+```
+
+```{r}
+#| eval: false
+
+system.time({
+  ris_results <- synthesisr::read_refs(out_f)
+})  ### 98 seconds to read a 1/5th split file
+```
+
