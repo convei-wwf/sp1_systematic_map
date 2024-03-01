@@ -24,11 +24,7 @@ f <- here('_data/output_for_colandr', 'sample.ris')
 
 message('Loading refs from ', f)
 
-docs_df <- read_file(f) 
-begin <- docs_df %>% str_locate_all()
-
-
-%>% parse_ris()
+docs_df <- read_refs(f) 
 
 message('In full docs list, ', nrow(docs_df), ' documents found...')
 
