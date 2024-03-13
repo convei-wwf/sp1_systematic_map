@@ -4,7 +4,7 @@ author: "O'Hara"
 format: 
   html:
     code-fold: true
-    code-summary: "Show me the code"
+    embed-resources: true
 execute:
   echo: true
   warning: false
@@ -16,35 +16,93 @@ editor: source
 library(tidyverse)
 library(here)
 library(tidytext)
-
-source(here('common_fxns.R'))
+library(synthesisr)
+# 
+# source(here('common_fxns.R'))
 ```
+
+# Examine documents with specific decision context
+
+The most challenging domain of the lit review is the methods looking at methods to value the EO data.  Here, let's examine the corpus for matches to phrases of specific valuation methods.
 
 ## Load search results
 
+Set aside benchmark papers for now...
+
 ```{r load bibtex}
-article_df <- load_articles()
+ris_fs <- list.files(here('_data/refs_ris_out'), pattern = 'wos|scopus', full.names = TRUE)
+article_df <- read_refs(ris_fs)
 ```
 
-## Examine keywords
+## Examine documents for spurious matches
+
+Read in screened docs, filter to just those with no criteria/spurious match...
 
 ```{r}
-article_kws_df <- article_df %>%
-  filter(field %in% c('keywords')) %>%
-  mutate(kw = str_split(text, '; |, ')) %>%
-  unnest(kw) %>%
-  mutate(kw = str_squish(kw)) %>%
-  filter(!is.na(kw)) %>%
-  group_by(kw) %>%
-  summarize(n = n_distinct(doc_id)) %>%
-  mutate(kw = fct_reorder(kw, n)) %>%
-  arrange(-n)
+screened <- read_refs(here('_data/screened_cco.ris')) %>%
+  rename(screen_decision = sequence_data) %>%
+  filter(screen_decision == 'D')
+```
 
-ggplot(article_kws_df %>% head(20) %>% mutate(kw = fct_drop(kw))) +
-  geom_col(aes(y = kw, x = n)) +
-  labs(title = 'top 20 Web of Science or Scopus keywords')
 
-# article_kws_df %>% filter(n == 1) %>% DT::datatable()
+Some common themes in spurious matches:
+
+* *sentinel* lymph nodes in context of cancer
+* *sentinel* surveillance in context of vaccine preventable diseases
+
+```{r}
+cancer_string <- c('sentinel lymph', 'sentinel surveillance', 'cancer', 'patient') %>%
+  paste(collapse = '|')
+
+cancer_match_df <- article_df %>%
+  mutate(kw_match = str_detect(tolower(keywords), cancer_string),
+         title_match = str_detect(tolower(title), cancer_string),
+         abstr_match = str_detect(tolower(abstract), cancer_string)) %>%
+  filter(kw_match | title_match | abstr_match)
+
+cancer_journals <- cancer_match_df$journal %>% unique()
+
+cancer_journal_terms <- data.frame(t = cancer_journals) %>%
+  unnest_tokens(output = 'word', input = 't') %>%
+  anti_join(stop_words) %>%
+  group_by(word) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  slice_max(n, n = 50)
+
+### potential terms unique to this set: oncology, cancer, surgery, surgical, 
+### breast, cardiovascular, heart, cardiology...
+drop_journal_terms <- c('oncology', 'cancer', 'surgery', 'surgical', 
+                        'breast', 'cardiovascular', 'heart', 'cardiology') %>%
+  paste(collapse = '|')
+
+cancer_match2_df <- article_df %>%
+  filter(str_detect(tolower(journal), drop_journal_terms)) %>%
+  full_join(cancer_match_df)
+
+```
+
+Perhaps we should drop these `r nrow(cancer_match2_df)` articles before proceeding.  Are there other terms that generate spurious matches?
+
+## Examine text for value methods
+
+The search string used in WoS and Scopus to identify a decision-making/value-estimating context:
+
+> "decision" OR "optimization" OR "risk analysis" OR "management" OR "policy" OR "cost benefit analysis" OR "benefit cost analysis" OR "investment" OR "contingent valuation" OR "counterfactual" OR "value chain analysis" OR "multi* criteria analysis" OR "multi* criteria decision analysis"
+"Planning" OR "governance" OR "prioritization" OR "impact assessment" OR "impact evaluation" OR "willingness to pay"
+
+Here let's grab specific methods and search for those unleashing the power of regex.
+
+```{r}
+value_methods <- c('cost.benefit analysis', 'benefit.cost analysis', 'contingent valu[a-z]+', 'counterfactual', 'value chain analysis', 'multi(ple)? criteri(a|on) (decision )?analysis', '(expected )?value of ([a-z]+ )?information', 'ev(p|s)i') %>%
+  paste0(collapse = '|')
+
+value_match_df <- article_df %>%
+  anti_join(cancer_match2_df) %>%
+  mutate(kw_match = str_detect(tolower(keywords), value_methods),
+         title_match = str_detect(tolower(title), value_methods),
+         abstr_match = str_detect(tolower(abstract), value_methods)) %>%
+  filter(kw_match | title_match | abstr_match)
+
 
 ```
 

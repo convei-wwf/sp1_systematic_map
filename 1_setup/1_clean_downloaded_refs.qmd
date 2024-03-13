@@ -15,12 +15,8 @@ editor: source
 ```{r setup}
 library(tidyverse)
 library(tidytext)
-library(bib2df) ### use dev version: remotes::install_github("ropensci/bib2df")
-# library(revtools)
 library(synthesisr)
 library(here)
-
-source(here('common_fxns.R'))
 ```
 
 # Summary
@@ -88,7 +84,7 @@ wos_clean <- lapply(wos_raw_fs,
 
 ```{r}
 
-article_starts <- str_locate_all(wos_clean, '@article|@incollection|@inproceedings')[[1]]
+article_starts <- str_locate_all(tolower(wos_clean), '@article|@incollection|@inproceedings')[[1]]
 
 art_start_df <- data.frame(start = article_starts[ , 1]) %>%
   mutate(end = lead(start) - 1,
