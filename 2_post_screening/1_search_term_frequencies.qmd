@@ -1,0 +1,261 @@
+---
+title: "Examine search term frequencies"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(tidytext)
+library(synthesisr)
+# 
+# source(here('common_fxns.R'))
+```
+
+# Examine documents with specific decision context
+
+The most challenging domain of the lit review is the methods looking at methods to value the EO data.  Here, let's examine the corpus for matches to phrases of specific valuation methods.
+
+## Load search results
+
+Set aside benchmark papers for now...
+
+```{r load bibtex}
+ris_fs <- list.files(here('_data/refs_ris_out'), pattern = 'wos|scopus', full.names = TRUE)
+article_df <- read_refs(ris_fs)
+```
+
+## Examine documents for spurious matches
+
+Read in screened docs, filter to just those with no criteria/spurious match...
+
+```{r}
+screened <- read_refs(here('_data/screened_cco.ris')) %>%
+  rename(screen_decision = sequence_data) %>%
+  filter(screen_decision == 'D')
+```
+
+
+Some common themes in spurious matches:
+
+* *sentinel* lymph nodes in context of cancer
+* *sentinel* surveillance in context of vaccine preventable diseases
+
+```{r}
+cancer_string <- c('sentinel lymph', 'sentinel surveillance', 'cancer', 'patient') %>%
+  paste(collapse = '|')
+
+cancer_match_df <- article_df %>%
+  mutate(kw_match = str_detect(tolower(keywords), cancer_string),
+         title_match = str_detect(tolower(title), cancer_string),
+         abstr_match = str_detect(tolower(abstract), cancer_string)) %>%
+  filter(kw_match | title_match | abstr_match)
+
+cancer_journals <- cancer_match_df$journal %>% unique()
+
+cancer_journal_terms <- data.frame(t = cancer_journals) %>%
+  unnest_tokens(output = 'word', input = 't') %>%
+  anti_join(stop_words) %>%
+  group_by(word) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  slice_max(n, n = 50)
+
+### potential terms unique to this set: oncology, cancer, surgery, surgical, 
+### breast, cardiovascular, heart, cardiology...
+drop_journal_terms <- c('oncology', 'cancer', 'surgery', 'surgical', 
+                        'breast', 'cardiovascular', 'heart', 'cardiology') %>%
+  paste(collapse = '|')
+
+cancer_match2_df <- article_df %>%
+  filter(str_detect(tolower(journal), drop_journal_terms)) %>%
+  full_join(cancer_match_df)
+
+```
+
+Perhaps we should drop these `r nrow(cancer_match2_df)` articles before proceeding.  Are there other terms that generate spurious matches?
+
+## Examine text for value methods
+
+The search string used in WoS and Scopus to identify a decision-making/value-estimating context:
+
+> "decision" OR "optimization" OR "risk analysis" OR "management" OR "policy" OR "cost benefit analysis" OR "benefit cost analysis" OR "investment" OR "contingent valuation" OR "counterfactual" OR "value chain analysis" OR "multi* criteria analysis" OR "multi* criteria decision analysis"
+"Planning" OR "governance" OR "prioritization" OR "impact assessment" OR "impact evaluation" OR "willingness to pay"
+
+Here let's grab specific methods and search for those unleashing the power of regex.
+
+```{r}
+value_methods <- c('cost.benefit analysis', 'benefit.cost analysis', 'contingent valu[a-z]+', 'counterfactual', 'value chain analysis', 'multi(ple)? criteri(a|on) (decision )?analysis', '(expected )?value of ([a-z]+ )?information', 'ev(p|s)i') %>%
+  paste0(collapse = '|')
+
+value_match_df <- article_df %>%
+  anti_join(cancer_match2_df) %>%
+  mutate(kw_match = str_detect(tolower(keywords), value_methods),
+         title_match = str_detect(tolower(title), value_methods),
+         abstr_match = str_detect(tolower(abstract), value_methods)) %>%
+  filter(kw_match | title_match | abstr_match)
+
+```
+
+## Scan fields for Earth Science Information terms
+
+Web of Science search string for this domain are:
+
+"satellite" OR "space-based" OR "remote observation" OR "remote sensing" OR "earth observation" OR "remotely sens*" OR "modis" OR "landsat"
+
+```{r define function to compress keywords}
+compress_keywords <- function(kw) {
+  kw_compressed <- str_remove_all(kw, '"') %>% ### drop quotation marks
+    str_replace_all('[^a-zA-Z *]', '.?') %>%   ### swap out punctuation for zero or one-space regex match
+    str_replace_all(' OR ', '|') %>%           ### swap out OR statements with or operator    
+    str_replace_all('\\*', '[a-z]*')           ### replace asterisk with regex match for one or more letters
+  return(kw_compressed)
+}
+```
+
+
+```{r extract esi terms}
+esi_key_raw <- '"satellite" OR "space-based" OR "remote observation" OR "remote sensing" OR "earth observation" OR "remotely sens*" OR "modis" OR "landsat"'
+esi_key <- compress_keywords(esi_key_raw)
+esi_term_df <- article_df %>%
+  mutate(term = str_extract_all(text, esi_key)) %>%
+  unnest(term)
+```
+
+This documents how many distinct papers (lit search results) note the use of each given term.  Each term is only counted once per document per field - i.e., if "satellite" shows up three times in an abstract, it will only be counted once.
+
+```{r function to tally frequency of terms}
+tally_results <- function(term_df) {
+  term_freq_df <- term_df %>%
+    select(doc_id, field, term) %>%
+    distinct() %>%
+    group_by(term, field) %>%
+    mutate(freq_term = n()) %>%
+    ungroup() %>%
+    mutate(term = fct_reorder(term, freq_term))
+  term_count_df <- term_df %>%
+    group_by(doc_id, field) %>%
+    summarize(n_terms = n_distinct(term))
+  return(list('freq' = term_freq_df, 'count' = term_count_df))
+}
+```
+
+
+```{r plot esi terms}
+esi_p_list <- tally_results(esi_term_df)
+ggplot(esi_p_list$freq, aes(y = term)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Expanded search term')
+
+ggplot(esi_p_list$count, aes(y = n_terms)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Number of distinct terms')
+  
+```
+
+
+## Scan fields for Decision Making Context terms
+
+Web of Science search string for this domain are:
+
+"decision" OR "optimization" OR "risk analysis" OR "management" OR "policy" OR "cost-benefit analysis" OR "benefit-cost analysis" OR "investment" OR "contingent valuation" OR "counterfactual"
+
+```{r extract decision terms}
+decision_key_raw <- '"decision" OR "optimization" OR "risk analysis" OR "management" OR "policy" OR "cost-benefit analysis" OR "benefit-cost analysis" OR "investment" OR "contingent valuation" OR "counterfactual"'
+decision_key <- compress_keywords(decision_key_raw)
+decision_term_df <- article_df %>%
+  mutate(term = str_extract_all(text, decision_key)) %>%
+  unnest(term)
+```
+
+
+```{r plot decision terms}
+decision_p_list <- tally_results(decision_term_df)
+ggplot(decision_p_list$freq, aes(y = term)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Expanded search term')
+
+ggplot(decision_p_list$count, aes(y = n_terms)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Number of distinct terms')
+```
+
+
+
+## Scan fields for Value terms
+
+Web of Science search string for this domain are:
+
+"value" OR "valuation" OR "benefit" OR "utility"
+
+```{r extract value terms}
+value_key_raw <- '"value" OR "valuation" OR "benefit" OR "utility"'
+value_key <- compress_keywords(value_key_raw)
+value_term_df <- article_df %>%
+  mutate(term = str_extract_all(text, value_key)) %>%
+  unnest(term)
+```
+
+
+```{r plot value terms}
+value_p_list <- tally_results(value_term_df)
+ggplot(value_p_list$freq, aes(y = term)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Expanded search term')
+
+ggplot(value_p_list$count, aes(y = n_terms)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Number of distinct terms')
+```
+
+
+
+## Scan fields for Societal Context terms
+
+Web of Science search string for this domain are:
+
+"social" OR "societal" OR "cultural" OR "*economic" OR "environmental" OR "ecosystem service" OR "sustainable development goal" OR "protected area" OR "heritage site" OR "non use value"
+
+```{r extract social terms}
+societal_key_raw <- '"social" OR "societal" OR "cultural" OR "*economic" OR "environmental" OR "ecosystem service" OR "sustainable development goal" OR "protected area" OR "heritage site" OR "non use value"'
+societal_key <- compress_keywords(societal_key_raw)
+societal_term_df <- article_df %>%
+  mutate(term = str_extract_all(text, societal_key)) %>%
+  unnest(term)
+```
+
+
+```{r plot social terms}
+societal_p_list <- tally_results(societal_term_df)
+ggplot(societal_p_list$freq, aes(y = term)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Expanded search term')
+
+ggplot(societal_p_list$count, aes(y = n_terms)) +
+  geom_bar() +
+  facet_wrap(~ field, scales = 'free_x') +
+  theme_minimal() +
+  labs(x = 'Search result count', y = 'Number of distinct terms')
+```
