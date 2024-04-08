@@ -1,5 +1,5 @@
 ---
-title: 'Systematic Map: Remove duplicate records'
+title: 'Systematic Map: consolidate records and prescreen'
 format: 
   html:
     code-fold: true
@@ -86,7 +86,14 @@ all_docs_clean <- all_docs %>%
   mutate(first_author = str_remove(tolower(author), ' and .+') %>%
            str_remove('(?<=(, [a-z])).+'),
          title = str_to_title(title),
-         abstr_short = tolower(abstract) %>% str_sub(1, 100),
+         title_short = tolower(title) %>% 
+           str_remove_all('[^a-z0-9 ]+') %>% 
+           str_squish() %>% 
+           str_sub(1, 100),
+         abstr_short = tolower(abstract) %>% 
+           str_remove_all('[^a-z0-9 ]+') %>% 
+           str_squish() %>% 
+           str_sub(1, 100),
          year = str_extract(year, '[0-9]{4}') %>% as.numeric())
 ```
 
@@ -107,22 +114,31 @@ As of Feb. 9, 2024, 13 of 18 papers show up in both WoS and Scopus.  One shows u
 
 ## Filter out duplicates
 
-Here we discard duplicated references, keeping the most recent version (if multiple years) and (arbitrarily) the Web of Science record if found in both sources.   Papers in the benchmark set are also removed so they can be flagged separately as screened papers.
+Here we discard duplicated references, keeping the most recent version (if multiple years) that also contains a DOI (if any), and (arbitrarily) the Web of Science record if found in both sources.   Papers in the benchmark set are also removed so they can be flagged separately as screened papers.
+
+Drop any observations of conference proceedings and listings where no DOI is present.
 
 ```{r}
 all_docs_distinct <- all_docs_clean %>%
-  group_by(first_author, title, abstr_short) %>%
-  mutate(n = n()) %>%
+  group_by(first_author, title_short, abstr_short) %>%
+  mutate(n = n(),
+         n_doi = sum(!is.na(doi)),
+         n_dist_doi = n_distinct(doi[!is.na(doi)])) %>%
   ungroup() %>%
   mutate(source_type = str_to_upper(source_type))
 
 dupes_dropped <- all_docs_distinct %>% 
-  group_by(first_author, title, abstr_short) %>%
+  group_by(first_author, title_short, abstr_short) %>%
   ### drop any author/title combos that show up in the benchmark set
   filter(!any(src == 'benchmark')) %>%
-  arrange(desc(year), desc(src)) %>%
+  mutate(doi_present = !is.na(doi)) %>%
+  arrange(!doi_present, desc(year), desc(src)) %>%
+  # arrange(desc(year), desc(src)) %>%
   slice(1) %>%
-  ungroup()
+  ungroup() %>%
+  select(-n, -n_doi, -n_dist_doi, -doi_present) %>%
+  select(-first_author, -title_short, -abstr_short) %>%
+  filter(!(source_type %in% c('CONF', 'INPROCEEDINGS') & is.na(doi)))
 
 ```
 
@@ -204,19 +220,17 @@ write_refs(bench_clean,  format = 'ris',
 
 
 refs_ready <- spurious_dropped %>%
-  select(-first_author, -abstr_short, -doc_id, -n) %>%
   select(where(~ any(!is.na(.))))
   
 set.seed(42)
 clean_sample_for_title_screen <- refs_ready %>%
-  sample_n(1000) %>%
+  sample_n(100) %>%
   ### write_refs can't handle tbl?
   as.data.frame() %>%
   select(where(~ any(!is.na(.))))
 
 write_refs(clean_sample_for_title_screen, format = 'ris',
            file = here('_data/refs_ris_out/sample.ris'))
-
 
 clean_scopus <- refs_ready %>%
   filter(src == 'scopus') %>% select(-src) %>%
@@ -231,10 +245,11 @@ clean_wos <- refs_ready %>%
   select(where(~ any(!is.na(.))))
 
 write_refs(clean_scopus, format = 'ris',
-           file = sprintf(here('_data/refs_ris_out/scopus_clean_%s.ris'), scopus_date))
+           file = sprintf(here('_data/refs_ris_out/scopus_clean_%s.ris'), 
+                          scopus_date))
 write_refs(clean_wos,    format = 'ris',  
-           file = sprintf(here('_data/refs_ris_out/wos_clean_%s.ris'), wos_date))
-
+           file = sprintf(here('_data/refs_ris_out/wos_clean_%s.ris'), 
+                          wos_date))
 ```
 
 
