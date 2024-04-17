@@ -140,6 +140,18 @@ dupes_dropped <- all_docs_distinct %>%
   select(-first_author, -title_short, -abstr_short) %>%
   filter(!(source_type %in% c('CONF', 'INPROCEEDINGS') & is.na(doi)))
 
+x <- dupes_dropped %>%
+  filter(!is.na(doi)) %>%
+  janitor::get_dupes(doi) %>%
+  group_by(doi) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(-dupe_count)
+
+dupes_dropped <- dupes_dropped %>%
+  filter(!doi %in% x$doi | is.na(doi)) %>%
+  bind_rows(x)
+
 ```
 
 ## Filter out spurious matches

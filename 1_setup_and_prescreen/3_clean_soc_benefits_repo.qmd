@@ -1,0 +1,171 @@
+---
+title: 'Systematic Map: clean refs from USGS Societal Benefits repo'
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(synthesisr)
+library(here)
+```
+
+# Summary
+
+This script will ingest the documents listed in the USGS Societal Benefits repository, clean fields, export as .ris, and compare which references are already included in our existing search results.
+
+# Methods
+
+## Read in .xlsx
+
+Read in the records, explore, clean/standardize to something like our existing format, and export as .ris
+
+```{r}
+sb_df <- read_csv(here('_data/societal_benefits/results_240423.csv')) %>%
+  janitor::clean_names()
+```
+
+## Clean up and save out
+
+```{r}
+sb_dropcols_df <- sb_df %>%
+  mutate(lead_author = ifelse(is.na(lead_author), lead_organization, lead_author)) %>%
+  select(author = lead_author, year = document_year, title, journal, abstract, keywords, doi = identifier_value) %>%
+  mutate(source_type = 'ARTICLE',
+         author = str_replace(author, ', *', ', ')) %>%
+  distinct()
+```
+
+Identify duplicated papers by DOI and fix/drop/etc where needed.
+
+Some fixes:
+
+* DOI is wrong for the Chrysoulakis, Nektarios paper: set to https://doi.org/10.1117/12.463236
+* DOI is wrong for "2021 Extracting the benefits of Earth observation" - link to https://frontiersi.com.au/wp-content/uploads/2021/08/FrontierSI_DigitalEarth_ExtractingEarthObservation_Final-Report_Aug-2021.pdf
+* DOI is wrong for the Hrycyna, Elizabeth paper: set to https://doi.org/10.1525/elementa.2022.00027
+
+```{r}
+sb_check_dupes <- janitor::get_dupes(sb_dropcols_df, doi)
+
+sb_fixed_df <- sb_dropcols_df %>%
+  mutate(doi = case_when(author == 'Chrysoulakis, Nektarios' ~ 'https://doi.org/10.1117/12.463236',
+                         title == 'Extracting the benefits of Earth observation' ~ 'https://frontiersi.com.au/wp-content/uploads/2021/08/FrontierSI_DigitalEarth_ExtractingEarthObservation_Final-Report_Aug-2021.pdf',
+                         author == 'Hrycyna, Elizabeth' ~ 'https://doi.org/10.1525/elementa.2022.00027',
+                         TRUE ~ doi))
+sb_fixed_dupes <- janitor::get_dupes(sb_fixed_df, doi)
+sb_dupes_to_drop <- sb_fixed_dupes %>%
+  group_by(doi) %>%
+  arrange(author, year, title, journal, abstract, keywords) %>%
+  slice(-1)
+
+sb_out <- sb_fixed_df %>%
+  anti_join(sb_dupes_to_drop) %>%
+  filter(!is.na(abstract)) %>%
+  as.data.frame() %>%
+  select(source_type, everything())
+
+write_refs(sb_out, format = 'ris',
+           file = here('_data/refs_ris_out/societal_benefits_240423.ris'))
+```
+
+## Check records against search results
+
+```{r}
+scopus <- read_refs(here('_data/refs_ris_out/scopus_clean_240204.ris')) %>% mutate(src = 'scopus')
+wos    <- read_refs(here('_data/refs_ris_out/wos_clean_240126.ris')) %>% mutate(src = 'wos')
+bench  <- read_refs(here('_data/refs_ris_out/bench_clean.ris')) %>% mutate(src = 'bench')
+
+all <- bind_rows(scopus, wos, bench) %>%
+  mutate(author = str_remove_all(author, ' and .+'))
+```
+
+
+```{r}
+sb_check_df <- sb_out %>%
+  select(author, title, year, journal, abstract, doi, keywords) %>%
+  mutate(source_type = 'JOUR') %>%
+  mutate(year = as.numeric(year)) %>%
+  mutate(author = str_replace(author, ', *', ', '),
+         author = str_replace(author, '(?<=(, [A-z])).+', '.')) %>%
+  distinct()
+
+all_check_df <- all %>%
+  mutate(author = str_replace(author, ', *', ', '),
+         author = str_replace(author, '(?<=(, [A-z])).+', '.')) %>%
+  mutate(abstract_short = tolower(abstract) %>% str_sub(1, 100)) %>%
+  mutate(title_short = tolower(title) %>% str_sub(1, 40)) %>%
+  mutate(year = as.numeric(year)) %>%
+  distinct()
+sb_already_in <- sb_check_df %>%
+  mutate(abstract_short = tolower(abstract) %>% str_sub(1, 100)) %>%
+  mutate(title_short = tolower(title) %>% str_sub(1, 40)) %>%
+  select(author, year, 
+         # abstract_short, 
+         title_short) %>%
+  inner_join(all_check_df) %>%
+  select(-title_short, -abstract_short) %>%
+  distinct()
+
+DT::datatable(sb_already_in %>% select(-abstract))
+```
+## Exploratory plots
+
+```{r}
+sb_area_approach <- sb_df %>%
+  select(title, societal_benefits_areas, economic_approach) %>%
+  mutate(sba = str_split(societal_benefits_areas, '\\|'),
+         ea  = str_split(economic_approach, '\\|')) %>%
+  unnest(sba) %>%
+  unnest(ea) %>%
+  filter(title %in% sb_out$title)
+
+sba_df <- sb_area_approach %>% 
+  filter(!is.na(sba)) %>% 
+  count(sba) %>% 
+  mutate(sba = fct_reorder(sba, n))
+ggplot(sba_df, 
+       aes(y = sba, x = n)) +
+  geom_col() + theme(axis.title = element_blank())
+
+ea_df <- sb_area_approach %>% 
+  filter(!is.na(ea)) %>% 
+  count(ea) %>% 
+  mutate(ea = fct_reorder(ea, n))
+ggplot(ea_df, 
+       aes(y = ea, x = n)) +
+  geom_col() + theme(axis.title = element_blank())
+```
+
+```{r}
+ea_sba_heatmap <- sb_area_approach %>%
+  filter(!is.na(ea) & !is.na(sba)) %>%
+  mutate(ea = str_replace(str_squish(ea), ' and ', ' & '),
+         ea = str_replace(ea, 'Statistical Methods', 'Stats'),
+         ea = str_replace(ea, 'Input-Output', 'I/O'),
+         ea = str_replace(ea, 'Computable General Equilibrium \\(CGE\\)', 'CGE')) %>%
+  mutate(sba = str_replace_all(str_squish(sba), ' and ', '/'),
+         sba = str_replace(sba, 'Resources', 'Res')) %>%
+  group_by(ea, sba) %>%
+  summarize(n = n_distinct(title), .groups = 'drop') %>%
+  mutate(ea = fct_reorder(ea, n),
+         sba = fct_reorder(sba, n)) %>%
+  complete(ea, sba)
+
+ggplot(ea_sba_heatmap, aes(x = ea, y = sba)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Economic Approach', y = 'Societal Benefit Area', fill = 'Docs')
+```
+
+
