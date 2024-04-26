@@ -204,81 +204,30 @@ Of the 2000 sampled articles, set aside 25% for testing, holding the other 75% f
 
 Processing this is slow, so save out the perplexity-vs-$k$ data for later access.
 
-```{r k optimization create training and testing document-term matrices}
-k_optim_file <- here('int', 'perplexity_vs_k.csv')
+NOTE: INSTEAD USE THE `ldatuning` PACKAGE!
 
-if(!file.exists(k_optim_file)) {
-  set.seed(42)
-  sample_size <- 2000
-  train_size  <- 0.80
-  earliest_yr <- 2010
+```{r}
+tuning_f <- here::here('int/topic_tuning.csv')
+if(!file.exists(tuning_f)) {
+  ### remotes::install_github("nikita-moor/ldatuning")
+  library(ldatuning)
   
-  k_optim_sample_df <- abstr_lemma_df %>%
-    ### drop oldest articles
-    filter(year >= earliest_yr) %>%
-    ### sample articles
-    sample_n(sample_size) %>%
-    ### randomize an index for each article - to separate into training/testing
-    mutate(index = sample(1:sample_size, replace = FALSE)) %>%
-    ### unnest tokens
-    unnest_tokens(input = text, output = word, token = 'words') %>%
-    ### drop unnecessary words
-    anti_join(stop_words, by = 'word') %>%
-    filter(nchar(word) > 2) %>%
-    filter(!str_detect(word, '[0-9]')) %>%
-    ### summarize
-    group_by(doc_id, word, index) %>%
-    summarize(n = n(), .groups = 'drop') 
+  k_vec <- c(2:10, seq(12, 20, 2), seq(25, 40, 5))
   
-  k_optim_train_dtm <- k_optim_sample_df %>%
-    filter(index <= sample_size * train_size) %>%
-    cast_dtm(document = doc_id, term = word, value = n)
-    
-  k_optim_test_dtm <- k_optim_sample_df %>%
-    filter(index > sample_size * train_size) %>%
-    cast_dtm(document = doc_id, term = word, value = n)
+  optim_topics <- FindTopicsNumber(
+    abstr_dtm, 
+    topics = k_vec, 
+    metrics = c("Griffiths2004", "CaoJuan2009", "Arun2010", "Deveaud2014"),
+    control = list(seed = 12345),
+    mc.cores = 4,
+    verbose = TRUE
+  )
+  write_csv(optim_topics, tuning_f)
 }
+
+optim_topics <- read_csv(tuning_f)
+# ldatuning::FindTopicsNumber_plot(optim_topics)
 ```
-
-Now iterate over $k$ values, create values of perplexity vs. $k$ for identifying potential optimum.
-
-```{r iterate to find complexity vs k}
-if(!file.exists(k_optim_file)) {
-  k_vec <- c(2:10, seq(12, 20, 2), seq(25, 50, 5), 75, 100) %>%
-    sample()
-    ### shuffle randomly for maybe not stacking the highest values together in mclapply!
-  
-  perp_vs_k_df <- parallel::mclapply(k_vec, mc.cores = 6,
-    FUN = function(k) {
-      ### k <- k_vec[2]
-      message('Processing LDA for k = ', k, '...')
-      ptm <- proc.time()
-      k_optim_lda <- topicmodels::LDA(k_optim_train_dtm, k = k)
-      ptm <- proc.time() - ptm
-      alpha <- k_optim_lda %>% slot('alpha')
-      message('... for k = ', k, ': alpha = ', round(alpha, 3), ' and proc time = ', round(ptm[3], 3), 's...')
-      perp <- perplexity(object = k_optim_lda, newdata = k_optim_test_dtm)
-      
-      return(data.frame(k = k, perplexity = perp))
-    }) %>%
-    bind_rows() %>%
-    arrange(k)
-  write_csv(perp_vs_k_df, k_optim_file)
-}
-perp_vs_k_df <- read_csv(k_optim_file)
-ggplot(perp_vs_k_df, aes(x = k, y = perplexity)) +
-  geom_line(linewidth = 1, color = hcl.colors(1)) +
-  geom_vline(xintercept = c(10, 20), linewidth = .5, linetype = 'dashed', color = hcl.colors(1)) +
-  geom_text(x = 9, y = 2410, label = 'k = 10', color = hcl.colors(1), angle = 90, hjust = 0, vjust = 0) +
-  geom_text(x = 19, y = 2410, label = 'k = 20', color = hcl.colors(1), angle = 90, hjust = 0, vjust = 0) +
-  theme_minimal() +
-  theme(panel.grid.minor = element_blank())
-
-perp_vs_k_df %>%
-  slice_min(n = 5, order_by = perplexity)
-```
-
-Based on this sample analysis, we see low perplexities from $k$ of about 10 to 30, then increasing.  In the vignette for `topicmodels`, on a small corpus (500 docs) all in the same discipline (statistical software), the authors decided on $k$ of 30, so perhaps a higher $k$ is warranted in our case.  Let's try two $k$ values: 10 and 20.
 
 ## Running LDA on full corpus
 

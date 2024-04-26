@@ -121,32 +121,86 @@ DT::datatable(sb_already_in %>% select(-abstract))
 
 ```{r}
 sb_area_approach <- sb_df %>%
-  select(title, societal_benefits_areas, economic_approach) %>%
+  select(title, societal_benefits_areas, economic_approach, value_indicator) %>%
   mutate(sba = str_split(societal_benefits_areas, '\\|'),
-         ea  = str_split(economic_approach, '\\|')) %>%
+         ea  = str_split(economic_approach, '\\|'),
+         vi  = str_split(value_indicator, '; ?|, ?|/')) %>%
   unnest(sba) %>%
   unnest(ea) %>%
+  unnest(vi) %>%
   filter(title %in% sb_out$title)
 
 sba_df <- sb_area_approach %>% 
+  select(title, sba) %>%
+  distinct() %>%
   filter(!is.na(sba)) %>% 
   count(sba) %>% 
   mutate(sba = fct_reorder(sba, n))
+
 ggplot(sba_df, 
        aes(y = sba, x = n)) +
   geom_col() + theme(axis.title = element_blank())
 
 ea_df <- sb_area_approach %>% 
+  select(title, ea) %>%
+  distinct() %>%
   filter(!is.na(ea)) %>% 
   count(ea) %>% 
   mutate(ea = fct_reorder(ea, n))
+
 ggplot(ea_df, 
        aes(y = ea, x = n)) +
   geom_col() + theme(axis.title = element_blank())
 ```
 
 ```{r}
-ea_sba_heatmap <- sb_area_approach %>%
+money_vec <- c('AUD', 'CHF', 'GBP', 'EUR', 'GTQ', 'CAN', 'CDN', 'TWD', 'EURO', 'KSH', 'KRW', 'money')
+fire_vec <- c('burned area', 'fire control')
+mortality_vec <- c('mortality', 'morbidity', 'deaths', 'fatality', 'lives lost', 'casualty rate')
+property_vec <- c('property damage', 'property loss', 'damage', 'property loss/damage')
+avoided_vec <- c('cost savings', 'costs avoided', 'avoided loss', 'loss reduction')
+uncert_vec <- c('accuracy', 'uncertainty', 'risk', 'error rate')
+injury_vec <- c('injury', 'injuries', 'infections', 'safety')
+consum_vec <- c('consumption', 'retail sales', 'spending', 'revenue', 'profit')
+ecol_vec <- c('ecosystem services', 'environmental impact', 'ecological resources')
+time_vec <- c('time', 'time savings', 'recreational days')
+econ_vec <- c('economic', 'economic growth', 'efficiency', 'Efficiency', 'GDP')
+ 
+vi_consolidated <- sb_area_approach %>%
+  ### group terms according to vectors above
+  mutate(vi = ifelse(vi %in% money_vec, 'non-USD currency', vi),
+         vi = ifelse(vi %in% avoided_vec, 'avoided costs/losses', vi),
+         vi = ifelse(vi %in% fire_vec, paste0(fire_vec, collapse = '/'), vi),
+         vi = ifelse(vi %in% uncert_vec, paste0(uncert_vec, collapse = '/'), vi),
+         vi = ifelse(vi %in% consum_vec, 'consumption/spending/revenue/profit', vi),
+         vi = ifelse(vi %in% time_vec, 'time/days', vi),
+         vi = ifelse(vi %in% ecol_vec, 'environ impact/ecosystem services', vi),
+         vi = ifelse(vi %in% econ_vec, 'economic/growth/efficiency/GDP', vi),
+         vi = ifelse(vi %in% injury_vec, 'injury/infection/safety', vi),
+         vi = ifelse(vi %in% property_vec, 'property loss/damage', vi),
+         vi = ifelse(vi %in% mortality_vec, 'mortality/morbidity', vi)) %>%
+  distinct() %>%
+  group_by(vi) %>%
+  mutate(vi = ifelse(n_distinct(title) == 1, 'other', vi)) %>%
+  ungroup()
+
+vi_df <- vi_consolidated %>% 
+  select(title, vi) %>%
+  distinct() %>%
+  filter(!is.na(vi)) %>% 
+  group_by(vi) %>%
+  mutate(vi = ifelse(n() == 1, 'other', vi)) %>%
+  ungroup() %>%
+  count(vi) %>% 
+  mutate(vi = fct_reorder(vi, n) %>% fct_relevel('other', after = 0))
+
+ggplot(vi_df, 
+       aes(y = vi, x = n)) +
+  geom_col() + theme(axis.title = element_blank())
+```
+
+```{r}
+ea_sba_heatmap <- vi_consolidated %>%
   filter(!is.na(ea) & !is.na(sba)) %>%
   mutate(ea = str_replace(str_squish(ea), ' and ', ' & '),
          ea = str_replace(ea, 'Statistical Methods', 'Stats'),
@@ -168,4 +222,99 @@ ggplot(ea_sba_heatmap, aes(x = ea, y = sba)) +
   labs(x = 'Economic Approach', y = 'Societal Benefit Area', fill = 'Docs')
 ```
 
+```{r}
+ea_vi_heatmap <- vi_consolidated %>%
+  filter(!is.na(ea) & !is.na(vi)) %>%
+  mutate(ea = str_replace(str_squish(ea), ' and ', ' & '),
+         ea = str_replace(ea, 'Statistical Methods', 'Stats'),
+         ea = str_replace(ea, 'Input-Output', 'I/O'),
+         ea = str_replace(ea, 'Computable General Equilibrium \\(CGE\\)', 'CGE')) %>%
+  group_by(ea, vi) %>%
+  summarize(n = n_distinct(title), .groups = 'drop') %>%
+  mutate(ea = fct_reorder(ea, -n) %>% fct_relevel('Other', after = Inf),
+         vi = fct_reorder(vi, n) %>% fct_relevel('other', after = 0)) %>%
+  complete(ea, vi)
+
+ggplot(ea_vi_heatmap, aes(x = ea, y = vi)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Economic Approach', y = 'Value Indicator', fill = 'Docs')
+```
+
+```{r}
+  
+sba_vi_heatmap <- vi_consolidated %>%
+  filter(!is.na(sba) & !is.na(vi)) %>%
+  mutate(sba = str_replace_all(str_squish(sba), ' and ', '/'),
+         sba = str_replace(sba, 'Resources', 'Res')) %>%
+  group_by(sba, vi) %>%
+  summarize(n = n_distinct(title), .groups = 'drop') %>%
+  mutate(sba = fct_reorder(sba, -n) %>% fct_relevel('Other', after = Inf),
+         vi = fct_reorder(vi, n) %>% fct_relevel('other', after = 0)) %>%
+  complete(sba, vi)
+
+ggplot(sba_vi_heatmap, aes(x = sba, y = vi)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Societal Benefit Area', y = 'Value Indicator', fill = 'Docs')
+```
+
+## Single vs multi values
+
+```{r}
+vi_count <- vi_consolidated %>%
+  select(title, vi) %>%
+  filter(!is.na(vi)) %>%
+  distinct() %>%
+  group_by(title) %>%
+  summarize(n_vi = n_distinct(vi), .groups = 'drop')
+
+ggplot(vi_count, aes(x = n_vi)) +
+  geom_histogram(bins = max(vi_count$n_vi)) +
+  theme_minimal() +
+  labs(x = 'Number of distinct value indicators',
+       y = 'Number of documents') +
+  scale_x_continuous(breaks = 1:7) +
+  theme(panel.grid = element_blank())
+```
+
+## Co-occurrence matrix
+
+```{r}
+vi_per_doc <- vi_consolidated %>%
+  select(title, vi) %>%
+  filter(!is.na(vi)) %>%
+  distinct()
+
+vi_levels <- vi_per_doc %>%
+  group_by(vi) %>%
+  summarize(n_docs = n_distinct(title)) %>%
+  mutate(vi = fct_reorder(vi, -n_docs) %>% fct_relevel('other', after = Inf)) %>%
+  .$vi %>% levels()
+
+vi_cooccur <- vi_per_doc %>%
+  rename(vi2 = vi) %>%
+  left_join(vi_per_doc, by = 'title') %>%
+  mutate(x = 1) %>%
+  group_by(vi2, vi) %>%
+  summarize(n = n_distinct(title)) %>%
+  mutate(vi  = factor(vi,  levels = vi_levels),
+         vi2 = factor(vi2, levels = vi_levels) %>% fct_rev()) %>%
+  mutate(n_lbl = n,
+         n = ifelse(vi == vi2, NA, n))
+
+ggplot(vi_cooccur, aes(x = vi, y = vi2, fill = n)) +
+  geom_tile() +
+  geom_text(aes(label = n_lbl), hjust = .5, vjust = .5, color = 'white', size = 3) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+  
+
+```
 
