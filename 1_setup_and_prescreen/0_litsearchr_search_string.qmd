@@ -58,8 +58,6 @@ clean_f_out <- here('_data/refs_clean', 'wosnaive.bib')
 write_file(bib_clean, clean_f_out)
 ```
 
-
-
 ```{r}
 article_df <- read_refs(clean_f_out) %>%
   select(type, year, 
@@ -91,16 +89,20 @@ article_docs <- paste(article_df$title, article_df$abstract)
 article_dfm <- create_dfm(elements = article_docs, 
                           features = title_terms)
 
-article_coocnet <- create_network(article_dfm, min_studies = 3)
+article_coocnet <- create_network(article_dfm, min_studies = 30)
 
+palette <- hcl.colors(5)
 ggraph(article_coocnet, layout = 'stress') +
   coord_fixed() +
   expand_limits(x = c(-3, 3)) +
-  geom_edge_link(aes(alpha = weight)) +
-  geom_node_point(shape = 'circle filled', fill = 'white') +
-  geom_node_text(aes(label = name), hjust = 'outward', check_overlap = TRUE) +
-  guides(edge_alpha = 'none') +
-  theme_void()
+  geom_edge_link(aes(color = weight, alpha = weight)) +
+  geom_node_point(shape = 'circle filled', fill = palette[4], color = 'grey90') +
+  geom_node_text(aes(label = name), hjust = 'outward', 
+                 size = 4, color = palette[3], check_overlap = TRUE) +
+  guides(edge_alpha = 'none', edge_color = 'none') +
+  scale_edge_color_gradientn(colors = palette[2:5]) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = 'black'))
 ```
 
 ### Prune the Network based on node strength
