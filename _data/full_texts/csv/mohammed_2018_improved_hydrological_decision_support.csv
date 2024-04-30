@@ -1,0 +1,549 @@
+page,p
+1,"remote sensing article improved hydrological decision support system for the lower mekong river basin using satellite-based earth observations ibrahim nourein mohammed 1, * id , john d."
+1,"bolten 2 id , raghavan srinivasan 3 id and venkat lakshmi 4 1 science applications international corporation, hydrological sciences laboratory, nasa goddard space flight center, mail code 617.0, greenbelt, md 20771, usa 2 hydrological sciences laboratory, nasa goddard space flight center, mail code 617.0, greenbelt, md 20771, usa; john.bolten@nasa.gov 3 spatial sciences laboratory, department of ecosystem science and management, texas a&m university, college station, tx 77843, usa; r-srinivasan@tamu.edu 4 school of earth ocean and environment, university of south carolina, columbia, sc 29208, usa; vlakshmi@geol.sc.edu * correspondence: ibrahim.mohammed@nasa.gov; tel.: +1-301-614-6537  received: 17 may 2018; accepted: 4 june 2018; published: 6 june 2018  abstract: multiple satellite-based earth observations and traditional station data along with the soil & water assessment tool (swat) hydrologic model were employed to enhance the lower mekong river basin region’s hydrological decision support system."
+1,"a nearest neighbor approximation methodology was introduced to fill the integrated multi-satellite retrieval for the global precipitation measurement mission (imerg) grid points from 2001 to 2014, together with the tropical rainfall measurement mission (trmm) data points for continuous precipitation forcing for our hydrological decision support system."
+1,a software tool to access and format satellite-based earth observation systems of precipitation and minimum and maximum air temperatures was developed and is presented.
+1,our results suggest that the model-simulated streamflow utilizing trmm and imerg forcing data was able to capture the variability of the observed streamflow patterns in the lower mekong better than model-simulated streamflow with in-situ precipitation station data.
+1,we also present satellite-based and in-situ precipitation adjustment maps that can serve to correct precipitation data for the lower mekong region for use in other applications.
+1,"the inconsistency, scarcity, poor spatial representation, difficult access and incompleteness of the available in-situ precipitation data for the mekong region make it imperative to adopt satellite-based earth observations to pursue hydrologic modeling."
+1,keywords: mekong river; water balance; remote sensing; swat; streamflow 1.
+1,"introduction the complexity of managing water resource, e.g., the mekong river, stems from the fact that there are many competing interests, such as societal, cultural, economic, and environmental interests, that all need to be synchronized to achieve the goal of prosperity and sustainability [1–6]."
+1,"sivapalan and blöschl [7] argued that the role of finer resolution remote sensing data and models that represent catchments as complex systems and that link time scales, is the notion that is most common in the current era (2010–2030) to address contemporary hydrological challenges."
+1,"growing populations, sustaining socio-economic activities (e.g., fishery), ecological needs, the effects of climate change, and energy security are some of the complex challenges experienced in the mekong river basin [8–13]."
+1,"remote sens. 2018, 10, 885; doi:10.3390/rs10060885 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2018, 10, 885 2 of 17 as a consequence, utilizing newly-developed remote sensing products and modeling to address the mekong river is vital."
+2,"this work integrates multiple satellite-based earth observation systems, in-situ station data and spatial data with the soil & water assessment tool (swat) hydrologic model employed in the mekong river basin region to improve the lower mekong river basin region’s hydrological decision support system, based on both hydrological flow and total water demand/use."
+2,the scarcity and the incompleteness of the data observations from many stations make it imperative to use satellite-based remote sensing data when modeling the hydrological fluxes in the lower mekong river basin (lmrb).
+2,"this work has developed a comprehensive suite of hydrological data products that can be used to improve water accounting and floodplain management using hydrological cycle variables such as runoff, evapotranspiration, and precipitation in the lmrb."
+2,the main objective of this work is the improvement of the hydrological decision support system for the lower mekong river basin.
+2,"this work explores streamflow simulation for the lower mekong river by examining the usability of satellite-based remote sensing data products, comparing them to the traditional in-situ station data."
+2,"overall, our work aims to assess the value-added information from the simulation of hydrological processes in the lmrb by using swat with climatological forcing data from satellite-based earth observations as an alternative to scarce in-situ station data."
+2,materials and methods 2.1.
+2,"study area the mekong river originates in the high altitudes of the tibetan plateau in china and flows south through five countries (myanmar, lao people’s democratic republic (pdr), thailand, cambodia, and vietnam) ending in a large delta before exiting to the south china sea."
+2,the mekong river basin is divided into upper and lower basins.
+2,"the lower mekong river basin begins when the mekong river leaves the chinese province of yunnan and enters the golden triangle, where the borders of thailand, lao pdr, china and myanmar come together (figure 1)."
+2,spatial data a digital elevation model (dem) with 1” (one arcsec) grid resolution for the study area was obtained from the advanced spaceborne thermal emission and reflection radiometer (aster) global digital elevation model (https://doi.org/10.5067/aster/astgtm.002).
+2,the dem map with 90-m resolution was used to derive the slope and aspect grids for the lmrb model input.
+2,the slope class of 2–8% covers about 40% of the watershed area.
+2,"the lmrb topography ranges from 2838 m above sea level in the annamese cordillera mountains range, laos (the mekong river and the south china sea are boundaries) to 89 m below sea level (outlet) with a mean elevation over the basin of 479 m."
+3,"remote sens. 2018, 10, 885 3 of 17 remote sens. 2018, 10, x for peer review 3 of 17 figure 1."
+3,the lower mekong river basin.
+3,streamflow gauges (described in table 1) follow the lower the lower figure 1.
+3,"mekong mekong river basin subareas,river basin.by rossi as presented streamflow gauges et al."
+3,"cities with(described in table population classes 1) follow the obtained from theriver lower mekong basin subareas, environmental as presented systems research by inc."
+3,"institute, rossi et al.world (esri) cities with [14]."
+3,"populated population places layer classes obtained (https://www.arcgis.com/home, from the environmental systems on 25 may 2018) accessed research are depicted institute, inc."
+3,"(esri) worldthan in red (greater 5 million),places layer populated orange (1-5 million), and light green (0.5–1 million). (https://www.arcgis.com/home, accessed on 25 may 2018) are depicted in red (greater than 5 million), orange (1–5 million), and light green (0.5–1 million)."
+3,the study area soil information data was obtained from the harmonized world soil database (hwsd) [15].
+3,the lmrb soil texture is mainly sandy clay loam and covers approximately 42% of the basin.
+3,the land use/land cover (lulc) data was obtained from a 2010 lulc map at a spatial resolution of a 0.25 km for the lower mekong basin using 2010 moderate resolution imaging spectroradiometer (modis) monthly normalized difference vegetation index (ndvi) data as the primary data source [16].
+4,"remote sens. 2018, 10, 885 4 of 17 the study watershed lulc areas are mainly forest and agricultural lands."
+4,"rice is farmed on about 26% of the watershed area, while forest land cover constitutes about 30% of the watershed area [16]."
+4,"in-situ data the discharge data for this work was obtained from the mekong river commission (mrc, www.mrcmekong.org)."
+4,"updated discharge data was interpolated from recent observed level data obtained from the asian preparedness disaster center (adpc, www.adpc.net)."
+4,"data for existing dams within the lmrb were obtained from the greater mekong consultative group for international agricultural research (cgiar) research program on water, land and ecosystems [17]."
+4,"in figure 1, we depict dams remote sens. within 2018, 10, the x forlmrb that are either already commissioned or still under construction 5 of 17 peer review and have a maximum reservoir area greater than or equal to 280 km2 , similar to the mrc mekong pointssetup."
+4,"river model within thethe surface arealabelled lmrb, of the reservoirs behind the various with identification numbersdamsthat we included thatreflect in this the assignment, is study as well as the illustrated in geographic figure 3. annotations for the in-situ stations depicted in figure 1, are visualized interactivelyminimum with the compressed and maximum keyhole dailymarkup air temperature data(kmz) language files supplementary was calculated from thematerials of air temperature this manuscript. records obtained from the global land data assimilation system (gldas) simulation data products daily [18].precipitation for this work, and minimum we usedand themaximum air temperature data gldas_noah025_3h.2.1 wasproducts obtained from data the from retrieved mekong https://disc.gsfc.nasa.gov/."
+4,"the wind figure river commission data respiratory. speed, 2relative depictshumidity, the in-situ and availability datasolar in the radiation datalower needed for mekong ourbasin."
+4,we note modeling work that wasprecipitation available are global data the estimated using for some reanalysis weather data 1920 sites since fromand started tocenters the national forwhole cover the basin around environmental 1990s.
+4,"air prediction temperature (ncep, data (minimum and maximum) http://www.ncep.noaa.gov/), are available forecastatsystem and the climate fewer sites than precipitation."
+4,"reanalysis (cfsr). (a) (b) figure 2. (a) precipitation (81 stations), and (b) air temperature (10 stations) in situ data availability figure 2. (a) precipitation (81 stations), and (b) air temperature (10 stations) in situ data availability at at the lower mekong basin."
+4,"the dark blue color (value of 0 or 0%) refers to a complete data record, the lower mekong basin."
+4,"the dark blue color (value of 0 or 0%) refers to a complete data record, while while the beige color (value of 1 or 100%) refers to a complete missing data records during a specific the beige color (value of 1 or 100%) refers to a complete missing data records during a specific year for year for a specific site. a specific site."
+4,hydrological model—swat 2.4.
+4,"meteorological data the swat is a conceptual watershed-scale hydrological model designed to address challenges daily cumulative precipitation data was obtained from the global precipitation measurement related to water management, sediment, climate change, land use change, and agricultural chemical mission (gpm) and the tropical rainfall measurement mission (trmm) remote sensing data yield [19–24]."
+4,the swat applications range from the field scale to the watershed scale [25] to the and used as inputs for the lmrb model.
+4,"the integrated multi-satellite retrieval for the global continental scale [26,27]."
+4,"the swat model components are hydrology, weather, sedimentation, soil precipitation measurement mission (imerg) dataset used for this work was the gpm_3imergdf temperature, crop growth, nutrients, pesticides, and agricultural management."
+4,the hierarchical (https://pmm.nasa.gov/data-access/downloads/gpm).
+4,"since imerg data products are only available structure for modeling units in swat is set to be multiple sub-watersheds, which are then further subdivided into hydrological response units (hrus) that consist of homogeneous land use, management, and soil characteristics."
+4,"the swat simulates the overall hydrological balance for each hru and model output is available in daily, monthly, and annual time steps."
+4,"swat meteorological inputs include daily precipitation, maximum and minimum temperature, solar radiation, humidity and wind speed."
+4,the version of swat used in this work was swat2012 rev.
+4,635 [28].
+4,the penman–
+5,"remote sens. 2018, 10, 885 5 of 17 from 12 march 2014 to present, we used the trmm rainfall data (3b42rt) for time periods earlier than 12 march 2014."
+5,"a nearest neighbor methodology was used to fill the imerg data points with the trmm data points as an approximation during the 1 march 2000 to 11 march 2014 time period, because the trmm and imerg data do not have the same spatial resolution (i.e., 0.25 and 0.1 degree respectively)."
+5,"the euclidean or great circle distance was calculated between the trmm and imerg cell centroids remote sens. 2018,to 10,achieve filling x for peer data points."
+5,the minimum distance between the imerg and trmm review 6 of 17 points was used for the filling assignment.
+5,"a layout showing part of the imerg and trmm cell points percentage within over the the lmrb, land use labelled area, with and 10% slope identification class that percentage numbers over reflect the the soil area, assignment, we obtained is illustrated in 10,096 hrus figure 3. for the lmrb model."
+5,figure 3.
+5,figure a schematic schematic showing 3.
+5,a layout of of the showing aa layout the tropical rainfall measurement tropical rainfall measurement mission mission (trmm) (trmm) (rectangle in red color at a spatial resolution of 0.25 deg.) and the integrated multi-satellite retrievals (rectangle in red color at a spatial resolution of 0.25 deg.) and the integrated multi-satellite retrievals for the for global precipitation precipitation measurement the global mission (imerg) (imerg) (circular measurement mission in black (circular in black color color at at aa spatial spatial resolution of resolution 0.1 deg.) of 0.1 deg.) grids grids labelled labelled with numbers illustrating with numbers illustrating nearest neighbor connectivity. nearest neighbor trmm connectivity.
+5,trmm data from data march 2000 2000 to from march march 2014 2014 were to march used to were used fill the the imerg to fill grids following imerg grids following thethe joining joining methodology explained. methodology explained.
+5,"results and discussion minimum and maximum daily air temperature data was calculated from the air temperature thisobtained records from thethe study highlights benefit global of satellite-based land observations earth system data assimilation data simulation for hydrological (gldas) data modeling[18]. products in regions thatwork, for this experience we used thespatial poor in-situ earth observations gldas_noah025_3h.2.1 datadata has retrieved itfrom representation. products been well established in literature https://disc.gsfc.nasa.gov/."
+5,"the windthat climate speed, relativeforcing dataand humidity, the dominant is solar contributor radiation data needed for in our modelingthe determining hydrologic work response. was estimated using globalof theability the our developed reanalysis weather hydrological data from themodel to represent national centers for variability of the the environmental prediction discharge observed(ncep, at multiple sites along the lower http://www.ncep.noaa.gov/), mekong and the river climate whensystem driven forecast by satellite-based reanalysis (cfsr).earth observation data corroborates the role of quality climate forcing as one of the main determinants in hydrologic modeling."
+5,"hydrological we assessedmodel—swat the performance of satellite-based data products (trmm and gpm) in estimating precipitation the swat is streamflow and a conceptual over the lower mekong watershed-scale river basin. hydrological model we designed that noticed to the quality address of the challenges related to waterremote satellite-based sensing sediment, management, precipitation data,change, climate landinuse especially southern thechange, andpart of the lmrb agricultural (i.e., chemical close to the delta) was better than elsewhere in the basin."
+5,this finding could be used yield [19–24].
+5,the swat applications range from the field scale to the watershed scale [25] to the for the further refinement of satellite-based remote sensing products in the lower mekong region.
+5,"it is worth mentioning here that although our calibration and validation work (cal/val) was done for years before the onset of gpm data, the simulated discharge results driven by the gpm precipitation data using the precipitation adjustment parameters obtained by the cal/val work were promising and matched the observed discharge values along the lower mekong river."
+6,"remote sens. 2018, 10, 885 6 of 17 continental scale [26,27]."
+6,"the swat model components are hydrology, weather, sedimentation, soil temperature, crop growth, nutrients, pesticides, and agricultural management."
+6,"the hierarchical structure for modeling units in swat is set to be multiple sub-watersheds, which are then further subdivided into hydrological response units (hrus) that consist of homogeneous land use, management, and soil characteristics."
+6,"the swat simulates the overall hydrological balance for each hru and model output is available in daily, monthly, and annual time steps."
+6,"swat meteorological inputs include daily precipitation, maximum and minimum temperature, solar radiation, humidity and wind speed."
+6,the version of swat used in this work was swat2012 rev.
+6,635 [28].
+6,the penman–monteith method was used to simulate potential evapotranspiration for this work.
+6,the swat calibration and uncertainty procedures (swat-cup) software package with the sequential uncertainty fitting (sufi2) method [29] was used for model calibration.
+6,"the watershed stream network and sub-basins were generated using the arc swat software (http://swat.tamu.edu/software/arcswat/) watershed analysis module (watershed delineator) with a contributing area threshold of 253.5 km2 , resulting in 1138 sub-basins."
+6,"applying the hru module in the arc swat software with 10% land use percentage over the sub-basin area, 10% soil class percentage over the land use area, and 10% slope class percentage over the soil area, we obtained 10,096 hrus for the lmrb model."
+6,results and discussion this study highlights the benefit of satellite-based earth observations data for hydrological modeling in regions that experience poor spatial in-situ earth observations data representation.
+6,it has been well established in literature that climate forcing data is the dominant contributor in determining the hydrologic response.
+6,the ability of our developed hydrological model to represent the variability of the observed discharge at multiple sites along the lower mekong river when driven by satellite-based earth observation data corroborates the role of quality climate forcing as one of the main determinants in hydrologic modeling.
+6,we assessed the performance of satellite-based data products (trmm and gpm) in estimating precipitation and streamflow over the lower mekong river basin.
+6,"we noticed that the quality of the satellite-based remote sensing precipitation data, especially in the southern part of the lmrb (i.e., close to the delta) was better than elsewhere in the basin."
+6,this finding could be used for the further refinement of satellite-based remote sensing products in the lower mekong region.
+6,"it is worth mentioning here that although our calibration and validation work (cal/val) was done for years before the onset of gpm data, the simulated discharge results driven by the gpm precipitation data using the precipitation adjustment parameters obtained by the cal/val work were promising and matched the observed discharge values along the lower mekong river."
+6,lmrb water balance the average annual precipitation in the study watershed during 2001–2015 was 1.9 m (satellite-based remote sensing data products).
+6,"the average maximum annual air temperature in the study watershed during 2001–2015 was 27 ◦ c, while the average minimum annual air temperature during 2001–2015 was 18 ◦ c (gldas data products)."
+6,we also note here there is about 2 ◦ c difference between air temperature estimates using gldas data products and in-situ station data products.
+6,"we believe that in-situ air temperature station data does not represent the entire watershed accurately, since there is a bias attributed to location and availability."
+6,we summarize the precipitation and air temperature annual information for the study watershed from 1985–2015 in figure 4.
+7,"watershed during 2001–2015 was 27 °c, while the average minimum annual air temperature during 2001–2015 was 18 °c (gldas data products)."
+7,we also note here there is about 2 °c difference between air temperature estimates using gldas data products and in-situ station data products.
+7,"we believe that in-situ air temperature station data does not represent the entire watershed accurately, since there is a bias attributed to location and availability."
+7,"we summarize the precipitation and remote sens. 2018, 10, 885 air 7 of 17 temperature annual information for the study watershed from 1985–2015 in figure 4."
+7,figure 4.4.
+7,the figure lower mekong mekong river the lower basin time timeseries river basin data.
+7,annual seriesdata.
+7,annual aggregated aggregated weighted weighted average average precipitation meters precipitationininmeters over over thethe lmrb lmrb using using satellite-based satellite-based remote remote sensing sensing (rs) and and in-situ (rs)in-situ data. data.
+7,mean mean aggregated annual annual aggregated weighted weighted air air temperature temperature patternand(maximum pattern (maximum minimum air minimum air andtemperatures) in temperatures) in degrees celsius using remote-sensing-calculated products degrees celsius using remote-sensing-calculated products and in-situ data. and in-situ data.
+7,table 1 gives various statistical measures for the lower mekong river annual discharge using table 1 gives various statistical measures for the lower mekong river annual discharge using calendar years at different gauges along the main stem river and upstream tributaries.
+7,the upper calendar years at different gauges along the main stem river and upstream tributaries.
+7,"the upper basin basin inlet discharge record for the years 2008 and onward, required for our modeling work, were inlet discharge record for the years 2008 and onward, required for our modeling work, were regressed regressed from the nearby station (chiang sean) discharge record."
+7,the vientiane (lao pdr) station from the nearby station (chiang sean) discharge record.
+7,"the vientiane (lao pdr) station # 011901, # 011901, which has the longest available monitoring record compared to the other stations studied which has the longest available monitoring record compared to the other stations studied (1913–2016), (1913–2016), has a mean annual discharge of 4476 m3/s."
+7,"minimum, maximum, different quantiles, has a mean annual discharge of 4476 m3 /s."
+7,"minimum, maximum, different quantiles, standard standard deviation, and coefficient of variation values for annual discharge at different stations are deviation, and coefficient of variation values for annual discharge at different stations are presented. presented."
+7,"discharge station skewness values suggest the location and the shape of the probability discharge station skewness values suggest the location and the shape of the probability distribution distribution (i.e., positive or negative)."
+7,"in table 1, we also provide the hurst coefficient [30,31]."
+7,"the (i.e., positive or negative)."
+7,"in table 1, we also provide the hurst coefficient [30,31]."
+7,the hurst coefficient hurst coefficient is an indicator of a serial correlation or dependence for the annual discharge time is an indicator of a serial correlation or dependence for the annual discharge time series studied.
+7,across series studied.
+7,"across the multiple discharge stations studied in the lower mekong, the hurst the multiple discharge stations studied in the lower mekong, the hurst coefficient for annual flow coefficient for annual flow was greater than 0.5, suggesting that high flow will most likely be followed was greater than 0.5, suggesting that high flow will most likely be followed by another high flow in by another high flow in the future."
+7,multiple works have presented various lmrb discharge statistics the future.
+7,"multiple works have presented various lmrb discharge statistics [14,32]."
+7,"however, table 1 [14,32]."
+7,"however, table 1 adds new information—the coefficient of variation, skewness, and adds new information—the coefficient of variation, skewness, and persistence and autocorrelation persistence and autocorrelation explained by the hurst coefficient for the lower mekong river. explained by the hurst coefficient for the lower mekong river."
+7,"discharge statistics at nine streamflow discharge statistics at nine streamflow gauges representing the outlets of eight sub-basins in the gauges representing the outlets of eight sub-basins in the lower mekong river basin, in addition to the lower mekong river basin, in addition to the upper mekong river inlet, are provided in table 1."
+7,"upper mekong river inlet, are provided in table 1."
+7,the geographic locations of these nine streamflow the geographic locations of these nine streamflow gauges are referenced in figure 1 with a green gauges are referenced in figure 1 with a green filled circle symbol. filled circle symbol.
+8,"remote sens. 2018, 10, 885 8 of 17 table 1."
+8,the lower mekong river annual discharge statistics.
+8,discharge units are in m3 /s.
+8,"country codes are: cn (china), th (thailand), la (lao people’s democratic republic), and kh (cambodia)."
+8,the a column refers to the drainage area in square km.
+8,qmin and qmax refer to the minimum and the maximum annual discharge over the record at each site.
+8,"the q1 , q2 , and q3 refer to the 25th, 50th (median), and 75th percentile of the mean annual discharge at each site."
+8,"the µ refers to the mean annual discharge over the record, σ is the unbiased standard deviation, cv is the coefficient of variation, γ is the skewness, h is the hurst coefficient."
+8,the coefficient of variation cv is equal to σ/µ.
+8,"station name code country lmrb start date end date a qmin q1 q2 q3 qmax µ σ cv γ h chinese border 010000 cn upper basin inlet 1-jan-1985 31-dec-2007 — 1619 2010 2157 2459 2763 2221 303 0.14 0.03 0.35 chiang sean 010501 th sub-basin 1 outlet 1-jan-1960 31-dec-2016 191,055 1871 2304 2564 2929 4027 2618 427 0.16 0.60 0.72 luang prabang 011201 la sub-basin 2 outlet 1-jan-1939 31-dec-2016 273,838 1852 3410 3754 4177 5488 3777 707 0.19 −0.12 0.70 vientiane 011901 la sub-basin 3 outlet 1-jan-1913 31-dec-2016 303,528 2677 3975 4455 4900 6111 4476 710 0.16 0.10 0.67 mukdahan 013402 th sub-basin 4 outlet 1-jan-1923 31-dec-2016 394,134 5256 7246 8031 9012 10,496 8071 1168 0.14 −0.02 0.89 pakse 013901 la sub-basin 5 outlet 1-jan-1923 31-dec-2016 550,955 6835 9095 10,050 11,165 12,918 10,066 1434 0.14 −0.08 0.68 kratie 014901 kh sub-basin 6 outlet 1-jan-1924 31-dec-2016 656,518 6599 11,891 13,527 15,077 19,562 13,411 2591 0.19 −0.41 0.77 yasothom 370104 th sub-basin 7 outlet 1-jan-1952 31-dec-2003 46,805 77 171 240 287 602 242 102 0.42 1.21 0.60 rasi salai 380134 th sub-basin 8 outlet 1-jan-1979 31-dec-2003 43,878 5 95 154 223 447 177 107 0.60 0.79 0.94"
+9,"remote sens. 2018, 10, 885 9 of 17 3.2."
+9,"calibration and verification of the lmrb model using trmm swat uses many parameters to describe typical soil, plant growth, land cover, reservoir, and agricultural management characteristics."
+9,"in this work, the lmrb model was calibrated to the monthly average discharge at the lmrb sub-basin outlets during the 2005 and 2006, with a few parameters as outlined in table 2."
+9,the reason for selecting 2005 and 2006 as the calibration years was based on the fact that the precipitation amounts in these two years were close to the average annual precipitation over the lower mekong river basin.
+9,"the validation of the lmrb model was performed at the lmrb sub-basin outlets during the time period 2001–2004, and in 2007."
+9,the validation time period was picked so that a common time period for the available satellite-based remote sensing and in-situ climate forcing data exists.
+9,"the availability of remote-sensing, satellite-based and in-situ air temperature and precipitation forcing data is depicted in figure 4."
+9,the parameters used and suggested range values for the lmrb model calibration were consulted and obtained from swat developers (r.
+9,"srinivasan, personal communication) and the previous works of neitsch et al. [33] and rossi et al."
+9,all other parameters in the lmrb model were left at their default values.
+9,"in table 2, we provide parameter-calibrated values for the two models that we performed (model forced with satellite-based remote sensing precipitation and in-situ precipitation)."
+9,"three groups of parameters related to precipitation, high flow, and base flow are presented in table 2."
+9,"the range of the correction factor to grid precipitation shown in table 2 are the values used in swat-cup to adjust the forcing precipitation data (i.e., increment)."
+9,the calibrated values for the soil evaporation compensation factor parameter (esco = 0.6 and 0.75) were found to be lower than the previous values reported by rossi et al. [14] for the lmrb.
+9,"generally, as the value for esco is reduced, the swat model is able to extract more of the evaporative demand from lower soil layers."
+9,"we argue here that the newer soil data used in this work has influenced a newer esco value for the lmrb that is different from the default value previously used (i.e., esco = 0.95)."
+9,"the parameters listed in table 2 are among many parameters that describe the swat soil physical characteristics and influence the movement of water and air through the soil profile and shallow aquifer underneath it, thus they have a major impact on the cycling of water within the swat modeling unit (hru)."
+9,our hydrological model showed higher sensitivity to parameters related to correction adjustment factors for precipitation forcing inputs.
+9,"figure 5 provides the lmrb model precipitation forcing adjustment factor layout for the in-situ and remote-sensing, satellite-based precipitation datasets."
+9,this layout could be used to guide the correction of trmm and gpm earth observations for future applications in the region.
+9,"polygons with no change in precipitation forcing adjustment (i.e., shown in white color) indicate the non-existence of rain stations or rain station exclusion due to the incompleteness of data records (figure 5a)."
+9,this matches earlier observation seen in figure 1 that there are a few number of rain stations over the lmrb.
+9,we note here that a sequential calibration procedure was performed starting from sub-basin outlet 1 and going downstream till sub-basin outlet 6 (sub-basins 7 and 8 are the western tributary outlets for the mekong river and are draining to sub-basin 5).
+9,this has resulted in the production of the correction adjustment factor layout in polygons corresponding to sub-basin outlets.
+9,figure 5 serves as a quality check for the precipitation forcing data in the lmrb when applied in hydrological applications.
+9,precipitation forcing data from satellite-based remote sensing tend to be more skewed in the northern part of the lmrb in comparison with the southern part.
+9,"in general, we found that running our model without satellite-based remote sensing precipitation data adjustments tended to overestimate the simulated discharge by about 13%."
+10,"remote sens. 2018, 10, 885 10 of 17 table 2."
+10,parameters and calibrated values used for the lmrb model simulations.
+10,"the identifier code refers to replacement (v), addition (a), and multiplication (r)."
+10,"calibrated value calibrated value parameter description range identifier code remote sensing data in-situ data precipitation precipitation correction factor to grid precipitation record −1, +0.01 r −0.445 to +0.002 −0.983 to −0.007 high flow initial scs runoff curve number to moisture cn2 −0.1, +0.1 r −0.07 −0.0315 condition ii awc available water capacity of the soil layer −0.1, +0.1 r +0.07 +0.0525 esco soil evaporation compensation factor +0.5, +0.9 v +0.6 +0.75 base flow gwht initial groundwater height 0, +1.0 v +0.075 +0.425 gw_delay groundwater delay time −30, +60 a −14.25 −14.25 gwqmn threshold depth of water in the shallow aquifer −1000, +1000 a −450 −250 revapmn percolation to the deep aquifer to occur −750, +750 a +262.5 +337.5 gw_revap groundwater “revap” coefficient +0.02, +0.10 v +0.042 +0.098 rchrg_dp deep aquifer percolation fraction −0.05, +0.05 a +0.0375 −0.0225"
+11,"remote sens. 2018, 10, 885 11 of 17 remote sens. 2018, 10, x for peer review 11 of 17 figure 5."
+11,"precipitation data adjustment layout for (a) in-situ station, and (b) satellite-based remote figure 5."
+11,"precipitation sensing data adjustment (rs) model input. layoutdata for adjustment the precipitation (a) in-situ station, equals toand (b) satellite-based 1+increment, remote as outlined in sensing (rs) table 2. model input."
+11,"the precipitation data adjustment equals to 1+increment, as outlined in table 2."
+11,"figure 6 depicts the lmrb model performance during the calibration years (2005, 2006), driven byfigure satellite-based remote 6 depicts the lmrb model earth sensing observations performance during(blue rectangle)years the calibration circle)by (red driven in-situ2006), and (2005, meteorological data at six watershed outlets within the lower mekong satellite-based remote sensing earth observations (blue rectangle) and in-situ (red circle) meteorologicalbasin."
+11,the simulated discharge data results obtained at six watershed from satellite-based outlets within the lower mekong sensing remotebasin.
+11,"thedata were able simulated to explain discharge more results than obtained 91% from of the variance satellite-based observed remote sensingin the monthly data discharge were able during to explain 91% ofyears calibration thethan more (i.e., the observed nash– the variance sutcliffe efficiency (nse) varied from 0.91 to 0.96 from sub-basin in the monthly discharge during the calibration years (i.e., the nash–sutcliffe efficiency (nse) 1 to 6)."
+11,the lmrb model varied performance when driven with in-situ data was able to explain from 68% to 91% of the variance from 0.91 to 0.96 from sub-basin 1 to 6).
+11,the lmrb model performance when driven with in-situ data observed in the monthly discharge during the calibration years.
+11,the lmrb model overestimated the was able to explain from 68% to 91% of the variance observed in the monthly discharge during the monthly discharge by about 5% at sub-basin 5 and underestimated the monthly discharge by about calibration years.
+11,the lmrb model overestimated the monthly discharge by about 5% at sub-basin 5 2% at sub-basin 6 during the calibration years when driven by satellite-based remote sensing data. and underestimated the monthly discharge by about 2% at sub-basin 6 during the calibration years table 3 provides the calibration metrics used to assess the performance of the lmrb model when when driven driven by satellite-based by satellite-based remote remote sensing and data. sensing in-situtable data.3the provides percent theerror calibration metrics the (qerr) between used to monthly assess the performance of the lmrb model when driven by satellite-based mean simulated and observed discharge and the nse performance metrics are tabulated for remote sensing and in-situ data.
+11,the the lmrb modelpercent undererror (qerr ) between satellite-based remotethe monthly sensing and mean data (tableand in-situsimulated 3). observed we note here discharge that and the nse performance metrics are tabulated for the lmrb model the results shown in figure 6 and table 3 suggest that the simulated model discharges utilizingunder satellite-based remote sensing and in-situ satellite-based data (table remote sensing we note 3). data hereare inputs thatable results the to shown capture theinvariability figure 6 and table of the 3 suggest observed that the simulated streamflow model patterns discharges in the lower mekongutilizing satellite-based better than simulated remotemodelsensing discharges forced are data inputs with in- to able capture the variability situ data.
+11,we also noteof thethat the qerr streamflow observed at sb5 and patterns sb6 (lmrb in the lower outlet) were higherbetter mekong than than othersimulated outlets examined model in the forced lmrb with discharges in-situwork calibration data.(
+11,table we also 3).
+11,"we notethink that that the q err differences the at sb5 andin sb6qerr(lmrb the amongoutlet) sub-basins were can be higher than attributed other outletstoexamined the sequential calibration in the method that lmrb calibration work used in3). we (table this wework, thinkand thatthethe interaction differences in of theamong qerr dam release rules observed the sub-basins the basin.to can beinattributed summary, inthe sequential ourcalibration lmrb model evaluation method that we results are similar to previous attempts presented by rossi et al. [14], who used in this work, and the interaction of the dam release rules observed in the basin."
+11,"in summary, our reported nash–sutcliffe lmrb monthly flow model evaluation values ranging efficiency results between are similar 0.8 and attempts to previous 1.0 at mainstream presented monitoring by rossi stations. et al. [14], who reported nash–sutcliffe flow monthly efficiency values ranging between 0.8 and 1.0 at mainstream monitoring stations."
+12,"remote sens. 2018, 10, 885 12 of 17 remote sens. 2018, 10, x for peer review 12 of 17 figure 6."
+12,the lmrb model calibration.
+12,monthly mean observed and simulated discharge in m3/s at figure 6.
+12,the lmrb model calibration.
+12,monthly mean observed and simulated discharge in m3 /s at six sub-basin watersheds in calibration of the lmrb model.
+12,the calibration time period is from 2005 six sub-basin watersheds in calibration of the lmrb model.
+12,the calibration time period is from 2005 to to 2006.
+12,"the red circles are simulated discharge with satellite-based, remote-sensing precipitation data 2006."
+12,"the red circles are simulated discharge with satellite-based, remote-sensing precipitation data input, while the blue rectangles are simulated discharge with in-situ meteorological data input."
+12,"here input, while the blue rectangles are simulated discharge with in-situ meteorological data input."
+12,here sb stands for sub-basin.
+12,sb stands for sub-basin.
+12,table 3.
+12,the lmrb model calibration metric results.
+12,the percent error (qerr) between the monthly table 3.
+12,the lmrb model calibration metric results.
+12,"the percent error (qerr ) between the monthly mean simulated and observed discharge and the nash–sutcliffe efficiency (nse) performance metrics mean simulated and observed discharge and the nash–sutcliffe efficiency (nse) performance metrics are depicted for each sub-basin corresponding to satellite-based remote sensing (rs) and in-situ data are depicted input, for each sub-basin corresponding to satellite-based remote sensing (rs) and in-situ data respectively. input, respectively."
+12,"qerr (%) nse sub-basin rs qerr (%) in-situ rs in-situ nse sub-basin sb1 0.81 0.53 0.96 0.91 rs in-situ rs in-situ sb2 −0.29 2.02 0.94 0.70 sb1 sb3 0.81 0.88 0.53−3.31 0.96 0.91 0.75 0.91 sb2 sb4 −0.29 0.79 2.02−3.41 0.94 0.93 0.78 0.70 sb3 sb5 0.88 4.76 −3.315.74 0.91 0.94 0.68 0.75 sb4 sb6 0.79 −1.90 −3.41 −1.64 0.93 0.94 0.83 0.78 sb5 4.76 5.74 0.94 0.68 sb6 −1.90 −1.64 0.94 0.83 figure 7 provides monthly observed and simulated discharge for the study watershed for the validation of the lmrb model over five years (2001–2004, and 2007)."
+12,"black circles and red rectangles were used 7toprovides figure monthly distinguish between observed and simulated the simulated dischargesdischarge generated the study forusing watershed satellite-based for the remote validation sensing andof the lmrb in-situ datamodel overinputs. as forcing five years (2001–2004, in general, and 2007). the model capturedblack timingand thecircles rectangles redonset of the and were used to distinguish between the simulated discharges generated using satellite-based end of seasonal discharge but was slightly off in some estimates of peak flow."
+12,the nse metrics during remote sensing timedata and in-situ the validation as forcing period for our inputs.
+12,"in general, model driven remote the the model captured by satellite-based timing sensing of thedata onset climate and (rs) end andofin-situ seasonal discharge climate but wasare data (in-situ) slightly tableestimates off ininsome provided of that 4."
+12,we note peaktheflow.
+12,nse the nse metrics performance during metrics forvalidation the our modeltime varied between period 0.88model for our and 0.98 when driven bydriven by satellite-based satellite-based remote climate sensing data remote sensing climate (rs)
+13,"remote sens. 2018, 10, 885 13 of 17 and in-situ climate data (in-situ) are provided in table 4."
+13,"we note that the nse performance metrics remote sens. 2018, 10, x for peer review 13 of 17 for our model varied between 0.88 and 0.98 when driven by satellite-based remote sensing climate dataand data andbetween between0.75 0.75to to0.97 0.97when whendriven byin-situ drivenby in-situclimate data.the climatedata."
+13,themodel hadabout modelhad about3.85% 3.85%error error on average in estimating monthly flows during the validation time on average in estimating monthly flows during the validation time period.period.
+13,figure 7.
+13,the lmrb model verification.
+13,scatterplot of monthly observed and simulated discharge in figure 7.
+13,the lmrb model verification.
+13,"scatterplot of monthly observed and simulated discharge in m3/s for the lower mekong river at six sub-basin watersheds in validation of the lmrb model for m3 /s for the lower mekong river at six sub-basin watersheds in validation of the lmrb model for 2001–2004, and 2007."
+13,"black circles indicate simulated discharge with satellite-based remote sensing 2001–2004, and 2007."
+13,"black circles indicate simulated discharge with satellite-based remote sensing meteorological data input, while red rectangles indicate simulated discharge with in-situ meteorological data input, while red rectangles indicate simulated discharge with in-situ precipitation precipitation and air temperature data input. and air temperature data input."
+13,table 4.
+13,the lmrb model validation metric results.
+13,the lmrb model nash–sutcliffe efficiency (nse) table 4.
+13,the lmrb model validation metric results.
+13,"the lmrb model nash–sutcliffe efficiency (nse) performance metrics are depicted for each sub-basin corresponding to satellite-based remote sensing performance metrics are depicted for each sub-basin corresponding to satellite-based remote sensing (rs) and in-situ data input, respectively."
+13,"(rs) and in-situ data input, respectively."
+13,nse sub-basin rs in-situ nse sub-basin sb1 0.98 0.97 rs in-situ sb2 0.91 0.83 sb1 0.98 0.97 sb3 0.94 0.79 sb2 0.91 0.83 sb4 0.90 0.83 sb3 0.94 0.79 sb4 sb5 0.89 0.90 0.75 0.83 sb5 sb6 0.88 0.89 0.84 0.75 sb6 0.88 0.84 3.3.
+13,verification of the lmrb model using gpm figure 8 depicts the ability of the lmrb model to simulate discharge at various sub-basin outlets using gpm-imerg precipitation as the forcing climate data.
+13,the simulated discharge results in figure 8 were able to explain between 71% to 96% of the variance observed in monthly discharge during the year 2015 (sub-basin 1 to sub-basin 6).
+13,we note here that there is a slight difference in the lmrb model performance results when we compare the lmrb model forced with gpm-imerg and
+14,"remote sens. 2018, 10, 885 14 of 17 3.3."
+14,verification of the lmrb model using gpm figure 8 depicts the ability of the lmrb model to simulate discharge at various sub-basin outlets using gpm-imerg precipitation as the forcing climate data.
+14,"the simulated discharge results in figure 8 were able to explain between 71% to 96% of the variance observed in monthly discharge during the remote year sens.(sub-basin 2015 2018, 10, x for 1 topeer review6)."
+14,we note here that there is a slight difference in the lmrb sub-basin of 17 14model performance results when we compare the lmrb model forced with gpm-imerg and trmm-3b42rt trmm-3b42rt (figures 6 and 8).
+14,we attribute the model performance difference to the adjustments (figures 6 and 8).
+14,we attribute the model performance difference to the adjustments that we made to that we made to the precipitation forcing data to calibrate the lmrb model.
+14,we think that the the precipitation forcing data to calibrate the lmrb model.
+14,we think that the adjustments we made to adjustments we made to the trmm-3b42rt forcing data during calibration years and verified in the the trmm-3b42rt forcing data during calibration years and verified in the verification years could be verification years could be also used reasonably by the lmrb model when forced with gpm-imerg also used reasonably by the lmrb model when forced with gpm-imerg data. data.
+14,figure8.8.
+14,monthly figure meanobserved observed and monthlymean simulated discharge discharge in and simulated m33/s in m /satatsix sixsub-basin sub-basinwatersheds watershedswith with the use of the lmrb model for 2015.
+14,the imerg precipitation data used to drive thelmrb the use of the lmrb model for 2015.
+14,the imerg precipitation data used to drive the lmrbmodel. model.
+14,thenash–sutcliffe the efficiency (nse) nash–sutcliffe efficiency (nse) performance performance metrics metrics are depicted for are depicted each sub-basin. for each sub-basin.here heresb sb stands for sub-basin. stands for sub-basin.
+14,nasaaccess tool 3.4.
+14,"nasaaccess tool we developed a ‘nasaaccess’ package (version 1.2) within the r software framework [34] to we developed a ‘nasaaccess’ package (version 1.2) within the r software framework [34] to streamline the accessing and processing of the national aeronautics and space administration streamline the accessing and processing of the national aeronautics and space administration (nasa) (nasa) earth observation data products (i.e., trmm, gpm, and gldas)."
+14,"our package incorporates earth observation data products (i.e., trmm, gpm, and gldas)."
+14,our package incorporates the the methods we introduced (figure 3) to address the spatial scale issues seen between trmm and methods we introduced (figure 3) to address the spatial scale issues seen between trmm and gpm.
+14,the ‘nasaaccess’ package creates weather input definition tables as well as station data files in the ‘nasaaccess’ package creates weather input definition tables as well as station data files in a format a format readable by the swat model or any other rainfall/runoff model.
+14,the ‘nasaaccess’ package readable by the swat model or any other rainfall/runoff model.
+14,the ‘nasaaccess’ package can be can be expanded to include other earth observation data products needed in the future.
+14,for the time expanded to include other earth observation data products needed in the future.
+14,"for the time being, being, ‘nasaaccess’ generates the daily rainfall and minimum and maximum air temperature gridded data and gridded data definition files needed to serve as a setup to run any basic swat/other model."
+14,"the core functionality of the ‘nasaaccess’ package can be summarized by the following steps: (i) access the nasa goddard space flight center (gsfc) servers to download earth observation data,"
+15,"remote sens. 2018, 10, 885 15 of 17 ‘nasaaccess’ generates the daily rainfall and minimum and maximum air temperature gridded data and gridded data definition files needed to serve as a setup to run any basic swat/other model."
+15,"the core functionality of the ‘nasaaccess’ package can be summarized by the following steps: (i) access the nasa goddard space flight center (gsfc) servers to download earth observation data, (ii) clip needed grids based on a user study watershed input shapefile, (iii) handle temporal and spatial issues (e.g., the gldas product has 3-h temporal resolution), (iv) generate daily climate gridded data files and definition files compatible with swat/ other models."
+15,"in summary, the inputs needed for the various functions within the ‘nasaaccess’ package are: start and end dates for the user’s required earth observation data, a shapefile for the study area of interest, and a dem grid for the area of interest."
+15,the ‘nasaaccess’ package was used effectively in this work to process the meteorological input data for the lmrb model.
+15,"conclusions and recommendations in this work, we showed that earth observation data enabled us to develop a regional hydrological decision support system application for the lower mekong river basin."
+15,"the inconsistency, scarcity, poor spatial representation, as well as difficult access and incompleteness of the available in situ data in the mekong region make it absolutely imperative to adopt earth observation data products to pursue hydrological modeling for the lower mekong river basin."
+15,we also introduced a smoothing technique method to address the spatial scale issues observed in the trmm and gpm earth observation data.
+15,we also produced a software tool that can be used to access and process earth observation data products on a global scale.
+15,the use of satellite and field data has helped us to evaluate and improve a hydrological decision support system model and parameterization for the lower mekong river basin.
+15,"for example, we were able to report new parameter values needed to estimate evaporation in the swat modeling environment (e.g., a soil evaporation compensation factor parameter or esco)."
+15,"we think that our work can serve to improve weather, climate, and hydrological modeling and prediction in the mekong region."
+15,"we here call for further research efforts in employing remotely-sensed, satellite-based products for hydrological modeling experiments."
+15,future research should emphasize providing proper guidance for climate forcing data corrections.
+15,"in addition, investigations into high-resolution soil information data products as well as land use and land cover data are needed."
+15,supplementary materials: (1) the ‘nasaaccess’ software package titled “downloading and reformatting tool for nasa earth observation data products” tar file; and (2) the kmz compressed files that contain the geographic annotations for the various layers depicted in figure 1 are supplements of this manuscript.
+15,"author contributions: i.n.m. processed the input data and developed the hydrological decision support system model with thoughtful suggestions from r.s., j.b. and v.l."
+15,"; i.n.m. wrote the software for the ‘nasaaccess’ package; v.l., j.b. and r.s. contributed with advice and editing of the paper."
+15,"funding: this work was fully supported by the national aeronautics and space administration (nasa), goddard space flight center (gsfc) applied sciences grant nng15hq01c that supports the hydrospheric and biospheric sciences (hbs) code 610 in various research and engineering activities."
+15,acknowledgments: special thanks to joe spruce who shared with us the land cover land use map for the lower mekong river basin.
+15,"any opinions, findings, and conclusions or recommendations expressed in this work are those of the author(s) and do not necessarily reflect the views of the national aeronautics and space agency, science systems and applications, inc., and science applications international corporation."
+15,conflicts of interest: the authors declare no conflict of interest.
+16,"remote sens. 2018, 10, 885 16 of 17 references 1."
+16,"vörösmarty, c.j."
+16,"; mcintyre, p.b."
+16,"; gessner, m.o."
+16,"; dudgeon, d."
+16,"; prusevich, a."
+16,"; green, p."
+16,"; glidden, s."
+16,"; bunn, s.e."
+16,"; sullivan, c.a."
+16,"; liermann, c.r.; et al."
+16,global threats to human water security and river biodiversity.
+16,"nature 2010, 467, 555–561."
+16,[crossref] [pubmed] 2.
+16,"ziv, g."
+16,"; baran, e."
+16,"; nam, s."
+16,"; rodríguez-iturbe, i."
+16,"; levin, s.a."
+16,"trading-off fish biodiversity, food security, and hydropower in the mekong river basin."
+16,"usa 2012, 109, 5609–5614."
+16,[crossref] [pubmed] 3.
+16,"zhang, b."
+16,"; zhang, l."
+16,"; guo, h."
+16,"; leinenkugel, p."
+16,"; zhou, y."
+16,"; li, l."
+16,"; shen, q."
+16,drought impact on vegetation productivity in the lower mekong basin.
+16,remote sens.
+16,"2014, 35, 2835–2856."
+16,[crossref] 4.
+16,"veilleux, j.c."
+16,"; anderson, e.p."
+16,"2015 snapshot of water security in the nile, mekong, and amazon river basins."
+16,limnol.
+16,oceanogr.-bull.
+16,"2016, 25, 8–14."
+16,[crossref] 5.
+16,"winemiller, k.o."
+16,"; mcintyre, p.b."
+16,"; castello, l."
+16,"; fluet-chouinard, e."
+16,"; giarrizzo, t."
+16,"; nam, s."
+16,"; baird, i.g."
+16,"; darwall, w."
+16,"; lujan, n.k."
+16,"; harrison, i.; et al."
+16,"balancing hydropower and biodiversity in the amazon, congo, and mekong."
+16,"science 2016, 351, 128–129."
+16,[crossref] [pubmed] 6.
+16,mekong river commission.
+16,"transboundary water resources management issues in the mekong delta of cambodia and vietnam; mekong river commission secretariat: vientiane, laos, 2017; p."
+16,"sivapalan, m."
+16,"; blöschl, g."
+16,"the growth of hydrological understanding: technologies, ideas, and societal needs shape the field."
+16,water resour.
+16,"2017, 53, 8137–8146."
+16,[crossref] 8.
+16,"piman, t."
+16,"; lennaerts, t."
+16,"; southalack, p."
+16,assessment of hydrological changes in the lower mekong basin from basin-wide development scenarios.
+16,hydrol.
+16,process.
+16,"2013, 27, 2115–2125."
+16,[crossref] 9.
+16,"piman, t."
+16,"; cochrane, t.a."
+16,"; arias, m.e."
+16,"effect of proposed large dams on water flows and hydropower production in the sekong, sesan and srepok rivers of the mekong basin."
+16,river res.
+16,"2016, 32, 2095–2108."
+16,[crossref] 10.
+16,"lyon, s.w."
+16,"; king, k."
+16,"; polpanich, o.-u."
+16,"; lacombe, g."
+16,assessing hydrologic changes across the lower mekong basin.
+16,hydrol.
+16,"2017, 12, 303–314."
+16,[crossref] 11.
+16,"li, d."
+16,"; long, d."
+16,"; zhao, j."
+16,"; lu, h."
+16,"; hong, y."
+16,observed changes in flow regimes in the mekong river basin.
+16,hydrol.
+16,"2017, 551, 217–232."
+16,[crossref] 12.
+16,"poff, n.l."
+16,"; olden, j.d."
+16,can dams be designed for sustainability?
+16,"science 2017, 358, 1252–1253."
+16,[crossref] [pubmed] 13.
+16,"sabo, j.l."
+16,"; ruhi, a."
+16,"; holtgrieve, g.w."
+16,"; elliott, v."
+16,"; arias, m.e."
+16,"; ngor, p.b."
+16,"; räsänen, t.a."
+16,"; nam, s."
+16,designing river flows to improve food security futures in the lower mekong basin.
+16,"science 2017, 358."
+16,[crossref] [pubmed] 14.
+16,"rossi, c.g."
+16,"; srinivasan, r."
+16,"; jirayoot, k."
+16,"; duc, t.l."
+16,"; souvannabouth, p."
+16,"; binh, n."
+16,"; gassman, p.w."
+16,hydrologic evaluation of the lower mekong river basin with the soil and water assessment tool model.
+16,agric.
+16,"2009, 18, 1–13."
+16,fao; iiasa; isric; isscas; jrc.
+16,"harmonized world soil database, hwsd (version 1.21); fao: rome, italy, 2012."
+16,"spruce, j."
+16,"; bolten, j.d."
+16,"; srinivasan, r."
+16,developing land use land cover maps for the lower mekong basin to aid swat hydrologic modeling.
+16,"in proceedings of the agu 2017 fall meeting, new orleans, la, usa, 11–15 december 2017; abstract h104-298677; agu: new orleans, la, usa, 2017."
+16,"dataset on the dams of the irrawaddy, mekong, red and salween river basins; wle: vientiane, laos, 2017."
+16,"rodell, m."
+16,"; houser, p.r."
+16,"; jambor, u."
+16,"; gottschalck, j."
+16,"; mitchell, k."
+16,"; meng, c.-j."
+16,"; arsenault, k."
+16,"; cosgrove, b."
+16,"; radakovich, j."
+16,"; bosilovich, m.; et al."
+16,the global land data assimilation system.
+16,meteorol.
+16,"2004, 85, 381–394."
+16,[crossref] 19.
+16,"arnold, j.g."
+16,"; srinivasan, r."
+16,"; muttiah, r.s."
+16,"; williams, j.r."
+16,large area hydrologic modeling and assessment part i: model development.
+16,water resour.
+16,assoc.
+16,"1998, 34, 73–89."
+16,[crossref] 20.
+16,"srinivasan, r."
+16,"; ramanarayanan, t.s."
+16,"; arnold, j.g."
+16,"; bednarz, s.t."
+16,large area hydrologic modeling and assessment part ii: model application.
+16,water resour.
+16,assoc.
+16,"1998, 34, 91–101."
+16,[crossref] 21.
+16,"arnold, j.g."
+16,"; fohrer, n."
+16,swat2000: current capabilities and research opportunities in applied watershed modelling.
+16,hydrol.
+16,process.
+16,"2005, 19, 563–572."
+16,[crossref] 22.
+16,"gassman, p.w."
+16,"; reyes, m.r."
+16,"; green, c.h."
+16,"; arnold, j.g."
+16,"the soil and water assessment tool: historical development, applications, and future research directions."
+16,trans.
+16,"asabe 2007, 50, 1211–1250."
+16,[crossref]
+17,"remote sens. 2018, 10, 885 17 of 17 23."
+17,"douglas-mankin, k.r."
+17,"; srinivasan, r."
+17,"; arnold, j.g."
+17,soil and water assessment tool (swat) model: current developments and applications.
+17,trans.
+17,"asabe 2010, 53, 1423–1431."
+17,[crossref] 24.
+17,"arnold, j.g."
+17,"; moriasi, d.n."
+17,"; gassman, p.w."
+17,"; abbaspour, k.c."
+17,"; white, m.j."
+17,"; srinivasan, r."
+17,"; santhi, c."
+17,"; harmel, r.d."
+17,"; griensven, a.v."
+17,"; liew, m.w.v.; et al."
+17,"swat: model use, calibration, and validation."
+17,trans.
+17,"asabe 2012, 55, 1491–1508."
+17,[crossref] 25.
+17,"daggupati, p."
+17,"; yen, h."
+17,"; white, m.j."
+17,"; srinivasan, r."
+17,"; arnold, j.g."
+17,"; keitzer, c.s."
+17,"; sowa, s.p."
+17,"impact of model development, calibration and validation decisions on hydrological simulations in west lake erie basin."
+17,hydrol.
+17,process.
+17,"2015, 29, 5307–5320."
+17,[crossref] 26.
+17,"srinivasan, r."
+17,"; arnold, j.g."
+17,"; jones, c.a."
+17,hydrologic modelling of the united states with the soil and water assessment tool.
+17,water resour.
+17,"1998, 14, 315–325."
+17,[crossref] 27.
+17,"abbaspour, k.c."
+17,"; rouholahnejad, e."
+17,"; vaghefi, s."
+17,"; srinivasan, r."
+17,"; yang, h."
+17,"; kløve, b."
+17,a continental-scale hydrology and water quality model for europe: calibration and uncertainty of a high-resolution large-scale swat model.
+17,hydrol.
+17,"2015, 524, 733–752."
+17,[crossref] 28.
+17,"arnold, j.g."
+17,"; kiniry, j.r."
+17,"; srinivasan, r."
+17,"; williams, j.r."
+17,"; haney, e.b."
+17,"; neitsch, s.l."
+17,"swat 2012 input/output documentation; tr-439; texas water resources institute: college station, tx, usa, 2013; p."
+17,"abbaspour, k.c."
+17,"; yang, j."
+17,"; maximov, i."
+17,"; siber, r."
+17,"; bogner, k."
+17,"; mieleitner, j."
+17,"; zobrist, j."
+17,"; srinivasan, r."
+17,modelling hydrology and water quality in the pre-alpine/alpine thur watershed using swat.
+17,hydrol.
+17,"2007, 333, 413–430."
+17,[crossref] 30.
+17,"hurst, h.e."
+17,long-term storage capacity of reservoirs.
+17,trans.
+17,"1951, 116, 770–808."
+17,"weron, r."
+17,estimating long-range dependence: finite sample properties and confidence intervals.
+17,"physica a 2002, 312, 285–299."
+17,[crossref] 32.
+17,"lacombe, g."
+17,"; douangsavanh, s."
+17,"; vogel, r.m."
+17,"; mccartney, m."
+17,"; chemin, y."
+17,"; rebelo, l.-m."
+17,"; sotoukee, t."
+17,multivariate power-law models for streamflow prediction in the mekong basin.
+17,hydrol.
+17,"2014, 2, 35–48."
+17,[crossref] 33.
+17,"neitsch, s.l."
+17,"; arnold, j.g."
+17,"; kiniry, j.r."
+17,"; williams, j.r."
+17,"; king, k.w."
+17,"soil and water assessment tool theoretical documentation version 2000; tr-191; texas water resources institute: college station, tx, usa, 2002; p."
+17,r development core team.
+17,"r: a language and environment for statistical computing, 3.4.4; r foundation for statistical computing: vienna, austria, 2018. © 2018 by the authors."
+17,"licensee mdpi, basel, switzerland."
+17,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).

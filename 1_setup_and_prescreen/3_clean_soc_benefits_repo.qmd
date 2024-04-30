@@ -31,7 +31,8 @@ Read in the records, explore, clean/standardize to something like our existing f
 
 ```{r}
 sb_df <- read_csv(here('_data/societal_benefits/repo_240423.csv')) %>%
-  janitor::clean_names()
+  janitor::clean_names() %>%
+  mutate(across(where(is.character), str_squish))
 ```
 
 ## Clean up and save out
@@ -61,17 +62,28 @@ sb_fixed_df <- sb_dropcols_df %>%
                          title == 'Extracting the benefits of Earth observation' ~ 'https://frontiersi.com.au/wp-content/uploads/2021/08/FrontierSI_DigitalEarth_ExtractingEarthObservation_Final-Report_Aug-2021.pdf',
                          author == 'Hrycyna, Elizabeth' ~ 'https://doi.org/10.1525/elementa.2022.00027',
                          TRUE ~ doi))
-sb_fixed_dupes <- janitor::get_dupes(sb_fixed_df, doi)
-sb_dupes_to_drop <- sb_fixed_dupes %>%
+
+sb_dupe_doi_to_drop <- sb_fixed_df %>%
+  janitor::get_dupes(doi) %>%
   group_by(doi) %>%
   arrange(author, year, title, journal, abstract, keywords) %>%
-  slice(-1)
+  slice(-1) %>%
+  ungroup()
+
+sb_dupe_title_to_drop <- sb_fixed_df %>%
+  janitor::get_dupes(title) %>%
+  group_by(title) %>%
+  arrange(author, year, doi, journal, abstract, keywords) %>%
+  slice(-1) %>%
+  ungroup()
 
 sb_out <- sb_fixed_df %>%
-  anti_join(sb_dupes_to_drop) %>%
+  anti_join(sb_dupe_doi_to_drop) %>%
+  anti_join(sb_dupe_title_to_drop) %>%
   filter(!is.na(abstract)) %>%
   as.data.frame() %>%
-  select(source_type, everything())
+  select(source_type, everything()) %>%
+  mutate(across(where(is.character), str_squish))
 
 write_refs(sb_out, format = 'ris',
            file = here('_data/refs_ris_out/societal_benefits_240423.ris'))
@@ -105,6 +117,7 @@ all_check_df <- all %>%
   mutate(title_short = tolower(title) %>% str_sub(1, 40)) %>%
   mutate(year = as.numeric(year)) %>%
   distinct()
+
 sb_already_in <- sb_check_df %>%
   mutate(abstract_short = tolower(abstract) %>% str_sub(1, 100)) %>%
   mutate(title_short = tolower(title) %>% str_sub(1, 40)) %>%
@@ -117,6 +130,7 @@ sb_already_in <- sb_check_df %>%
 
 DT::datatable(sb_already_in %>% select(-abstract))
 ```
+
 ## Exploratory plots
 
 ```{r}
@@ -130,6 +144,18 @@ sb_area_approach <- sb_df %>%
   unnest(vi) %>%
   filter(title %in% sb_out$title)
 
+sb_area_approach_cleaned <- sb_area_approach %>%
+  group_by(title) %>%
+  summarize(sba = paste0(unique(sba), collapse = ';'),
+            vi = paste0(unique(vi), collapse = ';'),
+            ea = paste0(unique(ea), collapse = ';')) %>%
+  mutate(across(c(sba, vi, ea), ~ ifelse(.x == 'NA', NA, .x))) %>%
+  left_join(sb_out, by = 'title')
+
+write_csv(sb_area_approach_cleaned, here('_data/societal_benefits/repo_cleaned_240423.csv'))
+```
+
+```{r}
 sba_df <- sb_area_approach %>% 
   select(title, sba) %>%
   distinct() %>%

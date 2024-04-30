@@ -1,0 +1,537 @@
+page,p
+1,"technology and code published: 09 february 2021 doi: 10.3389/fclim.2020.583509 enhancing the application of earth observations for improved environmental decision-making using the early warning explorer (ewx) shraddhanand shukla 1*, martin landsfeld 1 , michelle anthony 2 , michael budde 3 , gregory j."
+1,"husak 1 , james rowland 3 and chris funk 3,1 1 department of geography, climate hazards center, university of california, santa barbara, santa barbara, ca, united states, 2 kbr technical support services contract, contractor to the u.s."
+1,"geological survey earth resources observation and science center, sioux falls, sd, united states, 3 u.s."
+1,"geological survey, earth resources observation and science center, sioux falls, sd, united states the mitigation of losses due to extreme climate events and long-term climate adaptation requires climate informed decision-making."
+1,"in the past few decades, several remote sensing and modeled-based earth observations (eos) have been developed to edited by: provide an unprecedented global overview and routine monitoring of climate and its africa ixmucane flores-anderson, impacts on vegetation and hydrologic conditions, with the goal of supporting informed university of alabama in huntsville, united states decision-making."
+1,"however, their usage in decision-making is particularly limited in reviewed by: climate-risk vulnerable and in situ data-scarce regions such as sub-saharan africa, johnna maria infanti, due to lack of access to eos."
+1,"here, we describe the early warning explorer (ewx), national oceanic and atmospheric which was developed to address this crucial limitation and facilitate the application administration (noaa), united states lilian wangui ndungu, of eos in decision-making, particularly in the food and water-insecure regions of the regional centre for mapping of world."
+1,"first, the ewx’s core framework, which includes (i) the viewer, (ii) geoengine, resources for development, kenya and (iii) support applications, is described."
+1,"then, a comprehensive overview of the *correspondence: shraddhanand shukla viewer, which is a web-based interface used to access eos, is provided."
+1,"this includes sshukla@ucsb.edu a description of (i) the maps and associated features to access gridded eo data and anomalies for different temporal averaging periods, (ii) time series graphs and specialty section: this article was submitted to associated features to access eos aggregated over polygons such as administrative climate services, boundaries, and (iii) commonly used eos served by the ewx that provide assessments a section of the journal of climate and vegetation conditions."
+1,"next, examples are provided to demonstrate how frontiers in climate ewx can be used to monitor development, progression, spatial extent, and severity received: 15 july 2020 accepted: 16 december 2020 of climate-driven extreme events to support timely decisions related to mitigation of published: 09 february 2021 food insecurity and flooding impacts."
+1,"finally, the value of a regional implementation of citation: ewx at the regional centre for mapping of resources for development (rcmrd) in shukla s, landsfeld m, anthony m, budde m, husak gj, rowland j and nairobi, kenya, is highlighted."
+1,regional implementation of the ewx facilitates access to funk c (2021) enhancing the regionally focused eos and their availability at polygon boundaries most relevant to the application of earth observations for local decision-makers.
+1,"similar instances of ewx implemented in other regions, especially improved environmental decision-making using the early those susceptible to food and water security, will likely further enhance the application of warning explorer (ewx)."
+1,eos for informed decision-making.
+1,front.
+1,"2:583509. doi: 10.3389/fclim.2020.583509 keywords: earth observation, food security, water security, web service, drought, climate services, remote sensing frontiers in climate | www.frontiersin.org 1 february 2021 | volume 2 | article 583509"
+2,shukla et al.
+2,"early warning explorer introduction the ewx overview food and water security, globally, is susceptible to climate-related the ewx is implemented based on three main components risks due to climate variability and change (schmidhuber and (figure 1)."
+2,"the first component, the ewx viewer, is accessible tubiello, 2007; milly et al., 2008; falkenmark, 2013; wheeler to users through a browser (the ewx overview)."
+2,"the viewer is and von braun, 2013; campbell et al., 2016)."
+2,"annual economic the interface through which users can visualize eos in the form losses due to climate extremes are estimated to be at about $100b of maps (spatial representation of gridded eos) and time series (us dollars) between 2004 and 2014 (fao, 2016)."
+2,"mitigation graphs, as well as extract eo data for desired focus domain and of the adverse socio-economic impacts of climate extremes, time period for further analysis. as well as long-term climate resilience and adaptation, is the second component is the geoengine processing server, critically dependent on timely access to earth observations (eos). which is the core processor of the ewx system."
+2,"the primary these eos include satellite-based precipitation, temperature, and functions of the geoengine include: vegetation greenness, as well as modeled data sets including (i) providing web services to the eos and time series data, reanalysis products, simulated hydrologic fluxes, and dynamical (ii) serving as a graphical user interface for administrators sub-seasonal to seasonal climate forecasts."
+2,"during the past three to add and delete raster and vector data sets, decades, major strides have been taken in the development and define their combinations for calculating and operational production of satellite and model-based eos, summary statistics, often spanning the entire globe."
+2,"these efforts have improved (iii) monitoring file system for updates in the availability of eos, monitoring of the earth for scientific and decision-making (iv) syncing the map serving geoserver contents with the file applications (wulder and coops, 2014)."
+2,"for example, availability system as it is updated, (now open access) of 40+ years of landsat data sets has (v) calculating spatially averaged data sets and statistics as facilitated routine monitoring at a global scale and long-term required by any modifications or addition of boundaries or ecological change assessments (wulder et al., 2012)."
+2,availability eo fields and of high-resolution (10–60 m) multi-spectral imagery from the (vi) storing and retrieving outputs to and from the database.
+2,"sentinel series (donlon et al., 2012; drusch et al., 2012; torres et al., 2012; szantoi and strobl, 2019) has allowed for potential the third component, support applications, contains application of eos in decision-making at a truly local scale. applications including a map server, a geoserver instance, satellite-based estimates of precipitation (huffman et al., 2010; and a postgresql database for storage and retrieval of the ashouri et al., 2015; funk et al., 2015a; skofronick-jackson et al., statistics and the file system, which is continually monitored for 2017), evapotranspiration (jiang et al., 2020; senay et al., 2020), new or deleted eos."
+2,"geoserver is an open-source geospatial data surface soil moisture (brown et al., 2013; dorigo et al., 2017; server that implements open geospatial consortium (ogc) das et al., 2018), and total moisture—derived from monthly standards, serves maps to the ewx viewer and other geoengine gravity field estimates made by the twin gravity recovery clients, and allows for serving of data via different web services and climate experiment (tapley et al., 2004; rodell et al., such as web map service (wms), web feature service (wfs), 2018)—have allowed for improved understanding of change in web coverage service (wcs), and web mapping service with water availability, and for monitoring extreme events such as time (wmst)."
+2,a postgresql database stores derived data sets drought and floods.
+2,"additionally, model-based (and assimilated and statistics, maintains metadata about calculated statistics observational estimates) climate reanalysis (saha et al., 2010; (for example, when they were last calculated), and maintains an hersbach and dee, 2016; gelaro et al., 2017) and weather (hamill inventory of coverages and their associations, periodic data sets, et al., 2006) to subseasonal (pegion et al., 2019) to seasonal and vector data sets. scale (molteni et al., 1996; kirtman et al., 2013) climate or currently, multiple versions of the ewx exist, and they are hydrologic forecasting products (arsenault et al., 2020) allow for listed in table 1."
+2,"each of these versions is based on the above- the early warning of climate extreme events, and hence, support mentioned framework."
+2,the u.s.
+2,geological survey’s (usgs) decisions that save lives and resources.
+2,"however, despite the ewx is the first instance of ewx."
+2,"the usgs also hosts ewx-lite, availability of these and several other eos, application of these which is a limited version of the ewx designed for regions with data sets for decision-making in some of the most vulnerable poor internet connections."
+2,"the university of california, santa regions across the globe, such as sub-saharan africa (ssa), barbara’s (ucsb) ewx provides access to several eos that are has still been limited."
+2,the early warning explorer (ewx) has currently “experimental.”
+2,the regional centre for mapping of been developed and implemented to address this important resources for development (rcmrd) ewx is the first instance limitation.
+2,the ewx provides easy and routine access to critical of ewx in ssa.
+2,"as described in detail in section concluding eos with the primary goal of enhancing their application for remarks, this version of ewx was implemented to support disaster mitigation and supporting long-term resilience."
+2,"here, capacity building in the region of eastern and southern africa."
+2,"it we provide an overview of the ewx, describe its features, is expected that, depending on users’ eo needs, they can decide and demonstrate examples of how the ewx can be used to to access eos using any of the versions of the ewx."
+2,"there are empower decision-making, especially in the vulnerable regions several eos that are common to all versions of the ewx."
+2,"if a user of ssa. wants to access those common eos, they can choose any ewx frontiers in climate | www.frontiersin.org 2 february 2021 | volume 2 | article 583509"
+3,shukla et al.
+3,early warning explorer figure 1 | flow chart of the main components of the early warning explorer. version.
+3,"if a user wants to access “experimental” eos that are the ewx viewer not available on the usgs’s ewx version, they can access them on ucsb’s version."
+3,"similarly, users from eastern and southern this section provides an overview of the ewx viewer, including africa may want to access eos from rcmrd’s version of ewx, its main components, examples of the eos available through especially if they want to access eos at custom zones (e.g., ewx, and select primary features for spatial and temporal administrative-3 polygons or grazing area polygons) that are not mapping of the eos."
+3,figure 2 shows the usgs earth resources available on usgs and ucsb’s versions.
+3,the variety within these observation and science (eros) center’s version of the ewx different instances of the ewx highlights the flexibility of the viewer.
+3,"the left panel of this page lists all datasets (top left panel) platform to respond to the needs of specialized communities. that are accessible to the users and layers (e.g., boundaries), additionally, the usgs’s instance of ewx is available for which are available to overlay the data sets to extract spatially different regions of the globe."
+3,"currently (2020), the regions for averaged time series."
+3,"the usgs’s ewx currently provides access which ewx is available are (shown in figure 2): (i) global, to eos such as precipitation estimates, land surface temperature, (ii) africa, (iii) east africa (ea), (iv) central america, and and vegetative greenness."
+3,"these eos are best suited to monitor caribbean, (v) central asia, (vi) middle east, and (vii) south meteorological and agricultural drought conditions, and examine america."
+3,different regional instances of ewx allow for easy and long-term changes and trends.
+3,"in addition to eos, the ewx also quick access to the eos by zooming to the spatial extent of the provides access to ancillary data sets, such as topography and given region."
+3,"additionally, regional instances allow for access to population density based on landscan."
+3,topography is helpful for eos that are most useful for the given region.
+3,"for example, the providing physical context for eos (for example, high-elevation regional instance for central asia provides access to snow depth areas tend to have higher rainfall,) and population is helpful and snow water equivalent, as snow is a prominent source of for providing social context (i.e., the number of people in a water supply in that region. region affected by climate extreme events)."
+3,"the ewx allows users in the following sections, we provide a detailed overview to access eos in terms of absolute values, as well as absolute of the viewer, describe several features of the viewer anomaly and standardized anomaly."
+3,"eos are also typically that facilitate visualization and access to eos, describe available for different temporal aggregation periods, ranging select, widely used eos that ewx provides access to, and from the pentadal (5-days accumulations) to a 3-monthly period. finally we, provide examples of how ewx can be used to availability of eos at different temporal aggregation periods monitor climate extremes and perform analyses to support allows for monitoring of short-term variability of weather decision-making. conditions (e.g., dry and wet spells, and cool and hot spells) frontiers in climate | www.frontiersin.org 3 february 2021 | volume 2 | article 583509"
+4,shukla et al.
+4,early warning explorer table 1 | different versions of ewx.
+4,"host institution web address list of key eos usgs’s earth resources observation and https://earlywarning.usgs.gov/fews/ewx/index.html chirps-prelim, chirps, lst, ndvi, rfe (precipitation data science (eros) center, south dakota, ewx-lite https://earlywarning.usgs.gov/fews/ewx_lite/ set) usa index.html university of california santa barbara https://chc-ewx2.chc.ucsb.edu/ chirps-prelim, chirps (and misc. precipitation data sets), (ucsb), santa barbara, usa chirps-gefs (bias-corrected weather forecasts), chirtsmax (historical monthly mean tmax), fldas (fews net land data assimilation system) regional center for mapping of resources http://data.rcmrd.org/ewx-viewer/ chirps, chirps-gefs, chirtsmax, lst, ndvi for development (rcmrd), nairobi, kenya figure 2 | overview of the usgs ewx viewer and its selected main features and options. using pentadal and dekadal (10-days accumulations) aggregation graphs indicate swe totaled over the given basin."
+4,"the mapping periods, and monitoring of the season as a whole, with a 3- option provides maps of absolute value, additive anomaly, and months averaging period."
+4,"the ewx allows access to historical standardized anomaly (or percent anomaly, in the case of ndvi) data, which can be located by using a drop-down calendar menu for a given eo (figure 3)."
+4,"these map images can be downloaded and selecting years, months, or seasons, and day, pentad or dekad in png format."
+4,the underlying spatial data for the selected during the month. region can also be downloaded in geotiff format.
+4,"thus, a the ewx allows quick visualization of eos in the form of user can extract the eos in geotiff format and input the maps and time series graphs."
+4,"maps show the value or anomalies data to any widely used geographical information system tool of a selected eo (figure 3), averaging period, and region at for further analysis, or for overlaying with other maps that the native grid-cell resolution [which varies from 5 km x 5 km are not available from the ewx."
+4,a user may also want to for climate hazards center infrared precipitation with station download data in geotiff format to work with their existing data (chirps) and chirps-global ensemble forecast system mapping tools to provide maps in the standard format for to 250 m for normalized difference vegetation index] of the their agency’s bulletin.
+4,"for example, the zambia meteorological eo."
+4,time series graphs provide spatially averaged (averaged over department (zmd) downloads chirps-gefs (bias-corrected all grid cells within a selected boundary) values or anomalies of and downscaled weather forecasts) from the ucsb’s ewx a selected eo for the selected region and boundary (figure 4).
+4,"(table 1), maps it using their own tools, and includes it in the in the case of a variable like snow water equivalent (swe), the zmd’s crop weather bulletin (shukla et al., 2020b)."
+4,maps are frontiers in climate | www.frontiersin.org 4 february 2021 | volume 2 | article 583509
+5,shukla et al.
+5,"early warning explorer most useful for national, regional, and international decision- selection of any combination of years from the historical record makers who may be interested in assessing the climate and/or (current and past years), as well as the climatological mean, chart vegetation conditions at a broad spatial scale."
+5,"maps allow for types (line and bar plots), and download options (."
+5,csv to get identification of “hotspots” that may be experiencing the most the underlying data and png to get the figure).
+5,"figure 4c also severe anomalies (e.g., droughts and floods) during a given event. shows the 3-months anomaly of chirps for several different maps are also helpful for assessing the spatial extent (e.g., regional years in the past, which can be used to quickly assess the severity vs. local) of a given climate extreme."
+5,"the “spatial locking tool” of the anomalies in the current years relative to the anomalies option, highlighted in figure 3, is useful for comparing maps of in the past years."
+5,"the user can also see values of anomalies as (i) absolute magnitude, anomaly, and z-score for a given time they move the cursor to a different 3-months averaging period. period for a given eo, or (ii) a given eo for different time periods, for example, in figure 4c, the cursor is on the djf season to or (iii) different eos as well as different time periods (figure 2). display the anomalies for all years from 2013 to 14 through the typically, maps are used as a first glimpse of the climate and/or current year."
+5,"this option is also helpful when assessing impacts vegetation conditions, followed by time series graphs to get a of the climate or vegetation anomalies."
+5,"for example, a user can more in-depth, localized assessment of the conditions and its compare the anomalies of the current year with past years to evolution in time. identify the year with the most similar level of anomalies."
+5,"this time series graphs provide a localized, spatially averaged can help identify analog years for which impacts of anomalies view of the climate and vegetation conditions within a historical are already known (e.g., shortfall in production or level of food perspective (figure 4)."
+5,"the usgs’s ewx provides access to eo insecurity), and similar impacts can therefore be assumed for the time series spatially averaged over (i) administrative unit-1 or−2 current year."
+5,"for example, figure 4c shows that, although this and (ii) crop zones in several developing regions across the region experienced a drought in december-february 2019/2020 globe, such as africa, central america, the caribbean, central with precipitation deficit being 65.9 mm, this drought was not as asia, the middle east, and south america."
+5,"for the middle east severe as the past major drought in 2015-16, during which the region, the spatial aggregation is also available for a few selected precipitation deficit was 255.77 mm. watersheds."
+5,"aggregation over these boundaries allows the data to be directly relevant for decision-making, including urgent earth observations (eos) mitigation and/or long-term resilience."
+5,"for example, aggregation over administrative unit-1 or−2 may allow for a targeted delivery the usgs’s ewx provides access to several different earth of relief at a sub-national scale in the case of climate-driven food observations (eos) to support the timely analysis of climate, insecurity."
+5,"aggregation over crop zones ignores areas that are not vegetation, and land surface conditions in order to monitor the major-producing regions at a national level, and are most useful status of natural hazards such as droughts and floods."
+5,"in addition for assessing agricultural conditions and for crop production to eos facilitating routine monitoring, ewx also provides access outlooks."
+5,"figure 4b shows the time series of chirps anomaly to forecasts (such as precipitation forecasts) to facilitate early over a 3-months averaging period, over an administrative unit- warning (table 1)."
+5,"the list of eos available through the ewx 1 (manicaland, zimbabwe)."
+5,"the location of this administrative varies based on the focus regions, as well as the version of the unit can be seen by the “target symbol” in the map of chirps ewx (table 1); however, below is a list of the prominent eos anomaly, figure 4a."
+5,"the “target symbol” appears after the user that are common in different versions of ewx (table 1), which selects the “time series graph” option, as shown in figure 4a. cover at least quasi-global domain and are also widely used for after selecting the eo (chirps 3 monthly anomaly, in this monitoring and early warning purposes."
+5,"these eos are available case) and desired spatial domain, (manicaland, zimbabwe) a for all regions through the usgs’s ewx and across all versions time series graph is created (figure 4b)."
+5,this graph can be linked of ewx (table 1).
+5,"it is important to mention that the ewx with the map using the docking option in the time series graph, framework allows for the inclusion of additional gridded eos as as in figures 4a,b."
+5,this option allows quick access to time series needed or when applicable for a given region.
+5,"for example, swe for several different domains within the map (figures 4a,b). and snow depth data are available for central asia, where snow the “target symbol” will move as the user selects different plays a crucial role in food and water security. domains."
+5,"the chirps 3-monthly anomaly time series selected for manicaland, zimbabwe shows precipitation anomaly for each climate hazards center infrared precipitation with of the 3-months averaging periods in the latest “water year.”"
+5,"station data (chirps) in southern hemisphere regions, the “water year” starts from the chirps is a precipitation data set (funk et al., 2015a) that july and ends in june."
+5,"the time series graph (figure 4b) shows is widely used for routine monitoring (funk et al., 2019), as well a deficit of rainfall during the beginning of the rainy season. as long-term change and variability analysis."
+5,"this data set spans both oct-dec (ond) and nov-jan (ndj) seasonal anomalies more than 35 years, allowing for a long-term context through are substantially below normal."
+5,it also shows a recovery in which to examine present hazards such as drought.
+5,"it is available rainfall deficit late in the season, resulting in dec-feb (djf) at 0.05 deg x 0.05 deg spatial resolution and spans the globe anomalies being near normal."
+5,"depending on the region and between 50 deg n and 50 deg s. crop type, early and mid-seasonal precipitation deficit can have at the core of this data set are three main components: severe implications in terms of agricultural production and food (i) a high-quality precipitation climatological mean, chpclim, insecurity."
+5,"figure 4c shows several different mapping options (funk et al., 2015b) at 0.05 deg x 0.05 deg to allow for accurate available for time series graphs (top right) that allow for the variation of precipitation based on changes in topography, (ii) frontiers in climate | www.frontiersin.org 5 february 2021 | volume 2 | article 583509"
+6,shukla et al.
+6,"early warning explorer figure 3 | spatially locked maps of march-may 2020 season chirps precipitation (a) absolute magnitude, (b) additive anomaly, and (c) standardized anomaly over east africa."
+6,figure 4 | examples of the time series graphs and selected primary options.
+6,"(a) shows the location of administrative unit-1, manicaland in zimbabwe as well as the time series graph option, (b) shows the time series graph of the anomaly of 3-months total precipitation for 2019–2020 season, (c) shows a comparison between the anomalies during 2019/2020 with that of past selected years, as well as it highlights the key graphing options. a satellite-based infrared brightness temperature data set, used (1) generation of high-quality gridded mean precipitation to estimate variability in precipitation, and (iii) in situ reports (chpclim) using in situ observations of precipitation collected from several (about 15 to 20) global, (2) conversion of infrared (ir) cold cloud brightness temperature regional, and national databases. into precipitation estimates and conversion of ir based on a more detailed description of chirps methodology can be precipitation estimates into multiplicative anomalies found in funk et al. (2015a), but briefly, the development of (3) multiplication of ir-based precipitation anomalies to a high- chirps involves the following primary steps: quality mean precipitation data set to get chirp frontiers in climate | www.frontiersin.org 6 february 2021 | volume 2 | article 583509"
+7,shukla et al.
+7,"early warning explorer (4) adjustment and bias-correction of chirp relative to in and water fluxes between the land surface and atmosphere. situ precipitation reports, which are human inspected for in case of lack of sufficient moisture for evaporation, and consistency and erroneous entries."
+7,"this blending of in situ hence, evaporative cooling, lst becomes higher than normal, reports with satellite-based precipitation estimates allows for and lst anomalies can help detect the moisture deficit and greater accuracy of this data set (through in situ reports), drought conditions."
+7,"conversely, cooler-than-normal lst can as well as greater spatial and temporal coverage (through indicate healthy vegetation conditions or regions with excess satellite-based inputs). moisture."
+7,"figure 6 shows october-december lst anomalies over east africa for 2 extreme years, 2016 (figure 6a) and 2019 figure 3 shows the maps depicting chirps precipitation for (figure 6b), as shown by the chirps anomaly for those seasons the march-may 2020 season in terms of absolute magnitude (figures 6c,d), 2016 was a drought year (hence, above-normal (figure 3a), additive anomaly (figure 3b), and standardized lst) and 2019 was a wet year (hence, below-normal lst). anomaly (figure 3c)."
+7,"as highlighted in section example applications to support decision-making, this season is marked emodis normalized difference vegetation index by flooding and landslide events; however, anomaly maps used (ndvi) in conjunction with the absolute magnitude map highlight parts the usgs eros generates a suite of products based on expedited of somalia that experienced drought during this otherwise much moderate resolution imaging spectrometer (emodis) data wetter than normal year in this region as a whole."
+7,"(jenkerson et al., 2010). emodis ndvi, which is available at 250 m x 250 m spatial resolution, is part of this suite and climate hazards center infrared precipitation with is generated to facilitate real-time and remote monitoring station data-prelim (chirps-prelim) of vegetation conditions, particularly drought conditions."
+7,"as mentioned above, one of the primary strengths of chirps vegetation conditions can help provide assessments of is blending with in situ precipitation data."
+7,"this blending helps agricultural yield and production (vrieling et al., 2008, unbias the data set and enhances its accuracy."
+7,"however, in situ- 2011; funk and budde, 2009), as well as pasture availability based precipitation data are typically not available in real time."
+7,"(pricope et al., 2013; begue et al., 2014), both of which contribute generally, in situ reports of precipitation are available for the to food availability and livelihoods—and therefore, to food blending process about 2 weeks after the end of a month."
+7,this security.
+7,"the ewx provides access to dekadal-scale emodis delay of a few weeks can pose a challenge in the application of ndvi data, as well as absolute anomaly and percent of median."
+7,"chirps for real-time monitoring, which is particularly essential ndvi anomaly maps are typically used for monitoring spatial during a rainy season."
+7,"to reduce the latency and allow for extent and variability, as well as severity of vegetation drought near-real-time availability of the precipitation data set, chirps- conditions."
+7,"for example, figure 7 shows ndvi in percent of prelim is made available."
+7,"the process of generating chirps- median for the last dekad of february during the last few years; prelim is similar to the chirps process, with the main difference these maps highlight that the region of southern africa (sa) being its reliance on global telecommunication system (gts) experienced multiple drought events in recent years."
+7,"multiple stations only, which are available in near-real time."
+7,"blending of widespread droughts, and in some cases, consecutive drought chirp with gts-only stations allows for the latency of chirps- events (repeated droughts in the same region) in sa have led to prelim to be <5 days."
+7,"as in situ reports for a given month are substantial increases in the number of people needing emergency made available, chirps (final version) is generated using those food assistance since 2015 (fews net, 2020). reports."
+7,"note that, in general, the differences in chirps-prelim and chirps are within acceptable limits, as both data sets share chirps-global ensemble forecast system the same climatological mean."
+7,any differences between both data (chirps-gefs) sets are random rather than systematic in nature.
+7,"additionally, in addition to the satellite (and in-situ) based eos, ewx dinku et al. (2018) found the difference between chirp, which also allows access to weather forecasts."
+7,"at present ucsb and is solely based on satellite-based observations and is at the rcmrd’s instances of ewx, provide access to chirps-gefs core of both chirps-prelim and chirps, and chirps to be which is a precipitation forecast product, in the form of maps and minor over east africa."
+7,figure 5 shows a map of chirps-prelim time-series graphics.
+7,eros’s ewx provides access to this product precipitation globally.
+7,"maps such as this one are updated every in the form of time-series graphs. 5th day when chirps-prelim is updated and can be accessed chirps-gefs is generated by downscaling and bias- using the ewx. correcting national centers for environmental prediction’s (ncep) global ensemble forecast system (gefs) precipitation moderate resolution imaging spectroradiometer forecasts (hamill et al., 2006)."
+7,"the process of downscaling (modis) land surface temperature (lst) and bias-correction of ncep’s gefs to generate chirps- the ewx also provides access to near-real-time modis-based gefs, yields precipitation forecasts that are climatologically and land surface temperature (lst) estimates version 6 (wan, resolution wise compatible with chirps precipitation dataset 2014)."
+7,"modis lst is an important data set for drought [see section climate hazards center infrared precipitation with monitoring, especially in the regions and times of the season station data (chirps)]. that are “water limited” (karnieli et al., 2010)."
+7,"lst is a key land at first the ensemble mean of daily precipitation forecasts surface process parameter, which reflects the results of energy is calculated using the ensemble from operational ncep-gefs frontiers in climate | www.frontiersin.org 7 february 2021 | volume 2 | article 583509"
+8,shukla et al.
+8,"early warning explorer figure 5 | map of chirps-prelim, which shows total precipitation received globally during the pentad 5 (21–25) of june 2020."
+8,figure 6 | maps of absolute anomalies of october-december lst for (a) 2016 and (b) 2019.
+8,"october-december 2016 was a drought year for the region and october-december 2019 was a pluvial year as shown by corresponding chirps anomaly for (c) 2016 and (d) 2019. forecasts at resolution 0.50 x 0.50 , then the ensemble mean chirps)."
+8,"finally, a rank-based quantile mapping approach daily forecasts are accumulated to get 5, 10, and 15-days is used to bias-correct downscaled forecasts relative to the total precipitation forecasts."
+8,"following which total precipitation empirical distribution (sampled from 2000 to 2019 period, forecasts are downscaled from their native resolution to 0.050 which is the longest common period between the hindcast and x 0.050 spatial resolution (same as the spatial resolution of chirps climatology) of chirps 5, 10, and 15-days values."
+8,frontiers in climate | www.frontiersin.org 8 february 2021 | volume 2 | article 583509
+9,shukla et al.
+9,"early warning explorer figure 7 | maps of emodis ndvi in % of median, for the third dekad of february during the (a) 2015/16, (b) 2014/15, (c) 2012/13 seasons showing multiple drought events in the region."
+9,"figure 8 | maps showing monthly precipitation anomaly for (a) oct 2015, (b) nov 2015, (c) dec 2015, (d) jan 2016, and (e) feb 2016 over the southern africa region."
+9,the crop zone boundary layer (in red color) is overlaid on the maps.
+9,frontiers in climate | www.frontiersin.org 9 february 2021 | volume 2 | article 583509
+10,shukla et al.
+10,"early warning explorer figure 9 | seasonal overview of december-february 2015/16 season (a) chirps anomaly (b) lst anomaly (c) ndvi anomaly for the first dekad of march, time series of ndvi anomalies for 2015–16 compared with the anomalies from the past 3 years for administrative unit-1 in (d) mozambique and (e) zimbabwe."
+10,(f) shows the food insecurity reports as of june 2016 (source fews net).
+10,"the result of the quantile-matching scheme is that the average providing access to eos for improved assessment of climate- and variance of the chirps data are approximately retained in driven extreme events and understanding of long-term climate the resulting chirps-gefs values, which allows for seamless variability and change. application of chirps-gefs in conjunction with chirps."
+10,"the ewx is an effective tool for monitoring climate-driven at present chirps-gefs is being used for complementing extreme events, particularly drought events, which tend to routine agroclimatological monitoring products that are based develop more slowly than pluvial events."
+10,drought conditions on observations.
+10,"depending on time of the season, 15-days during a rainy season can lead to an increase in food lead precipitation forecasts can be crucial for supporting insecurity, and drought monitoring during the rainy season early assessments of agropastoral conditions."
+10,"for example, can therefore support early warning of food insecurity."
+10,"the with chirps (precipitation observation) and chirps-gefs ewx is also particularly attractive for monitoring, as it provides (precipitation forecast) combination time series in ewx, users access to low-latency, gridded rainfall data sets, allowing for can quickly evaluate if the next 2 weeks of forecast precipitation timely drought monitoring as opposed to relying on local in amounts would exacerbate observed deficits or be substantial situ rainfall reports, which are often available with a lag of enough to reduce the deficits. a few weeks."
+10,"in this section, using the example of the sa drought in 2015– 16 (archer et al., 2017; funk et al., 2018; shukla et al., 2020a), we demonstrate the value of the ewx as a drought monitoring tool."
+10,example applications to support this drought event led to massive increases in food insecurity in decision-making the region.
+10,"as per the southern africa development community (sadc) estimate (sadc, 2016), 23 million people in the region the strength of ewx lies in its ready access to eos, including needed emergency food assistance. maps, time series graphs, and analysis-ready data to support early warning of drought to support food insecurity starts informed decision-making."
+10,"the ewx is best suited to support several months before a season (funk et al., 2019)."
+10,"in decisions to mitigate impacts of climate-driven disasters, and advance of a rainy season, the main focus is given to large- to support long-term climate adaptation."
+10,"in this section, we scale climate and sea surface temperature (e.g., el niño- provide a few key examples of the application of the ewx in southern oscillation) conditions."
+10,based on the large-scale frontiers in climate | www.frontiersin.org 10 february 2021 | volume 2 | article 583509
+11,shukla et al.
+11,"early warning explorer figure 10 | seasonal overview of march-may 2020 season for east africa (a) chirps standardized anomaly (b) report of number of people displaced (source unochr), time series of pentadal total rainfall during the season for two of the most affected regions in kenya (c) turkana and (d) kisumu. climate anomalies, assumptions are made for how the rainy through february 2016."
+11,it is clear from these maps that close season will evolve.
+11,"prior to the start of 2015/16 rainy season monitoring of rainfall anomalies confirmed the high chances in sa, as per the international research institute for climate of rainfall drought development in the region."
+11,"starting from and society (iri) and climate prediction center (cpc), who october 2015, several of the regions in central and southern provided official el niño-southern oscillation forecasts on july sa experienced well-below-average rainfall."
+11,"rainfall deficits 9, 2015, the chances of an el niño persisting through february particularly intensified in parts of zimbabwe and mozambique. were >90%."
+11,"in addition to the high probability of el niño displaying the crop zone boundaries (in red) on the maps development, the dynamical forecasts from the north american highlights the fact that crop zones experienced the most severe multi-model system (nmme) (kirtman et al., 2013) were deficit in rainfall, which has a direct effect on crop production in forecasting the el niño to be in the “strong” category (3-months a rainfed region."
+11,the december to february (djf) period is when average niño 3.4 sst anomaly > 2◦ c).
+11,"historically, el niño has this region typically receives most of its rainfall, so deficits during been linked to enhanced probability of below-normal rainfall those months of 2015/16 were particularly serious. in the sa region (reason and jagadheesha, 2005; meque and post february 2016, the ewx allows for a seasonal (djf) abiodun, 2015; manatsa et al., 2017; gore et al., 2020), and the assessment of the climate and vegetation conditions in the past “strong” el niño events, such as 1982–83 and 1991–92, region."
+11,"figure 9 shows the december-february anomalies of resulted in severe droughts (pomposi et al., 2018)."
+11,the southern precipitation (figure 9a) and lst (figure 9b).
+11,"these maps africa regional climate outlook forum (sarcof-19), held highlight (i) the regions that experienced the most severe in august 2015, indicated enhanced chances of below-normal seasonal rainfall deficit and (ii) that this rainfall deficit was also rainfall in the central and southern part of the sa region."
+11,"as the accompanied by large positive anomalies in the lst (which, in rainy season approaches, this context of a higher chance of below- part, may be due to the rainfall deficit, but also partly due to long- normal rainfall is critical, as it triggers close monitoring of rainfall term climate change)."
+11,"the impact of rainfall deficit and high lst and drought conditions (funk et al., 2019). is reflected in the ndvi anomaly as of the first dekad of march using the ewx, rainfall anomalies can be monitored closely 2016 (figure 9c), as several regions of central and southern given the context of the rainfall outlook."
+11,"for example, figure 8 countries in sa were experiencing negative ndvi anomalies. shows the monthly rainfall anomalies from october 2015 a closer look at the time series graphs shows ndvi anomalies frontiers in climate | www.frontiersin.org 11 february 2021 | volume 2 | article 583509"
+12,shukla et al.
+12,early warning explorer figure 11 | time series graphs of seasonal precipitation for the main rainy seasons in an administrative unit-1 of (a) mali (july-sep season) and (b) ethiopia (mar-may and oct-dec season).
+12,these time series graphs and underlying data allow for analysis of long-term climate variability and change.
+12,figure 12 | example of boundary layers provided through rcmrd’s ewx to support country level decision makers such as northern regional trust (nrt).
+12,shown are boundary layers for (a) nrt conservancies (b) rapid grazing blocks and (c) nrt grazing blocks.
+12,"the boundary layers are overlaid over a map showing ndvi anomaly as of the first dekad of may 2020. over the selected crop zones in mozambique (figure 9d) and events, the food insecurity in these regions reached the “crisis” zimbabwe (figure 9e) highlights two key points with direct phase (per integrated food security phase classification), as implications to food insecurity: (i) prior to the 2015/16 droughts, indicated by fews net’s food insecurity maps of “current these regions had already experienced multiple drought events situations” released in june 2016."
+12,"the “crisis” phase of acute food (negative ndvi anomalies during november to march), and (ii) insecurity is when emergency food assistance is needed."
+12,"note the ndvi anomalies in 2015/16 were generally more severe than that, by the end of february 2016, maps and graphs showed the in past years, indicating a more severe drought in this region severe drought conditions in these regions and demonstrated that following multiple droughts."
+12,as a result of these multiple drought this drought followed multiple drought events in the last few frontiers in climate | www.frontiersin.org 12 february 2021 | volume 2 | article 583509
+13,shukla et al.
+13,"early warning explorer figure 13 | key usage statistics of (a) rcmrd ewx and (b) usgs ewx, between october 2019 to june 2020."
+13,(number of users per month is shown by blue bars and the number of page views is shown by the red line). years.
+13,this highlights the value of drought monitoring using the in southwest kenya (figure 10d) shows several pentads with ewx as an early warning tool for food insecurity. much above-normal rainfall (blue line) than the climatological as another example of monitoring climate extreme events mean for these regions (red lines).
+13,"this is another example of using ewx, figure 10 shows how near-real-time precipitation how the ewx can be used to monitor climate extremes, and, in maps and time series graphs can be used to monitor flooding this case, extreme precipitation totals that can lead to flooding conditions."
+13,parts of ea experienced floods and landslides and landslides. driven by extreme precipitation events.
+13,"several news outlets in addition to monitoring climate and vegetation conditions reported loss of lives and structures due to these extreme and extreme events, the ewx can also be used for visualizing and events, particularly during april and may."
+13,figure 10a shows accessing analysis-ready data for examining long-term climate the march-may standardized precipitation anomaly map for variability and change.
+13,the time series option can be used to kenya.
+13,"comparing this map with that of the number of people extract spatially averaged eos for a given time period (e.g., a displaced due to floods estimated by the united nations office given season) for all years, which can allow for examination for the coordination of humanitarian affairs (unocha, 2020) of the climate variability and change in the given eo variable, (figure 10b) indicates that several of the regions with the highest season, and region."
+13,"for example, figure 11 shows time series number of displaced people also experienced march-may rainfall of precipitation for 1981-present for an administrative unit-1 in >2 standard deviations above the mean."
+13,"a closer examination mali (figure 11a) for the july-september season, and in ethiopia of the precipitation totals at pentadal scale for the administrative for march-may and october-december seasons (figure 11b) for unit-1 turkana in northwest kenya (figure 10c) and kisumu the 3 months of their primary rainy seasons."
+13,the time series of frontiers in climate | www.frontiersin.org 13 february 2021 | volume 2 | article 583509
+14,shukla et al.
+14,"early warning explorer july-september precipitation in the administrative unit-1 in mali here we provide a comprehensive overview of the ewx, shows an apparent increase in precipitation."
+14,the time series of which includes: seasonal precipitation in the administrative unit-1 in ethiopia 1.
+14,"descriptions of several regional to global eos that allow shows the past extreme october-december precipitation events for near-real-time monitoring of agro-climatologial (climate, (e.g., 1997) and how the most recent october-december season hydrologic, and agricultural) conditions compares with past extreme events."
+14,the underlying data of such 2.
+14,"illustration of some of the important features of the ewx, time series can be downloaded for further analysis of climate allowing for ready access to eos in the form of gridded maps variability and change. and spatially averaged time series graphs finally, rcmrd’s ewx provides another important example 3."
+14,"illustration of real-world examples of how ewx and its of the value of this tool, highlighting the application of ewx different features can be used to access and analyze eos in the region of eastern and southern africa."
+14,an instance of to monitor climate extreme events and facilitate long- ewx was installed at rcmrd through a recently completed term climate change and variability analysis.
+14,"the illustrated servir applied science team (ast) project (shukla et al., examples include monitoring of both drought events and 2020b) (table 1)."
+14,a regional implementation of the ewx allowed flood events.
+14,the examples also include the application of rcmrd to add eos that are most needed for addressing rcmrd’s version of ewx specifically for the region of eastern environmental challenges in the region.
+14,"this implementation and southern africa. also allowed rcmrd to provide spatially averaged eos for the boundaries that are most relevant for regional decision-making additionally, it is important to emphasize that, in addition purposes."
+14,"for example, rcmrd’s ewx provides spatially to tools such as ewx, capacity-building training is needed to averaged eos for administrative three polygons for kenya further enhance the application of eos for decision-making."
+14,"for and tanzania, which can help facilitate application of eos example, in addition to the ewx implementation at rcmrd, for decisions at the ward level."
+14,"additionally, rcmrd’s ewx through the servir ast project, four training courses on the allows access to eos averaged over northern rangelands trust ewx and its applications were provided throughout the region."
+14,"(nrt) conservancies (figure 12a) and rapid grazing blocks these four training courses involved 70+ technical professionals (figure 12b), and nrt grazing blocks (figure 12c) which from regional, national, climate, meteorological, hydrological, makes the eos directly applicable for decision-makers such as and environmental agencies, as well as representatives from nrt, which is a kenya-based conservancy organization that basin-scale water management agencies."
+14,these training courses aims to support the development of resilient communities in the facilitated several applications of the ewx for supporting region.
+14,"ever since its implementation, this version of the ewx informed decision-making in the region; for example, rcmrd, has regularly provided access to eos to regional users—mainly tanzania ministry of agriculture’s food security division, in kenya, tanzania, and ethiopia (as per the usage statistics)."
+14,"sadc’s climate service center, and zambia meteorological figure 13a shows the key usage statistics, including the number department have utilized the ewx for regional support (shukla of users and number of page views for the cloud instance of the et al., 2020b)."
+14,rcmrd ewx page between october 2019 through june 2020.
+14,"finally, although the focus of this manuscript has been during this time period, this page was viewed a total of 1,222 on the ssa region, several of the eos available through the times, out of which 634 were unique views."
+14,"on average, users ewx are at least quasi-global (between 50 deg north to south), spent about 5 min on this page."
+14,"for comparison, figure 13b and hence, the ewx is applicable to supporting decision- shows the number of users and page views of usgs’s ewx making in other climatically vulnerable regions of the globe, and ewx-lite. such as the regions that servir—the national aeronautics and space administration (nasa) and united states agency for international development (usaid)-funded initiative— focuses on."
+14,implementation of the ewx in these regions would concluding remarks further increase access to eos and expand their application in empowering decision-making in order to mitigate the impacts of climate-related risks to food and water security are on the rise climate extremes and support climate adaptation.
+14,"furthermore, globally."
+14,"regions of the globe that are prone to food and water in order to facilitate ewx’s application for eo access, in future we insecurity, most of which are in sub-saharan africa, are not also plan to provide an user manual and hope to describe access only sensitive to climate-related risks, but they also face several and analysis of forecasts (weather to seasonal scale) using ewx challenges in terms of monitoring climate extreme events, mainly in a future manuscript. due to lack of in situ observations."
+14,"major strides have been made in terms of development and real-time availability of remote sensing-based eos; however, access to those data sets and their applications for informed decision-making is limited."
+14,the ewx data availability statement is a web service that aims both to fill that important existing gap and to facilitate application of eos for decision-making to publicly available datasets were analyzed in this study.
+14,this support mitigating the most adverse impacts of climate extreme data can be found at: https://earlywarning.usgs.gov/fews/ewx/ events and climate adaptation. index.html.
+14,frontiers in climate | www.frontiersin.org 14 february 2021 | volume 2 | article 583509
+15,shukla et al.
+15,"early warning explorer author contributions usgs internal reviewer, shahriar pervez, kbr contractor to the usgs eros, for his helpful comments and suggestions ss wrote the first draft of the manuscript and prepare all the on this manuscript and the climate hazards center’s technical figures."
+15,"ml, ma, mb, gh, jr, and cf reviewed and edited writer, juliet way-henthorne, for providing professional editing. the manuscript."
+15,ml and ma contributed to development of the authors acknowledge support of the united states agency figure 1.
+15,"ml, ma, mb, and jr contributed to development of for international development (usaid) cooperative agreement ewx."
+15,"jr, gh, and cf serve as investigators on miscellaneous no."
+15,"72dffp19ca00001, the usgs cooperative agreement funds that support development of ewx."
+15,"all authors contributed #g14ac00042, the usgs drivers of drought program, and the to the article and approved the submitted version."
+15,defense advanced research projects agency (darpa) world modelers program under army research office (aro) prime acknowledgments contract no.
+15,w911nf-18-1-0018.
+15,"any opinions, findings, and conclusions or recommendations expressed in this material the authors would like to thank mr."
+15,"patrick kabatha from are those of the author(s) and do not necessarily reflect the the geospatial information technology team at the rcmrd position or the policy of darpa and aro, and no such official for providing usage analytics data for rcmrd’s ewx, the endorsement by either should be inferred."
+15,"references at: http://www.fao.org/emergencies/resources/documents/resources-detail/en/ c/1106756/ (accessed may 21, 2020)."
+15,"archer, e."
+15,"m., landman, w."
+15,"a., tadross, m."
+15,"a., malherbe, j., weepener, h., fews net (2020)."
+15,"southern africa - key message update: mon, 2020-04-27 | maluleke, p., et al."
+15,(2017).
+15,understanding the evolution of the 2014–2016 famine early warning systems network.
+15,available online at: https://fews.net/ summer rainfall seasons in southern africa: key lessons.
+15,"risk manag. 16, southern-africa/key-message-update/april-2020 (accessed june 28, 2020)."
+15,"22–28. doi: 10.1016/j.crm.2017.03.006 funk, c., and budde, m."
+15,(2009).
+15,"phenologically-tuned modis ndvi-based arsenault, k."
+15,"r., shukla, s., hazra, a., getirana, a., mcnally, a., kumar, s. production anomaly estimates for zimbabwe."
+15,remote sens.
+15,environ.
+15,"113, v., et al."
+15,(2020).
+15,the nasa hydrological forecast system for food and 115–125. doi: 10.1016/j.rse.2008.08.015 water security applications.
+15,meteor.
+15,"101, e1007–e1025."
+15,"funk, c., davenport, f., harrison, l., magadzire, t., galu, g., artan, g."
+15,"a., doi: 10.1175/bams-d-18-0264.1 et al."
+15,(2018).
+15,"anthropogenic enhancement of moderate-to-strong el niño events ashouri, h., hsu, k.-l., sorooshian, s., braithwaite, d."
+15,"k., knapp, k."
+15,"r., cecil, likely contributed to drought and poor harvests in southern africa during 2016."
+15,"d., et al."
+15,(2015).
+15,persiann-cdr: daily precipitation climate data record bull.
+15,meteorol.
+15,"99, s91–s96. doi: 10.1175/bams-d-17-0112.1 from multisatellite observations for hydrological and climate studies."
+15,"funk, c., peterson, p., landsfeld, m., pedreros, d., verdin, j., shukla, s., meteorol."
+15,"96, 69–83. doi: 10.1175/bams-d-13-00068.1 et al. (2015a)."
+15,"the climate hazards infrared precipitation with stations— begue, a., vintrou, e., saad, a., and hiernaux, p."
+15,(2014).
+15,differences between a new environmental record for monitoring extremes.
+15,"data 2, 1–21. cropland and rangeland modis phenology (start-of-season) in mali."
+15,j. doi: 10.1038/sdata.2015.66 appl.
+15,earth obs.
+15,"geoinformation 31, 167–170. doi: 10.1016/j.jag.2014.03.024 funk, c., shukla, s., mamadou, w., rowland, j., hoell, a., mcnally, a., et al."
+15,"brown, m."
+15,"e., escobar, v., moran, s., entekhabi, d., o’neill, p."
+15,"e., njoku, e."
+15,(2019).
+15,"recognizing the famine early warning systems network (fews net): g., et al."
+15,(2013).
+15,nasa’s soil moisture active passive (smap) mission and over 30 years of drought early warning science advances and partnerships opportunities for applications users.
+15,meteorol.
+15,"94, 1125–1128. promoting global food security."
+15,meteorol.
+15,"100, 1011–1027. doi: 10.1175/bams-d-11-00049.1 doi: 10.1175/bams-d-17-0233.1 campbell, b."
+15,"m., vermeulen, s."
+15,"j., aggarwal, p."
+15,"k., corner-dolloff, c., girvetz, e., funk, c., verdin, a., michaelsen, j., peterson, p., pedreros, d., and husak, g."
+15,"loboguerrero, a."
+15,"m., et al."
+15,(2016).
+15,reducing risks to food security from climate (2015b).
+15,a global satellite-assisted precipitation climatology.
+15,earth syst.
+15,sci. change.
+15,food secur.
+15,"11, 34–43. doi: 10.1016/j.gfs.2016.06.002 data 7, 275–287. doi: 10.5194/essd-7-275-2015 das, n."
+15,"n., entekhabi, d., dunbar, r."
+15,"s., colliander, a., chen, f., crow, w., gelaro, r., mccarty, w., suárez, m."
+15,"j., todling, r., molod, a., takacs, l., et al. et al."
+15,(2018).
+15,the smap mission combined active-passive soil moisture product (2017).
+15,"the modern-era retrospective analysis for research and applications, at 9 km and 3 km spatial resolutions."
+15,remote sens.
+15,environ.
+15,"211, 204–217. version 2 (merra-2)."
+15,"30, 5419–5454. doi: 10.1175/jcli-d-16-0758.1 doi: 10.1016/j.rse.2018.04.011 gore, m., abiodun, b."
+15,"j., and kucharski, f."
+15,(2020).
+15,"understanding the influence of dinku, t., funk, c., peterson, p., maidment, r., tadesse, t., gadain, h., et al."
+15,enso patterns on drought over southern africa using speedy.
+15,"54, (2018)."
+15,validation of the chirps satellite rainfall estimates over eastern africa.
+15,307–327. doi: 10.1007/s00382-019-05002-w q.
+15,meteorol.
+15,"144, 292–312. doi: 10.1002/qj.3244 hamill, t."
+15,"m., whitaker, j."
+15,"s., and mullen, s."
+15,(2006).
+15,"reforecasts: an important donlon, c., berruti, b., buongiorno, a., ferreira, m."
+15,"h., féménias, p., dataset for improving weather predictions."
+15,meteorol.
+15,"87, 33–46."
+15,"frerick, j., et al."
+15,(2012).
+15,the global monitoring for environment and doi: 10.1175/bams-87-1-33 security (gmes) sentinel-3 mission.
+15,remote sens.
+15,environ.
+15,"120, 37–57."
+15,"hersbach, h., and dee, d."
+15,(2016).
+15,era5 reanalysis is in production. doi: 10.1016/j.rse.2011.07.024 ecmwf.
+15,"available online at: https://www.ecmwf.int/en/newsletter/147/news/ dorigo, w., wagner, w., albergel, c., albrecht, f., balsamo, g., brocca, l., et al. era5-reanalysis-production (accessed july 3, 2020)."
+15,(2017).
+15,"esa cci soil moisture for improved earth system understanding: huffman, g."
+15,"j., adler, r."
+15,"f., bolvin, d."
+15,"t., and nelkin, e."
+15,(2010).
+15,“the state-of-the art and future directions.
+15,remote sens.
+15,environ.
+15,"203, 185–215."
+15,"trmm multi-satellite precipitation analysis (tmpa),” in satellite rainfall doi: 10.1016/j.rse.2017.07.001 applications for surface hydrology, eds m."
+15,gebremichael and f.
+15,"hossain drusch, m., del bello, u., carlier, s., colin, o., fernandez, v., gascon, f., et al."
+15,"(springer: netherlands), 3–22. doi: 10.1007/978-90-481-2915-7_1 (2012)."
+15,"sentinel-2: esa’s optical high-resolution mission for gmes operational jenkerson, c."
+15,"b., maiersperger, t., and schmidt, g."
+15,(2010). emodis: a user- services.
+15,remote sens.
+15,environ.
+15,"120, 25–36. doi: 10.1016/j.rse.2011.11.026 friendly data source."
+15,"geological survey, u."
+15,available online at: http://pubs.
+15,"falkenmark, m."
+15,(2013).
+15,"growing water scarcity in agriculture: future challenge to er.usgs.gov/publication/ofr20101055 (accessed september 17, 2019). global water security."
+15,philos.
+15,trans.
+15,371:20120410.
+15,"jiang, c., guan, k., pan, m., ryu, y., peng, b., and wang, s."
+15,(2020).
+15,"bess- doi: 10.1098/rsta.2012.0410 stair: a framework to estimate daily, 30&thinsp;m, and all-weather crop fao (2016)."
+15,damage and losses due to weather and climate-related evapotranspiration using multi-source satellite data for the us corn belt.
+15,disasters in agricultural sectors : fao in emergencies.
+15,available online hydrol.
+15,earth syst.
+15,"24, 1251–1273. doi: 10.5194/hess-24-1251-2020 frontiers in climate | www.frontiersin.org 15 february 2021 | volume 2 | article 583509"
+16,shukla et al.
+16,"early warning explorer karnieli, a., agam, n., pinker, r."
+16,"t., anderson, m., imhoff, m."
+16,"l., shukla, s., arsenault, k., hazra, a., peters-lidard, c., davenport, f., magadzire, gutman, g."
+16,"g., et al."
+16,(2010).
+16,"use of ndvi and land surface temperature t., et al. (2020a)."
+16,improving early warning of drought-driven food for drought assessment: merits and limitations.
+16,"23, 618–633. insecurity in southern africa using operational hydrological monitoring doi: 10.1175/2009jcli2900.1 and forecasting products."
+16,hazards earth syst.
+16,"20, 1187–1201."
+16,"kirtman, b."
+16,"p., min, d., infanti, j."
+16,"m., kinter, j."
+16,"iii, paolino, d."
+16,"a., doi: 10.5194/nhess-20-1187-2020 zhang, q., et al."
+16,(2013).
+16,"the north american multimodel ensemble: phase- shukla, s., macharia, d., husak, g., landsfeld, m., nakalembe, c., blakeley, s., 1 seasonal-to-interannual prediction; phase-2 toward developing intraseasonal et al. (2020b)."
+16,enhancing access and usage of earth observations in environmental prediction.
+16,meteorol.
+16,"95, 585–601. doi: 10.1175/bams-d-12-0 decision-making in eastern and southern africa through capacity building."
+16,0050.1 front.
+16,sustain.
+16,food syst.
+16,land livelihoods food secur.
+16,"manatsa, d., mushore, t., and lenouo, a."
+16,(2017).
+16,"improved predictability skofronick-jackson, g., peterson, w."
+16,"a., berg, w., kidd, c., stocker, e."
+16,"f., of droughts over southern africa using the standardized precipitation kirschbaum, d."
+16,"b., et al."
+16,(2017).
+16,the global precipitation measurement (gpm) evapotranspiration index and enso.
+16,theor.
+16,climatol.
+16,"127, 259–274. mission for science and society."
+16,meteorol.
+16,"98, 1679–1695. doi: 10.1007/s00704-015-1632-6 doi: 10.1175/bams-d-15-00306.1 meque, a., and abiodun, b."
+16,(2015).
+16,"simulating the link between enso and szantoi, z., and strobl, p."
+16,(2019).
+16,copernicus sentinel-2 calibration and validation. summer drought in southern africa using regional climate models.
+16,remote sens.
+16,"52, 253–255. doi: 10.1080/22797254.2019.1582840 44, 1881–1900. doi: 10.1007/s00382-014-2143-3 tapley, b."
+16,"d., bettadpur, s., ries, j."
+16,"c., thompson, p."
+16,"f., and watkins, m."
+16,"milly, p."
+16,"d., betancourt, j., falkenmark, m., hirsch, r."
+16,"m., kundzewicz, (2004)."
+16,grace measurements of mass variability in the earth system.
+16,science z.
+16,"w., lettenmaier, d."
+16,"p., et al."
+16,(2008).
+16,"stationarity is dead: whither water 305, 503–505. doi: 10.1126/science.1099192 management?"
+16,"science 319, 573–574. doi: 10.1126/science.1151915 torres, r., snoeij, p., geudtner, d., bibby, d., davidson, m., attema, e., molteni, f., buizza, r., palmer, t."
+16,"n., and petroliagis, t."
+16,(1996).
+16,the ecmwf et al.
+16,(2012).
+16,gmes sentinel-1 mission.
+16,remote sens.
+16,environ.
+16,"120, 9–24. ensemble prediction system: methodology and validation."
+16,meteorol.
+16,"soc. doi: 10.1016/j.rse.2011.05.028 122, 73–119. doi: 10.1002/qj.49712252905 unocha (2020)."
+16,kenya: floods flash update no.
+16,1 (7 may 2020)—kenya.
+16,"pegion, k., kirtman, b."
+16,"p., becker, e., collins, d."
+16,"c., lajoie, e., burgman, reliefweb."
+16,"available online at: https://reliefweb.int/report/kenya/kenya- r., et al."
+16,(2019).
+16,"the subseasonal experiment (subx): a multimodel floods-flash-update-no-1-7-may-2020 (accessed june 28, 2020). subseasonal prediction experiment."
+16,meteorol.
+16,"100, 2043–2060."
+16,"vrieling, a., de beurs, k."
+16,"m., and brown, m."
+16,(2008).
+16,"“recent trends in doi: 10.1175/bams-d-18-0270.1 agricultural production of africa based on avhrr ndvi time series,” pomposi, c., funk, c., shukla, s., harrison, l., and magadzire, t."
+16,"(2018). in remote sensing for agriculture, ecosystems, and hydrology x, vol."
+16,"distinguishing southern africa precipitation response by strength of el niño 7104 (cardiff: international society for optics and photonics), 71040r. events and implications for decision-making."
+16,environ.
+16,"3:074015. doi: 10.1117/12.799824 doi: 10.1088/1748-9326/aacc4c vrieling, a., de beurs, k."
+16,"m., and brown, m."
+16,(2011).
+16,"variability of african pricope, n."
+16,"g., husak, g., lopez-carr, d., funk, c., and michaelsen, j."
+16,(2013). farming systems from phenological analysis of ndvi time series.
+16,"change the climate-population nexus in the east african horn: emerging degradation 109, 455–477. doi: 10.1007/s10584-011-0049-1 trends in rangeland and pastoral livelihood zones."
+16,environ.
+16,"change 23, wan, z."
+16,(2014).
+16,new refinements and validation of the collection-6 modis land- 1525–1541. doi: 10.1016/j.gloenvcha.2013.10.002 surface temperature/emissivity product.
+16,remote sens.
+16,environ.
+16,"140, 36–45."
+16,"reason, c., and jagadheesha, d."
+16,(2005).
+16,a model investigation of recent doi: 10.1016/j.rse.2013.08.027 enso impacts over southern africa.
+16,meteorol.
+16,atmos.
+16,"89, 181–205."
+16,"wheeler, t., and von braun, j."
+16,(2013).
+16,climate change impacts on global food doi: 10.1007/s00703-005-0128-9 security.
+16,"science 341, 508–513. doi: 10.1126/science.1239402 rodell, m., famiglietti, j."
+16,"s., wiese, d."
+16,"n., reager, j."
+16,"t., beaudoing, h."
+16,"k., landerer, wulder, m."
+16,"a., and coops, n."
+16,(2014).
+16,satellites: make earth observations open f.
+16,"w., et al."
+16,(2018).
+16,emerging trends in global freshwater availability.
+16,nature access.
+16,"news 513:30. doi: 10.1038/513030a 557, 651–659. doi: 10.1038/s41586-018-0123-1 wulder, m."
+16,"a., masek, j."
+16,"g., cohen, w."
+16,"b., loveland, t."
+16,"r., and woodcock, sadc (2016)."
+16,sadc regional vulnerability assessment and analysis synthesis c.
+16,(2012).
+16,"opening the archive: how free data has enabled the science report 2016, state of food insecurity and vulnerability in the southern african and monitoring promise of landsat."
+16,remote sens.
+16,environ.
+16,"122, 2–10."
+16,"development community, compiled from the national vulnerability assessment doi: 10.1016/j.rse.2012.01.010 committee (nvac) reports presented at the regional vulnerability assessment and analysis (rvaa) annual dissemination forum on 6-10 june 2016 in conflict of interest: the authors declare that the research was conducted in the pretoria, republic of south africa. absence of any commercial or financial relationships that could be construed as a saha, s., moorthi, s., pan, h.-l., wu, x., wang, j., nadiga, s., et al."
+16,(2010). potential conflict of interest.
+16,the ncep climate forecast system reanalysis.
+16,meteorol.
+16,"91, 1015–1058. doi: 10.1175/2010bams3001.1 copyright © 2021 shukla, landsfeld, anthony, budde, husak, rowland and funk."
+16,"schmidhuber, j., and tubiello, f."
+16,(2007).
+16,global food security under this is an open-access article distributed under the terms of the creative commons climate change.
+16,u.s.a.
+16,"104, 19703–19708."
+16,attribution license (cc by).
+16,"the use, distribution or reproduction in other forums doi: 10.1073/pnas.0701976104 is permitted, provided the original author(s) and the copyright owner(s) are credited senay, g."
+16,"b., kagone, s., and velpuri, n."
+16,(2020).
+16,"operational global and that the original publication in this journal is cited, in accordance with accepted actual evapotranspiration: development, evaluation, and dissemination."
+16,sensors academic practice.
+16,"no use, distribution or reproduction is permitted which does not 20:1915. doi: 10.3390/s20071915 comply with these terms."
+16,frontiers in climate | www.frontiersin.org 16 february 2021 | volume 2 | article 583509

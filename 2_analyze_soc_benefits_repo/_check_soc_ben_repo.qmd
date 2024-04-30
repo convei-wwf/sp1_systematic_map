@@ -1,0 +1,177 @@
+---
+title: "Societal Benefit Repo screening results"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(synthesisr)
+library(pdftools)
+library(here)
+```
+
+# Summary
+
+The 260 unique(?) documents with abstracts represented in the Societal Benefits repository were screened by title and abstract in Colandr.  The results were exported as a .csv.  This document analyzes/summarizes those results.
+
+# Data
+
+The SBR information was downloaded as a .csv on 4/23/24, and uploaded to Colandr.  The screening criteria outlined in the planning/protocol document were used to determine inclusion/exclusion.  Some documents were tagged with additional information, e.g., "maybe" for some included documents that seemed like they may not actually meet the criteria.
+
+The screening results were downloaded as a .csv on 4/29/24.
+
+# Methods
+
+## Read in the screening results
+
+Also, write out included refs with DOI for import into Zotero.
+
+```{r}
+sbr_df <- read_csv(here('_data/societal_benefits/repo_cleaned_240423.csv')) %>%
+  janitor::clean_names() %>%
+  select(-keywords) %>%
+  distinct()
+
+# sbr_results_df <- read_csv(here('_data/screened/colandr_results_240429.csv')) %>%
+#   filter(data_source_name == 'Societal Benefits repo') %>%
+#   select(contains('citation'), -contains('journal')) %>%
+#   setNames(str_remove(names(.), 'citation_')) %>%
+#   mutate(across(where(is.character), str_squish)) %>%
+#   select(-abstract, -authors) %>%
+#   distinct()
+
+sbr_results_df <- read_csv(here('_data/screened/colandr_companion_incl_240429.csv')) %>%
+  bind_rows(read_csv(here('_data/screened/colandr_companion_excl_240429.csv'))) %>%
+  mutate(across(where(is.character), str_squish)) %>%
+  select(-id, -authors, year = publication_year, 
+         screening_status = `t&a_status`, excl_reason = `t&a_exclusion_reasons`) %>%
+  filter(!is.na(screening_status)) %>%
+  distinct() %>%
+  mutate(tags = str_remove_all(tags, '"|\\{|\\}') %>% str_split(',')) %>%
+  unnest(tags) %>%
+  mutate(excl_reasons = str_remove_all(excl_reason, '"|\\{|\\}') %>% str_split(',')) %>%
+  unnest(excl_reasons) %>%
+  group_by(title, year, screening_status) %>%
+  summarize(tags = paste0(unique(tags), collapse = ';'),
+            excl_reasons = paste0(unique(excl_reasons), collapse = ';'))
+
+sbr_out_df <- sbr_df %>%
+  inner_join(sbr_results_df, by = c('title', 'year'))
+
+sbr_incl_df <- sbr_out_df %>%
+  filter(screening_status == 'included') %>%
+  select(-vi, -sba, -ea, -screening_status, -excl_reasons)
+
+write_csv(sbr_incl_df, here('_data/screened/included_sbr_2024-04-29.csv'))
+```
+
+## Examine inclusion/exclusion vs. tags
+
+```{r}
+sbr_ea_inclusion <- sbr_out_df %>%
+  mutate(ea_tagged = !is.na(ea)) %>%
+  group_by(ea_tagged, screening_status) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  pivot_wider(names_from = screening_status, values_from = n)
+
+sbr_ea_inclusion
+
+sbr_vi_inclusion <- sbr_out_df %>%
+  mutate(vi_tagged = !is.na(vi)) %>%
+  group_by(vi_tagged, screening_status) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  pivot_wider(names_from = screening_status, values_from = n)
+
+sbr_vi_inclusion
+
+
+sbr_sb_inclusion <- sbr_out_df %>%
+  mutate(sb_tagged = !is.na(sba)) %>%
+  group_by(sb_tagged, screening_status) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  pivot_wider(names_from = screening_status, values_from = n)
+
+sbr_sb_inclusion
+```
+
+## Import full texts into Zotero
+
+Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
+
+```{r}
+zot_check <- read_refs(here('_data/screened/included_sbr_zotero_240429.bib')) %>%
+  mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
+         doi = tolower(doi))
+
+doi_find <- sbr_incl_df %>%
+  mutate(doi = str_remove(tolower(doi), '.+doi.org/')) %>%
+  mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish()) %>%
+  filter(!doi %in% zot_check$doi) %>%
+  filter(!title_check %in% zot_check$title_check)
+
+pdf_find <- zot_check %>% filter(is.na(file))
+```
+
+## Copy files from Zotero to repo
+
+```{r}
+zot_fs <- zot_check %>%
+  select(author, title, year, file) %>%
+  filter(!is.na(file)) %>%
+  mutate(file = str_split(file, ';')) %>%
+  unnest(file) %>%
+  filter(str_detect(file, '.pdf$')) %>%
+  mutate(author = str_remove_all(tolower(author), ',.+|\\}.+|[^a-z]'),
+         title = str_replace_all(tolower(title), '[^a-z0-9]+', '_'),
+         year = str_extract(year, '[0-9]{4}')) %>%
+  rowwise() %>%
+  mutate(title_end = ifelse(nchar(title) > 32, 
+                            str_locate_all(title, '_')[[1]][4, 1]-1, 
+                            nchar(title)),
+         title = str_sub(title, 1, title_end)) %>%
+  ungroup() %>%
+  mutate(file_out = sprintf('%s_%s_%s.pdf', author, year, title),
+         file_out = str_remove_all(file_out, 'NA_'),
+         file_out = here('_data/full_texts/pdf', file_out))
+
+if(any(!file.exists(zot_fs$file_out))) {
+  file.copy(from = zot_fs$file, to = zot_fs$file_out) %>% sum()
+}
+# length(list.files(here('_data/full_texts/pdf')))
+```
+
+## Extract text from pdfs
+
+Save out as .csvs for further processing/examination.
+
+```{r}
+pdf_fs <- zot_fs$file_out
+
+for(f in pdf_fs) {
+  ### f <- pdf_fs[1]
+  f_out <- str_replace(f, 'full_texts/pdf', 'full_texts/csv') %>%
+    str_replace('.pdf$', '.csv')
+  if(!file.exists(f_out)) {
+    message(f_out)
+    doc_df <- data.frame(t = pdf_text(f)) %>%
+      mutate(page = 1:n(),
+             t = str_squish(t)) %>%
+      unnest_tokens(input = t, output = p, token = 'sentences', drop = TRUE) %>%
+      ### drop arbitrarily short tokens
+      filter(nchar(p) > 5)
+    
+    write_csv(doc_df, f_out)
+  }
+}
+```
+

@@ -1,0 +1,1678 @@
+page,p
+1,data article essential variables for environmental monitoring: what are the possible contributions of earth observation data cubes?
+1,"gregory giuliani 1,2, * , elvire egger 2 , julie italiano 2 , charlotte poussin 2 , jean-philippe richard 2 and bruno chatenoux 2 1 institute for environmental sciences, university of geneva, envirospace, bd carl-vogt 66, ch-1205 geneva, switzerland 2 institute for environmental sciences, university of geneva, grid-geneva, bd carl-vogt 66, ch-1211 geneva, switzerland; elvire.egger@etu.unige.ch (e.e.); julie.italiano@gmail.com (j.i.)"
+1,; charlotte.poussin@unige.ch (c.p.); jean-philippe.richard@unepgrid.ch (j.-p.r.); bruno.chatenoux@unepgrid.ch (b.c.)
+1,* correspondence: gregory.giuliani@unige.ch; tel.: +41-(0)22-379-07-09  received: 25 september 2020; accepted: 16 october 2020; published: 21 october 2020  abstract: environmental sustainability is nowadays a major global issue that requires efficient and effective responses from governments.
+1,essential variables (ev) have emerged in different scientific communities as a means to characterize and follow environmental changes through a set of measurements required to support policy evidence.
+1,"to help track these changes, our planet has been under continuous observation from satellites since 1972."
+1,"currently, petabytes of satellite earth observation (eo) data are freely available."
+1,"however, the full information potential of eo data has not been yet realized because many big data challenges and complexity barriers hinder their effective use."
+1,"consequently, facilitating the production of evs using the wealth of satellite eo data can be beneficial for environmental monitoring systems."
+1,"in response to this issue, a comprehensive list of evs that can take advantage of consistent time-series satellite data has been derived."
+1,"in addition, a set of use-cases, using an earth observation data cube (eodc) to process large volumes of satellite data, have been implemented to demonstrate the practical applicability of eodc to produce evs."
+1,the proposed approach has been successfully tested showing that eodc can facilitate the production of evs at different scales and benefiting from the spatial and temporal dimension of satellite eo data for enhanced environmental monitoring.
+1,keywords: essential variables; climate; biodiversity; water; earth observations; data cube 1.
+1,"introduction the latest global risks report from the world economic forum (wef) identified for the first time in its 10-year outlook survey that the top five global risks in terms of likelihood and impact were all related to the environment, ranking climate change and biodiversity loss as major global threats [1]."
+1,"therefore, environmental sustainability is recognized as a critical global issue that demands achieving a good balance between the exploitation of natural resources for socio-economic development, and conserving ecosystem services that are critical to everyone’s wellbeing and livelihoods [2]."
+1,"to reach this objective, it is essential to provide accountable scientific knowledge to policy- and decision-makers to enable them to develop effective policies based on evidence [3,4]."
+1,"however, this is still a challenging task because this requires organizing actions (i.e., from data acquisition to knowledge generation) in coherent and coordinated workflows."
+1,"these data value chains are a series of transformations to produce new insights from data [5] that can follow the data-information-knowledge-wisdom pattern data 2020, 5, 100; doi:10.3390/data5040100 www.mdpi.com/journal/data"
+2,"data 2020, 5, 100 2 of 23 to provide evidence about the limits of our planet [6,7]."
+2,this requires a paradigm shift from data-centric to more knowledge-centric approaches [8] integrating different datasets from various disciplines both environmental and socio-economic conditions [9].
+2,"ultimately, this allows describing and assessing environmental conditions at different scales (e.g., national, regional, global) and understanding the interactions between the different components of the earth system (e.g., atmosphere, hydrosphere, biosphere, geosphere) and possibly predicting future changes [10]."
+2,"however, such a knowledge-centric approach has not yet been widely applied for environmental monitoring [11,12]."
+2,"the concept of essential variables (ev) has emerged in various scientific communities as a means to adequately describe and monitor the evolution of earth system components (e.g., atmosphere, biosphere, hydrosphere) through a set of observational data."
+2,"these data should be (1) relevant (i.e., critical for characterizing a system and its changes); (2) feasible (i.e., methodologies are scientifically sound, technically feasible); (3) cost-effective (i.e., low cost of implementation, maintenance, archiving and (4) support policy frameworks [13,14]."
+2,"evs can be understood as “a minimal set of variables that determine the system’s state and developments, are crucial for predicting system developments, and allow us to define metrics that measure the trajectory of the system“ [15]."
+2,"currently, evs are already been defined for climate [16–18], biodiversity [19,20], water [21], oceans [22] and other domains have started the process such as agriculture [23], ecosystems [24], mountains, extractives [25], air quality [26] or renewable energies [27] as well as socio-economic [13,28]."
+2,timely and reliable access to evs can provide the basis for accountable scientific understanding and knowledge on environmental conditions to enhance informed and evidence-based policy process [29].
+2,"to facilitate environmental monitoring, our planet has been under continuous observation from satellites since 1972, providing synoptic, regular, multi-spectral observations of the planet."
+2,"these earth observation (eo) data can provide the long baseline required to determine trends, define present conditions, and inform future evolution [30]."
+2,"eo data have the potential to drive progress in key national and international development agendas, providing new insights and supporting better policy development across diverse environmental sustainability issues [31,32]."
+2,"indeed, governments have national and international commitments and obligations as well as national environmental programs."
+2,"they all need information that is synoptic, consistent, spatially explicit and sufficiently detailed to capture anthropogenic impacts."
+2,"however, this vision of eo data-driven decision making has not been fully addressed and challenges remain [33]."
+2,"the full information potential of eo data has not yet been realized, because many big data challenges (e.g., volume, variety, velocity), related complexity barriers (e.g., data preparation, model integration and prediction) and lack of capacities/skills hinder effective and efficient use of eo data in policy and decision-making processes [34,35]."
+2,"traditional approaches to the acquisition, management, distribution, and analysis of satellite eo data have limitations (e.g., data size, heterogeneity, complexity) that impede their massive use and analysis [36]."
+2,"to address these issues and leverage the information potential of eo data, eo data cubes (eodc) have been developed to strengthen the connection between data, applications and users [37]."
+2,"eodc are tackling big data challenges by providing efficient and effective solutions to store, organize, manage and analyze large volumes of freely available data in analysis ready (ard) format [38,39]."
+2,"various implementations exist mostly at the national and regional scales such as in australia [40,41], africa [42], armenia [43], austria [44], brazil [45], colombia [46], mexico [31], switzerland [47] and taiwan [48]."
+2,"however, none of these eodc are neither explored the potential nor routinely generating evs."
+2,"consequently, the aim of this paper is to (1) explore and define which evs can be generated using eodc in the three most advanced domains: climate, biodiversity and water; and (2) demonstrate the applicability of eodc in generating selected evs at local and national scales."
+2,this can help understanding how eodc can contribute and strengthen existing environmental monitoring systems with the regular provision of evs.
+3,"data 2020, 5, 100 3 of 23 2."
+3,"methodology and implementation the definition and development of evs in various thematic and scientific domains usually follows a community process to reach an agreement on a set of observables/measurements that can be considered as essential and that satisfy the needs of national to global monitoring, reporting, research or forecasting [15]."
+3,"among the different scientific communities, climate, biodiversity and water are those that can be considered the most mature domains and where evs definition process is the most advanced [24]."
+3,"for each of these three domains, evs are reviewed and evaluated according to their level of measurability using remotely-sensed data time-series."
+3,they are then classified following three labels: (y)es-(p)atrial-(n)o.
+3,"yes, means that an ev is fully measurable using remote-sensing data time-series; partial relates to evs that need additional information (e.g., in-situ data, models); no, indicates that they are not measurable using remote-sensing."
+3,"in addition, main spatial ((l)ocal-(n)ational-(r)egional-(g)lobal) and temporal ((h)our-(d)ay-(w)eek-(m)onth-(s)eason-(a)nnual) scales for monitoring are also considered."
+3,"classification choices are made based on literature search in relevant scientific libraries such as science direct, scopus, web of science or google scholar."
+3,"essential climate variables originally, the concept of evs has been defined by the climate community through the effort led by the global climate observing system (gcos) which established a set of 52 essential climate variables (ecv)."
+3,these ecvs are supposed to support the work of the united nations framework convention on climate change (unfccc) and the intergovernmental panel on climate change (ipcc) [17].
+3,"they were selected for their relevance to characterize the climate system as well as their technical and economic feasibility for systematic observations from satellite remote-sensing or in-situ measurements [16,49]."
+3,"ecvs are generated by different organizations (e.g., european space agency, national oceanic and atmospheric administration) and can be searched and accessed through the global observing systems information center (gosic) that provides a single entry-point to ensure a harmonized and integrated search across various data holdings [50]."
+3,"however, from a user-perspective accessing ecvs is still difficult because of the variety of data formats, access methodologies, spatial coordinates and temporal resolution [18] making them difficult to integrate with other datasets [51,52]."
+3,the full list of ecvs (table 1) has been extracted from the gcos website (https://gcos.wmo.int/en/ essential-climate-variables).
+3,table 1.
+3,essential climate variables (ecv) and possible contributions from remote sensing.
+3,"y-yes, p-patrial, n-no; l-n-r-g, ((l)ocal-(n)ational-(r)egional-(g)lobal); h-d-w-m-s-a, ((h)our-(d)ay-(w)eek-(m)onth-(s)eason-(a)nnual)."
+3,"class ecv remote sensing spatial scale temporal scale precipitation y [53] l-n-r-g h-d-w-m-s-a pressure (surface) n l-n-r-g h-d-w-m-s-a surface radiation budget y [54] r-g h-d-w-m-s-a surface surface wind speed y [55] l-n-r-g h-d-w-m-s-a and direction temperature (near surface) y [56] l-n-r-g h-d-w-m-s-a water vapor (surface) y [55] r-g h-d-w-m-s-a earth radiation budget y [57] g w-m-s-a lighting y [58] g w-m-s-a atmosphere upper atmosphere temperature (upper air) p [59] r-g h-d-w-m-s-a water vapor (upper air) p [60] r-g h-d-w-m-s-a cloud properties p [61] r-g h-d-w-m-s-a wind speed and direction y [55] l-n-r-g h-d-w-m-s-a (upper air) aerosols properties p [62] l-n-r-g h-d-w-m-s-a atmospheric composition carbon dioxide, methane and p [63] l-n-r-g h-d-w-m-s-a other greenhouse gases ozone y [64] l-n-r-g h-d-w-m-s-a precursors (supporting the p [65] l-n-r-g h-d-w-m-s-a aerosol and ozone ecvs)"
+4,"data 2020, 5, 100 4 of 23 table 1."
+4,class ecv remote sensing spatial scale temporal scale river discharge n l-n-r-g h-d-w-m-s-a hydrosphere groundwater p [66] r-g h-d-w-m-s-a lakes y [67] l-n-r-g h-d-w-m-s-a soil moisture p [68] l-n-r-g h-d-w-m-s-a snow y [69] l-n-r-g h-d-w-m-s-a cryosphere glaciers y [70] l-n-r-g m-s-a ice sheets and ice shelves p [70] l-n-r-g m-s-a permafrost p [71] l-n-r-g m-s-a albedo y [72] r-g h-d-w-m-s-a land cover y [73] l-n-r-g a land fraction of absorbed photosynthetically active p [74] l-n-r-g w-m-s-a biosphere radiation (fapar) leaf area index (lai) p [74] l-n-r-g w-m-s-a above-ground biomass p [75] l-n-r-g m-s-a soil carbon p [76] l-n-r-g m-s-a land surface temperature y [77] l-n-r-g h-d-w-m-s-a fire y [78] l-n-r-g h-d-w-m-s-a evaporation from land p [79] l-n-r-g h-d-w-m-s-a anthropogenic greenhouse n l-n-r-g h-d-w-m-s-a anthroposphere gas fluxes anthropogenic water use n l-n-r-g h-d-w-m-s-a ocean surface heat flux p [80] r-g h-d-w-m-s-a sea ice y [81] r-g w-m-s-a sea level p [82] r-g h-d-w-m-s-a sea state n r-g h-d-w-m-s-a physical sea surface salinity y [83] r-g h-d-w-m-s-a sea surface temperature y [84] r-g h-d-w-m-s-a subsurface currents n r-g h-d-w-m-s-a surface currents p [85] r-g h-d-w-m-s-a ocean surface stress n r-g h-d-w-m-s-a inorganic carbon n r-g w-m-s-a nitrous oxide n r-g w-m-s-a biogeochemical nutrients p [86] r-g d-w-m-s-a ocean colour y [87] r-g d-w-m-s-a oxygen n l-n-r-g h-d-w-m-s-a transient tracers n l-n-r-g h-d-w-m-s-a marine habitats properties p [88] r-g m-s-a biological/ecosystems plankton p [89] l-n-r-g h-d-w-m-s-a 2.2.
+4,"essential biodiversity variables similarly, the biodiversity community has established essential biodiversity variables (ebv) as a set of variables that are between primary observations and indicators [19,20]."
+4,"currently, there are 21 ebvs organized in 6 classes (e.g., genetic composition, species population, species traits, community composition, ecosystem function, ecosystem structure) [90]."
+4,"these variables are meant to study, report and manage biodiversity change, status and trends [91]."
+4,"they designed to support global initiatives such as the united nations convention on biological diversity (cbd) and the intergovernmental panel for biodiversity and ecosystem services (ipbes) [92] as well as national reporting commitments [93,94]."
+4,"ideally, these variables should benefit from a synergetic use of remote sensing and in-situ measurements [95,96]."
+4,"however, to access ebv, interoperability challenges are similar to those identified for ecvs [92]."
+4,the ebv list (table 2) has been extracted from the group on earth observations (geo) biodiversity observation network (bon) website (https://geobon.org/ebvs/what-are-ebvs/) which is providing access to ebvs through its portal (https://portal.geobon.org).
+4,the classification is based on the work done by pettorelli et al. (2016) [95] and randin et al. (2020) [97] how carefully reviewed the potential contributions of remote sensing for biodiversity.
+5,"data 2020, 5, 100 5 of 23 table 2."
+5,essential biodiversity variables (ebv) and possible contributions from remote sensing.
+5,class ebv remote sensing spatial scale temporal scale co-ancestry n l m-s-a allelic diversity n l-n-r-g m-s-a genetic composition population genetic differentiation p l-n-r-g m-s-a breed and variety diversity n l-n-r-g m-s-a species distribution p l-n-r-g m-s-a species population population abundance p l-n-r-g m-s-a population structure by age/size class p l-n-r-g m-s-a phenology p l-n-r-g w-m-s-a morphology p l-n-r-g m-s-a species traits reproduction n l-n-r-g w-m-s-a physiology n l-n-r-g w-m-s-a movement n l-n-r-g w-m-s-a taxonomic diversity p l-n-r-g m-s-a community composition species interactions n l-n-r-g m-s-a net primary productivity p l-n-r-g h-d-w-m-s-a secondary productivity n l-n-r-g h-d-w-m-s-a ecosystem functions nutrient retention n l-n-r-g m-s-a disturbance regime y l-n-r-g m-s-a habitat structure p l-n-r-g m-s-a ecosystem structure ecosystem extent and fragmentation p l-n-r-g m-s-a ecosystem composition by functional type p l-n-r-g m-s-a 2.3.
+5,essential water variables essential water variables (ewv) have emerged from different activities on water-related to the geo and led by the integrated global water cycle community of practice [98].
+5,"through a community reviewing process to ensure wide acceptance by the community, a set of 16 variables that are linked to applications and end-users [21] and are aiming to support international bodies to provide a comprehensive list of parameters targeting monitoring, modeling, and inter-disciplinary decision support systems [99]."
+5,"this list has been derived from user-needs/requirements assessment in all geo user sectors (e.g., agriculture, health, ecosystems, biodiversity, climate, energy, weather)."
+5,ewv are listed in table 3 and extracted from the global earth observation system of systems (geoss) water strategy report [98].
+5,table 3.
+5,essential water variables (ewv) and possible contributions from remote sensing.
+5,"class ewv remote sensing spatial scale temporal scale precipitation y [53] l-n-r-g h-d-w-m-s-a evaporation and evapotranspiration p [79] l-n-r-g h-d-w-m-s-a snow cover (and depth, freeze thaw margins) p [100] l-n-r-g h-d-w-m-s-a soil moisture/temperature y [56] l-n-r-g h-d-w-m-s-a primary groundwater p [101] r-g h-d-w-m-s-a runoff/streamflow/river discharge n l-n-r-g h-d-w-m-s-a lakes/reservoir levels and aquifer volumetric change p [67] l-n-r-g h-d-w-m-s-a water quality p [102] l-n-r-g h-d-w-m-s-a water use/demand n l-n-r-g d-w-m-s-a glaciers/ice sheets y [70] r-g m-s-a surface meteorology p [55] l-n-r-g h-d-w-m-s-a surface and atmospheric radiation budget p [57] r-g h-d-w-m-s-a cloud and aerosols p [103] l-n-r-g h-d-w-m-s-a supplementary land cover and vegetation/land use y [73] l-n-r-g m-s-a permafrost p [71] l-n-r-g w-m-s-a elevation/topography and geological stratification p [104] l-n-r-g a 2.4."
+5,"implementation to demonstrate the practical capability to generate evs, an operational eodc implementation has been used enabling a country to benefit from satellite eo data for environmental monitoring."
+6,"data 2020, 5, 100 6 of 23 switzerland is facing important environmental challenges because it is a small country with increasing pressures on land resources [105] and it is among the first countries in the world to have an operational eodc providing access to a unique eo analysis-ready data (ard) archive over the entire national territory [106]."
+6,"the swiss data cube (sdc) is a tera-scale analytical cloud-based platform offering access to 36 years (e.g., 1984 to present days) of satellite data from landsat 5-7-8 [47], sentinel-1 [107], and sentinel-2 [108] sensors."
+6,the sdc facilitates national-scale analyses of large volume of spatially aligned and consistently calibrated satellite eo data.
+6,"it is an initiative implemented and operated by the united nations environment programme (unep)/global resource information database (grid)-geneva in partnership with the university of geneva, the university of zurich, and the swiss federal institute for forest, snow and landscape research (wsl)."
+6,the sdc is supported by the federal office for the environment (foen) and is aiming to contribute to its environmental and reporting mandate while at the same time enabling any swiss institutions to benefit from the information power of satellite eo data.
+6,"the archive is updated on a daily basis and contains approximately 12,500 scenes corresponding to a total volume of 5 tb and more than 1000 billion observations/pixels."
+6,"it is built on the open data cube (odc), an open-source geospatial data management and analysis software project, led by the committee on earth observation satellites (ceos) in partnership with geoscience australia, the commonwealth scientific and industrial research organisation (csiro), the national aeronautics and space administration (nasa), the united states geological survey (usgs), catapult satellite applications, and analytical mechanics associates (ama) [109]."
+6,"in the backend, postgresql database is used to index data and their metadata; data can be either stored as network common data format (netcdf) or cloud-optimized geotiff; and data are handled using geospatial data abstraction library (gdal) and specific python libraries (e.g., numpy, proj, matplotlib)."
+6,"the sdc has already provided insightful results for forest monitoring [110], land degradation [111] and snow evolution [112]."
+6,"to efficiently and effectively process these large volumes of data and developed tailored applications, the sdc provides a python application programming interface (api) that enables users to write their own processing algorithms [113]."
+6,"this api is accessible through jupyter notebooks, an interactive web-based programming interface that can be used for combining software code, algorithm output and explanatory text [114]."
+6,"consequently, using these capabilities, dedicated analysis workflows have been implemented as python scripts to produce the evs presented in the next section."
+6,results are then published into a geoserver instance (https://geoserver.swissdatacube.org/) and properly documented with metadata descriptions and stored in a geonetwork catalog (https://geonetwork.swissdatacube.org/geonetwork/srv/eng/catalog.search#/home).
+6,"this allows an interoperable discovery and access to data products using standardized interfaces such as the web map service (wms), web coverage service (wcs) and catalog service for the web (csw)."
+6,"ultimately, these data can be examined in a web-based application enabling users to visualize, query, and download time-series products generated with the sdc (http://www.swissdatacube.org/viewer)."
+6,"results based on the evaluation of ecv, ebv and ebw, approximately 67 from a total number of 89 variables can be fully or partially measured using remote sensing."
+6,this corresponds to a percentage of 75%.
+6,"by domain, this corresponds to 79% of ecv (41 of 52), 57% of ebv (12 of 21) and 88% of ewv (14 of 16)."
+6,this shows that remote sensing can provide a substantial contribution to measure this evs.
+6,"to test and validate the technical feasibility, identify possible limitations and determine the potential of generating evs using an eodc, different use-cases have been selected."
+6,"climate change, biodiversity loss and water management are among the most important pressures that switzerland has to overcome in the next future [115]."
+6,"based on this consideration and the review done in section 2, the following essential variables have been selected: (1) for ecv: soil moisture and snow cover; (2) for ebv: ecosystem structure; and finally, for ewv: lake level and water quality."
+6,switzerland is recognized as the water castle of europe because approximately 6% of europe’s freshwater reserves are stored in the country [116].
+6,"therefore, adequate policies and management"
+7,"data 2020, 5, 100 7 of 23 practices are required to preserve and protect this resource."
+7,one famous feature of the swiss landscape is the mountainous regions covered by snow in the winter season.
+7,"besides its touristic aspect [117], snow is an important water resource and component of the water cycle, storing water in winter and releasing it in spring during the melting season."
+7,"snow cover is an ecv that is important to monitor as it provided useful indications on climate change as well as for effective natural resource management (e.g., flood risk management, water supply) [118]."
+7,"the contribution of snow melt to water bodies will likely decrease by about 25% by the end of the century and consequently greatly affect the water regime of some of the major european rivers (e.g., rhône, rhine and danube) [119,120]."
+7,detailed information on snow cover evolution can be produced to map snow cover extension using optical sensors data available in the swiss data cube.
+7,"the snow observations from space (sofs) algorithm [121] allows monitoring of snow cover evolution and variability over the entire swiss territory using a time-weighted approach of the normalized difference snow index [100,122] to compute frequencies of observations."
+7,"initial results using 20 years of landsat observations have evidenced an apparent decrease of snow cover during the winter season [31,112]."
+7,the area where permanent snow coverage is observed during the winter season has decreased by about 4% while during the same period the area with little or no snow has increased by about 8% (figure 1).
+7,figure 1.
+7,comparison of snow observations frequencies between the periods 1995/2005 (above) and 2005/2017 (below).
+7,areas with permanent snow cover over the winter season (dark blue) have significantly decreased whereas at the same time areas with little or no snow (red) have increased.
+7,data source: landsat.
+7,such results can be an indication of changing climate conditions over the swiss alps and can help follow the evolution trend of snow cover in this alpine region.
+7,another ecv that can be useful to provide useful information on water conditions is the soil moisture.
+7,it can be measured in various ways but the normalized difference water index (ndwi) is recognized as a good proxy to estimate water content in vegetation and soils [123].
+7,the ndwi
+8,"data 2020, 5, 100 8 of 23 estimates soil moisture and canopy water content using the reflecting properties in the near-infrared (nir) and short-wave infrared (swir) bands and is calculated as follows [124]: ndwi = (nir - swir)/(nir + swir), (1) usually, ndwi is a function of local climate conditions and soil properties controlling water availability [125]."
+8,"ndwi has demonstrated its usefulness in different circumstances such as drought monitoring, early warning, crop monitoring and soil moisture in grasslands and shrublands [126–128]."
+8,"in the swiss data cube, a python script has been implemented to produce different satellite-derived indices allowing users to easily perform time-series analysis of annual, seasonal or monthly mean."
+8,annual and seasonal ndwi means (with their respective standard deviations) have been computed for the entire country from 1984 to 2019 using landsat data.
+8,preliminary results allow researchers to explore both spatial and temporal variation of ndwi across switzerland (figure 2).
+8,figure 2.
+8,"normalized difference water index (ndwi) seasonal mean (year 2019) from winter (upper-left), spring (upper-right), summer (lower-left) and autumn (lower-right)."
+8,these maps show the evolution over a year of the water content in vegetation and soils.
+8,such datasets allow soil moisture over a dedicated area to be explored.
+8,"for example, users can select a protected area in the valais canton named “bois de finges” and compute a zonal statistic over the annual mean time-series (figure 3)."
+8,"this gives a curve that indicates that soil moisture is relatively stable over time, even if a small decrease can be observed, but more interestingly shows various important declines corresponding to major drought events that occurred in 1986, 2003 and 2018."
+8,this demonstrates the potential of ndwi to monitor soil moisture and drought conditions.
+8,"still concerning water, lakes are also a major feature of the swiss landscape having more than 100 lakes of a surface larger than 0.3 square kilometers [115]."
+8,"most of these lakes are artificially regulated and, therefore, their levels can be generally considered as stable [129,130]."
+8,"however, in the last years, switzerland has suffered regularly from severe drought conditions that have affected small natural and unregulated lakes showing an important decrease in their respective water levels."
+8,"water level, being an ewv, can be evaluated using satellite imagery using both optical and/or radar imagery [131]."
+8,"in the french-speaking part of switzerland, two lakes are regularly mentioned in the news showing a substantial decrease in their respective water levels during the summer season."
+8,"these are the lake des brenets, located in the north-western part at the swiss/french border, and the lake bret, on the eastside of lausanne city."
+8,using the water observations from space algorithm (wofs) [132] it is possible to detect surface water and evaluate the frequency of whether water is permanent or temporary for a
+9,"data 2020, 5, 100 9 of 23 given pixel through over a dedicated time-frame."
+9,water percentages have been computed for the 2017 and 2018 summer months using sentinel-2 data for both lakes (figures 4 and 5).
+9,figure 3.
+9,ndwi annual mean time-series for the bois de finges protected area showing important decrease in water content corresponding to major drought events.
+9,figure 4.
+9,water percentages for the lake des brenets in 2017 (above) and 2018 (below).
+9,water level severely decreased in 2018 showing that the east side of the lake was covered approximately only 50% of the time (in yellow) compared to permanent water (blue) and no water (red).
+9,data source: sentinel-2.
+10,"data 2020, 5, 100 10 of 23 figure 5."
+10,water percentages for the lake de bret in 2017 (left) and 2018 (right).
+10,the water level shows a similar pattern with the north-west side of the lake evidencing a clear decrease in water level.
+10,data source: sentinel-2.
+10,"this shows that for the same period of the year, the 2018 drought strongly affected the two lakes and a clear decrease in water levels can be observed."
+10,"large areas have been completely drained, severely impacting leisure activities such as sailing or fishing."
+10,"remote-sensing techniques have been extensively applied for water quality assessments on oceans, seas, and lakes and can help to estimate and monitor mineral water quality indicators such as turbidity, chlorophyll content, surface temperature or water colors [87,102,133]."
+10,"total suspended matter (tsm) allows the average amount of suspended matter in a water body to be determined and, therefore, can be considered as a relatively good proxy to estimate water quality."
+10,"it can help to evidence areas of high turbidity that can have various causes such as pollution, vegetation or mineral induced turbidity."
+10,lakes thun and brienz are located in the central part of switzerland at the foothill of the alps.
+10,"these two lakes are feed only by the aar river, a tributary of the rhine, that takes its source in the aare glacier in the bernese alps."
+10,"consequently, the aar river is carrying an important sediment load that can somehow affect the water quality of these two lakes [134]."
+10,the tsm algorithm implemented by the odc can be used with landsat data from april to august 2016 to compute the average value per pixel of suspended matter (figure 6).
+10,results show that most of the sediment load is deposited in the brienz lake whereas the thun lake appears clearer having virtually no sediment deposited in the lake.
+10,this result is confirmed also with a visual inspection of a true-color composite (figure 7) for the same period that shows lake brienz having a color that is desaturated and is whiter than the thun lake that has a better water quality.
+10,the last example relates to ebv and how ecosystem structure can be evaluated.
+10,"by structure, it is implied the set of biophysical properties of ecosystems that create the conditions of the structural components of ecosystems that lead to and maintain biodiversity characteristics [19]."
+10,ecosystem extent and fragmentation can be estimated using satellite data.
+10,"to quantify the spatial extent of vegetation, one can use the fractional cover (fc) methodology."
+10,"the fraction of vegetation cover can be derived using a linear unmixing methodology to evaluate the proportion of photosynthetic vegetation (pv), non-photosynthetic vegetation (npv) and bare soil (bs) within each pixel and codified in red/green/blue colors [135]."
+10,"in figure 8, landsat 8 data has been used to compute fc for estimating the spatial extent"
+11,"data 2020, 5, 100 11 of 23 of vegetation in a portion of the swiss low-land in the greater geneva area during the summer of 2003."
+11,this map shows that most of the area is covered by photosynthetic vegetation and can help to better determine the structure of vegetated areas as well as assessing the impacts of drought that caused the death of vegetation during the heatwave an appearing as npv on the map.
+11,figure 6.
+11,total suspended matter (tsm) concentration for the lakes thun (left) and brienz (right) showing an important difference in terms of sediment load.
+11,data sources: landsat; google.
+11,figure 7.
+11,true color composite of lakes thun (left) and brienz (right).
+11,brienz lake shows desaturated colors indicating that sediment load is more important than in the thun lake.
+11,data source: landsat.
+11,"finally, to derive some ebv, the normalized difference vegetation index (ndvi) is a well-accepted index for vegetation monitoring."
+11,"in particular, it can help to inform the seasonal pattern of vegetation activity (i.e., phenology) and can help to evaluate vegetation dynamics and health at different scales [136]."
+11,ndvi is a measure of the state of vegetation health based on how the vegetation reflects light in the
+12,"data 2020, 5, 100 12 of 23 red (i.e., strongly absorbed) and near-infrared (nir) (i.e., strongly reflected) bands."
+12,"it is calculated as follows [137]: ndvi = (nir - red)/(nir + red), (2) figure 8."
+12,fractional cover in the great geneva area using landsat 7 (summer 2003).
+12,index values range from −1.0 to 1.0 representing roughly vegetation for positive values; clouds-water-snow for negative values; and bare soils and rocks for values close to zero [138].
+12,when vegetation is affected by dehydration or becomes sick usually the colors turn from green to brown.
+12,this change is particularly significant in nir light that is increasingly absorbed when vegetation deteriorates.
+12,"therefore, ndvi can provide accurate information on the presence of chlorophyll and can be correlated with plant health [139]."
+12,"in the sdc, we used the script mentioned previously for generating ndwi annual and seasonal means by adapting formula (1) to compute annual and seasonal ndvi means nation-wide from 1984 to 2019."
+12,vegetation seasonal patterns can be observed as exemplified in figure 9.
+12,figure 9.
+12,"ndwi seasonal mean (year 2019) from winter (upper-left), spring (upper-right), summer (lower-left) and autumn (lower-right)."
+12,these maps show the evolution over a year of the water content in vegetation and soils.
+13,"data 2020, 5, 100 13 of 23 similar to the ndwi example, zonal statistics can be computed for the same protected area (i.e., bois de finges) annual mean time-series have been computed showing an increase of the ndvi measurements over time (figure 10)."
+13,"one significant hypothesis that can be made is that conditions for vegetation growth have improved (i.e., more precipitation and heat) caused by climate change at mid-latitudes and, therefore, vegetation can be observed to be more active."
+13,similar patterns have been observed in different parts of the world [140–142] and further studies are needed to confirm and characterize this change across the different biogeographical regions and landscapes of switzerland.
+13,figure 10.
+13,normalized difference vegetation index (ndvi) annual mean time-series for the bois de finges protected area showing an important increase of the vegetation’s greenness over the period considered.
+13,"discussion the presented use-cases are, to our knowledge, among the first attempts to compute various essential variables to support environmental monitoring using an earth observations data cube."
+13,the first results indicate that eodc can facilitate the production of evs and can make them accessible to different users.
+13,"in particular, this offers a consistent analytical framework for space and time-series analysis using satellite eo data."
+13,"initial implementation indicates benefits, limitations and further development to strengthen the efficient and effective generation of evs for environmental monitoring."
+13,"in terms of benefits, eodc can help to improve the accessibility, processing and use of evs [18] providing access to analysis-ready data."
+13,"it can therefore facilitate the generation of information and knowledge emphasizing the importance of suitable connections between data, applications and users [31,143]."
+13,"importantly, such technology can help to move away from traditional data-centric approaches and can enhance more user-/knowledge-centric approaches by lowering the barriers to use of satellite eo data [8] and automating the extraction of actionable information and knowledge at different spatial and temporal scales [144]."
+13,this is an essential condition to efficiently support public policy decision-making.
+13,"ultimately, it can allow the provision of decision-ready products that can be used for effective decision-making and evidence-based policy-making [14]."
+13,"more importantly, it allows quantifying measurements and can provide a unique capability to track environmental changes across a country."
+13,"finally, evs can contribute to support the production of high-level environmental indicators defined in different policy frameworks such as the sustainable development goals (sdgs) [4,110], the aichi targets on biodiversity [145], the water-food-energy nexus [146] as well as the driver-pressure-state-impact-response framework [29]."
+13,"other identified benefits are: (1) scalability and reproducibility of code/methods at different scales [37,147] that can be applied in more than 100 countries that are using the open data cube software; (2) integration of the information products into national environmental information database; (3) support innovation and growth in the digital economy; (4) improve efficiency and effectiveness of government investments; (5) improve management of natural resources and (6) stimulate research."
+14,"data 2020, 5, 100 14 of 23 the major limitation is probably the lack of awareness about the ev concept both in some scientific domains as well as in the policy context [15,24]."
+14,"in addition, eodc is a relatively new technology requiring new knowledge and capacities (e.g., big data, artificial intelligence, data science)."
+14,"therefore, to reach wide adoption, acceptance and commitment, capacity development efforts are fundamental [148]."
+14,"in that sense, geo can play a fundamental role in leveraging the potential of eodc and evs."
+14,in its 2020–2022 work programme (http://www.earthobservations.org/geoss_wp.php) there are related activities both on capacity development and evs.
+14,"therefore, geo can help advocating and strengthening the role of eo and evs and their associated benefits to society, enabling different stakeholders to become familiar with this technology and raise awareness on the potential of evs for enhanced environmental monitoring."
+14,"benefits can be demonstrated through appropriate examples, best practices, and guidelines."
+14,"particular attention should be devoted to developing capacities at the following three levels [149]: (1) human (e.g., education and training of individuals); (2) institutional (e.g., enhancing the understanding within organization and governments of the value of eo data to support decision-making); and (3) infrastructure (e.g., installing/configuring/managing the needed technology)."
+14,"ultimately, all these efforts should be geared towards a more open and reproducible eo science [37], an approach of research and education that aims to enhance scientific accountability and credibility by making scientific research and knowledge (e.g., data, methods, tools and resources) more collaborative, transparent and accessible through digital technologies."
+14,another limitation that needs to be overcome is that most of the reviewed evs are not directly generated from remote sensing measurements.
+14,satellite eo data are often a data source that needs to be used in conjunction with either in-situ/crowdsourced measurements or integrated into models to properly generate evs.
+14,"consequently, efforts should be made to better understand how to link eodc with other data sources to develop efficient workflows and produce evs in a consistent and coherent manner."
+14,"to tackle this issue, the system of systems (sos) approach promoted by geo in developing geoss, a platform interlinking existing and planned observation systems, can be an interesting solution [150,151]."
+14,"the geoss platform relies on interoperability arrangements, a set of standardized technical specifications that allows data from different systems to be combined into coherent data sets [152]."
+14,recent efforts have been devoted to implement open geospatial consortium (ogc) and international organization for standardization (iso) specifications in eodc.
+14,"these standards are widely adopted in the geospatial community to make eo data and algorithms interoperable [153,154]."
+14,"with the help of these standards this can prevent eodc from becoming silos of information and facilitate the integration of eo data with different data sources such as in-situ measurements or socio-economic data at different scales (e.g., local, national, international)."
+14,this is a fundamental condition to leverage the information potential of eo data.
+14,"all these data sources enclose unique insights and spatiotemporal signatures of relevant environmental changes and can provide crucial information to improve understanding, responding and adequately addressing environmental and sustainability challenges from local to global scales [144,155]."
+14,these first results are encouraging and prove the feasibility of generating evs using an eodc.
+14,"however, further work is needed to routinely produce evs."
+14,"first of all, it is necessary to explore how best to use in-situ data and models together with remotely-sensed data provided by eodc to generate other evs (i.e., those identified as partial contributions in section 2)."
+14,"second, it is important to make the information products interoperable [44,153] and compatible with find-accessible-interoperable-reproducible (fair) data-sharing principles [156,157] to facilitate their reuse by different users."
+14,"third, all these information products can be the basis for developing a national (or other scales) database for environmental monitoring using satellite eo data and add other evs such as land cover [158,159]."
+14,"fourth, it would be valuable to test the presented approach in other emerging ev domains to refine the understanding of the potential of eodc to support additional disciplines."
+14,the examples shown in this paper demonstrate that eodc and evs have the potential to realize the objective of transforming data into actionable information to support decisions based on evidence and improve the management of natural resources.
+14,this can help countries and local decision-makers
+15,"data 2020, 5, 100 15 of 23 to establish and operate their own analytical capabilities to underpin regulatory and official reporting mandates supported by replicable, reusable and scientifically accountable decision-ready products [31]."
+15,"conclusions nowadays, petabytes of eo data and geospatial information are freely and openly available from different data holdings."
+15,"combined with open source analytical tools for efficiently and effectively storing, managing and analyzing these data are leading an increasing number of countries to use eodc and ard to derive useful information and new insights on environmental changes to inform policies and support decision-making."
+15,essential variables can play an important role in providing necessary information on key elements to adequately describe different components of the earth system.
+15,"moreover, they can also significantly contribute to high-level policy frameworks such as the sdgs."
+15,"consequently, it is necessary to understand how to generate evs on a regular basis."
+15,"in this paper, we reviewed evs in the climate, biodiversity and water domains and produced a comprehensive list of evs that can take advantage of consistent time-series satellite data."
+15,"through various examples, we demonstrated the applicability of eodc to derive evs and how they can be used both at the local and at the national scales for environmental monitoring."
+15,"the initial implementation has shown that it is technically feasible, enabling the rapid production of different evs and benefiting from the spatial and temporal dimension of satellite eo data."
+15,"however, further work is needed to better understand how to derive evs using in-situ and or modeled data used in combination with satellite data."
+15,"we practically demonstrate the objectives of ev to have a high impact, high feasibility and relatively low cost of implementation and such work can be a contribution to the new geo initiative on essential variables (http://earthobservations.org/documents/gwp20_22/geo_essential_variables_ip.pdf)."
+15,"to conclude, we think that eodc represents a valuable opportunity to strengthen environmental monitoring systems, facilitating the production of essential information in a consistent and comparable manner to support evidence-based policy-making."
+15,"author contributions: conceptualization, g.g., e.e. and b.c.; methodology, g.g., e.e. and b.c.; validation, e.e. and b.c.; formal analysis, e.e., j.i., c.p.; investigation, g.g.; data curation, b.c.; writing—original draft preparation, g.g., e.e., j.i., c.p., j.-p.r. and b.c.; writing—review and editing, g.g., e.e., j.-p.r. and b.c.; supervision, g.g.; project administration, g.g.; funding acquisition, g.g."
+15,all authors have read and agreed to the published version of the manuscript.
+15,"funding: this research was funded by european commission “horizon 2020 program” era-planet/geoessential project, grant number 689443."
+15,"results of this publication are partly or fully relying on the swiss data cube (http://www.swissdatacube.org), operated and maintained by un environment/grid-geneva, the university of geneva, the university of zurich and the swiss federal institute for forest, snow and landscape research wsl."
+15,acknowledgments: the authors would like to thank the swiss federal office for the environment (foen) for their financial support to the swiss data cube.
+15,the views expressed in the paper are those of the authors and do not necessarily reflect the views of the institutions they belong to.
+15,conflicts of interest: the authors declare no conflict of interest.
+15,references 1.
+15,world economic forum.
+15,"the global risks report 2020; wef: geneva, switzerland, 2020; p."
+15,"guerry, a.d."
+15,"; polasky, s."
+15,"; lubchenco, j."
+15,"; chaplin-kramer, r."
+15,"; daily, g.c."
+15,"; griffin, r."
+15,"; ruckelshaus, m."
+15,"; bateman, i.j."
+15,"; duraiappah, a."
+15,"; elmqvist, t.; et al."
+15,natural capital and ecosystem services informing decisions: from promise to practice.
+15,"usa 2015, 112, 7348–7355."
+15,[crossref] 3.
+15,"rockström, j."
+15,"; bai, x.; devries, b."
+15,global sustainability: the challenge ahead.
+15,"sustain. 2018, 1, e6."
+15,[crossref] 4.
+15,"giuliani, g."
+15,"; mazzetti, p."
+15,"; santoro, m."
+15,"; nativi, s."
+15,"; van bemmelen, j."
+15,"; colangeli, g."
+15,"; lehmann, a."
+15,knowledge generation using satellite earth observations to support sustainable development goals (sdg): a use case on land degradation.
+15,earth obs.
+15,geoinf.
+15,"2020, 88, 102068."
+15,[crossref]
+16,"data 2020, 5, 100 16 of 23 5."
+16,"curry, e."
+16,"the big data value chain: definitions, concepts, and theoretical approaches."
+16,"in new horizons for a data-driven economy: a roadmap for usage and exploitation of big data in europe; cavanillas, j.m., curry, e., wahlster, w., eds."
+16,"; springer: cham, switzerland, 2016; pp."
+16,"29–37, isbn 978-3-319-21569-3."
+16,"rowley, j."
+16,the wisdom hierarchy: representations of the dikw hierarchy.
+16,"2007, 33, 163–180."
+16,[crossref] 7.
+16,"ackoff, r.l."
+16,from data to wisdom.
+16,"in ackoff’s best; sons, j.w., ed."
+16,"; john wiley & sons: new york, ny, usa, 1999; pp."
+16,170–172.
+16,"nativi, s."
+16,"; santoro, m."
+16,"; giuliani, g."
+16,"; mazzetti, p."
+16,towards a knowledge base to support global change policy goals.
+16,digit.
+16,"earth 2020, 13, 188–216."
+16,[crossref] 9.
+16,"lehmann, a."
+16,"; chaplin-kramer, r."
+16,"; lacayo, m."
+16,"; giuliani, g."
+16,"; thau, d."
+16,"; koy, k."
+16,"; goldberg, g."
+16,lifting the information barriers to address sustainability challenges with data from physical geography and earth observation.
+16,"sustainability 2017, 9, 858."
+16,[crossref] 10.
+16,"costanza, r."
+16,"; daly, l."
+16,"; fioramonti, l."
+16,"; giovannini, e."
+16,"; kubiszewski, i."
+16,"; mortensen, l.f."
+16,"; pickett, k.e."
+16,"; ragnarsdottir, k.v."
+16,"; de vogli, r."
+16,"; wilkinson, r."
+16,modelling and measuring sustainable wellbeing in connection with the un sustainable development goals.
+16,"2016, 130, 350–355."
+16,[crossref] 11.
+16,"santoro, m."
+16,"; mazzetti, p."
+16,"; nativi, s."
+16,the vlab framework: an orchestrator component to support data to knowledge transition.
+16,remote.
+16,"2020, 12, 1795."
+16,[crossref] 12.
+16,"cornell, s."
+16,"; berkhout, f."
+16,"; tuinstra, w."
+16,"; tabara, j.d."
+16,"; jager, j."
+16,"; chabay, i."
+16,"; de wit, b."
+16,"; langlais, r."
+16,"; mills, d."
+16,"; moll, p.; et al."
+16,opening up knowledge systems for better responses to global environmental change.
+16,environ.
+16,"policy 2013, 28, 60–70."
+16,[crossref] 13.
+16,"reyers, b."
+16,"; stafford-smith, m."
+16,"; erb, k.-h."
+16,"; scholes, r.j."
+16,"; selomane, o."
+16,essential variables help to focus sustainable development goals monitoring.
+16,environ.
+16,sustain.
+16,"2017, 26–27, 97–105."
+16,[crossref] 14.
+16,"lehmann, a."
+16,"; nativi, s."
+16,"; mazzetti, p."
+16,"; maso, j."
+16,"; serral, i."
+16,"; spengler, d."
+16,"; niamir, a."
+16,"; mccallum, i."
+16,"; lacroix, p."
+16,"; patias, p.; et al."
+16,geoessential—mainstreaming workflows from data sources to environment policy indicators with essential variables.
+16,digit.
+16,"earth 2019, 13, 322–338."
+16,[crossref] 15.
+16,"lehmann, a."
+16,"; masò, j."
+16,"; nativi, s."
+16,"; giuliani, g."
+16,towards integrated essential variables for sustainability.
+16,digit.
+16,"earth 2020, 13, 158–165."
+16,[crossref] 16.
+16,"bojinski, s."
+16,"; verstraete, m."
+16,"; peterson, t.c."
+16,"; richter, c."
+16,"; simmons, a."
+16,"; zemp, m."
+16,"the concept of essential climate variables in support of climate research, applications, and policy."
+16,meteorol.
+16,"2014, 95, 1431–1443."
+16,[crossref] 17.
+16,"giuliani, g."
+16,"; nativi, s."
+16,"; obregon, a."
+16,"; beniston, m."
+16,"; lehmann, a."
+16,spatially enabling the global framework for climate services: reviewing geospatial solutions to efficiently share and integrate climate data & information.
+16,"2017, 8, 44–58."
+16,[crossref] 18.
+16,"espinosa, m.t.m."
+16,"; giuliani, g."
+16,"; ray, n."
+16,reviewing the discoverability and accessibility to data and information products linked to essential climate variables.
+16,digit.
+16,"earth 2019, 13, 236–252."
+16,[crossref] 19.
+16,"pereira, h.m."
+16,"; ferrier, s."
+16,"; walters, m."
+16,"; geller, g.n."
+16,"; jongman, r.h.g."
+16,"; scholes, r.j."
+16,"; bruford, m.w."
+16,"; brummitt, n."
+16,"; butchart, s.h.m."
+16,"; cardoso, a.c.; et al."
+16,essential biodiversity variables.
+16,"science 2013, 339, 277–278."
+16,[crossref] 20.
+16,"geijzendorffer, i.r."
+16,"; regan, e.c."
+16,"; pereira, h.m."
+16,"; brotons, l."
+16,"; brummitt, n."
+16,"; gavish, y."
+16,"; haase, p."
+16,"; martin, c.s."
+16,"; mihoub, j.-b."
+16,"; secades, c.; et al."
+16,bridging the gap between biodiversity data and policy reporting needs: an essential biodiversity variables perspective.
+16,"2015, 53, 1341–1350."
+16,[crossref] 21.
+16,"lawford, r."
+16,"; strauch, a."
+16,"; toll, d."
+16,"; fekete, b."
+16,"; cripe, d."
+16,earth observations for global water security.
+16,environ.
+16,sustain.
+16,"2013, 5, 633–643."
+16,[crossref] 22.
+16,"muller-karger, f.e."
+16,"; miloslavich, p."
+16,"; bax, n.j."
+16,"; simmons, s."
+16,"; costello, m.j."
+16,"; sousa pinto, i."
+16,"; canonico, g."
+16,"; turner, w."
+16,"; gill, m."
+16,"; montes, e.; et al."
+16,advancing marine biological observations and data requirements of the complementary essential ocean variables (eovs) and essential biodiversity variables (ebvs) frameworks.
+16,front.
+16,"2018, 5, 211."
+16,[crossref] 23.
+16,"kussul, n."
+16,"; lavreniuk, m."
+16,"; kolotii, a."
+16,"; skakun, s."
+16,"; rakoid, o."
+16,"; shumilo, l."
+16,a workflow for sustainable development goals indicators assessment based on high-resolution satellite data.
+16,digit.
+16,"earth 2019, 13, 309–321."
+16,[crossref] 24.
+16,"patias, p."
+16,"; verde, n."
+16,"; tassopoulou, m."
+16,"; georgiadis, c."
+16,"; kaimaris, d."
+16,"essential variables: describing the context, progress, and opportunities for the remote sensing community."
+16,"in proceedings of the seventh international conference on remote sensing and geoinformation of the environment (rscy2019), paphos, cyprus, 18–21 march 2019; volume 11174, p."
+16,111740c.
+17,"data 2020, 5, 100 17 of 23 25."
+17,"ambrosone, m."
+17,"; giuliani, g."
+17,"; chatenoux, b."
+17,"; rodila, d."
+17,"; lacroix, p."
+17,definition of candidate essential variables for the monitoring of mineral resource exploitation.
+17,geo-spat.
+17,"2019, 22, 265–278."
+17,[crossref] 26.
+17,"shelestov, a."
+17,"; kolotii, a."
+17,"; borisova, t."
+17,"; turos, o."
+17,"; milinevsky, g."
+17,"; gomilko, i."
+17,"; bulanay, t."
+17,"; fedorov, o."
+17,"; shumilo, l."
+17,"; pidgorodetska, l.; et al."
+17,essential variables for air quality estimation.
+17,digit.
+17,"earth 2020, 13, 278–298."
+17,[crossref] 27.
+17,"ranchin, t."
+17,"; trolliet, m."
+17,"; ménard, l."
+17,"; wald, l."
+17,which variables are essential for renewable energies?
+17,digit.
+17,"earth 2020, 13, 253–261."
+17,[crossref] 28.
+17,"ehrlich, d."
+17,"; kemper, t."
+17,"; pesaresi, m."
+17,"; corbane, c."
+17,built-up area and population density: two essential societal variables to address climate hazard impact.
+17,environ.
+17,"policy 2018, 90, 73–82."
+17,[crossref] 29.
+17,"masó, j."
+17,"; serral, i."
+17,"; domingo-marimon, c."
+17,"; zabala, a."
+17,earth observations for sustainable development goals monitoring based on essential variables and driver-pressure-state-impact-response indicators.
+17,digit.
+17,"earth 2020, 13, 217–235."
+17,[crossref] 30.
+17,"dong, j."
+17,"; metternicht, g."
+17,"; hostert, p."
+17,"; fensholt, r."
+17,"; chowdhury, r.r."
+17,remote sensing and geospatial technologies in support of a normative land system science: status and prospects.
+17,environ.
+17,sustain.
+17,"2019, 38, 44–52."
+17,[crossref] 31.
+17,"dhu, t."
+17,"; giuliani, g."
+17,"; juárez, j."
+17,"; kavvada, a."
+17,"; killough, b."
+17,"; merodio, p."
+17,"; minchin, s."
+17,"; ramage, s."
+17,national open data cubes and their contribution to country-level development policies and practices.
+17,"data 2019, 4, 144."
+17,[crossref] 32.
+17,"kavvada, a."
+17,"; metternicht, g."
+17,"; kerblat, f."
+17,"; mudau, n."
+17,"; haldorson, m."
+17,"; laldaparsad, s."
+17,"; friedl, l."
+17,"; held, a."
+17,"; chuvieco, e."
+17,towards delivering on the sustainable development goals using earth observations.
+17,remote.
+17,environ.
+17,"2020, 247, 111930."
+17,[crossref] 33.
+17,"plag, h.-p."
+17,"; jules-plag, s.-a."
+17,a goal-based approach to the identification of essential transformation variables in support of the implementation of the 2030 agenda for sustainable development.
+17,digit.
+17,"earth 2020, 13, 166–187."
+17,[crossref] 34.
+17,"boulton, g."
+17,the challenges of a big data earth.
+17,"big earth data 2018, 2, 1–7."
+17,[crossref] 35.
+17,"guo, h."
+17,big earth data facilitates sustainable development goals.
+17,"big earth data 2020, 4, 1–2."
+17,[crossref] 36.
+17,"kopp, s."
+17,"; becker, p."
+17,"; doshi, a."
+17,"; wright, d.j."
+17,"; zhang, k."
+17,"; xu, h."
+17,achieving the full vision of earth observation data cubes.
+17,"data 2019, 4, 94."
+17,[crossref] 37.
+17,"giuliani, g."
+17,"; camara, g."
+17,"; killough, b."
+17,"; minchin, s."
+17,earth observation open science: enhancing reproducible science using data cubes.
+17,"data 2019, 4, 147."
+17,[crossref] 38.
+17,"baumann, p."
+17,datacube standards and their contribution to analysis-ready data.
+17,"in proceedings of the igarss 2018—2018 ieee international geoscience and remote sensing symposium, valencia, spain, 22–27 july 2018; pp."
+17,2051–2053.
+17,"baumann, p."
+17,"; misev, d."
+17,"; merticariu, v."
+17,"; huu, b.p."
+17,datacubes: towards space/time analysis-ready data.
+17,"in service-oriented mapping; lecture notes in geoinformation and cartography; springer: cham, switzerland, 2019; pp."
+17,269–299.
+17,isbn 978-3-319-72433-1.
+17,"ariza-porras, c."
+17,"; bravo, g."
+17,"; villamizar, m."
+17,"; moreno, a."
+17,"; castro, h."
+17,"; galindo, g."
+17,"; cabera, e."
+17,"; valbuena, s."
+17,"; lozano, p."
+17,"cdcol: a geoscience data cube that meets colombian needs; springer: cali, colombia, 2017; pp."
+17,87–99.
+17,"lewis, a."
+17,"; oliver, s."
+17,"; lymburner, l."
+17,"; evans, b."
+17,"; wyborn, l."
+17,"; mueller, n."
+17,"; raevksi, g."
+17,"; hooke, j."
+17,"; woodcock, r."
+17,"; sixsmith, j.; et al."
+17,the australian geoscience data cube—foundations and lessons learned.
+17,remote.
+17,environ.
+17,"2017, 202, 276–292."
+17,[crossref] 42.
+17,"killough, b."
+17,the impact of analysis ready data in the africa regional data cube.
+17,"in proceedings of the igarss 2019—2019 ieee international geoscience and remote sensing symposium, yokohama, japan, 28 july–2 august 2019; pp."
+17,5646–5649.
+17,"asmaryan, s."
+17,"; muradyan, v."
+17,"; tepanosyan, g."
+17,"; hovsepyan, a."
+17,"; saghatelyan, a."
+17,"; astsatryan, h."
+17,"; grigoryan, h."
+17,"; abrahamyan, r."
+17,"; guigoz, y."
+17,"; giuliani, g."
+17,paving the way towards an armenian data cube.
+17,"data 2019, 4, 117."
+17,[crossref] 44.
+17,"augustin, h."
+17,"; sudmanns, m."
+17,"; tiede, d."
+17,"; lang, s."
+17,"; baraldi, a."
+17,semantic earth observation data cubes.
+17,"data 2019, 4, 102."
+17,[crossref] 45.
+17,"gomes, v.c.f."
+17,"; queiroz, g.r."
+17,"; ferreira, k.r."
+17,an overview of platforms for big earth observation data management and analysis.
+17,remote sens.
+17,"2020, 12, 1253."
+17,[crossref]
+18,"data 2020, 5, 100 18 of 23 46."
+18,"bravo, g."
+18,"; castro, h."
+18,"; moreno, a."
+18,"; ariza-porras, c."
+18,"; galindo, g."
+18,"; cabrera, e."
+18,"; valbuena, s."
+18,"; lozano-rivera, p."
+18,architecture for a colombian data cube using satellite imagery for environmental applications.
+18,"in advances in computing, proceedings of the 12th colombian conference, cali, colombia, 19–22 september 2017; springer: cham, switzerland, 2017; pp."
+18,227–241.
+18,"giuliani, g."
+18,"; chatenoux, b."
+18,"; bono, a.d."
+18,"; rodila, d."
+18,"; richard, j.-p."
+18,"; allenbach, k."
+18,"; dao, h."
+18,"; peduzzi, p."
+18,building an earth observations data cube: lessons learned from the swiss data cube (sdc) on generating analysis ready data (ard).
+18,"big earth data 2017, 1, 100–117."
+18,[crossref] 48.
+18,"cheng, m.-c."
+18,"; chiou, c.-r."
+18,"; chen, b."
+18,"; liu, c."
+18,"; lin, h.-c."
+18,"; shih, i.-l."
+18,"; chung, c.-h."
+18,"; lin, h.-y."
+18,"; chou, c.-y."
+18,open data cube (odc) in taiwan: the initiative and protocol development.
+18,"in proceedings of the igarss 2019—2019 ieee international geoscience and remote sensing symposium, yokohama, japan, 28 july–2 august 2019; pp."
+18,5654–5657.
+18,"ostensen, o."
+18,"; o’brien, d."
+18,"; cooper, a."
+18,measurements to know and understand our world.
+18,"iso focus 2008, 5, 35–37."
+18,"diamond, h.j."
+18,"; lief, c.j."
+18,a comprehensive data portal for global climate information.
+18,eos trans.
+18,"agu 2009, 90, 341–342."
+18,[crossref] 51.
+18,"overpeck, j.t."
+18,"; meehl, g.a."
+18,"; bony, s."
+18,"; easterling, d.r."
+18,climate data challenges in the 21st century.
+18,"science 2011, 331, 700–702."
+18,[crossref] [pubmed] 52.
+18,"street, r.b."
+18,towards a leading role on climate services in europe: a research and innovation roadmap.
+18,"2015, 1, 2–5."
+18,[crossref] 53.
+18,"maggioni, v."
+18,"; meyers, p.c."
+18,"; robinson, m.d."
+18,a review of merged high-resolution satellite precipitation product accuracy during the tropical rainfall measuring mission (trmm) era.
+18,hydrometeor.
+18,"2016, 17, 1101–1117."
+18,[crossref] 54.
+18,"huang, g."
+18,"; li, z."
+18,"; li, x."
+18,"; liang, s."
+18,"; yang, k."
+18,"; wang, d."
+18,"; zhang, y."
+18,"estimating surface solar irradiance from satellites: past, present, and future perspectives."
+18,remote sens.
+18,environ.
+18,"2019, 233, 111371."
+18,[crossref] 55.
+18,"chelton, d.b."
+18,"; hussey, k.j."
+18,"; parke, m.e."
+18,"global satellite measurements of water vapour, wind speed and wave height."
+18,"nature 1981, 294, 529–532."
+18,[crossref] 56.
+18,"jin, m."
+18,"; dickinson, r.e."
+18,land surface skin temperature climatology: benefitting from the strengths of satellite observations.
+18,environ.
+18,"2010, 5, 044004."
+18,[crossref] 57.
+18,"barkstrom, b.r."
+18,"; smith, g.l."
+18,the earth radiation budget experiment: science and implementation.
+18,geophys.
+18,"1986, 24, 379–390."
+18,[crossref] 58.
+18,"turman, b.n."
+18,analysis of lightning data from the dmsp satellite.
+18,geophys.
+18,ocean.
+18,"1978, 83, 5019–5024."
+18,[crossref] 59.
+18,"spencer, r.w."
+18,"; christy, j.r."
+18,precise monitoring of global temperature trends from satellites.
+18,"science 1990, 247, 1558–1562."
+18,[crossref] 60.
+18,"bhatia, r.c."
+18,"; bhushan, b."
+18,"; rao, v.r."
+18,applications of water-vapour imagery received from insat-2e satellite.
+18,"1999, 76, 1448–1450."
+18,"wielicki, b.a."
+18,"; welch, r.m."
+18,cumulus cloud properties derived using landsat satellite data.
+18,climate appl.
+18,meteorol.
+18,"1986, 25, 261–276."
+18,[crossref] 62.
+18,"torres, o."
+18,"; bhartia, p.k."
+18,"; herman, j.r."
+18,"; ahmad, z."
+18,"; gleason, j."
+18,derivation of aerosol properties from satellite measurements of backscattered ultraviolet radiation: theoretical basis.
+18,geophys.
+18,atmos.
+18,"1998, 103, 17099–17110."
+18,[crossref] 63.
+18,"kuze, a."
+18,"; suto, h."
+18,"; nakajima, m."
+18,"; hamazaki, t."
+18,thermal and near infrared sensor for carbon observation fourier-transform spectrometer on the greenhouse gases observing satellite for greenhouse gases monitoring.
+18,"2009, 48, 6716–6733."
+18,[crossref] [pubmed] 64.
+18,"fishman, j."
+18,"; watson, c.e."
+18,"; larsen, j.c."
+18,"; logan, j.a."
+18,distribution of tropospheric ozone determined from satellite data.
+18,geophys.
+18,atmos.
+18,"1990, 95, 3599–3617."
+18,[crossref] 65.
+18,"veefkind, j.p."
+18,"; aben, i."
+18,"; mcmullan, k."
+18,"; förster, h."
+18,"; de vries, j."
+18,"; otter, g."
+18,"; claas, j."
+18,"; eskes, h.j."
+18,"; de haan, j.f."
+18,"; kleipool, q.; et al."
+18,"tropomi on the esa sentinel-5 precursor: a gmes mission for global observations of the atmospheric composition for climate, air quality and ozone layer applications."
+18,remote sens.
+18,environ.
+18,"2012, 120, 70–83."
+18,[crossref] 66.
+18,"wang, h."
+18,"; jia, l."
+18,"; steffen, h."
+18,"; wu, p."
+18,"; jiang, l."
+18,"; hsu, h."
+18,"; xiang, l."
+18,"; wang, z."
+18,"; hu, b."
+18,increased water storage in north america and scandinavia from grace gravity data.
+18,geosci.
+18,"2013, 6, 38–42."
+18,available online: http://www.nature.com/ngeo/journal/vaop/ncurrent/abs/ngeo1652.html#supplementary-information (accessed on 23 august 2020).
+18,[crossref]
+19,"data 2020, 5, 100 19 of 23 67."
+19,"schwatke, c."
+19,"; scherer, d."
+19,"; dettmering, d."
+19,automated extraction of consistent time-variable water surfaces of lakes and reservoirs based on landsat and sentinel-2.
+19,remote sens.
+19,"2019, 11, 1010."
+19,[crossref] 68.
+19,"mohanty, b.p."
+19,"; cosh, m.h."
+19,"; lakshmi, v."
+19,"; montzka, c."
+19,soil moisture remote sensing: state-of-the-science.
+19,vadose zone j.
+19,"2017, 16, 1–9."
+19,[crossref] 69.
+19,"gascoin, s."
+19,"; grizonnet, m."
+19,"; bouchet, m."
+19,"; salgues, g."
+19,"; hagolle, o."
+19,theia snow collection: high-resolution operational snow cover maps from sentinel-2 and landsat-8 data.
+19,earth syst.
+19,"data 2019, 11, 493–514."
+19,[crossref] 70.
+19,"hall, d.k."
+19,"; riggs, g.a."
+19,normalized-difference snow index (ndsi).
+19,"in encyclopedia of snow, ice and glaciers; singh, v.p., singh, p., haritashya, u.k., eds."
+19,"; springer: dordrecht, the netherlands, 2011; pp."
+19,"779–780, isbn 978-90-481-2642-2."
+19,"langer, m."
+19,"; westermann, s."
+19,"; heikenfeld, m."
+19,"; dorn, w."
+19,"; boike, j."
+19,satellite-based modeling of permafrost temperatures in a tundra lowland landscape.
+19,remote sens.
+19,environ.
+19,"2013, 135, 12–24."
+19,[crossref] 72.
+19,"wielicki, b.a."
+19,"; wong, t."
+19,"; loeb, n."
+19,"; minnis, p."
+19,"; priestley, k."
+19,"; kandel, r."
+19,changes in earth’s albedo measured by satellite.
+19,"science 2005, 308, 825."
+19,[crossref] [pubmed] 73.
+19,"gómez, c."
+19,"; white, j.c."
+19,"; wulder, m.a."
+19,optical remotely sensed time series data for land cover classification: a review.
+19,isprs j.
+19,photogramm.
+19,remote sens.
+19,"2016, 116, 55–72."
+19,[crossref] 74.
+19,"baret, f."
+19,"; weiss, m."
+19,"; lacaze, r."
+19,"; camacho, f."
+19,"; makhmara, h."
+19,"; pacholcyzk, p."
+19,"; smets, b."
+19,geov1: lai and fapar essential climate variables and fcover global time series capitalizing over existing products.
+19,part1: principles of development and production.
+19,remote sens.
+19,environ.
+19,"2013, 137, 299–309."
+19,[crossref] 75.
+19,"baccini, a."
+19,"; laporte, n."
+19,"; goetz, s.j."
+19,"; sun, m."
+19,"; dong, h."
+19,a first map of tropical africa’s above-ground biomass derived from satellite imagery.
+19,environ.
+19,"2008, 3, 045011."
+19,[crossref] 76.
+19,"bricklemyer, r.s."
+19,"; lawrence, r.l."
+19,"; miller, p.r."
+19,"; battogtokh, n."
+19,monitoring and verifying agricultural practices related to soil carbon sequestration with satellite imagery.
+19,agric.
+19,ecosyst.
+19,environ.
+19,"2007, 118, 201–210."
+19,[crossref] 77.
+19,"li, z.-l."
+19,"; tang, b.-h."
+19,"; wu, h."
+19,"; ren, h."
+19,"; yan, g."
+19,"; wan, z."
+19,"; trigo, i.f."
+19,"; sobrino, j.a."
+19,satellite-derived land surface temperature: current status and perspectives.
+19,remote sens.
+19,environ.
+19,"2013, 131, 14–37."
+19,[crossref] 78.
+19,"flannigan, m.d."
+19,"; haar, t.h.v."
+19,forest fire monitoring using noaa satellite avhrr.
+19,"1986, 16, 975–982."
+19,[crossref] 79.
+19,"gonzalez miralles, d."
+19,"; holmes, t.r.h."
+19,"; de jeu, r.a.m."
+19,"; gash, j.h."
+19,"; meesters, a.g.c.a."
+19,"; dolman, a.j."
+19,global land-surface evaporation estimated from satellite-based observations.
+19,hydrol.
+19,earth syst.
+19,"2011, 453–469."
+19,[crossref] 80.
+19,"brunke, m.a."
+19,"; wang, z."
+19,"; zeng, x."
+19,"; bosilovich, m."
+19,"; shie, c.-l."
+19,"an assessment of the uncertainties in ocean surface turbulent fluxes in 11 reanalysis, satellite-derived, and combined global datasets."
+19,"2011, 24, 5469–5493."
+19,[crossref] 81.
+19,"johannessen, o.m."
+19,"; shalina, e.v."
+19,"; miles, m.w."
+19,satellite evidence for an arctic sea ice cover in transformation.
+19,"science 1999, 286, 1937–1939."
+19,[crossref] 82.
+19,"cabanes, c."
+19,"; cazenave, a."
+19,"; provost, c.l."
+19,sea level rise during past 40 years determined from satellite and in situ observations.
+19,"science 2001, 294, 840–842."
+19,[crossref] 83.
+19,"klemas, v."
+19,remote sensing of sea surface salinity: an overview with case studies.
+19,coast.
+19,"2011, 27, 830–838."
+19,[crossref] 84.
+19,"wentz, f.j."
+19,"; gentemann, c."
+19,"; smith, d."
+19,"; chelton, d."
+19,satellite measurements of sea surface temperature through clouds.
+19,"science 2000, 288, 847–850."
+19,[crossref] [pubmed] 85.
+19,"chu, p.c."
+19,statistical characteristics of the global surface current speeds obtained from satellite altimetry and scatterometer data.
+19,ieee j.
+19,earth obs.
+19,remote sens.
+19,"2009, 2, 27–32."
+19,[crossref] 86.
+19,"traganza, e.d."
+19,"; nestor, d.a."
+19,"; mcdonald, a.k."
+19,satellite observations of a nutrient upwelling off the coast of california.
+19,geophys.
+19,ocean.
+19,"1980, 85, 4101–4106."
+19,[crossref] 87.
+19,"jackson, t."
+19,"; sathyendranath, s."
+19,"; mélin, f."
+19,an improved optical classification scheme for the ocean colour essential climate variable and its applications.
+19,remote sens.
+19,environ.
+19,[crossref] 88.
+19,"allee, r.j."
+19,"; kurtz, j."
+19,"; gould, r.w."
+19,"; ko, d.s."
+19,"; finkbeiner, m."
+19,"; goodin, k."
+19,application of the coastal and marine ecological classification standard using satellite-derived and modeled data products for pelagic habitats in the northern gulf of mexico.
+19,ocean coast.
+19,manag.
+19,"2014, 88, 13–20."
+19,[crossref] 89.
+19,"aïtelghazi, a."
+19,"; rhinane, h."
+19,"; bensalmia, a."
+19,"; giuliani, g."
+19,using the landsat-7 data to study the correlation between the surface temperature and phytoplankton turbidity case study: al massira lake (settat—morocco).
+19,mater.
+19,today proc.
+19,"2019, 13, 496–504."
+19,[crossref]
+20,"data 2020, 5, 100 20 of 23 90."
+20,"proença, v."
+20,"; martin, l.j."
+20,"; pereira, h.m."
+20,"; fernandez, m."
+20,"; mcrae, l."
+20,"; belnap, j."
+20,"; böhm, m."
+20,"; brummitt, n."
+20,"; garcía-moreno, j."
+20,"; gregory, r.d.; et al."
+20,global biodiversity monitoring: from data sources to essential biodiversity variables.
+20,conserv.
+20,"2017, 213, 256–263."
+20,[crossref] 91.
+20,"brummitt, n."
+20,"; regan, e.c."
+20,"; weatherdon, l.v."
+20,"; martin, c.s."
+20,"; geijzendorffer, i.r."
+20,"; rocchini, d."
+20,"; gavish, y."
+20,"; haase, p."
+20,"; marsh, c.j."
+20,"; schmeller, d.s."
+20,taking stock of nature: essential biodiversity variables explained.
+20,conserv.
+20,"2017, 213, 252–255."
+20,[crossref] 92.
+20,"kissling, w.d."
+20,"; hardisty, a."
+20,"; garcía, e.a."
+20,"; santamaria, m."
+20,"; de leo, f."
+20,"; pesole, g."
+20,"; freyhof, j."
+20,"; manset, d."
+20,"; wissel, s."
+20,"; konijn, j.; et al."
+20,towards global interoperability for supporting biodiversity research on essential biodiversity variables (ebvs).
+20,"biodiversity 2015, 16, 99–107."
+20,[crossref] 93.
+20,"vihervaara, p."
+20,"; auvinen, a.-p."
+20,"; mononen, l."
+20,"; törmä, m."
+20,"; ahlroth, p."
+20,"; anttila, s."
+20,"; böttcher, k."
+20,"; forsius, m."
+20,"; heino, j."
+20,"; heliölä, j.; et al."
+20,how essential biodiversity variables and remote sensing can help national biodiversity monitoring.
+20,conserv.
+20,"2017, 10, 43–59."
+20,[crossref] 94.
+20,"zilioli, m."
+20,"; oggioni, a."
+20,"; tagliolato, p."
+20,"; pugnetti, a."
+20,"; carrara, p."
+20,feeding essential biodiversity variables (ebvs): actual and potential contributions from lter-italy.
+20,conserv.
+20,"2019, 34, 477–503."
+20,[crossref] 95.
+20,"pettorelli, n."
+20,"; wegmann, m."
+20,"; skidmore, a."
+20,"; mücher, s."
+20,"; dawson, t.p."
+20,"; fernandez, m."
+20,"; lucas, r."
+20,"; schaepman, m.e."
+20,"; wang, t."
+20,"; o’connor, b.; et al."
+20,framing the concept of satellite remote sensing essential biodiversity variables: challenges and future directions.
+20,remote sens.
+20,conserv.
+20,"2016, 2, 122–131."
+20,[crossref] 96.
+20,"paganini, m."
+20,"; leidner, a.k."
+20,"; geller, g."
+20,"; turner, w."
+20,"; wegmann, m."
+20,the role of space agencies in remotely sensed essential biodiversity variables.
+20,remote sens.
+20,conserv.
+20,"2016, 2, 132–140."
+20,[crossref] 97.
+20,"randin, c.f."
+20,"; ashcroft, m.b."
+20,"; bolliger, j."
+20,"; cavender-bares, j."
+20,"; coops, n.c."
+20,"; dullinger, s."
+20,"; dirnböck, t."
+20,"; eckert, s."
+20,"; ellis, e."
+20,"; fernández, n.; et al."
+20,monitoring biodiversity in the anthropocene using remote sensing in species distribution models.
+20,remote sens.
+20,environ.
+20,"2020, 239, 111626."
+20,[crossref] 98.
+20,"lawford, r."
+20,"the geoss water strategy: from observations to decisions; geo: geneva, switzerland, 2013; p."
+20,"bolognesi, t."
+20,"; gerlak, a.k."
+20,"; giuliani, g."
+20,explaining and measuring social-ecological pathways: the case of global changes and water security.
+20,"sustainability 2018, 10, 4378."
+20,[crossref] 100.
+20,"crawford, c.j."
+20,"; manson, s.m."
+20,"; bauer, m.e."
+20,"; hall, d.k."
+20,multitemporal snow cover mapping in mountainous terrain for landsat climate data record development.
+20,remote sens.
+20,environ.
+20,"2013, 135, 224–233."
+20,[crossref] 101.
+20,"rodell, m."
+20,"; famiglietti, j.s."
+20,"the potential for satellite-based monitoring of groundwater storage changes using grace: the high plains aquifer, central us."
+20,hydrol.
+20,"2002, 263, 245–256."
+20,[crossref] 102.
+20,"bukata, r.p."
+20,retrospection and introspection on remote sensing of inland water quality: “like deja vu all over again”.
+20,great lakes res.
+20,"2013, 39, 2–5."
+20,[crossref] 103.
+20,"kasparian, j."
+20,"; hassler, c."
+20,"; ibelings, b."
+20,"; berti, n."
+20,"; bigorre, s."
+20,"; djambazova, v."
+20,"; gascon-diez, e."
+20,"; giuliani, g."
+20,"; houlmann, r."
+20,"; kiselev, d.; et al."
+20,assessing the dynamics of organic aerosols over the north atlantic ocean.
+20,"2017, 7, 45476."
+20,[crossref] 104.
+20,"hayakawa, y.s."
+20,"; oguchi, t."
+20,"; lin, z."
+20,comparison of new and existing global digital elevation models: aster g-dem and srtm-3.
+20,geophys.
+20,"2008, 35, l17404."
+20,[crossref] 105.
+20,"dao, h."
+20,"; peduzzi, p."
+20,"; friot, d."
+20,national environmental limits and footprints based on the planetary boundaries framework: the case of switzerland.
+20,environ.
+20,chang.
+20,"2018, 52, 49–57."
+20,[crossref] 106.
+20,"chatenoux, b."
+20,"; richard, j.-p."
+20,"; small, d."
+20,"; roeoesli, c."
+20,"; windgate, v."
+20,"; poussin, c."
+20,"; rodila, d."
+20,"; peduzzi, p."
+20,"; steinmeier, c."
+20,"; ginzler, c.; et al."
+20,the swiss data cube: analysis ready data archive using earth observations of switzerland.
+20,data. submitted for publication.
+20,"truckenbrodt, j."
+20,"; freemantle, t."
+20,"; williams, c."
+20,"; jones, t."
+20,"; small, d."
+20,"; dubois, c."
+20,"; thiel, c."
+20,"; rossi, c."
+20,"; syriou, a."
+20,"; giuliani, g."
+20,towards sentinel-1 sar analysis-ready data: a best practices assessment on preparing backscatter data for the cube.
+20,"data 2019, 4, 93."
+20,[crossref] 108.
+20,"giuliani, g."
+20,"; chatenoux, b."
+20,"; honeck, e."
+20,"; richard, j."
+20,towards sentinel-2 analysis ready data: a swiss data cube perspective.
+20,"in proceedings of the igarss 2018—2018 ieee international geoscience and remote sensing symposium, valencia, spain, 22–27 july 2018; pp."
+20,8659–8662.
+20,"killough, b."
+20,overview of the open data cube initiative.
+20,"in proceedings of the igarss 2018—2018 ieee international geoscience and remote sensing symposium, valencia, spain, 22–27 july 2018; pp."
+20,8629–8632.
+20,"honeck, e."
+20,"; castello, r."
+20,"; chatenoux, b."
+20,"; richard, j.-p."
+20,"; lehmann, a."
+20,"; giuliani, g."
+20,from a vegetation index to a sustainable development goal indicator: forest trend monitoring using three decades of earth observations across switzerland.
+20,isprs int.
+20,geo-inf.
+20,"2018, 7, 455."
+20,[crossref]
+21,"data 2020, 5, 100 21 of 23 111."
+21,"giuliani, g."
+21,"; chatenoux, b."
+21,"; benvenuti, a."
+21,"; lacroix, p."
+21,"; santoro, m."
+21,"; mazzetti, p."
+21,monitoring land degradation at national level using satellite earth observation time-series data to support sdg15—exploring the potential of data cube.
+21,"big earth data 2020, 4, 3–22."
+21,[crossref] 112.
+21,"poussin, c."
+21,"; guigoz, y."
+21,"; palazzi, e."
+21,"; terzago, s."
+21,"; chatenoux, b."
+21,"; giuliani, g."
+21,"snow cover evolution in the gran paradiso national park, italian alps, using the earth observation data cube."
+21,"data 2019, 4, 138."
+21,[crossref] 113.
+21,"rizvi, s.r."
+21,"; killough, b."
+21,"; cherry, a."
+21,"; gowda, s."
+21,lessons learned and cost analysis of hosting a full stack open data cube (odc) application on the amazon web services (aws).
+21,"in proceedings of the igarss 2018—2018 ieee international geoscience and remote sensing symposium, valencia, spain, 22–27 july 2018; pp."
+21,8643–8646.
+21,"perkel, j.m."
+21,why jupyter is data scientists’ computational notebook of choice.
+21,"nature 2018, 563, 145–146."
+21,[crossref] 115.
+21,swiss federal council.
+21,"environment switzerland 2015; state of the environment; swiss federal council: bern, switzerland, 2015; p."
+21,"beniston, m."
+21,"; stoffel, m."
+21,assessing the impacts of climatic change on mountain water resources.
+21,total environ.
+21,"2013, 493, 1129–1137."
+21,[crossref] 117.
+21,"loubier, j.-c."
+21,chapter 7—the touristic model of valais facing climate change: geoprospective simulations of more environmentally integrated development models.
+21,"in ecosystem and territorial resilience; garbolino, e., voiron-canicio, c., eds."
+21,"; elsevier: amsterdam, the netherlands, 2020; pp."
+21,"189–217, isbn 978-0-12-818215-4."
+21,"hüsler, f."
+21,"; jonas, t."
+21,"; riffler, m."
+21,"; musial, j.p."
+21,"; wunderle, s."
+21,a satellite-based snow cover climatology (1985–2011) for the european alps derived from avhrr data.
+21,"cryosphere 2014, 8, 73–90."
+21,[crossref] 119.
+21,"beniston, m."
+21,"; uhlmann, b."
+21,"; goyette, s."
+21,"; lopez-moreno, j.i."
+21,will snow-abundant winters still exist in the swiss alps in an enhanced greenhouse climate?
+21,climatol.
+21,"2011, 31, 1257–1263."
+21,[crossref] 120.
+21,"lehmann, a."
+21,"; guigoz, y."
+21,"; ray, n."
+21,"; mancosu, e."
+21,"; abbaspour, k.c."
+21,"; freund, e.r."
+21,"; allenbach, k."
+21,"; bono, a.d."
+21,"; fasel, m."
+21,"; gago-silva, a.; et al."
+21,"a web platform for landuse, climate, demography, hydrology and beach erosion in the black sea catchment."
+21,"data 2017, 4, 170087."
+21,[crossref] [pubmed] 121.
+21,"frau, l."
+21,"; rizvi, s.r."
+21,"; chatenoux, b."
+21,"; poussin, c."
+21,"; richard, j."
+21,"; giuliani, g."
+21,snow observations from space: an approach to map snow cover from three decades of landsat imagery across switzerland.
+21,"in proceedings of the igarss 2018—2018 ieee international geoscience and remote sensing symposium, valencia, spain, 22–27 july 2018; pp."
+21,8663–8666.
+21,"härer, s."
+21,"; bernhardt, m."
+21,"; siebers, m."
+21,"; schulz, k."
+21,on the need for a time- and location-dependent estimation of the ndsi threshold value for reducing existing uncertainties in snow cover maps at different scales.
+21,"cryosphere 2018, 12, 1629–1642."
+21,[crossref] 123.
+21,"wang, l."
+21,"; qu, j.j."
+21,"; hao, x."
+21,"; zhu, q."
+21,sensitivity studies of the moisture effects on modis swir reflectance and vegetation water indices.
+21,remote sens.
+21,"2008, 29, 7065–7075."
+21,[crossref] 124.
+21,"gao, b."
+21,ndwi—a normalized difference water index for remote sensing of vegetation liquid water from space.
+21,remote sens.
+21,environ.
+21,"1996, 58, 257–266."
+21,[crossref] 125.
+21,"serrano, j."
+21,"; shahidian, s."
+21,"; marques da silva, j."
+21,evaluation of normalized difference water index as a tool for monitoring pasture seasonal and inter-annual variability in a mediterranean agro-silvo-pastoral system.
+21,"water 2019, 11, 62."
+21,[crossref] 126.
+21,"gu, y."
+21,"; brown, j.f."
+21,"; verdin, j.p."
+21,"; wardlow, b."
+21,a five-year analysis of modis ndvi and ndwi for grassland drought assessment over the central great plains of the united states.
+21,geophys.
+21,"2007, 34, l06407."
+21,[crossref] 127.
+21,"grobicki, a."
+21,"; macleod, f."
+21,"; pischke, f."
+21,integrated policies and practices for flood and drought risk management.
+21,"water policy 2015, 17, 180–194."
+21,[crossref] 128.
+21,"medved-cvikl, b."
+21,"; ceglar, a."
+21,"; hofer, b."
+21,"; kajfez-bogataj, l."
+21,benefits of an integrated drought monitoring system in southeastern europe.
+21,data infrastruct.
+21,"2012, 7, 225–248."
+21,"ehrbar, d."
+21,"; schmocker, l."
+21,"; vetsch, d.f."
+21,"; boes, r.m."
+21,hydropower potential in the periglacial environment of switzerland under climate change.
+21,"sustainability 2018, 10, 2794."
+21,[crossref] 130.
+21,"savelsberg, j."
+21,"; schillinger, m."
+21,"; schlecht, i."
+21,"; weigt, h."
+21,the impact of climate change on swiss hydropower.
+21,"sustainability 2018, 10, 2541."
+21,[crossref] 131.
+21,"kreiser, z."
+21,"; killough, b."
+21,"; rizvi, s.r."
+21,water across synthetic aperture radar data (wasard): sar water body classification for the open data cube.
+21,"in proceedings of the igarss 2018—2018 ieee international geoscience and remote sensing symposium, valencia, spain, 22–27 july 2018; pp."
+21,437–440.
+22,"data 2020, 5, 100 22 of 23 132."
+22,"mueller, n."
+22,"; lewis, a."
+22,"; roberts, d."
+22,"; ring, s."
+22,"; melrose, r."
+22,"; sixsmith, j."
+22,"; lymburner, l."
+22,"; mcintyre, a."
+22,"; tan, p."
+22,"; curnow, s.; et al."
+22,water observations from space: mapping surface water from 25 years of landsat imagery across australia.
+22,remote sens.
+22,environ.
+22,"2016, 174, 341–352."
+22,[crossref] 133.
+22,"malenovský, z."
+22,"; rott, h."
+22,"; cihlar, j."
+22,"; schaepman, m.e."
+22,"; garcía-santos, g."
+22,"; fernandes, r."
+22,"; berger, m."
+22,"sentinels for science: potential of sentinel-1, -2, and -3 missions for scientific observations of ocean, cryosphere, and land."
+22,remote sens.
+22,environ.
+22,"2012, 120, 91–101."
+22,[crossref] 134.
+22,"thevenon, f."
+22,"; wirth, s.b."
+22,"; fujak, m."
+22,"; poté, j."
+22,"; girardclos, s."
+22,human impact on the transport of terrigenous and anthropogenic elements to peri-alpine lakes (switzerland) over the last decades.
+22,aquat.
+22,"2013, 75, 413–424."
+22,[crossref] 135.
+22,"guerschman, j.p."
+22,"; scarth, p.f."
+22,"; mcvicar, t.r."
+22,"; renzullo, l.j."
+22,"; malthus, t.j."
+22,"; stewart, j.b."
+22,"; rickards, j.e."
+22,"; trevithick, r."
+22,"assessing the effects of site heterogeneity and soil properties when unmixing photosynthetic vegetation, non-photosynthetic vegetation and bare soil fractions from landsat and modis data."
+22,remote sens.
+22,environ.
+22,"2015, 161, 12–26."
+22,[crossref] 136.
+22,"weber, d."
+22,"; schaepman-strub, g."
+22,"; ecker, k."
+22,predicting habitat quality of protected dry grasslands using landsat ndvi phenology.
+22,indic.
+22,"2018, 91, 447–460."
+22,[crossref] 137.
+22,"rouse, j.w., jr."
+22,"; haas, r.h."
+22,"; schell, j.a."
+22,"; deering, d.w."
+22,monitoring vegetation systems in the great plains with erts.
+22,nasa spec.
+22,"1974, 351, 309."
+22,"eastman, j.r."
+22,"; sangermano, f."
+22,"; machado, e.a."
+22,"; rogan, j."
+22,"; anyamba, a."
+22,"global trends in seasonality of normalized difference vegetation index (ndvi), 1982–2011."
+22,remote sens.
+22,"2013, 5, 4799–4818."
+22,[crossref] 139.
+22,"huang, s."
+22,"; tang, l."
+22,"; hupy, j.p."
+22,"; wang, y."
+22,"; shao, g."
+22,a commentary review on the use of normalized difference vegetation index (ndvi) in the era of popular remote sensing.
+22,[crossref] 140.
+22,"muradyan, v."
+22,"; tepanosyan, g."
+22,"; asmaryan, s."
+22,"; saghatelyan, a."
+22,"; dell’acqua, f."
+22,relationships between ndvi and climatic factors in mountain ecosystems: a case study of armenia.
+22,remote sens.
+22,environ.
+22,"2019, 14, 158–169."
+22,[crossref] 141.
+22,"vicente-serrano, s.m."
+22,"; martín-hernández, n."
+22,"; reig, f."
+22,"; azorin-molina, c."
+22,"; zabalza, j."
+22,"; beguería, s."
+22,"; domínguez-castro, f."
+22,"; kenawy, a.e."
+22,"; peña-gallardo, m."
+22,"; noguera, i.; et al."
+22,vegetation greening in spain detected from long term data (1981–2015).
+22,remote sens.
+22,"2019, 41, 1709–1740."
+22,[crossref] 142.
+22,"carlson, b.z."
+22,"; corona, m.c."
+22,"; dentant, c."
+22,"; bonet, r."
+22,"; thuiller, w."
+22,"; choler, p."
+22,observed long-term greening of alpine vegetation—a case study in the french alps.
+22,environ.
+22,"2017, 12, 114006."
+22,[crossref] 143.
+22,"dhu, t."
+22,"; dunn, b."
+22,"; lewis, b."
+22,"; lymburner, l."
+22,"; mueller, n."
+22,"; telfer, e."
+22,"; lewis, a."
+22,"; mcintyre, a."
+22,"; minchin, s."
+22,"; phillips, c."
+22,digital earth australia—unlocking new value from earth observation data.
+22,"big earth data 2017, 1, 64–74."
+22,[crossref] 144.
+22,"yang, c."
+22,"; clarke, k."
+22,"; shekhar, s."
+22,"; tao, c.v."
+22,big spatiotemporal data analytics: a research and innovation frontier.
+22,geogr.
+22,"2020, 34, 1075–1088."
+22,[crossref] 145.
+22,"de paula, m.d."
+22,"; giménez, m.g."
+22,"; niamir, a."
+22,"; thurner, m."
+22,"; hickler, t."
+22,combining european earth observation products with dynamic global vegetation models for estimating essential biodiversity variables.
+22,digit.
+22,"earth 2019, 13, 262–277."
+22,[crossref] 146.
+22,"mccallum, i."
+22,"; montzka, c."
+22,"; bayat, b."
+22,"; kollet, s."
+22,"; kolotii, a."
+22,"; kussul, n."
+22,"; lavreniuk, m."
+22,"; lehmann, a."
+22,"; maso, j."
+22,"; mazzetti, p.; et al."
+22,"developing food, water and energy nexus workflows."
+22,digit.
+22,"earth 2019, 13, 299–308."
+22,[crossref] 147.
+22,"giuliani, g."
+22,"; chatenoux, b."
+22,"; piller, t."
+22,"; moser, f."
+22,"; lacroix, p."
+22,data cube on demand (dcod): generating an earth observation data cube anywhere in the world.
+22,earth obs.
+22,geoinf.
+22,"2020, 87, 102035."
+22,[crossref] 148.
+22,"desconnets, j.-c."
+22,"; giuliani, g."
+22,"; guigoz, y."
+22,"; lacroix, p."
+22,"; mlisa, a."
+22,"; noort, m."
+22,"; ray, n."
+22,"; searby, n.d."
+22,geocab portal: a gateway for discovering and accessing capacity building resources in earth observation.
+22,earth obs.
+22,geoinf.
+22,"2017, 54, 95–104."
+22,[crossref] 149.
+22,"giuliani, g."
+22,"; lacroix, p."
+22,"; guigoz, y."
+22,"; roncella, r."
+22,"; bigagli, l."
+22,"; santoro, m."
+22,"; mazzetti, p."
+22,"; nativi, s."
+22,"; ray, n."
+22,"; lehmann, a."
+22,bringing geoss services into practice: a capacity building resource on spatial data infrastructures (sdi).
+22,trans.
+22,"gis 2016, 21, 811–824."
+22,[crossref] 150.
+22,"craglia, m."
+22,"; hradec, j."
+22,"; nativi, s."
+22,"; santoro, m."
+22,exploring the depths of the global earth observation system of systems.
+22,"big earth data 2017, 1, 21–46."
+22,[crossref] 151.
+22,"craglia, m."
+22,"; nativi, s."
+22,mind the gap: big data vs.
+22,"interoperability and reproducibility of science; springer: cham, switzerland, 2018; isbn 978-3-319-65632-8."
+23,"data 2020, 5, 100 23 of 23 152."
+23,"nativi, s."
+23,"; mazzetti, p."
+23,"; craglia, m."
+23,"; pirrone, n."
+23,the geoss solution for enabling data interoperability and integrative research.
+23,environ.
+23,pollut.
+23,"2013, 21, 4177–4192."
+23,[crossref] [pubmed] 153.
+23,"giuliani, g."
+23,"; masó, j."
+23,"; mazzetti, p."
+23,"; nativi, s."
+23,"; zabala, a."
+23,paving the way to increased interoperability of earth observations data cubes.
+23,"data 2019, 4, 113."
+23,[crossref] 154.
+23,"maso, j."
+23,"; zabala, a."
+23,"; serral, i."
+23,"; pons, x."
+23,a portal offering standard visualization and analysis on top of an open data cube for sub-national regions: the catalan data cube example.
+23,"data 2019, 4, 96."
+23,[crossref] 155.
+23,"yang, c."
+23,"; yu, m."
+23,"; li, y."
+23,"; hu, f."
+23,"; jiang, y."
+23,"; liu, q."
+23,"; sha, d."
+23,"; xu, m."
+23,"; gu, j."
+23,big earth data analytics: a survey.
+23,"big earth data 2019, 3, 83–107."
+23,[crossref] 156.
+23,"stall, s."
+23,"; yarmey, l."
+23,"; cutcher-gershenfeld, j."
+23,"; hanson, b."
+23,"; lehnert, k."
+23,"; nosek, b."
+23,"; parsons, m."
+23,"; robinson, e."
+23,"; wyborn, l."
+23,make scientific data fair.
+23,"nature 2019, 570, 27–29."
+23,[crossref] [pubmed] 157.
+23,"wilkinson, m.d."
+23,"; dumontier, m."
+23,"; aalbersberg, i.j."
+23,"; appleton, g."
+23,"; axton, m."
+23,"; baak, a."
+23,"; blomberg, n."
+23,"; boiten, j.-w."
+23,"; santos, l.b. da s."
+23,"; bourne, p.e.; et al."
+23,the fair guiding principles for scientific data management and stewardship.
+23,"data 2016, 3, 160018."
+23,[crossref] [pubmed] 158.
+23,"chaves, m.e.d."
+23,"; picoli, m.c.a."
+23,"; sanches, i.d."
+23,recent applications of landsat 8/oli and sentinel-2/msi for land use and land cover mapping: a systematic review.
+23,remote sens.
+23,"2020, 12, 3062."
+23,[crossref] 159.
+23,"lucas, r."
+23,"; mueller, n."
+23,"; siggins, a."
+23,"; owers, c."
+23,"; clewley, d."
+23,"; bunting, p."
+23,"; kooymans, c."
+23,"; tissott, b."
+23,"; lewis, b."
+23,"; lymburner, l.; et al."
+23,land cover mapping using digital earth australia.
+23,"data 2019, 4, 143."
+23,[crossref] publisher’s note: mdpi stays neutral with regard to jurisdictional claims in published maps and institutional affiliations. © 2020 by the authors.
+23,"licensee mdpi, basel, switzerland."
+23,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).

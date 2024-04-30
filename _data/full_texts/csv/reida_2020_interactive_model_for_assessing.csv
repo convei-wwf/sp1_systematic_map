@@ -1,0 +1,428 @@
+page,p
+1,"mit open access articles interactive model for assessing mangrove health, ecosystem services, policy consequences, and satellite design in rio de janeiro using earth observation data the mit faculty has made this article openly available."
+1,please share how this access benefits you.
+1,your story matters.
+1,"citation: reida, jack b. and danielle r."
+1,"wood."""
+1,"interactive model for assessing mangrove health, ecosystem services, policy consequences, and satellite design in rio de janeiro using earth observation data."" 71st international astronautical congress (iac): cyberspace edition, october 2020, international astronautical federation, 2020."
+1,"© 2020 jack reid and danielle wood as published: http://iafastro.directory/iac/paper/id/59434/summary/ publisher: international astronautical federation persistent url: https://hdl.handle.net/1721.1/129598 version: author's final manuscript: final author's manuscript post peer review, without publisher's formatting or copy editing terms of use: creative commons attribution-noncommercial-share alike"
+2,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+2,copyright ©2020 by jack reid and danielle wood.
+2,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+2,all rights reserved.
+2,"iac-20-b1.4 interactive model for assessing mangrove health, ecosystem services, policy consequences, and satellite design in rio de janeiro using earth observation data jack b."
+2,"reida ∗ , danielle r."
+2,"woodb a program in media arts and sciences, massachusetts institute of technology, 77 massachusetts avenue, cambridge, ma, usa, 02139, jackreid@ mit.edu b program in medias arts and sciences & department of aeronautics and astronautics, massachusetts institute of technology, 77 massachusetts avenue, cambridge, ma, usa, 02139, drwood@ media.mit.edu ∗ corresponding author there is an increasing need for tools to translate earth observation data into societally relevant metrics to inform human decision-making."
+2,"to address this need, we present a multi-disciplinary, interactive modeling framework to advance ecological forecasting and policymaking using earth observation data."
+2,"the environment-vulnerability-decision-technology (evdt) modeling framework will integrate four models into one tool that can be adapted to specific applications; the four models address the following: earth science models of the environment: human vulnerability and societal impact; human behavior and decision-making; and technology design for earth observation systems including satellites, airborne platforms and in-situ sensors the capabilities provided by this framework will improve the management of earth observation and socioeconomic data in a format usable by non-experts, while harnessing cloud computing, machine learning, economic analysis, complex systems modeling, and model-based systems engineering."
+2,this paper presents a prototype that demonstrates the viability of the framework via a case study: the mangrove forests in the guaratiba area of rio de janeiro.
+2,these mangroves are vulnerable due to urbanization and rising sea levels.
+2,"they provide a variety of ecosystem services, including serving as a mechanism for carbon sequestration, supporting subsistence fishing, preventing coastal erosion, and attracting an ecotourism industry."
+2,the case study of mangrove and community health in rio de janeiro demonstrates all four model components.
+2,"the environment model builds upon work by biospheric scientists fatoyinbo and lagomasino to use earth observation data, cloud computing, and machine learning to track mangrove extent, health, and vulnerability over time for a 600 km2 area, as well as work by the espaço research group at the federal university of rio de janeiro on the local mangrove ecosystem."
+2,"to build the human vulnerability and societal impact model, we are collaborating with ecosystem services economist suhyun jung to explain how policies impact mangrove health and how mangroves impact socioeconomic wellbeing."
+2,"to create the human decision making model, we have partnered with the pereira passos institute (the data science office of the rio de janeiro municipal government) to understand the policy history and socioeconomic factors."
+2,the technology model accounts for the types of data collection used by policy makers since 1975.
+2,"through such collaborations, we are able to build an integrated, interactive decision support tool that policymakers can use to assess mangrove health, ecosystem services value, and policy consequences."
+2,the model helps answer such questions as: (a) what is the state of the mangroves over time?
+2,(b) how are human communities impacting the mangroves?
+2,(c) what is the value of the mangrove ecosystem services to human communities?
+2,and (d) what policies can improve human and mangrove outcomes?
+2,this case study is demonstrative of the viability of a similar approach for ecosystems around the world.
+2,"keywords: earth observation, model-based systems engineering, mangroves, machine learning, decision support iac-20-b1.4 page 1 of 13"
+3,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+3,copyright ©2020 by jack reid and danielle wood.
+3,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+3,all rights reserved.
+3,introduction eo data for sustainable development.
+3,"while data is more there is an increasing need for tools to translate earth available than ever, it is not necessarily particularly acces- observation (eo) data into societally relevant metrics to sible to many potential users."
+3,those with the knowledge inform human decision-making.
+3,"this need is driven by and capabilities to access and transform this data continue the increasing socioeconomic and environmental conse- to reside primarily in government agencies and universities quences (positive and negative) of both human activities (though we have certainly seen heartening growth of such and technological development around the globe, as well as users in a much more diverse set of countries over the by an increasing (though still limited) awareness and under- past couple of decades)."
+3,the majority of prominent eo standing of such consequences.
+3,"these consequences and systems are designed primarily with scientific, meteoro- possibilities of a brighter future are embedded in the united logical, or military purposes in mind, limiting their utility nations (un) sustainable development goals (sdgs), in more applied contexts, regardless of the creativity of which organize various areas of potential improvement, users."
+3,"and many successful applications of eo data, par- spanning economic development, environmental conser- ticularly that which is not straightforward visual imagery, vation and preservation, reduced inequalities, and more remain squarely focused on characterizing specific, usually [1]."
+3,"the sdg framework are no mere vague gestures of environmental, phenomena, such as wildfires [7], aquatic intention either."
+3,"while they are not legally binding on bacterial growths [8], or deforestation [9]. any nations or other institutions, the 17 goals are broken more is needed to enable the use of eo data for hu- down into 169 targets and 231 unique indicators that can man decision-making in such a way that acknowledges be measured and progress charted."
+3,while significant gaps the linkages between the environment and humans.
+3,"to in our understanding and recognition of the connections this end, this paper expands and codifies a previously pro- between the environment, human wellbeing, technologies, posed evdt modeling framework for combining eo and and decision-making persist [2], the sdgs are a notable other types of data to inform decision-making in complex step towards acknowledging that our planet is one complex socio-environmental systems, particularly those pertaining system and that, in many cases, attempts to tackle one to sustainable development [10]."
+3,such a framework could domain without considering the others are fated to fail. also inform the development of future eo systems that are in parallel with this need for a multi-domain perspec- better designed for particular application contexts.
+3,"in the tive, we have seen the rise of geospatial data more generally beginning of the following section, this framework will and eo data in particular."
+3,this has been partially driven by be explained.
+3,"the remainder of the paper will then focus technological advances, such as the development and de- on making the framework more tangible by examining a ployment of eo systems (both aerial and space-based) and particular application in the city of rio de janeiro, brazil, advances in computation power."
+3,"another key component before concluding with remarks about the future of the has been the democratization of access to such data and framework and of the application case study. computational capabilities, as civil government satellite it should also be noted that various parts of the primary data has become largely freely available in the us and application presented in this paper are still in progress, both european union, limited data has been made available by in the sense that developing and applying this framework for other nations via international fora such as the committee the first time is a multi-year endeavour and in the sense that on earth observation satellites (ceos) and the group of the coronavirus pandemic has adversely affected field visits, earth observations (geo), and data processing and exper- in-person interactions, and governmental priorities."
+3,that tise have proliferated across the internet.
+3,"finally there has said, the currently state of the application is likely sufficient been a certain positive feedback between these dynamics. to demonstrate the evdt modeling framework concept, as awareness and knowledge of eo applications for sus- with complete verification and validation to follow. tainable development and disaster response have grown, so too has the interest in such applications, thereby driving 2."
+3,"materials and methods further invention and creativity, both in the use of existing, this section presents the overall evdt modeling largely scientific eo systems and in the development of framework, the circumstances surrounding the application new such systems."
+3,"the rise of commercial eo system case, the data and methods used in each component, and operators, such as planet and maxar, can thus been seen as how these components are linked together."
+3,"each compo- both responding to and driving such application demand nent of the evdt modeling framework, as well as any [3, 4]."
+3,"this interest has also driven many fruitful institu- application user interface, relies on different fields, meth- tional collaborations, such as that between geo and the ods, and theory."
+3,"for sake of brevity, only those aspects un [5] and the more recent ""serving society with space thought to be necessary for understanding this paper and data"" seminar series hosted by the space enabled research of primarily interest to this conference are included in this group and the secure world foundation [6]. section."
+3,"nonetheless, significant barriers remain to applying iac-20-b1.4 page 2 of 13"
+4,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+4,copyright ©2020 by jack reid and danielle wood.
+4,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+4,all rights reserved.
+4,1 baseline version of the environment - vulnerability - decision - technology model (generic case) 2.1.
+4,"evdt modeling framework for many years, though in many cases additional work is the evdt modeling framework seeks to break down required to tune and calibrate such tools for a particular complex socio-environmental systems into four primary context. components, while still acknowledging and addressing the this component directly feeds into the second model, important linkages that exist between them, as seen in fig- human vulnerability and societal impact (hereafter re- ure 1."
+4,the environment model uses earth science methods ferred to merely as vulnerability).
+4,this model seeks to to estimate the state of environmental phenomena; the capture and predict the degree of impact of some phe- vulnerability model captures societal impact of environ- nomena (usually environmental) on a set of people.
+4,"such mental changes including ecosystem services; the decision impacts are most vividly seen in cases of natural disasters, model captures human behavior and policy consequences; but are certainly evident in countless other, less dramatic and the technology model provides tools to design earth circumstances as well."
+4,"it should be noted, as the name of observation systems or select among earth observation this component seeks to imply, that these impacts need not technologies such as satellites, airborne sensors, and in-situ be uniformly negative, but can also include positive con- sensors."
+4,"this framework is targeted at responding to four sequences of natural phenomena with regards to income, questions, which can be specifically tailored to a particular health, or community. application: the third model, human decision-making, recognizes (a) the environment model asks, “what is happening that humans are no mere passive recipients of external in the natural environment?”"
+4,"pressures, but also take action to shape and change our (b) the vulnerability model asks, “how will humans environments (here meaning both the nature, á la the en- be impacted by what is happening in the natural vironment component, and their technologies, as will be environment?”"
+4,discussed shortly).
+4,"this decision-making takes place at (c) the decision model asks, “what decisions are hu- a variety of scales, which will in turn determine the ap- mans making in response to environmental factors propriate modeling method to pursue."
+4,individual fishers and why?”
+4,"may change their daily movement patterns in response to (d) the technology model asks, “what technology the availability of fish, or lack thereof, in such a way as to system can be designed or acquired to provide high lend towards agent-based modeling (abm)."
+4,governmental quality information that supports human decision policy may have explicit rules on when the resources of a making?”
+4,"conservation site may be accessed, lending to a straight- the first model, environment, seeks to capture the forward discrete-event simulation."
+4,"in some cases, where history and behavior of the relevant natural phenomena to the dynamics of human decision-making are too compli- the application, such as weather patterns, plant growth, or cated to capture a priori, it may even make sense to have a ice formation, and thereby answer question (a)."
+4,"this is human-in-the-loop as part of a more interactive simulation the component with the most robust literature and tools for process. the use of eo data, as many of these phenomena can and the fourth and final model refers to technology."
+4,"here have been directly tracked from space-based eo systems we primarily refer to sensing technology, though we use this iac-20-b1.4 page 3 of 13"
+5,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+5,copyright ©2020 by jack reid and danielle wood.
+5,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+5,"all rights reserved. term broadly to refer to virtually any means of knowing the world, both the environment and society."
+5,"this can rather straightforwardly refer to the design and development of a new space-based eo system, but might just as well include the deployment of in-situ measurement system, access- ing existing data and integrating into the decision-making pipeline, or instituting a new data collection policy using already in-operation sensors."
+5,"numerous robust tools for designing and simulating eo system performance exist already, but, depending on the intended audience, some ef- fort will often need to be taken to reduce the scope to focus on the most relevant components, such as the tradespace exploration process."
+5,it should be noted that while we present a base evdt modeling framework with these four components and fig.
+5,"2 map of rio de janeiro with the area of interest indi- the noted linkages, other components or additional link- cated with the red boundary."
+5,"the guaratiba administrative ages may be necessary in some contexts and the authors region is labelled ""xxvi"" ourselves have done so in some other applications [11]."
+5,"in this case study context, the environment model primarily refers to the extent and health of the mangrove 2.2."
+5,study area: guaratiba case study trees in the area.
+5,"the vulnerability model refers to the the western coast of the rio de janeiro municipality, various ecosystem services provided by these trees."
+5,"this highlighted in figure 2, is not as densely developed as the includes both global benefits such as carbon storage and lo- western urban core is (though this is rapidly changing). cal benefits such as food and other raw materials harvested this coast includes numerous rural farms, fishing com- from the forest and its associated waterways, as well as munities, and large industrial plants, the latter of which the impact of the mangrove presence on water quality and are primarily found in the northwest corner of the munici- sewage removal for local inhabitants."
+5,the decision-making pality.
+5,"on the southern end of this coast is the guaratiba model primarily refers to municipal-level government pol- area, which contains the largest remaining mangrove forest icymaking, particularly the urban zoning statues and the within the city of rio de janeiro, shown in figure 3 ."
+5,this local conservation statuses and boundaries.
+5,"finally, the forest is a sort of hub around which various land uses technology model refers to the access to various sensing are arranged: decorative plant farming, multiple fishing technologies, including in-situ surveys, aerial surveys, and communities, a military base and training center, a state- space-based eo systems."
+5,"these considerations transform run biological reserve, some informal settlements, and a the four guiding questions, into more specific questions: growing ecotourism industry."
+5,the guaratiba mangroves (a) what is happening in the natural environ- are vulnerable due to the aforementioned development ac- ment?
+5,"what are the impacts urban zoning and con- cording on their landward edge, which has been accelerated servation policy on the mangrove forests?"
+5,"what in recent years by the two megaevents that rio de janeiro role do complex secondary factors such as growth has hosted within the past decade [12], as well as by rising of informal settlements and the use of natural sea levels on the seaward edge [13]."
+5,numerous ecosystem resources in and around the forest play?
+5,"services are provided by these mangroves, including highly (b) how will humans be impacted by what is hap- efficient carbon sequestration, fishing and crab catching, pening in the natural environment?"
+5,"what im- coastal erosion prevention, and a local ecotourism industry pact does the designation of environmentally pro- [14]."
+5,these ecosystem services are often underappreciated tected areas have on the community?
+5,"what effects by government planners, due both to their inherent quan- would the lack of mangroves have on the city?"
+5,tification difficulty and due to the relatively unprivileged what is the value of the carbon sink of mangrove communities that they primarily accrue to.
+5,there is thus a forests?
+5,"need, on both the environmental and socioeconomic fronts, (c) what decisions are humans making in re- for the decision support provided by such a methodology as sponse to environmental factors and why?"
+5,the proposed evdt modeling framework.
+5,this suitability how are planning policies such as restricted land of this case study is further amplified by the fact that the rio use conversion in certain protected natural reserves de janeiro municipal government has long been committed developed?
+5,"how are other centralized and decen- to the collection and publishing of diverse datasets via their tralized decisions made, such as the rate of urban data.rio platform [15]. expansion or the development of transportation iac-20-b1.4 page 4 of 13"
+6,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+6,copyright ©2020 by jack reid and danielle wood.
+6,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+6,all rights reserved. infrastructure?
+6,and firsthand field visits.
+6,"planet lab’s planetscope sur- (d) what technology system can be designed to face reflectance imagery was also experimented with, but provide high quality information that supports ultimately was determined to not provide sufficient identi- human decision making?"
+6,"what satellite, aerial, fication improvements to warrant continued use."
+6,"in order and in-situ sensing platforms are needed by the to eliminate false positives, a mask was used to filter out municipal system of urban information (siurb) flagged pixels at over 40m in elevation, as determined by to accomplish their mission?"
+6,"the shuttle radar topography mission (srtm) dataset [23], and a kernel filter was used to eliminate solitary and near solitary pixels that were erroneously classified as mangroves."
+6,"this classification, for the year 2018, can be seen in figure 4."
+6,"for a more detailed explanation of random forest classifier algorithms and their relevance to forest identification, see [24]."
+6,3 visual landsat 8 oli imagery of coastal guarat- iba.
+6,the red border indicates the general boundaries of the primary mangrove forest.
+6,not all of the forest lies within the referenced biological reserve.
+6,"environment model the environment model of this case study is predom- inantly interested in the health, the size (as measured by fig."
+6,"4 classification of mangrove extent in western rio geographic extent), and height of the mangrove forest de janeiro for the year 2018. over time."
+6,"height of mangrove trees can be measured using aerial lidar [16] and rio de janeiro has recently conducted such a survey of the entire municipality, the the rio de janeiro area contains three different species data from which should be available shortly."
+6,"this height of mangroves, which makes exact identification and health can then be used to estimate biomass [17, 18], which is tracking somewhat more difficult."
+6,ultimately we elected to important for estimating the forests’ carbon sequestration use the relatively simple and robust normalized difference capabilities [9].
+6,"historical height data can be estimated vegetation index (ndvi), a normalized difference ratio of using space-based lidar and sar data [19], though this near infrared (nir) and red surface reflectance, as seen in method lacks the spatial resolution of aerial methods."
+6,equation 1.
+6,"ndvi returns a value between -1 and 1, with regarding extent, several widely-used global mangrove 1 indicating a high likelihood of healthy vegetation, -1 in- extent maps have been generated, including by giri [20], dicating an absence of vegetation, and intermediate values spalding [21], and the global mangrove watch (gmw) indicating either possible vegetation or unhealthy vegeta- [22]."
+6,"these are typically representative of specific years tion, as seen in figure 5."
+6,"in landsat 8’s operational land and, due to their global-scale, often have higher errors imager (oli), the primary instrument used for tracking in specific localities, particularly involving the landward ndvi in this case study, the nir band captures 0.845 µm edge of mangrove forests and smaller copses of trees."
+6,in to 0.885 µm light while the red band captures 0.630 µm order to conduct extent-change tracking and to identify to 0.680 µm light.
+6,"landsat 5 and 7 surface reflectance such copses, it is sometimes preferred to conduct more imagery were used as well, harmonized according to roy targeted estimations, as was done in this case."
+6,mangrove et al.
+6,"ndvi is the most commonly used surface re- extent was estimated using a random forest classifier flectance index for tracking vegetation presence and health (100 trees, 8 variables per split) utilizing both single-band via remote observation [26, 27]. surface reflectance imagery and several multi-band indices from landsat 7 etm+, landsat 8 oli, sentinel 2 msi, and alos palsar."
+6,"training data was identified using 𝑁 𝐼 𝑅 − 𝑅𝑒𝑑 a combination of giri’s 2000 map, gmw’s 2015 map, ndvi = (1) 𝑁 𝐼 𝑅 + 𝑅𝑒𝑑 iac-20-b1.4 page 5 of 13"
+7,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+7,copyright ©2020 by jack reid and danielle wood.
+7,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+7,"all rights reserved. estimating causal impacts between the evdt components, as seen in figure 7."
+7,5 false-color image of area of interest showing an ndvi composite.
+7,the greenest pixels indicate healthy vegetation presence fig.
+7,6 false-color image depicting ndvi mean anomaly.
+7,"in order to focus on significant, secular changes in green indicates new or healthier mangroves, red indicates mangrove health rather than cyclical or temporary changes, reduction in extent or in health, yellow indicates no mea- ndvi mean anomaly was used, rather than a straightfor- sured change. ward ndvi time series."
+7,the equation for this can be seen in equation 2.
+7,here ndviref refers to the median ndvi 2.4.
+7,"vulnerability model value at a specific location (an individual pixel in this case) various socioeconomic and demographic data, includ- over a specified reference period."
+7,"ndvii refers to the ndvi ing employment rates and population density, was collected value at that location for each of the images taken during at several geographic scales, including bairros (neighbor- the observation period, and n refers to the number of usable hoods), census blocks, and census microgrids."
+7,"much of images (i.e. clear, no clouds, etc.) at a specific location. this data was sourced from the national statistics agency, as mentioned earlier, ndvi is not a perfect measure of the brazilian institute of geography and statistics (ibge). mangrove health in a multi-species ecosystem, but it is these were supplemented with municipally collected data, broadly accurate."
+7,"with greater bands (more than 10) in the organized by the pereira passos municipal institute of visual spectrum, it is possible to differentiate vegetation urbanism (ipp)."
+7,"such data includes a un-developed species in some cases, but free hyperspectral platforms multidimensional poverty index (ipm) [29], a municipally- have poor spatial resolutions that make them inadequate customized social progress index [30], and detailed land use for this application [28]. maps [31]."
+7,this data varies significantly in its geographic and temporal resolution.
+7,"additionally, as mentioned in í𝑛 section 2.2, it is known that the local communities in the 𝑖=0 (𝑁 𝐷𝑉 𝐼𝑖 − 𝑁 𝐷𝑉 𝐼 𝑅𝑒 𝑓 ) 𝐴𝑛𝑜𝑚𝑎𝑙 𝑦 = (2) guaratiba area benefit from various ecosystem services pro- 𝑛 vided by the mangroves, but the exact forms these services the figures presented in this paper, such as figure 6, take are unknown and their values have not been quantified. used a reference period of august 31, 1999 to august 31, in order to better understand and quantify the dynamics 2001 and an observation period was september 1, 2001 to linking mangrove health and conservation policies with september 1, 2018."
+7,"it should be noted that mean anomaly local socioeconomic impact, the team is currently pursuing is sensitive to the selection and duration of these periods, so collaborating with an ecosystem services economist to ana- the presented figures alone should not be taken as indicative lyze historical data and potentially to conduct household of trends outside of the specified periods. surveys."
+7,"this historical data will be used in conjunction this eo data was accessed and proceed using google with the mangrove health history to estimate the ""carbon earth engine (gee), prior to being exported for use as and raw material impact"" and ""local socioeconomic im- part of the broader evdt modeling framework."
+7,"gee is a pact of mangrove loss,"" as shown in figure 7."
+7,"for more free, cloud-based, geospatial programming platform that details on these types of methods, see [32, 33]."
+7,once these hosts free satellite imagery from a variety of sources.
+7,"this historical dynamics are better understood, we can progress platform obviates the need to download such imagery onto to predictive simulation of vulnerability. a computer for individual manual analysis."
+7,this method of extent and health tracking is largely based upon methods used by lagomasino et al.
+7,"once this historical man- grove data has been processed, it serves as the foundation of iac-20-b1.4 page 6 of 13"
+8,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+8,copyright ©2020 by jack reid and danielle wood.
+8,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+8,all rights reserved.
+8,7 flowchart indicated various ways of estimating causal impact of one evdt component on another 2.5.
+8,"human behavior and decision making model in these protected areas (which are classed as ""inte- two primary policy decisions are current included in gral protection""), little or no development and resource this evdt application: conservation status and urban zon- extraction is allowed."
+8,in addition to these areas (and often ing.
+8,"the histories of these are provided by the municipal surround them), there are various municipally-defined ""sus- environmental secretariat and urban planning secretariat tainable use"" areas that allow for certain, restricted forms and accessed via the data.rio platform."
+8,the urban zon- of development and resource extraction.
+8,"there are also two ing categories are broadly similar to those in many cities different classes of boundary zones with fewer protections. around the world and include the types of commercial and industrial activity permitted and maximum floor area additionally to these specifically environmental protec- ratio allowed, among other factors."
+8,"conservation status, tions, there exists within the mangrove forest a federally- on the other hand, is somewhat complicated by the fact operated military base, ctex, and several informal set- that, due to rio de janeiro’s former status as the national tlements, such as araçatiba, situated on federal land but capital of brazil, the city was directly governed by the currently depending on the municipal government for for- federal government for multiple centuries up until 1960. mal recognition [36]."
+8,"these areas hold their own (both de as a result, there are multiple conservation areas and other facto and de jure) environmental protections and risks. specialized jurisdictional areas in the guaratiba area, both in close proximity and occasionally overlapping, governed the selection of these two axes of policy decisions by the municipal, state, and federal governments [34]."
+8,"the (conservation status and urban zoning) was based on meet- relevant conservation areas in the area include: ings and discussions with government officials from several • área de proteção ambiental (apa) ambiental das municipal and federal agencies, university researchers, and brisas (municipal) local community members."
+8,"other axes were discussed • apa da orla da baia de sepetiba (municipal) and were of interest to particular audiences (such as tran- • parque natural municipal da serra da capoeira sit network changes and conservation policy enforcement grande (municipal) stringency), but these two held broad appeal and relative • parque nacional municipal da prainha (municipal) accessibility, while still having concrete historical data that • parque nacional municipal de grumari (municipal) are either quantitative or code-able qualitative."
+8,"the history • reserva biológica e arqueológica de guaratiba of these two policy axes over the past several decades will (rbag)∗ (state) be used in conjunction with the environment and vulnera- • apa sepetiba ii (state) bility models to estimate the regulatory impact on these • parque estadual da pedra branca (state) two domains, as shown in figure 7."
+8,"∗ until 2006, this land was controlled by the nearby brazillian army army technology center (ctex), which continues to occupy a significant amount of land in the guaratiba area and maintains some facilities within the rbag."
+8,"similarly to other military administered lands in various parts of the world, ctex’s control of this land results in a kind of quasi-environmental protection that is simultaneously less formally determined than actual environmental conservation areas but much more stringently enforced in practice."
+8,"for example, there is an army vehicle workshop that disposes of waste directly into the mangroves, but commercial activities and unauthorized human access are strictly forbidden [35] iac-20-b1.4 page 7 of 13"
+9,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+9,copyright ©2020 by jack reid and danielle wood.
+9,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+9,all rights reserved.
+9,technology design model hosted predominantly online and allow for the real-time in order to enable the estimation of the impact of importing of data are planned.
+9,"a screen shot from the eo data collection and use, as shown in the bottom box user interface can be seen in figure 8."
+9,"the image shown of figure 7, the history of the collection and use of eo is in portuguese, the primary language of the target audi- data (including both satellite and aerial platforms) was ence, but multi-language functionality is currently being generated by the relevant municipal government agencies. added and is in available in some other versions of the user table 1 shows the simplified history of such use by the interface, as seen in later figures."
+9,the user interface can urban planning secretariat of rio de janeiro.
+9,"not shown present both historical data and simulated predictions in an in this table is the geographic coverage of each product, interactive manner, enabling experimentation and learning. the application that it was intended for, or the use of eo this user interface has two actionable units of analysis: by other agencies."
+9,the 1975 product is currently in the the conservation areas and urban zones.
+9,"in reality, both process of being digitized and georeferenced, which is why of these involve classification choices (is an area going a resolution is unknown at the moment. to completely prohibit human use or be classed as ’for table 1 eo data use by the municipal urban planning sustainable use only’?)"
+9,and geographic choices (where secretariat of rio de janeiro exactly should the boundaries run).
+9,the current version only allows for classification choices within the range of year product platform currently used categories.
+9,the capability of generating new 1975 ortophoto aerial (???
+9,cm) categories and geographic choices are being developed.
+9,"1999 ortophoto analog camera (scanned to 85cm) various other geographic units, such as bairros (neighbor- 2004 ortophoto analog camera (scanned to 50cm) hoods) and census blocks, are accessible for presenting 2006 satellite imagery quickbird (60 cm) geographic data but are not themselves actionable units of 2008 satellite imagery quickbird (60 cm) analysis."
+9,this is necessary as various demographic and 2009 ortophoto digital camera (25 cm) socioeconomic data likely to be relevant to decision-makers 2010 lidar survey aerial (10 pts/m2) are only reported in particular geographic scales.
+9,2010 ortophoto digital camera (25 cm) 2011 ortophoto digital camera (20 cm) 2012 ortophoto digital camera (20 cm) 2013 lidar survey aerial (2 pts/m2) 2013 ortophoto digital camera (10 cm) 2015 ortophoto digital camera (15 cm) 2016 satellite imagery worldview 3 (30 cm) 2017 satellite imagery worldview 2 (46 cm) 2018 satellite imagery worldview 3 (32 cm) 2019 true ortophoto digital camera (15 cm) 2019 lidar survey aerial (8 pts/m2) fig.
+9,"8 prototype user interface of the model, showing mangrove health, population density, and various other 3."
+9,results information for western rio de janeiro.
+9,"at the time of writing, mangrove extent and health the mangrove extent and health data has been imported tracking has been completed; historical socioeconomic, de- into the user interface from gee and is visible both geo- mographic, policy, and eo data usage have been collected; graphically (as a map overlay) and numerically (in the form and a user interface has been developed that incorporates of such values as the total mangrove extent area and the this data."
+9,environment and vulnerability impact estimation area of recent mangrove loss within the selected geographic and the development of a more robust technology design unit of analysis).
+9,"this enables the user to make concrete, model are ongoing. quantitative comparisons in addition to visual comparisons."
+9,other versions of the user interface can display temporal 3.1.
+9,"prototype user interface data represented as graphs, but users have found this more a prototype user interface for the evdt application relevant in applications with dynamics acting on shorter has been developed and is being iteratively improved with time scales than the guaratiba mangrove case, so it is not consultation with the rio de janeiro collaborators and po- included here. tential users."
+9,"it is written in python 3, can be run a standard personal computer, and utilizes shapefiles and csvs as its primary forms of data input."
+9,future versions that are iac-20-b1.4 page 8 of 13
+10,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+10,copyright ©2020 by jack reid and danielle wood.
+10,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+10,all rights reserved.
+10,9 mangrove loss in two parts of the case study area.
+10,lighter colored areas indicate less stringent environmental protections and darker colors indicate more stringent protected areas.
+10,the user interface has been designed to focus on simplic- the bulk of the mangrove loss is along the seaward edge. ity and modularity.
+10,"data is imported in the form of csvs, this suggests that conservation policy is at least correlated shapefiles, and geotiffs, all commonly used formats that with different stressors on the forest."
+10,"additional, historical do not require proprietary software."
+10,"the program, which comparisons are being conducted to further identify the is written in the python programming language, can be causal relationship and bring to light related factors. run on virtually any standard personal computer, including there are multiple intended use audiences, including laptops, though simulation times may take several minutes municipal government officials, local community leaders, depending on the exact specifications."
+10,each component of and eo system designers.
+10,"to ensure that the evdt model the program is relatively discrete and adjustable without fulfills each of these communities needs, they are regular impacting other components."
+10,"this includes both functional involved in the prototyping and requirement-setting process. components such as data display versus simulation, and a diagram depicting the objectives and user experience of structural components, such as the four evdt models. one particular audience type is shown in figure 10."
+10,"similar as stated earlier, most of the environmental and so- diagrams have been made for other audience types as well. cioeconomic impact estimation work is ongoing, so the predictive simulation components of the program are largely 4."
+10,"discussion and future work placeholders that will be swapped out for more complete as is evident, work on both this application case study models in the future. and on the evdt modeling framework are far from com- plete."
+10,"this paper has shown, however, that this multi- 3.2."
+10,intended use and outcomes disciplinary approach to using eo data for sustainable development decision-making is possible and worth pur- we can now return to the four guiding questions of suing further.
+10,"in this section, we discuss the future work, the evdt modeling framework, as applied to this case both immediate and longer term, before moving onto the study in section 2.2."
+10,"even it its rudimentary, in-progress broader consequences of the evdt modeling framework. form, the prototype evdt model can provide some degree of insight on these questions, and to (a) in particular."
+10,"as an example, figure 9 shows screenshots from the user 4.1."
+10,immediate additions and expansions interface indicating areas of notable mangrove loss over the obvious next step is continue the socioeconomic im- the past twenty years in two different parts of the case study pact assessment work and leverage this to developing robust area.
+10,"on the left is the ilha de maderia, in the northwest simulations of future mangrove health and socioeconomic corner of rio de janeiro."
+10,"here, where the mangroves are impact, as laid out in figure 7."
+10,"this will hopefully increase either unprotected or inside an area designated ""sustain- the policymakers’ recognition of often underappreciated able use,"" the mangrove loss is primarily on the landward ecosystem services and provide local community members facing edge of the forest, directly abutting recent industrial with an additional mechanism of advocacy."
+10,another ma- development.
+10,"meanwhile, in the southwest corner of the jor component to be added is a fully fledged technology municipality, shown on the right in the same figure, the design component."
+10,"in this case this will specifically entail mangroves lie primarily in or along ""integral protection"" ar- tradespace exploration, where the users can assess differ- eas, and secondarily in ""sustainable use"" areas."
+10,"in this area, ent eo data products and their validity."
+10,future variants iac-20-b1.4 page 9 of 13
+11,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+11,copyright ©2020 by jack reid and danielle wood.
+11,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+11,all rights reserved. of evdt applications could even use simulated eo data cording to the norms and standards of that field.
+11,"for the to compare alternatives, not dissimilar to the observing environment model in this case, for example, this entails system simulation experiments (osses) commonly used working with espaço using both remote sensing and for meteorological and scientific satellite design."
+11,"while the in-situ monitoring in order to calibrate and confirm the presented version focuses on the use of eo for assessing results of the mangrove health tracking discussed earlier. mangrove health, such data can be used to estimate other olofsson et al. is an excellent reference for best practices important factors in the guaratiba case study, including of remote sensing accuracy assessments [37]."
+11,"in general, water quality metrics such as turbidity and various socioe- any accuracy assessment needs to include proper sampling conomic factors, such as household income and building design, response design, and analysis."
+11,this in turn requires quality.
+11,once these expansions and improvements have comparison of multiple data sources for agreement.
+11,"as been integrated into the evdt application, the intent is explained in section 2.3, the current extent identification to move the user interface online to a cloud computing method already uses multiple eo satellite data sources. platform."
+11,"this will both expand access and will facilitate these can be individually compared for internal consis- various automated functions, such as the importing of up- tency, while the combined product can also be compared dated data from the data.rio platform and integration with to the medium-resolution land use maps that are assembled gee, thereby allowing for more computational expensive by the rio de janeiro municipality every few years [31]. calculations than are feasible on most personal computers."
+11,"these maps themselves are based upon a variety of data sources, including commissioned satellite observations, aerial surveying, in-situ surveying techniques, and the maps from previous years."
+11,"the ndvi tracking can also be compared to drone imagery, as the espaço research group periodically uses a phantom dji drone capable of both visual and near infrared imagery for aerial surveys of selective mangrove areas."
+11,"for a more detailed explanation of such a validation methodology applied to water hyacinth, rather than mangroves, see [38, 39]."
+11,"for verification and validation of the vulnerability and decision models, in addition to various internal checks and comparisons of different rio de janeiro datasets, there is also the possibility of comparing the findings to one or more other municipalities."
+11,"several such municipalities, all located within the same state, contain significant mangrove forests and fishing communities, including guapimirim, magé, itaguaí, angra dos reis, and paraty."
+11,"each have their own conservation and urban development policies, as well as their own history of eo data use (or lack thereof, as the case may be)."
+11,they may thus serve as a means of validating the causal relations identified by the ongoing work.
+11,"once an internally validated evdt model exists, user validation will be necessary to demonstrate the utility of framework in application."
+11,"this validation will make use of the collection of methods known as purposeful gam- ing [40], wargaming [41–43], and role-playing gaming [44, 45]."
+11,"participants from various audience groups, such as the municipal environmental secretariat, local com- fig."
+11,"10 two potential user experience concepts for this munity members, and urban planning officials, will be case study. recruited and asked to use the model to develop policies both individually and collaboratively."
+11,through the use 4.2.
+11,"verification and validation of comparison with other policymaking methods and of for each component of evdt, internal verification pre-and-post surveys, both the perceived and the assessed and validation work is required and is best conducted ac- utility of the model can be assessed."
+11,iac-20-b1.4 page 10 of 13
+12,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+12,copyright ©2020 by jack reid and danielle wood.
+12,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+12,all rights reserved.
+12,"longer term goals port of the 2030 agenda for sustainable development,” , in the further future, we envision using the results of mar."
+12,"2017. the usability testing to further the development of interface [6] group, s."
+12,"r., and secure world foundation, “we- standards for a more generalized integrated model frame- binar series: serving society with space data,” work."
+12,"the various submodels used in the case studies may https://www.media.mit.edu/posts/serving-humanity- themselves be the first members of an openly accessible innovations-in-satellite-data-applications-for-the-sdgs/, library of submodels."
+12,"potential user groups could adapt 2020. and reuse evdt components in other applications, without having to start from scratch."
+12,"in this way, a community of [7] schroeder, w., oliva, p., giglio, l., and csiszar, i."
+12,"a., “the new viirs 375m active fire detection data prod- practice can be built over time, contributing to both the uct: algorithm description and initial assessment,” re- framework itself as well as to specific application models. mote sensing of environment, vol. 143, 2014, pp."
+12,85–96.
+12,"ultimately, the goal is for specific decision-maker organiza- https://doi.org/10.1016/j.rse.2013.12.008. tions, either those involved with sustainable development or those involved with eo system design (or preferably the [8] stroming, s., robertson, m., mabee, b., kuwayama, y., two of these together) to take ownership of development and schaeffer, b., “quantifying the human health benefits and operation of their own application models, rather than of using satellite information to detect cyanobacterial relying on primarily academic teams."
+12,obviously this goal harmful algal blooms and manage recreational advi- sories in u.s.
+12,"lakes,” geohealth, vol."
+12,"4, no. 9, 2020, p. lies several years in the future, but it is hoped that the e2020gh000254. https://doi.org/10.1029/2020gh000254. framework and case study as presented here represent first steps forward."
+12,"[9] lagomasino, d., fatoyinbo, t., lee, s., feliciano, e., tret- tin, c., shapiro, a., and mangora, m."
+12,"m., “measuring mangrove carbon loss and gain in deltas,” environmen- acknowledgements tal research letters, vol."
+12,"14, no. 2, 2019, p."
+12,025002.
+12,we would like to acknowledge our rio de janeiro col- https://doi.org/10.1088/1748-9326/aaf0de. laborators and our colleagues here in the us.
+12,"in rio de janeiro, felipe mandarino of ipp has proven an invaluable [10] reid, j., zeng, c., and wood, d., “combining social, envi- point of contact on this project and much else."
+12,"the ex- ronmental and design models to support the sustainable development goals,” ieee aerospace conference pro- pertise an hospitality of prof."
+12,"carla madureira and prof. ceedings, vol."
+12,"2019-march, ieee computer society, big rafael barros of espaço at federal university of rio de sky, montana, 2019. https://doi.org/10.1109/aero.2019."
+12,janeiro (ufrj) is likewise much appreciated.
+12,"closer to 8741623. home, the advice prof."
+12,"david lagomasino of east carolina university, dr."
+12,"lola fatoyinbo of nasa goddard, and [11] reid, j., and wood, d., “decision support model and prof."
+12,"suhyun jung of west virginia university has been visualization for assessing environmental phenomena, crucial to this project, as has the work of two other space ecosystem services, policy consequences, and satellite enabled researchers, ufuoma ovienmhada and seamus design using earth observation data,” ascend, aiaa, online, 2020."
+12,lombardo.
+12,"[12] kassens-noor, e., gaffney, c., messina, j., and phillips, e., “olympic transport legacies: rio de janeiro’s bus references rapid transit system,” journal of planning education [1] united nations, “transforming our world: the 2030 and research, vol."
+12,"38, no. 1, 2018, pp."
+12,13–24.
+12,"agenda for sustainable development,” , 2015. https://doi.org/10.1177/0739456x16683228."
+12,"[2] bennich, t., weitz, n., and carlsen, h., “deciphering the [13] goldberg, l., lagomasino, d., and fatoyinbo, t., “ecomap: scientific literature on sdg interactions: a review and a decision-support tool to monitor global mangrove vul- reading guide,” science of the total environment, vol. nerability and its drivers,” agu fall meeting abstracts, 728, 2020, p."
+12,138405. https://doi.org/10.1016/j.scitotenv.
+12,2020.138405.
+12,"[14] schwenk, l."
+12,"m., and cruz, c."
+12,"m., “the research environ- [3] kruse, j., crompvoets, j., and pearlman, f. (eds.), geo- mental and socio-economical conflicts relative to the ad- value: the socioeconomic value of geospatial information, vance of the soybean growth in areas of influence of the in- crc press, new york, ny, 2017. https://doi.org/10.1201/ tegration and development axis in the state of mato grosso,” b20712."
+12,acta scientiarum.
+12,"agronomy, vol."
+12,"30, no. 4, 2008, pp."
+12,501– 511. https://doi.org/10.4025/actasciagron.v30i4.5305.
+12,"[4] tatem, a."
+12,"j., goetz, s."
+12,"j., and hay, s."
+12,"i., “fifty years of earth-observation satellites,” american scientist, 2017."
+12,"[15] matheus, r., vaz, j."
+12,"c., and ribeiro, m."
+12,"m., “open gov- ernment data and the data usage for improvement of [5] group on earth observations, “earth observations in sup- public services in the rio de janeiro city,” proceedings iac-20-b1.4 page 11 of 13"
+13,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+13,copyright ©2020 by jack reid and danielle wood.
+13,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+13,"all rights reserved. of the 8th international conference on theory and prac- [26] freden, s."
+13,"c., mercanti, e."
+13,"p., and becker, m."
+13,"a., “moni- tice of electronic governance, association for computing toring vegetation systems in the great plans with erts,” machinery, new york, ny, usa, 2014, pp."
+13,338–341.
+13,hird earth resources technology satellite-1 symposium: https://doi.org/10.1145/2691195.2691240.
+13,"the proceedings of a symposium held by goddard space flight center at washington, d.c. on december 10-14, [16] olagoke, a., proisy, c., féret, j.-b., blanchard, e., fromard, 1973, scientific and technical information office, national f., mehlig, u., de menezes, m."
+13,"m., dos santos, v."
+13,"f., and aeronautics and space administration, washington d.c., berger, u., “individual mangrove tree measurement using 1974, pp."
+13,309–329.
+13,uav-based lidar data: possibilities and challenges.”
+13,"re- mote sensing of environment, vol."
+13,"223, 19/december/2015, [27] haboudane, d., miller, j."
+13,"r., pattey, e., zarco-tejada, pp."
+13,34–49. https://doi.org/10.1007/s00468-015-1334-9.
+13,"j., and strachan, i."
+13,"b., “hyperspectral vegetation in- dices and novel algorithms for predicting green lai [17] clough, b."
+13,"f., and scott, k., “allometric relationships of crop canopies: modeling and validation in the con- for estimating above-ground biomass in six mangrove text of precision agriculture,” remote sensing of en- species,” forest ecology and management, vol."
+13,"27, no. 2, vironment, vol."
+13,"90, no. 3, 2004, pp."
+13,"337–352. https: 1989, pp."
+13,117–127. https://doi.org/10.1016/0378-1127(89) //doi.org/10.1016/j.rse.2003.12.013.
+13,90034-0.
+13,"[18] fatoyinbo, t., feliciano, e."
+13,"a., lagomasino, d., lee, [28] mousivand, a., menenti, m., gorte, b., and verhoef, w., s."
+13,"k., and trettin, c., “estimating mangrove above- “global sensitivity analysis of the spectral radiance of a ground biomass from airborne lidar data: a case soil–vegetation system,” remote sensing of environment, study from the zambezi river delta,” environmental vol. 145, 2014, pp."
+13,131–144. https://doi.org/10.1016/j.rse.
+13,"research letters, vol."
+13,"13, no. 2, 2018, p."
+13,025012.
+13,2014.01.023. https://doi.org/10.1088/1748-9326/aa9f03.
+13,"[29] oxford poverty and human development initiative, “chart- [19] lagomasino, d., fatoyinbo, t., lee, s., feliciano, e., trettin, ing patheways out of multidimensional poverty: achieving c., and simard, m., “a comparison of mangrove canopy the sdgs,” tech. rep., united nationals development pro- height using multiple independent measurements from gramme, 2020."
+13,"land, air, and space,” remote sensing, vol."
+13,"8, no. 4, 2016, p."
+13,327. https://doi.org/10.3390/rs8040327.
+13,"[30] pulici, a., moura, d."
+13,"c., and mosaner, m."
+13,"s., “relatório metodológico: índice de progresso social no rio de [20] giri, c., ochieng, e., tieszen, l."
+13,"l., zhu, z., singh, janeiro,” tech. rep., instituto pereira passos, rio de janeiro, a., loveland, t., masek, j., and duke, n., “status and brazil, 2016."
+13,"distribution of mangrove forests of the world using earth observation satellite data,” global ecology and [31] rego, l., and koch, b., “automatic classification of land biogeography, vol."
+13,"20, no. 1, 2011, pp."
+13,154–159.
+13,cover with high resolution data of the rio de janeiro https://doi.org/10.1111/j.1466-8238.2010.00584.x.
+13,"city brazil,” 2003 2nd grss/isprs joint workshop on remote sensing and data fusion over urban areas, 2003, [21] spalding, m., kainuma, m., and collins, l., world atlas pp."
+13,"172–176. https://doi.org/10.1109/dfua.2003.1219981. of mangroves, 1st ed., routledge taylor & francis group, new york, ny, 2010."
+13,"[32] jung, s., rasmussen, l."
+13,"v., watkins, c., newton, p., and agrawal, a., “brazil’s national environmental reg- [22] global mangrove watch, “global mangrove extent (v2.0),” istry of rural properties: implications for livelihoods,” www.globalmangrovewatch.org, 2018."
+13,"ecological economics, vol. 136, 2017, pp."
+13,53–61.
+13,"[23] jarvis, a., reuter, h., nelson, a., and guevara, e., https://doi.org/10.1016/j.ecolecon.2017.02.004."
+13,"“hole-filled srtm for the globe version 4, avail- able from the cgiar-csi srtm 90m database,” [33] jung, s., “evidence on land deals’ impacts on local liveli- http://srtm.csi.cgiar.org/, 2008. hoods,” current opinion in environmental sustainability, vol. 32, 2018, pp."
+13,90–95. https://doi.org/10.1016/j.cosust.
+13,"[24] jhonnerie, r., siregar, v."
+13,"p., nababan, b., prasetyo, l."
+13,"b., 2018.05.017. and wouthuyzen, s., “random forest classification for mangrove land cover mapping using landsat 5 tm and [34] couto, c."
+13,"g., and absher-bellon, g."
+13,"l., “imitation or alos palsar imageries,” procedia environmental sci- coercion?"
+13,"state constitutions and federative centraliza- ences, 2015, p."
+13,"7. tion in brazil,” revista de administracao publica, vol."
+13,"52, no. 2, 2018, pp."
+13,"321–344. https://doi.org/10.1590/0034- [25] roy, d."
+13,"p., kovalskyy, v., zhang, h."
+13,"k., vermote, e."
+13,"f., 761220170061."
+13,"yan, l., kumar, s."
+13,"s., and egorov, a., “characteriza- tion of landsat-7 to landsat-8 reflective wavelength and [35] herzog, c."
+13,"p., “guaratiba verde: subsídios para o projeto normalized difference vegetation index continuity,” re- de uma infra-estrutura verde em área de expansão urbana mote sensing of environment, vol. 185, 2016, pp."
+13,57–70.
+13,"na cidade do rio de janeiro,” ph.d. thesis, universidade https://doi.org/10.1016/j.rse.2015.12.024."
+13,"federal do rio de janeiro, 2009."
+13,iac-20-b1.4 page 12 of 13
+14,"71st international astronautical congress (iac) – the cyberspace edition, 12-14 october 2020."
+14,copyright ©2020 by jack reid and danielle wood.
+14,published by the international astronautical federation (iaf) with permission and released to the iaf to publish in all forms.
+14,all rights reserved.
+14,"[36] chisholm, j., “who’s invading whom?"
+14,"the complex battle for rio de janeiro’s informal settlements on federal land,” https://blogs.lse.ac.uk/latamcaribbean/2017/11/14/whos- invading-whom-the-complex-battle-for-rio-de-janeiros- informal-settlements-on-federal-land/, 2017."
+14,"[37] olofsson, p., foody, g."
+14,"m., herold, m., stehman, s."
+14,"v., woodcock, c."
+14,"e., and wulder, m."
+14,"a., “good practices for estimating area and assessing accuracy of land change,” remote sensing of environment, vol. 148, 2014, pp."
+14,42–57. https://doi.org/10.1016/j.rse.2014.02.015.
+14,"[38] ovienmhada, u., fatoyinbo, t., lagomasino, d., mouftaou, f., ashcroft, e., lombardo, s., and wood, d., “using earth observation data to inform community manage- ment of invasive plants and traditional fishing practices on lake nokoue in benin,” 71st international astronautical conference, international astronautical federation, the cyberspace edition, 2020."
+14,"[39] ovienmhada, u., “earth observation technology applied to environmental management: a case study in benin,” master of science, massachusetts institute of technology, cambridge, ma, may 2020."
+14,"[40] ross, a."
+14,"m., fitzgerald, m."
+14,"e., and rhodes, d."
+14,"h., “game- based learning for systems engineering concepts,” con- ference on systems engineering research, vol. 28, edited by a."
+14,madni and m.
+14,"sievers, elsevier, redondo beach, ca, 2014, pp."
+14,430–440. https://doi.org/10.1016/j.procs.2014.03.
+14,"[41] hanson, m."
+14,"e., “improving operational wargaming : it’s all fun and games until someone loses a war,” mono- graph, united states army command and general staff college, for leavenworth, kansas, 2016."
+14,"[42] selva, p., “revitalizing wargaming is necessary to be prepared for future wars,” war on the rocks2, 15."
+14,"[43] shlapak, d."
+14,"a., and johnson, m."
+14,"w., reinforcing deter- rence on nato’s eastern flank: wargaming the defence of the baltics, rand corporation, washington d.c., 2016. https://doi.org/10.7249/rr1253."
+14,"[44] grogan, p."
+14,"t., and de weck, o."
+14,"l., “federated simula- tion and gaming framework for a decentralized space- based resource economy,” thirteenth asce aerospace division conference on engineering, science, construc- tion, and operations in challenging environments, and the 5th nasa/asce workshop on granular materials in space exploration, american society of civil en- gineers, pasadena, california, 2012, pp."
+14,1468–1477. https://doi.org/10.1061/9780784412190.156.
+14,"[45] grogan, p."
+14,"t., and de weck, o."
+14,"l., “strategic engineering gaming for improved design and interoperation of infras- tructure systems,” working paper, massachusetts institute of technology."
+14,"engineering systems division, mar."
+14,iac-20-b1.4 page 13 of 13

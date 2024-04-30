@@ -1,0 +1,509 @@
+page,p
+1,economic sciences research article computer sciences open access geographic microtargeting of social assistance with high-resolution poverty maps isabella s.
+1,smythea and joshua e.
+1,"blumenstockb,1 edited by karen seto, yale university, new haven, ct; received november 9, 2021; accepted june 7, 2022 hundreds of millions of poor families receive some form of targeted social assistance."
+1,"many of these antipoverty programs involve some degree of geographic targeting, where significance aid is prioritized to the poorest regions of the country."
+1,"however, policy makers in many low-resource settings lack the disaggregated poverty data required to make effective many antipoverty programs use geographic targeting decisions."
+1,"using several independent datasets from nigeria, this geographic targeting to prioritize paper shows that high-resolution poverty maps, constructed by applying machine beneﬁts to people living in speciﬁc learning algorithms to satellite imagery and other nontraditional geospatial data, can locations."
+1,this paper shows that improve the targeting of government cash transfers to poor families.
+1,"specifically, we high-resolution poverty maps, find that geographic targeting relying on machine learning–based poverty maps can constructed with machine reduce errors of exclusion and inclusion relative to geographic targeting based on recent learning algorithms from satellite nationally representative survey data."
+1,"this result holds for antipoverty programs that imagery, can improve the target both the poor and the extreme poor and for initiatives of varying sizes."
+1,"we also geographic targeting of beneﬁts find no evidence that machine learning–based maps increase targeting disparities by to the poorest members of demographic groups, such as gender or religion."
+1,"based in part on these findings, the government of nigeria used this approach to geographically target emergency cash society."
+1,this approach was used transfers in response to the covid-19 pandemic. by the nigerian government to distribute beneﬁts to millions of poverty | targeting | satellite imagery | nigeria the extreme poor.
+1,"as high-resolution poverty maps hundreds of millions of poor and vulnerable families benefit from some form of targeted become globally available, these downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204. social assistance (1)."
+1,"just since the onset of the covid-19 pandemic, over 3,300 new results can inform the design and targeted social protection programs have been launched (1). implementation of social a key factor in the success of any antipoverty program is the degree to which it assistance programs worldwide. is accurately targeted (2)."
+1,"when truly poor families do not receive benefits (errors of exclusion) or when nonpoor families do receive benefits (errors of inclusion), this undermines the effectiveness of the policy (3)."
+1,"unfortunately, many governments in low- and middle-income countries (lmics) lack recent, reliable data on where poverty is concentrated (4)."
+1,"while most lmics have access to poverty data that provide comprehensive coverage at the largest administrative subdivision (e.g., the state level in nigeria, comparable with the state level in the united states), coverage is far less complete at the third administrative subdivision (e.g., the ward level in nigeria, comparable with municipalities in the united states)."
+1,"in nigeria, the most recent demographic and health survey (dhs) surveyed households in only 13.8% of wards."
+1,"this problem is present across lmics; in peru, for example, 32.0% of the comparable administrative units were covered in the most recent dhs, and in indonesia, just 16.1% were covered."
+1,"in practice, this incomplete coverage means that a geographically targeted program must either rely on potentially inaccurate and outdated poverty maps or author aﬃliations: a school of international and public accept the efficiency losses of targeting larger administrative units."
+1,"aﬀairs, columbia university, new york, ny 10027; and in this paper, we ask the following question."
+1,"can fine-grained poverty maps, produced b school of information, university of california, berkeley, ca 94720 by applying deep learning algorithms to high-resolution satellite imagery, improve the accuracy of geographically targeted antipoverty programs?"
+1,our results are based on an analysis done in a high-stakes policy environment to help the government of nigeria determine its emergency covid-19 response strategy.
+1,"author contributions: i.s.s. and j.e.b. designed research; i.s.s. and j.e.b. performed research; i.s.s. analyzed data; our main results evaluate different geographic targeting mechanisms available to and i.s.s. and j.e.b. wrote the paper. the nigerian government, which are similar to those used by policy makers in many the authors declare no competing interest."
+1,lmics.
+1,"specifically, we compare the targeting outcomes that would result from using this article is a pnas direct submission. high-resolution machine learning (ml)–based poverty maps with those that would copyright © 2022 the author(s)."
+1,published by pnas. result from using a recent nationally representative household survey (which we refer this open access article is distributed under creative commons attribution license 4.0 (cc by). to as the survey-based “benchmark”).
+1,both approaches are evaluated using a nationally 1 to whom correspondence may be addressed.
+1,"email: representative survey of 22,110 nigerian households that was independently collected and jblumenstock@berkeley.edu. not used to train the ml-based approach or to determine the survey-based benchmark."
+1,"this article contains supporting information online at by maintaining a clear separation between the data used to simulate targeting allocations https://www.pnas.org/lookup/suppl/doi:10.1073/pnas. and the data used to evaluate those allocations, we limit the scope for overfitting on the 2120025119/-/dcsupplemental. evaluation data."
+1,"published august 1, 2022."
+1,pnas 2022 vol.
+1,119 no. 32 e2120025119 https://doi.org/10.1073/pnas.2120025119 1 of 10
+2,we find that the ml-based poverty maps are at least as accurate data to both perform and evaluate targeting.
+2,"this allows us to as the benchmark in targeting benefits to the poor (i.e., those approximate how effectively targeting can be conducted when the with consumption below the poverty line) and to the extreme true underlying distribution of poverty is known."
+2,"however, it is poor (consumption below half the poverty line) in regions where important to note that this is a hypothetical exercise; no dataset benchmark data are available."
+2,"we also document the main ad- exists that would allow for optimal targeting in practice. vantage of the ml-based maps, which is that they allow for fig."
+2,"1, left displays the receiver operating characteristic (roc) accurate microtargeting in all administrative subdivisions of the curves where the objective is to provide benefits to the poor (daily country—including subdivisions where benchmark data do not consumption below $1.05); fig."
+2,"1, right provides the roc curves exist."
+2,this is important because the survey benchmark does not for the objective of targeting the extreme poor (daily consumption contain data for 86.2% of nigerian wards (the admin-3 unit) below $0.57).
+2,substantial increases in the area under the curve and 18.5% of local government areas (lgas; the admin-2 unit). are produced as the targeting policy shifts from states (the largest we document how the accuracy and complete coverage of the administrative unit) to lgas (the intermediate administrative ml-based maps make it possible to design a more disaggregated unit) and from lgas to wards (the smallest administrative unit). geographic targeting policy than would be possible with survey these findings are consistent with work done in other contexts data alone.
+2,"this disaggregation directly translates to a higher to document the benefits of spatial disaggregation in geographic fraction of benefits being allocated to the poor and the extreme targeting (11–13); intuitively, programs targeting smaller admin- poor. istrative units are able to more precisely direct benefits to the in addition, we assess the fairness of ml-based targeting with poorest regions than programs targeting larger ones. respect to several different demographic subgroups."
+2,this is to address the concern that targeting approaches that are agnostic to coverage and accuracy of ml-based poverty maps.
+2,"our second recipients’ demographics may over- or undertarget certain groups, set of results contrasts the coverage of ml-based poverty maps such as female-headed households (5, 6)."
+2,"comparing the demo- with survey-based alternatives and compares the accuracy of these graphic parity of ml-based and survey-based targeting approaches two approaches at different spatial scales. along several dimensions, we find that ml-based targeting does the difference in coverage between survey- and ml-based not decrease fairness overall. poverty maps is evident in fig."
+2,"2a, which shows the two ver- these results build on prior work that developed methods for sions of nigerian poverty maps side by side at different levels of the construction of high-resolution poverty maps (7–9)."
+2,"however, geographic aggregation."
+2,gray areas indicate administrative units our focus is different and more practical.
+2,"we take the output of where no surveys occurred in the benchmark dataset, a nation- prior work (the high-resolution poverty maps) as the input to ally representative dhs household survey of 40,427 households our analysis and show how such maps can improve the outcomes conducted in 2018."
+2,"at the state level (row a), both maps have downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204. of a real-world social assistance program."
+2,"in january 2021, the complete coverage; however, at the lga level (row b), the survey- nigerian government chose this approach to guide the expansion based map loses 18.5% of lgas, and at the finest level (row c), of cash transfers to the urban poor (10); our hope is that this surveys cover only 13.8% of all wards in nigeria."
+2,a full tabulation analysis can help encourage future efforts to integrate recent of these results is also shown in the first two columns of table 1. innovations in ml into humanitarian relief applications.
+2,the better coverage of ml-based poverty maps does not come at the expense of accuracy.
+2,"rather, we find that the ml-based results poverty maps measure the spatial distribution of poverty with approximately the same accuracy as the benchmark survey."
+2,this beneﬁts of disaggregation.
+2,our first intuitive result confirms can be seen in fig.
+2,"2b, which measures the accuracy of survey- prior work and highlights the value of geographic disaggregation based and ml-based poverty maps using a third independent in the design of geographic targeting policies."
+2,"this analysis is source of ground truth data, nigeria’s national living standards shown in fig. 1, where we compare targeting performance at survey (nlss) of 22,110 households conducted in 2018 and different aggregation levels using hypothetical optimal targeting 2019."
+2,"at all levels of spatial disaggregation, the correlation with data."
+2,optimal targeting is simulated by using the same survey the nlss is similar.
+2,note that we do not expect the ml-based estimates to outperform the dhs-based estimates since the dhs data were used to train the ml-based model (ml-based poverty maps).
+2,"rather, the main advantage of the ml-based maps is that they allow for accurate extrapolation of wealth estimates into the large number of regions not surveyed by the dhs."
+2,we further find that correlations with ground truth for both dhs and ml-based poverty maps increase when we consider only the regions where the evaluation (nlss) data are most reliable.
+2,"(this analysis is intended to address one limitation of our empir- ical setting, noted in issues of incomplete survey coverage, which is that the ground-truth nlss data used to evaluate performance are incomplete.)"
+2,"these results are shown in the last two columns of table 1, which reports the correlation between the two poverty fig."
+2,targeting performance of policies at diﬀerent administrative units. maps with ground truth estimates from the nlss.
+2,"while rows 1, roc curves show the performance of geographic targeting policies designed at the state (admin-1), lga (admin-2), and ward (admin-3) levels, where 2, and 7 echo the results shown in fig."
+2,"2b, the other rows indicate all households in a targeted administrative unit receive full beneﬁts and the correlation in specific subsets of the administrative units."
+2,in households in untargeted units receive no beneﬁts.
+2,"the targeting of an particular, we find that the performance of models evaluated using administrative unit is determined based on the average wealth of the unit as data from all lgas (row 2) is inferior to that of models using only calculated from nlss data."
+2,"true and false positive rates are calculated based on the portion of true poor households that are targeted, where true poverty data from lgas with at least 30 households in the nlss (row status is determined based on the nlss."
+2,"this effect is even stronger in table 1, ward-level correlations, 2 of 10 https://doi.org/10.1073/pnas.2120025119 pnas.org"
+3,"downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204."
+3,coverage and correlations of ml and benchmark poverty maps to nlss-estimated ground truth poverty maps.
+3,"a compares the coverage and estimates of traditional survey-based poverty maps (left) and ml-based poverty maps (right) at the three diﬀerent administrative levels: state (row a), lga (row b), and ward (row c)."
+3,regions without data are shown in gray.
+3,row d shows the high-resolution ml-based estimates prior to aggregation.
+3,"for privacy reasons, high- resolution poverty estimates are not generated for grid cells with fewer than 10 inhabitants."
+3,b compares the ml and survey benchmark (the dhs) wealth estimates of each administrative unit against the nlss ground truth estimate of that unit’s wealth.
+3,pearson’s correlation coeﬃcients are reported across all relevant units.
+3,fewer observations exist in b because not all lgas and wards contain households that were surveyed in the dhs.
+3,all correlations are signiﬁcant at p = 0.001. when we compare the analysis of all wards (row 7) with that of targeting outcomes using the ml-based wealth estimates with wards with at least 20 households (row 8).
+3,"as expected, both dhs targeting outcomes using survey benchmark wealth estimates. and ml-based poverty maps are more strongly correlated with the the analysis is based on simulations of ward-level geographic nlss validation data when regions with the fewest households targeting, where all households in selected wards receive an equal surveyed are excluded. benefit and no households in unselected wards receive benefits."
+3,"perhaps most important, we find that the ml-based estimates the data and methods used to construct poverty maps from the remain accurate even when evaluated in regions where no dhs ml-based and survey-based data sources are described in primary occurred."
+3,the accuracy of ml-based estimates in regions not data sources and poverty map construction.
+3,the details of the covered by the dhs (but present in the nlss ground truth and targeting simulations used to evaluate both methods are provided ml-based estimates) can be seen in rows 5 to 6 and 10 to 11 in targeting simulations. of table 1.
+3,"for instance, comparing rows 7 and 10, we see that to summarize, we find that, using a variety of different methods the correlation between the ml-based estimates and ground truth for evaluating targeting performance, the ml-based poverty maps is very similar (0.77 vs."
+3,0.76).
+3,"there is a slight attenuation in would deliver a higher proportion of benefits to the poorest accuracy at the lga level (row 2 vs. row 5), but this is likely due to people in nigeria than the survey-based benchmark (the dhs the fact that the nlss validation data are sparser in regions with with representative imputation)."
+3,this is true whether the goal no dhs data.
+3,"thus, we recalculate these correlations removing of targeting is to provide benefits to the poor (defined as those regions with little nlss data (rows 6 and 11); the gap in accuracy consuming less than us $1.05 per day) or the extreme poor shrinks at the lga level (row 3 vs. row 6) and disappears at the (consuming less than us $0.57 per day). ward level (row 8 vs. row 11)."
+3,"overall, there is little evidence that the roc curves in fig."
+3,"3a, left compare ward-level geo- the performance of ml-based maps deteriorates in regions where graphic targeting performance using the ml-based maps (area training data were unavailable. under the curve [auc] = 0.87) with ward-level performance using the survey benchmark (auc = 0.81)."
+3,"we also include, results of national targeting simulations."
+3,"the third set of re- for reference, the performance of an “oracle” strategy (auc = sults, which is likely most relevant to policy makers, compares 0.93), which indicates the optimal performance that could be pnas 2022 vol."
+3,119 no. 32 e2120025119 https://doi.org/10.1073/pnas.2120025119 3 of 10
+4,table 1.
+4,"coverage and accuracy of diﬀerent approaches to constructing poverty maps in nigeria no. of regions with estimates correlation with ground truth estimates dhs ml based dhs ml based state-level correlations 1) all states 37 37 0.935 0.931 (0.877, 0.966) (0.870, 0.964) lga-level correlations 2) all lgas 597 706 0.787 0.802 (0.755, 0.816) (0.774, 0.827) 3) > 30 ground truth households 333 371 0.839 0.863 (0.804, 0.868) (0.834, 0.887) 4) lgas with dhs data 597 0.811 (0.782, 0.837) 5) lgas with no dhs data 109 0.713 (0.606, 0.794) 6) > 30 ground truth households and no dhs 38 0.812 (0.665, 0.898) ward-level correlations 7) all wards 464 2, 016 0.779 0.769 (0.740, 0.812) (0.751, 0.786) 8) > 20 ground truth households 95 242 0.894 0.870 (0.844, 0.928) (0.835, 0.897) 9) wards with dhs data 464 0.792 (0.756, 0.824) 10) wards with no dhs data 1, 552 0.759 (0.737, 0.779) 11) > 20 ground truth households and no dhs 147 0.871 (0.825, 0.905) the ﬁrst two columns indicate the number of administrative units for which data exist in the 2019 nlss ground truth and the 2018 dhs (column 1) or the ml-based estimates (column 2)."
+4,the last two columns indicate the pearson correlation between wealth estimates generated from the ground truth (the nlss) and the dhs (using representative imputation; column 3) or ml-based estimates (column 4).
+4,"correlations are measured across administrative units (i.e., not across households) using nlss household weights for aggregation at the state level but downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204. not at the lga or ward level."
+4,diﬀerent levels of spatial aggregation of wealth estimates are indicated.
+4,"rows 3, 6, 8, and 11 restrict analysis to administrative units where the nlss ground truth contains a minimum of 20 to 30 households (to remove high-variance observations from the ground truth estimate)."
+4,"rows 4 and 9 evaluate the ml-based estimates on the regions where dhs data exist; rows 5, 6, 10, and 11 evaluate the ml-based estimates on the subset of administrative units where no dhs data exist."
+4,all correlations are signiﬁcant at p = 0.001; parentheses show 95% cis. achieved with a purely geographic targeting approach.
+4,the survey poor.
+4,"this is because there are fewer extreme poor (8.2%) than benchmark shown in fig. 3 imputes the wealth of a fraction of poor households (40.5%), and the extreme poor are distributed wards proportional to the number of wards with missing dhs throughout the country."
+4,"thus, any purely geographic targeting data (“representative imputation” is discussed in issues of incom- approach—no matter how accurate—will struggle to reach a large plete survey coverage) to ensure that every ward has a nonzero share of the extreme poor."
+4,this finding is consistent with past probability of receiving benefits.
+4,"we separately measure the per- work on the difficulty of distinguishing poor and extreme poor formance of a survey-based approach that is evaluated only in the households (14, 15)."
+4,"13.8% of wards with dhs data, which produces an auc = 0.87."
+4,"to more concretely illustrate how the improvements in target- this approach performs similarly to the ml-based approach, but ing accuracy from using the ml-based maps translate into better it could not be feasibly implemented because it would leave 86.2% policy outcomes, table 2 shows targeting precision at 10% recall of wards ineligible for benefits."
+4,"our findings are similar when we (i.e., the fraction of transfers that reach the poor when 10% of the evaluate targeting based on the proportion of transfers reaching poor are targeted) (si appendix, fig."
+4,s3 shows a visual comparison the extreme poor rather than the poor: ward-level targeting using of the targeted regions).
+4,"in table 2, we observe a similar pattern the ml-based estimates (auc = 0.86) improves on the survey as in fig. 1: that targeting performance generally increases as benchmark (auc = 0.80) and performs as well as the dhs when smaller administrative units are targeted (i.e., when results in states the dhs is only evaluated in the 13.8% of dhs wards (auc = are compared with lgas and when lgas are compared with 0.86). wards)."
+4,"* we find that ml-based maps can improve upon the survey- most important, we find that the ml-based approach out- based benchmark for antipoverty programs of many sizes."
+4,"3b performs the main dhs benchmark (representative imputation) shows the fraction of transfers going to the poor and the ex- at all levels of geographic targeting, except the state level (since treme poor as the number of beneficiaries increases."
+4,"we measure the dhs is designed and weighted to be representative at the program size as a fraction of the total number of poor in nige- state level, it is expected to perform well—but state-level targeting ria (currently estimated at 73.5 million)."
+4,in fig.
+4,"3b, left, the would not be viable in nigeria given the size of most states)."
+4,in ml-based map performs better than the benchmark irrespective of the size of the program.
+4,in fig.
+4,"3b, right, the ml-based map outperforms the benchmark for all extreme poverty program sizes, except those targeting a population of between 11.8 and 25.7 * note that while targeting performance increases with spatial disaggregation in table 2, million people. we earlier saw in table 1 that the correlation between the nlss ground truth and both the ml-based and dhs-based poverty maps decreased with spatial disaggregation."
+4,"this comparing these two panels, it is evident that all targeting illustrates a bias–variance trade-oﬀ, where the smaller units of analysis imply that fewer approaches perform better at targeting the poor than the extreme households are available to calculate the average wealth of a region. 4 of 10 https://doi.org/10.1073/pnas.2120025119 pnas.org"
+5,"substantial overlap between regions selected by all three poverty maps (si appendix, fig."
+5,† these increases in precision directly translate into reductions in errors of exclusion and inclusion.
+5,"for instance, if we compare two geographically targeted antipoverty programs that each provide transfers to 7.3 million individuals (i.e., 10% of nigeria’s poor population), the best ml-based approach (ward- level targeting) would correctly target 6,750,920 individuals; 66,735,620 poor individuals would not receive transfers, and 597,734 nonpoor individuals would be incorrectly included."
+5,"dhs-based ward-level targeting would correctly target 5,787,802 individuals; 67,698,738 would be incorrectly excluded, and 1,560,852 would be incorrectly included."
+5,"in other words, the ml-based approach would reduce exclusion errors by 1.4% and would reduce inclusion errors by 61.7%, resulting in nearly a million poor individuals receiving aid who otherwise would not have."
+5,our finding that ml-based targeting outperforms the survey benchmark is robust to several alternative approaches to targeting.
+5,"thus far, performance has been evaluated based on a method’s ability to target regions with low average (mean) wealth."
+5,"when targeting is instead conducted based on median wealth, ml-based maps improve auc over survey-based maps from 0.808 to 0.863 for targeting the poor and from 0.803 to 0.854 for targeting the fig."
+5,ward-level targeting performance.
+5,curves show performance of ge- extreme poor.
+5,"similar performance is observed for targeting based ographic targeting for programs of diﬀerent sizes for three diﬀerent ap- proaches to targeting: an optimal approach based on the nlss evaluation on the fraction of households in the ward that are (extreme) poor; data; the ml-based approach based on high-resolution poverty maps; and a survey benchmark based on dhs data, imputing a representative portion of missing values."
+5,a shows roc curves based on whether the nlss households in targeted wards are poor (left) or extreme poor (right).
+5,"b shows the fraction † of program beneﬁts going to the poor (left) and extreme poor (right) as the the analysis in table 2 is based on wards where both the dhs and the nlss contain downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204. size of the antipoverty program varies. at least one household (n = 464)."
+5,"there is also a large number of wards for which the dhs does not contain data, but the nlss does (n = 1,552)."
+5,"in these regions, it is possible to evaluate ml-based targeting performance but not the survey-based benchmark."
+5,we focus on wards where all data are available to facilitate direct comparisons between the dhs and ml model.
+5,"in an analysis not reported in table 2, we ﬁnd that the targeting targeting the poor, the ml-based approach increases precision accuracy of the ml-based approach is largely unchanged when evaluated on the full set relative to the benchmark from 0.82 to 0.86 at the lga level and of 1,552 wards with nlss data."
+5,"for targeting the poor, auc remains virtually unchanged from 0.79 to 0.92 at the ward level."
+5,"in targeting the extreme poor, (0.867 vs."
+5,0.869 for dhs wards only).
+5,"for targeting the extreme poor, we observe a slightly larger decline (to 0.82 from 0.86)."
+5,precision at 10% recall is unchanged at 0.92 for the increase is from 0.30 to 0.39 at the lga level and from 0.31 targeting the poor and declines slightly from 0.41 to 0.39 for targeting the extreme poor to 0.41 at the ward level.
+5,"at both the lga and ward level, we see (si appendix, si text and fig."
+5,table 2.
+5,"precision at 10% recall precision at 10% recall targeting approach targeting the poor targeting the extreme poor coverage, % states optimal (nlss) 0.806 0.277 100 ml based 0.682 0.118 100 dhs based 0.795 0.218 100 lgas optimal (nlss) 0.979 0.553 91.2 ml based 0.855 0.390 100 dhs based (representative imputation) 0.824 0.301 100 dhs based (minimum imputation) 0.843 0.321 91.2 dhs upper bound 0.840 0.359 81.5 wards optimal (nlss) 1.000 0.976 22.9 ml based 0.919 0.406 100 dhs based (representative imputation) 0.793 0.311 100 dhs based (minimum imputation) 0.867 0.366 22.9 dhs upper bound 0.923 0.376 13.8 the ﬁrst two columns indicate the fraction of transfers going to poor (or extreme poor) individuals when the program budget allows for 10% of the poor (or extreme poor) to be targeted."
+5,"the third column indicates the proportion of each administrative unit for which the relevant dataset provides estimates (e.g., the nlss conducted surveys in 91.2% of lgas and 22.9% of wards)."
+5,optimal (nlss) targeting uses the nlss ground truth data to select the poorest administrative units for beneﬁts.
+5,ml-based targeting selects units based on the average estimated wealth of those units.
+5,"dhs-based targeting (representative imputation) selects units based on the average wealth of dhs households in that unit using an imputed wealth estimate on a representative fraction of units, reﬂecting the proportion of units in the country for which dhs estimates would have to be imputed."
+5,"dhs-based targeting (minimum imputation) evaluates targeting performance in the full sample of nlss wards, with missing wards imputed."
+5,dhs upper bound evaluates targeting performance only in units where the dhs occur.
+5,pnas 2022 vol.
+5,119 no. 32 e2120025119 https://doi.org/10.1073/pnas.2120025119 5 of 10
+6,comparison of targeting fairness for selected demographic groups (assigned based on the head of household).
+6,"under perfect individual targeting, the fraction of transfers going to members of a demographic group would be equal to the fraction of total poor households belonging to that demographic group."
+6,"a shows the percentage diﬀerence between the number of households in each demographic group expected to receive transfers and the number that actually receive transfers, when 10% of the population is targeted."
+6,error bars show bootstrapped 95% cis.
+6,b shows how the fraction of transfers going to sample subgroups varies as a function of program size and as a fraction of total population.
+6,dashed horizontal line indicates the proportion of poor households whose head of household belongs to that demographic group.
+6,results pictured are for ward-level targeting.
+6,aucs for ml-based maps are 0.861 for targeting the poor vs. of bars) are statistically over- or undertargeted irrespective of the 0.802 for survey-based maps and 0.835 vs.
+6,0.774 for targeting the targeting methodology (indicated by bar color).
+6,"for instance, even extreme poor."
+6,"si appendix, fig."
+6,"s6 has the corresponding roc under optimal geographic targeting, hausa speakers (40.0% of plots."
+6,"nigerians per nlss estimates) are overtargeted, and igbo speakers these results also remain qualitatively unchanged if we make (11.2% of nigerians) are undertargeted."
+6,we also note significant different assumptions about the dhs benchmark.
+6,"in particular, undertargeting of female-headed households across all targeting downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204."
+6,"table 2 also provides an upper-bound estimate of the performance strategies. of a survey benchmark by evaluating performance only in the second, spatial disaggregation has no clear effect on statistical 81.5% of lgas and 13.8% of wards covered by the dhs."
+6,ml- disparities.
+6,"with religion, we find that targeting smaller spatial based poverty maps outperform this dhs upper bound every- units (i.e., wards) is marginally less disparate than targeting larger where except when targeting the poor at the ward level, where the spatial units (i.e., lgas)."
+6,"however, the opposite result appears two approaches are nearly identical (precision of 0.923 vs."
+6,0.919). when considering the age of the head of household.
+6,"however, we also include a “minimum imputation” estimate of dhs across all of these cases, confidence intervals (cis, indicated by performance that is evaluated on the full nlss sample (as opposed the whiskers) overlap."
+6,"thus, the overall impact of disaggregation to the subset of nlss regions that also appear in the dhs) by may depend on the patterns of spatial heterogeneity in the specific imputing dhs estimates for all regions where the dhs does not regions under consideration. contain data (si appendix, si text and fig."
+6,"the performance third and perhaps most relevant to the focus of this paper, we of minimum imputation typically exceeds that of representative find that ml-based targeting leads to disparities that are similar imputation but falls below the dhs upper bound, and it always in magnitude and direction to the survey-based benchmark."
+6,in performs worse than the ml-based approach.
+6,"4a, we see that 95% cis for ml- and survey-based targeting overlap significantly for all demographic groups."
+6,in fig.
+6,"4b, we see targeting fairness and demographic parity."
+6,our final set of similar results when the number of people targeted varies.
+6,"while results explores the extent to which different targeting approaches parity varies slightly for different program sizes, no systematic (optimal [the nlss], survey benchmark [the dhs; representa- differences between targeting approaches are apparent. tive imputation], and ml-based) lead to a “fair” distribution of resources, where fairness is assessed based on statistical parity."
+6,"this discussion is motivated by the fact that a singular focus on the accuracy of targeting (at reaching the poor) might inadvertently concentrate this paper provides empirical evidence that recent advances in benefits toward (or away from) specific, potentially marginalized ml can improve the geographic targeting of social assistance."
+6,"our or underserved, subgroups of the population (5, 6, 16–18)."
+6,"we analysis, done to support the government of nigeria’s human- note three results. itarian response to the ongoing covid-19 crisis, indicates that first, geographic targeting can create demographic disparities— programs targeted using ml-based maps can direct more transfers likely due to the fact that different subgroups of the population to the poorest households than programs targeted using survey- concentrate in specific geographic areas."
+6,these results can be based poverty maps.
+6,this improvement in targeting efficiency seen in fig.
+6,"4a, which quantifies the difference in the percentage is due to the fact that the ml-based maps provide accurate of households of a certain group that are expected to receive estimates of the relative wealth of every administrative subdivision transfers (based on the percentage of that group that is truly of the country, whereas survey data typically only cover a small poor) and the percentage of households of that group that fraction of all units."
+6,"as a result, an ml-based approach can be receive transfers according to each specific targeting method. designed for smaller regions, while a survey-based approach can in the figure, a large number of demographic subgroups (sets only be designed for larger regions."
+6,we do not find evidence that 6 of 10 https://doi.org/10.1073/pnas.2120025119 pnas.org
+7,"ml-based poverty maps increase disparities between demographic based on a small number of easily observed assets and housing characteristics groups in the nigerian context. (33, 34); community-based targeting, where communities are asked to identify their neediest members (35, 36); and geographic targeting, where resources are limitations."
+7,"while promising, this approach and the results we channeled to the regions with the highest levels of poverty (37–39)."
+7,a key result document have important limitations.
+7,"in particular, our analysis from this literature, which we extend in this paper, is that signiﬁcant efﬁciency focuses on a comparison between targeting based on a large, gains can be achieved by targeting small administrative units rather than larger standardized dhs (completed in 2018) and ml-based estimates ones (11–13). trained on that survey, as evaluated using a more reliable nlss this paper connects these two historically disjoint literatures by examining with consumption data (completed in 2019)."
+7,some of our find- whether recent innovations in ml-based poverty mapping can improve the target- ings may be specific to this particular data environment.
+7,for ing of social assistance and humanitarian aid (40).
+7,"we build on prior work by yeh instance, when the gap in time between the survey benchmark et al. (8), who discuss the potential for ml-based maps in program targeting but and the evaluation data is larger (or smaller), it is possible that the stop short of analyzing a real-world policy decision and who do not compare the gains from ml-based estimates may differ."
+7,our analysis in nigeria ml approach to status quo alternatives.
+7,we also build on recent work that shows also relies on ml-based estimates that are relatively accurate how mobile phone metadata can improve targeting outcomes in afghanistan (28) and togo (5).
+7,"relative to these projects, our approach is likely most relevant (ρ = 0.802 for admin-2 regions); when ml-based estimates are in contexts where mobile phone data are not publicly available or when policy more (or less) accurate, we expect the relative benefits to increase applications require a geographic approach to targeting. (or decrease)."
+7,"likewise, in countries with a different underly- ing wealth distribution or with different spatial patterns in the targeting context: nigeria."
+7,"our analysis was motivated by a speciﬁc request concentration of poverty, results may vary."
+7,"related, as discussed for assistance from the government of nigeria, which was working with the in ground truth evaluation data from the nlss and issues of world bank to design an emergency social assistance program in response to the incomplete survey coverage, our reliance on the nlss to evalu- covid-19 crisis."
+7,"at the onset of covid-19, there was no single comprehensive ate both methods carries its own limitations; the nlss surveys social registry that would allow them to identify the individuals or households only a fraction of all geographic units and is not representative with the greatest need for assistance, and in the middle of the pandemic, it below the state level, and our evaluation relies on one particular was impractical to go door to door to collect this information."
+7,"thus, they were asset-based notion of poverty, when in fact, poverty is complex interested in evaluating different approaches to geographic targeting. and multidimensional."
+7,"none of these limitations undermine the nigeria is home to roughly 211 million people, making it the seventh most internal validity of our analysis, but they do highlight important populous country in the world."
+7,"geographically, nigeria has three different levels avenues for future work. of administrative subdivisions (fig. 2); 37 states (admin-1) are subdivided into a finally, we want to state clearly that this analysis should not be total of 774 lgas (admin-2), which in turn, are subdivided into a total of 8,808 misconstrued to imply that ml-based approaches should replace wards (admin-3)."
+7,"however, in early 2020, the best poverty data available to the government of nigeria could only provide estimates of state-level poverty; they survey-based methods for measuring poverty."
+7,"indeed, the ml- downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204. did not allow for estimates of rates of poverty at the lga or ward level. based approach was only feasible because high-quality survey data based in part on the analysis described in this paper, the government elected existed to train the ml model."
+7,"more broadly, household surveys to use our high-resolution poverty maps to target the covid-19 rapid response capture a wide range of information, with much greater nuance registration (rrr) cash transfer project, which began disbursing beneﬁts to than can be clearly seen in overhead imagery and which may the ﬁrst of an eventual 1 million recipients in mid-january 2021 (10)."
+7,"the rrr not be easily modeled with ml (19, 20)."
+7,"rather, these results program is designed speciﬁcally to help the urban poor; si appendix has a suggest that ml-based maps can provide a reliable method for separate evaluation of targeting outcomes for urban areas only. geographic targeting when time and resource constraints prevent new data collection—a frequent consideration in the large num- primary data sources and poverty map construction. ber of lmics without a recent census or comprehensive social ml-based poverty maps."
+7,the high-resolution poverty maps shown in fig.
+7,"2a, registry. row d are constructed using an ml approach described in greater detail in chi et al. (9), which follows an approach similar to that ﬁrst proposed by jean et al."
+7,"to summarize, ground truth survey data from several dhss provide information materials and methods on the wealth of millions of households in lmics, including 40,427 households across nigeria."
+7,"these “labels” are matched, using geographic markers in the related work."
+7,"this paper connects a recent strand of the applied ml literature survey dataset, to a rich set of nontraditional geospatial data, including features to a rich literature in development economics."
+7,the most closely related ml papers derived from high-resolution satellite imagery using a convolutional neural net- explore how ml algorithms can be used to construct estimates of the spatial work as well as mobile connectivity data and other topological data.
+7,"a gradient- distribution of wealth and poverty from high-resolution satellite imagery (7–9, boosted decision tree is then used to predict the labels from the satellite and other 20–24)."
+7,also related are papers that construct granular poverty maps from mobile geospatial features using spatially stratiﬁed cross-validation.
+7,"the ﬁtted model is phone (5, 25–28) and social media data (29) and recent work on evaluating then used to predict the wealth of every 2.4-km gridded region in the country of fairness in ml-based targeting approaches (5, 6)."
+7,"broadly speaking, these studies nigeria. match nontraditional data (such as satellite or phone data) to a survey-based to produce estimates of the wealth and poverty of the different administrative ground truth measure of wealth, train ml methods to predict wealth from the units of nigeria (fig."
+7,"2a, right, rows a–c), the 2.4-km estimates are aggregated nontraditional data, and use the trained model to predict wealth estimates in using population weights, where the population of each 2.4-km grid cell is regions where no ground truth data exist (30). generated using population estimates from humanitarian data exchange (41)."
+7,"the second literature, which has a rich history in development economics, speciﬁcally, the wealth estimate of administrative unit i is calculated as studies the targeting of social assistance and government transfers."
+7,"this body of work provides theory and empirical evaluations of the different targeting   1 mechanisms that are commonly used to determine eligibility for beneﬁts (2, 3)."
+7,"wi =  i(t, i)pt wt , [1] t∈t i(t, i)pt the crux of the problem is that central governments often lack recent,reliable,and t∈t comprehensive data on the living conditions of each family (4)."
+7,"thus, a variety where t is the set of all 2.4-km satellite tiles; p and w approximate the population of common targeting mechanisms exist to help direct beneﬁts to the neediest and wealth of tile t, respectively; and i gives the fraction of tile t that intersects households: self-targeting, where beneﬁts are available to anyone, but there is administrative unit i."
+7,"because wealth indices are relative and have no meaningful some “ordeal” involved in registering such that only those with the greatest need units, they are normalized at the administrative level to have a mean of zero and will choose to participate (31, 32); proxy means tests, where wealth is estimated sd of one."
+7,pnas 2022 vol.
+7,119 no. 32 e2120025119 https://doi.org/10.1073/pnas.2120025119 7 of 10
+8,benchmark poverty maps from the dhs.
+8,"as a benchmark against which we in performance in very remote regions (si appendix, accuracy of targeting data compare the targeting outcomes of the ml-based maps, we construct a set of in remote regions has details). poverty maps using data from a recent, nationally representative household a second limitation of the nlss is that it was designed to be representative survey."
+8,"speciﬁcally, we obtain the microdata from nigeria’s 2018 dhs (42)."
+8,"the at the state level, meaning that households sampled at the smaller lga and dhs is a standardized household survey funded by the us agency for interna- ward levels are not guaranteed to be representative of their administrative units. tional development; the 2018 nigerian dhs conducted surveys with 40,427 we test the importance of this limitation in table 1 by assessing performance households in 1,360 unique locations across the country."
+8,"the survey instrument in regions with more and fewer surveyed households, as we expect the sparser contains detailed questions about the socioeconomic conditions of each house- regions to have the highest variance (table 1)."
+8,"as expected, the accuracy of both hold, including a wealth index, which provides a scalar measure of the wealth of the ml-based and the survey-based maps is higher in regions with more surveyed that household relative to all other surveyed households."
+8,‡ we also observe the households.
+8,"however, we do not see evidence suggesting that our estimate of approximate location of each dhs household, where the dhs groups households the relative performance of ml-based and survey-based maps is meaningfully into clusters (roughly equivalent to villages in rural areas and neighborhoods in changed by this source of measurement error in the nlss data. urban areas) and provides the geocoordinates of the centroid of the cluster of households after adding up to 5 km of jitter to preserve the privacy of individual targeting simulations."
+8,we simulate the geographic targeting of antipoverty households. programs in nigeria using two different approaches—one based on the ml-based to construct poverty maps from the household survey data (as shown in poverty maps (derived from satellite imagery) and the other based on the survey- fig.
+8,"2a, left), we calculate the average wealth index of all surveyed households based benchmark (derived from the 2018 dhs)."
+8,the performance of these two located in the relevant administrative unit.
+8,"for this process, we obtained shape approaches is evaluated using ground truth data derived from the 2018 to 2019 ﬁles and urban/rural classiﬁcations for each administrative unit from the world nlss, which is considered the most comprehensive and up-to-date survey in bank."
+8,"both the nlss and the dhs were designed to provide estimates of popula- nigeria. tion characteristics that are representative at the state level, and each household speciﬁcally, we assess targeting performance based on the proportion of has an associated survey sampling weight."
+8,"thus, for the state-level poverty maps, transfers that would reach poor and extreme poor households under different ap- we use this sampling weight to calculate the weighted average wealth index of proaches to geographic targeting."
+8,using the nigeria-speciﬁc world bank poverty all households in the state.
+8,"when constructing lga and ward wealth estimates, line of 377 nigerian naira per person per day ($1.05 in 2018), we estimate from we take the simple average of all households in the relevant administrative unit the nlss data that 40.5% of the population is poor (consumption below the since the household survey weights were not intended to provide lga- or ward- poverty line) and that 8.2% of the population is extremely poor (consumption representative inferences. below half the poverty line)."
+8,since neither the dhs nor the ml model provide ground truth evaluation data from the nlss.
+8,"to evaluate the performance of direct income or consumption data, our simulations of dhs and ml-based tar- targeting using the ml-based poverty maps and the survey-based poverty maps, geting focus on the 40.5% and 8.2% of households with the lowest wealth."
+8,"thus, we obtain a separate independent source of “ground truth” data on living stan- households with wealth indices in the bottom 8.2% are classiﬁed as extreme poor, dards in nigeria."
+8,"this is the 2019 nlss, an ambitious household survey ﬁnanced and those in the bottom 40.5% are classiﬁed as poor (i.e., poor is inclusive of by the world bank and implemented by nigeria’s national bureau of statistics extreme poor)."
+8,"downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204."
+8,"the survey was conducted with 22,110 households, of which 22,104 had based on these thresholds, we can classify each household in the nlss precise geo-coordinates."
+8,"for each household in this dataset, we observe the exact evaluation data as extreme poor, poor, and nonpoor; we can likewise calculate geocoordinates as well as a rich set of questions about socioeconomic conditions. the fraction of households in each administrative unit that falls into each category we use the responses to these questions to construct a dhs-style wealth index for of poverty."
+8,"when calculating state-level poverty rates, we use the survey sample each nlss household."
+8,"§ the nlss was never used to train the ml-based poverty weights; no weights are used to calculate poverty rates at the lga and ward levels. maps and did not inﬂuence the collection of the dhs data; it thus provides we then simulate geographic targeting policies at the state, lga, and ward an objective and out-of-sample means for validating the alternative approaches levels, where the targeting is determined using estimates from the ml-based to geographic targeting."
+8,"si appendix has a detailed description of the survey poverty map (“ml-based method”), the dhs-based poverty map data (the “bench- methodology and data availability. mark method”), and the nlss-based poverty map (the “oracle method”)."
+8,under data limitations.
+8,"in important ways, our analysis is constrained by the incom- each approach, we assume that 100% of the households within a given adminis- pleteness of ground truth data, a point discussed in detail in issues of incomplete trative unit will receive the same beneﬁt, which is how the nigerian government survey coverage."
+8,"to summarize, while the scope and scale of the nlss were quite originally envisioned this program would be implemented."
+8,"note that this implies extensive relative to survey efforts in many lmics, it still did not collect data in that even the oracle method, where geographic targeting is determined by the 8.8% of lgas and 77.1% of wards."
+8,"since the nlss was carefully designed to be same dataset used to evaluate targeting, will not be perfectly accurate."
+8,"this is nationally representative, our main analysis assumes that evaluation performed because there exist nonpoor households in even the poorest wards of nigeria, on the nlss sample will generalize to the rest of the country."
+8,we cannot test so providing beneﬁts to everyone in the poorest wards will result in errors of this assumption directly since we do not have evaluation data beyond what is inclusion.
+8,"likewise, errors of exclusion will occur whenever poor individuals live available in the nlss."
+8,"however, our analysis in table 1 and si appendix, table s1 in wealthy regions—even if the targeting data can perfectly separate wealthy from tests this indirectly by assessing the accuracy of ml-based maps in regions with poor regions. and without dhs data."
+8,"since the dhs was also designed to be nationally repre- while ward-level targeting theoretically has a higher upper bound on perfor- sentative, this analysis may shed light on the limits of evaluating performance on mance, estimates at the lga and state levels can draw on more data and thus, incomplete but nationally representative survey data."
+8,"in table 1, we observe that may be more accurate."
+8,it is useful to analyze targeting performance for these the performance of the ml-based maps does not depend critically on the avail- administrative units as well to quantify the trade-off between greater targeting ability of dhs data.
+8,"however, in si appendix, table s1, we do observe a decrease precision (at the ward level) and potentially more accurate wealth estimates (at the lga/state level)."
+8,alternative targeting criteria.
+8,"in addition to the poverty maps used in our ‡ the wealth index is constructed as the ﬁrst principal component of a vector of assets and main speciﬁcation, which estimate mean poverty of each administrative unit, household characteristics: air conditioner, animal-drawn cart, bank account, bed, bicycle, we create two additional ward-level poverty maps from each data source as a boat with a motor, canoe, car or truck, chair, computer, cupboard, electric iron, electricity, fan, generator, landline, motorbike, main ﬂoor material, main roof material, main wall robustness check."
+8,the ﬁrst estimates median poverty.
+8,"because the nlss and dhs material, mobile telephone, motorcycle or scooter, number of members per sleeping sample weights are not representative at the ward level, we use the poverty room, owns a house, owns land, radio, refrigerator, sofa, source of drinking water, table, level of the unweighted median household in each ward."
+8,"median wealth is television, type of toilet facility, type of cooking fuel, and watch. § calculated from the ml-based map using the median of the wealth estimates of the nlss is more detailed than the dhs and contains a superset of the dhs asset each 2.4-km satellite tile, weighted by the estimated population in that tile."
+8,the questions.
+8,"we, therefore, use the principal component analysis weights from the dhs wealth index to calculate the wealth index of each nlss household (rather than calculating second additional map estimates poverty rate and extreme poverty rate of each a new set of eigenvectors from the nlss data). ward."
+8,"to estimate these poverty rates, nlss and dhs households are classiﬁed 8 of 10 https://doi.org/10.1073/pnas.2120025119 pnas.org"
+9,as (extreme) poor based on the percentile of their wealth index (targeting simu- the survey-weighted mean wealth of households in the same state as a given lga lations).
+9,the unweighted fraction of households in each ward that are (extreme) but not within the lga itself.
+9,we similarly impute the wealth ŵw (i) of ward i for poor is used as the targeting criteria for the nlss and the dhs.
+9,"for the ml- a randomly selected subset of wards as based map, each 2.4-km satellite tile is classiﬁed as (extreme) poor based on the ⎧  percentile of its estimated wealth index, the fraction of people in each ward who ⎨ 1  wh 1{l(h) = l(i), w(h) = i} ∃h ∈ hi,w are (extreme) poor is then calculated as the fraction of people who live in satellite ŵw (i) = ai,w h∈h [3] tiles that are classiﬁed as (extreme) poor."
+9,"since separate maps are created for the ⎩ ŵl (l(i))  ∃h ∈ hi,w , poor and extreme poor, the order in which wards are targeted depends on which map is being used for targeting. where ai,w is deﬁned analogously to eq. 2 and hi,w is the set of all households in the same lga as ward i but not in ward i."
+9,w(h) gives the ward in which survey issues of incomplete survey coverage.
+9,one limitation of the surveys—both household h is located.
+9,"thus, if at least one household exists in the survey data the dhs data used to construct benchmark estimates of poverty and the nlss data that is in the same lga as a given ward, the ward is imputed as the simple average used to evaluate targeting performance—is that the data are sparse."
+9,as we discuss of all households in the lga.
+9,"otherwise, the ward’s wealth is imputed as the in greater detail below, only 13.8% of nigerian wards have one or more surveyed survey-weighted average of all households in the same state as the ward but not dhs households, and only 22.9% of wards have one or more households in the the ward itself."
+9,our goal with this third method is to make the imputation representative of incomplete evaluation data.
+9,while great care was taken in the design of the true missingness in the dhs.
+9,"thus, we randomly replace 18.5% of lgas and the nlss to ensure that the survey population was representative of the full 86.2% of wards with imputed values since 18.5% of lgas and 86.2% of wards population of nigeria (and also representative of each state), we are unable to do not have the dhs (and would thus require imputed estimates in practice)."
+9,"we evaluate the performance of the ml-based and survey-based poverty maps in repeat this randomization process 1,000 times and report results for the iteration the 8.8% of lgas and 77.1% of wards where no ground truth nlss data exist."
+9,"to with the median performance, as determined by the area under the roc curve. ensure that results are comparable for all targeting approaches, we further limit our results on targeting accuracy to the 77% of lgas and 5% of wards where both estimating demographic parity."
+9,we estimate the “fairness” of targeting the nlss and the dhs include at least one household.
+9,"when evaluating targeting based on statistical parity (16), which deﬁnes a fair allocation as one in which for lgas and wards, we also report results when performance is measured only the fraction of households in a speciﬁc group receiving transfers is equal to on the subset of wards where the nlss contains at least 20 households and the the fraction of households in that group that are truly poor."
+9,we acknowledge subset of lgas where the nlss contains at least 30 households.
+9,this effectively that other notions of fairness exist and may conﬂict with this focus on statistical removes the wards and lgas where our ground truth estimates of poverty have the highest variance. parity (45).
+9,incomplete benchmark data.
+9,"the fact that the dhs data are only collected in a our analysis assesses statistical parity for four demographic characteristics small fraction of all geographic units of the country means that those data cannot that are recorded in the nlss: gender, age, religion, and language (a proxy for be used in isolation to determine a ward- or lga-level geographic targeting policy. ethnicity,which is not recorded)."
+9,"we observe these characteristics just for the head of household, so our evaluation focuses on the extent to which households with downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204."
+9,"instead, either the policy would need to be designed at the state level (where dhs coverage is complete), or some form of imputation would be required to make a household head of a certain type are under- or overtargeted. decisions about lgas and wards where data do not exist."
+9,"the fractions of households in each ward in each demographic category in the targeting simulations, we simulate the performance of geographic are estimated using nlss data."
+9,nlss data are also used to estimate the total targeting with dhs data using three different methods.
+9,"the ﬁrst, “dhs upper fraction of poor households that belong to each demographic group."
+9,"this bound,” considers only those administrative units where both the dhs and the reference statistic is calculated for the subset of wards in which targeting nlss were conducted (5.3% of all wards and 76.9% of all lgas)."
+9,"this approach simulations occur (i.e., those with coverage in both the nlss and the dhs); requires no imputation and provides an indication of the performance to be thus, it may not accurately reﬂect the country-level demographics of poor expected if it was possible to collect dhs data in 100% of wards."
+9,"the resources households. required for such a data collection effort make this approach impractical, but it for each of the three targeting approaches – optimal (the nlss), survey represents an upper bound on the performance of targeting with dhs data. benchmark (the dhs with representative imputation) and ml-based – we cal- the second method, “dhs based (minimum imputation),” considers all 706 culate the fraction of targeted households that belong to each demographic lgas and 2,016 wards covered by the nlss—even though many of those units group."
+9,these fractions are evaluated using ward-level demographic information do not have any households covered by the dhs.
+9,"speciﬁcally, in the 597 lgas from the nlss, and vary based on the number of targeted households."
+9,"we also and 464 wards where dhs data are available, dhs estimates are used directly. calculate a snapshot of parity for a program targeting 10% of the population."
+9,"for in the remaining 109 lgas and 1,552 wards, wealth estimates are imputed as demographic group d, we calculate the extent of over- or undertargeting using the average (population-weighted) wealth of the larger spatial unit in which the smaller unit falls (i.e., we use the average lga wealth for wards with no dhs and fraction of targeted in d − fraction of poor in d · 100. [4] the average state wealth for lgas with no surveys)."
+9,"fraction of poor in d the third method, “dhs based (representative imputation),” simulates what we believe is the most realistic scenario by imputing data for a fraction of wards we generate cis by bootstrap sampling eq. 4 1,000 times. and lgas to match the true missingness in the national data."
+9,to ensure compara- data availability.
+9,"the ml-based estimates of wealth were contsructed by chi bility with the dhs upper-bound method, our primary results use the matched et al. (9) and are available from the humanitarian data exchange (https://data. sample of 597 lgas and 464 wards where both the dhs and the nlss are humdata.org/dataset/relative-wealth-index)."
+9,population estimates are publicly available.
+9,"using the minimum imputation method, we also show results for the larger sample of regions where nlss data are available in si appendix, fig."
+9,s8. available from the high resolution settlement layer (41).
+9,"dhs data survey data speciﬁcally, we impute the wealth wl (i) of lga i for a randomly selected are available upon registration at https://www.dhsprogram.com/ (42)."
+9,nlss sur- subset of lgas as vey data must be requested from the nigerian national bureau of statistics (43).
+9,"  the code used for these analyses, along with direct links to required data sources, 1 is available at https://github.com/issmythe/nigeria poverty mapping (46)."
+9,"ŵl (i) = (ah wh )1{s(h) = s(i), l(h) = i} [2] ai,l h∈h acknowledgments."
+9,"we thank tara vishwanath, jonathan lain, cristian pop-  ai,l = ah 1{s(h) = s(i), l(h) = i}."
+9,"eleches, and michael best for feedback on this project; emily aiken, guanghua h∈h chi, and raesetje sefala provided valuable input on the empirical analysis."
+9,"we thank meta’s data for good team for publicly disseminating the ml-based esti- here, h is the set of all surveyed households, and h is a household in state s(h) mates described in ref."
+9,"we are grateful for ﬁnancial support from data.org, the and lga l(h), with survey weight ah and wealth index wh ."
+9,"intuitively, this gives center for effective global action, schmidt futures, and nsf award iis–1942702."
+9,pnas 2022 vol.
+9,119 no. 32 e2120025119 https://doi.org/10.1073/pnas.2120025119 9 of 10
+10,"gentilini, m."
+10,"almenﬁ, i."
+10,"orton, p."
+10,"dale, social protection and jobs responses to covid-19."
+10,world 23.
+10,"abitbol, m."
+10,"karsai, interpretable socioeconomic status inference from aerial imagery through bank, washington, dc (2021). https://openknowledge.worldbank.org/handle/10986/33635. urban patterns."
+10,intell.
+10,"2, 684–692 (2020)."
+10,accessed 1 september 2021.
+10,"nordhaus, x."
+10,"chen, a sharper image?"
+10,estimates of the precision of nighttime lights as a proxy for 2.
+10,"coady, m."
+10,"grosh, j."
+10,"hoddinott, targeting outcomes redux."
+10,world bank res.
+10,"19, 61–85 (2004). economic statistics."
+10,geogr.
+10,"15, 217–246 (2015)."
+10,"hanna, b."
+10,"olken, universal basic incomes versus targeted transfers: anti-poverty programs in 25."
+10,"blumenstock, g."
+10,"cadamuro, r."
+10,"on, predicting poverty and wealth from mobile phone metadata. developing countries."
+10,perspect.
+10,"32, 201–226 (2018)."
+10,"science 350, 1073–1076 (2015)."
+10,"jerven, poor numbers: how we are misled by african development statistics and what to do 26."
+10,"steele et al., mapping poverty using mobile phone and satellite data."
+10,"interface 14, about it (cornell university press, 2013)."
+10,20160690 (2017).
+10,"aiken, s."
+10,"bellue, d."
+10,"karlan, c."
+10,"udry, j."
+10,"blumenstock, machine learning and phone data can 27."
+10,"blumenstock, estimating economic characteristics with phone data."
+10,"proc 108, improve targeting of humanitarian aid."
+10,"nature 603, 864–870 (2022)."
+10,72–76 (2018).
+10,"kondmann, x."
+10,"zhu, under the radar—auditing fairness in ml for humanitarian mapping. arxiv 28."
+10,"aiken, g."
+10,"bedoya, a."
+10,"coville, j."
+10,"blumenstock, program targeting with machine learning and [preprint] (2021). https://arxiv.org/abs/2108.02137 (accessed 1 september 2021). mobile phone data: evidence from an anti-poverty intervention in afghanistan. arxiv [preprint] 7."
+10,"jean et al., combining satellite imagery and machine learning to predict poverty."
+10,"science 353, (2022). https://arxiv.org/abs/2206.11400?"
+10,context=q-ﬁn.ec (accessed 22 june 2022).
+10,790–794 (2016).
+10,"fatehkia et al., mapping socioeconomic indicators using social media advertising data."
+10,epj data 8.
+10,"yeh et al., using publicly available satellite imagery and deep learning to understand economic sci."
+10,"9, 22 (2020). well-being in africa."
+10,commun.
+10,"11, 2583 (2020)."
+10,"blumenstock, fighting poverty with data."
+10,"science 353, 753–754 (2016)."
+10,"chi, h."
+10,"fang, s."
+10,"chatterjee, j."
+10,"blumenstock, microestimates of wealth for all low- and 31."
+10,"nichols, e."
+10,"smolensky, t."
+10,"tideman, discrimination by waiting time in merit goods."
+10,rev. middle-income countries.
+10,"sci. 119, e2113658119 (2022)."
+10,"61, 312–323 (1971)."
+10,"news agency of nigeria, 1 million nigerians to beneﬁt from covid-19 cash transfer programme."
+10,"alatas et al., self-targeting: evidence from a ﬁeld experiment in indonesia."
+10,polit.
+10,"124, pulse niger, 19 january 2021. https://www.pulse.ng/news/local/osinbajo-1-million-nigerians- 371–427 (2016). beneﬁt-from-covid-19-cash-transfer/jf73y7s."
+10,accessed 1 february 2021.
+10,"grosh, j."
+10,"baker, proxy means tests for targeting social programs."
+10,living standards measurement 11.
+10,"ravallion, “poverty alleviation through regional targeting: a case study for indonesia” in the study working paper 118, 1–49 (1995). https://doi.org/10.1596/0-8213-3313-5."
+10,"accessed economics of rural organization: theory, practice and policy, k."
+10,"hoff, a."
+10,"braverman, j."
+10,"stiglitz, eds."
+10,1 december 2020.
+10,"373–377 (oxford university press, new york, ny, 1993)."
+10,"filmer, l."
+10,"pritchett, estimating wealth effects without expenditure data–or tears: an application to 12."
+10,"coady, the welfare returns to ﬁner targeting: the case of the progresa program in mexico."
+10,tax educational enrollments in states of india.
+10,"demography 38, 115–132 (2001)."
+10,"public finance 13, 217–239 (2006)."
+10,"alderman, do local ofﬁcials know something we don’t?"
+10,decentralization of targeted transfers in 13.
+10,"elbers, t."
+10,"fujii, p."
+10,"lanjouw, b."
+10,"özler, w."
+10,"yin, poverty alleviation through geographic targeting: how albania."
+10,public econ.
+10,"83, 375–404 (2002). much does disaggregation help?"
+10,"83, 198–213 (2007)."
+10,"alatas, a."
+10,"banerjee, r."
+10,"hanna, b."
+10,"olken, j."
+10,"tobias, targeting the poor: evidence from a ﬁeld 14."
+10,"brown, m."
+10,"ravallion, d."
+10,"van de walle, a poor means test?"
+10,econometric targeting in africa.
+10,dev. experiment in indonesia.
+10,"102, 1206–1240 (2012)."
+10,"134, 109–124 (2018)."
+10,"baker, m."
+10,"grosh, poverty reduction through geographic targeting: how well does it work?"
+10,world 15.
+10,"dang, d."
+10,"jolliffe, c."
+10,"carletto, data gaps, data incomparability, and data imputation: a review of dev."
+10,"22, 983–995 (1994). poverty measurement methods for data-scarce environments."
+10,"33, 757–797 (2019)."
+10,"schady, picking the poor: indicators for geographic targeting in peru."
+10,"income wealth 48, 16."
+10,"dwork, m."
+10,"hardt, t."
+10,"pitassi, o."
+10,"reingold, r."
+10,"zemel, “fairness through awareness” in proceedings of 417–433 (2002). the 3rd innovations in theoretical computer science conference (2012), pp."
+10,214–226 (association for 39.
+10,"bedi, a."
+10,"coudouel, k."
+10,"simler, more than a pretty picture: using poverty maps to design better policies computing machinery, new york, ny, united states). and interventions (world bank publications, 2007)."
+10,"noriega-campero et al., “algorithmic targeting of social policies: fairness, accuracy, and distributed 40."
+10,"blumenstock, machine learning can help get covid-19 aid to those who need it most."
+10,"nature, governance” in proceedings of the 2020 conference on fairness, accountability, and transparency 10.1038/d41586-020-01393-7 (2020)."
+10,"(association for computing machinery, new york, ny, 2020), pp."
+10,241–251.
+10,facebook connectivity lab and center for international earth science information network - 18.
+10,"barocas, m."
+10,"hardt, a."
+10,"narayanan, fairness and machine learning: limitations and opportunities ciesin - columbia university."
+10,high resolution settlement layer (hrsl) (2016).
+10,source imagery for (2019). www.fairmlbook.org.
+10,accessed 1 september 2021.
+10,hrsl © 2016 digitalglobe. https://ciesin.columbia.edu/data/hrsl/.
+10,accessed 1 june 2020.
+10,"blumenstock, don’t forget people in the use of big data for development."
+10,"nature 561, 170–172 42."
+10,"national population commission; icf, “national population commission - npc, icf, nigeria downloaded from https://www.pnas.org by uc santa barbara on april 29, 2024 from ip address 128.111.196.204."
+10,(2018).
+10,"demographic and health survey 2018” (national population commission and icf, abuja, nigeria, 20."
+10,"head, m."
+10,"manguin, n."
+10,"tran, j."
+10,"blumenstock, “can human development be measured with 2019). satellite imagery?”"
+10,in proceedings of the ninth acm/ieee international conference on information and 43.
+10,"national bureau of statistics, federal government of nigeria, “nigeria living standards survey communication technologies and development (ictd 2017) (acm, lahore, pakistan, 2017) pp."
+10,16–19.
+10,"2018-2019” (national bureau of statistics, federal government of nigeria, abuja, nigeria, 2020)."
+10,"babenko, j."
+10,"hersh, d."
+10,"newhouse, a."
+10,"ramakrishnan, t."
+10,"swartz, poverty mapping using convolutional 44."
+10,"deaton, “measuring poverty” in understanding poverty, a."
+10,"banerjee, r."
+10,"bénabou, d."
+10,"mookherjee, neural networks trained on high and medium resolution satellite images, with an application in eds."
+10,"(oxford university press, oxford, united kingdom, 2006), pp."
+10,mexico. arxiv [preprint] (2017). https://arxiv.org/abs/1711.06323 (accessed 1 december 2020).
+10,"kleinberg, s."
+10,"mullainathan, m."
+10,"raghavan, inherent trade-offs in the fair determination of risk scores."
+10,"engstrom, j."
+10,"hersh, d."
+10,"newhouse, poverty from space: using high-resolution satellite imagery for arxiv [preprint] (2016). https://arxiv.org/abs/1609.05807 (accessed 1 september 2021). estimating economic well-being (policy research working paper 8284, world bank, 2017, 46."
+10,"smythe, nigeria poverty mapping."
+10,github. https://github.com/issmythe/nigeria poverty http://hdl.handle.net/10986/29075). mapping.
+10,deposited 12 july 2022. 10 of 10 https://doi.org/10.1073/pnas.2120025119 pnas.org

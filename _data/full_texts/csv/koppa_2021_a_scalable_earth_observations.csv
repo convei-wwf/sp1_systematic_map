@@ -1,0 +1,1303 @@
+page,p
+1,1 2 dr.
+1,akash koppa (orcid id : 0000-0001-5671-0878) 3 dr.
+1,"thomas hopson (orcid id : 0000-0002-4595-7274) 4 author manuscript 5 6 article type : technical paper 7 8 9 a scalable earth observations-based decision support system for hydropower planning 10 in africa 11 akash koppa, mekonnen gebremichael, thomas m."
+1,"hopson, emily riddle, jennifer boehnert, daniel p."
+1,"12 broman 13 department of civil and environmental engineering (koppa, gebremichael), university of california, los 14 angeles, california, usa (correspondence to koppa: akashkoppa@ucla.edu) 15 hydro-climate extremes lab (h-cel) (koppa), faculty of bioscience engineering, ghent university, 16 coupure links 653, 9000 ghent, belgiumresearch applications laboratory (hopson, riddle, boehnert), 17 national center for atmospheric research, boulder, co, usa 18 department of civil, environmental, and architectural engineering (broman), university of colorado 19 boulder, colorado, usa 20 water and environmental resources division (broman), united states bureau of reclamation, colorado, 21 usa 22 research impact statement: a novel decision support system based on earth observation 23 satellites, ensemble climate forecasts and hydrologic models for hydropower planning under deep 24 data uncertainty in africa."
+1,"this is the author manuscript accepted for publication and has undergone full peer review but has not been through the copyediting, typesetting, pagination and proofreading process, which may lead to differences between this version and the version of record."
+1,please cite this article as doi: 10.xxxx/jawr.12914 this article is protected by copyright.
+1,all rights reserved
+2,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+2,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 25 abstract: hydropower is a key part of the increasing shift in power production from non- 26 renewables to renewable energy.
+2,"in regions such as africa, hydropower reservoirs are vital for 27 achieving several sustainable development goals, including clean water, energy, and poverty 28 elimination."
+2,"however, the operations of hydropower reservoirs are often sub-optimal due to lack 29 30 author manuscript of hydrologic data for generating reliable inflow forecasts."
+2,"here, we present a decision support system (dss) framework for hydropower planning at daily to seasonal timescales by combining 31 data from earth observation satellites (eos) with ensemble climate forecasts from dynamical 32 models and hydrologic modeling."
+2,the large uncertainty inherent in satellite-based datasets is 33 overcome by using a data validation framework which does not require ground-based 34 measurements.
+2,"in addition, an eos evapotranspiration product is used as a proxy for streamflow 35 in calibrating hydrologic models."
+2,"compared to a dss forced with a climatological forecast (zero- 36 skill), the hydropower production with the new dss increased by 20%."
+2,"the study highlights the 37 advantage of using data from eos in overcoming the issue of data scarcity in water resources 38 applications, particularly in developing regions of the world such as africa."
+2,39 (keywords: hydropower; decision support system; remote sensing; water resources) 40 introduction 41 access to water and energy are essential for the development of the socio-economically vulnerable 42 regions of the world.
+2,"in fact, clean water and energy constitute two (sdg6 and sdg7) out of the 43 seventeen sustainable development goals (sdgs) identified by the united nations (griggs et al., 44 2013; sachs, 2012) (https://sustainabledevelopment.un.org/)."
+2,"effective water and energy resources 45 planning is necessary for not only achieving sdg6 and sdg7 but also plays an important role in 46 addressing other sdgs such as poverty elimination (sdg1), zero hunger (sdg2), and promotion 47 of sustainable cities and communities (sdg11)."
+2,"in this regard, hydropower, which lies at the nexus 48 of water and energy, has an important role to play."
+2,"this is especially true in africa, which has 49 witnessed significant growth in the construction of reservoirs, including those specifically 50 targeting hydropower production."
+2,"with such an exponential increase in hydropower capacity, it is 51 crucial to operate these reservoirs in such a way that guarantees energy production is maximized, 52 not an easy task given the seasonal and annual variability of water availability under present 53 (broman et al., 2020) and future (fletcher et al., 2019) climatic conditions."
+2,"the lack of optimal 54 reservoir operation causes more frequent power outages and associated economic losses, and this article is protected by copyright."
+2,all rights reserved
+3,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+3,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 55 incurs substantial opportunity cost (conway et al., 2017; sridharan et al., 2019)."
+3,"these reasons 56 necessitate the development and implementation of decision support systems (dsss) which can 57 provide reliable and effective information to decision makers, at the relevant time scales."
+3,58 59 author manuscript dsss are used for the optimal operations of reservoirs for a variety of purposes.
+3,"typically, the near-term (daily), sub-seasonal (weekly), and seasonal (monthly) releases from a reservoir serve 60 multiple purposes, such as domestic, industrial, and agricultural water supply, flood control, 61 hydropower, and the maintenance of environmental flows (alemu et al., 2011; koppa, 62 gebremichael, zambon, et al., 2019; westphal et al., 2003)."
+3,"a dss consists of three parts: 1) an 63 inflow forecasting system which uses statistical or dynamical methods to generate possible 64 realizations of future inflow into the reservoir at the required timescales, 2) an optimization system 65 which employs either deterministic or stochastic programming techniques, based on the nature of 66 the inflow forecasts, to optimize reservoir outflows, and 3) a visualization support system interface 67 that communicates this information to the user in an effective way to meet their decision-making 68 process in a timely fashion."
+3,"in the rest of the introduction, we provide a brief overview of the three 69 enumerated dss components and summarize the objectives of this study."
+3,70 inflow forecasting system 71 the effectiveness of a dss for hydropower planning is significantly influenced by the reliability 72 of the inflow forecasting system.
+3,"inflow forecasting systems generally fall into one of the 73 following two categories: (1) statistical modeling based on past streamflow observations, and (2) 74 dynamically driven hydrologic modeling forced by climate forecasts."
+3,"75 in the first category, statistical modeling techniques such as autoregressive moving average and 76 neural networks which sample from past observation of inflows, are used to generate the forecasts 77 (cuo et al., 2011; li et al., 2017)."
+3,"several factors hinder the application of such an inflow 78 forecasting system in africa, of which in-situ data scarcity and inaccessibility are the most 79 significant, because the lack of reliable long-term inflow information adversely impacts the 80 accuracy of statistical models of forecasting."
+3,"81 in the second category, dynamic forecasts of reservoir inflows are generated with computational 82 physics-based climate and hydrologic models."
+3,"the emergence of ensemble climate and hydrologic 83 forecasting in the last decade has shown potential for improving the quality of the forecasts, and this article is protected by copyright."
+3,all rights reserved
+4,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+4,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 84 hence forecast-informed decision making (alfieri et al., 2013; benninga et al., 2017)."
+4,"while this 85 category has shown value in generating dynamic forecasts and acknowledging some uncertainties 86 in the forecasts, it is limited by the large range in ensemble members and questions about which 87 ensemble forecast products are reliable."
+4,"in addition, reliable calibration of spatially distributed 88 89 author manuscript hydrologic models for forecasting purposes are largely dependent on the availability of streamflow measurements."
+4,"90 in our opinion, the next advancement in the inflow forecasting system in regions with reduced in 91 situ monitoring would be to develop a methodology that accurately quantifies the uncertainty in 92 the climate ensemble forecast products and reduces the uncertainty to a level that is useful for 93 decision making."
+4,"therefore, in this study, we propose a new approach for inflow forecasting 94 system that is particularly appropriate in data-scarce regions, such as africa."
+4,"this approach is to 95 utilize earth observing system (eos) data to both dynamically adjust the climate forecasts 96 provided by climate forecast centers, while also utilizing the eos data with novel techniques to 97 calibrate the hydrologic models of watersheds with limited surface measurements."
+4,"98 the value of eos in enabling improved water resources management in data scarce regions is well 99 recognized (sheffield et al., 2018)."
+4,"the development of improved eos over the last fifty years has 100 resulted in vast amounts of direct and indirect observations of nearly all the water and energy 101 balance components required for modeling the earth’s terrestrial processes, including its hydrology 102 (lettenmaier et al., 2015)."
+4,"although, eos data have been extensively used in climate and 103 hydrological modeling and forecasting through data assimilation (crow and ryu, 2009; mazrooei 104 and sankarasubramanian, 2019) and model calibration (koppa, gebremichael, and yeh, 2019; 105 lópez et al., 2017; rakovec et al., 2016; zink et al., 2018) or directly as forcing inputs, the utility 106 of such data for water and energy resources planning, in general, and hydropower reservoir 107 operation, specifically, has not been sufficiently explored."
+4,108 one of the key challenges in utilizing eos data products is to choose which data products to use.
+4,"109 there are many eos data products for the same variable (e.g., precipitation) with large differences 110 amongst them owing to differences in satellites, sensors and retrieval algorithms."
+4,"in addition, the 111 choice of eos data products may have to take into account their joint performance to ensure some 112 realism, for example, the closure of energy and water balance."
+4,"this is corroborated by several 113 findings (bitew et al., 2012; koppa, gebremichael, and yeh, 2019) who showed that the use of this article is protected by copyright."
+4,all rights reserved
+5,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+5,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 114 eos data products for only one variable may show good performance in simulating the streamflow 115 at the outlet of the catchment, but it may have large errors and unrealistic performance in 116 simulating other water balance components, indicating that such an approach may not work in 117 simulating even streamflow in the case of cascading hydropower reservoirs."
+5,"therefore, new 118 119 author manuscript methodologies need to be developed that advance the use of eos data for hydropower reservoir planning, particularly in africa where ground validation data are lacking."
+5,"120 optimization system 121 the optimization of a cascade of hydropower dams, using an ensemble of streamflow forecasts, is 122 generally carried out using stochastic programming with recourse models (yeh, 1985)."
+5,"in such 123 models, the system of reservoirs is optimized for the entire forecast horizon but the release 124 decisions for only the first-time step (referred to as ‘first stage’) is adopted."
+5,"then, the forecast 125 horizon is moved forward by one stage and the optimization procedure is repeated."
+5,"although the 126 value of stochastic inflow forecasts in hydropower optimization is well studied (séguin et al., 127 2017), an assumption inherent in such optimization models is that the first stage (day, week, 128 month) forecast is deterministic."
+5,"in other words, the forecast for the first stage is assumed to be 129 sufficiently accurate such that a single deterministic forecast for the first stage is deemed enough 130 for the optimization of reservoirs."
+5,"when new information regarding the inflow into reservoirs are 131 available, the whole system is validated, and the required adjustments are made to the dss before 132 the start of the next stage."
+5,"several studies employ this approach for the operation of reservoir 133 cascades (etkin et al., 2015; wang et al., 2012)."
+5,"however, such an approach is dependent on the 134 availability of reservoir inflows at regular intervals for the validation of the entire dss, which may 135 not be possible in data scarce regions such as africa."
+5,"here, we implement a new stochastic 136 programming with recourse model which considers the first stage to be also stochastic (koppa, 137 gebremichael, zambon, et al., 2019)."
+5,"in addition, we implement the conventional stochastic 138 programming with recourse model and a purely deterministic optimization model to enable 139 decision making under data scarcity and uncertainty."
+5,140 visualization support system 141 the effectiveness of a dss for hydropower planning is significantly enhanced by providing a 142 coherent interface between the technical outputs of the inflow forecasting and optimization 143 systems that then communicates this information to the user in an effective way to meet their this article is protected by copyright.
+5,all rights reserved
+6,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+6,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 144 decision-making process, all in a timely fashion."
+6,the scale of the information produced by 145 hydrometeorological services and climatological centers can often be overwhelming to a user.
+6,"as 146 an example, ensemble rainfall forecasts at a single location from a single weather center can easily 147 comprise over 3000 data points for a forecast going out to two weeks in advance – a well-designed 148 149 author manuscript visualization and support system then should consolidate and filter such information using expert knowledge of the data’s relevance to the unique decision making process of the user."
+6,"a number of 150 systems have been developed that have been shown to be effective in communicating timely, 151 coherent, relevant, and user-friendly information for a number of applications that have relevance 152 to a broad class of user’s decision-making needs, such as in the area of climate change (wilhelmi 153 et al."
+6,2016).
+6,"decision support visualization tools for hydropower planning comprises a unique 154 challenge, in that design considerations for decision making need consider a broad range of data 155 types (e.g. rainfall, streamflow, and power), temporal immediacy (e.g. historical, current 156 observations, forecasts), data source centers (e.g. space agencies and weather centers), the range 157 of temporal scale (e.g. 24-hour, 5-day, 1-month, and 3-month totals) and spatial scale (grid, small- 158 to large-catchment averaging), data accessing formats (e.g. csv, flat file, time-series, etc.), 159 uncertainty information (ensembles versus cumulative probabilities versus averages), and general 160 aesthetic and design considerations."
+6,"161 objectives of the study 162 in this study, the three systems detailed above are combined to create a decision support system 163 (dss) for hydropower planning in africa and other data scarce regions that leverages the potential 164 of eos data, ensemble climate forecasts, hydrological models, and stochastic optimization 165 systems."
+6,"this study leverages the findings of our previous research to develop, implement, and 166 test a coherent dss prototype, at daily to seasonal timescales, in a major river basin in ethiopia 167 consisting of a cascade of hydropower reservoirs."
+6,"the newly developed dss contains the 168 following innovations, and web-based tools to enable hydropower managers to implement the dss 169 in operational settings: 170  selection of appropriate eos data products – the dss includes a new data validation 171 framework for data-scarce regions that allows users to select the best eos data products, 172 among the wide variety available data products, required for the calibration of climate 173 precipitation forecasts and hydrologic models (koppa and gebremichael, 2017)."
+6,the this article is protected by copyright.
+6,all rights reserved
+7,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+7,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 174 framework does not require any ground-based data and uses the concept of budyko 175 hypothesis to select the most appropriate eos data products that represent the climate 176 accurately and close the water and energy balance.
+7,177  calibration of weather and climate forecasts – the dss development has led to 178 179 author manuscript innovations in calibrating optimized multi-model/multi-center ensemble weather and climate forecasts at daily (medium-range) and weekly (s2s) time scales using conditioned 180 analogue approaches blended with geostatistical regressors and quantile regression.
+7,these 181 post-processsed forecasts then provide skillful and reliable rainfall forecasts tailored for 182 the next stage in hydrometeorological forecast generation.
+7,"183  calibration of hydrologic models – the dss will use a recently developed bayesian 184 framework and eos terrestrial evaporation data product to calibrate a hydrologic model 185 (koppa, gebremichael, and yeh, 2019; koppa and gebremichael, 2020)."
+7,"this approach 186 conveniently replaces streamflow data, which is the commonly used data for calibrating 187 hydrologic models, with eos terrestrial evaporation data products, because most 188 watersheds in africa are ungauged and even those that are gauged have data quality issues 189 (outdated rating curve, stage measurements observed and recorded manually by non- 190 experts) and availability (substantial time lag until the data are transferred to electronic 191 format and shared by users, and bureaucracy in data sharing)."
+7,192  reservoir optimization models – the dss will use a new methodology that incorporates 193 uncertainties in climate forecasts and hydrologic model parameters in the optimization of 194 hydropower (koppa et al.
+7,2019).
+7,"195  web-based decision support tool – a powerful web- and gis-based visualization tool for 196 analyzing dss outputs to aid decision makers, that presents information in ways relevant 197 to the unique breadth and challenges of hydropower management."
+7,198 the study is organized as follows.
+7,"in the next section, we provide a detailed overview of the dss 199 framework for data scarce regions."
+7,"then, we describe the experimental design of the application 200 of the dss using selected hydropower reservoir systems in ethiopia as a case study."
+7,"finally, we 201 present and discuss the implications of using eos-based dss for data scarce regions."
+7,202 203 methodology this article is protected by copyright.
+7,all rights reserved
+8,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+8,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 204 the dss in this study consists of the following components: a) earth observations module (eom), 205 b) climate forecasting module (cfm), c) hydrologic forecasting module (hfm), d) optimization 206 module (om), and e) visualization module (vm)."
+8,the dss process (figure 1) starts with the 207 selection of the most appropriate eos data for precipitation (p) and evapotranspiration (et) 208 209 author manuscript variables for the selected domain (eom).
+8,"the selected p dataset is then used to calibrate ensemble weather and climate forecasts using combined analogue and quantile regression approaches 210 (hopson, 2014; hopson and webster, 2010; knievel et al., 2017; koenker and bassett, 1978b) at 211 the daily to seasonal timescales in the cfm."
+8,"an additional forecast calibration methodology in the 212 form of bayesian model averaging (bma) (hoeting et al., 1999; raftery et al., 2005) is also 213 implemented."
+8,"simultaneously, the selected et dataset is used to calibrate the hydrologic model 214 using a bayesian calibration algorithm to derive a set of parameters for streamflow forecasting."
+8,"215 next, the calibrated climate forecasts are used as input into the hydrologic model to generate 216 ensemble forecasts of inflows into all the reservoirs in the study domain for the forecast horizon 217 (hfm in figure 1)."
+8,"in om, the generated reservoir inflow forecasts are then used as an input into 218 a stochastic programming with recourse model to generate optimized reservoir release decision 219 such that the hydropower production is maximized."
+8,"finally, web-based decision support tools 220 visualize the ensemble climate forecasts, the reservoir inflow scenarios, and the optimized release, 221 storage and hydropower decisions (vm in figure 1)."
+8,we detail each module of the dss in the 222 following subsections.
+8,223 insert figure 1 224 earth observations module (eom) 225 the primary objective of the eom is to select the most appropriate eos-derived p and et datasets 226 for the calibration of ensemble p forecasts and the hydrologic model.
+8,"in data scarce regions, such 227 as africa, evaluation of eos data products using in-situ measurements is not possible."
+8,"we use a 228 recently developed framework which does not require in-situ measurements for validating eos- 229 based p and et datasets (koppa and gebremichael, 2017)."
+8,"the framework compares p and et 230 datasets against the budyko hypothesis, a semi-empirical model that describes the coupled water 231 and energy balance of watersheds at long-term timescales (budyko, 1974), using two indices: (1) 232 evaporative index (et/p, abbreviated as ei) and (2) aridity index (pet/p, abbreviated as ai)."
+8,"in 233 the dss, we utilize fuh’s equation (fuh, 1981) (equation 1), a single parameter budyko function: this article is protected by copyright."
+8,all rights reserved
+9,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+9,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1 � � �� ��� ��� 234 � =1+ � ― 1+ � ( ( )) (1) 235 where pet is potential et, and � is a parameter which has no analytical solution, but several 236 author manuscript parameterizations have been suggested relating � to watershed characteristics such as topography, 237 soil, vegetation, and geographical location of watersheds among others (li et al., 2013; xu et al., 238 2013)."
+9,"239 the budyko curve (equation 1) is constrained by the following water and energy limits: �� ��� 240 = 1, >1 (����� �����) (2) � � �� ��� ��� 241 = , <1 (������ �����) (3) � � � 242 the water limit (equation 2) implies that et cannot exceed p in the long term."
+9,implicit in the 243 constraint is the assumption that the contribution of watershed storage to long-term water 244 availability is negligible.
+9,"we note that this assumption may be inadequate in watersheds which 245 have experienced severe long-term groundwater loss (condon and maxwell, 2017)."
+9,"in watersheds 246 where water availability is not a constraint, et is limited by the available energy in the form of 247 net radiation (rn) or pet (equation 3)."
+9,"consequently, in our application of the fuh equation 248 (equation 1), the parameter, �, is stationary."
+9,"however, several studies have disputed this 249 assumption (mianabadi et al., 2020; ning et al., 2018) at finer timescales (monthly, seasonal, or 250 interannual)."
+9,we acknowledge that the lack of consideration of the non-stationarity in � could 251 impact the results of the analysis presented below.
+9,"to reduce this impact, we conduct our analysis 252 at long-term time scales."
+9,"in addition, we have comprehensively quantified the effect of the 253 variability in � in a previous study in which we have developed the methodology (koppa and 254 gebremichael, 2017)."
+9,"we have shown that at long-term time scale, the value of � does not have 255 significant on our results."
+9,"moreover, similar analysis has been used in a number of hydrological 256 (greve et al., 2020) and climate change studies (greve et al., 2014; zhou et al., 2015)."
+9,"finally, we 257 emphasize here that a different methodology for selection of precipitation datasets is necessitated 258 by the lack of availability of ground-based measurements for validating the datasets."
+9,"in regions 259 where such validation datasets are available, the remote sensing datasets should be evaluated using this article is protected by copyright."
+9,all rights reserved
+10,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+10,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 260 ground-based measurements.
+10,"as this study focuses on detailing the alternate methodology, we do 261 not present a evaluation with ground-based measurements."
+10,"262 in koppa and gebremichael (2017), we show that the validation framework is capable of 263 264 author manuscript mimicking traditional methodologies which use in-situ measurements."
+10,"specifically, we show that the combined error (ce) in p and et datasets can be represented by the following euclidean 265 measure (equation 4): 266 �� = (����� ― �����)2 + (����� ― �����)2 (4) 267 where, 268 1) eiest and aiest are the long-term average evaporative and aridity indices estimated from 269 satellite-based estimates of p, et, and rn considered in this study for water and energy 270 balance closure."
+10,"271 2) aiact is the actual long-term estimate of ai determined using observed rn from the 272 nasa/gewex surface radiation budget (srb) (cox et al., 2006) v3.0 data and 273 precipitation from worldclim v2.0 dataset (fick and hijmans, 2017)."
+10,this is done as the 274 methodology developed in koppa & gebremichael (2017) is based on the assumption 275 that the aridity of the watershed is known and does not change significantly.
+10,the srb 276 data spans the years 1983-2007 with a spatial resolution of 1o x 1o.
+10,the temporal range of 277 the worldclim dataset is 1970–2000 and the spatial resolution is 1km x 1km.
+10,278 3) eimod is determined from fuh’s equation (equation 3) as ����� = 1 + ����� ― 279 (1 + (�����)�)1/� where � is the budyko parameter.
+10,"280 as � has no analytical solution, we use the parameterization developed by (xu et al., 2013)."
+10,"281 specifically, we make use of the following multiple linear regression (mlr) model � = 5.057 ― 0.093��� + 0.130��� + 1.316���� + 0.000003� 282 ― 0.00018���� (5) 283 where, 284 1) lat is the latitude of the centroid of each watershed."
+10,this is derived from the 285 hydrobasins dataset.
+10,this article is protected by copyright.
+10,all rights reserved
+11,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+11,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 286 2) cti is the compound topographic index (beven and kirkby, 1979) defined as 287 ln (�/tan �), where a is the upstream watershed area derived from the hydrobasins 288 dataset, � is the slope in degrees."
+11,"we derive the average slope of each watershed from the 289 multi-error-removed improved-terrain (merit) digital elevation model (dem) which 290 291 author manuscript has coverage of the entire earth (yamazaki et al., 2017)."
+11,cti is correlated with soil moisture.
+11,low cti values implies smaller watersheds and steep slopes.
+11,high cti values 292 are associated with large watersheds with gentle slopes and represents more water 293 accumulation.
+11,294 3) a is the area of watershed derived from hydrobasins dataset and elev is elevation 295 derived from merit dem.
+11,"296 4) ndvi is the normalized difference vegetation index derived from nasa’s moderate 297 resolution imaging spectroradiometer (modis), specifically mod13a2 v6.0 available 298 at 1km spatial resolution (didan, 2015)."
+11,we determine one ndvi value per watershed by 299 averaging over the years 2000–2018.
+11,"300 in summary, the following steps are followed to select the best performing p and et datasets: 1) 301 for a given watershed or catchment area of hydropower reservoirs, the fuh parameter (�) is 302 determined using equation 5."
+11,2) the actual or reference long-term aridity index of the study region 303 is calculated using reliable potential evaporation (pet) or net radiation and precipitation datasets.
+11,"304 3) for every combination of p and et dataset to be evaluated, a euclidean distance metric in the 305 budyko space (ce) is calculated using equation 4."
+11,"4) finally, the combination of p and et dataset 306 with the least value of ce is selected as the best performing datasets."
+11,"307 in the dss, we implement this framework described above to select the most appropriate p and 308 et dataset among 14 widely used eos p and et datasets (figure 1 and table 1), using the 309 euclidean distance metric described in equation (4)."
+11,the best p and et dataset selected using the 310 framework for a specific watershed will then be used in cfm to calibrate the forecasts and in the 311 hfm to setup and calibrate the distributed hydrologic model.
+11,"312 climate forecasting module (cfm) 313 in the cfm, weather and climate forecasts at three different timescales can be generated as input 314 to the hfm: daily, sub-seasonal-to-seasonal (s2s), and seasonal."
+11,based on the optimization this article is protected by copyright.
+11,all rights reserved
+12,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+12,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 315 system, three different forecast scenario structures are produced: a) a single deterministic forecasts 316 for all stages (det), b) a single deterministic forecast for the first stage and ensemble (stochastic) 317 forecasts for the rest of the forecast horizon (spwr-d), and c) ensemble (stochastic) forecasts for 318 all the stages (spwr-s)."
+12,"for generating these scenarios, raw or calibrated multi-model ensemble 319 320 author manuscript weather or climate forecasts are used."
+12,"two distinct approaches are available in the cfm for calibration of the forecasts: 1) combination of analogue and quantile regression, 2) bayesian 321 model averaging (bma)."
+12,"below, we provide details of both the approaches."
+12,"322 the combined analogue and quantile regression algorithm (knievel et al., 2017; koenker and 323 bassett, 1978) can be explained as follows."
+12,"let {yi} represent a set of observations of the 324 regressand y of interest, and {xi} be an associated set of predictor values."
+12,"analogous to standard 325 linear regression, a linear function of x can be used to estimate to a specific quantile q of y 326 (6) 327 with residuals and  (0,1) ."
+12,"however, instead of minimizing the squared 328 residuals as with standard linear regression, in qr a weighted iterative minimization of {ri} is 329 performed over : 330 , (7) 331 with the weighting function used inside the summation defined as (using a generic placeholder 332 “u”):  u u0  (u)    (  1)u u  0 333 , (8) 334 where the value of � then prescribes the quantile function that one is solving for (e.g. say, 0.5 for 335 a fit to the median; or 0.9 for a 90th percentile functional fit)."
+12,"the benefits of using qr is that it 336 can be used to estimate the full probability distribution function of the regressand, the optimality 337 of its estimation does not require homoscedastic residuals (unlike standard linear regression), and 338 its functional fit is more immune to unrealistic outliers than standard linear regression (which 339 minimizes the squares of the residuals)."
+12,this article is protected by copyright.
+12,all rights reserved
+13,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+13,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 340 building on this qr backbone, one aspect that makes our postprocessing approach novel is that 341 we “pre-process” the ensemble dispersion ensuring its reliability (hopson, 2014), and then 342 explicitly condition the training of the final postprocessing model on the degree of the (now- 343 calibrated) ensemble dispersion, the primary benefit of which is that when the ensembles of the 344 345 author manuscript forecast are less(more) dispersed, the forecast user can trust that the forecast is more(less) certain."
+13,figure 2 provides a schematic of our approach.
+13,"additionally, we have investigated the use of 346 hybrid statistical-dynamical prediction methodologies to multi-model ensemble dynamical 347 forecasts and geophysical teleconnections to generate rainfall predictions."
+13,"specifically, at the s2s 348 scale we have enhanced forecast skill of the ncep-cfsv2 model through combining with madden 349 julian oscillation (mjo) indicators, which we will discuss further below in our case study and 350 results section."
+13,351 insert figure 2 352 the second method implemented for calibration of forecasts is bayesian model averaging 353 (bma).
+13,"bma is a well-established methodology for calibrating forecast ensembles generated 354 from multiple statistical (hoeting et al., 1999) or dynamical models (raftery et al., 2005)."
+13,"bma 355 of a forecast ensemble results in a calibrated and sharp predictive probability density function 356 (pdfs), represented as a weighted averaged of the pdfs of the ensemble members."
+13,"following 357 sloughter et al. (2007), the bma predictive pdf can be mathematically represented as � 358 �(�|�1,�2,…,��) = ∑ ����(�│��), (9) � =0 359 where �� is the posterior probability of ensemble forecast member �� being the best one, 360 determined in the calibration or training period using observed or reference data of the 361 hydrologic variable under consideration � (for example, precipitation or terrestrial evaporation); 362 and ��(�│��) is the conditional pdf associated with the ensemble forecast �� of the hydrologic 363 quantity �."
+13,"for variables such as temperature, the conditional pdf ��(�│��) can be assumed to 364 be normally distributed (raftery et al., 2005), but a gamma distribution is more appropriate for 365 precipitation (sloughter et al., 2007)."
+13,"in the dss, we use a mixture of point mass at zero and a 366 gamma distribution as the conditional pdf (sloughter et al., 2007)."
+13,we determine the bma 367 weights (��) of ensemble precipitation members using the most appropriate p dataset selected in 368 the eom.
+13,this article is protected by copyright.
+13,all rights reserved
+14,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+14,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 369 in the dss, we aim to provide support for the most popular global ensemble weather and climate 370 forecasts at daily to seasonal timescales."
+14,"at daily weather scale (1- to 16-day lead-times), real- 371 time ensemble forecasts are available from ncep (21 members) and environment canada (21 372 ensembles)."
+14,"to expand the multi-model, ensemble forecasts are utilized from an additional six 373 374 author manuscript climate centers from the (two-day delayed) thorpex interactive grand global ensemble (tigge) archive: cma (15 ensembles), cptec (15 ensembles), ecmwf (51 ensembles), 375 meteofrance (11 ensembles), ukmet (24 ensembles), and jma (51 ensembles)."
+14,the spatial 376 resolutions of the forecasts vary in the range from 0.25 to 1.50 degrees (table 1).
+14,"the forecasts 377 are available at lead times, ranging from nominally 6-hr to 16-days."
+14,"at the subseasonal- to 378 seasonal-range (s2s; 2- to 6-week lead-times), dynamical real-time forecasts are available from 379 the subx project (http://iridl.ldeo.columbia.edu/sources/."
+14,models/.
+14,"subx/), with the following 380 contributing models and centers: ncep-cfsv2, ncep-gefs, nasa-geos5, eccc-gem, us 381 navy-esm, ncar-ccsm4, esrl-fim."
+14,"for seasonal forecasts, we use the north american 382 multi-model ensemble (nmme)."
+14,"hydrologic forecasting module (hfm) 383 the main objective of hfm is to generate reliable reservoir inflow forecasts, the primary input to 384 the optimization module."
+14,"for this, we use the deterministic and stochastic precipitation forecasts 385 at daily to seasonal timescales, produced in the cfm as input into a calibrated spatially distributed 386 hydrologic model."
+14,the novel contribution in this module is in the use of terrestrial evaporation 387 (et) as a proxy for streamflow (sf).
+14,"the selection of et as a proxy for sf is motivated by the 388 findings of several previous studies which show that calibrating hydrologic models with et, in the 389 absence of sf observations, improves the accuracy of sf relative to an uncalibrated model 390 (immerzeel and droogers, 2008; lópez et al., 2017; zink et al., 2018)."
+14,"hence, we assume that the 391 high fidelity of the hydrologic model in simulating et implies accurate simulation of streamflow."
+14,"392 in addition, we also introduce the role of hydrologic model parameter uncertainty in affecting the 393 reservoir inflow forecasts and hence hydropower production."
+14,"for this, we adopt a formal bayesian 394 calibration approach to derive the posterior probability distribution of model parameters."
+14,"395 specifically, we utilize the differential evolution adaptive metropolis (dream) markov chain 396 monte carlo scheme (mcmc) scheme (vrugt et al., 2008, 2009)."
+14,"397 first, we calibrate the hydrologic model using the dream algorithm to derive the posterior 398 distribution of model errors."
+14,"next, we define a limit of acceptability or error threshold to this article is protected by copyright."
+14,all rights reserved
+15,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+15,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 399 distinguish between behavioral and non-behavioral solutions (beven, 2006)."
+15,"‘behavioral’ 400 solutions are model parameter sets, derived from calibration, that result in errors that are within an 401 acceptable limit (error threshold) for a specific model output (et in this study)."
+15,we use the model 402 parameter set with the least model error for generating deterministic and stochastic inflow 403 404 author manuscript scenarios.
+15,the remaining behavioral model parameter sets then are used to quantify the uncertainty in et and sf forecasts due to uncertainty in model parameters.
+15,"a detailed description of the 405 calibration methodology is available in (koppa, gebremichael, and yeh, 2019)."
+15,"406 in summary, the following steps are followed in generating the hydrologic forecasts in this module: 407 1) once the hydrologic model is selected (noah-mp), the model is calibrated using satellite-based 408 p and et datasets, 2) the best p and et datasets selected in the eom are used in a bayesian 409 calibration framework (dream) to generate a set of behavioral parameters for the hydrologic 410 model (noah-mp) for the calibration time period (2004), 3) each set of parameters will result in 411 one set of hydrologic forecast (one ensemble member), 4) the set of parameters are used to 412 generate different deterministic and stochastic inputs to the optimization model (described below)."
+15,"413 optimization module (om) 414 in the om, we implement a multistage deterministic and stochastic programming with recourse 415 model to optimize hydropower production at the required timescales."
+15,"first, we provide a generic 416 example of a multistage stochastic programming with recourse model."
+15,"then, we describe the 417 specific hydropower optimization scheme implemented in the dss."
+15,we note that the description 418 is provided for seasonal timescales (monthly time step).
+15,"however, the same optimization scheme 419 is applicable for the daily (hourly time step) to s2s (daily time step) time scales."
+15,420 consider a system of � reservoirs.
+15,"let the seasonal hydropower planning horizon be � months, 421 which is divided into � stages (each stage is one month)."
+15,"let the monthly time period be 422 t , t  1, 2,........"
+15,"in a multistage stochastic programming with recourse model, at the beginning 423 of each time period t , a reservoir inflow scenario with � scenarios is constructed to represent 424 possible future inflows into the reservoir."
+15,these scenario trees or fans are used as an input to an 425 optimization model that minimizes or maximizes the expected value of a specified objective 426 function.
+15,we adopt a ‘rolling horizon control’ scheme in which the optimal release decisions are 427 adopted only for the immediate stage (�).
+15,"then, the planning horizon ( t) is ‘rolled’ forward ( this article is protected by copyright."
+15,all rights reserved
+16,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+16,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 428 � = � + 1), the reservoir inflows are reforecasted, and the model is re-optimized (recourse)."
+16,"the 429 rolling horizon control is a general-purpose control scheme that involves repeatedly solving a 430 constrained optimization problem, as well as using predictions of future inflows, and constraints 431 over a moving time horizon to choose the control action."
+16,this process is repeated until the end of 432 author manuscript the planning horizon (� = �).
+16,"433 first, the deterministic and ensemble reservoir inflow forecasts generated in the hfm are used to 434 construct the three scenario structures implemented in the dss – 1) det, 2) spwr-d, and 3) 435 spwr-s."
+16,"for the construction of the completely deterministic or det scenario, only the 436 deterministic forecasts generated from bma of ensemble precipitation forecasts are used at all 437 stages of the planning horizon (�)."
+16,"as all stages are deterministic, the det scenario consists of 438 only one inflow scenario."
+16,"for the spwr-d scenario, deterministic forecast (from bma) is used 439 for just the first stage of the planning horizon, and � ensemble forecasts (generated from raw 440 ensemble precipitation forecasts) are used for the remaining � ― 1 stages (figure 1)."
+16,"therefore, 441 spwr-d scenario consists of � inflow scenarios."
+16,"finally, for the spwr-s scenario, only ensemble 442 forecasts are used at all stages resulting in a completely stochastic scenario, consisting of � 443 scenarios."
+16,"note that the det, spwr-d, and spwr-s scenarios are constructed at the beginning 444 of each iteration of the multistage stochastic programming with recourse model, i.e., at each stage 445 � of the planning horizon �."
+16,"next, the different scenarios are used as an input to a nonlinear 446 programming (nlp) hydropower optimization model to generate optimal release and storage 447 decisions."
+16,we choose nlp because it can accommodate the nonlinear power production functions 448 without approximation.
+16,"it has been shown that nlp models are most accurate in generating reliable 449 release and storage policy for reservoir management and operation (barros et al., 2003)."
+16,"a detailed 450 description of the optimization methodology is available in koppa, gebremichael, zambon, et al."
+16,451 (2019).
+16,"452 in summary, the following steps constitute the optimization module: 1) rolling horizon scheme is 453 followed in which the system is optimized at the start of every month for a planning horizon of 8 454 months, 2) a the start of every month, three inflow scenarios (det, spwr-d, and spwr-s) are 455 generated 3) det is generated by combining the bma of precipitation forecasts (cfm) with the 456 noah-mp model run with the best parameter set from hfm for all the 8 months, 4) spwr-d is 457 generated by running the bma forecast through the noah-mp model for the first month, and for this article is protected by copyright."
+16,all rights reserved
+17,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+17,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 458 the remaining months all the ensemble climate forecasts and parameter sets are used to generate 459 an ensemble of forecasts for the remaining 7 months , 5) spwr-s scenario is generated using 460 ensemble forecasts and model parameters for all the, 6) the system is optimized for the entire 8 461 months, but the decisions are implemented only for the first month, 7) at the start of the next 462 author manuscript month, the entire procedure (step 1 -7) is repeated for the next months."
+17,"463 visualization module (vm) 464 because each collaboration has its own region with its own unique geography, hydrology, and 465 decision-making needs, each partnership begins by identifying the relevant datasets, and forecast 466 models, as well as determining the most convenient output formats, including spatial requirements 467 (local catchments, grids or sites) and best data formats for interfacing with the agencies’ current 468 prediction systems."
+17,"because of this, the vm is primarily oriented around a customizable web- 469 based decision support tool that integrates many of the outputs from the dss into a gis-based 470 visualization framework to aid decision makers in assessing and downloading the dss data outputs 471 into their particular context."
+17,the power behind the vm is the ability to visualize and interrogate 472 the output from the dss through space and time.
+17,a time series graph of precipitation estimates for 473 each catchment is integrated into the interactive mapping application for each catchment.
+17,the 474 democratization of the forecasts lead to enhanced situational awareness of possible future rainfall 475 events for decision makers.
+17,"the web application components are built using open source data 476 formats, programming languages, and, mapping and graphing libraries.the spatial forecast data is 477 stored as a javascript object notation (json) file, which is a standard for storing and exchanging 478 data written in javascript notation, while the time series for each catchment is stored as common 479 seperated values (csv) files. the webapplication is developed using javascript code libraries; 480 the mapping component uses a library called leaflet (leaflet, 2016), while the time series are 481 plotted using the jqplot."
+17,"leaflet is one of the most popular mapping javascripts libraries today 482 (donohue et al., 2013) and is used as the mapping engine to glue all map and data services together."
+17,483 the data services that are displayed in the vm are spatial and temporal aggregations of 484 precipitation estimates from the eoss and cfms.
+17,this aggregation is developed using python 485 scripting and the open-source library called gdal/ogr.
+17,the processing steps required for our 486 precipitation product displays are provided in figure 3.
+17,487 insert figure 3 this article is protected by copyright.
+17,all rights reserved
+18,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+18,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 488 case study: omo-gibe river basin 489 as described in the previous section, the dss developed in this study contains several components 490 to aid in the generation of reliable reservoir release decisions at different timescales (daily to 491 492 author manuscript seasonal)."
+18,"the components include consideration of various eos-based p and et datasets (14 datasets), ensemble climate forecasts, hydrologic models (based on nasa’s lis), uncertainty 493 quantification (incorporation of model parameter uncertainty in addition to climate forecasts 494 uncertainty), different optimization schemes (deterministic or stochastic), and visualization 495 support tool design considerations."
+18,"however, for the purpose of the case study, we apply a specific 496 sequence of the dss chain for a large river basin in east africa at seasonal timescales: a) in the 497 eom, we use all the eos-based datasets described in table 1; b) in the cfm, we use the nmme 498 seasonal forecasts to generate all the three different scenarios (det, spwr-d, and spwr-s) to 499 couple to the hfm, and use ncep and tigge forecasts for daily to weekly rainfall guidance; c) 500 in the hfm, we setup the noah-mp hydrologic model (niu et al., 2011) using nasa’s lis and 501 calibrate the model using dream, however, we select only one behavioral parameter set and 502 therefore no model parameter uncertainty is incorporated in the final release decision; d) in the 503 om, we use deterministic and stochastic programming model at monthly timestep to optimize 504 hydropower under det, spwr-d, and spwr-s scenarios."
+18,"in the following sections, we present 505 the hydropower scheme selected as a case study, describe implementation of the developed 506 methodology step-by-step, demonstrate the added value of the dss by comparing results against 507 actually generated hydropower values, and present the particular implementation of our 508 visualization and support module for the dss."
+18,"509 study area and time period 510 our study region is the omo-gibe river basin, with an area of 79,000 km2, in ethiopia (figure 4)."
+18,"511 the elevation ranges from about 700 to 3,100 m.a.s.l."
+18,"the average rainfall in the basin is about 512 1,150 mm with a humid north and arid south."
+18,the annual temperature varies between 17 oc and 513 29 oc.
+18,"the study area consists of three power plants in operation (gilgel gibe i, ii and iii) and one 514 planned hydropower plant (koysha) – see table 2 for characteristics of the hydropower plants."
+18,"515 for our study, we considered a cascade of two reservoirs (gibe i and gibe iii)."
+18,"we focused on the 516 time period of february 2005 to september 2005, due to availability of actually generated 517 hydropower production data."
+18,"assuming a planning horizon of eight months, we forecasted inflows this article is protected by copyright."
+18,all rights reserved
+19,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+19,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 518 to the reservoirs eight months in advance.
+19,"therefore, this case study demonstrates the values of 519 our dss when we selected forecasts made eight months in advance."
+19,520 insert figure 4 521 author manuscript earth observations datasets (eos) 522 the first step in implementing the dss is the selection of an appropriate eos-based p and et 523 datasets required for the calibration of climate forecasts and the calibration of the hydrologic 524 model.
+19,"using the budyko-based framework of the dss (see eom component in fig. 1), we select 525 the most appropriate p and et datasets from a list of fourteen datasets (table 1) in the following 526 steps."
+19,we discretize the study domain into regular grids of 0.25o x 0.25o (a total of 592 grids).
+19,the 527 14 datasets are then interpolated onto the grids using bi-linear interpolation.
+19,"for each of the grid, 528 the budyko parameter is calculated using equation 5."
+19,then the combined error (ce) in a 529 combination of p and et dataset (total of 49 combinations) is determined for each grid cell using 530 equation 4.
+19,"finally, the root mean square error (rmse) of all the ce values (total of 592 values) 531 is used to summarize the performance of a specific combination of p and et in representing the 532 water and energy balance of the omo-gibe river basin."
+19,the combination of p and et dataset with 533 the least rmse is selected as the best combination.
+19,"in figure 5, we present a heat map of the 534 rmse of each combination of p and et dataset."
+19,it is seen that the best combination of p and et 535 dataset (i.e. with the least rmse) is obtained for the p product “persiann.cdr” and et product 536 “ssebopv4.0”.
+19,"537 insert figure 5 538 weather and seasonal precipitation forecast data 539 for climate forecasts, we use the ensemble seasonal precipitation forecasts from the north 540 american multi-model ensemble (nmme) (kirtman et al., 2014)."
+19,it consists of nine partner 541 models with the number of ensemble members in each model varying from six to twenty-eight.
+19,"542 as the hydrologic model (described below) requires daily forecasts to run, three models which 543 provide the seasonal forecasts at daily time step are chosen : 1) goddard earth observation 544 system version 5 (geos-5) (borovikov et al., 2019), 2) third generation canadian coupled 545 global climate model (cancm3) (merryfield et al., 2013), and 3) fourth generation canadian 546 coupled global climate model (cancm4) (merryfield et al., 2013)."
+19,the cancm3 and cancm4 this article is protected by copyright.
+19,all rights reserved
+20,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+20,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 547 models issue forecasts for lead times of up to 12 months.
+20,geos-5 forecasts are available for lead 548 times of up to 9 months.
+20,"with ten ensemble members for each model, the dss application to the 549 omo-gibe river basin uses a total of thirty ensembles from three models."
+20,the hindcasts of 550 nmme are available for the time period 1981-2010.
+20,the spatial resolution is 1.0o x 1.0o and the 551 author manuscript temporal resolution is daily.
+20,"552 at the daily- to two week-range time-scales, the dynamical forecast products we discussed above 553 are used to provide rainfall guidance to the user, with these forecasts coming from ncep and 554 tigge."
+20,"for s2s forecasts, geostatistical information at weekly-evolving time-scales can also be 555 used to enhance nwp rainfall forecasting skill."
+20,"in figure 6, we show composite plots of how the 556 madden-julian oscillation (mjo) impacts rainfall anomalies over ethiopia based on the phase of 557 the mjo because of its proximity to the equator (broman, 2019)."
+20,"558 insert figure 6 559 similarly, at seasonal timescales, enso can have an impact on the rainfall over the major river 560 basins in ethiopia, but the phase of the impact varies strongly based on the location, as we see in 561 figure 7."
+20,"562 insert figure 7 563 hydrologic model setup and calibration 564 to translate the nmme precipitation forecasts into reservoir inflow forecasts, we choose the 565 noah-mp (multi-parameterization) land surface model (lsm) (niu et al., 2011), driven through 566 nasa’s land information system (lis) (kumar et al., 2006)."
+20,we source the static input datasets 567 required for running the noah-mp mode from nasa’s lis data portal 568 (https://portal.nccs.nasa.gov/lisdata).
+20,"this includes the land cover map, sourced from united 569 states geological survey (usgs); the soil texture map from state soil geographic (statsgo) 570 dataset, sourced from the united states department of agriculture (usda); and the elevation map 571 from gtopo30, sourced from usgs."
+20,"albedo, greenness fraction and temperature are sourced 572 from the national centers for environmental prediction (ncep) reanalysis."
+20,"the meteorological 573 forcings required by the noah-mp model include precipitation, air temperature, surface pressure, 574 specific humidity, wind speed, and radiation."
+20,"barring persiann.cdr precipitation, all 575 meteorological forcings are derived from the global data assimilation system (gdas), sourced this article is protected by copyright."
+20,all rights reserved
+21,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+21,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 576 from the environmental modeling center (emc) of the ncep.
+21,the spatial resolution of the dataset 577 is 0.47o x 0.47o.
+21,the noah-mp model is set at a spatial resolution of 5km x 5km.
+21,"the 578 meteorological inputs, including the forecasts, are interpolated onto the model grid using bilinear 579 interpolation."
+21,the model is spun-up for a period of 68 years by looping through the year 2003 until 580 581 author manuscript the groundwater and soil moisture storage reach equilibrium.
+21,the model time step is three hours.
+21,"the number of soil layers in the model is four with thicknesses 10cm, 30cm, 60cm, and 100cm."
+21,582 specific noah-mp model physics options selected for different processes are detailed in table 3.
+21,583 the noah-mp model contains 71 standard parameters (present in user-defined tables) and 139 584 hard-coded parameters (present in the model code).
+21,"the noah-mp model output has been found 585 to be sensitive to about two-thirds of the 71 standard parameters (cuntz et al., 2016)."
+21,we select 586 five of the most sensitive parameters from the cuntz et al. (2016) study.
+21,"the selected parameters 587 are two surface runoff-related parameters (refdk and refkdt), the exponent in the brooks- 588 corey equation (bb), soil porosity (maxsmc), and hydraulic conductivity at saturation 589 (satdk)."
+21,"of the five parameters, bb, maxsmc, and satdk are related to soil texture."
+21,"as 590 there are twelve soil texture classes, the total number of parameters selected for calibration of the 591 noah-mp hydrologic model is 38 (table 4 presents a detailed breakdown of the parameters with 592 maximum and minimum values used for calibration)."
+21,"593 to calibrate the hydrologic model and quantify the uncertainty in reservoir inflow forecasts due to 594 uncertainty in model parameters, we use the dream algorithm."
+21,specific configuration options 595 and parameters of the dream algorithm used in this study are detailed in table 5.
+21,"in the absence 596 of streamflow observations, we use satellite-based estimates of et (ssebopv4.0) to calibrate the 597 hydrologic model for the year 2004."
+21,"specifically, error residuals are determined at all the 5km x 598 5km grid cells and time steps (monthly) over the entire omo-gibe river basin."
+21,"on a workstation 599 with 24 processors, dream required approximately 11,300 iterations to converge to a solution."
+21,"600 for the purpose of this case study, we choose the best performing model parameter."
+21,"as described 601 in the methodology section, multiple behavioral solutions from dream can be used to 602 incorporate model parameter uncertainty in hydropower decision making."
+21,"a comprehensive 603 quantification of model parameter uncertainty and its impact on hydropower is discussed in koppa, 604 gebremichael, zambon, et al."
+21,(2019).
+21,605 visualization module this article is protected by copyright.
+21,all rights reserved
+22,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+22,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 606 our visualization module provides displays and downloadable data of rainfall estimates from 607 forecasts at time-scales of short-, medium-, and seasonal-range over east africa, with focus over 608 ethiopia."
+22,"spatially, to provide the viewer with different scales of resolution, two different sizes of 609 basin-averaged rainfall were provided on the displays, which the user could access through zoom- 610 author manuscript in and zoom-out features."
+22,the chosen catchment scales are shown in figure 8.
+22,"611 insert figure 8 612 results and discussions 613 first, we evaluate the weather and seasonal precipitation hindcasts over our case study region, the 614 omo-gibe river basin, and the major basins of ethiopia."
+22,"then, we evaluate the noah-mp 615 hydrologic model using et estimates from ssebopv4.0."
+22,"next, we present the reservoir inflow 616 forecasts and resulting three different scenario structures used for optimization."
+22,we also present 617 the results from the deterministic and stochastic programming with recourse model including the 618 optimized release decisions and resulting hydropower production.
+22,"finally, we show results from 619 our developed visualization module."
+22,"620 evaluation of weather and climate forecasts 621 to validate the 30-member seasonal ensemble precipitation forecasts from nmme, we use the 622 persiann-cdr dataset (selected in the eom)."
+22,"we present taylor diagrams (taylor, 2001) to 623 represent the root mean square error (rmse), correlation with observations and standard deviation 624 of different forecast models (figure 9)."
+22,"a taylor diagram represents the standard deviation of the 625 observed data and modeled results, radially, along the x and y axes (for example the standard 626 deviation of the observed precipitation is approximately 50 mm)."
+22,"the correlation of the different 627 models with the observed data is shown along the circumference of the taylor diagram, increasing 628 radially from the y-axis to the x-axis (for example, the observed data is shown on the x axis, 629 representing a correlation of 1.0 and cancm4 has a correlation of 0.92 at lead time of 1-month)."
+22,"630 finally, the rmse of models are represented as contours (dashed yellow lines in figure 4), with 631 rmse values increasing from the x-axis to y-axis (for example, the observed data is shown on the 632 x-axis, representing an rmse of 0.0 and cancm4 has an rmse of approximately 20 mm/month 633 at lead time of 1-month)."
+22,"the closer the point representing a model (for example, cancm4) is to 634 the observed data (purple point in figure 5), better the performance of the model."
+22,this article is protected by copyright.
+22,all rights reserved
+23,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+23,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 635 the stochastic programming with recourse model implemented in this study uses forecasts that are 636 updated at the start of each month, while the release decisions are implemented only for the 637 immediate stage."
+23,"therefore, we focus on the performance of the forecasts at shorter lead times."
+23,"at 638 lead times of 2-3 months, we see that the geos-5 model consistently outperforms the other two 639 640 author manuscript models (figure 9)."
+23,"at lead time of 1-month, the cancm4 model exhibits lower rmse and higher correlation with the observed data (figure 9)."
+23,"however, at longer lead times, cancm4 model 641 performs relatively poorly compared with the other models."
+23,"as expected, the forecast accuracy of 642 all the models deteriorates with increasing lead times."
+23,"643 finally, we compare the simple mean and bayesian model average of all 30 ensemble members 644 with the individual models."
+23,we see that the ensemble bma outperforms all the other models at 645 almost every lead time (figure 9).
+23,the low rmse (approximately 18 mm/month) and high 646 correlation coefficient (greater than 0.9) at lead time 1-month supports this conclusion.
+23,"at shorter 647 lead times, the cancm4 model outperforms the ensemble mean in terms of both the magnitude of 648 error and correlation with the observed data."
+23,"this highlights the advantage of the bma technique, 649 which provides higher weights to better performing models (cancm4 in this case)."
+23,"the ensemble 650 mean, which weighs all the ensemble members equally, is biased by the lower performing 651 cancm3 and geos-5 models."
+23,"652 insert figure 9 653 the inclusion of large-scale teleconnections as geostatistical predictors along with nwp multi- 654 modeling can greatly enhance the forecasting skill of nwp seasonal and weather forecasts over 655 not only over the omo-gibe river basin (our primary study region), but over all the major river 656 basins of ethiopia."
+23,"building on the relationship between enso and rainfall anomalies shown in 657 figure 7 above, in figure 10 we utilize enso as a predictor along with all eight nmme models 658 into an optimized probabilistic forecast for the blue nile river basin, using the centennial trends 659 (centrends) gauge-based precipitation dataset (funk, nicholson, et al., 2015) for observations."
+23,"660 the individual forecast models are calibrated using a regression of the model ensemble mean 661 against the observations leaving one year out at a time (unger et al., 2009)."
+23,a simple linear 662 regression is also used to create a probabilistic forecast based on the nino3.4 index.
+23,a multi- 663 model forecast is then calculated by averaging the individual nmme forecasts together with 664 enso.
+23,since the higher confidence forecasts show greater variability from the climatological this article is protected by copyright.
+23,all rights reserved
+24,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+24,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 665 mean, they will be more highly weighted in the average."
+24,"as a last step, the output of the multi- 666 model forecast itself is once again calibrated to ensure accurate forecast probabilities."
+24,"the 667 summer season rainfall over the basin can be skillfully forecast using this multi-model approach 668 (r=0.59, p<0.001)."
+24,"669 author manuscript insert figure 10 670 similarly, geostatistical information at weekly-evolving time-scales can also be used to enhance 671 nwp rainfall forecasting skill."
+24,"utilizing the information shown in figure 6 on how the phasing of 672 the mjo impacts rainfall anomalies over ethiopia, this information, along with nwp rainfall 673 forecasts from ncep’s cfsv2, can be combined through a quantile regression model, to 674 significantly improve weekly time-scale rainfall forecasts for the omo-gibe, as shown in figure 675 11 (broman et al., 2020) ."
+24,"676 insert figure 11 677 at daily-to-two-week time-scales, combining nwp ensemble forecasts into a multi-model forecast 678 can provide significant benefits in forecasting skill for extreme events, as we show below in figure 679 12 (here, 90th percentile rainfall), where we compare rainfall forecasting skill of four weather 680 centers (canada – cmc, ecwmf, us – ncep, uk met office) to a combined multi-model over 681 ethiopia (stellingwerf et al., 2020)."
+24,"as shown in the figure using the brier skill score, the multi- 682 model forecast is equal to or out-performs any individual model for all of the 12 primary ethiopian 683 river basins shown."
+24,684 insert figure 12 685 evaluation of hydrologic model calibration and reservoir inflow forecasts 686 we validate the set of selected behavioral solutions with the ssebopv4.0 et dataset for the year 687 2005 using time series (figure 13a) and relevant error metrics.
+24,figure 13a reveals that the 688 ssebopv4.0 et-calibrated noah-mp model performs well in simulating et over the omo-gibe 689 river basin.
+24,"in the calibration period (12 months of 2004), we see that the reference et data (black 690 line) is closer to the 5% quantile of the modelled et for the months of april, may, and june."
+24,this 691 implies that the behavioral solutions consistently overestimate et for the months with higher 692 observed evapotranspiration.
+24,"in the validation period (12 months of 2005), the reference dataset this article is protected by copyright."
+24,all rights reserved
+25,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+25,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 693 corresponds to the median modelled et values for the first six months.
+25,"in this last six months of 694 2005, we see that the model consistently underestimates et over the study area."
+25,"additionally, the 695 model can capture the quantity and timing of the peaks and troughs seen in the reference et 696 dataset."
+25,"a low mean rmse of 2.5 mm/month and a high mean correlation co-efficient of 0.94, 697 698 author manuscript determined for the validation time period, shows that the noah-mp model is capable of simulating et."
+25,"as stated in the methodology, we assume that the high fidelity of the noah-mp model in 699 simulating et across the omo-gibe river basin implies accurate simulation of streamflow."
+25,"700 for the application of the dss in the omo-gibe river basin, we select the best performing noah- 701 mp model parameter set from the twenty behavioral solutions (used in figure 13a) to generate the 702 reservoir inflow forecasts for two reservoirs (gibe i and gibe iii)."
+25,"as described in the 703 methodology, we construct three scenario structures (det, spwr-d, and spwr-s) for the 704 months february 2005 to september 2005 by combining the calibrated and uncalibrated nmme 705 precipitation forecasts and the et-calibrated noah-mp hydrologic model."
+25,"here, we compare the 706 differences in reservoir inflows among the three scenarios."
+25,figure 13b presents the deterministic 707 (from bma) and stochastic (raw forecast ensembles) inflows used to construct the three scenario 708 trees.
+25,"in addition, we also present the inflows generated from a climatological forecast generated 709 by forcing noah-mp with persiann-cdr precipitation for a period of 10 years (2002 – 2015) 710 (seasn) and determining the average streamflow values for each month of the planning horizon."
+25,711 we see that the first three months of the study period are relatively dry compared to the rest of the 712 months.
+25,"also, the deterministic inflows into both gibe i and gibe iii are near the mean of the 30- 713 member ensemble, with july and september being the exceptions."
+25,"additionally, we also see that 714 there is considerable uncertainty in the reservoir inflow arising from uncertainty in the input 715 precipitation ensembles (boxplots in figure 13b)."
+25,the climatological forecasts are higher than the 716 mean of the ensemble mean in the low flow months and lower than the ensemble mean in the high 717 flow months.
+25,"718 insert figure 13 719 optimized release decision and power produced 720 the three inflow scenarios (det, spwr-d, and spwr-s) along with the climatological forecast 721 generated using 10-year of persiann-cdr data (seasn) are used as inputs to a deterministic this article is protected by copyright."
+25,all rights reserved
+26,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+26,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 722 and stochastic programming with recourse model to generate optimized power releases (figure 723 14a) and the associated hydropower production (figure 14b).
+26,"724 for the gibe i reservoirs, we see that the release decisions generated with the det and spwr-d 725 726 author manuscript inflow scenario structures are similar to each other, except for the month of may 2005 (figure 14a)."
+26,we note here that the results correspond to the immediate stage of the stochastic 727 programming with recourse model.
+26,"therefore, the similarity between the det and spwr-d 728 release decisions may be because the immediate stage of the spwr-d model is deterministic, 729 and the value derived from bma of ensemble members is equal to the det inflow scenario 730 structure."
+26,"we see that the optimized release decisions are consistently higher in the spwr-s 731 case compared with either the det or spwr-d scenario structures, in the dry months."
+26,"however, 732 in the later months of the planning horizon the releases are lower."
+26,"in gibe iii, the spwr-s 733 scenario is consistently higher than the det or spwr-d scenarios for all months."
+26,"additionally, 734 for gibe 3, it is interesting to note that the uncertainty in the inflows represented in the spwr-s 735 scenarios only impacts the dry periods (february 2005 to may 2005)."
+26,"in the wet months, the 736 power releases reach the capacity of the power plants."
+26,"737 finally, we compare the optimized hydropower values with the actual power produced at the 738 gibe i reservoir for the months of february 2005 to september 2005."
+26,"due to unavailability of 739 historic hydropower production data, we do not present the same comparison for gibe iii 740 reservoir."
+26,the actual power produced in gibe i for the eight-month study period is 0.53 million 741 mwh.
+26,"in comparison, the optimized hydropower generated from the det, spwr-d, and 742 spwr-s scenario structures are 0.68 million mwh, 0.71 million mwh, and 0.76 million mwh 743 respectively (table 6)."
+26,the higher power produced in the spwr-s scenario structure may be 744 attributed to the consistently higher values of reservoir inflow compared with the det and 745 spwr-d scenarios.
+26,"we note that reservoir evaporation has been ignored in our study, which, 746 when included, may reduce the optimized hydropower values."
+26,"to avoid this bias, we compare 747 the power production results of the three reservoir inflow scenarios with a baseline scenario 748 generated with climatology (seasn)."
+26,the hydropower generated from the climatological inflow 749 forecasts in gibe i is approximately 0.54 million mwh.
+26,"in comparison, all the different scenarios 750 (det, spwr-d, and spwr-s) represent a significant improvement in terms of power 751 production."
+26,"in gibe iii, the power produced from det, spwr-d, spwr-s scenarios are 1.96, this article is protected by copyright."
+26,all rights reserved
+27,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+27,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 752 1.96, and 2.1 million mwh respectively."
+27,the power produced from the climatological inflow 753 forecast is approximately 1.84 million mwh (table 6).
+27,"754 insert figure 14 755 author manuscript visualization module for decision support system 756 our developed visualization module for the dissemination of real-time and automated climate 757 data is shown below in figure 15, which shows a screenshot of the current display and user 758 interface."
+27,the interactive nature of the vm is the power behind the dss.
+27,"the selection options 759 on the left-hand side of the map provide the following options: the choice to display satellite 760 products verses forecast precipitation estimates; the selection of a temporal averaging period (24- 761 hr, 5-day for satellite and 24-hr, 5-day, 1 month, 3 month for forecast estimates); a temperal period; 762 and the satellite product, forecast model or a merged/multi-model product."
+27,"once the data is 763 mapped different spatial scales for the catchments are available through the zoom-in functionality, 764 and a time series plot is displayed through the click functionality on a catchment."
+27,"finally, the data 765 from the time series is available as a download into a text file format."
+27,"766 insert figure 15 767 768 conclusions, limitations, and future work 769 in this study, we presented a novel decision support system (dss) to aid hydropower planning 770 from daily to seasonal timescales in africa, where significant increases in hydropower capacity is 771 hindered by lack of reliable data."
+27,"the dss demonstrates how the progress in earth observation 772 satellites, ensemble weather and climate forecasts, and distributed large scale hydrologic 773 modelling can be leveraged to create an implementable tool for helping water managers take 774 reliable decisions under deep uncertainty."
+27,the dss applied to a real hydropower system in east 775 africa resulted in significant improvements over both the current hydropower production (34%) 776 and a system optimized using climatological forecast (20%).
+27,the dss is flexible enough to provide 777 the decision makers with several different options ranging from different eos-based data products 778 and multiple hydrologic models (enabled by nasa’s land information system) to different 779 scenario structures to account different sources of uncertainty.
+27,"to the authors’ knowledge, this is this article is protected by copyright."
+27,all rights reserved
+28,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+28,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 780 the first demonstration of a dss for hydropower optimization at seasonal timescales using earth 781 observation satellites and dynamical forecasts.
+28,"782 during the course of the design of the dss, we have made sure that all the components which 783 784 author manuscript form the overall framework are not only open source but are proven in several hydrologic and water resources applications by different research communities over the recent decades."
+28,"this 785 includes the satellite-based remote sensing datasets, the hydrologic model and the optimization 786 system."
+28,"however, we acknowledge that there are several other alternative datasets are models 787 which could be equally suitable for producing accurate hydrologic forecasts and improved 788 hydropower in data-scarce regions."
+28,"for example, simpler frameworks which combine runoff from 789 downscaled global scale seasonal climate forecast systems such as seas5 (johnson et al., 2019) 790 with offline routing schemes such as the routing application for parallel computation of 791 discharge (rapid) (david et al., 2011) have shown promise (snow et al., 2016)."
+28,"global 792 hydrological forecast systems such as the global flood awareness system (glofas) (alfieri et 793 al., 2013) are also an plausible alternative."
+28,"a comprehensive dss intercomparison studies, like 794 the ones in the climate modeling community (eyring et al., 2016), would help water managers 795 decide the best structure of dss suitable for their specific applications."
+28,"796 as the structure of the dss is modular, it can form the basis for further improvements which can 797 overcome the limitations of the prototype framework presented here."
+28,"prior to the application of the 798 dss in an operational mode, it must be tested comprehensively in a data-rich study region, 799 although we note that issues of transferability will always remain."
+28,"we envisage a similar dss for 800 multi-purpose reservoirs that considers additional eos-observations for calibration of hydrologic 801 models including total water storage from the gravity recovery and climate experiment 802 (grace) satellites, soil moisture from the soil moisture active passive (smap) mission, and 803 even direct discharge measurements from the upcoming surface water and ocean topography 804 (swot) mission."
+28,805 806 acknowledgements this article is protected by copyright.
+28,all rights reserved
+29,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+29,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 807 we acknowledge funding support from the nasa applied sciences water resources application 808 grant # nnx15ac33g.
+29,all hydrologic model configuration files and post-process scripts are 809 available at https://github.com/akashkoppa/jawra-forecast.
+29,"810 811 author manuscript literature cited 812 alemu, e.t., r.n."
+29,"palmer, a."
+29,"polebitski, and b."
+29,"meaker, 2011."
+29,decision support system for 813 optimizing reservoir operations using ensemble streamflow predictions.
+29,journal of 814 water resources planning and management 137:72–82.
+29,"815 alfieri, l., p."
+29,"burek, e."
+29,"dutra, b."
+29,"krzeminski, d."
+29,"muraro, j."
+29,"thielen, and f."
+29,"pappenberger, 2013."
+29,816 glofas - global ensemble streamflow forecasting and flood early warning.
+29,hydrology 817 and earth system sciences 17:1161–1175.
+29,"818 ashouri, h., k.-l."
+29,"hsu, s."
+29,"sorooshian, d.k."
+29,"braithwaite, k.r."
+29,"knapp, l.d."
+29,"cecil, b.r."
+29,"nelson, 819 o.p."
+29,"prat, h."
+29,"ashouri, k.-l."
+29,"hsu, s."
+29,"sorooshian, d.k."
+29,"braithwaite, k.r."
+29,"knapp, l.d."
+29,"cecil, 820 b.r."
+29,"nelson, and o.p."
+29,"prat, 2015."
+29,persiann-cdr: daily precipitation climate data 821 record from multisatellite observations for hydrological and climate studies.
+29,bulletin of 822 the american meteorological society 96:69–83.
+29,"823 barros, m.t.l., f.t.-c."
+29,"tsai, s."
+29,"yang, j.e.g."
+29,"lopes, and w.w.-g."
+29,"yeh, 2003."
+29,optimization of 824 large-scale hydropower system operations.
+29,journal of water resources planning and 825 management 129:178–188.
+29,"826 benninga, h.-j.f., m.j."
+29,"booij, r.j."
+29,"romanowicz, and t.h.m."
+29,"rientjes, 2017."
+29,performance of 827 ensemble streamflow forecasts under varied hydrometeorological conditions.
+29,hydrology 828 and earth system sciences 21:5273–5291.
+29,"829 beven, k., 2006."
+29,"searching for the holy grail of scientific hydrology: qt=(s, r, δt)a as 830 closure."
+29,hydrology and earth system sciences 10:609–618.
+29,"831 beven, k.j. and m.j."
+29,"kirkby, 1979."
+29,"a physically based, variable contributing area model of 832 basin hydrology."
+29,hydrological sciences bulletin 24:43–69.
+29,"833 bitew, m.m., m."
+29,"gebremichael, l.t."
+29,"ghebremichael, and y.a."
+29,"bayissa, 2012."
+29,evaluation of this article is protected by copyright.
+29,all rights reserved
+30,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+30,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 834 high-resolution satellite rainfall products through streamflow simulation in a 835 hydrological modeling of a small mountainous watershed in ethiopia.
+30,journal of 836 hydrometeorology 13:338–350.
+30,"837 838 author manuscript borovikov, a., r."
+30,"cullather, r."
+30,"kovach, j."
+30,"marshak, g."
+30,"vernieres, y."
+30,"vikhliaev, b."
+30,"zhao, and z."
+30,"li, 2019."
+30,geos-5 seasonal forecast system.
+30,climate dynamics. doi:10.1007/s00382-017- 839 3835-2.
+30,"840 broman, d., b."
+30,"rajagopalan, t."
+30,"hopson, and m."
+30,"gebremichael, 2020."
+30,spatial and temporal 841 variability of east african kiremt season precipitation and large‐scale teleconnections.
+30,842 international journal of climatology 40:1241–1254.
+30,"843 budyko, m.i."
+30,"(mikhail i., 1974."
+30,climate and life.
+30,academic press. 844 https://books.google.co.in/books/about/climate_and_life.html?
+30,id=ln89y- 845 6kwzyc&redir_esc=y.
+30,accessed 14 oct 2019.
+30,"846 condon, l.e. and r.m."
+30,"maxwell, 2017."
+30,systematic shifts in budyko relationships caused by 847 groundwater storage changes.
+30,hydrology and earth system sciences 21:1117–1135.
+30,"848 conway, d., c."
+30,"dalin, w.a."
+30,"landman, and t.j."
+30,"osborn, 2017."
+30,hydropower plans in eastern and 849 southern africa increase risk of concurrent climate-related electricity supply disruption.
+30,850 nature energy 2:946–953.
+30,"851 cox, s.j., p.w."
+30,"stackhouse jr, s.k."
+30,"gupta, j.c."
+30,"mikovitz, t."
+30,"zhang, l.m."
+30,"hinkelman, m."
+30,"wild, 852 and a."
+30,"ohmura, 2006."
+30,the nasa/gewex surface radiation budget project: overview 853 and analysis.
+30,"extended abstracts, 12th conf. on atmospheric radiation."
+30,"854 crow, w.t. and d."
+30,"ryu, 2009."
+30,a new data assimilation approach for improving runoff 855 prediction using remotely-sensed soil moisture retrievals.
+30,hydrology and earth system 856 sciences 13:1–16.
+30,"857 cuntz, m., j."
+30,"mai, l."
+30,"samaniego, m."
+30,"clark, v."
+30,"wulfmeyer, o."
+30,"branch, s."
+30,"attinger, and s."
+30,"858 thober, 2016."
+30,the impact of standard and hard-coded parameters on the hydrologic 859 fluxes in the noah-mp land surface model.
+30,journal of geophysical research. 860 doi:10.1002/2016jd025097.
+30,"861 cuo, l., t.c."
+30,"pagano, and q.j."
+30,"wang, 2011."
+30,a review of quantitative precipitation forecasts this article is protected by copyright.
+30,all rights reserved
+31,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+31,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 862 and their use in short- to medium-range streamflow forecasting.
+31,journal of 863 hydrometeorology 12:713–728.
+31,"864 david, c.h., d.r."
+31,"maidment, g.y."
+31,"niu, z.l."
+31,"yang, f."
+31,"habets, and v."
+31,"eijkhout, 2011."
+31,river 865 866 author manuscript network routing on the nhdplus dataset.
+31,journal of hydrometeorology. doi:10.1175/2011jhm1345.1.
+31,"867 didan, k., 2015."
+31,mod13c1 modis/terra vegetation indices 16-day l3 global 0.05deg cmg 868 v006.
+31,eosdis land processes daac.
+31,"869 donohue, r.g., c.m."
+31,"sack, and r.e."
+31,"roth, 2013."
+31,time series proportional symbol map with 870 leafet and jquery.
+31,cartographic perspectives. doi:10.14714/cp76.1248.
+31,"871 etkin, d., p."
+31,"kirshen, d."
+31,"watkins, c."
+31,"roncoli, m."
+31,"sanon, l."
+31,"some, y."
+31,"dembele, j."
+31,"sanfo, j."
+31,"872 zoungrana, and g."
+31,"hoogenboom, 2015."
+31,"stochastic programming for improved multiuse 873 reservoir operation in burkina faso, west africa."
+31,journal of water resources planning 874 and management 141:04014056.
+31,"875 eyring, v., s."
+31,"bony, g.a."
+31,"meehl, c.a."
+31,"senior, b."
+31,"stevens, r.j."
+31,"stouffer, and k.e."
+31,"taylor, 2016."
+31,876 overview of the coupled model intercomparison project phase 6 (cmip6) experimental 877 design and organization.
+31,geoscientific model development. doi:10.5194/gmd-9-1937- 878 2016.
+31,"879 fick, s.e. and r.j."
+31,"hijmans, 2017."
+31,worldclim 2: new 1-km spatial resolution climate 880 surfaces for global land areas.
+31,international journal of climatology 37:4302–4315.
+31,"881 fletcher, s., m."
+31,"lickley, and k."
+31,"strzepek, 2019."
+31,learning about climate change uncertainty 882 enables flexible water infrastructure planning.
+31,nature communications 10:1–11.
+31,"883 fuh, b., 1981."
+31,on the calculation of the evaporation from land surface.
+31,scientia atmospherica 884 sinica 5:23–31.
+31,"885 funk, c., s.e."
+31,"nicholson, m."
+31,"landsfeld, d."
+31,"klotter, p."
+31,"peterson, and l."
+31,"harrison, 2015."
+31,the 886 centennial trends greater horn of africa precipitation dataset.
+31,scientific data. 887 doi:10.1038/sdata.2015.50.
+31,"888 funk, c., p."
+31,"peterson, m."
+31,"landsfeld, d."
+31,"pedreros, j."
+31,"verdin, s."
+31,"shukla, g."
+31,"husak, j."
+31,"rowland, l."
+31,this article is protected by copyright.
+31,all rights reserved
+32,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+32,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 889 harrison, a."
+32,"hoell, and j."
+32,"michaelsen, 2015."
+32,the climate hazards infrared precipitation 890 with stations—a new environmental record for monitoring extremes.
+32,scientific data 891 2:150066.
+32,"892 893 author manuscript greve, p., p."
+32,"burek, and y."
+32,"wada, 2020."
+32,using the budyko framework for calibrating a global hydrological model.
+32,water resources research 56. doi:10.1029/2019wr026280.
+32,"894 greve, p., b."
+32,"orlowsky, b."
+32,"mueller, j."
+32,"sheffield, m."
+32,"reichstein, and s.i."
+32,"seneviratne, 2014."
+32,895 global assessment of trends in wetting and drying over land.
+32,nature geoscience 7:716– 896 721.
+32,"897 griggs, d., m."
+32,"stafford-smith, o."
+32,"gaffney, j."
+32,"rockström, m.c."
+32,"öhman, p."
+32,"shyamsundar, w."
+32,"898 steffen, g."
+32,"glaser, n."
+32,"kanie, and i."
+32,"noble, 2013."
+32,policy: sustainable development goals 899 for people and planet.
+32,nature 495:305–307.
+32,"900 hoeting, j.a., d."
+32,"madigan, a.e."
+32,"raftery, and c.t."
+32,"volinsky, 1999."
+32,bayesian model averaging: 901 a tutorial.
+32,statistical science. doi:10.1214/ss/1009212519.
+32,"902 hong, y., d."
+32,"gochis, j."
+32,"cheng, k."
+32,"hsu, s."
+32,"sorooshian, y."
+32,"hong, d."
+32,"gochis, j."
+32,"cheng, k."
+32,"hsu, 903 and s."
+32,"sorooshian, 2007."
+32,evaluation of persiann-ccs rainfall measurement using the 904 name event rain gauge network.
+32,journal of hydrometeorology 8:469–482.
+32,"905 hopson, t.m., 2014."
+32,assessing the ensemble spread-error relationship.
+32,monthly weather 906 review 142:1125–1142.
+32,"907 hopson, t.m. and p.j."
+32,"webster, 2010."
+32,a 1-10-day ensemble forecasting scheme for the major 908 river basins of bangladesh: forecasting severe floods of 2003-07.
+32,journal of 909 hydrometeorology 11:618–641.
+32,"910 huffman, g.j., d.t."
+32,"bolvin, e.j."
+32,"nelkin, d.b."
+32,"wolff, r.f."
+32,"adler, g."
+32,"gu, y."
+32,"hong, k.p."
+32,"911 bowman, e.f."
+32,"stocker, g.j."
+32,"huffman, d.t."
+32,"bolvin, e.j."
+32,"nelkin, d.b."
+32,"wolff, r.f."
+32,"adler, g."
+32,"912 gu, y."
+32,"hong, k.p."
+32,"bowman, and e.f."
+32,"stocker, 2007."
+32,"the trmm multisatellite 913 precipitation analysis (tmpa): quasi-global, multiyear, combined-sensor precipitation 914 estimates at fine scales."
+32,journal of hydrometeorology 8:38–55.
+32,"915 immerzeel, w.w. and p."
+32,"droogers, 2008."
+32,calibration of a distributed hydrological model based 916 on satellite evapotranspiration.
+32,journal of hydrology. doi:10.1016/j.jhydrol.2007.11.017.
+32,this article is protected by copyright.
+32,all rights reserved
+33,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+33,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 917 jiang, c. and y."
+33,"ryu, 2016."
+33,multi-scale evaluation of global gross primary productivity and 918 evapotranspiration products derived from breathing earth system simulator (bess).
+33,919 remote sensing of environment 186:528–547.
+33,"920 921 author manuscript johnson, s.j., t.n."
+33,"stockdale, l."
+33,"ferranti, m.a."
+33,"balmaseda, f."
+33,"molteni, l."
+33,"magnusson, s."
+33,"tietsche, d."
+33,"decremer, a."
+33,"weisheimer, g."
+33,"balsamo, s.p.e."
+33,"keeley, k."
+33,"mogensen, h."
+33,"zuo, 922 and b.m."
+33,"monge-sanz, 2019."
+33,seas5: the new ecmwf seasonal forecast system.
+33,923 geoscientific model development. doi:10.5194/gmd-12-1087-2019.
+33,"924 joyce, r.j., j.e."
+33,"janowiak, p.a."
+33,"arkin, p."
+33,"xie, r.j."
+33,"joyce, j.e."
+33,"janowiak, p.a."
+33,"arkin, and p."
+33,"xie, 925 2004."
+33,cmorph: a method that produces global precipitation estimates from passive 926 microwave and infrared data at high spatial and temporal resolution.
+33,journal of 927 hydrometeorology 5:487–503.
+33,"928 kirtman, b.p., d."
+33,"min, j.m."
+33,"infanti, j.l."
+33,"kinter, d.a."
+33,"paolino, q."
+33,"zhang, h."
+33,"van den dool, s."
+33,"929 saha, m.p."
+33,"mendez, e."
+33,"becker, p."
+33,"peng, p."
+33,"tripp, j."
+33,"huang, d.g."
+33,"dewitt, m.k."
+33,"tippett, 930 a.g."
+33,"barnston, s."
+33,"li, a."
+33,"rosati, s.d."
+33,"schubert, m."
+33,"rienecker, m."
+33,"suarez, z.e."
+33,"li, j."
+33,"931 marshak, y.k."
+33,"lim, j."
+33,"tribbia, k."
+33,"pegion, w.j."
+33,"merryfield, b."
+33,"denis, and e.f."
+33,"wood, 2014."
+33,932 the north american multimodel ensemble: phase-1 seasonal-to-interannual prediction; 933 phase-2 toward developing intraseasonal prediction.
+33,bulletin of the american 934 meteorological society. doi:10.1175/bams-d-12-00050.1.
+33,"935 knievel, j.c., y."
+33,"liu, t.m."
+33,"hopson, j.s."
+33,"shaw, s.f."
+33,"halvorson, h.h."
+33,"fisher, g."
+33,"roux, r.s."
+33,"sheu, 936 l."
+33,"pan, w."
+33,"wu, j.p."
+33,"hacker, e."
+33,"vernon, f.w."
+33,"gallagher, and j.c."
+33,"pace, 2017."
+33,mesoscale 937 ensemble weather prediction at u.s.
+33,"army dugway proving ground, utah."
+33,weather and 938 forecasting 32:2195–2216.
+33,"939 koenker, r. and g."
+33,"bassett, 1978a."
+33,regression quantiles.
+33,econometrica. doi:10.2307/1913643.
+33,"940 koenker, r. and g."
+33,"bassett, 1978b."
+33,regression quantiles.
+33,econometrica 46:33.
+33,"941 koppa, a. and m."
+33,"gebremichael, 2017."
+33,a framework for validation of remotely sensed 942 precipitation and evapotranspiration based on the budyko hypothesis.
+33,water resources 943 research 53. doi:10.1002/2017wr020593.
+33,"944 koppa, a. and m."
+33,"gebremichael, 2020."
+33,improving the applicability of hydrologic models for this article is protected by copyright.
+33,all rights reserved
+34,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+34,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 945 food–energy–water nexus studies using remote sensing data.
+34,remote sensing 12:599.
+34,"946 koppa, a., m."
+34,"gebremichael, and w.w.g."
+34,"yeh, 2019."
+34,multivariate calibration of large scale 947 hydrologic models: the necessity and value of a pareto optimal approach.
+34,advances in 948 949 author manuscript water resources 130:129–146.
+34,"koppa, a., m."
+34,"gebremichael, r.c."
+34,"zambon, w.w."
+34,"yeh, and t.m."
+34,"hopson, 2019."
+34,"seasonal 950 hydropower planning for data‐scarce regions using multimodel ensemble forecasts, 951 remote sensing data, and stochastic programming."
+34,water resources research. 952 doi:10.1029/2019wr025228.
+34,"953 kumar, s."
+34,"v., c.d."
+34,"peters-lidard, y."
+34,"tian, p.r."
+34,"houser, j."
+34,"geiger, s."
+34,"olden, l."
+34,"lighty, j.l."
+34,"954 eastman, b."
+34,"doty, p."
+34,"dirmeyer, j."
+34,"adams, k."
+34,"mitchell, e.f."
+34,"wood, and j."
+34,"sheffield, 2006."
+34,955 land information system: an interoperable framework for high resolution land surface 956 modeling.
+34,environmental modelling and software. doi:10.1016/j.envsoft.2005.07.004.
+34,"957 leaflet, 2016."
+34,leaflet - a javascript library for interactive maps.
+34,leaflet.com.
+34,"958 lettenmaier, d.p., d."
+34,"alsdorf, j."
+34,"dozier, g.j."
+34,"huffman, m."
+34,"pan, and e.f."
+34,"wood, 2015."
+34,inroads of 959 remote sensing into hydrologic science during the wrr era.
+34,water resources research 960 51:7309–7342.
+34,"961 li, w., q."
+34,"duan, c."
+34,"miao, a."
+34,"ye, w."
+34,"gong, and z."
+34,"di, 2017."
+34,a review on statistical 962 postprocessing methods for hydrometeorological ensemble forecasting.
+34,wiley 963 interdisciplinary reviews: water 4:e1246.
+34,"964 li, d., m."
+34,"pan, z."
+34,"cong, l."
+34,"zhang, and e."
+34,"wood, 2013."
+34,vegetation control on water and energy 965 balance within the budyko framework.
+34,water resources research 49:969–976.
+34,"966 lópez, p.l., e.h."
+34,"sutanudjaja, j."
+34,"schellekens, g."
+34,"sterk, and m.f.p."
+34,"bierkens, 2017."
+34,calibration 967 of a large-scale hydrological model using satellite-based soil moisture and 968 evapotranspiration products.
+34,hydrology and earth system sciences. doi:10.5194/hess-21- 969 3125-2017.
+34,"970 martens, b., d.g."
+34,"miralles, h."
+34,"lievens, r."
+34,"van der schalie, r.a.m."
+34,"de jeu, d."
+34,"fernández- 971 prieto, h.e."
+34,"beck, w.a."
+34,"dorigo, and n.e.c."
+34,"verhoest, 2017."
+34,gleam v3: satellite-based 972 land evaporation and root-zone soil moisture.
+34,geoscientific model development.
+34,this article is protected by copyright.
+34,all rights reserved
+35,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+35,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 973 doi:10.5194/gmd-10-1903-2017.
+35,"974 mazrooei, a. and a."
+35,"sankarasubramanian, 2019."
+35,improving monthly streamflow forecasts 975 through assimilation of observed streamflow for rainfall-dominated basins across the 976 977 author manuscript conus.
+35,journal of hydrology 575:704–715.
+35,"merryfield, w.j., w.s."
+35,"lee, g.j."
+35,"boer, v."
+35,"kharin, j.f."
+35,"scinocca, g.m."
+35,"flato, r.s."
+35,"978 ajayamohan, j.c."
+35,"fyfe, y."
+35,"tang, and s."
+35,"polavarapu, 2013."
+35,the canadian seasonal to 979 interannual prediction system.
+35,part i: models and initialization.
+35,monthly weather review. 980 doi:10.1175/mwr-d-12-00216.1.
+35,"981 mianabadi, a., k."
+35,"davary, m."
+35,"pourreza-bilondi, and a.m.j."
+35,"coenders-gerrits, 2020."
+35,budyko 982 framework; towards non-steady state conditions.
+35,journal of hydrology. 983 doi:10.1016/j.jhydrol.2020.125089.
+35,"984 mu, q., m."
+35,"zhao, and s.w."
+35,"running, 2011."
+35,improvements to a modis global terrestrial 985 evapotranspiration algorithm.
+35,remote sensing of environment 115:1781–1800.
+35,"986 ning, t., z."
+35,"li, q."
+35,"feng, w."
+35,"liu, and z."
+35,"li, 2018."
+35,comparison of the effectiveness of four 987 budyko-based methods in attributing long-term changes in actual evapotranspiration.
+35,988 scientific reports. doi:10.1038/s41598-018-31036-x.
+35,"989 niu, g.y., z.l."
+35,"yang, k.e."
+35,"mitchell, f."
+35,"chen, m.b."
+35,"ek, m."
+35,"barlage, a."
+35,"kumar, k."
+35,"manning, d."
+35,"990 niyogi, e."
+35,"rosero, m."
+35,"tewari, and y."
+35,"xia, 2011."
+35,the community noah land surface 991 model with multiparameterization options (noah-mp): 1.
+35,model description and 992 evaluation with local-scale measurements.
+35,journal of geophysical research atmospheres. 993 doi:10.1029/2010jd015139.
+35,"994 raftery, a.e., t."
+35,"gneiting, f."
+35,"balabdaoui, and m."
+35,"polakowski, 2005."
+35,using bayesian model 995 averaging to calibrate forecast ensembles.
+35,monthly weather review. 996 doi:10.1175/mwr2906.1.
+35,"997 rakovec, o., r."
+35,"kumar, s."
+35,"attinger, and l."
+35,"samaniego, 2016."
+35,improving the realism of 998 hydrologic model functioning through multivariate parameter estimation.
+35,water 999 resources research 52:7779–7792.
+35,"1000 sachs, j.d., 2012."
+35,from millennium development goals to sustainable development goals.
+35,the this article is protected by copyright.
+35,all rights reserved
+36,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+36,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1001 lancet 379:2206–2211.
+36,"1002 séguin, s., c."
+36,"audet, and p."
+36,"côté, 2017."
+36,scenario-tree modeling for stochastic short-term 1003 hydropower operations planning.
+36,journal of water resources planning and management 1004 1005 author manuscript 143:04017073.
+36,"senay, g.b., m.e."
+36,"budde, and j.p."
+36,"verdin, 2011."
+36,enhancing the simplified surface energy 1006 balance (sseb) approach for estimating landscape et: validation with the metric 1007 model.
+36,agricultural water management 98:606–618.
+36,"1008 sheffield, j., e.f."
+36,"wood, m."
+36,"pan, h."
+36,"beck, g."
+36,"coccia, a."
+36,"serrat-capdevila, and k."
+36,"verbist, 2018."
+36,1009 satellite remote sensing for water resources management: potential for supporting 1010 sustainable development in data-poor regions.
+36,water resources research 54:9724–9758.
+36,"1011 sloughter, j.m.l., a.e."
+36,"raftery, t."
+36,"gneiting, and c."
+36,"fraley, 2007."
+36,probabilistic quantitative 1012 precipitation forecasting using bayesian model averaging.
+36,monthly weather review. 1013 doi:10.1175/mwr3441.1.
+36,"1014 snow, a.d., s.d."
+36,"christensen, n.r."
+36,"swain, e.j."
+36,"nelson, d.p."
+36,"ames, n.l."
+36,"jones, d."
+36,"ding, n.s."
+36,"1015 noman, c.h."
+36,"david, f."
+36,"pappenberger, and e."
+36,"zsoter, 2016."
+36,a high-resolution national- 1016 scale hydrologic forecast system from a global ensemble land surface model.
+36,journal of 1017 the american water resources association. doi:10.1111/1752-1688.12434.
+36,"1018 sorooshian, s., k.-l."
+36,"hsu, x."
+36,"gao, h."
+36,"gupta, b."
+36,"imam, d."
+36,"braithwaite, s."
+36,"sorooshian, k.-l."
+36,"1019 hsu, x."
+36,"gao, h."
+36,"gupta, b."
+36,"imam, and d."
+36,"braithwaite, 2000."
+36,evaluation of persiann 1020 system satellite–based estimates of tropical rainfall.
+36,bulletin of the american 1021 meteorological society 81:2035–2046.
+36,"1022 sridharan, v., o."
+36,"broad, a."
+36,"shivakumar, m."
+36,"howells, b."
+36,"boehlert, d.g."
+36,"groves, h.h."
+36,"rogner, 1023 c."
+36,"taliotis, j.e."
+36,"neumann, k.m."
+36,"strzepek, r."
+36,"lempert, b."
+36,"joyce, a."
+36,"huber-lee, and r."
+36,"1024 cervigni, 2019."
+36,resilience of the eastern african electricity sector to climate driven 1025 changes in hydropower generation.
+36,nature communications 10:1–9.
+36,"1026 taylor, k.e., 2001."
+36,summarizing multiple aspects of model performance in a single diagram.
+36,1027 journal of geophysical research atmospheres. doi:10.1029/2000jd900719.
+36,"1028 tramontana, g., m."
+36,"jung, c.r."
+36,"schwalm, k."
+36,"ichii, g."
+36,"camps-valls, b."
+36,"ráduly, m."
+36,"reichstein, this article is protected by copyright."
+36,all rights reserved
+37,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+37,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1029 m.a.
+37,"arain, a."
+37,"cescatti, g."
+37,"kiely, l."
+37,"merbold, p."
+37,"serrano-ortiz, s."
+37,"sickert, s."
+37,"wolf, and d."
+37,"1030 papale, 2016."
+37,predicting carbon dioxide and energy fluxes across global fluxnet sites 1031 with regression algorithms.
+37,biogeosciences 13:4291–4313.
+37,"1032 1033 author manuscript unger, d.a., h. van den dool, e."
+37,"o’lenic, and d."
+37,"collins, 2009."
+37,ensemble regression.
+37,monthly weather review. doi:10.1175/2008mwr2605.1.
+37,"1034 vrugt, j.a., c.j.f. ter braak, m.p."
+37,"clark, j.m."
+37,"hyman, and b.a."
+37,"robinson, 2008."
+37,treatment of 1035 input uncertainty in hydrologic modeling: doing hydrology backward with markov 1036 chain monte carlo simulation.
+37,water resources research. doi:10.1029/2007wr006720.
+37,"1037 vrugt, j.a., c.j.f."
+37,"ter braak, c.g.h."
+37,"diks, b.a."
+37,"robinson, j.m."
+37,"hyman, and d."
+37,"higdon, 2009."
+37,1038 accelerating markov chain monte carlo simulation by differential evolution with self- 1039 adaptive randomized subspace sampling.
+37,international journal of nonlinear sciences and 1040 numerical simulation. doi:10.1515/ijnsns.2009.10.3.273.
+37,"1041 wang, f., l."
+37,"wang, h."
+37,"zhou, o.c."
+37,"saavedra valeriano, t."
+37,"koike, and w."
+37,"li, 2012."
+37,ensemble 1042 hydrological prediction-based real-time optimization of a multiobjective reservoir 1043 during flood season in a semiarid basin with global numerical weather predictions.
+37,1044 water resources research 48. doi:10.1029/2011wr011366.
+37,"1045 westphal, k.s., r.m."
+37,"vogel, p."
+37,"kirshen, and s.c."
+37,"chapra, 2003."
+37,decision support system for 1046 adaptive water supply management.
+37,journal of water resources planning and 1047 management 129:165–177.
+37,"1048 wielicki, b.a., b.r."
+37,"barkstrom, e.f."
+37,"harrison, r.b."
+37,"lee, g."
+37,"louis smith, j.e."
+37,"cooper, b.a."
+37,"1049 wielicki, b.r."
+37,"barkstrom, e.f."
+37,"harrison, r.b.l."
+37,"iii, g.l."
+37,"smith, and j.e."
+37,"cooper, 1996."
+37,1050 clouds and the earth’s radiant energy system (ceres): an earth observing system 1051 experiment.
+37,bulletin of the american meteorological society 77:853–868.
+37,"1052 xu, x., w."
+37,"liu, b.r."
+37,"scanlon, l."
+37,"zhang, and m."
+37,"pan, 2013."
+37,local and global factors 1053 controlling water-energy balances within the budyko framework.
+37,geophysical research 1054 letters 40:6123–6129.
+37,"1055 yamazaki, d., d."
+37,"ikeshima, r."
+37,"tawatari, t."
+37,"yamaguchi, f."
+37,"o’loughlin, j.c."
+37,"neal, c.c."
+37,"1056 sampson, s."
+37,"kanae, and p.d."
+37,"bates, 2017."
+37,a high-accuracy map of global terrain this article is protected by copyright.
+37,all rights reserved
+38,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+38,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1057 elevations.
+38,geophysical research letters 44:5844–5853.
+38,"1058 yeh, w.w.-g., 1985."
+38,reservoir management and operations models: a state-of-the-art 1059 review.
+38,water resources research 21:1797–1818.
+38,"1060 1061 author manuscript zhang, k., j.s."
+38,"kimball, r.r."
+38,"nemani, and s.w."
+38,"running, 2010."
+38,a continuous satellite-derived global record of land surface evapotranspiration from 1983 to 2006.
+38,water resources 1062 research 46. doi:10.1029/2009wr008800.
+38,"1063 zhang, y., j.l."
+38,"peña-arancibia, t.r."
+38,"mcvicar, f.h.s."
+38,"chiew, j."
+38,"vaze, c."
+38,"liu, x."
+38,"lu, h."
+38,"zheng, 1064 y."
+38,"wang, y.y."
+38,"liu, d.g."
+38,"miralles, and m."
+38,"pan, 2016."
+38,multi-decadal trends in global 1065 terrestrial evapotranspiration and its components.
+38,scientific reports 6:19124.
+38,"1066 zhou, g., x."
+38,"wei, x."
+38,"chen, p."
+38,"zhou, x."
+38,"liu, y."
+38,"xiao, g."
+38,"sun, d.f."
+38,"scott, s."
+38,"zhou, l."
+38,"han, and 1067 y."
+38,"su, 2015."
+38,global pattern for the effect of climate and land cover on water yield.
+38,1068 nature communications. doi:10.1038/ncomms6918.
+38,"1069 zink, m., j."
+38,"mai, m."
+38,"cuntz, and l."
+38,"samaniego, 2018."
+38,conditioning a hydrologic model using 1070 patterns of remotely sensed land surface temperature.
+38,water resources research. 1071 doi:10.1002/2017wr021346.
+38,1072 1073 1074 1075 1076 1077 1078 1079 1080 1081 list of tables this article is protected by copyright.
+38,all rights reserved
+39,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+39,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1082 table 1.
+39,"list of satellite-based precipitation, terrestrial evaporation, and net radiation datasets 1083 implement in the decision support system."
+39,"data source spatial temporal spatial reference author manuscript resolution (degree) resolution (years) coverage (degree) precipitation chirpsv2.0 0.05 1981–2019 50n-50s (funk, peterson, et al., 2015) cmorphv0.x.raw 0.25 2002–2017 60n-60s (joyce et al., 2004) persiann 0.25 2000–2019 60n-60s (sorooshian et al., 2000) persiann.ccs 0.04 2003–2019 60n-60s (hong et al., 2007) persiann.cdr 0.25 1983–2016 60n-60s (ashouri et al., 2015) trmm.3b42rt 0.25 2000–2019 50n-50s (huffman et al., 2007) trmm.3b43 0.25 2000–2019 50n-50s (huffman et al., 2007) terrestrial evaporation avhrr.ntsg 0.08 1983–2013 global (zhang et al., 2010) ssebopv4.0 0.01 2003–2019 global (senay et al., 2011) mod16a3 0.05 2000–2014 global (mu et al., 2011) gleamv3.3a 0.25 1980–2018 global (martens et al., 2017) csiro-pmlv2.0 0.5 1981–2012 global (zhang et al., 2016) bess 0.5 2000–2015 global (jiang and ryu, 2016) fluxcom.rs 0.5 2001–2015 global (tramontana et al., 2016) net radiation this article is protected by copyright."
+39,all rights reserved
+40,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+40,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license ceresv4.0 1.0 2000–2018 global (wielicki et al., 1996) precipitation forecasts china meteorological 0.5 2006- global - administration (cma) center author manuscript for weather 0.94 present 2006- global - forecast and climate present studies, brazil (cptec) european center for 0.75 2006- global - medium range weather present forecast (ecmwf) meteofrance 0.3 2006- global - present ukmet 0.2 2006- global - present japanese meteorological 1.25 2006- global - agency (jma) present national centers for 1.0 2006- global - environmental prediction present 1084 1085 1086 1087 1088 table 2."
+40,details of the five hydropower reservoirs in the omo-gibe river basin reservoir name start of operation hydropower capacity maximum storage gilgel gibe i 2004 210 mw 840 mm3 gilgel gibe ii 2010 420 mw 0.15 mm3 (run-of-river) gilgel gibe iii 2015 1870 mw 13700 mm3 this article is protected by copyright.
+40,all rights reserved
+41,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+41,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license koysha dam planned 2160 mw - halele wera 2014 424 mw - 1089 1090 author manuscript 1091 1092 1093 table 3.
+41,"noah-mp model physics options model physics selected physics option vegetation model use table leaf area index (4) canopy stomatal resistance ball-berry (1) [ball et al., 1987] soil moisture factor for stomatal resistance original noah (1) [chen et al., 1997] topmodel with groundwater (1) [niu et al., runoﬀ and groundwater 2007] surface layer drag coeﬃcient original noah (2) [chen et al., 1997] linear eﬀects, more permeable (1) [niu and yang, frozen soil permeability 2006] radiation transfer modified two-stream (1) [yang and friedl, 2003] snow surface albedo class (2) [verseghy et al., 1991] rainfall and snowfall partitioning jordan scheme(1) [jordan, 1991] lower boundary of soil temperature original noah (2) [chen et al., 1997] snow and soil temperature time scheme semi-implicit (1) this article is protected by copyright."
+41,all rights reserved
+42,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+42,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license super-cooled liquid water no iteration [niu and yang, 2006] (1) 1094 a the number in the brackets represents the internal noah-mp model code for the selected 1095 physics option 1096 author manuscript 1097 table 4."
+42,"details of noah-mp parameters used for calibration description sensitive total parameter variable parametersunits minimum maximum surface runoff sf refdk parameter 1 m/s 1.4e-06 6.5e-06 surface runoff sf refkdt parameter 1 no units 1.0 5.0 exponent in the sf, et brooks corey bb1 - bb12 equation 12 no units 0.5 12.0 maxsmc1 - soil porosity sf, et maxsmc12 12 no units 0.1 0.7 saturated sf, et hydraulic satdk1 - satdk12 conductivity 12 m/s 2.0e-06 7.0e-02 1098 a soil texture classes for bb, maxsmc and satdk (from 1 - 12): sand, loamy 1099 sand, sandy loam, silt loam, silt, loam, sandy clay loam, silt clay loam, clay loam, sandy clay, 1100 silty clay and clay."
+42,1101 1102 table 5.
+42,mt-dream (zs) and amalgam configuration this article is protected by copyright.
+42,all rights reserved
+43,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+43,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license dream option specified option number of generations 600 number of markov chains 3 author manuscript number of forward model parameters 38 number of crossover values 3 number of multi-tries 4 number of chain pairs proposal 1 prior distribution uniform likelihood function laplacian likelihood 1103 a note: all other mt-dream (zs) parameters are set to default values 1104 1105 1106 table 6.
+43,comparison of actual and optimized power production for the planning horizon (feb 1107 2005 to sep 2005) scenario gibe i gibe iii power produced (million mwh) power produced (million mwh) actual 0.53 - det 0.68 1.96 spwr-d 0.71 1.96 spwr-s 0.76 2.10 seasn 0.54 1.84 1108 1109 1110 1111 this article is protected by copyright.
+43,all rights reserved
+44,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+44,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1112 1113 1114 1115 author manuscript 1116 1117 1118 figure captions 1119 figure 1.
+44,block diagram of the hydropower decision support system (dss).
+44,1120 figure 2.
+44,location schematic of the qr post-processing procedure.
+44,1121 figure 3.
+44,processing steps for the rainfall displays of our interactive visualization module.
+44,1122 figure 4.
+44,"location map of the omo-gibe river basin in ethiopia, and its watershed map showing 1123 locations of the five hydropower reservoirs."
+44,red dots represent the dams modelled in this study.
+44,1124 the green line represents a tunnel which connects gibe i and gibe ii reservoirs.
+44,1125 figure 5.
+44,"heat map of the root mean square error (rmse) of the combination of precipitation (p), 1126 on the x-axis, and terrestrial evaporation (et) datasets, on the y-axis, for the omo-gibe river basin."
+44,"1127 the values are scaled between 0 and 1, with 0 representing the least performing combination and 1128 1 representing the best performing combination."
+44,the red star represents the best combination of p 1129 and et dataset for the omo-gibe river basin.
+44,1130 figure 6.
+44,heat composites of june–september average precipitation anomalies corresponding to 1131 each phase of the mjo.
+44,periods with no mjo activity are not shown.
+44,1132 figure 7.
+44,"composites of june-september standardized precipitation anomaly over ethiopia 1133 during the el nino phase of enso, with significant values shown with stippling, such as the 1134 north-northwest region of the country."
+44,"broken down by month (not shown), the july-august 1135 (rainfall peak season) and september (late season) show similar results, but there is no coherent 1136 pattern during june (early season)."
+44,this article is protected by copyright.
+44,all rights reserved
+45,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+45,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1137 figure 8.
+45,visualization module rainfall estimates and forecasts are provided at two different basin- 1138 averaged spatial-scales over east africa as provided by the eros data center hydro 1k dataset 1139 (top two panels).
+45,"over ethiopia, the lowest resolution basin-averaged rainfall was provided basin- 1140 averaged over the 13 major river catchments of ethiopia (lower right), with a special high 1141 1142 author manuscript resolution provided in the omo gibe for upstream catchments areas above the major reservoirs and measurement sites (lower left)."
+45,1143 figure 9.
+45,"taylor diagrams of precipitation (p) forecasts from the cancm3, cancm4, geos-5, 1144 ensemble bayesian model average (bma), and ensemble mean models derived for different lead 1145 times (1-4 months) and for the calibration (12 months of 2004) and validation (12 months of 2005) 1146 time periods."
+45,"the cancm3, cancm4, and geos-5 values are calculated as the mean of the 10 1147 ensemble members from each of the models."
+45,“ensemble bma” and “ensemble mean” are the 1148 simple mean and the bma of all the 30 ensemble members across all the three models.
+45,1149 figure 10.
+45,calibrated forecast of blue nile summertime precipitation using a weighted average 1150 of enso plus the 8 nmme models.
+45,june 1st forecast of june – september rainfall.
+45,the year 1151 being forecast is left out when calculating forecast weights and regression coefficients.
+45,"red – 1152 centrends precipitation data, blue – optimized ensemble forecast for mean rainfall (r=0.59, 1153 p<0.001), blue shading – 80% confidence interval of the forecast."
+45,1154 figure 11.
+45,"brier skill scores for ncep cfsv2 nwp 5-day accumulated rainfall forecasts over 1155 the omo-gibe river basin (black line) as a function of lead-time (days), and a combined quantile 1156 regression model utilizing mjo phase and anomaly information along with cfsv2 (green line), 1157 showing the appreciable improvement in forecasting skill that comes with the inclusion of the 1158 mjo at all lead-times."
+45,1159 figure 12.
+45,"brier skill score for precipitation exceeding the catchment-specific 90th percentile of 1160 rain after bias correction, showing how the multi-model forecast is equal to or out-performs any 1161 individual model for all of the 12 primary ethiopian river basins shown."
+45,the lower right plot 1162 displays the precipitation amount corresponding to the catchment-specific 90th percentile. +24 hr 1163 ensemble forecasts were used to create these plots.
+45,1164 figure 13. a) time series comparison of terrestrial evaporation (et) from et-calibrated noah- 1165 mp model (green) and eos-based et estimates (black) from ssebopv4.0 for the calibration (12 this article is protected by copyright.
+45,all rights reserved
+46,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+46,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license 1166 months of 2004) and validation (12 months of 2005) time periods.
+46,the 5% and 95% quantiles are 1167 from the behavioral solutions of bayesian calibration.
+46,"the vertical demarcates the calibration and 1168 validation time periods. b) reservoir inflow forecasts into gibe i and gibe iii reservoirs for the 8- 1169 month planning horizon (february-september 2005) and three scenarios: deterministic (det), 1170 1171 author manuscript climatological reservoir inflow (seasn), and stochastic (spwr-s represented by the box plots)."
+46,note: the results in (b) correspond to the first stage of each iteration of the deterministic and 1172 stochastic programming with recourse model.
+46,"1173 figure 14. a) optimal release decisions and b) power produced in the gibe i and gibe iii reservoirs 1174 for the 8-month planning horizon (february-september 2005) and four scenario structures: det, 1175 spwr-d, spwr-s and seasn (climatological reservoir inflows)."
+46,note: the results correspond 1176 to the first stage of each iteration of the deterministic and stochastic programming with recourse 1177 model.
+46,1178 figure 15.
+46,gui for the dissemination of catchment precipitation data to stake holders.
+46,"forecasts 1179 are available from the nmme seasonal models (monthly and 3-month averages), as well as from 1180 the tigge models (1-day and 5-day averages) going out 2 weeks."
+46,recent satellite observations 1181 are also available at the same time scales.
+46,"precipitation data are displayed at two different 1182 resolutions which can be accessed by zooming in and out and for both a large east africa domain, 1183 as well as a more focused ethiopia domain that includes the blue nile and omo-gibe basins."
+46,"for 1184 the omo-gibe basin, the data are available on catchments upstream of local gauging sites."
+46,"in 1185 addition to the map display, users can assess the data in graphical form as well as for download as 1186 a text file."
+46,this article is protected by copyright.
+46,all rights reserved
+47,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+47,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+47,all rights reserved jawr_12914_f1.tif author manuscript
+48,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+48,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+48,all rights reserved jawr_12914_f2.tif author manuscript
+49,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+49,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+49,all rights reserved jawr_12914_f3.tif author manuscript
+50,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+50,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+50,all rights reserved jawr_12914_f4.tif author manuscript
+51,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+51,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+51,all rights reserved jawr_12914_f5.tif author manuscript
+52,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+52,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+52,all rights reserved jawr_12914_f6.tif author manuscript
+53,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+53,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+53,all rights reserved jawr_12914_f7.tif author manuscript
+54,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+54,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+54,all rights reserved jawr_12914_f8.tif author manuscript
+55,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+55,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+55,all rights reserved jawr_12914_f9.tif author manuscript
+56,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+56,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+56,all rights reserved jawr_12914_f10.tif author manuscript
+57,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+57,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+57,all rights reserved jawr_12914_f11.tif author manuscript
+58,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+58,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+58,all rights reserved jawr_12914_f12.tif author manuscript
+59,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+59,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+59,all rights reserved jawr_12914_f13.tif author manuscript
+60,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+60,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+60,all rights reserved jawr_12914_f14.tif author manuscript
+61,"17521688, 2021, 5, downloaded from https://onlinelibrary.wiley.com/doi/10.1111/1752-1688.12914 by university of california, wiley online library on [29/04/2024]."
+61,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license this article is protected by copyright.
+61,all rights reserved jawr_12914_f15.tif author manuscript
