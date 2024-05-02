@@ -1,0 +1,137 @@
+---
+title: "Societal Benefit Repo - summarize with ChatGPT"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(here)
+library(httr)
+```
+
+# Summary
+
+The 100 unique documents included from the Societal Benefits repository have been imported into Zotero, and the pdfs copied into this repo; full text was extracted from each.  Here we will apply tips from [this blog post to post documents to ChatGPT and ask the LLM to summarize](https://www.r-bloggers.com/2024/03/how-to-scrape-pdf-text-and-summarize-it-with-openai-llms-in-r).
+
+# Data
+
+See scripts 1, 2, and 3 in this folder.
+
+# Methods
+
+## Get OpenAI token
+
+```{r}
+api_key <- Sys.getenv('OPENAI')
+```
+
+
+## Gather full texts
+
+Full texts were extracted from pdfs using `pdftools`, saved in `_data/societal_benefits/csv`.  Each row is a sentence parsed from the pdfs using `tidytext::unnest_tokens()`.  Not perfect, but good enough for government work.  We'll group the documents and summarize the sentences into an entire full text.
+
+```{r}
+files_df <- read_csv(here('_data/societal_benefits/int/fulltext_files.csv'))
+
+txt_df <- lapply(files_df$csv_out, data.table::fread) %>%
+  setNames(files_df$csv_out) %>%
+  bind_rows(.id = 'file') %>%
+  group_by(file) %>%
+  summarize(fulltext = paste(p, collapse = ' '), .groups = 'drop') %>%
+  mutate(doc_id = paste0('text', 1:n()))
+  
+```
+
+## API completion endpoint
+
+```{r}
+out_f <- here('_output/societal_benefits/chatgpt_summary.csv')
+
+if(!file.exists(out_f)) {
+  out_df <- files_df %>%
+    select(-csv_out, -pdf_out, -file) %>%
+    mutate(n_tokens = NA, summary = NA, error = NA)
+  
+  endpt <- 'https://api.openai.com/v1/chat/completions'
+  
+  prompt <- 'Please summarize the methods of this paper.  I am particularly interested in methods used to estimate or quantify the societal benefits of satellite or Earth Observation data.'
+  
+  cum_tokens <- 0 ### to track tokens
+  start_time <- proc.time()
+  
+  for(i in 1:nrow(txt_df)) {
+
+    ### i <- 1
+    fulltxt <- txt_df$fulltext[i]
+    
+    n_tokens <- data.frame(t = fulltxt) %>%
+      unnest_tokens(output = word, input = t, token = 'words') %>%
+      .$word %>% length()
+    
+    out_df$n_tokens[i] <- n_tokens
+    message('Processing fulltext #', i, ' with ', n_tokens, ' tokens...')
+    
+    if(n_tokens > 16385) {
+      message('Too many tokens! skipping')
+      out_df$error[i] <- 'manual: context window exceeded'
+      next()
+    }
+    
+    cum_tokens <- cum_tokens + n_tokens
+    if(cum_tokens > 60000) {
+      ### see how long it's been since we've last paused
+      elapsed_time <- (proc.time() - start_time)[3]
+      wait_time <- 60 - elapsed_time
+      ### take a nap
+      if(wait_time > 0) {
+        message('...Pausing to not exceed 60,000 tokens per minute')
+        Sys.sleep(wait_time)
+      }
+      ### reset timer and token count
+      cum_tokens <- 0
+      start_time <- proc.time()
+    }
+    
+    post_body <- list(
+      model = 'gpt-3.5-turbo-0125',
+      messages = list(
+        list(role = 'system', content = 'You are a helpful research assistant with a background in economic methods.'),
+        list(role = 'user', content = str_c(prompt, fulltxt))
+      )
+    )
+    
+    response <- POST(
+      url = endpt,
+      body = post_body,
+      encode = 'json',
+      add_headers(
+        Authorization = paste('Bearer', api_key),
+        `Content-Type` = 'application/json'
+      )
+    )
+    
+    x <- content(response, 'parsed')
+    
+    if(is.null(x$error$code)) {
+      out_text <- x$choices[[1]]$message$content %>% str_replace_all('\\n|\\r', '  ')
+      out_df$summary[i] <- out_text
+    } else {
+      out_df$error[i] <- x$error$code
+    }
+  }
+  
+  write_csv(out_df, out_f)
+}
+
+```
+

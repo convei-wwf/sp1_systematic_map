@@ -1,0 +1,270 @@
+---
+title: "Societal Benefit Repo Latent Dirichlet Allocation on full texts"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(topicmodels)
+library(here)
+library(ggwordcloud)
+```
+
+# Summary
+
+The 100 unique documents included from the Societal Benefits repository have been imported into Zotero, and the pdfs copied into this repo; full text was extracted from each.  Here we lemmatize the corpus of full texts for text analysis, and examine TF-IDF and LDA results.
+
+# Data
+
+See scripts 1 and 2 in this folder.
+
+# Methods
+
+
+## Gather full texts
+
+Full texts were extracted from pdfs using `pdftools`, saved in `_data/societal_benefits/csv`.  Each row is a sentence parsed from the pdfs using `tidytext::unnest_tokens()`.  Not perfect, but good enough for government work.  We'll group the documents and summarize the sentences into an entire full text.
+
+```{r}
+files_df <- read_csv(here('_data/societal_benefits/int/fulltext_files.csv'))
+
+txt_df <- lapply(files_df$csv_out, data.table::fread) %>%
+  setNames(files_df$csv_out) %>%
+  bind_rows(.id = 'file') %>%
+  group_by(file) %>%
+  summarize(fulltext = paste(p, collapse = ' '), .groups = 'drop') %>%
+  mutate(doc_id = paste0('text', 1:n()))
+```
+
+## Stop: Lemmatize!
+
+```{r}
+fulltext_parsed_f <- here('_data/societal_benefits/int/fulltext_parsed.csv')
+if(!file.exists(fulltext_parsed_f)) {
+  library(spacyr)
+  
+  # spacy_install() ### installs Python (if necessary) and everything to access the spaCy package
+  
+  spacy_initialize(model = 'en_core_web_sm') 
+  
+  system.time(fulltext_parsed_df <- spacy_parse(txt_df$fulltext))
+
+  fulltext_parsed_trimmed_df <- fulltext_parsed_df %>%
+    ### drop small tokens
+    filter(nchar(token) > 2) %>%
+    ### drop tokens with punctuation or numbers
+    filter(!str_detect(token, '[[:punct:]]|[0-9]'))
+  
+  write_csv(fulltext_parsed_trimmed_df, fulltext_parsed_f)
+}
+
+fulltext_parsed_df <- read_csv(fulltext_parsed_f)
+```
+
+## Examine TF-IDF
+
+```{r}
+tf_idf_df <- fulltext_parsed_df %>%
+  group_by(doc_id, lemma) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  bind_tf_idf(lemma, doc_id, n) %>%
+  filter(tf_idf > 0)
+
+top_tf_idf <- tf_idf_df %>%
+  filter(tf_idf > 0.02) 
+
+top_by_freq <- top_tf_idf %>%
+  group_by(lemma) %>%
+  summarize(n = sum(n),
+            n_docs = n_distinct(doc_id)) %>%
+  mutate(angle = 45 * sample(-2:2, n(),
+    replace = TRUE,
+    prob = c(1, 1, 4, 1, 1)
+  ))
+
+ggplot(top_by_freq, aes(label = lemma, size = n, color = log(n_docs))) +
+  geom_text_wordcloud(aes(angle = angle)) +
+  scale_size_area(max_size = 12) +
+  scale_color_viridis_c(option = 'plasma') +
+  theme_minimal()
+
+```
+
+## LDA
+
+### Get data into proper format
+
+First, let's start with our dataframe of lemmatized full-texts, but clean it up a bit since more words (including uninformative stop words) makes it take a lot longer. Then we will cast this to a "Document Term Matrix" that summarizes how many times each word shows up in each document (similar, but not the same, as TF-IDF) - each row a document, each column a word, and each cell the number of times that word shows up in that document.
+
+```{r}
+fulltext_clean_df <- fulltext_parsed_df %>%
+  select(doc_id, lemma) %>%
+  anti_join(stop_words, by = c('lemma' = 'word')) %>%
+  group_by(doc_id, lemma) %>%
+  summarize(n = n(), .groups = 'drop')
+
+fulltext_dtm <- cast_dtm(data = fulltext_clean_df, 
+                      term = lemma, 
+                      document = doc_id,
+                      value = n)
+```
+
+### How many topics?
+
+The `ldatuning` package runs four different metrics to identify a good number of topics. This takes a while (though less than manually trying each combination of k) so I've run it ahead of time and saved the results.
+
+```{r}
+tuning_f <- here('_data/societal_benefits/int/topic_tuning.csv')
+if(!file.exists(tuning_f)) {
+  ### remotes::install_github("nikita-moor/ldatuning")
+  library(ldatuning)
+  
+  k_vec <- c(2:10, seq(12, 20, 2), seq(25, 40, 5))
+  
+  optim_topics <- FindTopicsNumber(
+    fulltext_dtm, 
+    topics = k_vec, 
+    metrics = c("Griffiths2004", "CaoJuan2009", "Arun2010", "Deveaud2014"),
+    control = list(seed = 12345),
+    mc.cores = 4,
+    verbose = TRUE
+  )
+  write_csv(optim_topics, tuning_f)
+}
+
+optim_topics <- read_csv(tuning_f)
+ldatuning::FindTopicsNumber_plot(optim_topics)
+```
+
+Griffiths index seems to suggest about 30, before dropping slightly.  CaoJuan and Arun drop sharply to about 14 with little upticks at 16 and 18 respectively before leveling off after 20; Deveaud seems to peak at 14 or 20.  Based on these, let's choose 20 topics.
+
+### Running LDA on the full texts
+
+
+```{r}
+top_doc_f  <- here('_data/societal_benefits/out/topic_by_doc.csv')
+top_term_f <- here('_data/societal_benefits/out/term_by_topic.csv')
+if(any(!file.exists(top_doc_f, top_term_f))) {
+  library(topicmodels)
+  
+  set.seed(42) ### doesn't seem to make the LDA repeatable though
+  fulltext_lda <- topicmodels::LDA(fulltext_dtm, k = 20)
+
+  ### Extract topics for each doc by probability
+  fulltext_topics <- posterior(fulltext_lda)$topic %>%
+    as.data.frame() %>%
+    setNames(paste0('topic', names(.))) %>%
+    mutate(doc_id = rownames(.))
+  
+  write_csv(fulltext_topics, top_doc_f)
+  
+  ### Extract terms for each topic by probability
+  fulltext_terms  <- posterior(fulltext_lda)$term %>%
+    as.data.frame() %>%
+    mutate(topic = paste('topic', rownames(.))) %>%
+    pivot_longer(cols = -topic, names_to = 'term', values_to = 'prob') #%>%
+    # filter(prob > 0.0001)
+  
+  write_csv(fulltext_terms, top_term_f)
+}
+```
+
+### Summarize topic modeling!
+
+As a final step, take the top 20 terms from each topic, and ask ChatGPT to suggest a brief topic name for each.
+
+```{r}
+top20 <- read_csv(top_term_f) %>%
+  mutate(topic = str_extract(topic, '[0-9]+') %>% as.numeric) %>%
+  group_by(topic) %>%
+  slice_max(order_by = prob, n = 20) %>%
+  ungroup()
+write_csv(top20, str_replace(top_term_f, '.csv', '_top20.csv'))
+```
+
+Note that LDA seems to have built-in stochasticity, so even with a random generator seed, the results are different every time - these topics may not match properly if the LDA is run again.
+
+* Economic Impact of Space Activities
+* Sustainable Development Goals Monitoring with Satellite Data
+* Landsat and Weather Monitoring for Water Resources
+* Drought Management and Agricultural Impact
+* Modeling Water Conditions and Forecasting
+* Earth Observation for Community Priorities
+* Earth Observation Benefits and Climate Change
+* Water Quality Estimation and Economic Studies
+* Consumer Behavior Analysis and Economic Modeling
+* National Mapping and Poverty Estimation
+* Wildfire Management and Cost Analysis
+* Ocean Observation Systems and Economic Assessments
+* Remote Sensing for Oil Palm Production
+* Drought Monitoring and Health Impact
+* Landsat Imagery Benefits for Fisheries
+* Global Earth Observation Policies
+* Earth Science Applications for Future Studies
+* Social Impact Assessment with Earth Observation Data
+* Satellite Data Products and Service Providers
+* Climate Region Analysis and Precipitation Forecasting
+
+Now let's join the topics and the titles to see whether these make sense! Let's keep as many topics as necessary to make up 75% of the probability of the document.
+
+```{r}
+topic_names <- c(topic1  = 'Economic Impact of Space Activities',
+                 topic2  = 'Sustainable Development Goals Monitoring with Satellite Data',
+                 topic3  = 'Landsat and Weather Monitoring for Water Resources',
+                 topic4  = 'Drought Management and Agricultural Impact',
+                 topic5  = 'Modeling Water Conditions and Forecasting',
+                 topic6  = 'Earth Observation for Community Priorities',
+                 topic7  = 'Earth Observation Benefits and Climate Change',
+                 topic8  = 'Water Quality Estimation and Economic Studies',
+                 topic9  = 'Consumer Behavior Analysis and Economic Modeling',
+                 topic10 = 'National Mapping and Poverty Estimation',
+                 topic11 = 'Wildfire Management and Cost Analysis',
+                 topic12 = 'Ocean Observation Systems and Economic Assessments',
+                 topic13 = 'Remote Sensing for Oil Palm Production',
+                 topic14 = 'Drought Monitoring and Health Impact',
+                 topic15 = 'Landsat Imagery Benefits for Fisheries',
+                 topic16 = 'Global Earth Observation Policies',
+                 topic17 = 'Earth Science Applications for Future Studies',
+                 topic18 = 'Social Impact Assessment with Earth Observation Data',
+                 topic19 = 'Satellite Data Products and Service Providers',
+                 topic20 = 'Climate Region Analysis and Precipitation Forecasting')
+
+fulltext_topics <- read_csv(top_doc_f) %>%
+  pivot_longer(-doc_id, names_to = 'topic', values_to = 'prob') %>%
+  left_join(txt_df %>% select(-fulltext), by = 'doc_id') %>%
+  left_join(files_df, by = c('file' = 'csv_out')) %>%
+  select(topic, prob, title, author, year) %>%
+  distinct()
+
+doc_topics <- fulltext_topics %>%
+  group_by(title) %>%
+  arrange(prob) %>%
+  mutate(tot = cumsum(prob)) %>%
+  ungroup() %>%
+  filter(tot > .25) %>%
+  mutate(topic_name = topic_names[topic]) %>%
+  select(-topic, -tot) %>%
+  mutate(prob = round(prob, 3))
+```
+
+#### Confident topic assignments
+
+```{r}
+DT::datatable(doc_topics %>% filter(prob >= .75))
+```
+
+#### Mixed topic assignments
+
+```{r}
+DT::datatable(doc_topics %>% filter(prob < .75))
+```

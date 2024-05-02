@@ -1,0 +1,465 @@
+page,p
+1,using satellite data to fill the gaps in the us air pollution monitoring network* daniel m.
+1,sullivan alan krupnick first draft: september 2018 this draft: january 2019 abstract compliance with the clean air act’s national ambient air quality standards (naaqs) is determined using local pollution monitors.
+1,"however, most counties have zero or one monitor, and monitors may not represent exposure across wide areas."
+1,we use satellite-derived data on fine particulate matter (pm2.5 ) to revisit the compliance determinations for the pm2.5 annual naaqs made in 2015.
+1,"mirroring current regulatory practice, we flag counties as “nonattainment” if they contain areas that exceed the naaqs."
+1,"comparing the satellite-based list of nonattainment areas to the official determinations, we estimate that 24.4 million people live in attainment areas that the satellite data suggest should be nonattainment."
+1,"we then estimate how air quality changes in areas targeted by regulators for improvement, as occurs around ground-based monitors that are designated nonattainment."
+1,"the estimates suggest that proper classification would have prevented 5,652 premature deaths between 2016 and 2017, a welfare gain of $51 billion."
+1,"jel codes: q51, q53, q58 keywords: environmental regulation; clean air act; air pollution * resources for the future, 1616 p st nw, washington, dc 20036."
+1,"email: sullivan@rff.org, krupnick@ rff.org."
+1,we thank alex de sherbinin and david diner for advice on using satellite data on particulate matter.
+1,we are particularly grateful to aaron van donkelaar for sharing data.
+1,we also thank mark nepf for excellent research assistance.
+1,"we benefited greatly from feedback from corbett grainger, dave cohen, and seminar participants at wcere, haqast4, and epa."
+1,this research was supported through nasa cooperative agreement number nnx17ad26a with rff to estimate the value of information obtained from satellite-based remote sensing.
+2,1 introduction the clean air act (caa) is the foundation of air quality regulation in the united states.
+2,"under the caa, the us environmental protection agency (epa) establishes national ambient air quality standards (naaqs) for several air pollutants: pm2.5 , pm10 , ozone, nox , so2 , co, and lead."
+2,"the naaqs themselves are statistics describing concentration levels over various time horizons, e.g., the three-year daily average or the 98th percentile of daily maxima over three years."
+2,air pollution monitors across the country regularly measure concentrations of the regulated pollutants and regulators calculate “design values” from these measurements to compare against the naaqs.
+2,"if a monitor reports a design value above the naaqs, the monitor’s jurisdiction (usually the county) is classified as “nonattainment” for that pollutant standard and is subject to a series of requirements to bring its design value within the standard.1 past research has found that air quality improves significantly faster in nonattainment areas than in attainment areas, resulting in concomitant health and welfare benefits (see, e.g., currie et al."
+2,"2014; bishop, ketcham, and kuminoff 2018)."
+2,"but these air quality standards are only as effective as the epa’s monitoring network, which is limited."
+2,"the majority of us counties lack monitors altogether, and readings at an air pollution monitor do not necessarily represent concentrations across a wide area like a county."
+2,"of 3,100 counties in the united states, only 651 (21 percent) have any pm2.5 monitors."
+2,"of these, 48 percent have a single monitor."
+2,"in such cases, standard practice is to assume that the concentrations registered by that monitor are representative of concentrations throughout the county."
+2,"good monitor placement is obviously critical to this assumption, but recent research shows that some monitors appear to be placed in areas of low pollution relative to elsewhere in the county, such as upwind of major point sources (grainger, schreiber, and chang 2018)."
+2,the purpose of this research is to measure how many people live in gaps in the monitoring network where pollution levels are high but undetected by monitors and therefore undetected by regulators.
+2,we use high-resolution satellite-derived data (∼1 km2 ) on ground-level pm2.5 concentrations to find counties that are designated as attainment but contain areas that violate the naaqs according to the satellite data.
+2,"we find that 54 counties in 11 states, home to 24.4 million people, are misclassified 1."
+2,"there are some additional factors that epa may consider when making nonattainment designations, which we describe in more detail in section 2.1."
+3,according to satellite data from the time period epa used to originally assign attainment designations (2011–2013).
+3,"of these, 10.9 million live in counties that do not contain any pm2.5 monitors."
+3,"reclassifying all these misclassified individuals as nonattainment would more than double the total nonattainment population, currently 23.2 million."
+3,"we also find that the misclassification rate varies considerably across demographic groups, with rural individuals and black individuals the most likely to be misclassified."
+3,one consequence for these misclassified counties is that their residents did not enjoy the same accelerated improvements in air quality that properly classified nonattainment counties did after their nonattainment designation.
+3,we estimate the value of these forgone health benefits by measuring the effect of a new nonattainment designation on pollution concentrations near a monitor.
+3,"auffhammer, bento, and lowe (2009) find that when regulators take action to bring their counties into attainment, they specifically target high-pollution monitors—the immediate cause of the nonattainment designation—for improvements."
+3,"we measure the effect of this targeting after the 2015 nonattainment designation using a difference-in-differences design with monitor data and find that pm2.5 around targeted monitors (monitors over the naaqs in nonattainment counties) decreased by 2.3 µg/m3 more than it did around attainment monitors, which we take to be the counterfactual of targeted monitors absent the regulatory intervention."
+3,"untargeted monitors in nonattainment areas (monitors that did not exceed the naaqs) also saw relative decreases, though smaller than those of targeted monitors."
+3,"to calculate the social benefits of using the satellite data in the regulatory process, we consider the hypothetical where local regulators target all areas that exceed the naaqs instead of just those areas exceeding the naaqs according to ground-based monitors."
+3,"using a standard concentration-response estimate from lepeule et al. (2012) and the estimated effect of regulators’ targeting of monitors, we calculate the excess mortality due to misclassification."
+3,we estimate the decrease in pm2.5 that misclassified counties would have experienced had they been properly classified and use our estimates to calculate the number of premature deaths that would have been avoided.
+3,"we find that improved air quality would have prevented 5,652 premature deaths in misclassified areas between 2016 and 2017."
+3,"using the value of a statistical life (vsl), this would result in $51 billion in benefits to misclassified counties had states acted as quickly to reduce pm2.5 levels in these areas as they have in nonattainment areas."
+4,2 air quality regulation with sparse monitoring 2.1 background on the clean air act the clean air act (caa) of 1970 and its subsequent amendments form the basis of current air quality regulation in the united states (revesz 2015).2 the caa directs the administrator of the epa to issue naaqs for certain pollutants.
+4,"limits must be imposed on air pollutants that “may reasonably be anticipated to endanger public health or welfare” (42 usc § 7408(a)(1)(a)), and these limits should be set to “protect the public health” with “an adequate margin of safety” (§ 7409(b)(1)).3 the naaqs are supposed to be reviewed and possibly revised no later than every five years, although this schedule is rarely met."
+4,"these assessments are made in consultation with an independent scientific review committee, the clean air scientific advisory committee (casac), which provides scientific and technical advice."
+4,the current primary standards for pm2.5 were set in 2012 as (1) an annual average of no more than 12 micrograms per cubic meter (µg/m3 ) (down from 15 µg/m3 in 2005) and (2) a 98th percentile of daily readings no more than 35 µg/m3 (unchanged from 2005).
+4,both metrics are calculated using the three most recent years of monitor data.
+4,"as we discuss further in section 5, this study focuses on the annual standard of 12 µg/m3 ."
+4,"once a naaqs is established for a pollutant, each state formally recommends to epa which areas (generally counties) should be classified as in attainment with the naaqs, which should be classified as nonattainment areas (§ 107(d)(1)), and which are nonclassifiable (effectively attainment) areas."
+4,"the state is required to use the latest three years of monitoring data to do this, but it also may use atmospheric modeling, emissions inventories, and other tools.4 states also identify areas that contribute to 2."
+4,"in general, see revesz (2015), chapter 5, for detailed history and review of air quality regulation in the united states at the federal level."
+4,3. § 7408(a)(1)(b) also requires that the presence of the pollutant be due to “numerous or diverse mobile or stationary sources.”
+4,the public health standard prescribed in § 7409(b)(1) is known as the “primary” standard. § 7409(b)(2) provides for “secondary” standards that “protect the public welfare.”
+4,"welfare “includes, but is not limited to, effects on soils, water, crops, vegetation, manmade materials, animals, wildlife, weather, visibility, and climate, damage to and deterioration of property, and hazards to transportation, as well as effects on economic values and on personal comfort and well-being” (§ 7602(h))."
+4,"note, however, that the costs of meeting the standards may not be considered when setting standards."
+4,"when the pm2.5 standards were set in 2012, epa directed states to use air quality monitoring data from 2010 through 2012 in their initial recommendations for nonattainment areas and said it would use data from 2011 through 2013 in its final determination if 2013 data were available in time."
+5,downwind air quality violations and include them in their nonattainment recommendations.
+5,"epa examines the state submission and then makes its determination on nonattainment designations, which states can appeal."
+5,the caa also permits reclassifications of an area’s status as conditions change.
+5,most reclassifications are made after states or other groups petition to move from nonattainment status to attainment.
+5,"epa can also reclassify in the other direction on its own or if asked to by petitioners, but this rarely happens."
+5,"epa data show that only one area has ever been reclassified from attainment status to nonattainment for any pm2.5 standard.5 once an area is officially designated nonattainment, the state or states in which the area is located must submit a state implementation plan (sip) to epa that outlines how the naaqs will be met (e.g., what restrictions will be placed on which industries in which parts of the state)."
+5,"polluters in nonattainment areas face more stringent regulations than those in attainment, such as a requirement to use the best available control technology."
+5,areas with more severe nonattainment designations face tighter restrictions but have longer deadlines to reach attainment.
+5,states that continually fail to make “reasonable further progress” in reaching attainment may face federal funding sanctions or other consequences.
+5,understanding the schedule and speed of nonattainment areas in reaching attainment is important when we estimate the health benefits of making proper designations.
+5,2.2 problems with a limited network of air pollution monitors the naaqs and the attainment designations depend on epa’s pollution monitors to provide an accurate measure of how much pollution people are exposed to.
+5,"however, there are several problems with using a limited network of monitors to measure exposure to a spatially dispersed population."
+5,"the fundamental issues are that (1) air pollution varies significantly over short distances, with spikes around every factory, every road, and every refinery;6 and (2) pollution can travel long distances from its source."
+5,"as such, the correlation between a monitor’s readings and concentration on the ground decays quickly with distance; the farther you get from a monitor, the less the 5."
+5,"pinal county, arizona, was reclassified in 2011 as nonattainment with the pm2.5 2006 rule (24-hour standard) two years after initial classifications were made for that rule in 2009."
+5,reclassification from attainment to nonattainment for any pollutant is rare.
+5,it has happened only 59 times across all 13 criteria pollutant standards.
+5,"of these, 34 percent were changes to counties’ so2 status (2010 rule) and occurred in the last three years."
+5,"see, e.g., hu et al."
+5,(2009).
+6,monitor can tell you.
+6,"but in 2015, 79 percent of counties did not have a pm2.5 monitor, 10 percent had one monitor, 5 percent had two monitors, and 6 percent had three or more."
+6,"in addition to physical problems of measuring pollution, there are two problems with regulatory air pollution monitors that arise because air pollution is generated by economic activity."
+6,"the first problem is goodhart’s law: once a metric of economic activity becomes a regulatory target, it is no longer a good metric of the underlying activity."
+6,"this is because economic actors may adapt their behavior to affect the metric, like when a teacher changes his curriculum to better fit the standardized tests used to evaluate his performance."
+6,"for air pollution, this “teaching to the test” could happen in a number of ways: strategically placing monitors in less-polluted parts of the county, strategic timing of abatement by polluters when monitors are in operation, or the gradual relocation of polluters over time from locations upwind of monitors to locations downwind."
+6,"grainger, schreiber, and chang (2018) present evidence of strategic monitor placement."
+6,"zou (2018) presents evidence that firms reduce their pollution on days that pm2.5 and pm10 monitors are in operation, since some monitors operate only on select days and their schedule is published in advance.7 our paper does not test for these problems directly, but our results are likely driven in part by them."
+6,"the second problem is that monitors are fixed in space and time, while the location of pollution is constantly changing."
+6,"a pollution monitor provides a sample concentration from a single point in what could be a large area with varying topography, wind conditions, traffic patterns, and density of industry."
+6,"since air quality regulation is ultimately aimed at improving health, how people, pollution, and polluters are differentially distributed across space cannot be ignored."
+6,"furthermore, none of these distributions are static."
+6,"as polluters in different locations change their polluting behavior and as establishments relocate or open for the first time, the spatial distribution of emissions changes, and in turn the overall exposure to nearby residents changes."
+6,"as neighborhoods grow in some parts of a city and shrink in others, overall exposure changes."
+6,"as the local climate becomes hotter, airborne pollutants react in different ways and total exposure changes."
+6,"meanwhile, the monitor observes the air at 7."
+6,intermittent operation is primarily a problem with older monitors and pm10 monitors.
+6,"in our sample, 56 percent of pm2.5 monitors gathered data on fewer than 121 days in 2015, and 23 percent of those gathered data on fewer than 80 days."
+7,the same physical location and is blind to all these changes.
+7,"if a monitor initially corresponds to the median concentration in a county, a year later it may correspond to the 40th percentile, the 60th percentile, or some other order statistic from the population exposure distribution."
+7,"these problems together motivate a closer look at how well the monitors in the united states measure resident exposure to air pollution and, in turn, at whether the process of designating areas can be improved."
+7,a natural next question is ask is whether the county is the best unit of designation.
+7,"given how much pollution can vary over short distances, it may be more efficient to determine attainment status for areas smaller than the county."
+7,this would reduce the number of people living under a nonattainment designation who themselves have air quality within the naaqs.
+7,"however, abatement becomes harder at smaller scales—imagine a single residential neighborhood or apartment building being designated nonattainment and tasked with reducing their local pollution."
+7,this problem of the optimal unit of designation is separate from whether satellite data can improve the existing regulatory system.
+7,"as such, we leave it for a future paper."
+7,3 research design are there areas exceeding the naaqs that epa’s monitor network has missed?
+7,what might the mortality benefits have been had these areas been correctly classified as nonattainment?
+7,"to answer the first question, we compare the satellite-derived data on ground-level pm2.5 with official nonattainment designations to flag census blocks which (1) have satellite pm2.5 readings over the naaqs and (2) are classified as attainment/unclassifiable."
+7,"we refer to counties with any such areas as “misclassified,” since they would have been classified as nonattainment had epa’s monitor network had the same spatial coverage as the satellite data, i.e., one monitor for every square kilometer."
+7,our primary answer to the second question takes a two-step approach.
+7,"first, we estimate the effect that regulators have on local air quality when they target an area for improvements."
+7,a nonattainment designation pushes local regulators to lower pollution in order to get their county to attainment status.
+7,past research has found that regulators can be effective at targeting monitors that cause their county to be in nonattainment.
+7,"as auffhammer, bento, and lowe (2009) observe, regulators in 7"
+8,"nonattainment areas have less incentive to target monitors that are not over the naaqs because the nonattainment designation depends on readings at the highest monitor.8 we take an empirical approach similar to that of auffhammer, bento, and lowe (2009); grainger (2012); and bento, freedman, and lang (2015) to estimate the effect of pm2.5 nonattainment status on violating monitors."
+8,"we estimate a difference-in-differences regression to measure the effect on pm2.5 concentrations over time for monitors in nonattainment areas that register readings over the naaqs (termed group i) versus monitors in nonattainment areas that register concentrations below the naaqs (termed group ii) versus monitor readings in attainment areas (termed group iii):  pm t =β1 nonattainmentm × over naaqsm × postt +  β2 nonattainmentm × under naaqsm × postt + (1) δ t + δ m + ""m t where pm t is the pollution reading for monitor m at time t ."
+8,the indicator variables δt and δm control for year and monitor effects.
+8,"nonattainment and “over naaqs” status are taken from the year 2015, the first year nonattainment determinations were made for the 2012 pm2.5 rule."
+8,here β1 captures the change in targeted monitors in nonattainment areas (group i) relative to changes in attainment monitors (group iii).
+8,likewise β2 captures the change in untargeted monitors in nonattainment areas (group ii) relative to group iii.
+8,"because these monitors are not targeted, we would anticipate β2 to have a smaller magnitude than β1 , with much of the effect on untargeted monitors coming as a side effect from efforts to reduce pollution at the nearby targeted monitors."
+8,"(because a counties in our sample were not designated nonattainment without a violating monitor, all group ii monitors must have a group i monitor in the same county.)"
+8,"we invoke the usual parallel trends assumption that, absent the regulatory intervention, the trends of group i and group ii monitors would have continued to follow the trend of group iii monitors."
+8,"under this assumption, β̂1 and β̂2 measure the casual effect of regulators’ response to a nonattainment designation."
+8,“the federal regulation creates an incentive for the local regulator to closely track the monitors that put the county at ‘risk’ of becoming out of attainment.
+8,the regulator then allocates effort in terms of monitoring and enforcement activities to the different monitors by comparing the future costs of getting out of attainment to the present costs associated with the reduction in the emissions around ‘risky’ monitors.
+8,"the resulting equilibrium is a schedule of heterogeneous monitoring and enforcement efforts such that more effort is allocated to dirtier monitors” (auffhammer, bento, and lowe 2009, p."
+9,"after estimating β̂1 and β̂2 , we consider a scenario where federal regulators have monitors for every square kilometer."
+9,this gives local regulators the incentive to target all areas that exceed the naaqs instead of one or two specific points as in the current case with sparse monitoring.
+9,"we assume that if areas over the naaqs in misclassified counties had been correctly classified, they would have experienced declines in pm2.5 similar to those experienced by targeted monitors after their nonattainment designation, i.e., β̂1 ."
+9,"similarly, we assume areas under the naaqs in misclassified counties would get the spillover improvement β̂2 ."
+9,"we then calculate excess mortality using the estimate of concentration-mortality response from lepeule et al. (2012) which is commonly used in epa regulatory impact analyses (see, e.g., epa 2012; 2014; 2015)."
+9,we define excess mortality as the number of deaths would have been avoided if misclassified counties had been classified as nonattainment.
+9,"we also go through a secondary, much simpler exercise to calculate excess mortality that ignores regulator behavior and abatement spillovers."
+9,"in the non-behavioral method, we consider only the health benefits of bringing misclassified areas exactly in line with the naaqs."
+9,"specifically, we estimate what health benefits would have been if areas over the naaqs in misclassified areas had their pm2.5 decreased exactly to the naaqs (12 µg/m3 ) while all areas under the naaqs—including those in misclassified areas—follow their current trends."
+9,"after calculating the potential air quality improvements, we again use the concentration-response from lepeule et al. (2012) to calculate excess mortality and its social cost."
+9,"we focus on the most recent revision to the pm2.5 naaqs, which was made in 2012, lowering the limit for annual average pm2.5 to 12 µg/m3 ."
+9,"states submitted recommendations for their nonattainment designations in 2014 using monitor data from 2011 to 2013, and official designations were announced in 2015."
+9,"we focus our regression analyses on the five year window around 2015, from 2013 through 2017."
+9,we do this for a few reasons.
+9,"first, we want to use a balanced panel of monitors in the regression so that monitors leaving or entering the sample do not bias the results."
+9,"after restricting to monitors in continuous operation from 2013 through 2017, we have 14 monitors in group i, 49 in group ii, and 852 in group iii.9 increasing the time span of the sample increases the length of the pre-treatment period, but also removes monitors 9."
+9,"here we really mean “continuously according to schedule,” so a monitor that was supposed to operate every sixth day is considered to have “continuously” operated if it did so for the entire period in question."
+10,from the sample.
+10,"the second reason for this restriction is that a new daily standard for pm2.5 was implemented in 2009, and we want to limit the influence of this event on our estimates."
+10,4 data 4.1 air pollution monitors and attainment designations data on epa’s air pollution monitoring system come from epa and cover every air pollution monitor from 1999 through 2017.
+10,"the data include latitude and longitude, days of operation, pollution readings, and whether the monitor can be used to determine naaqs compliance."
+10,"when used, average annual readings for each monitor exclude concurred exceptional events.10 table 1 reports the number of monitors available for naaqs compliance during our period of study."
+10,panel a reports the number of monitors designated as naaqs primary compliance monitors that operated in the given year.
+10,"column 1 reports how many monitors operated no more than 80 days during that year, column 2 reports how many operated 81–120 days, and so on."
+10,the strongest time trend is the addition of monitors operating more than 300 days a year.
+10,panel b reports how many monitors had sufficient data over the prior three years to calculate a design value.
+10,"for any given year and frequency, the number of monitors with three years of data is generally less than those with one year of data, though small anomalies can occur when monitors move across the frequency categories year to year."
+10,both panels show that a significant proportion of monitors operate less than once every three days (columns 1 and 2).
+10,"even as late as 2017, 10 percent of monitors available to calculate design values to compare with the naaqs operated no more than 80 days per year."
+10,data on attainment status are taken from epa’s green book.11 10.
+10,"in exceptional events that are outside state regulators’ control, such as wildfires, state regulators may petition to have monitor readings from those events excluded from design value averages."
+10,epa then chooses whether to concur that the event was exceptional and allow it to be excluded from the design value.
+10,see https://www.epa.gov/green-book/green-book-data-download.
+11,4.2 satellite-derived concentration data the satellite-derived pm2.5 concentration data come from a variety of sources (van donkelaar et al. 2015; van donkelaar et al.
+11,2016).12 the data are primarily gathered by satellite-based instruments that measure aerosol optical depth (aod).
+11,"the best known of these instruments among economists are the modis instruments aboard the terra and aqua satellites (see, e.g., zou 2018; grainger, schreiber, and chang 2018; gendron-carrier et al."
+11,2018).
+11,"as these satellites orbit earth, the modis instruments on board capture data on the density of airborne particles."
+11,it does this by comparing the intensity of solar radiation at the top of the atmosphere with how much radiation is reflected by earth’s surface.
+11,"the more airborne particles there are to scatter and absorb this radiation, the less radiation is reflected to the satellite."
+11,"both satellites follow a polar orbit, going from the north pole to the south pole and back to the north pole every 100 minutes or so."
+11,"as the satellites orbit pole to pole, earth continues to rotate, giving the satellites a new swath of ground to scan."
+11,the satellites’ orbits are calculated so that they pass over and scan any given point on earth at approximately the same time every day.
+11,"on the sun-facing side of earth, terra crosses the equator at approximately 10:30 a.m. local time with each orbital pass, while aqua crosses the equator at approximately 1:30 p.m."
+11,"thus, every location is scanned by each satellite approximately once per day at roughly the same time every day."
+11,these once-a-day readings are temporally sparser than hourly readings available from ground monitors.
+11,"however, as discussed in the previous section, few monitors report hourly data, and most do not collect data every day."
+11,van donkelaar et al. (2015) and van donkelaar et al. (2016) combine the aod data from the modis misr (also aboard terra) and seawifs (aboard orbview-2 satellite) instruments with results from the chemical transport model geos-chem.
+11,geos-chem provides information about how pollutants are transported from one area to another by the wind and how chemical compounds change as they travel.
+11,this combination of measurements and simulation is calibrated using ground-based monitored observations of pm2.5 at a monthly timescale.
+11,"the data are then averaged by year for every 0.01-by-0.01-degree grid cell, which is approximately 1 km2 in area."
+11,while satellite-derived data on air pollution provide unique opportunities for 12.
+11,"the data we use here are an updated version of the north america data developed in van donkelaar et al. (2015), which uses advances presented in van donkelaar et al."
+11,(2016).
+11,we are very grateful to aaron van donkelaar for giving us access to these data.
+12,"researchers and policy makers, they also come with a few caveats."
+12,"first, the satellites do not measure pm2.5 directly."
+12,"they measure aod, which must be scaled to pm2.5 based on local conditions."
+12,"this is not altogether straightforward even for researchers with atmospheric sciences training, but aod itself can sometimes be used to estimate comparative pm2.5 levels in localized areas."
+12,"however, when comparing data with general policy thresholds such as the naaqs, they must be accurately scaled."
+12,"second, satellites cannot measure ground-level conditions on cloudy days."
+12,this is one reason the satellite-derived data are more reliable at large timescales (months or years) than small ones (hours or days).
+12,"third, the accuracy of the data depends on the sample of ground-based monitors used for calibration."
+12,"for example, data calibrated globally could have mean-zero error globally, but sub-samples of the data (e.g., the data for north america) may not be mean zero."
+12,"to avoid this problem, we use data specifically calibrated for north america, which are quite accurate.13 figure 1 plots the correlation between the van donkelaar et al. satellite-derived data (vertical axis) and annual average readings from ground-based monitors (horizontal axis)."
+12,the satellite data for each monitor is taken from the 0.01-by-0.01-degree cell in which the monitor is located.
+12,"faint markers indicate individual monitor–grid cell pairs; bold markers indicate the average for every bin centered at integers on the horizontal axis (i.e., satellite average for monitor readings of 1 ± 0.5 µg/m3 )."
+12,the shape and color of each marker indicates how frequently the monitor operates: red circles for monitors that operate no more than 80 days per year; yellow triangles for 81–120 days; blue squares for 121–300 days; and green pentagons for those operating more than 300 days per year.
+12,dashed gray lines show the 12 µg/m3 naaqs threshold for nonattainment classification.
+12,"in general, the satellites show strong agreement with the monitors, especially at lower monitor readings."
+12,"at higher monitor readings, the satellites tend to underestimate pollution concentrations relative to the monitors."
+12,this would imply that our methodology may be somewhat conservative in determining areas that are misclassified as attainment.
+12,4.3 population and demographic data block-level data on population counts and race/ethnicity come from the 2010 census.
+12,block group–level data on educational attainment and household income come from 13.
+12,"compare correlation between monitors and satellite data calibrated for north america shown in figure 1, discussed below, and the equivalent figure for globally calibrated data restricted to north america in figure a1, which shows a systematic upward bias relative to the monitors."
+13,the 2005–2010 american community survey (acs).
+13,data on county-level all-cause mortality come from the centers for disease control and prevention’s (cdc’s) compressed mortality file.14 5 results 5.1 monitor coverage and nonattainment status we begin by looking at the locations of pm2.5 monitors in the continental united states.
+13,figure 2 shows the location of each of the monitors that were used to make the 2015 attainment determinations.
+13,it also labels monitors based on how many days per year the monitor is required to operate following the same scheme as in figure 1.
+13,we see significant heterogeneity across states in both the density of monitors and the frequency of their use.
+13,"some states have dense monitor networks that operate daily or near daily (e.g., california, pennsylvania)."
+13,"others are hardly monitored at all (e.g., montana, maine, mississippi, nebraska, nevada, idaho).15 still others have many monitors, but each of those monitors does not operate more than 80 days per year (e.g., wisconsin, wyoming)."
+13,"even within states, coverage can vary."
+13,"most of california is densely monitored, but in central california the monitors operate nearly every day, while in the los angeles basin they operate no more than once every six days."
+13,figure 3 shows the designated nonattainment areas established in 2015 for the annual pm2.5 standard promulgated in 2012.
+13,"these nonattainment areas cover central california; the los angeles basin; west silver valley, idaho; cleveland; pittsburgh; and philadelphia."
+13,all these areas were designated as nonattainment because of high monitor readings and not because they contributed to a downwind nonattainment area.
+13,the key question the satellite data can answer is whether other counties also exceed the naaqs.
+13,5.2 satellite-measured concentrations and misclassified areas figure 4 shows the difference between the satellite-measured three-year average pm2.5 concentrations and the annual naaqs for the continental united states in 2015.
+13,blue 14.
+13,see https://wonder.cdc.gov/cmf-icd10.html.
+13,illinois is a special case where the monitors present in the state were deemed by epa to be of insufficient quality to be used for naaqs assessment.
+13,"therefore, all the data were thrown out, and the entire state was classified as attainment/unclassifiable."
+14,"areas correspond to those for which the satellite predicts a design value below the naaqs (12 µg/m3 ), red areas are those predicted above the naaqs, and white areas are those right at the naaqs."
+14,"this map shows many areas above the naaqs, particularly in california, where figure 3 also showed large nonattainment areas."
+14,"however, figure 4 also suggests that a large share of the midwest is close to the naaqs, and several areas have concentrations well above the naaqs despite being classified as attainment areas."
+14,"figure 5 focuses on some of these hot spots, highlighting the area bounded by chicago on the north and west, louisville on the south, and pittsburgh on the east."
+14,"again, red corresponds to concentrations over the naaqs, white about equal to the naaqs, and blue under the naaqs."
+14,"county boundaries are plotted in white, official nonattainment areas are bounded in orange, and monitor locations are represented by black dots."
+14,this map gives several examples of misclassified areas.
+14,"first are areas with concentrations exceeding the naaqs but that have no monitors in their counties (e.g., logansport, indiana, north of indianapolis and southeast of chicago)."
+14,"second are areas exceeding the naaqs that are not detected because the monitors are too far away from the hot spots (e.g., southeast of logansport)."
+14,"third are cities with multiple monitors, but those monitors are located on the edges of the hot spots and miss peak concentrations (e.g., indianapolis, louisville, and cincinnati)."
+14,figure 6 shows all the misclassified counties—those that were designated as attainment but contain areas that exceed the naaqs—in the continental united states.
+14,"there are 54 such counties across 11 states.16 table 2 lists the number of people living in misclassified counties in each state, with separate counts for counties with monitors and without."
+14,"for counties that include areas that are both attainment and nonattainment, we treat the attainment part of the county as a distinct county.17 all told, 24.4 million people live in misclassified areas."
+14,"of these, 10.9 million live in counties with no monitors."
+14,"the states with the largest populations of unmonitored and misclassified people are illinois (6.4 million misclassified, all unmonitored); california (4.9 million misclassified, of which 0.8 million are unmonitored); and texas (4.5 million misclassified, with 0.4 million unmonitored)."
+14,two other states have sizable 16.
+14,table a1 lists all misclassified counties and their core-based statistical areas.
+14,"if the satellite data find that the attainment portion should also be nonattainment, we count only people living in the attainment portion as misclassified."
+14,"similarly, if the nonattainment portion has pollution monitors but the misclassified attainment portion does not, we describe the attainment “county” as having no monitors."
+15,"misclassified populations that are unmonitored: kentucky (1.2 million misclassified, 1 million unmonitored) and ohio (2.2 million misclassified, 0.9 million unmonitored)."
+15,"the total number of people living in misclassified counties is 24.4 million, slightly more than the number of people currently living in official nonattainment areas (23.3 million).18 5.3 distribution of people across attainment groups table 3 summarizes how various demographic groups are distributed across correctly classified attainment areas and nonattainment areas, as well as misclassified areas."
+15,"to calculate these figures, we use 2010 census block-level data on population, race/ethnicity, and share urban, and 2005–2010 american community survey (acs) block group–level data on education and income."
+15,the first three columns show what percentage of the listed group resides in each type of classification area; these columns sum to 100 by construction.
+15,"for example, the first row shows that of the 306.6 million people in our sample, 84.5 percent were correctly classified as attainment, 8.0 percent (24.4 million people) were misclassified as attainment, and 7.6 percent (23.2 million) were classified as nonattainment."
+15,column 4 shows the percentage of the given group that live in an area that satellite data show should be nonattainment (the sum of columns 2 and 3).
+15,column 5 shows the ratio of people misclassified by monitors to the number of people flagged by satellites as nonattainment (column 2 divided by column 4).
+15,we refer to this ratio as the false negative rate of the monitoring network.
+15,"for the whole population, the satellite data found that 15.5 percent (column 2 plus column 3) should have been classified as nonattainment (misclassified population plus officially nonattainment), but of these over half (8 percent over 15.6 percent) were misclassified, for a false negative rate of 51 percent."
+15,"similarly, the second row of table 3 shows that the false negative rate in rural areas is 68.6 percent (2.4 percent divided by 3.6 percent)."
+15,"by contrast, urban areas (third row) have a false negative rate was 50.5 percent."
+15,this false negative rate is likely lower than that for rural areas because monitors are more concentrated in urban areas and are thus more likely to detect when urban areas exceed the naaqs compared to rural areas.
+15,"similarly, pollution concentrations are likely to be higher in urban areas where pollution is more concentrated."
+15,we include in these counts chicago (and the rest of illinois) and houston whose designation is attainment/unclassifiable because their monitoring was not deemed reliable enough to determine naaqs compliance.
+16,there are also large disparities in both pollution concentrations and monitors’ false negative rates across racial and ethnic groups.
+16,"white (non-hispanic) individuals are the least likely to live in areas that the satellites flagged as nonattainment (misclassified or official nonattainment), with 11.3 percent living in such areas."
+16,the monitors’ false negative rate for whites is 59.6 percent.
+16,"the fraction of black individuals flagged by the satellite as nonattainment is 14.6 percent, with a false negative rate of 65.1 percent."
+16,"hispanics as a group are the most likely to live in an area that exceeds the naaqs, with 30.0 percent living in these areas."
+16,"however, their false negative rate is somewhat lower than that of whites and blacks at 38.5 percent."
+16,asians have a comparable rate of living in nonattainment and misclassified areas (26.3 percent) but have the lowest false negative rate of all groups (32.8 percent).
+16,"there are similar disparities across educational attainment groups, which are defined as the highest level of education attained by people at least 25 years old."
+16,"those without a high school diploma are the most likely to live in areas exceeding the naaqs (19.0 percent), but the least likely to be missed by monitors (45.0 percent false negative rate)."
+16,those with only a high school diploma are less likely to live in an exceedance area (13.3 percent) but more likely to be missed by monitors (54.5 percent).
+16,"those with a partial college education are similar (14.9 percent over the naaqs, 51.4 percent false negative rate) as are those with a college degree or more (15.3 percent over the naaqs; 53.3 percent false negative rate)."
+16,"looking at households by income, there is surprisingly little variation in both their likelihood of living in an exceedance area and their false negative rate."
+16,"5.4 excess deaths from being misclassified as attainment a nonattainment designation requires local regulators to develop and implement plans to bring their jurisdiction into attainment.19 had misclassified counties been designated nonattainment, they might have experienced health benefits from the ensuing improvement in air quality."
+16,"in this section, we estimate the extent of these unrealized health benefits in two ways, first considering how regulator behavior affects air quality, and then without such considerations."
+16,"see chay and greenstone (2003), currie et al. (2014), and bishop, ketcham, and kuminoff (2018)."
+17,"5.4.1 effect on air quality from regulator behavior as discussed in section 3, the structure of the caa and naaqs create an incentive for regulators to specifically target improvements around those monitors that exceed the naaqs rather than across their jurisdiction as a whole (auffhammer, bento, and lowe 2009; grainger 2012; bento, freedman, and lang 2015)."
+17,"following past research, equation (1) outlines our difference-in-differences strategy to estimate the effect of this behavior on air quality."
+17,"before estimating equation (1), we want to assess the validity of the parallel trends assumption by estimating the event study equivalent of equation (1), x  pm t = β1,y nonattainmentm × over naaqsm × 1{t = y } + y 6=2015 x  β2,y nonattainmentm × under naaqsm × 1{t = y } + (2) y 6=2015 δ t + δ m + ""m t which takes attainment monitors (group iii) as the baseline and estimates how the trends of group i and group ii deviate from group iii."
+17,"for example, the coefficient β1,2016 is the difference between group i in 2016 and 2015, minus the difference in group iii between 2016 and 2015."
+17,"if β1,2016 = 0, then group i and group iii followed the same trend between 2015 and 2016."
+17,"if β1,2016 < 0, group i saw larger improvements in air quality."
+17,"the coefficients for 2015 are omitted, so each coefficient is the change relative to 2015."
+17,"figure 7 plots the β̂1,y and β̂2,y estimates and their 95 percent confidence intervals."
+17,"the group i coefficients (red solid line) are not statistically significant before 2015, showing a slight downward trend relative to the group iii monitors."
+17,the large error bands are likely due to the small number of monitors in group i (14 monitors) and the different local shocks faced by each monitor.
+17,"however, in 2016, the first year after the new nonattainment desigations, the confidence interval narrows considerably and the trend takes a slightly negative turn."
+17,"the 2016 coefficient is 66 percent larger in magnitude than the 2014 coefficient, but this difference is not statistically significant."
+17,"the group i monitors make a considerable break from trend in 2017, with a decrease of 3.3 µg/m3 pm2.5 relative to group iii."
+17,"the group ii coefficients are also somewhat noisy, hovering around zero with a slight drop in 2017."
+17,table 4 reports the difference-in-difference regression results.
+17,column 1 reports the 17
+18,pooled diff-in-diff of monitor readings on year indicators and a single nonattainment–post interaction.
+18,"the “post” period is 2016 and 2017, following the nonattainment designations made in 2015."
+18,"the preferred specification in column 2 adds a variable identifying monitors in nonattainment areas operating in 2016–2017 and showing violation of the naaqs (nonattainment–post–over naaqs), a triple interaction term."
+18,both regressions also account for any idiosyncrasies attributable to specific monitors through monitor-level fixed effects.
+18,all standard errors are clustered by monitor.
+18,column 1 shows that the average monitor in nonattainment areas records 1.02 µg/m3 less pm2.5 after the 2015 nonattainment designations relative to monitors in attainment areas.
+18,column 2 allows for a separate effect on monitors over the naaqs and shows that the overall decrease in pollution is being driven mostly by monitors over the naaqs.
+18,"under-naaqs nonattainment monitors see pollution drop 0.64 µg/m3 relative to attainment monitors, while over-naaqs monitors see a 2.35 µg/m3 decrease."
+18,"5.4.2 calculating excess mortality to calculate excess mortality from misclassification, we suppose that if misclassified areas had been designated as nonattainment, they would have experienced an average decline in pollution levels similar to that in areas properly designated as nonattainment."
+18,"specifically, areas over the naaqs would have their pm2.5 decrease by an additional 2.35 µg/m3 , while pm2.5 in non-exceeding areas in the same county would decrease by 0.64 µg/m3 ."
+18,we translate these pollution decreases into decreased mortality risk by multiplying them by the concentration-response coefficient from lepeule et al. (2012) of 14 percent increase in all-cause mortality per additional 10 µg/m3 pm2.5 .
+18,this leads to a 3.3 percent increase in all-cause mortality in areas over the naaqs and a 0.8 percent increase in mortality in the rest of the county.
+18,"finally, we multiply these figures by county-specific death rates from the cdc and block-level population from the census."
+18,"we find that misclassified counties would have avoided 2,826 premature deaths per year had they been correctly classified."
+18,"using epa’s standard vsl of $9 million, the social cost of this excess mortality is approximately $25.4 billion per year (epa 2016, p."
+18,4-16).
+18,"while the excess mortality effect is measured annually, it eventually gets eliminated as pollution trends in nonattainment areas equalize with those in 18"
+19,attainment areas.
+19,a conservative assumption would be that the trends shown in figure 7 will equalize after 2017 (after our regression sample) so that all benefits are realized in 2016 and 2017.
+19,"this would imply that total excess mortality of misclassification was 5,652, with a social cost of $51 billion."
+19,we can also make back-of-the-envelope calculations of excess mortality that ignore regulator behavior.
+19,"one way is to scale concentrations in misclassified counties so that all areas are under the naaqs (12 µg/m3 ) and then calculate the mortality savings.20 this results in an average decrease in pm2.5 of 0.5 µg/m3 across all misclassified blocks, leading to 1,398 fewer deaths per year, a welfare gain of $12.6 billion per year."
+19,"a second way is “peak shaving”, the scenario where areas that exceed the naaqs and are located in misclassified counties have their pm2.5 decreased to exactly 12 µg/m3 while all other areas are left unchanged.21 this would lead to an average decrease in exposure in over-naaqs areas (the group i equivalent) of 0.43 µg/m3 , and no change in the group ii and group iii equivalents by construction."
+19,"the resulting excess mortality is 261 deaths per year, with a social value of $2.4 billion per year."
+19,6 conclusion the clean air act is the primary air quality regulation in the united states.
+19,"however, its success in improving health and environmental quality depends on a limited network of stationary pollution monitors to provide regulators with information about local pollution levels."
+19,"if pollution levels in an area exceed the naaqs but there is no monitor nearby, that area is unlikely to exercise mitigation actions to reduce its pollution."
+19,"in this paper, we have used satellite data to provide evidence that significant portions of the country are indeed exceeding the annual pm2.5 naaqs standard but are nevertheless designated as being in attainment."
+19,"estimates of how regulators impact air quality in response to a nonattainment designation suggest that correctly classifying misclassified areas could have save thousands of lives, a potential welfare gain to society of $51 billion for 2016 and 2017."
+19,"a more conservative estimate, ignoring  20."
+19,"specifically, let the new hypothetical concentration in block b be x̃ b ,c = x b ,c 12/x cmax where x cmax is the maximum concentration in county c ."
+19,"following the notation in footnote 20, ¨ 12 if x b ,c > 12 x̃ b ,c = x b ,c else 19"
+20,"regulator behavior, values the gains from satellite-corrected classification at $2 billion per year."
+20,"while the value to health and social welfare provided by satellite information on air quality appears to be very large, a few caveats are in order."
+20,"the main caveat is that while satellite data are far more spatially dense than ground-based monitoring data, the conversion of what is actually measured by the satellites (aerosol optical depth) to pm2.5 is not without error or bias when compared with monitor readings at the same place."
+20,"in our case, the bias works to make our surprisingly large estimates of the misclassified population conservative."
+20,the other caveat is the relative temporal sparseness of reliable satellite data.
+20,to achieve high spatial resolution (while maintaining accuracy) requires aggregating to larger time scales.
+20,"yet, on a more macro scale, the satellites provide data for every day, while in 2016 at most 37 percent of monitors were operating daily."
+20,"when the caa first became law in 1970, legislators could not have envisioned the capability of measuring air quality on a spatially precise basis from satellites."
+20,our results suggest that epa should examine whether there is scope for satellite data to be used as one of the factors that enter into the designation decision.
+20,"alternatively, satellite data can be used as a guide in monitor placement and a check that vulnerable populations are being protected by the clean air act."
+20,"failing that, the clean air act should be reopened to change the designation process to better protect the health of the us population."
+20,"references auffhammer, maximilian, antonio m."
+20,"bento, and scott e."
+20,“measuring the effects of the clean air act amendments on ambient pm10 concentrations: the critical importance of a spatially disaggregated analysis.”
+20,journal of environmental economics and management 58:15–26.
+20,"bento, antonio, matthew freedman, and corey lang."
+20,“who benefits from environmental regulation?
+20,evidence from the clean air act amendments.”
+20,review of economics and statistics 97 (3): 610–622.
+20,"bishop, kelly c., jonathan d."
+20,"ketcham, and nicolai v."
+20,kuminoff.
+20,“hazed and confused: the effect of air pollution on dementia.”
+20,nber working paper #24970. http://www.nber.org/papers/w24970.
+21,"chay, kenneth y., and michael greenstone."
+21,"“air quality, infant mortality, and the clean air act of 1970.”"
+21,"nber working paper #10053, cambridge, ma: national bureau of economic research. http://www.nber.org/papers/w10053."
+21,"currie, janet, joshua graff zivin, jamie mullins, and matthew neidell."
+21,“what do we know about short- and long-term effects of early-life exposure to pollution?”
+21,annual review of resource economics 6 (1): 217–247.
+21,"gendron-carrier, nicolas, marco gonzalez-navarro, stefano polloni, and matthew a."
+21,turner.
+21,“subways and urban air pollution.”
+21,"nber working paper #24183, cambridge, ma: national bureau of economic research. http://www.nber.org/papers/w24183."
+21,"grainger, corbett a."
+21,“the distributional effects of pollution regulations: do renters fully pay for cleaner air?”
+21,journal of public economics 96:840–852.
+21,"grainger, corbett, andrew schreiber, and wonjun chang."
+21,“do regulators strategically avoid pollution hotspots when siting monitors?
+21,evidence from remote sensing of air pollution.”
+21,working paper.
+21,"hu, shishan, scott fruin, kathleen kozawa, steve mara, suzanne e."
+21,"paulson, and arthur m."
+21,winer.
+21,“a wide area of air of air pollutant impact downwind of a freeway during pre-sunrise hours.”
+21,atmospheric environment 43 (16): 2541–49.
+21,"lepeule, johanna, francine laden, douglas dockery, and joel schwartz."
+21,“chronic exposure to fine particles and mortality: an extended follow-up of the harvard six cities study from 1974 to 2009.”
+21,environmental health perspectives 120 (7): 965–970.
+21,"revesz, richard l."
+21,environmental law and policy. 3rd ed.
+21,"paul, mn: foundation press."
+21,united states environmental protection agency.
+21,regulatory impact analysis for the proposed revisions to the national ambient air quality standards for particulate matter.
+21,"research triangle park, nc: health, environmental impacts division, office of air quality planning, and standards, u.s."
+21,environmental protection agency. .
+21,regulatory impact analysis for the proposed carbon pollution guidelines for existing power plants and emission standards for modified and reconstructed power plants.
+21,"research triangle park, nc: health, environmental impacts division, office of air quality planning, and standards, u.s."
+21,environmental protection agency. .
+21,regulatory impact analysis for the clean power plan final rule.
+21,"research triangle park, nc: office of air quality planning, standards, office of air, and radiation, u.s."
+21,environmental protection agency.
+22,united states environmental protection agency.
+22,economic analysis of the formaldehyde standards for composite wood products act final rule.
+22,"washington, dc: office of chemical safety and pollution prevention, u.s."
+22,environmental protection agency. https://www.regulations.gov/document?
+22,d=epa-hq-oppt-2016-0461-0037.
+22,"van donkelaar, aaron, randall v."
+22,"martin, michael brauer, n."
+22,"christina hsu, ralph a."
+22,"kahn, robert c."
+22,"levy, alexei lyapustin, andrew m."
+22,"sayer, and david m."
+22,winker.
+22,"“global estimates of fine particulate matter using a combined geophysical-statistical method with information from satellites, models, and monitors.”"
+22,environmental science & technology 50 (7): 3762–3772.
+22,"van donkelaar, aaron, randall v."
+22,"martin, robert jd spurr, and richard t."
+22,burnett.
+22,“high-resolution satellite-derived pm2.5 from optimal estimation and geographically weighted regression over north america.”
+22,environmental science & technology 49 (17): 10482–10491.
+22,"zou, eric."
+22,“unwatched pollution: the effect of intermittent monitoring on air quality.”
+22,working paper. http://www.eric-zou.com/s/monitor_zou_201808.pdf.
+23,figures and tables 20.0 17.5 15.0 satellite ( g/m3) 12.5 10.0 7.5 5.0 2.5 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0 monitor ( g/m3) 80 days/year 81-120 121-300 >300 80 days/year mean 81-120 mean 121-300 mean >300 mean figure 1: satellite readings versus monitor readings notes: horizontal axis is annual average monitor reading.
+23,vertical axis is the satellite- derived reading for the 0.01-by-0.01-degree cell where the monitor is located.
+23,red circles indicate monitors that operate no more than 80 days per year; yellow indicate triangles 81–120 days; blue squares indicate 121–300 days; and green pentagons indicate more than 300 days per year.
+23,"faint markers indicate individual marker–grid cell pairs; bold markers indicate the average for every bin centered at integers on the horizontal axis, i.e., satellite average for monitor readings of 1 ± 0.5 µg/m3 ."
+23,dashed gray lines show the 12 µg/m3 naaqs threshold for nonattainment classification.
+24,"24 80 days/year 81-120 121-300 >300 figure 2: pm2.5 monitors by temporal coverage, 2011–2013 notes: categories determined using median of valid observation days from 2011 to 2013."
+24,monitors must cover entire time period to be included in sample.
+24,red dots denote monitors that operate no more than 80 days per year; yellow triangles denote 81–120 days per year; blue squares denote 121–300 days; and green pentagons denote at least 300 days per year.
+25,"25 figure 3: clean air act attainment status, 2015 notes: darker areas are those classified as nonattainment with pm2.5 2012 primary standard of 12 µg/m3 ."
+26,"26 figure 4: satellite-measured pm2.5 design values, 2015 notes: pm2.5 design values come from the satellite data described in section 5."
+26,"plotted concentration is 3-year lagged average (2011–2013), which is the design value used to measure compliance with the naaqs."
+27,27 figure 5: pm2.5 design values and attainment status notes: orange boundaries indicate official nonattainment areas for the pm2.5 2012 primary standard of 12 µg/m3 .
+27,"plotted pm2.5 design values come from the satellite data described in section 5 and are the average of years 2011–2013, the years of data that were used in making 2012 rule determinations."
+27,monitor sample restricted to those used for naaqs assessments.
+28,28 figure 6: areas misclassified as attainment for pm2.5 annual standard notes: black areas denote official nonattainment counties and sub-counties.
+28,"yellow areas are counties that are misclassified, i.e., counties that are officially attainment where the satellite data show that some portion of the county exceeds the naaqs."
+28,gray areas are correctly classified attainment counties.
+29,3 change in pm2.5 relative to attainment (group iii) 2 1 0 1 2 3 4 5 2013 2014 2015 2016 2017 year nonattainment over naaqs (group i) nonattainment under naaqs (group ii) figure 7: event study of monitor readings by attainment status and group notes: plot shows estimated coefficients from equation (2).
+29,"n=4,575."
+29,"number of monitors in groups i, ii, and iii are 14, 49, and 852, respectively."
+29,monitor sample includes only monitors used for naaqs compliance and which began operation no later than 2013 and that operated through 2017.
+29,"red dots are the point estimates for monitors that were in nonattainment areas and that were higher than the naaqs in 2015 (group i in the text), i.e., the β̂1,y ."
+29,"yellow dots are the point estimates for monitors that were in nonattainment areas and that were below the naaqs in 2015 (group ii), i.e., the β̂2,y ."
+29,the year 2015 is the reference year for both groups.
+29,regressions also include monitor-level fixed effects.
+29,bands around each dot show the 95 percent confidence interval.
+29,standard errors clustered by monitor.
+30,table 1: pm2.5 monitor counts by frequency of operation ≤ 80 days 81–120 days 121–300 days >300 days total a.
+30,monitors operating in the given year 2010 121 345 87 148 701 2011 95 341 55 177 668 2012 106 296 93 202 697 2013 83 313 117 229 742 2014 118 319 77 264 778 2015 112 381 59 290 842 2016 99 330 131 326 886 b.
+30,monitors with 3 years of valid data for naaqs assessment 2013 72 274 73 157 576 2014 67 276 85 179 607 2015 90 290 62 215 657 2016 78 332 45 249 704 2017 77 299 96 274 746 notes: panel a reports the number of monitors designated as naaqs primary com- pliance monitors which operated in the given year.
+30,"column 1 reports how many monitors operated no more than 80 days during that year, column 2 reports how many operated 81–120 days, and so on."
+30,panel b reports how many monitors had sufficient data over the past three years that a design value could be calculated using that monitor.
+30,"for example, a monitor that operated in 2016 but not 2015 would not be counted in 2016 while a monitor that operated in 2013–2015 would be counted in 2016."
+31,"table 2: misclassified population by state counties with counties with no monitor at least 1 monitor total west virginia 0 24,069 24,069 tennessee 0 54,181 54,181 arizona 0 195,751 195,751 missouri 0 319,294 319,294 kentucky 975,135 233,242 1,208,377 pennsylvania 633,269 1,081,820 1,715,089 ohio 945,497 1,240,213 2,185,710 indiana 616,795 2,229,834 2,846,629 texas 418,007 4,092,459 4,510,466 california 844,427 4,059,633 4,904,060 illinois 6,437,475 0 6,437,475 total 10,870,605 13,530,496 24,401,101 notes: all misclassified counties in illinois are counted as having no monitor because no monitor data were used in making attainment deter- minations in that state due to the monitors being deemed insufficiently accurate."
+32,table 3: distribution of demographic groups across attainment classifications (1) (2) (3) (4) (5) (6) nonattain. by monitors’ false percentage of group classified as satellites negative rate population attainment misclassified nonattainment (2) + (3) (2) / (4) (millions) population 84.5 8.0 7.6 15.5 51.2 306.6 rural 96.4 2.4 1.1 3.6 68.6 59.1 urban 81.6 9.3 9.1 18.4 50.4 247.4 race/ethnicity white 88.7 6.7 4.6 11.3 59.6 196.0 black 85.4 9.5 5.1 14.6 65.1 38.9 hispanic 70.0 11.6 18.4 30.0 38.5 50.3 asian 73.7 8.6 17.7 26.3 32.8 14.1 32 other 72.4 10.1 17.5 27.6 36.5 30.9 education no h.s.
+32,diploma 81.0 8.6 10.5 19.0 45.0 29.8 h.s.
+32,"diploma 86.7 7.3 6.1 13.3 54.5 57.5 some college 85.1 7.6 7.2 14.9 51.4 55.7 college degree or more 84.7 8.1 7.1 15.3 53.3 55.3 household income <$35,000 86.0 7.6 6.3 14.0 54.6 38.8 $35,000–75,000 85.8 7.7 6.5 14.2 54.2 37.1 >$75,000 84.4 8.1 7.5 15.6 52.1 37.6 notes: the first three columns of each row show show the percentage of the listed group that is attainment, misclassified, and nonattain- ment; e.g., 96.4 percent of people in rural areas are live in attainment counties."
+32,these columns sum to 100 for each row by construction.
+32,"data for population, share urban, and race/ethnicity come from 2010 census block-level counts."
+32,data for income and education come from 2005–2010 acs block group–level estimates.
+32,education sample is people age 25 and older.
+32,household income sample is by household; fourth column totals are number of households in the given income bin.
+32,naaqs limit is from the 2012 pm2.5 rule and is 12 µg/m3 .
+33,"table 4: effect of nonattainment and naaqs status on monitor readings over time (1) (2) nonattainment×post -1.0217*** (0.2134) nonattainment×over naaqs×post -2.3496*** (0.4453) nonattainment×under naaqs×post -0.6423*** (0.2121) 2014 -0.1728*** -0.1728*** (0.0432) (0.0432) 2015 -0.4735*** -0.4735*** (0.0430) (0.0430) 2016 -1.1766*** -1.1766*** (0.0508) (0.0508) 2017 -1.4239*** -1.4239*** (0.0606) (0.0606) r2 0.828 0.829 notes: n=4,575."
+33,"number of monitors in groups i, ii, and iii are 14, 49, and 852, respectively."
+33,outcome variable is annual average monitor read- ing of µg/m3 pm2.5 .
+33,monitor sample includes only monitors used for naaqs compliance and which began operation no later than 2013 and that operated through 2017.
+33,the variable “post” is an indicator variable for years greater than 2015.
+33,“over naaqs” is an indicator variable for monitors whose annual average in 2015 exceeded the naaqs limit of 12 µg/m3 .
+33,“under naaqs” is the complement of “over naaqs”.
+33,regres- sions also include monitor-level fixed effects.
+33,"standard errors clustered by monitor: ** p < .05, *** p< .01."
+34,supplementary appendix 25 20 satellite ( g/m3) 15 10 5 0.0 2.5 5.0 7.5 10.0 12.5 15.0 17.5 20.0 monitor ( g/m3) 80 days/year 81-120 121-300 >300 80 days/year mean 81-120 mean 121-300 mean >300 mean figure a1: globally calibrated satellite readings versus monitor readings notes: horizontal axis is annual average monitor reading.
+34,vertical axis is the satellite- derived reading for the 0.01-by-0.01-degree cell where the monitor is located.
+34,red circles indicate monitors that operate no more than 80 days per year; yellow indicate triangles 81–120 days; blue squares indicate 121–300 days; and green pentagons indicate more than 300 days per year.
+34,"faint markers indicate individual marker–grid cell pairs; bold markers indicate the average for every bin centered at integers on the horizontal axis, i.e., satellite average for monitor readings of 1 ± 0.5 µg/m3 ."
+34,dashed gray lines show the 12 µg/m3 naaqs threshold for nonattainment classification.
+35,"table a1: misclassified counties and their metro areas state county core-based statistical area (metro area) arizona yuma county yuma, az california imperial county* el centro, ca kern county* bakersfield, ca los angeles county* los angeles-long beach-anaheim, ca orange county* los angeles-long beach-anaheim, ca riverside county* riverside-san bernardino-ontario, ca san diego county san diego-carlsbad, ca ventura county oxnard-thousand oaks-ventura, ca illinois cook county chicago-naperville-elgin, il-in-wi lake county chicago-naperville-elgin, il-in-wi madison county st."
+35,"louis, mo-il st."
+35,clair county st.
+35,"louis, mo-il indiana bartholomew county columbus, in cass county logansport, in clark county louisville/jefferson county, ky-in floyd county louisville/jefferson county, ky-in hamilton county indianapolis-carmel-anderson, in jackson county seymour, in johnson county indianapolis-carmel-anderson, in lake county chicago-naperville-elgin, il-in-wi marion county indianapolis-carmel-anderson, in porter county chicago-naperville-elgin, il-in-wi shelby county indianapolis-carmel-anderson, in spencer county tippecanoe county lafayette-west lafayette, in vanderburgh county evansville, in-ky vigo county terre haute, in kentucky bullitt county louisville/jefferson county, ky-in campbell county cincinnati, oh-ky-in daviess county owensboro, ky henderson county evansville, in-ky jefferson county louisville/jefferson county, ky-in kenton county cincinnati, oh-ky-in missouri st."
+35,louis city st.
+35,"louis, mo-il ohio butler county cincinnati, oh-ky-in clermont county cincinnati, oh-ky-in cuyahoga county* cleveland-elyria, oh hamilton county cincinnati, oh-ky-in jefferson county weirton-steubenville, wv-oh montgomery county dayton, oh warren county cincinnati, oh-ky-in pennsylvania berks county reading, pa cumberland county harrisburg-carlisle, pa dauphin county harrisburg-carlisle, pa westmoreland county pittsburgh, pa york county york-hanover, pa tennessee roane county knoxville, tn texas harris county houston-the woodlands-sugar land, tx kinney county maverick county eagle pass, tx starr county rio grande city, tx val verde county del rio, tx webb county laredo, tx west virginia brooke county weirton-steubenville, wv-oh * partially misclassified county 35"
