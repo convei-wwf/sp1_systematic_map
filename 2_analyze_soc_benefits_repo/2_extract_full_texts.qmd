@@ -70,15 +70,17 @@ zot_fs <- zot_check %>%
   ungroup() %>%
   mutate(pdf_out = sprintf('%s_%s_%s.pdf', author_short, year, title_short),
          pdf_out = str_remove_all(pdf_out, 'NA_'),
-         pdf_out = here('_data/societal_benefits/pdf', pdf_out)) %>%
+         pdf_out = file.path('_data/societal_benefits/pdf', pdf_out)) %>%
   select(title, author, year, file, pdf_out) %>%
   mutate(csv_out = str_replace(pdf_out, '/pdf/', '/csv/') %>% str_replace('.pdf$', '.csv'))
 
 if(any(!file.exists(zot_fs$pdf_out))) {
-  file.copy(from = zot_fs$file, to = zot_fs$pdf_out) %>% sum()
+  file.copy(from = zot_fs$file, to = here(zot_fs$pdf_out)) %>% sum()
 }
 
-write_csv(zot_fs, here('_data/societal_benefits/int/fulltext_files.csv'))
+zot_fs_out <- zot_fs %>%
+  select(-file)
+write_csv(zot_fs_out, here('_data/societal_benefits/int/fulltext_files.csv'))
 ```
 
 ## Extract text from pdfs
@@ -86,7 +88,7 @@ write_csv(zot_fs, here('_data/societal_benefits/int/fulltext_files.csv'))
 Save out as .csvs for further processing/examination.
 
 ```{r}
-pdf_fs <- zot_fs$pdf_out
+pdf_fs <- here(zot_fs$pdf_out)
 
 for(i in seq_along(pdf_fs)) {
   f <- zot_fs$pdf_out[i]

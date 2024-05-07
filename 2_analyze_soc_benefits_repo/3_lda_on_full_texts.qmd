@@ -38,8 +38,10 @@ Full texts were extracted from pdfs using `pdftools`, saved in `_data/societal_b
 ```{r}
 files_df <- read_csv(here('_data/societal_benefits/int/fulltext_files.csv'))
 
-txt_df <- lapply(files_df$csv_out, data.table::fread) %>%
-  setNames(files_df$csv_out) %>%
+csv_fs <- files_df$csv_out
+
+txt_df <- lapply(here(csv_fs), data.table::fread) %>%
+  setNames(csv_fs) %>%
   bind_rows(.id = 'file') %>%
   group_by(file) %>%
   summarize(fulltext = paste(p, collapse = ' '), .groups = 'drop') %>%
