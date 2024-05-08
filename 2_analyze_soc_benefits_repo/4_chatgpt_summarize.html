@@ -3130,6 +3130,7 @@ vertical-align: -.125em;
 <section id="gather-full-texts" class="level2">
 <h2 class="anchored" data-anchor-id="gather-full-texts">Gather full texts</h2>
 <p>Full texts were extracted from pdfs using <code>pdftools</code>, saved in <code>_data/societal_benefits/csv</code>. Each row is a sentence parsed from the pdfs using <code>tidytext::unnest_tokens()</code>. Not perfect, but good enough for government work. We’ll group the documents and summarize the sentences into an entire full text.</p>
+<p>Note that the <code>bind_rows()</code> call seems to reorganize the list elements when forming the dataframe, so once formed, use <code>txt_df</code> NOT <code>files_df</code> or <code>csv_fs</code>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3142,7 +3143,10 @@ vertical-align: -.125em;
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="at">.id =</span> <span class="st">&#39;file&#39;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file) <span class="sc">%&gt;%</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">fulltext =</span> <span class="fu">paste</span>(p, <span class="at">collapse =</span> <span class="st">&#39; &#39;</span>), <span class="at">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">paste0</span>(<span class="st">&#39;text&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_tokens =</span> <span class="fu">nchar</span>(fulltext) <span class="sc">/</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc_id =</span> <span class="fu">paste0</span>(<span class="st">&#39;text&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(files_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;file&#39;</span> <span class="ot">=</span> <span class="st">&#39;csv_out&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>pdf_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -3160,8 +3164,8 @@ vertical-align: -.125em;
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  tokens <span class="ot">&lt;-</span> <span class="fu">round</span>(word_count <span class="sc">/</span> .<span class="dv">75</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>out_df <span class="ot">&lt;-</span> files_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>csv_out, <span class="sc">-</span>pdf_out) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>out_df <span class="ot">&lt;-</span> txt_df <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, author, year) <span class="sc">%&gt;%</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_tokens =</span> <span class="cn">NA</span>, <span class="at">summary =</span> <span class="cn">NA</span>, <span class="at">error =</span> <span class="cn">NA</span>, <span class="at">pass =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>

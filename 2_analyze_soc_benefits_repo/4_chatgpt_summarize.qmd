@@ -40,6 +40,8 @@ api_key <- Sys.getenv('OPENAI')
 
 Full texts were extracted from pdfs using `pdftools`, saved in `_data/societal_benefits/csv`.  Each row is a sentence parsed from the pdfs using `tidytext::unnest_tokens()`.  Not perfect, but good enough for government work.  We'll group the documents and summarize the sentences into an entire full text.
 
+Note that the `bind_rows()` call seems to reorganize the list elements when forming the dataframe, so once formed, use `txt_df` NOT `files_df` or `csv_fs`.
+
 ```{r}
 files_df <- read_csv(here('_data/societal_benefits/int/fulltext_files.csv'))
 
@@ -50,7 +52,10 @@ txt_df <- lapply(here(csv_fs), data.table::fread) %>%
   bind_rows(.id = 'file') %>%
   group_by(file) %>%
   summarize(fulltext = paste(p, collapse = ' '), .groups = 'drop') %>%
-  mutate(doc_id = paste0('text', 1:n()))
+  mutate(n_tokens = nchar(fulltext) / 4) %>%
+  mutate(doc_id = paste0('text', 1:n())) %>%
+  inner_join(files_df, by = c('file' = 'csv_out')) %>%
+  select(-pdf_out)
   
 ```
 
@@ -67,14 +72,15 @@ count_tokens <- function(x) {
   tokens <- round(word_count / .75)
 }
 
-out_df <- files_df %>%
-  select(-csv_out, -pdf_out) %>%
+out_df <- txt_df %>%
+  select(title, author, year) %>%
   mutate(n_tokens = NA, summary = NA, error = NA, pass = NA)
 
 ```
 
 
-```{r}
+```{r, message = NA}
+
 out_f <- here('_output/societal_benefits/chatgpt_summary.csv')
 
 if(!file.exists(out_f)) {
