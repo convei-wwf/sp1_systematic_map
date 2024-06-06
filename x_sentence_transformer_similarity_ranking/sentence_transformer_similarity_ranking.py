@@ -24,18 +24,9 @@ logging.basicConfig(
     format=(
         '%(asctime)s (%(relativeCreated)d) %(levelname)s %(name)s'
         ' [%(funcName)s:%(lineno)d] %(message)s'))
-logging.getLogger('taskgraph').setLevel(logging.INFO)
 logging.getLogger('sentence_transformers').setLevel(logging.WARN)
-logging.getLogger('PyPDF2._reader').setLevel(logging.ERROR)
-logging.getLogger('httpx').setLevel(logging.ERROR)
 LOGGER = logging.getLogger(__name__)
 
-TOP_K = 100
-
-# how big of a window to build around sentences
-SLIDING_WINDOW_SENTENCE_SIZE = 10
-SENTENCE_WINDOW_OVERLAP = 2
-SLIDING_WINDOW_CHARACTER_SIZE = 500
 BODY_TAG = 'body'
 CITATION_TAG = 'citation'
 
@@ -48,39 +39,11 @@ for dirpath in [CACHE_DIR]:
     os.makedirs(dirpath, exist_ok=True)
 
 
-def token_count(context):
-    return len(ENCODING.encode(context))
-
-
-def trim_context(context, max_tokens):
-    tokens = ENCODING.encode(context)
-    tokens = tokens[:max_tokens]
-    trimmed_context = ENCODING.decode(tokens)
-    return trimmed_context
-
-
 def generate_hash(documents):
     concatenated = ''.join(documents)
     hash_object = hashlib.sha256(concatenated.encode('utf-8'))
     hash_hex = hash_object.hexdigest()
     return hash_hex
-
-
-def split_into_sentence_windows(page_num, text):
-    doc = nlp(text)
-    sentences = [sent.text for sent in doc.sents]
-    current_sentence_offset = 0
-    sentence_windows = []
-    while current_sentence_offset < len(sentences):
-        working_window = ' '.join(sentences[current_sentence_offset:current_sentence_offset + SLIDING_WINDOW_SENTENCE_SIZE])
-        current_sentence_offset += SLIDING_WINDOW_SENTENCE_SIZE
-        while len(working_window) < SLIDING_WINDOW_CHARACTER_SIZE and current_sentence_offset < len(sentences):
-            working_window += ' ' + sentences[current_sentence_offset]
-            current_sentence_offset += 1
-        sentence_windows.append(working_window)
-        if current_sentence_offset != len(sentences):
-            current_sentence_offset -= SENTENCE_WINDOW_OVERLAP
-    return sentence_windows
 
 
 def parse_file_bib(bib_file_path):
