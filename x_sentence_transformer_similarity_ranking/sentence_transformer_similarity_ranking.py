@@ -228,7 +228,6 @@ def main():
         for file_path in file_paths:
             LOGGER.info(f'processing single file {file_path}')
             article_list.extend(parse_file(file_path))
-            break
         abstract_list, citation_list = zip(
             *[(article[BODY_TAG], article[CITATION_TAG])
               for article in article_list])
