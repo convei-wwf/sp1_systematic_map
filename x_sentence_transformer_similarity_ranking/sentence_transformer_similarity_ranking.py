@@ -8,7 +8,6 @@ import pickle
 import re
 
 import faiss
-import openai
 import spacy
 import tiktoken
 import torch
@@ -60,12 +59,12 @@ def trim_context(context, max_tokens):
     return trimmed_context
 
 
-# Example function to concatenate document contents and generate a hash
 def generate_hash(documents):
     concatenated = ''.join(documents)
     hash_object = hashlib.sha256(concatenated.encode('utf-8'))
     hash_hex = hash_object.hexdigest()
     return hash_hex
+
 
 def split_into_sentence_windows(page_num, text):
     doc = nlp(text)
@@ -86,7 +85,6 @@ def split_into_sentence_windows(page_num, text):
 
 def parse_file_bib(bib_file_path):
     def generate_citation(record):
-        # Generate a citation string from the record dictionary
         authors = ' and '.join(record.get('author', []))
         title = record.get('title', 'N/A')
         journal = record.get('journal', 'N/A')
@@ -207,11 +205,6 @@ def parse_file(file_path):
 
 
 def main():
-    # parser = argparse.ArgumentParser(description='Sentence Transformer Similarity Ranking')
-    # parser.add_argument('topic_phrase', type=str, help='Phrase to index the documents against')
-    # args = parser.parse_args()
-    # question_file_path = args.question_file
-
     file_paths = [
         file_path
         for file_pattern in DATA_STORE
@@ -259,14 +252,14 @@ def main():
             question_embedding = question_embedding.reshape(1, -1)
 
         distances, indices = document_distance_index.search(
-            question_embedding, stop_index+1)
+            question_embedding, stop_index + 1)
 
         retrieved_citations = [
             citation_list[idx] for idx in
-            indices[:, start_index:stop_index+1].flatten()]
+            indices[:, start_index:stop_index + 1].flatten()]
         retrieved_abstracts = [
             abstract_list[idx] for idx in
-            indices[:, start_index:stop_index+1].flatten()]
+            indices[:, start_index:stop_index + 1].flatten()]
 
         # Concatenate the retrieved documents to form the context
         context = "".join([
