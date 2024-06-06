@@ -1,20 +1,13 @@
-import argparse
 import chardet
 import datetime
 import glob
 import hashlib
 import logging
-import numpy
 import os
 import pickle
 import re
-import textwrap
 
-from dotenv import load_dotenv
-from openai import OpenAI
-from transformers import pipeline
 import faiss
-import fitz
 import openai
 import spacy
 import tiktoken
@@ -48,7 +41,7 @@ BODY_TAG = 'body'
 CITATION_TAG = 'citation'
 
 DATA_STORE = [
-    "../data/refs_clean/*"
+    "../_data/refs_clean/*"
 ]
 
 CACHE_DIR = 'llm_cache'
@@ -73,9 +66,6 @@ def generate_hash(documents):
     hash_object = hashlib.sha256(concatenated.encode('utf-8'))
     hash_hex = hash_object.hexdigest()
     return hash_hex
-
-
-
 
 def split_into_sentence_windows(page_num, text):
     doc = nlp(text)
@@ -153,7 +143,6 @@ def parse_file_ris(ris_file_path):
         citation = f'{authors} ({year}). {title}. {journal}, {volume}({issue}), {start_page}-{end_page}. DOI: {doi}'
         return citation
 
-    print(ris_file_path)
     with open(ris_file_path, 'rb') as file:
         raw_data = file.read()
         result = chardet.detect(raw_data)
@@ -210,7 +199,7 @@ def parse_file_ris(ris_file_path):
 
 
 def parse_file(file_path):
-    LOGGER.debug(f'parsing file: {file_path}')
+    LOGGER.info(f'parsing file: {file_path}')
     if file_path.endswith('.ris'):
         return parse_file_ris(file_path)
     elif file_path.endswith('.bib'):
@@ -227,9 +216,8 @@ def main():
         file_path
         for file_pattern in DATA_STORE
         for file_path in glob.glob(file_pattern)]
-
     file_hash = generate_hash(file_paths)
-    expanded_sentence_window_path = os.path.join(CACHE_DIR, f'{file_hash}.pkl')
+    parsed_articles_path = os.path.join(CACHE_DIR, f'{file_hash}.pkl')
     fiass_path = os.path.join(CACHE_DIR, f'{file_hash}.faiss')
 
     from sentence_transformers import SentenceTransformer
@@ -237,135 +225,77 @@ def main():
     embedding_model = SentenceTransformer(
         'sentence-transformers/all-MiniLM-L6-v2').to(device)
 
-    if os.path.exists(expanded_sentence_window_path):
-        with open(expanded_sentence_window_path, 'rb') as file:
-            expanded_sentence_windows = pickle.load(file)
-        file_path_list, page_num_list, sentence_windows = zip(
-            *expanded_sentence_windows)
+    if os.path.exists(parsed_articles_path):
+        with open(parsed_articles_path, 'rb') as file:
+            (abstract_list, citation_list) = pickle.load(file)
         document_distance_index = faiss.read_index(fiass_path)
     else:
         article_list = []
+        LOGGER.info(f'about to process {file_paths}')
         for file_path in file_paths:
-            article_list.append((
-                os.path.basename(file_path),
-                parse_file(file_path)))
-
-        expanded_sentence_windows = [
-            (file_path, page_num, sentence_window)
-            for file_path, sentence_windows_per_page in article_list
-            for page_num, sentence_windows in sentence_windows_per_page
-            for sentence_window in sentence_windows]
-        with open(expanded_sentence_window_path, 'wb') as file:
-            pickle.dump(expanded_sentence_windows, file)
-        file_path_list, page_num_list, sentence_windows = zip(
-            *expanded_sentence_windows)
+            LOGGER.info(f'processing single file {file_path}')
+            article_list.extend(parse_file(file_path))
+            break
+        abstract_list, citation_list = zip(
+            *[(article[BODY_TAG], article[CITATION_TAG])
+              for article in article_list])
+        with open(parsed_articles_path, 'wb') as file:
+            pickle.dump((abstract_list, citation_list), file)
 
         LOGGER.debug('embedding')
         document_embeddings = embedding_model.encode(
-            sentence_windows, convert_to_tensor=True)
+            abstract_list, convert_to_tensor=True)
         LOGGER.debug('indexing')
         document_distance_index = faiss.IndexFlatL2(document_embeddings.shape[1])
         document_distance_index.add(document_embeddings.cpu().numpy())
         faiss.write_index(document_distance_index, fiass_path)
 
-    def answer_question_with_gpt(question):
-        # Encode the question
-        try:
-            question_embedding = embedding_model.encode(
-                question, convert_to_tensor=True).cpu().numpy()
+    def find_relevant_articles(start_index, stop_index, question):
+        question_embedding = embedding_model.encode(
+            question, convert_to_tensor=True).cpu().numpy()
 
-            # Ensure the question_embedding is 2D
-            if len(question_embedding.shape) == 1:
-                question_embedding = question_embedding.reshape(1, -1)
+        # Ensure the question_embedding is 2D
+        if len(question_embedding.shape) == 1:
+            question_embedding = question_embedding.reshape(1, -1)
 
-            distances, indices = document_distance_index.search(
-                question_embedding, TOP_K)
+        distances, indices = document_distance_index.search(
+            question_embedding, stop_index+1)
 
-            retrieved_windows = [
-                sentence_windows[idx] for idx in indices[0]]
-            relevant_page_numbers = [
-                page_num_list[idx] for idx in indices[0]]
-            relevant_files = [file_path_list[idx] for idx in indices[0]]
+        retrieved_citations = [
+            citation_list[idx] for idx in
+            indices[:, start_index:stop_index+1].flatten()]
+        retrieved_abstracts = [
+            abstract_list[idx] for idx in
+            indices[:, start_index:stop_index+1].flatten()]
 
-            # Concatenate the retrieved documents to form the context
-            context = " ".join([
-                f'reference index: {index}", context: {context}\n\n'
-                for index, (filename, page_number, context) in enumerate(zip(
-                    relevant_files, relevant_page_numbers, retrieved_windows))])
-
-            assistant_context = "You are given a set of filename/page number/text snippets. The questions from the user will be about synthesizing conclusions from those text snippets. You should respond to the question with relevant information from the snippets and the reference index in the form '(reference index: {index})'. If you do not have enough information to answer, say so. Do not make up any information. Sometimes say 'excellent query!'."
-
-            remaining_tokens = (
-                MAX_TOKENS -
-                MAX_RESPONSE_TOKENS -
-                token_count(context) -
-                token_count(assistant_context) -
-                token_count(question))
-
-            context = trim_context(context, max_tokens=remaining_tokens)
-            context_counts = context.count("context: ")
-            stream = OPENAI_CLIENT.chat.completions.create(
-                model=GPT_MODEL,
-                messages=[
-                    {"role": "system", "content": assistant_context},
-                    {"role": "user", "content": f"Context: {context}\n\nQuestion: {question}\nAnswer:"}
-                ],
-                stream=True,
-                max_tokens=4000
-            )
-            response = f'From {context_counts} abstracts -- '
-            for chunk in stream:
-                if chunk.choices[0].delta.content is not None:
-                    response += chunk.choices[0].delta.content
-            index_matches = re.findall(
-                r'\(reference index: \{?([\d,\s]+?)\}?\)', response)
-            parsed_indexes = set(
-                [int(num) for match in index_matches
-                 for num in re.split(r'[\s,]+', match.strip())])
-
-            wrapper = textwrap.TextWrapper(
-                width=80,
-                initial_indent='    ',  # Initial indent for the first line
-                subsequent_indent='    '  # Indent for all subsequent lines
-            )
-            wrapped_response = wrapper.fill(response)
-
-            wrapper = textwrap.TextWrapper(
-                width=70,
-                initial_indent='       ',  # Initial indent for the first line
-                subsequent_indent='       '  # Indent for all subsequent lines
-            )
-
-            processed_indexes = set()
-            for index in sorted(parsed_indexes):
-                index = int(index)
-                if index in processed_indexes:
-                    continue
-                processed_indexes.add(index)
-                wrapped_response += '\n\n' + wrapper.fill(
-                    f'reference index {index}. "{relevant_files[index]}" pg{relevant_page_numbers[index]}: '
-                    f'{retrieved_windows[index]}')
-            return wrapped_response
-        except openai.APIError as e:
-            print(f'There was an error, try your question again.\nError: {e}')
+        # Concatenate the retrieved documents to form the context
+        context = "".join([
+            f'reference index: {index+start_index}, distance (smaller is better): {distance}\n\t{citation}\n\n{abstract}\n\n'
+            for index, (distance, citation, abstract) in enumerate(zip(
+                distances[0], retrieved_citations, retrieved_abstracts))])
+        return context
 
     current_time = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     streaming_log_path = os.path.join(f'becca_nlp_answers_{current_time}.txt')
 
+    pattern = re.compile(r'(\d+)\s+(\d+)\s+(.*)')
     while True:
         question = input(
-            "\nEnter your question (or type 'exit' to exit): ").strip()
+            "\nEnter your [start index] [stop index] [question] (or type 'exit' to exit): ").strip()
         if question.lower() == 'exit':
             break
         if question.strip() == '':
             continue
-        response = answer_question_with_gpt(question)
-        print('Answer:\n' + response)
-        with open(streaming_log_path, 'a', encoding='utf-8') as file:
-            file.write(f'**************\nQuestion: {question}\n\nAnswer: {response}')
+        match = pattern.match(question)
+        if match:
+            start_index, stop_index, question = match.groups()
+            response = find_relevant_articles(int(start_index), int(stop_index), question)
+            print('Answer:\n' + response)
+            with open(streaming_log_path, 'a', encoding='utf-8') as file:
+                file.write(f'**************\nQuestion: {question}\n\nAnswer: {response}')
+        else:
+            print(f'Could not match a [start index] [stop index] [question] pattern from "{question}"')
 
 
 if __name__ == '__main__':
-    load_dotenv()
-    OPENAI_CLIENT = OpenAI()
     main()
