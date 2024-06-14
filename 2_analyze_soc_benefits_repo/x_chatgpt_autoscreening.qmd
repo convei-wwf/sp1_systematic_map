@@ -1,0 +1,178 @@
+---
+title: "Societal Benefit Repo - auto-screen titles/abstracts using ChatGPT"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(here)
+library(httr)
+```
+
+# Summary
+
+From the Societal Benefits repository, 258 documents were prepared for import into Colandr in `1_setup_and_prescreen/3_clean_soc_benefits_repo.qmd`.  Here, we will try using ChatGPT to screen these automatically, and compare the results two ways: 
+
+* Internal consistency: run the screening process multiple times and compare whether inclusion/exclusion results are reasonably consistent from run to run.
+* Accuracy: If reasonably internally consistent, compare screening results to those of the human screening process performed in Colandr.
+
+We will apply tips from [this blog post to post documents to ChatGPT and ask the LLM to summarize](https://www.r-bloggers.com/2024/03/how-to-scrape-pdf-text-and-summarize-it-with-openai-llms-in-r).
+
+The process:
+
+* Craft a prompt that sets ChatGPT up to screen a title/abstract, including:
+    * the inclusion criteria
+    * the desired output format, for consistency across responses
+* Append the prompt and the title/abstract
+* Feed into ChatGPT and cross fingers
+    * have a check in there for response formats
+* Bind the results and save out
+
+# Data
+
+The input data are the cleaned records from the Societal Benefits repository, accessed on 4/23/24: `_data/societal_benefits/repo_240423.csv`.  The cleaned records are saved as: `_data/societal_benefits/repo_cleaned_240423.csv`.
+
+# Methods
+
+## Get SBR data
+
+```{r}
+count_tokens <- function(x) {
+  ### see https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+  ceiling(sapply(str_split(x, ' +'), length) / 0.75)
+}
+
+sbr_df <- read_csv(here('_data/societal_benefits/repo_cleaned_240423.csv')) %>%
+  arrange(title) %>%
+  mutate(doc_id = 1:n()) %>%
+  mutate(tokens = count_tokens(title) + count_tokens(abstract))
+```
+
+ 
+## Get OpenAI token
+
+```{r}
+api_key <- Sys.getenv('OPENAI')
+```
+
+## API access
+
+These are the criteria used to assess whether a citation is included or excluded.
+
+A. The context of the study relates to justice, equity, and/or one of the NASA Applied Science themes (Capacity Building, Climate & Resilience, Disasters, Health & Air Quality, Water Resources, Ecological Conservation, Agriculture, Wildland Fires)
+B. The title or abstract clearly mentions Earth Observation (EO), satellite data (or a specific satellite name, such as Landsat), or remote sensing data
+C. The title or abstract indicates that the study assesses/measures the value of a societal benefit in economic terms (e.g., monetary value) or utility (e.g., benefit for a defined user(s), purpose, or decision), as a primary goal or result
+D. The title or abstract attributes/links the benefit/value to the application/use of a specific dataset or data source (EO or otherwise)
+E. The title or abstract indicates that the study applies the valuation methodology specifically to an earth-observation-relevant dataset or data source
+F. The document does not represent a review, an opinion piece, or an intro to a series/book/conference
+G. The document does not represent a conference abstract
+
+For each criterion, set up a prompt:
+
+* role
+* explanation of criterion text
+* explanation of output
+    * if exclude, just the word "exclude" lower case
+    * if include, the word "include" lower case
+    * do we want a single sentence of explanation?
+    
+### Criterion A.
+
+
+  
+```{r}
+crit <- 'The context of the study relates to justice, equity, and/or one of the NASA Applied Science themes (Capacity Building, Climate & Resilience, Disasters, Health & Air Quality, Water Resources, Ecological Conservation, Agriculture, Wildland Fires)'
+
+prompt <- c('Here is a criterion: ',
+            crit ,
+            'Those are the inclusion criteria.  Given the following title and abstract for a document, determine whether the document meets all the inclusion criteria.  If the title and abstract meets all criteria, respond only with "include" and no other text.  If it fails to meet one or more criteria, respond with "exclude", followed by a comma, followed by the letters of the criteria it failed to meet concatenated together.  For example, if the title and abstract failed to meet criteria A and C, you would respond with "exclude,AC" and no other text.  If you are uncertain whether it meets one or more criteria, respond with "uncertain", followed by a comma, followed by the letters of the criteria it failed to meet concatenated together, for example, "uncertain,AC" and no other text.  Here is the title and abstract:'
+            )
+```
+
+```{r, message = NA}
+out_f <- here('_output/societal_benefits/chatgpt_autoscreen1.csv')
+
+if(!file.exists(out_f)) {
+  out_df <- sbr_df %>%
+    select(doc_id, title, abstract, author, year) %>%
+    mutate(screening_decision = NA, error = NA)
+  
+  endpt <- 'https://api.openai.com/v1/chat/completions'
+  
+  start_time <- proc.time()[3]; cum_tokens <- 0
+  for(i in 1:nrow(out_df)) {
+
+    if(i %% 5 == 1) {
+      ### (re) initialize rate counter every few documents
+      start_time <- proc.time()[3]; cum_tokens <- 0
+    }
+
+    ### i <- 4
+    title <- out_df$title[i]
+    abstr <- out_df$abstract[i]
+    input <- paste0('Title: ', title, '. Abstract: ', abstr)
+    
+    post_body <- list(
+      model = 'gpt-3.5-turbo-0125',
+      messages = list(
+        list(role = 'system', content = 'You are a helpful research assistant with a background in economic methods.'),
+        list(role = 'user', content = str_c(prompt, input, collapse = ' '))
+      )
+    )
+    
+    response <- POST(
+      url = endpt,
+      body = post_body,
+      encode = 'json',
+      add_headers(
+        Authorization = paste('Bearer', api_key),
+        `Content-Type` = 'application/json'
+      )
+    )
+    
+    message('Document ', i, ' of ', nrow(out_df), ':')
+    x <- content(response, 'parsed')
+    
+    x_error <- x$error$code
+    if(is.null(x_error)) {
+      out_text <- x$choices[[1]]$message$content %>% str_replace_all('\\n|\\r', '  ')
+      message('... Response: ', out_text)
+      out_df$screening_decision[i] <- out_text
+    } else {
+      out_df$error[i] <- x_error
+      message(x_error)
+      if(x_error == 'rate_limit_exceeded') {
+        message('...sleeping...')
+        Sys.sleep(10)
+      }
+    }
+    
+    cum_tokens <- cum_tokens + count_tokens(input)
+    elapsed <- proc.time()[3] - start_time
+    token_rate <- ceiling(cum_tokens / elapsed * 60) ### (tokens per minute)
+    message('... Token rate: ', token_rate)
+    if(token_rate > 30000) {
+      message('...sleeping...')
+      Sys.sleep(10)
+    }
+    
+    ### Force a pause between each instance to help avoid rate_limit_exceeded
+    Sys.sleep(3)
+    
+  }
+  
+  write_csv(out_df, out_f)
+}
+
+```
+

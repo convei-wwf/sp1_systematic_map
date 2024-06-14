@@ -1,0 +1,108 @@
+---
+title: "Examine FAISS outputs"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script takes the .csv files output by `1_faiss_criteria_query.qmd` and examines them:
+
+* Plot distance curves to see whether there are steep breaks
+* Run logistic regression against screened documents from the Societal Benefits Repo.
+
+```{r}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+```{r}
+faiss_query_fs <- list.files('faiss_out', pattern = 'faiss', full.names = TRUE)
+
+faiss_q_df <- lapply(faiss_query_fs, FUN = function(f) {
+  ## f <- faiss_query_fs[1]
+  q <- basename(f) %>% str_remove_all('faiss_out_|.csv')
+  df <- read_csv(f, show_col_types = FALSE) %>%
+    mutate(query = q) %>%
+    select(dist, query, citation)
+}) %>%
+  bind_rows() %>%
+  ### dissect citation
+  mutate(citation = str_remove(citation, '^\\[.+?\\]')) %>%  ### remove [ESA] and [the australian thing]
+  mutate(author = str_remove(citation, ' \\(.+') %>% str_trim(),
+         year   = str_extract(citation, '(?<=\\()[0-9]{4}(?=\\))') %>% as.integer(),
+         title  = str_remove(citation, author) %>% str_remove_all('\\([0-9]{4}\\)\\. |\\. N/A.+') %>% str_trim(),
+         doi    = str_remove(citation, '.+DOI: ') %>% str_trim())
+```
+
+## Plot distance per citation for each query
+
+Ideally we'd see a bimodal distribution, with strong representation at low or high values but fewer intermediate values; this would resemble a stepwise function on qq plot.
+
+```{r}
+ggplot(faiss_q_df) +
+  stat_qq(aes(sample = dist)) +
+  facet_wrap(~ query)
+
+ggplot(faiss_q_df) +
+  geom_histogram(aes(x = dist)) +
+  facet_wrap(~ query)
+```
+
+## Load references from Societal Benefits Repository
+
+We can compare the screened results from the SBR to the distance values here, perhaps via PCA, clustering, logistic regression...
+
+```{r}
+sbr_screened_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
+  mutate(title = str_to_title(title)) %>%
+  filter(!is.na(author)) %>%
+  mutate(author = str_remove(author, '\\[.+?\\]')) %>%
+  ### not sure why these citations are messed up...
+  mutate(author = ifelse(title == 'The Socio-Economic Value Of Scientific Publications: The Case Of Earth Observation Satellites', 'Morretta, Valentina and Vurchio, Davide and Carrazza, Stefano', author))
+  
+rescale <- function(x) {
+  1 - (x - min(x)) / (max(x) - min(x))
+}
+
+sbr_vs_faiss <- sbr_screened_df %>%
+  select(author, title, screening_status) %>%
+  left_join(faiss_q_df, by = c('author', 'title')) %>%
+  ### convert distance to relevance: low distance = high relevance
+  group_by(query) %>%
+  mutate(dist_norm = rescale(dist)) %>%
+  ungroup()
+
+sbr_vs_faiss_geom_mean <- sbr_vs_faiss %>%
+  ### let d be geometric mean of rescaled relevances: if any axis is low relevance,
+  ### citation is of low relevance
+  group_by(author, title, screening_status) %>%
+  summarize(dist_norm = prod(dist_norm)^(1/3), 
+            query = 'geom_mean',
+            .groups = 'drop') %>%
+  bind_rows(sbr_vs_faiss)
+
+ggplot(sbr_vs_faiss_geom_mean, aes(x = dist_norm)) +
+  geom_histogram(aes(fill = screening_status)) +
+  facet_wrap(~ query)
+
+t.test(dist_norm ~ screening_status, data = sbr_vs_faiss_geom_mean %>% filter(query == 'geom_mean'))
+```
+
+```{r}
+ggplot(sbr_vs_faiss_geom_mean) +
+  stat_qq(aes(sample = dist_norm, color = screening_status)) +
+  facet_wrap(~ query)
+
+ggplot(sbr_vs_faiss_geom_mean) +
+  geom_histogram(aes(x = dist_norm, fill = screening_status)) +
+  facet_wrap(~ query)
+```
+
