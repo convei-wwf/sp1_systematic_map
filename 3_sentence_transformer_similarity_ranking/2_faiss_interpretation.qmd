@@ -19,6 +19,7 @@ This script takes the .csv files output by `1_faiss_criteria_query.qmd` and exam
 
 ```{r}
 library(tidyverse)
+library(ggfortify)   ### for PCA plots
 library(here)
 library(synthesisr)
 ```
@@ -35,11 +36,12 @@ faiss_q_df <- lapply(faiss_query_fs, FUN = function(f) {
 }) %>%
   bind_rows() %>%
   ### dissect citation
-  mutate(citation = str_remove(citation, '^\\[.+?\\]')) %>%  ### remove [ESA] and [the australian thing]
+  mutate(citation = str_remove(citation, '^\\[.+?\\]') %>% tolower()) %>%  ### remove [ESA] and [the australian thing]
   mutate(author = str_remove(citation, ' \\(.+') %>% str_trim(),
          year   = str_extract(citation, '(?<=\\()[0-9]{4}(?=\\))') %>% as.integer(),
-         title  = str_remove(citation, author) %>% str_remove_all('\\([0-9]{4}\\)\\. |\\. N/A.+') %>% str_trim(),
-         doi    = str_remove(citation, '.+DOI: ') %>% str_trim())
+         title  = str_remove(citation, author) %>% str_remove_all('\\([0-9]{4}\\)\\. |\\. n/a.+') %>% str_trim() %>% str_sub(1, 100),
+         author = str_extract(author, '[a-z]+'),
+         doi    = str_remove(citation, '.+doi: ') %>% str_trim() %>% tolower())
 ```
 
 ## Plot distance per citation for each query
@@ -62,18 +64,19 @@ We can compare the screened results from the SBR to the distance values here, pe
 
 ```{r}
 sbr_screened_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
-  mutate(title = str_to_title(title)) %>%
-  filter(!is.na(author)) %>%
-  mutate(author = str_remove(author, '\\[.+?\\]')) %>%
   ### not sure why these citations are messed up...
-  mutate(author = ifelse(title == 'The Socio-Economic Value Of Scientific Publications: The Case Of Earth Observation Satellites', 'Morretta, Valentina and Vurchio, Davide and Carrazza, Stefano', author))
+  mutate(author = ifelse(title == 'The Socio-Economic Value Of Scientific Publications: The Case Of Earth Observation Satellites', 'morretta', author)) %>%
+  mutate(title = tolower(title) %>% str_sub(1, 100)) %>%
+  filter(!is.na(author)) %>%
+  mutate(author = str_remove(author, '\\[.+?\\]') %>% tolower() %>% str_extract('^[a-z]+'))
+
   
 rescale <- function(x) {
   1 - (x - min(x)) / (max(x) - min(x))
 }
 
 sbr_vs_faiss <- sbr_screened_df %>%
-  select(author, title, screening_status) %>%
+  select(author, title, screening_status, tags) %>%
   left_join(faiss_q_df, by = c('author', 'title')) %>%
   ### convert distance to relevance: low distance = high relevance
   group_by(query) %>%
@@ -84,16 +87,18 @@ sbr_vs_faiss_geom_mean <- sbr_vs_faiss %>%
   ### let d be geometric mean of rescaled relevances: if any axis is low relevance,
   ### citation is of low relevance
   group_by(author, title, screening_status) %>%
-  summarize(dist_norm = prod(dist_norm)^(1/3), 
-            query = 'geom_mean',
+  summarize(geom_mean = prod(dist_norm)^(n_distinct(query)), 
             .groups = 'drop') %>%
-  bind_rows(sbr_vs_faiss)
+  right_join(sbr_vs_faiss)
 
 ggplot(sbr_vs_faiss_geom_mean, aes(x = dist_norm)) +
-  geom_histogram(aes(fill = screening_status)) +
+  geom_density(aes(fill = screening_status), alpha = .25) +
   facet_wrap(~ query)
 
-t.test(dist_norm ~ screening_status, data = sbr_vs_faiss_geom_mean %>% filter(query == 'geom_mean'))
+t.test(dist_norm ~ screening_status,
+       data = sbr_vs_faiss_geom_mean %>% 
+         select(dist_norm, screening_status) %>% 
+         distinct())
 ```
 
 ```{r}
@@ -102,7 +107,48 @@ ggplot(sbr_vs_faiss_geom_mean) +
   facet_wrap(~ query)
 
 ggplot(sbr_vs_faiss_geom_mean) +
-  geom_histogram(aes(x = dist_norm, fill = screening_status)) +
-  facet_wrap(~ query)
+  geom_density(aes(x = dist_norm, fill = screening_status), alpha = .25) +
+  facet_wrap(~ query, scales = 'free_y')
+```
+
+## Let's try some PCA!
+
+```{r}
+sbr_faiss_wide <- sbr_vs_faiss %>%
+  select(-dist, -citation) %>%
+  pivot_wider(names_from = 'query', values_from = 'dist_norm') %>%
+  ### post-PCA, identify highly redundant axes
+  select(-bayesian_decision_analysis, -remote_earth_observation, -societal_benefits)
+
+sbr_faiss_pca <- sbr_faiss_wide %>%
+  select(-author, -title, -screening_status, -year, -doi, -tags) %>%
+  scale() %>%
+  prcomp()
+
+sbr_faiss_pca$rotation
+   
+autoplot(sbr_faiss_pca,
+         data = sbr_faiss_wide,
+         color = 'screening_status',
+         loadings = TRUE,
+         loadings.label = TRUE,
+         loadings.color = 'black',
+         loadings.label.color = 'black')
+
+screeplot(sbr_faiss_pca)
+```
+
+## Write out normalized distance values
+
+Take a sample of the highest-ranking "excludes" and lowest-ranking "includes" to examine why the distance scoring performs poorly (e.g., maybe missing some key words, maybe some screened articles were classified incorrectly)
+
+```{r}
+tmp <- sbr_faiss_wide %>%
+  select(-value_of_information, -satellite_data,-socioeconomic_benefits) %>%
+  mutate(geom_mean = (decision_analysis * satellite_earth_observation * societal_value * valuation_of_information)^.25) %>%
+  left_join(sbr_screened_df %>% select(title, abstract)) %>%
+  filter((screening_status == 'excluded' & geom_mean > .5) | (screening_status == 'included' & geom_mean < .35))
+
+write_csv(tmp, 'sbr_screened_dist_mtx.csv')
 ```
 

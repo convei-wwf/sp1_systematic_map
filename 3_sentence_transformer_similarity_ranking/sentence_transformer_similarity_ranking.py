@@ -28,11 +28,11 @@ logging.getLogger('sentence_transformers').setLevel(logging.WARN)
 LOGGER = logging.getLogger(__name__)
 
 BODY_TAG = 'body'
-CITATION_TAG = 'citation'
+CITATION_TAG = 'cite_key'
 
 REPO_DIR = 'Documents/github/sp1_systematic_map'
 DATA_STORE = [
-    os.path.join(REPO_DIR, "_data/3_refs_clean/*")
+    os.path.join(REPO_DIR, "_data/3_refs_clean/*.ris")
 ]
 
 CACHE_DIR = os.path.join(REPO_DIR, 'llm_cache')
@@ -53,11 +53,11 @@ def parse_file_bib(bib_file_path):
         title = record.get('title', 'N/A')
         journal = record.get('journal', 'N/A')
         year = record.get('year', 'N/A')
-        volume = record.get('volume', 'N/A')
-        issue = record.get('number', 'N/A')
-        pages = record.get('pages', 'N/A')
+        # volume = record.get('volume', 'N/A')
+        # issue = record.get('number', 'N/A')
+        # pages = record.get('pages', 'N/A')
         doi = record.get('doi', 'N/A')
-        return f"{authors} ({year}). {title}. {journal}, {volume}({issue}), {pages}. DOI: {doi}"
+        return f"{authors} | {year} | {title} | {journal} | DOI: {doi}"
 
     with open(bib_file_path, 'rb') as file:
         raw_data = file.read()
@@ -97,12 +97,13 @@ def parse_file_ris(ris_file_path):
         title = record.get('Title', 'N/A')
         journal = record.get('Journal', 'N/A')
         year = record.get('Year', 'N/A')
-        volume = record.get('Volume', 'N/A')
-        issue = record.get('Issue', 'N/A')
-        start_page = record.get('StartPage', 'N/A')
-        end_page = record.get('EndPage', 'N/A')
+        # volume = record.get('Volume', 'N/A')
+        # issue = record.get('Issue', 'N/A')
+        # start_page = record.get('StartPage', 'N/A')
+        # end_page = record.get('EndPage', 'N/A')
         doi = record.get('DOI', 'N/A')
-        citation = f'{authors} ({year}). {title}. {journal}, {volume}({issue}), {start_page}-{end_page}. DOI: {doi}'
+        # citation = f"{authors} | {year} | {title} | {journal} | DOI: {doi}"
+        citation = record.get('Notes', 'N/A')
         return citation
 
     with open(ris_file_path, 'rb') as file:
@@ -146,14 +147,16 @@ def parse_file_ris(ris_file_path):
                     record['Date'] = body
                 elif index == 'PY':
                     record['Year'] = body
-                elif index == 'VL':
-                    record['Volume'] = body
-                elif index == 'IS':
-                    record['Issue'] = body
-                elif index == 'SP':
-                    record['StartPage'] = body
-                elif index == 'EP':
-                    record['EndPage'] = body
+                elif index == 'N1':
+                    record['Notes'] = body
+                # elif index == 'VL':
+                #     record['Volume'] = body
+                # elif index == 'IS':
+                #     record['Issue'] = body
+                # elif index == 'SP':
+                #     record['StartPage'] = body
+                # elif index == 'EP':
+                #     record['EndPage'] = body
                 elif index == 'DO':
                     record['DOI'] = body
 
@@ -166,7 +169,6 @@ def parse_file(file_path):
         return parse_file_ris(file_path)
     elif file_path.endswith('.bib'):
         return parse_file_bib(file_path)
-
 
 def main():
     file_paths = [

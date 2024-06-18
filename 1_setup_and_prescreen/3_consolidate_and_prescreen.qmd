@@ -103,7 +103,8 @@ all_docs_clean <- all_docs %>%
   mutate(first_author = str_remove(tolower(author), ' and .+') %>%
            stri_trans_general('Latin-ASCII') %>% ### drop diacritics
            str_remove('(?<=(, [a-z])).+'),
-         title = str_to_title(title),
+         title = str_to_title(title) %>%
+           str_remove_all('\\<.+?\\>'), ### drop HTML tags
          title_short = tolower(title) %>% 
            stri_trans_general('Latin-ASCII') %>% ### drop diacritics
            str_remove_all('[^a-z0-9 ]+') %>% 
@@ -114,6 +115,7 @@ all_docs_clean <- all_docs %>%
            str_remove_all('[^a-z0-9 ]+') %>% 
            str_squish() %>% 
            str_sub(1, 100),
+         journal = str_to_title(journal),
          year = str_extract(year, '[0-9]{4}') %>% as.numeric()) %>%
   mutate(doi = tolower(doi),
          source_type = tolower(source_type))
@@ -323,12 +325,43 @@ spurious_dropped <- resolved_remaining_dupes %>%
 
 ## Write out by source
 
-Write out as .ris for easier import into Colandr.
+Write out as .ris for easier import into Colandr.  Add a column with the key, 
 
 ```{r write out cleaned bibliographies}
 
-refs_ready <- spurious_dropped %>%
-  select(where(~ any(!is.na(.))))
+refs_almost_ready <- spurious_dropped %>%
+  select(where(~ any(!is.na(.)))) %>%
+  ### drop agency acronyms
+  mutate(author = str_remove(author, '\\[.+\\]'))
+
+refs_lookup <- refs_almost_ready %>%
+  select(author, title, journal, year, doi) %>%
+  unique() %>%
+  mutate(auth_short = author %>% 
+           stri_trans_general('Latin-ASCII') %>% 
+           tolower() %>%
+           str_remove(', .+') %>% 
+           str_remove_all('[^a-z]')) %>%
+  unnest_tokens(output = title_words, input = title, token = 'words', drop = FALSE) %>%
+  anti_join(stop_words, by = c('title_words' = 'word')) %>%
+  group_by(author, auth_short, title, journal, year, doi) %>%
+  slice(1:4) %>%
+  summarize(title_short = paste(title_words, collapse = ''), .groups = 'drop') %>%
+  mutate(key = paste(auth_short, title_short, year, sep = '_')) %>%
+  select(key, author, title, journal, year, doi)
+
+still_dupes <- janitor::get_dupes(refs_lookup, key)
+### these all look like true dupes due to mismatches in title 
+  
+### Remove spurious dupes by just slicing the first instance and going with it
+refs_lookup <- refs_lookup %>%
+  group_by(key) %>%
+  slice(1) %>%
+  ungroup()
+
+refs_ready <- refs_almost_ready %>%
+  inner_join(refs_lookup) %>%
+  select(-doc_id, notes = key)
 
 clean_scopus <- refs_ready %>%
   filter(src == 'scopus') %>% select(-src) %>%
@@ -348,6 +381,8 @@ clean_sbr <- refs_ready %>%
   as.data.frame() %>%
   select(where(~ any(!is.na(.))))
 
+write_csv(refs_lookup, here('_data/3_refs_clean/ref_key_lookup.csv'))
+
 write_refs(clean_scopus, format = 'ris',
            file = sprintf(here('_data/3_refs_clean/scopus_clean_%s.ris'), 
                           scopus_date))
@@ -357,6 +392,6 @@ write_refs(clean_wos,    format = 'ris',
 write_refs(clean_sbr,    format = 'ris',  
            file = sprintf(here('_data/3_refs_clean/sbr_clean_%s.ris'), 
                           sbr_date))
-```
+``` 
 
 
