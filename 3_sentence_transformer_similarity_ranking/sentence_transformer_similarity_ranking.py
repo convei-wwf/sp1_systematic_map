@@ -12,6 +12,8 @@ import spacy
 import tiktoken
 import torch
 
+import pandas as pd
+
 # spacy.require_gpu()
 nlp = spacy.load("en_core_web_sm")
 
@@ -47,62 +49,10 @@ def generate_hash(documents):
     return hash_hex
 
 
-def parse_file_bib(bib_file_path):
-    def generate_citation(record):
-        authors = ' and '.join(record.get('author', []))
-        title = record.get('title', 'N/A')
-        journal = record.get('journal', 'N/A')
-        year = record.get('year', 'N/A')
-        # volume = record.get('volume', 'N/A')
-        # issue = record.get('number', 'N/A')
-        # pages = record.get('pages', 'N/A')
-        doi = record.get('doi', 'N/A')
-        return f"{authors} | {year} | {title} | {journal} | DOI: {doi}"
-
-    with open(bib_file_path, 'rb') as file:
-        raw_data = file.read()
-        result = chardet.detect(raw_data)
-        encoding = result['encoding']
-
-    record_list = []
-    with open(bib_file_path, 'r', encoding=encoding) as file:
-        content = file.read()
-        entries = content.split('@ARTICLE')[1:]  # Skip the initial split part before the first @ARTICLE
-        for entry in entries:
-            entry = entry.strip()
-            record = {}
-            for line in entry.split('\n'):
-                line = line.strip()
-                if line.endswith(','):
-                    line = line[:-1]
-                if '=' in line:
-                    key, value = line.split('=', 1)
-                    key = key.strip()
-                    value = value.strip().strip('{}').strip('"')
-                    if key == 'author':
-                        record[key] = [author.strip() for author in value.split(' and ')]
-                    else:
-                        record[key] = value
-            if 'abstract' in record:
-                record_list.append({
-                    BODY_TAG: record['abstract'],
-                    CITATION_TAG: generate_citation(record)
-                })
-        return record_list
-
-
 def parse_file_ris(ris_file_path):
     def generate_citation(record):
-        authors = ' and '.join(record.get('Authors', []))
-        title = record.get('Title', 'N/A')
-        journal = record.get('Journal', 'N/A')
-        year = record.get('Year', 'N/A')
-        # volume = record.get('Volume', 'N/A')
-        # issue = record.get('Issue', 'N/A')
-        # start_page = record.get('StartPage', 'N/A')
-        # end_page = record.get('EndPage', 'N/A')
-        doi = record.get('DOI', 'N/A')
-        # citation = f"{authors} | {year} | {title} | {journal} | DOI: {doi}"
+        ### Notes is citation key, incl abbr author, title, year... there is a
+        ### lookup file to match this with full biblio info
         citation = record.get('Notes', 'N/A')
         return citation
 
@@ -167,8 +117,8 @@ def parse_file(file_path):
     LOGGER.info(f'parsing file: {file_path}')
     if file_path.endswith('.ris'):
         return parse_file_ris(file_path)
-    elif file_path.endswith('.bib'):
-        return parse_file_bib(file_path)
+    # elif file_path.endswith('.bib'):
+    #     return parse_file_bib(file_path)
 
 def main():
     file_paths = [
@@ -195,9 +145,18 @@ def main():
         for file_path in file_paths:
             LOGGER.info(f'processing single file {file_path}')
             article_list.extend(parse_file(file_path))
+            ### convert to df, split abstract by sentence, explode
+            article_df = pd.DataFrame(article_list)
+            ### split on period, preceded by two or more letters, followed by one or more spaces then a capital letter
+            ### (avoid things like "Forestlands in the southeastern U.S. generate...")
+            article_df['body'] = article_df['body'].str.split('(?<=[A-z]{2})\\. *(?=[A-Z])')
+            article_df = article_df.explode('body')
+            ### convert back to list of records, same format as before
+            article_list2 = article_df.to_dict(orient = 'records')
+
         abstract_list, citation_list = zip(
             *[(article[BODY_TAG], article[CITATION_TAG])
-              for article in article_list])
+              for article in article_list2])
         with open(parsed_articles_path, 'wb') as file:
             pickle.dump((abstract_list, citation_list), file)
 
