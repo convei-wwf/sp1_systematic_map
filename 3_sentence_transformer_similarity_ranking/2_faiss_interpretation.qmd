@@ -25,23 +25,16 @@ library(synthesisr)
 ```
 
 ```{r}
-faiss_query_fs <- list.files('faiss_out', pattern = 'faiss', full.names = TRUE)
+faiss_query_fs <- list.files('faiss_out', pattern = 'faiss_min', full.names = TRUE)
 
 faiss_q_df <- lapply(faiss_query_fs, FUN = function(f) {
   ## f <- faiss_query_fs[1]
-  q <- basename(f) %>% str_remove_all('faiss_out_|.csv')
+  q <- basename(f) %>% str_remove_all('faiss_min_|.csv')
   df <- read_csv(f, show_col_types = FALSE) %>%
     mutate(query = q) %>%
     select(dist, query, citation)
 }) %>%
-  bind_rows() %>%
-  ### dissect citation
-  mutate(citation = str_remove(citation, '^\\[.+?\\]') %>% tolower()) %>%  ### remove [ESA] and [the australian thing]
-  mutate(author = str_remove(citation, ' \\(.+') %>% str_trim(),
-         year   = str_extract(citation, '(?<=\\()[0-9]{4}(?=\\))') %>% as.integer(),
-         title  = str_remove(citation, author) %>% str_remove_all('\\([0-9]{4}\\)\\. |\\. n/a.+') %>% str_trim() %>% str_sub(1, 100),
-         author = str_extract(author, '[a-z]+'),
-         doi    = str_remove(citation, '.+doi: ') %>% str_trim() %>% tolower())
+  bind_rows()
 ```
 
 ## Plot distance per citation for each query
@@ -62,22 +55,30 @@ ggplot(faiss_q_df) +
 
 We can compare the screened results from the SBR to the distance values here, perhaps via PCA, clustering, logistic regression...
 
-```{r}
-sbr_screened_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
-  ### not sure why these citations are messed up...
-  mutate(author = ifelse(title == 'The Socio-Economic Value Of Scientific Publications: The Case Of Earth Observation Satellites', 'morretta', author)) %>%
-  mutate(title = tolower(title) %>% str_sub(1, 100)) %>%
-  filter(!is.na(author)) %>%
-  mutate(author = str_remove(author, '\\[.+?\\]') %>% tolower() %>% str_extract('^[a-z]+'))
+Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
 
-  
+```{r}
+cit_scr_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
+  mutate(title = str_to_title(title))
+
+fulltext_df <- read_csv(here('_output/societal_benefits/fulltext_screened.csv')) %>%
+  ### skip author, match by title only?
+  select(title, screening_decision, reason_for_exclusion, notes = `Quick notes`) %>%
+  mutate(title = str_to_title(title))
+
+screened_df <- cit_scr_df %>%
+  full_join(fulltext_df) %>%
+  mutate(decision = ifelse(is.na(screening_decision), screening_status, tolower(screening_decision))) %>%
+  mutate(decision = str_replace(decision, 'cluded', 'clude'))
+
+
 rescale <- function(x) {
   1 - (x - min(x)) / (max(x) - min(x))
 }
 
-sbr_vs_faiss <- sbr_screened_df %>%
-  select(author, title, screening_status, tags) %>%
-  left_join(faiss_q_df, by = c('author', 'title')) %>%
+sbr_vs_faiss <- screened_df %>%
+  select(author, title, decision, tags, key) %>%
+  left_join(faiss_q_df, by = c('key' = 'citation')) %>%
   ### convert distance to relevance: low distance = high relevance
   group_by(query) %>%
   mutate(dist_norm = rescale(dist)) %>%
@@ -86,42 +87,89 @@ sbr_vs_faiss <- sbr_screened_df %>%
 sbr_vs_faiss_geom_mean <- sbr_vs_faiss %>%
   ### let d be geometric mean of rescaled relevances: if any axis is low relevance,
   ### citation is of low relevance
-  group_by(author, title, screening_status) %>%
+  group_by(author, title, decision) %>%
   summarize(geom_mean = prod(dist_norm)^(n_distinct(query)), 
             .groups = 'drop') %>%
   right_join(sbr_vs_faiss)
 
 ggplot(sbr_vs_faiss_geom_mean, aes(x = dist_norm)) +
-  geom_density(aes(fill = screening_status), alpha = .25) +
+  geom_density(aes(fill = decision), alpha = .25) +
   facet_wrap(~ query)
 
-t.test(dist_norm ~ screening_status,
+t.test(dist_norm ~ decision,
        data = sbr_vs_faiss_geom_mean %>% 
-         select(dist_norm, screening_status) %>% 
+         select(dist_norm, decision) %>% 
          distinct())
 ```
 
 ```{r}
 ggplot(sbr_vs_faiss_geom_mean) +
-  stat_qq(aes(sample = dist_norm, color = screening_status)) +
+  stat_qq(aes(sample = dist_norm, color = decision)) +
   facet_wrap(~ query)
 
 ggplot(sbr_vs_faiss_geom_mean) +
-  geom_density(aes(x = dist_norm, fill = screening_status), alpha = .25) +
+  geom_density(aes(x = dist_norm, fill = decision), alpha = .25) +
   facet_wrap(~ query, scales = 'free_y')
 ```
 
 ## Let's try some PCA!
 
 ```{r}
-sbr_faiss_wide <- sbr_vs_faiss %>%
-  select(-dist, -citation) %>%
-  pivot_wider(names_from = 'query', values_from = 'dist_norm') %>%
-  ### post-PCA, identify highly redundant axes
-  select(-bayesian_decision_analysis, -remote_earth_observation, -societal_benefits)
+library(corrplot)
 
-sbr_faiss_pca <- sbr_faiss_wide %>%
-  select(-author, -title, -screening_status, -year, -doi, -tags) %>%
+sbr_faiss_wide <- sbr_vs_faiss %>%
+  select(-dist, -key) %>%
+  filter(!is.na(query)) %>%
+  pivot_wider(names_from = 'query', values_from = 'dist_norm')
+
+sbr_faiss_mtx <- sbr_faiss_wide %>%
+  select(-author, -title, -decision, -tags) %>%
+  as.matrix()
+
+corr_mtx <- cor(sbr_faiss_mtx)
+
+### rename rows and cols for easier display
+varnames_df <- data.frame(name = colnames(corr_mtx)) %>%
+  mutate(code = LETTERS[1:n()])
+corr_mtx2 <- corr_mtx
+rownames(corr_mtx2) <- colnames(corr_mtx2) <- varnames_df$code
+corrplot.mixed(corr_mtx2)
+knitr::kable(varnames_df)
+
+```
+
+Examine correlation matrix to identify candidate variables to drop.
+
+```{r}
+corr_df <- as.data.frame(corr_mtx, col.names = colnames(corr_mtx)) %>% 
+  mutate(row = rownames(corr_mtx)) %>%
+  pivot_longer(-row, names_to = 'col', values_to = 'corr') %>%
+  filter(row != col) %>%
+  mutate(pair = ifelse(col > row, paste(col, row, sep = '-'), paste(row, col, sep = '-'))) %>%
+  select(-row, -col) %>%
+  distinct() %>%
+  separate(col = pair, into = c('row', 'col'), sep = '-')
+
+dropcols <- corr_df %>%
+  group_by(col) %>%
+  mutate(colsum = sum(abs(corr))) %>%
+  group_by(row) %>%
+  mutate(rowsum = sum(abs(corr))) %>%
+  ungroup() %>%
+  mutate(drop = ifelse(rowsum > colsum, row, col)) %>%
+  filter(abs(corr) > 0.82) %>%
+  .$drop
+
+```
+
+```{r}
+
+sbr_faiss_parsim <- sbr_faiss_wide %>%
+  select(-author, -title, -decision, -tags) %>%
+  ### drop highly correlated axes
+  select(-all_of(dropcols)) 
+
+sba_faiss_pca <- sbr_faiss_parsim %>%
   scale() %>%
   prcomp()
 
@@ -129,7 +177,7 @@ sbr_faiss_pca$rotation
    
 autoplot(sbr_faiss_pca,
          data = sbr_faiss_wide,
-         color = 'screening_status',
+         color = 'decision',
          loadings = TRUE,
          loadings.label = TRUE,
          loadings.color = 'black',
@@ -138,17 +186,7 @@ autoplot(sbr_faiss_pca,
 screeplot(sbr_faiss_pca)
 ```
 
-## Write out normalized distance values
+## Let's try some predictive models
 
-Take a sample of the highest-ranking "excludes" and lowest-ranking "includes" to examine why the distance scoring performs poorly (e.g., maybe missing some key words, maybe some screened articles were classified incorrectly)
 
-```{r}
-tmp <- sbr_faiss_wide %>%
-  select(-value_of_information, -satellite_data,-socioeconomic_benefits) %>%
-  mutate(geom_mean = (decision_analysis * satellite_earth_observation * societal_value * valuation_of_information)^.25) %>%
-  left_join(sbr_screened_df %>% select(title, abstract)) %>%
-  filter((screening_status == 'excluded' & geom_mean > .5) | (screening_status == 'included' & geom_mean < .35))
-
-write_csv(tmp, 'sbr_screened_dist_mtx.csv')
-```
 

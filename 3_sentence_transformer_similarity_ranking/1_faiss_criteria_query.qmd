@@ -82,7 +82,7 @@ document_distance_index = faiss.read_index(faiss_path[0])
 
 ```
 
-Having read in the indexed articles, let's process the distance for each criteria phrase across the entire corpus, and save out as .csv with article info and distance.
+Having read in the indexed articles, let's process the distance for each criteria phrase across the entire corpus.  Because each abstract is divided by sentence, take the sentence with the highest quality match and assign its distance score to the entire abstract.  Finally, save out as .csv with article info and distance.
 
 
 ```{python define rank_articles function}
@@ -123,8 +123,16 @@ OUT_DIR = 'faiss_out'
 
 for term in term_list:
     ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
     x = rank_articles(term)
-    f = os.path.join(OUT_DIR, 'faiss_out_' + term.replace(' ', '_') + '.csv')
-    x.to_csv(f)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
 
 ```

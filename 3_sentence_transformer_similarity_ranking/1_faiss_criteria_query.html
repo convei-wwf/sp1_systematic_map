@@ -3103,7 +3103,7 @@ vertical-align: -.125em;
 <ol type="1">
 <li>The corpus of title/abstracts is embedded and encoded</li>
 </ol>
-<div id="531daa6a" class="cell" data-execution_count="1">
+<div id="1f362da5" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import chardet</span></span>
@@ -3122,7 +3122,7 @@ vertical-align: -.125em;
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f5977b5a" class="cell" data-execution_count="2">
+<div id="c98bcbb4" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># spacy.require_gpu()</span></span>
@@ -3132,7 +3132,7 @@ vertical-align: -.125em;
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ENCODING = tiktoken.encoding_for_model(GPT_MODEL)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="30200473" class="cell" data-execution_count="3">
+<div id="9b0a8811" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># logging.basicConfig(</span></span>
@@ -3172,8 +3172,8 @@ vertical-align: -.125em;
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>document_distance_index <span class="op">=</span> faiss.read_index(faiss_path[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Having read in the indexed articles, let’s process the distance for each criteria phrase across the entire corpus, and save out as .csv with article info and distance.</p>
-<div id="68ec3741" class="cell" data-execution_count="4">
+<p>Having read in the indexed articles, let’s process the distance for each criteria phrase across the entire corpus. Because each abstract is divided by sentence, take the sentence with the highest quality match and assign its distance score to the entire abstract. Finally, save out as .csv with article info and distance.</p>
+<div id="f81f14f0" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rank_articles(question):</span>
@@ -3204,7 +3204,7 @@ vertical-align: -.125em;
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dist_cit_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="694a2274" class="cell" data-execution_count="5">
+<div id="3674b7cf" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>term_list <span class="op">=</span> [<span class="st">&#39;remote earth observation&#39;</span>, <span class="st">&#39;satellite earth observation&#39;</span>, <span class="st">&#39;satellite data&#39;</span>, </span>
@@ -3215,9 +3215,17 @@ vertical-align: -.125em;
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> term <span class="kw">in</span> term_list:</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">### term = term_list[0]</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> rank_articles(term)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> os.path.join(OUT_DIR, <span class="st">&#39;faiss_out_&#39;</span> <span class="op">+</span> term.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>) <span class="op">+</span> <span class="st">&#39;.csv&#39;</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    x.to_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">### Apply the rank_articles function for each term in the list</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> rank_articles(term)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">### use groupby and aggregate to keep the min distance per citation</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x.groupby(<span class="st">&#39;citation&#39;</span>).agg({<span class="st">&#39;dist&#39;</span>: <span class="st">&#39;min&#39;</span>})</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> x.groupby(<span class="st">&#39;citation&#39;</span>).agg({<span class="st">&#39;dist&#39;</span>: <span class="st">&#39;max&#39;</span>})</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">### create file path and write out y as a csv</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> os.path.join(OUT_DIR, <span class="st">&#39;faiss_min_&#39;</span> <span class="op">+</span> term.replace(<span class="st">&#39; &#39;</span>, <span class="st">&#39;_&#39;</span>) <span class="op">+</span> <span class="st">&#39;.csv&#39;</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    y.to_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
