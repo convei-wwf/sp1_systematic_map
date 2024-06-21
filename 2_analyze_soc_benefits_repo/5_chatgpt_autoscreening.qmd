@@ -35,8 +35,10 @@ The process:
     * the desired output format, for consistency across responses
 * Append the prompt and the title/abstract
 * Feed into ChatGPT and cross fingers
-    * have a check in there for response formats
+    * have a check in there for response formats?
 * Bind the results and save out
+
+It may be better/easier to try screening based on smaller chunks of criteria at a time, though will require more queries per paper.  The results can be combined and any that fail on a criterion can be excluded.
 
 # Data
 
@@ -70,29 +72,34 @@ api_key <- Sys.getenv('OPENAI')
 Set up the prompt:
 
 ```{r}
-inclusion_criteria <- c(
-  'A. The context of the study relates to justice, equity, and/or one of the NASA Applied Science themes (Capacity Building, Climate & Resilience, Disasters, Health & Air Quality, Water Resources, Ecological Conservation, Agriculture, Wildland Fires)',
-  'B. The title or abstract clearly mentions Earth Observation (EO), satellite data (or a specific satellite name, such as Landsat), or remote sensing data',
-  'C. The title or abstract indicates that the study assesses/measures the value of a societal benefit in economic terms (e.g., monetary value) or utility (e.g., benefit for a defined user(s), purpose, or decision), as a primary goal or result',
-  'D. The title or abstract attributes/links the benefit/value to the application/use of a specific dataset or data source (EO or otherwise)',
-  'E. The title or abstract indicates that the study applies the valuation methodology specifically to an earth-observation-relevant dataset or data source',
-  'F. The document does not represent a review, an opinion piece, or an intro to a series/book/conference',
-  'G. The document does not represent a conference abstract'
+crit_a <- 'the context of the study relates to justice, equity, and/or one of the NASA Applied Science themes (Capacity Building, Climate & Resilience, Disasters, Health & Air Quality, Water Resources, Ecological Conservation, Agriculture, Wildland Fires)'
+crit_b <- 'the article uses Earth Observation (EO), satellite data (or a specific satellite name, such as Landsat), or remote sensing data'
+crit_c <- 'the study assesses/measures the value of a societal benefit in economic terms (e.g., monetary value) or utility (e.g., benefit for a defined user(s), purpose, or decision), as a primary goal or result'
+crit_d <- 'the article attributes a societal benefit/value to the application or use of a specific dataset or data source (EO or otherwise)'
+crit_e <- 'the study applies the valuation methodology specifically to an earth-observation-relevant dataset or data source'
+crit_rev <- 'the article does not represent a review, an opinion piece, or an intro to a series/book/conference, and the article does not represent a conference abstract'
+
+pre_prompt <- c(
+  'I am screening papers for a systematic literature review.',
+  'Set temperature to 0 and max_tokens to 3.', 
+  'I only want to include articles that meet the following criteria: '
 )
 
-prompt <- c('Here is a set of inclusion criteria for a literature screening: ',
-            inclusion_criteria,
-            'Those are the inclusion criteria.  Given the following title and abstract for a document, please determine whether the document meets all the inclusion criteria.  If the title and abstract meets all criteria, respond only with "include" and no other text.  If it fails to meet one or more criteria, respond with "exclude", followed by a comma, followed by the letters of the criteria it failed to meet concatenated together.  For example, if the title and abstract failed to meet criteria A and C, you would respond with "exclude,AC" and no other text.  If you are uncertain whether it meets one or more criteria, respond with "uncertain", followed by a comma, followed by the letters of the criteria it failed to meet concatenated together, for example, "uncertain,AC" and no other text.  Here is the title and abstract:'
-            )
+post_prompt <- c(
+  'Based on that criteria, decide whether the article should be included or excluded from the systematic review.',
+  'I give the title and abstract of the article as input.  Only answer Include or Exclude.',
+  'Be lenient. I prefer including papers by mistake rather than excluding them by mistake.'
+  )
 ```
 
 ```{r, message = NA}
-out_f <- here('_output/societal_benefits/chatgpt_autoscreen1.csv')
+out_f <- here('_output/societal_benefits/chatgpt_autoscreen2.csv')
 
 if(!file.exists(out_f)) {
   out_df <- sbr_df %>%
     select(doc_id, title, abstract, author, year) %>%
-    mutate(screening_decision = NA, error = NA)
+    mutate(screening_decision = NA, error = NA) %>%
+    slice(1:10)
   
   endpt <- 'https://api.openai.com/v1/chat/completions'
   
@@ -109,11 +116,13 @@ if(!file.exists(out_f)) {
     abstr <- out_df$abstract[i]
     input <- paste0('Title: ', title, '. Abstract: ', abstr)
     
+    prompt <- str_c(pre_prompt, crit_d, post_prompt, input, collapse = ' ')
+    
     post_body <- list(
       model = 'gpt-3.5-turbo-0125',
       messages = list(
         list(role = 'system', content = 'You are a helpful research assistant with a background in economic methods.'),
-        list(role = 'user', content = str_c(prompt, input, collapse = ' '))
+        list(role = 'user', content = prompt)
       )
     )
     
