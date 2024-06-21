@@ -1,5 +1,5 @@
 ---
-title: "Societal Benefit Repo screening results"
+title: "Societal Benefit Repo citation screening results"
 author: "O'Hara"
 format: 
   html:
@@ -40,19 +40,29 @@ Also, write out included refs with DOI for import into Zotero.
 sbr_df <- read_csv(here('_data/societal_benefits/repo_cleaned_240423.csv')) %>%
   janitor::clean_names() %>%
   select(-keywords) %>%
+  mutate(title = str_to_title(title),
+         journal = str_to_title(journal),
+         author = str_remove(author, '\\[.+\\]')) %>%
   distinct()
 
-# sbr_results_df <- read_csv(here('_data/screened/colandr_results_240429.csv')) %>%
-#   filter(data_source_name == 'Societal Benefits repo') %>%
-#   select(contains('citation'), -contains('journal')) %>%
-#   setNames(str_remove(names(.), 'citation_')) %>%
-#   mutate(across(where(is.character), str_squish)) %>%
-#   select(-abstract, -authors) %>%
-#   distinct()
+sbr_key <- sbr_df %>%
+  mutate(auth_short = author %>% 
+           stringi::stri_trans_general('Latin-ASCII') %>% 
+           tolower() %>%
+           str_remove(', .+') %>% 
+           str_remove_all('[^a-z]')) %>%
+  unnest_tokens(output = title_words, input = title, token = 'words', drop = FALSE) %>%
+  anti_join(stop_words, by = c('title_words' = 'word')) %>%
+  group_by(author, auth_short, title, journal, year) %>%
+  slice(1:4) %>%
+  summarize(title_short = paste(title_words, collapse = ''), .groups = 'drop') %>%
+  mutate(key = paste(auth_short, title_short, year, sep = '_')) %>%
+  select(key, author, title, journal, year)
 
 sbr_results_df <- read_csv(here('_data/screened/colandr_companion_incl_240429.csv')) %>%
   bind_rows(read_csv(here('_data/screened/colandr_companion_excl_240429.csv'))) %>%
-  mutate(across(where(is.character), str_squish)) %>%
+  mutate(across(where(is.character), str_squish),
+         title = str_to_title(title)) %>%
   select(-id, -authors, year = publication_year, 
          screening_status = `t&a_status`, excl_reason = `t&a_exclusion_reasons`) %>%
   filter(!is.na(screening_status)) %>%
@@ -63,14 +73,20 @@ sbr_results_df <- read_csv(here('_data/screened/colandr_companion_incl_240429.cs
   unnest(excl_reasons) %>%
   group_by(title, year, screening_status) %>%
   summarize(tags = paste0(unique(tags), collapse = ';'),
-            excl_reasons = paste0(unique(excl_reasons), collapse = ';'))
+            excl_reasons = paste0(unique(excl_reasons), collapse = ';'),
+            .groups = 'drop')
 
 sbr_out_df <- sbr_df %>%
-  inner_join(sbr_results_df, by = c('title', 'year'))
+  inner_join(sbr_results_df, by = c('title', 'year')) %>%
+  left_join(sbr_key)
 
 sbr_incl_df <- sbr_out_df %>%
   filter(screening_status == 'included') %>%
   select(-vi, -sba, -ea, -screening_status, -excl_reasons)
+
+sbr_key2 <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))
+check <- sbr_out_df %>%
+  filter(!key %in% sbr_key2$key)
 
 write_csv(sbr_out_df, here('_data/societal_benefits/sbr_screened_results_240429.csv'))
 ```
