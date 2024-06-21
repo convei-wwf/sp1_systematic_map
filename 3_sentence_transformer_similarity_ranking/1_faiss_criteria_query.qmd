@@ -114,11 +114,17 @@ def rank_articles(question):
     return dist_cit_df
 ```
 
-```{python run terms}
-term_list = ['remote earth observation', 'satellite earth observation', 'satellite data', 
-             'societal benefits', 'socioeconomic benefits', 'societal value',
-             'valuation of information', 'value of information', 'decision analysis', 'bayesian decision analysis',
-             'value of satellite earth observation data to improve societal benefits']
+## Queries for each criterion group
+
+For each criterion, try a few queries.  When processing, perhaps summarize each criterion group of queries by selecting the minimum value.  For example, "Earth observation" might indicate high similarity, even if the paper does not mention satellite data (e.g., mentions Landsat instead) - so base the similarity on the most-similar term in the group.  If a paper is not similar on any metric, then even the most similar will be far afield.
+
+### Criterion A: earth observation/satellite data
+
+Include a letter indicating criterion group in the file name, for easy access later
+
+```{python run earth observation terms}
+term_list = ['remote sensing', 'earth observation', 'satellite data']
+
 OUT_DIR = 'faiss_out'
 
 for term in term_list:
@@ -129,10 +135,77 @@ for term in term_list:
     
     ### use groupby and aggregate to keep the min distance per citation
     y = x.groupby('citation').agg({'dist': 'min'})
-    z = x.groupby('citation').agg({'dist': 'max'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
     
     ### create file path and write out y as a csv
-    f = os.path.join(OUT_DIR, 'faiss_min_' + term.replace(' ', '_') + '.csv')
+    f = os.path.join(OUT_DIR, 'faiss_min_a_' + term.replace(' ', '_') + '.csv')
     y.to_csv(f)
 
 ```
+
+### Second criterion: societal benefits
+
+```{python run societal benefits terms}
+term_list = ['societal benefits', 'capacity building', 'disaster response', 'water resources', 'agriculture', 'climate resilience', 'health and air quality', 'ecological conservation', 'wildland fires']
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_b_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+
+### Third criterion: valuation methodology
+
+```{python run valuation methodology terms}
+term_list = ['valuation of information', 'decision analysis', 'cost benefit analysis']
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_c_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+
+### Combined criteria?
+
+```{python run combo queries}
+term_list = ['value of satellite earth observation data to improve societal benefits']
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_d_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+

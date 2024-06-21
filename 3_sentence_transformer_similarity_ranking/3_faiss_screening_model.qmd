@@ -80,9 +80,7 @@ sbr_vs_faiss <- screened_df %>%
 
 ```
 
-## Identify collinearity to reduce dimensionality
-
-Could also do PCA, but harder to explain axes
+## Examine collinearity
 
 ```{r}
 
@@ -96,65 +94,78 @@ sbr_faiss_mtx <- sbr_faiss_wide %>%
   as.matrix()
 
 corr_mtx <- cor(sbr_faiss_mtx)
+rownames(corr_mtx) <- colnames(corr_mtx) <- LETTERS[1:nrow(corr_mtx)]
+corrplot.mixed(corr_mtx)
 ```
+Unsurprisingly, results for very similar terms tend to have a lot of collinearity:
 
-Examine correlation matrix to identify candidate variables to drop.
+* `bayesian_decision_analysis` ~ `decision_analysis` = 84%
+* `remote_earth_observation` ~ `satellite_earth_observation` = 97%
+* `valuation_of_information` ~ `valuation_of_information` = 92%
+* `socioeconomic_benefits` ~ `societal_benefits` = 91%
+* and 12 other combos with correlation > 0.50
 
-```{r}
-corr_df <- as.data.frame(corr_mtx, col.names = colnames(corr_mtx)) %>% 
-  mutate(row = rownames(corr_mtx)) %>%
-  pivot_longer(-row, names_to = 'col', values_to = 'corr') %>%
-  filter(row != col) %>%
-  mutate(pair = ifelse(col > row, paste(col, row, sep = '-'), paste(row, col, sep = '-'))) %>%
-  select(-row, -col) %>%
-  distinct() %>%
-  separate(col = pair, into = c('row', 'col'), sep = '-')
-
-dropcols <- corr_df %>%
-  group_by(col) %>%
-  mutate(colsum = sum(abs(corr))) %>%
-  group_by(row) %>%
-  mutate(rowsum = sum(abs(corr))) %>%
-  ungroup() %>%
-  mutate(drop = ifelse(rowsum > colsum, row, col)) %>%
-  filter(abs(corr) > 0.82) %>%
-  .$drop
-
-```
 
 ## Examine relationships via PCA
 
 ```{r}
-
-sbr_faiss_parsim <- sbr_faiss_wide %>%
-  ### drop highly correlated axes
-  select(-all_of(dropcols)) 
-
-sba_faiss_pca <- sbr_faiss_parsim %>%
-  select(-author, -title, -decision, -tags) %>%
+# set.seed(42)
+sbr_faiss_pca <- sbr_faiss_wide %>%
+  select(where(is.numeric)) %>%
   scale() %>%
   prcomp()
 
-sbr_faiss_pca$rotation
-   
-autoplot(sbr_faiss_pca,
-         data = sbr_faiss_wide,
-         color = 'decision',
-         loadings = TRUE,
-         loadings.label = TRUE,
-         loadings.color = 'black',
-         loadings.label.color = 'black')
+pca_df <- as.data.frame(sbr_faiss_pca$x) %>%
+  mutate(decision = sbr_faiss_wide$decision)
 
-screeplot(sbr_faiss_pca)
+pca_hull_df <- pca_df %>%
+  arrange(decision, PC1, PC2) %>%
+  group_by(decision) %>%
+  slice(chull(PC1, PC2))
+
+pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * 10) %>%
+  mutate(query = rownames(.))
+
+p12 <- ggplot(pca_df, aes(x = PC1, y = PC2)) +
+  geom_point(aes(color = decision)) +
+  geom_segment(data = pca_rot_df, x = 0, y = 0, 
+               aes(xend = PC1, yend = PC2), 
+               arrow = arrow(length = unit(.1, 'inches'))) +
+  geom_text(data = pca_rot_df, aes(label = query)) +
+  geom_polygon(data = pca_hull_df, 
+               aes(x = PC1, y = PC2, color = decision, fill = decision), alpha = .1)
+
+p12
 ```
+
+The collinearity at least within the first two principal components is clear in the biplot.  While there is a lot of overlap between the includes and excludes, there's a pretty decent chunk of excluded documents that do not overlap at all.  Identifying thresholds to drop those would save a substantial amount of time when proceeding to a manual citation screening. 
+
+```{r}
+
+scree_df <- data.frame(PC = paste0('PC', 1:length(sbr_faiss_pca$sdev)),
+                       pct = (sbr_faiss_pca$sdev)^2 / sum((sbr_faiss_pca$sdev)^2)) %>%
+  mutate(PC = fct_inorder(PC),
+         lbl = paste0(round(pct * 100, 1), '%'),
+         cumsum = cumsum(pct))
+
+ggplot(scree_df, aes(x = PC, y = pct)) +
+  geom_col() +
+  geom_text(aes(label = lbl), vjust = 0, nudge_y = .01)
+
+knitr::kable(pca_rot_df %>% select(PC1:PC4))
+
+```
+
+The screeplot shows that 90% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful for the binary logistic regression model.
+
 
 ## Let's try some predictive models
 
-Split the data for later comparison of performance of different models.  `sbr_train_df` will be used for model selection.  Drop variables not used in model, and convert outcome variable to factor.
+Split the data for later comparison of performance of different models.  `sbr_train_df` will be used for model selection.  Drop variables not used in model, and convert outcome variable to factor.  Use the PCA results.
 
 ```{r}
-sbr_split <- initial_split(sbr_faiss_parsim %>%
-                             select(-author, -title, -tags) %>%
+
+sbr_split <- initial_split(pca_df %>%
                              mutate(decision = factor(decision)),
                            prop = .80, strata = decision)
 
@@ -211,5 +222,38 @@ rf_last  <- rf_wf %>%
 
 collect_metrics(blr_last)
 collect_metrics(rf_last)
+```
+
+Based on this, the binary logistic regression seems to do a good job of prediction.  However, we are more concerned about false negatives (rejecting a document that should be included) than false positives (including a document that should be excluded), and our dataset is a bit unbalanced (~20% inclusion) and the full dataset is likely to be far more unbalanced, so these "success metrics" are likely driven by high true negative rates.  Let's pull info out of the `blr_last`, and plot a ROC and confusion matrix to see if there's a good threshold for probability that drops true negatives but doesn't drop many true positives...
+
+```{r}
+blr_check_df <- blr_last$.predictions[[1]]
+
+blr_check_df %>% select(.pred_class, decision) %>% table()
+
+blr_check_df %>% filter(decision == 'include') %>% arrange(.pred_include)
+```
+
+From this rough cut, no false positives, but a high false negative rate (7 out of 11 "includes" classified as "exclude").  Not great!  The `.pred_include` column shows that false negatives start at only 9.6%, with many more in the 10-20% range.  
+
+```{r}
+roc_curve(blr_check_df, truth = decision, .pred_exclude) %>%
+  autoplot()
+```
+
+## Which documents are classified as false negatives?
+
+Examine the false negatives, including the queries with the lowest similarity values (these are rescaled distance values, so 0 = highest distance = lowest similarity, 1 = lowest distance = highest similarity).
+
+```{r}
+false_neg_indices <- blr_check_df %>% filter(decision == 'include' & .pred_class == 'exclude') %>% pull(.row)
+
+sbr_faiss_wide %>%
+  mutate(across(where(is.numeric), ~round(.x, 3))) %>%
+  slice(false_neg_indices) %>%
+  pivot_longer(names_to = 'query', values_to = 'val', -c(author, title, decision, tags)) %>%
+  group_by(author, title) %>%
+  slice_min(val, n = 2) %>%
+  DT::datatable()
 ```
 
