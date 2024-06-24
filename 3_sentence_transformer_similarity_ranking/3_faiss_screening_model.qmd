@@ -78,8 +78,8 @@ sbr_vs_faiss <- screened_df %>%
   select(author, title, decision, tags, key) %>%
   left_join(faiss_q_df, by = c('key' = 'citation')) %>%
   ### find the lowest distance among queries in the category
-  group_by(author, title, criteria) %>%
-  filter(dist == min(dist)) %>%
+  # group_by(author, title, criteria) %>%
+  # filter(dist == min(dist)) %>%
   ### convert distance to relevance: low distance = high relevance
   group_by(query) %>%
   mutate(dist_norm = rescale(dist)) %>%
@@ -93,8 +93,9 @@ sbr_vs_faiss <- screened_df %>%
 
 sbr_faiss_wide <- sbr_vs_faiss %>%
   filter(!is.na(query)) %>%
-  select(-dist, -key, -query) %>%
-  pivot_wider(names_from = 'criteria', values_from = 'dist_norm')
+  filter(criteria != 'd') %>%
+  select(-dist, -key, -criteria) %>%
+  pivot_wider(names_from = 'query', values_from = 'dist_norm')
 
 sbr_faiss_mtx <- sbr_faiss_wide %>%
   select(-author, -title, -decision, -tags) %>%
@@ -104,7 +105,7 @@ corr_mtx <- cor(sbr_faiss_mtx)
 corrplot.mixed(corr_mtx)
 ```
 
-Having selected the best match for each criterion, we now see very little collinearity among criteria a-c (though lots between a and d).  We therefore probably don't need to worry about a PCA to reduce collinearity, and can just use scores for criteria a-c directly. That said, let's still check out a PCA:
+The strength of collinearity is pretty low for most variable pairs, with exception of earth observation, remote sensing, and satellite data, which have correlation coefficients of around .67.  Let's see what these look like with a PCA.
 
 ## Examine relationships via PCA
 
@@ -112,7 +113,6 @@ Having selected the best match for each criterion, we now see very little collin
 # set.seed(42)
 sbr_faiss_pca <- sbr_faiss_wide %>%
   select(where(is.numeric)) %>%
-  select(-d) %>%
   scale() %>%
   prcomp()
 
