@@ -24,7 +24,7 @@ library(here)
 ```
 
 ```{r}
-faiss_query_fs <- list.files('faiss_out', pattern = 'faiss_min', full.names = TRUE)
+faiss_query_fs <- list.files('faiss_out', pattern = '^faiss_min.+.csv$', full.names = TRUE)
 
 faiss_q_df <- lapply(faiss_query_fs, FUN = function(f) {
   ## f <- faiss_query_fs[1]
@@ -109,31 +109,5 @@ ggplot(sbr_vs_faiss_geom_mean) +
 ggplot(sbr_vs_faiss_geom_mean) +
   geom_density(aes(x = dist_norm, fill = decision), alpha = .25) +
   facet_wrap(~ query, scales = 'free_y')
-```
-
-## Let's try some PCA!
-
-```{r}
-library(corrplot)
-
-sbr_faiss_wide <- sbr_vs_faiss %>%
-  select(-dist, -key) %>%
-  filter(!is.na(query)) %>%
-  pivot_wider(names_from = 'query', values_from = 'dist_norm')
-
-sbr_faiss_mtx <- sbr_faiss_wide %>%
-  select(-author, -title, -decision, -tags) %>%
-  as.matrix()
-
-corr_mtx <- cor(sbr_faiss_mtx)
-
-### rename rows and cols for easier display
-varnames_df <- data.frame(name = colnames(corr_mtx)) %>%
-  mutate(code = LETTERS[1:n()])
-corr_mtx2 <- corr_mtx
-rownames(corr_mtx2) <- colnames(corr_mtx2) <- varnames_df$code
-corrplot.mixed(corr_mtx2)
-knitr::kable(varnames_df)
-
 ```
 
