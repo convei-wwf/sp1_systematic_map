@@ -93,8 +93,9 @@ sbr_vs_faiss <- screened_df %>%
 
 sbr_faiss_wide <- sbr_vs_faiss %>%
   filter(!is.na(query)) %>%
-  filter(criteria != 'd') %>%
+  filter(!criteria %in% c('b')) %>% ### drop societal benefits queries?
   select(-dist, -key, -criteria) %>%
+  mutate(query = str_sub(query, 1, 10)) %>%
   pivot_wider(names_from = 'query', values_from = 'dist_norm')
 
 sbr_faiss_mtx <- sbr_faiss_wide %>%
@@ -141,27 +142,27 @@ p12
 
 The collinearity at least within the first two principal components is clear in the biplot.  While there is a lot of overlap between the includes and excludes, there's a pretty decent chunk of excluded documents that do not overlap at all.  Identifying thresholds to drop those would save a substantial amount of time when proceeding to a manual citation screening. 
 
-Let's examine between PC 2 and 3:
+Let's examine between PC 3 and 4:
 
 ```{r}
 pca_hull_df <- pca_df %>%
-  arrange(decision, PC3, PC2) %>%
+  arrange(decision, PC3, PC4) %>%
   group_by(decision) %>%
-  slice(chull(PC3, PC2))
+  slice(chull(PC3, PC4))
 
 pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * 5) %>%
   mutate(query = rownames(.))
 
-p23 <- ggplot(pca_df, aes(x = PC3, y = PC2)) +
+p34 <- ggplot(pca_df, aes(x = PC3, y = PC4)) +
   geom_point(aes(color = decision)) +
   geom_segment(data = pca_rot_df, x = 0, y = 0, 
-               aes(xend = PC3, yend = PC2), 
+               aes(xend = PC3, yend = PC4), 
                arrow = arrow(length = unit(.1, 'inches'))) +
   geom_text(data = pca_rot_df, aes(label = query)) +
   geom_polygon(data = pca_hull_df, 
-               aes(x = PC3, y = PC2, color = decision, fill = decision), alpha = .1)
+               aes(x = PC3, y = PC4, color = decision, fill = decision), alpha = .1)
 
-p23
+p34
 ```
 
 ```{r}
@@ -180,7 +181,7 @@ knitr::kable(pca_rot_df %>% select(PC1:PC4))
 
 ```
 
-The screeplot shows that 90% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful for the binary logistic regression model.
+The screeplot shows that 75% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful for the binary logistic regression model.
 
 
 ## Let's try some predictive models
@@ -188,9 +189,10 @@ The screeplot shows that 90% of the variance is captured in the first four princ
 Split the data for later comparison of performance of different models.  `sbr_train_df` will be used for model selection.  Drop variables not used in model, and convert outcome variable to factor.  Use the PCA results.
 
 ```{r}
-
+set.seed(42)
 sbr_split <- initial_split(sbr_faiss_wide %>%
-                             mutate(decision = factor(decision)),
+                             mutate(decision = factor(decision)) %>%
+                             select(decision, where(is.numeric)),
                            prop = .80, strata = decision)
 
 sbr_test_df <- testing(sbr_split)
@@ -209,25 +211,26 @@ blr_mdl <- logistic_reg() %>%
 
 blr_wf <- workflow() %>%
   add_model(blr_mdl) %>%
-  add_formula(decision ~ a + b + c)
+  add_formula(decision ~ .)
 
 blr_fit_folds <- blr_wf %>%
   fit_resamples(sbr_train_folds)
 
 collect_metrics(blr_fit_folds)
+
+# glm(decision ~ ., data = sbr_train_df, family = 'binomial') %>% summary
 ```
 
 ### Random forest
 
 ```{r}
-# set.seed(42)
 rf_mdl <- rand_forest(trees = 1000) %>%
   set_engine('ranger') %>%
   set_mode('classification')
 
 rf_wf <- workflow() %>%
   add_model(rf_mdl) %>%
-  add_formula(decision ~ a + b + c)
+  add_formula(decision ~ .)
 
 rf_fit_folds <- rf_wf %>%
   fit_resamples(sbr_train_folds)
@@ -248,20 +251,22 @@ collect_metrics(blr_last)
 collect_metrics(rf_last)
 ```
 
-Based on this, the binary logistic regression seems to do a good job of prediction.  However, we are more concerned about false negatives (rejecting a document that should be included) than false positives (including a document that should be excluded), and our dataset is a bit unbalanced (~20% inclusion) and the full dataset is likely to be far more unbalanced, so these "success metrics" are likely driven by high true negative rates.  Let's pull info out of the `blr_last`, and plot a ROC and confusion matrix to see if there's a good threshold for probability that drops true negatives but doesn't drop many true positives...
+Based on this, both models seems to do a good job of prediction.  However, we are more concerned about false negatives (rejecting a document that should be included) than false positives (including a document that should be excluded), and our dataset is a bit unbalanced (~20% inclusion) and the full dataset is likely to be far more unbalanced, so these "success metrics" are likely driven by high true negative rates.  Let's pull info out of the `rf_last`, and plot a ROC and confusion matrix to see if there's a good threshold for probability that drops true negatives but doesn't drop many true positives...
 
 ```{r}
-blr_check_df <- blr_last$.predictions[[1]]
+mdl_check_df <- rf_last$.predictions[[1]]
 
-blr_check_df %>% select(.pred_class, decision) %>% table()
+mdl_check_df %>% select(.pred_class, decision) %>% table()
 
-blr_check_df %>% filter(decision == 'include') %>% arrange(.pred_include)
+mdl_check_df %>% 
+  filter(decision == 'include' | .pred_class == 'include') %>% 
+  arrange(.pred_include)
 ```
 
-From this rough cut, no false positives, but a high false negative rate (7 out of 11 "includes" classified as "exclude").  Not great!  The `.pred_include` column shows that false negatives start at only 9.6%, with many more in the 10-20% range.  
+From this rough cut, one false positive, but a high false negative rate (9 out of 12 "includes" classified as "exclude").  Not great!  The `.pred_include` column shows that false negatives start at only 9.6%, with many more in the 10-20% range.  
 
 ```{r}
-roc_curve(blr_check_df, truth = decision, .pred_exclude) %>%
+roc_curve(mdl_check_df, truth = decision, .pred_exclude) %>%
   autoplot()
 ```
 
@@ -270,14 +275,15 @@ roc_curve(blr_check_df, truth = decision, .pred_exclude) %>%
 Examine the false negatives, including the queries with the lowest similarity values (these are rescaled distance values, so 0 = highest distance = lowest similarity, 1 = lowest distance = highest similarity).
 
 ```{r}
-false_neg_indices <- blr_check_df %>% filter(decision == 'include' & .pred_class == 'exclude') %>% pull(.row)
+false_neg_indices <- mdl_check_df %>% 
+  filter(decision == 'include' & .pred_class == 'exclude') %>% 
+  arrange(.pred_include) %>%
+  pull(.row)
 
-sbr_faiss_wide %>%
+cites_to_check <- sbr_faiss_wide %>%
   mutate(across(where(is.numeric), ~round(.x, 3))) %>%
-  slice(false_neg_indices) %>%
-  pivot_longer(names_to = 'query', values_to = 'val', -c(author, title, decision, tags)) %>%
-  group_by(author, title) %>%
-  slice_min(val, n = 2) %>%
-  DT::datatable()
+  slice(false_neg_indices)
+
+write_csv(cites_to_check, 'cites_to_check.csv')
 ```
 
