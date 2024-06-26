@@ -134,7 +134,7 @@ p12 <- ggplot(pca_df, aes(x = PC1, y = PC2)) +
   geom_text(data = pca_rot_df, aes(label = query)) +
   geom_polygon(data = pca_hull_df, 
                aes(x = PC1, y = PC2, color = decision, fill = decision), alpha = .1) +
-  stat_ellipse(aes(color = decision))
+  stat_ellipse(data = pca_df %>% filter(decision == 'include'), color = 'blue')
 
 p12
 ```
@@ -145,18 +145,14 @@ Let's examine overlap (in this coordinate system) between ellipses in the first 
 ```{r}
 build <- ggplot_build(p12)$data
 pts <- build[[1]] %>% sf::st_as_sf(coords = c('x', 'y'))
-ell <- build[[5]] %>% sf::st_as_sf(coords = c('x', 'y')) %>% concaveman::concaveman()
+ell <- build[[5]] %>% sf::st_as_sf(coords = c('x', 'y')) %>% 
+  concaveman::concaveman()
 
 in_ell <- sf::st_filter(pts, ell) %>% 
   cbind(st_coordinates(.))
-in_ell1 <- filter(in_ell, group == 1)
-in_ell2 <- filter(in_ell, !group %in% c(1, 3))
-in_ell3 <- filter(in_ell, !group %in% c(1, 2))
+in_ell %>% pull(group) %>% table()
 
-p12 +
-  geom_point(data = in_ell1, aes(X, Y), color = 'red')
-  geom_point(data = in_ell3, aes(X, Y), color = 'blue')
-  # geom_point(data = in_ell2, aes(X, Y), color = 'green') +
+pca_df %>% pull(decision) %>% table()
 ```
 
 Let's examine between PC 1 and 3:
