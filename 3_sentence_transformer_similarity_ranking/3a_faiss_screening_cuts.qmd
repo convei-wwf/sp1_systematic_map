@@ -125,8 +125,12 @@ pca_hull_df <- pca_df %>%
   group_by(decision) %>%
   slice(chull(PC1, PC2))
 
-### dataframe for loadings; scale up by factor of 5 for plotting
-pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * 5) %>%
+
+scale_factor <- min(max(abs(pca_df$PC1)), max(abs(pca_df$PC2))) / 
+                max(abs(sbr_faiss_pca$rotation[, 1:2]))
+  
+### dataframe for loadings; scale up by scaling_factor for plotting
+pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * scale_factor) %>%
   mutate(query = rownames(.))
 
 p12 <- ggplot(pca_df, aes(x = PC1, y = PC2)) +
@@ -162,72 +166,6 @@ pca_df %>% pull(decision) %>% table()
 
 If we keep only observations within the blue ellipse, we include 52/56 "included" (93% recall), 145/201 "excluded", and 7262/13562 yet to be screened.  This reduces the screening burden to 54% of the yet-to-be screened.
 
-### PC 1 and 3
-
-Let's examine between PC 1 and 3:
-
-```{r}
-pca_hull_df <- pca_df %>%
-  arrange(decision, PC1, PC3) %>%
-  group_by(decision) %>%
-  slice(chull(PC1, PC3))
-
-pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * 5) %>%
-  mutate(query = rownames(.))
-
-p13 <- ggplot(pca_df, aes(x = PC1, y = PC3)) +
-  geom_point(aes(color = decision)) +
-  geom_segment(data = pca_rot_df, x = 0, y = 0, 
-               aes(xend = PC1, yend = PC3), 
-               arrow = arrow(length = unit(.1, 'inches'))) +
-  geom_text(data = pca_rot_df, aes(label = query)) +
-  geom_polygon(data = pca_hull_df, 
-               aes(x = PC1, y = PC3, color = decision, fill = decision), alpha = .1) +
-  stat_ellipse(data = pca_df %>% filter(decision == 'include'), color = 'blue')
-
-
-p13
-```
-
-Let's examine overlap (in this coordinate system) between ellipses in the first and third principal components.
-
-```{r}
-p13_build <- ggplot_build(p13)$data
-p13_pts <- p13_build[[1]] %>% 
-  sf::st_as_sf(coords = c('x', 'y')) %>%
-  mutate(id = 1:n())
-p13_ell <- p13_build[[5]] %>% sf::st_as_sf(coords = c('x', 'y')) %>% 
-  concaveman::concaveman()
-
-p13_in_ell <- sf::st_filter(p13_pts, p13_ell) %>% 
-  cbind(st_coordinates(.))
-p13_in_ell %>% pull(group) %>% table()
-
-pca_df %>% pull(decision) %>% table()
-```
-
-This drops more "includes" than the PC1/PC2 cut, and leaves in more "yet to be screened" docs.  Combining the two cuts, how do we fare?  Verified that the points are in the same order within the `build` object:
-
-```{r}
-p123_cut_df <- p12_build[[1]] %>%
-  select(x12 = x, y2 = y, group12 = group) %>%
-  cbind(p13_build[[1]] %>%
-              select(x13 = x, y3 = y, group13 = group)) %>%
-  mutate(id = 1:n()) %>%
-  # mutate(mismatch = x12 != x13,
-  #        mismatch2 = group12 != group13)
-  mutate(p12_in_ell = id %in% p12_in_ell$id,
-         p13_in_ell = id %in% p13_in_ell$id) %>%
-  mutate(both = p12_in_ell & p13_in_ell)
-
-p123_cut_df %>%
-  filter(both) %>%
-  pull(group12) %>%
-  table()
-```
-
-This cut leaves 48/56 "includes" (86% accuracy), 134/201 "excludes", and 6456/13562 (or 48%) "to be screened" (compared to 56% for just the PC1/PC2 cut).  
-
 ## Scree plot
 
 ```{r}
@@ -246,5 +184,60 @@ knitr::kable(pca_rot_df %>% select(PC1:PC4))
 
 ```
 
-The screeplot shows that 75% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful if we decide to implement a binary logistic regression model.
+The screeplot shows that `r round(scree_df$cumsum[4] * 100)`% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful if we decide to implement a binary logistic regression model.
+
+## Hypervolume method?
+
+```{r}
+#| eval: true
+#| 
+library(ggpubr)
+library(hypervolume)
+
+set.seed(42)
+sample_df <- pca_df %>%
+  group_by(decision) %>%
+  # slice_sample(n = 1000) %>%
+  ungroup()
+### set up matrices for hypervolumes - use first four PCs (85%)
+incl_mtx <- sample_df %>%
+  filter(decision == 'include') %>%
+  select(PC1:PC4) %>%
+  as.matrix()
+ 
+excl_mtx <- sample_df %>%
+  filter(decision == 'exclude') %>%
+  select(PC1:PC4) %>%
+  as.matrix()
+
+todo_mtx <- sample_df %>%
+  filter(decision == 'not screened') %>%
+  select(PC1:PC4) %>%
+  as.matrix()
+ 
+### create an "include" hypervolume
+incl_hypv <- hypervolume_gaussian(incl_mtx)
+
+### test whether points in the "exclude" matrix fall within the "include"
+### hypervolume
+excl_test <- hypervolume_inclusion_test(incl_hypv, excl_mtx,
+                                        fast.or.accurate = 'accurate',
+                                        accurate.method.threshold = quantile(incl_hypv@ValueAtRandomPoints, 0.5))
+todo_test <- hypervolume_inclusion_test(incl_hypv, todo_mtx,
+                                        fast.or.accurate = 'accurate',
+                                        accurate.method.threshold = quantile(incl_hypv@ValueAtRandomPoints, 0.5))
+
+ggplot(data = sample_df, aes(x = PC1, y = PC2)) +
+  geom_point(data = sample_df %>% filter(decision == 'not screened') %>% mutate(test = todo_test),
+             aes(color = test), shape = 21, size = 3, alpha = .5, fill = 'yellow') +
+  geom_point(data = sample_df %>% filter(decision == 'exclude') %>% mutate(test = excl_test),
+             aes(color = test), fill = 'red', shape = 21, size = 3, alpha = .5) +
+    geom_point(data = sample_df %>% filter(decision == 'include'), color = 'darkgreen', size = 3) +
+  scale_color_manual(values = c('black', 'white'))
+
+sum(excl_test) / length(excl_test)
+
+sum(todo_test) / length(todo_test)
+
+```
 
