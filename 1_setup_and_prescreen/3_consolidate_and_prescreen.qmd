@@ -30,7 +30,7 @@ This script will ingest Bibtex files of records and:
 
 ## Remove duplicates and save out for Colandr ingestion
 
-Pull in all preprocessed citation data.  Identify duplicates by first author and title.  Save only one version (Societal Benefits $\succ$ Web of Science $\succ$ Scopus).  Also save out the benchmark documents, separately.
+Pull in all preprocessed citation data.  Identify duplicates by first author and title.  Save only one version (Societal Benefits $\succ$ Web of Science $\succ$ Scopus).
 
 ```{r read in the preprocessed WoS citations}
 wos_fs <- list.files(here('_data/2_refs_preprocessed'), pattern = 'wos_', full.names = TRUE)
@@ -394,4 +394,23 @@ write_refs(clean_sbr,    format = 'ris',
                           sbr_date))
 ``` 
  
+## Save out a sample of documents for modeling
+
+This sample excludes benchmarks and societal benefits repo papers.
+
+```{r}
+set.seed(2001)
+
+sample_1000 <- refs_ready %>%
+  filter(src != 'societal benefits repo') %>%
+  filter(!benchmark) %>%
+  slice_sample(n = 1000) %>% 
+  select(-src) %>%
+  ### write_refs can't handle tbl?
+  as.data.frame() %>%
+  select(where(~ any(!is.na(.))))
+  
+write_refs(sample_1000, format = 'ris',
+           file = here('_data/3_refs_clean/sample/sample_1000_240708.ris'))
+```
 

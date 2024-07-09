@@ -24,8 +24,8 @@ This script takes the .csv files output by `1_faiss_criteria_query.qmd` and insi
 library(tidyverse)
 library(ggfortify)   ### for PCA plots
 library(here)
-library(tidymodels)
 library(corrplot)
+library(sf)
 
 ```
 
@@ -104,12 +104,15 @@ The strength of collinearity is pretty low for most variable pairs, with excepti
 
 ## Examine relationships via PCA
 
+### PC 1 and 2
+
+QUESTION: Since distances are all on the same unitless scale, should we rescale these distance values?  If a query shows a wide range of distances it seems it should play a greater role in differentiating than a query that reveals only a narrow range of distances.  Here we have disabled rescaling (though have allowed centering for mean zero).
+
 ```{r}
 # set.seed(42)
 sbr_faiss_pca <- sbr_faiss_wide %>%
   select(where(is.numeric)) %>%
-  scale() %>%
-  prcomp()
+  prcomp(scale. = FALSE)
 
 pca_df <- as.data.frame(sbr_faiss_pca$x) %>%
   mutate(decision = sbr_faiss_wide$decision,
@@ -143,17 +146,23 @@ The collinearity at least within the first two principal components is clear in 
 
 Let's examine overlap (in this coordinate system) between ellipses in the first two principal components.
 ```{r}
-build <- ggplot_build(p12)$data
-pts <- build[[1]] %>% sf::st_as_sf(coords = c('x', 'y'))
-ell <- build[[5]] %>% sf::st_as_sf(coords = c('x', 'y')) %>% 
+p12_build <- ggplot_build(p12)$data
+p12_pts <- p12_build[[1]] %>% 
+  sf::st_as_sf(coords = c('x', 'y')) %>%
+  mutate(id = 1:n())
+p12_ell <- p12_build[[5]] %>% sf::st_as_sf(coords = c('x', 'y')) %>% 
   concaveman::concaveman()
 
-in_ell <- sf::st_filter(pts, ell) %>% 
+p12_in_ell <- sf::st_filter(p12_pts, p12_ell) %>% 
   cbind(st_coordinates(.))
-in_ell %>% pull(group) %>% table()
+p12_in_ell %>% pull(group) %>% table()
 
 pca_df %>% pull(decision) %>% table()
 ```
+
+If we keep only observations within the blue ellipse, we include 52/56 "included" (93% recall), 145/201 "excluded", and 7262/13562 yet to be screened.  This reduces the screening burden to 54% of the yet-to-be screened.
+
+### PC 1 and 3
 
 Let's examine between PC 1 and 3:
 
@@ -173,33 +182,53 @@ p13 <- ggplot(pca_df, aes(x = PC1, y = PC3)) +
                arrow = arrow(length = unit(.1, 'inches'))) +
   geom_text(data = pca_rot_df, aes(label = query)) +
   geom_polygon(data = pca_hull_df, 
-               aes(x = PC1, y = PC3, color = decision, fill = decision), alpha = .1)
+               aes(x = PC1, y = PC3, color = decision, fill = decision), alpha = .1) +
+  stat_ellipse(data = pca_df %>% filter(decision == 'include'), color = 'blue')
+
 
 p13
 ```
 
-Let's examine between PC 3 and 4:
+Let's examine overlap (in this coordinate system) between ellipses in the first and third principal components.
 
 ```{r}
-pca_hull_df <- pca_df %>%
-  arrange(decision, PC3, PC4) %>%
-  group_by(decision) %>%
-  slice(chull(PC3, PC4))
+p13_build <- ggplot_build(p13)$data
+p13_pts <- p13_build[[1]] %>% 
+  sf::st_as_sf(coords = c('x', 'y')) %>%
+  mutate(id = 1:n())
+p13_ell <- p13_build[[5]] %>% sf::st_as_sf(coords = c('x', 'y')) %>% 
+  concaveman::concaveman()
 
-pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * 5) %>%
-  mutate(query = rownames(.))
+p13_in_ell <- sf::st_filter(p13_pts, p13_ell) %>% 
+  cbind(st_coordinates(.))
+p13_in_ell %>% pull(group) %>% table()
 
-p34 <- ggplot(pca_df, aes(x = PC3, y = PC4)) +
-  geom_point(aes(color = decision)) +
-  geom_segment(data = pca_rot_df, x = 0, y = 0, 
-               aes(xend = PC3, yend = PC4), 
-               arrow = arrow(length = unit(.1, 'inches'))) +
-  geom_text(data = pca_rot_df, aes(label = query)) +
-  geom_polygon(data = pca_hull_df, 
-               aes(x = PC3, y = PC4, color = decision, fill = decision), alpha = .1)
-
-p34
+pca_df %>% pull(decision) %>% table()
 ```
+
+This drops more "includes" than the PC1/PC2 cut, and leaves in more "yet to be screened" docs.  Combining the two cuts, how do we fare?  Verified that the points are in the same order within the `build` object:
+
+```{r}
+p123_cut_df <- p12_build[[1]] %>%
+  select(x12 = x, y2 = y, group12 = group) %>%
+  cbind(p13_build[[1]] %>%
+              select(x13 = x, y3 = y, group13 = group)) %>%
+  mutate(id = 1:n()) %>%
+  # mutate(mismatch = x12 != x13,
+  #        mismatch2 = group12 != group13)
+  mutate(p12_in_ell = id %in% p12_in_ell$id,
+         p13_in_ell = id %in% p13_in_ell$id) %>%
+  mutate(both = p12_in_ell & p13_in_ell)
+
+p123_cut_df %>%
+  filter(both) %>%
+  pull(group12) %>%
+  table()
+```
+
+This cut leaves 48/56 "includes" (86% accuracy), 134/201 "excludes", and 6456/13562 (or 48%) "to be screened" (compared to 56% for just the PC1/PC2 cut).  
+
+## Scree plot
 
 ```{r}
 
@@ -217,5 +246,5 @@ knitr::kable(pca_rot_df %>% select(PC1:PC4))
 
 ```
 
-The screeplot shows that 75% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful for the binary logistic regression model.
+The screeplot shows that 75% of the variance is captured in the first four principal components.  We don't necessarily need the dimensionality reduction at this point, but removing the collinearity might be helpful if we decide to implement a binary logistic regression model.
 

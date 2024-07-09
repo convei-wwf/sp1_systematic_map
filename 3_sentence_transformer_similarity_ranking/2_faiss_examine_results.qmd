@@ -56,6 +56,8 @@ We can compare the screened results from the SBR to the distance values here, pe
 
 Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
 
+QUESTION: Since distances are all on the same unitless scale, should we rescale these distance values?  If a query shows a wide range of distances it seems it should play a greater role in differentiating than a query that reveals only a narrow range of distances.  
+
 ```{r}
 cit_scr_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
   mutate(title = str_to_title(title))
