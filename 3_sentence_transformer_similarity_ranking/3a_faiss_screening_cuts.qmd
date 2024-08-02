@@ -50,6 +50,14 @@ faiss_q_df <- lapply(faiss_query_fs, FUN = function(f) {
 check <- faiss_q_df %>%
   select(-criteria) %>%
   pivot_wider(values_from = 'dist', names_from = 'query')
+
+### how do citations bin out by year? 
+y <- check %>% mutate(y = str_extract(citation, '[0-9]{4}$') %>% as.integer())
+x <- y %>% group_by(y) %>% summarize(n = n()) %>% arrange(y) %>% mutate(y_cum = cumsum(n))
+
+# Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+# 1955    2015    2020    2017    2022    2024
+### if the median is 2020, a year cutoff is pretty meaningless
 ```
 
 

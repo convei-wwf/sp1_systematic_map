@@ -1,0 +1,109 @@
+---
+title: "Societal Benefit Repo gather and extract full texts for included items"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(synthesisr)
+library(pdftools)
+library(here)
+```
+
+# Summary
+
+The 260 unique(?) documents with abstracts represented in the Societal Benefits repository were screened by title and abstract in Colandr.  The results were exported as a .csv.  This document takes the "included" documents, helps identify which are not yet present in the Zotero collection.  Once the Zotero collection is complete, the pdfs are copied into this repo and the full text is extracted into text format.
+
+# Data
+
+The SBR information was downloaded as a .csv on 4/23/24, and uploaded to Colandr.  The screening criteria outlined in the planning/protocol document were used to determine inclusion/exclusion.  Some documents were tagged with additional information, e.g., "maybe" for some included documents that seemed like they may not actually meet the criteria.
+
+The screening results were downloaded as a .csv on 4/29/24.
+
+# Methods
+
+
+## Import full texts into Zotero
+
+Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
+
+```{r}
+sbr_incl_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
+  filter(screening_status == 'included')
+zot_check <- read_refs(here('_data/societal_benefits/included_sbr_zotero_240429.bib')) %>%
+  mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
+         doi = tolower(doi))
+
+pdf_find <- zot_check %>% filter(is.na(file))
+```
+
+Out of `r nrow(sbr_incl_df)` included papers, `r nrow(zot_check)` have records in Zotero; of these, `r nrow(pdf_find)` do(es) not have a .pdf available.
+
+## Copy files from Zotero to repo
+
+```{r}
+zot_fs <- zot_check %>%
+  select(author, title, year, file) %>%
+  filter(!is.na(file)) %>%
+  mutate(file = str_split(file, ';')) %>%
+  unnest(file) %>%
+  filter(str_detect(file, '.pdf$')) %>%
+  mutate(title = str_remove_all(title, '\\{|\\}') %>% str_squish(),
+         author_short = str_remove_all(tolower(author), ',.+|\\}.+|[^a-z]'),
+         title_short = str_replace_all(tolower(title), '[^a-z0-9]+', '_'),
+         year = str_extract(year, '[0-9]{4}')) %>%
+  rowwise() %>%
+  mutate(title_end = ifelse(nchar(title_short) > 32, 
+                            str_locate_all(title_short, '_')[[1]][4, 1]-1, 
+                            nchar(title_short)),
+         title_short = str_sub(title_short, 1, title_end)) %>%
+  ungroup() %>%
+  mutate(pdf_out = sprintf('%s_%s_%s.pdf', author_short, year, title_short),
+         pdf_out = str_remove_all(pdf_out, 'NA_'),
+         pdf_out = file.path('_data/societal_benefits/pdf', pdf_out)) %>%
+  select(title, author, year, file, pdf_out) %>%
+  mutate(csv_out = str_replace(pdf_out, '/pdf/', '/csv/') %>% str_replace('.pdf$', '.csv'))
+
+if(any(!file.exists(zot_fs$pdf_out))) {
+  file.copy(from = zot_fs$file, to = here(zot_fs$pdf_out)) %>% sum()
+}
+
+zot_fs_out <- zot_fs %>%
+  select(-file)
+write_csv(zot_fs_out, here('_data/societal_benefits/int/fulltext_files.csv'))
+```
+
+## Extract text from pdfs
+
+Save out as .csvs for further processing/examination.
+
+```{r}
+pdf_fs <- here(zot_fs$pdf_out)
+
+for(i in seq_along(pdf_fs)) {
+  f <- zot_fs$pdf_out[i]
+  f_out <- zot_fs$csv_out[i]
+  if(!file.exists(f_out)) {
+    message(f_out)
+    doc_df <- data.frame(t = pdf_text(f)) %>%
+      mutate(page = 1:n(),
+             t = str_squish(t)) %>%
+      unnest_tokens(input = t, output = p, token = 'sentences', drop = TRUE) %>%
+      ### drop arbitrarily short tokens
+      filter(nchar(p) > 5)
+    
+    write_csv(doc_df, f_out)
+  }
+}
+```
+
