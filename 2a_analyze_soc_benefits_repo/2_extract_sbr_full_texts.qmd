@@ -38,9 +38,9 @@ The screening results were downloaded as a .csv on 4/29/24.
 Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
 
 ```{r}
-sbr_incl_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
+sbr_incl_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv')) %>%
   filter(screening_status == 'included')
-zot_check <- read_refs(here('_data/societal_benefits/included_sbr_zotero_240429.bib')) %>%
+zot_check <- read_refs(here('_data/5a_societal_benefits/included_sbr_zotero_240429.bib')) %>%
   mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
          doi = tolower(doi))
 
@@ -70,7 +70,7 @@ zot_fs <- zot_check %>%
   ungroup() %>%
   mutate(pdf_out = sprintf('%s_%s_%s.pdf', author_short, year, title_short),
          pdf_out = str_remove_all(pdf_out, 'NA_'),
-         pdf_out = file.path('_data/societal_benefits/pdf', pdf_out)) %>%
+         pdf_out = file.path('_data/5a_societal_benefits/pdf', pdf_out)) %>%
   select(title, author, year, file, pdf_out) %>%
   mutate(csv_out = str_replace(pdf_out, '/pdf/', '/csv/') %>% str_replace('.pdf$', '.csv'))
 
@@ -80,7 +80,7 @@ if(any(!file.exists(zot_fs$pdf_out))) {
 
 zot_fs_out <- zot_fs %>%
   select(-file)
-write_csv(zot_fs_out, here('_data/societal_benefits/int/fulltext_files.csv'))
+write_csv(zot_fs_out, here('_data/5a_societal_benefits/int/fulltext_files.csv'))
 ```
 
 ## Extract text from pdfs
@@ -89,10 +89,11 @@ Save out as .csvs for further processing/examination.
 
 ```{r}
 pdf_fs <- here(zot_fs$pdf_out)
+csv_fs <- here(zot_fs$csv_out)
 
 for(i in seq_along(pdf_fs)) {
-  f <- zot_fs$pdf_out[i]
-  f_out <- zot_fs$csv_out[i]
+  f <- pdf_fs[i]
+  f_out <- csv_fs[i]
   if(!file.exists(f_out)) {
     message(f_out)
     doc_df <- data.frame(t = pdf_text(f)) %>%

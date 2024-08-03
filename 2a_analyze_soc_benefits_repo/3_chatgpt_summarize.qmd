@@ -43,7 +43,7 @@ Full texts were extracted from pdfs using `pdftools`, saved in `_data/societal_b
 Note that the `bind_rows()` call seems to reorganize the list elements when forming the dataframe, so once formed, use `txt_df` NOT `files_df` or `csv_fs`.
 
 ```{r}
-files_df <- read_csv(here('_data/societal_benefits/int/fulltext_files.csv'))
+files_df <- read_csv(here('_data/5a_societal_benefits/int/fulltext_files.csv'))
 
 csv_fs <- files_df$csv_out
 
@@ -81,7 +81,7 @@ out_df <- txt_df %>%
 
 ```{r, message = NA}
 
-out_f <- here('_output/societal_benefits/chatgpt_summary.csv')
+out_f <- here('_output/phase1_societal_benefits/chatgpt_summary.csv')
 
 if(!file.exists(out_f)) {
   

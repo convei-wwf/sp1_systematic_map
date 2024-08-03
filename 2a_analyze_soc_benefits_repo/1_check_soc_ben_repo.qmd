@@ -37,7 +37,7 @@ The screening results were downloaded as a .csv on 4/29/24.
 Also, write out included refs with DOI for import into Zotero.
 
 ```{r}
-sbr_df <- read_csv(here('_data/societal_benefits/repo_cleaned_240423.csv')) %>%
+sbr_df <- read_csv(here('_data/3_refs_clean/sbr_repo_cleaned_240423.csv')) %>%
   janitor::clean_names() %>%
   select(-keywords) %>%
   mutate(title = str_to_title(title),
@@ -59,8 +59,8 @@ sbr_key <- sbr_df %>%
   mutate(key = paste(auth_short, title_short, year, sep = '_')) %>%
   select(key, author, title, journal, year)
 
-sbr_results_df <- read_csv(here('_data/screened/colandr_companion_incl_240429.csv')) %>%
-  bind_rows(read_csv(here('_data/screened/colandr_companion_excl_240429.csv'))) %>%
+sbr_results_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_240429.csv')) %>%
+  bind_rows(read_csv(here('_data/4_colandr_screened/colandr_companion_excl_240429.csv'))) %>%
   mutate(across(where(is.character), str_squish),
          title = str_to_title(title)) %>%
   select(-id, -authors, year = publication_year, 
@@ -88,7 +88,7 @@ sbr_key2 <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))
 check <- sbr_out_df %>%
   filter(!key %in% sbr_key2$key)
 
-write_csv(sbr_out_df, here('_data/societal_benefits/sbr_screened_results_240429.csv'))
+write_csv(sbr_out_df, here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
 ```
 
 ## Examine inclusion/exclusion vs. tags
