@@ -1,0 +1,1643 @@
+page,p
+1,"remote sensing article from forest dynamics to wetland siltation in mountainous landscapes: a rs-based framework for enhancing erosion control gonzalo hernández-romero 1,2 , jose manuel álvarez-martínez 2, * , ignacio pérez-silos 2 , ana silió-calzada 2 , david r."
+1,vieites 3 and jose barquín 2 1 biocore s.
+1,"coop., c/manzanares, 4, 28005 madrid, spain; gonzalo.hernandez@unican.es 2 ihcantabria—instituto de hidráulica ambiental, universidad de cantabria, pctcan, c/isabel torres 15, 39011 santander, spain; ignacio.perez@unican.es (i.p.-s.); ana.silio@unican.es (a.s.-c.); jose.barquin@unican.es (j.b.)"
+1,"3 departament of biogeography and global change, museo nacional de ciencias naturales—csic, calle josé gutierrez abascal 2, 28006 madrid, spain; vieites@mncn.csic.es * correspondence: jm.alvarez@unican.es; tel.: +34-942-201-616 abstract: human activities have caused a significant change in the function and services that ecosys- tems have provided to society since historical times."
+1,"in mountainous landscapes, the regulation of services such as water quality or erosion control has been impacted by land use and land cover (lulc) changes, especially the loss and fragmentation of forest patches."
+1,"in this work, we develop a remote sensing (rs)-based modelling approach to identify areas for the implementation of nature-based solutions (nbs) (i.e., natural forest conservation and restoration) that allow reducing the vulnerability of aquatic ecosystems to siltation in mountainous regions."
+1,"we used time series landsat 5tm, 7etm+,   8oli and sentinel 2a/2b msi (s2) imagery to map forest dynamics and wetland distribution in citation: hernández-romero, g."
+1,"; picos de europa national park (cantabrian mountains, northern spain)."
+1,"we fed rs-based models álvarez-martínez, j.m."
+1,"; pérez-silos, i.; with detailed in situ information based on photo-interpretation and fieldwork completed from 2017 silió-calzada, a."
+1,"; vieites, d.r.; to 2021."
+1,"we estimated a forest cover increase rate of 2 ha/year comparing current and past lulc barquín, j."
+1,from forest dynamics to maps against external validation data.
+1,we applied this forest gain to a scenario generator model wetland siltation in mountainous to derive a 30-year future lulc map that defines the potential forest extent for the study area in landscapes: a rs-based framework 2049.
+1,we then modelled the distribution of wetlands to identify the areas with the greatest poten- for enhancing erosion control. tial for moisture accumulation.
+1,we used an s2 mosaic and topography-derived data such as the remote sens.
+1,"2022, 14, 1864. https:// slope and topographic wetness index (twi), which indicate terrain water accumulation."
+1,overall doi.org/10.3390/rs14081864 accuracy scores reached values of 86% for lulc classification and 61% for wetland mapping.
+1,"at academic editor: inge jonckheere the same time, we obtained the potential erosion using the netmap software to identify potential received: 12 january 2022 sediment production, transport and deposition areas."
+1,"finally, forest dynamics, wetland distribution accepted: 8 april 2022 and potential erosion were combined in a multi-criteria analysis aiming to reduce the amount of published: 13 april 2022 sediment reaching selected wetlands."
+1,"we achieved this by identifying the most suitable locations for the conservation and restoration of natural forests on slopes and in riparian areas, which may reduce publisher’s note: mdpi stays neutral the risk of soil erosion and maximise sediment filtering, respectively."
+1,"the results show a network with regard to jurisdictional claims in published maps and institutional affil- pattern for forest management that would allow for controlling erosion effects across space and time iations. at three levels: one, by reducing the load that originates upslope in the absence of forest cover; two, by intersecting runoff at watercourses related to sediment transport; and three, by a lack of former barriers, by trapping erosion near to the receiving wetland systems, main river axes and contributing streams."
+1,"in conclusion, the proposed methodology, which could be transferred to other mountain copyright: © 2022 by the authors. regions, allows to optimise investment for erosion prevention and wetland conservation by using licensee mdpi, basel, switzerland. only very specific areas of the landscape for habitat management (e.g., for nbs implementation)."
+1,this article is an open access article distributed under the terms and keywords: cantabrian cordillera; ecosystem services; habitat mapping; lulc; mountainous conditions of the creative commons wetlands; nature-based solutions; soil erosion; remote sensing attribution (cc by) license (https:// creativecommons.org/licenses/by/ 4.0/).
+1,remote sens.
+1,"2022, 14, 1864. https://doi.org/10.3390/rs14081864 https://www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2022, 14, 1864 2 of 22 1."
+2,"introduction as water is the most valuable and limited resource for biodiversity, comprehensive knowledge of water-related ecosystem functioning is essential for developing an integrated management scheme that assures its sustainability [1–3]."
+2,"to establish priority actions on water resources worldwide, spatial assessment and environmental mapping play an essential role in defining critical areas for conservation and ecological restoration [4,5]."
+2,"in the context of global change, land use and land cover (lulc) changes resulting from urban, farmland and livestock expansion [6,7] have led to the destruction of habitats, ecosystem functionality and the historical services they offer to society [8,9]."
+2,"ecosystem services (es) are the direct and indirect contributions that ecosystems provide to human well-being and quality of life [10,11]."
+2,they are essential for sustaining life on earth and represent an accurate indicator of an ecosystem’s health [12–15].
+2,"the most important disturbances are related to (i) the loss of forest stands [16,17]; (ii) fragmentation of extensive, original forests in patched mosaics [18,19]; and (iii) soil erosion and water and soil contamination [20–22]."
+2,"therefore, understanding how es responds to anthropogenic changes is necessary to assess and balance short-term needs with long-term sustainability goals [23,24]."
+2,"aquatic ecosystems, including wetlands and water bodies, provide different and essential functions and es, such as habitat for wildlife, water filtration, flood protection or carbon storage [25,26]."
+2,wetlands are typically located at defined depressions in the ground or where the water table is close to the surface [27].
+2,"there is extensive evidence that aquatic ecosystem functions can be impaired by modification of the adjacent lulc change, bringing on siltation processes at different levels [28,29]."
+2,"in this regard, forests play an essential role in maintaining ecosystem functions relevant to aquatic ecosystems, such as modifying soil structure, allowing better infiltration and water retention, maintaining more stable runoff levels during drying season [30], playing a decisive role in the overall water cycle by balancing infiltration–evapotranspiration–runoff [31] and reducing soil erosion and sediment transport towards receiving streams [32]."
+2,"in developed countries, woodlands and shrublands have regenerated naturally since the 19th century because of rural depopulation and land abandonment in marginal ar- eas [33,34]."
+2,"this involved the expansion of forest land and an increase in the maturity of forest ecosystems and, therefore, their capacity to provide regulating es such as ero- sion protection, hydrological stability or water quality maintenance [35]."
+2,"consequently, land management strategies such as rewilding are currently at the forefront of european adaptation policies as a way to recover forest cover [36,37]."
+2,rewilding implies passive management of ecological succession to restore natural ecosystem processes and minimise human control of landscapes.
+2,"this allows for maximising environmental and socioeco- nomic benefits in rural areas undergoing changes such as land abandonment [38,39]."
+2,"we focused on soil erosion because it is one of the biggest threats to wetland conser- vation, involving negative impacts such as eutrophication and increased risk of flooding and landslides [40,41]."
+2,"in this regard, regulating ecosystem services for soil erosion pre- vention is paramount in mountainous areas [42]."
+2,"we evaluated, in this work, soil erosion at three stages concerning natural and human drivers."
+2,"the first stage consists of an initial detachment of individual particles from the soil mass, subsequent transportation by erosion agents—principally wind and water—and final siltation into land depressions or delivery to water bodies."
+2,"sediment detachment is not exclusively the result of raindrop impacts [43,44] but also originates in the overland flow as an erosive agent [45]."
+2,"both factors generate shear stress on the soil surface: if the cohesive soil strength is exceeded, sediment detachment occurs [46]."
+2,"sediment enters the river dissolved or as fragments eroded from the adjacent hills, banks or channels [47]."
+2,"at the same time, streamflow provides the driving force that transports the sediment downstream within river corridors."
+2,"hence, surface and subsurface water fluxes are strongly influenced by river characteristics, including valley and channel ge- ometry, vegetation, biota and human activities [48]."
+2,"wetland siltation occurs when the eroded material transported by river channels or overland flow settles out of the water column onto the surface as the water flow slows down [49,50]."
+2,"when this occurs, the presence of sediment"
+3,"remote sens. 2022, 14, 1864 3 of 22 often significantly reduces water and the quality of the aquatic habitat for biota [51]."
+3,it makes water bodies more turbid and does not allow light to penetrate the water column [52].
+3,"furthermore, suspended sediment can clog the gills of aquatic organisms, cover the stream bottom leading to the suffocation of fish eggs and benthic macroinvertebrates [53] and reduce dissolved oxygen levels due to higher water temperatures [54]."
+3,"additionally, pesticides, some metals and other pollutants may cling to suspended sediment in the water and increase the concentration of the contaminants and toxins [55,56]."
+3,"therefore, there is a need for direct and indirect management actions to avoid diffuse sources of sediment and pollutants, mainly related to soil erosion and runoff after rainfall events in deforested areas [57]."
+3,"in cases where rainfall erosion occurs, these downstream effects are often significant and can cause severe environmental and economic damages [58]."
+3,"nowadays, nature-based solutions (nbs) are gaining considerable socio-political trac- tion as evidence mounts regarding the multiple regulating es and the biodiversity they provide [59]."
+3,nbs is used as an umbrella framework encompassing multiple conservation and restoration managing strategies applied over natural and semi-natural ecosystems to enhance es provision and biodiversity [60].
+3,"the standard approach is mainly based on using natural processes and cycles of organisms, matter and energy, taking advantage of the ecosystem’s properties and following their seasonal and temporal dynamics [61]."
+3,"therefore, they are sustainable over time for potentially maintaining multiple ecosystem functions alternatively or simultaneously [62]."
+3,"in this sense, nbs might be able to improve the ecosys- tem where they are embedded."
+3,"their effects might span across ecosystem boundaries (i.e., meta-ecosystem) [63]."
+3,"as shown in [64], these properties make them particularly recom- mendable for managing aquatic ecosystems based on their biotic and abiotic exchanges with terrestrial habitats."
+3,"to identify areas for nbs implementation, we can use different tools for semiautomatic analyses at a regional scale, characterising landscape patterns and pro- cesses at a geographical scale and temporal resolution to match the ecosystem processes of interest."
+3,"in this sense, rs is a source of earth observation data of great interest in landscape studies given its ability to follow dynamic processes [65,66]."
+3,"rs has become a critical tool for landscape monitoring given its capacity to generate spatially continuous, regular and repeatable observations over large areas."
+3,"it is a primary source of information for global monitoring of ecosystem processes, along with national statistics, field-based observations and numerical modelling [67,68]."
+3,"among its applications, lulc characterisation is one of the most developed branches in conjunction with geographic information systems (gis), computational capabilities and statistical techniques developed over the last decades."
+3,"all have turned ecological models into powerful tools for spatial analysis aimed at (i) exploring the various mechanisms that force changes in lulc, as well as their social and economic driving forces, (ii) projecting the potential environmental and socioeconomic impacts de- rived from these changes across future scenarios, and (iii) assessing the influence of policy alternatives and management regimes on ecosystems functionality [65]."
+3,"much of the work to protect aquatic ecosystems, particularly from siltation effects, is based on creating vegetated buffer strips for stream management [69,70]."
+3,"beyond this, the quality of the services generated depends largely on the conservation state of forest stands [71,72]."
+3,"therefore, the ecosystem function is defined by the extension, structure and composition of forest patches and the optimal distribution across the landscape of these vegetation barriers [73–75]."
+3,"however, very few publications address this problem from a comprehensive point of view, including reducing sediment production in the headwaters, sediment transport in river channels or diffuse runoff and final siltation in receiving water bodies."
+3,"objectives the main objective of this work is to apply an rs-based framework to identify suitable locations related to the conservation and restoration of natural forests in hillslopes and riparian areas that reduce the risk of soil erosion and increase sediment filtering, respectively."
+3,this approach will allow analysis of the vulnerability of siltation on wetland ecosystems
+4,"remote sens. 2022, 14, 1864 4 of 22 in current and future lulc scenarios concerning soil erosion, sediment transport and sedimentation."
+4,"to do so, we carried out a series of specific steps: • mapping lulc dynamics from 1989 to 2019 by coupling landsat and sentinel 2 imagery."
+4,• modelling forest distribution in a future scenario for 2049 based on a reliable maximum forest cover increment defined for the study area.
+4,• mapping current wetlands distribution supported by extensive fieldwork and photo- interpretation.
+4,"• modelling landscape processes related to the production, transport and deposition of sediment."
+4,"• application of multi-criteria analyses to identify potential areas for the implemen- tation of nbs (i.e., forest restoration and conservation) to reduce erosion effects on wetland ecosystems."
+4,"study area the study area covers the sella, cares and deva catchments, which extend across the northern slopes of the cantabrian cordillera (spain) with a total surface area of 2485.20 km2 that spans more than 400 km parallel to the cantabrian sea [33] (figure 1)."
+4,"the current morphology results from small-scale tectonic movements and the action of wind, fluvial and glacier erosive agents, thus forming very active geosystems that gave rise to a great diversity of landscapes [76]."
+4,"the climate is humid, oceanic and temperate [73], and the region is subdivided into different biogeographical provinces distributed along the colino, montano, subalpine and alpine bioclimatic floors [77]."
+4,"combined with steep terrain and sharp altitudinal gradients, they make the mountain range a longitudinal, and sometimes a transversal, border for species transit [76]."
+4,"this heterogeneity of conditions means that the region is home to one of the greatest botanical richnesses of the european mountain regions [78], as well as an enormous wealth of fauna, including 18 species of amphibians, 22 reptiles, 190 breeding birds and 67 mammals [79–81]."
+4,"in addition, the above-mentioned border effect translates into a high percentage of endemism [82]."
+4,"due to the borderline na- ture, i.e., where different ecosystems converge between the atlantic and the mediterranean regions, the area is highly sensitive to climate change [76]."
+4,short and steep rivers with great erosive power [83] and frequent floods of varying magnitude [84] characterise the area’s hydrology.
+4,"the biodiversity of aquatic systems in the region, including river networks and lentic elements such as lagoons, lakes, springs and peat bogs (i.e., wetlands from now on), show a high richness of diatoms, macroinvertebrates and amphibians [76,78]."
+4,"local endorheic lakes formed by the action of glacial ice during the pleistocene [85] created complex hydrological networks with streams, wetlands and other water bodies which are highly connected and interdependent [86]."
+4,"wetlands are more complex to identify and characterise, and are usually former glacial lakes or the result of an outcrop of water in flat terrain, which is very common due to the predominance of limestone materials throughout the territory [26,86]."
+4,"the land cover gradient is characterised by the legacy of human management and land- use practices, which dates from the neolithic [87] and whose influence on the forest has been prominent since the 13th and 14th centuries [88]."
+4,"in the last 400 years, this influence has been based on deforestation for stockbreeding, agriculture and wood production through the combined use of fire and traditional agricultural techniques."
+4,"these heavily managed landscapes [88,89] suffered further transformations during recent decades because of land abandonment and rural exodus [90], with the subsequent increase in the occupied area and density of forests and shrublands [91,92] and the decrease of crops, pastures and grasslands [89,93]."
+4,"in contrast, large parts of the study area have not experienced major historical deforestation and present mature eurosiberian forest patches of beech (fagus sylvatica), birches (betula ssp.), oaks (quercus robur) and mediterranean vegetation in lowlands (quercus pyrenaica or q. ilex)."
+4,"here, the presence of brown bear (ursus arctos) and cantabrian capercaillie (tetrao urogallus cantabricus) demonstrates a better landscape conservation status [76,94,95]."
+5,"demonstrates a better landscape conservation status [76,94,95]."
+5,"the combination of these factors related to relief, hydrology and lulc change has made the numerous aquatic ecosystems in the study area vulnerable to siltation."
+5,"the on- site impacts of soil erosion are widespread and manifest in very high rates of soil loss, in remote sens. 2022, 14, 1864 some cases exceeding 200 t·ha−1·y−1 (ines), generating off-site costs like siltation of 5dams of 22 and ponds and downslope damage to property, roads and other infrastructure [96,97]."
+5,"figure 1. (a) study area location in the cantabrian mountains of northern spain. (b) shape of the figure 1. (a) study area location in the cantabrian mountains of northern spain. (b) shape of the area. (c) detail showing current ortophotos of pnoa (cnig; https://centrodedescargas.cnig.es, area. (c) detail showing current ortophotos of pnoa (cnig; https://centrodedescargas.cnig.es, accessed on accessed 15 september on 15 september 2020)."
+5,2020).
+5,"the combination of these factors related to relief, hydrology and lulc change has 4."
+5,materials and methods made the numerous aquatic ecosystems in the study area vulnerable to siltation.
+5,"the on-site weofdeveloped impacts soil erosionaare flow diagramand widespread summarise to manifest the high in very main methodological rates steps of soil loss, in some connecting forest dynamics − 1 to − 1wetland siltation in mountainous landscapes (figure cases exceeding 200 t·ha ·y (ines), generating off-site costs like siltation of dams and 2). ponds and downslope damage to property, roads and other infrastructure [96,97]."
+5,materials and methods we developed a flow diagram to summarise the main methodological steps connecting forest dynamics to wetland siltation in mountainous landscapes (figure 2).
+5,"in situ data across environmental gradients to train lulc and wetland ecosystems classifications, we obtained a data set of reference points distributed across the study area."
+5,"those included field campaigns carried out from 2017 to 2021 and photo-interpretation using high-resolution aerial photographs from the pnoa program (20 cm of pixel size), freely available for the whole of spain for the same years (cnig; https://centrodedescargas.cnig.es)."
+5,"we paid particular attention to selecting accurate and representative reference data across the whole territory, avoiding sampling noise from border-type effects and mixed categories, as well as reducing sampling bias about location, slope and orientation [98]."
+5,"some data were also validated through google street view to assure this [99,100]."
+5,"we achieved this by collecting training points for lulc classification by using a 2 km grid to stratify the area, reducing spatial autocorrelation and pseudoreplication in medium-resolution images of heterogeneous mountain areas [101]."
+5,"we accounted for 1.821 field-checked locations: 457 for broadleaf and 205 for coniferous forest, 320 shrublands, 227 pastures and around 700 for other land cover types."
+5,"on the other hand, we collected 282 reference points (gps quality) of wetlands across the study area, with varying soil moisture gradients and topographic constraints."
+5,"checking these reference locations, we also digitalised wetland patches visible during low-level flows by using high-resolution aerial photographs from the end of summer, getting the reliable size and shape of 141 wetlands for subsequent distribution modelling."
+5,absence points were selected randomly across the area following three criteria: (i) excluding the former
+6,"remote sens. 2022, 14, 1864 6 of 22 141 photo-interpreted patches, (ii) only within shrublands and grasslands obtained in the remote sens. 2022, 14, x for peer review 6 of 23 previous lulc classification and (iii) with a minimum distance of 200 metres among them to avoid pseudoreplication."
+6,figure 2.
+6,"flow diagram showing the methodological steps followed in this study, indicating the figure 2."
+6,"flow diagram showing the methodological steps followed in this study, indicating the method’s sections at each step. method’s sections at each step."
+6,in 4.2.
+6,"dataacross situ data satellite environmental gradients and pre-processing to train lulc lulc and mapping wetland ecosystems was performed by applying a supervised we classifications, obtained aover classification data set of a cloud- reference free mosaicacross points distributed satellite-imagery the study covering area. region, the whole those included field campaigns using different scenes from carried july out from 2019 2017 to to assure 2021 and photo-interpretation a maximum sun elevation angleusing high-resolution and less cloud coverage. aerialtopphotographs of the at- from the pnoa mosphere program (level-1) (20 cm data from of copernicus the pixel size), freely available sentinel-2 for the whole constellation wereofchosen spain for the same years (cnig; https://centrodedescargas.cnig.es)."
+6,we paid this task.
+6,"data were acquired by two operational satellites (s2a and s2b) that provide particular attention to selecting accurate multispectral images representative and at 10, 20 and 60 reference data across m of spatial the whole resolution, territory,revisiting at a five-day avoiding sampling time. noise from copernicus was launchedeffects s2a border-type in june and mixed 2015, categories, followed by its twinas well as reducing satellite (s2b) in sampling march bias 2017."
+6,"theabout imageslocation, slope and orientation were downloaded [98]."
+6,"some open from the copernicus data were access also hubvalidated service through google street view to assure (https://scihub.copernicus.eu/, [99,100]. this on accessed we achieved 21 september 2020)thisandby collecting training atmospherically and classification points for lulccorrected radiometrically to theby using of bottom a 2atmosphere km grid to stratify (boa) level usingreducing the area, the sen2corspatial al- gorithm available in the snap sentinel toolbox."
+6,"using the bilinear autocorrelation and pseudoreplication in medium-resolution images of heterogeneous interpolation algorithm, all image bands mountain areas were [101].subsampled we accounted 10 1.821 to afor m grid."
+6,"the subsampled field-checked bands457 locations: (b5,for b6,broadleaf b7, b8a, and and b11 b12)coniferous 205 for were thenforest, stacked320with original 10 shrublands, bands (b2, 227mpastures andb3, b4 and around 700b8)for for deriving other land spectral indices cover types."
+6,"onrelated to vegetation the other hand, we collectedtraits functional 282 such as productivity reference points (gps and quality) phenology. of in particular, wetlands we obtained across the studythe normalised area, difference with varying vegetation soil moisture index (ndvi), gradients commonly and topographic used in land checking constraints. cover mapping thesefor enhancing reference vegetation locations, weproductivity also digitalised and biomass wetland[102,103]. patches visible during low-level flows by using high-resolution aerial photographs from thefrom some studies report that lulc classification benefits from incorporating information end the red edgegetting of summer, and thethe reliable sizeofand near-infrared electromagnetic theshape spectrum of 141 wetlands by exploiting for subsequent s2 bands distribution and 8."
+6,theabsence 4modelling.
+6,normalized points difference green vegetation were selected (gndvi) randomly across area also theindex exploits following the three criteria:green visible spectrum (i) excluding the(540–570 former 141 nm).
+6,"apart from being photo-interpreted more patches, (ii)sensitive only within to chlorophyll shrublands and grasslands obtained in the previous lulc classification and (iii) with a minimum distance of 200 metres among them to avoid pseudoreplication."
+7,"remote sens. 2022, 14, 1864 7 of 22 concentration than ndvi, it is good senescence and leaf hydric stress indicator [104] that occurs during the summer period in the study area."
+7,"a complimentary digital elevation model (dem) of 5 m of spatial resolution was obtained from lidar data, also available for the whole country at cnig (https://centrodedescargas.cnig.es), and resampled to 10 m and 30 m to match s2 and landsat pixel sizes, respectively."
+7,"in turn, lulc classification in the past was developed over a time series of 41 cloud-free landsat images collected from 1989 to 2019, processed with nasa’s landsat ecosystem disturbance adaptive processing system (ledaps)."
+7,"such data were obtained from the us geological survey (usgs) earth explorer archive (http://earthexplorer.usgs.gov/, accessed on 21 september 2020)."
+7,"similar to the previous process, a minimum amount of cloud cover and high elevation angles were required, which focused the search on images taken during the summer period of each year."
+7,"we used the same s2 mosaic to map wetland distribution, but corrected it with the icor algorithm as it presents a better performance for water-related ecosystems [105,106]."
+7,we generated two specific spectral indices related to water presence—the normal difference water index (ndmi) and the automated water extraction index (aweinsh) [107–109].
+7,"furthermore, we created the topographic wetness index (twi), derived from topographical attributes, to define the areas with the highest potential for moisture accumulation [110]."
+7,mapping lulc trends and wetlands distribution lulc classification has been made for three time periods spanning 30 years (1989–2019–2049).
+7,"the beginning of any supervised classification involves the definition of the legend, i.e., in which categories the image is going to be classified."
+7,table 1 shows the legend for the present study based on the typologies used in [111] according to vegetation physiognomic units that assure an optimal classification with medium resolution sensors in heterogeneous and mountainous environments.
+7,we then applied a per-pixel supervised classification using a support vector machine algorithm (svm) which collected in situ data and the predictors explained above.
+7,"the svm algorithm generates a hard map, assuming homogeneous pixels across the landscape continuum and creating a complete classification for the s2 mosaic."
+7,"when one pixel does not belong entirely to any defined class, the algorithm assigns it as “not evaluated” or to the category with the highest probability of belonging [112]."
+7,"therefore, the process calculates an uncertainty that can be evaluated by complementary soft-classification approaches and used to refine lulc patterns and trends [111]."
+7,the analysis of lulc dynamics requires assuring spectral coherence between landsat and sentinel images.
+7,"radiometric differences must be considered due to aspects such as phenology and vegetation growth rates, varying atmospheric conditions, soil moisture or the presence of aerosols that may modify boa reflectance and therefore affect the post- classification comparison of lulc patterns."
+7,"without a high temporal resolution of lulc maps over time, the performance of an adequate atmospheric and topographic correction, the quality of the training data or even the selection of images during the summer period do not guarantee lulc comparability over time, which may result in inconsistent change detection [65,101]."
+7,"here, we applied a sensitivity analysis that calculates the averaged values of ndvi for each lulc category defined in the legend for the year 2019 and searched the most spectrally similar image in the past, even when dealing with different sensors, thus guaranteeing comparability of maps over time."
+7,"we then calculated the ndvi value for each in situ data point for the whole series of landsat and s2 images, together with the 25th and 75th percentiles between which the interquartile range is found, i.e., 50% of the sample values (see figure 3)."
+7,"these averages are then calculated for each category and landsat image in the time series, identifying all in situ data points within the current image’s interquartile range."
+7,"in this way, the june 1989 scene was selected as the one that assures a larger consistency in the time series for the lulc change analysis."
+7,"after selecting the scene, lulc classification was performed similarly to s2, applying the svm algorithm and using only the reference points of each category with ndvi values within the interquartile range"
+8,"remote sens. 2022, 14, 1864 8 of 22 to keep the spectral unmixing of lulc categories as much as possible."
+8,current s2 maps and ancillary topography data were finally rescaled to 30 m using a nearest neighbour approach to match the landsat data.
+8,table 1.
+8,definition of basic legend for lulc classification [91].
+8,legend description vegetation formation composed mainly of mature trees with shrub and undergrowth presence in which broadleaved species predominate.
+8,"applicable to mature forests of natural or anthropogenic origin such as pure or mixed broadleaved stands; riparian and 1 broadleaf forest (blf) gallery forests; broadleaved deciduous thermophiles forests; evergreen sclerophyllous forests; arborescent thickets with sclerophyllous broadleaved species; logging areas; young broadleaved tree plantations; also, to young broadleaved plantations."
+8,vegetation formation consisting of mature trees with shrub and undergrowth presence in which coniferous species predominate.
+8,"applicable to mature forests of natural or 2 coniferous forest (cnf) anthropogenic origin such as pure or mixed coniferous stands; deciduous, coniferous forest; arborescent scrub."
+8,"furthermore, to young conifer plantations and coniferous wooded dunes."
+8,"areas of dense, herbaceous vegetation with occasional scattered trees."
+8,"representative of natural development of broadleaved and/or coniferous forest formations in transition by natural succession on abandoned agricultural land; forest regeneration after damage (fire, 3 shrublands (ssh) landslides); stages of forest degeneration caused by natural or anthropogenic stress factors; reforestation after logging or planting in previously non-forested natural or semi-natural areas."
+8,"areas of cultivated land in agricultural use for arable crops irrigated periodically or agricultural land, crops permanently, using permanent infrastructure (irrigation channels, drainage network and 4 (agr) additional irrigation facilities)."
+8,most of these crops cannot be cultivated without an artificial water supply.
+8,permanent grasslands characterised by agricultural use or heavy human disturbance.
+8,"5 pasture and grassland (gra) they have a floral composition influenced by human activity, usually grazing or mechanical harvesting of grass meadows."
+8,"areas of boulders, cliffs, rocky outcrops, including areas of active erosion, rocks and natural no vegetated expanses of sand or pebble/gravel."
+8,"in coastal or inland locations, denude rock and bare soil such as beaches, dunes, gravel, including torrential stream channel beds."
+8,it also includes 6 (den) areas with sparse vegetation consisting of herbaceous and/or semi-woody species covering 10–50% of the area.
+8,"includes steppes, tundra, lichen heaths, wastelands, karst areas and sparse vegetation at high altitudes."
+8,"areas of continuous or discontinuous urban land, as well as industrial areas, road urban and human-derived 7 networks, port areas and artificial areas occupied by extractive activities."
+8,areas with areas (uhd) artificial vegetation are also included.
+8,"inland sea area and lower tidal limit as well as lakes, ponds and flowing waters formed by 8 water ecosystem (wae) all rivers and streams, including also artificial water bodies such as reservoirs and canals."
+8,"after classifying past and current lulc patterns, we generated a matrix of change by comparing the maps from 1989 and 2019."
+8,"we established an increment rate of the forest cover and applied the scenario generator proximity based model of invest (integrated valuation of ecosystem services and trade-offs, see https://naturalcapitalproject.stanford. edu, accessed on 17 may 2021) [113–115] to create a future bau (business as usual) scenario allocating the maximum increase in the forest category."
+8,"previously, we merged blf and cnf typologies (see table 1) into a single forest category called for to avoid the uncertainty generated by the translocation of pixels of both typologies without any specific analysis of the phenology, drivers and abiotic limiting factors at the species level."
+8,"the invest service shows that this tool requires establishing the focal lc that sets the proximity rules from which the scenario will be determined—in this case, ssh and gra."
+8,"the scenario generator will then convert pixels of grasslands and shrublands into forests, starting from the edge of focal patches at the base of the higher probability to be modified [113,114]."
+8,"we used the same supervised classification with an svm algorithm for mapping wetland distribution over a combination of the s2 imagery corrected by the icor package,"
+9,"dealing with different sensors, thus guaranteeing comparability of maps over time."
+9,"we then calculated the ndvi value for each in situ data point for the whole series of landsat and s2 images, together with the 25th and 75th percentiles between which the interquartile range is found, i.e., 50% of the sample values (see figure 3)."
+9,"these averages are then calculated for each category and landsat image in the time series, identifying all remote sens. 2022, 14, 1864 9 of 22 in situ data points within the current image’s interquartile range."
+9,"in this way, the june 1989 scene was selected as the one that assures a larger consistency in the time series for the lulc change analysis."
+9,"after selecting the scene, lulc classification was performed similarlyindices spectral and ancillary to s2, applying topographic the svm algorithmvariables and using[116]. onlythe the model output reference provides points of each category probabilities per-pixel withinoccurrence of wetland with ndvi values with continuous the interquartile values range to keep the ranging spectral from 0 to unmixing 1.ofwith the previously digitalised wetland patches, we extracted a suitable threshold lulc categories as much as possible."
+9,current s2 maps and ancillary topography data for creating presence–absence maps from model outputs and used it as a cut-off threshold were finally rescaled to 30 m using a nearest neighbour approach to match the landsat that data. us spatially define wetland areas. allowed figure3.3.
+9,boxplot figure boxplotrepresents thethe represents ndvi ndvi values values of the of the reference reference points points used used to classify to classify the the july july 2019 2019 scene. scene.
+9,"potential erosion, surface runoff and deposition areas the afterpotential erosion classifying hillsides pastinand currentand sediment lulc delivery patterns, on wetlands we generated ecosystems a matrix was of change determined by comparing using the netmap the maps from 1989 with tooland an we 2019. automated process established that analyses an increment watershed rate of the forest functioning according cover and applied to characteristic the scenario generator proximitysuch parameters based topography asmodel of investand (integrated pluviome- try [117,118]."
+9,"valuation for its of use, we generated ecosystem a synthetic services river network and trade-offs, digital (srn) from the see elevation model (dem) with 10 m of spatialaccessed https://naturalcapitalproject.stanford.edu, resolutiononto17match data."
+9,thistonetwork the s2[113–115] may 2021) create a an optimal isfuture hierarchical bau (business usual)framework asspatial the hydrological to articulate scenario allocating and environmental maximum increase in the forest information [119].
+9,thewe category.
+9,"previously, stream mergednetworks blf andarecnf delineated flow using(see typologies 1) into inferred directions table from a single forest the dem and the algorithms described by [120]."
+9,"we applied drainage enforcement category called for to avoid the uncertainty generated by the translocation of pixels of in lower both areas relief (slope less typologies than any without 30%)specific by reducing the elevation analysis of the current of the phenology, cells in drivers theabiotic and dem by two metres, using the current locations of reference river channels to limiting factors at the species level."
+9,the invest service shows that this tool requires avoid these cells acting as sinks.
+9,"nodes divide the network where several river channels establishing the focal lc that sets the proximity rules from which the scenario will be meet, as these junction areas imply determined—in thischanges case, ssh in channel and gra."
+9,"the scenario[117,118]. morphologies generator will we then, thenapplied convert specific pixels netmap packages that encompass shallow landslide, gully and surface of grasslands and shrublands into forests, starting from the edge of focal patches at theerosion processes through base of thegeomorphologic criteria higher probability to to beobtain modifiedthe generic erosion potential index (gep)."
+9,"gep [113,114]. provides a relative measure of potential erosion at the source (e.g., from 0 to 1) calculated from the flow accumulation to each pixel [118,121]."
+9,"the gep index will give larger values in steeper and convergent slopes [118], as they are more prone to landslides and surface erosion [122]."
+9,"in addition, the rusle length–slope (ls) factor was added as a measure of the sediment transport capacity of surface runoff [123]."
+9,"finally, we defined deposition areas as plains with a slope of less than 5% [124–126] that intersect with the river network which coincides with the wetlands defined in the previous classification."
+9,multi-criteria analysis: from forest dynamics to wetland siltation we designed a multi-criteria analysis to identify priority areas to reduce soil ero- sion on hillsides and the probability that the sediment generated will be transported and finally deposited in the wetlands of the study area.
+9,"this action targets forest conserva- tion and restoration actions, but specifically also spontaneous vegetation regeneration"
+10,"remote sens. 2022, 14, 1864 10 of 22 following secondary succession processes across hillslopes and riparian areas (i.e., valley bottoms and wetlands receiving runoff from adjacent zones)."
+10,"to this end, we analysed each process separately."
+10,"for evaluating erosion at the source through the gep, we selected the surfaces with remote sens. 2022, 14, x for peer review 11 of 23 a value greater than 0.50 upstream of the wetland ecosystem of interest [121,127] with an influence area of 30 m to the transport channels [127] (figure 4)."
+10,"we selected all upstream channels within the drainage area for transport issues, discarding the rest."
+10,"all overland flow transport of presence forest systems channels obtained in this area through the regulates the transfer ls index have of sediment been included; betweenthose we identified the terrestrial pixels with an ls valueand environment the wetlands, greater than 0 [123]."
+10,"we thenareas so different defineforfour forest management categories can be of transport established, capacity based on at either thethe maximum quantiles (i.e., of the lscovering all possible index, with erosion values from 1 toprocesses) or only 74 (low, medium, in andareas those high high),the verywhere problems where are more the channels of important are section). (see results the river network in this sense, always categorised as the area “very of abiotic high”. flow potentialarea the influence ofwas overlaid with: the sediment (i) the transport current network is vegetation map (2019) 5 m for all those with a to identify slope forest greater than areas 30% andthat10are currently m for the restpreventing erosion, and (figure 4) [127,128]. (ii) the thesedimentation finally, future forest process is allocated expansion map (2049)to the the within entire area to identify 20 m areas that of the may target wetlands experience a reductionwithina erosion slope ofdue less than to 5% (figure future 4)."
+10,lulc dynamics.
+10,figure 4.
+10,"figure of wetland, example of 4."
+10,"example wetland, gep area of gep and and area influence in of influence thestudy in the studyarea area for: (a)erosion for:(a) erosionat source, atsource, (b) transport and (c) sedimentation processes."
+10,"according to [64], the spatially explicit delineation of erosion at source, sediment 5."
+10,results transport and sedimentation processes constitute the area of abiotic potential flow.
+10,"the we obtained the distribution and dynamics of lulc typologies according to the presence of forest systems in this area regulates the transfer of sediment between the legend of table 1, which show a significant increase in forests over time, from a coverage terrestrial environment and the wetlands, so different areas for forest management can of 14.84% in 1989 to more than 38% in 2019 (see table 2 and figure 5)."
+10,"this represents a be established, either at the maximum (i.e., covering all possible erosion processes) or total area of 59,624.88 ha, i.e., 1987.50 ha/year, which was used to model forest expansion only in those areas where the problems are more important (see results section)."
+10,in this using the invest tool.
+10,"the overall accuracy for the current scene is 86.4% ± 1.4 with a 95% sense, the area of abiotic potential flow was overlaid with: (i) the current vegetation map confidence interval."
+10,"the classification was able to identify similar lulc typologies, (2019) to identify forest areas that are currently preventing erosion, and (ii) the future forest getting, e.g., minimum jeffries–matusita separability values of 1.15 between the agr and expansion map (2049) to identify the areas that may experience a reduction in erosion due gra coverages, and 1.56 ssh and gra."
+10,"in the 1980s’ classification, we obtained an 80.2% to future lulc dynamics."
+10,± 2.3 overall accuracy with a 95% confidence interval.
+10,"from 2019 to 2049, the forested area is predicted to increase by more than 57,000 ha, 5."
+10,"results whichwe means the from shifting obtained occupying distribution andless than 40% dynamics of to than 61% of moretypologies lulc the totaltoarea. according the legend of table 1, which show a significant increase in forests over time, fromshrublands."
+10,"this large increase in the forest category for 2049 is related to the decrease in a coverage the process of 14.84% inhas two 1989 stages:than to more a slight first,38% reduction in 2019 between 2 and 1989 (see table and 5).2019, figure this from 40% toa represents 35% of their total area or about 15,000 ha in total or 480 ha/year, and secondly, the extreme reduction simulated between 2019 and 2049, from 35% of the area to less than 16%, with about 45,000 ha or more than 1500 ha/year."
+10,"this effect is offset by pastures and grassland, with a significant reduction from 1989 to 2019 of more than 36,000 ha, or 1,200 ha/year, and a slight decrease between 2019 and 2049 of around 20,000 ha, or 660 ha/year."
+11,"remote sens. 2022, 14, 1864 11 of 22 total area of 59,624.88 ha, i.e., 1987.50 ha/year, which was used to model forest expansion remote sens. 2022, 14, x for peer review 12 of 23 using the invest tool."
+11,the overall accuracy for the current scene is 86.4% ± 1.4 with a 95% confidence interval.
+11,"the classification was able to identify similar lulc typologies, getting, e.g., minimum jeffries–matusita separability values of 1.15 between the agr and gra 2019 and remain coverages, ssh until stable and 1.56 2049."
+11,in and gra.
+11,"finally, the water the 1980s’ ecosystem classification, weand denude obtained anrock/bare soil 80.2% ± 2.3 constantwith remainaccuracy overall throughout time. a 95% confidence interval."
+11,table2.2.
+11,"lulc table lulcdistributional areasfor distributionalareas thepast, forthe currentand andfuture past,current scenarios. futurescenarios."
+11,1989 2019 2049 l.u.
+11,1989 2019 2049 l.u.
+11,"surface (ha) % surface surface (ha) % surface surface (ha) % surface surface (ha) % surface surface (ha) % surface surface (ha) % surface blf 36,499.40 14.69 94,517.00 38.04 blf for 36,499.4036,874.69 0.15 14.69 14.84 96,499.57 94,517.00 38.04 38.84 153,799.57 61.89 cnf for 375.29 36,874.69 14.84 1982.57 96,499.570.80 38.84 153,799.57 61.89 cnf 375.29 0.15 1982.57 0.80 ssh ssh 99,809.43 99,809.43 40.16 40.16 85,214.25 85,214.25 34.29 34.29 39,627.61 39,627.61 15.95 15.95 agr agr 21,619.85 21,619.85 8.708.70 11,090.19 11,090.19 4.464.46 11,090.19 11,090.19 4.46 4.46 gra gra 57,229.07 57,229.07 23.03 23.03 21,533.37 21,533.37 8.678.67 9820.01 9820.01 3.95 3.95 den den 31,819.08 31,819.08 12.80 12.80 31,449.75 31,449.75 12.66 12.66 31,449.75 31,449.75 12.66 12.66 uhd 767.20 0.31 2332.19 0.94 2332.19 0.94 uhd 767.20 0.31 2332.19 0.94 2332.19 0.94 wae 380.01 0.15 380.01 0.15 380.01 0.15 wae 380.01 0.15 380.01 0.15 380.01 0.15 figure 5."
+11,"lulc map for the three scenarios in the study area: (a) 1989, (b) 2019 and (c) 2049 lulc figure 5. the following mapof legend fortable the three scenarios 1: blf in the broadleaf study forest; area: cnf (a) 1989, (b) coniferous 2019ssh andshrublands; forest; (c) 2049 following agr the legend of table 1: blf broadleaf forest; cnf coniferous forest; ssh shrublands; agricultural land, crops; gra pasture and grassland; den denude rock and bare soil; uhd urban agr agricultural land, crops; gra pasture and grassland; den denude rock and bare soil; uhd urban and human-derived areas and wae water ecosystem. and human-derived areas and wae water ecosystem."
+11,"from 2019 to 2049, the forested area is predicted to increase by more than 57,000 ha, whichthe wetland means modelling shifting outcomesless from occupying were able than 40% to more 171 to identify thanreference 61% of the points totalacross area. the study area from the 282 available, leading to a detection capability of 60.6% this large increase in the forest category for 2049 is related to the decrease in shrublands."
+11,± 6.8 with a 95% confidence interval.
+11,"in turn, the 141 wetlands mapped by the process has two stages: first, a slight reduction between 1989 and 2019, from 40% to expert photo- interpretation 35% occupied of their total area ofha170.50 a total15,000 area or about ha.orwetland in total models, 480 ha/year, andafter applying secondly, suitable the extreme thresholds over continuous 0–1 reduction simulated between 2019 and 2049, from 35% of the area to less than 16%, withof probability values and acknowledging the capabilities such an about rs-based 45,000 modelling ha or more approach, than 1500 ha/year."
+11,this aeffect occupy totalisarea of 395.66 offset ha.
+11,"this by pastures andresults in an grassland, overlay with percentage a significant of 38.54% reduction or, in from other 1989 2019 of an to words, moreoverestimation ha,wetland than 36,000 of or 1200models ha/year, in the expert criteria."
+11,"the results obtained for gep indicate a greater erosion potential on steeper slopes, which tend to coincide with non-forested headwater basins."
+11,"in these areas, sediment flow channels show that temporary water networks or runoff flows transport the most"
+12,"remote sens. 2022, 14, 1864 12 of 22 and a slight decrease between 2019 and 2049 of around 20,000 ha, or 660 ha/year."
+12,"in addition, agricultural land has a reduction between 1989 and 2019 of about 10,000 ha and then remains constant in the model until 2049."
+12,urban areas have increased from 1989 to 2019 and remain stable until 2049.
+12,"finally, the water ecosystem and denude rock/bare soil remain constant throughout time."
+12,"the wetland modelling outcomes were able to identify 171 reference points across the study area from the 282 available, leading to a detection capability of 60.6% ± 6.8 with a 95% confidence interval."
+12,"in turn, the 141 wetlands mapped by expert photo-interpretation occupied a total area of 170.50 ha."
+12,"wetland models, after applying suitable thresholds over continuous 0–1 probability values and acknowledging the capabilities of such an rs-based modelling approach, occupy a total area of 395.66 ha."
+12,"this results in an overlay percentage of 38.54% or, in other words, an overestimation of wetland models in the expert criteria."
+12,"the results obtained for gep indicate a greater erosion potential on steeper slopes, which tend to coincide with non-forested headwater basins."
+12,"in these areas, sediment flow channels show that temporary water networks or runoff flows transport the most considerable amount of sediment towards the wetland ecosystems as opposed to the permanent networks, which make a much smaller yet significant contribution."
+12,the netmap tool also allowed identifying which reaches receive the most important contribution of sediment (see figure 4).
+12,"finally, the multi-criteria analysis identified optimal areas to apply forest management strategies based on conservation and passive restoration actions (692.13 and 1289.11 ha, respectively)."
+12,"these current and future forest patches may allow for reducing erosion process at three stages (table 3): (i) reducing erosion production at the source through the presence of forests on drainage slopes, (ii) filtering sediment inputs and retaining sediment transport in permanent and temporary water networks using riparian forest strips, and (iii) filtering out sediment delivery or deposition to wetlands through riparian forest buffers in surrounding areas."
+12,the larger areas to preserve and restore correspond to sediment transport (see table 3).
+12,"dealing with the intensity of sediment transport, larger areas correspond to high transport capacity, or in other words, to those where surface runoff is more important."
+12,"secondly, erosion at the source, to which forest management actions could be applied, affects less than 15% of the area."
+12,"finally, the areas addressing sediment deposition occupy 3.56% of the area of potential erosion flow."
+12,"as a graphical example, figure 6 shows potential areas for establishing forest management actions in one of the studied wetlands."
+12,table 3.
+12,"area available for the implementation of forest management actions (i.e., nbs of forest conservation and forest restoration) in relation to the analysis of erosion process."
+12,sediment transport erosion at source sediment deposition total low medium high very high forest conservation (ha) 92.48 308.22 122.51 85.77 77.17 5.98 692.13 forest restoration (ha) 137.48 556.24 185.90 108.47 236.42 64.6 1289.14
+13,"forest conservation 92.48 308.22 122.51 85.77 77.17 5.98 692.13 (ha) forest remote sens. 2022, 14, 1864 restoration 137.48 556.24 185.90 108.47 236.42 64.6 13 of 22 1289.14 (ha) forest distribution 6. (a) example of current forest figure 6. and future distribution and expansion. (b) optimal areas to future expansion. related to establish nbs related forest conservation to forest conservation and and restoration restoration (e.g., rewilding)strategies. (e.g., rewilding) strategies."
+13,"discussion in this work, we applied a novel rs-based modelling approach that couples forest dynamics and potential wetlands siltation to identify optimal areas for implementing nbs that regulate sediment flows in mountainous systems."
+13,landscape modelling approach lulc mapping has been based on sensitivity analysis to detect spectrally comparable satellite images from different sensors within a time series of landsat and s2 scenes.
+13,"various studies showed that both sensors are directly comparable after a toa correction when the images were taken on the same date [129,130]."
+13,other studies developed a time-series- based reflectance adjustment (tra) approach for reducing the reflectance differences between both sensor observations after a toa correction [131] and linear regression models to adjust reflectance differences between sensors for each pixel and spectral band.
+13,"we developed here a simplified, conservative approach that maintains the original values of band images."
+13,"to achieve this, we based our analyses on a sensitivity selection by ndvi according to the lulc legend to obtain comparable data at the boa level."
+13,"the rs-based modelling of wetlands allows assessing the uncertainty of boundaries ex- tracted by automated algorithms in complex landscapes against expert-based data collected on the ground [101,132,133]."
+13,these rs-based models’ uncertainties can be linked to several issues.
+13,one deals with the nature of wetland typologies.
+13,"among the 282 wetlands reference points, we have different typologies including lagoons, lakes and peat bogs."
+13,"with the 10 m pixel size of the s2 images, we are, in principle, able to identify some of these aquatic systems [134,135]."
+13,"nevertheless, other aquatic ecosystems such as cattle watering holes or springs are locations where the image pixel’s size and spectral uncertainty may preclude mapping their occurrence on the ground."
+13,"a second reason can be related to the need for the temporal dynamics (i.e., phenology or seasonal trends) of satellite information to catch up with the systems’ properties that allow for reliable mapping exercises."
+13,"in [136,137], among studies, has been demonstrated the capability of using satellite image time series to map and monitor biodiversity patterns at a large scale."
+13,"moving beyond the validation of wetland occurrences (i.e., made here by overlying modelled patterns and reference points), we assessed the method’s capability for matching the spatial pattern of wetlands mapped using expert criteria and aerial photographs."
+13,"in general, we observed an overestimation"
+14,"remote sens. 2022, 14, 1864 14 of 22 of the models over photointerpretation patterns."
+14,"nevertheless, assessing local boundary uncertainty or fuzzy boundary width in wetlands may result in artificial and not wholly reliable in the base of existing images of known class characteristics and locations, and this may hamper discrimination and variability [138,139]."
+14,discrimination consists of the ability of the photointerpreter (or an algorithm) to detect a difference in texture.
+14,"vari- ability consists on the intrinsic spatial variability of the texture itself because of the fuzzy boundaries [138,140]."
+14,"acknowledging these complexities, we determine that rs-based modelling of wetlands may help examine the effect of context on boundary uncertainty in complex landscapes, i.e., how one might assess the uncertainty of boundaries extracted by automated algorithms based on rs against reliable data collected on the ground to advance more reliable and automatic mapping procedures."
+14,"nevertheless, this issue needs further research to determine the omission and commission errors of both techniques."
+14,the combination of lulc and wetland distributions in this work allowed assessing the potential flow of sediment following a meta-ecosystem perspective [63].
+14,"this identified, on the one hand, all potential pathways of sediment through terrestrial landforms to wetlands, but also depicted where terrestrial ecosystems are connected to these abiotic flows in order to reduce the magnitude of the sedimentation processes in target wetlands."
+14,"in this sense, erosion at the source, sediment transport and sediment deposition has been analysed independently."
+14,"this is a major advance over other approaches that either consider only some of the processes in isolation, or cannot spatially discretise them to assess accurately in which terrestrial structures they occur [141–143]."
+14,"in this way, our methodology identifies not only different forest habitats (e.g., riparian forests or hillside forests), but also different managing strategies (e.g., conservation or restoration), that could be applied at various scales and locations to reduce the sediment transfer between terrestrial and wetland ecosystems."
+14,"therefore, using the proposed approach, we could first prioritise which locations need urgent actions and which are not at risk from erosive sediment inputs."
+14,"furthermore, we could identify over which process and locations we can act more effectively, e.g., erosion production at the source, sediment transport by rills and channels or sedimentation in flat areas."
+14,"implications for landscape management our results show that, in the study area, most of the sediment is generated in the headwaters."
+14,"this is in agreement with other studies carried out in mountainous territories where slope steepness and convergence cause surface and subsurface flow to become concentrated and thus contribute to soil erosion [117,118,144]."
+14,"in this sense, vegetation is an important agent for stabilizing steep regolith-mantled slopes."
+14,"vegetation reinforces the regolith with roots [145,146] and, to a lesser extent, modifies soil moisture and subsurface hydrology through transpiration, canopy interception, the redistribution of rainwater and the development of preferential flow paths via root systems [147,148]."
+14,"from an ecological point of view, more complex ecosystems and mature vegetation contribute to greater protection of the soil properties [40]."
+14,"in fact, woody vegetation stabilizes soil surfaces by impeding soil movement, generating lower losses in comparison to other vegetation types [149–151]."
+14,"in our study area, forest conservation actions would not affect large extents (around 4% of the total area implied in sediment flows), so fully preserving its current adequate condition should be a priority."
+14,"however, as has been quantified by [64] for the same study area, an important part of the sediment is generated in areas where forests are not present, now nor in the future, because of limiting abiotic factors such as altitude, slopes and climatic conditions [101]."
+14,"in this sense, the total area of sediment generation is significantly larger than the 229.96 ha (table 3) identified in our study as a potential area to reduce the production of sediment in wetlands."
+14,"in these cases, management should focus on reducing sediment transport and deposition by means of, e.g., riparian vegetation, in order to regulate sediment flows that are difficult to mitigate at the source."
+14,"for example, according to some studies, riparian areas covered by dense and mature forests were ≥75% effective in trapping sediment before reaching a water body in agricultural"
+15,"remote sens. 2022, 14, 1864 15 of 22 land [127], and 53% to 96% in piedmont areas [152,153]."
+15,"for this purpose, our methodology allows us to locate not only the temporary and secondary channels with a high capacity to transport sediment from the production areas to the wetlands, but also the areas where sediment arrives at the wetlands (table 3)."
+15,"however, during high-intensity precipitation events, which are expected to increase in frequency because of climate change [154], the effectiveness of these buffering systems may be limited by the concentration of the surface flow of water and sediment before they even reach the delivery channels [155–157]."
+15,"under these circumstances, conservation and restoration of hillside forest in areas of low and medium transport capacity become of paramount importance (table 3): the increase in the roughness of the initialization rills of water and sediment flow can contribute to making it more diffuse, which increases the effectiveness of the riparian filters [158]."
+15,"in terms of landscape dynamics, we observed in the study area a widespread and intense forest expansion that can be read as an opportunity to provide erosion regula- tion [159,160]."
+15,"our results about forest dynamics were compared to another study in a similar area [87], which provides an average annual forest cover increment rate for the period between 1956 and 2004 of 0.54%, representing an increment of 1.94 ha/year."
+15,"if we extrapolate this value to our study area, we get a forest expansion rate of 1342.01 ha/year."
+15,"with these data, we estimate that the average area occupied by forests for the year 1983 was 32.01% and 47.53% in 2004, which implies an increment of 2.94 ha/year."
+15,"extrapolating these rates to our study area, it represents 2029.58 ha/year."
+15,"this reinforced our estimation of future lulc for the year 2049, which is also coherent with the dynamics observed in other mountain regions [111,161,162]."
+15,"in the base on these results, the reactivation of secondary succession processes would allow creating, in the next 30 years, a total of 597.01 ha of new forest stands for the study area, which represents a 115% increase compared to the current forest that, in turn, is linked to the erosion regulation and subsequent sediment delivery to the wetlands (see table 3)."
+15,"considering these trends, therefore, passive management of forest expansion (i.e., rewilding) seems to be a very cost-effective adaptive strategy for improving wetland conditions and functioning."
+15,"apart of that, other restoration tech- niques such as sediment trapping [163] or human-made afforestation could be also applied when erosion effects are more important."
+15,"this would assure wetland conditions in case a wetland is close to clogging or receives sediment with a large amount of nutrients [164], or simply when future forests will not be able to reach specific critical locations at the base of our potential simulation [91]."
+15,"however, several authors pointed out the negative effects that rewilding may have on preserving the rich diversity of european cultural landscapes [165,166], as well as its impact on traditional agrarian activities and, conse- quently, some food-provisioning es [167]."
+15,"in fact, in our study area, forest expansion is driven by a decrease in livestock pressure, which may involve the loss of highly productive grasslands [94]."
+15,"in this context, our methodology could contribute to decision-making by identifying areas where the process of secondary succession is most favorable to wetland conservation with minimum area requirements to be managed by nbs implementation (e.g., rewilding)."
+15,"furthermore, the framework is suitable to be inserted in integrative approaches that seek to design effective landscapes in response to not only social demands but also environmental conditions of the territory (e.g., blue and green infrastructure networks) [64]."
+15,"in this sense, the erosion regulation es for wetland protection would be considered together with other es such as flood regulation, food provision or aesthetic values."
+15,"by simultaneously assessing factors associated with wetland conservation such as biodiversity or water body connectivity, and the relationships with other es (e.g., synergies or trade-offs; [167]), the areas of the territory for nbs implementation would be prioritized in a multivariate and cost-effective manner."
+15,"conclusions the combination of information about lulc dynamics, wetland distribution and erosion processes has allowed establishing an innovative spatially explicit rs-based work- flow that allows addressing potential ecological and hydrological problems of wetlands in"
+16,"remote sens. 2022, 14, 1864 16 of 22 mountainous environments by using nbs related to forest ecosystems."
+16,"in the context of this work, ecosystem management actions should be focused on conserving current forest stands and applying passive restoration techniques in areas where future forests could be established near receiving areas where the delivery of sediment from streamflow or surface runoff may reach the aquatic ecosystems of interest."
+16,"the general purpose of the stratified approach would tackle not only slowing down erosion processes in the short to long term, but doing so more efficiently, thus ensuring a better ecosystem functionality that could be executed under limited available funding opportunities for ecological restoration."
+16,"author contributions: conceptualization, g.h.-r., j.m.á.-m., i.p.-s. and j.b.; methodology, g.h.-r., j.m.á.-m. and i.p.-s.; software, g.h.-r., j.m.á.-m., i.p.-s. and a.s.-c.; validation, g.h.-r., j.m.á.-m. and i.p.-s.; formal analysis, g.h.-r. and j.m.á.-m.; investigation, g.h.-r., j.m.á.-m. and i.p.-s.; resources, g.h.-r., j.m.á.-m., i.p.-s., a.s.-c., d.r.v. and j.b.; data curation g.h.-r.; writing—original draft preparation, g.h.-r., j.m.á.-m.; writing—review and editing, g.h.-r., j.m.á.-m., i.p.-s., a.s.-c., d.r.v. and j.b.; visualization, g.h.-r.; supervision, j.m.á.-m.; project administration, j.m.á.-m. and j.b.; funding acquisition, d.r.v. and j.b."
+16,all authors have read and agreed to the published version of the manuscript.
+16,"funding: this article has been funded by “waterlands project”, code pid2019-107085rb-i00, funded by mcin/aei/10.13039/501100011033/ and by erdf “a way of making europe“ that “seeks to understand the linkages between water (river) and land cover (forest) dynamics in mountain systems” <https://waterlands.ihcantabria.com/>, and by “life divaqua” project, code life18 nat/es/000121, entitled “improving aquatic diversity in picos de europa” <https://lifedivaqua. com/en/>."
+16,institutional review board statement: not applicable.
+16,informed consent statement: not applicable.
+16,data availability statement: not applicable.
+16,acknowledgments: we are grateful to all members of the continental ecosystems research group of ihcantabria for the effort made during fieldwork campaigns and comments <https://ihcantabria. com/en/investigacion/grupo-ecosistemas-continentales/>.
+16,we also thank technical support to csic teledetect thematic interdisciplinary platform members <https://pti-teledetect.csic.es/ teledetect-pti/> and the master’s degree in geoinformatics for natural resources management of the university of león <http://mastergeoinformatica.unileon.es/> to which msc defence was designed the first version of the manuscript.
+16,conflicts of interest: the authors declare no conflict of interest.
+16,references 1.
+16,"biswas, a.k."
+16,integrated water resources management: a reassessment: a water forum contribution.
+16,water int.
+16,"2004, 29, 248–256."
+16,[crossref] 2.
+16,"flores díaz, a.c."
+16,"; mokondoko delgadillo, p."
+16,"; gonzález mora, i."
+16,"; machorro reyes, j."
+16,"; ríos patrón, e."
+16,servicios ecosistémicos: fundamentos desde el manejo de cuencas.
+16,cuadernos de divulgación ambiental.
+16,available online: https://agua.org.mx/wp- content/uploads/2018/05/servicios-ecosistémicos-fundamentos-desde-el-manejo-de-cuencas.pdf (accessed on 11 january 2022).
+16,"sadoff, c."
+16,"; muller, m."
+16,"water management, water security and climate change adaptation: early impacts and essential responses; global water partnership stockholm: stockholm, sweden, 2009."
+16,"pérez-silos, i."
+16,"; álvarez-martínez, j.m."
+16,"; barquín, j."
+16,large-scale afforestation for ecosystem service provisioning: learning from the past to improve the future.
+16,landsc.
+16,"2021, 36, 3329–3343."
+16,[crossref] 5.
+16,"troy, a."
+16,"; wilson, m.a."
+16,mapping ecosystem services: practical challenges and opportunities in linking gis and value transfer.
+16,"2006, 60, 435–449."
+16,[crossref] 6.
+16,"duarte, r."
+16,"; pinilla, v."
+16,"; serrano, a."
+16,"globalization and natural resources: the expansion of the spanish agrifood trade and its impact on water consumption, 1965–2010."
+16,environ.
+16,chang.
+16,"2016, 16, 259–272."
+16,[crossref] 7.
+16,"thornton, p."
+16,"; herrero, m."
+16,"the inter-linkages between rapid growth in livestock production, climate change, and the impacts on water resources, land use, and deforestation."
+16,available online: https://ssrn.com/abstract=1536991 (accessed on 11 january 2022).
+16,"benayas, j.m.r."
+16,"; bullock, j.m."
+16,restoration of biodiversity and ecosystem services on agricultural land.
+16,"ecosystems 2012, 15, 883–899."
+16,[crossref]
+17,"remote sens. 2022, 14, 1864 17 of 22 9."
+17,"power, a.g."
+17,ecosystem services and agriculture: tradeoffs and synergies.
+17,philos.
+17,trans.
+17,b biol.
+17,"2010, 365, 2959–2971."
+17,[crossref] 10.
+17,"hein, l."
+17,"; van koppen, k."
+17,"; de groot, r.s."
+17,"; van ierland, e.c."
+17,"spatial scales, stakeholders and the valuation of ecosystem services."
+17,"2006, 57, 209–228."
+17,[crossref] 11.
+17,"reid, w.v."
+17,"; mooney, h.a."
+17,"; capistrano, d."
+17,"; carpenter, s.r."
+17,"; chopra, k."
+17,"; cropper, a."
+17,"; dasgupta, p."
+17,"; hassan, r."
+17,"; leemans, r."
+17,"; may, r.m."
+17,nature: the many benefits of ecosystem services.
+17,"nature 2006, 443, 749."
+17,[crossref] 12.
+17,"chiabai, a."
+17,"; quiroga, s."
+17,"; martinez-juarez, p."
+17,"; higgins, s."
+17,"; taylor, t."
+17,"the nexus between climate change, ecosystem services and human health: towards a conceptual framework."
+17,total environ.
+17,"2018, 635, 1191–1204."
+17,[crossref] 13.
+17,"daily, g."
+17,introduction: what are ecosystem services.
+17,"in nature’s services: societal dependence on natural ecosystems; daily, gretchen: washington, dc, usa, 1997; volume 1."
+17,"de groot, r.s."
+17,"; alkemade, r."
+17,"; braat, l."
+17,"; hein, l."
+17,"; willemen, l."
+17,"challenges in integrating the concept of ecosystem services and values in landscape planning, management and decision making."
+17,complex.
+17,"2010, 7, 260–272."
+17,[crossref] 15.
+17,"haines-young, r."
+17,"; potschin, m."
+17,"the links between biodiversity, ecosystem services and human well-being."
+17,ecosyst.
+17,a new synth.
+17,"2010, 1, 110–139."
+17,"heywood, v."
+17,"; stuart, s."
+17,species extinctions in tropical forests.
+17,"deforestation species extinction 1992, 5, 91–117."
+17,"seidl, r."
+17,"; schelhaas, m.-j."
+17,"; rammer, w."
+17,"; verkerk, p.j."
+17,increasing forest disturbances in europe and their impact on carbon storage.
+17,chang.
+17,"2014, 4, 806–810."
+17,[crossref] [pubmed] 18.
+17,"mcintyre, s."
+17,"; hobbs, r."
+17,a framework for conceptualizing human effects on landscapes and its relevance to management and research models.
+17,conserv.
+17,"1999, 13, 1282–1292."
+17,[crossref] 19.
+17,"primack, r.b."
+17,"; ros, j."
+17,"introducción a la biología de la conservación; grupo planeta (gbs): madrid, spain, 2002."
+17,"duraiappah, a.k."
+17,poverty and environmental degradation: a review and analysis of the nexus.
+17,world dev.
+17,"1998, 26, 2169–2179."
+17,[crossref] 21.
+17,"freedman, b."
+17,"environmental ecology: the ecological effects of pollution, disturbance, and other stresses; elsevier: amsterdam, the netherlands, 1995."
+17,"karr, j.r."
+17,"; dudley, d.r."
+17,ecological perspective on water quality goals.
+17,environ.
+17,manag.
+17,"1981, 5, 55–68."
+17,[crossref] 23.
+17,"daily, g."
+17,what are ecosystem services.
+17,environ.
+17,chall.
+17,twenty-first century resour.
+17,consum.
+17,sustain.
+17,solut.
+17,"2003, 1, 227–231."
+17,"de groot, r.s."
+17,"; wilson, m.a."
+17,"; boumans, r.m."
+17,"a typology for the classification, description and valuation of ecosystem functions, goods and services."
+17,"2002, 41, 393–408."
+17,[crossref] 25.
+17,"council, n.r."
+17,"restoration of aquatic ecosystems: science, technology, and public policy; national academies press: cambridge, ma, usa, 1992."
+17,"houlahan, j.e."
+17,"; keddy, p.a."
+17,"; makkay, k."
+17,"; findlay, c.s."
+17,the effects of adjacent land use on wetland species richness and community composition.
+17,"wetlands 2006, 26, 79–96."
+17,[crossref] 27.
+17,"winter, t.c."
+17,the vulnerability of wetlands to climate change: a hydrologic landscape perspective 1.
+17,jawra j.
+17,water resour.
+17,assoc.
+17,"2000, 36, 305–311."
+17,[crossref] 28.
+17,"detenbeck, n.e."
+17,"; taylor, d.l."
+17,"; lima, a."
+17,"; hagley, c."
+17,temporal and spatial variability in water quality of wetlands in the minneapolis/st.
+17,"paul, mn metropolitan area: implications for monitoring strategies and designs."
+17,environ.
+17,monit.
+17,assess.
+17,"1996, 40, 11–40."
+17,[crossref] [pubmed] 29.
+17,"skagen, s.k."
+17,"; melcher, c.p."
+17,"; haukos, d.a."
+17,reducing sedimentation of depressional wetlands in agricultural landscapes.
+17,"wetlands 2008, 28, 594–604."
+17,[crossref] 30.
+17,"watson, j.e."
+17,"; evans, t."
+17,"; venter, o."
+17,"; williams, b."
+17,"; tulloch, a."
+17,"; stewart, c."
+17,"; thompson, i."
+17,"; ray, j.c."
+17,"; murray, k."
+17,"; salazar, a."
+17,the exceptional value of intact forest ecosystems.
+17,"2018, 2, 599–610."
+17,[crossref] [pubmed] 31.
+17,"gerten, d."
+17,"; schaphoff, s."
+17,"; haberlandt, u."
+17,"; lucht, w."
+17,"; sitch, s."
+17,terrestrial vegetation and water balance—hydrological evaluation of a dynamic global vegetation model.
+17,hydrol.
+17,"2004, 286, 249–270."
+17,[crossref] 32.
+17,"neary, d.g."
+17,"; ice, g.g."
+17,"; jackson, c.r."
+17,linkages between forest soils and water quality and quantity.
+17,manag.
+17,"2009, 258, 2269–2281."
+17,[crossref] 33.
+17,"acreman, m."
+17,"; holden, j."
+17,how wetlands affect floods.
+17,"wetlands 2013, 33, 773–786."
+17,[crossref] 34.
+17,"alonso, j.l."
+17,"; pulgar, f.j.á."
+17,"; pedreira, d."
+17,el relieve de la cordillera cantábrica.
+17,enseñanza cienc.
+17,"tierra 2007, 15, 151–163."
+17,"belmar, o."
+17,"; barquín, j."
+17,"; álvarez-martínez, j.m."
+17,"; peñas, f.j."
+17,"; del jesus, m."
+17,the role of forest maturity in extreme hydrological events.
+17,"ecohydrology 2018, 11, e1947."
+17,[crossref] 36.
+17,"gillson, l."
+17,"; ladle, r.j."
+17,"; araújo, m.b."
+17,"baselines, patterns and process."
+17,"in conservation biogeography; wiley-blackwell: oxford, uk, 2011; volume 1, pp."
+17,31–44.
+17,"körner, c."
+17,"mountain biodiversity, its causes and function."
+17,ambio j.
+17,environ.
+17,"2004, 33, 11–17."
+17,[crossref] 38.
+17,"butler, j.r."
+17,"; marzano, m."
+17,"; pettorelli, n."
+17,"; durant, s.m.; du toit, j.t."
+17,"; young, j.c."
+17,decision-making for rewilding: an adaptive governance framework for social-ecological complexity.
+17,front.
+17,conserv.
+17,"2021, 2, 681545."
+17,[crossref] 39.
+17,"perino, a."
+17,"; pereira, h.m."
+17,"; navarro, l.m."
+17,"; fernández, n."
+17,"; bullock, j.m."
+17,"; ceaus, u, s."
+17,"; cortés-avizanda, a.; van klink, r."
+17,"; kuemmerle, t."
+17,"; lomba, a."
+17,rewilding complex ecosystems.
+17,"science 2019, 364, eaav5570."
+17,[crossref] [pubmed] 40.
+17,"borrelli, p."
+17,"; robinson, d.a."
+17,"; fleischer, l.r."
+17,"; lugato, e."
+17,"; ballabio, c."
+17,"; alewell, c."
+17,"; meusburger, k."
+17,"; modugno, s."
+17,"; schütt, b."
+17,"; ferro, v."
+17,an assessment of the global impact of 21st century land use change on soil erosion.
+17,commun.
+17,"2017, 8, 2013."
+17,[crossref]
+18,"remote sens. 2022, 14, 1864 18 of 22 41."
+18,"panagos, p."
+18,"; borrelli, p."
+18,"; poesen, j."
+18,"; ballabio, c."
+18,"; lugato, e."
+18,"; meusburger, k."
+18,"; montanarella, l."
+18,"; alewell, c."
+18,the new assessment of soil loss by water erosion in europe.
+18,environ.
+18,"policy 2015, 54, 438–447."
+18,[crossref] 42.
+18,"maes, j."
+18,"; teller, a."
+18,"; erhard, m."
+18,"; liquete, c."
+18,"; braat, l."
+18,"; berry, p."
+18,"; egoh, b."
+18,"; puydarrieux, p."
+18,"; fiorina, c."
+18,"; santos, f."
+18,mapping and assessment of ecosystems and their services.
+18,framew.
+18,ecosyst.
+18,assess.
+18,"under action 2013, 5, 1–58."
+18,"hudson, n."
+18,"field measurement of soil erosion and runoff ; food & agriculture org.: rome, italy, 1993; volume 68."
+18,"nearing, m.a."
+18,"; foster, g.r."
+18,"; lane, l."
+18,"; finkner, s."
+18,a process-based soil erosion model for usda-water erosion prediction project technology.
+18,trans.
+18,"asae 1989, 32, 1587–1593."
+18,[crossref] 45.
+18,"römkens, m.j."
+18,"; helming, k."
+18,"; prasad, s."
+18,"soil erosion under different rainfall intensities, surface roughness, and soil water regimes."
+18,"catena 2002, 46, 103–123."
+18,[crossref] 46.
+18,"merritt, w.s."
+18,"; letcher, r.a."
+18,"; jakeman, a.j."
+18,a review of erosion and sediment transport models.
+18,environ.
+18,model.
+18,softw.
+18,"2003, 18, 761–799."
+18,[crossref] 47.
+18,"mcdowell, d.m."
+18,a general formula for estimation of the rate of transport of non-cohesive bed-load.
+18,hydraul.
+18,"1989, 27, 355–361."
+18,[crossref] 48.
+18,"wohl, e."
+18,legacy effects on sediments in river corridors.
+18,earth-sci.
+18,"2015, 147, 30–53."
+18,[crossref] 49.
+18,"álvarez-cobelas, m."
+18,"; sánchez-carrillo, s."
+18,"; cirujano, s."
+18,"; angeler, d."
+18,"a story of the wetland water quality deterioration: salinization, pollution, eutrophication and siltation."
+18,threat.
+18,semi-arid wetl.
+18,"2010, 2, 109–133."
+18,"johnston, c.a."
+18,sediment and nutrient retention by freshwater wetlands: effects on surface water quality.
+18,environ.
+18,"control 1991, 21, 491–565."
+18,[crossref] 51.
+18,"bilotta, g.s."
+18,"; brazier, r.e."
+18,understanding the influence of suspended solids on water quality and aquatic biota.
+18,water res.
+18,"2008, 42, 2849–2861."
+18,[crossref] [pubmed] 52.
+18,"davies-colley, r."
+18,"; smith, d."
+18,"turbidity suspeni) ed sediment, and water clarity: a review 1."
+18,jawra j.
+18,water resour.
+18,assoc.
+18,"2001, 37, 1085–1101."
+18,[crossref] 53.
+18,"wood, p.j."
+18,"; armitage, p.d."
+18,biological effects of fine sediment in the lotic environment.
+18,environ.
+18,manag.
+18,"1997, 21, 203–217."
+18,[crossref] 54.
+18,"fiskal, a."
+18,"; deng, l."
+18,"; michel, a."
+18,"; eickenbusch, p."
+18,"; han, x."
+18,"; lagostina, l."
+18,"; zhu, r."
+18,"; sander, m."
+18,"; schroth, m.h."
+18,"; bernasconi, s.m."
+18,effects of eutrophication on sedimentary organic carbon cycling in five temperate lakes.
+18,"biogeosciences 2019, 16, 3725–3746."
+18,[crossref] 55.
+18,"akhtar, n."
+18,"; syakir ishak, m.i."
+18,"; bhawani, s.a."
+18,"; umar, k."
+18,various natural and anthropogenic factors responsible for water quality degradation: a review.
+18,"water 2021, 13, 2660."
+18,[crossref] 56.
+18,"shojaeezadeh, s.a."
+18,"; nikoo, m.r."
+18,"; mcnamara, j.p."
+18,"; aghakouchak, a."
+18,"; sadegh, m."
+18,stochastic modeling of suspended sediment load in alluvial rivers.
+18,water resour.
+18,"2018, 119, 188–196."
+18,[crossref] 57.
+18,"stocking, m."
+18,"; murnaghan, n."
+18,land degradation.
+18,encycl.
+18,behav.
+18,"2001, 12, 8242–8247."
+18,"quiñonero-rubio, j.m."
+18,"; nadeu, e."
+18,"; boix-fayos, c.; de vente, j."
+18,evaluation of the effectiveness of forest restoration and check-dams to reduce catchment sediment yield.
+18,land degrad.
+18,"2016, 27, 1018–1031."
+18,[crossref] 59.
+18,"maes, j."
+18,"; jacobs, s."
+18,nature-based solutions for europe’s sustainable development.
+18,conserv.
+18,"2017, 10, 121–124."
+18,[crossref] 60.
+18,"cohen-shacham, e."
+18,"; andrade, a."
+18,"; dalton, j."
+18,"; dudley, n."
+18,"; jones, m."
+18,"; kumar, c."
+18,"; maginnis, s."
+18,"; maynard, s."
+18,"; nelson, c.r."
+18,"; renaud, f.g."
+18,core principles for successfully implementing and upscaling nature-based solutions.
+18,environ.
+18,"policy 2019, 98, 20–29."
+18,[crossref] 61.
+18,"meli, p."
+18,"; rey benayas, j.m."
+18,"; balvanera, p."
+18,"; martínez ramos, m."
+18,"restoration enhances wetland biodiversity and ecosystem service supply, but results are context-dependent: a meta-analysis."
+18,"plos one 2014, 9, e93507."
+18,[crossref] [pubmed] 62.
+18,"chausson, a."
+18,"; turner, b."
+18,"; seddon, d."
+18,"; chabaneix, n."
+18,"; girardin, c.a."
+18,"; kapos, v."
+18,"; key, i."
+18,"; roe, d."
+18,"; smith, a."
+18,"; woroniecki, s."
+18,mapping the effectiveness of nature-based solutions for climate change adaptation.
+18,chang.
+18,"2020, 26, 6134–6155."
+18,[crossref] 63.
+18,"gounand, i."
+18,"; harvey, e."
+18,"; little, c.j."
+18,"; altermatt, f."
+18,meta-ecosystems 2.0: rooting the theory into the field.
+18,trends ecol.
+18,"2018, 33, 36–46."
+18,[crossref] 64.
+18,"pérez-silos, i."
+18,towards dynamic and integrative landscape management in mountain catchments: definition of an adaptive strategy to global change challenges.
+18,"thesis, university of cantabria, santander, spain, 2021."
+18,"álvarez-martínez, j.m."
+18,"; suárez-seoane, s."
+18,"; calabuig, e.d.l."
+18,modelling the risk of land cover change from environmental and socio-economic drivers in heterogeneous and changing landscapes: the role of uncertainty.
+18,landsc.
+18,urban plan.
+18,"2011, 101, 108–119."
+18,[crossref] 66.
+18,"garcía-llamas, p."
+18,"; calvo, l."
+18,"; álvarez-martínez, j.m."
+18,"; suárez-seoane, s."
+18,using remote sensing products to classify landscape.
+18,a multi-spatial resolution approach.
+18,earth obs.
+18,geoinf.
+18,"2016, 50, 95–105."
+18,[crossref] 67.
+18,"cord, a.f."
+18,"; brauman, k.a."
+18,"; chaplin-kramer, r."
+18,"; huth, a."
+18,"; ziv, g."
+18,"; seppelt, r."
+18,priorities to advance monitoring of ecosystem services using earth observation.
+18,trends ecol.
+18,"2017, 32, 416–428."
+18,[crossref] 68.
+18,"gómez, c."
+18,"; white, j.c."
+18,"; wulder, m.a."
+18,optical remotely sensed time series data for land cover classification: a review.
+18,isprs j.
+18,photogramm.
+18,remote sens.
+18,"2016, 116, 55–72."
+18,[crossref] 69.
+18,"osborne, l.l."
+18,"; kovacic, d.a."
+18,riparian vegetated buffer strips in water-quality restoration and stream management.
+18,freshw.
+18,"1993, 29, 243–258."
+18,[crossref] 70.
+18,"uusi-kämppä, j."
+18,"; yläranta, t."
+18,"; mulamoottil, g."
+18,effect of buffer strips on controlling soil erosion and nutrient losses in southern finland.
+18,"in wetlands: environmental gradients, boundaries, and buffers; mulamoottil, g., warner, b.g., mcbean, e.a., eds."
+18,"; crc press, lewis publishers: boca raton, fl, usa, 1996; pp."
+18,221–235.
+19,"remote sens. 2022, 14, 1864 19 of 22 71."
+19,"magdaleno, f."
+19,"; blanco garrido, f."
+19,"; bonada i caparrós, n."
+19,"; herrera grao, t."
+19,how are riparian plants distributed along the riverbank topographic gradient in mediterranean rivers?
+19,application to minimally altered river stretches in southern spain.
+19,"limnetica 2014, 33, 124–138."
+19,[crossref] 72.
+19,"schuft, m.j."
+19,"; moser, t.j."
+19,"; wigington, p."
+19,"; stevens, d.l."
+19,"; mcallister, l.s."
+19,"; chapman, s.s."
+19,"; ernst, t.l."
+19,development of landscape metrics for characterizing riparian-stream networks.
+19,photogramm.
+19,remote sens.
+19,"1999, 65, 1157–1167."
+19,"73. de bruin, s."
+19,"; lerink, p."
+19,"; klompe, a.; van der wal, t."
+19,"; heijting, s."
+19,spatial optimisation of cropped swaths and field margins using gis.
+19,comput.
+19,electron.
+19,agric.
+19,"2009, 68, 185–190."
+19,[crossref] 74.
+19,"lópez-vicente, m."
+19,"; poesen, j."
+19,"; navas, a."
+19,"; gaspar, l."
+19,predicting runoff and sediment connectivity and soil erosion by water for different land use scenarios in the spanish pre-pyrenees.
+19,"catena 2013, 102, 62–73."
+19,[crossref] 75.
+19,"navas, a."
+19,"; lópez-vicente, m."
+19,"; gaspar, l."
+19,"; palazón, l."
+19,"; quijano, l."
+19,establishing a tracer-based sediment budget to preserve wetlands in mediterranean mountain agroecosystems (ne spain).
+19,total environ.
+19,"2014, 496, 132–143."
+19,[crossref] 76.
+19,"barquín, j."
+19,"; álvarez martínez, j.m."
+19,"; jiménez-alfaro gonzález, f.d.b."
+19,"; garcía garcía, d."
+19,la integración del conocimiento sobre la cordillera cantábrica: hacia un observatorio inter-autonómico del cambio global.
+19,"ecosistemas 2018, 27, 96–104."
+19,[crossref] 77.
+19,"rivas martínez, s."
+19,"; penas, á."
+19,"; díaz gonzález, t."
+19,"; ladero álvarez, m."
+19,"; asensi marfil, a."
+19,"; díez garretas, b."
+19,"; molero mesa, j."
+19,"; valle tendero, f."
+19,"; cano, e."
+19,"; costa talens, m."
+19,"mapa de series, geoseries y geopermaseries de vegetación de españa (memoria del mapa de vegetación potencial de españa)."
+19,"parte ii; fundación dialnet: madrid, spain, 2011; volume 1."
+19,"jiménez-alfaro, b."
+19,evaluación del conocimiento florístico de la cordillera cantábrica (españa) a partir de bases de datos de biodiversidad.
+19,"pirineos 2009, 164, 117–133."
+19,[crossref] 79.
+19,"muñoz-gallego, a.r."
+19,nuevo atlas de aves de españa durante la época reproductora (2014–2018).
+19,"uso de la lógica difusa para la elaboración de los mapas de distribución; universidad de málaga: malaga, spain, 2019; volume 1."
+19,"palomo, l.j."
+19,"; gisbert, j."
+19,"; blanco, j.c."
+19,"atlas y libro rojo de los mamíferos terrestres de españa; organismo autónomo de parques nacionales: madrid, spain, 2007."
+19,"pleguezuelos, j.m."
+19,"; márquez, r."
+19,"; lizana, m."
+19,"atlas y libro rojo de los anfibios y reptiles de españa; dirección general de conservación de la naturaleza spain: madrid, spain, 2002."
+19,"martín, j."
+19,"; garcía-barros, e."
+19,"; gurrea, p."
+19,"; luciañez, m."
+19,"; munguira, m."
+19,"; sanz, m."
+19,"; simón, j."
+19,high endemism areas in the iberian peninsula.
+19,entomol.
+19,"2000, 2, 47–57."
+19,"pérez-silos, i."
+19,"; álvarez-martínez, j.m."
+19,"; barquín, j."
+19,modelling riparian forest distribution and composition to entire river networks.
+19,"2019, 22, 508–521."
+19,[crossref] 84.
+19,"codrón, j.c.g."
+19,"; pedraja, c.g."
+19,"; álvarez, d.r."
+19,avenidas e inundaciones históricas en el cantábrico: factores climáticos y cambios en el tiempo.
+19,in proceedings of the cambio climático.
+19,"extremos e impactos: [ponencias presentadas al viii congreso internacional de la asociación española de climatología], salamanca, spain, 25–28 september 2012; pp."
+19,339–348.
+19,"fuentes-pérez, j."
+19,"; hevia, j.n."
+19,"; legazpi, j.r."
+19,"; garcía-vega, a."
+19,inventario y caracterización morfológica de lagos y lagunas de alta montaña en las provincias de palencia y león (españa).
+19,"pirineos 2015, 170, e013."
+19,[crossref] 86.
+19,"winter, t.c."
+19,"; labaugh, j.w."
+19,hydrologic considerations in defining isolated wetlands.
+19,"wetlands 2003, 23, 532–540."
+19,[crossref] 87.
+19,"fernández mier, m."
+19,"; lópez gómez, p."
+19,"; gonzález-álvarez, d."
+19,prácticas ganaderas en la cordillera cantábrica.
+19,aproximación multidisciplinar al estudio de las áreas de pasto en la edad media.
+19,debates arquelogía mediev.
+19,"2013, 3, 167–219."
+19,"álvarez, f.a."
+19,"; sánchez, m.f."
+19,"; mediavilla, g.g."
+19,"; pellejero, r.g."
+19,"; estébanez, n.l."
+19,"; de lomana, g.m.g."
+19,"; pombo, e.s."
+19,una aproximación al análisis comparativo de los paisajes forestales de la cordillera cantábrica y el sistema central.
+19,"ería 2014, 94, 161–182."
+19,"pellejero, r.g."
+19,"; allende, f."
+19,"; sáez, j.a.l."
+19,"; frochoso, m."
+19,"; sánchez, f.a."
+19,"; schaad, d.a."
+19,natural and anthropic dynamics of the vegetative landscape of the inner valleys of western cantabria (north of spain).
+19,boletín asoc.
+19,"geógrafos españoles 2014, 65, 411–438."
+19,"lasanta martínez, t."
+19,tendencias en el estudio de los cambios de uso del suelo en las montañas españolas.
+19,"pirineos 1990, 135, 73–103."
+19,[crossref] 91.
+19,"álvarez-martínez, j.m."
+19,"; suárez-seoane, s."
+19,"; stoorvogel, j.j.; de luis calabuig, e."
+19,influence of land use and climate on recent forest expansion: a case study in the e urosiberian–m editerranean limit of north-west s pain.
+19,"2014, 102, 905–919."
+19,[crossref] 92.
+19,"bengoa, j."
+19,"cambios en el paisaje en la cordillera cantábrica (asturias, cantabria y castilla y león) en los últimos 40 años: comparativa de superficies arboladas a partir del mapa forestal."
+19,"in la evolución del paisaje vegetal y el uso del fuego en la cordillera cantábrica; fundación patrimonio natural de castilla y león: valladolid, spain, 2011; pp."
+19,217–224.
+19,"fernández, i.v."
+19,"aprendizaje histórico en gestión de bienes comunales: los pastos en cantabria (españa); universidad de cantabria: santander, spain, 2016."
+19,"blanco-fontao, b."
+19,"; obeso, j.r."
+19,"; bañuelos, m.-j."
+19,"; quevedo, m."
+19,habitat partitioning and molting site fidelity in tetrao urogallus cantabricus revealed through stable isotopes analysis.
+19,ornithol.
+19,"2012, 153, 555–562."
+19,[crossref] 95.
+19,"wiegand, t."
+19,"; naves, j."
+19,"; stephan, t."
+19,"; fernandez, a."
+19,"assessing the risk of extinction for the brown bear (ursus arctos) in the cordillera cantabrica, spain."
+19,monogr.
+19,"1998, 68, 539–570."
+19,[crossref] 96.
+19,"boardman, j."
+19,"; poesen, j."
+19,"; evans, r."
+19,socio-economic factors in soil erosion and conservation.
+19,environ.
+19,"policy 2003, 6, 1–6."
+19,[crossref] 97.
+19,"boardman, j."
+19,"; vandaele, k."
+19,"; evans, r."
+19,"; foster, i.d."
+19,off-site impacts of soil erosion and runoff: why connectivity is more important than erosion rates.
+19,soil use manag.
+19,"2019, 35, 245–256."
+19,[crossref] 98.
+19,"foody, g.m."
+19,"; mathur, a."
+19,the use of small training sets containing mixed pixels for accurate hard image classification: training on mixed spectral responses for classification by a svm.
+19,remote sens.
+19,environ.
+19,"2006, 103, 179–189."
+19,[crossref]
+20,"remote sens. 2022, 14, 1864 20 of 22 99."
+20,"deus, e."
+20,"; silva, j.s."
+20,"; catry, f.x."
+20,"; rocha, m."
+20,"; moreira, f."
+20,google street view as an alternative method to car surveys in large-scale vegetation assessments.
+20,environ.
+20,monit.
+20,assess.
+20,"2016, 188, 560."
+20,[crossref] [pubmed] 100.
+20,"olea, p.p."
+20,"; mateo-tomás, p."
+20,assessing species habitat using google street view: a case study of cliff-nesting vultures.
+20,"plos one 2013, 8, e54582."
+20,[crossref] 101.
+20,"álvarez-martínez, j.m."
+20,"; silió-calzada, a."
+20,"; barquín, j."
+20,can training data counteract topographic effects in supervised image classification?
+20,a sensitivity analysis in the cantabrian mountains (spain).
+20,remote sens.
+20,"2018, 39, 8646–8669."
+20,[crossref] 102.
+20,"fernández-manso, a."
+20,"; fernández-manso, o."
+20,"; quintano, c."
+20,sentinel-2a red-edge spectral indices suitability for discriminating burn severity.
+20,earth obs.
+20,geoinf.
+20,"2016, 50, 170–175."
+20,[crossref] 103.
+20,"frampton, w.j."
+20,"; dash, j."
+20,"; watmough, g."
+20,"; milton, e.j."
+20,evaluating the capabilities of sentinel-2 for quantitative estimation of biophysical variables in vegetation.
+20,isprs j.
+20,photogramm.
+20,remote sens.
+20,"2013, 82, 83–92."
+20,[crossref] 104.
+20,"gitelson, a."
+20,"; merzlyak, m.n."
+20,spectral reflectance changes associated with autumn senescence of aesculus hippocastanum l. and acer platanoides l. leaves.
+20,spectral features and relation to chlorophyll estimation.
+20,plant physiol.
+20,"1994, 143, 286–292."
+20,[crossref] 105.
+20,"pahlevan, n."
+20,"; mangin, a."
+20,"; balasubramanian, s.v."
+20,"; smith, b."
+20,"; alikas, k."
+20,"; arai, k."
+20,"; barbosa, c."
+20,"; bélanger, s."
+20,"; binding, c."
+20,"; bresciani, m."
+20,"acix-aqua: a global assessment of atmospheric correction methods for landsat-8 and sentinel-2 over lakes, rivers, and coastal waters."
+20,remote sens.
+20,environ.
+20,"2021, 258, 112366."
+20,[crossref] 106.
+20,"renosh, p.r."
+20,"; doxaran, d."
+20,"; keukelaere, l.d."
+20,"; gossn, j.i."
+20,evaluation of atmospheric correction algorithms for sentinel-2-msi and sentinel-3-olci in highly turbid estuarine waters.
+20,remote sens.
+20,"2020, 12, 1285."
+20,[crossref] 107.
+20,"lastovicka, j."
+20,"; svec, p."
+20,"; paluba, d."
+20,"; kobliuk, n."
+20,"; svoboda, j."
+20,"; hladky, r."
+20,"; stych, p."
+20,sentinel-2 data in an evaluation of the impact of the disturbances on forest vegetation.
+20,remote sens.
+20,"2020, 12, 1914."
+20,[crossref] 108.
+20,"mustafa, m.t."
+20,"; hassoon, k.i."
+20,"; hussain, h.m."
+20,"; abd, m.h."
+20,"using water indices (ndwi, mndwi, ndmi, wri and awei) to detect physical and chemical parameters by apply remote sensing and gis techniques."
+20,"res.-granthaalayah 2017, 5, 117–128."
+20,[crossref] 109.
+20,"schwatke, c."
+20,"; scherer, d."
+20,"; dettmering, d."
+20,automated extraction of consistent time-variable water surfaces of lakes and reservoirs based on landsat and sentinel-2.
+20,remote sens.
+20,"2019, 11, 1010."
+20,[crossref] 110.
+20,"beven, k.j."
+20,"; kirkby, m.j."
+20,"a physically based, variable contributing area model of basin hydrology/un modèle à base physique de zone d’appel variable de l’hydrologie du bassin versant."
+20,hydrol.
+20,"1979, 24, 43–69."
+20,[crossref] 111.
+20,"álvarez-martínez, j.m."
+20,"; stoorvogel, j.j."
+20,"; suárez-seoane, s.; de luis calabuig, e."
+20,uncertainty analysis as a tool for refining land dynamics modelling on changing landscapes: a case study in a spanish natural park.
+20,landsc.
+20,"2010, 25, 1385–1404."
+20,[crossref] 112.
+20,"tempfli, k."
+20,"; huurneman, g."
+20,"; bakker, w."
+20,"; janssen, l.l."
+20,"; feringa, w."
+20,"; gieske, a."
+20,"; grabmaier, k."
+20,"; hecker, c."
+20,"; horn, j."
+20,"; kerle, n."
+20,"principles of remote sensing: an introductory textbook; international institute for geo-information science and earth observation: enschede, the netherlands, 2009."
+20,"atri, s."
+20,"; panahi, m."
+20,"; arjmandi, r."
+20,"; gharagozlou, a."
+20,"predictive modeling of the future of the jajrood protected area, based on the evaluation of land use change trends of the past 30 years by using invest software."
+20,environ.
+20,"2021, 19."
+20,[crossref] 114.
+20,"berg, c."
+20,"; rogers, s."
+20,"; mineau, m."
+20,building scenarios for ecosystem services tools: developing a methodology for efficient engagement with expert stakeholders.
+20,"futures 2016, 81, 68–80."
+20,[crossref] 115.
+20,"sharma, r."
+20,"; nehren, u."
+20,"; rahman, s.a."
+20,"; meyer, m."
+20,"; rimal, b."
+20,"; aria seta, g."
+20,"; baral, h."
+20,"modeling land use and land cover changes and their effects on biodiversity in central kalimantan, indonesia."
+20,"land 2018, 7, 57."
+20,[crossref] 116.
+20,"liu, t."
+20,"; abd-elrahman, a."
+20,"; morton, j."
+20,"; wilhelm, v.l."
+20,"comparing fully convolutional networks, random forest, support vector machine, and patch-based deep convolutional neural networks for object-based wetland mapping using images from small unmanned aircraft system."
+20,giscience remote sens.
+20,"2018, 55, 243–264."
+20,[crossref] 117.
+20,"benda, l."
+20,"; miller, d."
+20,"; andras, k."
+20,"; bigelow, p."
+20,"; reeves, g."
+20,"; michael, d."
+20,netmap: a new tool in support of watershed science and resource management.
+20,"2007, 53, 206–219."
+20,"benda, l."
+20,"; miller, d."
+20,"; barquín, j."
+20,creating a catchment scale perspective for river restoration.
+20,hydrol.
+20,earth syst.
+20,"2011, 15, 2995–3015."
+20,[crossref] 119.
+20,"gonzález-ferreras, a.m."
+20,"; barquín, j."
+20,mapping the temporary and perennial character of whole river networks.
+20,water resour.
+20,"2017, 53, 6709–6724."
+20,[crossref] 120.
+20,"clarke, s.e."
+20,"; burnett, k.m."
+20,"; miller, d.j."
+20,modeling streams and hydrogeomorphic attributes in oregon from digital and field data 1.
+20,jawra j.
+20,water resour.
+20,assoc.
+20,"2008, 44, 459–477."
+20,[crossref] 121.
+20,"benda, l."
+20,"; litschert, s.s."
+20,"erosion, sediment sources, and channel analysis in the crystal river, colorado; earth systems institute: fort collins, co, usa, 2013."
+20,"miller, d.j."
+20,"; burnett, k.m."
+20,"effects of forest cover, topography, and sampling extent on the measured density of shallow, translational landslides."
+20,water resour.
+20,"2007, 43, 1–23."
+20,[crossref] 123.
+20,"moore, i.d."
+20,"; wilson, j.p."
+20,length-slope factors for the revised universal soil loss equation: simplified method of estimation.
+20,soil water conserv.
+20,"1992, 47, 423–428."
+20,"jain, m.k."
+20,"; das, d."
+20,estimation of sediment yield and areas of soil erosion and deposition for watershed prioritization using gis and remote sensing.
+20,water resour.
+20,manag.
+20,"2010, 24, 2091–2112."
+20,[crossref] 125.
+20,"meinen, b.u."
+20,"; robinson, d.t."
+20,mapping erosion and deposition in an agricultural landscape: optimization of uav image acquisition schemes for sfm-mvs.
+20,remote sens.
+20,environ.
+20,"2020, 239, 111666."
+20,[crossref]
+21,"remote sens. 2022, 14, 1864 21 of 22 126."
+21,"mitasova, h."
+21,"; hofierka, j."
+21,"; zlocha, m."
+21,"; iverson, l.r."
+21,modelling topographic potential for erosion and deposition using gis.
+21,geogr.
+21,"1996, 10, 629–641."
+21,[crossref] 127.
+21,"lind, l."
+21,"; hasselquist, e.m."
+21,"; laudon, h."
+21,towards ecologically functional riparian zones: a meta-analysis to develop guidelines for protecting ecosystem functions and biodiversity in agricultural landscapes.
+21,environ.
+21,manag.
+21,"2019, 249, 109391."
+21,[crossref] 128.
+21,"collier, k."
+21,"; cooper, a."
+21,"; davies-colley, r."
+21,"; rutherford, j."
+21,"; smith, c."
+21,"; williamson, r."
+21,managing riparian zones.
+21,"in a contribution to protecting new zealand’s rivers and streams; niwa, ed."
+21,"; department of conservation: wellington, new zealand, 1995; volume 2."
+21,"astola, h."
+21,"; häme, t."
+21,"; sirro, l."
+21,"; molinier, m."
+21,"; kilpi, j."
+21,comparison of sentinel-2 and landsat 8 imagery for forest variable prediction in boreal region.
+21,remote sens.
+21,environ.
+21,"2019, 223, 257–273."
+21,[crossref] 130.
+21,"mandanici, e."
+21,"; bitelli, g."
+21,preliminary comparison of sentinel-2 and landsat 8 imagery for a combined use.
+21,remote sens.
+21,"2016, 8, 1014."
+21,[crossref] 131.
+21,"shang, r."
+21,"; zhu, z."
+21,harmonizing landsat 8 and sentinel-2: a time-series-based reflectance adjustment approach.
+21,remote sens.
+21,environ.
+21,"2019, 235, 111439."
+21,[crossref] 132.
+21,"de keukelaere, l."
+21,"; sterckx, s."
+21,"; adriaensen, s."
+21,"; knaeps, e."
+21,"; reusen, i."
+21,"; giardino, c."
+21,"; bresciani, m."
+21,"; hunter, p."
+21,"; neil, c."
+21,"; van der zande, d."
+21,atmospheric correction of landsat-8/oli and sentinel-2/msi data using icor algorithm: validation for coastal and inland waters.
+21,remote sens.
+21,"2018, 51, 525–542."
+21,[crossref] 133.
+21,"warren, m.a."
+21,"; simis, s.g."
+21,"; martinez-vicente, v."
+21,"; poser, k."
+21,"; bresciani, m."
+21,"; alikas, k."
+21,"; spyrakos, e."
+21,"; giardino, c."
+21,"; ansper, a."
+21,assessment of atmospheric correction algorithms for the sentinel-2a multispectral imager over coastal and inland waters.
+21,remote sens.
+21,environ.
+21,"2019, 225, 267–289."
+21,[crossref] 134.
+21,"sánchez-espinosa, a."
+21,"; schröder, c."
+21,land use and land cover mapping in wetlands one step closer to the ground: sentinel-2 versus landsat 8.
+21,environ.
+21,manag.
+21,"2019, 247, 484–498."
+21,[crossref] [pubmed] 135.
+21,"weise, k."
+21,"; höfer, r."
+21,"; franke, j."
+21,"; guelmami, a."
+21,"; simonson, w."
+21,"; muro, j."
+21,"; o’connor, b."
+21,"; strauch, a."
+21,"; flink, s."
+21,"; eberle, j."
+21,wetland extent tools for sdg 6.6. 1 reporting from the satellite-based wetland observation service (swos).
+21,remote sens.
+21,environ.
+21,"2020, 247, 111892."
+21,[crossref] 136.
+21,"lopes, m."
+21,"; fauvel, m."
+21,"; ouin, a."
+21,"; girard, s."
+21,spectro-temporal heterogeneity measures from dense high spatial resolution satellite image time series: application to grassland species diversity estimation.
+21,remote sens.
+21,"2017, 9, 993."
+21,[crossref] 137.
+21,"vina, a."
+21,"; liu, w."
+21,"; zhou, s."
+21,"; huang, j."
+21,"; liu, j."
+21,land surface phenology as an indicator of biodiversity patterns.
+21,indic.
+21,"2016, 64, 281–288."
+21,[crossref] 138.
+21,"edwards, g."
+21,"; lowell, k.e."
+21,modeling uncertainty in photointerpreted boundaries.
+21,photogramm.
+21,remote sens.
+21,"1996, 62, 377–390."
+21,"fauvel, m."
+21,"; lopes, m."
+21,"; dubo, t."
+21,"; rivers-moore, j."
+21,"; frison, p.-l."
+21,"; gross, n."
+21,"; ouin, a."
+21,prediction of plant diversity in grasslands using sentinel-1 and-2 satellite image time series.
+21,remote sens.
+21,environ.
+21,"2020, 237, 111536."
+21,[crossref] 140.
+21,"topouzelis, k.n."
+21,"oil spill detection by sar images: dark formation detection, feature extraction and classification algorithms."
+21,"sensors 2008, 8, 6642–6659."
+21,[crossref] 141.
+21,"karim, m."
+21,"; maanan, m."
+21,"; maanan, m."
+21,"; rhinane, h."
+21,"; rueff, h."
+21,"; baidder, l."
+21,"assessment of water body change and sedimentation rate in moulay bousselham wetland, morocco, using geospatial technologies."
+21,sediment res.
+21,"2019, 34, 65–72."
+21,[crossref] 142.
+21,"majumdar, a."
+21,"; shrivastava, a."
+21,"; sarkar, s.r."
+21,"; sathyavelu, s."
+21,"; barla, a."
+21,"; bose, s."
+21,"hydrology, sedimentation and mineralisation: a wetland ecology perspective."
+21,chang.
+21,environ.
+21,sustain.
+21,"2020, 8, 134–151."
+21,[crossref] 143.
+21,"pulley, s."
+21,"; ellery, w.n."
+21,"; lagesse, j.v."
+21,"; schlegel, p.k."
+21,"; mcnamara, s.j."
+21,gully erosion as a mechanism for wetland formation: an examination of two contrasting landscapes.
+21,land degrad.
+21,"2018, 29, 1756–1767."
+21,[crossref] 144.
+21,"keesstra, s."
+21,"; nunes, j."
+21,"; novara, a."
+21,"; finger, d."
+21,"; avelar, d."
+21,"; kalantari, z."
+21,"; cerdà, a."
+21,the superior effect of nature based solutions in land management for enhancing ecosystem services.
+21,total environ.
+21,"2018, 610, 997–1009."
+21,[crossref] [pubmed] 145.
+21,"gabet, e.j."
+21,"; dunne, t."
+21,landslides on coastal sage-scrub and grassland hillslopes in a severe el nino winter: the effects of vegetation conversion on sediment delivery.
+21,"2002, 114, 983–990."
+21,[crossref] 146.
+21,"montgomery, d.r."
+21,"; dietrich, w.e."
+21,"; heffner, j.t."
+21,piezometric response in shallow bedrock at cb1: implications for runoff generation and landsliding.
+21,water resour.
+21,"2002, 38, 10-11–10-18."
+21,[crossref] 147.
+21,"gonzalez-ollauri, a."
+21,"; mickovski, s.b."
+21,hydrological effect of vegetation against rainfall-induced landslides.
+21,hydrol.
+21,"2017, 549, 374–387."
+21,[crossref] 148.
+21,"phillips, c."
+21,"; hales, t."
+21,"; smith, h."
+21,"; basher, l."
+21,shallow landslides and vegetation at the catchment scale: a perspective.
+21,"2021, 173, 106436."
+21,[crossref] 149.
+21,"el kateb, h."
+21,"; zhang, h."
+21,"; zhang, p."
+21,"; mosandl, r."
+21,"soil erosion and surface runoff on different vegetation covers and slope gradients: a field experiment in southern shaanxi province, china."
+21,"catena 2013, 105, 1–10."
+21,[crossref] 150.
+21,"genet, m."
+21,"; stokes, a."
+21,"; fourcaud, t."
+21,"; norris, j.e."
+21,the influence of plant diversity on slope stability in a moist evergreen deciduous forest.
+21,"2010, 36, 265–275."
+21,[crossref] 151.
+21,"marden, m."
+21,"effectiveness of reforestation in erosion mitigation and implications for future sediment yields, east coast catchments, new zealand: a review."
+21,geogr.
+21,"2012, 68, 24–35."
+21,[crossref] 152.
+21,"lowrance, r."
+21,"; altier, l.s."
+21,"; newbold, j.d."
+21,"; schnabel, r.r."
+21,"; groffman, p.m."
+21,"; denver, j.m."
+21,"; correll, d.l."
+21,"; gilliam, j.w."
+21,"; robinson, j.l."
+21,water quality functions of riparian forest buffers in chesapeake bay watersheds.
+21,environ.
+21,manag.
+21,"1997, 21, 687–712."
+21,[crossref] [pubmed]
+22,"remote sens. 2022, 14, 1864 22 of 22 153."
+22,"white, w."
+22,"; morris, l."
+22,"; warnell, d."
+22,"; pinho, a."
+22,"; jackson, c."
+22,"; west, l."
+22,sediment retention by forested filter strips in the piedmont of georgia.
+22,soil water conserv.
+22,"2007, 62, 453–463."
+22,"trenberth, k.e."
+22,"; koike, t."
+22,"; onogi, k."
+22,progress and prospects for reanalysis for weather and climate.
+22,eos trans.
+22,geophys.
+22,"union 2008, 89, 234–235."
+22,[crossref] 155.
+22,"bereswill, r."
+22,"; golla, b."
+22,"; streloke, m."
+22,"; schulz, r."
+22,entry and toxicity of organic pesticides and copper in vineyard streams: erosion rills jeopardise the efficiency of riparian buffer strips.
+22,agric.
+22,ecosyst.
+22,environ.
+22,"2012, 146, 81–92."
+22,[crossref] 156.
+22,"bereswill, r."
+22,"; streloke, m."
+22,"; schulz, r."
+22,"current-use pesticides in stream water and suspended particles following runoff: exposure, effects, and mitigation requirements."
+22,environ.
+22,toxicol.
+22,"2013, 32, 1254–1263."
+22,[crossref] 157.
+22,"stehle, s."
+22,"; dabrowski, j.m."
+22,"; bangert, u."
+22,"; schulz, r."
+22,erosion rills offset the efficacy of vegetated buffer strips to mitigate pesticide exposure in surface waters.
+22,total environ.
+22,"2016, 545, 171–183."
+22,[crossref] 158.
+22,"garcía, a.k."
+22,"; fernandez, h.r."
+22,"; rolandi, m.l."
+22,"; gultemirian, m.d.l."
+22,"; sanchez, n."
+22,"; pla, l."
+22,"; hidalgo, m."
+22,effect of diffuse pollution on water quality in mountain forest streams.
+22,available online: https://ri.conicet.gov.ar/handle/11336/67342 (accessed on 11 january 2022).
+22,"bonnesoeur, v."
+22,"; locatelli, b."
+22,"; guariguata, m.r."
+22,"; ochoa-tocachi, b.f."
+22,"; vanacker, v."
+22,"; mao, z."
+22,"; stokes, a."
+22,"; mathez-stiefel, s.-l."
+22,impacts of forests and forestation on hydrological services in the andes: a systematic review.
+22,manag.
+22,"2019, 433, 569–584."
+22,[crossref] 160.
+22,"mengist, w."
+22,"; soromessa, t."
+22,assessment of forest ecosystem service research trends and methodological approaches at global level: a meta-analysis.
+22,environ.
+22,"2019, 8, 22."
+22,[crossref] 161.
+22,"houet, t."
+22,"; gremont, m."
+22,"; vacquié, l."
+22,"; forget, y."
+22,"; marriotti, a."
+22,"; puissant, a."
+22,"; bernardie, s."
+22,"; thiery, y."
+22,"; vandromme, r."
+22,"; grandjean, g."
+22,downscaling scenarios of future land use and land cover changes using a participatory approach: an application to mountain risk assessment in the pyrenees (france).
+22,environ.
+22,chang.
+22,"2017, 17, 2293–2307."
+22,[crossref] 162.
+22,"verburg, p.h.; van berkel, d.b.; van doorn, a.m.; van eupen, m.; van den heiligenberg, h.a."
+22,trajectories of land use change in europe: a model-based exploration of rural futures.
+22,landsc.
+22,"2010, 25, 217–232."
+22,[crossref] 163.
+22,"wiener, k."
+22,"; schlegel, p."
+22,"; grenfell, s.; van der waal, b."
+22,contextualising sediment trapping and phosphorus removal regulating services: a critical review of the influence of spatial and temporal variability in geomorphic processes in alluvial wetlands in drylands.
+22,manag.
+22,"2022, 1–34."
+22,[crossref] 164.
+22,"garcía, j.r."
+22,"; vegas, j."
+22,"; lópez-vicente, m."
+22,"; mata, m."
+22,"; morellón, m."
+22,"; navas, a."
+22,"; salazar, á."
+22,"; sánchez-españa, j."
+22,"el lago de enol (asturias): origen, evolución y dinámica geomorfológica."
+22,"in proceedings of the comprendiendo el relieve: del pasado al futuro: actas de la xiv reunión nacional de geomorfología málaga, málaga, spain, 22–25 june 2016; pp."
+22,151–158.
+22,"agnoletti, m."
+22,"rural landscape, nature conservation and culture: some notes on research trends and management approaches from a (southern) european perspective."
+22,landsc.
+22,urban plan.
+22,"2014, 126, 66–73."
+22,[crossref] 166.
+22,"garcía-llamas, p."
+22,"; geijzendorffer, i.r."
+22,"; garcía-nieto, a.p."
+22,"; calvo, l."
+22,"; suárez-seoane, s."
+22,"; cramer, w."
+22,impact of land cover change on ecosystem service supply in mountain systems: a case study in the cantabrian mountains (nw of spain).
+22,environ.
+22,chang.
+22,"2019, 19, 529–542."
+22,[crossref] 167.
+22,"lee, h."
+22,"; lautenbach, s."
+22,a quantitative review of relationships between ecosystem services.
+22,indic.
+22,"2016, 66, 340–351."
+22,[crossref]

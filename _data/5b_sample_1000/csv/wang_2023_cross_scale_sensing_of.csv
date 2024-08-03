@@ -1,0 +1,627 @@
+page,p
+1,"remote sensing of environment 285 (2023) 113366 contents lists available at sciencedirect remote sensing of environment journal homepage: www.elsevier.com/locate/rse cross-scale sensing of field-level crop residue cover: integrating field photos, airborne hyperspectral imaging, and satellite data sheng wang a, b, *, kaiyu guan a, b, c, d, *, chenhui zhang a, c, d, qu zhou a, b, sibo wang c, xiaocui wu a, b, chongya jiang a, b, bin peng a, b, c, weiye mei a, b, kaiyuan li a, b, ziyi li a, b, yi yang a, b, wang zhou a, b, yizhi huang d, zewei ma a, b a agroecosystem sustainability center, institute for sustainability, energy, and environment, university of illinois urbana-champaign, urbana, il 61801, usa b department of natural resources and environmental sciences, college of agricultural, consumer and environmental sciences, university of illinois urbana-champaign, urbana, il 61801, usa c national center for supercomputing applications, university of illinois urbana-champaign, urbana, il 61801, usa d department of computer science, university of illinois urbana-champaign, urbana, il 61801, usa a r t i c l e i n f o a b s t r a c t edited by jing m."
+1,chen conservation tillage practices can bring benefits to agricultural sustainability.
+1,"accurate spatial and temporal resolved information of field-scale crop residue cover, which reflects tillage intensity, is highly valuable for keywords: evaluating the outcomes of government conservation programs and voluntary ecosystem service markets, as well crop residue as facilitating agroecosystem modeling to quantify cropland biogeochemical processes."
+1,"remote sensing has the tillage practices potential to cost-effectively detect crop residue cover, however, existing regional-scale studies were limited by airborne hyperspectral imaging insufficient ground truth data, scale mismatch between coarse satellite pixels and ground data, and the lack of sentinel-2 landsat key spectral data for detecting crop residues."
+1,"therefore, this study developed an innovative cross-sensing convolutional neural networks framework to integrate proximal sensing, airborne hyperspectral imaging, and satellite earth observation resnet-50 through deep learning to quantify field-level crop residue cover fractions at the regional scale."
+1,"specifically, we sustainable agriculture have collected intensive ground orthographic photos and conducted airborne hyperspectral surveys at corn and multi-scale remote sensing soybean fields of champaign and nearby counties in illinois, the heartland of the u.s."
+1,corn belt.
+1,"through semi- automatic labeling aided by resnet-50 and superpixel image segmentation, we obtained 6719 records of ground residue fractions."
+1,"with these ground data, we developed the 1-dimensional convolution neural network (cnn) model using airborne hyperspectral reflectance, which has 0.5 m spatial resolution and 3–5 nm spectral reso­ lution from 400 to 2400 nm, to predict residue fractions."
+1,"by applying the cnn model to airborne pixels, we augmented “ground truth” data of crop residues and further combined them with harmonized landsat and sentinel-2 (hls) satellite data to quantify regional residue fractions at 30 m resolution."
+1,"results show that airborne hyperspectral imagery with cnn can accurately detect residue fractions (r2 = 0.82, relative rmse = 11.73%) to effectively generate quasi “ground truth” data to support satellite upscaling to all fields."
+1,"with in­ dependent ground data for testing, we found that the ground-airborne-satellite integrative framework achieved better predictions in estimating crop residue cover (r2 = 0.67, relative rmse = 17.53%) than the conventional ground-satellite upscaling (r2 = 0.22, relative rmse = 32.09%)."
+1,"we also found that the shortwave infrared wavelengths, particularly 2100–2300 nm, are vital for predicting crop residue cover."
+1,sentinel-2 and landsat-8 data have a comparable capability to track residue fractions due to similar shortwave infrared wavelengths.
+1,this study highlights the high accuracy of hyperspectral imaging to detect agroecosystem tillage management practices and the advantages of cross-scale sensing to cost-effectively integrate multi-source data to quantify field-level agroecosystem variables across scales.
+1,"* corresponding authors at: agroecosystem sustainability center, institute for sustainability, energy, and environment, university of illinois urbana-champaign, urbana, il 61801, usa."
+1,e-mail addresses: shengwang12@gmail.com (s.
+1,"wang), kaiyug@illinois.edu (k."
+1,guan). https://doi.org/10.1016/j.rse.2022.113366 received 24 june 2022; received in revised form 2 november 2022; accepted 10 november 2022 available online 1 december 2022 0034-4257/© 2022 elsevier inc.
+1,all rights reserved.
+2,wang et al.
+2,remote sensing of environment 285 (2023) 113366 1.
+2,"introduction particularly lignin and cellulose absorption bands in 2100 and 2300 nm (asner and lobell, 2000; daughtry, 2001; daughtry et al., 2004; hively sustainable agriculture with maintaining or increasing high yields et al., 2018; wang et al., 2022)."
+2,"as shortwave infrared wavelengths are while minimizing negative environmental impacts is pivotal for feeding highly valuable for crop residue detection, optical hyperspectral remote the world’s growing population and for mitigating climate changes sensing with rich narrow shortwave-infrared wavelengths shows a high (ipcc climate change, 2022)."
+2,as one of the major practices for sus­ capability to detect residue cover.
+2,"for example, airborne hyperspectral tainable agriculture, conservation tillage (e.g., reduced- and non-tillage) remote sensing with the full optical range of 400–2400 nm and high has been adopted to replace conventional (intensive) tillage around the spatial resolution to be matched with ground measurements can identify world for the benefits of reducing soil erosion, increasing soil carbon and tillage classes with high accuracy of >90% (daughtry et al., 2005), fertility, as well as, saving costs on labor, fuel, and machinery (papen­ which is much higher than the accuracy of multispectral sensing studies dick and parr, 1997; deines et al., 2019)."
+2,"the adoption of conservation (e.g., 75–79%, azzari et al., 2019)."
+2,"however, airborne hyperspectral tillage can significantly alter cropland nutrient, carbon, water, and en­ data have limited spatial and temporal coverages, and are hard to be ergy dynamics (davin et al., 2014; mehra et al., 2018) and has been applied to quantify crop residue cover for every field across large considered an important management practice for soil carbon seques­ regions. tration to mitigate climate change (follett, 2001; bai et al., 2019)."
+2,"as satellite remote sensing is more cost-effective to quantify regional one of the most intensive cropping systems in the world, the u.s."
+2,"corn crop residue cover for every field, compared to airborne sensing or field belt contributes one-third of global corn and soybean production (usda, investigations."
+2,"in the past years, studies have explored the utility of 2019), but faces severe issues on agroecosystem sustainability (thaler satellite data with shortwave infrared bands, such as hyperion et al., 2021)."
+2,"given the benefits of conservation tillage, reduced- and (daughtry et al., 2006; bannari et al., 2015), aster (serbin et al., non-tillage practices have been promoted in the past decades by gov­ 2009), landsat (azzari et al., 2019), sentinel-2 (zhou et al., 2021), ernment conservation programs, such as usda conservation reserve modis (watts et al., 2011), and worldview-3 (hively et al., 2018), to program (crp) and environmental quality incentives program (eqip), quantify tillage intensity classes (e.g. conventional, reduced or and the recent emerging voluntary carbon markets (oldfield et al., non-tillage)."
+2,"among these satellite data, the hyperspectral mission hy­ 2022)."
+2,"to assess the outcome of current policies and understand the perion achieved around 80% accuracy in distinguishing tillage classes factors influencing the adoption of conservation tillage, accurate for three counties in central iowa (daughtry et al., 2006)."
+2,"however, the spatially and temporally resolved information on cropland tillage limited spatial coverage, low frequency, and low signal-to-noise ratios practices is urgently needed."
+2,"furthermore, tillage intensity information significantly limited hyperion for regional applications (middleton is also essential for agroecosystem modeling to facilitate the accurate et al., 2013)."
+2,"multispectral satellite missions, e.g."
+2,"aster and quantification of agroecosystem biogeochemical processes as well as worldview-3, with rich narrow bands in the shortwave infrared can also cropland carbon outcomes (maharjan et al., 2018; guan et al., 2022). track tillage practices with high accuracy (serbin et al., 2009; hively however, such information at the regional scale is still rare and only a et al., 2018)."
+2,"however, aster shortwave infrared sensors have failed few studies have identified regional tillage classes (e.g., two classes since 2008 (serbin et al., 2009) and the commercial satellite mission including high- and low-intensity tillage, azzari et al., 2019)."
+2,worldview-3 has limited spatial and temporal coverage with a high cost.
+2,"the key physical variable that directly reflects the outcome of tillage the coarse spatial resolution modis (i.e., 500 m) has difficulty in practices is crop residue cover."
+2,the residue fraction refers to the per­ detecting tillage practices for small fields.
+2,"among all satellite missions, centage of non-photosynthetic senesced plant litter, such as corn stalks landsat and sentinel-2 with two shortwave infrared wavelengths at or soybean stubble, accumulated on the ground."
+2,"the fraction of crop 20–30 m spatial resolution are often utilized for monitoring tillage in­ residue cover is often used as the proxy of tillage intensity (hively et al., tensity (azzari et al., 2019; yue et al., 2020; gao et al., 2022)."
+2,"partic­ 2018), and tillage types can be classified according to the ranges of crop ularly, multi-source satellite fusion or harmonized data, e.g."
+2,"national residue cover (e.g., 0–15, 15–30, 30–60, >60%) after planting (ctic, aeronautics and space administration (nasa) harmonized landsat 2022)."
+2,"similarly, usda’s national agricultural statistics service (nass) sentinel-2 (hls, claverie et al., 2018), can combine landsat and provides county-level three-class tillage types (i.e. conventional, sentinel-2 to provide high temporal frequency data, which provide po­ reduced, and non-tillage acreage) based on residue cover (usda, 2019). tential high-value data sources for quantifying regional tillage practices."
+2,"to obtain accurate information on tillage practices, the field-level data however, existing studies have not fully realized the potential of these on crop residue cover are, traditionally, collected through farmer self- fusion data, and studies exploring their capability to quantify tillage reporting in governmental or commercial programs, or in-person field practices are highly needed."
+2,"meanwhile, 30 m multispectral satellite investigations such as the usda line transect method (morrison jnr data could have uncertainties to be matched with point measurements of et al., 1993) and annual roadside surveys (ctic, 2022)."
+2,"however, these crop residue cover in fields."
+2,"how to seamlessly integrate remote sensing survey data have limitations on data accuracy, data sharing, spatial and with ground data needs further exploration. temporal coverage due to surveyors’ personal judgment, farmers’ con­ to overcome the above challenges in existing studies, we aim to cerns about data privacy, and the high cost of field surveys."
+2,"therefore, develop an innovative cross-scale sensing framework to seamlessly conventional field surveys are difficult to provide timely information on integrate ground proximal sensing, airborne hyperspectral imaging, and tillage intensity for every field across broad regions (zheng et al., 2014) satellite earth observation to accurately quantify regional residue cover. and, so far, usda nass only reports county-level tillage types once to derive regional information, the large-scale satellite data need to every five years."
+2,"given these limitations, there is an urgent need to have a paired high volume of ground truth data for machine learning develop a timely, cost-effective, and accurate approach for monitoring model development (deines et al., 2021; deines et al., 2022), particu­ regional-scale tillage intensity. larly considering that soil sensing signals vary significantly in space and remote sensing provides opportunities to quantify crop residue time."
+2,"however, collecting such large amounts of ground truth data cover to infer tillage intensity in a cost-effective manner."
+2,"in the past through conventional field investigation is highly labor- and decades, studies have been conducted with proximal (e.g., nagler et al., cost-intensive."
+2,"thus, this cross-sensing framework innovatively deploys 2003), airborne (e.g., daughtry et al., 2006), and satellite (e.g., azzari airborne hyperspectral imaging systems to collect sub-meter resolution et al., 2019) sensing to quantify residue cover fractions or tillage in­ surface reflectance with hundreds of wavelengths."
+2,as airborne hyper­ tensity classes.
+2,"in the principles of spectral signals in detecting crop spectral remote sensing has a high accuracy to derive tillage intensity residues, these studies found that crop residues and soils have similar (daughtry et al., 2005), we first upscale the ground photo-derived label spectral signatures in the visible and near-infrared regions, but residues data of crop residues to airborne hyperspectral pixels for croplands to show unique absorption features in the shortwave infrared region, obtain a large amount of quasi “ground truth”."
+2,this 2
+3,wang et al.
+3,"remote sensing of environment 285 (2023) 113366 airborne-hyperspectral-based quasi “ground truth” is then used to scale layer perceptron neural networks (mlp), have the high potential to up the satellite algorithm to regional scale tillage mapping."
+3,"as such, we make full use of spectral wavelengths (wang et al., 2022) without not only augment ground truth data cost-effectively using airborne making handcraft indices to predict residue cover fractions. hyperspectral data, but also minimize the scale-mismatch issue by the general objective of this study was to develop an accurate, linking airborne data with satellite data for upscaling (instead of directly robust, and scalable approach to integrate proximal, airborne, and sat­ scaling in-situ ground data to satellite)."
+3,"this framework thus uses the ellite sensing through deep learning to quantify regional-scale field-level multi-source harmonized satellite data, i.e., hls reflectance, to upscale fractions of crop residue cover to infer tillage intensity in croplands."
+3,the airborne-based quasi “ground truth” to every field in the region of in­ specific objectives were: (1) to develop and assess the proximal and terest.
+3,"by doing so, we cost-effectively obtain the information of airborne sensing to obtain a large volume of ground truth data for res­ regional-scale residue cover. idue cover fractions."
+3,"these sensing approaches include employing besides the innovations in integrating multi-scale sensing data, this computer vision algorithms to semi-automatically identify residue cover cross-scale sensing framework also aims to leverage versatile computer fractions from close-range field photos, and leveraging airborne hyper­ vision and deep learning algorithms to apply to ground photos, airborne spectral imaging with deep learning to augment field photo-derived hyperspectral imagery, and satellite multispectral observations collec­ residue fractions to obtain quasi-ground truth data at the regional tively to quantify crop residue cover."
+3,"specifically, to accurately derive scale; (2) to assess the performance of integrating multi-scale data from ground truth data of residue cover fractions, we leverage computer proximal, airborne, and satellite sensing for quantifying residue cover vision image segmentation algorithms to semi-automatically identify fractions, and analyze the added values of airborne hyperspectral crop residues on the ground."
+3,"as such, we can mitigate the uncertainties sensing as the intermediate step for upscaling field data to satellites; and from manual labeling in field investigations."
+3,"in remote sensing algo­ (3) to identify key spectral information for quantifying crop residue rithms, conventional approaches to derive residue cover fractions pri­ cover fraction and test the applicability of sentinel-2 and landsat-8 marily focused on multispectral indices operating with a few satellite data for quantifying regional tillage intensity. wavelengths, e.g."
+3,"normalized difference tillage index (ndti, van deventer et al., 1997), cellulose absorption index (cai, nagler et al., 2."
+3,"study region and data 2003; daughtry et al., 2004), crop residue index multiband (crim, biard and baret, 1997), modified soil adjusted corn residue index 2.1."
+3,"study region (msacri, bannari et al., 2000), and broadband crop residue angle index (bai, yue et al., 2020) as well as using random forest classifiers to this study focused on corn and soybean fields in champaign and incorporate spectral reflectance (e.g., azzari et al., 2019; watts et al., nearby counties, illinois."
+3,as in the central region of the u.s.
+3,corn belt 2011).
+3,"with the advances in artificial intelligence, new deep learning (fig. 1a), this region is dominated by agricultural landscapes with >90% algorithms, such as convolutional neural networks (cnn) and multi- of fields planted with corn (zea mays l.) and soybean (glycine max [l.]"
+3,study region of champaign county and nearby counties. (a) corn and soybean planting area fractions across the u.s.
+3,the study region is in the center of the u.s.
+3,corn belt. (b) study region map.
+3,the pink polygons refer to the collected airborne hyperspectral imagery.
+3,the circles are the locations of collected ground photos.
+3,"the base map is the true color hls imagery on december 26th, 2020. (c) example of ground photo collection in one field."
+3,"(for interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)"
+4,wang et al.
+4,remote sensing of environment 285 (2023) 113366 merr.).
+4,"with a typical continental climate, corn and soybean fields in approximately scanned 102 km2 croplands across this region. this region are typically planted in april–may and harvested in sep­ tember–october."
+4,"for conventional tillage practices, growers often 2.2.3."
+4,"satellite remote sensing conduct primary deep tillage to loosen soils within the depth of 20–30 for satellite remote sensing data, we used 30-m spatial resolution cm in the fall right after the harvest, and a few farmers also conduct hls data to scale up airborne estimates of crop residues to every field secondary tillage in spring after soil thawing to loosen soils at a depth of across the study region."
+4,"as two major public satellite missions by nasa 5–8 cm to prepare the seedbed (omonode et al., 2007)."
+4,"for reduced and european space agency (esa), landsat and sentinel-2 provide tillage practices, soil disturbance is much less, and residue cover frac­ freely available moderate-to-high spatial resolution multispectral sat­ tions in the field are higher than in fields with conventional tillage, ellite data, and they are also the two most widely used in tillage clas­ while fields with non-tillage practices are covered by high fractions of sification."
+4,"the synergy of landsat and sentinel-2 data, such as hls, crop residues left after the harvest (claassen et al., 2018)."
+4,"the major soil creates unique opportunities for timely and accurate detection of land order and texture in the study region are mollisols and silt loams, surface changes."
+4,"specifically, in hls data processing, sentinel-2 msi respectively."
+4,"the soil organic carbon concentrations at surface layers l1c and landsat-8 oli l1 products were used as inputs to be processed (0–15 cm) are around 1–4% g⋅g− 1 (potash et al., 2022). through spatial coregistration, atmospheric corrections, cloud masking, bandpass adjustment, and bi-directional reflectance normalization to generate consistent nadir-adjusted surface reflectance for these two 2.2."
+4,"data satellites (claverie et al., 2018)."
+4,"hls provided per-pixel quality flags for cloud, shadow, snow, and water masks."
+4,"however, the quality flag of hls 2.2.1."
+4,"field photos version 1.4 is problematic for sentinel-2 (bolton et al., 2020) and we we conducted field investigations to collect field photos in an used the sentinel-2 quality flag from google earth engine to remove orthographic view and then from these photos to derive highly accurate low-quality pixels in hls sentinel-2 (hls s30)."
+4,by excluding bands for data on crop residue cover fractions.
+4,"in the field measurement, we used detecting atmospheric conditions, hls s30 has 10 bands including blue cellphones to take photos with an approximately nadir position and a (450–510 nm), green (530–590 nm), red (640–670 nm), red edge 1 height roughly around 1.5 m above the ground."
+4,"each photo was geo­ (690–710 nm), red edge 2 (730–750 nm), red edge 3 (770–790 nm), nir tagged with global navigation satellite system (gnss) location infor­ broad (780–880 nm), nir narrow (850–880 nm), swir 1 (1570–1650 mation, which has an accuracy of 2–5 m in an open area environment for nm), and swir 2 (2110–2290 nm)."
+4,"hls landsat (l30) has 6 bands typical cellphones (petovello and dabove, 2014; van diggelen and enge, including blue (450–510 nm), green (530–590 nm), red (640–670 nm), 2015)."
+4,fig. 1(b) shows the detailed locations for these ground photos.
+4,"nir narrow (850–880 nm), swir1 (1570–1650 nm), and swir2 specifically, we collected photos at 6–10 locations in each field as an (2110–2290 nm). example in fig. 1(c)."
+4,these locations have >30 m distance between each other.
+4,"in each location, we took 3–4 photos with a distance of 2–4 m 3."
+4,methodology between each other.
+4,"to avoid significant residue shadows covering soils, all photos were taken at a local time of 10 am–4 pm."
+4,"to provide suffi­ the workflow of this study includes three data tiers, i.e., ground, cient data on ground crop residue fractions for airborne hyperspectral airborne, and satellite data."
+4,"to fill the spatial upscaling gaps and acquire sensing, we have collected a total of 6719 ground photos."
+4,"among them, massive highly accurate quasi “ground truth” of residue cover fractions, there are 3358 and 3361 records for the spring (within three days after we conducted ground-airborne-satellite upscaling as fig."
+4,"meanwhile, april 21st, 2020) and winter (within three days after december 22nd, we also conducted the direct upscaling from ground to satellite remote 2020) campaigns (table 1), respectively. sensing."
+4,"specifically, from ground photos, we developed computer vision-aided algorithms, including deep residual networks (resnet-50, 2.2.2."
+4,"airborne hyperspectral data he et al., 2016) and superpixel image segmentation (felzenszwalb and three airborne hyperspectral flight surveys were conducted by an huttenlocher, 2004), to semi-automatically label photos to derive crop aircraft (pa23–160, piper aircraft, us) on march 7th, april 21st, and residue cover (see section 3.1)."
+4,"furthermore, we compared two december 22nd, 2020 (table 1)."
+4,the airborne hyperspectral system was upscaling approaches from ground to satellite data to quantify regional equipped with hyspex vnir-1800 (spectral range: 400–1000 nm) and crop residue cover.
+4,"in the first approach, the ground-airborne-satellite swir-384 (spectral range: 950–2400 nm) imaging sensors (hyspex integration used airborne hyperspectral imagery as the intermediate neo, norway) onboard to collect surface reflected radiance data over step to upscale ground crop residue cover to satellite data (see section the study region (fig."
+4,vnir-1800 and swir-384 sensors have the full 3.3).
+4,"this approach used ground data as labels and airborne hyper­ wavelength at half maximum (spectral resolution) of 3.26 and 5.45 nm, spectral data as features to develop cnn models (see section 3.2)."
+4,"then respectively, and the same radiometric resolution of 16 bits."
+4,"to acquire the developed models were applied to airborne imagery pixels to sensors’ position and angular data in the flight, an inertial measurement quantify crop residue cover fractions."
+4,"the airborne derived fractions unit (imu) and differential gnss (applanix, trimble, us) were attached were then used as labels along with satellite data to develop mlp."
+4,by to the imaging sensors.
+4,"the airborne system flew at an altitude of 1.5 km applying mlp to all satellite data, we can obtain the crop residue cover above the ground, which led to the acquired hyperspectral imagery with for the whole study region."
+4,"in the second approach, the ground-satellite spatial resolution of 0.5 m."
+4,the airborne surveys were conducted with upscaling directly used the ground photo-derived crop residue cover as large solar elevation angles (see the local time in table 1).
+4,"in total, we table 1 summary of airborne hyperspectral surveys in the study for quantifying crop residue cover."
+4,"date local time (us weather relative air temperature start time solar noon time solar end time solar date of satellite data central time) humidity (%) (◦ c) elevation (◦ ) elevation (◦ ) elevation (◦ ) for upscaling mar 7, 10:31–13:52 sunny 55.6 4.8 40.3 45.1 38.7 mar 8, 2020 2020 apr 21, 10:48–13:58 sunny 30.9 10.2 58.9 62.1 50.7 apr 20, 2020 2020 dec 22, partially 10:10–14:33 53.2 6.1 22.3 26.6 16.4 dec 26, 2020 2020 sunny 4"
+5,wang et al.
+5,remote sensing of environment 285 (2023) 113366 fig.
+5,"workflow of deriving crop residue cover fractions from ground, airborne, and satellite cross-scale sensing."
+5,resnet-50 is a 50-layer-deep convolutional neural network (cnn) to provide the first guess of residue cover fraction.
+5,mlp stands for a multilayer perceptron model.
+5,"s30 and l30 refer to 30-m sentinel-2 and landsat data, respectively. ground truth, and then upscaled to satellite data (see section 3.4). was designed for image classification, and in this study, we modified finally, we evaluated these two upscaling approaches to hls using the resnet-50 from a classifier to a regressor."
+5,"specifically, we still used the independent ground measurements for model testing (see section 3.6). same backbone structure as in resnet-50, but we changed the final classification layers, which were used to map the latent representation to the prediction scores of a number of different classes, to output only 3.1."
+5,field photo processing one quantity — the predicted tillage residue.
+5,"we finetuned both the resnet-50 backbone pre-trained on imagenet and the modified regres­ to obtain highly accurate ground crop residue cover, we developed a sor on new ground tillage photos with mean squared error (mse) loss. computer vision-aided semi-automatic labeling method (fig. 3) to meanwhile, we also employed a superpixel segmentation algorithm, i.e., facilitate the labeling process."
+5,"in the first step, we manually labeled felzenszwalb’s method (felzenszwalb and huttenlocher, 2004), to 1317 photos to obtain the residue cover fractions."
+5,"using these residue partition photo pixels into “superpixels” — units that only cover a single fraction data as labels, we fine-tuned resnet-50 (he et al., 2016), which object (but a single object can still consist of multiple superpixels)."
+5,"then, was pre-trained on imagenet (deng et al., 2009), to predict crop residue we converted the rgb channel values to the grayscale of each super­ fractions from photos."
+5,"to quantify model uncertainty, we use monte pixel."
+5,"in the following step of manual photo labeling, the labeling person carlo dropout (gal and ghahramani, 2016) to obtain a prediction in­ only needs to check and tune the residue fractions according to the first- terval for each image."
+5,"to label new photos, we applied resnet-50 to guess residue fraction generated by resnet-50 and image gray-scale obtain the first guess of crop residue fraction."
+5,"traditionally, resnet-50 fig."
+5,3. (a) procedures of processing field-collected photos to derive ground measurements of crop residue cover. (b) example of deriving crop residue cover from field photos using resnet-50 initial guess and superpixel segmentation.
+6,wang et al.
+6,remote sensing of environment 285 (2023) 113366 histogram distribution (see the graphic interface in fig.
+6,"as such, the 3.4."
+6,direct upscaling of ground measurements to satellite labeling person selected the threshold to separate the average values of background and foreground superpixels.
+6,"the final residue mask was as a comparison to the ground-airborne-satellite upscaling frame­ eventually generated by selecting superpixels that were on the appro­ work, we also conducted the direct upscaling from ground measure­ priate side of the threshold."
+6,"compared to direct labeling through simple ments to satellite multispectral observations (hls s30, 30 m spatial thresholding, this approach can reduce noises and biases to improve resolution)."
+6,"in this process (fig. 2), we first identified the geolocation- labeling accuracy by incorporating resnet-50 initial prediction and paired ground truth data with satellite remote sensing and then devel­ superpixel segmentation."
+6,"furthermore, this approach speeded up la­ oped an mlp model to predict crop residue fractions from satellite beling processes and is much more efficient than the conventional la­ spectral data."
+6,"we conducted a thorough comparison with the ground- beling methods, e.g., manually marking every foreground pixel (or, airborne-satellite upscaling. equivalently, drawing the foreground boundary)."
+6,"by using this semi- automatic approach, we obtained 6719 records of crop residue frac­ 3.5."
+6,machine learning algorithms tions from all collected ground photos.
+6,we used two machine learning algorithms including 1-dimensional 3.2.
+6,airborne data processing cnn and mlp to develop models to predict crop residue fractions from remote sensing data.
+6,"specifically, hyperspectral data have 356 to obtain high-quality surface reflectance, we followed wang et al. wavelengths and we applied cnn to make full use of hyperspectral data (2021) procedures on geometric, radiometric, and atmospheric correc­ to predict crop residue fractions."
+6,"meanwhile, for multispectral bands in tions to process airborne raw imagery."
+6,"specifically, we first converted satellite remote sensing data, we applied mlp to predict crop residue airborne sensor raw imagery (digital numbers) to at-sensor radiance fractions."
+6,the details of these two algorithms are mentioned below. data using sensor radiometric calibration coefficients from the manu­ mlp used generic nonlinear function approximation by building a factory.
+6,"then, two popularly used airborne data processing software model of the data-generating processes for the network to generalize and parge and atcor (richter and schläpfer, 2016) were used to process predict target variables (hecht-nielsen, 1989)."
+6,"in this study, mlp con­ geometric and atmospheric corrections, respectively."
+6,"in geometric cor­ sisted of one input layer, one output layer, and at least one hidden layer. rections, parge used the flight recorded gnss and imu data, pre- this study used a back-propagation neural network regression model to calibrated sensor boresight coefficients, and surface digital elevation deal with highly nonlinear relationships between feature inputs and model (dem) to conduct imagery orthorectification."
+6,"after that, the at­ label outputs."
+6,"the mlp model parameters including the optimal number mospheric corrections of orthorectified airborne imagery were pro­ of hidden layers and neurons were optimized through parameter cessed through atcor, which used the modtran look-up table screening to achieve the smallest rmse."
+6,"cnn has similar features of approach (berk et al., 2005)."
+6,"in this atmospheric correction process, we multiple fully connected layers as mlp, but adds extra convolutional selected the atcor mid-latitude, winter, and rural aerosol models and layers before fully connected layers."
+6,"through convolution operation, removed the airborne data smile, keystones, and atmospheric attenu­ cnn can account for connections among feature data, e.g., linkages ation effects."
+6,"to correct the bidirectional reflectance distribution func­ across hyperspectral wavelengths, other than mlp. tion (brdf) effects induced by variable solar elevation angles and sensor to analyze the feature importance for the cnn and mlp deep view angles, we performed brdf correction for airborne hyperspectral learning models, we utilized the permutation approach."
+6,"the permuta­ imagery using the open-source package hytool (https://github. tion feature importance was determined by the decrease of a model com/enspec/hytools, liu et al., 2021)."
+6,"with these steps of data pro­ evaluation score (root mean squares errors, rmse) when a single cessing, we obtained high-quality surface reflectance with 356 spectral feature input (each spectral wavelength) was randomly shuffled (alt­ bands from 400 to 2400 nm, 3–5 nm spectral resolution and 0.5 m mann et al., 2010)."
+6,"this permutation feature importance has been spatial resolution. widely applied for evaluating the importance of feature inputs in deep neural network models (e.g., wang et al., 2022)."
+6,ground-airborne-satellite upscaling 3.6.
+6,"model implementation and validation in the ground-airborne-satellite upscaling (fig. 2), we first identified the paired data sets for airborne hyperspectral reflectance (0.5 m spatial in all machine learning model development of this study, we split the resolution and 356 spectral bands) and the field photo-based residue whole dataset into training (75% of all data) and testing (25% of all cover fractions (from section 3.1)."
+6,we used airborne hyperspectral data data).
+6,"notably, the model accuracy can be inflated with the testing and as feature inputs and field crop residue fractions as labels to develop a 1- training data from the same fields (zheng et al., 2012; azzari et al., dimensional cnn model."
+6,to account for the uncertainties of field photo 2019).
+6,"to avoid such cases, we consider field sources in the data split­ gnss data (2–5 m), we have tested aggregated airborne spectral data ting of ground measurements, which means that ground measurements from different zone sizes (change from 0.5 m to 5.5 m with an interval of from the same field did not occur in both training and testing datasets."
+6,"in 0.5 m) in airborne pixels to identify the best match between airborne the process of deep learning model training testing, we utilized weight and field measurements."
+6,"specifically, we developed 11 cnn models decay to mitigate potential overfitting."
+6,"concretely, weight decay pe­ with feature inputs of spectral data from aggregated airborne pixels nalizes model parameters with excessively large l2 norm (loshchilov (0.5–5.5 m) and identified the aggregated sizes with the best model and hutter, 2018)."
+6,we also plotted figures of training vs testing loss testing performance.
+6,"then, by applying this best airborne deep learning curves to demonstrate that we did not encounter significant overfitting model to all airborne pixels, we can obtain massive quasi “ground truth” issues to hinder the generalization of the model."
+6,"in model evaluation, we of crop residue fractions for croplands."
+6,"after that, we obtained the used statistics including coefficient of determination (r2), rmse, rela­ paired airborne estimates with satellite multispectral remote sensing tive rmse (rrmse), bias, and relative bias. rrmse was the ratio be­ (hls s30, 30 m spatial resolution) to further develop the satellite-based tween rmse and data range."
+6,the better model performance corresponds mlp deep learning model.
+6,"finally, by applying the satellite mlp model to the higher values of r2 and the lower values of rmse, rrmse, and to all cropland satellite pixels, we can get the estimates of regional-scale bias, or vice versa. crop residue fractions."
+6,"through this upscaling framework, we seam­ the potential high performance of airborne hyperspectral imagery to lessly integrated ground data, airborne hyperspectral sensing, and sat­ quantify tillage practices came from two factors: the high spatial reso­ ellite multispectral earth observation to quantify crop residue fractions lution of airborne imagery to be benchmarked with ground photo for every field across the targeted region. measurements, and rich high spectral information to support cnn deep 6"
+7,wang et al.
+7,remote sensing of environment 285 (2023) 113366 learning predict crop residue cover.
+7,"to understand the separated ben­ efits from high spatial and rich spectral information for quantifying crop residue cover, we also used multiple spectral wavelengths to calculate ndti (eq. 1) and cai (eq. 2) from airborne hyperspectral data."
+7,"both ndti and cai are two most popular indices used in corn and soybean systems to quantify crop residue cover (nagler et al., 2003; daughtry et al., 2004; serbin et al., 2009; hively et al., 2018; hively et al., 2021)."
+7,"furthermore, we also followed these ndti and cai studies to conduct pearson correlation and linear regression analysis with the ground derived crop residue cover."
+7,"in addition, we compared r2 between spectral indices and ground residue cover with the cnn deep learning approach, which utilized all spectral information in hyperspectral data."
+7,this comparison provides us insights into distinguishing contributions from high spectral and high spatial resolutions in high-performance airborne hyperspectral imagery for quantifying crop residue cover.
+7,r2200 − r1600 ndti = (1) r2200 + r1600 cai = 0.5(r2000 + r2200 ) − r2100 (2) where r refers to surface reflectance at a specific wavelength.
+7,"for example, r2200 is reflectance at the wavelength of 2200 nm."
+7,results 4.1.
+7,"crop residue fractions derived from ground field photos in the first step of semi-automatic labeling, resnet-50 can effectively give high accuracy of estimates of crop residue fractions (fig."
+7,"through further superpixel image segmentation, gray-scale histogram distribution and manual checking, we obtained 6719 records of ground photo-based crop residue fractions across the study region (fig."
+7,fig. 5 (a) shows examples of labeled ground photos as well as the distribution of labeled crop residue fraction data.
+7,"in corn and soybean fields, con­ ventional tillage has induced significant soil disturbance and limited residue fraction in the field."
+7,"meanwhile, for reduced and non-tillage, the fields have much more residue cover left."
+7,fig. 5 (b) is the distribution of crop residue fractions derived from all field photos.
+7,field collected photos and labeled crop residue fractions. (a) examples 4.2.
+7,"crop residue fraction derived from ground-airborne upscaling of field photos and residue fractions in conventional, reduced, and non-tillage. (b) histogram of crop residue fraction derived from field photos through image with the paired ground measurements and airborne hyperspectral segmentation and labeling. reflectance in the same location, we developed the cnn model to predict crop residue fractions."
+7,the developed cnn model did not show any training overfitting issues (supplementary fig.
+7,the cnn model achieved high predictive performance (fig. 7a) with r2 = 0.82 and in­ dicates that the hyperspectral-based estimates of crop residue fractions are highly consistent with the ground truth.
+7,"this accuracy is similar to the previous studies using airborne hyperspectral data to quantify tillage intensity categories (daughtry et al., 2005)."
+7,"however, this study collected massive ground measurements (6719 photos) from diverse field conditions and still achieves high performance."
+7,"the rich ground labeling data enables us to develop robust deep learning models (i.e., cnn model) and to fully utilize the large-volume hyperspectral data in the upscaling process."
+7,"it is worth mentioning that we have tested different buffer zone sizes for pairing airborne hyperspectral reflectance with ground crop residue measurements, we found that the best per­ formance is achieved with the buffer zone sizes of 3.5 m, which may correspond to the gnss accuracy of field photos."
+7,"furthermore, by using the permutation method, we analyzed the feature importance of the cnn model (fig. 7b)."
+7,"among all spectral wavelengths, the shortwave fig."
+7,"model testing performance of resnet-50 to predict crop residue frac­ infrared wavelengths of 2000–2200 nm have the highest contribution, tions."
+7,"resnet-50 provided the first guess of crop residue fractions and then which agrees with studies using indices such as cai (cellulose absorp­ estimates were fine-tuned manually. tion index, nagler et al., 2003) to quantify crop residue cover."
+7,closely 7
+8,wang et al.
+8,"remote sensing of environment 285 (2023) 113366 following those wavelengths, the near-infrared wavelengths in two models are from swir 1 and swir 2, which agrees with previous 900–1100 nm have high importance."
+8,"after that, the red and red-edge studies utilizing ndti to quantify tillage practices (daughtry et al., wavelengths in 600–750 nm have relatively high contributions in pre­ 2004)."
+8,nir narrow and broad have the third and fourth highest con­ dicting crop residue cover.
+8,"the high feature importance of the short­ tributions, but mlp models for s30 and l30 achieved similar perfor­ wave infrared, near-infrared, and red spectral regions agrees with the mance."
+8,this shows that nir broad may have similar effects as nir recent study on using these three wavelengths to calculate crop residue narrow.
+8,"overall, the feature importance analysis for satellite data is angle index (bai, yue et al., 2020) to quantify crop residue cover. generally consistent with the airborne hyperspectral analysis, except for we further compared commonly used airborne data-based spectral swir 1."
+8,this indicates that if multispectral data have no sufficient indices ndti and cai (fig. 7) with the cnn deep learning results spectral wavelengths in swir 2 like airborne hyperspectral data or (fig.
+8,"results show that cai (r2 = 0.67) performs better than ndti worldview-3, the combination of swir 1 and 2 is needed to quantify (r2 = 0.37), but all these spectral indices perform worse than the deep crop residue cover. learning approach (r2 = 0.82), which utilizes all spectral information in by applying the mlp model to hls s30, we obtained the spatial maps hyperspectral data."
+8,the high performance of cai agrees with the feature for all the corn and soybean fields in champaign county (fig.
+8,corn importance analysis that 2000–2200 nm have the largest contribution to fields overall have relatively higher crop residue fractions than soybean predicting crop residue cover.
+8,"the comparison of spectral indices with fields, which may result from the fact that corn has larger biomass and the convolutional neural network based model performance provides us thus larger residues (supplementary fig."
+8,s2). insights into distinguishing contributions from high spectral and high spatial resolutions in high-performance airborne hyperspectral imagery 4.4.
+8,comparison of ground-airborne-satellite and ground-satellite for quantifying crop residue cover.
+8,"the performance improvement from upscaling cai to cnn demonstrates that both high spatial resolution and rich high spectral signatures play important roles to highly accurately quantify to evaluate the benefits of incorporating airborne estimates as an crop residue cover from airborne hyperspectral data. intermediate step, we used the independent ground measurements to by applying the cnn model to airborne hyperspectral pixels, we test the satellite estimates from the ground-satellite upscaling and quantified crop residue fraction for airborne flight paths (fig."
+8,from ground-airborne-satellite upscaling (fig.
+8,"from the scatterplots, the the comparison of three fields in fig. 8, we found that fields a, b, and c ground-airborne-satellite upscaling scheme achieved much higher per­ correspond to non-tillage, reduced, and conventional tillage with mean formance than the scheme with direct upscaling ground measurements crop residue fractions of 0.81, 0.56, and 0.27, respectively. to satellites."
+8,"the ground-satellite upscaling had good predictions in the high crop residue conditions (fig. 11a), however, failed in predictions in 4.3."
+8,crop residue fraction derived from airborne-satellite upscaling low crop residue conditions.
+8,"this could be due to the fact that high crop residue fields have similar spectral signatures, while low crop residue with the airborne acquired 102 km2 highly accurate quasi “ground fields have diverse soil backgrounds, which is hard to be predicted from truth” of crop residue fraction, we developed the mlp model to integrate multispectral data."
+8,table 2 further summarized the model performance airborne estimates with hls s30 (sentinel-2).
+8,the developed mlp regarding each step upscaling in fig. 2 and confirms the benefits of model did not show any overfitting issues (supplementary fig.
+8,s5). airborne hyperspectral imaging as the intermediate step for upscaling fig. 9(a) shows the scatterplots of testing performance between airborne ground residue fractions to coarse resolution multispectral imagery. estimates and satellite predictions.
+8,the mlp model achieved acceptable performance with r2 = 0.73 and relative rmse = 13.21%.
+8,such per­ 5.
+8,discussion formance is lower than the hyperspectral predictions (fig. 7) as spectral wavelengths have been largely reduced.
+8,"meanwhile, with hls l30 in this study, we developed a cross-scale sensing framework to spectral wavelengths, we found that the model performance (fig. 9c) is integrate ground field photos, airborne hyperspectral imaging, and hls similar to the performance obtained with hls s30."
+8,this shows that the satellite data through deep learning to quantify regional crop residue extra red edge wavelengths in hls s30 have limited contributions. fractions.
+8,"compared to direct ground-satellite upscaling, the proposed furthermore, we utilized the permutation method to analyze the feature ground-airborne-satellite upscaling framework shows much higher ac­ importance for the mlp model with hls s30 and l30 (fig. 9b and d). curacy to quantify crop residue fractions."
+8,"moreover, we also found that the feature importance shows that the highest contributions from these the shortwave infrared wavelengths in both hyperspectral and fig."
+8,"upscaling ground-derived crop residue fraction to airborne hyperspectral imagery using convolutional neural networks. (a) model testing performance, (b) permutation-based feature importance for each wavelength."
+9,wang et al.
+9,remote sensing of environment 285 (2023) 113366 fig.
+9,comparison of airborne spectral indices to quantify crop residue cover. (a) normalized difference tillage index (ndti) and (b) cellulose absorption index (cai).
+9,the linear regression lines are in red.
+9,the regression equations and the determination of coefficients (r2) are in the title of each subplot.
+9,"(for interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)"
+9,examples of quantified crop residue fractions from airborne hyperspectral imagery across champaign county.
+9,the red color refers to the low residue fractions and the blue color indicates the high residue fractions.
+9,the base map colors refer to the corn and soybean types.
+9,"fields a, b, and c (black rectangles) correspond to non, reduced, and conventional tillage, respectively."
+9,"(for interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.) multispectral remote sensing data show high contributions to differen­ 5.1."
+9,improving ground photo collection and labeling tiating crop residues and soil.
+9,"in further discussion, we analyzed the potential improvement in ground photo collection and labeling."
+9,the this study spent significant effort to collect a large number of ground benefits of airborne hyperspectral imaging as an intermediate step for photos (6719) in champaign and nearby counties to support ground- upscaling agriculture ground truth to satellite imagery were also elab­ airborne-satellite upscaling.
+9,compared to highly efficient aircraft and orated.
+9,"we also discussed the potential of future satellite earth obser­ satellite sensing, in-person field investigations could be one key bottle­ vation missions for tracking regional tillage practices. neck for applying the current ground-airborne-satellite framework to 9"
+10,wang et al.
+10,remote sensing of environment 285 (2023) 113366 fig.
+10,upscaling airborne hyperspectral data derived crop residue fraction to satellite hls multispectral remote sensing using mlp.
+10,the first row is the testing performance with hls sentinel-2 wavelengths.
+10,"the second row is the testing performance with hls landsat-8 spectral wavelengths. (a) model testing performance for sentinel-2 bands, (b) permutation-based feature importance for sentinel-2 spectral wavelengths. (c) model testing performance for landsat-8 bands, (d) permutation-based feature importance for landsat-8 spectral wavelengths. broad regions."
+10,"other ground data collection approaches such as vehicle- petabyte-scale diverse earth observation data to monitor agricultural based roadside image data collection (pilger et al., 2020) or lightweight ecosystem dynamics (guan et al., 2017)."
+10,"meanwhile, the recent progress small unmanned aerial vehicle-based close-range photo collection (yue in deep learning algorithms also empowers our ability to interpret these and tian, 2020; acharya et al., 2021) could potentially further improve petabyte-scale satellite data (reichstein et al., 2019)."
+10,"however, deep ground data collection efficiency."
+10,"with the well-represented and suffi­ learning models with a large volume of satellite data as inputs require cient ground truth data, we may even not need airborne hyperspectral sufficient and massive label data for model training and testing."
+10,"more­ data as an intermediate step to bridge ground truth and satellite data. over, as the intrinsic tradeoffs among spectral, spatial, temporal, and furthermore, this study utilized the modified resnet-50 regressor and radiometric resolutions for satellite data (ustin and middleton, 2021), superpixel segmentation to provide the first guess of residue cover and satellite missions such as landsat and sentinel-2 with 10–30 m spatial soil/residue masks in the semi-automatic photo labeling pipeline. resolution and 6–10 bands are popularly used for agricultural moni­ nonetheless, this process still requires significant manual checking to toring."
+10,"nonetheless, with such spatial resolutions, field measurements ensure data quality."
+10,"in a few cases, for example, if crop residues are in from small sampling units (often <5 m2) usually have significant un­ shadows or soils are too bright, the first guess from resnet-50 and certainties to be matched with satellite pixels."
+10,"therefore, lacking high- superpixel segmentation could underestimate or overestimate crop res­ quality, large-volume, high-resolution, and cost-effective ground truth idue cover, respectively."
+10,"with the acquisition of more and more ground data to support satellite model development becomes the main bottle­ tillage photos, deep-learning-based supervised image segmentation neck."
+10,"to address this challenge, airborne hyperspectral imaging systems could be potentially applied to better distinguish soil and crop residue offer three major benefits to support the upscaling from ground mea­ pixels and obtain more accurate residue labels."
+10,"in addition, currently all surements to satellite prediction."
+10,"first, airborne hyperspectral data offer ground photos were manually and carefully checked."
+10,"multiple group hundreds of spectral wavelengths, which are closely linked with surface label comparison experiments could be helpful to understand and biophysical and biochemical parameters, and are able to be integrated possibly improve the accuracy of label data. with representative ground data through deep learning to obtain highly accurate agroecosystem variables."
+10,these quantified agroecosystem variables inferred from airborne hyperspectral systems have sufficient 5.2.
+10,benefits of airborne hyperspectral data as an intermediate step for accuracy to be treated as quasi “ground truth”.
+10,"for example, this study upscaling demonstrated that crop residue fractions and tillage intensity were highly accurately predicted by airborne hyperspectral data with cnn with the rapid development of space technology, satellites offer 10"
+11,wang et al.
+11,remote sensing of environment 285 (2023) 113366 fig.
+11,"quantified crop residue fraction conditions for every corn and soybean field in champaign county on december 23th, 2020 from hls satellite imagery. (a) crop residue fraction for corn fields. (b) crop residue fraction for soybean fields. (c) histogram distribution for crop residue fraction in corn and soybean fields."
+11,the field boundaries are derived internally.
+11,"(r2 = 0.82, relative rmse = 11.73%)."
+11,"second, airborne data can build label data to support large-scale satellite upscaling."
+11,airborne hyper­ the bridge to address the scaling-mismatch issues.
+11,airborne data have a spectral imaging is a powerful tool for agricultural ground-truthing to fine spatial resolution to be seamlessly matched with ground data down augment ground measurements in a high-throughput manner.
+11,"as such, to sub-meter level, and airborne quasi-ground truth can be further airborne highly accurate estimates are able to be further upscaled with resampled to the same resolution as satellite pixels (30 m in this study) satellite observations and deep learning to derive agroecosystem vari­ to avoid ground-satellite data mismatch in the conventional approaches. ables for every field in a given region, as an example demonstrated in the direct upscaling ground measurements to satellite data showed this study on crop residue cover monitoring. weak performance (fig. 11a) in this study, partly due to the insufficient ground photos (6–8 photos per satellite pixel) to represent the whole satellite pixel condition."
+11,high spatial resolution airborne data can be 5.3.
+11,satellite data for monitoring crop residue cover very useful to support ground sampling to obtain spatially detailed in­ termediate data for upscaling to coarse-resolution satellite data in a cost- this study demonstrated the utility of medium resolution multi­ effective manner.
+11,"third, with flight permission and suitable weather spectral satellite data to detect regional crop residue fractions."
+11,"from conditions, airborne hyperspectral systems could be flexibly deployed to feature importance analysis, we found that shortwave infrared bands are collect surface reflectance across a large region to generate large-volume vital for detecting crop residue cover."
+11,"however, we also found clear performance degradation from airborne hyperspectral data to satellite 11"
+12,wang et al.
+12,remote sensing of environment 285 (2023) 113366 fig.
+12,testing performance for (a) directly upscaling the ground crop residue fraction to satellite data (b) upscaling through ground-airborne-satellite data.
+12,sentinel-1c-band synthetic aperture radar backscattering (surface table 2 roughness or soil moisture proxy) could be added to the satellite statistics for comparing ground-airborne-satellite and ground-satellite upscaling modeling framework.
+12,"furthermore, satellite multi-temporal techniques methods for quantifying tillage intensity."
+12,ground to airborne refers to airborne model testing performance evaluated by ground data.
+12,airborne to satellite refers to utilize time-series observations to minimize soil moisture effects and to satellite model testing performance evaluated by airborne data.
+12,"testing per­ exclude soil background signals (e.g., zhou et al., 2022) are also formance refers to satellite model testing performance evaluated by ground promising to improve the current satellite detection."
+12,"for example, zheng data. et al. (2012) found that the temporal minimum ndti approach is testing performance for upscaling r2 rmse bias effective to exclude soil moisture effects to quantify crop residue cover. schemes in addition, the recently proposed novel indices such as non­ photosynthetic vegetation-soil separation index (nssi, tian et al., ground to airborne 0.11 0.00 testing 0.82 (11.73%) (− 0.24%) 2021) and broadband crop residue angle index (bai, yue et al., 2020) ground- airborne to satellite 0.11 − 0.01 also show capability to reduce soil moisture effects on quantifying crop airborne- 0.73 satellite testing (13.21%) (− 0.70%) residue cover."
+12,testing performance 0.17 0.00 0.67 using ground data (17.53%) (0.47%) ground- testing performance 0.31 0.13 5.4.
+12,scalability of ground-airborne-satellite integrative sensing 0.22 satellite using ground data (32.09%) (13.22%) accurate information on crop residue cover is valuable to guide conservation practices as well as understanding biogeochemical dy­ multispectral data (table 2).
+12,this agrees with previous studies that namics in agroecosystems.
+12,"the scalable and cost-effective approach to hyperspectral remote sensing outperforms multispectral sensing to quantify crop residue cover from remote sensing is urgently needed. detect crop residue fraction, and narrowband shortwave infrared compared to the direct ground-satellite upscaling approach, ground- wavelengths are needed for crop residue detection (hunt and daughtry, airborne-satellite upscaling added one more step to airborne hyper­ 2018; hively et al., 2018)."
+12,"the current landsat and sentinel-2 only have spectral sensing, but achieved much higher accuracy."
+12,"though adding two wavelengths in the shortwave infrared range and could be a limiting this one more step, from the scalability perspective, deploying an factor for further improving satellite detection accuracy."
+12,"with the new airborne hyperspectral imaging system to collect massive quasi-ground and forthcoming satellite hyperspectral missions or multispectral mis­ truth of residue cover could be still much more cost-effective and scal­ sions with rich shortwave infrared wavelengths, these missions such as able than conventional ground sampling."
+12,"for example, this study con­ prisma (pignatti et al., 2013), enmap (guanter et al., 2009), nasa ducted three airborne flights to acquire 102 km2 cropland hyperspectral sbg (cawse-nicholson et al., 2021) and landsat next (hively et al., reflectance to obtain residue cover information, which is much more 2021) can provide great capabilities to detect crop residues globally. high-throughput than in-person field investigations."
+12,"furthermore, as for the current landsat or sentinel-2 multispectral data, un­ incorporating diverse field conditions, the spectral relationship trained certainties in soil background signals from variable soil properties, from ground residue cover to airborne data is generic, and would change moisture conditions, and crop residue moisture are major challenges to little over space and time in this region."
+12,"for example, to deploy such accurately detecting the fractions of crop residue cover (serbin et al., approaches to broader space and time domains with similar field con­ 2009; yue et al., 2020)."
+12,"for example, the direct ground-satellite ditions, we do not expect that more airborne surveys are needed for upscaling cannot predict low crop residue conditions well, as diverse different years."
+12,"if the soil types are different in the new geography, soil signals across fields (fig. 11a)."
+12,"to conquer these challenges, this additional strategic airborne sampling could be needed for fine-tuning study conducted airborne hyperspectral surveys to scan 102 km2 of remote sensing models to improve the accuracy and generalizability of croplands across this region."
+12,these collected massive information on the algorithms.
+12,"overall, the ground-airborne-satellite algorithm is crop residue and soil fractions supported satellite multispectral data to highly scalable."
+12,the developed cross-scale sensing framework and distinguish crop residues and soils across diverse field conditions.
+12,"in methodology, though only trained in the study region (central illinois), addition, incorporating soil property or other remote sensing data could should have broad transferability and applicability to large corn and further help to improve the predictions of crop residue cover."
+12,"for soybean cropland geographies with fine-tuning through only a small example, gssurgo soil property database (soil color proxy) and amount of extra ground truth, making this method highly scalable and 12"
+13,wang et al.
+13,remote sensing of environment 285 (2023) 113366 cost-effective.
+13,"ultimately, we can only use satellite data to scale up to declaration of competing interest broader regions with their local ground data for spectral model fine- tuning."
+13,"the authors declare that they have no known competing financial beyond crop residues, timely data on non-photosynthetic vegetation interests or personal relationships that could have appeared to influence in agroecosystems indicates crop stress, environmental conditions, and the work reported in this paper. timing for harvest."
+13,"in natural ecosystems, high-resolution information on non-photosynthetic components is also vital for the diagnosis of data availability ecosystem health, fire risks, and biogeochemical processes."
+13,"given the importance, non-photosynthetic vegetation has been identified as a data will be made available on request. priority variable in the context of new spaceborne imaging spectroscopy missions (berger et al., 2021)."
+13,"to deliver operational products for non- acknowledgment photosynthetic vegetation at the global scale, besides airborne-satellite integrative sensing and advanced data-driven machine learning this work was supported by the u.s."
+13,"department of energy (doe) models in this study, we also need to further develop soil-vegetation advanced research projects agency-energy (arpa-e) smartfarm radiative transfer models (berger et al., 2021) or spectral indices (e.g., projects (symfoni and mbc lab)."
+13,"this project is also partially funded tian et al., 2021) to enable the direct retrieval of non-photosynthetic by foundation for food & agriculture research (ffar) seeding solu­ vegetation from multi-scale remote sensing. tions award (grant 602757)."
+13,we would also like to thank the support from the seed funding to s.w. and k.g. from illinois discovery partners 6.
+13,"conclusion institute (dpi), institute for sustainability, energy, and environment (isee), and college of agricultural, consumer and environmental sci­ accurately quantifying crop residue fraction and tillage intensity is ences future interdisciplinary research explorations (fire), university vital for evaluating public conservation programs as well as under­ of illinois urbana-champaign."
+13,this work was also partially supported by standing agroecosystem biogeochemical processes.
+13,"however, traditional the national science foundation (nsf) and usda-nifa aifarms remote sensing approaches are challenging to obtain regional-scale project, and the c3.ai digital transformation institute."
+13,k.g. is funded by detailed information on crop residue fractions.
+13,"given the urgent the nsf career award, nasa carbon monitoring system program needs, this study developed a novel cross-sensing framework to integrate (80nssc18k0170) managed by the nasa terrestrial ecology program, proximal sensing, airborne hyperspectral imaging, and satellite multi­ and usda nifa foundational program award (2022-68013-37052, spectral sensing with the aid of deep learning to quantify crop residue 2017-67013-26253, 2017-68002-26789, 2017-67003-28703). fractions in the central region of the u.s."
+13,corn belt.
+13,"using image seg­ mentation, we labeled 6719 ground photos from fields across the study appendix a."
+13,supplementary data region.
+13,"by matching these ground measurements with airborne hyper­ spectral imagery, we utilized cnn to accurately quantify crop residue supplementary data to this article can be found online at https://doi. fraction (r2 = 0.82, relative rmse = 11.73%) to effectively augment the org/10.1016/j.rse.2022.113366. quasi “ground truth” to support satellite upscaling to quantify all corn and soybean tillage intensity."
+13,"compared to the direct ground-satellite references upscaling framework (r2 = 0.35, relative rmse = 21.91%), this ground-airborne-satellite integrative sensing framework achieved much acharya, b.s., bhandari, m., bandini, f., pizarro, a., perks, m., joshi, d.r., wang, s., dogwiler, t., ray, r.l., kharel, g., sharma, s., 2021."
+13,"unmanned aerial vehicles in better performance to quantify crop residue fractions (r2 = 0.67, rela­ hydrology and water management: applications, challenges, and perspectives. p. tive rmse = 17.53%)."
+13,"among all wavelengths, we found that shortwave e2021wr029925 water resources research 57 (11). infrared 2000–2200 nm has a high contribution to crop residue pre­ altmann, a., toloşi, l., sander, o., lengauer, t., 2010."
+13,permutation importance: a corrected feature importance measure.
+13,"bioinformatics 26 (10), 1340–1347. dictions."
+13,"this study demonstrated the effectiveness of airborne hyper­ asner, g.p., lobell, d.b., 2000."
+13,a biogeophysical approach for automated swir spectral imaging as agricultural “ground truth” collectors to fill the unmixing of soils and vegetation.
+13,remote sens.
+13,environ.
+13,"74, 99–112. https://doi. scale-mismatch between petabyte-scale satellite earth observation and org/10.1016/s0034-4257(00)00126-7."
+13,"azzari, g., grassini, p., edreira, j.i.r., conley, s., mourtzinis, s., lobell, d.b., 2019. plot-level ground measurements to seamlessly integrate multi-source satellite mapping of tillage practices in the north central us region from 2005 to data to advance the monitoring of sustainable agriculture."
+13,remote sens.
+13,environ.
+13,"221, 417–429. https://doi.org/10.1016/j. rse.2018.11.010."
+13,"bannari, k., haboudane, d., mcnairn, h., bonn, f., 2000."
+13,modified soil adjusted crop credit authorship contribution statement residue index (msacri): a new index for mapping crop residue.
+13,in: igarss 2000.
+13,ieee 2000 international geoscience and remote sensing symposium.
+13,"taking the sheng wang: conceptualization, methodology, software, formal pulse of the planet: the role of remote sensing in managing the environment. analysis, investigation, visualization, funding acquisition, data cura­ proceedings (cat."
+13,"00ch37120), 7, pp."
+13,2936–2938.
+13,"bannari, a., staenz, k., champagne, c., khurshid, k.s., 2015."
+13,"spatial variability mapping tion, resources, validation, writing - original draft, writing – review & of crop residue using hyperion (eo-1) hyperspectral data."
+13,"remote sens. 7, editing."
+13,"kaiyu guan: conceptualization, methodology, formal analysis, 8107–8127. https://doi.org/10.3390/rs70608107."
+13,"project administration, funding acquisition, investigation, resources, bai, x., huang, y., ren, w., coyne, m., jacinthe, p.a., tao, b., hui, d., yang, j., matocha, c., 2019."
+13,responses of soil carbon sequestration to climate-smart writing – review & editing.
+13,"chenhui zhang: methodology, software, agriculture practices: a meta-analysis."
+13,chang.
+13,"25 (8), 2591–2606."
+13,"investigation, visualization, formal analysis, validation, writing – re­ berger, k., halabuk, a., verrelst, j., mojses, m., gerhatova, k., tagliabue, g., view & editing."
+13,"qu zhou: software, writing – review & editing."
+13,"sibo wocher, m., hank, t., 2021."
+13,"in: towards quantifying non-photosynthetic vegetation for agriculture using spaceborne imaging spectroscopy, pp."
+13,5822–5825.
+13,"wang: software, writing – review & editing."
+13,xiaocui wu: writing – https://doi.org/10.1109/igarss47720.2021.9553212. review & editing.
+13,chongya jiang: writing – review & editing.
+13,"bin berk, a., anderson, g.p., acharya, p.k., bernstein, l.s., muratov, l., lee, j., fox, m., peng: writing – review & editing."
+13,"weiye mei: software, writing – re­ adler-golden, s.m., chetwynd, j.h., hoke, m.l., lockwood, r.b., 2005."
+13,modtran 5: a reformulated atmospheric band model with auxiliary species and practical view & editing.
+13,"kaiyuan li: data curation, writing – review & editing. multiple scattering options: update."
+13,"in: algorithms and technologies for ziyi li: data curation, writing – review & editing."
+13,"yi yang: data multispectral, hyperspectral, and ultraspectral imagery xi, 5806, pp."
+13,662–667.
+13,"spie. curation, writing – review & editing."
+13,"wang zhou: data curation, biard, f., baret, f., 1997."
+13,crop residue estimation using multiband reflectance.
+13,remote sens.
+13,environ.
+13,"59, 530–536. https://doi.org/10.1016/s0034-4257(96)00125-3."
+13,writing – review & editing.
+13,yizhi huang: writing – review & editing.
+13,"bolton, d.k., gray, j.m., melaas, e.k., moon, m., eklundh, l., friedl, m.a., 2020."
+13,"zewei ma: data curation, writing – review & editing."
+13,continental-scale land surface phenology from harmonized landsat 8 and sentinel-2 imagery.
+13,remote sens.
+13,environ.
+13,"240, 111685."
+14,wang et al.
+14,"remote sensing of environment 285 (2023) 113366 cawse-nicholson, k., townsend, p.a., schimel, d., assiri, a.m., blake, p.l., middleton, e.m., ungar, s.g., mandl, d.j., ong, l., frye, s.w., campbell, p.e., landis, d."
+14,"buongiorno, m.f., campbell, p., carmon, n., casey, k.a., correa-pabón, r.e., r., young, j.p., pollack, n.h., 2013."
+14,"the earth observing one (eo-1) satellite dahlin, k.m., 2021."
+14,nasa’s surface biology and geology designated observable: a mission: over a decade in space.
+14,ieee journal of selected topics in applied earth perspective on surface imaging algorithms.
+14,remote sens.
+14,environ.
+14,"257, 112349."
+14,"observations and remote sensing 6 (2), 243–256."
+14,"claassen, r., bowman, m., mcfadden, j., smith, d., wallander, s., 2018."
+14,"tillage intensity morrison jnr, j.e., hua, huang chi, lightle, d.t., daughtry, c.s.t., 1993."
+14,residue and conservation cropping in the united states (no.
+14,1476-2018-5723).. measurement techniques.
+14,soil water conserv.
+14,"48, 478–483."
+14,"claverie, m., ju, j., masek, j.g., dungan, j.l., vermote, e.f., roger, j.c., skakun, s.v., nagler, p.l., inoue, y., glenn, e.p., russ, a.l., daughtry, c.s.t., 2003."
+14,"cellulose justice, c., 2018."
+14,the harmonized landsat and sentinel-2 surface reflectance data absorption index (cai) to quantify mixed soil-plant litter scenes.
+14,remote sens. set.
+14,remote sens.
+14,environ.
+14,"219, 145–161. https://doi.org/10.1016/j."
+14,environ.
+14,"87, 310–325. https://doi.org/10.1016/j.rse.2003.06.001. rse.2018.09.002."
+14,"hunt jr., e.r, daughtry, c.s., 2018."
+14,"what good are unmanned aircraft systems for ctic, 2022."
+14,tillage type definitions.
+14,west lafayette.
+14,available online:.
+14,in: conservation agricultural remote sensing and precision agriculture?
+14,remote sens.
+14,"39 technology information center (accessed on september 8, 2022). https://www.ctic."
+14,"(15–16), 5345–5376. org/resource_display/?"
+14,id=322&title=tillage+type+definitions.
+14,"ipcc climate change, 2022."
+14,"impacts, adaptation and vulnerability."
+14,cambridge univ.
+14,"daughtry, c.s.t., 2001."
+14,agroclimatology: discriminating crop residues from soil by press in the press. shortwave infrared reflectance.
+14,agron.
+14,"125–131. https://doi.org/10.2134/ omonode, r.a., vyn, t.j., smith, d.r., hegymegi, p., gál, a., 2007."
+14,"soil carbon dioxide agronj2001.931125x. and methane fluxes from long-term tillage systems in continuous corn and daughtry, c.s., doraiswamy, p.c., hunt jr., e.r., stern, a.j., mcmurtrey iii, j.e., corn–soybean rotations."
+14,soil tillage res.
+14,"95 (1–2), 182–195."
+14,"prueger, j.h., 2006."
+14,remote sensing of crop residue cover and soil tillage intensity.
+14,"oldfield, e.e., eagle, a.j., rubin, r.l., rudek, j., sanderman, j., gordon, d.r., 2022."
+14,soil tillage res.
+14,"91 (1–2), 101–108."
+14,crediting agricultural soil carbon sequestration.
+14,"science 375 (6586), 1222–1225."
+14,"daughtry, c.s., hunt jr., e.r., doraiswamy, mcmurtrey, j.e., 2005."
+14,"remote sensing the papendick, r.i., parr, j.f., 1997."
+14,no-till farming: the way of the future for a sustainable spatial distribution of crop residues.
+14,agronomy j.
+14,"97 (3), 864–871. dryland agriculture."
+14,"arid zone 36, 193–208."
+14,"daughtry, c.s.t., hunt, e.r., mcmurtrey, j.e., 2004."
+14,"assessing crop residue cover using petovello, m., dabove, p., 2014."
+14,what are the actual performances of gnss positioning shortwave infrared reflectance.
+14,remote sens.
+14,environ.
+14,"90, 126–134. https://doi.org/ using smartphone technology?"
+14,"insidegnss 9, 34–37."
+14,10.1016/j.rse.2003.10.023.
+14,"potash, e., guan, k., margenot, a., lee, d., delucia, e., wang, s., jang, c., 2022."
+14,"how to davin, e.l., seneviratne, s.i., ciais, p., olioso, a., wang, t., 2014."
+14,preferential cooling of estimate soil organic carbon stocks of agricultural fields?
+14,perspectives using ex-ante hot extremes from cropland albedo management.
+14,"a. 111, evaluation."
+14,"geoderma 411, 115693."
+14,9757–9761. https://doi.org/10.1073/pnas.1317323111.
+14,"pignatti, s., palombo, a., pascucci, s., romano, f., santini, f., simoniello, t., deng, j., dong, w., socher, r., li, l.j., li, k., fei-fei, l., 2009."
+14,"imagenet: a large-scale umberto, a., vincenzo, c., acito, n., diani, m., matteoli, s., 2013."
+14,the prisma hierarchical image database.
+14,"in: 2009 ieee conference on computer vision and hyperspectral mission: science activities and opportunities for agriculture and land pattern recognition2009, june.ieee248255."
+14,"ieee, pp."
+14,248–255. monitoring.
+14,"in: 2013 ieee international geoscience and remote sensing deines, j.m., guan, k., lopez, b., zhou, q., white, c.s., wang, s., lobell, d.b., 2022."
+14,symposium-igarss.
+14,"ieee, pp."
+14,4558–4561.
+14,"recent cover crop adoption is associated with small maize and soybean yield losses pilger, n., berg, a., joosse, p., 2020."
+14,semi-automated roadside image data collection for in the united states.
+14,global change biol. characterization of agricultural land management practices.
+14,remote sens.
+14,"12 (14), deines, j.m., patel, r., liang, s.z., dado, w., lobell, d.b., 2021."
+14,"a million kernels of 2342. truth: insights into scalable satellite maize yield mapping and yield gap analysis from reichstein, m., camps-valls, g., stevens, b., jung, m., denzler, j., carvalhais, n., 2019. an extensive ground dataset in the us corn belt."
+14,remote sens.
+14,environ.
+14,"253, deep learning and process understanding for data-driven earth system science."
+14,112174.
+14,"nature 566 (7743), 195–204."
+14,"deines, j.m., wang, s., lobell, d.b., 2019."
+14,"satellites reveal a small positive yield effect richter, r., schläpfer, d., 2016."
+14,atcor-4 user guide.
+14,aerosp.
+14,"center, ger. from conservation tillage across the us corn belt."
+14,environ.
+14,lett. 14 https://doi.
+14,"serbin, g., daughtry, c.s.t., hunt, e.r., reeves, j.b., brown, d.j., 2009."
+14,effects of soil org/10.1088/1748-9326/ab503b. composition and mineralogy on remote sensing of crop residue cover.
+14,remote sens.
+14,"felzenszwalb, p.f., huttenlocher, d.p., 2004."
+14,efficient graph-based image segmentation.
+14,environ.
+14,"113, 224–238. https://doi.org/10.1016/j.rse.2008.09.004."
+14,comput.
+14,"59, 167–181. https://doi.org/10.1023/b: thaler, e.a., larsen, i.j., yu, q., 2021."
+14,the extent of soil loss across the us corn belt.
+14,visi.0000022288.19776.77.
+14,a. 118 https://doi.org/10.1073/pnas.1922375118.
+14,"follett, r.f., 2001."
+14,soil management concepts and carbon sequestration in cropland soils.
+14,"tian, j., su, s., tian, q., zhan, w., xi, y., wang, n., 2021."
+14,a novel spectral index for soil tillage res.
+14,"61 (1–2), 77–92. estimating fractional cover of non-photosynthetic vegetation using near-infrared gal, y., ghahramani, z., 2016."
+14,dropout as a bayesian approximation: representing model bands of sentinel satellite.
+14,earth obs.
+14,geoinf.
+14,"101, 102361. uncertainty in deep learning."
+14,in: international conference on machine learning.
+14,"ustin, s.l., middleton, e.m., 2021."
+14,"current and near-term advances in earth observation pmlr, pp."
+14,1050–1059. for ecological applications.
+14,process.
+14,"10 (1), 1–57."
+14,"gao, l., zhang, c., yun, w., ji, w., ma, j., wang, h., li, c., zhu, d., 2022."
+14,"mapping crop usda, april 2019."
+14,"us department of agriculture, national agricultural statistics residue cover using adjust normalized difference residue index based on sentinel-2 service."
+14,in: 2017 census of agriculture: united states summary and state data.
+14,msi data.
+14,soil tillage res.
+14,"220, 105374."
+14,"volume 1, geographic area series, part 51."
+14,ac-17-a-51. www.agcensus.usda.gov.
+14,"guan, k., wu, j., kimball, j.s., anderson, m.c., frolking, s., li, b., hain, c.r., lobell, d."
+14,"van deventer, a.p., ward, a.d., gowda, p.m., lyon, j.g., 1997."
+14,"using thematic mapper b., 2017."
+14,"the shared and unique values of optical, fluorescence, thermal and data to identify contrasting soil plains and tillage practices."
+14,photogramm.
+14,eng. microwave satellite data for estimating large-scale crop yields.
+14,remote sens.
+14,remote sens.
+14,"63, 87–93."
+14,environ.
+14,"199, 333–349."
+14,"van diggelen, f., enge, p., 2015."
+14,"the world’s first gps mooc and worldwide laboratory guan, k., jin, z., delucia, e.h., west, p., peng, b., tang, j., jiang, c., wang, s., kim, t., using smartphones."
+14,"in: proceedings of the 28th international technical meeting of zhou, w., griffis, t., 2022."
+14,"a roadmap toward scalably quantifying field-level the satellite division of the institute of navigation (ion gnss+ 2015), pp."
+14,361–369. agricultural carbon outcome. https://doi.org/10.31223/x5qw7j.
+14,"wang, s., guan, k., wang, z., ainsworth, e.a., zheng, t., townsend, p.a., liu, n., guanter, l., segl, k., kaufmann, h., 2009."
+14,"simulation of optical remote-sensing scenes nafziger, e., masters, m.d., li, k., 2021."
+14,airborne hyperspectral imaging of nitrogen with application to the enmap hyperspectral mission.
+14,ieee trans.
+14,geosci.
+14,remote deficiency on crop traits and yield of maize by machine learning and radiative sens.
+14,"47 (7), 2340–2351. transfer modeling."
+14,earth obs.
+14,geoinf.
+14,"105, 102617."
+14,"hively, w.d., lamb, b.t., daughtry, c.s.t., shermeyer, j., mccarty, g.w., quemada, m., wang, s., guan, k., zhang, c., lee, d., margenot, a.j., ge, y., peng, j., zhou, w., 2018."
+14,"mapping crop residue and tillage intensity using worldview-3 satellite zhou, q., huang, y., 2022."
+14,using soil library hyperspectral reflectance and machine shortwave infrared residue indices.
+14,remote sens. 10 https://doi.org/10.3390/ learning to predict soil organic carbon: assessing potential of airborne and rs10101657. spaceborne optical soil sensing.
+14,remote sens.
+14,environ.
+14,"271, 112914."
+14,"hively, w.d., lamb, b.t., daughtry, c.s., serbin, g., dennison, p., kokaly, r.f., wu, z., watts, j.d., powell, s.l., lawrence, r.l., hilker, t., 2011."
+14,"improved classification of masek, j.g., 2021."
+14,evaluation of swir crop residue bands for the landsat next conservation tillage adoption using high temporal and synthetic satellite imagery.
+14,mission.
+14,remote sens.
+14,"13 (18), 3718."
+14,remote sens.
+14,environ.
+14,"115, 66–75. https://doi.org/10.1016/j.rse.2010.08.005."
+14,"he, k., zhang, x., ren, s., sun, j., 2016."
+14,deep residual learning for image recognition.
+14,"in: yue, j., tian, q., dong, x., xu, n., 2020."
+14,"using broadband crop residue angle index to proceedings of the ieee conference on computer vision and pattern recognition, estimate the fractional cover of vegetation, crop residue, and bare soil in cropland pp."
+14,770–778. systems.
+14,remote sens.
+14,environ. 237 https://doi.org/10.1016/j.rse.2019.111538.
+14,"hecht-nielsen, r., 1989."
+14,"in: theory of the backpropagation neural network, yue, j., tian, q., 2020."
+14,"estimating fractional cover of crop, crop residue, and soil in pp."
+14,593–605. https://doi.org/10.1109/ijcnn.1989.118638. cropland using broadband remote sensing data and machine learning.
+14,"liu, n., townsend, p.a., naber, m.r., bethke, p.c., hills, w.b., wang, y., 2021."
+14,earth obs.
+14,geoinf.
+14,"89, 102089."
+14,"hyperspectral imagery to monitor crop nutrient status within and across growing zheng, b., campbell, j.b., de beurs, k.m., 2012."
+14,remote sensing of crop residue cover seasons.
+14,remote sens.
+14,environ.
+14,"255, 112303. using multi-temporal landsat imagery."
+14,remote sens.
+14,environ.
+14,"117, 177–183."
+14,"loshchilov, i., hutter, f., 2018."
+14,decoupled weight decay regularization.
+14,"in: international zheng, b., campbell, j.b., serbin, g., galbraith, j.m., 2014."
+14,remote sensing of crop conference on learning representations. residue and tillage practices: present capabilities and future prospects.
+14,"soil tillage maharjan, g.r., prescher, a.k., nendel, c., ewert, f., mboh, c.m., gaiser, t., seidel, s.j., res. https://doi.org/10.1016/j.still.2013.12.009."
+14,"approaches to model the impact of tillage implements on soil physical and zhou, q., guan, k., wang, s., jiang, c., huang, y., peng, b., chen, z., wang, s., nutrient properties in different agro-ecosystem models."
+14,soil tillage res. https://doi.
+14,"hipple, j., schaefer, d., qin, z., 2022."
+14,recent rapid increase of cover crop adoption org/10.1016/j.still.2018.03.009. across the us midwest detected by fusing multi-source satellite data.
+14,geophysi.
+14,"mehra, p., baker, j., sojka, r.e., bolan, n., desbiolles, j., kirkham, m.b., ross, c., lett. e2022gl100249."
+14,"gupta, r., 2018."
+14,"a review of tillage practices and their potential to impact the soil zhou, w., rao, p., jat, m.l., singh, b., poonia, s., bijarniya, d., kumar, m., singh, l.k., carbon dynamics."
+14,agron.
+14,185–230. https://doi.org/10.1016/bs.
+14,"schulthess, u., singh, r., jain, m., 2021."
+14,using sentinel-2 to track field-level tillage agron.2018.03.002. practices at regional scales in smallholder systems.
+14,remote sens.
+14,"13 (24), 5108."

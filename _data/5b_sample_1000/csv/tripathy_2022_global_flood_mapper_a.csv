@@ -1,0 +1,396 @@
+page,p
+1,"natural hazards (2022) 114:1341–1363 https://doi.org/10.1007/s11069-022-05428-2 original paper global flood mapper: a novel google earth engine application for rapid flood mapping using sentinel‑1 sar pratyush tripathy1 · teja malladi1 received: 20 september 2021 / accepted: 23 may 2022 / published online: 21 june 2022 © the author(s), under exclusive licence to springer nature b.v."
+1,2022 abstract timely and accurate information about the extent of floodwater is critical for emer- gency planning and disaster management efforts.
+1,"despite the advances in computational resources and in the field of remote sensing, there is a clear gap that restricts the disas- ter community from leveraging the technological resources in real time, which impedes on-ground response efforts."
+1,"to bridge this gap, this paper makes two contributions."
+1,"first, the paper presents a new web application, the global flood mapper (gfm) that allows the user to generate flood maps quickly and without getting into technical intricacies."
+1,"to derive the flood extent from sentinel-1 satellite data, the pre-flood collection is considered as base and anomaly cells in the during-flood image(s) are identified using z-score values."
+1,"second, it advances an existing flood mapping method to (a) map the peak of the floods by combining ascending and descending scenes when necessary, and (b) check for false posi- tives in hilly terrains by adding slope and elevation mask parameters."
+1,"by comparing our results with sentinel-2 msi derived flood maps and field photographs, we show that the gfm can generate flood maps with precision."
+1,"the gfm can be used to map and download the extent of multiple flood events of an area as vector data (.kml format), which can be a critical input for flood modeling and risk and impact assessments."
+1,the gfm shall enable first responders and practitioners across the globe to overcome technical barriers and lack of computational resources to map the extent of inundation during and after floods.
+1,"keywords flood · disaster · sentinel-1 · sar · google earth engine · climate change 1 introduction despite the advances in the field of remote sensing, there is a clear gap that restricts the disaster community from leveraging the available information to support on-ground response efforts."
+1,"the knowledge gaps and the lack of convergence between the fields of * pratyush tripathy pratyush@iihs.ac.in; pratkrt@gmail.com teja malladi tmalladi@iihs.ac.in 1 geospatial lab., indian institute for human settlements, 197/36, 2nd main road, sadashivnagar, bangalore 560080, india 13 vol.:(0123456789)"
+2,1342 natural hazards (2022) 114:1341–1363 geoinformation and emergency management in practice becomes evident during emer- gency situations (brecht 2008).
+2,personnel involved with emergency management require very specific information for decision making (scholten et al. 2008) but often do not get required information in time and in “user-friendly” format (stevens 2008).
+2,"some of the factors contributing to the under-utilization of geoinformation are, (a) data existing with various departments and lack of mechanisms to collect and make the data rapidly available for decision makers (stevens 2008; schumann et al. 2016), and (b) lack of understanding within the scientific community and the geoinformation experts about the end-user require- ments and timely needs (schumann et al."
+2,2016).
+2,"data, tools and application needs vary from planning phase to the response stages (brecht 2008), and lack of prior planning leads to high demand in emergency situations leading to excessive workloads causing delays."
+2,"besides government response, a coordinated disaster response relies on support from professional organizations, non-governmental organizations (ngos), volunteers and other groups (kawasaki et al."
+2,2013).
+2,all these organizations need to have the necessary infor- mation related to the disaster impacts to be able to develop an effective response strat- egy (kumar et al.
+2,2020).
+2,"initiatives such as the international charter for space and major disasters (stryker and jones 2009), nasa hazard data distribution system (jones and lamb 2015), and servir among others, provide access to pre- and post-disaster satellite imagery."
+2,"however, these programs focus on significant and large scale events only."
+2,"les- sons learnt from the past disasters indicated that web-based tools that were easy to access and use at the time of need, contributed to their wide usage by rescue workers and others involved in rescue operations during disasters (brecht 2008)."
+2,"this paper focuses on floods, a disaster whose frequency has increased in the twentieth century (milly et al."
+2,2002).
+2,"in 2020 alone, deaths caused by floods accounted for 40% of the total deaths (undrr et al."
+2,2021).
+2,countries in south east asia and certain parts of africa are expected to be disproportionately affected by increase in the frequency of floods due to climate change (hirabayashi et al.
+2,2013).
+2,availability and low cost makes satellite imagery an alternative for field-based assessments especially for most developing countries facing frequent floods (rahman and di 2017).
+2,"however, there were several limitations that prevented the widespread use of satellite imagery for flood mapping (schumann et al."
+2,2018).
+2,optical satellite data scenes are rife with cloud cover as flooded regions are likely to have cloudy weather.
+2,"synthetic aperture radar (sar) provided a way around this problem but the temporal resolution is low for most sar satellites such as envisat, alos palsar and radarsat-1 satellites which have temporal resolution of 35, 46 and 24 days, respectively (european space agency 2020; rosenqvist et al."
+2,2004; canadian space agency 2013).
+2,"besides, there are further delays at the hosting space agency’s end for calibration and pre-processing steps before making it available for use."
+2,"further, for the end users, acquiring a large number of scenes required to cover affected areas and accessing computational resources to process and derive meaningful information is challenging."
+2,some of the challenges mentioned above have been addressed with the launch of sen- tinel-1 sar data in 2014 by the european space agency (esa).
+2,publicly available senti- nel-1 data have a spatial resolution of 10 m and a temporal resolution of 12 days.
+2,"in addi- tion, the data are made available for analysis within a couple of hours of acquisition."
+2,"in the event of a disaster in a region, the course of the satellite is adjusted to acquire data of the affected area at a frequency higher than the temporal resolution of sentinel-1."
+2,"neverthe- less, sentinel-1 data originally used to be processed on the esa’s offline processing soft- ware: sentinel application and processing (snap), which relies on offline computational power for processing the satellite data."
+2,only few institutions with substantial funding had 13
+3,natural hazards (2022) 114:1341–1363 1343 access to resources for storing and processing big earth observation data like multi-year satellite imagery for large regions (klein et al.
+3,2017).
+3,"a breakthrough in processing satel- lite data is the google earth engine (gee), which has the complete repository of analysis ready data (ard) sentinel data along with other notable missions (gorelick et al."
+3,2017).
+3,gee has reduced the processing time from weeks to a few minutes and the workflow can easily be scaled to new regions and events as and when the imagery becomes available.
+3,"however, leveraging the computational resources of gee to deduce meaningful infor- mation requires substantial knowledge of remote sensing and a fair amount of familiar- ity with javascript or python programming languages."
+3,"hence, this restricts the use of the powerful combination of sentinel-1 data and gee."
+3,"this paper attempts to bridge this gap by developing an open-source application built on gee, called the global flood mapper (gfm), which allows the user to map floods without getting into technical intricacies."
+3,"in addition, this paper proposes an improved workflow for flood mapping using sentinel-1."
+3,"1.1 about the global flood mapper the gfm, unlike gee code editor, is a graphical user interface (gui) system that does not require access credentials or developing programming scripts."
+3,the gfm allows the user to map the flood inundation by selecting area and dates of interest.
+3,"in addition, it allows downloading the flood extents as vector data (.kml format)."
+3,"flood extent of multiple years of a region can be easily generated, which has huge potential in building decision support systems for flood modeling, and risk and impact assessments (mahmoud and gan 2018; pandey et al."
+3,2022).
+3,1.2 related work recent literature has witnessed an increase in the number of studies that use sentinel-1 and gee combination for flood mapping (singha et al.
+3,2020; vanama et al.
+3,2020; tiwari et al.
+3,2020; liu et al.
+3,2018; lal et al.
+3,2020; zurqani 2019).
+3,"in principle, there are two notable practices recommended for flood mapping using sentinel-1 and gee, the united nations—space based information for disaster management and emergency response (un-spider) (n.d.) and podest and mccartney (2019)."
+3,"the latter is a part of the national aeronautics and space administration—applied remote sensing training program (nasa—arset), which trains a decision tree (dt) model using manually generated labels to deduce the flood extent."
+3,"whereas, the un-spider method relies on a robust approach of using the difference in the sentinel-1 images before and during/after the floods."
+3,"more importantly, the issue of utility of either the vv or vh band of sentinel-1 for flood mapping has not reached a consensus."
+3,"for instance, the un-spider method asserts that flood mapping is usually done using the vh band of the sentinel-1 data, and there are possibilities of false-positive classification, i.e., a certain area of land can be flagged as a flooded region even if it is not."
+3,"however, clement et al. (2018) found that the vv band produces the least misclassification."
+3,"furthermore, twele et al. (2015) found that the vv band can achieve higher thematic accuracy than the vh band under calm wind conditions."
+3,"devries et al. (2020), while claiming that the vv band alone is widely used for flood map- ping, discuss how using the vh band alone can falsely “provide evidence for flooding,” and propose a method that relies on coupling the two bands."
+4,1344 natural hazards (2022) 114:1341–1363 the method proposed by devries et al. (2020) generates sub-classes of the flood extent (low and high confidence) as opposed to a binary layer like in the un-spider method.
+4,"in addition, instead of merely relying on two images, before and during/after an event, of the affected area, devries et al. (2020) use a long time stretch to capture the area before the floods."
+4,"the mean and standard deviation are computed for each pixel in the pre-flood image collection, and then the image during floods is used to compute per-pixel z-score."
+4,considering a long time stretch for pre-floods accounts for seasonal variability and reduces false positives.
+4,"in addition, using both the vv and vh bands checks for additional false alarms in the produced flood map."
+4,"although devries et al. (2020) advance previous methods and attempt to reduce false classification to a large extent, there are two major limitations in their approach."
+4,"first, their method treats the ascending and descending images of sentinel-1 separately, which limits their ability to map flooded areas where water stagnates for a duration shorter than the sat- ellite revisit time."
+4,"this is particularly significant when mapping large areas, since covering large areas with ascending and descending scenes separately may require compilation of sentinel-1 data for a longer period, which may not then adequately capture the flood extent due to limitations of temporal frequency of sentinel-1."
+4,"second, devries et al. (2020) do not account for the noise in the sentinel-1 data especially in uneven terrain and hence their method can produce lots of false alarms in hilly regions."
+4,a different line of research in the domain are the studies that attempt to use methods for flood susceptibility mapping using sentinel-1 (arora et al.
+4,2021; bui et al.
+4,2020; termeh et al.
+4,2018).
+4,"since machine learning methods focus on mapping “probable,” not “actual,” flood extent, the present study refrains from these methods."
+4,1.3 contribution of this article 1.3.1 flood mapping algorithm this paper contributes to the literature by addressing the limitations of the method pro- posed by devries et al. (2020) mentioned in the sect.
+4,this paper advances sentinel- 1-based flood mapping in the following ways.
+4,"first, it enables mapping the peak of the floods by providing the option to cohesively use both, ascending and descending orbit directions of sentinel-1."
+4,"second, it introduces slope and elevation parameters to check for false positives in hilly terrains, which are missing in the base algorithm but have been widely used by previous studies (martinis et al."
+4,2015).
+4,"third, it proposes to segregate the pre- and during-flood sentinel-1 collections to expedite on-the-fly processing by avoiding trivial computation."
+4,"1.3.2 open‑source web application in addition to methods specific advancements, the paper addresses the challenge of lim- ited adoption of gee and sentinel-1 integration, especially among users from the non- programming and non-remote sensing community by developing and publicly releasing a gee application, the gfm."
+4,"given the ability of the gfm to map past flood events conveni- ently, subject to availability of sentinel-1, it opens up the opportunity to generate an inven- tory of flood events around the globe over time, the lack of which is considered an obstacle in disaster risk reduction (rautela 2016)."
+5,natural hazards (2022) 114:1341–1363 1345 the remainder of this paper is structured as follows.
+5,section 2 describes the algorithm and the ideal way to use gfm.
+5,section 3 discusses the results obtained by mapping flood extent using gfm and how that compares with field photographs and flood extent derived from sentinel-2 optical satellite data.
+5,section 3 also discusses the challenges and limita- tions of our work and opportunities for improvement.
+5,section 4 concludes with major find- ings of the study and recommendations for future.
+5,2 data and methods the gfm allows the user to map flood extent across the globe.
+5,"for demonstration, we map the 2020 floods in the states of bihar and andhra pradesh in india (see fig."
+5,nearly 73% of bihar is prone to floods and during 1998–2019 nearly 3.5 million ha. land was affected (national remote sensing center 2020).
+5,the state has experienced 27 flooding disasters since 2000 and two events in 2020 alone (matheswaran et al.
+5,2018; tripathi et al.
+5,2019; lal et al.
+5,2020).
+5,"we map the 2020 andhra pradesh, india floods where the inundated water stagnated for only a day or two on 28 november 2020, which makes a good case for dem- onstrating the utility of cohesively using ascending and descending scenes."
+5,"in addition, the region to the west of nellore, andhra pradesh has hill ranges, which is a good case to demonstrate the utility of using the slope and elevation parameters proposed in this paper."
+5,"we compare the bihar flood maps generated using the gfm with the flood extent com- puted from sentinel-2 multispectral instrument (msi) and with field photographs acquired before and during the august 2020 floods in patna, bihar."
+5,"for simplicity of reference throughout this paper, the flood map generated using the sentinel-1 sar data on the gfm will be referred to as “sar flood map” and the sentinel-2 msi derived flood map will be referred to as “optical flood map.”"
+5,we refrain from doing a per-pixel statistical comparison of the sar and optical flood maps because optical data have their own limitations that make them unfit to be considered as ground truth (detailed discussion on this in sect.
+5,"to derive the optical flood map, we first extract the pre- and during-flood binary water layers from sentinel-2 composite of the same date ranges as sentinel-1 (table 1)."
+5,"we perform cloud pixel masking on sentinel-2 images using the default function avail- able in gee, which relies on the qa60 cloud mask band."
+5,we compute the binary water layers for cloud-free pixels by thresholding (> = 0.08) the normalized difference water index (ndwi) layer.
+5,we identify the flood inundation as any new water pixel that appeared between the pre- and during-flood binary water layers.
+5,table 1 presents a summary of the dates used for both the comparisons.
+5,"as shown in table 1, we map the flood extent in bihar for two different during-flood time spans."
+5,the first is during the peak of flood inundation—we use this span to compare the sar flood map with the optical flood map.
+5,the second time span complements the dates of the field photographs.
+5,"for the second approach, we use a single during-flood date closest to the photograph date for which the sentinel-1 scene was available."
+5,"for both, we use the same before-flood time span, i.e., 01 may to 30 june 2020."
+5,"2.1 flood mapping algorithm we consider the method proposed by devries et al. (2020) as the baseline, which con- siders a long time span (~ 2 months) for the pre-flood period to compute the per-pixel mean and standard deviation."
+5,this helps account for seasonal variability and is a robust 13
+6,1346 natural hazards (2022) 114:1341–1363 fig.
+6,"1 key map showing study areas bihar and andhra pradesh in india table 1 dates used for mapping the flood extent of 2020 bihar floods comparison with before dates after dates gfm before dates gfm after dates sentinel-2 msi (optical 01 may 2020 24 july 2020 01 may 2020 to 30 june 24 july 2020 flood map) to 30 june to 04 august 2020 to 04 august 2020 2020 2020 field photograph 15 june 2020 18 august 2020 01 may 2020 to 30 june 19 august 2020 (25.600499 n, 85.232343 2020 e) approach."
+6,a single target date is used to obtain the during-flood sentinel-1 scene and standardized score (z-score) is computed.
+6,flood pixels are computed separately for the vv and vh bands and later combined to produce high- and low-confidence flood classes.
+6,the flood mapping can be expressed using the following expressions: 13
+7,"natural hazards (2022) 114:1341–1363 1347 [( ) ] [( ) ] xvv − 𝜇vv xvh − 𝜇vh high confidence flood (hcf) = ≥ thvv ∩ ≥ thvh (1) 𝜎vv 𝜎vh [{( ) } {( ) }] ( ) xvv − 𝜇vv xvh − 𝜇vh low confidence flood (lcf) = hcfc ∩ ≥ thvv ∪ ≥ thvh 𝜎vv 𝜎vh (2) where • xvv and xvh are the pixel values in the vv and vh bands of the during-floods scene. • 𝜇vv and 𝜇vv are the per-pixel mean value and 𝜎vv and 𝜎vh are the per-pixel standard deviation of the vv and vh bands, respectively, in the pre-floods collection and are computed as: � n ∑n 2 i=1 (xi −𝜇 ) mean (𝜇) = n1 ∑ xi and standard deviation (𝜎) = n . i=1 n is the number of observations for a pixel and xi represents pixel value of ith obser- vation in the collection. thvv and thvh are the threshold for the vv and vh bands to flag a pixel as flooded."
+7,the thresholds are multipliers for standard deviation.
+7,hcfc is the complement of the hcf class that represents all the pixels other than the non-high confidence flood class.
+7,"in principle, a pre-flood period (dry season) is considered as the base period."
+7,the per-pixel mean and standard deviation (sd) is computed using all the images in the collection.
+7,"using base mean and sd, the per-pixel standardized score (z-score) of a during-flood scene is computed."
+7,anomaly (or flood) pixels are identified as cells that are n sd away from the base mean.
+7,this n can be different for the vv and vh bands and are represented by thvv and thvh .
+7,these thresholds can vary around 2.5 and should be defined by visually interpreting the pre- and during-flood sentinel-1 scene and the flood map.
+7,"to make gfm a scalable application for rapid flood mapping, we made the modifications listed in sections below."
+7,the detailed workflow is shown in fig.
+7,most of the changes are optional and can be tweaked in the gfm interface (fig.
+7,"2.1.1 perennial water body layer we eliminate the dynamic surface water extent (dswe) computation to speed up the flood map generation as it processes all available landsat-5 tm and landsat-7 etm + images acquired between 2000 and 2015 on the fly, which delays the overall flood map generation as stated by devries et al."
+7,(2020).
+7,we feel justified in doing so since the permanent open water (pow) computation uses an “or” operator between the dswe and the monthly water history (mwh) layer by the joint research centre (jrc) of the european union.
+7,"since the latter product is available in analysis-ready form on gee and has been computed from three million landsat data between 1984 and 2015, it stands out as a good alternative to dswe."
+7,"therefore, to speed up the map- ping process, we rely only on the mwh layer (pekel 2016)."
+8,1348 natural hazards (2022) 114:1341–1363 fig.
+8,"2 diagram showing the global flood mapper workflow 2.1.2 excluding sw mode scenes due to poor global coverage of the sw mode of sentinel-1 data, we restrict ourselves to the iw mode."
+8,the sw mode sentinel-1 product queried for the entire globe since the availability of sentinel-1 data till 01 august 2020 results in only a few scenes scattered across the globe.
+8,whereas the iw mode for any given month captures the globe completely (appendix 1: fig.
+8,this is consistent with studies in the literature that use and propose the iw mode only for mapping floods (twele et al.
+8,2016).
+8,2.1.3 replacing target date with period we replace the target flood date with the flood range and consider the mean of the overlap- ping cells.
+8,this allows the user to cover a large area which otherwise would not be covered entirely in a single day.
+8,doing this is crucial to ensure that sentinel-1 scenes wholly cover the area of interest.
+8,"for instance, the case of bihar that we consider in this paper, on aver- age, is covered by sentinel-1 scenes in a minimum eight days’ span."
+8,"for larger states, this can be increased while ensuring that the chosen dates are not too far from the floods and are as narrow as possible."
+8,"however, for targeting smaller areas, the gfm allows the user to change this to a single day by updating the number of succeeding days of the during-flood panel to 0."
+8,2.1.4 introducing the slope and elevation parameters we add optional slope and elevation threshold parameters so that flood pixels above the thresholds are masked out.
+8,"this helps in getting rid of false positives that are observed in uneven terrain, along the hill/valley range and in elevated areas."
+8,the case of the 2020 andhra pradesh floods in india demonstrated in this paper shows the importance of slope and elevation masking.
+8,the thresholds can be tweaked under the advanced options in the gfm as needed.
+8,we use the nasa srtm digital elevation 30 m data available on gee 13
+9,natural hazards (2022) 114:1341–1363 1349 fig.
+9,3 screenshot of the gfm a application and b advanced options available in the pre-flood panel for elevation and slope (farr et al.
+9,2007).
+9,"adding these two parameters, the modified eq. 1 can be expressed as eq."
+9,"accordingly, eq. 2 will also inherit slope and threshold param- eters from eq."
+9,3. [( ) ] [( ) ] xvv − 𝜇vv xvh − 𝜇vh ( ) ( ) hcf = ≥ thvv ∩ ≥ thvh ∩ elevation < thelv ∩ slope < thslp 𝜎vv 𝜎vh (3) where • elevation represents the dem surface and elv_th is the elevation threshold.
+9,• slope represents the slope layer computed from the elevation layer and slp_th is the slope threshold.
+9,2.1.5 fusing ascending and descending scenes we combine the ascending and descending orbit directions of sentinel-1 images before computing the z-score to improve coverage of large areas in the shortest possible time span (li et al.
+9,2020).
+9,this helps in two different ways.
+9,"first, when the flooded extent is large and water stagnates for a time lesser than the revisit time of the next sentinel-1 acqui- sition, combining scenes from two orbit directions is the only way to map floods."
+9,"second, smaller scale events where flood water stays for only a couple of days, combining both the orbit direction is the only plausible option, as we demonstrate using the case of the 2020 andhra pradesh floods in india."
+9,"in all cases, combining both the orbit directions help cap- ture the inundation extent during the peak of the flood."
+9,"combining the two orbit directions creates room for false positives (un-spider, n.d.), mainly in hilly areas, which we account for by using the slope and elevation masking parameters, discussed in section 2.1.4."
+9,"hence, we have three factors that cohesively check for false alarms: (1) using the vv and vh bands instead of any one, (2) accounting for seasonal variability using numerous pre-flood sentinel-1 scenes instead of only one, and (3) introducing the slope and elevation threshold."
+9,"even though some noise is present, such false positives are most likely to be in the low-confidence flood class."
+10,1350 natural hazards (2022) 114:1341–1363 the ability to fuse ascending and descending scenes is a major advantage over our base- line method.
+10,"however, this is an optional change in the gfm that allows the user to either combine the ascending and descending orbit directions, or process them separately, or use either of the two."
+10,"a “data availability chart” is added to the gui that shows the frequency of ascending and descending scenes available for the area of interest, making it easier for users to decide dates and take a call on orbit direction depending on the image availability (detailed discussion on this in sect."
+10,"2.1.6 code rectification and optimization apart from the limitations in the mapping algorithm, the javascript code structure of the base- line method is flawed too."
+10,"first, it computes z-score for all the images since 2015, which is unnecessary computation and impedes on-the-fly backend computation of the gui."
+10,"second, the pre- and during-flood collections are not separate, rather, the mosaic() function in gee, which returns pixels from the latest date imagery of the collection, is used to get the images of pre-flood dates."
+10,"for large areas that require multiple scenes’ footprints to be fully covered, when scenes of one or more footprints are not available for the date of the flood, the algorithm will wrongly generate the flood map using the imagery of a date prior to the target flood date available in the collection without raising a warning."
+10,this is a serious problem since the user would not know whether the area of interest has all the scenes’ footprints for the given target flood date.
+10,we fix both the issues by segregating pre- and during-flood collections in the back- end.
+10,this avoids trivial computation and helps in identifying missing scenes’ footprints in the during-flood collection as pixels of missing scenes appear blank in our flood map.
+10,this along with the “data availability chart” makes it easier to adjust dates.
+10,2.2 accessing and using the gfm the gfm is a gee application that is free and does not require registration or signup like the gee code editor.
+10,it can be accessed via a link available in the github reposi- tory (https://​github.​com/​praty​ushtr​ipathy/​global_​flood_​mapper).
+10,the basic options of the gfm target users who want to prepare the flood map quickly without getting into the technical intricacies.
+10,"for users who wish to tweak the parameters such as the vv and vh threshold, open water probability threshold, orbit direction, elevation and slope threshold, we provide advanced options."
+10,"for most purposes, the default parameters of the advanced options should suffice."
+10,the following steps are recommended to use the gfm application: (1) select the country and the state from the dropdown menu or use the map canvas to select a rectangular area of interest (aoi).
+10,this will center the map to the selected aoi.
+10,"(2) based on the flood event dates, select a start date and enter the number of succeeding days in the during-flood panel that covers the entire area."
+10,"for example, using the start date as 01 january with nine succeeding days, will filter sentinel-1 data during 01–10 january."
+10,"if the aoi is small enough, a short during-flood span should work."
+10,"(3) based on the during-flood date, select a pre-flood date range of two or more months that ends at least a couple of weeks before the during-flood dates."
+10,this should be for a known dry season.
+10,the pre-flood date range should be long enough to have multiple values for each cell belonging to different points in time.
+10,refer to the “data availability chart” to understand the image availability cycle for the area.
+11,natural hazards (2022) 114:1341–1363 1351 (4) compare the pre- and during-flood sentinel-1 composites using the vertical slider in the gfm application and tweak the during-flood date range to achieve the image that shows the most difference in water.
+11,the high- and low-confidence classes in the flood map appear automatically after this step.
+11,"(5) for advanced options, tweak the thresholds slightly until the desired flood layer best represents the change between the pre- and during-flood sentinel-1 composites."
+11,"if the aoi is small enough to be covered by a single scene, say a descending scene, the orbit direction option can be changed to descending, which will use only descending scenes for mapping floods and will likely produce better results."
+11,the orbit direction of the images and the availability frequency for each day for the aoi can be seen in the “data availability chart.”
+11,"(6) to download the flood extent vector layer or the flood map as seen on the map canvas, use the shp or png download options."
+11,2.3 comparison of sar and optical flood maps we map the flood inundation in bihar following the steps mentioned in sect.
+11,we iden- tify the peak flood dates by choosing the during-flood dates that show the most difference with the pre-flood sentinel-1 composite.
+11,"to cover the entire state in the shortest period for the during-flood span, we merge both the orbit passes in the gfm and found that a nine- day long stretch works well."
+11,"for the during-flood dates, only partly cloud-free sentinel-2 images were available, and hence for comparison, the optical flood map is available for cloud-free pixels only."
+11,"the sar flood map has separate low and high-confidence flood classes, since it generates flood maps for the vv and vh bands separately to merge the two."
+11,"2.4 validation of sar flood map with field photographs we obtained the photographs through field visits before and during the floods on 15 june 2020 and 18 august 2020, respectively, acquired at geolocation 25.600499 n latitude and 85.232343 e longitude."
+11,"to compare the sar flood extent with the field photograph, we check the image availability for the date and geo-location of the photograph."
+11,"since a single ascending pass scene covered the area shown in the field photo on 19 august 2020, we use the ascending orbit direction option in the gfm."
+11,"3 results and discussion 3.1 flood mapping algorithm using the gfm application, we map the flood extent for bihar."
+11,"for more flood maps of events around the globe, see appendix 1: figs. 10, 11, 12, 13 and 14."
+11,"for bihar, the sentinel-1 composites in panel (a) and (b) of fig. 4 show a significant change in the sur- face water (black), which is captured well by the sar flood map in panel (d)."
+11,on trying 13
+12,1352 natural hazards (2022) 114:1341–1363 fig.
+12,4 sentinel-1 vh-vv-vh rgb composite a 01 may 2020 to 30 june 2020 and b 26 july 2020 to 04 august 2020.
+12,"flood extent computed from c sentinel-2 using ndwi and d sentinel-1 using gfm. e and f represent the zoom-in version of c and d for the same area highlighted with a red box different values for the vv and vh thresholds, we found that the default value (-2.5) per- forms well for both the bands."
+12,"3.1.1 using target duration as can be clearly seen in fig. 4b, large parts of north bihar encountered flood."
+12,"the spread of the flood extent is longitudinal in nature, which is significantly broader than 13"
+13,natural hazards (2022) 114:1341–1363 1353 the swath of a single sentinel-1 scene (250 km).
+13,"therefore, using scenes from multiple dates for the during-flood period is the only solution to map the peak inundation of the flood."
+13,this is a clear advantage over using a single target date.
+13,"3.1.2 fusing ascending and descending scenes since flood water stagnates for roughly a week or less in most cases, and given the tem- poral resolution of sentinel-1 (i.e., 12 days), processing the ascending and descend- ing scenes separately is not always a viable option."
+13,"even if flood waters stay for long enough, the likelihood of missing the peak of it is very high if scenes from both the orbit directions are not merged."
+13,"for instance, we map the november 2020 floods of andhra pradesh where all the sentinel-1 scenes for the flooded area for as long as 6 months before the floods are of descending direction."
+13,"however, the two scenes available on the date when the flood inundation was at the peak are both of ascending direction (fig."
+13,"the baseline method that we build on would be insufficient to capture such an event since due to the stringency of processing ascending and descending scenes separately, but our method can overcome these challenges."
+13,combining ascending and descending scenes is a rarely observed practice because it has its own shortcomings but it is an accepted practice in the remote sensing litera- ture (li et al.
+13,2020).
+13,"while combining works in plain areas, its caveat can be seen in uneven terrains."
+13,but the slope and elevation threshold parameters that we introduce in this paper is capable of checking for such issues.
+13,"3.1.3 slope and elevation parameters figure 6a shows the flood map of nellore, andhra pradesh generated by combining scenes from both the orbit directions."
+13,"while the actual flooded pixels are demarcated accurately near the coast in the east, one can clearly notice linear demarcation of the flood class toward the west of the area."
+13,these roughly linear fringes are generated at the sides of hill ranges due to the difference in viewing angles of the two orbit directions.
+13,"5 image availability chart generated in gfm for november 2020 floods in nellore, andhra pradesh, india."
+13,"parameter used: pre-flood date: 01 may 2020 + 60 days, during-flood date: 28 nov 2020 + 0 day 13"
+14,1354 natural hazards (2022) 114:1341–1363 fig.
+14,"6 nellore, andhra pradesh, india (shown in rectangle 3 in fig."
+14,1) november 2020 flood map prepared using gfm with slope threshold a 15 degrees and b 5 degrees.
+14,"parameter used: pre-flood date: 01 may 2020 + 60 days, during-flood date: 28 nov 2020 + 0 day nevertheless, the slope and elevation mask parameters can check for these issues and generate a flood extent free from such false positives."
+14,figure 6b shows the flood map for the same area and dates generated by using a stricter slope threshold.
+14,"3.2 comparison of sar and optical flood maps on comparing the sar and optical flood map, one can clearly notice that the former is advantageous over the latter since the optical flood map shown in fig. 3(c) is rife with clouds, obscuring large patches of flood inundated areas."
+14,"a visual comparison between optical and sar flood maps for a zoom-in extent, shown in fig. 4e and 4f, shows good agreement for cloud-free sentinel-2 pixels."
+14,the flood inundated areas in the optical flood map are complemented majorly by high-confidence class and somewhat with the low-con- fidence flood class in the sar flood map.
+14,we investigate areas where low and high-confidence flood class cells of the sar flood map were in the non-water class in the optical flood map.
+14,"figure 7 shows the area of disa- greement between sar and optical flood maps, and the before and during-flood sentinel-1 sar composites."
+14,sentinel-1 captures flood inundated areas better than its optical counter- part.
+14,"for instance, the area that shows a significant change in the extent of surface water between fig. 7 panels (a) and (b) is either in low- or high-confidence flood class in panel (d)."
+14,"the optical flood map, shown in panel (c), fails to identify such areas as flooded areas."
+14,this can be attributed to the fact that flood water carries debris and mud that changes its spectral characteristics in the optical satellite data.
+14,"therefore, the optical data are unable to consistently identify water across geographies; the same reason for which we refrain from conducting a per-pixel statistical comparison between the optical and sar flood maps."
+14,"in addition, we identified areas where non-water class pixels in the sar flood map were in the flood class in the optical flood map and found that the latter had false alarms."
+14,"fig- ure 8 shows one such area, where panel (a) and (b) show the difference in the surface water (in black) of sentinel-1 composites before and during the floods."
+14,"the optical flood map in panel (c) classifies a large number of cells near the river as floods category, which is not supported by sentinel-1 sar composites shown in panels (a) and (b)."
+14,the false alarms 13
+15,natural hazards (2022) 114:1341–1363 1355 fig.
+15,7 zoomed-in area (shown in rectangle 1 in fig. 1) showing sentinel-1 a before and b during flood composites.
+15,flood map derived from c sentinel-2 and d sentinel-1 showing disagreement in areas that opti- cal flood map fails to capture occurred in the first place during the binary water layer extraction in the during-floods sen- tinel-2 data.
+15,"this can largely be attributed to the fact that the cloud-mask algorithm eradi- cates complete cloud pixels only, whereas the pixels with a thin cloud layer are retained."
+15,the dn value for pixels with such atmospheric effects causes anomalies in the optical flood map.
+15,sar data on the other hand are free from such atmospheric distortions.
+15,another noteworthy point is that the sar flood map classifies new water pixels in the area shown in fig. 8 as low-confidence flood and not high-confidence flood class because a majority of these small patches appear to be vegetation in the pre-flood composite image.
+15,zooming in and investigating such areas reveals that these areas have shallow water inun- dation; they do not appear as dark as a deep water inundated pixel.
+15,"the remaining minor disagreements did not form clusters, which can largely be attributed to the noise in the optical data caused by atmospheric effects."
+15,"3.3 validation of sar flood map with field photographs figure 9 shows the pre- and during-floods field photograph, the camera location and angle on the google earth basemap, and the sar flood map produced using gfm."
+15,we use the water inundation at the bank of the river to cross-validate our flood map.
+15,"as can be seen clearly, the inundated area seen in the photograph is supported by the sar flood map as a high-confidence flood area."
+15,"the low-confidence flood class pixels surround the high-confidence flood class pixels; this is because the wet clay in the pre-flood sentinel-1 data behaves partly like water pixels, 13"
+16,1356 natural hazards (2022) 114:1341–1363 fig.
+16,8 zoomed-in area (shown in rectangle 2 in fig. 1) showing sentinel-1 a before-flood and b during- flood composites.
+16,flood maps derived from c sentinel-2 and d sentinel-1 showing disagreement in an area where the optical flood map raises false alarms by absorbing most of the radar rays.
+16,"in the flood map in fig. 9d, there is an empty patch surrounded by the high-confidence flood pixels; this is because of the vegetation patch that remained above the water level, as can be seen in fig. 9b."
+16,this appearance confirms that the flood map generated using the gfm classifies even small patches with high precision and leverages the full potential of the 10 m resolution sentinel-1 data.
+16,"3.4 challenges and future directions although gfm provides a simple open-source web application for flood mapping using sentinel-1 data, there are certain intricacies that the users should be aware of while using the tool."
+16,"first, the limited spatial resolution of sentinel-1 data limits the ability of gfm to accurately detect floods at intra-urban scale."
+16,"second, since the selection of parameters is a manual process, there is a risk of over-tweaking the parameters, which could potentially generate misleading flood maps."
+16,"however, for beginner users, the pre-defined parameters in the gfm are adequate to generate robust flood maps, as we show by mapping several flood events around the globe (appendix 1: figs. 11, 12, 13, and 14)."
+16,"third, there are pos- sibilities of noise in the flood map generated by gfm, for instance, falsely classifying a pixel as non-flooded but these are less likely in large contiguous flooded areas."
+16,these limitations also shape future directions of research around flood mapping using satellite imagery.
+16,"for instance, availability of high-resolution sar data can be helpful in reliably mapping intra-urban floods."
+16,"in addition, developing workflows and algorithms that 13"
+17,natural hazards (2022) 114:1341–1363 1357 fig.
+17,"9 field photographs of a 15 june 2020 and b 18 august 2020 taken at 25.600499 n, 85.232343e."
+17,"the camera location and view angle overlaid on the c google earth basemap and d high and low-confidence flood classes derived from sentinel-1 at 10 m cell size, along with permanent water body layer of the eu- jrc of 30 m cell can adjust parameters automatically across geographies can reduce manual interventions and check the risk of over-tweaking."
+17,"further, methods to reduce noise without smoothen- ing and losing granular details of the flood maps can be explored."
+17,"4 conclusion the present study draws on recent advances in the field of remote sensing, proliferation in open data availability and cloud processing platforms."
+17,we advance the flood mapping methods present in the literature and propose ways to map the peak of floods by combining the ascending and descending scenes of the sentinel-1 data.
+17,"further, the slope and eleva- tion parameters are introduced to mask the flood map that reduces false positives in differ- ent terrains."
+17,"using our improved algorithm, we build and propose the gfm, a web-based gee application, which can map the flood extent for any region (subject to availability of esa’s sentinel-1 sar data)."
+17,"the gfm is a graphical user interface that requires no prior knowledge of programming, which is otherwise a necessity when using gee directly."
+17,users can customize their flood map by tweaking the parameters available in the gfm.
+17,"in addition, the gfm allows downloading the flood map as a png file or the flood extent as vector data (.kml format), which can directly feed into flood modeling and risk mapping."
+18,1358 natural hazards (2022) 114:1341–1363 we demonstrate the utility of the gfm using the case of 2020 floods in bihar and andhra pradesh in india.
+18,"using sentinel-2 msi derived flood maps and field photographs, taken before and during the flood, we show that gfm produces high-precision flood maps."
+18,the case of the 2020 andhra pradesh flood shows the advantages of changes proposed in the flood mapping algorithm in this paper.
+18,"gfm will enable first responders, emergency man- agement agencies and practitioners across the globe to overcome technical barriers and lack of computational resources to rapidly map the extent of inundation during floods."
+18,"appendix 1 see figures 10, 11, 12, 13 and 14."
+18,10 global coverage of sentinel-1 sar ascending and descending directions for a sw mode during 01 jan 2015 to 01 august 2020 and b iw mode during 01 july 2020 to 01 august 2020 as seen on google earth engine code editor 13
+19,natural hazards (2022) 114:1341–1363 1359 fig.
+19,"11 flood map of thua thien—hue, viet nam generated using the gfm."
+19,"parameter used: pre-flood date: 01 aug 2020 + 60 days, during-flood date: 13 oct 2020 + 1 day fig."
+19,"12 flood map of assam, india generated using the gfm."
+19,"parameter used: pre-flood date: 01 may 2019 + 45 days, during-flood date: 04 july 2019 + 10 days 13"
+20,1360 natural hazards (2022) 114:1341–1363 fig.
+20,13 flood map of bahamas generated using the gfm.
+20,"parameter used: pre-flood date: 01 jun 2019 + 60 days, during-flood date: 03 sep 2019 + 5 days fig."
+20,"14 flood map of sofala, mozambique generated using the gfm."
+20,"parameter used: pre-flood date: 01 jan 2019 + 60 days, during-flood date: 19 mar 2019 + 1 day 13"
+21,natural hazards (2022) 114:1341–1363 1361 acknowledgments the authors express gratitude to the european space agency for making the sentinel data freely available.
+21,the authors would also like to thank google for providing access to the google earth engine (gee).
+21,"author’s contributions conceptualization, formal analysis, investigation, resources, data curation, writ- ing—original draft preparation, writing—review and editing, visualization and project administration were contributed by pt and tm; methodology and application development were contributed by pt.; supervision was contributed by tm."
+21,"funding this work was completed with support from the peak urban program, funded by uk research and innovation’s global challenge research fund, grant ref: es/p011055/1."
+21,data availability the link to the global flood mapper can be found at https://​github.​com/​praty​ushtr​ipathy/​ global_​flood_​mapper.
+21,code availability the source code of the global flood mapper can be found at https://​github.​com/​praty​ ushtr​ipathy/​global_​flood_​mapper.
+21,declarations conflict of interest the authors have no financial or proprietary interests in any material discussed in this article.
+21,consent to participate not applicable.
+21,consent to publication not applicable.
+21,"references arora a, arabameri a, pandey m, siddiqui ma, shukla uk, bui dt, bhardwaj a (2021) optimization of state-of-the-art fuzzy-metaheuristic anfis-based machine learning models for flood susceptibility prediction mapping in the middle ganga plain india."
+21,sci total environ 750:141565. https://​doi.​org/​10.​ 1016/j.​scito​tenv.​2020.​141565 brecht h (2008) the application of geo-technologies after hurricane katrina.
+21,"in: nayak shailesh, zla- tanova sisi (eds) remote sensing and gis technologies for monitoring and prediction of disasters."
+21,"springer, berlin, heidelberg, pp 25–36 bui dt, hoang nd, martínez-álvarez f, ngo ptt, hoa pv, pham td, costache r (2020) a novel deep learning neural network approach for predicting flash flood susceptibility: a case study at a high fre- quency tropical storm area."
+21,sci total environ 701:134413. https://​doi.​org/​10.​1016/j.​scito​tenv.​2019.​
+21,134413 canadian space agency.
+21,(2013).
+21,radarsat-1: components and specifications.
+21,retrieved from https://​ www.​asc-​csa.​gc.​ca/​eng/​satel​lites/​radar​sat1/​compo​nents.​asp.
+21,accessed on 12 december 2020.
+21,"clement ma, kilsby cg, moore p (2018) multi-temporal synthetic aperture radar flood mapping using change detection."
+21,"j flood risk manag 11(2):152–168. https://​doi.​org/​10.​1111/​jfr3.​12303 devries b, huang c, armston j, huang w, jones jw, lang mw (2020) rapid and robust monitoring of flood events using sentinel-1 and landsat data on the google earth engine."
+21,remote sens environ 240:111664. https://​doi.​org/​10.​1016/j.​rse.​2020.​111664 european space agency (2020) envisat overview.
+21,retrieved from https://​earth.​esa.​int/​eogat​eway/​missi​ons/​ envis​at/​descr​iption.
+21,"accessed 12 dec 2020 farr tg, rosen pa, caro e, crippen r, duren r, hensley s, kobrick m, paller m, rodriguez e, roth l, seal d, shaffer s, shimada j, umland j, werner m, oskin m, burbank d, alsdorf de (2007) the shuttle radar topography mission."
+21,"rev geophys 45(2):rg2004. https://​doi.​org/​10.​1029/​2005r​g0001​ 83 gorelick n, hancher m, dixon m, ilyushchenko s, thau d, moore r (2017) google earth engine: plane- tary-scale geospatial analysis for everyone."
+21,remote sens environ 202:18–27. https://​doi.​org/​10.​1016/j.​ rse.​2017.​06.​031 13
+22,"1362 natural hazards (2022) 114:1341–1363 hirabayashi y, mahendran r, koirala s, konoshima l, yamazaki d, watanabe s, kanae s (2013) global flood risk under climate change."
+22,"nat clim chang 3(9):816–821. https://​doi.​org/​10.​1038/​nclim​ate19​11 jones b, lamb rm (2015) hazards data distribution system (hdds) (no."
+22,2015–3048).
+22,"us geological sur- vey. https://​doi.​org/​10.​3133/​fs201​53048 kawasaki a, berman ml, guan w (2013) the growing role of web-based geospatial technology in disaster response and support."
+22,"disasters 37(2):201–221. https://​doi.​org/​10.​1111/j.​1467-​7717.​2012.​01302.x klein t, nilsson m, persson a, håkansson b (2017) from open data to open analyses—new opportunities for environmental applications?"
+22,"environments 4(2):32. https://​doi.​org/​10.​3390/​envir​onmen​ts402​0032 kumar a, pandey ac, khan ml (2020) urban risk and resilience to climate change and natural hazards: a perspective from million-plus cities on the indian subcontinent."
+22,"techn disaster risk manag mitigation. https://​doi.​org/​10.​1002/​97811​19359​203.​ch3 lal p, prakash a, kumar a (2020) google earth engine for concurrent flood monitoring in the lower basin of indo-gangetic-brahmaputra plains."
+22,"nat hazards 104(2):1947–1952. https://​doi.​org/​10.​ 1007/​s11069-​020-​04233-z li m, koks e, taubenböck h, van vliet j (2020) continental-scale mapping and analysis of 3d building structure."
+22,"remote sens environ 245:111859. https://​doi.​org/​10.​1016/j.​rse.​2020.​111859 liu cc, shieh mc, ke ms, wang kh (2018) flood prevention and emergency response system powered by google earth engine."
+22,"remote sens 10(8):1283. https://​doi.​org/​10.​3390/​rs100​81283 mahmoud sh, gan ty (2018) urbanization and climate change implications in flood risk management: developing an efficient decision support system for flood susceptibility mapping."
+22,"sci total environ 636:152–167. https://​doi.​org/​10.​1016/j.​scito​tenv.​2018.​04.​282 martinis s, kuenzer c, wendleder a, huth j, twele a, roth a, dech s (2015) comparing four oper- ational sar-based water and flood detection approaches."
+22,"int j remote sens 36(13):3519–3543. https://​doi.​org/​10.​1080/​01431​161.​2015.​10606​47 matheswaran k, alahacoon n, pandey r, amarnath g (2018) flood risk assessment in south asia to prioritize flood index insurance applications in bihar."
+22,"geomatics, natural hazards and risk, india. https://​doi.​org/​10.​1080/​19475​705.​2018.​15004​95 milly pcd, wetherald rt, dunne ka, delworth tl (2002) increasing risk of great floods in a changing climate."
+22,"nature 415(6871):514–517. https://​doi.​org/​10.​1038/​41551​4a national remote sensing centre (nrsc), isro."
+22,(2020).
+22,flood hazard atlas –bihar–a geospatial approach version 2.
+22,"project team, dmsg, rsa, nrsc, isro, department of space, government of india."
+22,"retrieved from https://​bhuvan.​nrsc.​gov.​in/​pdf/​flood-​hazard-​atlas-​bihar.​pdf pandey ac, kaushik k, parida br (2022) google earth engine for large-scale flood mapping using sar data and impact assessment on agriculture and population of ganga-brahmaputra basin."
+22,"sustain- ability 14(7):4210. https://​doi.​org/​10.​3390/​su140​74210 pekel jf, cottam a, gorelick n, belward as (2016) high-resolution mapping of global surface water and its long-term changes."
+22,"nature 540(7633):418–422. https://​doi.​org/​10.​1038/​natur​e20584 podest e, mccartney s (2019)."
+22,sar for flood mapping using google earth engine.
+22,nasa-arset.
+22,"dec 3, 2019."
+22,retrieved from https://​www.​youtu​be.​com/​watch?
+22,"v=​4y2gi​urpcuc rahman ms, di l (2017) the state of the art of spaceborne remote sensing in flood management."
+22,nat hazards 85(2):1223–1248. https://​doi.​org/​10.​1007/​s11069-​016-​2601-9 rautela p (2016) lack of scientific recordkeeping of disaster incidences: a big hurdle in disaster risk reduction in india.
+22,"int j disaster risk reduct 15:73–79. https://​doi.​org/​10.​1016/j.​ijdrr.​2015.​12.​005 rosenqvist a, shimada m, watanabe m (2004) alos palsar: technical outline and mission con- cepts."
+22,in: 4th international symposium on retrieval of bio-and geophysical parameters from sar data for land applications (pp.
+22,"innsbruck, austria."
+22,"retrieved from https://​www.​eorc.​jaxa.​jp/​ alos/​en/​kyoto/​ref/​alos_​biogeo-​04.​pdf scholten h, fruijter s, dilo a, van borkulo e (2008) spatial data infrastructure for emergency response in netherlands."
+22,"in: nayak shailesh, zlatanova sisi (eds) remote sensing and gis technologies for monitoring and prediction of disasters."
+22,"springer, berlin, heidelberg, pp 179–197 schumann gjp, frye s, wells g, adler r, brakenridge r, bolten j, jones b (2016) unlocking the full potential of earth observation during the 2015 texas flood disaster."
+22,"water resour res 52(5):3288– 3293. https://​doi.​org/​10.​1002/​2015w​r0184​28 schumann gj, brakenridge gr, kettner aj, kashif r, niebuhr e (2018) assisting flood disas- ter response with earth observation data and products: a critical assessment."
+22,"remote sensing 10(8):1230. https://​doi.​org/​10.​3390/​rs100​81230 singha m, dong j, sarmah s, you n, zhou y, zhang g, doughty r, xiao x (2020) identifying floods and flood-affected paddy rice fields in bangladesh based on sentinel-1 imagery and google earth engine."
+22,isprs j photogramm remote sens 166:278–293. https://​doi.​org/​10.​1016/j.​isprs​jprs.​2020.​
+22,06.​011 13
+23,natural hazards (2022) 114:1341–1363 1363 stevens d (2008) increasing the use of geospatial technologies for emergency response and disaster rehabilitation in developing countries.
+23,"in: nayak shailesh, zlatanova sisi (eds) remote sensing and gis technologies for monitoring and prediction of disasters."
+23,"springer, berlin, heidelberg, pp 57–71 stryker t, jones b (2009) disaster response and the international charter program."
+23,"photogramm eng remote sens 75(12):1342–1344 termeh svr, kornejady a, pourghasemi hr, keesstra s (2018) flood susceptibility mapping using novel ensembles of adaptive neuro fuzzy inference system and metaheuristic algorithms."
+23,"sci total environ 615:438–451. https://​doi.​org/​10.​1016/j.​scito​tenv.​2017.​09.​262 tiwari v, kumar v, matin ma, thapa a, ellenburg wl, gupta n, thapa s (2020) flood inundation map- ping-kerala 2018; harnessing the power of sar, automatic threshold detection method and google earth engine."
+23,"plos one 15(8):e0237324. https://​doi.​org/​10.​1371/​journ​al.​pone.​02373​24 tripathi g, parida br, pandey ac (2019) spatio-temporal rainfall variability and flood prognosis analysis using satellite data over north bihar during the august 2017 flood event."
+23,"hydrology 6(2):38. https://​ doi.​org/​10.​3390/​hydro​logy6​020038 twele a, cao w, plank s, martinis s (2016) sentinel-1-based flood mapping: a fully automated processing chain."
+23,"int j remote sens 37(13):2990–3004. https://​doi.​org/​10.​1080/​01431​161.​2016.​11923​04 undrr, uclouvain, cred, and usaid."
+23,(2021).
+23,2020 the non covid year of disasters: global trends and perspectives.
+23,the centre for research on the epidemiology of disasters (cred); un office for disaster risk reduction.
+23,retrieved from https://​dial.​uclou​vain.​be/​pr/​boreal/​en/​object/​boreal%​3a245​ 181/​datas​tream/​pdf_​01/​view united nations - space based information for disaster management and emergency response (un-spi- der). n.d.
+23,recommended practice for flood mapping.
+23,"retrieved from https://​www.​un-​spider.​org/​ advis​ory-​suppo​rt/​recom​mended-​pract​ices/​recom​mended-​pract​ice-​flood-​mappi​ng/​in-​detail vanama vsk, mandal d, rao ys (2020) gee4flood: rapid mapping of flood areas using temporal sen- tinel-1 sar images with google earth engine cloud platform."
+23,j appl remote sens 14(3):034505. https://​doi.​org/​10.​1117/1.​
+23,"jrs.​14.​034505 zurqani ha, post cj, mikhailova ea, ozalas k, allen js (2019) geospatial analysis of flooding from hur- ricane florence in the coastal south carolina using google earth engine."
+23,graduate research and dis- covery symposium (grads).
+23,230. https://​tiger​prints.​clems​on.​edu/​grads_​sympo​sium/​230 publisher’s note springer nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.

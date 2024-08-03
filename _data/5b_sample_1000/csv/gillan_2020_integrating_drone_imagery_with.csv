@@ -1,0 +1,646 @@
+page,p
+1,environ monit assess (2020) 192: 269 https://doi.org/10.1007/s10661-020-8216-3 integrating drone imagery with existing rangeland monitoring programs jeffrey k.
+1,gillan & jason w.
+1,karl & willem j.
+1,"d. van leeuwen received: 13 november 2019 / accepted: 16 march 2020 / published online: 6 april 2020 # springer nature switzerland ag 2020 abstract the recent availability of small and low-cost developing a suite of monitoring methods that are use- sensor carrying unmanned aerial systems (uas, com- ful for supporting management decisions (e.g., repeat- monly known as drones) coupled with advances in able, cost-effective, and validated against field methods) image processing software (i.e., structure from motion will require additional exploration to develop best prac- photogrammetry) has made drone-collected imagery a tices for image acquisition and analytical workflows that potentially valuable tool for rangeland inventory and can efficiently estimate multiple indicators."
+1,we embed- monitoring.
+1,"drone-imagery methods can observe larger ded with a bureau of land management (blm) field extents to estimate indicators at landscape scales with monitoring crew in northern california, usa to com- higher confidence than traditional field sampling."
+1,they pare field-measured and imagery-derived indicator also have the potential to replace field methods in some values and to evaluate the logistics of using small instances and enable the development of indicators not uas within the framework of an existing monitoring measurable from the ground.
+1,much research has already program.
+1,"the unified workflow we developed to mea- demonstrated that several quantitative rangeland indica- sure fractional cover, canopy gaps, and vegetation tors can be estimated from high-resolution imagery. height was specific for the sagebrush steppe, an ecosys- tem that is common in other blm managed lands."
+1,"the electronic supplementary material the online version of this correspondence between imagery and field methods article (https://doi.org/10.1007/s10661-020-8216-3) contains yielded encouraging agreement while revealing system- supplementary material, which is available to authorized users. atic differences between the methods."
+1,workflow best practices for producing repeatable rangeland indicators j.
+1,gillan (*) : w.
+1,"j. van leeuwen school of natural resources and the environment, university of is likely to vary by vegetation composition and phenol- arizona, tucson, az 85721, usa ogy."
+1,an online space dedicated to sharing imagery- e-mail: jgillan@email.arizona.edu based workflows could spur collaboration among re- searchers and quicken the pace of integrating drone- w.
+1,j. van leeuwen imagery data within adaptive management of e-mail: leeuw@email.arizona.edu rangelands.
+1,though drone-imagery methods are not likely to replace most field methods in large monitoring j.
+1,"karl programs, they could be a valuable enhancement for department of forest, rangeland, and fire sciences, university of idaho, moscow, id 83844, usa pressing local management needs. e-mail: jkarl@uidaho.edu w."
+1,j. van leeuwen keywords drone .
+1,unmanned aerial system .
+1,"school of geography and development, university of arizona, rangelands ."
+1,adaptive management .
+1,"ecological tucson, az 85721, usa inventory and monitoring ."
+1,remote sensing
+2,"269 page 2 of 20 environ monit assess (2020) 192: 269 introduction laliberte and rango 2011; lu and he 2017; mcgwire et al. 2013) and visual interpretation (booth and cox rangeland inventory and monitoring (i & m) data, used 2008, 2009; breckenridge et al."
+2,"2011; duniway et al. to evaluate ecosystem function and successional states, 2012; hardin et al."
+2,2007; karl et al.
+2,2014; moffet 2009; are important for adaptive management of public and seefeldt and booth 2006) with high success for plant private rangelands (allen et al.
+2,2017; kendall and functional types and some species identification.
+2,from moore 2012; mitchell 2010).
+2,"the bureau of land man- high-resolution imagery, it is possible to estimate large agement’s (blm) assessment, inventory, and monitor- inter-canopy gaps (karl et al."
+2,2012; rango et al. 2009) ing (aim) strategy is an i & m program intended to as well as vegetation heights and structure (cunliffe provide long-term data on the status and trend of land et al.
+2,2016; gillan et al.
+2,"2014; jensen and mathews health (biotic integrity, soil and site stability, hydrologic 2016; olsoy et al."
+2,2018; swetnam et al.
+2,"2018). function) across all blm managed lands in the ameri- however, for drone-based methods to gain can west (taylor et al."
+2,2014; toevs et al.
+2,2011).
+2,"aim widespread use for i & m, including integration uses standardized field-data collection methods, and with existing programs, they need to be repeatable, randomized (i.e., probability-based) sampling designs cost-effective, and validated against current field to infer the status and trend of rangeland health indica- methods."
+2,"because best practices for estimating a tors across reporting areas that could include grazing suite of i & m indicators will vary by vegetation allotments, watersheds, or entire field offices."
+2,"however, composition and phenology, it seems unlikely and in landscape units with heterogeneous or patchy vege- perhaps unproductive to pursue a standard set of tation characteristics, a field sampling approach that protocols as have been developed for field observes only a small fraction of the inference area (as methods (e.g., aim core indicators; mackinnon many field-based monitoring programs do) may esti- et al."
+2,2011).
+2,"instead, image acquisition and analyt- mate indicator values and their change with low confi- ic workflows will need to be customized by eco- dence (booth and cox 2011). system including timing of data collection condu- the recent availability of small and low-cost cive to detecting the i & m features of interest sensor carrying unmanned aerial systems (uas, (hunt et al."
+2,2003; lass and calihan 1997).
+2,"for the commonly known as drones) along with the codi- sake of efficiency, workflows should be designed fication of piloting and airspace rules has made to estimate multiple indicators when possible. drone-collected imagery a potentially valuable tool in this paper, we present the results of a pilot program for range inventory and monitoring."
+2,"small drones to test the use of image products collected from small (< 5 kg) can now be easily brought into the field uas to produce multi-indicator rangeland i & m data. and deployed to image dozens to hundreds of for this test, we embedded with a blm field monitoring hectares at spatial resolutions capable of measuring crew in northern california, usa to compare field- fine-scale vegetation and soil indicators."
+2,they hold measured and imagery-derived indicator values and to the promise of observing larger extents and esti- evaluate the logistics of using small uas as a field- mating i & m indicators at landscape scales with deployed tool for rangeland monitoring.
+2,"we sought to higher confidence than traditional field sampling. develop image acquisition and processing methods spe- drone imagery methods also have the potential to cific for the sagebrush steppe, an ecosystem that is replace field methods in some instances (cunliffe common in other blm managed lands."
+2,"accordingly, et al."
+2,2016; gillan et al.
+2,"2017; olsoy et al. 2018), the methods described in this paper could be applied to and enable the development of indicators not mea- other similar vegetation communities. surable from the ground (ludwig et al."
+2,2007; our objectives were to (1) develop a unified rango et al.
+2,"2009). workflow to measure three common rangeland indica- research has shown that several quantitative range- tors from drone imagery: fractional cover of plant func- land indicators can be estimated from high-resolution tional types, canopy gaps, and vegetation heights; (2) imagery (< 10 cm ground sampling distance (gsd)). assess agreement between imagery-based indicator fractional cover estimates have been demonstrated values and field-measured values; and (3) investigate using classification algorithms (baena et al. 2017; how fractional cover estimates differed between two cruzan et al."
+2,"2016; laliberte et al. 2010a, b, 2011a, b; different sensor types."
+3,environ monit assess (2020) 192: 269 page 3 of 20 269 material and methods encountered.
+3,"each transect had 50 observations, and transects were aggregated to form a plot sampling unit study area with a total of 150 observations."
+3,"to facilitate compari- son with imagery fractional cover, we used just the “top- field research was conducted at the applegate and hit” vegetation to calculate cover."
+3,"cover (as a propor- eagle lake field offices in the blm’s northern califor- tion) was calculated by dividing the number of observa- nia district (ncd), in northeastern california, and tions of a given cover class by the total number of across the border into nevada (fig."
+3,"the combined observations. land area of both field offices is 11,165 km2 and consists vegetation heights were measured along the same primarily of semi-arid sagebrush steppe, scattered transects at 2.5-m intervals (30 total measurements per mountain ranges reaching elevation of 2500 m, and plot)."
+3,the height and species of the tallest herbaceous extensive desert playas devoid of vegetation.
+3,"mean and woody vegetation, encountered within a 15-cm annual precipitation ranges from 25 to 35 cm with radius of a rod, was recorded to the nearest cm 75% occurring between october and march."
+3,"typically, (herrick et al."
+3,2017).
+3,this included any dead or dormant the warmest month is july with average temperature plant.
+3,"for the purposes of this study, only woody vege- highs of 31.5 °c and lows of 10.4 °c."
+3,january is typi- tation heights were compared with drone imagery. cally the coldest month of the year with average tem- inter-canopy gaps were measured along the three perature highs of 4.7 °c and lows of − 6 °c.
+3,a primary transects following herrick et al.
+3,(2017).
+3,field crews use of blm lands in the ncd is cattle grazing.
+3,"greater recorded the distances (in cm) between vegetation can- sage-grouse (centrocercus urophasianus), a species of opies (woody or herbaceous) with only gaps > 25 cm conservation concern, has critical habitat within the being recorded."
+3,the canopy gap indicator was reported district (us bureau of land management 2007).
+3,"the as the percentage of the total transect length for gap sizes district has been heavily invaded by cheatgrass (bromus of 25–50 cm, 51–100 cm, 101–200 cm, and > 200 cm as tectorum) which has led to large range fires such as the recommended by herrick et al."
+3,(2017).
+3,rush fire in 2012.
+3,there are also large populations of wild horses and burros.
+3,developing a unified workflow for multiple indicators field data collection designing the acquisition and image processing workflow tailored to the ncd study area began with three-person crews collected field data following the an extensive literature review of previous studies using protocols of the blm’s aim strategy (herrick et al. very high-resolution imagery to estimate fractional cov- 2017).
+3,a total of 122 plots were visited and sampled er and vegetation heights (fig.
+3,"while these studies in the ncd between may 22 and september 11, 2017. present varied methods, collectively, they represent the at each plot, three 25-m transects were established myriad choices for turning very high-resolution imagery radiating out from the plot’s center to form a “spoke” into quantitative estimates of ecosystem indicators. plot design, oriented at magnetic 0°, 120°, and 240°, breaking down each paper’s workflow into its compo- respectively (fig."
+3,"the transects started 5 m away nent parts helped to reveal the popularity of choices for from the plot center where equipment was stored and a each decision and identify gaps in research (i.e., viable soil pit dug to determine soil type and ecological site. choices that have not been tested)."
+3,"in addition, we along each transect, fractional cover was estimated documented (in graphical form) the step-by-step instruc- using the line-point intercept method (herrick et al. tions to produce each of the indicators (fig."
+3,2017).
+3,"every 0.5 m along the transect, an observer dropped a 1-mm-diameter metal pin to the ground with- uas image acquisition out directing its landing location."
+3,vegetation intercepted by the pin was recorded to species.
+3,"the “top-hit” (i.e., we acquired uas imagery at 16 aim plots in ncd foliar cover) was recorded along with any lower vege- between june 16 and july 1, 2017 (fig. 1; supplemental tation touched by the pin."
+3,ground surface was recorded table a1).
+3,"at 12 of the plots, we collected the imagery for each pin drop as bare soil, rock, litter, or biological 2–5 days after the field crews had collected their data. crust regardless of whether vegetation was also for the remaining four plots, we embedded with the"
+4,269 page 4 of 20 environ monit assess (2020) 192: 269 fig.
+4,"1 study area at the northern california district (ncd) of the was collected, while blue circles are plot locations where phantom bureau of land management."
+4,blm land is highlighted in tan.
+4,red and sequoia imagery were acquired.
+4,"the background imagery is circles indicate aim plot locations where only phantom imagery from landsat 8, acquired june 2017 field crew and acquired the imagery immediately before we acquired aerial imagery with phantom 3 profes- the field measurements."
+4,accessing all of the plot loca- sional and phantom 4 quad-rotor drones (https://www. tions required off-trail hiking across rugged terrain with dji.com).
+4,both drones have nearly identical 12- the drones and associated equipment carried in back- megapixel integrated rgb sensors (table 1).
+4,we also packs.
+4,"we chose the plots to cover a range of ecological employed a parrot sequoia sensor (https://www.parrot. sites and vegetation communities in coordination with com), which we mounted on the phantom 3."
+4,the the field crew’s monitoring schedule.
+4,"drones were op- sequoia is a very small multi-spectral sensor with green, erated under a part 107 small uas license with a special red, red-edge, and near-infrared (nir) bands (table 1). use permit to conduct air operations over blm land."
+4,"with its own external power supply, global navigation"
+5,environ monit assess (2020) 192: 269 page 5 of 20 269 fig.
+5,2 data for this study were collected at field plots consisting color composite orthomosaic made with sequoia multi-spectral of three 25-m transects (black lines).
+5,"shown here is plot tablelands imagery. c an orthomosaic thematically classified into plant func- 440. a orthomosaic made with phantom rgb imagery. b false- tional types, d woody vegetation heights satellite system, and sensor-triggering capabilities, the limiting excessive processing time typical of finer-scale sequoia operated independently from the drone. data (see gillan et al."
+5,2019).
+5,sequoia imagery was autonomous grid pattern missions were pro- collected on only seven plots due to a manufacturer grammed in altizure v 3.0 (https://next.altizure.com). defect that caused the sensor to overheat (see fig. 1 for we flew one mission to collect nadir (vertical) imagery plot locations and table a1 for plot details).
+5,"at each and four missions to collect 30° oblique images because plot, we collected between 210 and 280 images per prior research has shown that the incorporation of sensor covering an area slightly larger than the aim oblique images into photogrammetry can improve scene plot (~ 1 ha)."
+5,radiometric calibration of the drone- geometry (james and robson 2014).
+5,"we collected im- collected images was deemed unnecessary because all agery 40 m above ground level (agl) at each plot, classification, analysis, and interpretation was conduct- yielding gsd of 1.5 cm for the phantom imagery and ed within individual plots using images that were col- 3.7 cm for the sequoia imagery (table 1)."
+5,this resolu- lected during a single drone flight. tion was chosen because it was determined to be fine though the phantom drones and sequoia sensor enough to detect the presence of bunch grasses while record geographic coordinates of each acquired image
+6,269 page 6 of 20 environ monit assess (2020) 192: 269 fig.
+6,"3 workflow decisions based on a review of 29 published the focus was on rangeland type environments (e.g., grasslands, studies using high-resolution aerial photography (drone and shrublands) but also included some research in crop systems."
+6,"the manned aircraft) to estimate vegetation fractional cover and height. options used in this project are highlighted with red boxes with their onboard global navigation satellite systems object of known length (i.e., scale-bar) ensures correct (gnss), they are typically accurate to only a few meters horizontal and vertical dimensions for the entire image horizontally, and several meters vertically."
+6,"because we model, enabling accurate estimates of fractional cover visited these remote plots only one time, it was not and vegetation heights (carbonneau and dietrich 2016). practical to install and survey ground control points at a test plot in southern new mexico, we found scale- (gcps) to reference the scenes."
+6,"to overcome this limi- bar reference point clouds to be within 2 cm horizontally tation, we placed a single 8-m long scale-bar in the and 2.5 cm vertically of point clouds using a network of center of each plot instead of surveying gcps (sensu surveyed ground control points."
+6,"using this approach, carbonneau and dietrich 2016)."
+6,"the scale-bar consisted however, the image products may be systematically of two aerial targets on the ends of an 8-m collapsible shifted both horizontally and vertically compared to rod."
+6,"informing the photogrammetry software of an their true location (i.e., georeferencing error)."
+7,environ monit assess (2020) 192: 269 page 7 of 20 269 fig. 3 (continued) photogrammetry and image product creation to make point clouds and orthomosaics of each plot and sensor separately.
+7,the general sfm process of making we used structure-from-motion photogrammetry (sfm) point clouds is well-documented (eltner et al. 2015; software agisoft photoscan v.
+7,1.3.5 (www.agisoft.com) smith et al.
+7,2015; snavely et al.
+7,2008; westoby et al.
+8,269 page 8 of 20 environ monit assess (2020) 192: 269 fig.
+8,"4 step-by-step workflow to calculate vegetation fractional cover by plant functional types, canopy gaps, and vegetation heights from orthomosaics and point clouds 2012), so it will be abbreviated here."
+8,"all image process- two evga geforce gtx 1080 video cards, and 256 ing was carried out on a windows 10 machine with two gb ram."
+8,"we did “high quality” initial alignment and intel xeon cpus (2.4 ghz; 16 logical processors each), self-calibration using the latitude, longitude, and"
+9,"environ monit assess (2020) 192: 269 page 9 of 20 269 table 1 phantom 3 and 4 camera and parrot sequoia sensor specifications spectral characteristics sensor pixels shutter radiometric resolution image image gsd at format overlap 40 m agl phantom red, green, blue 4000 horizontal × 3000 rolling with 8 bit (256 bvs) jpeg 75–80% 1.5 cm 3 and 4 vertical (12 mpx) 33 ms readout parrot sequoia green 1280 horizontal × 960 global 10 bit (1024 bvs) tiff 75–80% 3.7 cm 530–570 nm vertical (1.2 mpx) stored as 16 bit red (65,536 bvs) 640–680 nm red-edge 730–740 nm nir 770–810 nm elevation stamped on each image."
+9,"to improve model identical to nadir + all oblique images with reso- scaling, we referenced each plot with a single 8-m scale- lution of 1.5 cm."
+9,using only nadir images greatly bar (see carbonneau and dietrich 2016).
+9,we estimated reduced the processing time from multiple days to the scale-bar length accuracy to be within 5 cm.
+9,follow- a few hours per plot.
+9,"point clouds were generated ing the recommendation of james et al. (2017), we at “ultra high” density which attempted to generate optimized parameters focal length (f), principal point a point at every pixel."
+9,"point cloud densities were coordinates (cx, cy), radial distortion (k1, k2), and tan- typically 1000–3000 points·m−2. gential distortion (p1, p2), and also for rolling shutter orthomosaic generation required a slightly different effect present in phantom sensors (vautherin 2016). workflow."
+9,"experience has shown that very detailed next, we used the “gradual selection” tool to iden- point clouds and subsequent digital elevation models tify and remove low-quality sparse points with the (dems) create orthomosaics with substantial stretching following criteria: reprojection error > 0.3 pixels, and artifacts."
+9,"accordingly, we generated a dense point reconstruction uncertainty > 13, and projection er- clouds with low density followed by the creation of low- ror > 10."
+9,the sparse cloud was optimized (bundle resolution dems (6–10 cm depending on the scale of adjustment) after each removal of low quality the imagery) used in the orthorectification process. points.
+9,"for dense point cloud reconstruction, we orthomosaic spatial resolutions were 1.5 cm for phan- used just the nadir images."
+9,extensive testing found tom imagery (fig. 2a) and 3.7 cm for sequoia imagery that nadir only dense point clouds were nearly (fig. 2b).
+9,5 image features used to predict supervised classes in c50 decision tree classification
+10,269 page 10 of 20 environ monit assess (2020) 192: 269 uas imagery indicator generation 100 points per class on the segmented orthomosaics where we opportunistically found representative sam- classifying fractional cover ples.
+10,identifying specific classes was aided by line-point intercept field data and ground photos.
+10,"at several plots prior to orthomosaic classification, we simplified the (west ft."
+10,"sage197, tablelands 440, shaffer 243, twin images through segmentation (i.e., grouping similar peaks 236, crest 436, snowstorm441, and lower lake contiguous pixel together into objects; burnett and 437), we omitted perennial herb/grass as a class because blaschke 2003)."
+10,"with very high spatial resolution, clas- it either did not occur in the plot or the specimens were sification on segments (or objects) have been shown to too small and indistinguishable to be useful for training. be more accurate than pixel-based classifications that we used r package c50 (kuhn and quinlan 2017) to suffer from “salt & pepper” heterogeneity within fea- classify the orthomosaics."
+10,"the algorithm, which is an r tures such as shrub canopies (laliberte et al. 2011a). version of see5 (www.rulequest.com/see5-info.html), segmentation also facilitates the use of non-color traits is a machine learning decision tree used to predict such as texture, size, and shape to distinguish classes, discrete classes."
+10,we specified adaptive boosting with while pixel-based classifications can generally only use 20 trials and disabled winnowing.
+10,we used 75% of the spectra (navulur 2007).
+10,"using the “segment mean shift” training samples to train the classifier and withheld 25% tool in arcmap 10.5 (https://www.esri.com), we for validation (see fig."
+10,a1 complete r code).
+10,"c50 attempted to group pixels into real features on the outputs confusion matrices and information to assess landscape (e.g., one segment for one shrub)."
+10,this was the importance of predictor features (see table a2 for quite difficult to achieve so most objects such as shrubs feature importance and table a3 for aggregated or large rocks often contained multiple segments. confusion matrix).
+10,we calculated fractional cover as the spectral features we used to classify the phantom the number of pixels per class as a proportion of total imagery were (fig. 5) blue mean and standard deviation classified pixels (fig. 2c).
+10,"(sd), green mean and sd, red mean and sd, and green g2−r−b leaf algorithm (gla; g2þrþb ; louhaichi et al."
+10,2001) canopy gaps mean and sd.
+10,"additionally, we used the following spatial features for classification of image segments: from the classified orthomosaics, we calculated canopy segment pixel count, rectangularity, and compactness. gaps following the general methods presented in karl for rectangularity, values range from 0 to 1, with 1 et al."
+10,(2012).
+10,"first, we digitized the three transects using being a rectangle."
+10,"compactness is the degree to which markers (iron-cross targets) located at the ends as a a segment is circular with values ranging from 0 to 1, reference."
+10,we retained the bare-ground class and re- where 1 is a circle.
+10,"for sequoia imagery, we included moved annual herb/grass, perennial herb/grass, and the red-edge and nir bands and used normalized dif- woody classes."
+10,we then converted the bare-ground ras- ference vegetation index (ndvi) instead of the green ter into vector polygons and used the “intersect” tool in leaf algorithm.
+10,we calculated feature values for each arcmap to identify the parts of lines crossing the bare- segment. ground polygons.
+10,"we calculated the length of each line noticeably absent from the list of features is canopy and created histograms for the proportion of total line heights which are frequently used in object-based clas- length having lengths of 25–50 cm, 51–100 cm, 101– sifications (baena et al."
+10,2017; cruzan et al.
+10,2016).
+10,"in this 200 cm, and > 200 cm. workflow, canopy height models were created after vegetation classification and thus could not be used as a feature in the classification (details in ‘vegetation vegetation heights heights’ section)."
+10,"the final classes were annual herb/grass, perennial we calculated vegetation heights using only the phan- herb/grass, woody, bare-ground, and shadow in some tom rgb imagery point clouds because the coarser cases (fig."
+10,"the bare-ground class included bare-soil, sequoia imagery would produce less detailed 3d recon- rock, and lichen."
+10,"for classification training, we created structions."
+10,using the “classify ground points” tool in individual point shapefiles for each class.
+10,"we placed 50– agisoft, we identified points representing the ground."
+10,this is a type of maximum local slope filter
+11,environ monit assess (2020) 192: 269 page 11 of 20 269 fig.
+11,6 scatter plots and linear regression (dotted lines) show the comparison between field and phantom imagery estimates of fractional cover (n = 16).
+11,"solid gray lines represent a 1:1 agreement (montealegre et al. 2015) where the lowest elevation remove the boulders height data, we identified and point within a user defined grid cell is assumed to be the deleted any height measurements that were not classi- ground."
+11,all additional ground points were identified fied as vegetation. based on a user defined maximum angle and vertical though this study specifically looked at woody vege- distance from the origin ground point.
+11,"for each plot, we tation heights, we chose not to filter herbaceous vegeta- specified a grid cell size of 2 m with a max angle of 9° tion out of the chm."
+11,"the spatial resolution of the drone and max distance of 10 cm. imagery was generally too coarse to detect herbaceous in arcmap, we converted the original point clouds into vegetation heights (see gillan et al. 2019), especially for digital surface models (dsms) with a 5-cm cell size by species such as cheatgrass (bromus tectorum) and assigning the cell value as the highest elevation point squirreltail (elymus elymoides) with low-stature growth and using natural neighbor interpolation to estimate forms."
+11,analysis of the chms showed very little if any values for cells with no points.
+11,digital terrain models registered heights concurrent with the presence of her- (dtms) were created similarly with ground-only point baceous vegetation.
+11,"finally, we used the “aggregate” clouds."
+11,"using “raster calculator,” we subtracted the tool to compute the highest height value within a 30 × dtm from the dsm on a cell-by-cell basis to create a 30 cm grid cell on the chms (fig. 2d) to more closely canopy height model (chm)."
+11,"in some plots, the pres- match the field method of finding the highest part of the ence of large boulders were appearing in the chms."
+11,to plant within a 15-cm radius of the rod.
+11,table 2 fractional cover for field data and phantom rgb imagery.
+11,standard errors are shown in parenthesis data annual herb/grass perennial herb/grass woody bare-ground shadow mean field 0.37 (0.05) 0.06 (0.01) 0.12 (0.02) 0.43 (0.04) 0 phantom 0.39 (0.08) 0.05 (0.02) 0.15 (0.02) 0.36 (0.07) 0.017 difference 0.02 (0.04) 0.00 (0.02) 0.03 (0.01) − 0.06(0.04) 0.017 absolute mean difference 0.13 (0.02) 0.05 (0.01) 0.04 (0.00) 0.14 (0.02) 0.017
+12,269 page 12 of 20 environ monit assess (2020) 192: 269 fig.
+12,"7 fractional cover scatter plots and regression lines showing linear relationships between phantom rgb imagery and field methods (n = 7), and sequoia multi-spectral imagery and field methods (n = 7)."
+12,solid lines represent 1:1 agreement comparison between field and imagery indicators along the three transects.
+12,"for each indicator (fractional cover, canopy gaps, vegetation heights), we assessed we assessed agreement between field and imagery in- method agreement by comparing the mean values (with dicator values using the plot as the sample unit."
+12,imagery 95% confidence intervals) across all 16 plots.
+12,"mean indicator values for fractional cover and vegetation differences (which include signed differences) were heights were calculated within rectangular polygons useful for showing bias toward overestimate or under- along each field transects’ location approximately estimate indicator values, while absolute mean differ- 0.33 m wide to contain spatial co-registration errors with ences (which eliminate signed differences) were com- field measurements."
+12,canopy gap values were estimated puted to show true departure between methods.
+12,table 3 comparing fractional cover estimated with phantom rgb and sequoia multi-spectral imagery (n = 7).
+12,standard errors shown in parenthesis data annual herb/grass perennial herb/grass woody bare-ground shadow mean field 0.37 (0.09) 0.08 (0.03) 0.08 (0.02) 0.44 (0.08) 0 phantom 0.36 (0.14) 0.05 (0.03) 0.10 (0.02) 0.44 (0.12) 0.01 sequoia 0.35 (0.13) 0.04 (0.02) 0.09 (0.02) 0.46 (0.11) 0.02 mean difference with field methods phantom − 0.00 (0.07) − 0.02 (0.01) 0.01 (0.01) − 0.00 (0.07) 0.01 sequoia −0.01(0.06) − 0.03 (0.01) 0.01 (0.01) 0.01 (0.06) 0.02 absolute mean difference with field methods phantom 0.14 (0.04) 0.02 (0.01) 0.03 (0.00) 0.14 (0.03) 0.01 sequoia 0.13 (0.04) 0.03 (0.01) 0.02 (0.00) 0.11 (0.04) 0.02
+13,environ monit assess (2020) 192: 269 page 13 of 20 269 fig.
+13,8 canopy gaps comparison between field measurements and scatterplots and linear regression (dotted lines) comparing field imagery. a bars indicate mean proportion of transect with associ- and imagery estimates of canopy gaps.
+13,solid lines represent 1:1 ated gap sizes.
+13,"error bars indicate 95% confidence intervals. b agreement additionally, we performed least-squares regression and vegetation heights, we additionally compared maximum calculated coefficients of determination (r2 values) to and standard deviation and the proportion of observa- describe linear relationships between methods."
+13,for tions within eight histogram bins.
+13,on a subset of plots
+14,269 page 14 of 20 environ monit assess (2020) 192: 269 table 4 comparison of canopy gap data as measured by field and imagery (phantom) methods data 25–50 cm 51–100 cm 101–200 cm > 200 cm all gaps > 25 cm mean field 0.07 (0.00) 0.09 (0.01) 0.11 (0.02) 0.21 (0.06) 0.49 (0.06) phantom 0.03 (0.00) 0.04 (0.01) 0.071 (0.01) 0.18 (0.05) 0.33 (0.06) difference − 0.04 (0.00) − 0.04 (0.01) − 0.04 (0.01) − 0.03 (0.03) − 0.16 (0.04) phantom/field 0.42 0.44 0.63 0.85 0.67 absolute mean difference 0.04 (0.00) 0.04 (0.00) 0.06 (0.01) 0.08 (0.02) 0.16 (0.04) values represent the proportion of transects within each gap class.
+14,"standard errors are shown in parentheses (n = 7), we compared fractional cover agreement be- separate analysis by ecological site which is typically tween phantom and sequoia multi-spectral imagery. done for i & m data interpretation (see karl and herrick due to the relatively small sample sizes, we did not 2010)."
+14,9 agreement between field and imagery methods of estimat- regression for mean height. d scatterplot and linear regression ing vegetation heights. a bar graphs show mean and maximum for height standard deviation. e scatterplot and linear regression vegetation heights across all plots with 95% confidence intervals (dotted lines) for maximum vegetation heights.
+14,solid lines repre- (n = 16). b histogram showing proportion of values within height sent 1:1 agreement bins with 95% confidence intervals. c scatterplot and linear
+15,"environ monit assess (2020) 192: 269 page 15 of 20 269 results histogram bins, nearly 50% of imagery observations were within the 4–14 cm bin, while field methods had method agreement—fractional cover only 14% of observations within that range (fig. 9b)."
+15,"conversely, there was a much higher proportion of field the woody vegetation cover class showed the strongest observations within the height bins from 35 to 54 cm linear relationship between field and image measure- (29% v. 11%), 55–74 cm (8% v. 3%), and 75–94 cm ments (r2 = 0.82; fig. 6), followed by annual herb/ (13% v."
+15,"the linear relationship of mean heights grass (r2 = 0.79), bare-ground (r2 = 0.69), and perenni- was weak (r2 = 0.12), mostly due to one plot with a al herb/grass (r2 = 0.24)."
+15,mean fractional cover across dead woody plant that was too thin to be detected with all plots was similar between field and imagery esti- imagery (fig. 9c).
+15,removing this one plot from analysis mates for each of the four classes (table 2).
+15,mean improved the linear relationship to r2 = 0.46.
+15,height method differences ranged from as small as − 0.009 standard deviation had r2 = 0.47 (fig. 9d) and maxi- (perennial herb) to as large as − 0.062 (bare-ground). mum height had r2 = 0.34 (fig. 9e).
+15,"mean and maxi- bare-ground had the largest absolute mean difference mum vegetation height were overpredicted (compared (0.145), followed closely by annual herb/grass (0.134). to field measures) at some plots because tall woody perennial herb/grass and woody had absolute mean plants were not encountered with the field methods. differences of 0.052 and 0.047, respectively."
+15,"indicator value variation between plots was higher (i.e., larger standard errors) for imagery compared with field methods for each of the cover classes."
+15,"discussion fractional cover sensor comparison fractional cover we found minimal differences in linear relationships because imagery and field methods of observing vege- between the phantom rgb camera and sequoia multi- tation cover have inherent mechanical differences (i.e., spectral sensor in terms of fractional cover agreement pin drops v. classified pixels) and possible co- with field measurements (fig."
+15,"similarly, average registration error, perfect agreement between indicator fractional cover and cover differences with field values is not expected."
+15,"image-based measures should methods were < 3% different for each cover class be, however, strongly related to field measures to be (table 3). considered a reliable tool worth adopting for rangeland monitoring."
+15,"though we found strong relationships be- method agreement—canopy gaps tween imagery and field estimates of fractional cover, some classes could be improved with small workflow proportion of inter-canopy gaps were generally adjustments detailed in the following two paragraphs. underestimated for each size class (fig. 8a; table 4)."
+15,"it was difficult to find useable training samples for the greatest relative underestimations (proportional to perennial herb/grass because there were so few of them the mean value) occurred at small gaps sizes (e.g., 25– to begin with and because potential samples were often 50 cm) and steadily shrank as gap sizes increased. too small and indistinguishable from adjacent pixels."
+15,variance (illustrated with confidence intervals) between this often led to omitting the class or poor results field and imagery estimates was very similar.
+15,"linear (e.g., under- or over-prediction)."
+15,the imagery resolution relationships between field and imagery improved as was generally too coarse to identify and classify peren- the size of the gaps increased (fig. 8b). nial bunchgrasses found in this study area.
+15,we would recommend imagery ≤ 1 cm gsd to identify individual method agreement—vegetation heights bunchgrasses and other herbaceous plants as demon- strated in other projects (cunliffe et al.
+15,2016; fraser imagery methods underestimated mean vegetation et al.
+15,2016; gillan et al.
+15,2019).
+15,"even at this fine resolu- heights by 18 cm on average and underestimated max- tion, however, separating herbaceous species from each imum vegetation heights on average by 8 cm (fig. 9a). other will be challenging (gearhart et al."
+15,2013; laliberte regarding the proportion of height observations within et al. 2010b; lu and he 2017).
+16,"269 page 16 of 20 environ monit assess (2020) 192: 269 though the annual herb/grass and bare-ground classes and technical challenges of these sensors may make had strong linear relationships with field methods, they them less desirable for mass adoption and reducing had the highest mean absolute differences."
+16,"the classifi- monitoring costs. cations often confused annual herb/grass (mostly cheat- grass) and bare-ground, a significant problem given the canopy gaps concern of cheatgrass expansion in the district."
+16,"confu- sion was primarily caused by cheatgrass that had similar to our findings, karl et al. (2012) found that senesced to a yellow/brown color making it difficult to correlations between imagery and field estimates im- separate from bare-ground."
+16,"separation may have been proved as the gap sizes increased, and gaps > 50 cm better in the spring while the cheatgrass was still green were reliably estimated from imagery in a variety of and easily distinguished from bare-ground."
+16,imagery plant communities.
+16,"in this research, consistent underes- collected in the spring, however, may not capture other timation of canopy gaps at each size class had two main annuals such as prickly lettuce (lactuca serriola) or causes."
+16,the first was misclassifying bare-ground as perennials such as bottlebrush squirrel tail (elymus annual herb/grass.
+16,the second (and less frequent) cause elymoides). was scale (specifically grain) differences between field vegetation phenology is critical to identify species or and imagery observations.
+16,"the imagery, and subsequent functional groups within imagery, more so than identi- grouping of pixels into objects, could not see small fying the same features with field methods (hunt et al. diameter branches or sparse vegetation the field observ- 2003; lass and calihan 1997)."
+16,as with any image er could see.
+16,"take, for example, a group of shrubs close classification, distinguishing features of interest is high- to each other."
+16,"the imagery classification may perceive ly dependent on the spectral and spatial uniqueness of no gaps between the shrubs, while the field observer the classes (laliberte and rango 2011)."
+16,integrating may observe that there are in fact gaps of at least 25 cm drone imagery will require a re-thinking of when mon- between the branch canopies. itoring occurs to maximize feature detectability.
+16,"de- canopy gaps are an example of an indicator that has pending on the objectives of the inventory and monitor- the potential to be improved instead of simply replicated ing, multiple acquisitions may be required in a year. by drone imagery."
+16,field-based measures of canopy gaps we found little difference in fractional cover agree- are a 1-dimensional representation of erosional force ment between the phantom rgb camera and the parrot connectivity that is typically integrated over multiple sequoia multi-spectral sensor.
+16,other research has dem- directions in the plot to provide a composite value onstrated the ability of rgb imagery to successfully (webb et al.
+16,2014).
+16,drone imagery could open up more classify cover (cruzan et al.
+16,2016; laliberte et al. meaningful 2-d or 3-d measurements of the same phe- 2010a; meng et al.
+16,2018).
+16,"in addition to lower cost, nomenon."
+16,"for example, with drone-based classifica- rgb sensors generally offer higher spatial resolution tions, the size and configuration of bare ground patches compared with multi-spectral sensors, an advantage for parallel to the slope (indicator of water erosion potential) identifying small plants and generating detailed point could be separated from the effects of bare ground clouds."
+16,"in theory, multi-spectral sensors offer additional patches in line with prevailing winds (indicator of wind bandwidth from which to separate species based on erosion potential)."
+16,"similarly, ludwig et al. (2007) used spectral differences (laliberte et al. 2011a), though we two-dimensional information on bare ground distribu- found no discernible advantage in this study."
+16,"addition- tion to create an index related to a site’s ability to retain ally, multi-spectral sensors can also be radiometrically resources (i.e., a “leakiness” index). calibrated to reflectance values which could improve consistency of repeat image classifications and aid the development of spectral libraries."
+16,other sensors includ- vegetation heights ing lidar and hyperspectral have been demonstrated on drones to characterize dryland vegetation cover and the differences between imagery and field estimates of structure (mitchell et al.
+16,2012; sankey et al.
+16,2017).
+16,"their woody vegetation heights were caused primarily by the data may help to distinguish more cover classes than mechanics of each method, and additionally by imper- rgb and multi-spectral."
+16,"however, the additional cost fect referencing (i.e., scale-bar)."
+16,"for mean height, the field method averaged 30 measurements of the tallest"
+17,environ monit assess (2020) 192: 269 page 17 of 20 269 part of the plant that was encountered within a 15-cm for biomass estimation in protocols exchange radius of a rod placement.
+17,most of these observations (https://doi.org/10.1038/protex.2018.134). were high up on the plant.
+17,"the point cloud/chm alternatively, it could be advantageous to share methods observed all aspects of the plant, from the workflows through a website dedicated to rangeland i crown to the base."
+17,"naturally, numerous observations & m ( e . g . , t h e l a n d s c a p e to o l b o x , w w w. on the lower part of the plant brought down the average. landscapetoolbox.com), where drone-based monitoring the maximum vegetation height in a plot was generally could be embedded within the larger context of range- underestimated by the imagery due to poorly modeling land data collection theory and field protocols. plant extremities that were too fine or small to detect."
+17,this is a well-known trait of photogrammetric recon- is drone monitoring worth the effort?
+17,struction methods (cunliffe et al.
+17,2016; gillan et al.
+17,"2014; olsoy et al. 2018), but is not necessarily a limita- in large monitoring programs like aim that collect a tion in a rangeland monitoring context."
+17,"maximum veg- diverse suite of data, drones will not replace most of the etation height is a convenient indicator to measure in the field methods."
+17,"even from very high-resolution imagery, field, but it may not hold any specific ecological value. it can be challenging to identify fine-scale features (e.g., drone-based photogrammetric point clouds can provide grass and forb species identification, biological crusts) thousands of measurements, enabling a more detailed and carry out qualitative assessments of land health (i.e., and synoptic look at vegetation heights, including the in situ multi-factor interpretations of ecosystem condi- ability to quantify observations per height bin, analyze tion or trend)."
+17,"however, drone-imagery methods could height variance, and calculate vegetation volume."
+17,"this be used in a more supplemental capacity in which the technique will improve our ability to estimate biomass modes of integration can be customized to the specific and carbon storage (cunliffe et al. 2016), parameterize management needs of the locality."
+17,"in the ncd, for surface roughness for wind erosion modeling (webb example, drone imagery could be collected to improve et al. 2014), quantify fuels for prescribed or uncontrolled estimates of bare-ground or cheatgrass cover in a post- fires (leis and morrison 2011), and assess the quality of fire rehabilitation area."
+17,this could take the form of wildlife habitat (olsoy et al.
+17,2018).
+17,"in ncd, for exam- expanding the size of existing monitoring plots, or ple, greater sage-grouse habitat could be assessed with collecting imagery at new plots without field measures. drone-based vegetation structure data, including the drone-imagery-based indicators will complement oth- height, cover, and shape of sagebrush (stiver et al. er remote sensing efforts that “upscale” field data to 2015). satellite imagery products (see jones et al."
+17,2018; mccord et al.
+17,2017; xian et al.
+17,2015).
+17,"the upscaled developing best practices products have the advantage of covering entire field offices but the indicators are limited to fractional cover the workflow presented in the paper is just one of many of a few general classes (bare-ground, woody, perennial possible paths to estimate these indicator values, and herb, etc)."
+17,"drone imagery can observe features that further work is needed to validate uas-based tech- cannot be modeled to satellite imagery, such as canopy niques for estimating i & m indicators in different gaps, vegetation heights, and identification of some rangeland systems."
+17,"additionally, the choices of hard- vegetation species. ware, software, image acquisition, and processing spec- ifications are large and growing."
+17,identifying drone- imagery best practices could be accelerated with an online workflow repository.
+17,"given the high interest in conclusion this technology, a website like this could spur collabo- ration and advancement in ways that published literature due to their low cost, ability to image dozens of hectares alone cannot."
+17,"a few existing protocol repositories in- per flight, and extreme portability, small uas are likely clude protocols exchange (https://www.nature. to become a standard tool for rangeland inventory and com/protocolexchange) and protocols.io monitoring."
+17,they will be integrated with existing field (http://protocols.io).
+17,"cunliffe and anderson (2019), for efforts in order to observe larger and more representative example, published a protocol to collect drone imagery portions of the landscape and to measure indicators not"
+18,269 page 18 of 20 environ monit assess (2020) 192: 269 easily measured on the ground.
+18,"we demonstrated a breckenridge, r."
+18,"p., dakins, m., bunting, s., harbour, j."
+18,"l., & white, s."
+18,(2011).
+18,"comparison of unmanned aerial vehicle workflow to estimate three rangeland vegetation indica- platforms for assessing vegetation cover in sagebrush steppe tors, reported agreement with their counterpart field ecosystems."
+18,"rangeland ecology & management, 64(5), method, and provided recommendations for workflow 521–532. https://doi.org/10.2111/rem-d-10-00030.1. improvements."
+18,"these methods could serve as a starting burnett, c., & blaschke, t."
+18,(2003).
+18,a multi-scale segmentation/ point for other drone-based i & m efforts in sagebrush object relationship modelling methodology for landscape analysis.
+18,"ecological modelling, 168(3), 233–249. steppe ecosystems."
+18,"despite the success of this and other https://doi.org/10.1016/s0304-3800(03)00139-x. research demonstrations, we face a challenge in devel- carbonneau, p."
+18,"e., & dietrich, j."
+18,(2016).
+18,"cost-effective non- oping a suite of monitoring methods that are useful for metric photogrammetry from consumer-grade suas: impli- supporting management decisions (e.g., accurate, re- cations for direct georeferencing of structure from motion photogrammetry."
+18,"earth surface processes and landforms, peatable, and cost-effective) across varied rangeland 42(3), 473–486. https://doi.org/10.1002/esp.4012. systems."
+18,"the time is right to develop an online space cruzan, m."
+18,"b., weinstein, b."
+18,"g., grasty, m."
+18,"r., kohrn, b."
+18,"f., that facilitates the co-creation of repeatable workflows hendrickson, e."
+18,"c., arredondo, t."
+18,"m., & thompson, p."
+18,g. and curates best practices for a variety of rangeland (2016).
+18,"small unmanned aerial vehicles (micro-uavs, indicators. drones) in plant ecology."
+18,"applications in plant sciences, 4(9), 1600041. https://doi.org/10.3732/apps.1600041."
+18,"cunliffe, a., & anderson, k."
+18,(2019.
+18,"measuring above-ground acknowledgments we thank andrew johnson, geographer at biomass with drone photogrammetry: data collection proto- eagle lake field office, for help coordinating this research with col."
+18,protocol exchange. https://doi.org/10.1038 field crews.
+18,"we also thank eric panebaker, aviation manager of /protex.2018.134."
+18,"blm northern california district, for permitting drone flights."
+18,"cunliffe, a."
+18,"m., brazier, r."
+18,"e., & anderson, k."
+18,(2016).
+18,ultra-fine grain landscape-scale quantification of dryland vegetation funding information travel and data collection were funded structure with drone-acquired structure-from-motion photo- by usda ars jornada experimental range. grammetry.
+18,"remote sensing of environment, 183, 129–143. https://doi.org/10.1016/j.rse.2016.05.019."
+18,"compliance with ethical standards duniway, m."
+18,"c., karl, j."
+18,"w., schrader, s., baquera, n., & herrick, j."
+18,(2012).
+18,rangeland and pasture monitoring: an approach conflict of interest the authors declare that they have no con- to interpretation of high-resolution imagery focused on ob- flict of interest. server calibration for repeatability.
+18,"environmental monitoring and assessment, 184(6), 3789–3804. https://doi. org/10.1007/s10661-011-2224-2."
+18,"eltner, a., kaiser, a., castillo, c., rock, g., neugirg, f., & abellan, a."
+18,(2015).
+18,"image-based surface reconstruction in geomorphometry – merits, limits and developments of a promising tool for geoscientists."
+18,"earth surface dynamics references discussions, 3(4), 1445–1508. https://doi.org/10.5194 /esurfd-3-1445-2015."
+18,"fraser, r."
+18,"h., olthof, i., lantz, t."
+18,"c., & schmitt, c."
+18,(2016).
+18,"uav allen, c."
+18,"r., angeler, d."
+18,"g., fontaine, j."
+18,"j., garmestani, a."
+18,"s., photogrammetry for mapping vegetation in the low-arctic."
+18,"hart, n."
+18,"m., pope, k."
+18,"l., & twidwell, d."
+18,(2017).
+18,"adaptive arctic science, 102(june), 1–51. https://doi.org/10.1139/as- management of rangeland systems."
+18,in rangeland systems: 2016-0008.
+18,"processes, management and challenges (pp."
+18,373–394).
+18,"gearhart, a., booth, d."
+18,"t., sedivec, k., & schauer, c."
+18,(2013).
+18,"use baena, s., moat, j., whaley, o., & boyd, d."
+18,(2017).
+18,identifying of kendall’s coefficient of concordance to assess agreement species from the air: uavs and the very high resolution among observers of very high resolution imagery.
+18,geocarto challenge for plant conservation.
+18,"plos one, 12(11), international, 28(6), 517–526. https://doi.org/10.1080 e0188714. https://doi.org/10.1371/journal.pone.0188714."
+18,/10106049.2012.725775.
+18,"booth, d."
+18,"t., & cox, s."
+18,(2008).
+18,"image-based monitoring to gillan, j."
+18,"k., karl, j."
+18,"w., duniway, m., & elaksher, a."
+18,(2014). measure ecological change in rangeland.
+18,"frontiers in modeling vegetation heights from high resolution stereo ecology and the environment, 6(4), 185–190. https://doi. aerial photography: an application for broad-scale rangeland org/10.1890/070095. monitoring."
+18,"journal of environmental management, 144, booth, d."
+18,"t., & cox, s."
+18,(2009).
+18,"dual-camera, high-resolution 226–235. https://doi.org/10.1016/j.jenvman.2014.05.028. aerial assessment of pipeline revegetation."
+18,"environmental gillan, j., karl, j., elaksher, a., & duniway, m."
+18,(2017).
+18,"fine- monitoring and assessment, 158, 23–33. https://doi. resolution repeat topographic surveying of dryland land- org/10.1007/s10661-008-0562-5. scapes using uas-based structure-from-motion photogram- booth, d., & cox, s."
+18,(2011).
+18,art to science: tools for greater metry: assessing accuracy and precision against traditional objectivity in resource monitoring.
+18,"rangelands, 33(4), 27– ground-based erosion measurements."
+18,"remote sensing, 9(5), 34. https://doi.org/10.2111/1551-501x-33.4.27."
+18,437. https://doi.org/10.3390/rs9050437.
+19,"environ monit assess (2020) 192: 269 page 19 of 20 269 gillan, j."
+19,"k., mcclaran, m."
+19,"p., swetnam, t."
+19,"l., & heilman, p."
+19,"giscience & remote sensing, 48(1), 4–23. https://doi."
+19,(2019).
+19,estimating forage utilization with drone-based pho- org/10.2747/1548-1603.48.1.4. togrammetric point clouds.
+19,"rangeland ecology & laliberte, a."
+19,"s., browning, d."
+19,"m., herrick, j."
+19,"e., & gronemeyer, management, 72(4), 575–585. https://doi.org/10.1016/j."
+19,p. (2010a).
+19,"hierarchical object-based classification of ultra- rama.2019.02.009. high-resolution digital mapping camera (dmc) imagery for hardin, p., jackson, m., anderson, v., & johnson, r."
+19,(2007). rangeland mapping and assessment.
+19,journal of spatial detecting squarrose knapweed ( centaurea virgata lam.
+19,"science, 55(1), 101–115. https://doi.org/10.1080 ssp. squarrosa gugl.) using a remotely piloted vehicle: a /14498596.2010.487853."
+19,utah case study.
+19,"giscience & remote sensing, 44(3), 203– laliberte, a."
+19,"s., herrick, j."
+19,"e., rango, a., & winters, c. (2010b)."
+19,219. https://doi.org/10.2747/1548-1603.44.3.203.
+19,"acquisition, orthorectification, and object-based classifica- herrick, j."
+19,"e., zee, j."
+19,"van, mccord, s."
+19,"e., courtright, e."
+19,"m., tion of unmanned aerial vehicle (uav) imagery for rangeland karl, j."
+19,"w., & burkett, l."
+19,(2017).
+19,monitoring manual for monitoring.
+19,"photogrammetric engineering & remote grassland, shrubland, and savanna ecosystems 2nd edn."
+19,"vol sensing, 76(6), 661–672. https://doi.org/10.14358 1: core methods."
+19,/pers.76.6.661.
+19,"hunt, e."
+19,"r., everitt, j."
+19,"h., ritchie, j."
+19,"c., moran, m."
+19,"s., booth, d."
+19,"laliberte, a."
+19,"s., goforth, m. a., steele, c."
+19,"m., & rango, a."
+19,"t., anderson, g."
+19,"l., et al."
+19,(2003).
+19,applications and research (2011a).
+19,"multispectral remote sensing from unmanned air- using remote sensing for rangeland management. craft: image processing workflows and applications for photogrammetric engineering & remote sensing, 69(6), rangeland environments."
+19,"remote sensing, 3(12), 2529– 675–693. https://doi.org/10.14358/pers.69.6.675."
+19,2551. https://doi.org/10.3390/rs3112529.
+19,"james, m."
+19,"r., & robson, s."
+19,(2014).
+19,"mitigating systematic error in laliberte, a."
+19,"s., winters, c., & rango, a. (2011b)."
+19,uas remote topographic models derived from uav and ground-based sensing missions for rangeland applications.
+19,geocarto image networks.
+19,"earth surface processes and landforms, international, 26(2), 141–156. https://doi.org/10.1080 39(10), 1413–1420. https://doi.org/10.1002/esp.3609."
+19,/10106049.2010.534557.
+19,"james, m."
+19,"r., robson, s., d’oleire-oltmanns, s., & niethammer, lass, l."
+19,"w., & calihan, r."
+19,(1997).
+19,effects of phenological stage u.
+19,(2017).
+19,"optimising uav topographic surveys processed on detectability of yellow hawkweed (hieracium pratense) with structure-from-motion: ground control quality, quantity and oxeye daisy (chrysanthemum leucanthemum) with re- and bundle adjustment."
+19,"geomorphology, 280, 51–66. mote multispectral digital imagery."
+19,"weed technology, 11, https://doi.org/10.1016/j.geomorph.2016.11.021."
+19,248–256.
+19,"leis, s. a., & morrison, l."
+19,(2011).
+19,"field test of digital photog- jensen, j."
+19,"r., & mathews, a."
+19,(2016).
+19,"assessment of image- raphy biomass estimation technique in tallgrass prairie. based point cloud products to generate a bare earth surface rangeland ecology & management, 64(1), 99–103. and estimate canopy heights in a woodland ecosystem. https://doi.org/10.2111/rem-d-09-00180.1."
+19,"remote sensing, 8(50). https://doi.org/10.3390/rs8010050."
+19,"louhaichi, m., borman, m."
+19,"m., & johnson, d."
+19,(2001).
+19,"spatially jones, m."
+19,"o., allred, b."
+19,"w., naugle, d."
+19,"e., & mestas, j."
+19,"(2018). located platform and aerial photography for documentation innovation in rangeland monitoring : annual, 30 m, plant of grazing impacts on wheat."
+19,"geocarto international, 16(1), functional type percent cover maps for u."
+19,"s. rangelands, 65–70. https://doi.org/10.1080/10106040108542184."
+19,"1984–2017, 9(september). https://doi.org/10.1002 lu, b., & he, y."
+19,(2017).
+19,"species classification using unmanned /ecs2.2430. aerial vehicle (uav)-acquired high spatial resolution imag- karl, j."
+19,"w., & herrick, j."
+19,(2010).
+19,monitoring and assessment ery in a heterogeneous grassland.
+19,isprs journal of based on ecological sites.
+19,"rangelands, 32(6), 60–64."
+19,"photogrammetry and remote sensing, 128, 73–85. https://doi.org/10.2111/rangelands-d-10-00082.1. https://doi.org/10.1016/j.isprsjprs.2017.03.011."
+19,"karl, j."
+19,"w., duniway, m."
+19,"c., & schrader, t."
+19,(2012).
+19,"a technique ludwig, j."
+19,"a., bastin, g."
+19,"n., chewings, v."
+19,"h., eager, r."
+19,"w., & for estimating rangeland canopy-gap size distributions from liedloff, a."
+19,(2007).
+19,leakiness: a new index for monitoring high-resolution digital imagery.
+19,"rangeland ecology & the health of arid and semiarid landscapes using remotely management, 65(2), 196–207. https://doi.org/10.2111 sensed vegetation cover and elevation data."
+19,ecological /rem-d-11-00006.1.
+19,"indicators, 7(2), 442–454. https://doi.org/10.1016/j."
+19,"karl, j."
+19,"w., gillan, j."
+19,"k., barger, n."
+19,"n., herrick, j."
+19,"e., & duniway, ecolind.2006.05.001."
+19,(2014).
+19,"interpretation of high-resolution imagery for mackinnon, w."
+19,"c., karl, j."
+19,"w., toevs, g."
+19,"r., taylor, j."
+19,"j., karl, detecting vegetation cover composition change after fuels m., spurrier, c."
+19,"s., & herrick, j."
+19,(2011).
+19,blm core reduction treatments in woodlands.
+19,"ecological indicators, terrestrial indicators and methods."
+19,tech note 440.
+19,"denver: 45, 570–578. https://doi.org/10.1016/j.ecolind.2014.05.017."
+19,"us department of the interior, bureau of land management, kendall, w."
+19,"l., & moore, c."
+19,(2012).
+19,maximizing the utility of national operations center. monitoring to the adaptive management of natural resources.
+19,"mccord, s."
+19,"e., buenemann, m., karl, j."
+19,"w., browning, d."
+19,"m., & in r."
+19,"gitzen, j."
+19,"milspaugh, a."
+19,"cooper, & d."
+19,"licht hadley, b."
+19,(2017).
+19,"integrating remotely sensed imagery (eds.), design and analysis of long-term ecological monitor- and existing multiscale field data to derive rangeland indica- ing studies."
+19,cambridge: university of cambridge press. tors: application of bayesian additive regression trees.
+19,"kuhn, m., & quinlan, r."
+19,(2017).
+19,"c5.0 decision trees and rule- rangeland ecology & management, 1–12. https://doi. based models."
+19,r package version 0.1.1. org/10.1016/j.rama.2017.02.004.
+19,"laliberte, a."
+19,"s., & rango, a."
+19,(2011).
+19,"image processing and mcgwire, k."
+19,"c., weltz, m."
+19,"a., finzel, j."
+19,"a., morris, c."
+19,"e., classification procedures for analysis of sub-decimeter imag- fenstermaker, l."
+19,"f., & mcgraw, d."
+19,(2013).
+19,multiscale ery acquired with an unmanned aircraft over arid rangelands. assessment of green leaf cover in a semi-arid rangeland with a
+20,269 page 20 of 20 environ monit assess (2020) 192: 269 small unmanned aerial vehicle.
+20,"international journal of snavely, n., seitz, s."
+20,"m., & szeliski, r."
+20,(2008).
+20,"modeling the remote sensing, 34(5), 1615–1632. https://doi.org/10.1080 world from internet photo collections."
+20,"international journal /01431161.2012.723836. of computer vision, 80(2), 189–210. https://doi.org/10.1007 meng, b., gao, j., liang, t., cui, x., ge, j., yin, j., et al."
+20,(2018). /s11263-007-0107-3.
+20,"modeling of alpine grassland cover based on unmanned stiver, s."
+20,"j., thomas rinkes, e., & naugle, d."
+20,(2015).
+20,"sage- aerial vehicle technology and multi-factor methods: a case grouse habitat assessment framework: a multiscale assess- study in the east of tibetan plateau, china."
+20,"remote sensing, ment tool."
+20,technical reference 6710–1.
+20,"denver, co."
+20,"10(2), 320. https://doi.org/10.3390/rs10020320."
+20,"swetnam, t."
+20,"l., gillan, j."
+20,"k., sankey, t."
+20,"t., mcclaran, m."
+20,"p., mitchell, j."
+20,(2010).
+20,"criteria and indicators of sustainable nichols, m."
+20,"h., heilman, p., & mcvay, j."
+20,(2018). rangeland management.
+20,university of wyoming considerations for achieving cross-platform point cloud data cooperative extension publication no.
+20,sm-56. fusion across different dryland ecosystem structural states.
+20,"mitchell, j."
+20,"j., glenn, n."
+20,"f., anderson, m."
+20,"o., hruska, r."
+20,"c., & frontiers in plant science, 8(january), 2144. https://doi."
+20,"charlie, a."
+20,(2012).
+20,"unmanned aerial vehicle ( {uav} ) org/10.3389/fpls.2017.02144. hyperspectral remote sensing for dryland vegetation moni- taylor, j., kachergis, e., toevs, g., karl, j., bobo, m., karl, m, toring hyperspectral image and signal sensing."
+20,"idaho miller, s., & spurrier, c."
+20,(2014).
+20,"aim-monitoring: a compo- national laboratory preprint. nent of the blm assessment, inventory, and monitoring moffet, c. a."
+20,(2009).
+20,agreement between measurements of shrub strategy.
+20,tech note 445.
+20,"denver: us department of the cover using ground-based methods and very large scale aerial interior, bureau of land management, national operations imagery."
+20,"rangeland ecology & management, 62(3), 268– center."
+20,277. https://doi.org/10.2111/08-244r.1.
+20,"toevs, g."
+20,"r., karl, j."
+20,"w., taylor, j."
+20,"j., spurrier, c."
+20,"s., karl, m."
+20,"s., montealegre, a."
+20,"l., lamelas, m."
+20,"t., & de la riva, j."
+20,(2015).
+20,"a bobo, m."
+20,"r., & herrick, j."
+20,(2011).
+20,consistent indicators comparison of open - source lidar filtering algorithms in a and methods and a scalable sample design to meet assess- mediterranean forest environment.
+20,"ieee journal of selected ment, inventory, and monitoring information needs across topics in applied earth observations and remote sensing, scales."
+20,"rangelands, 33(4), 14–20. https://doi.org/10.2111 8(8), 4072–4085. https://doi.org/10.1109 /1551-501x-33.4.14."
+20,/jstars.2015.2436974.
+20,us bureau of land management.
+20,(2007).
+20,"eagle lake field office navulur, k."
+20,(2007).
+20,multi-spectral image analysis using the resource management plan and environmental impact state- object-oriented paradigm.
+20,"boca raton: crc press, taylor ment."
+20,"susanville, ca. and francis group."
+20,"vautherin, j."
+20,(2016).
+20,"photogrammetric accuracy and modeling of olsoy, p."
+20,"j., shipley, l."
+20,"a., rachlow, j."
+20,"l., forbey, j."
+20,"s., glenn, n. rolling shutter cameras."
+20,"eurocow 2016, the european f., burgess, m."
+20,"a., & thornton, d."
+20,(2018).
+20,"unmanned calibration and orientation workshop (presentation), 10– aerial systems measure structural habitat features for wildlife 12 february 2016, lausanne, switzerland. https://doi. across multiple scales."
+20,"methods in ecology and evolution, org/10.5194/isprsannals-iii-3-139-2016."
+20,"9(3), 594–604. https://doi.org/10.1111/2041-210x.12919."
+20,"webb, n."
+20,"p., herrick, j."
+20,"e., & duniway, m."
+20,(2014).
+20,"ecological rango, a., laliberte, a., herrick, j."
+20,"e., winters, c., havstad, k., site-based assessments of wind and water erosion : informing steel, c., & browning, d."
+20,(2009).
+20,"unmanned aerial vehicle- accelerated soil erosion management in rangelands. based remote sensing for rangeland assessment, monitoring, ecological applications, 24(6), 1405–1420. https://doi. and management."
+20,"journal of applied remote sensing, 3(1), org/10.1890/13-1175.1."
+20,033542. https://doi.org/10.1117/1.3216822.
+20,"westoby, m."
+20,"j., brasington, j., glasser, n."
+20,"f., hambrey, m."
+20,"j., & sankey, t."
+20,"t., mcvay, j., swetnam, t."
+20,"l., mcclaran, m."
+20,"p., reynolds, j."
+20,(2012).
+20,"‘structure-from-motion’ photogram- heilman, p., & nichols, m."
+20,(2017).
+20,"uav hyperspectral and metry: a low-cost, effective tool for geoscience applications. lidar data and their fusion for arid and semi-arid land vege- geomorphology, 179, 300–314. https://doi.org/10.1016/j. tation monitoring."
+20,remote sensing in ecology and geomorph.2012.08.021.
+20,"conservation, 1–14. https://doi.org/10.1002/rse2.44."
+20,"xian, g., homer, c., rigge, m., shi, h., & meyer, d."
+20,(2015).
+20,"seefeldt, s."
+20,"s., & booth, d."
+20,(2006).
+20,measuring plant cover in characterization of shrubland ecosystem components as con- sagebrush steppe rangelands: a comparison of methods. tinuous fields in the northwest united states.
+20,"remote sensing environmental management, 37(5), 703–711. https://doi. of environment, 168, 286–300. https://doi.org/10.1016/j. org/10.1007/s00267-005-0016-6. rse.2015.07.014."
+20,"smith, m."
+20,"w., carrivick, j."
+20,"l., & quincey, d."
+20,(2015).
+20,structure from motion photogrammetry in physical geography.
+20,"publisher’s note springer nature remains neutral with regard to progress in physical geography, 40(2), 247–275. jurisdictional claims in published maps and institutional https://doi.org/10.1177/0309133315615805. affiliations."

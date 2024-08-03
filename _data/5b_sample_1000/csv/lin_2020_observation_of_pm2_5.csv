@@ -1,0 +1,710 @@
+page,p
+1,"1 observation of pm2.5 using a combination of satellite remote sensing and low-cost 2 sensor network in siberian urban areas with limited reference monitoring 3 changqing lin,1 lev d."
+1,"labzovskii,2,* hugo wai leung mak,3 jimmy c.h."
+1,"fung,1,4 alexis k.h."
+1,"4 lau,1,5 samuel takele kenea,2 muhhamad bilal,6 joshua d."
+1,"vande hey,7 xingcheng lu,1 jun ma5 5 1 division of environment and sustainability, the hong kong university of science and 6 technology, hong kong, china 7 2 climate research division, national institute of meteorological sciences (nims), seogwipo, 8 jeju-do, 63568, korea 9 3 faculty of engineering, the chinese university of hong kong, hong kong, china 10 4 department of mathematics, hong kong university of science and technology, hong kong, 11 china 12 5 department of civil and environmental engineering, the hong kong university of science and 13 technology, hong kong, china 14 6 school of marine science, nanjing university of information science and technology, nanjing 15 210044, china 7 16 school of physics and astronomy, earth observation science group, university of leicester, 17 leicester, united kingdom 18 corresponding author: 19 * address: climate research division, national institute of meteorological sciences (nims), 20 seogwipo, jeju-do, 63568, republic of korea."
+1,email: labzowsky@gmail.com (lev d.
+1,21 labzovskii).
+1,22 23 1
+2,"24 abstract: the lack of reference ground-based pm2.5 observation leads to large gaps in air 25 quality information, particularly in many areas of the developing world."
+2,this study investigated a 26 new solution for urban air-quality monitoring in regions with limited reference ground-based 27 monitoring.
+2,"we developed an observation-based method by combining satellite remote-sensing 28 techniques and a newly established low-cost sensor network to estimate long-term pm2.5 29 concentrations over krasnoyarsk, a highly industrialized siberian city."
+2,"first, a physical model was 30 developed to estimate pm2.5 concentrations using satellite remote-sensing with the aid of ground- 31 based meteorological and radiosonde observations."
+2,observations from the ground-based sensor 32 network were then used to calibrate the deviations in the satellite-derived pm2.5 concentrations.
+2,33 the results show that the satellite-based pm2.5 concentrations obtained by our physical model were 34 in good agreement with the sensor observations (r = 0.78 on the monthly scale).
+2,"the deviation in 35 satellite-derived annual pm2.5 concentrations resulted from data restrictions that occurred at noon 36 and data loss in winter were identified as 20% and 30%, respectively."
+2,the regional transport of 37 smoke from forest wildfires increased pm2.5 concentration to 150 µg/m3 in the summer 2018.
+2,"the 38 average pm2.5 concentrations in the urban districts could reach 35 µg/m3, which far exceeded the 39 world health organization air quality guideline."
+2,these results underscore the good ability of our 40 new method to determine pm2.5 concentrations in regions with limited reference ground-based 41 monitoring.
+2,use of sensor and meteorological observations greatly improved satellite detection of 42 pm2.5 concentration.
+2,"in addition, our method has the potential for global application to improve 43 determination of pm2.5 concentrations, especially in sparsely monitored regions."
+2,44 keywords: satellite; pm2.5; low-cost sensor; siberia; air quality 2
+3,"introduction 46 given the adverse effects of fine particulate matter (pm2.5) on human health, pm2.5 47 concentrations should be accurately monitored (crouse et al., 2012; guo et al., 2018)."
+3,"it is 48 particularly important to monitor pm2.5 concentrations in large urban areas, which contain millions 49 of people in conditions of deteriorated air quality (baklanov et al., 2016)."
+3,"pm2.5 concentrations 50 have traditionally been monitored by ground-based networks operated by government agencies 51 (rohde and muller, 2015)."
+3,"however, such networks often fail to provide sufficient observational 52 coverage for urban air quality monitoring."
+3,the resulting lack of governmental pm2.5 data may have 53 caused long-term deficiencies in air quality measurements in less-developed countries.
+3,"recent 54 advances in satellite-based remote sensing and low-cost sensors are new opportunities to 55 supplement incomplete conventional monitoring datasets from these regions (pinder et al., 2019)."
+3,"56 using satellite-detected aerosol optical depth (aod) to estimate pm2.5 concentration is an 57 effective tool to fill the data gaps in government-led ground-based observations (chan et al., 2018; 58 lin et al., 2018)."
+3,"the estimation requires an understanding of the vertical distribution, hygroscopic 59 growth, and characteristics of aerosols (lin et al., 2016; liu, 2014)."
+3,"a range of statistical models 60 has been established to elucidate the link between aod and pm2.5 concentration using methods 61 such as machine learning (di et al., 2016; xiao et al., 2018) and geographically and temporally 62 weighted regression (guo et al., 2017; he and huang, 2018)."
+3,"these statistical models require 63 sufficient ground-based pm2.5 measurements as the training datasets, so their use is difficult in vast 64 regions outside developed countries, where the ground-based monitoring coverage is sparse (liu, 65 2014)."
+3,66 satellite-based estimations of pm2.5 concentrations in these poorly-monitored regions have 67 to date relied on chemical transport models (ctms) to simulate aod-pm2.5 relationships (van 3
+4,"68 donkelaar et al., 2010)."
+4,"these ctm-based methods have no imposed restrictions on ground pm2.5 69 measurements, but they impose heavy computational demands."
+4,"thus, each computation is subject 70 to certain intrinsic uncertainties, such as those arise from aerosol vertical distribution and optical 71 properties (van donkelaar et al., 2006; jin et al., 2019)."
+4,it is therefore important to develop 72 alternative observation-based aod-pm2.5 algorithms for estimation of pm2.5 concentrations in 73 these poorly monitored regions.
+4,"74 technological progress has led to the development of miniaturized low-cost sensor devices 75 with sufficient sensitivity for air quality monitoring (kumar et al., 2015; morawska et al., 2018)."
+4,"76 there has been considerable investigation of the utility of low-cost air-quality sensors, and there 77 is a growing consensus that they could provide valuable information when used appropriately for 78 suitable applications (wmo, 2018), such as providing indicative and supplementary data rather 79 than regulatory data."
+4,"these miniaturized sensors are less bulky, less expensive and easier to deploy 80 and manage, than the reference instruments (snyder et al., 2013)."
+4,"81 although pm2.5 datasets with limited accuracy may be obtained from only a single sensor 82 (borrego et al., 2016; castell et al., 2017), the integration of large numbers of sensors into a 83 network can yield useful and realistic information about a city’s air quality (schneider et al., 2017)."
+4,"84 some stationary sensor networks have already been established as pilot projects for air quality 85 monitoring in complex environments, such as urban areas (gao et al., 2015; semple et al., 2015) 86 and airports (popoola et al., 2018)."
+4,the united states environmental protection agency (u.s.
+4,epa) 87 has confirmed the necessity of extending the existing urban air-quality monitoring systems by 88 introducing low-cost sensors (u.s.
+4,"epa, 2014)."
+4,long-term measurements from low-cost sensor 89 networks may ultimately be used to complement the mapping of urban air-quality and to assist in 90 the calibration and evaluation of deviations in satellite-derived pm2.5 concentration data.
+5,"91 when urban air quality measurements are severely lacking, the efforts of non- 92 governmental urban air-quality monitoring can encourage citizen action by informing broad 93 audiences about a city’s air quality."
+5,"such a situation has already developed in krasnoyarsk, a large 94 industrial center of siberia."
+5,"krasnoyarsk is susceptible to air quality deterioration due to numerous 95 urban emission sources from chemical and metallurgical industries (including one of the world’s 96 largest aluminum smelting plants), coal-burning power plants, and transportation (khleboporos et 97 al., 2012)."
+5,"moreover, the region around krasnoyarsk frequently experiences summer wildfires 98 (conard and davidenko, 1996), which leads to a reduction in ground visibility and cause long- 99 term episodes of air pollution in the city (damoah et al., 2004)."
+5,public concern about air quality 100 has evolved rapidly in recent years.
+5,"this concern coincides with an increase in the number of 101 people with pulmonary disease (artyukhov et al., 2015)."
+5,"a 2018 report from the ministry of 102 environmental management concluded that air pollution in krasnoyarsk was “very high,” and the 103 city was included in the list of the most polluted urban areas in russia (ministry of environmental 104 management, 2018)."
+5,"105 to provide more local, accessible data, an unofficial pm2.5 monitoring network named 106 “nebo” (“sky” in russian) was founded in krasnoyarsk."
+5,"the numerous low-cost sensors in this 107 network have rapidly covered the city’s entire urban area; measurements have been collected since 108 2017, and the data have been periodically released for public access."
+5,"moreover, the nebo network 109 regularly reports unhealthy or very unhealthy air quality conditions, based on the widely- 110 recognized epa indices."
+5,"the nebo network has developed a high level of trust with a wide range 111 of users in krasnoyarsk (>25,000 people follow its activities) and is currently making 112 recommendations related to outdoor activities for a broad audience within the city."
+5,this citizen- 5
+6,"113 science action is positive, but further scientific investigation of the information potential of the 114 network is needed, which motivated this study."
+6,115 this study used krasnoyarsk as a case study for alternative solutions in urban air-quality 116 monitoring in regions with poor reference monitoring.
+6,we used satellite remote-sensing and newly 117 developed ground-based low-cost sensors (the nebo sensor network) as primary tools to measure 118 the pm2.5 concentrations in krasnoyarsk.
+6,"within the main scope of the study, we analyzed the 119 agreement of low-cost sensors with available reference observations to determine the validity of 120 the sensor measurements."
+6,"then, by applying an observation-based method to estimate the 121 distribution of pm2.5 concentration, we characterized pm2.5 variation in krasnoyarsk during a 2- 122 year period (2017 to 2018), including the anomalous pollution events."
+6,"finally, we evaluated the 123 method’s performance, uncertainty, and long-term applicability."
+6,124 2.
+6,"data and methods 125 2.1 study region 126 figure 1 shows the topography of the study region around krasnoyarsk (92.55°e to 127 93.15°e, 55.7°n to 56.3°n)."
+6,"krasnoyarsk is on the yenisei river in siberia, russia, and is 128 surrounded by forested mountains to the south and west and by plains to the north and east."
+6,"it is 129 the regional center of krasnoyarsk krai, which is part of the so-called “donor” region of russia 130 that supplies 50% of the country’s gross domestic product (gdp)."
+6,"krasnoyarsk’s economy is 131 highly industrialized, and some industrial facilities around it are unprecedented and have global 132 importance."
+6,"for instance, ~3% of the world’s aluminum is produced there."
+6,"this industrialized 133 economy has invariably created environmental challenges in krasnoyarsk and its surroundings, 134 such as degraded air quality."
+6,"moreover, krasnoyarsk’s mountainous landscape and its location in 135 the basin of the yenisei river make the city more susceptible to fog and haze formation."
+7,"136 frequent cold temperatures generate temperature inversion layers, whereby a layer of mountain- 137 derived cold air traps polluted air from the industrial sources in the atmosphere over krasnoyarsk 138 (gosteva et al., 2019)."
+7,139 140 figure 1.
+7,topography of the study region around krasnoyarsk.
+7,"white points represent 141 measurements within the ground-based pm2.5 sensor network, red square represents the ground 142 meteorological station for visibility and relative humidity measurements, yellow triangle 143 represents the radiosonde station, and orange triangle represents the pm2.5 reference monitoring 144 station."
+7,"145 2.2 ground-based observations of pm2.5 in krasnoyarsk 146 2.2.1 reference observation of pm2.5 147 pm2.5 concentration was measured using the β-attenuation monitor (bam) at severniy 148 (sev, 56.07°n and 92.94°e) station in february 2018."
+7,its location is shown by the orange triangle 149 in figure 1.
+7,this reference data was provided by the ministry of environment to nebo network as 7
+8,150 a validation dataset for the newly introduced sensors.
+8,the bam analyzer is manufactured by 151 metone instruments.
+8,"according to the governmental procurement activities, more bam analyzers 152 are expected to be installed within krasnoyarsk in the near future 153 (http://zakupki.gov.ru/223/purchase/public/download/download.html?"
+8,id=45643315).
+8,154 2.2.2 sensor observation of pm2.5 155 the establishment of the nebo network continues in krasnoyarsk.
+8,the network uses 156 identical units of the airvisual node to measure pm2.5 concentration.
+8,"the operation of the 157 airvisual node is based on the common light-scattering principle (singer and delp, 2018)."
+8,the 158 airvisual machine-learning algorithms then calibrate and validate the sensor using temperature 159 and humidity values.
+8,"airvisual staff conducted a field evaluation of the sensor’s performance in 160 beijing in june 2015 (ng, 2016), and the comparison between observations from airvisual sensors 161 and the reference bam instrument on a daily basis during this period shown good agreement (r = 162 0.91)."
+8,"independent laboratory evaluation of airvisual sensors using dusttrak has also confirmed 163 that these units reliably and realistically quantify pm2.5 (tan, 2017), and all sensors were delivered 164 to the network installation team after the laboratory calibration was conducted by the manufacturer."
+8,165 pm2.5 concentration was recorded at each measurement site at a high frequency of 20 166 minutes and then averaged to obtain hourly estimates.
+8,"the nebo network has introduced 14 167 stations for pm2.5 monitoring, as indicated by white points in figure 1 (see detailed information in 168 table s1)."
+8,this study used the observations from 11 stations (which by january 2019 had 169 accumulated data for more than 6 months) to calibrate and evaluate satellite observation.
+8,"the 170 sensor observations at komsomolskiy (kom) station, which is 900 m from sev station, were 171 used from february 2018 to determine the sensor’s performance."
+8,all sensors were mounted outside 172 in special boxes situated on the second floors of residential buildings of a similar type.
+8,this setup 8
+9,173 was used to ensure as much as possible that the sensors were free from exposure to very strong 174 emission sources and could thus measure pm2.5 with good spatial representativeness.
+9,the data 175 were uploaded by the airvisual global project to an air pollution app that offers free access to a 176 large air quality database that includes observations from thousands of airvisual nodes distributed 177 around the world (https://www.airvisual.com).
+9,"178 2.3 radiosonde observations 179 a key parameter in all existing aod-pm2.5 models is the planetary boundary layer height 180 (pblh), which determines the extent to which vertical mixing occurs (he and huang, 2018; ma 181 et al., 2016)."
+9,"common methods for deriving pblh have used vertical profiles of meteorological 182 quantities (guo et al., 2016; johnson et al., 2001)."
+9,"in this context, radiosondes remain the standard 183 for upper-level air monitoring and provide the most accurate information of vertical profiles of the 184 meteorological variables (cimini et al., 2013)."
+9,"radiosondes are thus often adopted as a data source 185 for operational determination of pblh (seibert et al., 2000)."
+9,"186 we acquired the radiosonde data from yemelyanovo (yem, 56.18°n and 92.62°e) station 187 in krasnoyarsk from the world meteorological organization’s global telecommunications system, 188 as shown by the yellow triangle in figure 1."
+9,radiosondes are routinely launched twice a day at 189 7:00 am and 7:00 pm local time.
+9,"we adopted the method proposed by holzworth (1964, 1967) to 190 produce diurnal variation in the pblh at an interval of 1 hour."
+9,"the holzworth method has been 191 widely used in a range of meteorological and environmental studies (karimian et al., 2016; yang 192 et al., 2013)."
+9,it assumes a constant potential temperature within the pbl.
+9,the pblh is identified 193 as the height at which the upper potential temperature equal to ground potential temperature.
+9,"based 194 on the estimated hourly pblh data, the daily noontime average of pblh (from 11:00 am to 2:00 195 pm) was obtained to match the time of satellite observation."
+10,"196 2.4 meteorological observation 197 hourly surface meteorological parameters, such as relative humidity (rh) and visibility 198 (l), at opytnoe pole (opy, 56.03°n and 92.75°e, red square in figure 1) were also acquired from 199 the world meteorological organization."
+10,"the atmosphere was moderately moist in krasnoyarsk, 200 and the average noontime rh was 61.2% ± 16.5% within this 2-year period."
+10,"the visibility ranged 201 from 0 to 10 km, with all values above 10 km recorded as 10 km; such visibility upper limits are 202 frequently registered not only in siberia but also in regions such as america, africa, the middle 203 east, and southern asia (i.e., an upper limit can be 10 km or 16 km in these places)."
+10,"the surface 204 aerosol extinction coefficient (σa,0) can be quantified from visibility by σa,0 = 3.912/l 205 (koschmieder, 1925)."
+10,"206 2.5 satellite observation of pm2.5 207 2.5.1 satellite observation of aod 208 the moderate resolution imaging spectroradiometer (modis) instruments aboard terra 209 and aqua measure aod (chu et al., 2002)."
+10,"in this study, modis c6 level-2 aod data in 210 krasnoyarsk for 2017 and 2018 were acquired."
+10,"the aod data were retrieved using the dark-target 211 algorithm over land (levy et al., 2013)."
+10,"based on the nominal resolution of the modis aod, we 212 created 400 grid cells at a spatial resolution of 0.03° × 0.03° that covered the study region."
+10,the 213 measurements from two satellites were averaged to represent the daily noontime value.
+10,"modis 214 aod data are often missing due to the presence of clouds and high surface reflectance (liu, 2014)."
+10,215 figure s1 shows the sample size of the satellite-based daily aod within the study region for 216 different months from 2017 to 2018.
+10,the samples were counted when satellite observations were 217 available in at least 25% of the area within the study region.
+10,"it was found that the satellite 218 observations were poor in winter, mainly because snow and ice surfaces in these high-latitude 10"
+11,"219 regions generate high surface reflectance (van donkelaar et al., 2006)."
+11,the data loss in winter 220 should be therefore considered when we estimate annual pm2.5 concentrations via satellite.
+11,"221 2.5.2 satellite-based estimation of pm2.5 222 we adopt and extend an observational data-driven algorithm to retrieve pm2.5 223 concentrations, showing in supplementary material (lin et al., 2015)."
+11,"the algorithm introduces 224 aerosol scale height (h), integrated humidity coefficient (γ’), and integrated reference value under 225 dry-air conditions (k)."
+11,"226 the scale height h can be estimated from the ratio of the satellite-based aod and the 227 visibility-derived σa,0."
+11,"similar to most other regions, the visibility dataset was affected by an upper 228 limit of 10 km in krasnoyarsk."
+11,the pblh provided additional information to characterize the 229 aerosol vertical distribution.
+11,the scale height can be larger than pblh when a significant 230 concentration of aerosols accumulates above the pbl.
+11,we therefore introduce a ratio (a) of scale 231 height to the pblh.
+11,spatial distribution of the pm2.5 concentration can be estimated as follow: 𝐴𝐴𝐴𝐴𝐴𝐴 232 𝑃𝑃𝑃𝑃2.5 = 𝐴𝐴∙𝑃𝑃𝑃𝑃𝑃𝑃𝑃𝑃 ′ (1) 1−𝑅𝑅𝑅𝑅 −𝛾𝛾 𝐾𝐾∙� � 1−𝑅𝑅𝑅𝑅0 233 the pblh and rh derived from the radiosonde and meteorological stations represent 234 atmospheric conditions over the entire krasnoyarsk area.
+11,"the γ’ and k values are prerequisite 235 parameters in our pm2.5 estimation model, and both are associated with aerosol characteristics (lin 236 et al., 2019)."
+11,"the average γ’ and k values across china, where aerosols covered various categories, 237 were estimated to be 0.50 ± 0.32 and 5.14 ± 1.56 m2/g, respectively (lin et al., 2015)."
+11,"in the 238 monitoring-limited regions, assumptions of both γ’ and k values are required."
+11,"in this work, we 239 began the estimate of pm2.5 concentration in krasnoyarsk based on the average γ’ and k values 240 derived from the chinese study."
+11,"because actual γ’ and k values over krasnoyarsk were likely to 241 differ from the values over china, we discuss the effect of the difference in aerosol characteristics 11"
+12,242 between china and krasnoyarsk in section 3.3 and assess the possible uncertainties based on these 243 assumptions in section 3.5.
+12,244 2.6 hysplit backward trajectory model 245 we exploited the hybrid single-particle lagrangian integrated trajectory (hysplit) 246 model to track the origin of air masses in krasnoyarsk.
+12,"the hysplit model is one of the most 247 common models for conducting back-trajectory analysis and is based on source-receptor 248 relationships (rolph et al., 2017)."
+12,"in this study, the computation of the backward trajectory used 249 the meteorological fields of the global data assimilation system with a spatial resolution of 0.5° 250 × 0.5°."
+12,"the model ran in a backward trajectory regime for 12 hours, starting from 12:00 utc in 251 krasnoyarsk (56.01°n, 92.87°e) at 200 m above sea level."
+12,the backward trajectories of air parcels 252 were calculated using a free-access online platform developed by the air resources laboratory of 253 national oceanic and atmospheric administration (https://ready.arl.noaa.gov/hysplit.php).
+12,254 3.
+12,"results 255 3.1 evaluation of ground-based sensor observations 256 to evaluate the performance of the nebo network sensors, we compared pm2.5 257 concentration observations from one sensor with the reference pm2.5 measurement."
+12,the bam 258 observations from sev station in february 2018 had been provided to the nebo network by 259 governmental agencies.
+12,figure s2 compares the time series of hourly pm2.5 concentrations from 260 the sensor at kom station with the reference bam monitor at sev station.
+12,good agreement was 261 obtained between the pm2.5 concentrations from the sensor and bam observation.
+12,both of sensor 262 and bam monitoring detected those high pm2.5 pollution episodes.
+12,263 figure 2 shows regression relationship between hourly pm2.5 concentrations from the 264 sensor and reference bam monitoring.
+12,slope and intercept were estimated to be 0.95 and 0.41 12
+13,"265 µg/m3, respectively."
+13,good agreement between the sensor and reference monitoring was obtained 266 with a correlation coefficient (r) of 0.94 (n = 672) and a mean absolute percentage deviation 267 within 20%.
+13,"the monthly average pm2.5 concentration from the sensor and bam were estimated 268 to be 55.4 µg/m3 and 57.7 µg/m3, respectively."
+13,"the systematic deviation in the monthly average 269 pm2.5 concentration was -2.3 µg/m3, which was insignificant and was within 5%."
+13,such high 270 agreement also outperformed the experiment conducted by the airvisual group in beijing.
+13,"271 moreover, this node-to-bam agreement was as high as that of the previous dataset from the 272 chinese city of xian (r = 0.93–0.95) (gao et al., 2015) and higher than that of the dataset from 273 the u.s. city of oakland (r = 0.80–0.84) (holstius et al., 2014)."
+13,274 275 figure 2.
+13,regression relationship between hourly pm2.5 concentrations from the sensor at kom 276 station and the reference bam monitoring data from sev station in february 2018.
+13,"the statistical 277 metrics include correlation coefficient (r), root-mean-square deviation (rmsd), mean deviation 278 (d), mean absolute deviation (|d|), mean percentage deviation (pd), and mean absolute percentage 279 deviation (|pd|)."
+14,"280 to evaluate the performance of each sensor, we further compare temporal variation in the 281 hourly pm2.5 concentrations at different stations."
+14,"figure 3 shows the correlation coefficient 282 between hourly pm2.5 concentrations for each pair of stations during the second half year of 2018 283 (i.e., from july to december), when observations were available at all stations."
+14,average sample 284 size was 3697.
+14,the correlation coefficient ranged from 0.45 to 0.89 with an average of 0.72.
+14,"the 285 lowest correlation coefficients were associated with pm2.5 concentration at aka station, which 286 was on the westernmost side of the city."
+14,the larger distances between aka station and other 287 stations could lead to these lower correlation coefficients.
+14,"temporal variation in pm2.5 288 concentrations at aka and its neighboring stations (e.g., baz and kir stations), however, was 289 highly consistent with a correlation coefficient exceeded 0.8."
+14,these results suggest the good 290 performance of all sensors from the network.
+14,291 292 figure 3.
+14,"correlation coefficient between hourly pm2.5 concentrations for each pair of stations 293 during the second half year of 2018 (i.e., from july to december)."
+15,294 validation of all sensors of the nebo network throughout all seasons of the year would 295 have been an enormous undertaking given the limited data access and the gaps in the spatial 296 coverage of the government monitoring.
+15,"nevertheless, within the observed conditions, the high 297 sensor-to-bam agreement and insignificant systematic bias suggest good field performance of the 298 pm2.5 sensors in krasnoyarsk, which implies that the use of sensors after laboratory calibration 299 was acceptable to achieve the desired goals of our study."
+15,"in case of detecting a significant sensor’s 300 bias after laboratory calibration, we would recommend an adjustment of the sensor data using the 301 regression equations."
+15,"302 3.2 retrieving pblh and scale height 303 to define the vertical mixing within our method of pm2.5 data retrieval, we plotted the time 304 series of the noontime average pblh (from 11:00 am to 2:00 pm) at the radiosonde station from 305 2017 to 2018 (see the black line in figure s3)."
+15,"in general, the noontime pblhs in spring and 306 summer were higher than those in autumn and winter."
+15,"such seasonal patterns were similar to those 307 observed in radiosonde or lidar datasets from northern china (chu et al., 2019; guo et al., 2016); 308 these studies have shown that high near-surface wind speed and intense solar radiation favors the 309 development of the boundary layer in spring and summer."
+15,"the scale height h was estimated from 310 the ratio of the satellite-based aod and the visibility-derived σa,0."
+15,"the red triangles show the 311 noontime scale height at the meteorological station on specific dates, when satellite observations 312 were available and the ground visibility was within the upper limit (i.e., 10 km)."
+15,313 figure s4 shows the seasonal average ratio (a) of the scale height to pblh in krasnoyarsk 314 during the study period.
+15,"the seasonal average ratios for spring (mam), summer (jja), and autumn 315 (son) were estimated to be 0.99 ± 0.52, 1.70 ± 0.62, and 0.99 ± 0.37, respectively."
+15,the high ratio 15
+16,"316 in summer suggests that approximately 40% of aerosols appeared above the pbl, which resulted 317 from the vertical convection and regional transport of aerosols such as wildfire smoke."
+16,"318 3.3 comparison between satellite-based and ground-based pm2.5 concentrations 319 we applied the method described in section 2.5.2 to estimate pm2.5 concentrations using 320 satellite remote-sensing data, coupled with radiosonde and ground meteorological observations."
+16,"321 the satellite-based estimation of pm2.5 concentration used average values of γ’ and k obtained 322 from china (i.e., 0.50 and 5.14 m2/g) (lin et al., 2015)."
+16,we compared the agreement in pm2.5 323 concentrations between satellite and nebo sensor observations.
+16,"thus, figure 4 shows correlation 324 coefficients between the satellite-derived and ground-based daily noontime pm2.5 concentrations 325 during the study period."
+16,"the correlation coefficients ranged from 0.36 at pav station to 0.87 at 326 aka station (mean, 0.57 ± 0.14)."
+16,"these correlation coefficients were comparable to those from 327 the eastern united states (r = 0.30 – 0.80) and higher than those from the western united states 328 (r < 0.30) obtained with the ctm-based model (van donkelaar et al., 2006)."
+16,our results suggest 329 that the observation-based model predicted the temporal variations in pm2.5 concentration as 330 accurately as the simulation-based model.
+16,331 16
+17,332 figure 4.
+17,correlation coefficient between satellite-derived and ground-observed daily noontime 333 pm2.5 concentrations from various sensors during the study period.
+17,"334 however, systematic deviations were observed between the satellite-derived and sensor- 335 observed pm2.5 concentrations, in that the 2-year averages of the satellite-derived pm2.5 336 concentrations were consistently higher than the corresponding sensor observations."
+17,"on average, 337 these satellite-derived pm2.5 concentrations were overestimated by 5.92 µg/m3 (i.e., 27.6% of 338 sensor observations), which could have been due to the various chemical compositions and optical 339 properties of aerosols over krasnoyarsk compared to the aerosols over china."
+17,"that is, siberian 340 wildfires mean that krasnoyarsk experiences a higher average loading of carbonaceous aerosols 341 (e.g., elemental and organic carbons) than does china (smolyakov et al., 2014)."
+17,"the k value in 342 krasnoyarsk is thus expected to be higher than that in china because of the strong light extinction 343 efficiency of the carbonaceous aerosols (watson, 2002)."
+17,"therefore, we made an assumption and 344 used a higher k value of 6.56 m2/g for the krasnoyarsk data, 27.6% higher than the average value 345 in china."
+17,this eliminated the systematic error within the satellite-derived data but did not affect 346 the correlation coefficient between the satellite-derived and sensor-observed daily pm2.5 347 concentrations.
+17,"348 figure 5 compares of the satellite-derived and ground-observed daily noontime pm2.5 349 concentrations from the sensor at sve station, which has the longest data record (i.e., 350 measurements started in june 2017)."
+17,"in the figure, the blue points on both panels show the time 351 series of the ground-observed daily noontime pm2.5 concentration from 2017 to 2018, and the red 352 points show the time series of the satellite-derived daily noontime aod and pm2.5 concentrations, 353 respectively."
+17,"notably, after the conversion from aod to pm2.5 concentration, the correlation 17"
+18,354 coefficient increased from 0.51 to 0.54 (n = 78) during the study period.
+18,"in particular, the 355 correlation coefficient substantially increased from 0.09 to 0.67 (n = 24) in 2017. 356 (a) 357 (b) 358 figure 5."
+18,comparison of satellite-derived and ground-observed daily noontime pm2.5 359 concentrations from the sensor at sve station from 2017 to 2018.
+18,blue points in (a) and (b) show 360 the time series of the ground-observed daily noontime pm2.5 concentrations.
+18,"red points in (a) and 361 (b) show the time series of the satellite-derived daily noontime aod and pm2.5 concentrations, 362 respectively."
+18,363 3.4 characterization of pm2.5 concentration variation 364 we combined nebo monitoring observations and spaceborne data to characterize pm2.5 365 concentration variations in krasnoyarsk in the years for which observations were available (2017 366 and 2018) and during the anomalous pollution events.
+18,367 3.4.1 spatiotemporal variation of pm2.5 concentration 18
+19,"368 at first, we analyzed the temporal variability of pm2.5 concentration during 2017 and 2018."
+19,369 figure s5 shows the time series of pm2.5 concentrations from 11 sensors within this period.
+19,the 370 pm2.5 concentrations varied considerably.
+19,"the highest pm2.5 concentrations (>200 µg/m3) were 371 frequently observed in winter (e.g., january and february) and in july 2018."
+19,"the high pm2.5 372 concentrations in winter were seemingly driven by enhanced emissions from heating systems and 373 by weather conditions that were unfavorable for pollution dispersion (mikhailuta et al., 2009)."
+19,374 figure s6 demonstrates the diurnal variation in pm2.5 concentration from the sensor 375 observations.
+19,"these variations were characterized based on the averaged pm2.5 concentrations 376 obtained from the four sensors at sve, pav, lop, and ale stations with full data coverage in 377 2018."
+19,the results show that the pm2.5 concentration reached its peak at 2:00 pm.
+19,"we also plot the 378 corresponding pm2.5 concentrations at noontime (indicated by the red solid line), for when satellite 379 observations were available."
+19,"we discovered that the noontime average pm2.5 concentration was 380 higher than the 24-h average by 5.24 µg/m3 (i.e., 20.0% of the 24-h average)."
+19,"381 because satellite observations were only available at approximately noon, a correction 382 factor was needed to represent the degree of diurnal pm2.5 variation to obtain robust long-term 383 averages."
+19,"to obtain the monthly average pm2.5 concentration, we therefore applied a correction 384 factor of 1.20 to the satellite-derived monthly average of noontime pm2.5 concentrations."
+19,"this 385 correction factor was essential because the use of satellite-derived pm2.5 concentrations mainly 386 focused on the use of long-term averages (e.g., monthly and annual averages)."
+19,387 we further evaluated the correlation between satellite-derived monthly average pm2.5 388 concentrations against ground-based observations from all sensors during 2017 and 2018 period 389 (shown in figure 6).
+19,a good correlation coefficient of 0.78 (n = 74) was obtained.
+19,this city-scale 390 correlation is comparable to national-scale comparisons seen in other studies (van donkelaar et 19
+20,"391 al., 2010, 2015; geng et al., 2015; peng et al., 2016)."
+20,"the root-mean-square deviation, mean 392 deviation, and mean percentage deviation were estimated to be 7.1 µg/m3, 1.4 µg/m3, and 18.1%, 393 respectively."
+20,we once again emphasize that the application of the constant correction factor does 394 not affect the correlation coefficient between the satellite-derived and sensor-observed monthly 395 pm2.5 concentrations.
+20,396 397 figure 6.
+20,evaluation of satellite-derived monthly averaged pm2.5 concentration against ground- 398 based observations from all sensors in krasnoyarsk during 2017 and 2018.
+20,"statistical metrics 399 include correlation coefficient (r), root-mean-square deviation (rmsd), mean deviation (d), 400 mean absolute deviation (|d|), mean percentage deviation (pd), and mean absolute percentage 401 deviation (|pd|)."
+20,"402 the solid line in figure s7 shows the monthly variation of the average pm2.5 concentrations 403 from the four sensors at sve, pav, lop, and ale stations with a full data coverage in 2018."
+20,it 404 revealed the distinct pollution features in krasnoyarsk.
+20,the highest monthly pm2.5 concentration 405 was observed in winter (as high as 63 µg/m3 in february).
+20,another peak of pm2.5 concentration 20
+21,406 was observed in summer (40 µg/m3 in july).
+21,"both peaks are also displayed in figure s5, which 407 depicts results derived from measurements at 11 stations."
+21,"because the satellite observations were 408 only available from april to october (the 7 months shown by the red line), another correction 409 factor that represented the degree of monthly pm2.5 variation was needed to obtain the annual 410 average."
+21,"411 we found that the annual average pm2.5 concentration was higher than the 7-month average 412 by 7.86 µg/m3 (i.e., 30.0% of the annual average), which indicates that the use of uncorrected 413 satellite data leads to severe underestimation of the annual pm2.5 concentrations in high-latitude 414 regions such as krasnoyarsk."
+21,"to obtain a more accurate annual average of pm2.5 concentration, 415 we therefore divided the satellite-derived 7-month average of pm2.5 concentration by 0.7."
+21,"416 after the correction factors were determined, we identified the spatial distribution of the 417 pm2.5 concentrations in krasnoyarsk by plotting the satellite-derived averages from 2017, 2018, 418 and 2017–2018 (shown in left, middle, and right panels of figure 7, respectively)."
+21,the points in 419 the middle panel represent the annual average pm2.5 concentrations from the four sensors with full 420 data coverage in 2018.
+21,"the mean deviation of the annual averaged pm2.5 concentrations from 421 satellite and sensor observations was 1.4 µg/m3 (i.e., 5.3% of sensor observation)."
+21,satellite 422 observations show that the highest pm2.5 concentrations were present over the geographical center 423 and the southern coast of the city in 2017 and 2018 period.
+21,"in this area, the pm2.5 concentrations 424 ranged from 29.5 µg/m3 (central district) to 35.0 µg/m3 (sverdlovskiy district) in 2017."
+21,"in 2018, 425 the same area had pm2.5 concentrations ranging from 24.7 µg/m3 (central district) to 33.9 µg/m3 426 (sverdlovskiy district)."
+21,"therefore, the 2-year average pm2.5 concentrations in the central and 427 southern districts of krasnoyarsk could reach 35 µg/m3, which far exceeds the world health 428 organization (who) air quality guideline (aqg) for annual pm2.5 standards (i.e., 10 µg/m3)."
+22,"429 the higher pm2.5 concentration in the geographical center of the city and southern districts 430 underscores the high pollutant emission and unfavorable dispersion conditions in this area, and the 431 increased negative effects on health that these conditions would have."
+22,"in total, the spatial average 432 of the 2-year pm2.5 concentration over 400 grid cells within the study region was estimated to be 433 23.1 ± 3.5 µg/m3."
+22,"this estimate was ~63% higher than the national averaged pm2.5 concentration 434 (14.2 µg/m3) in russia in 2013 (brauer et al., 2016)."
+22,435 436 figure 7.
+22,"left and middle panels show spatial distribution of satellite-derived annual averaged 437 pm2.5 concentrations in 2017 and 2018, and right panel shows corresponding 2-year average 438 distribution."
+22,points in middle panel represent annual average pm2.5 concentrations from the four 439 sensors with full data coverage in 2018.
+22,"440 3.4.2 pm2.5 pollution episode in july 2018 441 as aforementioned, pm2.5 concentration had a distinct spike in july 2018."
+22,"panel a of figure 442 8 shows the time series of pm2.5 concentrations at pav station in the middle of july 2018, where 443 it can be seen that pm2.5 concentrations reached 150 µg/m3 on july 13."
+22,we make use of the true- 444 color images acquired from the modis instrument aboard aqua satellite (shown in panel b) for 445 further investigation.
+22,"in the figure, the red points represent the areas of active fire hotspots."
+22,"we 446 found that on july 13, 2018, the large forest areas in the close vicinity of krasnoyarsk were 22"
+23,447 engulfed by the wildfires.
+23,analysis of modis images reveals that the massive smoke plumes 448 originated from wildfires in the northeastern direction from krasnoyarsk.
+23,krasnoyarsk was 449 directly exposed to the increased aerosol loading driven by smoke particles.
+23,"additional analyses 450 of hysplit back trajectory (shown in panel c) have also supported the smoke-transport 451 hypothesis, that is, that the air masses transported smoke particles directly from the hotspot regions 452 to krasnoyarsk. 453 (a) 454 (b) (c) 455 figure 8. (a) time series of pm2.5 concentration at pav station in the middle of july 2018. (b) 456 true-color images acquired from the modis instrument aboard aqua satellite on july 13, 2018."
+23,457 red points identify actively burning wildfires. (c) hysplit back-trajectory analysis using 12-h 458 setting (yellow triangles) near krasnoyarsk (white pixels).
+23,459 3.5 performance and uncertainties of the observation-based method 23
+24,"460 in this section, we evaluate the performance and describe the uncertainties of our proposed 461 method and data sources used in this study."
+24,"462 3.5.1 evaluation of our method compared to other methods 463 the statistical aod-pm2.5 methods used extensive pm2.5 observational data to train the 464 models and therefore tended to have lower estimation errors (he and huang, 2018; liu, 2014; ma 465 et al., 2016)."
+24,"their requirement for extensive ground observations hinders their application in the 466 regions with large observational data gaps (like most developing countries) or with restricted 467 access to pm2.5 data (e.g., most ex-soviet countries including russia)."
+24,"in such regions, traditional 468 aod-pm2.5 methods have to rely on simulation results from the ctms (e.g., geos-chem model) 469 to give an estimate of pm2.5 concentrations."
+24,470 figure s8 shows the spatial distribution of the satellite-derived annual pm2.5 concentrations 471 based on a ctm-based model in the study region for 2016 (downloaded from 472 http://fizz.phys.dal.ca/~atmos/martin/?
+24,page_id=140).
+24,the spatial pattern of pm2.5 concentrations 473 was similar to the results obtained in this study.
+24,"in particular, the pm2.5 concentrations were 474 elevated within the urban area of krasnoyarsk and in the close vicinity of the city."
+24,"the spatial 475 average of pm2.5 concentrations obtained from the ctm-based model was approximately 16.0 476 µg/m3, which was 30% lower than the concentrations obtained in this study."
+24,such a deviation could 477 stem from the uncertainties of model simulation and satellite data loss.
+24,this would potentially 478 cause bias in exposure and health impact assessments using this data.
+24,future studies should further 479 compare data sets obtained from different sources.
+24,"480 3.5.2 uncertainties of the satellite-derived pm2.5 concentrations 481 major uncertainty in the pm2.5 concentrations estimated from satellite data stems from the 482 input factors such as satellite-based aod, pblh, the ratio (a) of scale height to pblh, and the γ’ 24"
+25,483 and k values.
+25,"using the same pblh algorithm as in krasnoyarsk, we also produced the pblh 484 from radiosonde data in hong kong, for which ground-based lidar observations are available."
+25,"485 evaluation of the radiosonde-derived daily noontime pblh using the lidar observations showed 486 good agreement, with a correlation coefficient of 0.63 (n = 2075) and a percentage deviation of 487 around 20% (su et al., 2017)."
+25,"488 it is also essential to consider the difference between the scale height and pblh for regions 489 like krasnoyarsk, in which a large proportion of aerosols are transported above the pbl."
+25,"without 490 introduction of the ratio of scale height to pblh, the pm2.5 estimation can be greatly biased during 491 summer."
+25,"in this study, we used the seasonal average of such a ratio because the aod-visibility 492 pairs were limited during the investigation period."
+25,"if more visibility data are available, more 493 information on the scale height and its association with pblh can be obtained."
+25,494 the γ’ and k are prerequisite parameters in our pm2.5 estimation model.
+25,both are associated 495 with aerosol characteristics.
+25,"the use of the average k value from china (i.e., 5.14 ± 1.56 m2/g) 496 resulted in uncertainty in the pm2.5 concentration of about 30%."
+25,"given the higher loading of 497 carbonaceous aerosols, we used a higher k value to reduce the deviation in the satellite-derived 498 pm2.5 concentration for krasnoyarsk."
+25,"499 to assess the uncertainty caused by using the average γ’ value from china (i.e., 500 0.50 ± 0.32), we performed monte carlo simulation, in which we set the values of aod, pblh, 501 a, rh, and k as 0.25, 1 km, 1, 61%, and 6.56 m2/g, respectively."
+25,"we generated 10,000 γ’ values 502 from a normalized distribution with a mean and standard deviation of 0.50 and 0.32, respectively."
+25,503 we then estimated pm2.5 concentrations using these γ’ values.
+25,the frequency distribution of the 504 estimated pm2.5 concentration is shown in figure s9.
+25,"the estimated mean (and standard deviation) 505 pm2.5 concentration was 31.0 ± 4.3 µg/m3, which suggests that the uncertainty caused by direct 25"
+26,506 use of the γ’ value from china was less than 15%.
+26,future studies can refine the γ’ and k values 507 when more detailed information on local aerosol characteristics are available.
+26,508 3.5.3 uncertainties of sensor observations 509 we performed several quality control processes to avert the failure of sensors.
+26,"first, once 510 the cheap nodes for pm2.5 observations are calibrated in laboratory conditions, they will endure for 511 ~2 years in the stable conditions without instrumental-related deviations."
+26,our work deals with 1-2 512 years observations.
+26,"second, an automated algorithm sets observation value to n.a. once 513 observation is physically failed."
+26,"third, we performed statistical-based “flagging” the observation 514 data beforehand."
+26,we determined that not more than 4% of point observations were found in the 515 statistically unrealistic interval for each station.
+26,statistical anomaly is defined as range outside +/- 516 3 times of standard deviation from hourly mean.
+26,such observations were removed beforehand.
+26,517 most malignant observations were found in bot station (3.9%).
+26,"however, it is not a problem in 518 the data since bot station had provided prominently less observations in total than other stations."
+26,"519 the agreement between low number of total observations at bot and the presence of the statistical 520 anomalies indirectly approves the validity of automated sensor algorithm (i.e., sensor adequately 521 and frequently switches off at station with issues)."
+26,"at every other station, the percentages of the 522 anomalies found per each station are: 2.9% at sve, 1.9% at uda, 3.3% at ves, 3.1% at aka, 523 3.2% at dzh, 3.1% at muz, 2.9% at baz, 3.4% at kir, 2.4% at kop, 2.3% at ady, 3.5% at 524 kom, 3.6% at zhe, 3.5% at pav, 3.9% at bot."
+26,525 collocation of bam-to-node experiment is peculiarly difficult in krasnoyarsk because of 526 three malignant factors.
+26,"foremost, the access to air quality observations is severely limited and 527 there is a lack of comprehensive study that can approve that existing governmental sensors are 528 accurate enough."
+26,"as we know, the first study about evaluating air quality observations from 26"
+27,529 governmental network is under the process.
+27,we underline that their effort is independent from our 530 study and do not provide any synergistic retrieval for pm2.5 monitoring.
+27,"once they open all these 531 datasets or manage to publish their study, it will be easier to compare their observations with our 532 method."
+27,"at second, any actions with bam instrument on-site is challenging for the team behind 533 this paper."
+27,bam collocation was initiated by russian government as a result of exceptional top- 534 down decision.
+27,"after that, we had not noticed any will to make additional experiment from the 535 governmental side."
+27,"despite we want as much as possible inter-comparison data, the combined 536 manpower-funding limitation for the on-site work does not allow to obtain any additional bam 537 sensors in a commercial way."
+27,"at third, it is a common knowledge about peculiarly difficult 538 situation with air quality observations in the post-ussr countries."
+27,"the current situation 539 description is easily found in the modern research literatures (strukova et al., 2019)."
+27,"all in all, 540 although one bam is not adequate for very comprehensive study, but in our situation and as a first 541 step towards better understanding of air quality status in industrial city, it is a good start."
+27,"these 542 factors are actually the reasons why our work is so helpful in the hindered situation with poor air 543 quality monitoring, constrained access to most of data, and lack of adequate funding."
+27,"544 based on the previously discussed results of the beijing airvisual comparison and the 545 airvisual-bam comparison in krasnoyarsk, the credibility of the nebo sensor network for 546 measuring pm2.5 concentration was deemed satisfactory."
+27,"the uncertainty in the validity of data 547 from low-cost sensors stems from factors such as meteorological influence, unpredictable drift or 548 unknown seasonality in measurement bias, sensor saturation, and degradation of the sensors, along 549 with potential variation in sensitivity to aerosols of various properties."
+27,"550 during the month-long comparison, the nebo sensor exhibited good agreement with the 551 bam reference instruments (r = 0.94)."
+27,field calibration of each sensor from the nebo network 27
+28,552 was a major challenge due to the limited reference observations.
+28,"to address these challenges, we 553 used only the aggregated and averaged information from sensor observations at multiple stations 554 (e.g., averaged diurnal and monthly variations in pm2.5 concentration from the four sensors at sve, 555 pav, lop, and ale stations) to calibrate the satellite observations."
+28,our evaluation of the monthly 556 average pm2.5 concentrations in february 2018 from the sensor using reference monitoring 557 suggested an insignificant systematic bias (<5%).
+28,558 4.
+28,"discussion 559 this work aimed to find alternative solutions for urban air-quality monitoring for regions 560 with poor reference monitoring, based on a study conducted in krasnoyarsk."
+28,low-cost sensors and 561 satellite observations were used to develop an observation-based method to estimate long-term 562 pm2.5 concentrations within the city for 2017–2018.
+28,"different approaches have unique advantages 563 and can compensate for the weaknesses when they are deployed together (pinder et al., 2019)."
+28,564 deployment of a few reference monitoring pairing with the low-cost sensors ensures the data 565 quality and quantifies the uncertainty.
+28,the low-cost sensor network and satellite remote sensing 566 then extend spatiotemporal coverage.
+28,the satellite-derived pm2.5 concentrations showed good 567 agreement with the sensor pm2.5 concentrations (r = 0.78 on the monthly scale).
+28,"the sensor pm2.5 568 concentrations were used to correct the deviation in the satellite-derived annual pm2.5 569 concentrations by 20%, resulting from data restriction at noontime, and by 30%, resulting from 570 the data loss in winter."
+28,the deviation between the satellite-derived and sensor-observed annual 571 pm2.5 concentrations was <10%.
+28,"taken together, these data show that our method has satisfactory 572 performance and reasonable uncertainties."
+28,573 our results have both local and global implications.
+28,"from a local perspective, our results 574 demonstrate that low-cost sensor data and synergy method are sufficiently accurate that they can 28"
+29,575 be used to assist governmental urban air-quality monitoring.
+29,"given the high level of agreement 576 between the bam and the airvisual node with which it was compared, local policymakers may 577 find it beneficial to co-locate multiple airvisual sensors with their reference stations for an 578 extended period of time."
+29,this will enable evaluation of the efficacy of these sensors as a potential 579 supplemental source of information to aid understanding of sources and dispersion of pollution 580 and of the effectiveness of interventions.
+29,"581 in particular, the method are applicable in cities like krasnoyarsk, where significant 582 emission sources are well known but insufficient quantitative information exists."
+29,its use could pave 583 the way for nationwide projects for air quality improvement.
+29,"this aspect is particularly important 584 for russia because its clean air program consists of ambitious plans for improving urban air 585 quality in 12 industrial cities (including krasnoyarsk) by 2021 (government of russian 586 federation, 2019)."
+29,"587 from a global perspective, our pm2.5 estimation model relies on widely-available data and 588 can thus be used to investigate pm2.5 pollution trends and effects in poorly observed regions."
+29,"such 589 investigations may help to reveal previously unreported effects of aerosols on the environment, 590 health, and climate on global scales."
+29,"the approach of shaddick et al. (2018), which filled data gaps 591 and assigned uncertainties, can be used to identify areas with predicted high exposures and high 592 uncertainties, which can then be targeted by the new monitoring infrastructure."
+29,understanding how 593 the linkage of low-cost sensor networks and other observations can improve global estimates of 594 pm2.5 exposure is thus critical to realize the potential benefits of emerging lower-cost technologies.
+29,"595 therefore, the method developed here can be extended for global pm2.5 monitoring applications 596 in the foreseeable future, especially for poorly observed regions such as that in this study."
+29,597 5.
+29,conclusions 29
+30,"598 the lack of reference ground-based pm2.5 observation has resulted in major gaps in air- 599 quality information globally, particularly in many parts of the developing world."
+30,"this study 600 developed and validated an alternative solution for urban air-quality monitoring in regions such as 601 krasnoyarsk, which has limited reference ground-based monitoring."
+30,we developed an 602 observation-based method by combining satellite remote-sensing techniques and a low-cost sensor 603 network to estimate long-term pm2.5 concentrations.
+30,604 our method met satisfactory requirements for providing high spatiotemporal pm2.5 605 distributions for urban air quality monitoring.
+30,"our method has been applied for robust 606 quantification of the pm2.5 concentration in krasnoyarsk for 2017 and 2018, resolving long-term 607 ambiguity about aerosol distribution within the city."
+30,"the pm2.5 concentration in krasnoyarsk 608 during these years was 23.1 µg/m3, which is 63% higher than the average pm2.5 in russia (14.2 609 µg/m3)."
+30,"seasonal variability in the pm2.5 concentration over krasnoyarsk in 2018 revealed two 610 distinct peaks in winter (e.g., february) and summer (e.g., july)."
+30,the peak in winter is likely to be 611 due to increased heating and unfavorable pollution-dispersion conditions.
+30,"during the pollution 612 event in summer, the pm2.5 concentrations reached 150 µg/m3 as a result of smoke transport from 613 forest wildfires."
+30,614 further studies should include three key steps.
+30,"first, airvisual sensors should be deployed 615 alongside pm2.5 reference monitors at a variety of urban and rural background locations to 616 understand the sensors’ response to various aerosol mixes."
+30,"second, further study is required to 617 assess the spatial extent and resolution of the low-cost sensor sampling points and the site 618 requirements of the sampling locations to provide the most accurate picture of pm2.5 across a city 619 or region using this technique."
+30,"finally, evaluation of how this nonregulatory but potentially quite 30"
+31,620 accurate data can inform government and citizen stakeholders is needed to improve public health 621 and policy.
+31,622 acknowledgments 623 this work was supported by the science and technology plan project of guangdong 624 province of china (grant no.
+31,"2017a050506003), the research grants council of hong kong 625 government (project no."
+31,"t24/504/17), nsfc/rgc (grant no."
+31,"n_hkust638/19), and the fok 626 ying tung graduate school (nrc06/07."
+31,sc01).
+31,vande hey’s contribution was funded by the 627 natural environment research council of the uk (ne/n005406/1).
+31,part of this work was 628 supported by the korean meteorological administration research and the development program 629 “development and assessment of ipcc ar6 climate change scenario (1365003000)”.
+31,we 630 gratefully acknowledge igor schpekht and the entire team of nebo monitoring for providing free 631 access to the data from their sensors and for their strong support of our study.
+31,we also thank oleg 632 yakubailik for providing relevant information about state-of-the-art conditions of urban air quality 633 in krasnoyarsk and the surrounding regions.
+31,the authors declare that they have no actual or 634 potential competing financial interests.
+31,"635 reference 636 artyukhov, i.p., arshukova, i.l., dobretsova, e.a., dugina, t.a., shulmin, a.v., and demko, 637 i.v."
+31,(2015).
+31,"epidemiology of chronic obstructive pulmonary disease: a population-based study in 638 krasnoyarsk region, russia."
+31,chron.
+31,obstruct.
+31,pulmon.
+31,"10, 1781–1786."
+31,"639 baklanov, a., molina, l.t., and gauss, m."
+31,(2016).
+31,"megacities, air quality and climate."
+31,atmos.
+31,640 environ.
+31,"126, 235–249."
+31,"641 borrego, c., costa, a.m., ginja, j., amorim, m., coutinho, m., karatzas, k., sioumis, th., 642 katsifarakis, n., konstantinidis, k., de vito, s., et al."
+31,(2016).
+31,assessment of air quality 643 microsensors versus reference methods: the eunetair joint exercise.
+31,atmos.
+31,environ.
+31,"147, 246– 644 263."
+31,"645 brauer, m., freedman, g., frostad, j., van donkelaar, a., martin, r.v., dentener, f., dingenen, 646 r. van, estep, k., amini, h., apte, j.s., et al."
+31,(2016).
+31,ambient air pollution exposure estimation 647 for the global burden of disease 2013.
+31,environ.
+31,technol.
+31,"50, 79–88."
+32,"648 castell, n., dauge, f.r., schneider, p., vogt, m., lerner, u., fishbain, b., broday, d., and 649 bartonova, a."
+32,(2017).
+32,can commercial low-cost sensor platforms contribute to air quality 650 monitoring and exposure estimates?
+32,environ.
+32,"99, 293–302."
+32,"651 chan, t.-c., zhang, z., lin, b.-c., lin, c., deng, h.-b., chuang, y.c., chan, j.w.m., jiang, w.k., 652 tam, t., chang, l., et al."
+32,(2018).
+32,long-term exposure to ambient fine particulate matter and 653 chronic kidney disease: a cohort study.
+32,environ.
+32,health perspect.
+32,"126, 107002."
+32,"654 chu, d.a., kaufman, y.j., ichoku, c., remer, l.a., tanré, d., and holben, b.n."
+32,(2002).
+32,655 validation of modis aerosol optical depth retrieval over land.
+32,geophys.
+32,"29, mod2-1- 656 mod2-4."
+32,"657 chu, y., li, j., li, c., tan, w., su, t., and li, j."
+32,(2019).
+32,seasonal and diurnal variability of 658 planetary boundary layer height in beijing: intercomparison between mpl and wrf results.
+32,659 atmospheric res.
+32,"660 cimini, d., de angelis, f., dupont, j.-c., pal, s., and haeffelin, m."
+32,(2013).
+32,mixing layer height 661 retrievals by multichannel microwave radiometer observations.
+32,atmospheric meas.
+32,"6, 2941– 662 2951."
+32,"663 conard, s.g., and davidenko, e.p."
+32,(1996).
+32,fire in siberian boreal forests — implications for 664 global climate and air quality.
+32,air pollut.
+32,change eff.
+32,ecosyst.
+32,"general 665 technical report psw-gtr-166, 87–94."
+32,"666 crouse, d.l., peters, p.a., van donkelaar, a., goldberg, m.s., villeneuve, p.j., brion, o., khan, 667 s., atari, d.o., jerrett, m., pope, c.a., et al."
+32,(2012).
+32,risk of nonaccidental and cardiovascular 668 mortality in relation to long-term exposure to low concentrations of fine particulate matter: a 669 canadian national-level cohort study.
+32,environ.
+32,health perspect.
+32,"120, 708–714."
+32,"670 damoah, r., spichtinger, n., forster, c., james, p., mattis, i., wandinger, u., beirle, s., wagner, 671 t., and stohl, a."
+32,(2004).
+32,around the world in 17 days - hemispheric-scale transport of forest fire 672 smoke from russia in may 2003.
+32,atmospheric chem.
+32,"4, 1311–1321."
+32,"673 di, q., kloog, i., koutrakis, p., lyapustin, a., wang, y., and schwartz, j."
+32,(2016).
+32,assessing 674 pm2.5 exposures with high spatiotemporal resolution across the continental united states.
+32,675 environ.
+32,technol.
+32,"50, 4712–4721. 676 van donkelaar, a., martin, r.v., and park, r.j."
+32,(2006).
+32,estimating ground-level pm2.5 using 677 aerosol optical depth determined from satellite remote sensing.
+32,geophys.
+32,"atmospheres 111. 678 van donkelaar, a., martin, r.v., brauer, m., kahn, r., levy, r., verduzco, c., and villeneuve, 679 p.j."
+32,(2010).
+32,global estimates of ambient fine particulate matter concentrations from satellite-based 680 aerosol optical depth: development and application.
+32,environ.
+32,health perspect.
+32,"118, 847–855. 681 van donkelaar, a., martin, r.v., brauer, m., and boys, b.l."
+32,(2015).
+32,use of satellite observations 682 for long-term exposure assessment of global concentrations of fine particulate matter.
+32,environ.
+32,683 health perspect.
+32,"123, 135–143."
+32,"684 gao, m., cao, j., and seto, e."
+32,(2015).
+32,"a distributed network of low-cost continuous reading 685 sensors to measure spatiotemporal variations of pm2.5 in xi’an, china."
+32,environ.
+32,pollut.
+32,"199, 56– 686 65."
+33,"687 geng, g., zhang, q., martin, r.v., van donkelaar, a., huo, h., che, h., lin, j., and he, k."
+33,(2015).
+33,688 estimating long-term pm2.5 concentrations in china using satellite-based aerosol optical depth 689 and a chemical transport model.
+33,remote sens.
+33,environ.
+33,"166, 262–270."
+33,"690 gosteva, a.a., matuzko, a.k., and yakubailik, o.e."
+33,(2019).
+33,detection of changes in urban 691 environment based on infrared satellite data.
+33,iop conf.
+33,mater.
+33,"537, 062051."
+33,692 government of russian federation (2019).
+33,federal policy “about conducting experiment for 693 regulating pollutants from emissions and about complementing the federal laws on decreasing 694 atmospheric pollution.”
+33,n 4483p-p9 (n 4483п-п9).
+33,signed by d.
+33,medvedev on 23.05.2019 in 695 moscow (document in russian).
+33,"696 guo, c., zhang, z., lau, a.k.h., lin, c.q., chuang, y.c., chan, j., jiang, w.k., tam, t., yeoh, 697 e.-k., chan, t.-c., et al."
+33,(2018).
+33,"effect of long-term exposure to fine particulate matter on lung 698 function decline and risk of chronic obstructive pulmonary disease in taiwan: a longitudinal, 699 cohort study."
+33,lancet planet.
+33,"health 2, e114–e125."
+33,"700 guo, j., miao, y., zhang, y., liu, h., li, z., zhang, w., he, j., lou, m., yan, y., bian, l., et al."
+33,701 (2016).
+33,the climatology of planetary boundary layer height in china derived from radiosonde and 702 reanalysis data.
+33,atmospheric chem.
+33,"16, 13309–13319."
+33,"703 guo, y., tang, q., gong, d.-y., and zhang, z."
+33,(2017).
+33,estimating ground-level pm2.5 704 concentrations in beijing using a satellite-based geographically and temporally weighted 705 regression model.
+33,remote sens.
+33,environ.
+33,"198, 140–149."
+33,"706 he, q., and huang, b."
+33,(2018).
+33,satellite-based mapping of daily high-resolution ground pm2.5 in 707 china via space-time regression modeling.
+33,remote sens.
+33,environ.
+33,"206, 72–83."
+33,"708 holstius, d.m., pillarisetti, a., smith, k.r., and seto, e."
+33,(2014).
+33,field calibrations of a low-cost 709 aerosol sensor at a regulatory monitoring site in california.
+33,atmospheric meas.
+33,"7, 1121– 710 1131."
+33,"711 holzworth, g."
+33,(1964).
+33,extimates of mean maximum mixing depths in the contiguous united states.
+33,712 mon.
+33,weather rev.
+33,"92, 235–242."
+33,"713 holzworth, g.c."
+33,(1967).
+33,"mixing depths, wind speeds and air pollution potential for selected 714 locations in the united states."
+33,meteorol.
+33,"6, 1039–1044."
+33,"715 jin, x., fiore, a.m., curci, g., lyapustin, a., civerolo, k., ku, m., donkelaar, a. van, and martin, 716 r.v."
+33,(2019).
+33,assessing uncertainties of a geophysical approach to estimate surface fine particulate 717 matter distributions from satellite-observed aerosol optical depth.
+33,atmospheric chem.
+33,"19, 718 295–313."
+33,"719 johnson, r.h., ciesielski, p.e., and cotturone, j.a."
+33,(2001).
+33,multiscale variability of the 720 atmospheric mixed layer over the western pacific warm pool.
+33,atmospheric sci.
+33,"58, 2729– 721 2750."
+33,"722 karimian, h., li, q., li, c., jin, l., fan, j., and li, y."
+33,(2016).
+33,an improved method for monitoring 723 fine particulate matter mass concentrations via satellite remote sensing.
+33,aerosol air qual.
+33,"16, 724 1081–1092."
+33,"725 koschmieder, h."
+33,(1925).
+33,theorie der horizontalen sichtweite ii: kontrast und sichtweite.
+33,beitr.
+33,726 zur phys.
+33,freien atmosphäre 171−181.
+34,"727 kumar, p., morawska, l., martani, c., biskos, g., neophytou, m., di sabatino, s., bell, m., 728 norford, l., and britter, r."
+34,(2015).
+34,the rise of low-cost sensing for managing air pollution in cities.
+34,729 environ.
+34,"75, 199–205."
+34,"730 levy, r.c., mattoo, s., munchak, l.a., remer, l.a., sayer, a.m., patadia, f., and hsu, n.c."
+34,731 (2013).
+34,the collection 6 modis aerosol products over land and ocean.
+34,"atmos meas tech 6, 732 2989–3034."
+34,"733 lin, c., li, y., yuan, z., lau, a.k.h., li, c., and fung, j.c.h."
+34,(2015).
+34,using satellite remote 734 sensing data to estimate the high-resolution distribution of ground-level pm2.5.
+34,remote sens.
+34,735 environ.
+34,"156, 117–128."
+34,"736 lin, c., lau, a.k.h., fung, j.c.h., lao, x.q., li, y., and li, c."
+34,(2019).
+34,assessing the effect of 737 the long-term variations in aerosol characteristics on satellite remote sensing of pm2.5 using 738 an observation-based model.
+34,environ.
+34,technol.
+34,"53, 2990–3000."
+34,"739 lin, c.q., li, y., lau, a.k.h., deng, x.j., tse, k.t., fung, j.c.h., li, c.c., li, z.y., lu, x.c., 740 zhang, x.g., et al."
+34,(2016).
+34,estimation of long-term population exposure to pm2.5 for dense urban 741 areas using 1-km modis data.
+34,remote sens.
+34,environ.
+34,"179, 13–22."
+34,"742 lin, c.q., liu, g., lau, a.k.h., li, y., li, c.c., fung, j.c.h., and lao, x.q."
+34,(2018).
+34,high- 743 resolution satellite remote sensing of provincial pm2.5 trends in china from 2001 to 2015.
+34,atmos.
+34,744 environ.
+34,"180, 110–116."
+34,"745 liu, y."
+34,(2014).
+34,"monitoring pm2.5 from space for health: past, present, and future directions."
+34,746 env.
+34,manage 6–10.
+34,"747 ma, z., hu, x., sayer, a.m., levy, r., zhang, q., xue, y., tong, s., bi, j., huang, l., and liu, 748 y."
+34,(2016).
+34,"satellite-based spatiotemporal trends in pm2.5 concentrations: china, 2004–2013."
+34,749 environ.
+34,health perspect.
+34,"124, 184–192."
+34,"750 mikhailuta, s.v., taseiko, o.v., pitt, a., lezhenin, a.a., and zakharov, y.v."
+34,(2009).
+34,seasonal 751 variations of air pollutant concentrations within krasnoyarsk city.
+34,environ.
+34,monit.
+34,assess.
+34,"149, 752 329–341."
+34,753 ministry of environmental management (2018).
+34,governmental report about the conditions and 754 protection of environment.
+34,offeset ltd kemerovo russ.
+34,"755 morawska, l., thai, p.k., liu, x., asumadu-sakyi, a., ayoko, g., bartonova, a., bedini, a., 756 chai, f., christensen, b., dunbabin, m., et al."
+34,(2018).
+34,applications of low-cost sensing 757 technologies for air quality monitoring and exposure assessment: how far have they gone?
+34,environ.
+34,758 int.
+34,"116, 286–299."
+34,"759 ng, j."
+34,(2016).
+34,"comparison of pm2.5 measurements using the airvisual monitor and beta 760 attenuation monitor. accessed 29 august, 2019."
+34,"761 peng, j., chen, s., lü, h., liu, y., and wu, j."
+34,(2016).
+34,spatiotemporal patterns of remotely sensed 762 pm2.5 concentration in china from 1999 to 2011.
+34,remote sens.
+34,environ.
+34,"174, 109–121."
+34,"763 pinder, r.w., klopp, j.m., kleiman, g., hagler, g.s.w., awe, y., and terry, s."
+34,(2019).
+34,764 opportunities and challenges for filling the air quality data gap in low- and middle-income 765 countries.
+34,atmos.
+34,environ.
+34,"215, 116794."
+35,"766 popoola, o.a.m., carruthers, d., lad, c., bright, v.b., mead, m.i., stettler, m.e.j., saffell, j.r., 767 and jones, r.l."
+35,(2018).
+35,use of networks of low cost air quality sensors to quantify air quality in 768 urban settings.
+35,atmos.
+35,environ.
+35,"194, 58–70."
+35,"769 rohde, r.a., and muller, r.a."
+35,(2015).
+35,air pollution in china: mapping of concentrations and 770 sources.
+35,"plos one 10, e0135749."
+35,"771 rolph, g., stein, a., and stunder, b."
+35,(2017).
+35,environmental modelling & software real-time 772 environmental applications and display system : ready.
+35,environ.
+35,model.
+35,softw.
+35,"95, 210–228."
+35,"773 schneider, p., castell, n., vogt, m., dauge, f.r., lahoz, w.a., and bartonova, a."
+35,(2017).
+35,774 mapping urban air quality in near real-time using observations from low-cost sensors and model 775 information.
+35,environ.
+35,"106, 234–247."
+35,"776 seibert, p., beyrich, f., gryning, s.-e., joffre, s., rasmussen, a., and tercier, p."
+35,(2000).
+35,review 777 and intercomparison of operational methods for the determination of the mixing height.
+35,atmos.
+35,778 environ.
+35,"34, 1001–1027."
+35,"779 semple, s., ibrahim, a.e., apsley, a., steiner, m., and turner, s."
+35,(2015).
+35,"using a new, low-cost 780 air quality sensor to quantify second-hand smoke (shs) levels in homes."
+35,"control 24, 153– 781 158."
+35,"782 shaddick, g., thomas, m.l., green, a., brauer, m., donkelaar, a. van, burnett, r., chang, h.h., 783 cohen, a., dingenen, r.v., dora, c., et al."
+35,(2018).
+35,data integration model for air quality: a 784 hierarchical approach to the global estimation of exposures to ambient air pollution.
+35,785 ser.
+35,c appl.
+35,"67, 231–253."
+35,"786 singer, b.c., and delp, w.w."
+35,(2018).
+35,response of consumer and research grade indoor air quality 787 monitors to residential sources of fine particles.
+35,"indoor air 28, 624–639."
+35,"788 smolyakov, b.s., makarov, v.i., shinkorenko, m.p., popova, s.a., and bizin, m.a."
+35,(2014).
+35,"789 effects of siberian wildfires on the chemical composition and acidity of atmospheric aerosols of 790 remote urban, rural and background territories."
+35,environ.
+35,pollut.
+35,"188, 8–16."
+35,"791 snyder, e.g., watkins, t.h., solomon, p.a., thoma, e.d., williams, r.w., hagler, g.s.w., 792 shelow, d., hindin, d.a., kilaru, v.j., and preuss, p.w."
+35,(2013).
+35,the changing paradigm of air 793 pollution monitoring.
+35,environ.
+35,technol.
+35,"47, 11369–11377."
+35,"794 strukova e., golub a., markandya a."
+35,(2019).
+35,air pollution costs in ukraine.
+35,"environmental 795 economics, 2 (3), 52-63."
+35,"796 su, t., li, j., li, c., xiang, p., lau, a.k.-h., guo, j., yang, d., and miao, y."
+35,(2017).
+35,"an 797 intercomparison of long-term planetary boundary layer heights retrieved from calipso, ground- 798 based lidar, and radiosonde measurements over hong kong."
+35,geophys.
+35,"atmospheres 122, 799 3929–3943."
+35,"800 tan, b.k."
+35,(2017).
+35,laboratory evaluation of low to medium cost particle sensors.
+35,uwspace 801 http://hdl.handle.net/10012/12776.
+35,802 u.s.
+35,epa (2014).
+35,"fiscal year 2014-2018 epa strategic plan (washington d.c., usa)."
+35,"803 watson, j.g."
+35,(2002).
+35,visibility: science and regulation.
+35,air waste manag.
+35,assoc.
+35,"52, 628–713."
+36,804 wmo (2018).
+36,low-cost sensors for the measurement of atmospheric composition: overview of 805 topic and future applications. 806 https://www.wmo.int/pages/prog/arep/gaw/documents/low_cost_sensors_18_oct.pdf.
+36,"807 xiao, q., chang, h.h., geng, g., and liu, y."
+36,(2018).
+36,an ensemble machine-learning model to 808 predict historical pm2.5 concentrations in china from satellite data.
+36,environ.
+36,technol.
+36,"52, 809 13260–13269."
+36,"810 yang, d., li, c., lau, a.k.-h., and li, y."
+36,(2013).
+36,long-term measurement of daytime atmospheric 811 mixing layer height over hong kong.
+36,geophys.
+36,"atmospheres 118, 2422–2433."
+36,812 36

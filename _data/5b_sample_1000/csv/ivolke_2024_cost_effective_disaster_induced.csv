@@ -1,0 +1,1159 @@
+page,p
+1,international journal of remote sensing issn: (print) (online) journal homepage: www.tandfonline.com/journals/tres20 cost-effective disaster-induced land cover analysis: a semi-automatic methodology using machine learning and satellite imagery matias i.
+1,"volke, rodrigo abarca-del-rio & timothy a."
+1,warner to cite this article: matias i.
+1,"volke, rodrigo abarca-del-rio & timothy a."
+1,"warner (2024) cost- effective disaster-induced land cover analysis: a semi-automatic methodology using machine learning and satellite imagery, international journal of remote sensing, 45:2, 279-305, doi: 10.1080/01431161.2023.2292015 to link to this article: https://doi.org/10.1080/01431161.2023.2292015 view supplementary material published online: 08 jan 2024."
+1,submit your article to this journal article views: 208 view related articles view crossmark data full terms & conditions of access and use can be found at https://www.tandfonline.com/action/journalinformation?
+1,journalcode=tres20
+2,"international journal of remote sensing 2024, vol."
+2,"45, no. 2, 279–305 https://doi.org/10.1080/01431161.2023.2292015 cost-effective disaster-induced land cover analysis: a semi-automatic methodology using machine learning and satellite imagery matias i."
+2,"volkea, rodrigo abarca-del-riob and timothy a."
+2,"warner c a energy doctoral program, faculty of engineering, universidad de concepción, concepción, chile; b department of geophysics, faculty of physical and mathematical sciences, university of concepcion, concepcion, chile; cdepartment of geology and geography, west virginia university, morgantown, wv, usa abstract article history this study introduces a cost-effective and automated methodology received 8 september 2023 to swiftly and accurately gauge disaster-induced land cover accepted 26 november 2023 changes, harnessing satellite imagery and machine learning."
+2,"keywords using open-source platforms like google earth engine, the land cover change; machine approach streamlines training sample generation and assesses learning; remote sensing; diverse machine learning algorithms on pre- and post-disaster classification accuracy landsat images."
+2,"the innovation lies in its semi-automatic training sample generation methodology, reducing time and manual effort for accurate land cover mapping and addressing the challenge of crafting training samples in disaster settings."
+2,"the methodology was tested on the 2010 chilean earthquake and tsunami, revealing a 45% increase in sediment cover and a 15% reduction in water cover, underlining vast landscape alterations."
+2,svm stood out for its consistent accuracy.
+2,"to validate the methodological robustness and broaden its applicability, we replicated the procedures using diverse land cover collection, including esa worldcover 10 m and dynamic world."
+2,"this comprehensive validation encompassed var­ ied catastrophic events, extending the methodology’s relevance beyond its original scope."
+2,the consistent findings across different scenarios underscored the method’s robustness and underscored its potential for broader utilization.
+2,"this streamlined, cost-effective approach suits multiple land cover products, setting the stage for constant earth feature monitoring."
+2,"in light of escalating natural disasters, the synergy of machine learning and geospatial technol­ ogy spotlighted here offers promising avenues for improved disas­ ter preparedness and response."
+2,"introduction given the vast and varied impacts of natural disasters such as earthquakes and tsunamis, swiftly producing detailed maps of affected land cover is challenging (koshimura et al."
+2,2020).
+2,in the immediate disaster aftermath prompt and accurate information is essential.
+2,"typically, damage mapping relies heavily on ground observations and low-altitude contact matias i."
+2,"volke matiasvolke@udec.cl energy doctoral program, faculty of engineering, universidad de concepción, concepción 4030000, chile supplemental data for this article can be accessed online at https://doi.org/10.1080/01431161.2023.2292015 © 2024 informa uk limited, trading as taylor & francis group"
+3,280 m.
+3,volke et al. surveys.
+3,"however, these methods are often hazardous, labour-intensive, inconsistent, and provide only a partial inventory of the changes (sublime and kalinicheva 2019)."
+3,"in contrast, multispectral imagery mapping can potentially overcome many of these limita­ tions, making it a preferred choice for swiftly assessing detailed vulnerability studies in natural disasters-induced zones (koshimura et al."
+3,2020).
+3,"for these reasons, satellite remote sensing has emerged as the primary support tool instrument for disaster management (kaku 2019), serving as a cost-effective monitoring mechanism for catastrophic events (khodaverdizahraee, rastiveis, and jouybari 2020)."
+3,"remote sensing is particularly relevant for cataloguing disaster-related changes resulting from earthquakes and tsunamis, events with profound socio-economic repercussions, as evidenced by the tsunamis in japan (march 2011) (ishihara and tadono 2017; richmond et al."
+3,2012; tappin et al. 2012) and indonesia (december 2004) (kaiser et al.
+3,2013; sarun et al.
+3,2018).
+3,effective land cover mapping is pivotal for both damage evaluation and risk assessment (waghwala and agnihotri 2019).
+3,"the accuracy of remotely sensed land cover change maps, in tandem with the associated labour and computational resources costs, strongly depends on the choice of the classification algorithms, imagery sources, and training samples."
+3,"different classification approaches exist (maxwell, warner, and fang 2018)."
+3,"among the conventional remote sensing classifiers, isodata, k-means, and max­ imum likelihood are the most prominent (blanzieri and melgani 2008; rawat and kumar 2015; rogan et al."
+3,2008).
+3,"most advanced machine learning methods include neural net­ works (ann, bocco et al. 2007), decision trees (dt; pal and mather 2003, k-nearest neighbour (knn; franco-lopez, ek, and bauer 2001), random forest (rf; belgiu and drăguţ 2016), support vector machine (svm; mountrakis, im, and ogole 2011), gradient boosting machine (gbm; natekin and knoll 2013), extreme gradient boosting (xgb; chen and guestrin 2016) and an emerging classification subset based on deep neural networks (dnn; guo et al."
+3,2016; sublime et al.
+3,; sublime and kalinicheva 2019).
+3,"reviews by, ma et al."
+3,"(2019), talukdar et al. (2020), and shi et al. (2020) delineate recent advances and applications of classification models in remote sensing."
+3,"while the current literature tend to provide fragmented classifiers comparison, some studies discuss classi­ fiers for specific applications (ghayour et al."
+3,2021; orieschnig et al.
+3,2021).
+3,"others works, like belgiu and drăguţ (2016), zhang et al. (2021) or razaque et al. (2021) focus on examining a specific classifier in depth."
+3,detailed comparisons of machine learning algo­ rithms in the context of various natural disasters can be found in merghadi et al.
+3,(2020).
+3,"although koshimura et al. (2020) performed a comprehensive review on remote sensing’s role in damage detection of earthquakes and tsunamis, they did not detail the evaluation of classification algorithms and their relative accuracy."
+3,"other approaches, such as ghaffarian et al. (2021), use pre- and post-disaster remotely sensed imagery, proposing machine learning-derived land use maps to provide information on areas affected by natural disasters."
+3,"recent advancements of state-of-the-art cloud-based platforms for planetary-scale geos­ patial analysis, notably google earth engine (gee) and amazon web service (aws), have unlocked transformative possibilities for disaster mapping (scheip and wegmann 2021)."
+3,the rise of cloud computing has significantly increased access to robust computational capacity and extensive online image datasets (gorelick et al.
+3,2017).
+3,"specifically, gee provides an open-access cloud computing platform with a rich variety of earth observation data (phan et al."
+3,2021).
+3,"capitalizing on the bigdata processing potential of such platforms,"
+4,"international journal of remote sensing 281 researchers have conducted extensive wide-ranging studies on diverse subjects, including change monitoring (mugiraneza et al., 2020), cropland mapping (jin et al., 2020), and forest disturbance detection (hu et al., 2020)."
+4,"while gee is well suited for exploiting large data volumes, considered as an ideal testbed for machine learning algorithms, most associated research predominantly employs single algorithm, such as random forest or cart to develop land cover classifications (phan et al."
+4,"2021 ye et al., 2021; cui et al., 2022)."
+4,"yet, the challenge remains in optimizing this system both systematically and swiftly to acquire swift and accurate overview of the land cover change following a disaster (friedl et al."
+4,2010).
+4,the quantity and quality of training data play an essential role in producing accurate land covers maps (ramezan et al.
+4,2021).
+4,"many classification errors, regardless of the algorithms employed, stems from inadequate or unrepresentative training samples (li, liu, and yu 2014; xie et al."
+4,2019).
+4,"however, despite their importance, cost and logistical challenges associated with sample collecting have limited the efforts to acquire consistent, high-quality samples."
+4,"on top of that, collecting sufficient and precise training data across multiple periods requires considerable efforts (huang et al."
+4,2020).
+4,"consequently, there is an increasing demand for innovative approaches that enable efficient, timely and cost-effective training sample collection."
+4,the utiliza­ tion of existing land cover maps as training data sources has been explored for years (jia et al.
+4,2014; radoux et al.
+4,2014; wessels et al.
+4,"2016; bagan et al., 2020; huang et al., 2020)."
+4,"bagan et al. (2018), for instance, extracted training data from a previous land cover map (specifically, modis landcover type (mcd12q1) products) to generate new land cover products."
+4,leveraging existing land cover maps to support new classifica­ tions mapping offers several advantages.
+4,"it (i) simplifies automated classification by eliminating manual training data collection and refinement, (ii) potentially provides an extensive, geographically diverse training data set, and (iii) enables the satellite data classification to align consistently with existing land cover map classes."
+4,"however, it’s essential to meticulously filter the original land cover map to extract only reliably defined training data, while considering any spatial or temporal discrepancies between the original land cover map and the targeted satellite data classification."
+4,"moreover, for land cover change analysis it is necessary to evaluate periods before and after events."
+4,"in this regard, huang et al. (2020) introduced a promising approach using spectral similarity and distance indicators to distinguish between changed and unchanged training sites, thereby keeping the unchanged ones as migrated training data for landsat tm imagery."
+4,"in this study, we propose a novel approach, combining the potentialities of the aforementioned methodological approaches, extracting training data from previous land cover map products and migrating it to another period."
+4,"research efforts have focused on developing automated strategies to extract informa­ tion from satellite imagery of disaster zones through machine learning algorithms, aiming for an optimal balance between speed and accuracy (duarte et al."
+4,2018; ghaffarian et al.
+4,"2019, 2021)."
+4,"specifically, the primary goal is to refine an automated framework to classify and interpret landsat land cover change, informed by modis land-cover products and migrated training data pertinent to disaster response."
+4,"our approach to the classification and evaluation of changes in five land cover classes utilizes sample collection techniques, drawing upon the modis land cover product (mcd12q1.006)."
+4,"this methodology extends from well-established methods in prior studies (zhang and roy 2017; bagan et al., 2020)."
+5,282 m.
+5,volke et al.
+5,"training samples acquired from an initial date were used to generate migrated training samples for a subsequent date, after excluding altered pixels as per the methodology outlined by huang et al."
+5,(2020).
+5,we also propose an alternative automated approach for selecting training samples for change/not changed classification.
+5,"in all scenarios consid­ ered, we assessed the classification performance across various training sample sizes, predictor variables, and parameter optimization processes."
+5,this study examines the combined impact of an earthquake and subsequent tsunami that occurred in chile on 27 february 2010.
+5,"the earthquake, registering an mw of 8.8 on the moment magnitude scale (as reported by the global centroid-moment-tensor (cmt) project, www.globalcmt. org), had its epicentre 23.7 km deep and approximately 3 km off pelluhue town’s coast in the maule region of chile (see figure 1)."
+5,"the earthquake triggered a magnitude 4 tsunami, impacting 800 km of the maule and biobío regions' coastlines (fritz et al."
+5,2011).
+5,"the combined impact of both events resulted in profound land cover and geo­ morphological alterations in the region, including coseismic uplift and subsidence, sea­ water intrusion in coastal areas, dunes and coastal bars erosion, and extensive deposition of sand and debris (araya-cornejo and carvajal 2016; martínez et al."
+5,2011).
+5,"additionally, it wrought extensive damage to the infrastructure of numerous coastal cities and towns (cienfuegos et al."
+5,2014; soto et al.
+5,2015).
+5,"given the disaster’s timing, the available satellite data currently available for global land cover types exhibit coarse spatial resolution."
+5,figure 1.
+5,study area.
+5,"false colour composite landsat images (bands 4, 3, and 2 as rgb) correspond to the classified area’s full extension. (a) previous tsunami (7 march 2009). (b) post-tsunami (26 march 2010)."
+6,international journal of remote sensing 283 figure 2.
+6,flowchart showing the method’s main steps.
+6,"google earth engine processes are coloured in grey, and r processing in green."
+6,"nonetheless, the proposed methodology can adapt to higher-resolution global land cover datasets and multispectral imagery, enabling for a more accurately characterize of subtle variations, as shown in the studies by tavus et al. (2022) or duarte et al. (2023a)."
+6,"this paper is organized as follows: section 2 details the study area, satellite databases, preprocessing techniques, and the machine learning methods employed."
+6,"section 3 pre­ sents the results, leading into the subsequent discussion and conclusion sections."
+6,"image preprocessing and training sample generation were performed on the google earth engine platform (gorelick et al. 2017), while classification and statistical analysis were conducted with the r software (r software, 2021)."
+6,materials 2.1.
+6,"study area our research underscores the tubul town area (37,21 °s; 73,43 °w) and llico (37.2°s: 73.57° w) within the arauco province, bíobío region of south-central chile, as depicted in figure 1, to exemplify the approach conceived in this work."
+6,"the earthquake event on 27 february 2010 and the ensuing tsunami – which, for brevity, is henceforth designated as the ‘tsunami’ – had profound implications for the coast of arauco bay."
+6,"situated proximate to the tubul-raqui wetland, tubul is flanked by two main watercourses, namely the tubul and raqui rivers."
+6,"the tsunami’s ingress extended to the base of the palaeo-cliffs, inundating an area of approximately 75 hec­ tares."
+6,"the most devastated sector comprised the beach’s edge and portions of the riverbank, leading to the total destruction of 300 homes and partial damage to another"
+7,284 m.
+7,volke et al. 400 within the riverside sector (martínez et al.
+7,"conversely, llico, experienced flood­ ing primarily in areas below 5 m above sea level, covering an estimated 45 ha."
+7,"contrasting tubul’s setting, llico, a coastal village, is characterized by numerous vacation residences."
+7,"notably, those positioned beachfront faced complete demolition, summing up to a total of 320 destroyed residences."
+7,"although classifications spanned the entire landsat image, the land cover change analysis remained concentrated on the described sites."
+7,data central to this research are two main datasets: the moderate resolution landsat imagery (30-m pixels) tailored for change detection and the coarser modis land cover.
+7,both datasets are described in the ensuing subsections.
+7,2.2.1.
+7,landsat the google earth engine (gee) platform provides access to an expansive online repository of satellite imagery.
+7,"this includes the 30-m landsat 5 tm spanning from 1985 to 2012, particularly encapsulating the timescape preceding and succeeding the 27 february 2010 tsunami (huang et al."
+7,2017).
+7,"landsat 5’s surface reflectance (sr) derivatives, readily accessible, are processed via the landsat ecosystem disturbance adaptive processing system (ledaps) algorithm, version 3.4.0."
+7,our analytical framework leveraged landsat image compositions from 26 january to 26 february 2010 (pre-tsunami) and 27 february to 27 march 2010 (post-tsunami).
+7,2.2.2.
+7,"modis land cover product the modis collection 6 land cover type product(mcd12q1.006) curates annual global land cover cartography with a 500-m spatial resolution, extending from 2001 onwards."
+7,the international geosphere-biosphere program (igbp) classification scheme layers from mcd12q1 collection 6 (as detailed sulla-menashe et al. 2019) classify each 500-m pixel into one of 17 predefined categories (refer to table 1).
+7,the accuracy of the international geosphere-biosphere programme (igbp) layer of mcd12q1.006 is estimated to be 73.6% on a global scale.
+7,this metric is supported by quantitative cross-validation analysis conducted on a comprehensive training site database.
+7,"for the temporal scope of this study, we acquired the modis land cover type data specific to the year 2010."
+7,"a tailored approach was adopted, consolidating the 17 classes into five principal categories echoing our research terrain and the nuances of tsunami- induced land cover alterations."
+7,certain modis classes exhibited minimal or absent manifestations within the designated research precincts.
+7,"consequently, sourcing ample training samples from the full 17 classes would be arduous."
+7,"by contrast, the five classes detailed in table 1 highlight the most significant shifts observed in the research zone."
+7,methods this study’s core innovation introduces a framework for extracting training data from an existing land cover map and subsequently migrating this data across temporal periods.
+7,"in alignment with this objective, we explored multiple cases varying in automation degrees concerning the selection and processing of training samples"
+8,international journal of remote sensing 285 table 1.
+8,classes defined for land cover classification by grouping classes defined in mcd12q1.
+8,"classes used in this study modis classes description high evergreen needleleaf forests; evergreen vegetation cover in which the tree stratum is due vegetation broadleaf forests; deciduous needleleaf to native species such as coihue, olivillo, forests; deciduous broadleaf forests; mixed patagua, and boldo."
+8,it also represents forests forests where the arboreal stratum is due to exotic species such as eucalyptus and radiata pine.
+8,low vegetation closed shrublands; open shrublands; woody plant formation where the herbaceous cover is savannas; savannas; grasslands; croplands over 40%.
+8,"it includes land with crop rotation, types of trees, and shrubs with an area of extension of less than 25%—agricultural areas, including cereal crops, vegetables, and fruits."
+8,"dry sediment urban and built-up lands; barren exposed soils with low moisture content and and urban organic matter, such as sand, exposed hillsides, area uncultivated, cleared, burned, erosion, and no vegetation areas."
+8,"urban soils and exposed rocks wet sediment permanent wetlands; wet sediments soils with high moisture content include wetland soils, farmland, and coastal deposits."
+8,water water bodies.
+8,"surfaces covered by water, both fresh and salty. (refer to figure 2)."
+8,"these encompass: (a) direct manual selection of training samples, denoted as ‘manual’, (b) semi-automated selection of training samples derived from the pre-tsunami modis global land cover product, labelled as ‘modis derived’, (c) semi-automated migration of training samples post-tsunami, termed ‘migrated’, and (d) semi-automated selection specifically tailored for change mapping, referred to as ‘changes’."
+8,"the methodology can be compartmentalized into six integral tasks: (1) preprocessing, (2) reference pixels for training, (3) algorithm, (4) algorithm optimi­ zation and training, (5) accuracy evaluation, and (6) detect changes in land cover by the tsunami disaster in tubul and llico."
+8,these are described in the following subsections.
+8,preprocessing landsat 5’s observational capabilities for terrestrial imagery are limited by its 16-day acquisition cycle.
+8,"further, a significant number of scenes can be partially or entirely obscured by cloud cover (xie et al."
+8,2019).
+8,"a viable mitigation strategy employs multi-temporal image composites, amalgamating multiple scene observations to yield imagery with minimal cloud interference."
+8,"during this compositing process, the cfmask band from the landsat surface reflectance (sr) pro­ duct is pivotal in masking cloud-affected and shadowed areas (foga et al. 2017) prior to data merging."
+8,this study harnessed two such composites: one encapsulating the pre- tsunami phase and the other the post-tsunami period.
+8,"in analysing modis data, only mcd12q1 pixels with classification confidence surpass­ ing 50% were considered."
+8,pixels labelled ‘snow’ by mcd12q1 were explicitly excluded.
+8,"to align with landsat’s specifications, modis images underwent resampling to match their spatial resolution and conformed to the same map projection (wgs 84 (epsg:4326))."
+8,"during this reprojection, google earth engine defaultly employs the nearest neighbour resampling approach."
+9,286 m.
+9,volke et al.
+9,3.1.1.
+9,"reference pixels for training to assess the efficacy of semi-automated and automated approaches for selecting sam­ ples, four distinct training datasets were constructed."
+9,"the first employed traditional manual training sample selection, serving as a comparative standard against the semi- automated and automated techniques."
+9,"this approach manually selected training samples on the landsat imagery with google earth pro’s high-resolution images as a reference, a technique routinely employed for land cover classification (xie et al."
+9,2019).
+9,"after this, the initial sample selection underwent a random sub-sampling to achieve a set comprising 5,000 samples."
+9,three additional sets of classifications were constructed using semi-automated training sample selection methods.
+9,"the first is characterized as a semi-automated approach for the pre-tsunami classification, using modis data as guidance (termed ‘modis derived refer­ ences samples’)."
+9,the second method involves semi-automated post-tsunami classification that migrates reference samples from the pre-tsunami data (denoted as ‘migrated refer­ ences samples’).
+9,this process involves collecting and transferring samples from a reference to a target image and further refined by filtering potential pixel changes.
+9,"lastly, for the differentiation between altered and unaltered regions, a semi-automated approach to select training samples was implemented, termed as ‘changes reference samples’."
+9,the mcd12q1 products informed the selection of landsat training samples for the semi-automated approaches.
+9,"through stratified random sampling, training samples were obtained by superimposing pre-tsunami landsat image pixels on modis land cover data, thereby assigning a distinct class label to each of these landsat pre-tsunami pixels."
+9,"given that each 500-m modis pixel encompasses 289 (i.e. 17 × 17) 30-m landsat pixels, this step occasionally generates mislabelled pixels."
+9,"to rectify this, a filtering process is implemen­ ted to remove landsat pixels exhibiting spectral discrepancies from their peers within the same modis pixel footprint."
+9,"the filtering procedure comprises three distinct phases, summarized in figure 2: (1) compute the spectral centroid for all pixels initially labelled under a specific class."
+9,(2) determine the euclidean distance (ed) between each individual pixel and its correspond­ ing class’s spectral centroid.
+9,"(3) establish a selection threshold, retaining only those pixels proximate to the spectral centroid, thereby shaping the final pre-tsunami landsat refer­ ence dataset."
+9,"to determine the optimal threshold for the semi-automatic selection of training data, we employed an iterative procedure."
+9,"as ghorbanian et al. (2020) suggested, the user can fine-tune this threshold to yield a particular sample count."
+9,table 2 delineates the ed threshold values we used to curate the training pixel subsets for each class.
+9,"for the selection of migrated references samples, the filtered modis derived references samples, accompanied by their associated class labels, serve as the initial set."
+9,"this set underwent a secondary filtration, through change vector analysis (cva) table 2."
+9,centroid spectral and category thresholds used for demarcating homogeneous regions at the granularity of landsat and modis imagery.
+9,class high veg.
+9,low veg.
+9,dry sed.
+9,wet sed.
+9,water ed threshold 0.06 0.07 0.10 0.05 0.10
+10,international journal of remote sensing 287 figure 3.
+10,comparative graph depicting overall accuracy vs. threshold value for the classification algorithms employed to differentiate the change/not changed samples. methodology (warner 2007).
+10,the cva change magnitude was derived within this context by measuring the spectral euclidean distance (ed) between each post- tsunami pixel and its pre-tsunami counterpart.
+10,a pixel is regarded as ‘changed’ and subsequently excluded if its change magnitude exceeds a predetermined threshold.
+10,"in this research, the ed threshold was set at 0.1, determined through iterative testing."
+10,the remaining unchanged pixels are then used as the training set for the post-tsunami classification.
+10,"the final reference data set of 5,000 labelled pixels was selected from each pre- and post-tsunami image using stratified random sampling, with the number of pixels selected proportional to the number of pixels (i.e. area) of that class in the reference data set."
+10,"in the final semi-automated approach, a binary classification delineating change/not changed was performed."
+10,pixels indicating change were those exceeding a specified spectral ed threshold.
+10,"however, contrary to prior methods, this threshold was selected automatically by evaluating a range of potential levels."
+10,"to facilitate the procedure, an image showcasing the spectral difference between pre- and post-tsunami scenarios was produced."
+10,"to improve the differentiation of changes in vegetated areas, a band capturing the variance between the normalized difference vegetation index (ndvi) values across the two dates was integrated."
+10,the resulting enhanced image is then used to calculate the ed for every pixel.
+10,"as depicted in figure 3, a threshold value of 0.1 consistently yielded the highest accuracy for identifying changes across all tested models (refer to figure 3)."
+10,this threshold was thus adopted in the subsequent process.
+10,"in concluding this method, a simple random sampling was performed, procuring 5,000 training samples."
+11,288 m.
+11,volke et al.
+11,"algorithm this research employs eight machine learning methods for performance evaluation: k-nearest neighbor (knn), multivariate adaptive regression spline (mars), random forest (rf), gradient boosting machine (gbm), extreme gradient boosting (xgb), support vector machines (svm), deep neural network (dnn), and one parametric algo­ rithm, naïve bayes (nb)."
+11,"a brief overview of these methods is provided below, with in- depth descriptions available in the supplementary material, s1."
+11,the algorithms were selected based on their demonstrated performance in remote sensing contexts (heydari and mountrakis 2018; abdi 2020).
+11,3.2.1.
+11,naive bayes (nb) nb is grounded in a maximum likelihood variant (vatsavai et al.
+11,2011).
+11,"this widely recognized algorithm, prominent in remote sensing (ghayour et al. 2021), assigns pixels to the class with the highest likelihood, provided a normal distribution for each class across individual bands (ahmad and quegan 2012)."
+11,3.2.2.
+11,"k-nearest neighbor (knn) knn, a non-parametric method (thanh noi and kappas 2017), classifies unknown samples based on the most common class of the k-nearest neighbours determined by distance functions (akbulut et al."
+11,2017).
+11,the value of k is the key user-specified parameter for optimizing this classifier (qian et al.
+11,2014).
+11,3.2.3.
+11,"multivariate adaptive regression splines (mars) mars, proposed by friedman (1991), is an extension of linear models that captures interactions and non-linearity."
+11,"it employs recursive partitioning and multi-stage linear regression using piecewise spline functions (samadi, sarkardeh, and jabbari 2020), effec­ tively determining relationships between the dependent and independent variables (ou, lei, and shen 2019)."
+11,3.2.4.
+11,"random forest (rf) rf, an ensemble of decision trees, trains trees in parallel using bootstrap sampling (breiman 2001; he, lee, and warner 2017)."
+11,each tree operates on a random subset of training data and predictor variables (naidoo et al.
+11,2012).
+11,"the combined vote of these trees produces, on average, a strong learner and determines the final classification (rodriguez-galiano et al."
+11,2012).
+11,3.2.5.
+11,"gradient boosting machine (gbm) gbm, a decision-tree-based ensemble method within the boosting family (friedman 2001) sequentially trains models (unlike rf), to refine a loss function error."
+11,"consequently, gradient (or step‐by‐step) boosting minimizes errors among a collection of decision trees, resulting in a cohesive single predictive model (shiferaw, bewket, and eckert 2019)."
+11,3.2.6.
+11,"extreme gradient boosting (xgb) xgb, first described by chen and guestrin (2016), belongs to the family of boosting algorithms."
+11,"as an ensemble tree-boosting method, enhances classification iteratively,"
+12,international journal of remote sensing 289 emphasizing previously misclassified samples.
+12,the final classification includes the com­ bined improvement of the previously modelled trees regulated by an objective function that evaluates training loss and model complexity (chen and guestrin 2016; georganos et al.
+12,2018).
+12,3.2.7.
+12,"support vector machines (svm) svm, is a kernel-based technique that features a kernel ‘trick’ that projects data into a high-dimensional space so that the classes can be linearly distinguished using an optimal hyperplane (gelabert et al."
+12,2020).
+12,svm focuses on the training samples closest to the classes’ optimal separation limit (vapnik 1995).
+12,"these samples are called support vectors and define the hyperplane with the maximum margin (i.e. separation) between classes (mountrakis, im, and ogole 2011)."
+12,3.2.8.
+12,"deep neural networks (dnn) dnns, characterized as multi-layered hierarchically structured (abdi 2020) sequentially process previous layer values, gradually forming more abstract representations."
+12,"in the employed feed-forward dnn with error back-propagation, information flows via an activation function."
+12,"detected error back-propagates to adjust earlier layers, culminating in a classification based on the node with the highest value (candel et al."
+12,2016; beysolow 2017).
+12,"algorithm optimization and training most machine learning methods’ precision is partly contingent upon optimizing their respective algorithm hyperparameters, a practice commonly termed as ‘tuning’ (ramezan et al."
+12,2021).
+12,table s1 presents the results of this tuning for each algorithm deployed in this study.
+12,we employed a grid search methodology paired with fivefold cross-validation on the training data for hyperparameter tuning.
+12,the parameter ranges were established in alignment with previous research (abdi 2020; thanh noi and kappas 2017).
+12,the criterion for optimization was overall accuracy (oa).
+12,"further, each algorithm was specifically fine- tuned depending on the mode of training sample selection – be it manual, semi- automatic, or automatic."
+12,"for all four scenarios, the investigation then gauges the influence of the training sample size on the resultant classification accuracy across various classifiers."
+12,"ten subsets were randomly constituted for each training dataset, ranging from 10% to 100% of the test sample in 10% increments."
+12,this sub-setting was conducted using the r ‘caret’ package (kuhn 2008) and repeated 100 times to increase the statistical robustness of the results.
+12,"accuracy evaluation various metrics have been proposed to evaluate classification performance (shiferaw, bewket, and eckert 2019)."
+12,the assessment hinges on the overall accuracy (oa) derived from each algorithm’s confusion matrix.
+12,"the accuracy evaluation relied on 1,500 valida­ tion samples from stratified random sampling (olofsson et al."
+12,2014).
+12,"these independent stratified validation samples, derived from polygons spanning each class, were visually"
+13,290 m.
+13,"volke et al. authenticated using google earth imagery and landsat’s rgb composition, ensuring a genuine representation of each land cover category (venkatappa et al."
+13,2019).
+13,a cross- check was performed between the validation and the training datasets to ensure non- overlap between these.
+13,some researchers deploy non-parametric tests like the wilcoxon signed-rank test to discern statistically significant systematic pairwise discrepancies between classifications at α = 5% significance (merghadi et al.
+13,2020).
+13,"a p-value below 0.05 signifies statistical differences between models, while a value above this threshold suggests no discernible performance variance."
+13,"similarly, we employed mcnemar’s chi-square test (χ2) (mcnemar 1947) to contrast the error matrices the algorithms forming the thematic maps yielded."
+13,"this comparison assesses the marginal homogeneity of the two classifiers, wherein ‘marginal homogeneity’ refers to equality or implies an absence of statistically significant disparities in the overall distributions predicted by one algorithm relative to another (de leeuw et al."
+13,2006).
+13,results 4.1.
+13,model comparison and accuracy assessment figure 4 summarizes the oa results across the four methods of training samples selection.
+13,"for classifications based on manually-selected training samples, the oa spanned a range manual modis derived migrated changes figure 4."
+13,"average overall accuracies for ml algorithms used in 20%, 40%, 60%, 80%, and 100% training sample sizes in all selection of training sample cases."
+14,international journal of remote sensing 291 between 0.95 and 0.98 for the tested classification algorithms (figure 4).
+14,"the wilcoxon test indicates statistically significant difference in oa in most pairs of algorithms, with the exceptions of rf vs.dnn and gbm vs."
+14,svm (refer to table s2 in the supplemental data).
+14,"as expected, an increase in training sample size corresponded to a rise in oa for each algorithm."
+14,the highest oa was recorded when 100% of the training samples were manually selected.
+14,"specifically, the svm classification algorithm achieved the highest oa (0.9784), though gbm’s oa was almost the same (0.9783)."
+14,"conversely, the nb algo­ rithm recorded the lowest accuracy (0.9653)."
+14,"notably, in the semi-automated for both modis derived and migrated, larger training samples did not consistently elevate the oa, unlike the manual training data selection (figure 4)."
+14,"a wilcoxon signed-rank test indicates that the oa, for each algorithm trained on samples from three semi-automatic methods, is significantly lower compared to manual sample selection (refer to table s3 in the supplemental data)."
+14,"on average, transitioning from manual to modis derived and migrated sample selection leads to a 5.88% decline in oa across all algorithms."
+14,"similarly, the shift from manual to changes sample selection results in a 6.23% average reduction in oa."
+14,"furthermore, for migrated selection of training samples, oa values were significantly lower than those from pre-tsunami modis derived training samples."
+14,"however, mars, knn and svm were exceptions, as evidenced by the wilcoxon signed-rank test (see table s3 in the supplemental data)."
+14,svm emerged as the most accurate classifier under semi-automatic training data selection for both modis derived(oa of 0.9381 trained with 100% data) and migrated (oa of 0.9068 trained with 100% data) classification.
+14,"in the semi-automated selection for change mapping, dnn showed the highest overall accuracy at 0.927 when using 100% of the training data, while nb recorded the lowest at 0.839."
+14,"however, the accuracy for the remaining algorithms was comparably consistent, averaging 0.869 with a negligible standard deviation of 0.001."
+14,"among the five classes considered in this study, the wet sediment cover class regis­ tered the lowest accuracy."
+14,"conversely, the remaining land cover classes demonstrated higher user and producer accuracies."
+14,most notably the spectrally distinctive water classes.
+14,table 3 presents the confusion matrix for both manual and semi-automatic approaches for the best performing algorithm.
+14,"land cover change analysis figure 5 depicts thematic maps from each case study’s best-performing classifiers, with the complete image for all training sample selection processes detailed in fig."
+14,s1-s2-s3.
+14,"manual and semi-automatic selection of training samples produced similar classifications for low vegetation, high vegetation, and water cover."
+14,"however, noticeable differences arise in the identification of dry and wet sedimentation."
+14,"while both classifications accu­ rately identify the urban area of tubul (representing dry sediment) and the coastline (indicative of wet sediment) for the pre-tsunami phase, their coverage diverge in areas directly impacted by the tsunami, such as tubul’s coastal zones."
+14,"when compared with thematic maps generated by classifiers trained via change sample selection, consistent shifts are evident, particularly the transformation from vegetation cover to sediment in the post-tsunami imagery."
+15,292 m.
+15,volke et al.
+15,table 3.
+15,"confusion matrix delineating results for manual (first row), semi-automatic modis derived and migrated (second row), and semi-automatic change/not change (third row) for best performance algorithms."
+15,dry wet high low user dry wet high low user water sed. sed. veg. sed. accu.
+15,water sed. sed. veg. sed. accu.
+15,confusion matrix to svm classification with manual selection of confusion matrix to svm classification with manual training samples (pre-tsunami) selection of training samples (post-tsunami) water 169 0 2 0 0 0.988 water 217 0 6 0 0 0.973 dry sed.
+15,0 280 0 0 11 0.962 dry sed.
+15,0 214 0 0 3 0.986 wet sed.
+15,0 0 52 1 0 0.981 wet sed.
+15,0 3 117 0 0 0.976 high veg.
+15,0 0 0 480 10 0.980 high veg.
+15,0 0 0 478 10 0.979 low veg.
+15,0 2 0 5 488 0.986 low veg.
+15,0 2 0 8 441 0.978 producer 1 0.993 0.963 0.988 0.959 producer 1 0.977 0.951 0.983 0.967 accu. accu.
+15,confusion matrix to svm classification with semi-automatic confusion matrix to svm classification with migrated modis-derived training samples (pre-tsunami) semi.automatic selection of training samples (post- tsunami) water 168 0 9 4 0 0.928 water 217 0 9 4 0 0.943 dry sed.
+15,0 238 4 0 4 0.967 dry sed.
+15,0 214 17 2 59 0.733 wet sed.
+15,1 3 41 2 1 0.854 wet sed.
+15,0 4 97 9 7 0.829 high veg.
+15,0 0 0 472 14 0.971 high veg.
+15,0 0 0 453 12 0.974 low veg.
+15,0 41 0 8 490 0.91 low veg.
+15,0 1 0 18 378 0.952 producer 0.994 0.845 0.760 0.971 0.963 producer 1 0.977 0.789 0.932 0.829 accu. accu.
+15,not- user change change accu.
+15,confusion matrix to dnn classification with the semi-automatic selection of training samples for change mapping.
+15,change 696 62 0.913 not-change 74 668 0.900 producer 0.904 0.915 accu.
+15,figure 6 displays thematic maps of the tubul and llico areas derived by the worst- performing classifiers.
+15,"when contrasted to those in figure 5, these in figure 6, notably struggle in identifying urban areas as dry sediment during the pre-tsunami phase."
+15,"moreover, the tsunami-affected areas are ambiguously defined, particularly evident in the thematic map produced via the semi-automatic method for llico."
+15,"likewise, these maps also exhibit less homogeneity, with noticeable ‘salt-and-pepper’ texturing, such as water-classified pixels in tubul’s urban zone."
+15,"additionally, the thematic maps from the automated method in figure 6 reveal higher dispersion in the ‘change’ category, which don’t align with the tsunami-affected areas showcased in figure 5."
+15,figure 7 summarizes the land cover changes following the tsunami in tubul and llico areas.
+15,"significant shifts include the 499 pixels (49.1 ha) transitioning from water to wet sediment and the 465 pixels (133.3 ha) shifting from low vegetation to dry sediment, as highlighted in figure 5."
+15,"specifically, zones a and b saw the land cover water class replaced by newly wet sediment deposited, while zones c and d observed low vegetation being replaced by dry sediment."
+15,"for the modis derived and migrated selection of training samples, 5628 pixels (63.5%) remained consistent across both periods, while 3233"
+16,international journal of remote sensing 293 figure 5.
+16,"the thematic maps generated by the best classification algorithms (svm for both manual and semi-automatic case and dnn for semi-automatic change/no change case) of tubul (upper row) and llico (lower row) for the pre- (‘before’) and post- (‘after’) tsunami periods, with 100% of the training samples. pixels (36.5%) reported changes."
+16,"alternatively, the automatic binary classification identi­ fied 6438 pixels (72.7%) as stable and 2423 pixels (27.3%) with modifications."
+16,"a comparative analysis between both reveals a 75.8% concordance, and mcnemar’s test confirms the map differences as statistically significant (p < 0.05)."
+16,"discussion this work explores the potential of machine learning classification, combined with semi- automated methods for collecting training data, to expedite land cover mapping follow­ ing disasters such as earthquakes and tsunamis."
+16,"in disaster response mapping, the priority typically lies in rapid data collection, where broad, general classes may be an acceptable temporary replacement for detailed information, provided the classified maps are pro­ vided quickly."
+16,"training sample data, although essential to land cover mapping, pose a challenge due to their need for accuracy, consistent collection across periods, and availability in data-scarce if training data are not collected consistently, which might result in misclassification or low precision."
+16,"consequently, practical and automated approaches for collecting training data are imperative."
+16,"for this reason, the focus was on the most commonly identified and spectrally distinctive classes derived by merging modis land cover categories."
+16,"four different scenarios were used to evaluate classifier performance: manual collection of training samples, semi-automatically generated train­ ing samples from a pre-tsunami image based on a modis classification, semi- automatically generated training samples migrated from the pre-tsunami to the post- tsunami image(excluding potentially changed pixels), and semi-automatically generated training samples to develop a binary classification."
+17,294 m.
+17,volke et al.
+17,(modis derived and migrated) of training (changes) figure 6.
+17,"the thematic maps generated by the worst classifications algorithms (nb for all cases) of tubul (upper row) and llico (lower row) for the pre- (‘before’) and post- (‘after’) tsunami periods, with the 100% of the training samples."
+17,"evaluation of accuracy suggests high overall accuracy (oa) values for all classifiers employing manually digitized training areas, with svm providing the highest accuracy."
+17,"in contrast, the parametric technique, nb, provided the lowest accuracy (figure 4)."
+17,this is consistent with prior studies such as (he et al.
+17,2015; thanh noi et al.
+17,2018; gopinath et al.
+17,"2020; karan and samadder 2018; heydari and mountrakis 2018), which identified svm as the best performer among supervised classification algorithms."
+17,"the performance of the non-parametric method employed in this study, nb, lagged behind the best-performing classifiers."
+17,the difference in performance varies depending on the training sample selection process.
+17,"for manual selection, nb’s perfor­ mance is 1.1% lower."
+17,"it is 9.7% lower for semi-automatic modis derived (pre-tsunami), 4% for semi-automatic migrated (post-tsunami), and 8.4% for semi-automatic changes training sample selection processes."
+17,"however, nb was the only classifier for which no parameter tuning was performed."
+17,"this lack of parameter optimization could explain its poorer performance, raising the question of potential improvements with better parameter optimization."
+17,"indeed, this suggests a potential direction for future work, including exploring parameter tuning techniques like gridsearch or randomizedsearch, to enhance nb’s performance."
+17,"in comparison, when subjected to parameter search and optimization, the remaining classifiers consistently under­ performed the top classifier."
+17,"specifically, for the manual selection process, they lagged by an average of 0.3%."
+17,"for the semi-automatic modis-derived training samples, the shortfall was 4.4%."
+17,"with semi-automatic migrated training samples, the underperformance was 3.5%, and for the semi-automatic (changes mapping), it was 4.2%."
+17,"as heydari and mountrakis, (2018) pointed out, parameter optimization is crucial for training procedures, likely contributing to the poorer performance of the nb classifier."
+17,"note that nb’s lower performance may also be impacted by its assumption that each class’s data has a normal distribution, as it might deliver unsatisfactory results for non-normal distribution (otukei and blaschke 2010)."
+17,this study underscores that the characteristics of the training data may be just as crucial as the classifier selection.
+17,"thus, when comparing manual with semi-automatic training sample selections, there are notable differences in the oa values of the best- and"
+18,international journal of remote sensing 295 pre-tsunami post-tsunami 1753 2114 -17.1% water 928 dry sed.
+18,2887 211% 857 wet sed.
+18,798 -6.9% 3958 low veg.
+18,2132 -46.1% 1229 30% 942 high veg.
+18,figure 7.
+18,land cover change diagram.
+18,numerical annotations on each class represent the number of pixels classified to the respective land cover class. worst-performing classifiers.
+18,"for semi-automatic selection, the worst-performing algo­ rithms saw an oa dip of 10.6%, while the best was a 5.85% decline relative to manual selection."
+18,"these reductions were even steeper for fully automatic selection, at 13.3% and 6.26%."
+18,"considering the semi-automatic approach, it selects training samples from modis- derived coverages for the pre-tsunami reference and migrates samples for the post- tsunami target."
+18,"in both cases, classification accuracy dropped by 8.2% and 9.2% from manual sampling."
+18,"yet, top classifiers achieved an oa of 0.94 and 0.92 for pre- and post- tsunami, respectively."
+18,"this underlines the significant potential of the proposed approach for land cover classification, harnessing samples from available land cover products, a notion that aligns with findings from ghorbanian et al."
+18,(2020).
+18,"in addition, leveraging"
+19,296 m.
+19,volke et al. existing land cover products to derive and transfer training samples obviates the time- consuming and labour-intensive issues of gathering training samples manually.
+19,"the highest oa values for the machine learning algorithms using manually selected training samples used the entire set, or 100% of the total training samples."
+19,this is consistent with findings from huang et al.
+19,"(2002), thanh noi and kappas, 2017), and ramezan et al. (2021), who all concluded that, regardless of the classification method, a larger pool of training samples is preferable."
+19,"interestingly, enlarging the size of training samples did not boost the efficacy of semi-automatic training sample selection."
+19,"it could be due to the inherent heterogeneity in semi- and fully automatically selected training samples compared to those manually selected, indicating that filtering did not sufficiently discard unrepresentative samples."
+19,"research by xie et al. (2019) suggested focusing on homogeneous modis data to reduce spectral variation risk, while heydari and mountrakis, (2018) revealed an accuracy drop of approximately 8–9% when edge pixels formed 10% of the training set."
+19,"however, despite the reduced accuracy in semi-automatic cases, our results align well with anecdotal information describing changes in the study area."
+19,"all classifiers experienced a significant decline in oa values when using semi-automatic and automatic training samples selection from both pre- and post-tsunami images, compared to the manual benchmark."
+19,"however, manually digitizing training areas is time- consuming and can be biased."
+19,"the process requires expert knowledge, especially in image interpretation, given the challenges of collecting field data after a disaster."
+19,"while expert analysts can best identify the most appropriate training samples, the need for speed and the limited expert availability might make semi-automated methods, such as our approach, an acceptable alternative to manual techniques."
+19,"in both modis derived and migrated semi-automatic selection of training sample cases, the svm classifiers outperformed all others, as evidenced by high oa values (as illustrated in figure 4)."
+19,"this indicates svm’s exceptional capability to generalize from limited data and manage samples with potentially unreliable labels (mountrakis, im, and ogole 2011)."
+19,"svm robustness could be attributed to its user-defined parameter, c, which controls the preciseness needed for the decision boundary’s hyperplane to separate training data points (pal and mather, 2005), possibly accounting for its resilience to noisy data."
+19,"in contrast, for the changes semi-automatic training samples selection, dnn was the top performer."
+19,"dnn has become a premier classification method, particularly when large quantities of training information are available (sun et al."
+19,2020).
+19,"notably, in the fully automatic training samples selection case, we included a spectral index as an extra input variable, resulting in more information available to the classifier compared to other experiments."
+19,"while high-quality training data and ample samples are vital, machine learning algo­ rithm’s performance is contingent on reliable and robust optimization of user-defined parameters (see table s3)."
+19,"however, relying solely on default algorithms settings may not guarantee the highest accuracy."
+19,"nevertheless, despite optimization, a consensus regard­ ing the most accurate learning algorithm for satellite image classification remains con­ tentious (lawrence and moran 2015)."
+19,"it appears that the relative accuracy of different classifiers depends on the number and complexity of the mapped classes, the quality and size of the training data, and the employed prediction variables used."
+19,"hence, it is advisable for classification projects to explore multiple classifiers alongside optimization,"
+20,international journal of remote sensing 297 thereby identifying the best approach for the specific mapping task at hand.
+20,"fortunately, the flexibility of tools like r or similar packages enables the easy addition of more classifiers with minimal code adjustments, streamlining the selection of the best classifier for a given study area."
+20,"furthermore, the classification scripts can be generalized, simplify­ ing their application to new study areas."
+20,"satellite imagery-based damage assessment can be performed manually or semi- automatically (khodaverdizahraee, rastiveis, and jouybari 2020; wen et al."
+20,2019).
+20,"our results align with studies like khodaverdizahraee et al. (2020), emphasizing that manual interpretation yields superior veracity in depicting changes/damage on thematic maps."
+20,"however, this method is labour-resource-intensive and requires expansive investigation, positioning semi-automatic techniques as more viable for crisis management."
+20,"however, the semi-automatic training sample generation approach for assessing disaster areas has its constraints."
+20,utilizing the 500-m resolution modis map as a baseline showed that the significant resolution disparity with 30-m landsat introduces many incorrectly labelled samples.
+20,"for this reason, the spectral thresholding method was adopted in this study."
+20,note that a stricter threshold could diminish training data without necessarily improving reliability if the initial class means are skewed by mislabelled pixels.
+20,"therefore, perhaps one potential solution is utilizing higher spatial resolution reference data."
+20,"emerging global land cover databases, such as the 300-m globcover product (radoux et al. 2014), 100-m copernicus global land cover layers-collection2 (buchhorn et al. 2020), or the 10- m 2020’s esa worldcover (zanaga et al. 2021), offer potential alternatives."
+20,"nevertheless, we wish to emphasize the utilization of the modis collection due to its capacity to offer land cover data across a comprehensive time span (since 2001)."
+20,this collection enables the examination of shifts in trends and recuperation processes related to numerous incidents over the preceding decades.
+20,"accordingly, this globally expansive land cover product can facilitate the retrospective analysis of historical calamities, such as earth­ quakes, tsunamis, floods, volcanic eruptions, droughts, landslides, and forest fires."
+20,"furthermore, it enables anticipatory assessments for potential future events with compar­ able characteristics."
+20,another critical limitation in land cover change analysis is that the broadly defined classes in disaster zones may not capture the nuanced effects of specific events such as earthquakes and tsunamis.
+20,"employing higher-resolution reference data­ sets could enable more precise class identification, fostering a more thorough analysis."
+20,tubul and llico experienced severe tsunami impact with 4 to 13 metres run-ups as observed locally (fritz et al.
+20,2011).
+20,"the inundation areas stretched up to 1.2 km and 0.8 km inland, respectively."
+20,"in addition, tubul’s shallow slope was strongly impacted by the 1.4 ± 0.1-metre coseismic elevation shift (fritz et al."
+20,2011).
+20,figure 5’s point b shows a 200 m coastline regression due to the wet sediment class.
+20,"notably, the earthquake and tsunami led the tubul and raqui rivers to dry up with wet sediments, chiefly replacing the usual water cover depicted by points a and b in figure 5."
+20,"significant vegetation changes, especially in low vegetation areas, resulted from rock and sediment slides, primarily due to seawater intrusion, leading to vegetation loss and subsequent soil exposure (see points c and d in figure 5)."
+20,"this event triggered remarkable land cover transition, such as a transition from water to wet (49.1 ha) and dry sediment (14.2 ha) and low vegetation being supplanted mainly by sediment (133.3 ha)."
+20,"timely and accurate land cover information is pivotal for land managers, decision- makers, and policymakers responsible for devising land management strategies and policies (nguyen et al."
+20,2021).
+20,this study provides a local perspective on land cover
+21,298 m.
+21,"volke et al. changes aftermath of the 2010 chilean tsunami, offering a more localized viewpoint than broader regional analyses in prior work (rojas et al."
+21,2013).
+21,"traditional crisis management methods may fall short of addressing decision-makers complex requirements (haung et al., 2018)."
+21,"however, advancements in cloud-based planetary-scale geospatial analysis and machine learning-based classifications promise a solution."
+21,the main contribution of this study is a methodological framework to automate and accelerate crisis responses in disaster-stricken areas.
+21,"this approach, and its results, can be adapted for detailed earth feature monitoring using high-resolution data sets."
+21,"to validate and substantiate our proposition, we replicate our methodology by using the esa worldcover 10 m and dynamic world global land covers map (zanaga et al."
+21,"2021; brown et al., 2022) alongside sentinel 2 satellite imagery, extended our analysis to encompass other forms of natural disasters, specifically focusing on the 2023 chilean forest fires (see supplementary g), north evia island wildfire event (greece) on august 2021 (see supplementary h) and the eruption of the chaitén volcano in southern chile (2008) (see supplementary i)."
+21,"notably, in all instances, we observed changes that con­ curred with the targeted phenomena, maintaining comparable accuracies to our initial findings."
+21,"these results provide compelling evidence of the robustness and efficacy of our automated training samples generation framework in satellite imagery land cover analy­ sis, emphasizing its effectiveness across diverse scenarios."
+21,conclusions this study provides valuable evidence that integrating passive satellite images with machine learning methodologies can serve as an effective tool for quantifying natural disasters impacts.
+21,"in an era of growing accessibility of satellite data, machine learning tools through open-source software and cloud computing, our proposed methodologies, underscored by training sample migration, have the potential to be employed as rapid response tools in emergency and risk management scenarios."
+21,the focus was on developing a unique method for semi-automatically selecting the optimal machine learning algorithm and corresponding training data derived from modis land cover products for predisaster landsat image-and migrated to post-disaster landsat image.
+21,"the pivotal semi-automatically process, eliminates the time-consuming process of manual training data collection and refinement, positioning it as a potential time advantage in disaster response scenarios."
+21,"the analysis of land cover changes following the 2010 chilean earthquake and tsunami validated this approach, with the svm classifier displaying a high level of accuracy."
+21,"by leveraging modis global product data at a 500-metre scale alongside 30-metre landsat imagery, this study formulates a methodology for assimilating broader-resolution land cover data into datasets from moderate and high-resolution satellites."
+21,"furthermore, the temporal expansiveness inherent in the modis global coverage product affords the prospect of scrutinizing diverse natural disasters of the past few decades and extrapolat­ ing potential impacts from events sharing analogous traits."
+21,"notably, the methodology was further substantiated by replicating it with the esa worldcover 10 m and dynamic world global land covers map and sentinel 2 satellite imagery, allowing for the detection of even the most subtle land cover variations and its applicability in other disaster scenarios."
+22,"international journal of remote sensing 299 a key feature of the proposed methodology is its potential for broad applicability across diverse disaster scenarios, demonstrated by its ability to track significant transfor­ mations in land cover and consistently achieve high accuracy levels."
+22,"nonetheless, it is important to recognize the inherent limitations in this study, particularly the presence of incorrectly labelled samples and the heterogeneity in semi-automatically selected train­ ing samples."
+22,"despite these challenges, the preliminary findings point to the potential of the pro­ posed approach."
+22,"however, to truly ascertain the scope and effectiveness of these meth­ ods, further refinement and research are required."
+22,"future studies should focus on enhancing the collection of training samples, optimizing the use of high-resolution global cover databases, and refining semi-automated methodologies."
+22,"as the fields of machine learning and geospatial technology continue to evolve, the exploration and incorporation of novel techniques may prove beneficial."
+22,"this synergy could play a role in disaster management, where aiding in more rapid damage identifica­ tion and mapping can make a significant difference."
+22,"considering the increasing occur­ rence of natural disasters, this study’s findings highlight the potential benefits of fusing advancements in machine learning and geospatial technology to improve disaster pre­ paredness and response."
+22,"by potentially reducing the impacts of disasters, these techni­ ques contribute to the ongoing progress in this swiftly evolving field."
+22,disclosure statement no potential conflict of interest was reported by the author(s).
+22,orcid timothy a.
+22,"warner http://orcid.org/0000-0002-0414-9748 references abdi, a."
+22,“land cover and land use classification performance of machine learning algorithms in a boreal landscape using sentinel-2 data.”
+22,giscience & remote sensing 57 (1): 1–20. https://doi.org/10.1080/15481603.2019.1650447.
+22,"ahmad, a., and s."
+22,quegan.
+22,“analysis of maximum likelihood classification on multispectral data.”
+22,"applied mathematical sciences 6 (129), 6425–6436."
+22,"akbulut, y., a."
+22,"sengur, y."
+22,"guo, and f."
+22,smarandache.
+22,“ns-k-nn: neutrosophic set-based k-nearest neighbors classifier.”
+22,symmetry 9 (9): 179. https://doi.org/10.3390/sym9090179.
+22,"araya-cornejo, c., and m."
+22,carvajal.
+22,"“efectos geomorfológicos del tsunami de chile de 2010 frente a la zona de máximo slip, revelados por imágenes satelitales y observaciones de campo: el caso del litoral arenoso la trinchera, región del maule.”"
+22,investigaciones geográficas 52 (52): 5. https://doi.org/10.5354/0719-5370.2016.43260.
+22,"bagan, h., h."
+22,"borjigin, and y."
+22,yamagata.
+22,“assessing nighttime lights for mapping the urban areas of 50 cities across the globe.”
+22,environment & planning b: urban analytics & city science 46 (6): 1097–1114. https://doi.org/10.1177/2399808317752926.
+22,"bagan, h., a."
+22,"millington, w."
+22,"takeuchi, and y."
+22,yamagata.
+22,spatiotemporal analysis of deforestation in the chapare region of bolivia using landsat images.
+22,land degrad dev 31 (18): 3024–3039. https://doi.org/10.1002/ldr.3692.
+23,300 m.
+23,volke et al.
+23,"belgiu, m., and l."
+23,drăguţ.
+23,“random forest in remote sensing: a review of applications and future directions.”
+23,isprs journal of photogrammetry and remote sensing 114:24–31. https://doi. org/10.1016/j.isprsjprs.2016.01.011.
+23,"beysolow, t., ii."
+23,“introduction to deep learning using r.”
+23,in introduction to deep learning using r.
+23,apress. https://doi.org/10.1007/978-1-4842-2734-3.
+23,"blanzieri, e., and f."
+23,melgani.
+23,“nearest neighbor classification of remote sensing images with the maximal margin principle.”
+23,ieee transactions on geoscience and remote sensing 46 (6): 1804–1811. https://doi.org/10.1109/tgrs.2008.916090.
+23,"bocco, m., g."
+23,"ovando, s."
+23,"sayago, and e."
+23,willington.
+23,“neural network models for land cover classification from satellite images.”
+23,agricultura tecnica 67 (4): 414–421. https://doi.org/10.4067/ s0365-28072007000400009.
+23,"breiman, l."
+23,“random forests.”
+23,machine learning 45 (1): 5–32. https://doi.org/10.1023/ a:1010933404324.
+23,"brown, c."
+23,"f., s."
+23,"brumby, b."
+23,"guzder-williams, t."
+23,"birch, s."
+23,"hyde, j."
+23,"mazzariello, w."
+23,"czerwinski, v."
+23,"pasquarella, r."
+23,"haertel, s."
+23,"ilyushchenko, k."
+23,"schwehr, et al."
+23,"dynamic world, near real-time global 10 m land use land cover mapping."
+23,scientific data 9(1): 257. https://doi.org/10.1038/ s41597-022-01307-4 .
+23,"buchhorn, m., m."
+23,"lesiv, n."
+23,"tsendbazar, m."
+23,"herold, l."
+23,"bertels, and b."
+23,smets.
+23,“copernicus global land cover layers—collection 2.”
+23,remote sensing 12 (6): 1044. https://doi.org/10.3390/ rs12061044.
+23,"candel, a., v."
+23,"parmar, e."
+23,"ledell, a."
+23,"arora, and j."
+23,lanford 2016.
+23,deep learning with h2o: fifth edition deep learning with h2o. http://h2o.ai/resources/.
+23,"chen, t., and c."
+23,guestrin.
+23,“xgboost: a scalable tree boosting system”.
+23,proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining.
+23,785–794.
+23,"cienfuegos, r., m."
+23,"villagran, j."
+23,"aguilera, p."
+23,"catalán, b."
+23,"castelle, and r."
+23,almar.
+23,“video monitoring and field measurements of a rapidly evolving coastal system: the river mouth and sand spit of the mataquito river in chile.”
+23,journal of coastal research 70:639–644. https://doi. org/10.2112/si70-108.1.
+23,"cui, j., m."
+23,"zhu, y."
+23,"liang, g."
+23,"qin, j."
+23,"li, and y."
+23,land use/land cover change and their driving factors in the yellow river basin of shandong province based on google earth engine from 2000 to 2020.
+23,"international journal of geo-information, 11(3): 163. https://doi.org/10.3390/ijgi11030163."
+23,"de leeuw, j., h."
+23,"jia, l."
+23,"yang, x."
+23,"liu, k."
+23,"schmidt, and a."
+23,skidmore.
+23,“comparing accuracy assessments to infer superiority of image classification methods.”
+23,international journal of remote sensing 27 (1): 223–232. https://doi.org/10.1080/01431160500275762.
+23,"duarte, d., c."
+23,"fonte, h."
+23,"costa, and m."
+23,caetano.
+23,“thematic comparison between esa worldcover 2020 land cover product and a national land use land cover map.”
+23,land 12 (2): 490. https://doi.org/10.3390/land12020490.
+23,"duarte, d., f."
+23,"nex, n."
+23,"kerle, and g."
+23,vosselman.
+23,“multi-resolution feature fusion for image classification of building damages with convolutional neural networks.”
+23,remote sensing 10 (10): 1636. https://doi.org/10.3390/rs10101636.
+23,"fix, e., and j."
+23,hodges.
+23,discriminatory analysis.
+23,nonparametric discrimination: consistency properties.
+23,international statistical review / revue internationale de statistique 57(3): 238. https:// doi.org/10.2307/1403797.
+23,"foga, s., p."
+23,"scaramuzza, s."
+23,"guo, z."
+23,"zhu, r."
+23,"dilley, t."
+23,"beckmann, g."
+23,"schmidt, j."
+23,"dwyer, m."
+23,"joseph hughes, and b."
+23,“cloud detection algorithm comparison and validation for operational landsat data products.”
+23,remote sensing of environment 194:379–390. https://doi.org/ 10.1016/j.rse.2017.03.026.
+23,"franco-lopez, h., a."
+23,"ek, and m."
+23,bauer.
+23,"“estimation and mapping of forest stand density, volume, and cover type using the k-nearest neighbors method.”"
+23,remote sensing of environment 77 (3): 251–274. https://doi.org/10.1016/s0034-4257(01)00209-7.
+23,"friedl, m."
+23,"a., d."
+23,"sulla-menashe, b."
+23,"tan, a."
+23,"schneider, n."
+23,"ramankutty, a."
+23,"sibley, and x."
+23,huang.
+23,“modis collection 5 global land cover: algorithm refinements and characterization of new datasets.”
+23,remote sensing of environment 114 (1): 168–182. https://doi.org/10.1016/j.rse.2009.08.016.
+24,"international journal of remote sensing 301 friedman, j."
+24,“multivariate adaptive regression splines.”
+24,the annals of statistics 19 (1): 1–67. https://doi.org/10.1214/aos/1176347963.
+24,"friedman, j."
+24,greedy function approximation: a gradient boosting machine.
+24,annals of statistics 1189–1232.
+24,"fritz, h."
+24,"m., c."
+24,"petroff, p."
+24,"catalán, r."
+24,"cienfuegos, p."
+24,"winckler, n."
+24,"kalligeris, r."
+24,"weiss, s."
+24,"barrientos, g."
+24,"meneses, c."
+24,"valderas-bermejo, c."
+24,"ebeling, et al."
+24,field survey of the 27 february 2010 chile tsunami.
+24,pure appl.
+24,geophys.pure and applied geophysics 168(11): 1989– 2010. https://doi.org/10.1007/s00024-011-0283-5.
+24,"gelabert, p."
+24,"j., a."
+24,"montealegre, m."
+24,"lamelas, and d."
+24,domingo.
+24,“forest structural diversity characterization in mediterranean landscapes affected by fires using airborne laser scanning data.”
+24,57 (4): 497–509. https://doi.org/10.1080/15481603.2020.1738060.
+24,"georganos, s., t."
+24,"grippa, s."
+24,"vanhuysse, m."
+24,"lennert, m."
+24,"shimoni, and e."
+24,wolff.
+24,“very high resolution object-based land use-land cover urban classification using extreme gradient boosting.”
+24,ieee geoscience and remote sensing letters 15 (4): 607–611. https://doi.org/10.1109/ lgrs.2018.2803259.
+24,"ghaffarian, s., n."
+24,"kerle, e."
+24,"pasolli, and j."
+24,arsanjani.
+24,“post-disaster building database updating using automated deep learning: an integration of pre-disaster openstreetmap and multi-temporal satellite data.”
+24,remote sensing 11 (20): 2427. https://doi.org/10.3390/ rs11202427.
+24,"ghaffarian, s., d."
+24,"roy, t."
+24,"filatova, and n."
+24,kerle.
+24,“agent-based modelling of post-disaster recovery with remote sensing data.”
+24,international journal of disaster risk reduction 60:102285. https://doi.org/10.1016/j.ijdrr.2021.102285.
+24,"ghayour, l., a."
+24,"neshat, s."
+24,"paryani, h."
+24,"shahabi, a."
+24,"shirzadi, w."
+24,"chen, n."
+24,"al-ansari, et al."
+24,“performance evaluation of sentinel-2 and landsat 8 oli data for land cover/use classification using a comparison between machine learning algorithms.”
+24,remote sensing 13 (7): 1349. https:// doi.org/10.3390/rs13071349.
+24,"ghorbanian, a., m."
+24,"kakooei, m."
+24,"amani, s."
+24,"mahdavi, a."
+24,"mohammadzadeh, and m."
+24,hasanlou.
+24,“improved land cover map of iran using sentinel imagery within google earth engine and a novel automatic workflow for land cover classification using migrated training samples.”
+24,isprs journal of photogrammetry and remote sensing 167:276–288. https://doi.org/10.1016/j.
+24,isprsjprs.2020.07.013.
+24,"gopinath, g., n."
+24,"sasidharan, and u."
+24,surendran.
+24,“landuse classification of hyperspectral data by spectral angle mapper and support vector machine in humid tropical region of india.”
+24,earth science informatics 13 (3): 633–640. https://doi.org/10.1007/s12145-019-00438-4.
+24,"gorelick, n., m."
+24,"hancher, m."
+24,"dixon, s."
+24,"ilyushchenko, d."
+24,"thau, and r."
+24,moore.
+24,“google earth engine: planetary-scale geospatial analysis for everyone.”
+24,remote sensing of environment 202:18–27. https://doi.org/10.1016/j.rse.2017.06.031.
+24,"guo, y., y."
+24,"liu, a."
+24,"oerlemans, s."
+24,"lao, s."
+24,"wu, and m."
+24,“neurocomputing deep learning for visual understanding : a review.”
+24,neurocomputing 187:27–48. https://doi.org/10.1016/j.neucom.
+24,2015.09.116.
+24,"he, j., j."
+24,"harris, m."
+24,"sawada, and p."
+24,behnia.
+24,“a comparison of classification algorithms using landsat-7 and landsat-8 data for mapping lithology in canada’s arctic.”
+24,international journal of remote sensing 36 (8): 2252–2276. https://doi.org/10.1080/01431161.2015.1035410.
+24,"he, y., e."
+24,"lee, and t."
+24,warner.
+24,“a time series of annual land use and land cover maps of china from 1982 to 2013 generated using avhrr gimms ndvi3g data.”
+24,remote sensing of environment 199:201–217. https://doi.org/10.1016/j.rse.2017.07.010.
+24,"heydari, s."
+24,"s., and g."
+24,mountrakis.
+24,"“effect of classifier selection, reference sample size, reference class distribution and scene heterogeneity in per-pixel classification accuracy using 26 landsat sites.”"
+24,remote sensing of environment 204:648–658. https://doi.org/10.1016/j.rse.
+24,2017.09.035.
+24,"huang, h., y."
+24,"chen, n."
+24,"clinton, j."
+24,"wang, x."
+24,"wang, c."
+24,"liu, p."
+24,"gong, et al."
+24,“mapping major land cover dynamics in beijing using all landsat images in google earth engine.”
+24,remote sensing of environment 202:166–176. https://doi.org/10.1016/j.rse.2017.02.021.
+25,302 m.
+25,volke et al.
+25,"huang, h., j."
+25,"wang, c."
+25,"liu, l."
+25,"liang, c."
+25,"li, and p."
+25,the migration of training samples towards dynamic global land cover mapping.
+25,isprs journal of photogrammetry & remote sensing 161:27–36. https://doi.org/10.1016/j.isprsjprs.2020.01.010.
+25,"hu y, and y."
+25,"detecting forest disturbance and recovery in primorsky krai, russia, using annual landsat time series and multi–source land cover products."
+25,"remote sensing 12(1): 129. https://doi.org/10.3390/rs12010129 ishihara, m., and t."
+25,tadono.
+25,“land cover changes induced by the great east japan earthquake in 2011.”
+25,scientific reports 7 (1): 7. https://doi.org/10.1038/srep45769.
+25,"jia, k., s."
+25,"liang, x."
+25,"wei, l."
+25,"zhang, y."
+25,"yao, and s."
+25,“automatic land-cover update approach integrating iterative training sample selection and a markov random field model.”
+25,5 (2): 148–156. https://doi.org/10.1080/2150704x.2014.889862.
+25,"jin, y., x."
+25,"liu, j."
+25,"yao, x."
+25,"zhang, and h."
+25,zhang.
+25,mapping the annual dynamics of cultivated land in typical area of the middle-lower yangtze plain using long time-series of landsat images based on google earth engine.
+25,international journal of remote sensing 41(4): 1625–1644. https:// doi.org/10.1080/01431161.2019.1673917.
+25,"kaiser, g., b."
+25,"burkhard, h."
+25,"römer, s."
+25,"sangkaew, r."
+25,"graterol, t."
+25,"haitook, h."
+25,"sterr, and d."
+25,sakuna- schwartz.
+25,"“mapping tsunami impacts on land cover and related ecosystem service supply in phang nga, thailand.”"
+25,natural hazards and earth system sciences 13 (12): 3095–3111. https:// doi.org/10.5194/nhess-13-3095-2013.
+25,"kaku, k."
+25,“satellite remote sensing for disaster management support: a holistic and staged approach based on case studies in sentinel asia.”
+25,international journal of disaster risk reduction 33:417–432. https://doi.org/10.1016/j.ijdrr.2018.09.015.
+25,"karan, s."
+25,"k., and s."
+25,samadder.
+25,“a comparison of different land-use classification techniques for accurate monitoring of degraded coal-mining areas.”
+25,environmental earth sciences 77 (20): 1–15. https://doi.org/10.1007/s12665-018-7893-5.
+25,"khodaverdizahraee, n., h."
+25,"rastiveis, and a."
+25,jouybari.
+25,“segment-by-segment comparison technique for earthquake-induced building damage map generation using satellite imagery.”
+25,international journal of disaster risk reduction 46:101505. https://doi.org/10.1016/j.ijdrr.2020.
+25,101505.
+25,"koshimura, s., l."
+25,"moya, e."
+25,"mas, and y."
+25,“tsunami damage detection with remote sensing: a review”.
+25,geosciences (switzerland) 10(5).
+25,mdpi ag. https://doi.org/10.3390/geosciences10050177.
+25,"kuhn, m."
+25,“building predictive models in r using the caret package.”
+25,journal of statistical software 28 (5): 1–26. https://doi.org/10.18637/jss.v028.i05.
+25,"lawrence, r."
+25,"l., and c."
+25,moran.
+25,“the americaview classification methods accuracy comparison project: a rigorous approach for model selection.”
+25,remote sensing of environment 170:115–120. https://doi.org/10.1016/j.rse.2015.09.008.
+25,"li, x., x."
+25,"liu, and l."
+25,“aggregative model-based classifier ensemble for improving land-use/ cover classification of landsat tm images.”
+25,international journal of remote sensing 35 (4): 1481–1495. https://doi.org/10.1080/01431161.2013.878061.
+25,"ma, l., y."
+25,"liu, x."
+25,"zhang, y."
+25,"ye, g."
+25,"yin, and b."
+25,johnson.
+25,“deep learning in remote sensing applications: a meta-analysis and review.”
+25,isprs journal of photogrammetry and remote sensing 152:166–177. https://doi.org/10.1016/j.isprsjprs.2019.04.015.
+25,"martínez, c., o."
+25,"rojas, d."
+25,"edilia jaque, j."
+25,"quezada, g."
+25,"daniela vázquez, and i."
+25,arturo belmonte.
+25,"“efectos territoriales del tsunami del 27 de febrero de 2010 en la costa de la región del bio-bío, chile.”"
+25,revista geográfica de américa central número especial egal 2:47e.
+25,"maxwell, a."
+25,"e., t."
+25,"warner, and f."
+25,“implementation of machine-learning classification in remote sensing: an applied review.”
+25,international journal of remote sensing 39 (9): 2784–2817.
+25,taylor and francis ltd. https://doi.org/10.1080/01431161.2018.1433343.
+25,"mcnemar, q."
+25,“note on the sampling error of the difference between correlated proportions or percentages.”
+25,psychometrika 12 (2): 153–157. https://doi.org/10.1007/bf02295996.
+25,"merghadi, a., a."
+25,"yunus, j."
+25,"dou, j."
+25,"whiteley, b."
+25,"thaipham, d."
+25,"bui, r."
+25,"avtar, and b."
+25,abderrahmane.
+25,“machine learning methods for landslide susceptibility studies: a comparative overview of algorithm performance.”
+25,earth science review 207:103225. https://doi.org/10.1016/j.earscirev.
+25,2020.103225.
+26,"international journal of remote sensing 303 mountrakis, g., j."
+26,"im, and c."
+26,ogole.
+26,“isprs journal of photogrammetry and remote sensing support vector machines in remote sensing: a review.”
+26,isprs journal of photogrammetry and remote sensing 66 (3): 247–259. https://doi.org/10.1016/j.isprsjprs.2010.11.001.
+26,"mugiraneza, t., a."
+26,"nascetti, and y."
+26,continuous monitoring of urban land cover change trajectories with landsat time series and landtrendr-google earth engine cloud computing.
+26,remote sensing 12(18): 2883. https://doi.org/10.3390/rs12182883.
+26,"naidoo, l., m."
+26,"cho, r."
+26,"mathieu, and g."
+26,asner.
+26,"“classification of savanna tree species, in the greater kruger national park region, by integrating hyperspectral and lidar data in a random forest data mining environment.”"
+26,isprs journal of photogrammetry and remote sensing 69:167–179. https://doi.org/10.1016/j.isprsjprs.2012.03.005.
+26,"natekin, a., and a."
+26,knoll.
+26,"“gradient boosting machines, a tutorial.”"
+26,frontiers in neurorobotics 7 (dec): 21. https://doi.org/10.3389/fnbot.2013.00021.
+26,"nguyen, h."
+26,"a., t."
+26,"sophea, s."
+26,"gheewala, r."
+26,"rattanakom, t."
+26,"areerob, and k."
+26,prueksakorn.
+26,integrating remote sensing and machine learning into environmental monitoring and assessment of land use change.
+26,sustainable production and consumption 27:1239–1254. https://doi.org/10.1016/j.spc.2021.02.025.
+26,"olofsson, p., g."
+26,"foody, m."
+26,"herold, s."
+26,"stehman, c."
+26,"woodcock, and m."
+26,wulder.
+26,“good practices for estimating area and assessing accuracy of land change.”
+26,remote sensing of environment 148:42–57. https://doi.org/10.1016/j.rse.2014.02.015.
+26,"orieschnig, c."
+26,"a., g."
+26,"belaud, j."
+26,"venot, s."
+26,"massuel, and a."
+26,ogilvie.
+26,"“input imagery, classifiers, and cloud computing: insights from multi-temporal lulc mapping in the cambodian mekong delta.”"
+26,54 (1): 398–416. https://doi.org/10.1080/22797254.2021.1948356.
+26,"otukei, j."
+26,"r., and t."
+26,blaschke.
+26,"“land cover change assessment using decision trees, support vector machines and maximum likelihood classification algorithms.”"
+26,international journal of applied earth observation and geoinformation 12 (suppl.
+26,1): s27–s31. https://doi.org/10.1016/j.
+26,jag.2009.11.002.
+26,"ou, q., x."
+26,"lei, and c."
+26,“individual tree diameter growth models of larch–spruce–fir mixed forests based on machine learning algorithms.”
+26,forests 10 (2): 187. https://doi.org/10. 3390/f10020187.
+26,"pal, m., and p."
+26,mather.
+26,an assessment of the effectiveness of decision tree methods for land cover classification.
+26,remote sensing of environment 86(4): 554–565. https://doi.org/10.1016/ s0034-4257(03)00132-9.
+26,"pal m., and p."
+26,mather.
+26,support vector machines for classification in remote sensing.
+26,"international journal of remote sensing, 26(5): 1007–1011. https://doi.org/10.1080/ 01431160512331314083."
+26,"phan, d."
+26,"c., t."
+26,"trung, v."
+26,"truong, t."
+26,"sasagawa, t."
+26,"vu, d."
+26,"bui, m."
+26,"hayashi, t."
+26,"tadono, and k."
+26,nasahara.
+26,“first comprehensive quantification of annual land use/cover from 1990 to 2020 across mainland vietnam.”
+26,scientific reports 11 (1): 1–20. https://doi.org/10.1038/s41598- 021-89034-5.
+26,"qian, y., w."
+26,"zhou, j."
+26,"yan, w."
+26,"li, and l."
+26,“comparing machine learning classifiers for object-based land cover classification using very high resolution imagery.”
+26,remote sensing 7 (1): 153–168. https://doi.org/10.3390/rs70100153.
+26,"radoux, j., c."
+26,"lamarche, e."
+26,"van bogaert, s."
+26,"bontemps, c."
+26,"brockmann, and p."
+26,defourny.
+26,“automated training sample extraction for global land cover mapping.”
+26,remote sensing 6 (5): 3965–3987. https://doi.org/10.3390/rs6053965.
+26,"ramezan, c."
+26,"a., t."
+26,"warner, a."
+26,"maxwell, and b."
+26,price.
+26,“effects of training set size on supervised machine-learning land-cover classification of large-area high-resolution remotely sensed data.”
+26,remote sensing 3 (3): 368. https://doi.org/10.3390/rs13030368.
+26,"rawat, j."
+26,"s., and m."
+26,kumar.
+26,"“monitoring land use/cover change using remote sensing and gis techniques: a case study of hawalbagh block, district almora, uttarakhand, india.”"
+26,the egyptian journal of remote sensing & space science 18 (1): 77–84. https://doi.org/10.1016/j.ejrs.
+26,2015.02.002.
+27,304 m.
+27,volke et al.
+27,"razaque, a., m."
+27,"ben haj frej, m."
+27,"almi’ani, m."
+27,"alotaibi, and b."
+27,alotaibi.
+27,“improved support vector machine enabled radial basis function and linear variants for remote sensing image classification.”
+27,sensors 21 (13): 4431. https://doi.org/10.3390/s21134431.
+27,"richmond, b., w."
+27,"szczuciński, c."
+27,"chagué-goff, k."
+27,"goto, d."
+27,"sugawara, r."
+27,"witter, d."
+27,"tappin, et al."
+27,"“erosion, deposition and landscape change on the sendai coastal plain, japan, resulting from the march 11, 2011 tohoku-oki tsunami.”"
+27,sedimentary geology 282:27–39. https://doi.org/ 10.1016/j.sedgeo.2012.08.005.
+27,"rodriguez-galiano, v."
+27,"f., b."
+27,"ghimire, j."
+27,"rogan, m."
+27,"chica-olmo, and j."
+27,rigol-sanchez.
+27,“an assessment of the effectiveness of a random forest classifier for land-cover classification.”
+27,isprs journal of photogrammetry and remote sensing 67 (1): 93–104. https://doi.org/10.1016/j.isprsjprs.
+27,2011.11.002.
+27,"rogan, j., j."
+27,"franklin, d."
+27,"stow, j."
+27,"miller, c."
+27,"woodcock, and d."
+27,roberts.
+27,“mapping land-cover modifications over large areas: a comparison of machine learning algorithms.”
+27,remote sensing of environment 112 (5): 2272–2283. https://doi.org/10.1016/j.rse.2007.10.004.
+27,"rojas, c., v."
+27,"mauricio, o."
+27,"sergio, s."
+27,"peters, and v."
+27,constanza.
+27,“pre and post earthquake land use and land cover identification in concepción.”
+27,lecture notes in geoinformation and cartography 199659:223–231. https://doi.org/10.1007/978-3-642-32714-8_15.
+27,r software.
+27,r: a language and environment for statistical computing.
+27,r foundation for statistical computing. https://www.r-project.org/.
+27,"samadi, m., h."
+27,"sarkardeh, and e."
+27,jabbari.
+27,“explicit data-driven models for prediction of pressure fluctuations occur during turbulent flows on sloping channels.”
+27,stochastic environmental research and risk assessment 34 (5): 691–707. https://doi.org/10.1007/s00477- 020-01794-0.
+27,"sarun, s., p."
+27,"vineetha, r."
+27,"kumar, and v."
+27,jayalekshmi.
+27,"“spatial analysis of land use and land cover changes using spectral indices in the tsunami affected areas in kerala, india.”"
+27,"journal of geography, environment and earth science international 15 (4): 1–11. https://doi.org/10.9734/ jgeesi/2018/41927."
+27,"scheip, c."
+27,"m., and k."
+27,wegmann.
+27,“hazmapper: a global open-source natural hazard mapping application in google earth engine.”
+27,natural hazards and earth system sciences 21 (5): 1495–1511. https://doi.org/10.5194/nhess-21-1495-2021.
+27,"shiferaw, h., w."
+27,"bewket, and s."
+27,eckert.
+27,“performances of machine learning algorithms for mapping fractional cover of an invasive plant species in a dryland ecosystem.”
+27,ecology and evolution 9 (5): 2562–2574. https://doi.org/10.1002/ece3.4919.
+27,"shi, w., m."
+27,"zhang, r."
+27,"zhang, s."
+27,"chen, and z."
+27,“change detection based on artificial intelligence: state-of-the-art and challenges.”
+27,remote sensing 12 (10): 1688. https://doi.org/10. 3390/rs12101688.
+27,"soto, m."
+27,"v., j."
+27,"arriagada, c."
+27,"castro-correa, i."
+27,"ibarra, and g."
+27,rodolfi.
+27,“condiciones geodinámicas derivadas del terremoto y tsunami de 2010 en la costa de chile central.
+27,el caso de pichilemu.”
+27,revista de geografia norte grande 60:79–95. https://doi.org/10.4067/s0718- 34022015000100005.
+27,"sublime, j., and e."
+27,kalinicheva.
+27,“automatic post-disaster damage mapping using deep-learning techniques for change detection: case study of the tohoku tsunami.”
+27,remote sensing 11 (9): 1123. https://doi.org/10.3390/rs11091123.
+27,"sulla-menashe, d., j."
+27,"gray, s."
+27,"abercrombie, and m."
+27,friedl.
+27,“hierarchical mapping of annual global land cover 2001 to present: the modis collection 6 land cover product.”
+27,remote sensing of environment 222:183–194. https://doi.org/10.1016/j.rse.2018.12.013.
+27,"sun, z., l."
+27,"di, h."
+27,"fang, and a."
+27,burgess.
+27,“deep learning classification for crop types in north dakota.”
+27,ieee journal of selected topics in applied earth observations and remote sensing 13:2200–2213. https://doi.org/10.1109/jstars.2020.2990104.
+27,"talukdar, s., p."
+27,"singha, s."
+27,"mahato, s."
+27,"shahfahad pal, y."
+27,"liou, and a."
+27,rahman.
+27,“land-use land- cover classification by machine learning classifiers for satellite observations—a review.”
+27,remote sensing 12 (7): 1135. https://doi.org/10.3390/rs12071135.
+27,"tappin, d."
+27,"r., h."
+27,"evans, c."
+27,"jordan, b."
+27,"richmond, d."
+27,"sugawara, and k."
+27,“coastal changes in the sendai area from the impact of the 2011 tōhoku-oki tsunami: interpretations of
+28,"international journal of remote sensing 305 time series satellite images, helicopter-borne video footage and field observations.”"
+28,sedimentary geology 282:151–174. https://doi.org/10.1016/j.sedgeo.2012.09.011.
+28,"tavus, b., s."
+28,"kocaman, and c."
+28,gokceoglu.
+28,“flood damage assessment with sentinel-1 and sentinel-2 data after sardoba dam break with glcm features and random forest method.”
+28,science of the total environment 816:151585. https://doi.org/10.1016/j.scitotenv.2021.151585.
+28,"thanh noi, p., and m."
+28,kappas.
+28,"“comparison of random forest, k-nearest neighbor, and support vector machine classifiers for land cover classification using sentinel-2 imagery.”"
+28,sensors 18 (1): 18. https://doi.org/10.3390/s18010018.
+28,"thanh noi p., and m."
+28,kappas.
+28,"comparison of random forest, k-nearest neighbor, and support vector machine classifiers for land cover classification using sentinel-2 imagery."
+28,"sensors, 18(2): 18. https://doi.org/10.3390/s18010018."
+28,"vapnik, v."
+28,"the nature of statistical learning theory, (vol.4, no.10)."
+28,journal of computer and communications: springer. http://dx.doi.org/10.1007/978-1-4757-2440-0.
+28,vatsavai r.
+28,"r., c."
+28,"symons, v."
+28,"chandola, and g."
+28,gx-means: a model-based divide and merge algorithm for geospatial image clustering.
+28,procedia computer science 4:186–195. https:// doi.org/10.1016/j.procs.2011.04.020 .
+28,"venkatappa, m., n."
+28,"sasaki, r."
+28,"shrestha, n."
+28,"tripathi, and h."
+28,“determination of vegetation thresholds for assessing land use and land use changes in cambodia using the google earth engine cloud-computing platform.”
+28,remote sensing 11 (13): 1514. https://doi.org/ 10.3390/rs11131514.
+28,"waghwala, r."
+28,"k., and p."
+28,agnihotri.
+28,“flood risk assessment and resilience strategies for flood risk management: a case study of surat city.”
+28,international journal of disaster risk reduction 40:101155. https://doi.org/10.1016/j.ijdrr.2019.101155.
+28,"warner, t."
+28,“hyperspherical direction cosine change vector analysis.”
+28,international journal of remote sensing 26 (6): 1201–1215. https://doi.org/10.1080/0143116042000298252.
+28,"wen, q., k."
+28,"jiang, w."
+28,"wang, q."
+28,"liu, q."
+28,"guo, l."
+28,"li, and p."
+28,“automatic building extraction from google earth images under complex backgrounds based on deep instance segmentation network.”
+28,sensors 19 (2): 333. https://doi.org/10.3390/s19020333.
+28,"wessels, k."
+28,"j., f."
+28,"bergh van den, d."
+28,"roy, b."
+28,"salmon, k."
+28,"steenkamp, b."
+28,"macalister, d."
+28,"swanepoel, and d."
+28,jewitt.
+28,“rapid land cover map updates using change detection and robust random forest classifiers.”
+28,remote sensing 8 (11): 888. https://doi.org/10.3390/rs8110888.
+28,"xie, s., l."
+28,"liu, x."
+28,"zhang, j."
+28,"yang, x."
+28,"chen, and y."
+28,“automatic land-cover mapping using landsat time-series data based on google earth engine.”
+28,remote sensing 11 (24): 3023. https:// doi.org/10.3390/rs11243023.
+28,"ye j., y."
+28,"hu, l."
+28,"zhen, h."
+28,"wang, and y."
+28,zhang.
+28,"analysis on land-use change and its driving mechanism in xilingol, china, during 2000–2020 using the google earth engine."
+28,remote sensing 13(24): 5134. https://doi.org/10.3390/rs13245134.
+28,"zanaga, d., r."
+28,"van de kerchove, w."
+28,"de keersmaecker, n."
+28,"souverijns, c."
+28,"brockmann, r."
+28,"quast, j."
+28,"wevers, et al."
+28,"esa worldcover 10 m 2020 v100. https://doi.org/10.5281/zenodo.5571936 zhang, h."
+28,"k., and d."
+28,“using the 500 m modis land cover product to derive a consistent continental scale 30 m landsat land cover classification.”
+28,remote sensing of environment 197:15–34. https://doi.org/10.1016/j.rse.2017.05.024.
+28,"zhang, t., j."
+28,"su, z."
+28,"xu, y."
+28,"luo, and j."
+28,“sentinel-2 satellite imagery for urban land cover classification by optimized random forest classifier.”
+28,applied sciences 11 (2): 543. https://doi.org/ 10.3390/app11020543.
