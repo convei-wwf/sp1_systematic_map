@@ -399,18 +399,22 @@ write_refs(clean_sbr,    format = 'ris',
 This sample excludes benchmarks and societal benefits repo papers.
 
 ```{r}
-set.seed(2001)
+sample_f <- here('_data/3_refs_clean/sample/sample_1000_240708.ris')
 
-sample_1000 <- refs_ready %>%
-  filter(src != 'societal benefits repo') %>%
-  filter(!benchmark) %>%
-  slice_sample(n = 1000) %>% 
-  select(-src) %>%
-  ### write_refs can't handle tbl?
-  as.data.frame() %>%
-  select(where(~ any(!is.na(.))))
+if(!file.exists(sample_f)) {
+  set.seed(2001)
   
-write_refs(sample_1000, format = 'ris',
-           file = here('_data/3_refs_clean/sample/sample_1000_240708.ris'))
+  sample_1000 <- refs_ready %>%
+    filter(src != 'societal benefits repo') %>%
+    filter(!benchmark) %>%
+    slice_sample(n = 1000) %>% 
+    select(-src) %>%
+    ### write_refs can't handle tbl?
+    as.data.frame() %>%
+    select(where(~ any(!is.na(.))))
+    
+  write_refs(sample_1000, format = 'ris',
+             file = sample_f)
+}
 ```
 
