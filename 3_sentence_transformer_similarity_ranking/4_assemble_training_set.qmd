@@ -1,0 +1,85 @@
+---
+title: "Assemble training set"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script gathers the citations and appends screening decisions to create a training set.  This training set can be used to create a classification model of some sort.
+
+This script can be run standalone or as a child of another script, to hand the training set to that script.
+
+```{r}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+
+## Load SBR screening results
+
+Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results out of Colandr; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
+
+```{r}
+sbr_cit_scr_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv')) %>%
+  mutate(title = str_to_title(title)) %>%
+  select(title, abstract, author, key) %>%
+  distinct()
+
+
+sbr_fulltext_df <- read_csv(here('_output/phase1_societal_benefits/fulltext_screened.csv')) %>%
+  ### skip author, match by title only?
+  select(title, include = screening_decision, 
+         notes = `Quick notes`) %>%
+  mutate(title = str_to_title(title),
+         include = (include == 'Include'))
+
+sbr_training <- sbr_cit_scr_df %>%
+  left_join(sbr_fulltext_df, by = 'title') %>%
+  mutate(include = ifelse(is.na(include), FALSE, include))
+
+```
+
+## Load sample screening results
+
+```{r}
+### get title/key lookup
+sample_info_df <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv')) %>%
+  select(title, key) %>%
+  mutate(title = str_to_title(title))
+
+sample_cit_scr_df <- read_csv(here('_data/5b_sample_1000/sample_screened_results_240802.csv')) %>%
+  mutate(title = str_to_title(title)) %>%
+  select(title, abstract, author) %>%
+  inner_join(sample_info_df, by = 'title') %>%
+  distinct()
+
+sample_fulltext_df <- read_csv(here('_output/phase2_sample_1000/fulltext_screened.csv')) %>%
+  ### skip author, match by title only?
+  select(title, include = screening_decision, 
+         notes = `Quick notes`) %>%
+  mutate(title = str_to_title(title),
+         include = (include == 'Include')) %>%
+  filter(!is.na(include))
+
+sample_training <- sample_cit_scr_df %>%
+  left_join(sample_fulltext_df, by = 'title') %>%
+  mutate(include = ifelse(is.na(include), FALSE, include))
+
+```
+
+## Bind together into a training set
+
+```{r}
+training_df <- bind_rows(sample_training, sbr_training)
+
+# write_csv(training_df, here('_output/tmp_training_set.csv'))
+```
+
