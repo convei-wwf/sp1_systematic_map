@@ -1,0 +1,433 @@
+page,p
+1,"csiro publishing international journal of wildland fire 2020, 29, 961–973 review https://doi.org/10.1071/wf19091 how to measure the economic health cost of wildfires – a systematic review of the literature for northern america ruth dittrich a,b and stuart mccallum a a university of portland, pamplin school of business, 5000 n willamette boulevard, portland, or 97203, usa."
+1,b corresponding author.
+1,email: dittrich@up.edu abstract.
+1,"there has been an increasing interest in the economic health cost from smoke exposure from wildfires in the past 20 years, particularly in the north-western usa that is reflected in an emergent literature."
+1,"in this review, we provide an overview and discussion of studies since 2006 on the health impacts of wildfire smoke and of approaches for the estimation of the associated economic cost."
+1,we focus on the choice of key variables such as cost estimators for determining the economic impact of mortality and morbidity effects.
+1,"in addition, we provide an in-depth discussion and guidance on the functioning, advantages and challenges of benmap-ce, freely available software of the us environmental protection agency (epa) that has been used in a growing number of studies to assess cost from wildfire smoke."
+1,we highlight what generates differences in outcomes between relevant studies and make suggestions for increasing the comparability between studies.
+1,"all studies, however, demonstrate highly significant health cost from smoke exposure, in the millions or billions of us dollars, often driven by increases in mortality."
+1,the results indicate the need to take health cost into account for a comprehensive analysis of wildfire impacts.
+1,"additional keywords: benmap-ce received 18 june 2019, accepted 2 august 2020, published online 1 october 2020 introduction prevalence has led to an increase in exposure to harmful pol- total area burned through wildfires in the united states has lutants emitted by wildfires like particulate matter (pm), and increased since the mid-1980s, with the north-west usa as one ground-level ozone (o3)."
+1,"as such, interest in the cost to health of of the most affected regions (spracklen et al."
+1,2009; liu et al. these wildfires is growing.
+1,2016; mcclure and jaffe 2018).
+1,"although there is some evi- at present, there exists significant literature surrounding dence to suggest this increase is due to a more normal fire wildfires’ ecological impact (reid et al. 2016); yet literature mitigation regime in areas where fires had previously been surrounding the valuation of indirect health costs associated supressed (doerr and santin 2016), there exists a growing with wildfires is still relatively new."
+1,direct health costs from consensus that climate change has led and will lead to an wildfire relate to damage such as death resulting from burn increased incidence of wildfires (fried et al.
+1,2008; spracklen injuries whereas the indirect costs are the result of secondary et al.
+1,2009; flannigan et al.
+1,2013; liu et al.
+1,2016).
+1,abatzoglou impacts.
+1,many general cost studies on wildfires vastly underes- and williams (2016) found anthropogenic climate change to timate the true cost of those fires as they do not incorporate have contributed to increased fuel aridity and a doubling in the smoke-induced health costs.
+1,"the literature suggests that these cumulative forest fire area since 1984, the main drivers of this indirect costs may be much greater than assumed in the past and being earlier spring snow melt and increasing spring and sum- growing."
+1,"it is estimated that between 2010 and 2015, wildfire mer temperatures (spracklen et al."
+1,2009).
+1,"another driver of smoke costs grew on average by 217% each year in the western wildfires is the increased wildland-urban interface, the zone usa (jones and berrens 2017). between unoccupied land and human population, where homes kochi et al. (2010) carried out a literature review on the are built near or among lands prone to wildfires (radeloff et al. economic costs of health impacts in 2010."
+1,"at that time, they 2018)."
+1,liu et al. (2016) estimate ‘more than 82 million indivi- identified a need to better understand both the major and minor duals will experience on average a 31% to 57% increase in impacts of wildfire smoke on adverse health outcomes including frequency and intensity’ of wildfire in the usa.
+1,this increase is more knowledge on aversion behaviours.
+1,"in the 10 years since to be greatest in the pacific northwest, with a 78% increase in then, several new studies on the cost of health impacts from annual mean area burned by 2050 (spracklen et al."
+1,"2009). wildfires have emerged, particularly in the usa."
+1,"this could in linked to this, cascio (2018) found that the size of the popu- part be due to the increasing severity of wildfires, especially in lation at risk from smoke is going up: an increase in wildfire the usa, but also due to the availability of benmap-commuity journal compilation ó iawf 2020 open access cc by-nc-nd www.publish.csiro.au/journals/ijwf"
+2,962 int.
+2,wildland fire r.
+2,dittrich and s.
+2,mccallum edition (benmap-ce) or the ‘environmental benefits mapping the pollutants from wildfires that affect human health and analysis program’: open-source software provided by the wildfires generate smoke plumes that are the primary cause of us environmental protection agency (epa) that makes the indirect health costs.
+2,"smoke plumes are defined as ‘gases, evaluation of changes in air quality and the application of cost– smoke and debris that rise slowly from the fire while being benefit analysis in the wildfire context more accessible and has carried along the ground because the buoyant forces are been used by several studies. exceeded by those of the ambient surface wind’ (national in the present literature review, we will examine the latest wildfire coordinating group 2018)."
+2,these plumes dramati- studies on the economic costs of adverse health-related impacts cally alter air quality in the affected area and can increase from wildfires.
+2,"although there is some literature on the health both the levels of ozone (o3) and pm to dangerous levels effects from prescribed fire smoke (nguyen et al. 2020), we are (larsen et al."
+2,2018).
+2,"other combustion products produced not aware of economic valuation studies for prescribed fires. by wildfires include: polycyclic aromatic hydrocarbons we focus mostly on northern america, as the bulk of recent (pahs), carbon monoxide (co), nitrogen oxides (nox), vol- literature focuses on this geographic region but also include atile organic compounds (vocs) and sulfur dioxide (so2) studies from other regions where relevant."
+2,we believe this to be (hänninen et al.
+2,2009). a valuable exercise to inform future research and policy.
+2,"often- there is consensus that wildfire smoke has a significant times, health impacts from smoke are still not considered when impact on both acute and long-term health endpoints in the estimating the total cost from a wildfire as it is time-consuming. exposed populations (us forest service 2018)."
+2,"in general, the synthesising the literature related to health costs allows us to health literature shows associations between smoke exposure better contextualise other costs from wildfires and to inform and an increased risk of mortality (death) (morgan et al. 2010; discussions on what drives costs from wildfires."
+2,"as such, a better johnston et al."
+2,2012; kochi et al.
+2,2012; shaposhnikov et al. understanding of total wildfire costs can provide an indication 2014; reid et al.
+2,2016).
+2,"specifically, johnston et al. (2012) where to focus mitigation spending for wildfire impacts. found the estimated global mortality attributable to wildfire to we provide readers with practical guidance on how be an average of 339 000 deaths annually across the world (the benmap-ce functions and where its challenges lie that makes most affected regions being sub-saharan africa and south-east the standardisation across benmap-ce studies difficult."
+2,we asia).
+2,"in addition, there is also evidence of the increased risk of also discuss options on how to make those studies potentially morbidity (kochi et al."
+2,2010). more uniform for future research.
+2,"the first part of the paper the evidence on health impacts from prescribed fires is very includes all studies that have been identified as relevant to the limited but literature on pm2.5 concentrations suggests they may topic, whereas the second part focuses on studies that used be less severe than from wildfires."
+2,"generally, even though the benmap-ce. burnt areas from wildfires and prescribed fires are similar in the this remainder of this paper is structured as follows: the usa per year, the measured pm2.5 concentrations are much pollutants from wildfires that affect human health section lower for the latter (jaffe et al."
+2,2020).
+2,"this is due to fuel types reviews the literature in the field, including the epidemiological and fire management practice that avoids burning canopy or duff effects of wildfire smoke, describing first the pollutants, and fuels in prescribed fires. then health impacts of these pollutants."
+2,the economic cost of health impacts and benmap-ce sections discuss literature that values health impact incidences to derive economic cost with a particulate matter (pm) focus on benmap-ce.
+2,the final two sections provide a discus- particulate matter is the catch-all term for ‘solid particles and sion and conclusion respectively. liquid droplets found in the air’ and includes both pm10 (diameters 10 mm and smaller) and pm2.5 (2.5 mm and smaller) (epa 2018a).
+2,"fine pm consists of soot, organic carbon com- methodology pounds and inorganic ash (hänninen et al."
+2,2009).
+2,"owing to its the literature search was conducted using search engines size, pm infiltrates deep into the lungs, with some even entering (google scholar and researchgate) and databases (csiro the bloodstream."
+2,decreases in the levels of pm2.5 have been seen publishing and elsevier) in order to identify peer-reviewed nationwide in ambient air as anthropogenic emissions (emitted articles as well as grey literature that tackle the subject. by combustion engines) have been reduced.
+2,"fann et al. (2018a) through the citations and references of these papers, further found the estimated fraction of deaths in the usa due to pm2.5 evidence was found to contribute to this literature review. from all sources to be 6.1% in 2005 (150 000 deaths), which fell search terms centred around wildfire/forest fire, prescribed to 4.6% (121 000 deaths) by 2014 as pm2.5 concentrations fires/controlled burns, particulate matter (pm2.5 and pm10), declined."
+2,yet areas with a high wildfire prevalence have seen ground-level ozone (o3) and health impacts/effects.
+2,"through increases in levels of pm2.5 (particularly the western and north- the search, a focus was placed on literature from 2006 onwards western usa) attributable to the impact of wildfire (liu et al. as well as a concentration on north america."
+2,"however, litera- 2016; mcclure and jaffe 2018)."
+2,"in addition, wegesser et al. ture that added value was also utilised as supporting evidence (2009) demonstrated that pm2.5 produced by wildfire is of a even if not under these criteria."
+2,"a filtering process – through greater toxicity than that found in ambient air, highlighting the titles, then abstracts and finally full papers – was then used to need for health analysis of pm2.5 caused by wildfires. identify the relevant studies."
+2,"we identified 47 studies as rele- the effects of pm2.5 are both acute and long term, with vant, of which 12 estimated the economic cost of health impacts adetona et al. (2016) describing pm2.5 as the most harmful and of those, five used benmap-ce. pollutant from wildfire to public health."
+3,review of the economic cost of wildfires int.
+3,"wildland fire 963 multiple reviews of the literature find a strong association if concentrations are sufficiently elevated, ozone can have between exposure to wildland fire smoke and respiratory mor- serious health implications, particularly for vulnerable popula- bidity and mortality (youssouf et al."
+3,2014; liu et al.
+3,2015; reid tions and it is also a greenhouse gas.
+3,o3 has been shown to et al.
+3,2016; cascio 2018).
+3,"this includes aggravated asthma, irritate lungs and aggravate bronchitis and asthma, as well as chronic obstructive pulmonary disease (copd), bronchitis, leading to short-term mortality (occurring within less than 90 decreased lung functioning and pneumonia."
+3,regarding the days) (youssouf et al.
+3,2014; reisen et al.
+3,"2015). exacerbations of asthma, studies including henderson et al."
+3,"in addition, vocs themselves (which react with nitrogen (2011) and morgan et al. (2010) found an association with oxide to form ozone) have been found to be associated with increased respiratory mortality in a study of bushfire smoke in symptoms like skin and eye irritation, drowsiness, coughing and australia (concentrating on the urban area of sydney), a finding wheezing (youssouf et al."
+3,2014). supported by a longer-term australian study (johnston et al.
+3,2011).
+3,"meanwhile, an analysis of cities across europe also found population segmentation increases in respiratory mortality to be associated with increases the population segments most affected by wildfire smoke are in levels of pm10 (faustini et al."
+3,"2015). the elderly, smokers and those with pre-existing conditions wildfire smoke exposure has also been shown to lead to (youssouf et al."
+3,2014).
+3,"also, increases in exposure and health higher rates of respiratory hospital admissions as a result of risks are greater for women than men, and greater for african smoke exposure (delfino et al."
+3,2009; lee et al.
+3,"2009; morgan americans, and in counties with [relatively] lower levels of et al."
+3,2010; henderson et al.
+3,2011; rappold et al.
+3,2011; martin education (liu et al.
+3,2017).
+3,these studies raise significant et al. 2013) and an increase in the rates of physician visits (yao questions about inequalities leading to vulnerabilities of popu- et al.
+3,2016). lations particularly with regard to ability or knowledge to the research on pm2.5 exposure and cardiovascular morbid- implement preventative measures. ity shows mixed results.
+3,haikerwal et al. (2015) is one of few another health concern associated with wildfires is birth studies to show an association between pm2.5 and cardiovascu- outcomes.
+3,one study found the 2003 southern californian lar outcomes.
+3,"in that study, pm2.5 exposure was linked to an wildfires to be associated with a reduced average birthweight increased risk of out-of-hospital cardiac arrests and ischaemic (holstius et al."
+3,2012).
+3,"these findings were confirmed by heart disease (ihd) during the 2006–07 wildfires in victoria, cândido da silva et al. (2014) and flannigan et al."
+3,(2013).
+3,australia.
+3,reid et al. (2016) conclude that ‘too many studies and too many inconsistencies in findings exist to determine whether economic cost of health impacts wildfire smoke exposure is associated with specific cardiovas- cular outcomes’.
+3,"health impacts from wildfires carry costs from lives lost, medical treatment, working time lost and disutility – for example from pain."
+3,our literature search brought up only a small tropospheric ozone (o3) number of directly relevant papers estimating this economic another key pollutant from wildfires is tropospheric ozone (o3). cost.
+3,"for much of the literature, emphasis is placed on western o3 – a secondary pollutant – is generated by the photoreaction of usa wildfires (e.g."
+3,douglass 2008; kochi et al.
+3,"2012; nox (oxides of nitrogen) and vocs, which are both produced by richardson et al."
+3,2012; jones et al.
+3,2016; jones and berrens wildfires.
+3,2017).
+3,many of the studies use the cost–benefit transfer software studies by jaffe and widger (2012) and mcclure and jaffe tool benmap-ce in some form or another (douglass 2008; (2018) have shown wildfire to contribute to an increase in the jones et al.
+3,2016; jones and berrens 2017; fann et al. 2018b).
+3,to level above the ozone air quality standard.
+3,"unhealthy levels of measure mortality (lives lost) cost from wildfires, studies used ozone were shown to be 3.3 times more likely to occur on the value of statistical life (vsl)."
+3,"to capture morbidity cost ‘smoke plume days’ in a study of a 2006–13 wildfire by larsen (disease), either cost of illness (coi) or willingness to pay et al. (2018), with the most heavily impacted areas being urban (wtp) or both were applied."
+3,"the concepts of vsl, wtp and owing to the increased presence of non-methane organic com- coi in the context of wildfires are discussed in the next section. pounds (nmocs), which need to be present to produce o3."
+3,"having said that, measuring o3 production from wildfires is measuring the cost of premature mortality – the value of a quite complicated as it is a secondary pollutant and as such, statistical life (vsl) whereas particulate matter concentration tends to decrease away costs from mortality are far greater than from any other health from the site of the fire, o3 mixing ratios have the potential to endpoint owing to the large cost associated with one death increase (jaffe and widger 2012)."
+3,"studies showing increased o3 measured by the vsl, which is a measure of per-unit cost of concentrations due to wildfires include bossioli et al. (2012) and premature mortality."
+3,the vsl refers to society’s aggregated kang et al.
+3,(2014).
+3,wtp to save one anonymous person’s life and is derived from an likely owing to the difficult measurement of o3 due to individual’s wtp for a specific mortality risk reduction.
+3,"for wildfires, information on its impact on health is much sparser example, individuals may be asked how much they are willing to relative to pm (reid et al."
+3,2016).
+3,reisen et al. (2015) state that pay to reduce their risk of dying of 1 in 10 000 (or 0.0001) from a although o3 concentrations close to fires are unlikely to be high specific pollutant.
+3,"this implies that for every 10 000 individuals, enough to cause concern, higher o3 concentrations can occur we would expect one individual to die if no reduction in the ‘where concentrations are already high owing to anthropogenic pollution occurs."
+3,"if the average wtp for this 1/10 000 mortality activities’, for example in urban areas. risk reduction is us$100 (all dollar values are in 2019 dollars"
+4,964 int.
+4,wildland fire r.
+4,dittrich and s.
+4,"mccallum unless stated otherwise to allow a better comparison), then the treatment cost and lost wages – without considering the value of vsl can be calculated as individual’s average wtp for disutility associated with pain, discomfort and lower quality the risk reduction of x over x (us$100/0.0001 ¼ us$1 million) of life (also known as reduced qaly)."
+4,the cost of the (epa 2018b).
+4,kochi et al. (2010) states that vsl estimates in the preventative action taken to avoid becoming sick is also not literature are between us$2.3 and 16.4 million (2019 dollars); the taken into account (e.g. the cost of buying an air cleaner).
+4,"epa (2019a) provides a central estimate of us$9.38 million generally, this approach is used to value the cost of specific (2019 dollars), which is also used in benmap-ce and derived health outcomes involving medical care or some form of direct from 26 vsl studies."
+4,the discussion about appropriate vsl is expense. ongoing.
+4,"for example, rittmaster et al. (2006) lowered the vsl therefore, most coi estimates are derived from actual estimate in a study on wildfire smoke in order to reflect the group treatment data for specific endpoints from hospital and emer- to be most likely affected by air quality changes, namely the gency departments, as shown in table 2."
+4,those figures range elderly.
+4,elderly people have fewer remaining years of life than from less than us$100 to close to us$70 000 depending on the other age groups; they may therefore be willing to pay less to endpoint.
+4,some studies include opportunity cost (wages lost) reduce the mortality risk.
+4,"one could argue, however, they may be as part of coi."
+4,"work days lost are a major factor in morbidity willing to pay more because the remaining years of life are a costs, accounting for 36–74% of health costs (kochi et al. scarce good to them (kochi et al."
+4,2012).
+4,2010).
+4,"in addition, there are coi that represent the average cost all studies that estimate the cost from mortality rely on vsl of illness per exposed person per day that are non-endpoint and on values provided by the epa (or the canadian equivalent) specific, e.g."
+4,us$11.43 in richardson et al.
+4,"(2012), us$3.60 in for different regulatory analyses."
+4,"generally, costs from even a richardson et al."
+4,(2013).
+4,"the latter study also includes a coi small increase in premature mortality are far greater than any estimate that considers lost leisure time, arriving at a coi of us other cost associated with wildfire health impacts, with the next $20.10."
+4,most of the benmap-ce studies apply the software’s largest impact being from working days lost (rittmaster et al. in-built coi values (rittmaster et al.
+4,2006; rappold et al.
+4,2006; kochi et al.
+4,2010; jones and berrens 2017).
+4,"however, the 2014; jones et al."
+4,2016; parthum et al.
+4,2017).
+4,"the coi wide range of vsl estimates also makes it harder to contextua- estimates that are per exposed person (often obtained by survey lise the magnitudes of mortality cost across studies. data) would include individuals who suffered from serious rittmaster et al. (2006) found a 1-day increase in pm during a cardiovascular conditions (caused by smoke) and those who 2001 fire in chisholm, alberta, canada, had aggregated health purchased a face mask for protection."
+4,"the latter would not impacts of can$18.5 million, most of which was from prema- show up in the hospital or emergency department (ed) data, ture mortality."
+4,"similarly, kochi et al. (2012) estimated the value which makes it difficult to compare these coi estimates with of an additional 133 deaths due to cardiorespiratory illness from endpoint-specific coi. smoke exposure during 2003 southern californian wildfires to in contrast to coi, the wtp of an individual to avoid any be between us$207.28 million and us$2.08 billion."
+4,in a rare negative impact from the fire includes all potential cost.
+4,"this us east coast study, rappold et al. (2014) examined a wildfire includes disutility from symptoms and cost of preventative smoke episode in rural north carolina."
+4,"the purpose of this study action in addition to, as measured by coi, medical expenditures was to look at the impact of potential interventions (like and lost wages (richardson et al."
+4,2012).
+4,"wtp can be derived adequate forecasting), and they found the economic benefits through revealed preferences (rp) or stated preferences (sp) of effective interventions to be us$58 million in total, again methods."
+4,"the former uses market transactions to estimate wtp, mainly owing to avoided premature mortality."
+4,jones and the latter usually surveys in which participants express their berrens (2017) investigated wildfires in the entire western subjective wtp to prevent adverse endpoints.
+4,"us from 2005 to 2015 and found that although emergency room the defensive behaviour method (dbm) also known as the visits were dominating in terms of numbers, mortality accumu- averting behaviour method (grossman 1972) is an rp method, lated the greatest health cost at us$1.9 billion (averaging $177 where the individual’s averting and mitigating behaviours (e.g. million year1)."
+4,"in another similar longer-term study, fann et al. using a home air cleaner, staying indoors) to reduce symptoms (2018b) looked at the impact of wildfire episodes in the days are taken into account."
+4,"in the dbm, a utility maximisation usa from 2008 to 2012."
+4,they found a significant increase model is used to determine where the marginal benefits of in hospital admissions and premature deaths valued at between reduced time spent sick equals the marginal cost of reduced us$13 and 24 billion per year for short-term exposure (within sick time.
+4,the underlying idea is that the individual will not 5 years) and us$90 and 154 billion per year for long-term spend more on defensive action than the benefit they receive exposure (over 5 years). from it.
+4,"the marginal cost of reduced sick time is determined by dividing the average cost of the defensive action (e.g. cost of an measuring the cost from morbidity – deriving willingness to air cleaner) by the incremental effect of the defensive action pay and cost of illness (e.g. the effect of an air cleaner to reduce symptoms by 1 day), various approaches have been used to estimate the cost of which is derived statistically. morbidity impacts, which is challenging as the severity and richardson et al. (2013) used dbm and the contingent duration of adverse health outcomes vary significantly (kochi valuation method (cvm) to determine the wtp of reducing et al."
+4,2010).
+4,table 1 provides a summary of the coi and wtp symptom days by 1 day for the 2009 california station fire.
+4,for estimates and their sources in the reviewed studies.
+4,"cvm, an sp method, individuals affected by wildfire smoke the coi approach only looks at direct costs from morbidity: are explicitly asked about their wtp to reduce the symptom it sums the resource and opportunity costs from being sick – the days their household experienced by x%."
+4,jones et al.
+4,(2016)
+5,review of the economic cost of wildfires int.
+5,wildland fire 965 table 1.
+5,"mortality and morbidity cost estimates of smoke-induced (health) impacts in studies since 2006 coi, cost of illness; wtp, willingness to pay; ha, hospital admission; ed, emergency department; vsl value of statistical life; author(s) mortality cost derivation of mortality cost esti- morbidity cost estimates derivation of morbidity cost estimates estimate mate (in 2019 us dollar values) rittmaster et al."
+5,vsl estimate: from environment canada and respiratory ha (coi) from environment canada and health (2006) health canada air quality canada aqvm valuation model (aqvm) low: can aqvm is a dataset that contains cardiac ha (coi) $3.7 million data similar to benmap-ce.
+5,"this central: can includes economic estimates for ed visit (coi) $6.3 million different health end points taken high: can from relevant studies (1979–94) in restricted day activity (wtp, coi) $12.7 million the literature asthma symptoms (wtp) acute respiratory symptoms (wtp) the study did not provide coi/wtp estimates in the manuscript kochi et al."
+5,vsl estimate: us environmental protection (2012) agency (epa) estimates (2005) us$1.56 mil- from the regulatory impact anal- lion–us ysis for the final clean air inter- $15.6 million state rule richardson et al.
+5,wtp for a decrease in 1 symptom day wtp derived using survey information (2012) from wildfire smoke using an air applying the defensive behaviour cleaner: us$100.6 method private coi for 1 symptom day: us private coi derived using alberini and $11.43 krupnick (2000) based on medical expenses and wages lost wtp : coi ¼ 9 richardson et al.
+5,"to achieve a reduction in 1 symptom all data were obtained through a survey (2013) day and analysed with statistical data analysis. – wtp using defensive behaviour defensive behaviour model is taken from method: us$103.52 (us$1.94–5.25, richardson et al. (2012), differences in 90% ci) wtp are due to rounding – mean wtp using contingent valua- tion method: us$141.24 – coi: us$3.6 (us$27.15–727.42, 90% ci) – coi (including missed leisure time): us$20.10 (us$16.81–23.38, ci 90%) moeltner et al."
+5,average treatment cost in hospitals and treatment cost summary statistics based (2013) ambulatory surgical centres (coi) on actual cost data from hospitals – respiratory illness: us$42 000 – cardiovascular illness: us$47 000 treatment cost per 100 acres burned treatment cost per 100 acres burned depending on distance from fire or derived from regression analysis type of fire: us$145–560 rappold et al.
+5,"vsl value for internally adjusted benmap-ce empirical data on ed þ ha average ed þha visit costs were obtained from (2014) mortality: us value cost (coi): 2008 nationwide emergency depart- $11.4 million – asthma: us$9800 ment sample (neds) and from health- (us$0–226 – congestive heart failure: us$3200 care cost and utilisation project million, 95% benmap-ce economic values for (hcup) and multiplied by number of ci) respiratory and cardiovascular end- additional incidences points, work loss jones et al."
+5,wtp for a decrease in 1 symptom day defensive behaviour method based on (2016) from wildfire smoke using an air richardson et al. (2012) to derive wtp cleaner: $141.24 (continued)
+6,966 int.
+6,wildland fire r.
+6,dittrich and s.
+6,mccallum table 1.
+6,"(continued) author(s) mortality cost derivation of mortality cost esti- morbidity cost estimates derivation of morbidity cost estimates estimate mate (in 2019 us dollar values) benmap-ce economic values (coi) for ed asthma and ha respiratory (including asthma and pneumonia), minor restricted activity days (mrad) kochi et al."
+6,"average medical cost per ha (coi): averaging total hospital and ed cost of (2016) us$35 000–83 000 each patient by county, disease category and age group average medical cost per ed (coi): us $527–722 (coi) jones (2017) wtp $442 to avoid 1 day of wildfire life satisfaction approach to derive wtp smoke to avoid direct and indirect impacts from wildfires (beyond health) based on changes in subjective wellbeing due to exposure to wildfire smoke jones and vsl value of internally adjusted benmap-ce wtp $141.24 for all morbidity impacts wtp is taken from jones et al."
+6,(2016) berrens (2017) us$7.48 value million parthum et al.
+6,"benmap-ce coi values for ha respi- coi estimates are internal to benmap- (2017) ratory and cardiovascular, by age ce group local median daily income to deter- income from bureau of labour statistics mine opportunity cost (i.e. wages lost) fann et al."
+6,vsl value of internally adjusted benmap-ce ha respiratory (coi): $43 000 epa estimate for regulatory impact (2018a) us$10.1 value (2010 estimate and 2016 analysis (epa 2012) million income year) jones (2018) wtp for smoke-induced health extension of jones (2017) using the life impacts: $153 satisfaction approach.
+6,"differentiation between smoke-induced health impacts and other impacts (lost visibility, amenity) also applied dbm based on the approach by richardson et al."
+6,jones (2017) and jones (2018) both use the us behavioural (2012).
+6,"risk factor surveillance system data (2006–10); however, the another way to derive wtp is the life satisfaction approach latter study tries to isolate the negative impacts on swb from or subjective wellbeing approach (swb), which is increasingly wildfire smoke due to health-related impacts only (wtp of applied in various contexts (national research council 2014)."
+6,$153).
+6,"jones’ (2017) wtp estimate of $447 includes all nega- jones (2017, 2018) took this approach. tive impacts on swb from wildfire smoke (health-related, lost this approach involves taking reported subjective estimates of amenity values, changes in ecosystem services, visibility)."
+6,"the life satisfaction and explaining them with socioeconomic vari- differences in results suggest that health costs are a significant ables including income level and the variable of interest, here portion but only a part of the total cost individuals experience environmental conditions (smoke), geographic location and from wildfire smoke exposure. health status."
+6,"this approach requires fewer assumptions regard- few studies so far have estimated the more comprehensive ing the rationality of individuals (levinson 2012) compared with wtp for wildfire morbidity shown in fig. 1: using dbm, dbm and cvm, and instead considers surveys of swb as richardson et al. (2012, 2013) estimated us$100.6 and jones empirical approximations for individual utility (jones 2018)."
+6,"to et al. (2016) and jones and berrens (2017) estimated us$141.24 isolate the effect of wildfire smoke on swb, it is necessary to to reduce symptoms by 1 day. identify locations where smoke plumes coincide with the survey richardson et al. (2013) provide the only cvm wtp date (or occurred shortly before the survey date)."
+6,"to calculate estimate, with us$113.24 and jones (2017, 2018) determined wtp to avoid a smoke-induced health effect, the marginal rate of wtp with the life satisfaction approach as us$442 and 153 substitution (mrs) between income and health status induced by respectively."
+6,none of these estimates are endpoint-specific.
+6,this a 1-day increase in smoke exposure is determined.
+6,"this equals the is challenging given that, for instance, the disutility from cardiac amount of income compensation required to exactly offset a arrest is likely different from an asthma attack."
+6,"however, it is utility decrement from experiencing 1 additional day of wildfire noteworthy that all of the measures are relatively close (apart smoke-induced health effects (jones 2018). from jones 2017, as explained above), which can help to"
+7,review of the economic cost of wildfires int.
+7,wildland fire 967 table 2.
+7,"studies since 2006 estimating the economic cost of wildfires: fire assessed, endpoints, use of ben-map and aggregate cost estimates (where applicable) all $ values are 2019 dollars; however, the studies may have used different income adjustments, which likely creates the differences in vsl estimates."
+7,"coi, cost of illness; wtp, willingness to pay."
+7,"ha, hospital admissions; er, emergency room; ed, emergency department author(s) event description endpoint benmap-ce total estimated economic cost rittmaster et al."
+7,"(2006) chisholm, alberta, canada mortality, respiratory and cardiac no can$18.5 million from an aggregate 1 day 2001 has, er visits, restricted activ- increase in pm2.5 ity days, asthma symptom days kochi et al."
+7,"(2012) southern california wildfire, mortality due to cardiovascular no additional 133 deaths due to cardiorespira- 2003 and respiratory illness tory illness costing an estimated us$207.28 million to 2.07 billion richardson et al."
+7,"(2012) station fire, california, 2009 wtp and coi for indirect smoke no wtp for decrease in 1 symptom day from health impacts wildfire smoke using an air cleaner: us $101.57 private coi based on 1 symptom day: $11.43 study did not estimate total cost moeltner et al. (2013) 24 large-scale wildfires in cardiovascular and respiratory no us$1.3–4.1 million for wildfires in northern reno/sparks area las vegas, morbidity nevada in 2008 usa, march 2005 to december 2008 rappold et al."
+7,"(2014) evans road fire, rural north benefits of intervention through yes economic benefits of effective interventions: carolina, 2008 adequate smoke forecasting using benmap-ce: us$58 million (87% of total due to premature mortality) using ha þ ed treatment data: $473 000 for asthma $781 000 for congestive heart failure jones et al."
+7,"(2016) wallow, south-western us wtp for indirect smoke health yes us$447 000 (non-wildfire-specific dr wildfire, albuquerque, 2011 impacts functions) and us$540 000 (wildfire-spe- cific dr functions) for ed (asthma), ha admission (all respiratory) and minor restricted activity days kochi et al."
+7,"(2016) southern california wildfire, respiratory and acute cardiovas- no us$4.23 million total medical costs (coi) 2007 cular ha, respiratory and car- diovascular ed visits jones (2017) impact of smoke from wildfire wtp for total individual damages no derivation of wtp measure to avoid 1 day of on life satisfaction using (health and non-health) wildfire smoke: $447 survey data from 2006–10, usa jones and berrens (2017) western usa wildfires, mortality, er all respiratory, ha yes $1.9 billion total health cost or $177 million 2005–15 all respiratory per year (2005–15) of which 99% is mor- tality cost parthum et al."
+7,"(2017) benefits of avoiding one benefits of reducing the occur- yes one avoided wildfire catastrophe is worth wildfire event in a national rence of wildfires (using ed visit $3.69 million or $306 per hectare burned refuge, virginia, 2008 data) and coi fann et al. (2018a) wildfire episodes in the usa premature mortality, ha yes between $13 and $24 billion per year (2008– 2008–12 12) for short-term exposure between $90 and $154 billion per year (2008– 12) from long-term exposure jones (2018) individual wtp to avoid wtp for smoke health impacts no wtp – $154 wildfire smoke exposure in (life satisfaction approach) the usa (survey data from 2006 to 2010) contextualise costs across fire and build an evidence base for are more readily available."
+7,it is therefore not surprising that most benefit transfer.
+7,"in a benefit transfer, estimated values from one studies looked at coi and very few studies applied wtp for a or more studies are applied to an unstudied location. reduction in health damages; however, wtp values can be up to even though wtp clearly covers a much greater range of the 30 times greater than the most frequently used coi estimates costs, a coi approach is usually much simpler to implement and five times larger than comprehensive coi estimates because far fewer variables need to be determined and the data (richardson et al."
+7,2013).
+8,968 int.
+8,wildland fire r.
+8,dittrich and s.
+8,mccallum wtp (2019 dollars) jones (2018) (swb – only health impacts 153 from smoke) jones (2017) (swb – includes all utility 442 impacts from smoke) richardson et al.
+8,(2013) (cvm) 113.24 jones et al. (2016) and jones and berrens 141.24 (2017) (dbm) richardson et al. (2012 and 2013) (dbm) 100.6 0 100 200 300 400 500 fig.
+8,willingness to pay (wtp) estimates per exposed person per day for different studies.
+8,"swb, subjective wellbeing approach; cvm, contingent valuation method; dbm, defensive behaviour method."
+8,"a way to relate wtp and coi estimates are wtp : coi ratios since 2008, a sign of its increasing importance for this type of as recommended and derived by richardson et al. (2013), in analysis."
+8,"jones et al. (2016) link this to its potential to estimate other words, multiplying study-specific coi by the ratio to get economic impacts of various changes in air quality, whether an estimated wtp."
+8,"this makes benefit transfer feasible without positive or negative, which until this point ‘was not easy to do in having to engage in implementing the previously discussed a systematic and controlled way’."
+8,"cvm, dbm or life satisfaction approach."
+8,"however, the chosen in the case of wildfires, costs are looked at instead of benefits."
+8,"wtp : coi ratio needs to be relevant for the particular location as a first step, the user imports air quality data for a specific or wildfire episode. location and population."
+8,"then, to estimate the health impacts of differences in results not only arise from the choice of the air quality changes, dose–response (dr) functions are used costing approach but also from the presentation of results: to estimate the incidence rate."
+8,"in this context, a dr function estimates can be in totals or per person, with the former being describes the magnitude of the health impact as a result of a affected by location (low- v. high-population areas), and certain increase in the pollutant relative to a baseline incidence. whether the study analysed a single wildfire v. multiple fires, the estimated change in incidences is then multiplied by a given or events over multiple years."
+8,table 2 provides an overview of dollar amount using a coi or wtp value.
+8,"the output can be the analysed fires, the considered endpoints, whether benmap- represented numerically, but benmap-ce can also be used as a ce was used and aggregate results for the studies where geographic information system (gis) to map the calculated applicable. data."
+8,the following sections discuss the key aspects of using benmap-ce for smoke impacts as a guide to readers who are benmap-ce interested in applying the software for this context.
+8,benmap-ce is open-source windows-based software created by the epa.
+8,"first developed in 2003 to analyse national-scale air air pollution exposure estimates quality policies, the proprietary version was replaced by an most usa studies use freely available air quality data from a open-source tool in december 2013 named benmap- variety of epa monitoring sites, which are located across the community edition."
+8,it allows the user to estimate economic country but tend to be concentrated in urban areas.
+8,jones and benefits and cost to health due to air quality changes.
+8,"its main berrens (2017), jones et al. (2016) and moeltner et al. (2013) use has been in the assessment of urban air policy benefits. used the readily available aqs (air quality systems) and studies include both local and regional analyses in the united improve (interagency monitoring of protected visual states but also work elsewhere, mainly in china."
+8,"the former environments) monitored data (www.epa.gov/outdoor-air- include work by fann et al. (2011) on air quality policy, health quality-data/interactive-map-air-quality-monitors, accessed 19 benefits and inequality; by nowak et al. (2013) on the effect of august 2020). tree removal on pm2.5 and associated health effects; and aqs is the catch-all term for the ambient air pollution data kheirbek et al. (2013) on pm2.5 and ozone impacts in new york collected by the epa, state and local agencies from thousands of city, among many others. monitors (epa 2019b)."
+8,"in contrast to this, improve stations douglass (2008), in a study from the grey literature, was the only collect air quality data in some of the usa’s protected first to employ benmap-ce to determine health costs of wild- areas."
+8,"therefore, the location of the study will determine the fires in washington, idaho and oregon."
+8,five of the 12 studies on data source used.
+8,"for example, when looking at urban areas, the economic health cost from wildfires have used benmap-ce aqs will be of more use."
+8,all studies cited the ease of
+9,review of the economic cost of wildfires int.
+9,wildland fire 969 accessibility of the data available on the epa’s website.
+9,jones 2017).
+9,"also, urban air quality dr functions generally describe and berrens (2017) in a large-scale study of the western us relationships for lower (pm) pollutant concentrations but long looked at 146 aqs sites and 101 improve sites."
+9,jones et al. duration of exposure as opposed to wildfire-specific dr with (2016) used data from seven monitoring stations located in high pm pollutant concentrations for a short period of exposure.
+9,albuquerque’s metropolitan area from epa aqs.
+9,wegesser et al. (2009) showed that wildfire ‘pm was much some studies have used modelled data as opposed to moni- more toxic to the lung on equal weight basis than pm collected toring data including fann et al. (2018b) and rappold et al. from ambient air’.
+9,"related to this, jones et al. (2016) found (2014) who used the community multiscale air quality model wildfire-specific dr functions produced considerably higher (a suite of programs from the epa for conducting air quality morbidity costs than those that used in urban air studies: they monitoring simulations) and noaa’s smoke forecasting sys- compared different dr functions and found coi for their tem (sfs) respectively to estimate emissions with and without analysis to be us$74 000 using urban dr functions and wildland fires, for prescribed fires as well as agricultural fires."
+9,"us$111 000 using wildfire dr functions, nearly 70% more."
+9,emergency room asthma costs were a staggering 2535% higher smoke event periods and smoke event counterfactual and hospital admission for all respiratory costs were also 44% higher than using respective urban air quality dr functions.
+9,"in a second step, the smoke event period and an accurate location benmap-ce studies using urban dr functions internal to need to be determined to ensure that the extent of the estimated benmap-ce were douglass (2008), rappold et al. (2014) and health impacts is correct."
+9,studies must be careful not to over- jones et al.
+9,(2016).
+9,"studies that used wildfire-specific functions estimate the geographic extent in benmap-ce, thereby were jones and berrens (2017) and for some functions jones including too many people and vice versa."
+9,this component can et al.
+9,(2016).
+9,jones and berrens (2017) used six wildfire-specific be made as complex or a simple as required by the study.
+9,"dr functions from the health literature covering emergency wind direction can be taken into account (moeltner et al. room (er) asthma visits and respiratory visits (based on reid 2013), or the use of smoke dispersion models, but it is also et al. 2016), hospital admissions for pneumonia, hospital admis- possible to use a simpler approach such as a maximum distance, sions for all respiratory illnesses, hospital admissions for asthma e.g. an 80-km radius from the monitoring station (jones et al. from delfino et al. (2009) and mortality functions from johnston 2016)."
+9,one must also consider the influence of several wildfires et al.
+9,(2012).
+9,"the wildfire-specific dr functions used in jones occurring in one region at the same time, which may lead to an et al. (2016) were also from delfino et al. (2009) and resnick overestimation of the impact of one specific fire. et al. (2015), which are specific to the western us."
+9,"in a variation, studies vary significantly in their approach: jones and berrens rappold et al. (2014) used a state-wide tracking tool to record (2017) used the noaa/nesdis hazard mapping system in daily ed visits and therefore incidence rates in north carolina. combination with the location of monitoring sites to look for as jones et al. (2016) state, the choice of dr function, ‘is an intersection, i.e. where the visual smoke from satellite pictures unsettled methodological issue [y] which is likely to be con- correlated with elevated levels of the pollutant from monitoring fronted by researchers estimating the costs of a wildfire event’. stations."
+9,"specifically, they defined a smoke event day as daily the lack of internal wildfire-specific dr functions in benmap- average pm2.5 levels of more than the 99th percentile of daily ce is a shortcoming of the software."
+9,it requires analysists who average readings per monitor site over the previous 5 years.
+9,the choose to use wildfire-specific functions to engage with the same protocol was followed by jones et al.
+9,(2016).
+9,both studies relevant and specialised health literature to identify the appropri- describe this methodology as a conservative estimate as they are ate information and enter it into benmap-ce.
+9,to help this potentially missing many subtle smoke impacts.
+9,"rappold et al. process, reid et al. (2016) analysed 103 wildfire-specific dr (2014) examined the 2008 evans road fire in eastern north functions for their suitability and bias in a review of recent carolina where cumulative exposure to pm2.5 over the study literature."
+9,their review represents a good resource for future period exceeded 50 mg m3.
+9,"smoke exposure estimates were researchers looking for wildfire-specific dr functions. gained using the noaa’s sfs, which uses the bluesky smoke modelling framework to forecast the smoke event periods and the economic values smoke event counterfactual."
+9,"so far, there is no consistent method in a next step, benmap-ce uses the aggregate, pool and value used across studies, with many studies weighing up the trade-off (apv) configuration to specify the geographic level at which the between better representation of the smoke event period and the results are calculated, how the incidence results are combined or complexity and difficulty of the method. pooled and which economic value to assign."
+9,"this involves benmap-ce applying vsl, wtp or coi dose–response functions values for estimated incidence levels for various endpoints the choice of the dr function plays an important role as it based on the chosen dr functions."
+9,"for vsl, even though creates the explicit link between the smoke and health outcomes benmap-ce offers the central vsl value of us$7.4 million incidences."
+9,"benmap-ce’s library contains ,40 dr functions, (2006 dollars), this can be adjusted to account for inflation and which are specific to urban air quality only; however, the soft- changes in income (we expect vsl to increase with income). ware does have the capability to import other functions."
+9,"this leads to somewhat different vsl values even for studies results vary significantly between wildfire- and non-wild- that all use benmap-ce, as shown in table 2. fire- (i.e. urban air quality) specific dr functions."
+9,"differences for morbidity, although benmap-ce includes various esti- stem from chemical differences in smoke, the public’s percep- mates, certain endpoints only have inbuilt coi (based on actual tions of health risks and associated averting behaviour (liu et al. treatment costs and wages lost) applicable to them."
+9,as with the
+10,970 int.
+10,wildland fire r.
+10,dittrich and s.
+10,"mccallum health impact functions, however, it is possible to import the different approaches (dbm, cvm and swb)."
+10,"in general, an wtp or coi values."
+10,"studies in this area are therefore split increased use of wtp estimates for better decision-making between those that use internal and external values in benmap- would be advantageous and, as such, a more diverse range is ce."
+10,"for example, to value premature deaths, fann et al. (2018b) needed across different demographic and socioeconomic groups used the vsl estimate internal to benmap-ce from the epa as as well as for specific endpoints in order to gain a greater well as for hospital admissions from respiratory symptoms, understanding of the impacts of wildfire. whereas jones and berrens (2017) used their own derived to increase validity of benmap-ce results for wildfires, the wtp value of us$141.24 to value morbidity impacts while software should include wildfire wtp estimates."
+10,the literature the vsl from the epa was used to value mortality.
+10,"by using so far provides four suitable wtp estimates that could be wtp or coi values external to benmap-ce, a more reliable permanently included in benmap-ce (richardson et al. 2012; final estimate can be made as these functions can be taken from richardson et al."
+10,2013; jones 2018) and more could be added as literature that is more specific to the study’s context. the research advances.
+10,"in addition, it would be helpful if benmap-ce included discussion more wildfire-specific features that still need to be entered or the literature on adverse health effects from wildfires during the adjusted manually by the user."
+10,the calculation of economic past 10 years has been shaped by changes in wildfire occur- health cost from wildfires (as opposed to urban air quality rences but also by the availability of new tools for analysis.
+10,"this changes) requires identifying the relevant epidemiological liter- is particularly true for the western united states: the increasing ature for suitable dr functions and the appropriate economic incidence of wildfires in this part of the world, related among literature for wtp or coi estimates."
+10,"however, even with the other things to climate change and a growing urban–wildland appropriate dr functions, owing to the analysis being focused interface, has heightened interest in this type of research, which on relatively low but long-term pollutant exposure in the context is reflected by the growing number of increasingly sophisticated of urban air quality, the output is calculated as changes over an publications in the field."
+10,"the availability of benmap-ce has entire year, which can bias results. made the analysis more accessible for researchers from different in addition, there exists no standardised methodology for disciplines."
+10,"the software is easy to access and non-technical, estimating smoke event periods and areas and benmap-ce in with manuals and example applications available online. its current form does not allow an easy estimation of a short-term nevertheless, the diversity in estimates at all levels, the smoke event period (from a few weeks to a few months, the usual consideration of single or multiple wildfires with differing duration of a fire). geographic extents and varying population density make direct by providing more wildfire-specific parameters in benmap- comparison of studies difficult."
+10,"ce, the research of impact studies will become easier to carry although mortality usually only accounts for a small per- out, more standardised and comparable in the future."
+10,"this may centage of total number of incidences in studies, the high vsl allow us to better understand the overall trends in the economic makes this impact account for most of the costs in studies that costs of the adverse health impacts from wildfire smoke and assess mortality impacts."
+10,"in our review, we found that all studies make this field of research more accessible. applied the concept of vsl to determine the cost of premature assuming a sufficient number of studies on the economic mortality and all of the studies used epa (or the equivalent health cost of wildfire smoke will be published in the next few organisation outside the united states) estimates from different years, a meta-analysis of those studies may be feasible (van regulatory contexts."
+10,"despite this, the range of values is consid- houtven 2008)."
+10,"the resulting wtp values could be used for erable, which makes comparison tricky."
+10,"we suggest that all benefit transfer (johnston et al. 2015), for wider application in studies apply the current central epa estimate of the vsl of the economic impact analysis of wildfires."
+10,"alternatively, more us$9.38 (2019 dollars) and report lower and upper values that studies such as that of richardson et al. (2013) that derive are study-appropriate (e.g. considering different age groups)."
+10,wtp : coi ratios may be applied for benefit transfers.
+10,"indeed, this would at a minimum allow a comparison of the central vsl benefit transfer values may bridge the gap between complex estimates for each study. original studies and the shortcomings of benmap-ce studies."
+10,we found that the next largest health-related costs stem from working days lost and then respiratory morbidity endpoints conclusion relying on coi estimates.
+10,"coi for morbidity are also highly in this literature review, we have provided a systematic over- diverse, in particular when comparing actual treatment cost and view of studies on the economic health-related cost from wild- average cost per exposed person."
+10,"indeed, even treatment cost for fires since 2006."
+10,we showed that most studies have a common similar endpoints may vary from hospital to hospital and approach of estimating health cost by starting with determining certainly from country to country.
+10,"the meta-analysis type air pollution from fires, estimating increased morbidity and approach taken in benmap-ce where a distribution based on mortality incidences due to the air pollution and finally attaching several studies is derived may be well suited to accommodate economic values to those additional incidences."
+10,"however, geographic cost differences and increase comparability between comparisons between studies are limited by the many choices studies. that need to be made in the analysis process and that lead to although there are so far only four studies that estimated results that differ significantly between studies. (non-endpoint specific) wtp for avoiding health impacts from although there is still great potential in deriving more wildfire smoke, their results are encouraging as they all arrive at consistent health cost from wildfires, it is clear, however, that central estimates between us$100 and 150 employing three health-related cost from wildfires are always substantial and"
+11,review of the economic cost of wildfires int.
+11,wildland fire 971 often proportionally the highest among all types of costs from cascio we (2018) wildland fire smoke and human health.
+11,"the science of wildfires ahead of suppression cost: average yearly federal the total environment 624, 586–595. doi:10.1016/j.scitotenv. suppression cost between 2006 and 2018 amounted to 2017.12.086 us$1.78 billion (national interagency fire center 2020)."
+11,"fann delfino rj, brummel s, wu j, stern h, ostro b, lipsett m, winter a, et al. (2018a) found the yearly health cost of short-term expo- street dh, zhang l, tjoa t, gillen dl (2009) the relationship of respiratory and cardiovascular hospital admissions to the southern sure to wildfire smoke across the usa to be between us$13 and californian wildfires of 2003."
+11,"occupational and environmental medi- 24 billion and between us$90 and 154 billion per year for long- cine 66, 189–197. doi:10.1136/oem.2008.041376 term exposure between 2008 and 2012."
+11,"this certainly suggests doerr sh, santin c (2016) global trends in wildfire and its impacts: that from a cost–benefit point of view, the cost of suppression perception versus realities in a changing world."
+11,philosophical transac- spending is justified by the potential (further) damage avoided tions of the royal society of london.
+11,"series b, biological sciences from wildfire smoke."
+11,"however, the better alternative to accept- 371, 20150345. doi:10.1098/rstb.2015.0345 ing high suppression cost may be to think about interventions douglass r (2008) quantification of the health impacts associated with fine (masks, air cleaners) that may decrease the health costs from particulate matter due to wildfires."
+11,"masters project thesis, nicholas wildfire."
+11,school of the environment and earth sciences of duke university.
+11,this is where research can also contribute.
+11,"as far as we available at http://wildfire-economics.org/library/douglass_2008.pdf [verified september 2018]. know, thus far, there are no economic assessments of health epa (2012) regulatory impact assessment for the pm naaqs ria. costs of prescribed fires, which would constitute an important available at https://www3.epa.gov/ttnecas1/regdata/rias/pmria- component of the cost–benefit analysis of fire management combinedfile_bookmarked.pdf [verified 20 august 2020] regimes."
+11,"in addition, tools like benmap-ce allow us to go epa (2018a) particulate matter (pm basics)."
+11,"available at: https://www.epa. beyond impacts by analysing the benefits (avoided damage), for gov/pm-pollution/particulate-matter-pm-basics [verified september example of increasing awareness among the public about the 2018]. dangers of wildfire smoke and putting in place interventions to epa (2018b) environmental benefits mapping and analysis program – reduce smoke impacts."
+11,studies like rappold et al. (2014) and community edition (benmap-ce).
+11,"available at https://www.epa.gov/ parthum et al. (2017) have already begun to make headway here benmap [verified october 2018]. and we believe that future research should focus, in addition to epa (2019a) mortality risk valuation."
+11,"available at https://www.epa.gov/ environmental-economics/mortality-risk-valuation [verified 25 may improving impact estimates, on the economic benefits and costs 2019]. of mitigating the effects of the high indirect costs from smoke as epa (2019b) interactive map of air quality monitors."
+11,available at https:// demonstrated by the studies analysed in the present literature www.epa.gov/outdoor-air-quality-data/interactive-map-air-quality- review. monitors [verified 27 may 2019].
+11,"fann n, roman ha, fulcher cm, gentile ma, hubbell bj, wesson k, conflicts of interest levy ji (2011) maximizing health benefits and minimizing inequality: incorporating local-scale data in the design and evaluation of air quality the authors declare no conflicts of interest. policies."
+11,"risk analysis 31, 908–922. doi:10.1111/j.1539-6924.2011."
+11,01629.
+11,"x acknowledgements fann n, alman b, broome ra, morgan gg, johnston fh, pouliot g, we acknowledge the funding support of the usda forest service pacific rappold ag (2018a) the health impacts and economic value of northwest research station under agreement no."
+11,18-cr-11261955–017 for wildland fire episodes in the us: 2008–2012.
+11,science of the total this research.
+11,"environment 610–611, 802–809. doi:10.1016/j.scitotenv.2017.08."
+11,"024 references fann n, coffman e, timin b, kelly jt (2018b) the estimated change in the abatzoglou jt, williams a (2016) impact of anthropogenic climate change level and distribution of pm2.5 attributable health impacts in the united on wildfire across western us forests."
+11,proceedings of the national states 2005–2014.
+11,"environmental research 167, 506–514. doi:10.1016/ academy of sciences of the united states of america 113, 11770–11775."
+11,"j.envres.2018.08.018 doi:10.1073/pnas.1607171113 faustini a, alessandrini er, pey j, perez n, samoli e, querol x, cadum adetona o, reinhardt t, domitrovich j, broyles g, adetona am, klein- e, perrino c, ostro b, ranzi a, sunyer j (2015) short-term effects of man mt, kleinman rd, roger do, naher lp (2016) review of the particulate matter on mortality during forest fires in southern europe: health effects of wildland fire smoke on wildland firefighters and the results of the medparticles project."
+11,occupational and environ- public.
+11,"inhalation toxicology 28, 95–139. doi:10.3109/08958378.2016. mental medicine 72, 323–329. doi:10.1136/oemed-2014-102459 1145771 flannigan m, cantin as, de groot wj, wotton m, newbery a, gowman alberini a, krupnick a (2000) cost-of-illness and willingness-to-pay lm (2013) global wildland fire severity in the 21st century."
+11,forest estimates of the benefits of improved air quality: evidence from taiwan.
+11,"ecology and management 294, 54–61. doi:10.1016/j.foreco.2012."
+11,"land economics 76, 37–53. doi:10.2307/3147256 10.022 bossioli e, tombrou m, karali a, dandou a, paronis d, sofiev m (2012) fried js, gilless jk, riley wj, moody tj, de blas cs, hayhoe k, moritz ozone production from the interaction of wildfire and biogenic emis- m, stephens s, torn m (2008) predicting the effect of change sions: a case study in russia during spring 2006."
+11,atmospheric chemistry on wildfire behavior and initial attack success.
+11,"climatic change and physics 12, 7931–7953. doi:10.5194/acp-12-7931-2012 87, 251–264. doi:10.1007/s10584-007-9360-2 cândido da silva am, moi gp, mattos i, de souza haon s (2014) low grossman m (1972) on the concept of health capital and the demand for birthweight at term and the presence of fine particulate matter and carbon health."
+11,"journal of political economy 80, 223–255. doi:10.1086/259880 monoxide in the brazilian amazon: a population-based retrospective haikerwal a, akram m, del monaco a, smith k, sim mr, meyer m, cohort study."
+11,"bmc pregnancy and childbirth 14, 309. doi:10.1186/ tonkin am, abramson mj, dennekamp m (2015) impact of fine 1471-2393-14-309 particulate matter (pm2.5) exposure during wildfire on cardiovascular"
+12,972 int.
+12,wildland fire r.
+12,dittrich and s.
+12,mccallum health outcomes.
+12,"journal of the american heart association 4, e001653."
+12,"kochi i, champ pa, loomis jb, donovan gh (2016) valuing morbidity doi:10.1161/jaha.114.001653 effects of wildfire smoke exposure from the 2007 southern california hänninen oo, salonen ro, koistinen k, lanki t, barregard l, jantunen wildfires."
+12,"journal of forest economics 25, 29–54. doi:10.1016/j.jfe."
+12,m (2009) population exposure to fine particles and estimated excess 2016.07.002 mortality in finland from an eastern european wildfire episode.
+12,"journal larsen ae, reich bj, ruminiski m, rappold ag (2018) impacts of fire of exposure science & environmental epidemiology 19, 414–422. smoke plumes on regional air quality 2006–2013."
+12,"journal of exposure doi:10.1038/jes.2008.31 science & environmental epidemiology 28, 319–327. doi:10.1038/ henderson sb, brauer m, macnab yb, kennedy sm (2011) three s41370-017-0013-x measures of forest fire smoke exposure and their associations with lee ts, falter k, meyer p, mott j, gwynn c (2009) risk factors respiratory and cardiovascular outcomes in a population-based cohort. associated with clinic visits during the 1999 forest fires near the environmental health perspectives 119, 1266–1271. doi:10.1289/ehp."
+12,"hoopa valley indian reservation, california, usa."
+12,"international jour- 1002288 nal of environmental health research 19, 315–327. doi:10.1080/ holstius d, reid c, jesdale b, morello-frosch r (2012) birth weight 09603120802712750 following pregnancy during the 2003 southern california wildfires."
+12,"levinson a (2012) valuing public goods using happiness data: the case of environmental health perspectives 120, 1340–1345. doi:10.1289/ air quality."
+12,"journal of public economics 96, 869–880. doi:10.1016/j."
+12,"ehp.1104515 jpubeco.2012.06.007 jaffe da, widger nl (2012) ozone production from wildfires: a critical liu jc, pereira g, uhl sa, bravo ma, bell ml (2015) a systematic review review."
+12,"atmospheric environment 51, 1–10. doi:10.1016/j.atmo of the physical health impacts from non-occupational exposure to senv.2011.11.063 wildfire smoke."
+12,"environmental research 136, 120–132. doi:10.1016/j."
+12,"jaffe da, o’neill sm, larkin nk, holder al, peterson dl, halofsky je, envres.2014.10.015 rappold ag (2020) wildfire and prescribed burning impacts on air liu jc, mickley lj, sulprizio mp, dominici f, yue x, ebisu k, anderson quality in the united states."
+12,"journal of the air & waste management gb, khan rf, bravo ma, bell ml (2016) particulate air pollution association 70, 583–615. doi:10.1080/10962247.2020.1749731 from wildfires in the western us under climate change."
+12,"climatic change johnston f, hanigan i, henderson s, morgan g, bowman d (2011) 138, 655–666. doi:10.1007/s10584-016-1762-6 extreme air pollution from bushfires and dust storms and their associa- liu j, wilson a, mickley lj, ebisu k, sulprizio mp, wang y, peng rd, tion with mortality in sydney, australia 1994–2007."
+12,"environmental yue x, dominici f, bell ml (2017) who among the elderly is most research 111, 811–816. doi:10.1016/j.envres.2011.05.007 vulnerable to exposure to and health risks of fine particulate matter from johnston fh, henderson sb, chen y, randerson jt, marlier m, defries wildfire smoke."
+12,"american journal of epidemiology 186, 730–735."
+12,"rs, kinney p, bowman dm, brauer m (2012) estimated global doi:10.1093/aje/kwx141 mortality attributable to smoke from landscape fire."
+12,"environmental martin kl, hanigan ic, morgan gg, henderson sb, johnston fh (2013) health perspectives 120, 695–701. doi:10.1289/ehp.1104422 air pollution from bushfires and their association with hospital admis- johnston rj, rolfe j, rosenberger rs, brouwer r (eds) (2015) ‘benefit sions in sydney, newcastle and wollongong, australia 1994–2007. transfer of environmental and resource values.’"
+12,"in ‘the economics of australian and new zealand journal of public health 37, 238–243. non-market goods and resources, volume 14’."
+12,(series ed.
+12,"ij bateman).’ doi:10.1111/1753-6405.12065 (springer: new york, ny, usa) mcclure cd, jaffe da (2018) us particulate matter air quality improves jones ba (2017) are we underestimating the economic costs of wildfire except in wildfire-prone areas."
+12,proceedings of the national academy of smoke?
+12,an investigation using the life satisfaction approach.
+12,"journal of sciences of the united states of america 115, 7901–7906. doi:10.1073/ forest economics 27, 80–90. doi:10.1016/j.jfe.2017.03.004 pnas.1804353115 jones ba (2018) willingness to pay estimates for wildfire smoke health moeltner k, kim m, zhu e, yang w (2013) wildfire smoke and health impacts in the us using the life satisfaction approach."
+12,journal of impacts: a closer look at fire attributes and their marginal effects.
+12,"environmental economics and policy 7, 403–419. doi:10.1080/ environmental economics and management 66, 476–496. doi:10."
+12,"21606544.2018.1463872 1016/j.jeem.2013.09.004 jones ba, berrens rp (2017) application of an original wildfire smoke health morgan g, sheppeard v, khalaj b, ayyar a, lincoln d, jalaludin b, cost benefits transfer protocol to the western us, 2005–2015."
+12,"environmen- beard j, corbett s, lumley t (2010) effects of bushfire smoke on daily tal management 60, 809–822. doi:10.1007/s00267-017-0930-4 mortality and hospital admissions in sydney, australia."
+12,"epidemiology jones ba, thatcher ja, chermak jm, berrens rp (2016) wildfire smoke 21, 47–55. doi:10.1097/ede.0b013e3181c15d5a health costs: a methods case study for a south-western us ‘mega-fire’."
+12,"national interagency fire center (2020) federal firefighting costs journal of environmental economics and policy 5, 181–199. doi:10. (suppression only)."
+12,"available at https://www.nifc.gov/fireinfo/firein- 1080/21606544.2015.1070765 fo_documents/suppcosts.pdf [verified 19 august 2020] kang c-m, gold d, koutrakis p (2014) downwind o3 and pm2.5 speciation national research council (2014) ‘subjective well-being: measuring hap- during the wildfires in 2002 and 2010."
+12,"atmospheric environment piness, suffering, and other dimensions of experience.’"
+12,"(national acad- 95, 511–519. doi:10.1016/j.atmosenv.2014.07.008 emies press: washington, dc)."
+12,"kheirbek i, wheeler k, walters s, kass d, matte t (2013) pm2.5 and ozone national wildfire coordinating group (2018) glossary of wildfire termi- health impacts and disparities in new york city: sensitivity to spatial nology."
+12,available at https://www.nwcg.gov/publications [verified 31 and temporal resolution.
+12,"air quality, atmosphere & health 6, 473–486."
+12,"october 2018]. doi:10.1007/s11869-012-0185-4 nguyen hd, trieu t, cope m, azzi m, morgan g (2020) modelling kochi i, donovan gh, champ pa, loomis jb (2010) the economic cost hazardous reduction burnings and bushfire emission in air quality model of adverse health effects from wildfire smoke exposure: a review. and their impacts on health in the greater metropolitan region of sydney."
+12,"international journal of wildland fire 19, 803–817. doi:10.1071/ environmental modeling and assessment . doi:10.1007/s10666-020- wf09077 09705-x kochi i, champ pa, loomis jb, donavan gh (2012) valuing nowak dj, greenfield ej, hoehn re, lapoint e (2013) carbon storage and mortality impacts of smoke exposure from major southern california sequestration by trees in urban and community areas of the united states. wildfires."
+12,"journal of forest economics 18, 61–75. doi:10.1016/j.jfe."
+12,"environmental pollution 178, 229–236. doi:10.1016/j.envpol.2013."
+12,2011.10.002 03.019
+13,review of the economic cost of wildfires int.
+13,"wildland fire 973 parthum b, pindilli e, hogan d (2017) benefits of the fire mitigation richardson la, champ pa, loomis jb (2012) the hidden cost of wildfires: ecosystem service in the great dismal swamp national wildfire economic valuation of health effects of wildfire smoke exposure in refuge, virginia, usa."
+13,journal of environmental management southern california.
+13,"journal of forest economics 18, 14–35. doi:10."
+13,"203, 375–382. doi:10.1016/j.jenvman.2017.08.018 1016/j.jfe.2011.05.002 radeloff vc, helmers dp, kramer ha, mockrin mh, alexandre pm, van rittmaster r, adamowicz w, amiro b, pelletier r (2006) economic butsic ab, hawbaker tj, syphard sm, stewart ad (2018) rapid analysis of health effects from forest fires."
+13,canadian journal of forest growth of the us wildland–urban interface raises the wildfire risk.
+13,"research 36, 868–877. doi:10.1139/x05-293 proceedings of the national academy of sciences of the united states shaposhnikov d, revich b, bellander t, bedada gb, bottai m, kharkova of america 115, 3314–3319. doi:10.1073/pnas.1718850115 t, kvasha e, lezina e, lind t, semutnikova e, pershagen g (2014) rappold a, stone s, cascio w, neas lm, kilaru vj, carraway ms, mortality related to air pollution with the moscow heat wave and szykman jj, ising a, cleve we, meredith jt, vaughan-batten h, wildfire of 2010."
+13,"epidemiology 25, 359–364. doi:10.1097/ede."
+13,"deyneka l, devlin rb (2011) peat bog wildfire smoke exposure in rural 0000000000000090 north carolina is associated with cardiopulmonary emergency depart- spracklen dv, mickley lj, logan ja, hudman rc, yevich r, flannigan ment visits assessed through syndromic surveillance."
+13,"environmental md, westerling al (2009) impacts of climate change from 2000 to health perspectives 119, 1415–1420. doi:10.1289/ehp.1003206 2050 on wildfire activity and carbonaceous aerosol concentrations in the rappold ag, fann nl, crooks j, huang j, cascio we, devlin rb, diaz- western united states."
+13,"journal of geophysical research, d, atmo- sanchez d (2014) forecast-based interventions can reduce the health spheres 114, d20301. doi:10.1029/2008jd010966 and economic burden of wildfires."
+13,environmental science & technology us forest service (2018) the forest service and wildland fire.
+13,"available at 48, 10571–10579. doi:10.1021/es5012725 https://www.fs.fed.us/wildlandfire/ [verified september 2018]."
+13,"reid ce, brauer m, johnston fh, jerrett m, balmes jr, elliott ct van houtven g (2008) methods for meta-analysis of willingness to pay (2016) critical review of health impacts of wildfire smoke exposure. data."
+13,"pharmacoeconomics 26, 901–910. doi:10.2165/00019053- environmental health perspectives 124, 1334–1343. doi:10.1289/ehp."
+13,"200826110-00003 1409277 wegesser tc, pinkerton ke, last ja (2009) california wildfires of 2008: reisen f, duran sm, flannigan m, elliott c, rideout k (2015) wildfire coarse and fine particulate matter toxicity."
+13,environmental health smoke and public health risk.
+13,"international journal of wildland fire perspectives 117, 893–897. doi:10.1289/ehp.0800166 24, 1029–1044. doi:10.1071/wf15034 yao j, eyamie j, henderson sb (2016) evaluation of a spatially resolved resnick a, woods b, krapfl h, toth b (2015) health outcomes associated forest fire smoke model for population-based epidemiologic exposure with smoke exposure in albuquerque, new mexico, during the 2011 and assessment."
+13,journal of exposure science & environmental epide- wallow fire.
+13,"journal of public health management and practice 21 miology 26, 233–240. doi:10.1038/jes.2014.67 (suppl2), s55–s61. doi:10.1097/phh.0000000000000160 youssouf h, liousse c, roblou l, assamoi em, salonen ro, maesano c, richardson l, loomis jb, champ pa (2013) valuing morbidity from banerjee s, annesi-maesano i (2014) non-accidental health impacts wildfire smoke exposure: a comparison of revealed and stated preference of wildfire smoke."
+13,international journal of environmental research techniques.
+13,"land economics 89, 76–100. doi:10.3368/le.89.1.76 and public health 11, 11772–11804. doi:10.3390/ijerph111111772 www.publish.csiro.au/journals/ijwf"
