@@ -170,9 +170,6 @@ def main():
     trainer.save_model(model_path)
     tokenizer.save_pretrained(model_path)
 
-    trainer.save_model("./my_model")
-    tokenizer.save_pretrained("./my_model")
-
     eval_results = trainer.evaluate()
     print(eval_results)
 
