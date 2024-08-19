@@ -22,7 +22,9 @@ RUN pip install transformers[torch] datasets evaluate scikit-learn chardet
 
 RUN python -c "from transformers import AutoModel, AutoTokenizer; AutoModel.from_pretrained('microsoft/deberta-base'); AutoTokenizer.from_pretrained('microsoft/deberta-base')"
 RUN python -c "from transformers import AutoModel, AutoTokenizer; AutoModel.from_pretrained('microsoft/deberta-large'); AutoTokenizer.from_pretrained('microsoft/deberta-large')"
+RUN python -c "from transformers import AutoModel, AutoTokenizer; AutoModel.from_pretrained('microsoft/deberta-large'); AutoTokenizer.from_pretrained('xlnet/xlnet-base-cased')"
 
+RUN pip install imbalanced-learn sentencepiece
 
 # Set the default command to run a shell when the container starts
 CMD ["bash"]
