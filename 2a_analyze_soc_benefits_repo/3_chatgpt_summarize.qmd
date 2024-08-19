@@ -43,11 +43,13 @@ Full texts were extracted from pdfs using `pdftools`, saved in `_data/societal_b
 Note that the `bind_rows()` call seems to reorganize the list elements when forming the dataframe, so once formed, use `txt_df` NOT `files_df` or `csv_fs`.
 
 ```{r}
-files_df <- read_csv(here('_data/5a_societal_benefits/int/fulltext_files.csv'))
+files_df <- read_csv(here('_data/5a_societal_benefits/int/fulltext_files.csv')) # %>%
+  # filter(file.mtime(csv_out) > as.Date('2024-08-14'))
 
 csv_fs <- files_df$csv_out
 
-txt_df <- lapply(here(csv_fs), data.table::fread) %>%
+txt_df <- lapply(here(csv_fs), 
+                 FUN = function(f) data.table::fread(f) %>% mutate(p = as.character(p))) %>%
   setNames(csv_fs) %>%
   bind_rows(.id = 'file') %>%
   group_by(file) %>%
@@ -96,7 +98,7 @@ if(!file.exists(out_f)) {
   # fail_vec <- c(40, 64, 85)
   # for(i in fail_vec) {
   for(i in 1:nrow(txt_df)) {
-    ### i <- 3
+    ### i <- 1
     fulltxt <- txt_df$fulltext[i]
     
     n_tokens <- count_tokens(fulltxt)
@@ -104,36 +106,20 @@ if(!file.exists(out_f)) {
     out_df$n_tokens[i] <- n_tokens
     message('Processing fulltext #', i, ' with ', n_tokens, ' tokens...')
     
-    if(n_tokens > 16385) {
+    if(n_tokens > 128000) {
       message('Too many tokens! skipping')
       out_df$error[i] <- 'manual: context window exceeded'
       next()
     }
     
-    cum_tokens <- cum_tokens + n_tokens
-    elapsed_time <- round((proc.time() - start_time)[3], 1)
-      
-    message('Cumulative token count ', cum_tokens, ' in ', elapsed_time, ' sec...')
-    if(cum_tokens > 50000) {
-      ### see how long it's been since we've last paused
-      wait_time <- 60 - elapsed_time + 15 ### add some padding
-      ### take a nap
-      if(wait_time > 0) {
-        message('...Pausing for ', round(wait_time, 1), 
-                ' sec to avoid exceeding 60,000 tokens per minute')
-        Sys.sleep(wait_time)
-      }
-      ### reset timer and token count
-      cum_tokens <- 0
-      start_time <- proc.time()
-    }
-    
     post_body <- list(
-      model = 'gpt-3.5-turbo-0125',
+      model = 'gpt-4o-mini',
       messages = list(
+        ### is this first part actually used?
         list(role = 'system', content = 'You are a helpful research assistant with a background in economic methods.'),
         list(role = 'user', content = str_c(prompt, fulltxt))
-      )
+      ),
+      temperature = 0.7
     )
     
     response <- POST(
@@ -161,6 +147,17 @@ if(!file.exists(out_f)) {
         Sys.sleep(15)
       }
       out_df$error[i] <- x$error$code
+    }
+    
+    cum_tokens <- cum_tokens + n_tokens
+    elapsed_time <- round((proc.time() - start_time)[3], 1)
+    token_rate <- round(cum_tokens / (elapsed_time/60))
+      
+    message('Cumulative token count ', cum_tokens, ' in ', elapsed_time, ' sec...')
+    message('Token rate ', token_rate, ' per minute...')
+    if(token_rate > 150000) {
+      message('...Pausing for 15 sec to avoid exceeding 200,000 tokens per minute!')
+      Sys.sleep(15)
     }
   }
   

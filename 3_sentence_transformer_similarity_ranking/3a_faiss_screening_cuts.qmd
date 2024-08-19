@@ -68,10 +68,10 @@ We can compare the screened results from the SBR to the distance values here, pe
 Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
 
 ```{r}
-cit_scr_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
+cit_scr_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv')) %>%
   mutate(title = str_to_title(title))
 
-fulltext_df <- read_csv(here('_output/societal_benefits/fulltext_screened.csv')) %>%
+fulltext_df <- read_csv(here('_output/phase1_societal_benefits/fulltext_screened.csv')) %>%
   ### skip author, match by title only?
   select(title, screening_decision, reason_for_exclusion, notes = `Quick notes`) %>%
   mutate(title = str_to_title(title))
