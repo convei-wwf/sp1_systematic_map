@@ -1,5 +1,8 @@
+from datetime import datetime
+import argparse
 import csv
 import logging
+import os
 
 from datasets import Dataset
 from evaluate import load as load_metric
@@ -26,6 +29,19 @@ for logger in LOGGERS:
 ACCURACY_METRIC = load_metric("accuracy", trust_remote_code=True)
 
 
+def validate_data_table_path(path):
+    try:
+        with open(path, 'r') as file:
+            header = file.readline().strip().split(',')
+            if not all(column in header for column in ['include', 'abstract']):
+                raise argparse.ArgumentTypeError(
+                    f'"{path}" file must contain "include" and "abstract" columns.')
+    except Exception as e:
+        raise argparse.ArgumentTypeError(f'Failed to read CSV file: {e}')
+
+    return path
+
+
 class CSVLoggerCallback(TrainerCallback):
     def __init__(self, log_file):
         self.log_file = log_file
@@ -49,12 +65,19 @@ def compute_metrics(p):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Train a classifier for include/exclude on abstracts for CONVEI project.")
+    parser.add_argument(
+        'data_table_path',
+        type=validate_data_table_path,
+        help="Path to the CSV file containing 'include' and 'abstract' columns.")
+
+    args = parser.parse_args()
     print(f'cuda is available: {torch.cuda.is_available()}')
-    with open(DATA_TABLE_PATH, 'rb') as f:
+    with open(args.data_table_path, 'rb') as f:
         result = chardet.detect(f.read())
         encoding = result['encoding']
     print(f'encoding is: {encoding}')
-    table = pd.read_csv(DATA_TABLE_PATH, encoding=encoding)
+    table = pd.read_csv(args.data_table_path, encoding=encoding)
     y = table['include']
     X = table['abstract']
 
@@ -139,6 +162,13 @@ def main():
         param.data = param.data.contiguous()
 
     trainer.train()
+
+    saved_model_name = (
+        f'convei_abstract_classifier_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}')
+    os.makedirs('models', exist_ok=True)
+    model_path = os.path.join('models', saved_model_name)
+    trainer.save_model(model_path)
+    tokenizer.save_pretrained(model_path)
 
     trainer.save_model("./my_model")
     tokenizer.save_pretrained("./my_model")
