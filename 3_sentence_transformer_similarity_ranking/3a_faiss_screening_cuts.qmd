@@ -25,6 +25,7 @@ library(tidyverse)
 library(ggfortify)   ### for PCA plots
 library(here)
 library(corrplot)
+library(cowplot)
 library(sf)
 
 ```
@@ -45,7 +46,9 @@ faiss_q_df <- lapply(faiss_query_fs, FUN = function(f) {
 }) %>%
   bind_rows() %>%
   mutate(criteria = str_extract(query, '^[a-z]'),
-         query = str_remove(query, '[a-z]_'))
+         query = str_remove(query, '[a-z]_')) %>%
+  mutate(citation = stringi::stri_trans_general(citation, 'Latin-ASCII'))
+  # mutate(citation = str_replace_all(citation, "’", "'"))
 
 check <- faiss_q_df %>%
   select(-criteria) %>%
@@ -63,48 +66,39 @@ x <- y %>% group_by(y) %>% summarize(n = n()) %>% arrange(y) %>% mutate(y_cum = 
 
 ## Load references from Societal Benefits Repository
 
-We can compare the screened results from the SBR to the distance values here, perhaps via PCA, clustering, logistic regression...
+We can compare the screened results to the distance values here, perhaps via PCA, clustering, logistic regression... load the `_output/training_set.csv` file.
 
-Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
+QUESTION: Since distances are all on the same unitless scale, should we rescale these distance values?  If a query shows a wide range of distances it seems it should play a greater role in differentiating than a query that reveals only a narrow range of distances. 
+
+FOR NOW: no, we will not do rescaling
 
 ```{r}
-cit_scr_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv')) %>%
-  mutate(title = str_to_title(title))
-
-fulltext_df <- read_csv(here('_output/phase1_societal_benefits/fulltext_screened.csv')) %>%
-  ### skip author, match by title only?
-  select(title, screening_decision, reason_for_exclusion, notes = `Quick notes`) %>%
-  mutate(title = str_to_title(title))
-
-screened_df <- cit_scr_df %>%
-  full_join(fulltext_df) %>%
-  mutate(decision = ifelse(is.na(screening_decision), screening_status, tolower(screening_decision))) %>%
-  mutate(decision = str_replace(decision, 'cluded', 'clude')) %>%
-  select(author, title, decision, tags, key)
-
-sbr_vs_faiss <- screened_df %>%
-  full_join(faiss_q_df, by = c('key' = 'citation')) %>%
-  filter(!is.na(dist))
-
+screened_df <- read_csv(here('_output/training_set.csv')) %>%
+  mutate(decision = ifelse(include, 'include', 'exclude'))
 ```
+
 
 ## Examine collinearity
 
 ```{r}
+screened_faiss <- screened_df %>%
+  full_join(faiss_q_df, by = c('key' = 'citation')) %>%
+  filter(!is.na(dist))
+  ### adding in those climate model papers really fucks the cut rate
 
-sbr_faiss_wide <- sbr_vs_faiss %>%
+faiss_wide <- screened_faiss %>%
   filter(!is.na(query)) %>%
   filter(!criteria %in% c('b')) %>% ### drop societal benefits queries?
-  select(key, dist, query, decision) %>%
+  select(key, dist, query, decision, src) %>%
   pivot_wider(names_from = 'query', values_from = 'dist')
 
-sbr_faiss_mtx <- sbr_faiss_wide %>%
+faiss_mtx <- faiss_wide %>%
   column_to_rownames(var = 'key') %>%
-  select(-decision) %>%
+  select(-decision, -src) %>%
   setNames(str_sub(names(.), 1, 10)) %>%
   as.matrix()
 
-corr_mtx <- cor(sbr_faiss_mtx)
+corr_mtx <- cor(faiss_mtx)
 corrplot.mixed(corr_mtx)
 ```
 
@@ -118,12 +112,14 @@ QUESTION: Since distances are all on the same unitless scale, should we rescale 
 
 ```{r}
 # set.seed(42)
-sbr_faiss_pca <- sbr_faiss_wide %>%
+faiss_pca <- faiss_wide %>%
   select(where(is.numeric)) %>%
   prcomp(scale. = FALSE)
 
-pca_df <- as.data.frame(sbr_faiss_pca$x) %>%
-  mutate(decision = sbr_faiss_wide$decision,
+pca_df <- as.data.frame(faiss_pca$x) %>%
+  mutate(src = faiss_wide$src,
+         src = ifelse(is.na(src), 'none', src),
+         decision = faiss_wide$decision,
          decision = ifelse(is.na(decision), 'not screened', decision),
          decision = factor(decision, levels = c('not screened', 'exclude', 'include'))) %>%
   arrange(decision)
@@ -135,14 +131,14 @@ pca_hull_df <- pca_df %>%
 
 
 scale_factor <- min(max(abs(pca_df$PC1)), max(abs(pca_df$PC2))) / 
-                max(abs(sbr_faiss_pca$rotation[, 1:2]))
+                max(abs(faiss_pca$rotation[, 1:2]))
   
 ### dataframe for loadings; scale up by scaling_factor for plotting
-pca_rot_df <- data.frame(sbr_faiss_pca$rotation %>% round(4) * scale_factor) %>%
+pca_rot_df <- data.frame(faiss_pca$rotation %>% round(4) * scale_factor) %>%
   mutate(query = rownames(.))
 
 p12 <- ggplot(pca_df, aes(x = PC1, y = PC2)) +
-  geom_point(aes(color = decision), alpha = .3) +
+  geom_point(aes(color = decision), alpha = .4, size = 2) +
   geom_segment(data = pca_rot_df, x = 0, y = 0, 
                aes(xend = PC1, yend = PC2), 
                arrow = arrow(length = unit(.1, 'inches'))) +
@@ -151,7 +147,22 @@ p12 <- ggplot(pca_df, aes(x = PC1, y = PC2)) +
                aes(x = PC1, y = PC2, color = decision, fill = decision), alpha = .1) +
   stat_ellipse(data = pca_df %>% filter(decision == 'include'), color = 'blue')
 
-p12
+```
+
+```{r}
+p32 <- ggplot(pca_df, aes(x = PC3, y = PC2)) +
+  geom_point(aes(color = decision), alpha = .4, size = 2) +
+  geom_segment(data = pca_rot_df, x = 0, y = 0, 
+               aes(xend = PC3, yend = PC2), 
+               arrow = arrow(length = unit(.1, 'inches'))) +
+  geom_text(data = pca_rot_df, aes(label = query)) +
+  geom_polygon(data = pca_hull_df, 
+               aes(x = PC3, y = PC2, color = decision, fill = decision), alpha = .1) +
+  stat_ellipse(data = pca_df %>% filter(decision == 'include'), color = 'blue')
+```
+
+```{r}
+plot_grid(p12 + theme(legend.position = 'none'), p32 + theme(axis.title.y = element_blank()), rel_widths = c(2, 3))
 ```
 
 The collinearity at least within the first two principal components is clear in the biplot.  While there is a lot of overlap between the includes and excludes, there's a pretty decent chunk of excluded documents that do not overlap at all, and an even greater cloud of not-yet-screened documents well beyond the group of included documents.  Identifying thresholds to drop those would save a substantial amount of time when proceeding to a manual citation screening. 
@@ -172,14 +183,14 @@ p12_in_ell %>% pull(group) %>% table()
 pca_df %>% pull(decision) %>% table()
 ```
 
-If we keep only observations within the blue ellipse, we include 52/56 "included" (93% recall), 145/201 "excluded", and 7262/13562 yet to be screened.  This reduces the screening burden to 54% of the yet-to-be screened.
+If we keep only observations within the blue ellipse in PC1 and PC 2, we include 86/92 "included" (93% recall), 675/795 "excluded" (not great reject rate), and 10606/12932 yet to be screened.  This reduces the screening burden to 82% of the yet-to-be screened.  NOT a great filter!
 
 ## Scree plot
 
 ```{r}
 
-scree_df <- data.frame(PC = paste0('PC', 1:length(sbr_faiss_pca$sdev)),
-                       pct = (sbr_faiss_pca$sdev)^2 / sum((sbr_faiss_pca$sdev)^2)) %>%
+scree_df <- data.frame(PC = paste0('PC', 1:length(faiss_pca$sdev)),
+                       pct = (faiss_pca$sdev)^2 / sum((faiss_pca$sdev)^2)) %>%
   mutate(PC = fct_inorder(PC),
          lbl = paste0(round(pct * 100, 1), '%'),
          cumsum = cumsum(pct))
@@ -235,17 +246,32 @@ todo_test <- hypervolume_inclusion_test(incl_hypv, todo_mtx,
                                         fast.or.accurate = 'accurate',
                                         accurate.method.threshold = quantile(incl_hypv@ValueAtRandomPoints, 0.5))
 
-ggplot(data = sample_df, aes(x = PC1, y = PC2)) +
+excl_in_vol <- sum(excl_test) / length(excl_test)
+
+todo_in_vol <- sum(todo_test) / length(todo_test)
+```
+
+In the hypervolume defined by the "includes", overlaps with `r round(excl_in_vol * 100)`% of "excludes" and `r round(todo_in_vol * 100)`% documents still to be assessed.
+
+```{r}
+hv12 <- ggplot(data = sample_df, aes(x = PC1, y = PC2)) +
   geom_point(data = sample_df %>% filter(decision == 'not screened') %>% mutate(test = todo_test),
              aes(color = test), shape = 21, size = 3, alpha = .5, fill = 'yellow') +
   geom_point(data = sample_df %>% filter(decision == 'exclude') %>% mutate(test = excl_test),
              aes(color = test), fill = 'red', shape = 21, size = 3, alpha = .5) +
-    geom_point(data = sample_df %>% filter(decision == 'include'), color = 'darkgreen', size = 3) +
+  geom_point(data = sample_df %>% filter(decision == 'include'), color = 'darkgreen', size = 3) +
   scale_color_manual(values = c('black', 'white'))
 
-sum(excl_test) / length(excl_test)
+hv32 <- ggplot(data = sample_df, aes(x = PC3, y = PC2)) +
+  geom_point(data = sample_df %>% filter(decision == 'not screened') %>% mutate(test = todo_test),
+             aes(color = test), shape = 21, size = 3, alpha = .5, fill = 'yellow') +
+  geom_point(data = sample_df %>% filter(decision == 'exclude') %>% mutate(test = excl_test),
+             aes(color = test), fill = 'red', shape = 21, size = 3, alpha = .5) +
+  geom_point(data = sample_df %>% filter(decision == 'include'), color = 'darkgreen', size = 3) +
+  scale_color_manual(values = c('black', 'white'))
 
-sum(todo_test) / length(todo_test)
+plot_grid(hv12 + theme(legend.position = 'none'), hv32 + theme(axis.title.y = element_blank()), rel_widths = c(4, 5))
 
 ```
 
+Green is "includes", red is "excludes", and yellow-filled are still to be screened.

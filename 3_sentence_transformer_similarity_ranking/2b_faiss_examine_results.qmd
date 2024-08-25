@@ -50,66 +50,54 @@ ggplot(faiss_q_df) +
   facet_wrap(~ query)
 ```
 
-## Load references from Societal Benefits Repository
+## Load screened data from SBR and sample
 
-We can compare the screened results from the SBR to the distance values here, perhaps via PCA, clustering, logistic regression...
-
-Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
+We can compare the screened results to the distance values here, perhaps via PCA, clustering, logistic regression... load the `_output/training_set.csv` file.
 
 QUESTION: Since distances are all on the same unitless scale, should we rescale these distance values?  If a query shows a wide range of distances it seems it should play a greater role in differentiating than a query that reveals only a narrow range of distances.  
 
 ```{r}
-cit_scr_df <- read_csv(here('_data/societal_benefits/sbr_screened_results_240429.csv')) %>%
-  mutate(title = str_to_title(title))
-
-fulltext_df <- read_csv(here('_output/societal_benefits/fulltext_screened.csv')) %>%
-  ### skip author, match by title only?
-  select(title, screening_decision, reason_for_exclusion, notes = `Quick notes`) %>%
-  mutate(title = str_to_title(title))
-
-screened_df <- cit_scr_df %>%
-  full_join(fulltext_df) %>%
-  mutate(decision = ifelse(is.na(screening_decision), screening_status, tolower(screening_decision))) %>%
-  mutate(decision = str_replace(decision, 'cluded', 'clude'))
+screened_df <- read_csv(here('_output/training_set.csv'))
 
 
 rescale <- function(x) {
   1 - (x - min(x)) / (max(x) - min(x))
 }
 
-sbr_vs_faiss <- screened_df %>%
-  select(author, title, decision, tags, key) %>%
+screened_vs_faiss <- screened_df %>%
+  select(author, title, include, notes, key) %>%
   left_join(faiss_q_df, by = c('key' = 'citation')) %>%
   ### convert distance to relevance: low distance = high relevance
   group_by(query) %>%
-  mutate(dist_norm = rescale(dist)) %>%
-  ungroup()
+  mutate(relevance = rescale(dist)) %>%
+  ungroup() %>%
+  filter(!is.na(relevance))
 
-sbr_vs_faiss_geom_mean <- sbr_vs_faiss %>%
+screened_vs_faiss_geom_mean <- screened_vs_faiss %>%
   ### let d be geometric mean of rescaled relevances: if any axis is low relevance,
   ### citation is of low relevance
-  group_by(author, title, decision) %>%
-  summarize(geom_mean = prod(dist_norm)^(n_distinct(query)), 
+  group_by(author, title, include) %>%
+  summarize(geom_mean = prod(relevance)^(1 / n_distinct(query)), 
             .groups = 'drop') %>%
-  right_join(sbr_vs_faiss)
+  right_join(screened_vs_faiss)
 
-ggplot(sbr_vs_faiss_geom_mean, aes(x = dist_norm)) +
-  geom_density(aes(fill = decision), alpha = .25) +
+ggplot(screened_vs_faiss_geom_mean, aes(x = relevance)) +
+  geom_density(aes(fill = include), alpha = .25) +
   facet_wrap(~ query)
 
-t.test(dist_norm ~ decision,
-       data = sbr_vs_faiss_geom_mean %>% 
-         select(dist_norm, decision) %>% 
+t.test(relevance ~ include,
+       data = screened_vs_faiss_geom_mean %>% 
+         select(relevance, include) %>% 
          distinct())
 ```
 
 ```{r}
-ggplot(sbr_vs_faiss_geom_mean) +
-  stat_qq(aes(sample = dist_norm, color = decision)) +
+ggplot(screened_vs_faiss_geom_mean) +
+  stat_qq(aes(sample = relevance, color = include)) +
   facet_wrap(~ query)
 
-ggplot(sbr_vs_faiss_geom_mean) +
-  geom_density(aes(x = dist_norm, fill = decision), alpha = .25) +
+ggplot(screened_vs_faiss_geom_mean) +
+  geom_density(aes(x = relevance, fill = include), alpha = .25) +
   facet_wrap(~ query, scales = 'free_y')
 ```
 
