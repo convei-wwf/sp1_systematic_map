@@ -17,8 +17,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import torch
 
-DATA_TABLE_PATH = 'tmp_training_set.csv'
-
 
 LOGGERS = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
 for logger in LOGGERS:
