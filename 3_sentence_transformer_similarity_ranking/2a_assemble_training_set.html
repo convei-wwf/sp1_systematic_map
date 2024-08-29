@@ -3129,7 +3129,7 @@ vertical-align: -.125em;
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>sbr_fulltext_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;_output/phase1_societal_benefits/fulltext_screened.csv&#39;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">### skip author, match by title only?</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, <span class="at">include =</span> screening_decision, author, year,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">notes =</span> <span class="st">`</span><span class="at">Quick notes</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">notes =</span> quick_notes) <span class="sc">%&gt;%</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> stringi<span class="sc">::</span><span class="fu">stri_trans_general</span>(title, <span class="st">&#39;Latin-ASCII&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">str_to_title</span>(),</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">short_title =</span> <span class="fu">make_short_title</span>(title),</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">include =</span> <span class="fu">str_detect</span>(<span class="fu">tolower</span>(include), <span class="st">&#39;include&#39;</span>)) <span class="sc">%&gt;%</span></span>
@@ -3164,7 +3164,7 @@ vertical-align: -.125em;
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>sample_fulltext_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;_output/phase2_sample_1000/fulltext_screened.csv&#39;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">### skip author, match by title only?</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, <span class="at">include =</span> screening_decision, </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">notes =</span> <span class="st">`</span><span class="at">Quick notes</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">notes =</span> quick_notes) <span class="sc">%&gt;%</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">str_to_title</span>(title),</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">include =</span> <span class="fu">str_detect</span>(<span class="fu">tolower</span>(include), <span class="st">&#39;include&#39;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(include))</span>
@@ -3189,7 +3189,7 @@ vertical-align: -.125em;
 <pre><code>              include
 src            FALSE TRUE
   sample_1000    616   14
-  soc_ben_repo   180   78</code></pre>
+  soc_ben_repo   173   85</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
