@@ -29,7 +29,10 @@ ACCURACY_METRIC = load_metric("accuracy", trust_remote_code=True)
 
 def validate_data_table_path(path):
     try:
-        with open(path, 'r') as file:
+        with open(path, 'rb') as f:
+            result = chardet.detect(f.read())
+            encoding = result['encoding']
+        with open(path, 'r', encoding=encoding) as file:
             header = file.readline().strip().split(',')
             if not all(column in header for column in ['include', 'abstract']):
                 raise argparse.ArgumentTypeError(
@@ -129,7 +132,7 @@ def main():
     batch_size = 16
     num_batches_per_epoch = len(train_dataset) // batch_size
     total_steps = num_epochs * num_batches_per_epoch
-    warmup_steps = int(0.1 * total_steps)  # 10% of total steps
+    warmup_steps = int(0.2 * total_steps)
 
     training_args = TrainingArguments(
         output_dir='./final_results',
@@ -143,7 +146,8 @@ def main():
         metric_for_best_model="accuracy",
         greater_is_better=True,
         load_best_model_at_end=True,
-        lr_scheduler_type="linear",
+        max_grad_norm=0.5,
+        lr_scheduler_type="cosine_with_restarts",
         warmup_steps=warmup_steps,
     )
 

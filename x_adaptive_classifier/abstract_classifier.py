@@ -18,11 +18,14 @@ for logger in LOGGERS:
 
 def validate_data_table_path(path):
     try:
-        with open(path, 'r') as file:
+        with open(path, 'rb') as f:
+            result = chardet.detect(f.read())
+            encoding = result['encoding']
+        with open(path, 'r', encoding=encoding) as file:
             header = file.readline().strip().split(',')
-            if not all(column in header for column in ['abstract']):
+            if not all(column in header for column in ['include', 'abstract']):
                 raise argparse.ArgumentTypeError(
-                    f'"{path}" file must contain "abstract" column.')
+                    f'"{path}" file must contain "include" and "abstract" columns.')
     except Exception as e:
         raise argparse.ArgumentTypeError(f'Failed to read CSV file: {e}')
 
