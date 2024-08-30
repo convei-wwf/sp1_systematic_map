@@ -1,0 +1,35 @@
+---
+title: "Examine TF-IDF on documents by topic"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show me the code"
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(tidytext)
+library(bib2df)
+
+source(here('common_fxns.R'))
+```
+
+```{r load bibtex}
+all_fields_df <- load_bibtex(pattern = 'wos.bib|scopus.bib', aspect = 'wide') %>%
+  mutate(doc_id = 1:n())
+
+no_abstr <- all_fields_df %>%
+  filter(is.na(abstract) | length(abstract) == 0)
+
+prob_txt <- c('satellite cell', 'satellite campus', 'satellite librar', 'satellite hosp') %>%
+  paste0(collapse = '|')
+probs_df <- all_fields_df %>%
+  filter(str_detect(abstract, prob_txt))
+```

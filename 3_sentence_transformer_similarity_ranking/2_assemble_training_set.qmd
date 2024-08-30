@@ -1,0 +1,98 @@
+---
+title: "Assemble training set"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script gathers the citations and appends screening decisions to create a training set.  This training set can be used to create a classification model of some sort.
+
+This script can be run standalone or as a child of another script, to hand the training set to that script.
+
+```{r}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+
+## Load SBR screening results
+
+Note: `_data/societal_benefits/sbr_screened_results_240429.csv` is the citation screening results out of Colandr; `_output/societal_benefits/fulltext_screened.csv` is the full text screening results (does not include those excluded in the citation screening).
+
+```{r}
+make_short_title <- function(title) {
+  title %>% tolower() %>% str_replace_all('[^a-z0-9 ]', ' ') %>% str_squish() %>% str_sub(1, 40)
+}
+
+
+sbr_cit_scr_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv')) %>%
+  mutate(title = stringi::stri_trans_general(title, 'Latin-ASCII') %>% str_to_title(),
+         short_title = make_short_title(title)) %>%
+  select(title, short_title, abstract, author, year, key) %>%
+  distinct()
+
+sbr_fulltext_df <- read_csv(here('_output/phase1_societal_benefits/fulltext_screened.csv')) %>%
+  ### skip author, match by title only?
+  select(title, include = screening_decision, author, year,
+         notes = quick_notes) %>%
+  mutate(title = stringi::stri_trans_general(title, 'Latin-ASCII') %>% str_to_title(),
+         short_title = make_short_title(title),
+         include = str_detect(tolower(include), 'include')) %>%
+  select(-title, -author, -year)
+         
+sbr_training <- sbr_cit_scr_df %>%
+  left_join(sbr_fulltext_df, by = 'short_title') %>%
+  mutate(include = ifelse(is.na(include), FALSE, include),
+         src = 'soc_ben_repo')
+
+check <- sbr_fulltext_df %>% anti_join(sbr_cit_scr_df, by = 'short_title')
+if(sum(sbr_training$include) != sum(sbr_fulltext_df$include)) stop('mismatch in join')
+```
+
+## Load sample screening results
+
+```{r}
+### get title/key lookup
+sample_info_df <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv')) %>%
+  select(title, key) %>%
+  mutate(title = stringi::stri_trans_general(title, 'Latin-ASCII') %>% str_to_title())
+
+sample_cit_scr_df <- read_csv(here('_data/5b_sample_1000/sample_screened_results_240802.csv')) %>%
+  mutate(title = stringi::stri_trans_general(title, 'Latin-ASCII') %>% str_to_title()) %>%
+  select(title, abstract, author) %>%
+  inner_join(sample_info_df, by = 'title') %>%
+  distinct()
+
+sample_fulltext_df <- read_csv(here('_output/phase2_sample_1000/fulltext_screened.csv')) %>%
+  ### skip author, match by title only?
+  select(title, include = screening_decision, 
+         notes = quick_notes) %>%
+  mutate(title = str_to_title(title),
+         include = str_detect(tolower(include), 'include')) %>%
+  filter(!is.na(include))
+
+sample_training <- sample_cit_scr_df %>%
+  left_join(sample_fulltext_df, by = 'title') %>%
+  mutate(include = ifelse(is.na(include), FALSE, include),
+         src = 'sample_1000')
+
+```
+
+## Bind together into a training set
+
+```{r}
+training_df <- bind_rows(sample_training, sbr_training)
+
+table(training_df %>% select(src, include))
+
+write_csv(training_df, here('int/classifier_training_set.csv'))
+```
+

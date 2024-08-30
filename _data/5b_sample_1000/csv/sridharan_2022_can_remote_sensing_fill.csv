@@ -1,0 +1,609 @@
+page,p
+1,water article can remote sensing fill the united states’ monitoring gap for watershed management?
+1,"vamsi krishna sridharan 1, *, saurav kumar 2, * and swetha madhur kumar 3 1 fisheries collaborative program, university of california, affiliated with fisheries ecology division, southwest fisheries science center, national marine fisheries service, national oceanic and atmospheric administration, santa cruz, ca 95060, usa 2 texas a&m agrilife and department of biological and agricultural engineering, texas a&m agrilife research center, el paso, tx 79927, usa 3 client analytics, evolent health, arlington, va 22203, usa; mk.swetha89@gmail.com * correspondence: vamsi.sridharan@noaa.gov (v.k.s.); saurav@tamu.edu (s.k.)"
+1,"abstract: remote sensing has been heralded as the silver bullet in water quality modeling and watershed management, and yet a quantitative mapping of where its applicability is likely and most useful has not been undertaken so far."
+1,"here, we combine geospatial models of cloud cover as a proxy for the likelihood of acquiring remote scenes and the shortest time of travel to population centers as a proxy for accessibility to ground-truth remote sensing data for water quality monitoring and produce maps of the potential of remote sensing in watershed management in the united states."
+1,we generate several maps with different cost-payoff relationships to help stakeholders plan and incentivize remote sensing-based monitoring campaigns.
+1,"additionally, we combine these remote sensing potential maps with spatial indices of population, water demand, ecosystem services, pollution risk, and monitoring coverage deficits to identify where remote sensing likely has the greatest role to play."
+1,"we find that the southwestern united states and the central plains regions are generally suitable for remote sensing for watershed management even under the most stringent costing projections, but that the potential for using remote sensing can extend further north and east as constraints are relaxed."
+1,"we also find citation: sridharan, v.k."
+1,"; kumar, s.; large areas in the southern united states and sporadic watersheds in the northeast and northwest madhur kumar, s."
+1,can remote seaboards and the midwest would likely benefit most from using remote sensing for watershed sensing fill the united states’ monitoring.
+1,"although developed herein for watershed decision support in the united states, our monitoring gap for watershed approach is readily generalizable to other environmental domains and across the world."
+1,management?.
+1,"water 2022, 14, 1985. https://doi.org/10.3390/w14131985 keywords: remote sensing; geographical information systems; watershed management; water academic editor: thomas meixner quality; decision support; ambient monitoring; data collection received: 1 may 2022 accepted: 20 june 2022 published: 21 june 2022 1."
+1,"introduction publisher’s note: mdpi stays neutral of the 37.6 million waterbodies including canals, stream segments, ponds, and lakes with regard to jurisdictional claims in in the united states, fewer than three million are monitored in situ, with only about 60,000 published maps and institutional affil- monitoring sites providing information that can be compared with remotely sensed data iations."
+1,"(figure 1a) [1,2]."
+1,"of the millions of waterbodies, only 430,893 have been assessed for water quality impairments as of 2022 (figure 1b) [3,4]."
+1,"within the recent past, even for the assessed waterbodies, ambient monitoring of general state of the water quality and synoptic data copyright: © 2022 by the authors. collection of the load, transport, and fate processes associated with impairment happens licensee mdpi, basel, switzerland. sporadically in only about a third of the cases [5]."
+1,"remote sensing, both with airborne and this article is an open access article space-borne platforms offers tremendous potential for bridging these massive data gaps. distributed under the terms and but there are significant data gaps to even be able to use remote sensing everywhere in conditions of the creative commons the united states (figure 1a)."
+1,"our contribution herein is, albeit with several simplifying attribution (cc by) license (https:// assumptions, to map out the potential for remote sensing to be a viable monitoring tool creativecommons.org/licenses/by/ for all the subwatersheds—the smallest catchment class associated with waterbodies as 4.0/). defined by the united states geological survey (usgs)—within the conterminous united water 2022, 14, 1985. https://doi.org/10.3390/w14131985 https://www.mdpi.com/journal/water"
+2,"water 2022, 14, x for peer review 2 of 16 water 2022, 14, 1985 2 of 16 for all the subwatersheds—the smallest catchment class associated with waterbodies as defined by the united states geological survey (usgs)—within the conterminous united as aa corollary states."
+2,"as to these corollary to maps, we these maps, we also also present present aa geospatial estimate of geospatial estimate where remote of where remote sensing is sensing likelyto is likely havethe tohave greatestimpact thegreatest impactininthe thecountry country mapping byby mapping intersection thethe of intersection remote of remotesensing sensingpotential potential risk risk andand highhigh of impairment of impairment anddata and low low coverage."
+2,these these data coverage. maps mapsserve will will asserve as decision decision supportsupport tools tools for for researchers researchers and practitioners and practitioners to plantowhere plan where to in- to invest vest their energies their energies and resources and resources with respect with respect to data collection to data collection for waterfor watermanage- quality quality management ment approaches. approaches.
+2,figure 1.
+2,assessment and in-situ monitoring gap for water quality in the united states: (a) 39.6 figure 1.
+2,"assessment and in-situ monitoring gap for water quality in the united states: million stream segments, ponds, lakes and estuaries in the national hydrography dataset and (a) 39.6 million stream segments, ponds, lakes and estuaries in the national hydrography dataset and 603,433 in-situ monitoring locations from the aquasat database for secchi disk depth, chlorophyll- 603,433 a, in-situ monitoring total suspended locations solids and fromorganic dissolved the aquasat carbondatabase for been that have secchimatched disk depth, chlorophyll-a, to landsat scenes, suspended total(b) and the 430,893solids and waterbodies assessed dissolved organic that have carbon states in the united been from obtained matched to landsat statesscenes, the united envi- and (b) theprotection ronmental 430,893 assessed assessment in agency’swaterbodies thetotal and united states obtained maximum daily loadfrom the united tracking states and imple- mentation system environmental (attains) protection database."
+2,agency’s red lines indicate assessment and totalstate borders.
+2,daily load tracking and maximum implementation system (attains) database.
+2,red lines indicate state borders.
+2,"our focus in this paper is not to limit our treatment to a specific land surface process, waterour focusparameter, quality in this paper is not type or remoteto to limit our treatment of impairment a specific sensing dataland surface source."
+2,"thisprocess, is be- water quality cause parameter, water quality type of impairment is a complex or remote system response sensing within the data source.tothis watershed is because surface, sub- water quality is a complex system response within the watershed to surface and hydrologic processes that are modulated by human influence."
+2,"therefore, ra- surface, subsurface and hydrologic ther than focusing processes that are on a specific modulated aspect by human of watershed influence. processes, therefore, we develop rather than a comprehen- focusing on a specific aspect of watershed processes, we develop a comprehensive sive scoping tool for adopting remote sensing in monitoring and data collection."
+2,"scoping scoping tool for tools adopting such as the remote sensinghere one presented in monitoring and datafor can be developed collection. specific scoping tools process land surface such as the one presented here can be developed for specific land surface process monitoring, or water quality management of given impairments by using information rel- monitoring, or water quality management of given impairments by using evant to certain remote sensing platforms and data collection methods. information relevant to certain remote sensing over platforms the past and data two decades, collection a large number methods. of many aerial and space-borne platforms over the past two decades, a large number and space-borne of many aerialspectrum and sensors that sample different parts of the electromagnetic have come platforms online and sensors that sample different parts of the electromagnetic spectrum [6]."
+2,"platforms such as landsat, geoeye, worldview, and technologies such as light have comede- on- line [6]."
+2,"platforms such as landsat, geoeye, worldview, and technologies tection and ranging (lidar) are useful for water body delineation (e.g., [7]), while ba- such as light detectionofand thymetry ranging (lidar) waterbodies are useful can be obtained forfrom either water bodyordelineation lidar, by analyzing (e.g., [7]), while spectral band bathymetry of waterbodies can be obtained either from lidar, or by analyzing spectral ratios of satellite and drone imagery [8,9]."
+2,"streamflow can be obtained using radio detec- band ratios of satellite and drone imagery [8,9]."
+2,"streamflow can be obtained using ra- tion and ranging (radar) altimetry and rating curves from platforms such as jason-3, dio detection and ranging (radar) altimetry and rating curves from platforms such as sentinel-3, and saral/altika [10]."
+2,"the terrestrial water budget can be quantified using jason-3, sentinel-3, and saral/altika [10]."
+2,"the terrestrial water budget can be quantified gravimetric data, while floods can be characterized using optical sensors such as the ad- using gravimetric data, while floods can be characterized using optical sensors such as vanced very-high-resolution radiometer (avhrr), the visible infrared imaging radi- the advanced very-high-resolution radiometer (avhrr), the visible infrared imaging ometer suite (viirs), the moderate resolution imaging spectroradiometer (modis), sen- radiometer suite (viirs), the moderate resolution imaging spectroradiometer (modis), tinel, landsat, satellite pour l’observation de la terre (spot), the advanced spaceborne sentinel, landsat, satellite pour l’observation de la terre (spot), the advanced spaceborne thermal emission and reflection radiometer (aster), ikonos, worldview, rapideye, thermal emission and reflection radiometer (aster), ikonos, worldview, rapideye, ziyuan 3 and gaofen and synthetic aperture radar data [10]."
+2,water quality parameters ziyuan 3 and gaofen and synthetic aperture radar data [10].
+2,"water quality parameters that that are directly observable can be monitored using landsat, sentinel, modis, the me- are directly observable can be monitored using landsat, sentinel, modis, the medium dium resolution resolution imaging imaging spectrometer spectrometer (meris)(meris) and other and other specialized specialized sensors sensors such such as as hyperion (chlorophyll-a), spot, avhrr (total suspended sediments), ikonos (water clarity) and the coastal zone color scanner (czcs) [colored dissolved organic matter] imagery [10]."
+3,"water 2022, 14, 1985 3 of 16 hyperspectral imagery [11], lidar and airborne laser scanning [12] can be used to infer crop characteristics and tree canopies in agrarian and forested watersheds."
+3,"within water- sheds, indices developed by using reflectances from different spectral bands are useful for classifying land cover and land use types [13]."
+3,"also within watersheds, the state of best management practices such as low impact developments and green infrastructure can be monitored using visible and thermal imagery and spectral reflectance-based indices [14]."
+3,"authors have developed an array of methods ranging from the well-established to the experimental frontier have emerged to quantify watershed loading and receiving water quality pertaining to various types of impairment [15,16]."
+3,"broadly, for land surface processes such as crop cycles, land cover and land use changes, observations of surface reflectances and ratios of reflectance across multiple spectral bands are used with validation datasets such as land use classification maps or photographs are common (e.g., [17])."
+3,"for water quality parameters that affect the inherent and apparent optical properties of the water column and spectral properties of the reflectances, such as total suspended solids, chlorophyll-a, colored dissolved organic carbon, turbidity, and water surface temperature, statistical models linking observations of surface reflectances and ratios of reflectance across multiple spectral bands with the water quality parameters are popular [18]."
+3,"for such processes, bio-optical and bio-geo-optical models that mechanistically link the irradiance- reflectance ratio across multiple spectral bands to the bulk water column properties are a reliable alternative [19]."
+3,"for impairments such as harmful algal blooms and oxygen depletion, more sophisticated statistical (e.g., [20]) or mechanistic models (e.g., [21]) are used to relate watershed nutrient loads with impairment."
+3,"for water quality parameters that do not directly affect the optical properties of the water column and spectral properties of the reflectances (e.g., mercury and heavy metals), statistical, machine learning and artificial intelligence models relating the quantities of interest with other water constituents (e.g., turbidity) are becoming increasingly common [15]."
+3,"two unifying requirements of all of these approaches are that for a given location, (i) it must be possible to obtain remotely sensed spectral imagery in the first place, and (ii) the land surface process such as fertilizer application, presence of a pollutant load attenuation best management practice like a detention pond or bioswale, and the receiving water quality must all be ground-truthed with in-situ observations [22–24]."
+3,"this means that the vast potential of remote sensing can only truly be exploited in those areas where atmospheric conditions are generally conducive to remote sensing, and where some access to the watershed is possible."
+3,we leverage geospatial datasets containing information on atmospheric conditions and accessibility to rank subwatersheds according to their propensity to being amenable to remote sensing for water quality monitoring under a variety of cost-payoff scenarios.
+3,"reasons for the gap between the number of this assessment and monitored waterbod- ies and the total number of waterbodies in the united states can include (i) applicability, (ii) accessibility, (iii) resource constrains and (iv) socioeconomics."
+3,"first, in most cases, waterbodies might be located in remote, locations with minimal human development and limited beneficial uses to society apart from preserving pristine natural beauty and bounty."
+3,"second, there may be access issues due to rugged landforms, impassable land use features and limited mobility networks which make monitoring difficult or even impos- sible."
+3,"third, state, tribal and local agencies tasked with assessing and programmatically attaining designated uses for waterbodies may be hampered by resource constraints that make regular ambient monitoring and synoptic data collection difficult or even impossible in all watersheds."
+3,"fourth, there may be environmental justice issues with impairment being linked to socioeconomic and demographic conditions (e.g., [25])."
+3,"in this paper, we only look at the first three factors, as we are only interested in the technical constraints of feasibility of using remote sensing for water quality monitoring and data collection here."
+3,"the advantage of remote sensing over conventional monitoring programs is that for areas where the former is applicable, ground-truthing need not be performed very often, and in"
+4,"water 2022, 14, 1985 4 of 16 the overall life cycle of monitoring and data collection programs, can be significantly less expensive to implement, particularly if public domain data and tools are used."
+4,"the paper is organized as follows: in section 2, we describe our classification approach, the datasets we used and the geostatistical methods we adopted."
+4,"in section 3, we showcase the remote sensing potential map."
+4,"in section 4, we discuss where in the country gaps need to be filled, given the potential for remote sensing by looking at the applicability and accessibility of the subwatersheds and the intersection of quantified risks of impairment, ecological vulnerability and lack of coverage."
+4,"finally, also in section 4, we outline the caveats in our approach, and chart our future trajectory in making these classifications more robust and readily accessible to the watershed management community."
+4,materials and methods our fundamental premise is that we can determine the potential of remote sensing to be useful for ambient monitoring and synoptic data collection in a given waterbody by mapping this potential at the usgs’ hydrologic unit code 12 (huc-12) subwatershed scale.
+4,"the huc-12 subwatershed classification allows us to analyze watersheds at the 1:24,000 scale."
+4,"at this scale, these subwatersheds typically contain four stream segments, except in a few larger subwatersheds in the northeast and the great lakes."
+4,"we feel that this spatial scale is sufficient to identify the potential for remote sensing, as the streams encompassed within these subwatersheds are usually higher order distributaries or small areal bodies with similar climate, land use and terrain characteristics."
+4,"in total, there are 102,973 huc-12 subwatersheds in the conterminous united states."
+4,we discuss our approach in section 2.1 below.
+4,"we used numerous geographical information system (gis) resources in this study to map access, acquisition, constraints and risks of impairment."
+4,"all gis operations and visualizations were performed in qgis [26], while the model development was performed in matlab [27]."
+4,"in determining the potential for remote sensing and its applications, we used existing accessibility and image acquisition conditions, and did not account for the effects of land use and land cover change or climate change."
+4,"after determining the potential of remote sensing as a data source within each subwatershed, we subsequently subset subwatersheds on the basis of applicability and resource constraints as described in section 2.2 below."
+4,we have listed all the datasets we used in these analyses in table 2.
+4,table 1.
+4,data sources used in this study.
+4,serial number data use source location https://www.usgs.gov/national- hydrologic unit class 12 smallest hydrologic national hydrography hydrography/national- 1 subwatersheds feature for analysis dataset hydrography-dataset (accessed on 20 april 2022) advanced spaceborne thermal emission and https://earthexplorer.usgs.gov 2 digital elevation model hillshade and basemaps reflection radiometer (accessed on 20 april 2022) (aster) https://www.earthenv.org/cloud 3 cloud cover database acquisition analysis earthenv (accessed on 20 april 2022) https: //malariaatlas.org/research- 4 time to cities accessibility analysis malaria atlas project project/accessibility-to-cities/ (accessed on 20 april 2022) https: //www.census.gov/geographies/ united states census cartographic 5 basemaps mapping-files/time-series/geo/ administrative boundaries boundary files cartographic-boundary.html (accessed on 20 april 2022)
+5,"water 2022, 14, 1985 5 of 16 table 2."
+5,"serial number data use source location assessment and total maximum daily load https://www.epa.gov/ evaluating assessment 6 assessed waterbodies tracking and waterdata/attains (accessed on 20 gaps implementation system april 2022) (attains) https: evaluating human 7 population by huc-12 enviroatlas //www.epa.gov/enviroatlas footprint (accessed on 20 april 2022) agricultural, domestic, industrial and https: evaluating water supply 8 thermoelectric water enviroatlas //www.epa.gov/enviroatlas needs demand by huc-12 (accessed on 20 april 2022) (mgd) protected areas under the international union for https: conservation of nature evaluating conservation 9 enviroatlas //www.epa.gov/enviroatlas and the united states need (accessed on 20 april 2022) protected areas by huc-12 (% of land cover) big game and bird hunting, fishing, and https: evaluating recreational 10 migratory bird watching enviroatlas //www.epa.gov/enviroatlas need demand by huc-12 (accessed on 20 april 2022) (days/year) vulnerability index of https: evaluating biodiversity 11 native aquatic species by enviroatlas //www.epa.gov/enviroatlas needs huc-12 (accessed on 20 april 2022) wastewater discharge https: (mgd), total permitted evaluating environmental 12 enviroatlas //www.epa.gov/enviroatlas discharge, daily needs (accessed on 20 april 2022) agricultural runoff (mm) although our analysis pipeline extends to alaska, hawaii and other minor islands and united states protectorates, we have restricted all figures to only the conterminous united states for simplicity."
+5,"to illustrate the role of topography on various watershed char- acteristics, in most figures, we have superimposed our analytical products on a hillshade relief we generated from the 30 m resolution aster digital elevation model obtained from the usgs earth explorer portal."
+5,potential for remote sensing as a tool to collect data on the subwatershed scale we used the mean annual fraction of cloudy days from the earthenv global cloud cover model dataset [28] as a surrogate to indicate how likely it is to acquire remote sensing imagery of a 1 km2 scene and how hard it is to process this imagery for use (figure 2a).
+5,this dataset includes 1 km resolution mean conditions between the period of 2001 and 2014.
+5,"we used the global map of minimum travel times from a location to a population center (defined as a city or township with more than 50,000 people) produced by the malaria atlas project [29] as a surrogate for accessibility to a given 1 km2 grid cell (figure 2b)."
+5,"this raster map is the outcome of a geospatial travel time model that takes existing road and rail networks, land cover and 30 m resolution digital terrain models of the entire globe."
+5,"the combination of these two datasets, respectively indicate how likely it is to acquire a scene remotely, and how easy it is to ground-truth reflectances to link the remotely sensed data to land cover characteristics and water quality impairments."
+5,"the tacit assumption is that it will be possible for stakeholders tasked with managing the watershed to reach any major population center, and then travel from there to perform in-situ sampling work."
+5,"to link these datasets to the hydrological units of interest, we used the usgs’ national hydrography dataset’s (nhdplus) huc-12 layer [3]."
+6,"water 2022, 14, x for peer review 6 of 16 water 2022, 14, 1985 to reach any major population center, and then travel from there to perform in-situ6sam- of 16 pling work."
+6,"to link these datasets to the hydrological units of interest, we used the usgs’ national hydrography dataset’s (nhdplus) huc-12 layer [3]."
+6,figure2.2.
+6,"datasets figure datasets used tomodel used to potentialfor modelpotential forremote sensingin remotesensing watershedmonitoring: inwatershed (a)mean monitoring: (a) mean annual fraction of cloudy days, and (b) maximum shortest travel time to population center annual fraction of cloudy days, and (b) maximum shortest travel time to population center within within each huc-12 subwatershed."
+6,these quantities are surrogates for acquisition and accessibility of re- each huc-12 subwatershed.
+6,"these quantities are surrogates for acquisition and accessibility of motely sensed scenes and in-situ data needed to ground-truth them. remotely sensed scenes and in-situ data needed to ground-truth them. modeledthe wemodeled we potentialfor thepotential for using using remote remote sensing sensing forfor andand monitoring monitoring datadata collec- collection tion within each subwatershed as the product of various categorical levels within each subwatershed as the product of various categorical levels of τmax , ,the of τshortest the maximum of the shortest time to reach a population center from anywhere maximum of the shortest time to reach a population center from anywhere within the within the subwatershed, and subwatershed, various categorical and various categorical levels ofµ𝜇 levels of , the mean annual fraction of cloud cover , the mean annual fraction of cloudy days within the subwatershed."
+6,"within each subwatershed, we cloudy days within the subwatershed."
+6,"within each subwatershed, estimated ττshortest we estimated max as the maximum over all pixels within as the maximum over all pixels within the area of the shortest time to reach aapopulation the area of the shortest time to reach population center.we center."
+6,weestimated 𝜇 estimatedµcloud as the mean over all pixels within the area of mean an- cover as the mean over all pixels within the area of mean annual fraction of cloudy days.
+6,"thus, for thefor nual fraction of cloudy days."
+6,"thus, iththe 𝑖th subwatershed, subwatershed, we have we have 𝑃 = ℂ τ ,  × ℂ 𝜇 (1) premote sensing,i , = c τshortest max,i × c(µcloud cover,i ) , (1) here, the function ℂ ∙ assigns a category from 0 to 3 to both the acquisition (𝜇 here, the function ) and (τ assigns accessc(·) a category ) variables from 0 to to according 3 to both2.the table acquisition 0 indicates (µcloud a low cover ) potential and for access (τshortest success, and max ) 3 variables indicates according the to highest table 3. 0 potential indicates for a low success. potential the for possible success, valuesandof 3𝑃indicates the highest potential for success."
+6,"the possible values obtained in this way are binned into four categories for of p easesensing remote obtained of application: in this way are binned 0 (unsuitable), into4–6 1–3 (low), four and 9for categories (good), ease of application: (excellent)."
+6,"we note that 0 (unsuitable), the numeric1–3 (low), values of 𝑃 4–6 (good), and 9 (excellent)."
+6,"we note that the numeric themselves are only meaningful when they contributevalues of p remoteto sensing themselves the different cate- are onlyofmeaningful gories “unsuitable,” when they “good” “low,” contributeandto“excellent.” the different categories of “unsuitable,” “low,” “good” and “excellent.”"
+6,as stakeholders in the watershed management domain may weigh the costs associ- ated with the logistics of travel to remote locations for in-situ ground-truthing of remote table 3.
+6,"cost-payoff sensing matrix data, and the for modeling careful planningpotential of remote of periods whensensing for watershed to collect monitoring. in-situ data in conjunc- accessibility:these tion with clear sky days, we represented time toin cost-payoff weights shortest matrices acquisition: to set the fraction cloudy category and access categorical values of the acquisition population these variables (table 2)."
+6,"days center perweights year effec- tively lower the τ conservative and 𝜇 threshold values, respectively for the accessi- 0 bility and acquisition criteria for the different >75% >6 h categories going from conservative to nor- 1 2–6 h 50–75% mal to optimistic 2 estimates of the cost-payoff1–2 hrelationships (table 2). 25–50% 3 <1 h <25% normal matrix for modeling potential of remote sensing for watershed monitoring."
+6,table 2.
+6,"cost-payoff 0 >24 h >90% 1 6–24 h time to accessibility: shortest acquisition:75–90% fraction cloudy category2 3–6 h 50–75% 3 population center <3 h per year days<50% conservative optimistic 0 >48 h >95% 0 1 >6 h24–48 h >75% 90–95% 1 2 2–6 h6–24 h 50–75% 75–90% 2 3 1–2 h <6 h <75% 25–50% 3 <1 h <25% as stakeholders in the watershed management domain may weigh the costs associated with the logistics of travel to remote locations for in-situ ground-truthing of remote sensing data, and the careful planning of periods when to collect in-situ data in conjunction with clear sky days, we represented these weights in cost-payoff matrices to set the categorical"
+7,"water 2022, 14, 1985 7 of 16 values of the acquisition and access variables (table 3)."
+7,"these weights effectively lower the τshortest max and µcloud cover threshold values, respectively for the accessibility and acquisition criteria for the different categories going from conservative to normal to optimistic estimates of the cost-payoff relationships (table 3)."
+7,"for example, one regulatory agency may be willing to send an engineer on a six-hour long journey to collect water quality data."
+7,"so, any value of τshortest max,i smaller than six hours for a subwatershed within the jurisdiction of this agency would get a c τshortest  max value of 3."
+7,another agency may decide that it does not want its engineers to spend more than one hour traveling to a remote site.
+7,"in this case, the c τshortest shortest larger  max for any τ max than one hour would be 2 or lower."
+7,"similarly, a consultant may be willing to invest the effort into building robust processing pipelines to deal with largely cloudy scenes or invest time and resources in data fusion-based cloud removal algorithms that are becoming more popular across various platforms [30,31]."
+7,this consultant would perhaps be willing to assign a c(µcloud cover ) value of 2 or higher for a subwatershed where the sky is likely to be cloudy for almost 75% of the days in the year.
+7,another consultant who is perhaps geared to directly use analysis-ready products may assign a c(µcloud cover ) value of 3 for their subwatershed only if the sky is likely to be clear for 75% of the days in the year.
+7,"by presenting maps of the categorical levels of the potential across a range of c(·) values, we allow decision-makers to choose the cost-payoff level they are comfortable with to plan their workflows accordingly."
+7,quantifying benefits of remote sensing in watershed monitoring we modeled the potential for remote sensing using equation (1) and surrogates for accessibility and acquisition.
+7,"however, these maps in themselves provide only one piece of the puzzle."
+7,it is only when the potential for watershed monitoring using remote sensing is combined with risk maps and lack of coverage by conventional monitoring that areas can be identified where remote sensing can play a crucial role.
+7,"to do this, we developed maps of five metrics of risk using published gis data from the enviroatlas [32] (table 2): (i) the human footprint, (ii) anthropogenic water demand, (iii) ecosystem vulnerability, (iv) impairment, and (v) conventional monitoring and assessment coverage gaps."
+7,"as the units of these metrics are different from one another, we simply overlaid these maps and determined the intersecting areas to determine where the remote sensing role would be most useful."
+7,human footprint: we collected the human population in each subwatershed.
+7,the conventional wisdom is that impairment and watershed management matter most where human settlements are prevalent.
+7,the subwatersheds populations were then ranked from 0 to 6 with decadal increase from less than 10 to more than one million people.
+7,"anthropogenic water demand: we combined the domestic, agricultural, industrial and thermoelectric water demand in each subwatershed to estimate the total water demand from each subwatershed."
+7,watersheds with greater demand are likely to experience larger ecological deficit flows and a higher propensity for critical conditions of impairment.
+7,"the subwatershed demands were then ranked from 0 to 6 with decadal increase from less than 12,000 gallons per day (gpd) [the per capital daily water demand is 1200 gpd estimated by dividing the total water demand by the total population]."
+7,ecosystem vulnerability: we combined three key ecosystem services with equal weigh- tage to each to estimate an overall vulnerability index.
+7,"first, we summed the average number of days in a year that hunting, fishing, and recreational activities are typically engaged in within a subwatershed to obtain a fractional recreation time, f recreation ."
+7,large values of this number indicate greater pressure for recreational activities.
+7,"second, we com- bined the total fraction of land cover earmarked for conservation by both the international union for nature conservation (iucn) and the united states government, f conservation ."
+7,"large values of this number indicate that additional monitoring, assessment, and restora- tion effort must be expended in these subwatersheds."
+7,"third, we collected the native aquatic species vulnerability index, f vulnerability , a key measure of how many endangered, native"
+8,"water 2022, 14, 1985 8 of 16 species are threatened [33]."
+8,this index is also a proxy for ecosystem health in general.
+8,higher values of this index imply generally poorer ecosystem health.
+8,all these numbers range from 0 to 1.
+8,"the overall ecosystem vulnerability of the subwatershed is then   f = w f recreation irecreation + f conservation iconservation + f vulnerability ivulnerability (2) where ii is an indicator that can either be 0 or 1 depending on whether the service i, i.e., recreation, conservation or species vulnerability, is being provided by the subwatershed or not, and w is 1, 0.5 or 0.33 if there are one, two or all three of the services being provided by the subwatershed."
+8,"the subwatersheds ecosystem vulnerability indicator was then ranked 0 for no vulnerability, and then from 1 to 4 in increments of 0.25."
+8,"impairment risk: we developed subindex curves of the total wastewater discharge in million gallons per day (mgd), the total permitted pollutant load in pounds per year, and the total agricultural overland, tile and non-tile subsurface runoff in mm as described in walsh and wheeler [34]."
+8,we then combined these subindices using a maximum subindex measure as the overall index of impairment within a subwatershed.
+8,this index was deemed to represent the impairment risk in the subwatershed.
+8,"to develop these subindex curves the following approach was adopted: first, we summed the total load in each class, i.e., wastewater, permitted sources, and agricultural runoff, and divided it by the total surface area of waterbodies within the watershed to normalize loads across subwatersheds."
+8,"then we omitted zero values and obtained the 25th, 50th and 75th quantiles of these normalized loads across all the subwatersheds in the country and assigned rank values from 0 to 4 depending on whether there was no impairment from that loading class to whatever quantile range the normalized loads fell into."
+8,this effectively positioned the normalized loads in each load class onto a subindex curve.
+8,"then, as the nature of impairment is likely to vary depending on the dominant economic sector, human activity, and land surface processes in each subwatershed, we took the overall impairment risk to be the maximum of the three rank values."
+8,"thus, higher values of this index (ranging from 0 to 4) represents higher risk of impairment."
+8,"conventional monitoring and assessment coverage gaps: for each subwatershed, we es- timated the total length of assessed stream segments, lstream , the total area of assessed ponds, lakes, and estuaries, abody , and the total number of monitoring stations, nstation , from the assessment and total maximum daily load tracking and implementation system (attains) database [4]."
+8,a subwatershed was determined to have a monitoring gap if lstream + abody + nstation = 0.
+8,"finally, we also produced a remote sensing monitoring potential map using the normal cost-payoff estimates from table 3 to indicate where remote sensing would be likely feasible."
+8,"subwatersheds where the role of remote sensing is likely to be most crucial were then classified as those that met the decision tree in figure 3, that is, where all the layers after suitable thresholding to represent various risks intersect with at least good potential for remote sensing."
+9,"water 2022, 14, x for peer review 9 of 16 water 2022, 14, 1985 9 of 16 figure 3."
+9,flowchart for estimating where the role of remote sensing will be crucial in watershed figure 3.
+9,flowchart for estimating where the role of remote sensing will be crucial in watershed management.
+9,the operation represents the intersection of geospatial layers.
+9,the numbers indicate management.
+9,the operation represents the intersection of geospatial layers.
+9,the numbers indicate threshold values of various index levels. threshold values of various index levels.
+9,results 3.
+9,results we show the maps of potential for remote sensing in monitoring within watersheds for show the maps we cost-payoff various of potential scenarios in figure for4.remote sensing in these potential monitoring rankings within represent watersheds an interplay for variousthe between cost-payoff ambient cloudscenarios figure 2a) coverin(figure 4.
+9,these and thepotential maximum rankings of therepresent an inter- shortest travel timebetween play the ambient to a population centercloud (figure cover 2b).(
+9,"figure the model 2a) and the maximum predicts of thecover shortest that when cloud travel is low, and travel times are short, the time to a population center (figure 2b)."
+9,the model predicts that when cloud cover is is potential is maximized.
+9,"conversely, when cloud cover low, hightravel and and travel timestimes the the are long, are short, potential potential is inhibited."
+9,"conversely, is maximized."
+9,"typically, cloud whencover is lowest cloud cover is in the high and southwest, travel times andareincreases long, the generally potential through the central is inhibited."
+9,"plainscloud typically, towards cover theiseast lowest and is highest over the north and the rockies and appalachian in the southwest, and increases generally through the central plains towards the east mountains (figure 2a).and travel times are generally relatively low (less than three hours) is highest over the north and the rockies and appalachian mountains (figure 2a)."
+9,"travel on the eastern and western seaboards, and throughout the central plains and in the south, and increase to more than times are generally relatively low (less than three hours) on the eastern and western sea- six hours in the mountainous rockies and the remote midwest."
+9,"these patterns are reflected boards, and throughout the central plains and in the south, and increase to more than six in the model. in thefrom hoursgoing mountainous left to rightrockies in figureand remoteofmidwest. theexpense 4, the these effort to build patterns pipelines forare reflected occluded the model. inimages and changing light conditions is budgeted increasingly generously."
+9,"this reflects in going from the improved left to for potential right in figure remote sensing 4, the expense in more partsofofeffort to build the mideast andpipelines east."
+9,"goingfor oc- cluded images and changing light conditions is budgeted increasingly from top to bottom in figure 4, the effort required to collect in-situ data for ground- generously."
+9,this reflects truthing inisthe improved budgeted potentialgenerously. increasingly for remotethis sensing in the parts in more reflects improvedof the mideast potential forand east.
+9,"going remote from sensing bottom top toparts in more of the insouthwest figure 4, and the the effort required midwest, toincollect until in-situ the bottom data right of for figure 4, there is more ground-truthing or less uniformly is budgeted increasinglyhigh potential generously. throughout the country."
+9,"this reflects in thenonetheless, improved po- most of tential forthe california remote central sensing in more valley, southern parts southwest and of the california, thecentral and the midwest, plains until have in the uniformly bottom rightgood to excellent of figure potential 4, there is moreunder all cost-payoff or less uniformlyscenarios, owingthroughout high potential to generallythe clear skies country. mosttimes. and short travel nonetheless, of the california central valley, southern california, and the central plains have uniformly good to excellent potential under all cost-payoff scenarios, owing to generally clear skies and short travel times."
+10,"water 14, water 2022, x for 2022, peer review 14, 1985 10 of 16 10 of 16 figure 4."
+10,figure modeled modeledmapsmapsof the potential of the remotesensing potential ofofremote sensing forfor data data collection collection and monitoring and monitoring of of watersheds under various cost-payoff assumptions.
+10,as the effect of cloud cover watersheds under various cost-payoff assumptions.
+10,"as the effect of cloud cover decreases (more decreases (more cloudy cloudydays acceptable), areare days morecloudy acceptable),more areas display cloudy areas higherpotential. display higher potential.as theeffect asthe effectofof access de- access creases (longer decreases travel (longer times travel are times acceptable), more areacceptable), remoteareas areas more remote display display higher higher potential. potential."
+10,thin red thin red lines are state boundaries. lines are state boundaries.
+10,"in in figure5,5,we figure weshow show the various risk the various riskmetrics metrics through (a(a through e) and the the e) and associated remote associated remote sensing utility map (f) by applying the flowchart in figure 3 to each subwatershed sensing utility map (f) by applying the flowchart in figure 3 to each subwatershed in these in these layers. layers."
+10,"population population centers,asasexpected, centers, expected, are generally concentrated are generally concentratednear nearthe major the major cities cities on on the eastern and western seaboards and in the mideast and the gulf of mexico coast the eastern and western seaboards and in the mideast and the gulf of mexico coast (fig- (figure 5a)."
+10,"the water demand generally tracks the population centers, except in california, 5a). urethe the water demand generally tracks the population centers, except in california, midwest, and the central plains subwatersheds from where water is diverted to other midwest, theplaces (figureand thefor 5b)."
+10,"central plains instance, subwatersheds in california, water isfrom where gravity waterreservoirs is diverted fed from to other in the places north(figure 5b)."
+10,"for to consumers in instance, the south. in california, almost waterinisthe everywhere gravity unitedfed from states, reservoirs ecosystems arein the north to consumers vulnerable in the (figure 5c). most ofalmost in south. everywhere the midwest, in thedue this is likely united states, to large ecosystems tracts of lands are vulnerable (figure as being designated 5c).protected of theand in mostzones, midwest, likely due this isnevada in the sierra to large mountains in tracts the west,of lands duedesignated being to ecologicalasdisasters protected sustained by zones, anddrought and forest in the sierra fires.mountains nevada most of the in population the west, due centers on the to ecological easternby disasters and western seaboard sustained drought are andpolluted by wastewater forest fires."
+10,"most of the andpopulation permitted cen- discharges, while the central plains and midwest impairments reflect of agricultural runoff ters on the eastern and western seaboard are polluted by wastewater and permitted dis- into the mississippi river tributaries (figure 5d)."
+10,"the attains database indicates that charges, while the central plains and midwest impairments reflect of agricultural runoff most of the nation’s subwatersheds have at least some waterbodies that have been assessed. into butthe mississippi many river in subwatersheds the united(figure tributaries 5d)."
+10,"the states-mexico attains border database region, the indicates that remote midwest, andof most thethe nation’s rockies remainsubwatersheds unassessed (figure at least have 5e)."
+10,basedsome waterbodiesof that on a combination thesehave layersbeen in as- sessed.
+10,"but many subwatersheds in the united states-mexico conjunction with the remote sensing potential model under the assumption of a normalborder region, the remote midwest, andscenario cost-payoff the rockies (middle panel unassessed remain in figure 4 and (figure 5e)."
+10,"table 3), based several on a combination hotspots emerge banded of these predominantly layers in the with in conjunction souththe the north andremote sensing remote sensing where potential model could underbe crucial, and often of a the assumption perhaps normal the only source cost-payoff scenario (middleofpanel of assessment the condition in figure of these 4 and subwatersheds (figurehotspots 5f)."
+10,"table 2), several emerge banded predominantly in the south and the north where remote sensing could be crucial, and often perhaps the only source of assessment of the condition of these sub- watersheds (figure 5f)."
+11,"water 2022,14, water2022, 14,1985 x for peer review of 16 11 of 11 16 figure 5."
+11,figure 5.
+11,"predicted subwatersheds where predicted subwatersheds the role where the of remote role of sensing could could be remote sensing crucial as be crucial the intersec- as the intersec- tion of greater than good remote sensing potential, high impairment risk indicators, and low cover- tion of greater than good remote sensing potential, high impairment risk indicators, and low coverage. age."
+11,"across subwatersheds, (a) population, (b) total water demand, (c) ecosystem vulnerability in- across subwatersheds, (a) population, (b) total water demand, (c) ecosystem vulnerability index, (d) dex, (d) pollution entering streams and waterbodies, (e) water quality monitoring gaps, and (f) in- tersectionentering pollution of thesestreams and waterbodies, layers with (e) waterand normal accessibility quality normalmonitoring and (f) intersection gaps,cost-payoff cloud cover model pre-of these layers with normal accessibility and normal cloud cover cost-payoff dicted higher than good remote sensing potential subwatersheds (blue polygons). model predicted higher than good remote sensing potential subwatersheds (blue polygons)."
+11,"it is evident from these remote sensing potential maps and the combination of risk it is evident from these remote sensing potential maps and the combination of risk metrics and remote sensing potential that there are specific areas within the country where metrics and remote sensing potential that there are specific areas within the country where watershed researchers and managers can beneficially leverage remote sensing data at var- watershed researchers and managers can beneficially leverage remote sensing data at ious spatial various scales spatial ranging scales from ranging stream from segment-reach stream to the segment-reach to subwatershed scale.scale. the subwatershed by allo- by cating resources preferentially to occluded and poorly-lit scene imagery usage pipelines, allocating resources preferentially to occluded and poorly-lit scene imagery usage pipelines, the potential the potential for using remote for using sensing can remote sensing can be tremendously maximized. maximized."
+11,"this be tremendously is borne this is out borne out by rapidly by rapidly improving potential going improving potential left to going left right in to right in figure figure 4,4, than by going than by from top going from to top to bottom in figure bottom in figure 4."
+11,discussion and conclusions 4.
+11,wehave we presenteda aset havepresented setofof maps maps that that chart thethe chart potential potential of remote of remote sensing sensing to aug- to augment ment the the monitoring monitoring data collection andcollection and data in watersheds in watersheds for surface for land land surface and water and water quality quality pro- processes. cesses. areare these these available available forfor open open source source downloadinina agit download gitrepo repo[35].
+11,toenable [35].
+11,"to enable easy easy access to, access to, and visualization of these and visualization maps, the these maps, risk factors factors for the risk impairment, and summary for impairment, summary potential of remote sensing under various assumptions within the cost- statistics of the potential statistics"
+12,"water 2022,14, water2022, 14,1985 x for peer review of 16 12 of 12 16 payoff matrix, payoff we have matrix, we also developed have also developed an an app app [36] [36] using google earth using google engine [37]."
+12,earth engine [37].
+12,this this app contains an interactive map within which the user can click on a specific subwatershed app contains an interactive map within which the user can click on a specific subwater- of interest to obtain additional information (figure 6).
+12,a summarization of this paper shed of interest to obtain additional information (figure 6).
+12,a summarization of this paper is available as a guide to using the app in a separate panel.
+12,once a subwatershed has is available as a guide to using the app in a separate panel.
+12,"once a subwatershed has been been clicked, a summary visual report will be generated, and the relevant information on clicked, a summary visual report will be generated, and the relevant information on the the impairment risk factors and the potential for remote sensing can be downloaded as impairment risk factors and the potential for remote sensing can be downloaded as comma-separated value files. comma-separated value files."
+12,figure 6.
+12,google earth engine application to demonstrate the potential of remote sensing in moni- figure 6.
+12,google earth engine application to demonstrate the potential of remote sensing in moni- toring watershed management in the united states.
+12,attribution: map data © 2022 google inegi toring watershed management in the united states.
+12,"attribution: map data © 2022 google inegi imagery © 2022 nasa, terrametrics."
+12,"imagery © 2022 nasa, terrametrics."
+12,"additionally, we have shown how such maps can be modified within a cost-payoff additionally, we have shown how such maps can be modified within a cost-payoff landscape to be truly customizable by watershed decision-makers."
+12,the cost-payoff analy- landscape to be truly customizable by watershed decision-makers.
+12,the cost-payoff analysis sis also shows that improving the data processing pipelines for occluded and poorly lit also shows that improving the data processing pipelines for occluded and poorly lit scenes scenes can tremendously benefit the power of remote sensing (going left to right in figure can tremendously benefit the power of remote sensing (going left to right in figure 4).
+12,by 4).
+12,"by combining the regions of high remote sensing potential with other risk factors de- combining the regions of high remote sensing potential with other risk factors describing scribingfootprint, human human footprint, impairment impairment risk, ecosystem risk, ecosystem vulnerability,vulnerability, and conventionaland conventional monitoring monitoring coverage coverage gaps, we cangaps, can identify wethose identify those subwatersheds subwatersheds where remotewhere sensing remote sensing is likely to haveis likely to have the highest benefit, and in fact, likely be an integral source the highest benefit, and in fact, likely be an integral source of primary data."
+12,large areas of primary data.
+12,"large in areas in the the southern southern united united states, states, in particularly california,innew particularly california, mexico,new mexico, texas, texas, mississippi, mississippi, georgia, and the carolinas, and sporadic watersheds georgia, and the carolinas, and sporadic watersheds in the northeast and northwest in the northeast and northwest seaboards (washington and maine) and the midwest seaboards (washington and maine) and the midwest would likely benefit most from using would likely benefit most from remote using sensing forremote sensing watershed for watershed monitoring (figure monitoring 5f)."
+12,(figure 5f).
+12,our approach represents a seminal and necessary our approach represents a seminal and necessary step in step aiding the in aiding decision-making the decision-making process for resource-constrained regulatory agencies and contractors. process for resource-constrained regulatory agencies and contractors.
+12,"by augmenting by augmenting these these maps with other socio-economic geospatial data, deeper maps with other socio-economic geospatial data, deeper insights can be gained insights can be gained to tackleto tackle challenges of environmental justice and equity."
+12,rather than challenges of environmental justice and equity.
+12,"rather than focusing on specific watershed focusing on specific processes, impairments, watershedimpairments, processes, and remoteand remote sensing sensing we platforms, platforms, we have adeveloped method ofa have developed method of assessing theassessing the general general potential potential for remote for remote sensing sensingapplications for whatever for whatever areapplications envisioned envisioned aresystem by managersby system managers in their monitoring andmonitoring in their and workflows. data collection data collectionthisworkflows. approach this approach allows allows us to explore theus to explore benefits the benefits of remote sensing of remote further, as sensing parts ofas (i) not allfurther, the(i)country not all parts of the country are monitored regularly, and even when they are, in-situ monitoring"
+13,"water 2022, 14, 1985 13 of 16 are monitored regularly, and even when they are, in-situ monitoring costs can typically exceed several hundred thousands of dollars a year within a small watershed [38], and (ii) remote sensing can provide long-term cost savings."
+13,remote sensing potential maps could be constructed for specific applications outlined in the introduction by suitably modifying the factors considered in the model presented in section 2.1.
+13,"for example, if a consultant proposes a data fusion pipeline using sentinel 2, modis, and planet imagery [39] to study watershed health, heavy metal concentrations in a nearby lake, and the role of watershed best management practices, then the principal costs of image acquisition will likely be the cost of procuring high-resolution planet imagery, while in-situ monitoring costs will likely be driven by personnel costs rather than access time."
+13,there are several caveats to the maps we have produced here.
+13,"first, the assumptions built into the earthenv cloud cover and the malaria atlas travel time databases carry over to our maps."
+13,"while these data sources are excellent for global coverage at the kilometer-scale, our pipeline may be refined with source dems and spectral imagery for specific watersheds to systematically downscale our national coverage maps."
+13,"the shortest time to reach a population center, while somewhat ad-hoc, is an appropriate metric to characterize the difficulty of ground-truthing remote sensing imagery because typically waterbodies outside major population centers are not monitored."
+13,"however, as we show in figure 5d, such areas are also at high risk of impairment."
+13,"second, our remote sensing potential model is extremely simple and steady state, and yet captures the underlying tradeoff between scene acquisition and ground-truthing."
+13,"within a watershed, multiple process-scales exist, ranging from storms and coastal upwelling events that happen on hourly to daily timescales, land use and land cover changes that happen on annual to decadal timescales, and landform changes that happen over many decades to centuries [40]."
+13,our maps do not factor in these different timescales.
+13,"more sophisticated models, including spatial kriging approaches and gaussian process models that incorporate seasonal variability in scene acquisition and travel time can be developed."
+13,"cloud cover, for instance, can vary seasonally so that even in areas with many cloudy days, there can be periods with clear skies during which period field campaigns could be planned."
+13,we do not capture such nuances here.
+13,"for simple applications that require only a single remote sensing image such as a national agricultural image program [41] or landsat scene, cloud cover may not even be an issue if the acquisition window can be carefully determined."
+13,"although many non-dimensional metrics for land use and land cover classification for characterizing the environment can be derived from multi- and hyperspectral imagery in most locations within the united states, as we showed in figure 1, there are still significant data gaps that require physical ground-truthing for which our maps will be useful."
+13,"third, we have operated at the huc-12 subwatershed scale in this project for computational tractability."
+13,"however, much finer reach-scale resolution of the impaired waterbodies can be incorporated within our pipeline by combining the nhdplus and attains datasets using cloud platforms such as google’s earth engine [37]."
+13,"fourth, our thresholds for cloud cover and minimum travel time to population centers for the various cost-payoff scenarios are somewhat arbitrary, but still indicate sensible and meaningful trends in the remote sensing potential maps."
+13,this is a reflection of the fact that we have sacrificed specificity to different remote sensing technologies for the generality of our guidance maps.
+13,these thresholds can be more rigorously defined for different types of remote sensing platforms by combining the atmospheric conditions and ground-truthing needs of specific technologies.
+13,"fifth, while we have chosen risk metrics that largely encompass most risk factors for watershed impairments, a more thorough exploration of available datasets, particularly socioeconomic data, is possible to identify other, transdisciplinary benefits of remote sensing within a watershed."
+13,"it is likely that such exhaustive inclusion must be done on a local municipal, county, or state scale than on the national scale for disparate factors to sensibly be combined at meaningful physical scales."
+13,"in subsequent iterations of these products, we will tackle these advances."
+13,"sixth, we only considered terrestrial subwatersheds in our current pipeline, and excluded all coastal and"
+14,"water 2022, 14, 1985 14 of 16 great lakes impairments."
+14,"in subsequent iterations of these maps, we will include these areas as well."
+14,"while we have developed the pipeline for the united states, a similar workflow could be developed anywhere in the world, or even for the entire planet."
+14,"the only consideration is that while earth explorer, the united states environmental protection agency, and the enviroatlas catalog a wide array of geospatial datasets for immediate use, such data may be difficult to find in the international landscape, and may have to be stitched together from disparate sources of information."
+14,"nonetheless, for any serious, reproducible, and scalable application of remote sensing for monitoring and data collection on watershed loads and impairments, this is a necessary first step."
+14,"for the first time ever, a product is available that will allow researchers and managers to evaluate the potential of remote sensing to augment, or even fulfill ambient monitoring and data collection needs throughout the united states."
+14,"we hope that our maps will be useful for the watershed managers within the united states, even as we continue to improve them with finer granularity and additional factors."
+14,"author contributions: conceptualization, v.k.s., s.k. and s.m.k.; methodology, v.k.s. and s.k.; software, v.k.s. and s.k.; validation, v.k.s. and s.k.; formal analysis, v.k.s.; investigation, v.k.s.; resources, v.k.s., s.k. and s.m.k.; data curation, v.k.s.; writing—original draft preparation, v.k.s.; writing—review and editing, v.k.s. and s.k.; visualization, v.k.s.; supervision, v.k.s. and s.k.; project administration, v.k.s.; funding acquisition, unfunded study."
+14,all authors have read and agreed to the published version of the manuscript.
+14,funding: this research received no external funding.
+14,institutional review board statement: institutional review and approval was not applicable for this study.
+14,informed consent statement: informed consent was not applicable for this study as there were no human subjects.
+14,data availability statement: data available in a publicly accessible repository that does not issue dois here: https://github.com/vamsiks2003/remotesensingpotentialmapping (accessed on 20 april 2022).
+14,publicly available datasets were analyzed in this study.
+14,"this data can be found here: https:// www.usgs.gov/national-hydrography/national-hydrography-dataset, https://earthexplorer.usgs.gov, https://www.earthenv.org/cloud, https://malariaatlas.org/research-project/accessibility-to-cities/, https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html, https://www.epa.gov/waterdata/attains, https://www.epa.gov/enviroatlas (accessed on 20 april 2022)."
+14,"data citation: sridharan, v.k., kumar, s.n., and madhur kumar, s."
+14,github repo re- motesensingpotentialmapping (https://github.com/vamsiks2003/remotesensingpotentialmapping (accessed on 20 april 2022)).
+14,acknowledgments: discussions with rocky talchabadel and santosh palmate at texas a&m univer- sity were useful in the development of the methods presented here.
+14,"critical review by lee harrison at the university of california, san diego and recommendations by three anonymous reviewers and the academic editor at water significantly improved the quality of this manuscript."
+14,"the lead author acknowledges the environmental and water resources institutes remote sensing task committee, total maximum daily load analysis and modeling task committee and the watershed management technical committee whose deliberations motivated this study."
+14,conflicts of interest: the authors declare no conflict of interest.
+14,references 1.
+14,"read, e.k."
+14,"; carr, l."
+14,"; de cicco, l."
+14,"; dugan, h.a."
+14,"; hanson, p.c."
+14,"; hart, j.a."
+14,"; kreft, j."
+14,"; read, j.s."
+14,"; winslow, l.a."
+14,water quality data for national-scale aquatic research: the water quality portal.
+14,water resour.
+14,"2017, 53, 1735–1745."
+14,[crossref] 2.
+14,"ross, m.r.v."
+14,"; topp, s.n."
+14,"; appling, a.p."
+14,"; yang, x."
+14,"; kuhn, c."
+14,"; butman, d."
+14,"; simard, m."
+14,"; pavelsky, t.m."
+14,aquasat: a data set to enable remote sensing of water quality for inland waters.
+14,water resour.
+14,"2019, 55, 10012–10025."
+14,[crossref] 3.
+14,united states geological survey.
+14,national hydrography dataset.
+14,available online: https://www.usgs.gov/national- hydrography/access-national-hydrography-products (accessed on 23 october 2019).
+14,usepa.
+14,attains.
+14,available online: https://www.epa.gov/waterdata/attains (accessed on 30 april 2020).
+15,"water 2022, 14, 1985 15 of 16 5."
+15,"sridharan, v.k."
+15,"; quinn, n.w.t."
+15,"; kumar, s."
+15,"; mccutcheon, s.c."
+15,"; ahmadisharaf, e."
+15,"; fang, x."
+15,"; zhang, h.x."
+15,"; parker, a."
+15,selecting reliable models for total maximum daily load development: holistic protocol.
+15,hydrol.
+15,"2021, 26, 04021031."
+15,[crossref] 6.
+15,"kuenzer, c."
+15,"; ottinger, m."
+15,"; wegmann, m."
+15,"; guo, h."
+15,"; wang, c."
+15,"; zhang, j."
+15,"; dech, s."
+15,"; wikelski, m."
+15,earth observation satellite sensors for biodiversity monitoring: potentials and bottlenecks.
+15,remote sens.
+15,"2014, 35, 6599–6647."
+15,[crossref] 7.
+15,"yang, x."
+15,"; qin, q."
+15,"; yésou, h."
+15,"; ledauphin, t."
+15,"; koehl, m."
+15,"; grussenmeyer, p."
+15,"; zhu, z."
+15,monthly estimation of the surface water extent in france at a 10-m resolution using sentinel-2 data.
+15,remote sens.
+15,environ.
+15,"2020, 244, 111803."
+15,[crossref] 8.
+15,"yang, f."
+15,"; qi, c."
+15,"; su, d."
+15,"; ding, s."
+15,"; he, y."
+15,"; ma, y."
+15,an airborne lidar bathymetric waveform decomposition method in very shallow water: a case study around yuanzhi island in the south china sea.
+15,earth observ.
+15,geoinf.
+15,"2022, 109, 102788."
+15,[crossref] 9.
+15,"legleiter, c.j."
+15,"; harrison, l.r."
+15,"remote sensing of river bathymetry: evaluating a range of sensors, platforms, and algorithms on the upper sacramento river, california, usa."
+15,water resour.
+15,"2019, 55, 2142–2169."
+15,[crossref] 10.
+15,"chawla, i."
+15,"; karthikeyan, l."
+15,"; mishra, a.k."
+15,"a review of remote sensing applications for water security: quantity, quality, and extremes."
+15,hydrol.
+15,"2020, 585, 124826."
+15,[crossref] 11.
+15,"jafarbiglu, h."
+15,"; pourreza, a."
+15,"a comprehensive review of remote sensing platforms, sensors, and applications in nut crops."
+15,comput.
+15,electron.
+15,agric.
+15,"2022, 197, 106844."
+15,[crossref] 12.
+15,"wu, d."
+15,"; johansen, k."
+15,"; phinn, s."
+15,"; robson, a."
+15,"; tu, y.h."
+15,inter-comparison of remote sensing platforms for height estimation of mango and avocado tree crowns.
+15,earth obs.
+15,geoinf.
+15,"2020, 89, 102091."
+15,[crossref] 13.
+15,"lechner, a.m."
+15,"; foody, g.m."
+15,"; boyd, d.s."
+15,applications in remote sensing to forest ecology and management.
+15,"one earth 2020, 2, 405–412."
+15,[crossref] 14.
+15,"fuentes, s."
+15,"; tongson, e."
+15,"; gonzalez, v.c."
+15,urban green infrastructure monitoring using remote sensing from integrated visible and thermal infrared cameras mounted on a moving vehicle.
+15,"sensors 2021, 21, 295."
+15,[crossref] [pubmed] 15.
+15,"gholizadeh, m.h."
+15,"; melesse, a.m."
+15,"; reddi, l."
+15,a comprehensive review on water quality parameters estimation using remote sensing techniques.
+15,"sensors 2016, 16, 1298."
+15,[crossref] [pubmed] 16.
+15,"topp, s.n."
+15,"; pavelsky, t.m."
+15,"; jensen, d."
+15,"; simard, m."
+15,"; ross, m.r."
+15,research trends in the use of remote sensing for inland water quality science: moving towards multidisciplinary applications.
+15,"water 2020, 12, 169."
+15,[crossref] 17.
+15,"steinhausen, m.j."
+15,"; wagner, p.d."
+15,"; narasimhan, b."
+15,"; waske, b."
+15,combining sentinel-1 and sentinel-2 data for improved land use and land cover mapping of monsoon regions.
+15,earth obs.
+15,geoinf.
+15,"2018, 73, 595–604."
+15,[crossref] 18.
+15,"sagan, v."
+15,"; peterson, k.t."
+15,"; maimaitijiang, m."
+15,"; sidike, p."
+15,"; sloan, j."
+15,"; greeling, b.a."
+15,"; maalouf, s."
+15,"; adams, c."
+15,"monitoring inland water quality using remote sensing: potential and limitations of spectral indices, bio-optical simulations, machine learning, and cloud computing."
+15,earth-sci.
+15,"2020, 205, 103187."
+15,[crossref] 19.
+15,"ammenberg, p."
+15,"; flink, p."
+15,"; lindell, t."
+15,"; pierson, d."
+15,"; strombeck, n."
+15,bio-optical modelling combined with remote sensing to assess water quality.
+15,remote sens.
+15,"2002, 23, 1621–1638."
+15,[crossref] 20.
+15,"karki, s."
+15,"; sultan, m."
+15,"; elkadiri, r."
+15,"; elbayoumi, t."
+15,"mapping and forecasting onsets of harmful algal blooms using modis data over coastal waters surrounding charlotte county, florida."
+15,remote sens.
+15,"2018, 10, 1656."
+15,[crossref] 21.
+15,"apostel, a."
+15,"; kalcic, m."
+15,"; dagnew, a."
+15,"; evenson, g."
+15,"; kast, j."
+15,"; king, k."
+15,"; martin, j."
+15,"; muenich, r.l."
+15,"; scavia, d."
+15,simulating internal watershed processes using multiple swat models.
+15,total environ.
+15,"2021, 10, 143920."
+15,[crossref] 22.
+15,"mueller-warrant, g.w."
+15,"; whittaker, g.w."
+15,"; banowetz, g.m."
+15,"; griffith, s.m."
+15,"; barnhart, b.l."
+15,methods for improving accuracy and extending results beyond periods covered by traditional ground-truth in remote sensing classification of a complex landscape.
+15,earth obs.
+15,geoinf.
+15,"2015, 38, 115–128."
+15,[crossref] 23.
+15,"scudiero, e."
+15,"; corwin, d.l."
+15,"; anderson, r.g."
+15,"; skaggs, t.h."
+15,moving forward on remote sensing of soil salinity at regional scale.
+15,front.
+15,environ.
+15,"2016, 4, 65."
+15,[crossref] 24.
+15,"nagai, s."
+15,"; nasahara, k.n."
+15,"; akitsu, t.k."
+15,"; saitoh, t.m."
+15,"; muraoka, h."
+15,importance of the collection of abundant ground-truth data for accurate detection of spatial and temporal variability of vegetation by satellite remote sensing.
+15,"in biogeochemical cycles: ecological drivers and environmental impact; american geophysical union: hoboken, nj, usa, 2020; pp."
+15,223–244.
+15,[crossref] 25.
+15,"schaider, l.a."
+15,"; swetschinski, l."
+15,"; campbell, c."
+15,"; rudel, r.a."
+15,environmental justice and drinking water quality: are there socioeconomic disparities in nitrate levels in us drinking water?
+15,environ.
+15,"health 2019, 18, 1–15."
+15,[crossref] [pubmed] 26.
+15,qgis development team.
+15,qgis geographic information system.
+15,open source geospatial foundation project.
+15,available online: http://qgis.osgeo.org (accessed on 20 april 2022).
+15,the mathworks inc.
+15,"matlab r2020b; the mathworks inc.: natick, ma, usa, 2020."
+15,"wilson, a.m."
+15,"; jetz, w."
+15,remotely sensed high-resolution global cloud dynamics for predicting ecosystem and biodiversity distributions.
+15,"plos biol. 2016, 14, e1002415."
+15,[crossref] [pubmed] 29.
+15,"weiss, d.j."
+15,"; nelson, a."
+15,"; gibson, h.s."
+15,"; temperley, w."
+15,"; peedell, s."
+15,"; lieber, a."
+15,"; hancher, m."
+15,"; poyart, e."
+15,"; belchior, s."
+15,"; fullman, n.; et al."
+15,a global map of travel time to cities to assess inequalities in accessibility in 2015.
+15,"nature 2018, 553, 333–336."
+15,[crossref] [pubmed] 30.
+15,"kalkan, k."
+15,"; maktav, m.d."
+15,a cloud removal algorithm to generate cloud and cloud shadow free images using information cloning.
+15,indian soc.
+15,remote sens.
+15,"2018, 46, 1255–1264."
+15,[crossref] 31.
+15,"alvarez-mendoza, c.i."
+15,"; teodoro, a."
+15,"; ramirez-cando, l."
+15,"improving ndvi by removing cirrus clouds with optical remote sensing data from landsat-8–a case study in quito, ecuador."
+15,remote sens.
+15,environ.
+15,"2019, 13, 257–274."
+15,[crossref] 32.
+15,"pickard, b.r."
+15,"; daniel, j."
+15,"; mehaffey, m."
+15,"; jackson, l.e."
+15,"; neale, a."
+15,enviroatlas: a new geospatial tool to foster ecosystem services science and resource management.
+15,ecosyst.
+15,"2015, 14, 45–55."
+15,[crossref]
+16,"water 2022, 14, 1985 16 of 16 33."
+16,"panlasigui, s."
+16,"; davis, a.j.s."
+16,"; mangiante, m.j."
+16,"; darling, j.a."
+16,assessing threats of non-native species to native freshwater biodiversity: conservation priorities for the united states.
+16,conserv.
+16,"2018, 224, 199–208."
+16,[crossref] 34.
+16,"walsh, p."
+16,"; wheeler, w."
+16,water quality index aggregation and cost benefit analysis; ncee working paper no.
+16,"12-05; usepa: washington, dc, usa; national center for environmental economics: washington, dc, usa, 2012."
+16,"sridharan, v.k."
+16,"; kumar, s.n."
+16,"; madhur kumar, s."
+16,github repo remotesensingpotentialmapping.
+16,available online: https://github.com/vamsiks2003/remotesensingpotentialmapping (accessed on 20 april 2022).
+16,"sridharan, v.k."
+16,"; kumar, s.n."
+16,; google earth engine remote sensing potential application.
+16,available online: https: //vamsiks2003.users.earthengine.app/view/remotesensingpotential (accessed on 20 april 2022).
+16,"gorelick, n."
+16,"; hancher, m."
+16,"; dixon, m."
+16,"; ilyushchenko, s."
+16,"; thau, d."
+16,"; moore, r."
+16,google earth engine: planetary-scale geospatial analysis for everyone.
+16,remote sens.
+16,environ.
+16,"2017, 202, 18–27."
+16,[crossref] 38.
+16,"dressing, s.a."
+16,"; meals, d.w."
+16,"monitoring and evaluating nonpoint source watershed projects; united states environmental protection agency: washington, dc, usa, 2016; p."
+16,available online: https://www.epa.gov/sites/default/files/2016-06/documents/ chapter_9_may_2016_508.pdf (accessed on 14 april 2022).
+16,"cooley, s.w."
+16,"; smith, l.c."
+16,"; stepan, l."
+16,"; mascaro, j."
+16,tracking dynamic northern surface water changes with high-frequency planet cubesat imagery.
+16,remote sens.
+16,"2017, 9, 1306."
+16,[crossref] 40.
+16,"tucker, g.e."
+16,"; hutton, e.w."
+16,"; piper, m.d."
+16,"; campforts, b."
+16,"; gan, t."
+16,"; barnhart, k.r."
+16,"; kettner, a.j."
+16,"; overeem, i."
+16,"; peckham, s.d."
+16,"; mccready, l.; et al."
+16,csdms: a community platform for numerical modeling of earth surface processes.
+16,geosci.
+16,model dev.
+16,"2022, 15, 1413–1439."
+16,[crossref] 41.
+16,united states geological survey.
+16,usgs eros archive—aerial photography—national agriculture imagery program (naip).
+16,available online: https://www.usgs.gov/centers/eros/science/usgs-eros-archive-aerial-photography-national- agriculture-imagery-program-naip (accessed on 14 april 2022).

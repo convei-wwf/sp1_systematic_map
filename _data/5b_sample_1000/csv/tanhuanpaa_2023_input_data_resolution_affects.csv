@@ -1,0 +1,477 @@
+page,p
+1,"ambio 2023, 52:1793–1803 https://doi.org/10.1007/s13280-023-01885-6 carbon sequestration and biodiversity impacts in forested ecosystems input data resolution affects the conservation prioritization outcome of spatially sparse biodiversity features topi tanhuanpää , ninni mikkonen, heini kujala, einari heinaro, janne mäyrä, timo kumpula received: 13 february 2023 / revised: 21 april 2023 / accepted: 9 may 2023 / published online: 2 june 2023 abstract detailed spatial data are an essential part of land planning goals."
+1,"the on-going biodiversity crisis, which use planning and decision-making."
+1,"their spatial resolution strongly connects to the climate crisis, underlines the sets limitations to their use, as coarse datasets are not importance of ecological aspects as part of all land use suitable for detecting small-scale phenomena."
+1,"in this planning, such as avoiding ecological impacts in develop- study, we explored the effects of spatial resolution on the ment projects and the planning and designation of new ecological outcome of a conservation prioritization process protected areas (montanarella et al."
+1,2018). in zonation software.
+1,"our study area was in evo, southern conservation prioritization is an analytical step of sys- finland, covering a mosaic of managed and conserved tematic conservation planning (sarkar and margules 2002). forests."
+1,"we produced the feature layers describing the it identifies the priority areas for conservation across the forest characteristics using high-resolution remote sensing target landscape by finding that set of sites that together datasets, object-based mapping methods, and forest site type maximize conservation outcomes for all included biodi- data."
+1,"we found that increasing the resolution above the 16 m versity features, such as species, habitats, and other rele- baseline resolution resulted in substantial errors."
+1,the vant indicators.
+1,"an important part of spatial prioritization conservation errors were the highest for rare features is cost-effectiveness, i.e., maximizing conservation benefits related to european aspen, whereas the common features with minimal cost or land area (moilanen et al. 2009; related to dominant tree species could benefit from the kukkala and moilanen 2013)."
+1,in conservation prioritiza- growth of cell size.
+1,"we conclude that adequate spatial tion, like in all land use planning, the spatial resolution resolution is a prerequisite for efficient conservation defines the level of detail that can be achieved with spatial prioritization, and that the size and spatial distribution of data."
+1,"the requirements for the resolution vary, depending the features affect the resolution requirements. on the purpose of the planning."
+1,"hence, the resolution and quality of the data affect the use and interpretation of keywords conservation prioritization  forests  spatial data sets and eventually the results of the analysis remote sensing  scale  spatial resolution  zonation (araujo et al."
+1,2005; rondinini et al.
+1,2006).
+1,in ecological datasets the effect of spatial resolution varies by the scar- city of the phenomena.
+1,"the more detailed the input data, introduction the smaller patterns can be distinguished from the land- scape."
+1,"on the other hand, very detailed data can be land use planning is highly dependent on spatial data sets. impossible to gather due to higher data acquisition and the data provide decision-makers with information on the processing costs, and the work can be left undone because subject area through key characteristics related to the of this."
+1,"spatially explicit ecological data that cover large areas at resolution relevant to land use planning are not, however, easy to obtain."
+1,"most biological survey data are based on point observations that cover only a small fraction supplementary information the online version contains supplementary material available at https://doi.org/10.1007/s13280- of subject areas, tend to be spatially biased, and do not 023-01885-6."
+1,ó the author(s) 2023 www.kva.se/en 123
+2,"1794 ambio 2023, 52:1793–1803 provide information from unsurveyed areas (boakes et al. of spatial resolution on conservation decisions."
+2,"also, 2010; anderson 2012). majority of the studies focusing on the overall conserva- biodiversity (bd) is typically mapped and monitored tional value date back several decades, which means that using indicators, because the phenomenon itself is often too the possibilities of acquiring high-resolution data by means complicated to measure in detail with the available of rs have improved significantly."
+2,studying the effect of resources (sakar et al.
+2,2002).
+2,"the bd indicators are typi- sampling unit size on the variability of species richness in cally phenomena, species, or other structural features that north america, stoms (1994) showed that using larger cell indicate the site’s potential for hosting other species sizes lowered the reported species richness indices."
+2,jantke (ćosovi_c et al.
+2,2020).
+2,"for example, in boreal forests, the et al. (2013) studied the efficiency of wetland conservation presence of european aspen (populus tremula l.) and the at different spatial scales over europe and showed the link amount of deadwood are key indicators for the level of between the increase of input data resolution and the biodiversity (harmon et al."
+2,1986; kuuluvainen 1994; enhanced conservation efficiency.
+2,"more recently, delangre krankina and harmon 1995; kivinen et al."
+2,"2020). et al. (2018) studied the role of resolution and shape of the rs-based forest inventory systems have been used mapping units in habitat suitability models and showed that already for decades in producing landscape-level forest resolution has a significant effect on model performance, resource data (see, e.g., tomppo 2006; kangas et al."
+2,2018). exceeding that of the shape of mapping units.
+2,"still, the however, the coarse resolution of the landscape-level data spatial resolution in all reported studies was rather coarse dissolves the scattered bd indicators into the forest matrix when compared to the level of detail available in current and the important details are lost."
+2,"this is problematic for rs datasets. ecological mapping, especially as the ecologically signifi- the aim of this study is to investigate the effect of the cant remnants of natural forest structure are scarce within spatial resolution in spatial prioritization analysis of a the mosaic of managed forests (korhonen et al."
+2,2021).
+2,like fragmented forest landscape.
+2,"to achieve this, we use the large-scale methods, also methods used in collecting detailed airborne rs data sets and novel machine learning compartment-level data for operational forest planning are methods with zonation 5 software to produce a priority typically based on field samples that are generalized for ranking of forest to support the planning of a hypothetical larger landscapes using various rs data (e.g., packalén and conservation plan."
+2,our focus was not on the accuracy of maltamo 2007).
+2,"such operational data do not adequately state-of-the-art object-based methods, but on the effect represent the scarce ecological features, as the economi- their output detail has on conservation outcomes. cally significant trees are typically emphasized in the col- we executed six prioritization analyses, each with the lection of field data (suomen metsäkeskus 2021)."
+2,"hence, same input features but with different resolutions and the data produced using rs methods are often either too compared the results to answer the following questions: coarse or imprecise for making ecologically sound land-use decisions."
+2,"how does the resolution affect the spatial and conser- within the last decade, very high-resolution rs data, vation error of prioritization?"
+2,"(r1) such as airborne lidar and drone imagery, have intro- 2."
+2,which input features are the most robust to changes in duced new possibilities in mapping forest structure and bd spatial resolution?
+2,(r2) indicators (polewski et al.
+2,2018).
+2,coupled with powerful 3.
+2,"what type of forests benefit the most from detailed machine learning algorithms and various spectral datasets, data?"
+2,(r3) these mapping methods have shown to be able to produce detailed spatial data at the level of individual trees (sothe et al.
+2,2020).
+2,"however, the object-based mapping methods materials and methods typically suffer from bias caused from not detecting all objects (error of omission) and, on the other hand, falsely study area detecting objects that do not really exist (error of com- mission) (see, e.g., korpela et al."
+2,2007).
+2,"the question our study area was in southern finland consisting of a remains whether the enhanced data on forest structure mosaic of intensively managed forest, recreational forests, brings enough advantages to compensate for the problems and forest with strict conservation status (fig."
+2,"the study related to detection bias. area covers 84 km2 and has been measured intensively both the concept of spatial resolution is a well-studied sub- in the field and by various remote sensing methods (see, ject in ecology (poiani et al."
+2,2000; rahbek 2005).
+2,"how- e.g., mäyrä et al."
+2,2021).
+2,"the forests in the area are domi- ever, many of the studies focus on distribution of individual nated by conifers norway spruce (picea abies (l.)"
+2,karst) species rather than the overall ecological value.
+2,"hence, and scots pine (pinus sylvestris l.) representing 40% and there is a limited number of studies focusing on the effects ó the author(s) 2023 123 www.kva.se/en"
+3,"ambio 2023, 52:1793–1803 1795 fig."
+3,1 upper panels the evo study area in southern finland.
+3,"lower panel an outtake of aspen occurrence at 16 m (black), 48 m (medium gray), and 96 m (light gray) resolutions (upper panel left: made with natural earth."
+3,"upper panel right: nls finland image archives, 12/2022."
+3,"lower panel: uef-drone lab) 35% of the total volume, respectively."
+3,"together, silver study area covers two valuable old forest areas (kotinen birch (betula pendula roth) and downy birch (betula and sudenpesänkangas) that have had very little human pubescens ehrh.) represent 17% and european aspen 5% of impact. the total volume."
+3,"the study area is rather fertile as over managed, recreational, and strictly conserved areas 30% of it consists of herb-rich areas (herb-rich forests and cover 24%, 54%, and 21% of the study landscape, herb-rich heath forests) and more than 50% of mesic heath respectively."
+3,"for capturing the site types of the study area, forests (table 1)."
+3,"sub-xeric heath forest and areas with we utilized the compartment-level forest resource data even lower productivity are rather scarce, representing only collected by the finnish forest centre (finnish forest about 17% of the area."
+3,the area has a long history in centre 2022).
+3,"the original data divides the forest soils into forestry as the first forestry school in finland was founded seven fertility classes, ranging from mesic groves to dry there in 1862."
+3,"however, in addition to managed forests the sands and rock."
+3,because of the scarcity of the most nutrient ó the author(s) 2023 www.kva.se/en 123
+4,"1796 ambio 2023, 52:1793–1803 rich and the most barren sites types, we combined the (silver birch and downy birch)."
+4,standing dead trees were classes on both ends of the spectrum.
+4,"thus, we divided the not separated from the living trees. area in four classes describing the site fertility (table 1)."
+4,"for the purposes of this study, we processed the data further by adding data on diameter at breast height (dbh) and stem volume."
+4,"first, we used the als-derived tree data height to estimate the dbh with existing species-specific equations (kalliovirta and tokola 2005)."
+4,height and dbh we utilized several datasets that were originally collected were further used for estimating the stem volumes with and processed for other studies or operational forest man- species-specific volume equations by laasasenaho (1982). agement.
+4,"we derived the forest data from object-level figure 2 shows the relative occurrence of species and dis- measurements of both living and dead trees, which allowed tributions of other features between the four forest site type a detailed description of small-scale variation in the forest classes (listed in table 1). structure."
+4,"the high-resolution rs data enabled detailed as comprehensive ddw data were not available for the description of the key indicators of forest biodiversity, such study area, we estimated the presence of ddw with dense as location, size, and species of trees in the dominant als data and 3d object detection."
+4,"we used the method canopy layer, as well as downed deadwood (ddw). introduced in heinaro et al. (2021) that is based on we used existing vector format tree maps produced for detecting linear objects from height classified als point mäyrä et al. (2021) as a basis for our object-based data on clouds."
+4,the method detects the fallen trunks directly from standing trees.
+4,"the location, height, and tree species were the point clouds and derives them into estimates of ddw determined for all the 2.4 million treetops in the study area instances with diameter, length, and volume. using a fusion of airborne laser scanning (als) data and airborne hyperspectral data (for details see mäyrä et al."
+4,data processing and analysis 2021).
+4,the existing tree-level data were determined for the four most frequent tree species groups in the area.
+4,three of we first transformed all data layers into regular 16 m 9 the groups consisted of individual tree species (norway 16 m grid cells.
+4,"the cell values were calculated using the spruce, scots pine, and european aspen), whereas the object, i.e., tree-level data within each grid cell."
+4,"for the fourth group was a combination of the two birch species living trees, we calculated total volume (vol), height of the table 1 forest site type classes used site fertility class original fertility classes share of the total classification abbreviation land area (%) herb rich f1 herb-rich forests, herb-rich heath forest 32.4 mesic f2 mesic heath forest 51.1 sub-xeric f3 sub-xeric heath forest 15.6 low productive f4 xeric heath forest and barren heath forest."
+4,"additionally, the class includes rock 0.9 outcrop and scree habitat types fig."
+4,2 features occurrences at 16 m cell size.
+4,"the figure shows the distribution of forest characteristics between the four forest site type classes (f1 = herb rich, f2 = mesic, f3 = sub-xeric, f4 = low productive) ó the author(s) 2023 123 www.kva.se/en"
+5,"ambio 2023, 52:1793–1803 1797 tallest tree (hmax), and mean height of the trees (hmean) cover core or high-quality habitats of all input features within the grid cells."
+5,"the attributes related to living trees (see, e.g., kujala et al."
+5,2018).
+5,"additionally, zonation were calculated separately for the four species groups used reports information on the fraction of each input feature’s in the study."
+5,"for the ddw, we calculated the total volume total distribution that is protected by any top ranked frac- of ddw instances within the grid cells."
+5,the ddw tion of the grid cells.
+5,"all together six analyses were done, instances occupying several grid cells were divided corre- each with the same number of input features (n = 52) but at spondingly."
+5,"after calculating the grid-level attributes, we six different resolutions (see appendix s1)."
+5,"during the connected them with the four site type classes (table 1). prioritization, feature-specific benefits (vj) of protecting a each tree species class formed its own data layer in all four grid cell i were treated additive (moilanen 2007)."
+5,"for each site type classes. feature j, we used a benefit function to describe the value of finally, we aggregated the original data layers for 32 m, protection vj as a function of the accumulating fraction rj 48 m, 64 m, 80 m, and 96 m grid cells."
+5,"the 16 m cell size of feature j’s total distribution that is protected. vj (rj) is a is used in finland for operational forest data (e.g., mäkisara power function, where the parameter z defines the shape of et al. 2022), whereas the largest size has been used before the function."
+5,"we set z = 0.25 for all biodiversity features, in nation-wide prioritization tasks (e.g., mikkonen et al. following the well-established species-area relationship."
+5,2018; forsius et al.
+5,2021).
+5,"for the larger cells, we calcu- from each of the six spatial prioritization results, we lated the mean height as an average, maximum height as selected the top ranked 2% and 10% of grid cells to rep- maximum, and total volume as a sum of the 16 m cells resent our conservation plan."
+5,the 10% was based on the within them.
+5,"as a result, we had a total of 312 data layers eu biodiversity strategy 2030 target of strict protection describing the attributes of living trees (288) and ddw (european commission 2020)."
+5,"in addition, we selected the (24) describing the spatial forest characteristics of the study 2% to understand if there are additional effects on the most area (table 2, appendix s1)."
+5,"as all coarser data were critically important areas. generated from the 16 m data, the inevitable uncertainties for defining the spatial error, we used the prioritization in the object-based mapping of forest structure should not results based on the 16 m resolution data as our baseline. have affected the results between different resolutions."
+5,"we then compared the top 2% and 10% priority areas next, we identified priority forest areas for a hypothet- identified at the coarser resolutions with those of the ical conservation plan."
+5,the study area was prioritized using baseline.
+5,"from the comparisons, we first defined the rela- zonation 5 spatial prioritization software (moilanen et al. tive area shared with the baseline map, i.e., intersection of 2022)."
+5,zonation produces a nested hierarchical priority the two prioritizations.
+5,"in addition, we defined the error of ranking of spatial units, here grid cells, based on their omission for all five resolutions."
+5,"for conservational error, importance for conservation."
+5,"through an iterative opti- we calculated the relative loss or gain in protection of input mization process, the software seeks to find a priority features that happens as the selection of priority areas are ranking of cells that maximizes the representation of all based on increasingly coarser data."
+5,we did this by com- input biodiversity features in the top ranked grid cells.
+5,"the paring the total sums of each feature (i.e., hmax, hmean, optimization utilizes core concepts of systematic conser- and vol) that is protected by the different priority solu- vation planning such as complementarity and irreplace- tions, calculated using the baseline (16 m) data. ability (kukkala and moilanen 2013) to find the most cost- effective solution (or area-effective, if no cost data is available)."
+5,"consequently, the top ranked areas typically results table 2 biodiversity variables and resolutions used to compile input data for the conservation prioritization."
+5,"spatial maps of biodiversity spatial error features (height and volume of dominant tree species and dead wood volume, n = 13) were prepared separately for each site class (n = 4) the overlap with the baseline priority areas decreased with and resolution (n = 6), resulting in a total of 312 data layers cell size, both for 2% and 10% top fractions (fig."
+5,"the tree size (3) hmax, hmean, and vol overlap of the 2% top fraction varied between 0.34 (32 m tree species (4) spruce, pine, birches, and aspen 9 32 m resolution) and 0.21 (96 m 9 96 m), whereas for (living trees only) the 10% top fraction the overlap varied between 0.45 and volume of downed deadwood ddw (no species information) 0.31."
+5,"the decrease in the overlap was highest between (1) baseline and the next finest 32 m 9 32 m resolution, site classes (4) f1, f2, f3, and f4 although the greatest drop in the overlap took place already data resolutions (6) 16 m, 32 m, 48 m, 64 m, 80 m, and during this first resolution decrease (fig."
+5,the error of 96 m omission increased steadily with increasing cell size.
+5,ó the author(s) 2023 www.kva.se/en 123
+6,"1798 ambio 2023, 52:1793–1803 fig."
+6,"3 upper panel an outtake from the study area showing the 2% (green) and 10% (dark blue) prioritized top fractions at 16 m, 48 m, and 96 m cell size."
+6,the 2% top fraction is included in the 10% top fraction.
+6,lower panel detected spatial error in relation to the decrease of resolution.
+6,the relative value of common area and error of omission sum up to 1.
+6,background image: rgb-drone data uef-drone lab conservation error than the 16 m baseline.
+6,"in the 10% top fraction, the errors for pine, spruce, and birch are generally higher but still we report the results for conservation error separately for close to or even slightly above the baseline."
+6,in volume height features (fig. 4) and volume features (fig.
+6,"for features, the trends are similar but even more positive for height features, only results for feature hmax are shown, as pine and spruce (fig."
+6,in all site types the effect of the outcomes for hmax and hmean behaved similarly with increasing resolution varied between different features. the increase of the cell size.
+6,results for feature hmean are aspen features suffered the most from the increase of cell given in appendix s2. size.
+6,"while these features lost 20%-60% from their highest overall, the decrease of spatial accuracy (i.e., increasing attainable protection already when moving from baseline to cell size) had a negative impact on the conservation out- 32 m cell size, the loss increased steadily further, peaking come for features (figs."
+6,"4, 5, appendices s2 and s3)."
+6,"in at about 75% (vol feature at 96 m cell size, 2% top frac- most cases, the priority areas protected less of their values tion)."
+6,"for the ddw, the effect of cell size was twofold."
+6,"the within the priority areas, than what could have been pro- relative loss from the baseline is significant, but in forest tected with a higher resolution data."
+6,"there were a few cases site type class 2, the increase in cell size resulted in better that stood out."
+6,"for biodiversity features found on forest site outcomes than the baseline. type class 4, which was the rarest site type, the 2% top fractions show an increasing conservation error with res- olution in both height and volume features, but in the 10% discussion top fraction the error remains marginal and steady at all cell sizes and the differences between feature types are in this study, we explored the effect of spatial resolution on small. spatial prioritization-based conservation outcomes in a in site type class 2, both the height and volume features boreal forest site."
+6,"our results show that the spatial error of the dominant tree species, i.e., pine and spruce, show a increases drastically when resolution is lowered (r1)."
+6,the positive trend between the increasing cell size and relative share of common area between the baseline and decreasing conservation error.
+6,"in the 2% top fraction, the coarser resolution solutions dropped to 0.35–0.45 (2% and conservation error for height features of pine, spruce, and 10% top fractions, respectively) already at the first cell size birch decreases with cell size (fig."
+6,"for pine and spruce, increase from 16 9 16 m to 32 9 32 m (fig."
+6,the share the outcomes with coarser data were at times even greater of common area continued to decrease with increasing cell ó the author(s) 2023 123 www.kva.se/en
+7,"ambio 2023, 52:1793–1803 1799 fig."
+7,4 the relative change of height features’ values that are protected by the priority areas under each data resolution.
+7,"here, hmax describes the height of the tallest trees within the map cells."
+7,the top row presents the variation in the top 2% fraction and the lower row in the top 10% fraction fig.
+7,5 the relative change of volume features’ values that are protected by the priority areas under each data resolution.
+7,here vol describes the volume of each tree species and ddw.
+7,the top row presents the variation in the top 2% fraction and the lower row in the top 10% fraction ó the author(s) 2023 www.kva.se/en 123
+8,"1800 ambio 2023, 52:1793–1803 sizes, but slower."
+8,"we believe that the relative increase in site types forming continuous areas, which are simpler to the cell area plays an important role here."
+8,increasing the aggregate into larger cell sizes.
+8,"second, with coarser res- cell size from 16 9 16 m to 32 9 32 m results in four times olutions the number of selectable cells is lower within the larger cell extent, whereas further increases in cell size landscape."
+8,although the remaining rare features still drive have much lower relative effect on the cell extent.
+8,"also the selection of cells as priorities, at coarser resolution it arponen et al. (2012) reported low overlap between the top becomes impossible to select the rare and scattered features priority outcomes in prioritization analyses conducted at without bringing in large amounts of the common features different resolutions."
+8,"from this follows, that the most common features the increase in spatial error also led to higher conser- can even benefit from the increasing cell size as the pri- vation errors, although there was a lot of variation between oritization process actually selects more of these features the features (r1)."
+8,"typically, the spatially more common from the landscape compared to the baseline."
+8,"for example, features were less affected by the increasing cell size and the amount of protected pine features at site type class 2 even benefited from it, whereas more scarce features were rose well above the baseline (figs. 4 and 5, appendix s2). clearly lost."
+8,"the effect of scarcity can be seen especially in this study, the scarce forest features were represented for aspen."
+8,"having the lowest relative occurrence and rel- by aspen features (hmax, hmean, and vol) and ddw fea- ative volume and being a species that occurs only spo- tures."
+8,"in the analyses, the aspen features behaved as radically, often as single trees, in the study area, expected whereas the behavior of the ddw features was information about aspen-specific biodiversity features somewhat unexpected."
+8,"the ddw features’ response to the became lost when cells were aggregated into larger units. increasing cell size resembles that of the common tree unlike dead wood and features of other tree species, aspen- species (fig. 5), although it is a scarce and scattered phe- specific features had a declining trend in all forest site type nomenon in the landscape."
+8,"prior to the analysis, the cor- classes and both top fractions, the only exception being the rectness of the ddw feature layer was checked by low productive site type class (f4) in the 10% top fraction. comparing its average volume to the ddw volumes mea- in our study system, both the tree species and the site sured from the area in field surveys."
+8,although the mean type class defined how common or rare a feature was.
+8,"for volumes were rather similar, it seems that the rs-based example, spruce was one of the most common dominant detection overestimated the occurrence of ddw by making species in site type classes 1 and 2 (fig. 2), and in both its spatial distribution more even, thus making it a more classes, the conservational error of spruce-specific features common feature in the landscape."
+8,"the als-based ddw remained relatively low (figs. 4 and 5, appendix s2)."
+8,"in mapping method has been reported to work best with large contrast, spruce was less commonly dominant in site type diameter trunks (heinaro et al. 2021) that contribute the class 3, and in this class the increasing cell size increased most for the total volume."
+8,although the falsely detected the conservation error of spruce-specific features.
+8,"on the ddw instances, i.e., errors of commission are typically other hand, forest site type class itself can be rare."
+8,"in our small in size, they build up in larger cell sizes and affect study, the site type class 4 covered only 0.9% of the total the total volume."
+8,as the method seems to work best on study area.
+8,"since the prioritization aimed to capture core large diameter trunks, it would be interesting to use it for occurrences of all features within the priority areas, the few mapping only the occurrence of the largest ddw diameter locations of site type 4 became selected at rather high classes."
+8,"in general, this study did not consider the uncer- frequency (appendix s4)."
+8,this led to all species behaving tainties related to remote-sensed forest attributes.
+8,"however, rather similarly within site class 4, especially within the if the results were to be used for, e.g., planning of new 10% top fractions, where nearly all of the cells of this site conservation areas, all rs-based forest attribute maps class were selected in the priority areas (figs. 4 and 5. should be validated using adequate reference data."
+8,appendix s2).
+8,"according to our results, the forest areas scarce features suffered the most from the increase of hosting scattered and small-scale features tend to be sub- cell size."
+8,"hence, we argue that any rare phenomenon is stituted by areas hosting more common features in con- likely to disappear into the forest matrix with large cell servation plans based on coarser data (r2 and r3)."
+8,we sizes.
+8,lehtomäki et al. (2015) proposes that the data col- believe this to be driven by two processes.
+8,"first, the spatial lected primarily for operational forest planning would be aggregation of feature’s occurrences defines how well informative in the context of spatial conservation prioriti- information about its presence is carried through to higher zation."
+8,unlike the operational forest data that utilizes sta- cell sizes.
+8,"this is highlighted by the differences between tistical models to generalize field-measured attributes with features related to aspen and site type class 4, which show rs data (see, e.g., brosofske et al. 2014), the input features that rare aspen features with sporadic occurrence, tend to in this study based on direct detection and identification of be lost in the cell aggregation and therefore suffer from forest features from rs data."
+8,"according to our results, even much higher conservation error in comparison to the rare detailed object-level data (i.e., tree and deadwood maps) ó the author(s) 2023 123 www.kva.se/en"
+9,"ambio 2023, 52:1793–1803 1801 will not guarantee that scarce and scattered phenomena will the inclusion of rare and scattered forest features and thus be present in the final prioritization results, if the spatial the overall quality of spatial prioritizations in fragmented resolution of the final input feature is too coarse for the forest landscapes."
+9,high-resolution rs data and object- phenomenon.
+9,such phenomena require a finer resolution based methods offer a means for mapping ecological key than rare but strongly clustered phenomena.
+9,"hence, the components in detail for the needs of conservation spatial distribution of the phenomenon affects its chance to prioritization. be included in conservation schemes."
+9,"still, the twofold nature of resolution remains."
+9,"as this ecological features such as local species diversity may research has shown, high-resolution input features help result in biased estimates on very fine resolutions (noss maintaining small-scale key components of biodiversity."
+9,1990).
+9,"hence, there are trade-offs between optimal reso- on the other hand, overly high resolution also results in lutions for mapping different features."
+9,"nevertheless, the fragmented output that, e.g., lowers the resilience of con- cost-efficiency of defining the ecologically most significant servation areas."
+9,"hence, the overall goal of the analysis areas still suffers from coarse resolution."
+9,"coarse resolution should always set the final resolution of input features. data introduces spatial uncertainty to conservation plans, as however, it is important to keep in mind how the chosen part of the scarce resources may be misplaced to protect resolution affects ecological features with different spatial well fairing biodiversity features while rare ones are distribution. missed."
+9,as zonation software only considers the location and acknowledgements the academy of finland (ibc-carbon project number 312559/strategic research council; c-neut project 347848; relative abundance of input features (kujala et al.
+9,"2018), inar ri project 345532), the european commission (elter plus the results of this study are applicable to all forest eu horizon project 871128; horizon project naturaconnect ecosystems hosting rare and scattered features that are 101060429), the finnish ministry of the environment (feo project important for biodiversity."
+9,"however, the definition of high vn/5082/2020; sumi project, vn/33334/2021), and the finnish ministry of agriculture and forestry (systeemihiili project vn/28536/ or coarse resolution varies between ecosystems as it 2020), are acknowledged for financial support of this study. depends on the extent of the target features."
+9,"the resolution has a significant effect on the qualities of the prioritized author contributions tt, nm, and hk contributed to the study forest areas and on the conservation outcome for the target conception and design."
+9,"material preparation, data collection and features. analysis were performed by tt, nm, eh, jm."
+9,the first draft of the manuscript was written by tt and all authors commented on previous as spatial datasets from rare and scattered phenomena versions of the manuscript.
+9,"all authors read and approved the final are challenging to produce for high resolutions, the future manuscript. research should focus on how to produce high-resolution spatial data sets efficiently."
+9,object-based techniques and funding open access funding provided by university of eastern state-of-the-art remote sensing material already make this finland (uef) including kuopio university hospital. possible for the dominant trees (kaartinen et al.
+9,2012; declarations dalponte and coomes 2016).
+9,"in contrast to the area-based estimates relying on statistically sound plot-level data, conflict of interest the authors have no relevant financial or non- object-based methods do not produce unbiased estimates, financial interests to disclose. as all objects are rarely spotted from the rs data."
+9,"however, open access this article is licensed under a creative commons only the object-based methods can capture the fine scale attribution 4.0 international license, which permits use, sharing, adap- variation of the scarce features that are needed in effective tation, distribution and reproduction in any medium or format, as long as spatial conservation prioritization. you give appropriate credit to the original author(s) and the source, provide a link to the creative commons licence, and indicate if changes were made."
+9,"the images or other third party material in this article are included in the article’s creative commons licence, unless indicated conclusions otherwise in a credit line to the material."
+9,"if material is not included in the article’s creative commons licence and your intended use is not per- mitted by statutory regulation or exceeds the permitted use, you will need we conclude that prioritizations made with coarse resolu- to obtain permission directly from the copyright holder."
+9,"to view a copy of tion are biased towards the dominant forest types and this licence, visit http://creativecommons.org/licenses/by/4.0/. features in the landscape."
+9,using large cell sizes favors the features that are common and evenly distributed in the landscape.
+9,"to capture the rare, scattered, and clustered references features from the landscape, input features used in priori- tizations should be based on spatial data capable of cap- anderson, r.p."
+9,harnessing the world’s biodiversity data: promise turing the smallest mappable features significant for the and peril in ecological niche modeling of species distributions. prioritization.
+9,high resolution of input features enhances annals of the new york academy of sciences 1260: 66–80.
+9,ó the author(s) 2023 www.kva.se/en 123
+10,"1802 ambio 2023, 52:1793–1803 araújo, m.b., w."
+10,"thuiller, p.h."
+10,"williams, and i."
+10,reginster.
+10,"ecological role, knowledge needs and mapping using remote downscaling european species atlas distributions to a finer sensing."
+10,forest ecology and management 462: 118008. resolution: implications for conservation planning.
+10,"global korhonen, k.t., a."
+10,"ahola, j."
+10,"heikkinen, h.m."
+10,"henttonen, j.p."
+10,ecology and biogeography 14: 17–30.
+10,"hotanen, a."
+10,"ihalainen, m."
+10,"melin, j."
+10,"pitkänen, et al."
+10,"forests arponen, a., j."
+10,"lehtomäki, j."
+10,"leppänen, e."
+10,"tomppo, and a. of finland 2014–2018 and their development 1921–2018."
+10,silva moilanen.
+10,effects of connectivity and spatial resolution fennica. https://doi.org/10.14214/sf.10662. of analyses on conservation prioritization across large extents.
+10,"korpela, i., b."
+10,"dahlin, h."
+10,"schäfer, e."
+10,"bruun, f."
+10,"haapaniemi, j."
+10,conservation biology 26: 294–304.
+10,"honkasalo, s."
+10,"ilvesniemi, v."
+10,"kuutti, et al."
+10,"single-tree boakes, e.h., p.j."
+10,"mcgowan, r.a."
+10,"fuller, d."
+10,"chang-qing, n.e."
+10,"clark, forest inventory using lidar and aerial images for 3d treetop k."
+10,"o’connor, and g.m."
+10,"distorted views of positioning, species recognition, height and crown width biodiversity: spatial and temporal bias in species occurrence estimation."
+10,in proceedings of isprs workshop on laser scanning data.
+10,plos biology 8: e1000385. (pp.
+10,227–233).
+10,"brosofske, k.d., r.e."
+10,"froese, m.j."
+10,"falkowski, and a."
+10,banskota.
+10,"krankina, o.n., and m.e."
+10,harmon.
+10,dynamics of the dead wood 2014.
+10,a review of methods for mapping and prediction of carbon pool in northwestern russian boreal forests.
+10,"water, air, inventory attributes for operational forest management."
+10,forest and soil pollution 82: 227–238.
+10,science 60: 733–756.
+10,"kujala, h., a."
+10,"moilanen, and a."
+10,gordon.
+10,"spatial characteristics ćosović, m., m.n."
+10,"bugalho, d."
+10,"thom, and j.g."
+10,borges.
+10,stand of species distributions as drivers in conservation prioritization. structural characteristics are the most practical biodiversity methods in ecology and evolution 9: 1121–1132. indicators for forest management planning in europe.
+10,"forests kukkala, a.s., and a."
+10,moilanen.
+10,core concepts of spatial 11: 343. prioritisation in systematic conservation planning.
+10,"biological dalponte, m., and d.a."
+10,coomes.
+10,"tree-centric mapping of reviews 88: 443–464. forest carbon density from airborne laser scanning and hyper- kuuluvainen, t."
+10,"gap disturbance, ground microtopography, and spectral data."
+10,"methods in ecology and evolution 7: 1236–1245. the regeneration dynamics of boreal coniferous forests in finland: delangre, j., j."
+10,"radoux, and m."
+10,dufrêne.
+10,landscape delineation a review.
+10,in annales zoologici fennici (pp.
+10,35–51).
+10,"finnish strategy and size of mapping units impact the performance of zoological publishing board, formed by the finnish academy of habitat suitability models."
+10,informatics 47: 55–60.
+10,"sciences, societas biologica fennica vanamo, societas pro fauna european commission."
+10,"eu biodiversity strategy for 2030: et flora fennica, and societas scientiarum fennica."
+10,bringing nature back into our lives.
+10,"communication for the laasasenaho, j."
+10,"taper curve and volume functions for pine, commission to the european parliament, the council, the spruce and birch."
+10,metsäntutkimuslaitos.
+10,"european economic and social committee and the committee lehtomäki, j., s."
+10,"tuominen, t."
+10,"toivonen, and a."
+10,leinonen.
+10,"2015. of the regions, p-25."
+10,what data to use for forest conservation planning?
+10,a comparison finnish forest centre.
+10,field and forest stand database aarni of coarse open and detailed proprietary forest inventory data in https://www.metsakeskus.fi/fi/avoin-metsa-ja-luontotieto/ finland.
+10,"plos one 10: e0135926. aineistot-paikkatieto-ohjelmille/paikkatietoaineistot montanarella, l., r."
+10,"scholes, and a."
+10,brainich (eds.)
+10,"the forsius, m., h."
+10,"kujala, f."
+10,"minunno, m."
+10,"holmberg, n."
+10,"leikola, n."
+10,ipbes assessment report on land degradation and restoration.
+10,"mikkonen, i."
+10,"autio, v.-v."
+10,"paunu, et al."
+10,"developing a ipbes—secretariat of the intergovernmental science-policy spatially explicit modelling and evaluation framework for platform on biodiversity and ecosystem services, bonn, integrated carbon sequestration and biodiversity conservation: germany, pp."
+10,application in southern finland.
+10,"science of the total environ- mäkisara, k., m."
+10,"katila, and j."
+10,peräsaari.
+10,the multi-source ment 775: 145847.
+10,"national forest inventory of finland—methods and results 2017 harmon, m.e., j.f."
+10,"franklin, f.j."
+10,"swanson, p."
+10,"sollins, s.v."
+10,"gregory, and 2019."
+10,"lattin, and k.w."
+10,cummins.
+10,"ecology of coarse woody mäyrä, j., s."
+10,"keski-saari, s."
+10,"kivinen, t."
+10,"tanhuanpää, p."
+10,"hurskainen, debris in temperate ecosystems."
+10,advances in ecological p.
+10,"kullberg, l."
+10,"poikolainen, a."
+10,"viinikka, et al."
+10,"tree research 15: 133–302. species classification from airborne hyperspectral and lidar heinaro, e., t."
+10,"tanhuanpää, t."
+10,"yrttimaa, m."
+10,"holopainen, and m. data using 3d convolutional neural networks."
+10,remote sensing of vastaranta.
+10,airborne laser scanning reveals large tree trunks environment 256: 112322. on forest floor.
+10,forest ecology and management 491: 119225.
+10,"mikkonen, n., n."
+10,"leikola, a."
+10,"lahtinen, j."
+10,"lehtomäki, and p."
+10,halme.
+10,"kaartinen, h., j."
+10,"hyyppä, x."
+10,"yu, m."
+10,"vastaranta, h."
+10,"hyyppä, a."
+10,"monimuotoisuudelle tärkeät metsäalueet suomessa-puus- kukko, m."
+10,"holopainen, c."
+10,"heipke, et al."
+10,an international toisten elinympäristöjen monimuotoisuusarvojen zonation-ana- comparison of individual tree detection and extraction using lyysien loppuraportti. airborne laser scanning.
+10,remote sensing 4: 950–974.
+10,"moilanen, a."
+10,"landscape zonation, benefit functions and target- jantke, k., c."
+10,"schleupner, and u.a."
+10,schneider.
+10,benefits of earth based planning: unifying reserve selection strategies.
+10,biological observation data for conservation planning in the case of conservation 134: 571–579.
+10,european wetland biodiversity.
+10,"environmental conservation moilanen, a., i."
+10,"kohonen, p."
+10,"lehtinen, j."
+10,"jalkanen, e."
+10,"virtanen, and 40: 37–47."
+10,kujala.
+10,zonation 5 v1.0 user manual.
+10,"kalliovirta, j., and t."
+10,tokola.
+10,"functions for estimating stem moilanen, a., k."
+10,"wilson, and h."
+10,possingham.
+10,"spatial diameter and tree age using tree height, crown width and existing conservation prioritization: quantitative methods and computa- stand database information."
+10,silva fennica 39: 227–248. tional tools.
+10,oxford: oxford university press.
+10,"kangas, a., r."
+10,"astrup, j."
+10,"breidenbach, j."
+10,"fridman, t."
+10,"gobakken, k.t."
+10,"noss, r.f."
+10,"indicators for monitoring biodiversity: a hierarchi- korhonen, m."
+10,"maltamo, m."
+10,"nilsson, et al."
+10,remote sensing cal approach.
+10,"conservation biology 4: 355–364. and forest inventories in nordic countries–roadmap for the packalén, p., and m."
+10,maltamo.
+10,the k-msn method for the future.
+10,"scandinavian journal of forest research 33: 397–412. prediction of species-specific stand attributes using airborne laser kivinen, s., e."
+10,"koivisto, s."
+10,"keski-saari, l."
+10,"poikolainen, t."
+10,"tanhuanpää, scanning and aerial photographs."
+10,remote sensing of environ- a.
+10,"kuzmin, a."
+10,"viinikka, r.k."
+10,"heikkinen, et al."
+10,"a keystone ment 109: 328–341. species, european aspen (populus tremula l.), in boreal forests: ó the author(s) 2023 123 www.kva.se/en"
+11,"ambio 2023, 52:1793–1803 1803 poiani, k.a., b.d."
+11,"richter, m.g."
+11,"anderson, and h.e."
+11,richter.
+11,"address: department of geographical and historical studies, biodiversity conservation at multiple scales: functional sites, university of eastern finland, yliopistonkatu 7, 80101 joensuu, landscapes, and networks."
+11,bioscience 50: 133–146.
+11,finland.
+11,"polewski, p., w."
+11,"yao, m."
+11,"heurich, p."
+11,"krzystek, and u."
+11,stilla.
+11,2018. e-mail: topi.tanhuanpaa@uef.fi learning a constrained conditional random field for enhanced segmentation of fallen trees in als point clouds.
+11,"isprs journal ninni mikkonen is a coordinator and spatial prioritization specialist of photogrammetry and remote sensing 140: 33–44. at the finnish environment institute, and a doctoral candidate at the rahbek, c."
+11,the role of spatial scale and the perception of large- university of helsinki.
+11,her research interests include data concerning scale species-richness patterns.
+11,"ecology letters 8: 224–239. conservation biology of threatened species and habitats, and ecolog- rondinini, c., k.a."
+11,"wilson, l."
+11,"boitani, h."
+11,"grantham, and h.p. ical decision making especially in forest environments."
+11,possingham.
+11,"tradeoffs of different types of species address: finnish environment institute syke, latokartanonkaari 11, occurrence data for use in systematic conservation planning."
+11,"00790 helsinki, finland."
+11,"ecology letters 9: 1136–1145. e-mail: ninni.mikkonen@syke.fi sarkar, s., and c."
+11,margules.
+11,operationalizing biodiversity for conservation planning.
+11,journal of biosciences (bangalore) 27: heini kujala is a university researcher at the finnish natural 299–308.
+11,"history museum, university of helsinki."
+11,"her research interests sothe, c., c.m."
+11,"de almeida, m.b."
+11,"schimalski, l.e.c."
+11,"la rosa, include spatial conservation planning, biodiversity modelling and j.d.b."
+11,"castro, r.q."
+11,"feitosa, m."
+11,"dalponted, c.l."
+11,"limae, et al. decision-making under uncertainty."
+11,"comparative performance of convolutional neural net- address: finnish natural history museum, university of helsinki, work, weighted and conventional support vector machine and pohjoinen rautatiekatu 13, p.o."
+11,"box 17, 00014 helsinki, finland. random forest for classifying tree species using hyperspectral e-mail: heini.kujala@helsinki.fi and photogrammetric data."
+11,giscience & remote sensing 57: 369–394.
+11,"einari heinaro is a doctoral student at the department of forest stoms, d.m."
+11,scale dependence of species richness maps.
+11,the sciences at the university of helsinki.
+11,his research focuses on bio- professional geographer 46: 346–358. diversity mapping using airborne laser scanning.
+11,suomen metsäkeskus.
+11,puustotulkintakoealojen maastotyöohje.
+11,"address: department of forest sciences, university of helsinki, (field guide for measuring forest inventory plots, in finnish) latokartankonkaari 7, p.o."
+11,"box 27, 00014 helsinki, finland."
+11,"tomppo, e."
+11,the finnish multi-source national forest inventory- e-mail: einari.heinaro@helsinki.fi small area estimationand map production.
+11,"in forest inventory, ed."
+11,kangas and m.
+11,"maltamo, 195–224."
+11,dordrecht: springer.
+11,janne mäyrä is a researcher at the finnish environment institute.
+11,"tuominen, s., t."
+11,"pitkänen, a."
+11,"balazs, and a."
+11,kangas.
+11,his research interests include the application of machine learning improving finnish multi-source national forest inventory by 3d methods for various geospatial data. aerial imaging.
+11,silva fennica. https://doi.org/10.14214/sf.7743.
+11,"address: finnish environment institute syke, latokartanonkaari 11, 00790 helsinki, finland. e-mail: janne.mayra@syke.fi publisher’s note springer nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations."
+11,timo kumpula is a professor in university of eastern finland.
+11,he focuses on land cover and land use changes in the arctic and boreal zones.
+11,"author biographies address: department of geographical and historical studies, topi tanhuanpää (&) is a post-doctoral researcher at the university of eastern finland, yliopistonkatu 7, 80101 joensuu, university of eastern finland."
+11,his research interests include remote finland. sensing of 3d forest structure and other biodiversity indicators. e-mail: timo.kumpula@uef.fi ó the author(s) 2023 www.kva.se/en 123

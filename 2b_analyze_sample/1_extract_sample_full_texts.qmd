@@ -1,0 +1,153 @@
+---
+title: "Phase 2: gather and extract full texts for included items in sample set"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(synthesisr)
+library(pdftools)
+library(here)
+```
+
+# Summary
+
+After sampling 1000 documents and using Colandr for a title/abstract screening (stopped after 600), pull in includes and excludes.  Export a .ris of the includes to be ported into Zotero to gather .pdfs.  
+
+# Data
+
+The samples were randomly selected from the Scopus/Web of Science references and saved as a .ris on 7/8/24, and uploaded to Colandr.  The screening criteria outlined in the planning/protocol document were used to determine inclusion/exclusion.  Some documents were tagged with additional information, e.g., "maybe" for some included documents that seemed like they may not actually meet the criteria.
+
+The screening results were downloaded as two .csvs (include, exclude) on August 2, 2024.
+
+# Methods
+
+## Consolidate Colandr results
+
+```{r}
+incl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_240802.csv'))
+excl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_excl_240802.csv'))
+results_df <- bind_rows(incl_df, excl_df) %>%
+  janitor::clean_names() %>%
+  mutate(date_screened_t_a = as.Date(date_screened_t_a)) %>%
+  ### keep only those after the date of uploading the sample to Colandr
+  filter(date_screened_t_a >= as.Date('2024-07-08')) %>%
+  ### exclude any after the August 2nd results download
+  filter(date_screened_t_a <= as.Date('2024-08-02')) %>%
+  select(title, abstract, year = publication_year, author = authors, keywords, doi, tags,
+         screening_status = t_a_status, excl_reasons = t_a_exclusion_reasons)
+
+write_csv(results_df, here('_data/5b_sample_1000/sample_screened_results_240802.csv'))
+```
+
+## Isolate includes and save as .bib for Zotero
+
+Write out dois as .csv, import into Zotero using the magic wand (add objects by identifier) to auto grab PDFs.  For ones that Zotero does not automatically find .pdfs, use Google Scholar to see if other pdfs are available.  If behind a paywall (inaccessible from UCSB library) or no DOI then the paper will not be included in the full text screening.
+
+NOTES:
+
+* Colandr seems to fuck up the author order by alphabetizing when exporting... UUUUGHGHGHGHGHGHGHGH... WHHYYYYYYYY
+* Use VPN to log into UCSB account for more likely retrieval?
+* Here, we use the Colandr results to identify DOIs that are included.  We find the original cleaned sample refs and filter to the relevant DOIs and then save that out as a .bib.  This should preserve author order and avoid future fuckery.
+
+
+```{r}
+sample_refs <- read_refs(here('_data/3_refs_clean/sample/sample_1000_240708.ris'))
+x <- results_df %>%
+  filter(screening_status == 'included' & !is.na(doi))
+
+sample_incl <- sample_refs %>% filter(doi %in% x$doi)
+
+write_refs(sample_incl, format = 'bib', file = here('_data/5b_sample_1000/incl_bib_to_zotero.bib'))
+
+```
+
+Out of 77 items, 38 did not automatically find .pdfs.  For 33 of these, pdfs were found manually; of the other five, two were in Chinese, two were behind paywalls, and one was not found.
+
+
+## Import full texts into Zotero
+
+Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
+
+```{r}
+sbr_incl_df <- read_csv(here('_data/5b_sample_1000/sample_screened_results_240802.csv')) %>%
+  filter(screening_status == 'included')
+zot_check <- read_refs(here('_data/5b_sample_1000/incl_bib_from_zotero_240802.bib')) %>%
+  mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
+         doi = tolower(doi))
+
+pdf_find <- zot_check %>% filter(is.na(file))
+```
+
+Out of `r nrow(sbr_incl_df)` included papers, `r nrow(zot_check)` have records in Zotero; of these, `r nrow(pdf_find)` do(es) not have a .pdf available.
+
+## Copy files from Zotero to repo
+
+```{r}
+zot_fs <- zot_check %>%
+  select(author, title, year, file) %>%
+  filter(!is.na(file)) %>%
+  mutate(file = str_split(file, ';')) %>%
+  unnest(file) %>%
+  filter(str_detect(file, '.pdf$')) %>%
+  mutate(title = str_remove_all(title, '\\{|\\}') %>% str_squish(),
+         author_short = str_remove_all(tolower(author), ',.+|\\}.+|[^a-z]'),
+         title_short = str_replace_all(tolower(title), '[^a-z0-9]+', '_'),
+         year = str_extract(year, '[0-9]{4}')) %>%
+  rowwise() %>%
+  mutate(title_end = ifelse(nchar(title_short) > 32, 
+                            str_locate_all(title_short, '_')[[1]][4, 1]-1, 
+                            nchar(title_short)),
+         title_short = str_sub(title_short, 1, title_end)) %>%
+  ungroup() %>%
+  mutate(pdf_out = sprintf('%s_%s_%s.pdf', author_short, year, title_short),
+         pdf_out = str_remove_all(pdf_out, 'NA_'),
+         pdf_out = file.path('_data/5b_sample_1000/pdf', pdf_out)) %>%
+  select(title, author, year, file, pdf_out) %>%
+  mutate(csv_out = str_replace(pdf_out, '/pdf/', '/csv/') %>% str_replace('.pdf$', '.csv'))
+
+if(any(!file.exists(zot_fs$pdf_out))) {
+  file.copy(from = zot_fs$file, to = here(zot_fs$pdf_out)) %>% sum()
+}
+
+zot_fs_out <- zot_fs %>%
+  select(-file)
+write_csv(zot_fs_out, here('_data/5b_sample_1000/int/fulltext_files.csv'))
+```
+
+## Extract text from pdfs
+
+Save out as .csvs for further processing/examination.
+
+```{r}
+pdf_fs <- here(zot_fs$pdf_out)
+csv_fs <- here(zot_fs$csv_out)
+
+for(i in seq_along(pdf_fs)) {
+  ### i <- 1
+  f <- pdf_fs[i]
+  f_out <- csv_fs[i]
+  if(!file.exists(f_out)) {
+    message(f_out)
+    doc_df <- data.frame(t = pdf_text(f)) %>%
+      mutate(page = 1:n(),
+             t = str_squish(t)) %>%
+      unnest_tokens(input = t, output = p, token = 'sentences', drop = TRUE) %>%
+      ### drop arbitrarily short tokens
+      filter(nchar(p) > 5)
+    
+    write_csv(doc_df, f_out)
+  }
+}
+```
+

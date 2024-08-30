@@ -1,0 +1,578 @@
+page,p
+1,forest ecology and management 434 (2019) 87–98 contents lists available at sciencedirect forest ecology and management journal homepage: www.elsevier.com/locate/foreco mapping ﬂoristic gradients of forest composition using an ordination- t regression approach with landsat oli and terrain data in the central hardwoods region ⁎ bryce t.
+1,"adamsa, , stephen n."
+1,"matthewsa,b, matthew p."
+1,"petersb, anantha prasadb, louis r."
+1,"iversonb a school of environment and natural resources, the ohio state university, columbus, oh 43210, usa b northern research station, usda forest service, delaware, oh 43015, usa a r t i c le i n fo a b s t r a c t keywords: mapping forest properties with supervised remote sensing has historically and increasingly remained vital to forest composition research and management eﬀorts, and the demand for such products will only increase as better tools and data cover type mapping increase the usability of such maps."
+1,multispectral imagery by the landsat program has been an invaluable landsat resource for forest type characterization for several decades.
+1,"as an alternative to traditional classiﬁcation ap- central hardwoods proaches dominating these eﬀorts, we instead employed an ordination-regression approach to mapping forest gradient mapping composition as ﬂoristic gradients across a ∼5000-km2 forestland in southeastern ohio’s central hardwoods."
+1,plot ordination-regression data (n = 699 plots; 99 species/genera) from a comprehensive sample of both overstory and understory woody plants across structurally- (open to closed canopy) and topographically-variable forest conditions were projected onto a non-metric multidimensional scaling (nmds) ordination solution.
+1,"floristic gradients, via their ordination scores, were related to spectral reﬂectance provided by a multitemporal landsat 8-operational land imager (oli) image and various terrain variables using random forests models."
+1,"approximately 61%, 49%, and 25% of the ﬂoristic variation among the three axes of the nmds ordination were related to the remotely-sensed vari- ables during regression modeling."
+1,"the axes were predicted onto three images and merged to a rgb color composite for the ﬁnal ﬂoristic gradient map, displaying multivariate vegetation variation across the landscape in terms of variation in color."
+1,"the color values, by referencing ordination space position within the original solution, provide a statistical approximation of the taxonomic composition of individual forest stands in relation to the plot data."
+1,we found this approach highly eﬀective and an attractive alternative to traditional classiﬁca- tions.
+1,"it is time-eﬃcient, more realistic in that compositional turnover is expressed in continuous ﬁelds rather than arbitrary breaks, and less subjective, overcoming the generalization problem inherent in categorizing ve- getation assemblages a priori."
+1,"moving forward, our model will be a valuable tool in developing suitable man- agement options on individual forest stands for the restoration of desired species, adapting to a changing climate, and improving wildlife habitat in forestlands across the central hardwoods."
+1,"introduction composition of an ecosystem and the rate and magnitude of its pro- cesses (perera et al., 2018; tilman et al., 1997)."
+1,this demand will only 1.1.
+1,background increase as the inﬂuence of shifting vegetation pressures continue to emerge and species respond to climate change and altered disturbance understanding and planning for ecosystem change requires the regimes.
+1,"with increased attention to providing practical guidelines unique combination of quantifying ecological process and projecting across diverse landownerships, including where baseline data are lim- this understanding across broader extents."
+1,"a spatially-explicit knowl- ited, remote sensing platforms have become increasingly relevant edge of the ﬂoristic composition of individual forest stands is of great (fassnacht et al., 2006; rogan and chen, 2004; rose et al., 2015; xie utility to these eﬀorts (he et al., 1998; iverson et al., 1989; kerr and et al., 2008)."
+1,"as such, the number of applications involving supervised ostrovsky, 2003), considering the relationship between the species remote-sensing approaches has grown exponentially in recent years, ⁎ corresponding author."
+1,e-mail address: adams.861@osu.edu (b.t.
+1,adams). https://doi.org/10.1016/j.foreco.2018.12.018 received 16 september 2018; received in revised form 7 december 2018; accepted 9 december 2018 available online 13 december 2018 0378-1127/ © 2018 elsevier b.v.
+1,all rights reserved.
+2,adams et al.
+2,"forest ecology and management 434 (2019) 87–98 particularly landsat-based applications, due in part to the opening of at landscape extents (mcgarigal et al., 2009; schmidtlein et al., 2007). the landsat archive in 2008 (turner et al., 2015)."
+2,"indeed, forest cover floristic composition depicted by continuous ordination values can, type mapping has been a signiﬁcant area of focus for landsat-based in turn, reduce some of these limitations."
+2,"for example, mapping con- applications since the launch of the ﬁrst satellite in 1972 (cohen and tinuous ordination values in lieu of discrete classes incorporates both goward, 2004; he et al., 1998; iverson et al., 1989; wulder et al., fuzzy transitional and abrupt compositional gradients alike, better re- 2012). ﬂecting realistic ecological patterning among intergrading stand as- species composition is one of the most basic, albeit highly im- semblages (feilhauer et al., 2011; schmidtlein et al., 2007; schmidtlein portant, characteristics of forested ecosystems due to its impacts on the and sassin, 2004; thessler et al., 2005)."
+2,"in addition, being a non-clas- regulation of essential social and ecological services (perera et al., siﬁcatory approach, much of the subjectivity in categorizing forest 2018; running and coughlan, 1988; tilman et al., 1997)."
+2,"for example, types a priori is reduced."
+2,"ordination, being a tool for transforming large quercus (oak) is regarded as a foundational genus in eastern deciduous ecological datasets to a much-reduced gradient space, in turn, depicts forests (hanberry and nowacki, 2016)."
+2,"foundational species, such as relative degrees of compositional similarity or dissimilarity among pairs oaks, play critical roles in structuring trophic interactions and sus- of sampled ﬁeld plots or grid cells in a raster image according to their taining locally-stable habitat conditions for other organisms (ellison relative positioning within the ordination solution."
+2,"color values can be et al., 2005)."
+2,"in fact, oak-dominated stands have been shown to support assigned to stacked raster images by merging ordination scores among more abundant and diverse faunal assemblages, including insects and the principal axes into a rgb color combination, which provides a birds, in comparison to stands dominated by other co-occurring hard- simple visual cue that references the multidimensional space position of wood species (fox et al., 2010; rodewald and abrams, 2002; tallamy new locations to the original gradient solution."
+2,"such images provide a and shropshire, 2009)."
+2,"because of their importance, large-scale quercus statistical approximation of the assemblage composition of individual regeneration failure, a result of shifting disturbance regimes, has long forest stands because ordination analysis can also reference the relative been a major concern for researchers and land managers throughout the abundance patterns of species within the gradient solution."
+2,"here, spe- eastern us (abrams, 2003; johnson et al., 2009; loftis and mcgee, cies centroids become valuable tools for interpretation, linking the 1993; mcewan et al., 2011)."
+2,"many studies have addressed these chal- color values on the “gradient map” to individual species (hakkenberg lenges via detailed research on species ecology and examination of et al., 2018; rocchini et al., 2018; schmidtlein et al., 2007; thessler silvicultural treatments that promote advanced regeneration of quercus et al., 2005)."
+2,"candidate approaches to relating mapped pixels to ordi- species (iverson et al., 2018, 2017; loftis and mcgee, 1993; prasad nation values have included random forests (hakkenberg et al., 2018), et al., 2013; swaim et al., 2018)."
+2,"in support of these eﬀorts, combined partial least squares regression (feilhauer et al., 2011; harris et al., with observed and predicted eﬀects of climate-driven redistribution of 2015; schmidtlein et al., 2007), and nearest neighbor approaches tree species habitats in the coming decades, detailed spatial knowledge (duveneck et al., 2015; henderson et al., 2014; ohmann and gregory, on current ﬂoristic patterns are needed for local and regional man- 2002)."
+2,"conceptually, each gradient mapping approach relates to the agement eﬀorts, particularly approaches that account for a complete community-continua concept (gleason, 1926), which theorizes assem- stand-level compositional perspective that supports site-level manage- blages as collections of overlapping, yet independent, species distribu- ment eﬀorts (iverson et al., 2011; iverson and prasad, 1998; prasad tions (whittaker, 1967)."
+2,"indeed, climate-based modeling eﬀorts also et al., 2016). incorporate the importance of individual species response to antici- modeling forest composition with supervised remote sensing can pated climatic change (iverson and prasad, 1998; reich et al., 2015; proceed by either (1) traditional classiﬁcation of vegetational variation webb iii and bartlein, 1992). into distinct syntaxonomic units or classes which are visualized as ordination-regression approaches have been used to map ﬂoristic discretely-bounded and categorically-deﬁned patches on the landscape, gradients of open-canopy assemblages (feilhauer et al., 2011; harris (bunting et al., 2010; mcgarigal et al., 2009; turner et al., 2003); or (2) et al., 2015; schmidtlein et al., 2007) and more recently forest assem- recent integration of ordination techniques that synthesize multivariate blages (gu et al., 2015; hakkenberg et al., 2018)."
+2,"however, these ap- vegetation patterns into continuous surfaces of intergrading species plications have utilized hyperspectral imaging and/or lidar scanning assemblages (feilhauer and schmidtlein, 2009; ohmann and gregory, of vegetation structure."
+2,although these studies exhibit exceptional ac- 2002).
+2,"indeed, classiﬁcation frameworks have formed the basis for curacies, the low availability and high cost of these data restricts their national standards in vegetation organization (jennings et al., 2009) broad implementation."
+2,"instead, spaceborne, moderate resolution mul- and image classiﬁcation in remote sensing for some time (franklin, tispectral imagery from the landsat program may oﬀer a suitable al- 1995; turner et al., 2003)."
+2,"these frameworks can incorporate quanti- ternative (thessler et al., 2005)."
+2,"such data oﬀer attractive properties for tative analysis (such as classiﬁcation/clustering of vegetation assem- modeling forest composition, including a spatial resolution of the blages) but usually default to expert opinion (such as categorizing sensor largely in agreement with local-scale management, cost-free species assemblages by canopy dominant species) in developing such access, and expansive data archive supporting multi-date feature input. classiﬁcation systems, which can introduce some subjectivity and un- a primary motivation for this study is to test the eﬀectiveness of these certainty in the deﬁnition of individual classes (hakkenberg et al., data in mapping ﬂoristic gradients of forest composition that is in- 2018; schmidtlein et al., 2007)."
+2,"ultimately, analysts are confronted clusive to all woody stems encountered among sampled ﬁeld plots – with challenges in balancing tradeoﬀs regarding parsimony and the rather than focusing on the characterization of a small number of dis- maximum number of forest types that may be reliably modeled for a crete forest types that may or may not be entirely based on the dis- given dataset."
+2,"for example, adjusting the compositional resolution of crimination of a select few canopy dominants."
+2,"given emerging threats overly-general classiﬁcation schemes to incorporate additional forest and proximate shifts in vegetation assemblages that have resulted from types often results in dramatic reductions in the per-unit sample sizes of shifting disturbance regimes and observed climatic eﬀects, we believe a individual classes, impacting the statistical rigor in model accuracy gradient mapping approach could support local management eﬀorts in assessment (hakkenberg et al., 2018; zhu and liu, 2014)."
+2,"still true is our southeastern ohio study area, particularly where emphasis is the fact that classiﬁcations based on canopy dominants alone are often placed on the restoration of desired species assemblages (iverson et al., insuﬃcient for heterogeneous stands or where highly-detailed species- 2018). level maps are desired, considering the degree of the ﬂoristic variation occurring among subordinate taxa and/or lower strata."
+2,more apparent 1.2.
+2,"objectives are the sharp boundaries and local discontinuities that result from de- picting discrete vegetation types, which fail to recognize the within- in this study, we use a standalone ordination-regression approach to stand variation and often-continuous nature of compositional turnover map forest composition across six study forests and the surrounding 88"
+3,adams et al.
+3,forest ecology and management 434 (2019) 87–98 fig.
+3,"a ﬂowchart, including inputs and analyses, of the gradient mapping approach used in this study."
+3,plot-level species composition data were ordinated onto three non-metric multidimensional scaling ordination axes.
+3,ordination space position with remotely-sensed inputs were modeled with the regression-type random forests model.
+3,"models were applied to the imagery for each ordination axis, and mapped ordination scores were merged into a rgb color composite for the ﬁnal ﬂoristic gradient map, where color values are used to visualize each pixel’s estimated position within the original ordination space, meaningful with respect the composition of sampled ﬁeld plots."
+3,"(for interpretation of the references to colour in this ﬁgure legend, the reader is referred to the web version of this article.) landscape in a portion of southeastern ohio’s central hardwoods."
+3,"we addition, the study area was primarily forested at 64% (adams and decomposed a large ecological dataset of importance values of woody matthews, 2018), containing a diversity of natural and plantation forest plant taxa onto three ordination axes and intersected plot ordination types of various compositions, physiognomies, and stand ages, owing to scores with spectral and topographic data."
+3,ordination values were then a variety of forest uses and management regimes.
+3,"the region is rich in modeled across the study area using the ensemble-learning algorithm, tree species with 75 species of trees occurring in the study area (prasad random forests."
+3,"our primary objective is to test the eﬀectiveness of et al., 2007)."
+3,"like much of the eastern us, the predominant forest cover landsat-based images for the detailed depiction of gradient forest is recovering from heavy exploitation; in this region, notably ca. composition across large heterogeneous forested landscapes."
+3,"in addi- 1850–1900 following a short-lived iron industry (stout, 1933)."
+3,"floristic tion, we evaluate the importance of image date and spectral and to- assemblages closely track the topographic contours of the unglaciated pographic variables constraining forest assemblage composition across allegheny plateaus physiographic region, which features dissected the study area. terrain with < 100 m relief, casting distinct topographically-deﬁned ecological landtypes in the study area (iverson et al., 2018)."
+3,generally 2.
+3,"methods speaking, mixed-oak forests dominate the dry ridgetops and south- western hillslopes and transition into more mesophytic species com- 2.1."
+3,"overview positions on opposing (wetter) northeastern hillslopes and valleys (hix and pearcy, 1997)."
+3,"some diagnostic species include quercus alba, q."
+3,"the gradient mapping procedure used in this study included four montana, q. velutina, carya glabra, c. tomentosa, sassafras albidum, and steps (fig."
+3,"(1) ordination is used to decompose ﬁeld plot composi- oxydendrum arboreum on dry uplands; acer saccharum, fraxinus amer- tional data onto a reduced space."
+3,"(2) spectral reﬂectance and topo- icana, lindera benzoin, liriodendron tulipifera, and tilia americana on graphic data are summarized for ﬁeld plots."
+3,"(3) independent regression northeastern hillslopes; and fagus grandifolia, aesculus ﬂava, acer ne- models are tuned to the remotely-sensed and ordination inputs to build gundo, and carpinus caroliniana in valleys and mesic bottomlands."
+3,the predictive models for each ordination axis.
+3,"(4) ordination space posi- numerous plantation forests are usually composed of monospeciﬁc tion, denoting resemblance to the composition of sampled ﬁeld plots, is stands of either pinus strobus, p. resinosa, or p. echinata, while other approximated for all areas across the study area from the predictive native conifers, including p. virginiana, p. rigida, and tsuga canadensis, models, and ﬁnally depicted as a rgb color combination in the ﬁnal combine at low densities with deciduous hardwoods. ﬂoristic gradient map."
+3,data 2.2.
+3,study area and study sites 2.3.1.
+3,"field data the six public study forests and surrounding study area cover field data were collected in the summers of 2015 and 2016 from ∼5000 km2 of the central hardwoods region in southeastern ohio 699, 0.04-ha circular vegetation plots (radius = 11.3 m), following a (fig."
+3,"these include four state forests, a state park, and a state spatially-stratiﬁed, cluster sampling design."
+3,"first, according to a gen- wildlife management area."
+3,"all study forests were nearly entirely eralized random tessellation stratiﬁed sampling design, plot arrays (3x3 forested although there were a few treeless locations present."
+3,in plots placed at 25 m intervals; see inset map in fig. 2) were randomly 89
+4,adams et al.
+4,forest ecology and management 434 (2019) 87–98 fig.
+4,the study area and study forests in southeastern ohio where the species composition of forest assemblages was sampled from 699 vegetation plots (yellow dots).
+4,displayed also are true color images of the four principal landsat 8-oli images and digital terrain model used in this study.
+4,a schematic of the cluster sampling design in relation to the actual sampled plot locations and landsat pixels is displayed in the smaller inset map.
+4,"(for interpretation of the references to colour in this ﬁgure legend, the reader is referred to the web version of this article.) located < 400 m from roads (sometimes alongside roads to facilitate species, such as quercus alba, within the regeneration and overstory data collection and capture variation in forest composition along forest layers over other such options, especially presence/absence and den- edges) and > 150 m apart to facilitate landscape-scale coverage within sity, rendering ivs most valuable to setting conservation and manage- each study forest (stevens and olsen, 2004)."
+4,"next, clusters of 2–3 plots ment priorities. were sampled from each array after substituting or slightly oﬀsetting locations where physically inaccessible or obstructed by roads or 2.3.2."
+4,digital data acquisition and processing streams.
+4,final plot locations were georeferenced with a handheld gps multiseasonal images were used to capture the phenological varia- receiver with self-reported geo-locational error ≤8 m.
+4,"field plots in- tion expressed by diﬀerent species and vegetation states, through green- cluded a wide physiographic spectrum, including ridgetops, valleys, up to dormancy, to maximize the accuracy of the predictive models and riparian positions, as well as a variety of forests (natural and (chrysaﬁs et al., 2017; ghitter et al., 1995; hill et al., 2010; townsend plantation) and forest-associated habitats, such as clear-cuts, shrubby and walsh, 2001; wolter et al., 1995; zhu and liu, 2014)."
+4,"we used an wetlands, and swamps, maximizing the ecological coverage and com- image dataset that comprised four cloud-free landsat 8-operational prehensiveness of our ﬁnal ﬂoristic dataset."
+4,"as such, the dataset in- land imager (oli) (path 19, row 33) images across the study area, cluded a large mixture of emergent vegetation structures that range processed to l2t surface reﬂectance (climate data record) by the from closed-canopy forest to relatively open-canopy ﬂoodplains, albeit united states geological survey (usgs), following a thorough search of dominated by woody plant species. the usgs data archive (https://earthexplorer.usgs.gov/) (table 1)."
+4,"we woody stems ≥1 m in height were sampled for two diameter size used the entire 30-m multispectral band library of each image, which classes: included 7 bands image-1."
+4,"the green (b3), red (b4), and near infrared (nir) (b5) bands are important in distinguishing vegetation species, 1."
+4,"large: stems ≥8 cm diameter at breast height (dbh) were identiﬁed while the blue (b2), shortwave infrared 1 (swir-1) (b6), and shortwave and dbh recorded within the entire plot area. infrared 2 bands (swir-2) (b7) are useful for discriminating deciduous 2."
+4,"small: stems < 8 cm dbh were identiﬁed and tallied within a re- versus coniferous vegetation and moisture content of the soil and ve- duced area, designated by a nested 0.01 ha circular subplot (∼5 m getation."
+4,"the landsat oli sensor also includes an additional (coastal) radius) at plot center, and extrapolated to the full plot extent. blue band (b1) that has recently demonstrated some utility in forest modeling applications (chrysaﬁs et al., 2017)."
+4,"physiognomically, these size classes distinguished trees from shrubs the images were projected in nad 83 utm zone 17 n, and re- and young trees."
+4,"woody plant taxa were identiﬁed to genus for the ﬂectance values were topographically-corrected for visually apparent following genera to facilitate timely data collection: carya, crataegus, hill shadows resulting from still-present terrain-induced solar illumi- salix, smilax, vaccinium, and vitis. nation eﬀects (appendix a: fig."
+4,"while several algorithms exist compositional variation was expressed using importance values (iv) (riaño et al., 2003), we selected the empirical-statistical method after a of each species/genera (iverson and prasad, 1998)."
+4,"ivs were computed test of several options and because of its performance in a recent review by summing the relative densities (stem ha−1; large + small stems) and (sola et al., 2016)."
+4,topographic corrections were made using tools in relative basal areas (m2 ha−1; large stems) of each species/genus.
+4,"ex- the rstoolbox package (leutner et al., 2018) of the r statistical en- cept for 23 treeless plots, each row in the ﬁnal species-by-plot matrix vironment (https://cran.r-project.org/) with a lidar-derived digital summed to 200."
+4,"our ivs indeed give more weight to species/genera terrain model (dtm). with records in both size classes because dbh measurements were not model accuracy was slightly improved by including terrain data, taken for the smaller stem size class."
+4,"however, this perspective best often used as supplementary data in image classiﬁcation (dorren et al., leveraged disparities among the relative dominances of certain key 2003; zhu and liu, 2014), with the principal images."
+4,"thus, we 90"
+5,adams et al.
+5,"forest ecology and management 434 (2019) 87–98 table 1 spectral and terrain predictors of forest composition used in this study, including spectral band properties, acquisition date, and season/phenology, as well as terrain equations and abbreviations."
+5,"number landsat 8 oli spectral bands (path 19, row 33) acquisition date season resolution 1–4 coastal (b1): 0.433–0.453 μm 5-feb-16 winter (leaf-oﬀ) 30 m 5–8 blue (b2): 0.450–0.515 μm 12-apr-17 spring (spring onset) 9–12 green (b3): 0.525–0.600 μm 10-jun-15 summer (leaf-on) 13–16 red (b4): 0.630–0.680 μm 24-sep-13 autumn (autumn oﬀset) 17–20 nir (b5): 0.845–0.885 μm 21–24 swir-1 (b6): 1.560–1.660 μm 25–28 swir-2 (b7): 2.100–2.300 μm terrain variables (source) abbreviation equation/notes 29 dtm: elevation (lidar-derived dtm; ohio geographic ele dtm (5 m resolution) aggregated to 30-m native landsat resolution 30 m reference information program - interpolated minimum using mean values and used to derive terrain variables ground returns) 30 slope slo slope in degrees; 8-neighbor rule 31 transformed aspect: eastingness eas eas = sine(aspect ∙ 8-neighbor rule) 32 transformed aspect: northingness nor nor = cosine(aspect ∙ 8-neighbor rule) 33 topographic wetness index twi twi = ln(a/tanβ); a is the local upslope area and β is the slope 34 topographic position index tpi tpi = zo - z̄ ; zo and z̄ are the focal cell and mean elevation in a 225 m radius 35 deviation from mean elevation dev dev = (zo - z̄ )/sd; zo and z̄ are the focal cell and mean elevation in a 225 m radius and sd is standard deviation elevation in neighborhood computed seven terrain variables, including elevation, slope, trans- correlation between the original compositional distances and the dis- formed aspects (eastingness and northingness), topographic wetness tances in the reduced space over a series of slight redistributions of the index (twi), topographic position index (tpi), and topographic de- data."
+5,"disagreement, or “stress”, is minimized when the ordering re- viation (dev), from the dtm for use as ancillary data with the principal lationship is maximally correlated with the original distances."
+5,"the axes images, generating a stack of 35 total predictor variables, including a scores from the minimum stress solution are transferred, using a prin- mixture of spectral and terrain data (table 1)."
+5,"the lidar-derived dtm cipal-component rotation, to orthogonal gradients of maximum ﬂoristic was developed for the study area using publicly-available lidar data variation."
+5,we selected bray-curtis dissimilarity for the compositional collected in 2007 and distributed by the ohio geographic reference distance matrix and a maximum of 500 random starts.
+5,bray-curtis information program (http://ogrip.oit.ohio.gov/home.aspx; accessed dissimilarity was chosen for its robust handling of pairs of sample plots 2014 october 13).
+5,"the lidar dataset had an average point spacing and exhibiting similar patterns in the presence/absence of species occur- density of 1.27 m and 0.27 points m−2, respectively."
+5,"the dtm was rences (legendre and legendre, 2012)."
+5,"the metamds() function, as generated by ﬁrst interpolating mean elevation values of ground points implemented in the vegan package (oksanen et al., 2018), selects the at 5-m resolution and then resampling it to the native resolution of the ﬁnal solution after the lowest stress value is obtained twice in a row to image data (30 m)."
+5,climatic variation across the study area does not avoid settling on a local minimum.
+5,wisconsin and square root trans- exceed that of micro-scale temperature and moisture regimes imposed formations were applied to the original compositional dataset before by the topographic gradients.
+5,"thus, climate information was not con- ordination."
+5,"the dimensionality was selected so that nmds axes 1–3 sidered. could be assigned to one of each of the three channels in rgb color plot-wise reﬂectance and terrain variables were sampled according space in the ﬁnal gradient map (thessler et al., 2005). to an area-weighted mean of pixel values within a 30-m resolution square window (native landsat resolution) centered on each ﬁeld plot."
+5,2.4.2.
+5,"regression analysis we considered this window size to best stabilize spatial uncertainties in random forests (rf) was selected to parameterize three in- ﬁeld reconnaissance and landsat geometric precision (planimetric dependent continuous axis models (one per each nmds axis 1–3) with error, according to usgs, was < 9 m root mean square error [rmse] reﬂectance and terrain inputs, using the randomforest package in r for each image)."
+5,"in other words, by summarizing information over a (liaw and wiener, 2002)."
+5,"the rf algorithm has become an attractive slightly larger area than a sample plot, it better ensured that the modeling platform in remote sensing (belgiu and drăgu, 2016; khatami spectral signal inherent to a given plot was captured, but not too much et al., 2016) and ecological (prasad et al., 2006) applications because of of the variation in the surrounding neighborhood of the plot."
+5,"in addi- its eﬀectiveness and convenience in producing highly accurate predic- tion, when transferring models trained at this scale back to the imagery, tions that are largely immune to over-ﬁtting and discerning useful it matched the native landsat resolution, voiding additional processing. predictor variables and ecological relationships via variable contribu- tion (breiman, 2001)."
+5,the rf algorithm is similar to bootstrapping a 2.4.
+5,"analysis decision tree model (breiman, 2001; cutler et al., 2007; prasad et al., 2006), combining the predictions (mean for continuous responses) from 2.4.1."
+5,ordination analysis an ensemble of individual decision trees – each comprising a permuted we selected non-metric multidimensional scaling (nmds) to ordi- version of the overall dataset.
+5,"withheld samples not used in the growth nate the ﬁeld plot data due to its robust capabilities in simplifying large of individual trees (default is 37% of the sample data) are purposed for ecological datasets (mccune et al., 2002) and its recent use in remote cross-validation of individual tree accuracy, referred to as “out of bag” sensing and ecological applications (harris et al., 2015; schmidtlein (oob) test error."
+5,"because each node is split via a random subsample of et al., 2007; thessler et al., 2005)."
+5,"nmds is a non-parametric, un- the possible predictors (default is 1/3 of the variables), variable con- constrained ordination technique that employs user-selected distance tribution is assessed by determining the eﬀect on removing a speciﬁc matrices and dimensionality, and an iterative approach to sample entity predictor from oob predictions. placement in the ﬁnal gradient space."
+5,"beginning with an initial random rf models were tuned with the default settings and 1000 trees each. arrangement, the procedure strives to maximize the rank-order prediction accuracy was assessed with oob predictions using an 91"
+6,adams et al.
+6,"forest ecology and management 434 (2019) 87–98 adjusted version of the coeﬃcient of determination (r2) and rmse. and alnus serrulata and young, successional stands composed of pioneer additionally, rmse was also scaled as a percentage of the range in species, such as rhus typhina)."
+6,"plots with high nmds2 scores represent scores to standardize prediction error among each axis in relation to closed-canopy, mesic stands reminiscent of mature forest communities, total gradient length."
+6,"a separate split-sample validation (utilizing se- dominated by fagus grandifolia, acer saccharum, and tilia americana. parate 75% training and 25% testing datasets) yielded similar accuracy interestingly, the third axis demonstrates a longitudinal gradient in the estimates as the oob observations in the full dataset."
+6,"thus, we opted to sample plots (related in part to diﬀerences in moisture regime but also a validate the models using the built-in features of rf, which allowed the gradient in elevation across the study area; see regression results), with use of the entire dataset in model training."
+6,"the rf algorithm is known eastern locations dominating lower nmds3 axis scores and western to impart some bias in continuous predictions (roy and larocque, 2012; locations dominating comparably higher nmds3 values."
+6,"zhang and lu, 2012)."
+6,"here, predictions are higher and lower than ex- pected towards the lower and higher ends of observed values (i.e., ex- 3.2."
+6,"regression results tremes), respectively."
+6,"techniques have included estimating a regression function between observed and predicted values to reduce this bias modeling results were weakest when either landsat images or ter- (zhang and lu, 2012)."
+6,"a test of this approach however provided mar- rain variables were considered alone in nmds axes models (appendix ginal eﬀects on model accuracy and, most notably, on reducing biased c: fig."
+6,s1); we will only discuss the results of the combined data do- predictions of extreme values on each axis.
+6,"thus, we did not consider mains in detail."
+6,"based on oob observations, rf models accounted for bias correction in this study."
+6,"variable contribution was assessed using 61.13% (rmse = 0.28; 10.2% of axis length), 49.3% (rmse = 0.28; the mean percentage increase (normalized by the standard deviation 9.7%), and 25.28% (rmse = 0.29; 12.1%) of the variation in nmds [sd]) in mean square error (%incmse) to support ecological inter- axes 1–3, respectively (fig. 4a-c), resembling the original compositional pretation of the nmds models."
+6,model uncertainties were derived based variance transferred to each nmds axis.
+6,"in combination, the accuracy on the sd of all predictions in each ensemble. of the three models, based on oob observations, explained 48.66% of the variation in the three nmds axes."
+6,"model uncertainties, in terms of 2.5."
+6,"forest ﬂoristic gradient map the sd of all tree predictions comprising each rf ensemble, are dis- played in fig. 4d-f."
+6,"uncertainty increases in terms of the variation in predictive rf models were applied to the predictor stack, producing model predictions and helps to illustrate locations where additional three images of ordination values that depict the estimated position of sampling coverage may be targeted."
+6,although no strict criteria are each pixel along nmds axes 1–3.
+6,"in total the three images represent the followed in interpretation, the uncertainty maps generally reveal that approximate position of mapped pixels within the original ordination the targeted forest cover was sampled adequately. space, expressing resemblance to the composition of sampled ﬁeld transformed aspect, eastingness, the red (b4) band recorded on the plots."
+6,"the three images were merged into a rgb color composite for the april image, the nir (b5) and swir-2 (b7) bands recorded on the ﬁnal ﬂoristic gradient map as a visual aid to track ordination space september image, twi, and elevation were important variables for the position after scaling the ordination values of the three individual maps nmds1 model (fig. 5a)."
+6,"transformed aspects, nothingness and east- to 8-bit based on a 2% stretch of the predicted range in nmds scores for ingness, the green (b3) band recorded on the april and june images, the visual enhancement."
+6,"a forest mask was used to avoid interpretation swir-2 (b7) band recorded on the september image, and tpi ranked over non-vegetated areas outside of the forest study sites (adams and highly among the important variables in the nmds2 model (fig. 5b)."
+6,"matthews, 2018)."
+6,"elevation ranked extremely high in the nmds3 model (helping to align sample plots along a longitudinal gradient apparent in this axis), fol- 3."
+6,"results lowed by the nir (b5) band recorded on the september image, tpi, and the red (b4) band recorded on the april image (fig. 5c)."
+6,ordination results 3.3.
+6,forest ﬂoristic gradient map a total of 99 woody plant taxa were sampled and considered in the analysis with a range of 3–30 ( x̄ = 14.52; sd = 4.62) species/genera the rf models were applied to the spectral and terrain data to per plot (appendix b: table s1).
+6,"the most frequently sampled taxa were produce maps of each nmds axis, and, ﬁnally, to visualize the spatial acer rubrum (85% of plots), smilax spp (83%), carya spp (80%), quercus distribution of woody plant taxa across the study area as continuous alba (61%), and nyssa sylvatica (58%)."
+6,the nmds analysis converged ﬁelds of ﬂoristic variation (fig.
+6,"species centroids provide vital after 123 iterations (back-to-back minimum stress obtained) with a context to the mapped color values, enabling associations to be drawn stress metric of 19.1, transferring 77.2% of the variation in bray-curtis between the colors on the map and the sampled plant assemblages."
+6,the dissimilarities to the respective nmds solution (fig. 3a-c).
+6,"speciﬁcally, resulting ﬂoristic gradient map eﬀectively visualizes the general pattern this amounted to 37.5%, 27.2%, and 12.5% of the compositional var- reﬂected in the dataset, which tracks both the woody plant assemblages iation assigned to nmds axes 1–3, respectively, indicating that the and the underlying terrain conditions of the study area."
+6,"zooming in, the largest ﬂoristic diﬀerences were reﬂected in the ﬁrst axis with des- pattern illustrates diﬀerences between the eastern study forests (e.g., cending explanatory power corresponding with each subordinate axis."
+6,"vinton furnace state experimental forest and zaleski state forest) and we allocated axes 2, 3, and 1 to the red, green, and blue channels of the the most western study forest (tar hollow state forest), which features rgb color composite, respectively (fig. 3d). greater elevation, relief, and subsequently drier hillslopes (fig."
+6,"the the ﬁrst axis revealed a gradient from very dry to very wet site preponderance of the lime and salmon hues of the western study forest conditions with calcifuges taxa of well drained soils, such as kalmia reﬂect a dominance of quercus montana, sassafras albidum, and oxy- latifolia, vaccinium spp, and oxydendrum arboreum, dominating plots dendrum arboreum (lime and olive hues) and liriodendron tulipifera, with low nmds1 scores, and hydric taxa associated with ﬂowing water celtis occidentalis, lindera benzoin, and tilia americana (salmon hues)."
+6,"in or seasonally-inundated soils, such as betula nigra, salix spp, and acer contrast, the maroon and burgundy hues, apparent in the eastern study saccharinum, dominating plots with high nmds1 scores."
+6,"this pattern forests, correspond to a greater dominance in quercus alba, q. velutina, corresponded to a gradient highly correlated with the ecological land- viburnum acerifolium, and carya spp in these forests."
+6,"bottomland, types of the study area (iverson et al., 2018)."
+6,"the second nmds axis hydric assemblages appear as light blue hues (resulting from high was broadly related to stand physiognomy, particularly successional nmds1 values allocated to the blue channel) and track the dendritic state, with the low nmds2 scores corresponding to plots with open- venation of steep stream channels throughout the study area."
+6,early- canopy communities (such as shrubby wetlands dominated by salix spp successional stands comprising pioneer species and recruitment of 92
+7,adams et al.
+7,forest ecology and management 434 (2019) 87–98 fig.
+7,non-metric multidimensional scaling ordination results.
+7,the distances in nmds space plotted against the original bray-curtis distances (a).
+7,floristic variation transferred to nmds axes 1–3 (b).
+7,variation in plot axis scores (c).
+7,ordination diagram of ﬁeld plots (dots) and species (squares) plotted in the 3d ordination space with colors representing the selected rgb color combination according to ordination coordinates (red: axis 2; green: axis 3; blue: axis 1) (d) as well as selected plant taxa (e).
+7,"(for interpretation of the references to colour in this ﬁgure legend, the reader is referred to the web version of this article.) canopy species from advanced regeneration appear as light-green and gradient mapping of forest assemblages in our study area located in the cyan hues, resulting from low nmds2 values allocated to the red central hardwoods region of southeastern ohio."
+7,these results will channel.
+7,"the pink hues, appearing primarily along lower northeastern prove vital to ongoing restoration eﬀorts to restore mixed-oak forest hillslope positions, represent mixed mesophytic assemblages, com- ecosystems where detailed information on current ﬂoristic assemblages prising ostrya virginiana, fraxinus americana, acer saccharum, aesculus is required for restoration focus (iverson et al., 2018, 2017)."
+7,"the eﬃ- ﬂava, and quercus rubra."
+7,"finally, several coniferous forests (either na- ciency in use and need for more detailed representation of the taxo- tive or plantation) appear in purple or greenish hues, depending on the nomic composition of ﬂoristic stands sparked the emergence of the species composition and degree of intermixing with deciduous species. predictive modeling of continuous ordination values (feilhauer et al., 2011; schmidtlein et al., 2007; thessler et al., 2005)."
+7,as relative in- 4.
+7,"discussion dicators of compositional dissimilarity, ordination scores are used to relate new locations to the composition of sampled ﬁeld plots, given the combination of ordination and regression techniques enabled that the reference samples are representative of the taxonomic variation 93"
+8,adams et al.
+8,forest ecology and management 434 (2019) 87–98 fig.
+8,"observed versus predicted nmds axes 1–3 plot scores (a-c, respectively) by random forests regression models, and model uncertainties derived from the standard deviation (sd) of all predictions in each ensemble for nmds axes 1–3 (d-f, respectively). in ﬂoristic assemblages encountered in the area and that patterns re- simple visual representation of the approximate taxonomic composition lating to ordination space position and remotely-sensed reﬂectance and of the study area with underlying terrain attributes. environmental variables can be obtained through predictive modeling we chose nmds due to its ﬂexibility in choice of distance metric, (thessler et al., 2005)."
+8,"finally, ordination space position depicted as a non-parametric distributional assumptions, and robust capabilities in rgb color combination of the principal ordination axes provide a extracting reliable ﬂoristic gradients from complex ecological datasets fig."
+8,"percentage increase in mean square error (%incmse) on removing a speciﬁc variable from random forests out of bag predictions, indicating predictor variable usefulness and relatedness to ﬂoristic variation in ordination (non-metric multidimensional scaling) axes 1–3 (a-c, respectively)."
+8,"see table 1 for variable descriptions; in addition, the naming scheme for landsat bands includes the speciﬁc band № and date of acquisition."
+9,adams et al.
+9,forest ecology and management 434 (2019) 87–98 fig.
+9,"the ﬁnal ﬂoristic gradient map of forest assemblages in southeastern ohio, visualized as a rgb color combination of predicted nmds ordination scores (red: axis 2; green: axis 3; blue: axis 1)."
+9,ecological interpretation and context regarding the mapped color values is provided by the species centroids in the legend.
+9,species centroids are sorted according to their position along the ﬁrst nmds axis.
+9,"(for interpretation of the references to colour in this ﬁgure legend, the reader is referred to the web version of this article.)"
+9,"(mccune et al., 2002)."
+9,"the nmds analysis yielded a stress metric of in image classiﬁcation (dorren et al., 2003; zhu and liu, 2014), was 19.1 and a transfer of 77.2% of the variance in the ﬂoristic dataset to incorporated to improve prediction accuracy."
+9,"in fact, terrain variables the ﬁnal ordination solution."
+9,"this stress is particularly robust con- came out ﬁrst in variable importance for each of the three nmds axes sidering the large number of sample plots utilized (feilhauer et al., models."
+9,although the ﬂoristic patterns extracted by the nmds ordina- 2011).
+9,"although the explanatory power, in terms of (r2), was relatively tion are orthogonal, this does not suggest that each gradient be con- weak for the third axis model, likely reﬂecting the lesser degree of strained by unique or unambiguous environmental features."
+9,"where ﬂoristic variance transferred to this axis, it was ultimately retained there are similar variables emerging in importance, the rf models are because it exhibited a similar rsme in proportion to the range in or- indeed detecting diﬀerent gradients of information."
+9,"certainly, both data dination scores of the other two axes."
+9,"the gradient mapping approach sources complemented each other, as accuracies were comparably depends on the assumption that ﬂoristic assemblages are composed of weaker when either was used alone in regression modeling."
+9,"overall, species with similar ecological requirements and aggregate structural reﬂectance and terrain variables accounted for 61%, 49%, and 25% of and biochemical attributes that produce unique spectral signatures the variance in woody plant composition for nmds axes 1, 2, and 3 detectable in predictive algorithms."
+9,hence the importance in the careful respectively.
+9,our landsat-based approach is motivating for two rea- selection of appropriate ordination technique in generating reliable sons: (1) many previous gradient mapping studies utilizing ordination- ﬂoristic patterns.
+9,"overall, the solution was supported by realistic eco- regression approaches have employed airborne, hyperspectral or logical gradients related to the spectral responses of ﬂoristic assem- lidar-hyperspectral data (but see schmidtlein and sassin (2004) and blages and functional relationships to moisture regimes, directly linked thessler et al., (2005)) to predict the composition of (2) canopy vege- to the ecological landtypes of the study area (iverson et al., 2018). tation or structurally inert, open canopy assemblages, entirely visible to caution, however, is noted for the depiction of extreme scores along remote imaging platforms (feilhauer et al., 2011; gu et al., 2015; harris each axis, where predicted ordination values begin to diverge more et al., 2015; schmidtlein and sassin, 2004)."
+9,our sampling of a large abruptly among that observed in the dataset.
+9,"though bias correction spectrum of vegetation assemblages meant that a great mixture of techniques have been developed, particularly with extension to rf, heterogenous, closed-canopied and open-canopied, stands were in- more work is needed to improve predictive modeling of compositional cluded in the analysis."
+9,surprising is the degree of similarity in the ac- variation.
+9,"as such, the depiction of accurate species-level variation curacies obtained from our landsat-based approach with those found in towards these ends likely remains an ongoing challenge in approaches these other studies."
+9,"this emerged despite perceived spectral, spatial, such as these. and structural advantages of hyperspectral data and lidar scanning of moderate resolution landsat satellite images, acquired from four vegetation physiognomies and constraints in attempting to model seasons of phenology, provided the principal data source in our gra- comprehensive stand compositions of mixed closed- and open-canopy dient mapping study."
+9,"terrain information, often used as ancillary data stands, where most species variation is obscured by a few canopy 95"
+10,adams et al.
+10,forest ecology and management 434 (2019) 87–98 dominants.
+10,"for example, three ordination axes of a uk peatland were oak forest type in an east-west gradient across the study forests."
+10,"dry modeled by harris et al., (2015) with an accuracy (r2) ranging from ridgetops and southwestern hillslopes of eastern study forests tended to 0.30 to 0.74."
+10,"urban forest composition among canopy foliage in wis- occupy sectors of the ordination space that featured a more pronounced consin, usa, was modeled by gu et al., (2015) with an accuracy (r2) of dominance in quercus alba, while the western-most study forest showed 0.67 and 0.47 for nmds axis 1 and 2, respectively."
+10,the advantage of a predominance in quercus montana.
+10,"this was attributed to greater capturing phenological phases of diﬀerent species and vegetation states relief and subsequently dryer hillslope conditions towards the western by multitemporal landsat images should not be taken for granted, as portion of the study area, as correlated with higher elevation values our study indicates that various temporal periods (particularly early that spanned this geographic gradient."
+10,"such taxonomic resolution will spring onset, summer, and autumn oﬀset), are important to the pre- be valuable in targeting restoration focus for desired species assem- dictive accuracy of modeling ﬂoristic gradients."
+10,while multitemporal blages.
+10,"while nominal categories of broad forest types help to demon- images clearly support better classiﬁcation results (pasquarella et al., strate coarse taxonomic variation (zhu and liu, 2014), they have the 2018), conspicuous drawbacks remain in obtaining suitable cloud-free unfortunate quality of homogenizing the intricate details of forest images."
+10,"a search of landsat images over a 5-year period resulted in only stands into a single discrete class that might ultimately function dif- four suitable (and seasonal) images for our ∼5000-km2 study area, ferently based on subtle shifts in important species."
+10,"in addition, com- highlighting the potential diﬃculty in obtaining satellite images, also positional variation more realistically unfolds along a continuum in encountered in other studies (pasquarella et al., 2018; thessler et al., topo-edaphic gradients rather than arbitrary breaks in topographic 2005). contours."
+10,"ultimately, more detailed information on the intergrading the red (b4), nir (b5), swir-2 (b7), and green (b3) bands were nature of overlapping, yet independent, species distributions found in some of the most important bands for compositional modeling in our gradient mapping provides a more realistic representation of ﬂoristic study, as indicated by variable importance measures in the rf routine. assemblages on the landscape."
+10,"harris et al. (2015), employing airborne hyperspectral imaging, simi- a focus on community-level modeling has emerged because of the larly demonstrated that bands occupying the red, red-edge, and nir close link between the composition of an ecosystem and its ecological regions of the electromagnetic spectrum were important in the accurate processes (ferrier and guisan, 2006)."
+10,"community-ﬁrst approaches, characterization of peatland assemblages."
+10,"they concluded that high- such as the methods employed in this study, have several advantages spectral resolution images may not be necessary to accurately map over the aggregation of individual species models."
+10,"it is usually not gradients of peatland vegetation and that characterization of red and possible to model all species in a dataset for statistical reasons, as many nir reﬂectance holds great promise for vegetation compositional rare species are omitted due to small sample sizes."
+10,"instead, all available modeling as a whole."
+10,"speciﬁcally, the red and nir regions of the data across all species, regardless of the number of records per species, electromagnetic spectrum are due to the absorption of red and the re- is analyzed by multivariate approaches, such as ordination, in com- ﬂecting of green, nir, and swir light by plants during photosynthesis. munity-level strategies."
+10,"rare species are better accounted for by ex- since these features detected are directly linked to photosynthetic ploiting patterns of interspeciﬁc association and co-occurrence with processes, they hold great potential for detecting variation in ﬂoristic other, more abundant, species, essentially allowing less frequently-oc- assemblages, and that higher resolution (spatially or spectrally) data curring species to borrow information from the overall patterns of may not be necessary for ﬂoristic mapping. compositional variation in a dataset."
+10,some studies have even demon- our results help support other recent investigations for full-stand strated that such community-level approaches have a tendency to gradient modeling of ﬂoristic assemblages beyond canopy dominants produce more accurate species-level predictions when employing alone.
+10,"for example, hakkenberg et al. (2018) predicted full-stand community-ﬁrst strategies (elith and leathwick, 2007; guisan et al., vascular plant composition (i.e., both understory and overstory vege- 1999)."
+10,"in addition, joint species distribution modeling could provide tation) at a 30-m resolution in a north carolina piedmont forest with an novel insight and a productive approach to extend such eﬀorts through accuracy (r2) ranging from 0.48 to 0.71 for three nmds axes utilizing changing temporal domains (clark et al., 2014; pollock et al., 2014). fusions of hyperspectral and lidar data."
+10,"thessler et al., (2005) accu- rately modeled the composition of pteridophytes and melastomataceae 5."
+10,"conclusion species, taxa that are entirely obscured by overstory foliage, in an amazonian tropical rainforest with a single-date landsat image."
+10,"accu- temperate forest ecosystems are threatened by accelerating local rate modeling of understory assemblages likely stems from correlations and global environmental change, aﬀecting the ecological processing in response to factors (e.g., soil properties, exposure to light, etc.) that and provisioning of ecosystem services (perera et al., 2018)."
+10,many of aﬀect overstory ﬂora.
+10,"yet, the additional ecological information im- these forests are still recovering from heavy exploitation from the parted by understory data helps to capture a more complete commu- previous century and a half with highly inﬂuential legacy eﬀects im- nity-level view, where emergent properties of habitat and ecosystem pacting their present and future conditions (wang et al., 2015)."
+10,"while processes manifest (ferrier and guisan, 2006)."
+10,"the use of multiseasonal ﬁeld-based inventories provide an immediate window into the current images in our study could have also directly captured the spectral state of forested ecosystems, remote-sensing platforms provide a prac- variation of understory foliage due to contrasting phenological phases tical and repeatable means to extrapolate beyond these eﬀorts (turner among the vertical strata."
+10,"a determination of the mechanisms re- et al., 2015)."
+10,a spatially-explicit knowledge of the taxonomic compo- sponsible for accurate depictions of full-stand composition is beyond sition of forest stands is absolutely essential to eﬃciently guide man- the scope of this study.
+10,"however, gradient mapping shows great pro- agement and restoration investments (tilman et al., 1997), particularly mise for accurate modeling of the taxonomic composition of structu- for that of mixed-oak assemblages."
+10,"spatial inventories of forest com- rally-diverse stands. munities and their subsequent modeling have long relied on ecological floristic variation is usually approximated at landscape extents by classiﬁcation to simplify the compositional complexity of forest stands environmental correlates of assemblage composition based on known into meaningful, albeit coarse, cover types, which can be of great utility habitat aﬃliations (ferrier, 2002)."
+10,"in our study area, a large body of and is the foundation for hierarchical vegetation classiﬁcation systems literature has demonstrated the importance of topographic variation as (jennings et al., 2009)."
+10,"however, at their core, discrete community drivers of forest composition (e.g., iverson et al., (2018))."
+10,"our gradient units are rarely realistically distinguished because of the intergrading mapping study complements these eﬀorts by providing a ﬁner taxo- nature of ﬂoristic assemblages (rarely are two stands compositionally nomic resolution to the recognized ecological landtypes and associated alike), where subtle changes in environmental conditions drive over- forest assemblages."
+10,"for example, the ﬁnal model expresses spatial lapping, yet independent, species distributions."
+10,the methods applied in variation in the dominant species that make up the vulnerable mixed- this study will be an important contribution to the decades of work on 96
+11,adams et al.
+11,"forest ecology and management 434 (2019) 87–98 oak-hickory regeneration practices (caryell and tryon, 1961; iverson states."
+11,manage.
+11,"259, 2426–2432. et al., 2017; johnson et al., 2009; loftis and mcgee, 1993), as well as franklin, j., 1995."
+11,predictive vegetation mapping: geographic modelling of biospatial patterns in relation to environmental gradients.
+11,geogr.
+11,"19, 474–499. enhanced management for many other key species and their associates."
+11,"ghitter, g.s., hall, r.j., franklin, s.e., 1995."
+11,variability of landsat thematic mapper data our landsat-based approach further extends the utility of satellite- in boreal deciduous and mixed-wood stands with conifer understory.
+11,"remote based remote imaging, providing support for gradient modeling of sens."
+11,"16, 2989–3002."
+11,"gleason, h.a., 1926."
+11,the individualistic concept of the plant association.
+11,torrey bot. forest composition.
+11,"club 53, 7–26."
+11,"gu, h., singh, a., townsend, p.a., 2015."
+11,detection of gradients of forest composition in acknowledgments an urban area using imaging spectroscopy.
+11,remote sens.
+11,environ.
+11,"167, 168–180."
+11,"guisan, a., weiss, s.b., weiss, a.d., 1999."
+11,glm versus cca spatial modeling of plant species distributions.
+11,plant ecol.
+11,"143, 107–122."
+11,"this study was funded by the state wildlife grants program, ad- hakkenberg, c.r., peet, r.k., urban, d.l., song, c., 2018."
+11,modeling plant composition as ministered jointly by the us fish and wildlife service and the ohio community-continua in a forest landscape with lidar and hyperspectral remote sensing.
+11,"28, 177–190."
+11,"division of wildlife, through the ohio biodiversity conservation hanberry, b.b., nowacki, g.j., 2016."
+11,oaks were the historical foundation genus of the partnership.
+11,additional support was provided by the school of east-central united states.
+11,"145, 94–103."
+11,"environment and natural resources and the terrestrial wildlife harris, a., charnock, r., lucas, r.m., 2015."
+11,hyperspectral remote sensing of peatland ecology laboratory at the ohio state university.
+11,we thank several ﬂoristic gradients.
+11,remote sens.
+11,environ.
+11,"162, 99–111."
+11,"he, h.s., mladenoﬀ, d.j., radeloﬀ, v.c., crow, t.r., 1998."
+11,"integration of gis data and individuals for their assistance in data collection: kaley donovan, classiﬁed satellite imagery for regional forest assessment."
+11,"8, 1072–1083."
+11,"james hanks, garrett evans, sara zaleski, alex eberts, and daniel henderson, e.b., ohmann, j.l., gregory, m.j., roberts, h.m., zald, h., 2014."
+11,species hodges.
+11,"we thank robert gates, laura kearns, christopher tonra and distribution modelling for plant communities: stacked single species or multivariate modelling approaches?"
+11,"17, 516–527. three reviewers for their comments and input that helped improve this hill, r.a., wilson, a.k., george, m., hinsley, s.a., 2010."
+11,mapping tree species in tem- manuscript.
+11,"additionally, we thank matthew shumar for assessing rgb perate deciduous woodland using time-series multi-spectral data."
+11,"sci. 13, color combinations for eﬀective color representation on the map."
+11,86–99.
+11,"hix, d.m., pearcy, j.n., 1997."
+11,"forest ecosystems of the marietta unit, wayne national forest, southeastern ohio: multifactor classiﬁcation and analysis."
+11,"27, appendix a."
+11,supplementary material 1117–1131.
+11,"iverson, l.r., graham, r.l., cook, e.a., 1989."
+11,applications of satellite remote sensing to forested ecosystems.
+11,landsc.
+11,"3, 131–143."
+11,"supplementary data to this article can be found online at https:// iverson, l.r., hutchinson, t.f., peters, m.p., yaussy, d.a., 2017."
+11,long-term response of doi.org/10.1016/j.foreco.2018.12.018. oak-hickory regeneration to partial harvest and repeated ﬁres: inﬂuence of light and moisture.
+11,"ecosphere 8, e01642."
+11,"iverson, l.r., peters, m.p., bartig, j., rebbeck, j., hutchinson, t.f., matthews, s.n., stout, references s., 2018."
+11,spatial modeling and inventories for prioritizing investment into oak- hickory restoration.
+11,manage.
+11,"424, 355–366."
+11,"abrams, m.d., 2003."
+11,where has all the white oak gone?
+11,"bioscience 53, 927–939."
+11,"iverson, l.r., prasad, a.m., 1998."
+11,"predicting abundance of 80 tree species following adams, b.t., matthews, s.n., 2018."
+11,enhancing forest and shrubland mapping in a man- climate change in the eastern united states.
+11,monogr.
+11,"68, 465–485. aged forest landscape with landsat-lidar data fusion."
+11,areas j.
+11,"38, 402–418."
+11,"iverson, l.r., prasad, a.m., matthews, s.n., peters, m.p., 2011."
+11,"lessons learned while belgiu, m., drăgu, l., 2016."
+11,"random forest in remote sensing: a review of applications integrating habitat, dispersal, disturbance, and life-history traits into species habitat and future directions."
+11,isprs j.
+11,photogramm.
+11,remote sens.
+11,"114, 24–31. models under climate change."
+11,"ecosystems 14, 1005–1020."
+11,"breiman, l., 2001."
+11,random forests.
+11,learn.
+11,"45, 5–32."
+11,"jennings, m.d., faber-langendoen, d., loucks, o.l., peet, r.k., roberts, d., 2009."
+11,"bunting, p., lucas, r.m., jones, k., bean, a.r., 2010."
+11,characterisation and mapping of standards for associations and alliances of the u.s.
+11,national vegetation forest communities by clustering individual tree crowns.
+11,remote sens.
+11,environ.
+11,"114, classiﬁcation."
+11,monogr.
+11,"79, 173–199."
+11,2536–2547.
+11,"johnson, p., shiﬂey, s., rogers, r., 2009."
+11,the ecology and silviculture of oaks.
+11,"cabi caryell, k., tryon, e., 1961."
+11,"the eﬀect of environmental factors on the abundance of oak publishing, ny, ny. regeneration beneath mature oak stands."
+11,"7, 98–105."
+11,"kerr, j.t., ostrovsky, m., 2003."
+11,"from space to species: ecological applications for remote chrysaﬁs, i., mallinis, g., gitas, i., tsakiri-strati, m., 2017."
+11,estimating mediterranean sensing.
+11,trends ecol.
+11,"18, 299–305. forest parameters using multi seasonal landsat 8 oli imagery and an ensemble khatami, r., mountrakis, g., stehman, s.v., 2016."
+11,a meta-analysis of remote sensing learning method.
+11,remote sens.
+11,environ.
+11,"199, 154–166. research on supervised pixel-based land-cover image classiﬁcation processes: general clark, j.s., gelfand, a.e., woodall, c.w., zhu, k., 2014."
+11,more than the sum of the parts: guidelines for practitioners and future research.
+11,remote sens.
+11,environ.
+11,"177, 89–100. forest climate response from joint species distribution models."
+11,"24, legendre, p., legendre, l., 2012."
+11,"numerical ecology, 3rd ed."
+11,"elsevier science, 990–999."
+11,"amsterdam, the netherlands."
+11,"cohen, w.b., goward, s.n., 2004."
+11,"landsat’s role in ecological applications of remote leutner, b., horning, n., schwalb-willman, j., hijmans, r.j., 2018."
+11,rstoolbox: tools for sensing.
+11,"bioscience 54, 535–545. remote sensing data analysis."
+11,"cutler, d.r., edwards jr., t.c., beard, k.h., cutler, a., hess, k.t., gibson, j., lawler, j.j., liaw, a., wiener, m., 2002."
+11,classiﬁcation and regression by randomforest.
+11,"r news 2, 2007."
+11,random forests for classiﬁcation in ecology.
+11,"ecology 88, 2783–2792."
+11,18–22.
+11,"dorren, l.k.a., maier, b., seijmonsbergen, a.c., 2003."
+11,"improved landsat-based forest loftis, d.l., mcgee, c.e., 1993."
+11,"oak regeneration: serious problems, practical re- mapping in steep mountainous terrain using object-based classiﬁcation."
+11,ecol. commendations.
+11,"se-84, southeastern forest experiment station, manage."
+11,"183, 31–46."
+11,"asheville, nc."
+11,"duveneck, m.j., thompson, j.r., wilson, b.t., 2015."
+11,"an imputed forest composition map mccune, b., grace, j.b., urban., d.l., 2002."
+11,analysis of ecological communities. for new england screened by species range boundaries.
+11,manage.
+11,"347, mcewan, r.w., dyer, j.m., pederson, n., 2011."
+11,multiple interacting ecosystem drivers: 107–115.
+11,"toward an encompassing hypothesis of oak forest dynamics across eastern north elith, j., leathwick, j., 2007."
+11,predicting species distributions from museum and her- america.
+11,ecography (cop.)
+11,"34, 244–256. barium records using multiresponse models ﬁtted with multivariate adaptive re- mcgarigal, k., tagil, s., cushman, s.a., 2009."
+11,surface metrics: an alternative to patch gression splines.
+11,divers.
+11,distrib.
+11,"13, 265–275. metrics for the quantiﬁcation of landscape structure."
+11,landsc.
+11,"24, 433–450."
+11,"ellison, a.m., bank, m.s., clinton, b.d., colburn, e.a., elliott, k., ford, c.r., foster, d.r., ohmann, j.l., gregory, m.j., 2002."
+11,"predictive mapping of forest composition and kloeppel, b.d., knoepp, j.d., lovett, g.m., mohan, j., orwig, d.a., rodenhouse, n.l., structure with direct gradient analysis and nearest-neighbor imputation in coastal sobczak, w.v., stinson, k.a., stone, j.k., swan, c.m., thompson, j., von holle, b., oregon, u.s.a."
+11,"32, 725–741. https://doi.org/10.1139/x02-011."
+11,"webster, j.r., 2005."
+11,"loss of foundation species: consequences for the structure and oksanen, j., blanchet, f.g., freindly, m., kindt, r., legendre, p., mcglinn, d., minchin, p. dynamics of forested ecosystems."
+11,front.
+11,environ.
+11,"3, 479–486."
+11,"r., o’hara, r.b., simpson, g.l., solymos, p., stevens, m.h.h., and, e.s., wagner, h., fassnacht, k.s., cohen, w.b., spies, t.a., 2006."
+11,key issues in making and using satellite- 2018. vegan: community ecology package. based maps in ecology: a primer.
+11,manage.
+11,"222, 167–181."
+11,"pasquarella, v.j., holden, c.e., woodcock, c.e., 2018."
+11,"improved mapping of forest type feilhauer, h., faude, u., schmidtlein, s., 2011."
+11,combining isomap ordination and ima- using spectral-temporal landsat features.
+11,remote sens.
+11,environ.
+11,"210, 193–207. ging spectroscopy to map continuous ﬂoristic gradients in a heterogeneous landscape."
+11,"perera, a.h., peterson, u., pastur, g.m., iverson, l.r., 2018."
+11,ecosystem services from remote sens.
+11,environ.
+11,"115, 2513–2524."
+11,forest landscapes: broadscale considerations.
+11,"springer, cham, switzerland."
+11,"feilhauer, h., schmidtlein, s., 2009."
+11,"mapping continuous ﬁelds of forest alpha and beta pollock, l.j., tingley, r., morris, w.k., golding, n., o’hara, r.b., parris, k.m., vesk, p.a., diversity."
+11,"12, 429–439."
+11,"mccarthy, m.a., 2014."
+11,"understanding co-occurrence by modelling species simulta- ferrier, s., 2002."
+11,mapping spatial pattern in biodiversity for regional conservation neously with a joint species distribution model (jsdm).
+11,methods ecol.
+11,"evol. 5, planning: where to from here?"
+11,"51, 331–363."
+11,397–406.
+11,"ferrier, s., guisan, a., 2006."
+11,spatial modelling of biodiversity at the community level.
+11,"prasad, a.m., gardiner, j.d., iverson, l.r., matthews, s.n., peters, m., 2013."
+11,exploring appl.
+11,"43, 393–404. tree species colonization potentials using a spatially explicit simulation model: fox, v.l., buehler, c.p., byers, c.m., drake, s.e., 2010."
+11,"forest composition, leaf litter, and implications for four oaks under climate change."
+11,chang.
+11,"19, 2196–2208. songbird communities in oak- vs. maple-dominated forests in the eastern united prasad, a.m., iverson, l.r., liaw, a., 2006."
+11,newer classiﬁcation and regression tree 97
+12,adams et al.
+12,forest ecology and management 434 (2019) 87–98 techniques: bagging and random forests for ecological prediction.
+12,"ecosystems 9, stat."
+12,assoc.
+12,"99, 262–278."
+12,181–199.
+12,"stout, w., 1933."
+12,"the charcoal iron industry of the hanging rock iron district—its in- prasad, a.m., iverson, l.r., matthews, s.n., peters, m.p., 2016."
+12,a multistage decision ﬂuence on the early development of the ohio valley.
+12,ohio state archaeol.
+12,"q. 42, support framework to guide tree species management under climate change via ha- 72–104. bitat suitability and colonization models, and a knowledge-based scoring system."
+12,"swaim, j.t., dey, d.c., saunders, m.r., weigel, d.r., thornton, c.d., kabrick, j.m., landsc."
+12,"31, 2187–2204."
+12,"jenkins, m.a., 2018."
+12,"overstory species response to clearcut harvest across environ- prasad, a.m., iverson, l.r., matthews, s.n., peters, m.p., 2007."
+12,a climate change atlas for mental gradients in hardwood forests.
+12,manage.
+12,"428, 66–80. 134 forest tree species of the eastern united states [database]."
+12,"in, northern research tallamy, d.w., shropshire, k.j., 2009."
+12,"ranking lepidopteran use of native versus in- station, usda forest service, delaware, oh."
+12,[www document].
+12,url http://www. troduced plants.
+12,conserv.
+12,"23, 941–947. nrs.fs.fed.us/atlas/tree."
+12,"thessler, s., ruokolainen, k., tuomisto, h., tomppo, e., 2005."
+12,"mapping gradual land- reich, p.b., sendall, k.m., rice, k., rich, r.l., stefanski, a., hobbie, s.e., montgomery, scape-scale ﬂoristic changes in amazonian primary rain forests by combining ordi- r.a., 2015."
+12,geographic range predicts photosynthetic and growth response to nation and remote sensing.
+12,biogeogr.
+12,"14, 315–325. warming in co-occurring tree species."
+12,chang.
+12,"5, 148–152."
+12,"tilman, d., knops, j., wedin, d., reich, p., ritchie, m., siemann, e., 1997."
+12,"the inﬂuence riaño, d., chuvieco, e., salas, j., aguado, i., 2003."
+12,assessment of diﬀerent topographic of functional diversity and composition on ecosystem processes.
+12,"science (80-.) 277, corrections in landsat-tm data for mapping vegetation types."
+12,ieee trans.
+12,geosci.
+12,1300–1302.
+12,remote sens.
+12,"41, 1056–1061."
+12,"townsend, p.a., walsh, s.j., 2001."
+12,"remote sensing of forested wetlands: application of rocchini, d., luque, s., pettorelli, n., bastin, l., doktor, d., faedi, n., feilhauer, h., féret, multitemporal and multispectral satellite imagery to determine plant community j.-b., foody, g.m., gavish, y., godinho, s., kunin, w.e., lausch, a., leitão, p.j., composition and structure in southeastern usa."
+12,plant ecol.
+12,"157, 129–149."
+12,"marcantonio, m., neteler, m., ricotta, c., schmidtlein, s., vihervaara, p., wegmann, turner, w., rondinini, c., pettorelli, n., mora, b., leidner, a.k., szantoi, z., buchanan, g., m., nagendra, h., 2018."
+12,"measuring β-diversity by remote sensing: a challenge for dech, s., dwyer, j., herold, m., koh, l.p., leimgruber, p., taubenboeck, h., biodiversity monitoring."
+12,methods ecol.
+12,"9, 1787–1798."
+12,"wegmann, m., wikelski, m., woodcock, c., 2015."
+12,"free and open-access satellite data rodewald, a.d., abrams, m.d., 2002."
+12,floristics and avian community structure: im- are key to biodiversity conservation.
+12,conserv.
+12,"182, 173–176. plications for regional changes in eastern forest composition."
+12,"48, 267–272."
+12,"turner, w., spector, s., gardiner, n., fladeland, m., sterling, e., steininger, m., 2003."
+12,"rogan, j., chen, d.m., 2004."
+12,remote sensing technology for mapping and monitoring remote sensing for biodiversity science and conservation.
+12,trends ecol.
+12,"evol. 18, land-cover and land-use change."
+12,plann.
+12,"61, 301–325."
+12,306–314.
+12,"rose, r.a., byler, d., eastman, j.r., fleishman, e., geller, g., goetz, s., guild, l., wang, w.j., he, h.s., thompson iii, f.r., fraser, j.s., hanberry, b.b., dijak, w.d., 2015."
+12,"hamilton, h., hansen, m., headley, r., hewson, j., horning, n., kaplin, b.a., the importance of succession, harvest, and climate change in determining future laporte, n., leidner, a., leimgruber, p., morisette, j., musinsky, j., pintea, l., forest composition changes of the u.s."
+12,central hardwood forests.
+12,"ecosphere 6, prados, a., radeloﬀ, v.c., rowen, m., saatchi, s., schill, s., tabor, k., turner, w., art277. https://doi.org/10.1890/es15-00238.1."
+12,"vodacek, a., vogelmann, j., wegmann, m., wilkie, d., wilson, c., 2015."
+12,"ten ways webb iii, t., bartlein, p.j., 1992."
+12,global changes during the last 3 million years: climatic remote sensing can contribute to conservation.
+12,conserv.
+12,"29, 350–359. controls and biotic responses."
+12,"23, 141–173."
+12,"roy, m.-h., larocque, d., 2012."
+12,robustness of random forests for regression.
+12,"whittaker, r.h., 1967."
+12,gradient analysis of vegetation.
+12,"42, 207–264."
+12,nonparametr.
+12,"24, 993–1006."
+12,"wolter, p.t., mladenoﬀ, d.j., host, g.e., crow, t.r., 1995."
+12,"improved forest classiﬁcation running, s.w., coughlan, j.c., 1988."
+12,a general model of forest ecosystem processes for in the northern lake states using multi-temporal landsat imagery.
+12,photogramm.
+12,eng. regional applications i.
+12,"hydrologic balance, canopy gas exchange and primary pro- remote sensing 61, 1129–1143. duction processes."
+12,modell.
+12,"42, 125–154."
+12,"wulder, m.a., masek, j.g., cohen, w.b., loveland, t.r., woodcock, c.e., 2012."
+12,"opening schmidtlein, s., sassin, j., 2004."
+12,mapping of continuous ﬂoristic gradients in grasslands the archive: how free data has enabled the science and monitoring promise of using hyperspectral imagery.
+12,remote sens.
+12,environ.
+12,"92, 126–138."
+12,landsat.
+12,remote sens.
+12,environ.
+12,"122, 2–10."
+12,"schmidtlein, s., zimmermann, p., schüpferling, r., weiß, c., 2007."
+12,"mapping the ﬂoristic xie, y., sha, z., yu, m., 2008."
+12,remote sensing imagery in vegetation mapping: a review.
+12,j. continuum: ordination space position estimated from imaging spectroscopy.
+12,plant ecol.
+12,"1, 9–23."
+12,"18, 131–140."
+12,"zhang, g., lu, y., 2012."
+12,bias-corrected random forests in regression.
+12,"39, sola, i., gonzález-audícana, m., álvarez-mozos, j., 2016."
+12,multi-criteria evaluation of 151–160. topographic correction methods.
+12,remote sens.
+12,environ.
+12,"184, 247–262."
+12,"zhu, x., liu, d., 2014."
+12,"accurate mapping of forest types using dense seasonal landsat stevens, d.l., olsen, a.r., 2004."
+12,spatially balanced sampling of natural resources.
+12,am. time-series.
+12,isprs j.
+12,photogramm.
+12,remote sens.
+12,"96, 1–11."

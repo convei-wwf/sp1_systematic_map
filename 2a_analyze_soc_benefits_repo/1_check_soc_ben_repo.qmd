@@ -1,0 +1,313 @@
+---
+title: "Societal Benefit Repo citation screening results"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(synthesisr)
+library(pdftools)
+library(here)
+```
+
+# Summary
+
+The 260 unique(?) documents with abstracts represented in the Societal Benefits repository were screened by title and abstract in Colandr.  The results were exported as a .csv.  This document analyzes/summarizes those results.
+
+# Data
+
+The SBR information was downloaded as a .csv on 4/23/24, and uploaded to Colandr.  The screening criteria outlined in the planning/protocol document were used to determine inclusion/exclusion.  Some documents were tagged with additional information, e.g., "maybe" for some included documents that seemed like they may not actually meet the criteria.
+
+The screening results were downloaded as a .csv on 4/29/24.
+
+# Methods
+
+## Read in the screening results
+
+Also, write out included refs with DOI for import into Zotero.
+
+```{r}
+make_short_title <- function(title) {
+  title %>% tolower() %>% str_replace_all('[^a-z0-9 ]', ' ') %>% str_squish() %>% str_sub(1, 40)
+}
+
+sbr_df <- read_csv(here('_data/3_refs_clean/sbr_repo_cleaned_240423.csv')) %>%
+  janitor::clean_names() %>%
+  select(-keywords) %>%
+  mutate(title = str_to_title(title) %>% stringi::stri_trans_general('Latin-ASCII'),
+         journal = str_to_title(journal),
+         author = str_remove(author, '\\[.+\\]')) %>%
+  mutate(title_short = make_short_title(title)) %>%
+  distinct()
+
+sbr_key <- sbr_df %>%
+  mutate(auth_short = author %>% 
+           stringi::stri_trans_general('Latin-ASCII') %>% 
+           tolower() %>%
+           str_remove(', .+') %>% 
+           str_remove_all('[^a-z]')) %>%
+  unnest_tokens(output = title_words, input = title, token = 'words', drop = FALSE) %>%
+  anti_join(stop_words, by = c('title_words' = 'word')) %>%
+  group_by(author, auth_short, title, title_short, journal, year) %>%
+  slice(1:4) %>%
+  summarize(title_cut = paste(title_words, collapse = ''), .groups = 'drop') %>%
+  mutate(key = paste(auth_short, title_cut, year, sep = '_')) %>%
+  select(key, author, title_short, journal, year)
+
+sbr_results_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_240429.csv')) %>%
+  bind_rows(read_csv(here('_data/4_colandr_screened/colandr_companion_excl_240429.csv'))) %>%
+  mutate(title = str_to_title(title) %>% stringi::stri_trans_general('Latin-ASCII'),
+         across(where(is.character), str_squish)) %>%
+  select(-id, -authors, year = publication_year, 
+         screening_status = `t&a_status`, excl_reason = `t&a_exclusion_reasons`) %>%
+  filter(!is.na(screening_status)) %>%
+  distinct() %>%
+  mutate(tags = str_remove_all(tags, '"|\\{|\\}') %>% str_split(',')) %>%
+  unnest(tags) %>%
+  mutate(excl_reasons = str_remove_all(excl_reason, '"|\\{|\\}') %>% str_split(',')) %>%
+  unnest(excl_reasons) %>%
+  group_by(title, year, screening_status) %>%
+  summarize(tags = paste0(unique(tags), collapse = ';'),
+            excl_reasons = paste0(unique(excl_reasons), collapse = ';'),
+            .groups = 'drop') %>% 
+  mutate(title_short = make_short_title(title)) %>%
+  ### fix mistakes that were in Colandr from the original SBR but have since been fixed
+  mutate(year = case_when(title_short == 'assessing the full effects of public inv' ~ 2014, 
+                          title_short == 'data poverty a global evaluation for 200' ~ 2016,
+                          title_short == 'the socio economic value of satellite ea' ~ 2020,
+                          title_short == 'the socio economic value of scientific p' ~ 2022,
+                          TRUE ~ year))
+
+sbr_out_df <- sbr_df %>%
+  inner_join(sbr_results_df %>% select(-title), 
+             by = c('title_short', 'year')) %>%
+  left_join(sbr_key) %>%
+  select(-title_short)
+
+sbr_incl_df <- sbr_out_df %>%
+  filter(screening_status == 'included') %>%
+  select(-vi, -sba, -ea, -screening_status, -excl_reasons)
+
+sbr_key2 <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))
+check <- sbr_out_df %>%
+  filter(!key %in% sbr_key2$key)
+
+### NOTE: some manual edits were made to this file - overwrite at your peril!
+# write_csv(sbr_out_df, here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+
+sbr_out_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+```
+
+## Examine inclusion/exclusion vs. tags
+
+```{r}
+sbr_ea_inclusion <- sbr_out_df %>%
+  mutate(ea_tagged = !is.na(ea)) %>%
+  group_by(ea_tagged, screening_status) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  pivot_wider(names_from = screening_status, values_from = n)
+
+sbr_ea_inclusion
+
+sbr_vi_inclusion <- sbr_out_df %>%
+  mutate(vi_tagged = !is.na(vi)) %>%
+  group_by(vi_tagged, screening_status) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  pivot_wider(names_from = screening_status, values_from = n)
+
+sbr_vi_inclusion
+
+
+sbr_sb_inclusion <- sbr_out_df %>%
+  mutate(sb_tagged = !is.na(sba)) %>%
+  group_by(sb_tagged, screening_status) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  pivot_wider(names_from = screening_status, values_from = n)
+
+sbr_sb_inclusion
+```
+
+## exclusion reasons
+
+```{r}
+excl <- sbr_out_df %>%
+  filter(screening_status == 'excluded') %>%
+  mutate(excl_reasons = str_split(excl_reasons, ';')) %>%
+  unnest(excl_reasons) %>%
+  group_by(excl_reasons) %>%
+  summarize(n = n_distinct(title)) %>%
+  mutate(excl_reasons = fct_reorder(excl_reasons, n))
+
+ggplot(excl, aes(y = excl_reasons, x = n)) +
+  geom_col() +
+  theme_minimal() +
+  theme(axis.title = element_blank())
+```
+
+
+## examine frequency of tags within included papers
+
+```{r}
+sbr_unnested <- sbr_out_df %>%
+  filter(screening_status == 'included') %>%
+  mutate(sba = str_split(sba, ';')) %>%
+  unnest(sba) %>%
+  mutate(ea = str_split(ea, ';')) %>%
+  unnest(ea) %>%
+  mutate(vi = str_split(vi, ';')) %>%
+  unnest(vi)
+  
+sba_df <- sbr_unnested %>%
+  mutate(sba = ifelse(is.na(sba) | sba == 'NA', 'none stated', sba)) %>%
+  select(title, sba) %>%
+  distinct() %>%
+  count(sba) %>% 
+  mutate(sba = fct_reorder(sba, n))
+
+ggplot(sba_df, 
+       aes(y = sba, x = n)) +
+  geom_col() + theme(axis.title = element_blank())
+
+ea_df <- sbr_unnested %>%
+  mutate(ea = ifelse(is.na(ea), 'none stated', ea)) %>%
+  select(title, ea) %>%
+  distinct() %>%
+  count(ea) %>% 
+  mutate(ea = fct_reorder(ea, n))
+
+ggplot(ea_df, 
+       aes(y = ea, x = n)) +
+  geom_col() + theme(axis.title = element_blank())
+```
+
+```{r}
+money_vec <- c('AUD', 'CHF', 'GBP', 'EUR', 'GTQ', 'CAN', 'CDN', 'TWD', 'EURO', 'KSH', 'KRW', 'money')
+fire_vec <- c('burned area', 'fire control')
+mortality_vec <- c('mortality', 'morbidity', 'deaths', 'fatality', 'lives lost', 'casualty rate')
+property_vec <- c('property damage', 'property loss', 'damage', 'property loss/damage')
+avoided_vec <- c('cost savings', 'costs avoided', 'avoided loss', 'loss reduction')
+uncert_vec <- c('accuracy', 'uncertainty', 'risk', 'error rate')
+injury_vec <- c('injury', 'injuries', 'infections', 'safety')
+consum_vec <- c('consumption', 'retail sales', 'spending', 'revenue', 'profit')
+ecol_vec <- c('ecosystem services', 'environmental impact', 'ecological resources')
+time_vec <- c('time', 'time savings', 'recreational days')
+econ_vec <- c('economic', 'economic growth', 'efficiency', 'Efficiency', 'GDP')
+ 
+vi_consolidated <- sbr_unnested %>%
+  ### group terms according to vectors above
+  mutate(vi = ifelse(vi %in% money_vec, 'non-USD currency', vi),
+         vi = ifelse(vi %in% avoided_vec, 'avoided costs/losses', vi),
+         vi = ifelse(vi %in% fire_vec, paste0(fire_vec, collapse = '/'), vi),
+         vi = ifelse(vi %in% uncert_vec, paste0(uncert_vec, collapse = '/'), vi),
+         vi = ifelse(vi %in% consum_vec, 'consumption/spending/revenue/profit', vi),
+         vi = ifelse(vi %in% time_vec, 'time/days', vi),
+         vi = ifelse(vi %in% ecol_vec, 'environ impact/ecosystem services', vi),
+         vi = ifelse(vi %in% econ_vec, 'economic/growth/efficiency/GDP', vi),
+         vi = ifelse(vi %in% injury_vec, 'injury/infection/safety', vi),
+         vi = ifelse(vi %in% property_vec, 'property loss/damage', vi),
+         vi = ifelse(vi %in% mortality_vec, 'mortality/morbidity', vi)) %>%
+  distinct() %>%
+  group_by(vi) %>%
+  mutate(vi = ifelse(n_distinct(title) == 1, 'other', vi)) %>%
+  ungroup() %>%
+  mutate(across(c(sba, vi, ea), ~ifelse(is.na(.x), '(none stated)', .x)))
+
+vi_df <- vi_consolidated %>% 
+  select(title, vi) %>%
+  distinct() %>%
+  filter(!is.na(vi)) %>% 
+  group_by(vi) %>%
+  mutate(vi = ifelse(n() == 1, 'other', vi)) %>%
+  ungroup() %>%
+  count(vi) %>% 
+  mutate(vi = fct_reorder(vi, n) %>% 
+           fct_relevel('other', after = 0) %>%
+           fct_relevel('(none stated)', after = 0))
+
+ggplot(vi_df, 
+       aes(y = vi, x = n)) +
+  geom_col() + theme(axis.title = element_blank())
+```
+
+```{r}
+ea_sba_heatmap <- vi_consolidated %>%
+  filter(!is.na(ea) & !is.na(sba)) %>%
+  mutate(ea = str_replace(str_squish(ea), ' and ', ' & '),
+         ea = str_replace(ea, 'Statistical Methods', 'Stats'),
+         ea = str_replace(ea, 'Input-Output', 'I/O'),
+         ea = str_replace(ea, 'Computable General Equilibrium \\(CGE\\)', 'CGE')) %>%
+  mutate(sba = str_replace_all(str_squish(sba), ' and ', '/'),
+         sba = str_replace(sba, 'Resources', 'Res')) %>%
+  group_by(ea) %>% mutate(n_ea = n_distinct(title)) %>%
+  group_by(sba) %>% mutate(n_sba = n_distinct(title)) %>%
+  ungroup() %>%
+  mutate(ea = fct_reorder(ea, n_ea),
+         sba = fct_reorder(sba, n_sba)) %>%
+  group_by(ea, sba) %>%
+  summarize(n = n_distinct(title), .groups = 'drop') %>%
+  complete(ea, sba)
+
+ggplot(ea_sba_heatmap, aes(x = ea, y = sba)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Economic Approach', y = 'Societal Benefit Area', fill = 'Docs')
+```
+
+```{r}
+ea_vi_heatmap <- vi_consolidated %>%
+  filter(!is.na(ea) & !is.na(vi)) %>%
+  mutate(ea = str_replace(str_squish(ea), ' and ', ' & '),
+         ea = str_replace(ea, 'Statistical Methods', 'Stats'),
+         ea = str_replace(ea, 'Input-Output', 'I/O'),
+         ea = str_replace(ea, 'Computable General Equilibrium \\(CGE\\)', 'CGE')) %>%
+  group_by(ea) %>% mutate(n_ea = n_distinct(title)) %>%
+  group_by(vi) %>% mutate(n_vi = n_distinct(title)) %>%
+  ungroup() %>%
+  mutate(ea = fct_reorder(ea, n_ea),
+         vi = fct_reorder(vi, n_vi)) %>%
+  group_by(ea, vi) %>%
+  summarize(n = n_distinct(title), .groups = 'drop') %>%
+  complete(ea, vi)
+
+ggplot(ea_vi_heatmap, aes(x = ea, y = vi)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Economic Approach', y = 'Value Indicator', fill = 'Docs')
+```
+
+```{r}
+  
+sba_vi_heatmap <- vi_consolidated %>%
+  filter(!is.na(sba) & !is.na(vi)) %>%
+  mutate(sba = str_replace_all(str_squish(sba), ' and ', '/'),
+         sba = str_replace(sba, 'Resources', 'Res')) %>%
+  group_by(sba) %>% mutate(n_sba = n_distinct(title)) %>%
+  group_by(vi) %>% mutate(n_vi = n_distinct(title)) %>%
+  ungroup() %>%
+  mutate(sba = fct_reorder(sba, n_sba),
+         vi = fct_reorder(vi, n_vi)) %>%
+  group_by(sba, vi) %>%
+  summarize(n = n_distinct(title), .groups = 'drop') %>%
+  complete(sba, vi)
+
+ggplot(sba_vi_heatmap, aes(x = sba, y = vi)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_viridis_c() +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Societal Benefit Area', y = 'Value Indicator', fill = 'Docs')
+```

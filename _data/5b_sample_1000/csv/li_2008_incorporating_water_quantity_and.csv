@@ -1,0 +1,657 @@
+page,p
+1,"incorporating water quantity and quality modelling into forest management by xiangfei li1,2, mohamed h."
+1,"nour3, daniel w."
+1,"smith1, ellie e."
+1,"prepas4,5, gordon putz6 and brett m."
+1,watson6 abstract under the authority of the millar western forest products ltd.
+1,"(mwfp) forest management agreement, the company has the right to harvest trees, grow trees, manage the forest and plan activities that assure forest productivity and indus- try profitability without jeopardizing the quality of the environment."
+1,"thus, as part of obtaining provincial government approval, the company has to submit a detailed forest management plan that includes a comprehensive assessment of the environmental implications of forestry operations and the mitigation of impacts."
+1,"forest management planning for the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 environmental sustainability will become more and more difficult with increased land use pressures from other indus- tries, agriculture and recreation."
+1,"therefore, the planning process will require increasingly more sophisticated modelling tools to identify and avoid significant impacts."
+1,"the forest watershed and riparian disturbance (forward) project pro- poses a hybrid modelling tool that relies on inexpensive remote sensing data, with few ground truthing requirements, to model streamflow, suspended solids and nutrients in streams on the boreal plain."
+1,incorporating modelling tools into the mwfp planning process provides mwfp additional strategies to operate in an environmentally sensitive manner.
+1,"thus, the company can maintain an allowable cut, while ensuring that ecological and physical values are considered."
+1,"key words: forest management and planning, modelling, artificial neural networks, swat, remote sensing, modis, gis résumé en fonction des droits accordés par le contrat d’aménagement forestier de millar western forest products ltd."
+1,"(mwfp), l’entreprise a la possibilité de couper du bois, de faire pousser des arbres, d’aménager la forêt et de planifier des activités qui assurent la productivité de la forêt et la profitabilité de l’entreprise sans mettre en péril la qualité de l’environnement."
+1,for personal use only.
+1,"par conséquent, afin d’obtenir l’approbation du gouvernement provincial, l’entreprise doit soumettre un plan d’aménage- ment forestier détaillé qui inclut une évaluation complète des implications environnementales des opérations forestières et de la mitigation de ces effets."
+1,"la planification de l’aménagement forestier dans un contexte de durabilité environnemen- tale deviendra de plus en plus difficile avec l’accroissement des pressions exercées en matière d’utilisation du territoire de la part des autres industries, de l’agriculture et des activités récréatives."
+1,"en conséquence, le processus de planification nécessitera de plus en plus l’utilisation d’outils sophistiqués de modélisation afin d’identifier et d’éviter les impacts signifi- catifs."
+1,"le projet forest watershed and riparian disturbance (forward) propose un outil hybride de modélisation qui repose sur des données de télédétection peu dispendieuses accompagnées de quelques vérifications au sol, permettant de modéliser l’écoulement des eaux, les solides en suspension et les éléments nutritifs des cours d’eau de la plaine boréale."
+1,l’inclusion des outils de modélisation au processus de planification de mwfp fournit à l’entreprise des stratégies addi- tionnelles d’opération respectant le contexte environnemental.
+1,"par conséquent, l’entreprise peut maintenir le niveau de coupe permis, tout en assurant que les valeurs écologiques et physiques sont prises en considération. ."
+1,"mots clés : aménagement forestier et planification, modélisation, réseaux neuronaux artificiels, swat, télédétection, modis, sig 1department of civil and environmental engineering, 3–133 markin/cnrl natural resources engineering facility, university of alberta, edmonton, alberta t6g 2w2."
+1,2author to whom correspondence should be sent.
+1,"e-mail: xiangfei@ualberta.ca 3isl engineering and land services ltd., 100 7909 – 51 avenue nw, edmonton, alberta t6e 5l9."
+1,"4faculty of forestry and the forest environment, lakehead university, thunder bay, ontario p7b 5e1."
+1,"5department of biological sciences, university of alberta, edmonton, alberta t6g 2e9."
+1,"6department of civil and geological engineering, university of saskatchewan, 57 campus drive, saskatoon, saskatchewan s7n 5a9."
+1,"338 mai/juin 2008, vol."
+1,"84, no 3 — the forestry chronicle"
+2,xiangfei li mohamed h.
+2,nour daniel w.
+2,smith ellie e.
+2,"prepas the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 alberta, and the university of saskatchewan to develop a bet- ter understanding of the impact of harvesting activities on soils, hydrology and water quality (smith et al. 2003b)."
+2,"over the past six years, forward research has provided a detailed database of soil properties, streamflow and water quality within the mwfp fma area and a better understand- ing of the link between land-based activities and water resource impacts."
+2,"initial streamflow and water quality simu- lation models have been formulated and tested on small pilot- scale forested watersheds near whitecourt, alberta."
+2,"to apply these models on a scale comparable to an entire industrial for- est management area, there is an urgent need to adapt them for personal use only."
+2,gordon putz brett m.
+2,watson to be less reliant on data-intensive inputs and to provide the means to include these models in operational forest manage- ment and planning.
+2,"this paper summarizes the available introduction water quantity and quality models, presents the forward in alberta, forestry is an important land-based resource stream flow and quality modelling approach and initial mod- activity, following only the oil and gas and agricultural sectors elling results, and proposes a framework toward incorporat- in economic importance."
+2,millar western forest products ltd. ing these modelling efforts in the dfmp process.
+2,(mwfp) is an alberta-based company involved in pulp and lumber production.
+2,the company’s harvesting activities are water quantity and quality modelling governed by a forest management agreement (fma) with simulation models are very useful tools to analyze watershed the province of alberta.
+2,"the obligations of an fma permit processes, and to develop and assess watershed management holder are to harvest no more than the amount of timber scenarios."
+2,"a multitude of applications (e.g., streamflow and stated in the fma, and to promptly regenerate and maintain water quality parameters forecasting, the evaluation of the the harvested areas in a forested condition."
+2,"in addition, the impact of different forest management and agricultural activ- fma holder should also plan its harvest strategy to prevent ities on water quantity and quality and the evaluation of detrimental effects to other interests in its fma area."
+2,"to watershed responses to different climate change scenarios) accommodate possible conflicting interests within an fma have contributed to the development of a vast number of area, the agreement holder prepares a detailed forest man- watershed models, starting in the early 1960s (wagener agement plan (dfmp) that sets the strategic planning 2005)."
+2,these models are usually a mixture of linear and non- process.
+2,"this process assures that each fma holder is follow- linear functions, combined to represent those processes ing the guidelines set out by the provincial government. occurring in a specific watershed and important for the study a set of harvesting control policies are currently used as objectives at hand. best practices, attempting to minimize the adverse impacts of forest harvesting on biodiversity, ecological integrity, water review of available watershed models quantity and quality and timber supply."
+2,"in an era of increased watershed models can be classified based on the degree of land use and resource development, forest management plan- spatial resolution into: (1) lumped models that use average ning processes will require increasingly more sophisticated values of input variables over the entire watershed area, and modelling tools and science-based evidence to identify and thus have minimal data requirements; (2) semi-distributed avoid significant impacts on the environment (smith et al. models that divide the watershed into sub-watersheds, in 2003a). which each sub-watershed carries a distinct set of input vari- as a first step toward developing the required modelling ables; and (3) distributed models that are pixel-based in terms tools, mwfp initiated the forest watershed and riparian of input representations and parameter routing, and therefore disturbance (forward) project in collaboration with having huge data requirements."
+2,"although using distributed researchers from lakehead university, the university of models is conceptually appealing, the superiority of the more may/june 2008, vol."
+2,"84, no."
+2,3 — the forestry chronicle 339
+3,complex semi-distributed and distributed models over the data requirements simpler lumped models is still an issue of debate (wilcox et al.
+3,"watershed-scale water quality models typically require a con- 1990, michaud and sorooshian 1994, hauhs et al."
+3,"1996, don- siderable amount of data (e.g., topography, vegetation cover, nelly-makowecki and moore 1999). soil characteristics, stream channel characteristics and sub- watershed models can also be classified according to surface infiltration) for model calibration."
+3,"providing the physical conceptualization into: (1) empirical (also called money and effort to get this information is infeasible for large data-driven); (2) physically based (also called mechanistic); land areas, thus hindering the applications of theses models in and (3) conceptual (also called parametric) models."
+3,empiri- practice.
+3,"the current resurgence in earth-observing satellite cal models use available time-series of input and output vari- and airborne platforms, along with the advancements in com- ables (e.g., nutrient concentrations, precipitation, streamflow, puter and software technology, has made it possible to evalu- temperature) to derive both the model structure and the cor- ate and quantify large numbers of watershed physical charac- responding parameter values."
+3,they therefore do not need a teristics and state variables via remote sensing (rs).
+3,"it is a complete prior knowledge about the physical, chemical, cost-efficient way to improve the spatial and temporal cover- hydro-morphological and biological processes controlling age of surface water and watershed monitoring (koponen et flow processes and contaminant transport mechanisms. al."
+3,2004).
+3,"rs techniques have expanded widely, to the point the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 physically based models mathematically describe a process that they now include most of the electromagnetic spectrum. using a set of principles, based on the conservation of mass, different sensors can provide unique information about momentum and energy."
+3,they are distributed models and properties of the surface or shallow layers of the earth. have intensive data requirements.
+3,"conceptual models include the application of rs information to watershed model- both simplified physically based components and empirical ling, as well as management, can be divided into three main components."
+3,"the modeller, based on a conceptualization of categories: (1) to delineate surface features, such as snow-cov- the watershed, specifies the structure of these models in ered areas, surface water extent or sediment plumes; (2) to advance and uses observations of the watershed response to retrieve information such as land cover, geological features or find appropriate values for the model parameters through other hydrologic parameters through interpretation and empirical relations."
+3,conceptual models form the large major- computer classification of remotely sensed data; and (3) to ity of models used in practice. directly use rs digital data to estimate hydrological state conceptual watershed-scale water quantity and quality parameters.
+3,"the third application is the most important to models include, but are not limited to, the soil and water watershed modelling and is normally achieved through elec- for personal use only."
+3,"assessment tool (swat) developed by arnold et al. (1998), tro-optical or statistical modelling of known hydrometric aerial non-point source watershed environment simulation- data with satellite data."
+3,although there has been some success 2000 (answers-2000) (beasley et al.
+3,"1980, bouraoui and in the application of rs data in hydrology, the incorporation dillaha 1996), hydrologic simulation program fortran of rs information in watershed water quality modelling still (hspf) (johanson et al. 1984), erosion productivity impact requires more effort. calculator (sharpley and williams 1990), annualized agricul- the moderate-resolution imaging spectroradiometer ture non-point source pollutant loading model (annagnps) (modis) sensor on board the earth-monitoring satellite (bingneer et al. 2001), and the guelph model for evaluating terra (united states national aeronautics space administra- the effects of agricultural management systems on erosion tion [nasa]) allows for measurement of plant growth on a and sedimentation (games) by cook et al."
+3,(1985).
+3,the use global scale at moderate spatial and temporal resolution.
+3,"the of this class of models presents the challenge of estimating or data provided by the modis land group (e.g., vegetation calibrating a large number of model parameters from infor- indexes (vis) like the normalized difference vegetation index mation with limited availability."
+3,"obtaining the information (ndvi), enhanced vegetation index (evi) and leaf area index necessary for model calibration is time-consuming and (lai)) support global to regional monitoring, modelling and expensive. assessment (justice et al."
+3,"1998, nasa 2007, li et al."
+3,2008).
+3,"data-driven models have been successful in capturing pat- furthermore, modis data are freely available, thus providing terns in data with less knowledge of the behaviour of the sys- a means of acquiring time series representations of vegetation tem in terms of interactions among the biological, geological, dynamics at an affordable cost."
+3,"for instance, a successful chemical and physical processes affecting the modelled sys- nutrient model requires information regarding soil and vege- tem."
+3,"consequently, they are attractive alternatives to tradi- tation nutrient status."
+3,rs vis can represent vegetation health tional conceptual models.
+3,"among those techniques, artificial and stress in terms of the vegetation chlorophyll content and neural network (ann) models hold promise for water quan- the leaf water content, which can be linked to soil/vegetation tity and quality modelling."
+3,ann models can often capture nutrient interactions and thus can aid in formulating rela- data patterns without extensive knowledge of the particular tively accurate and usable nutrient watershed models (cheng site-related problems and can model complicated and non- et al.
+3,2006).
+3,such information can potentially act as a surro- linear processes with fewer input variables than mechanistic gate for soil/vegetation nutrient transport and therefore can models.
+3,"since they are capable of handling large-scale and potentially represent vegetation dynamics in nutrient model complex problems, ann models provide great advantages in formulation. a wide range of water quality applications, such as modelling sediment concentrations (cigizoglu and alp 2006, cigizoglu integration of rs and gis with simulation models for watershed and kisi 2006, nour et al. 2006b, tayfur and guldal 2006, alp management and cigizoglu 2007), phosphorus concentrations (nour et al."
+3,"the complexity of decision-making, as well as data require- 2006b, c, d), and cyanobacteria blooms (maier et al. 2004, ments, has created a need to integrate rs and geographical teles et al. 2006) in surface waters."
+3,"information systems (gis) technology with simulation mod- 340 mai/juin 2008, vol."
+3,"84, no 3 — the forestry chronicle"
+4,els for watershed management.
+4,"gis technology is an essential characteristics and management features are considered tool in a variety of fields where spatial information processing homogeneous within an hru. is involved, such as forest management, urban planning and hydrologic processes are simulated within the swat agriculture."
+4,"rs is commonly used in conjunction with gis to model, including surface runoff, percolation, lateral subsur- provide spatial data in gis databases."
+4,"gis and rs have been face flow, groundwater flow, snowmelt and water storage combined with simulation models for many applications, (arnold et al."
+4,1998).
+4,"the swat model also simulates a vari- such as vegetation mapping and monitoring, biodiversity ety of other watershed processes (e.g., crop growth and nutri- mapping and modelling, hydrological modelling, land use ent cycling) using watershed information like weather, soil, planning and environmental impact assessment (skidmore topography, vegetation and land management practices."
+4,the 2002).
+4,"for example, a gis-based ann model was developed integration of gis and the swat model has proven to be an to simulate spatial distribution of nitrate (no3-) concentra- effective and efficient means for input data preprocessing and tions in groundwater with land use information and site-spe- output data visualization (arnold et al."
+4,1999).
+4,it has been suc- cific hydrogeological properties in an agricultural region cessfully used for many case studies (di luzio et al.
+4,"2005, qi (wang et al."
+4,2006).
+4,"gis tools were used to prepare and and grunwald 2005, santhi et al."
+4,"2005, grunwald and qi process input–output vectors data for the ann, which effi- 2006, olivera et al."
+4,2006).
+4,"the swat model is a comprehen- the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 ciently simulated groundwater no3- concentrations and cap- sive hydrologic model that can simulate streamflow, as well as tured the general trend of groundwater no3- pollution pat- water quality parameters."
+4,it is a public-domain model and is terns (wang et al.
+4,2006).
+4,the use of multi-temporal rs images conceptually sound.
+4,"however, it was initially developed to in support of environmental modelling analysis in a gis envi- simulate agricultural watersheds."
+4,a number of modifications ronment has contributed to identify a variety of long-term are required for the model to be able to simulate a forested interactions between resources and land use (ning et al.
+4,2006). ecosystem.
+4,the spatial and temporal variation in no3- in the basin of a small river was simulated by combining no3- dynamic mod- ann modelling elling and gis with the use of rs ndvi (matejicek et al.
+4,2003).
+4,an ann model is a data-driven modelling alternative that the ndvi was implemented in the dynamic model to esti- was developed in an attempt to mimic the learning of human mate the level of denitrification.
+4,"in summary, the integration brains."
+4,"anns consist of a large number of simple, highly inter- of simulation models, gis techniques and rs information is connected processing elements (neurons) in an architecture necessary to improve watershed management and decision- inspired by the structure of the cerebral cortex of the brain for personal use only. making processes when ground-based data are limited."
+4,(tsoukalas and uhrig 1997).
+4,the successful application of anns in water quantity and quality modelling indicates that forward modelling approach ann models are useful in supporting environmental deci- the forward project study area includes 16 watersheds (3 sion-making (maier et al.
+4,"2001, rudra et al."
+4,"2005, dakou et al. to 250 km2) located in the virginia hills, alberta (locations 2006, diamantopoulou et al."
+4,"2007, elhatip and komur 2008). shown in prepas et al."
+4,2008).
+4,"seven of the watersheds are rel- there are seven major components to an ann architec- atively undisturbed systems, four were up to 100% burned ture: (1) processing neurons, (2) a state of activation, (3) an during the virginia hill fire in 1998, four were harvested in output function for each neuron, (4) a pattern of connectivity 2004, and one was harvested in 2000."
+4,"data collection on soil, or weights between neurons, (5) a propagation rule, (6) an vegetation, meteorology, water quantity and water quality activation function to combine the inputs impinging on a began in 1998."
+4,"based on 11 selection criteria for modelling neuron with the current state of that neuron to produce a new streamflow and nutrient concentrations in boreal plain level of activation for that unit, and (7) a learning rule streams, two modelling approaches incorporating the swat whereby weights are adjusted for model calibration (rumel- model and anns have been used in the forward project hart and mcclelland 1986)."
+4,the processing neurons are gen- (putz et al.
+4,2003).
+4,a detailed description of the forward erally organized in layers.
+4,"the multi-layer perceptron neural project can be found in the journal of environmental engi- network trained with the error back-propagation training neering and science 2 (supplement s1). algorithm (mlp-bp) is by far the most popular of all neural networks (maier and dandy 2000, dawson and wilby 2001)."
+4,swat modelling considering the popularity of the algorithm and because the the swat model is a physically based distributed watershed- authors have applied this algorithm successfully in different scale model that operates on a daily time step.
+4,"it was devel- applications, it was used in this study. oped to predict the impact of watershed management on the development of ann models generally includes the water, sediment, nutrient and agricultural yields in large following steps: (1) input determination; (2) data division into basins for a long simulation period (arnold et al."
+4,1998).
+4,"spa- training, testing and validation datasets; (3) determination of tially, the swat model simulates a basin by subdividing it model architecture (e.g., number of hidden layers, number of into sub-basins based on topographic information."
+4,"the com- neurons in each layer, activation function, and learning rate); ponents of sub-basins include eight major divisions: hydrol- (4) model calibration; and (5) model evaluation."
+4,"the deter- ogy, weather, sedimentation, soil temperature, crop growth, mination of model inputs is one of the most important steps nutrients, pesticides and agricultural management (arnold et in developing a successful ann model."
+4,training data quality al.
+4,1998).
+4,the sub-basins can be further divided into smaller is of paramount importance to a data-driven modelling modelling units called hydrologic response units (hrus) approach like ann.
+4,inclusion of noisy and correlated input depending on the heterogeneity of land uses and soil types variables can increase computational complexity and deterio- within the sub-basin (muleta and nicklow 2005).
+4,watershed rate model performance.
+4,"thus, input variables should be may/june 2008, vol."
+4,"84, no."
+4,3 — the forestry chronicle 341
+5,"carefully selected to closely describe the physical system being their hybrid model, the spatial variation of rainfall, the het- modelled."
+5,"ideally, the available input/output data pairs should erogeneity of watershed characteristics and their impacts on be divided into three data sets for training (calibrating), test- runoff were investigated by the semi-distributed conceptual ing and validating the model."
+5,"the training data set is used for rainfall-runoff model, while the nonlinear transformations of model training and for the optimization of the model connec- the runoff generated from the individual subcatchments into tion weights."
+5,the testing set is used to decide when to stop the total runoff at the watershed outlet were performed by the training to avoid model overfitting.
+5,the cross-validation data anns.
+5,this hybrid model took into account both the spatial set is used to evaluate the model against a totally independent variation presented by the semi-distributed conceptual model data set.
+5,"careful data division is important to assure good and the nonlinear mapping ability of anns, highlighting the model generalization ability."
+5,"model architecture determina- possibility of integrating the two kinds of models. tion generally relies upon modellers’ experience; however, forward researchers use one physically based data- guidelines have been proposed in recent studies (e.g., maier intensive approach to understand the biological, geological, and dandy 2000, nour et al. 2006d)."
+5,"for an ann to generate chemical and physical behaviours of the system, and one output predictions that are as close as possible to the objective data-driven approach that is flexible in terms of data require- values, model calibration is an essential step to find optimal ments to develop a modelling tool that is less data-intensive."
+5,"the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 weights, minimizing a predetermined error function."
+5,"after in addition, attempts to link both the swat and the ann model calibration, the power of the models in terms of pre- approaches are ongoing to capitalize on the strength of each diction accuracy, robustness and generalization ability should technique. be verified before the models are put in use."
+5,"the models usu- ally are tested through several criteria including: the coeffi- initial modelling results cient of multiple determination (r2), correlation coefficient, to date, forward researchers have made significant mod- root mean squared error, the multivariate corrected akaike’s ifications to the swat model to better model watersheds information criterion (aicc), the bayesian information crite- located in forested ecosystems."
+5,"more modifications are rion (bic), swapping the testing and validation data sets, plot- underway."
+5,"they developed a step-by-step framework for ting measured and predicted values over time and graphing modelling time-correlated variables using ann and a proto- measured and predicted values for training, testing and vali- col for utilizing rs information in water quality modelling, dation data sets (nour et al. 2008a). and they have applied the developed models successfully in experimental small watersheds in the boreal plain."
+5,both these for personal use only.
+5,link between swat and ann modelling efforts require significant additional advancements the swat model is widely used for hydrologic processes before they can to be applied to a larger landbase (like an simulation and to support decision-making within watershed fma area) due to the lack of detailed distributed landbase management.
+5,it has been upgraded over time and integrated data.
+5,the experience gained from implementing ann and with a gis database component.
+5,"however, as a physically swat models in small experimental watersheds will pave the based distributed basin scale model, the swat model is very road for further development towards a robust technique for data intensive."
+5,"in some situations, the power of swat is com- utilizing rs data at the wider fma scale."
+5,the following sec- promised due to data limitation.
+5,"on the other hand, anns tions summarize the conducted modifications for the swat are able to identify the relationship between inputs and out- model, and the initial results of the ann modelling puts, without fully understanding the mechanistic principles approach. behind them."
+5,ann models have proved to be superior to mechanistic models when data are limited and numerous modification of swat assumptions have to be made to solve the physically based because the swat model was originally developed for agri- equations.
+5,"for instance, in-stream nitrogen concentrations, cultural watershed management, a series of modifications which are affected by land use/land classification, vegetation have been incorporated to make it effective for boreal forest dynamics and in-stream nitrogen transformations, were sim- management."
+5,"the modified model, called swat-boreal for- ulated reasonably well with the ann approach (lek et al. est (swat-bf), incorporates the following major changes: 1999, khalil et al."
+5,2005).
+5,a litter layer component adopted from wattenbach et al.
+5,a study comparing the performance of swat and ann (2005) has been incorporated.
+5,the litter layer contains models in simulating hydrologic processes in an agricultural many nutrients and is an important component of forest watershed found that the ann monthly predictions were ecosystem.
+5,it is able to store water and reduce peak flows closer to the observed flows than the monthly predictions during rain events. from the swat model (srivastava et al.
+5,2006).
+5,this and other 2.
+5,an algorithm was incorporated to account for the effects studies suggest that ann is an attractive modelling alterna- of slope and aspect on incoming solar radiation. tive for hydrologic and water quality modelling.
+5,"however, 3."
+5,"a new wetlands model was incorporated, since the origi- current anns efforts cannot take into account spatial varia- nal wetlands model was not deemed suitable for the wet- tion within a watershed."
+5,more efforts are needed to explore lands found in boreal forests.
+5,the new wetlands model is the applicability of developing semi-distributed watershed based on a bucket model approach.
+5,it has an upper organic models using ann. layer and a lower organic layer.
+5,a non-linear function is there have been very limited attempts in the literature to used to determine the amount of lateral flow from each develop a hybrid swat/ann approach.
+5,for example a layer.
+5,"unlike the original wetlands model in swat, the hybrid rainfall-runoff model integrating anns with a con- new model accounts for water uptake by vegetation, sur- ceptual model was introduced by chen and adams (2006)."
+5,"in face runoff, percolation and base flow."
+5,"342 mai/juin 2008, vol."
+5,"84, no 3 — the forestry chronicle"
+6,a new feature has been incorporated into swat that they captured the seasonal cycle of the modelled parameters enables lateral flow and base flow from upland hrus to be and accurately predicted both base and peak concentrations routed through lowland wetlands that are found in valley (see fig. 1 as an example). bottoms.
+6,"previously with swat, this was not possible."
+6,"to quantify the impact of land use activities on water qual- instead, all hrus simply contributed to the stream and ity, the model must divide the watershed into sub-watersheds, there was no consideration of the position of the hrus in to be able to recognize the locations of disturbances and the landscape."
+6,lowland wetlands tend to retain water and hence simulate the corresponding impacts.
+6,"forward dampen peak flows, so this new arrangement in swat researchers conducted a leading study on the impact of water- attempts to reproduce that process. shed subdivision on the prediction accuracy of tp concentra- tion in boreal plain streams (nour et al. 2008b)."
+6,"although the ann modelling of streamflow and water quality parameters statistical model evaluation favoured the finest spatial resolu- the forward researchers have been successful in using tion, all model performance indicators were satisfactory for ann modelling to predict streamflow, and water-phase total the four models devised for different watershed subdivisions suspended solids (tss), total phosphorus (tp), and nitrogen for the willow watershed."
+6,the differences in performance components (no3- and total dissolve nitrogen (tdn)) in indicators were not significant for any practical application.
+6,"the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 undisturbed forward watersheds (e.g., willow, two therefore, it was concluded that the choice of the optimum creek, and cassidy), disturbed watersheds (e.g., burnt pine) watershed subdivision should depend upon the modelling and watersheds with a relatively large percentage of wetlands objective (nour et al. 2008b)."
+6,"lumped parameter models are (e.g., 1a) (table 1)."
+6,"the main advantage of the developed easy to construct and rely on affordable landbase information, ann models is that they use as inputs meteorological data, but cannot address questions related to the impact of differ- which are easily accessible in the boreal forest via environ- ent land use scenarios on water quality."
+6,"therefore, if the ment canada weather stations and provincial fire towers, and objective is to forecast real-time water quality (likely used for public-domain, free-of-cost rs modis-derived vis."
+6,"the post-harvesting assessment), lumped parameter modelling model inputs were carefully selected to reflect causality, time can be used without jeopardizing prediction accuracy."
+6,on the correlation and q/tss/nutrient hystereses loops.
+6,"the inputs other hand, if the objective is to quantify the impact of differ- are composed of cause/effect factors (e.g., rainfall (r), snow- ent land use activities, then the watershed must be divided fall (s), temperature (t), degree-days (dd), and evi), time- into sub-watersheds to make the model able to recognize the lagged inputs (e.g., rt, rt-1, …rt-n) and inputs reflecting locations of disturbances and, thus, able to simulate the cor- for personal use only. seasonal cyclisity and q/tss/nutrient hystereses behaviour responding impacts on water quality."
+6,"based on our results, we (e.g., sin(2pvt), cos(2pvt), julian day), which are determined conclude that only in this case is the added time, cost and based on a combination of prior knowledge of the system being effort of preparing and processing distributed landbase infor- modelled, as well as statistical analysis of the data (table 1). mation justifiable."
+6,"the developed models predictions compared well with the successful ann modelling of water quantity and quality validation data results (r2 of validation > 0.76), which high- parameters relying only on meteorological and rs data sug- lights the good generalization ability of these models."
+6,"also, gests that the proposed models can potentially be applied to table 1."
+6,initial ann modelling results for streamflow and water quality parameters.
+6,"model performance (r2) modelled forward parameter watersheda input parameters calibration validation references q cassidy, willow, rb, ddb, sb, tb, seasonal cycle indicators > 0.90 > 0.84 nour et al."
+6,"1a, two creek (sin(2pvt), cos(2pvt)) 2006b, c, 2008a tss two creek r, dd, s, seasonal cycle indicators > 0.90 > 0.90 nour et al. 2006b (sin(2pvt), cos(2pvt)) tp willow, 1a, r, dd, s, t, evib, and seasonal cycle indicators > 0.86 > 0.76 nour et al."
+6,"2005; two creek (sin(2pvt), cos(2pvt)) nour et al. 2006b, 2008b tdn willow, two creek, r, dd, t, evi, seasonal cycle indicator (julian day) > 0.90 > 0.90 li et al."
+6,"2008 burnt pine no3- willow, two creek, r, dd, t, evi, seasonal cycle indicator (julian day) > 0.90 > 0.90 li et al."
+6,"2008 burnt pine nh4+ willow, two creek, r, dd, t, evi, seasonal cycle indicator (julian day) > 0.90 > 0.83 li et al."
+6,"2008 burnt pine acassidy, willow and two creek are undisturbed watersheds, 1a is undisturbed and has a large percentage of wetlands, burnt pine watershed was 100% burned in 1998. br: rainfall, dd: degree-days, s: snowfall, t: air temperature, evi: enhanced vegetation index."
+6,"may/june 2008, vol."
+6,"84, no."
+6,3 — the forestry chronicle 343
+7,the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 for personal use only.
+7,"time series plot of measured and ann predicted (a) streamflow (q), (b) total phosphorus (tp), and (c) total dissolved nitrogen (tdn) for the willow watershed. modelling watersheds in an fma-scale landbase."
+7,the use of in the burnt pine watershed (burned in 1998) are captured by modis-derived vis has played an important role in repre- the modis-derived evi (fig.
+7,higher evi values indicate senting phosphorus and nitrogen dynamics within the higher density of vegetation canopy.
+7,"compared to the evi of soil/vegetation phases in the developed water quality models. the willow watershed, the evi of the burnt pine watershed for example, changes to the vegetation canopy after wildfire was lower and demonstrated an increasing trend from 2001 344 mai/juin 2008, vol."
+7,"84, no 3 — the forestry chronicle"
+8,the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 fig.
+8,comparison of enhanced vegetation index (evi) for the willow and burnt pine watersheds from 2001 to 2005.
+8,"for personal use only. through 2005, which was resulted from the recovery of vege- obtaining good model predictions on unseen data is the avail- tation with time since disturbance (fig."
+8,"the following sec- ability of representative data for model training (including tion proposes a plan to extrapolate the application of the cur- wet, dry, and normal conditions), and the key for successful rently developed models to the entire mwfp fma area. model transferability from one watershed to the other is hydrologic similarity."
+8,"thus, the following steps summarize a framework to include modelling in the dfmp process the proposed forward approach toward incorporating the goal of the forward project is to develop an improved water quantity and quality modelling in the mwfp dfmp decision support tool (essentially integrated streamflow and process: water quality models), which is capable of predicting changes 1."
+8,delineate the digital elevation model (dem) of the in streamflow and water quality parameters as a result of pro- mwfp fma area into first order watersheds (~ 5 km2) posed spatial and temporal patterns of forest harvesting.
+8,the using the eight-direction pour-point algorithm and a rea- improved decision support tool will be incorporated into sonable threshold for flow accumulation.
+8,this task is mwfp’s next dfmp to provide the capability to limit and already completed and details are presented in prepas et al. control disturbance effects on water resources in the mwfp (2008).
+8,fma area.
+8,"this task is challenging, due to our immature 2."
+8,"use rainfall interpolation techniques like kriging and understanding of the hydrological, biological and chemical inverse distance weighted interpolation techniques to esti- mechanisms that control contaminant transport at the large mate daily rainfall intensity in the centroid of each water- watershed scale, as well as the lack of pertinent data for model shed using data from surrounding weather stations (fire calibration."
+8,"providing the human and infrastructure towers, environment canada, and forward project sta- resources to gauge streamflow and measure water quality in tions)."
+8,"forward researchers have established the inter- all watersheds of interest in an fma area is impractical, thus polation algorithm (nour et al. 2006a)."
+8,"the interpolation a class of models that could simulate the response of weights can be assumed to be fixed with time, and thus can ungauged watersheds by relying on easily accessible informa- be used for future scenario simulations. tion (like meteorological and rs inputs) is important to forest 3."
+8,"formulate streamflow (q), tss and nutrient models for management planning."
+8,"the previously described ann mod- several of the 16 forward experimental watersheds and els use readily available, easily accessed meteorological infor- validate with the remaining watersheds."
+8,a series of combi- mation and public-domain free-of-cost information as model nations of calibration and validation watersheds will be inputs.
+8,such models can have a good chance of application in examined to assure model stability and parsimony.
+8,this ungauged watersheds due to the relative ease of obtaining process is still ongoing.
+8,"for each model to be constructed, these inputs for an entire fma area."
+8,"however, initial results the following must be done: (1) modis images must be from the forward modelling efforts suggest that the key to downloaded from nasa; (2) data quality has to be may/june 2008, vol."
+8,"84, no."
+8,3 — the forestry chronicle 345
+9,the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 fig.
+9,a framework to model ungauged watersheds using artificial neural network (ann) models.
+9,"dem: digital elevation model, rs: for personal use only. remote sensing, gis: geographical information systems, nn: neural network. assessed; (3) a yearly stack of images will be constructed bance on the landbase will be fed to the models to identify for each spectral band of importance (e.g., red, near the impact of different land use activities on water quality infrared, mid-infrared, and blue bands) using erdas imag- and quantity."
+9,"to design these scenarios, a relation has to be ine image processing software (from leica geosystems); established between vis (currently used in modelling) and (4) map algebra will be used to calculate relevant vis that typically used vegetation metrics (e.g., timber volume, will later serve as inputs to the water quality models; (5) average age, height, and diameter at breast height)."
+9,"this the dem-derived watersheds will be overlapped on the relation can be used to translate vegetation cut into values satellite images to extract relevant vis for each delineated of vis that can be fed to the models to predict changes in watershed; (6) cross correlation and spectral analyses will streamflow, water-phase solids, and nutrients in response be used to identify time-lagged inputs and feed the model to harvesting scenarios. with q/tss/nutrient hystereses loops, respectively; and (7) the previous demonstration will finally be repeated with different ann models will be formulated for predicting q, a hybrid ann/swat modelling approach, which would tss and nutrient concentrations for the forward likely create boundaries and reduce the number of parameters experimental watersheds. for the ann modelling (a data-driven approach) based on 5."
+9,"the previously delineated watersheds, including the for- the conceptual representation of the swat model (a concep- ward study watersheds, will be grouped into different tually based approach) and thus make it easier for ann categories according to hydrologic homogeneity in term of parameter estimation."
+9,"vis, average slope, % wetland composition, yearly precip- itation, and basin area (fig."
+9,"it is proposed to use an conclusions advanced classification technique (kohonen neural net- over the past six years, the forward research project has works; kohonen 1982) to classify the mwfp fma area developed a detailed database of soil properties, streamflow delineated watersheds into groups of hydrologically simi- and water quality within the mwfp fma area and a better lar watersheds."
+9,data must be collected for a member of understanding of the impact of land-based activities on water each group where none of the forward study water- resources.
+9,simulation models capable of modelling initial sheds exist.
+9,"models are to be calibrated for these additional streamflow, tss and nutrient concentrations have been devel- watersheds as described in no. 3 above."
+9,"this results in a oped and tested on pilot-scale forested watersheds near white- calibrated model for each group of watersheds. court, alberta."
+9,to apply these models on a full-scale industrial 6.
+9,"each calibrated model will then be run for all the water- fma area, it is necessary to adapt them to be less data-inten- sheds falling into its group of similar watersheds."
+9,upon sive and to provide the means to incorporate these models in successful implementation of models to the whole fma operational forest management and planning.
+9,"therefore, area, scenario-based analysis that forces harvesting distur- forward attempted to rely on one physically based 346 mai/juin 2008, vol."
+9,"84, no 3 — the forestry chronicle"
+10,"approach to understand the biological, geological, chemical, cigizoglu, h.k. and o."
+10,"methods to improve the neural and physical behaviours of the system, and one data-driven network performance in suspended sediment estimation."
+10,"hydrol. approach, which is flexible in terms of data requirements, to 317: 221–238. develop a modelling tool that is less data-intensive."
+10,"in addi- cook, d.j., w.j."
+10,dickinson and r.p.
+10,rudra.
+10,"games-the guelph model for evaluating the effects of agricultural management tion, attempts to link both approaches are ongoing in order to systems in erosion and sedimentation."
+10,user’s manual.
+10,"guelph, on. capitalize on the strengths of each technique."
+10,"dakou, e., p.l.m."
+10,"goethals, t."
+10,"d’heygere, a.p."
+10,"dedecker, w."
+10,"to date, forward researchers have made significant gabriels, n."
+10,de pauw and m.
+10,lazaridou-dimitriadou.
+10,2006. modifications to the swat model to better model watersheds development of artificial neural network models predicting located in forested ecosystems.
+10,more modifications are macroinvertebrate taxa in the river axios (northern greece). underway.
+10,they developed a step-by-step framework for annales de limnologie-int.
+10,limnol.
+10,"42: 241–250. modelling time-correlated variables using ann, a protocol dawson, c.w. and r.l."
+10,wilby.
+10,"hydrological modelling using for utilizing rs information in water quality modelling, and artificial neural networks."
+10,progr.
+10,geogr.
+10,"25: 80–108. they have applied the developed models successfully in exper- di luzio, m., j.g."
+10,arnold and r.
+10,srinivasan.
+10,effect of gis imental watersheds on the boreal plain. data quality on small watershed stream flow and sediment simula- tions.
+10,hydrol.
+10,19: 629–650.
+10,"the experience gained from implementing ann and the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 diamantopoulou, m.j., p.e."
+10,georgiou and d.m.
+10,papatnichail.
+10,swat models in experimental watersheds will pave the road performance of neural network models with kalman learning rule for for further development towards a robust technique for utiliz- flow routing in a river system.
+10,fresenius environ.
+10,16: 1474–1484. ing rs data at the broader fma scale.
+10,"the results of the donnelly-makowecki, l.m. and r.d."
+10,moore.
+10,hierarchical model application within the mwfp fma area will be docu- testing of three rainfall-runoff models in small forested catchments. mented and included in the company’s next dfmp.
+10,these j.
+10,hydrol.
+10,"219: 136–152. efforts will provide a leading example for similar forest indus- elhatip, h. and m.a."
+10,komur.
+10,"evaluation of water quality try companies on how to predict and mitigate disturbance on parameters for the mamasin dam in aksaray city in the central the landscape wisely, so that water quality is not impaired."
+10,anatolian part of turkey by means of artificial neural networks.
+10,this work will also likely provide guidelines for including environ.
+10,53: 1157–1164.
+10,"grunwald, s. and c."
+10,"gis-based water quality modeling in such modelling tools in operational forest management and the sandusky watershed, ohio, usa."
+10,water resour.
+10,assoc. planning for possible use by other forest industry companies.
+10,42: 957–973.
+10,"hauhs, m., c."
+10,"neal, r."
+10,hooper and n.
+10,christophersen.
+10,acknowledgements summary of a workshop on ecosystem modeling: the end of an era?
+10,for personal use only.
+10,the forward project is funded by the natural sciences sci.
+10,total environ.
+10,"183: 1–5. and engineering research council of canada (crd and dis- johanson, r.c., j.c."
+10,"imhoff, j.l."
+10,kittle and a.s.
+10,donigian.
+10,"1984. covery grant programs) and millar western forest products hydrological simulation program-fortran (hspf) user’s man- ltd., as well as the canada foundation for innovation, blue ual."
+10,"environmental protection agency, athens, ga."
+10,"ridge lumber inc. (a division of west fraser timber com- justice, c.o., e."
+10,"vermote, j.r.g."
+10,"townshend, r."
+10,"defries, d.p."
+10,"roy, d.k."
+10,"hall, v.v."
+10,"salomonson, j.l."
+10,"privette, g."
+10,"riggs, a."
+10,"strahler, w. pany ltd.), alberta newsprint company (anc timber), lucht, r.b."
+10,"myneni, y."
+10,"knyazikhin, s.w."
+10,"running, r.r."
+10,"nemani, vanderwell contractors (1971) ltd., the living legacy z.m."
+10,"wan, a.r."
+10,"huete, w. van leeuwen, r.e."
+10,"wolfe, l."
+10,"giglio, j.p."
+10,"research program, and the ontario innovation trust."
+10,"muller, p."
+10,lewis and m.j.
+10,barnsley.
+10,the moderate resolution imaging spectroradiometer (modis): land remote sensing for references global change research.
+10,ieee trans.
+10,geosci.
+10,remote sens.
+10,"36: alp, m. and h.k."
+10,cigizoglu.
+10,"suspended sediment load simu- 1228–1249. lation by two artificial neural network methods using hydrometeo- khalil, a., m.n."
+10,"almasri, m."
+10,"mckee, and j.j."
+10,kaluarachchi.
+10,2005. rological data.
+10,environ.
+10,model.
+10,22: 2–13.
+10,"applicability of statistical learning algorithms in groundwater qual- arnold, j.g., r."
+10,"srinivasan, r.s."
+10,muttiah and j.r.
+10,williams.
+10,1998. ity modeling.
+10,water resour.
+10,41: art.
+10,w05010.
+10,"large area hydrologic modeling and assessment – part 1: model kohonen, t."
+10,self-organized formation of topologically correct development.
+10,water resour.
+10,assoc.
+10,34: 73–89. feature maps.
+10,cybern.
+10,43: 59–69.
+10,"arnold, j.g., r."
+10,"srinivasan, t.s."
+10,ramanarayanan and m.
+10,"di koponen, s., k."
+10,"kallio, j."
+10,"pulliainen, j."
+10,"vepsalainen, t."
+10,pyhalahti luzio.
+10,water resources of the texas gulf basin.
+10,water sci. and m.
+10,hallikainen.
+10,water quality classification of lakes using technol.
+10,39: 121–133. 250-m modis data.
+10,ieee geosci.
+10,remote sens.
+10,1: 287–291.
+10,"beasley, d.b., l.f."
+10,huggins and e.j.
+10,monke.
+10,"answers – a lek, s., m."
+10,guiresse and j.-l.
+10,giraudel.
+10,predicting stream model for watershed planning.
+10,trans.
+10,"asae 23: 938–944. nitrogen concentration from watershed features using neural net- bingneer, r.l., f.d."
+10,"theurer, r.g."
+10,cronshey and r.w.
+10,darden. works.
+10,water res.
+10,33: 3469–3478.
+10,agnps 2001 [online].
+10,available from http://msa.ars.usda.
+10,"li, x., m.h."
+10,"nour, d.w."
+10,smith and e.e.
+10,prepas.
+10,"modelling gov/ms/oxford/nsl/agnps.html. nitrogen composition in streams on the boreal plain using genetic bouraoui, f. and t.a."
+10,dillaha.
+10,answers-2000: runoff and adaptive general regression neural networks.
+10,environ.
+10,sci. sediment transport model.
+10,environ.
+10,eng.-asce 122: 493–502.
+10,(under review).
+10,"chen, j. and b.j."
+10,adams.
+10,"integration of artificial neural net- maier, h.r. and g.c."
+10,dandy.
+10,neural networks for the predic- works with conceptual models in rainfall-runoff modeling.
+10,j. tion and forecasting of water resources variables: a review of model- hydrol.
+10,318: 232–249. ling issues and applications.
+10,environ.
+10,model.
+10,15: 101–124.
+10,"cheng, y.b., p.j."
+10,"zarco-tejada, d."
+10,"riano, c.a."
+10,rueda and s.l.
+10,"maier, h.r., m.d."
+10,burch and m.
+10,bormans.
+10,flow manage- ustin.
+10,"estimating vegetation water content with hyperspectral ment strategies to control blooms of the cyanobacterium, anabaena data for different canopy scenarios: relationships between aviris circinalis, in the river murray at morgan, south australia."
+10,regul. and modis indexes.
+10,remote sens.
+10,environ.
+10,105: 354–366.
+10,rivers res.
+10,manage.
+10,17: 637–650.
+10,"cigizoglu, h.k. and m."
+10,"generalized regression neural maier, h.r., g.b."
+10,"kingston, t."
+10,"clark, a."
+10,frazer and a.
+10,sanderson. network in modelling river sediment yield.
+10,37: 63–68.
+10,"risk-based approach for assessing the effectiveness of flow may/june 2008, vol."
+10,"84, no."
+10,3 — the forestry chronicle 347
+11,management in controlling cyanobacterial blooms in rivers.
+11,river management upon streamflow and water quality: basic concepts and res.
+11,20: 459–471. considerations.
+11,environ.
+11,2 (suppl.
+11,s1): 87–101.
+11,"matejicek, l., l."
+11,benesova and j.
+11,tonika.
+11,"ecological model- qi, c. and s."
+11,grunwald.
+11,gis-based hydrologic modeling in ling of nitrate pollution in small river basins by spreadsheets and the sandusky watershed using swat.
+11,trans.
+11,asae 48: 169–180.
+11,model.
+11,170: 245–263.
+11,"rudra, r.p., s.c."
+11,negi and n.
+11,gupta.
+11,"modelling approaches michaud, j. and s."
+11,sorooshian.
+11,comparison of simple versus for subsurface drainage water quality management.
+11,water qual.
+11,res. complex disturbed runoff models on a midsized semiarid watershed.
+11,40: 71–81.
+11,water resour.
+11,30: 593–605.
+11,"rumelhart, d.e. and j.l."
+11,mcclelland.
+11,"parallel distributed muleta, m.k. and j.w."
+11,nicklow.
+11,decision support for water- processing: explorations in the microstructure of cognition.
+11,2. shed management using evolutionary algorithms.
+11,water resour.
+11,"mit press, cambridge, ma."
+11,manage. -asce 131: 35–44.
+11,"santhi, c., r.s."
+11,"muttiah, j.g."
+11,arnold and r.
+11,srinivasan.
+11,a national aeronautics and space administration (nasa).
+11,gis-based regional planning tool for irrigation demand assessment data gateway interface [online].
+11,available from http://modis.gsfc. and savings using swat.
+11,trans.
+11,asae 48: 137–147. nasa.gov/ [cited 15 june 2007].
+11,"sharpley, a.n., and williams, j.r."
+11,"epic-erosion/productiv- ning, s.k., n.b."
+11,"chang, k.y."
+11,jeng and y.h.
+11,tseng.
+11,soil ero- ity impact calculator: i.
+11,"model documentation, tech."
+11,"bull. sion and non-point source pollution impacts assessment with the aid skidmore, a.k."
+11,introduction.
+11,skidmore (ed.).
+11,environ- the forestry chronicle downloaded from pubs.cif-ifc.org by santa barbara (ucsb) on 08/02/24 of multi-temporal remote sensing images.
+11,environ.
+11,manage. 79: mental modelling with gis and remote sensing.
+11,taylor & francis 88–101.
+11,"inc., new york."
+11,"nour, m.h., a."
+11,"khan, d.w."
+11,"smith, and m.g."
+11,el-din.
+11,"on the smith, d.w., j.s."
+11,"russell, j.m."
+11,burke and e.e.
+11,prepas. 2003a. potential of satellite derived vegetation phenology for watershed expanding the forest management framework in the province of nutrient modelling: a neural network approach.
+11,proceedings of the alberta to include landscape-based research.
+11,environ.
+11,"2 water environment federation, weftec®2005."
+11,"washington, dc."
+11,(suppl.
+11,s1): 15–22. 23 p.
+11,"smith, d.w., e.e."
+11,"prepas, g."
+11,"putz, j.m."
+11,"burke, w.l."
+11,meyer and i.
+11,"nour, m.h., d.w."
+11,smith and m.g.
+11,el-din. 2006a.
+11,geostatistical whitson. 2003b.
+11,the forest watershed and riparian disturbance mapping of precipitation: implications for rain gauge network study: a multi-discipline initiative to evaluate and manage watershed design.
+11,water sci.
+11,technol.
+11,53: 101–110. disturbance on the boreal plain of canada.
+11,environ.
+11,"2 nour, m.h., d.w."
+11,"smith, m.g."
+11,el-din and e.e.
+11,prepas. 2006b.
+11,(suppl.
+11,s1): 1–13.
+11,"neural networks modelling of streamflow, phosphorus, and sus- srivastava, p., j.n."
+11,mcvair and t.e.
+11,johnson.
+11,comparison of pended solids: application to the canadian boreal forest.
+11,water sci. process-based and artificial neural network approaches for stream- technol.
+11,53: 91–99. flow modeling in an agricultural watershed.
+11,water resour.
+11,"nour, m.h., d.w."
+11,"smith, m.g."
+11,el-din and e.e.
+11,prepas. 2006c.
+11,the assoc.
+11,42: 545–563.
+11,"for personal use only. application of artificial neural networks to flow and phosphorus tayfur, g. and v."
+11,guldal.
+11,"artificial neural networks for esti- dynamics in small streams on the boreal plain, with emphasis on the mating daily total suspended sediment in natural streams."
+11,nordic role of wetlands.
+11,model.
+11,191: 19–32.
+11,hydrol.
+11,37: 69–79.
+11,"nour, m.h., d.w."
+11,"smith, m.g."
+11,el-din and e.e.
+11,prepas. 2006d.
+11,"teles, l.o., v."
+11,"vasconcelos, e."
+11,pereira and m.
+11,saker.
+11,time artificial neural networks and time series modelling of tp concen- series forecasting of cyanobacteria blooms in the crestuma reser- tration in boreal streams: a comparative approach.
+11,environ.
+11,"eng. voir (douro river, portugal) using artificial neural networks."
+11,envi- sci.
+11,5 (suppl.
+11,s1): 39–52. ron.
+11,manage.
+11,38: 227–237.
+11,"nour, m.h., d.w."
+11,"smith, m.g."
+11,el-din and e.e.
+11,prepas. 2008a.
+11,"tsoukalas, l.h. and r.e."
+11,uhrig.
+11,fuzzy and neural towards a generic neural network model for the prediction of daily approaches in engineering.
+11,"wiley-interscience, new york. streamflow in ungauged boreal plain watersheds."
+11,environ.
+11,"wagener, t."
+11,watershed modelling.
+11,in water encyclopedia.
+11,(in press).
+11,"john wiley & sons, inc."
+11,"nour, m.h., d.w."
+11,"smith, m.g."
+11,el-din and e.e.
+11,prepas. 2008b.
+11,"wang, m.x., g.d."
+11,"liu, w.l."
+11,"wu, y.h."
+11,bao and w.n.
+11,effect of watershed subdivision on water-phase phosphorus mod- prediction of agriculture derived groundwater nitrate distribution in elling: an artificial neural network modelling application.
+11,envi- north china plain with gis-based bpnn.
+11,environ.
+11,geol. 50: ron.
+11,(in press).
+11,637–644.
+11,"olivera, f., m."
+11,"valenzuela, r."
+11,"srinivasan, j."
+11,"choi, h.d."
+11,"cho, s."
+11,"wattenbach, m., f."
+11,"hattermann, r."
+11,"weng, f."
+11,"wchsung, v."
+11,koka and a.
+11,agrawal.
+11,arcgis-swat: a geodata model and krysanova and f.
+11,badeck.
+11,a simplified approach to imple- gis interface for swat.
+11,water resour.
+11,assoc.
+11,"42: 295–309. ment forest eco-hydrological properties in regional hydrological prepas, e.e., g."
+11,"putz, d.w."
+11,"smith, j.m."
+11,burke and j.d.
+11,macdon- modelling.
+11,model.
+11,187: 40–59. ald.
+11,"the forward project: objectives, framework and ini- wilcox, b.p., w.j."
+11,"rawls, d.l."
+11,brakensiek and j.r.
+11,wight.
+11,1990. tial integration into the detailed forest management plan process in predicting runoff from rangeland catchments: a comparison of two alberta.
+11,chron.
+11,84(3): 330–337. models.
+11,water resour.
+11,26: 2401–2410.
+11,"putz, g., j.m."
+11,"burke, d.w."
+11,"smith, d.s."
+11,"chanasyk, e.e."
+11,prepas and e.
+11,mapfumo.
+11,"modelling the effects of boreal forest landscape 348 mai/juin 2008, vol."
+11,"84, no 3 — the forestry chronicle"

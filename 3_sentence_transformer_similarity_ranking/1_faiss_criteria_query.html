@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -3103,7 +3103,7 @@ vertical-align: -.125em;
 <ol type="1">
 <li>The corpus of title/abstracts is embedded and encoded</li>
 </ol>
-<div id="613231eb" class="cell" data-execution_count="1">
+<div id="3fbe91ec" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import chardet</span></span>
@@ -3122,7 +3122,7 @@ vertical-align: -.125em;
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="45b2df46" class="cell" data-execution_count="2">
+<div id="4278f61e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># spacy.require_gpu()</span></span>
@@ -3132,7 +3132,7 @@ vertical-align: -.125em;
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ENCODING = tiktoken.encoding_for_model(GPT_MODEL)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bee2dea4" class="cell" data-execution_count="3">
+<div id="c4411b9b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># logging.basicConfig(</span></span>
@@ -3173,7 +3173,7 @@ vertical-align: -.125em;
 </details>
 </div>
 <p>Having read in the indexed articles, let’s process the distance for each criteria phrase across the entire corpus. Because each abstract is divided by sentence, take the sentence with the highest quality match and assign its distance score to the entire abstract. Finally, save out as .csv with article info and distance.</p>
-<div id="94787ad0" class="cell" data-execution_count="4">
+<div id="06f915d3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rank_articles(question):</span>
@@ -3210,10 +3210,10 @@ vertical-align: -.125em;
 <section id="criterion-a-earth-observationsatellite-data" class="level3">
 <h3 class="anchored" data-anchor-id="criterion-a-earth-observationsatellite-data">Criterion A: earth observation/satellite data</h3>
 <p>Include a letter indicating criterion group in the file name, for easy access later</p>
-<div id="3fef4242" class="cell" data-execution_count="5">
+<div id="9d9aaa53" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>term_list <span class="op">=</span> [<span class="st">&#39;remote sensing&#39;</span>, <span class="st">&#39;earth observation&#39;</span>, <span class="st">&#39;satellite data&#39;</span>]</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>term_list <span class="op">=</span> [<span class="st">&#39;remote sensing&#39;</span>, <span class="st">&#39;earth observation&#39;</span>, <span class="st">&#39;satellite data&#39;</span>, <span class="st">&#39;climate forecast&#39;</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>OUT_DIR <span class="op">=</span> <span class="st">&#39;faiss_out&#39;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3235,7 +3235,7 @@ vertical-align: -.125em;
 </section>
 <section id="second-criterion-societal-benefits" class="level3">
 <h3 class="anchored" data-anchor-id="second-criterion-societal-benefits">Second criterion: societal benefits</h3>
-<div id="b71077c5" class="cell" data-execution_count="6">
+<div id="280cbdc8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># term_list = [&#39;societal benefits&#39;, &#39;capacity building&#39;, &#39;disaster response&#39;, &#39;water resources&#39;, &#39;agriculture&#39;, &#39;climate resilience&#39;, &#39;health and air quality&#39;, &#39;ecological conservation&#39;, &#39;wildland fires&#39;]</span></span>
@@ -3260,10 +3260,10 @@ vertical-align: -.125em;
 </section>
 <section id="third-criterion-valuation-methodology" class="level3">
 <h3 class="anchored" data-anchor-id="third-criterion-valuation-methodology">Third criterion: valuation methodology</h3>
-<div id="26feed73" class="cell" data-execution_count="7">
+<div id="94b4d876" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>term_list <span class="op">=</span> [<span class="st">&#39;valuation of information&#39;</span>, <span class="st">&#39;decision analysis&#39;</span>, <span class="st">&#39;cost benefit analysis&#39;</span>]</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>term_list <span class="op">=</span> [<span class="st">&#39;valuation of information&#39;</span>, <span class="st">&#39;decision analysis&#39;</span>, <span class="st">&#39;cost benefit analysis&#39;</span>, <span class="st">&#39;stated preference&#39;</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>OUT_DIR <span class="op">=</span> <span class="st">&#39;faiss_out&#39;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> term <span class="kw">in</span> term_list:</span>
@@ -3284,7 +3284,7 @@ vertical-align: -.125em;
 </section>
 <section id="combined-criteria" class="level3">
 <h3 class="anchored" data-anchor-id="combined-criteria">Combined criteria?</h3>
-<div id="f0013a48" class="cell" data-execution_count="8">
+<div id="ffb171fb" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>term_list <span class="op">=</span> [<span class="st">&#39;value of satellite earth observation data to improve societal benefits&#39;</span>,</span>

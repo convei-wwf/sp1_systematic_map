@@ -1,0 +1,373 @@
+page,p
+1,meteorol.
+1,"8, 209–219 (2001) a skill score based on economic value for probability forecasts d s wilks, department of earth and atmospheric sciences, cornell university, ithaca, new york, usa an approach to evaluating probability forecasts for dichotomous events, based on their economic value over all possible cost/loss ratio decision problems, is proposed."
+1,"the resulting value score (vs) curve shows non-dimensionalised relative economic value as a function of the cost/loss ratios for different decision-makers, over their full meaningful range."
+1,"the vs curve is similar in terms of computational mechanics and graphical display to the relative operating characteristic (roc) curve, but the roc curve is shown to be insensitive to either conditional or unconditional biases and thus to reflect potential rather than actual skill."
+1,"the possibility of collapsing the vs curve into a single scalar score is addressed, and it is shown that the results can depend very strongly on the assumed distribution of cost/loss ratios in the community of forecast users."
+1,introduction both bs and ss are scalar measures of the association between the forecasts and corresponding observations.
+1,"an important issue in forecast verification is the prob- as such, they necessarily (and in a somewhat arbitrary lem of evaluating probability forecasts for dichoto- manner) collapse into a single number the full relation- mous events, for example occurrence of precipitation ship between the forecasts and observations that is con- versus no precipitation."
+1,"almost universally, the accu- tained in the joint frequency distribution of the fore- racy of such forecasts is evaluated using the brier score casts and observations, p(fi, oj) (murphy & winkler, (e.g., murphy, 1997; murphy & daan, 1985; stanski et 1987)."
+1,"here fi, i = 1, . . . , i, are the allowable forecasts; al., 1989; wilks, 1995): and oj, j = 0, 1, are the possible observations for dichotomous outcomes."
+1,"if forecast probabilities are 1 n rounded to tenths, then i = 11, with f1 = 0.0, f2 = 0.1, . . ., bs = ∑ ( ft − ot )2 n t =1 (1) and f11 = 1.0."
+1,"in that case the joint distribution p(fi, oj) can be visualised as a table with two rows and 11 columns, each entry of which specifies one of the 22 where ft is the probability forecast on occasion t, ot is a joint probabilities in the distribution."
+1,"depending on binary variable indicating whether the event occurred the forecast format there may be more or fewer than (ot = 1) or not (ot = 0), and n is the number of forecasts i = 11 allowable forecasts, and for such cases the devel- being evaluated."
+1,"thus, the brier score is a mean- opment in the following generalises directly. squared error measure for probability forecasts."
+1,"equation (1) is sometimes called the half-brier score, even for comparatively simple problems (small i and j) because the score as originally introduced by brier the information in p(fi, oj) may be difficult to digest."
+1,in (1950) was larger by a factor of 2.
+1,brier scores (as well practice it has been found that two factorisations of this as other accuracy measures) are often expressed on a joint distribution may be helpful in understanding the relative basis using skill scores of the form: performance characteristics of a set of forecasts.
+1,"these factorisations are: ss = bs − bsclim bsperf − bsclim bs − bs = clim bsclim (2) ( ) ( )( ) p fi , oj = p oj fi p fi (3a) here bsclim indicates the brier score received by con- ( ) ( )( ) p fi , oj = p fi oj p oj (3b) stant forecasts of the climatological probability, and bsperf is the brier score for perfect forecasts."
+1,the sec- (a) calibration-refinement factorisation.
+1,"equation (3a) ond equality in equation (2) follows because bsperf = 0. is called the calibration-refinement factorisation, equation (2) is often interpreted as the proportional and consists of the i conditional distributions improvement in accuracy between climatological and of observations conditional on each of the fi (the perfect forecasts. ‘calibration’ distributions, p(oj | fi)), and one distri- 209"
+2,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+2,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license d s wilks bution quantifying the frequency of use of the fi and thompson & brier (1955), who characterised fore- (the ‘refinement’ distribution p(fi)). cast performance in terms of economic value for partic- (b) likelihood-base rate factorisation."
+2,equation (3b) is ular cost/loss problems.
+2,"here the approach is extended called the likelihood-base rate factorisation, and to simultaneously consider economic value for all pos- consists of conditional distributions of forecasts sible cost/loss problems, providing a more universal given subsequent observations (the ‘likelihoods’, analysis that obviates the need for individual, user-by- p(fi | oj)), and the sample climatological or ‘base user results. rate’ distribution p(oj)."
+2,"for probability forecasts of dichotomous events, the 2."
+2,"the 2 × 2 cost/loss ratio problem calibration-refinement factorisation (equation (3a)) can be expressed graphically using a reliability diagram the evaluation of forecasts proposed here is based on (e.g., wilks, 1995), or an attributes diagram (hsu & an idealised and extremely simple model of optimal murphy, 1986)."
+2,"these diagrams consist of plots of the decision-making, called the cost/loss ratio problem. conditional probabilities p(o1 | fi) as a function of fi the cost/loss problem was apparently introduced first (since the complementary probabilities p(o0 | fi) are eas- by thompson (1952), and has been studied extensively ily computed as 1– p(o1 | fi)), together with a histogram since that time (e.g., katz & murphy, 1997; murphy, or other representation of the distribution p(fi)."
+2,"1977; murphy & ehrendorfer, 1987; thompson & brier, 1955)."
+2,"while it is the simplest possible quantita- from the perspective of a forecast user, the degree of tive model of optimal decision-making, it nevertheless forecast accuracy expressed in terms of mean squared can approximate many real-world problems to a reason- error or some other scalar measure is of less interest able degree (roebber & bosart, 1996; wilks, 1997). than the value (economic or otherwise) that the user may derive from the forecasts."
+2,"it is sometimes naively the basic premise of the cost/loss problem is that of a assumed that greater overall accuracy, as measured for decision-maker faced with the uncertain prospect of example by bs or ss, will necessarily lead to greater some kind of adverse weather."
+2,the decision-maker is value to users.
+2,"perhaps surprisingly, this is not neces- able to protect against the effects of adverse weather by sarily the case: it is quite possible for forecasts of higher paying a cost c, whereas occurrence of adverse weather overall accuracy to impart less economic value for some without benefit of this protection results in a loss l. decision problems (ehrendorfer & murphy, 1988, the protection cost c is incurred whenever the deci- 1992; murphy & ehrendorfer, 1987; murphy, 1997). sion is made to protect, whether or not adverse weather thus, summarising forecast performance in terms of bs occurs, but if adverse weather does not occur and no or ss is deficient from the standpoint of forecast users, protective action is taken the economic impact on the even if the users understand the structure of these sta- enterprise is zero."
+2,figure 1(a) shows the full loss func- tistics.
+2,"at the opposite extreme, sophisticated forecast tion for this problem. users with access to the joint distribution p(fi | oj) (or one of its factorisations, for example in the form of a the optimal decision whether or not to take protective reliability diagram), and knowledge of their own loss action will be the one resulting in the least expected functions can compute the expected economic value of (i.e., probability-weighted average) expense."
+2,"the infor- the forecasts for their particular decision problems mation available to the decision-maker is that adverse (e.g., clemen, 1996; wilks, 1997; winkler & murphy, weather will occur with probability p."
+2,if protection is 1985).
+2,"however, typical forecast users would probably chosen, the cost c will be incurred with probability 1. find a tabulation of p(fi | oj) to be too complex and thus if not, the loss l will be suffered with probability p. fairly uninformative."
+2,"thus, protection against the adverse weather is optimal whenever: this paper proposes an evaluation method for proba- bility forecasts of dichotomous events which produces c < pl results in terms of economic value."
+2,"this approach is or directly relevant to users of forecasts, and will also be c informative to forecast producers who are interested in <p l the value of their forecasts to the users they serve."
+2,"because different forecast users can face quite different that is, protection is optimal when the cost/loss ratio is and sometimes quite complex decision problems, the less than the probability of adverse weather."
+2,note that method is based on a prototype decision problem this result holds whether or not the entry in the lower- known as the cost/loss ratio situation.
+2,"while the right cell of figure1(a) is zero because such loss tables cost/loss problem is an idealised analysis it nevertheless can be transformed to that form (e.g., roebber & bosart, captures the essentials of optimal decision-making, and 1996)."
+2,"note that if c > l it is never worthwhile to pro- many real-world decision problems can be cast at least tect, while if c < 0 (i.e., the decision-maker is paid to approximately in the cost/loss framework."
+2,the protect) protection will always be optimal.
+2,thus mean- approach taken here is similar to that of mylne (1999) ingful cost/loss problems are confined to 0 < c/l < 1.
+3,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+3,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license skill score based on economic value for probability forecasts figure 1. (a) loss function for the 2×2 cost/loss ratio situation. (b) corresponding 2×2 verification table resulting from proba- bility forecasts characterised by the joint distribution p(fi, oj) being transformed to categorical forecasts according to a particu- lar decision-maker’s cost/loss ratio."
+3,"if the decision-maker’s only information is the clima- protective action) when i ≥ 4, since f4 = 0.3."
+3,"the pro- tological probability of adverse weather, π, then the portion of occasions when this would occur in advance optimal action will be either to always protect (if c/l of adverse weather would be p11 = σi≥dp(fi,o1), and the < π) or never protect (if c/l > π)."
+3,"the expected expense proportion of occasions when protective action would given climatological information is thus: be taken needlessly would be p10 = σi≥dp(fi,o0)."
+3,"the probability of adverse weather following a ‘no’ fore-  c if c / l < π cast, p01, and the probability of no adverse weather fol- eeclim =  lowing a ‘no’ forecast, p00, are defined similarly as indi- πl otherwise cated in figure 1(b)."
+3,"thus the expected expense faced by a decision-maker consists of the entries in figure on the other hand, if a decision-maker could have 1(a) weighted by the probabilities in figure 1(b), or: access to perfect forecasts, the decision to protect would be taken only on those occasions when adverse weather was about to occur, so that the expected ( ) eef = p11 + p10 c + p01l (4a) expense would be: giving: eeperf = πc ( ) 1 eef = c ∑ ∑ p fi , oj + l ∑ p fi , o1 j = 0 i ≥d i <d ( ) (4b) the expected expense when cost/loss decisions are based on imperfect probability forecasts for adverse weather depends on the performance characteristics of this expected expense depends on the particular user’s those forecasts."
+3,"that is, the decision-maker pays the cost and loss, on the cost/loss ratio through its rela- protection cost c whenever the forecast f is greater tionship to the decision threshold d, and on the per- than c/l, incurs the loss l whenever f < c/l but formance characteristics of the forecasts on which the adverse weather nevertheless occurs, and suffers no loss decisions are based, as encapsulated in the joint distrib- when f < c/l and the adverse weather does not occur. ution of forecasts and observations p(fi, oj)."
+3,"in effect, the decision-maker transforms each probabil- ity forecast to a categorical (i.e., yes/no) forecasts of adverse weather according to the magnitude of the 3."
+3,the value score forecast probability f in relation to a particular cost/loss ratio.
+3,the result is a categorical-forecast 2×2 3.1.
+3,"definition contingency table that depends on the joint distribu- tion of the probability forecasts and corresponding conventionally the economic value of forecasts is com- observations p(fi, oj) as shown in figure 1(b)."
+3,"adverse puted as the difference of expected expenses between weather is ‘forecast’ for all fi, i ≥ d, where d is the some baseline (often climatological) information and index of the smallest forecast probability that is larger the expected expenses given the forecasts under consid- than c/l."
+3,"for example, if the forecast probabilities are eration, eeclim – eef (e.g., wilks, 1997)."
+3,"in raw form rounded to tenths, with i = 11, a decision-maker with this difference would be unsuitable as a general mea- c/l = 0.25 would ‘forecast’ adverse weather (i.e., take sure of forecast performance because of its dependence 211"
+4,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+4,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license d s wilks on particular values of c and l.
+4,"however, normalising p01 = p00 = 0."
+4,"since this is also the optimal action under this difference by the corresponding value of perfect climatological information when c/l < π, the resulting information yields a score in the form of equation (2) eef = eeclim so that vs = 0."
+4,"similarly if c/l = 1 the for the economic value that depends only on the decision-maker should never protect, which is cost/loss ratio: the same optimal action as under climatological infor- mation since c/l > π, leading to p11 = p10 = 0 and again eef − eeclim (5a) vs = 0."
+4,vs = eeperf − eeclim giving: different forecast users with different decision prob- lems will realise different levels of economic value from c  ( ) p11 + p10 − 1 + p01 c (5b) optimal use of the same forecasts.
+4,thus the vs is best expressed graphically as a function of c/l.
+4,"note that l if <π   c l ( π −1 ) l ideas similar to the vs have been proposed both by mylne (1999) and by thompson & brier (1955), but for vs =  c  l ( ) p11 + p10 + p01 − π c (5c) individual c/l levels rather than over the full meaning- ful range of c/l. if >π  c  l  π  − 1  l  3.2."
+4,illustration this value score (vs) can be interpreted as the expected economic value of the forecasts of interest as it is useful to illustrate the vs using hypothetical sets of a fraction of the value of perfect forecasts relative to cli- forecasts.
+4,"twelve such forecasts sets will be considered, matological forecasts, or as a percentage improvement which have been constructed as all possible combina- in value between climatological and perfect informa- tions of the four calibration functions p(o1 | fi) in figure tion; as a function of the cost/loss ratio, for 0 < c/l < 2(a) with the three refinement distributions p(fi) in 1."
+4,"its maximum value is vs = 1 for perfect forecasts, figure 2(b)."
+4,"the two panels in figure 2 comprise relia- while vs = 0 when the forecasts impart no more value bility diagrams for these forecasts, and constitute full that does optimal use of the climatological probability specifications of the respective joint distributions p(fi, oj) π."
+4,the vs may be negative in cases where the cost/loss through equation (3a).
+4,"the climatological probability decision-maker would be better served by ignoring the for these forecasts is π = 0.3, except π ≈ 0.2 for the over- forecasts, and acting optimally according to π."
+4,"note forecast case, and π ≈ 0.4 for the under-forecast case. that in the restricted but desirable case of well-cali- brated (‘reliable’) forecasts (i.e., p(o1 | fi) = fi, ∀ i) the figure 2(a) indicates that none of the forecasts are well- minimum vs is zero: perfectly calibrated forecasts are calibrated, because none of the four calibration func- always at least as useful as the climatological informa- tions coincide with the dashed 1:1 line, i.e. p(o1 | fi) ≠ fi, tion (murphy, 1977)."
+4,this occurs because economic except in two cases when fi = π.
+4,"the ‘under-confident’ value can be non-zero only if some decisions are forecasts have been constructed using p(o1 | fi) = 2 fi – π changed as a result of knowledge of a forecast rather and thus show conditional bias: the larger probabilities than the climatological probability (e.g., winkler & are under-forecast and the smaller probabilities are murphy, 1985), and these changes are made only if the over-forecast."
+4,"the ‘over-confident’ forecasts have the expected expense (equation (4)) according to that prob- opposite conditional biases, since p(o1 | fi) = (fi + π)/2. ability is more favorable."
+4,"therefore, equation (5) can be this over-confident calibration distribution is an inter- negative only if forecast probabilities do not corre- esting case because it is equidistant between the dashed spond to event relative frequencies."
+4,"thus the vs is sen- perfect calibration line and the ‘no resolution’ line sitive to unconditional and conditional biases, as well as p(o1 | fi) = π (which is not plotted), and thus these fore- to non-systematic deviations from perfect calibration, casts have zero skill according to the brier skill score in in a way that reflects the losses suffered by decision- equation (2) (hsu & murphy, 1986; wilks, 1995)."
+4,"the makers who take the forecasts at face value. remaining two calibration functions, for which p(o1 | fi) = fi ± 0.1, exhibit unconditional biases, or consistent in practice the verification data will consist of a finite under- and over-forecasting."
+4,"in all these cases p(o1 | fi) number i of allowable forecast probabilities fi, so that has been constrained to be on the unit interval."
+4,vs can be evaluated at i+1 values of c/l.
+4,"the joint dis- tribution p(fi, oj) can be partitioned non-trivially as the refinement distributions p(fi) are represented here shown in figure 1(b) in i–1 distinct ways, by taking the using beta distributions: decision index d between all adjacent pairs of forecasts, while interpreting the corresponding cost/loss ratio for γ ( a + b) p( f ) = ( f )a −1 (1 − f )b −1 , 0 ≤ f ≤ 1 (6) decision-makers whose optimal actions would follow γ ( a )γ ( b) the resulting contingency table (c/l)i = (fi + fi+1)/2."
+4,"in addition, if c/l = 0 then the optimal decision-maker the two distribution parameters a and b are positive always protects (because protection is free) so that real numbers, and γ( ) denotes the gamma function."
+5,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+5,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license skill score based on economic value for probability forecasts figure 2. (a) calibration functions and (b) refinement distributions for hypothetical forecasts used to illustrate the vs in figure 3.
+5,the ‘perfect reliability’ line is dashed in (a).
+5,the values of σ in (b) refer to the standard deviation of the beta distribution (see equation (6)).
+5,in all cases the average forecast is 0.30.
+5,"figure 2(b) shows three beta distributions with mean users with small cost/loss ratios are persuaded not to (µ) of 0.3 and standard deviation (σ) of 0.1, 0.2, and 0.3 protect on occasions when the probability of adverse where: weather p(o1 | fi) is actually larger than c/l for the a smaller fi, and users with large cost/loss ratios are µ= induced to incur protection costs when p(o1 | fi) < c/l a+b 1 for the larger fi."
+5,these negative economic values are 1  ab  2 magnified for larger σ because these extreme fi occur σ=   ( a + b)  a + b + 1 more frequently in those cases.
+5,"similarly, forecasts with simple unconditional biases (figures 3(c) and 3(d)) for σ = 0.1 the forecasts resemble long-lead seasonal show generally positive vs, except for those decision- forecasts (wilks, 2000), deviate only rarely from their makers who are badly misled because of their cost/loss mean value, and thus have the least potential to be ratios."
+5,decision-makers with very small c/l will pro- informative.
+5,"for σ = 0.3 the forecasts resemble short- tect too rarely given the under-forecasting of the small range weather forecasts (murphy & wilks, 1998), are probabilities (figure 3(c)), and decision-makers with comparatively sharp, and forecast large deviations from large c/l will protect too often when the largest prob- the mean value fairly frequently."
+5,"the discrete probabil- abilities are over-forecast (figure 3(d)). ities p(fi) have been obtained by integrating these func- tions over the eleven intervals shown on the abscissa, the dashed curves in figure 3 show the corresponding with the nominal forecast probabilities fi taken to be results after recalibration of the forecasts: all the fore- the interval midpoints 0.025, 0.10, . . . , 0.90, and 0.975. cast characteristics displayed in figure 2 are retained, except that the forecast probabilities fi are relabelled to the solid lines in figure 3 show vs curves for the be consistent with the calibration functions."
+5,"that is, the refinement distributions in figure 2(b); for (a) the recalibrated forecast probabilities are defined as fi ≡ under-confident, (b) the over-confident, (c) under- p(o1 | fi) so that the calibration functions for the fi are forecast, and (d) the over-forecast calibration functions coincident with the dashed 1:1 line (with fi constrained in figure 2(a)."
+5,"clearly the under-confident forecasts in to lie within the unit interval), and the abscissa of (a) are the best of these, as they are able to forecast a figure 2(b) is appropriately rescaled while the inte- comparatively large number of events with either prob- grated probabilities in each of the 11 bins remain ability zero or probability one, which happens more unchanged."
+5,in each case the vs responds to removal of frequently for the larger σ.
+5,"figure 3(b) shows that the bias with a higher score, with the minimum vs now over-confident, or ‘no skill’ forecasts can impart posi- being zero."
+5,"note that in figure 3(a) the dashed curves tive economic value for decision-makers whose action are below the solid curves in the vicinity of c/l = π threshold is near the climatological probability π = 0.3. solely because of the discretisation of the forecasts: these are decision-makers, who have been called ‘ideal after recalibration of the under-confident forecasts users’ (gandin et al., 1992), whose best choice is least only the revised probabilities fi = 0.05, 0.20, 0.40, 0.60, obvious given only the climatological information and 0.80, and 0.95 are ‘issued’, so the vs curve is only so benefit most from forecasts."
+5,"for other decision- coarsely defined. makers these forecasts impart negative value, since 213"
+6,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+6,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license d s wilks figure 3.
+6,"vs curves for the (a) under-confident, (b), over-confident, (c) under-forecast, and (d) over-forecast calibration functions in figure 2(a); for each of the three refinement distributions shown in figure 2(b)."
+6,solid lines show vs for the forecasts as portrayed in figure 2.
+6,"dashed lines show the improvements resulting from recalibrating (i.e., correcting the biases in) the forecasts."
+6,"connections to relative operating and stanski et al. (1989), and is currently used for veri- characteristic (roc) fying probability forecasts (e.g., buizza et al., 1999; mason & graham, 1999)."
+6,the mechanics of calculating vs curves as described above overlap in part with those for the relative both roc and vs curves are constructed by transform- operating characteristic (roc) curve for probability ing the joint distribution of forecasts and observations forecasts.
+6,"the roc curve has a long history in psy- into a series of 2×2 contingency tables as shown in figure chology (e.g., swets, 1973) as an element of signal 1(b), by imposing i-1 decision thresholds between adja- detection theory."
+6,"it has been described in the meteoro- cent pairs of the i forecasts, fi."
+6,computation of the points logical literature by harvey et al.
+6,"(1992), mason (1982) on the vs curve then proceeds through equations (4) and 214"
+7,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+7,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license skill score based on economic value for probability forecasts (5) for each of the contingency tables.
+7,"for the roc curve curves for poorer forecasts are closer to the dashed sd each of the contingency tables is summarised by comput- hr = sd far line, which corresponds to forecasts ing the signal-detection hit rate and the signal-detection with no discrimination. false alarm rate, defined as: note that the counterparts of the dashed curves in p11 p figures 3(a) and 3(b), corresponding to forecasts whose sd hr = = 11 p11 + p01 π conditional biases (evident in figure 2(a) ) have been and corrected, are not visible in figure 4."
+7,the roc curves p10 p for the pairs of original and bias-corrected forecasts are sd far = = 10 p10 + p00 1 − π identical.
+7,"because the actual numerical value of the forecast probabilities fi are not considered in the com- note that these statistics are different from the conven- putations for the roc curve, systematic errors in the fi tional meanings of hit rate and false alarm rate (e.g., (e.g., conditional or unconditional biases as shown in wilks, 1995), and so are distinguished here with the figure 2(a)) do not affect either sd hr or sd far. prefix ‘sd’ for ‘signal detection’."
+7,"the sd hr and sd the result is that the roc curve is blind to such biases, far are conditional probabilities of a ‘yes’ forecast and forecast improvements that alleviate them will not given either occurrence or non-occurrence of the event, be credited as improvements by verification systems and so relate to the likelihood-base rate factorisation based on the roc curve."
+7,"thus, in common with other (equation (3b))."
+7,"as such they reflect discrimination bias-insensitive forecast performance measures such as exhibited by the forecasts (murphy, 1997; murphy & correlations (murphy & epstein, 1989), the roc curve winkler, 1987), without regard to the particular is best interpreted as reflecting potential rather than numerical values of the fi. actual skill."
+7,roc scores are reportedly under consider- ation by the world meteorological organization as the the roc curve consists of a plot of sd hr as a func- standard for reporting skill of probabilistic weather and tion of sd far.
+7,"as is the case for the vs curve, there climate forecasts (mason & graham, 1999)."
+7,their evi- are i–1 nontrivial points; plus the two points corre- dent insensitivity to forecast biases indicates that this sponding to never forecasting the event (sd hr = sd would be a poor choice.
+7,"far = 0), and always forecasting the event (sd hr = sd far = 1)."
+7,"for example, figure 4 shows roc curves for the forecasts whose vs curves are plotted in 5."
+7,an instructive example figures 3(a) and 3(b).
+7,"the roc curves for better fore- casts are more strongly bowed and closer to the upper this section compares verification results for probabil- left-hand corner, approaching the limit of perfect fore- ity-of-precipitation forecasts at las vegas (36o n, 115 o casts for which sd far = 0 and sd hr = 1."
+7,"the roc w), a desert location, for the period april 1980 through march 1987."
+7,"the forecasts consist of objective statisti- cal forecasts from model output statistics (mos) (glahn & lowry, 1972), and the corresponding subjec- tive probability forecasts (sub) made by us national weather service forecasters (who generally had access to the mos forecasts before formulating their own)."
+7,in both cases the event being forecast is the occurrence of at least 0.254 mm of precipitation over a 12-hour period.
+7,the results are tabulated separately for the ‘cool’ (october through march) and ‘warm’ (april through september) seasons.
+7,figure 5 shows vs curves summarising the forecasts.
+7,these are interesting cases to examine because for both the cool (figure 5(a)) and warm (figure 5(b)) seasons there are ranges of cost/loss ratios for which each of the two forecast sources are more valuable.
+7,"in the cool sea- son, decision-makers with c/l < 0.2 would prefer the sub forecasts, while those with c/l > 0.4 would prefer the mos forecasts."
+7,similarly in the warm season forecast users with smaller cost/loss ratios would prefer the mos forecasts while users with larger cost/loss ratios would figure 4.
+7,roc curves for the under-confident and over-con- prefer the sub forecasts.
+7,"the warm-season case is espe- fident forecasts, corresponding to the vs curves in figures 3(a) and 3(b)."
+7,the dashed curves for recalibrated forecasts are cially interesting since the mos system never forecast coincident with the solid curves because the roc does not probabilities greater than 0.5; and while the human fore- respond to forecast biases. casters were able to successfully forecast some larger 215
+8,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+8,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license d s wilks figure 5.
+8,"vs curves for objective (mos) and subjective (sub) probability of precipitation forecasts at las vegas, nevada, for the period april 1980–march 1987. probabilities, this was apparently done at the expense of or aroc) forecasts are actually superior."
+8,"these are forecast quality for the smaller probabilities. examples of quality/value reversals (ehrendorfer & murphy, 1988; murphy & ehrendorfer, 1987) that can it is common practice to attempt to summarise the per- easily occur when the evaluation of forecast quality is formance characteristics of a set of forecasts using a sin- collapsed into a scalar measure."
+8,"it is sometimes possible gle number, for example ss (equation (2)), or the area to demonstrate clear superiority of one set of forecasts under the roc curve, aroc."
+8,table 1 compares these over another in terms of economic value for all users two statistics for the las vegas data.
+8,"for both the cool (krzysztofowicz & long, 1991; murphy & ye, 1990), and warm seasons, the mos forecasts are judged to be a condition which is known as sufficiency."
+8,"however, better according to the ss statistic, while the sub fore- often when comparing closely competitive forecasts (as casts are superior in both cases according to the aroc. in the present case) neither will be clearly superior for this conflicting result should not be especially surpris- all users."
+8,"since cost/loss decision-makers are a subset of ing in view of the fact that compressing a high-dimen- all forecast users, vs curves for forecasts that are unam- sional verification problem into a single scalar value biguously superior (i.e., sufficient) will be everywhere will necessarily obscure some important information larger than the vs curves for their inferiors (e.g., the (murphy, 1991; murphy & winkler, 1987). pairs of dashed and solid lines in figure 3), although the converse might not be true."
+8,in each case here there are some forecast users for whom the ‘inferior’ (according to one or the other of ss particular forecast users will want to examine vs curves at cost/loss ratios relevant to their own decision problems.
+8,"on the other hand, it is possible that a fore- table 1."
+8,"comparisons of skill score (ss, equation (2)) caster or forecasting agency might want to collapse a and the area under the roc curve (aroc) for objective vs curve into a single number that integrates relative (mos) and subjective (sub) probability of precipitation economic value of the forecasts over a collection of forecasts at las vegas, nevada, april 1980–march 1987 users."
+8,"while the spectrum of cost/loss ratios in a par- ticular user community will be difficult to evaluate, one forecast of probability of precipitation ss aroc approach to exploring the effects of different distribu- tions of cost/loss ratios within the user population is to october–march model their relative frequencies using beta distributions mos 0.316 0.928 (murphy, 1969; roebber & bosart, 1996), i.e., equation sub 0.313 0.931 (6) with c/l rather than f as its argument."
+8,"april–september mos 0.142 0.905 sub 0.108 0.920 figure 6 shows differences (sub – mos) in weighted- average vs, where the weights characterising the rela- 216"
+9,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+9,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license skill score based on economic value for probability forecasts tive importance of different cost/loss ratios are pro- vided by beta distributions with 0 < a < 8 and 0 < b < 8.
+9,"figures 6(a) and 6(b) contain results for the las vegas cool- and warm-season forecasts, respectively."
+9,"the zero line is heavy, the contour interval is 0.02, and dashed contours indicate negative values (i.e., mos forecasts deemed more valuable in aggregate)."
+9,"the raw integrated vs results underlying these figures range from near zero to – 1⁄4 for large a and small b, to approx- imately 1⁄2 for small a and large b."
+9,figure 6(c) shows thumb-nail sketches of selected beta distributions for perspective.
+9,"the case of a = b = 1 yields the uniform distribution, for which the vs at all cost/loss ratios are weighted equally."
+9,"this seemingly attractive choice is equivalent to use of the bs (equation (1)) to evaluate the forecasts, since the expected value of eef according to the uniform distribution is a linear function of bs (murphy 1966), and therefore so also is the expected value of vs."
+9,"as could have been anticipated, the mos forecasts have a greater integrated vs when the larger cost/loss ratios are emphasised in the cool season, and when the smaller cost/loss ratios are emphasised during the warmer months."
+9,figure 6 shows very clearly that the result of collapsing the vs curve into a single score depends very strongly on the weighting function that is assumed to represent the spectrum of forecast users.
+9,"conclusions this paper has proposed a method to evaluate proba- bility forecasts for binary predictands, based on the simple 2×2 cost/loss ratio problem."
+9,"the result is a curve representing the variation of (scaled) economic value as a function of the cost/loss ratio; which respects the fact that different decision-makers will derive different ben- efits from a given set of forecasts, and that attempting to express forecast quality with a single number will fail to capture this variation."
+9,"the vs curve is an extension of the approaches of mylne (1999) and thompson & brier (1955), who considered forecast evaluation in terms of economic value for particular, individual cost/loss ratios."
+9,"the approach is a rational way to approach verification for weather variables that directly affect human enterprises, and would probably be less attractive for forecasts of variables such as geopotential heights."
+9,"note that the 2×2 cost/loss ratio situation is essentially a toy decision problem which neglects such complications as multiple decision options, multiple relevant meteorological events, related sequential deci- sions, and different attitudes toward risk (e.g., wilks, 1997), although a large number of decision problems figure 6."
+9,"(left) differences (sub – mos) in weighted-aver- age vs, as a function of the beta distribution parameters a and b used to define relative importances of cost/loss ratios, for (a) cool season and (b) warm season las vegas forecasts of prob- ability of precipitation."
+9,"the heavy contours indicate zero dif- ference, the contour interval is 0.2, and negative contours are dashed. (c) illustration of selected beta densities to aid inter- pretation."
+10,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+10,see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license d s wilks can be viewed at least approximately in terms of the these scaled economic values could also be portrayed simple cost/loss ratio situation.
+10,"while it might be pos- graphically as a function of c/l, and would be equal to sible to devise similar scores based on more complex (for c/l equal to the forecaster’s yes/no threshold) or and realistic decision problems, these would either per- less than the value achieved through optimal forecast tain to quite specific user subsets, or increase the use (krzysztofowicz, 1983; murphy, 1977) as indicated dimensionality of the results (e.g., figures 3 and 5) in by the vs curve. ways that would make concise display difficult."
+10,"note added in proof: recently richardson (2000) has the vs is non-negative for calibrated forecasts (i.e., described a procedure similar to that presented here, p(o1 | fi)= fi)."
+10,"to the extent that there is miscalibration but which assumes in effect that the forecasts will be (e.g., conditional or unconditional biases) the score calibrated. reflects penalties endured by decision-makers who take the forecasts at face value."
+10,"it is sometimes assumed in this context that the forecast user can and will recali- acknowledgements brate forecasts based on past performance of those forecasts (krzysztofowicz, 1992; krzysztofowicz & i thank ken mylne for stimulating my interest in this long, 1990), a process which is equivalent to the bias topic."
+10,this paper is dedicated to the memory of allan corrections yielding the dashed curves in figure 3.
+10,murphy.
+10,"however, it is arguably unreasonable to expect real- world decision-makers to perform this task when it is the forecaster or forecasting agency who should have references the information required to correct forecast miscalibra- atger, f."
+10,(1999).
+10,the skill of ensemble prediction systems. tion.
+10,such biases can be corrected in operational set- mon.
+10,"rev., 127: 1941−1953. tings (atger, 1999; eckel & walters, 1998), and it seems brier, g."
+10,(1950).
+10,verification of forecasts expressed in reasonable and desirable for a verification system to terms of probability.
+10,"rev., 78: 1–3. reward such efforts."
+10,"buizza, r., hollingsworth, a., lalaurette, f."
+10,"& ghelli, a."
+10,(1999).
+10,probabilistic predictions of precipitation using the certain of the mechanics of the computation of the vs ecmwf ensemble prediction system.
+10,"weather and parallel those for the relative operating characteristic forecasting, 14: 168–189."
+10,"(roc), and both are displayed as functions rather than clemen, r."
+10,(1996).
+10,making hard decisions: an reported as scalar scores.
+10,"however, it has been shown introduction to decision analysis."
+10,"second edition, duxbury press, belmont, california. that roc curves do not penalise forecast biases, and eckel, f."
+10,"& walters, m."
+10,(1998).
+10,calibrated probabilistic thus are better regarded as expressing potential rather quantitative precipitation forecasts based on the mrf than actual skill.
+10,similarly the area under the roc ensemble.
+10,"weather and forecasting, 13: 1132–1147. curve will not be affected by systematic forecast biases."
+10,"ehrendorfer, m."
+10,"& murphy, a."
+10,(1988).
+10,"comparative eval- any number of scalar scores can also be constructed uation of weather forecasting systems: sufficiency, quality, through statistical expectations of the vs curve with and accuracy."
+10,"rev., 116: 1757–1770. respect to probability densities over user cost/loss ehrendorfer, m."
+10,"& murphy, a."
+10,(1992).
+10,"evaluation of pro- ratios, but the result can depend very strongly on the totypical climate forecasts: the sufficiency relation."
+10,j. nature of the assumed user community.
+10,"climate, 5: 876–887."
+10,"gandin, l."
+10,"s., murphy, a."
+10,"& zhukovsky, e."
+10,(1992).
+10,"finally, the vs could also be used to compare proba- economically optimal decisions and the value of meteoro- logical information."
+10,"in preprints, 5th international meeting bilistic and non-probabilistic forecasts for binary on statistical climatology, 22–26 june 1992, toronto, events."
+10,the vs curve is constructed by transforming canada.
+10,"j64–j71. probabilistic forecasts into a categorical yes/no protec- glahn, h."
+10,"& lowry, d."
+10,(1972).
+10,"the use of model out- tion decision, according to the magnitude of the fore- put statistics (mos) in objective weather forecasting."
+10,j. cast probability in relation to a decision-maker’s cost/ appl.
+10,"meteorol., 11: 1203–1211. loss ratio."
+10,"similarly, categorical forecasts effectively harvey, l."
+10,"jr., hammond, k."
+10,"r., lusk, c."
+10,"& mross, transform probability judgements of the forecaster into e."
+10,(1992).
+10,the application of signal detection theory to yes/no forecasts (that may reflect a presumed decision weather forecasting behavior.
+10,"rev., 120: threshold relevant to forecast users), effectively shifting 863–883. the responsibility for decision-making from the users hsu, r.-w."
+10,"& murphy, a."
+10,(1986).
+10,"the attributes diagram: to the forecaster (thompson & brier,1955)."
+10,within the a geometrical framework for assessing the quality of prob- ability forecasts.
+10,"forecasting, 2: 285–293. framework presented here, categorical forecasts would katz, r."
+10,"& murphy, a."
+10,(1997).
+10,"forecast value: proto- yield a single verification table (figure 1(b)), regardless type decision-making models."
+10,in economic value of of a particular decision-maker’s c/l.
+10,"different deci- weather and climate forecasts, r."
+10,katz and a.
+10,"h. sion-makers would realise different economic benefits murphy, eds., cambridge university press, 183–217. (or losses) from such forecasts, with magnitudes krzysztofowicz, r."
+10,(1983).
+10,why should a forecaster and a depending on the differences between their cost/loss decision maker use bayes theorem.
+10,"water resources res., ratios and the forecaster’s single yes/no threshold."
+10,19: 327–336.
+11,"14698080, 2001, 2, downloaded from https://rmets.onlinelibrary.wiley.com/doi/10.1017/s1350482701002092 by university of california, wiley online library on [15/08/2024]."
+11,"see the terms and conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on wiley online library for rules of use; oa articles are governed by the applicable creative commons license skill score based on economic value for probability forecasts krzysztofowicz, r."
+11,(1992).
+11,"bayesian correlation score: a util- murphy, a."
+11,"& winkler, r."
+11,(1987).
+11,a general frame- itarian measure of forecast skill.
+11,"rev., 120: work for forecast verification."
+11,"rev., 115: 208–219."
+11,1330–1338.
+11,"krzysztofowicz, r."
+11,"& long, d."
+11,(1990).
+11,"fusion of detection murphy, a."
+11,"& ye, q."
+11,(1990).
+11,"comparison of objective probabilities and comparison of multisensor systems. and subjective precipitation probability forecasts: the suffi- ieee transactions on systems, man, and cybernetics, 20: ciency relation."
+11,"rev., 118: 1783–1792."
+11,665–677.
+11,"mylne, k."
+11,(1999).
+11,"the use of forecast value calculations for krzysztofowicz, r."
+11,"& long, d."
+11,(1991).
+11,forecast sufficiency optimal decision-making using probability forecasts.
+11,in characteristic: construction and application.
+11,"preprints, 17th conference on weather analysis and forecasting, 7: 39–45."
+11,"forecasting, american meteorological society, boston, mason, i."
+11,(1982).
+11,"a model for assessment of weather fore- massachusetts, 235–239. casts."
+11,australian meteorol.
+11,"mag., 30: 291–303."
+11,"richardson, d."
+11,(2000).
+11,"skill and economic value of the mason, s."
+11,"& graham, n."
+11,(1999).
+11,conditional probabili- ecmwf ensemble prediction system.
+11,"meteorol. ties, relative operating characteristics, and relative operat- soc., 126: 649–667. ing levels."
+11,"weather and forecasting, 14: 713–725."
+11,"roebber, p."
+11,"& bosart, l."
+11,(1996).
+11,"the complex relation- murphy, a."
+11,(1966).
+11,a note on the utility of probabilistic ship between forecast skill and forecast value: a real-world predictions and the probability score in the cost-loss ratio analysis.
+11,"weather and forecasting, 11: 544–559. situation."
+11,"meteorol., 5: 534–537."
+11,"stanski, h."
+11,"r., wilson, l."
+11,"& burrows, w."
+11,(1989).
+11,"survey murphy, a."
+11,(1969).
+11,measures of the utility of probabilis- of common verification methods in meteorology.
+11,wmo tic predictions in cost-loss ratio decision situations in world weather watch tech.
+11,report no.
+11,"8, wmoi td no. which knowledge of the cost-loss ratios is incomplete."
+11,"j. 358, 114 pp."
+11,"meteorol., 8: 863–873."
+11,"swets, j."
+11,(1973).
+11,"the relative operating characteristic in murphy, a."
+11,(1977).
+11,"the value of climatological, categori- psychology."
+11,"science, 182: 990–1000. cal and probabilistic forecasts in the cost-loss situation."
+11,"thompson, j."
+11,(1952).
+11,on the operational deficiencies in mon.
+11,"rev., 105: 803–816. categorical weather forecasts."
+11,meteorol.
+11,"soc., 33: murphy, a."
+11,(1991).
+11,forecast verification: its complexity 223–226. and dimensionality.
+11,"rev., 119: 1590–1601."
+11,"thompson, j."
+11,"& brier, g."
+11,(1955).
+11,"the economic utility murphy, a."
+11,(1997).
+11,forecast verification.
+11,in economic of weather forecasts.
+11,"rev., 83: 249–254."
+11,"value of weather and climate forecasts, r."
+11,"katz and wilks, d."
+11,(1995).
+11,statistical methods in the atmospheric a.
+11,"murphy, eds., cambridge university press, 19–74."
+11,sciences.
+11,"international geophysics series, vol."
+11,"59, murphy, a."
+11,"& daan, h."
+11,(1985).
+11,forecast evaluation.
+11,"in academic press, 464 pp."
+11,"probability, statistics and decision making in the wilks, d."
+11,(1997).
+11,"forecast value: prescriptive decision atmospheric sciences, a."
+11,murphy and r.w.
+11,"katz, eds., studies."
+11,"in economic value of weather and climate westview press, boulder, colorado, 379–437."
+11,"forecasts, r."
+11,katz and a.
+11,"murphy, eds., cambridge murphy, a."
+11,"& ehrendorfer, m."
+11,(1987).
+11,"on the relation- university press, 109–145. ship between the accuracy and value of forecasts in the wilks, d."
+11,(2000).
+11,diagnostic verification of the climate cost-loss ratio situation.
+11,"weather and forecasting, 2: prediction center long-lead outlooks."
+11,"climate, 13: 2389– 243–251."
+11,"murphy, a."
+11,"& epstein, e."
+11,(1989).
+11,"skill scores and cor- winkler, r."
+11,"& murphy, a."
+11,(1985).
+11,decision analysis. relation coefficients in model verification.
+11,"rev., in probability, statistics and decision making in the 117: 572–581."
+11,"atmospheric sciences, a."
+11,murphy and r.
+11,"katz, eds., murphy, a."
+11,"& wilks, d."
+11,(1998).
+11,"a case study of the use westview press, boulder, colorado, 493–524. of statistical models in forecast verification: precipitation probability forecasts."
+11,"weather and forecasting, 13: 795– 810 219"

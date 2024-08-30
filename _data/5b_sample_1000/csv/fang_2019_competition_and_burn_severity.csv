@@ -1,0 +1,1228 @@
+page,p
+1,"remote sensing article competition and burn severity determine post-fire sapling recovery in a nationally protected boreal forest of china: an analysis from very high-resolution satellite imagery lei fang 1 , ellen v."
+1,"crocker 2 , jian yang 2 , yan yan 3 , yuanzheng yang 3 and zhihua liu 1, * 1 cas key laboratory of forest ecology and management, institute of applied ecology, chinese academy of sciences, shenyang 110016, china; fanglei@iae.ac.cn 2 department of forestry and natural resources, tp cooper building, university of kentucky, lexington, ky 40546, usa; e.crocker@uky.edu (e.v.c.); jian.yang@uky.edu (j.y.)"
+1,"3 key laboratory of environment change and resources use in beibu gulf, guangxi teacher education university, nanning 530001, china; yanyan@gxtc.edu.cn (y.y.); yangyz@gxtc.edu.cn (y.y.)"
+1,* correspondence: liuzh@iae.ac.cn; tel.: +86-024-8397-0327  received: 12 february 2019; accepted: 1 march 2019; published: 13 march 2019  abstract: anticipating how boreal forest landscapes will change in response to changing fire regime requires disentangling the effects of various spatial controls on the recovery process of tree saplings.
+1,spatially explicit monitoring of post-fire vegetation recovery through moderate resolution landsat imagery is a popular technique but is filled with ambiguous information due to mixed pixel effects.
+1,"on the other hand, very-high resolution (vhr) satellite imagery accurately measures crown size of tree saplings but has gained little attention and its utility for estimating leaf area index (lai, m2 /m2 ) and tree sapling abundance (tsa, seedlings/ha) in post-fire landscape remains untested."
+1,"we compared the explanatory power of 30 m landsat satellite imagery with 0.5-m worldview-2 vhr imagery for lai and tsa based on field sampling data, and subsequently mapped the distribution of lai and tsa based on the most predictive relationships."
+1,a random forest (rf) model was applied to assess the relative importance and causal mechanisms of spatial controls on tree sapling recovery.
+1,the results showed that pixel percentage of canopy trees (ppct) derived from vhr imagery outperform all landsat-derived spectral indices for explaining variance of lai (r2 vhr = 0.676 vs.
+1,r2 landsat = 0.427) and tsa (r2 vhr = 0.508 vs.
+1,r2 landsat = 0.499).
+1,"the rf model explained an average of 55.5% (sd = 3.0%, mse = 0.382, n = 50) of the variation of estimated lai."
+1,"understory vegetation coverage (competition) and post-fire surviving mature trees (seed sources) were the most important spatial controls for lai recovery, followed by burn severity (legacy effect), topographic factors (environmental filter) and nearest distance to unburned area (edge effect)."
+1,"these analyses allow us to conclude that in our study area, mitigating wildfire severity and size may increase forest resilience to wildfire damage."
+1,"given the easily-damaged seed banks and relatively short seed dispersal distance of coniferous trees, reasonable human help to natural recovery of coniferous forests is necessary for severe burns with a large patch size, particularly in certain areas."
+1,"our research shows the vhr worldview-2 imagery better resolves key characteristics of forest landscapes like lai and tsa than landsat imagery, providing a valuable tool for land managers and researchers alike."
+1,"keywords: forest recovery; resilience; leaf area index; tree sapling abundance; burn severity; boreal forests; worldview-2 remote sens. 2019, 11, 603; doi:10.3390/rs11060603 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2019, 11, 603 2 of 22 1."
+2,"introduction wildfire has been well recognized as a crucial process governing the dynamics of forest structure, composition and function in boreal forests [1,2]."
+2,"severe burns can cause abrupt changes to forest ecosystem by killing living plants, consuming organic matter, and altering biophysical environments [3–5]."
+2,"in general, forest ecosystems are resilient and able to recover key functional and compositional attributes after disturbances [6–8]."
+2,"however, the resilience of boreal forests is decreasing due to a misalignment between changing fire regimes and vulnerable ecosystem states [9–11]."
+2,"biome transitions in boreal forests, including shifts from forests to treeless steppes and an increase in deciduous trees, are thought to be exacerbated by changing fire regimes [12–15]."
+2,"in addition, both fire frequency and severity in boreal ecosystems is predicted to increase in the future [16–19]."
+2,research on the spatial controls of forest restoration post-fire is essential for understanding how boreal ecosystems respond to changing fire regimes and advancing ecologically sound policies in boreal fire management and restoration.
+2,"tree sapling regeneration is strongly correlated to the future successional trajectory of burned forests and thus can be used to anticipate future compositional and structural dynamics [20,21]."
+2,"structural attributes of regeneration observed in the field, such as abundance, biomass, and species composition, can be used to determine the strength of post-fire forest recovery [21–24]."
+2,"field-based inventory approaches can provide first-hand information, but this is a labor-intensive and time-consuming process with limited utility for long-term monitoring over a broad spatial scale."
+2,"on the other hand, remote sensing is a novel and cost-effective technique for monitoring forest ecosystems [25], as well as for evaluating fire-related characteristics such as burn severity [26,27], burned area [28], and monitoring post-fire vegetation recovery [29–31]."
+2,satellite imagery for monitoring post-fire vegetation dynamics assumes that the remotely sensed surface reflectance can capture spectral signal variations that correspond to vegetation recovery.
+2,"vegetation indices were designed to reflect vegetation photosynthesis and were widely accepted as surrogates of canopy attributes, biomass, or tree coverage across global forest ecosystems [30,32]."
+2,"however, spectral variation as exhibited in satellite imagery is not a biophysical parameter that can precisely characterize structure or function of forest ecosystems [33]."
+2,"forest recovery is typically described ambiguously in terms of changes in vegetation index or greenness in remote sensing literatures, however little attention has been paid to investigate whether such remotely sensed spectral information can reflect key forest structures in newly established boreal forest stands [34,35]."
+2,"on the other hand, structural attributes rather than spectral variations are the critical indicators of forest ecosystem functions (i.e., carbon sequestration and water budgets) [36,37], and are thus more important for assessing forest recovery for management and scientific perspectives."
+2,"tree sapling abundance (tsa), the number of tree saplings per unit area, is a crucial attribute of the post-fire forest stands as it determines the future successional trajectory of forests [38,39]."
+2,"burned areas with high tsa have a higher possibility of developing as forests through succession and recovery processes, while burned areas with few tree saplings may take a longer time to approach canopy closure."
+2,the spatial distribution of tsa is thus a critical reference for directing artificial management measures that aim to promote forest restoration post-fire.
+2,"leaf area index (lai) is another structural attribute with critical importance to forest productivity and biomass accumulation through influencing forest canopy photosynthesis [40,41]."
+2,"lai can be measured rapidly in the field and is one of the few forest structures that is well-linked to optical remote sensing at various spatial scales [42,43]."
+2,spatially monitoring these two structural attributes is essential for understanding the functional dynamics of post-fire forest ecology but presents a challenge for traditional remote sensing approaches.
+2,"in post-fire landscapes, tree sapling distribution usually exhibits a high degree of heterogeneity as a result of interactions among seed availability (legacy effects), filter effects from environmental factors, inter- and intraspecific competition and edge effects [23,44]."
+2,"previous studies aimed at disentangling these effects were dependent on field investigations but very high-resolution (vhr) satellite imagery, which can provide fine details of post-fire landscapes (<1 m), is a promising approach that has not previously been utilized for tree saplings."
+2,the high resolution of vhr imagery is significant in allowing
+3,"remote sens. 2019, 11, x for peer review 3 of 23 remote sens. 2019, 11, 603 3 of 22 approach that has not previously been utilized for tree saplings."
+3,"the high resolution of vhr imagery is significant in allowing for accurate assessment of tree sapling crown size, but very few studiesassessment for accurate sapling of treethe have investigated utilitycrown of vhr size, but very imagery for few have structural studiesforest monitoring investigated the utility attributes in of vhr imagery for monitoring newly reestablished stands. forest structural attributes in newly reestablished stands. on this, basedbased we sought on this, we sought to to addressthe address thefollowing how questions:(1)(1)how following questions: dodothethe performances performances of of vhr andvhrlandsat imagery and landsat differed imagery for delineating differed for delineating spatial the the distribution spatial distribution tsa ofof tsa andlai and laiininthe theearly early post-fire post-fire (2) landscape; landscape; (2) which which spatial spatial controls controls (interspecific (interspecific competition,competition, legacy legacy effects, effects, environmental environmental filters or edge effects) are most important in the recovery of filters or edge effects) are most important in the recovery of lai and tsa post-fire; and (3) howlai and tsa post-fire; and spatial do these (3) howcontrol spatial influence do thesefactors control factors influenceor(inhibiting (inhibiting or facilitating) facilitating) spatial distribution spatial distribution of lai and of lai and tsa post-fire?"
+3,tsa post-fire?
+3,materials and methods 2.
+3,materials and methods 2.1.
+3,study area 2.1.
+3,"study area the study was conducted in huzhong national natural reserve of great xing’an mountains the study (figure was conducted 1), where in huzhong primary forests nationalsince are well protected natural reserve all logging of great has been xing’an prohibited mountains since 1958."
+3,"(figure 1), where primary forests are well protected since all logging has been prohibited in this area, post-fire forests follow a natural recovery process and successional trajectory without since 1958. area, post-fire in thisartificial seeding or forests follow plantation. ban onrecovery a natural a strict logging ofprocess and successional natural forests has been enforced trajectory acrosswithout the artificial seeding great xing’anormountains plantation."
+3,"a strict since ban on april 2014, thuslogging of natural historical forests fires in the nature hasreserve been enforced across will provide valuable insight for understanding how resilient this forest is in responding the great xing’an mountains since april 2014, thus historical fires in the nature reserve will provideto wildfire and for refining valuable insightpost-fire management practices. for understanding the particular how resilient is (lat/lon: this forestfire 122°50′e, in responding 51°53′n)and to wildfire we studied for refining was ignited by lightning on 17 june 2000 and lasted for seven ◦days post-fire management practices."
+3,"the particular fire (lat/lon: 122 50 e, 51 53 n) we studied 0 [45]."
+3,"◦ it 0 burned an area was approximately 7735 ha, most of which was moderate-high severity with high tree mortality rates ignited by lightning on 17 june 2000 and lasted for seven days [45]."
+3,"it burned an area approximately [26,39]. 7735 ha, most of which was moderate-high severity with high tree mortality rates [26,39]."
+3,figure 1.
+3,"spatial location of the study area (a, red dot) in great xing’an mountains (a, in blue) of figure 1."
+3,"china northeastern (a,location spatial of the in green). falsearea thestudy (a,landsat color (b,xing’an in great red dot) image r: tm7,mountains g: tm4, b:(a, tm3) in blue) of acquired northeastern china (a, in green)."
+3,"the false color landsat image (b, r: tm7, g: tm4, b: tm3) acquired on 24 may 2002 exhibits an overview of two-year post-fire landscape, while the worldview-2 image (c) on 24 may 2002 exhibits an overview of two-year post-fire landscape, while the worldview-2 image shows the post-fire landscape after 14 years recovery."
+3,the red and blue dots are field plots explored in (c) shows the post-fire landscape after 14 years recovery.
+3,"the red and blue dots are field plots 2012 and 2013, respectively. explored in 2012 and 2013, respectively."
+3,"the pre-fire forests were dominated by dahurian larch (larix gmelinii), a deciduous conifer, and a few deciduous broadleaf species of birch (betula platyphylla) and aspen (populus davidiana and populus suaveolens) [46]."
+3,some evergreen conifers including scotch pine (pinus sylvestris var. mongolica) and korean spruce (picea koraiensis) were also sparsely distributed.
+3,the understory layer was the primary
+4,"remote sens. 2019, 11, x for peer review 4 of 23 the remote sens. 11, 603forests were dominated by dahurian larch (larix gmelinii), a deciduous conifer, and 4 of 22 pre-fire 2019, a few deciduous broadleaf species of birch (betula platyphylla) and aspen (populus davidiana and populus suaveolens) [46]."
+4,"some evergreen conifers including scotch pine (pinus sylvestris var. fuel mongolica) bed and source of ladder and korean fuels spruce [45], (picea were also of which consisted koraiensis) evergreen sparsely shrubs the distributed."
+4,"pinus pumila, (e.g.,understory layerledum was the linnaeus andprimary vaccinium bed and source fuel vitisidaea), of ladder deciduous fuels [45], shrubs (e.g.,which consisted ofand betulafruticosa evergreen shrubs (e.g., rhododendron dauricum pinus pumila, ledum linnaeus and vaccinium vitisidaea), deciduous shrubs (e.g., betulafruticosa linnaeus) and some herbaceous plants (e.g., chamaenerion angustifolium, carex appendiculata and rubus and rhododendron linnaeus) dauricum that varied edaphicand withlinnaeus) andsome herbaceousconditions topographic chamaenerion plants (e.g.,[47]."
+4,"this area angustifolium, carex short has a relatively appendiculata and rubus linnaeus) that varied with edaphic and topographic conditions [47]."
+4,"this area growing seasons (150 days) and frost-free period (~80–100 days), with a mean annual temperature has a relatively short ◦growing seasons (150 days) and frost-free period (~80–100 days), with a mean of approximately −4.7 c and mean annual precipitation of about 460 mm [26]."
+4,the topography is annual temperature of approximately −4.7 °c and mean annual precipitation of about 460 mm [26].
+4,the topography elevation mountainous with ranges is mountainous from with to 1300from 760 mranges elevation m. 760 m to 1300 m.
+4,field data 2.2.
+4,"field collection data collection for field datadata for field collection, we focused collection, our attention we focused on two our attention on structural attributes two structural of post-fire attributes vegetation, of post-fire and lai, which tsavegetation, tsa and canlai, whichevaluated be easily can be easilyin the field."
+4,in evaluated the field.
+4,"inofsummers in summers 2012 andof2013, and field 2012 our 2013,crews our field collected crews 70 plots ofcollected 70 plots ofdata sapling inventory sapling both tsa data for inventory laiboth and for tsa1), (figure and laiplot with (figure size 1), set with to 30 m × plot size set to 30 m in order to match the spatial resolution of landsat imagery and to minimize potentialand 30 m × 30 m in order to match the spatial resolution of landsat imagery scaletoissues."
+4,this minimize will improve potential scale issues. the accuracy this between of linkage in situthe will improve accuracy ofand measurement linkage landsatbetween in properties. spectral situ measurement and landsat spectral properties.
+4,all sites were at least 150 m from roads to eliminate all sites were at least 150 m from roads to eliminate edge effect and were selected according to severity edge effect and were selected according to severity and topographic positions.
+4,"within each plot, we and topographic positions."
+4,"within each plot, we set three 5 m × 5 m quadrants along the diagonal (~42 m) set three 5 m × 5 m quadrants along the diagonal (~42 m) to survey sapling stems with a height to survey greatersapling than 1.5stems with a 2). m (figure height greater we did not than 1.5 m (figure distinguish wespecies between2).tree did not(although distinguish mostbetween were tree white birch and larch) as they were not differentiable in vhr imagery due to very similar spectraldue to species (although most were white birch and larch) as they were not differentiable in vhr imagery similar spectral verysignature and highlysignature mixed and highly in situ. mixed in all saplings situ. were all saplings counted were based on the counted number of based stemson them) (>1.5 number of stems (>1.5 because m) because asexual asexual resprouting of resprouting white birch is ofcommon. white birch common."
+4,tsaiswas tsaaswas calculated thecalculated mean number as theof mean saplings number and wasand of saplings normalized to saplings was normalized to per hectare. saplings per hectare.
+4,figure figure 2.
+4,layout 2.
+4,layout of of samplingplot. sampling plot.three 5m three 5 m ××55mmquadrates quadratesareare used used treetree sapling for for abundance sapling abundance survey.
+4,nine fish-eye photos were used for estimation of leaf area index.
+4,three survey.
+4,nine fish-eye photos were used for estimation of leaf area index.
+4,"three upward upward digitaldigital hemispherical photography (dhp, top-left) pictures show examples of in situ canopy measurement, hemispherical photography (dhp, top-left) pictures show examples of in situ canopy measurement, while tree processed pictures (low-right) show corresponding classification results (see marks) in while tree processed pictures (low-right) show corresponding classification results (see marks) in can-eye software."
+4,the black areas in mid-right picture (blue triangle) represent masked dead can-eye software.
+4,the black areas in mid-right picture (blue triangle) represent masked dead standing stems in corresponding dhp picture (top-middle). standing stems in corresponding dhp picture (top-middle).
+4,lai was measured using a digital hemispherical photography (dhp) system using a canon eos 60d digital single lens reflex camera and a sigma 8-mm f3.5 ex dg fisheye lens.
+4,"we followed the user manual of can-eye software (version 6.3.3, national institute of agronomical research, toulouse, france) to calibrate our dhp system and derive the parameters for establishing the"
+5,"remote sens. 2019, 11, 603 5 of 22 projection functions [48]."
+5,"using a 1920 × 1280 pixels parameter for digital photograph, our calibration process generated accurate projection functions that are comparable with results as shown in user manual (see appendix a)."
+5,the dhp system was installed to a tripod with a fixed 0.70 m height.
+5,"within each sampling plot, we took nine upward digital photographs distributed as shown in figure 2."
+5,"following the recommendation of the user manual, the limit of the circle of interest was set as 60◦ in can-eye software to avoid mixed pixels effects in the blended photograph edges."
+5,other input parameters were set as either default values or derived from photographs automatically.
+5,"given this procedure, dead standing stems with large diameter had the potential to influence the lai estimation, so we manually masked them during the image process in can-eye software to reduce the overestimation."
+5,"the canopy of surviving trees was retained, however, because their greenness was involved in landsat spectral signals and not possible to isolate."
+5,remote sensing for estimating vegetation coverage 2.3.1.
+5,remote sensing data process the cloud-free worldview-2 (digitalglobe.
+5,"inc., herndon, va, usa, figure 1) image was acquired on 1 june 2014 at 2 m spatial resolution including four multispectral bands (blue 450–510 nm; green 510–580 nm, red 705–745 nm, and near infrared (nir) 860–1040 nm) and 0.5 m spatial resolution for panchromatic band (450–800 nm)."
+5,we used the pan sharpening toolbox in envi 5.3 software (harris geospatial solution.
+5,"inc., washington, dc, usa) to perform image fusion, and improved the spatial resolution of multispectral bands to 0.5 m."
+5,the worldview-2 imagery had been geo-spatially projected using the universal transverse mercator (utm) coordinate system based on wgs-84 ellipsoid with a nominal positioning accuracy of 3.5 m.
+5,"it is accurately overlapped with landsat imageries, which have 30-m spatial resolution."
+5,"to produce time-synchronous comparisons between landsat and field survey, the spectral indices were extracted according to the year when the tsa and lai data were collected in the field."
+5,"in addition, we used the same field data for the landsat-derived indices of 2014 in order to form an unbiased comparison with worldview-2 data."
+5,"we obtained 8 landsat-5 tm, landsat-7 etm+, and landsat-8 oli surface reflectance images (path-row: 122/24 and 121/24, time: 2010, 2012–2014) from the eros science processing architecture (espa) system of the usgs (table 1)."
+5,atmospheric and topographic correction had been carried out for these before distribution.
+5,"due to the lack of cloud-free days over the study area during the time periods assessed, we used “cloud masking” to remove cloud and shadow pixels [49], and then carried out image mosaic to fill data-gap for each year."
+5,"although the intra-annual landsat imageries have very close observation dates, we still applied the iteratively re-weighted multivariate alteration detection (ir-mad) approach to minimize spectral inconsistency among landsat sensors [50,51]."
+5,the landsat-5 imagery of 2011 was used as the reference imagery for band-by-band radiometric normalization.
+5,"the mean correlation coefficients (for 6 bands) of four target imageries were each higher than 0.95, indicating good performance of ir-mad for radiometric normalization."
+5,table 1.
+5,detailed information of landsat scenes.
+5,"invalid pixels are cloud, shadow and null value pixels."
+5,satellite sensor acquisition date path-row percentage of invalid pixels usage landsat-5 tm 5 september 2011 122-24 3.6% reference image landsat-7 etm+ 30 august 2012 122-24 21.7% spectral indices landsat-7 etm+ 8 september 2012 121-24 33.1% spectral indices landsat-8 oli 25 august 2013 122-24 36.8% spectral indices landsat-8 oli 3 september 2013 121-24 13.3% spectral indices landsat-8 oli 21 august 2014 121-24 33.2% spectral indices landsat-7 etm+ 29 august 2014 121-24 35.0% spectral indices landsat-7 etm+ 5 september 2014 122-24 31.0% spectral indices
+6,"remote sens. 2019, 11, 603 6 of 22 2.3.2."
+6,"landsat-derived spectral indices vegetation indices developed from remote-sensed red and nir bands, such as the normalized differenced vegetation index (ndvi), are often used as indicators of vegetation recovery in many forest ecosystems [31]."
+6,"but saturation issues with vegetation indices are widely reported [34,52], especially in areas covered with dense vegetation, which may limit the strength of vegetation indices for detecting structural changes related to forest recovery [30]."
+6,"spectral indices derived from the shortwave infrared (swir) bands, which are sensitive to water content in vegetation foliage, are proving to be good indicators of post-fire recovery in many forest ecosystems [34,53,54]."
+6,"in addition, components of tasseled cap (tc) transformation (i.e., brightness, greenness and wetness) and their modified spectral indices are also commonly used for monitoring forest disturbance and forest recovery [55]."
+6,different indices may provide different perspectives of forest recovery.
+6,"therefore, it is critical to elucidate which landsat-derived spectral indices have the feasibility to depict post-fire tree sapling attributes in our ecosystem."
+6,such efforts can be helpful to provide an in-depth understanding of what remote sensing indices mean in the field.
+6,"to comprehensively investigate the performance of landsat-derived spectral indices on estimating tsa and lai, we calculated nine commonly-used spectral indices (table 2) to analyze their explanatory strength."
+6,table 2.
+6,formulas of nine landsat-derived spectral indices.
+6,spectral index abbreviation: ndvi—normalized difference of vegetation index; evi—enhanced vegetation index [56]; savi—soil adjusted vegetation index [52]; msavi—modified soil adjusted vegetation index [52]; nbr—normalized burn ratio [54]; ndmi—normalized difference moisture index [57]; tca—tasseled cap angle [55]; tcw—tasseled cap wetness.
+6,note: spectral bands are different between landsat5/7 and landsat 8.
+6,spectral index spectral index ρ n ir −ρ red ρ n ir −ρsw ir2 ndv i = ρ n ir +ρ red nbr = ρ n ir +ρsw ir2 2.5×(ρ n ir −ρ red ) ρ −ρ ev i = ρ n ir +6×ρ red −7.5×ρ blue +1 ndmi = ρ nn ir sw ir1 ir + ρsw ir1 2.5×(ρ −ρ ) tcgreeness n ir ev i2 = ρ n ir +2.4 red ×ρ red +1 tca = arctan( tc brightness ) tcw = 0.1446× ρ blue + 0.1761 × ρgreen + 0.3322 × ρ red ρ −ρ sav i = 1.5×(ρ n ir +ρred +0.5) +0.3396 × ρ n ir − 0.621 × ρsw ir1 n ir red −0.4186 × ρsw ir2 − 3.3828 q msav i = 0.5 × (2 × ρ n ir + 1 − (2 × ρ n ir + 1)2 − 8 × (ρ n ir − ρ red )) 2.3.3.
+6,"image textures of worldview-2 imagery the worldview-2 has limited spectral bands that cannot sufficiently support to calculate much spectral indices, but it offers image textures to improve the land cover mapping [58,59] and estimation of forest structures [60,61], yet its performance in estimating attributes of sapling tree was not verified."
+6,"using the panchromatic band of worldview-2 imagery, we calculated 13 image texture variables, which consist of five occurrence measures and eight co-occurrence measures."
+6,"the occurrence measures directly use the number of occurrences of each gray level within a given moving window for calculating summaries of statistics (i.e., range, mean, variance, entropy and skewness)."
+6,the co-occurrence measures are second-order statistical calculations involving the spatial relationships among neighboring pixels.
+6,"the grey level co-occurrence matrix, which is a function of both the angular relationship and distance between a central pixel and its neighboring pixels, was used to calculate eight statistical measures including mean, variance, homogeneity, contrast, dissimilarity, entropy, angular second moment (asm), and correlation."
+6,calculation of image texture is influenced by the window size as it determines the number of surrounding pixels.
+6,"wood, et al. [62] suggested that a small window size for image texture analysis may best match the spatial scale at which the forest structure varies."
+6,"we tested three kinds of window size,"
+7,"remote sens. 2019, 11, 603 7 of 22 including 5 × 5, 15 × 15 and 25 × 25, but did not find notable differences for subsequent analysis."
+7,we chose a 5 × 5 window size for all texture variable calculations because it matches the spatial size of a single tree sapling and since it was the least costly in computing time.
+7,"we did not calculate image texture for landsat imagery because our field plots had identical spatial size with landsat pixel, which means the measured tsa and lai can only reflect within-pixel (30 m) variations."
+7,all image texture variables were computed using envi 5.3 software (harris geospatial solution.
+7,"inc., herndon, va, usa)."
+7,2.3.4.
+7,land cover mapping of worldview-2 imagery we used the per-pixel classification method to obtain the land cover information from the 0.5 m worldview-2 imagery.
+7,"according to our field knowledge and visual interpretation of the imagery, we used a classification scheme consisting of 9 popular objects in the field during the preliminary analysis."
+7,we used the support vector machine (svm) approach to carry out the land cover classification.
+7,"the svm is a supervised classifier that has been widely applied for land cover and land use mapping through the local to global spatial scales [63,64]."
+7,training pixels were selected with very high confidence based on our knowledge.
+7,we chose over 3000 training pixels for each land cover type in order to provide sufficient model training and avoid overfitting problem [65].
+7,"we calculated the jeffries–matusita distance (jmd) to evaluate the separability of training pixels, defined as:   j mdxy = 2 1 − e− b where b is the bhattacharyya distance, which is usually used for indicating dissimilarity between two distributions: ∑ x +∑ y    −1 t ∑x+∑y  1 1  2 b = ( x − y) ( x − y) + ln p  8 2 2 |∑ x | × |∑ y| in this equation, x and y are two vectors of spectral and textural signatures and ∑ x and ∑ y are covariance matrix of x and y respectively [66]."
+7,"the jmd will be close to 2 when spectral and textural signatures of two classes are completely different (high separability), and close to 0 when spectral and textural signatures are identical (low separability)."
+7,classification accuracy was evaluated based on additional pixels (~1000 pixels for each class) that were independently selected from the training pixels.
+7,"using the confusion matrix approach [67], we calculated the cohen’s kappa coefficient to evaluate overall classification accuracy, and used the omission error and commission error to evaluate accuracy of individual class."
+7,the ability to distinguish tree saplings from the surviving trees was desired to refine our research.
+7,"however, we found low separability between these two classes (table 3)."
+7,we also found low separability between grasslands and shrublands and therefore combined those classes for the further analysis (but reported accuracies evaluated based on the nine-class scheme).
+7,statistical analysis 2.4.1.
+7,"compare performance of landsat and worldview-2 on predicting tsa and lai to match the spatial size of field data, we conducted spatial aggregation to obtain statistical measures for information derived from worldview-2 data."
+7,"for the land cover map, we used a moving window (60 × 60 pixels), whose spatial size is consistent with spatial resolution of landsat imagery, to compute the percentage of pixels that were classified as the canopy trees (i.e., tree saplings and mature trees), denoted as ppct."
+7,"for image texture, we conducted spatial aggregation to obtain the mean value for each texture variable."
+7,"given high collinearity among image texture variables, pairwise pearson correlation coefficients (r) calculated from the “hmisc” package in r 3.4.1 (r development core team 2017, boston, ma, usa) were used as the criteria based on randomly sampled 300 pixels."
+8,"remote sens. 2019, 11, 603 8 of 22 we used a forward stepwise method combined with variance inflation factors (vif) functions in the “car” package to drop variables with high collinearity by applying a stringent threshold of 3, following recommendation of zuur, et al."
+8,landsat spectral indices often show collinearity as their computation may use the same spectral bands.
+8,"because of this we only retained two co-occurrence texture variables (i.e., mean and asm) and one occurrence texture variable (i.e., entropy) as they represented low correlations (|r| < 0.50)."
+8,we retained all spectral indices for the further analysis to allow us to investigate the usage of a spectral index in monitoring post-fire vegetation dynamics.
+8,"the presence of spatial autocorrelation in dependent variables may violate the assumption that all observations are independent, which will inflate the significance and affect the coefficient estimates."
+8,"using functions in the “ape” package [69], we calculated the moran’s i index to examine spatial autocorrelations in our measured tsa and lai respectively."
+8,moran’s i is similar to a correlation coefficient ranging between −1 and 1.
+8,"higher positive values indicate greater similarity, while lower negative values indicate stronger dissimilarity."
+8,"autocorrelation was found significant at α < 0.05 level, but very weak for both tsa (moran’s i = 0.18) and lai (moran’s i = 0.20)."
+8,"it suggested our field observations on tsa and lai have low spatial dependence, and the subsequent analysis will not be strongly influenced by spatial autocorrelation."
+8,the coefficient of determination (r2 ) was used to evaluate the explanatory power of remotely sensed variables for variations of field-measured tsa and lai.
+8,"because the lai is partially determined by tree density, it is not surprising that our lai data represented very high correlation (r = 0.783, p < 0.01) with tsa data."
+8,we retained both variables for the remote sensing analysis as they reflect different perspectives of forest structure and may be sensitive to different spectral bands.
+8,"before parameterizing the regression model, we applied the shapiro-wilk test and histogram approach to detect whether the normality assumption is violated [70]."
+8,"if the null hypothesis (i.e., samples came from a normally distributed population) was rejected at α < 0.05 level, we applied logarithm transformation to mitigate skew."
+8,homogeneity of variance was evaluated using the fligner–killeen test [71].
+8,"the test results indicated that the null hypothesis (i.e., all populations variances are equal) was not violated in any regression model."
+8,outliers (cook’s distance greater than four times of the mean) were detected and removed.
+8,the landsat indices and worldview-2 variables with the highest r2 were used to predict tsa and lai through the post-fire landscape.
+8,2.4.2.
+8,evaluation of relative importance using random forest model we used the random forest (rf) model in the “randomforest” package to evaluate the relative importance of spatial controls on determining tsa and lai.
+8,"the rf model is a machine learning algorithm with advantages for dealing with nonlinear relationships, multi-collinearity, and complex interactions without imposing assumptions on data distribution [72]."
+8,"based on a bootstrap subsampling (bagging) scheme, the rf model can generate multiple regression trees with low variance that can be combined for an accurate prediction."
+8,the best split of node is chosen from the random subsets of predictor variables to ensure that all predictors are tested.
+8,"for each individual tree, the remaining (i.e., out-of-bag, oob) data that not drawn into training subset is used for unbiased model validation [73]."
+8,we used the variance explained (r2 ) to evaluate the goodness of fit of rf model for training data.
+8,it is calculated based on the internal oob error rate in terms of mean of squared residuals (mse): n 2 mse = n−1 ∑ (yi − ŷoob i ) 1 where ŷoob i is the average of the oob predictions for observation i.
+8,the r2 is calculated as: mse r2 = σ̂y2 the most important variable will cause highest degradation on model fit when it is omitted.
+9,"remote sens. 2019, 11, 603 9 of 22 predictors were spatial variables representing gradients of burn severity, topography and understory vegetation abundance (table 3)."
+9,"burn severity was evaluated based on a quadratic correlation model (r2 = 0.856), which was developed from the difference between the normalized burned ratio (dnbr) and field-sampled severity measures [26]."
+9,"we applied a 30 m resolution digital elevation model (dem) to generate topographic variables reflecting elevation, topographic relief, topographic wetness, and the total solar radiation of growing season (april to october)."
+9,understory vegetation abundance was derived from worldview-2 land cover map.
+9,"similar to ppct, we calculated the coverage of understory vegetation (i.e., shrubland and grassland) using a 30 m × 30 m moving window aggregation approach."
+9,we also found that the shadow pixels largely reflected mature trees in our worldview-2 imagery.
+9,we used the coverage of tree shadow as a surrogate to represent the number of surviving mature trees post-fire.
+9,"this is similar to berner, et al. [74], who applied the tree shadow coverage as a surrogate of tree biomass."
+9,"to understand the edge effects of unburned areas on post-fire recovery, we also calculated the nearest distance to the edge of unburned area as a predictor."
+9,the remote sensed tsa and lai were used as the response variables for two rf models respectively.
+9,we generated random samplings based on a 150 m sampling space to balance the spatial autocorrelation and the maximum sampling number (~500 points).
+9,"to reduce the risk of stochastic errors and create stable model outputs, we carried out 50 rf modeling trials independently and used the average value as the final result."
+9,table 3.
+9,description of predictors used in random forest models.
+9,"predictor category description indicator of burn severity, calculated based on bi-temporal difference of dnbr legacy effect nbr."
+9,higher dnbr values represent higher tree mortality and more combustion of surface organic matters.
+9,surrogate amount of surviving trees post-fire.
+9,this is derived from the shadow legacy effect 0.5 m land cover map of worldview-2.
+9,higher shadow coverage indicates more surviving trees (and likely higher seed availability).
+9,elevation topography filter altitude of a given site.
+9,topographic position index.
+9,"a positive tpi value indicates a higher altitude than neighborhood pixels, while a negative tpi value indicates tpi topography filter a lower altitude than surrounding areas."
+9,a tpi value of 0 indicates a flat area or an area near mid-slope.
+9,topographic wetness index.
+9,twi values typically range from 3 to 30.
+9,twi topography filter higher twi values indicate high soil moisture potential.
+9,incoming solar radiation from a raster surface during the growing solar radiation topography filter season.
+9,higher values indicate higher exposure to solar radiation.
+9,southern-facing slopes usually have higher solar radiation.
+9,percentage of pixels classified as understory (grasslands and shrublands) in land cover map of worldview-2 for each 30 m × 30 m understory coverage competition site.
+9,higher understory coverage indicates more space occupied by understory plants.
+9,understory plants do not include tree sapling here.
+9,the nearest distance to unburned areas.
+9,it reflects the potential of a nearest distance edge effect given site to receive seed source from unburned areas with proximity to unburned forests indicating a higher likelihood of receiving seeds.
+9,results 3.1.
+9,accuracy assessment of worldview-2 classification relatively high pairwise jmd values (table 4) indicated very high spectral dissimilarity among the most of land cover classes.
+9,the overall accuracy of classification was 81.3% and the cohen’s kappa coefficient was 0.790.
+9,"mature trees had strong spectral similarity with tree saplings, resulting in a high rate of commission errors (41.6%) for mature tree classification and high omission error (66.5%) for tree sapling classification."
+9,"similarly, spectral separability between shrublands and grasslands"
+10,"remote sens. 2019, 11, x for peer review 10 of 23 grasslands also was11, remote sens. 2019, 603 relatively low, preventing us from distinguishing the two classes in subsequent 10 of 22 analyses."
+10,"mature trees and tree saplings together occupied about 23.6% of the total burned area, while shrublands and grasslands occupied approximately 51.9% of the total burned area (figure 3). rock,relatively was also bare low, preventing where vegetation us from has difficulty distinguishing establishing, the twoabout accounted classes in subsequent of the totalanalyses."
+10,10.2% burned mature trees and tree saplings together occupied about 23.6% of the total burned area.
+10,"the remaining 14.3% consisted of bare soil, water bodies, shadow areas and moss. area, while shrublands and grasslands occupied approximately 51.9% of the total burned area (figure 3)."
+10,"bare rock, where table 4.has vegetation difficulty pairwise establishing,distance jeffries–matusita accounted about (jmd, 10.2% values of the within total burned brackets) area."
+10,"the and confusion remaining matrix for 14.3% consisted of bare soil, water bodies, shadow areas and moss. evaluating intra-classes separability and classification accuracies respectively."
+10,the bold represents the number of verified samples.
+10,table 4.
+10,"pairwise jeffries–matusita distance (jmd, values within brackets) and confusion matrix for mature tree evaluating intra-classes separability bare and classification accuracies respectively."
+10,water shadow class bare soil grass-land shrub-landthe bold represents the moss tree sapling rock body area number of verified samples.
+10,mature tree 958 671 0 0 16 tree (1.83) sapling mature class tree tree342 sapling bare soil bare rock grass-land shrub-land water body shadow area moss soil bare tree mature (2.00) 958 (2.00) 671 919 01 0 59 1 16 bare tree rock sapling (2.00) (1.83) (2.00) 342 103 (1.99) 1029 bare soil (2.00) (2.00) 919 1 59 1 grassland bare rock (1.97) (2.00) 6 (2.00) (2.00) (1.99) 3103 (1.99) 12 (1.99) 1029 403 10 shrubland grassland 42 (1.98) (1.97) 16(2.00) (2.00) 6 3(1.95) (1.99) (2.00) 12 (1.99) 661403 (1.46) 10 960 43 shrubland water body 42 (1.98) (2.00) 1 (2.00) (2.00) 6 (1.95) (2.00) (2.00) (2.00) 661 (1.46) (2.00) 960(2.00) 1082 109 43 water body (2.00) (2.00) (2.00) (2.00) (2.00) (2.00) 1082 109 shadow shadow area area (1.99) (1.99) (2.00) (2.00) (2.00) (2.00) (2.00) (2.00) (1.98) (1.98) (2.00) (2.00) (1.86) (1.86) 908 908 moss moss (2.00) (2.00) (2.00) (2.00) (1.97) (1.97) (2.00) (2.00) (2.00) (2.00) 4 (2.00) 4 (2.00) (2.00) (2.00) (2.00) (2.00) 1000 1000 3.
+10,land figure 3.
+10,"figure landcover covermapping mapping of the burned of the area (a) burned areabased on worldview-2 (a) based imagery.imagery. on worldview-2 small windows small (b–e) show windows zoomed (b–e) showviews of land zoomed viewscover maps of land compared (b,d)maps cover (b, d)to the rgb to compared imageries the rgb(c,e) for two(c, imageries sites e) (black box for b,c, red box from d,e) respectively. for two sites (black box for b, c, red box from d, e) respectively."
+10,correlations between remote sensed variables and lai and tsa 3.2.
+10,correlations between remote sensed variables and lai and tsa all landsat-derived indices exhibited significant correlations with lai and tsa (table 5).
+10,in two all landsat-derived indices exhibited significant correlations with lai and tsa (table 5).
+10,"in landsat cases, the evi2 (r2 = 0.427, rmse = 0.348, figure 4a) and nbr (r2 = 0.489, rmse = 0.331, two landsat cases, the evi2 (r2 = 0.427, rmse = 0.348, figure 4a) and nbr (r2 = 0.489, rmse = 0.331, figure 4d) were found the most explanative landsat-derived indices for lai, while the nbr figure 4d) were found the most explanative landsat-derived indices for lai, while the nbr (r2 = (r2 = 0.499, rmse = 0.953, figure 4b) and ndmi (r2 = 0.478, rmse = 0.983, figure 4e) were the 0.499, rmse = 0.953, figure 4b) and ndmi (r2 = 0.478, rmse = 0.983, figure 4e) were the most most explanative variables for tsa."
+10,"spectral indices derived from swir bands (e.g., nbr and ndmi) explanative variables for tsa."
+10,"spectral indices derived from swir bands (e.g., nbr and ndmi) generally performed better than vegetation indices (e.g., ndvi, evi, and savi)."
+10,the ppct variable of
+11,"remote sens. 2019, 11, 603 11 of 22 worldview-2 (vhr) explained the highest proportions of variance for lai (r2 = 0.676, rmse = 0.257, figure 4c) and tsa (r2 = 0.508, rmse = 0.977, figure 4f) among all variables, but image texture represented relatively weak correlations (table 5)."
+11,table 5.
+11,coefficients of linear regression models for evaluating relationships between remotely sensed variables and leaf area index (lai) and tree sapling abundance (tsa).
+11,landsat-derived spectral index abbreviations see footnote of table 2.
+11,ppct—pixel percentage of canopy tree; co_means—means of co-occurrence texture; asm—angular second moment.
+11,rmse—root mean square error.
+11,lai € tsa € satellite imagery predictor r2 † rmse outliers r2 rmse outliers evi € 0.283 ** 0.390 3 0.409 ** 1.048 3 evi2 0.427 ** 0.348 4 0.299 ** 1.111 3 msavi € 0.282 ** 0.396 2 0.251 ** 1.188 1 nbr 0.418 ** 0.354 2 0.499 ** 0.953 5 landsat (2010–2013) ndmi 0.337 ** 0.376 2 0.369 ** 1.077 3 ndvi € 0.376 ** 0.367 3 0.316 ** 1.13 2 savi € 0.339 ** 0.380 2 0.311 ** 1.134 2 tca 0.405 ** 0.354 4 0.351 ** 1.076 4 tcw 0.331 ** 0.379 3 0.385 ** 1.052 4 evi 0.171 ** 0.412 3 0.173 ** 1.196 3 evi2 0.377 ** 0.359 2 0.322 ** 1.09 2 msavi € 0.394 ** 0.357 3 0.333 ** 1.081 3 nbr 0.489 ** 0.331 5 0.450 ** 1.022 3 landsat (2014) ndmi 0.385 ** 0.360 3 0.478 ** 0.983 4 ndvi € 0.374 ** 0.360 2 0.324 ** 1.088 2 savi € 0.368 ** 0.362 2 0.304 ** 1.105 2 tca 0.455 ** 0.339 3 0.395 ** 1.037 3 tcw 0.333 ** 0.379 3 0.384 ** 1.053 4 ppct € 0.676 ** 0.257 4 0.508 ** 0.977 2 entropy € 0.008 0.437 3 0.038 1.282 3 worldview-2 (2014) co_means 0.008 0.437 4 0.002 1.275 3 asm € 0.089 * 0.418 4 0.005 1.316 2 € : model fits using logarithmic transformation; † : significance code: ** p < 0.01; * p < 0.05.
+11,the spatial distributions of lai (figure 5a) and tsa (figure 5b) 14 years post-fire were mapped based on the correlation models with highest r2 in table 5.
+11,"we found about 51.1% (~4098 ha) of the burned area exhibited high lai recovery (greater than 1), which corresponded to approximately 10,790~74,380 sapling/ha tsa."
+11,"about 14.6% (~1169 ha) of the burned area exhibited moderate lai recovery (between 0.5 and 1) of 4770~10,680 sapling/ha, and approximately 2745 ha of the burned area exhibited recovered poor recovery (lai < 0.5, and tsa < 4630 sapling/ha)."
+12,"remote sens. 2019, 11, x for peer review 12 of 23 remote sens."
+12,"remote 2019, sens. 11,11, 2019, 603x for peer review 12ofof2223 12 figure 4."
+12,"scatter plots depict the best relationships (table 4) between leaf area index (lai) and two landsat indices (a,b), and wroldview-2 case (c); and relationships between tree sapling abundance figure4."
+12,"scatter figure scatterplots depictthe plotsdepict bestrelationships thebest (table4)4)between relationships(table leafarea areaindex betweenleaf (lai)and index(lai) two andtwo (tsa) and two landsat indices (d,e), and wroldview-2 case (f)."
+12,"landsatindices landsat indices(a,b), andwroldview-2 (a,b),and wroldview-2 case case (c); (c); and and relationshipsbetween relationships betweentreetree sapling sapling abundance abundance (tsa) (tsa) andand two two landsat landsat indices indices (d,e), (d,e), and and wroldview-2 wroldview-2 case case (f).(f)."
+12,figure 5.
+12,"two maps show spatial distribution of leaf area index (lai, a) and tree sapling abundance figureb) 5."
+12,"(tsa, twoonmaps based pixel show spatial percentage distribution of canopy of leafderived tree (ppct) area index (lai, a) andimage."
+12,"tree sapling from worldview-2 abundance (tsa, b) based on pixel percentage of canopy tree (ppct) derived from worldview-2 figure 5."
+12,"two maps show spatial distribution of leaf area index (lai, a) and tree sapling 3.3."
+12,relative image.
+12,"importance of predictors to lai recovery abundance (tsa, b) based on pixel percentage of canopy tree (ppct) derived from worldview-2 image."
+12,"worldview-2 derived ppct was the most predictive indicator for both lai and tsa, because 3.3."
+12,"relative and lai andimportance of predictors tsa are highly to lai correlated recovery with each other, the rf model produces the same results for 3.3."
+12,lai both and relative tsa.
+12,thus importance we of only represented predictors to lai because worldview-2 derived ppct was the the rf model recovery results for indicator most predictive lai.
+12,"the 50forrf models lai explained both and tsa, aand maximum 2 62.4% lai andoftsa highlyrcorrelated are(mean = 55.5%, sd with = each mse =the 3.0%,other, 0.382, n = 50)produces rf model of the variation the same estimated in results for because worldview-2 derived ppct was the most predictive indicator for both lai and tsa, both the lai. and tsa.ofthus laicoverage understory we only vegetation representedandthe shadow rf model were the pixelsresults lai."
+12,"themost for top-two important 50 rf models and lai and tsa are highly correlated with each other, the rf model produces the same results for explainedvariables, predictor a maximum of 62.4% mse decreasing (mean about 43.3% (sd r2 = 55.5%, 4.6%)mse sd ==3.0%, and =42.89% 0.382, n(sd = 3.8%) = 50) of therespectively variation in both lai and tsa."
+12,thus we only represented the rf model results for lai.
+12,the 50 rf models when incorporated estimated lai.
+12,"theincoverage rf models of(figure 6).2 the understory dnbr contributed vegetation and shadow a 23.4% aboutpixels (sdthe = 2.9%) were decrease top-two most explained a maximum of 62.4% (mean r = 55.5%, sd = 3.0%, mse = 0.382, n = 50) of the variation in estimated lai."
+12,the coverage of understory vegetation and shadow pixels were the top-two most
+13,"remote sens. 2019, 11, x for peer review 13 of 23 important predictor variables, decreasing mse about 43.3% (sd = 4.6%) and 42.89% (sd = 3.8%) remote 11, 603incorporated in rf models (figure 6)."
+13,"the dnbr contributed about a 23.4% sens. 2019,when respectively of 22= 13(sd 2.9%) decrease in mse, while contributions of topography variables ranged from 9.6% to 16.7%, infollowed by solar mse, while radiationof(sd contributions = 3.7%), topographic topography position variables ranged 9.6%(tpi) fromindex (sd =followed to 16.7%, 2.3%), twi (sd = by solar 3.9%) and elevation (sd = 2.1%)."
+13,"the edge effect was found to be the least important radiation (sd = 3.7%), topographic position index (tpi) (sd = 2.3%), twi (sd = 3.9%) and elevation factor, contributing (sd about = 2.1%)."
+13,"the a 7.2% edge (sd effect = 3.2%) was founddecrease in least to be the mse.important factor, contributing about a 7.2% (sd = 3.2%) decrease in mse."
+13,figure 6.
+13,"relative importance from 50 random forest models, measured as the normalized difference figure 6."
+13,"relative importance from 50 random forest models, measured as the normalized difference between the mean square errors (mse) when permuting the out-of-bag portion of the data and the between the mean square errors (mse) when permuting the out-of-bag portion of the data and the mse when permuting given variable."
+13,magnitude of decrease of in mse indicates relative importance mse when permuting given variable.
+13,magnitude of decrease of in mse indicates relative importance of predictor variable (see table 3 for variable abbreviations). of predictor variable (see table 3 for variable abbreviations).
+13,discussion 4.
+13,discussion 4.1.
+13,remotely sensed estimation of lai and tsa 4.1.
+13,remotely sensed estimation of lai and tsa our field investigation suggests that the lai is highly correlated with tsa in early post-fire our field landscapes.
+13,"giveninvestigation that surveying tsa that suggests in thethefield highly correlated laiisistime-consuming and with tsa labor in earlyutilizing post-fire intensive, landscapes."
+13,given that surveying tsa in a dhp system can be a more efficient way to monitor post-fire tree sapling recovery.
+13,"we found thata the field is time-consuming and labor intensive, utilizing dhp all system can bespectral landsat-derived a more efficient way to monitor indices exhibited post-fire statistically tree sapling significant recovery. correlations weboth with found laithat all and landsat-derived spectral indices exhibited statistically significant correlations tsa, but the variance explained was usually less than 50%."
+13,"evi2 and nbr were the most predictive with both lai and tsa, but spectral the variance indices and tsa was for laiexplained butthan usually less respectively, 50%."
+13,"evi2 we found and nbr that nbr were the performed most predictive consistently well spectral for indices simulating laiforand laitsaandintsatworespectively, landsat analysisbut we found cases."
+13,thisthat nbr performed suggests that nbr consistently may be the bestwell for simulating lai and tsa in two landsat analysis cases.
+13,this suggests choice for monitoring post-fire vegetation dynamics in our study area.
+13,"a similar finding was also that nbr may be the best choice for reported by monitoring who vegetation post-fire chen, et al. [75], found that nbrdynamics in oursensitive is the most study area."
+13,"a similar indicator finding of post-fire was also vegetation reportedinbythechen, recovery blackethills al."
+13,"[75], national foundofthat whoforest the most that usa, issuggesting the nbr sensitive indicator the value of nbr of extends post-fire vegetation recovery in the black hills national beyond our boreal forest study system."
+13,"previous studies have also shown that nbr is betterofthan forest of the usa, suggesting that the value nbr extends ndvi forbeyond our boreal quantifying forest study burn severity system. [26,76], further previous supported studies have alsoyang by kennedy, shownandthat nbr[54] is better cohen and than ndvi for quantifying burn severity [26,76], further supported white, wulder, hermosilla, coops and hobart [53], who concluded that the nbr is a very usefulby kennedy, yang and cohen [54] and for indicator white, wulder, detecting disturbancecoops firehermosilla, and hobart and monitoring [53], who post-fire concluded vegetation that the nbr is a very trajectory. useful indicator although for detecting fire landsat-derived disturbance spectral indices and monitoring exhibited post-fire significant vegetationwith correlations trajectory. the lai and although landsat-derived spectral indices tsa, we found that the worldview-2 (vhr) imagery performed even better."
+13,"ppct hadthe exhibited significant correlations with lai and a stronger tsa, we found explanatory powerthatfor thelaiworldview-2 than for tsa (vhr) imagery because our performed even better. of dhp measurement ppctlaihad a stronger consisted of explanatory power for lai than for tsa because our dhp measurement canopy foliage of both surviving trees and tree saplings."
+13,the in-field upward canopy photograph of lai consisted of canopy foliageclosely results of bothmatch ppcttrees surviving and tree derived fromsaplings.
+13,"worldview-2 the in-field imagery, furthercanopy upward photograph confirming the value results of closely this match ppct technique."
+13,"however,derived ppct from worldview-2 cannot imagery, wholly reflect tsafurther as there confirming the value were surviving treesofthat this exhibited disproportionately large canopy projection areas in the imagery when compared to tree"
+14,"remote sens. 2019, 11, 603 14 of 22 saplings."
+14,the low spectral separability of surviving trees and tree saplings limited the applicability of worldview-2 imagery for monitoring tsa.
+14,image textures are commonly used as auxiliary inputs to provide spatial features that spectral information cannot characterize.
+14,"many previous studies have reported that including image textures as predictors can improve the estimation of forest structural parameters such as tree diameter [77], stand density [61] and crown diameter [78]."
+14,"however, image textures did not exhibit strong explanatory power to either lai or tsa in our study."
+14,one reason is that crown shadow is an important factor in representing spatial variation as reflected in the imagery [61].
+14,"in contrast to the coarse surface of mature forests, the post-fire landscape where dominated by tree sapling that did not represent very strong shadow effects (contrasts) in the imagery (figure 3c)."
+14,"in addition, the value of textural features has no explicit relationship to spectral features and the same value of textural attributes may represent very different land surface properties."
+14,"for example, post-fire landscapes usually exhibit high homogeneity, however similar homogeneity values may be corresponding to different land cover compositions."
+14,"the response of forest recovery to spatial controls we found that including surrogates of intra-specific competition (i.e., understory coverage) and density of surviving trees (i.e., shadow coverage) greatly improved model fit."
+14,"according to partial dependence curves, we found a negative effect of understory (grass and shrub species) coverage on tree sapling regeneration (figure 7a)."
+14,understory species usually act as pioneers in post-disturbance landscapes and rapidly occupy available spaces and resources.
+14,"in addition, some understory species are resistant to wildfire and recover rapidly."
+14,"by comparison, tree saplings may require longer timespans to establish; they will compete with understory species for available resources and may be limited by seed availability."
+14,"tree sapling regeneration (estimated by lai) is very sensitive to shadow coverage, suggesting that even a few surviving trees can strongly promote post-fire recovery (figure 7b)."
+14,"the nearest distance to unburned area, which reflects the importance of seed inputs from out of the burned area, significantly impacted lai recovery with areas near the edge of boundaries having a higher opportunity to receive seeds from unburned areas."
+14,"our results showed that edge effects extend for a distance of approximately 700 m for this fire (figure 7h), which can partially explain why the core area exhibited poor tree recovery."
+14,"trees that survive fire are thus critical for supporting reestablishment of tree community post-burn [79,80]."
+14,"nonetheless, if the number of surviving trees was over a certain threshold, canopy closure was negatively affected because our study area was dominated by mature larch forests, which have wide tree spacing and relatively open canopies."
+14,"surviving trees may prevent the establishment of saplings, likely through resource competition."
+14,burn severity is often described as a legacy effect as high severity fires have a long-term impact on forest ecosystems through removing surface organic layers and creating canopy openings through killing nearly all large trees.
+14,burn severity is well-reported to have adverse effects on forest restoration in boreal forests [81] and subalpine forest ecosystems [82].
+14,"our results suggest that high severity burns decrease tree sapling regeneration post-fire, consistent with previous findings in similar ecosystems."
+14,"in our study wildfire exerted limited effects on tree recovery when dnbr was lower than 0.730 (figure 7c), which is related to low severity (dnbr < 0.418) and moderate severity (dnbr < 0.942) levels according to published thresholds from fang and yang [26]."
+14,surviving trees contributed a large part of canopy foliage at low and moderate burn severity areas and combining with tree sapling foliage to result in high post-fire lai under low and moderate burn severities.
+14,"we found that lai recovery decreases dramatically with dnbr increasing, implying that moderate to high severity fires have profound effects on diminishing forest resilience."
+14,"severe fire behavior may cause crown fires in our study area [45], which will destroy areal seed banks in serotinous cones of coniferous trees [8]."
+14,"at the same time, severe surface fires will consume fine fuels such as litters and soil organic materials, create exposure of soil and base rock, and destroy surface seed beds."
+14,"given the key roles of coniferous tree species on maintaining the unique functions of boreal forest communities [9,14,23], recovery of"
+15,"remote sens. 2019, 11, x for peer review 15 of 23 remote sens. 2019, 11, 603 15 of 22 the key roles of coniferous tree species on maintaining the unique functions of boreal forest communities [9,14,23], recovery of coniferous tree species has raised increasing concerns [10,21]."
+15,"coniferous coniferous tree specieshas treespecies have relatively raised increasingshorter dispersal seed [10,21]. concerns distance tree coniferous larch have (e.g.,species < 150relatively m, and shorterpine scotch 500 m) than seed~ dispersal broadleaf distance larch(e.g., (e.g.,trees < 150 m, and aspen birch 1000~m) scotch>pine 500 m)to due heavier than seed mass broadleaf trees [83,84]."
+15,"many studies found that great xing’an boreal forests will experience (e.g., birch and aspen > 1000 m) due to heavier seed mass [83,84]."
+15,"many studies found that great severe fire activities that wereboreal xing’an characterized as experience forests will more frequent andfire severe large activities withwere higher burns that severity along characterized with frequent as more climatic and largeand changes fuelwith burns accumulation [18,85,86]. higher severity along is notclimatic it with to speculate difficultchanges thataccumulation and fuel coniferous forests may [18,85,86]. experience more to it is not difficult recovery speculatelimitations, whichforests that coniferous has been mayvalidated in boreal experience forests oflimitations, central siberian more recovery which [84] and north has been america validated [8,11]. in boreal besides, forests very high of central severity siberian [84]fires may have and north also killed america [8,11].broadleaf tree besides, very species and understory species whose roots would otherwise provide high severity fires may have also killed broadleaf tree species and understory species whose rootsa source of asexual reproduction would otherwise even if above-ground provide portions a source of asexual are killed, reproduction creating even opportunities if above-ground for are portions primary killed, succession. creating opportunities for primary succession."
+15,figure 7.
+15,figure dependence plots partial dependence 7.
+15,partial plots of of a-h a-h show influences of show influences eight selected of eight selected spatial controls (variable spatial controls (variable names see x-axis) on forest recovery in terms of leaf area index (lai).
+15,variable abbreviations names see x-axis) on forest recovery in terms of leaf area index (lai).
+15,variable abbreviations were were described in table 3. described in table 3.
+15,"topography is usually considered an environmental filter because it theoretically determines topography is usually considered an environmental filter because it theoretically determines the drainage, thermal, solar radiation, surface roughness and other site factors which are usually the drainage, thermal, solar radiation, surface roughness and other site factors which are usually exert considerable influence on tree species distribution and growth [87,88]."
+15,"total solar radiation exert considerable influence on tree species distribution and growth [87,88]."
+15,"total solar radiation during the growing season is typically the most important topographical factor and we found that during the growing season is typically the most important topographical2 factor and we found that lai increased significantly when solar radiation exceeded 90,000 wh/m (figure 7d)."
+15,"at our study lai increased significantly when solar radiation exceeded 90,000 wh/m2 (figure 7d)."
+15,"at our study site, southern slopes and flat areas favored broad leaf tree species, such as white birch and aspen, that site, southern slopes and flat areas favored broad leaf tree species, such as white birch and aspen, can regenerate through roots sprouting [21,47]."
+15,"the tpi, twi and elevation shared similar relative that can regenerate through roots sprouting [21,47]."
+15,"the tpi, twi and elevation shared similar importance."
+15,"higher tpi indicates higher slope position (figure 7e), and thereby sites that tend to have relative importance."
+15,"higher tpi indicates higher slope position (figure 7e), and thereby sites that good drainage and open space to accept seed rain, especially low weight seeds of white birch and tend to have good drainage and open space to accept seed rain, especially low weight seeds of white aspen dispersed via wind. birch and aspen dispersed via wind."
+16,"remote sens. 2019, 11, 603 16 of 22 our results suggest that twi is inversely related to lai (figure 7f) while elevation has a positive influence lai (figure 7g)."
+16,"twi is known to have a strong direct relationship with soil moisture in boreal forests ecosystems [89] and our findings are consistent with cai, yang, liu, hu and weisberg [21], who reported similar relationships between soil moisture, elevation and broad leaf tree sapling abundance through field investigation."
+16,"however, while cai, yang, liu, hu and weisberg [21] found moist soil valley bottoms favorable for larch saplings, our study finds them to be more limited in terms of tree recovery than more elevated locations."
+16,"one explanation is that at our site permafrost is usually present in those moist valleys [90], and the seasonal thaw may prevent seed germination."
+16,"in addition, moss (sphagnum cuspidatulum) and grass (carex appendiculata) is often thick in moist valley bottoms and can prevent larch seed from encountering the mineral soil necessary for their establishment."
+16,conclusions our study is one of very few to investigate the utility of vhr satellite imagery for monitoring post-fire forest structural attributes (specifically tree sapling regeneration) in terms of lai and tsa.
+16,we found that worldview-2 vhr imagery outperforms landsat imagery but still has some limitations.
+16,"in particular, the high price of vhr imagery as well as the cost of associated computing resources may limit its practical usage."
+16,"however, this may change in the future as costs are reducing for both uav photogrammetry and the launch of vhr satellites, potentially increasing accessibility by those managing forest resources [91,92], including the monitoring of post-fire forest recovery [93]."
+16,our study shows that spectral variations can provide more useful information than image textures for the retrieval of parameters of tree saplings.
+16,"tree saplings provide very similar spectral signatures to surviving mature trees in our ecosystem, but this limitation may be less significant in other ecosystems exhibiting vegetation phenology differences or other unique characteristics that can be reflected in vhr imagery."
+16,recognizing surviving mature trees in post-fire landscapes is of critical significance for quantifying post-fire landscape resilience.
+16,"our work suggests that shadow analysis can provide useful information for identifying surviving trees and this method merits further study as quick post-fire assessment of surviving trees through vhr imagery may provide useful information for forest managers, such as identifying locations where artificial regeneration may be needed."
+16,"given that seed banks of coniferous tree species are easily damaged, and their seed dispersal distances are relatively short, our results suggested that combined natural forest restoration and proper human help (i.e., aerial seeding) for coniferous forests is necessary in our study area, especially following wildfires that burned severely across large geographic areas."
+16,"in these areas, northern slopes and valley bottoms where solar radiation is low may require extra attentions from forest managers."
+16,"while our work also suggests that understory plants can inhibit tree sapling recovery, a more thorough assessment of the effects of understory plants (e.g., soil and water retention) is required for ecological sound design and planning to assist land managers in making decisions about where across the landscape to prioritize reforestation efforts."
+16,decreasing severity and size of wildfires through fuel management is known to improve the resilience of forest ecosystems [94–96].
+16,"although edge effects did not exhibit a strong effect in our study due to continuous distribution of this high severity fire [26], islands of unburned patch may play important roles in accelerating natural forest recovery post-fire."
+16,author contributions: l.f. and j.y. conceived the research design; l.f. and y.y.
+16,"(yuanzheng yang) conducted the field data collection; l.f., e.c., j.y. and z.l. conducted analysis and wrote the manuscript."
+16,l.f. and y.y.
+16,(yan yan) conducted the analysis of satellite data.
+16,"funding: this study is financially funded by the national key r&d program of china (2017yfa0604403), the national natural science foundation of china (project no.31500387, 31470517 and 31800395), and cas pioneer hundred talents program."
+16,"acknowledgments: the authors appreciate yongzhi liu, hongxin zhang, hailong zhang and changhe hu, who are working for the administrative agencies of huzhong nutural reserve and huzhong forestry bureau, for their assistance during field data collection."
+16,we appreciate two anonymous reviewers for comments that improved this manuscript.
+17,"remote sens. 2019, 11, 603 17 of 22 conflicts of interest: the authors declare no conflict of interest."
+17,"the funding sponsors had no role in the design of the study; the collection, analyses, or interpretation of data; the writing of the manuscript; or the decision to publish the results."
+17,"appendix a the calibration results of our digital hemispherical photography (dhp) system (panel 1), and results cited from reference document provided by can-eye software (panel 2)."
+17,this is a proof to verify that our dhp system can generate reliable model outputs in can-eye software.
+17,"note that two dhp systems use different cameras, fisheye lens and picture sizes, thus they have remote sens. 2019, 11, x for peer review 18 of 23 different parameters for characterizing optical center position and projection function."
+17,references 1.
+17,"bond-lamberty, b."
+17,"; peckham, s.d."
+17,"; ahl, d.e."
+17,"; gower, s.t."
+17,fire as the dominant driver of central canadian boreal forest carbon balance.
+17,"nature 2007, 450, 89–92, doi:10.1038/nature06272."
+18,"remote sens. 2019, 11, 603 18 of 22 references 1."
+18,"bond-lamberty, b."
+18,"; peckham, s.d."
+18,"; ahl, d.e."
+18,"; gower, s.t."
+18,fire as the dominant driver of central canadian boreal forest carbon balance.
+18,"nature 2007, 450, 89–92."
+18,[crossref] [pubmed] 2.
+18,"rogers, b.m."
+18,"; soja, a.j."
+18,"; goulden, m.l."
+18,"; randerson, j.t."
+18,influence of tree species on continental differences in boreal fires and climate feedbacks.
+18,geosci.
+18,"2015, 8, 228–234."
+18,[crossref] 3.
+18,"keane, r.e."
+18,"; agee, j.k."
+18,"; fule, p."
+18,"; keeley, j.e."
+18,"; key, c."
+18,"; kitchen, s.g."
+18,"; miller, r."
+18,"; schulte, l.a."
+18,ecological effects of large fires on us landscapes: benefit or catastrophe?
+18,"wildland fire 2008, 17, 696–712."
+18,[crossref] 4.
+18,"kasischke, e.s."
+18,"; johnstone, j.f."
+18,variation in postfire organic layer thickness in a black spruce forest complex in interior alaska and its effects on soil temperature and moisture.
+18,"2005, 35, 2164–2177."
+18,[crossref] 5.
+18,"bowd, e.j."
+18,"; banks, s.c."
+18,"; strong, c.l."
+18,"; lindenmayer, d.b."
+18,long-term impacts of wildfire and logging on forest soils.
+18,geosci.
+18,[crossref] 6.
+18,"anderson-teixeira, k.j."
+18,"; miller, a.d."
+18,"; mohan, j.e."
+18,"; hudiburg, t.w."
+18,"; duval, b.d."
+18,"; delucia, e.h."
+18,altered dynamics of forest recovery under a changing climate.
+18,chang.
+18,"2013, 19, 2001–2021."
+18,[crossref] [pubmed] 7.
+18,"seidl, r."
+18,"; rammer, w."
+18,"; spies, t.a."
+18,"disturbance legacies increase the resilience of forest ecosystem structure, composition, and functioning."
+18,"2014, 24, 2063–2077."
+18,[crossref] [pubmed] 8.
+18,"johnstone, j.f."
+18,"; allen, c.d."
+18,"; franklin, j.f."
+18,"; frelich, l.e."
+18,"; harvey, b.j."
+18,"; higuera, p.e."
+18,"; mack, m.c."
+18,"; meentemeyer, r.k."
+18,"; metz, m.r."
+18,"; perry, g.l."
+18,"changing disturbance regimes, ecological memory, and forest resilience."
+18,front.
+18,environ.
+18,"2016, 14, 369–378."
+18,[crossref] 9.
+18,"chapin, f."
+18,"; mcguire, a."
+18,"; ruess, r."
+18,"; hollingsworth, t."
+18,"; mack, m."
+18,"; johnstone, j."
+18,"; kasischke, e."
+18,"; euskirchen, e."
+18,"; jones, j."
+18,"; jorgenson, m."
+18,resilience of alaska’s boreal forest to climatic change.
+18,"2010, 40, 1360–1370."
+18,[crossref] 10.
+18,"johnstone, j.f."
+18,"; hollingsworth, t.n."
+18,"; chapin, f.s."
+18,"; mack, m.c."
+18,changes in fire regime break the legacy lock on successional trajectories in alaskan boreal forest.
+18,chang.
+18,"2010, 16, 1281–1295."
+18,[crossref] 11.
+18,"hart, s.j."
+18,"; henkelman, j."
+18,"; mcloughlin, p.d."
+18,"; nielsen, s.e."
+18,"; truchon-savard, a."
+18,"; johnstone, j.f."
+18,examining forest resilience to changing fire frequency in a fire-prone region of boreal forest.
+18,chang.
+18,[crossref] 12.
+18,"scheffer, m."
+18,"; hirota, m."
+18,"; holmgren, m."
+18,"; van nes, e.h."
+18,"; chapin, f.s., 3rd."
+18,thresholds for boreal biome transitions.
+18,"usa 2012, 109, 21384–21389."
+18,[crossref] 13.
+18,"wolken, j.m."
+18,"; hollingsworth, t.n."
+18,"; rupp, t.s."
+18,"; chapin, f.s."
+18,"; trainor, s.f."
+18,"; barrett, t.m."
+18,"; sullivan, p.f."
+18,"; mcguire, a.d."
+18,"; euskirchen, e.s."
+18,"; hennon, p.e.; et al."
+18,evidence and implications of recent and projected climate change in alaska’s forest ecosystems.
+18,"ecosphere 2011, 2, 1–35."
+18,[crossref] 14.
+18,"beck, p.s."
+18,"; goetz, s.j."
+18,"; mack, m.c."
+18,"; alexander, h.d."
+18,"; jin, y."
+18,"; randerson, j.t."
+18,"; loranty, m."
+18,the impacts and implications of an intensifying fire regime on alaskan boreal forest composition and albedo.
+18,chang.
+18,"2011, 17, 2853–2866."
+18,[crossref] 15.
+18,"johnstone, j.f."
+18,"; chapin, f.s."
+18,fire interval effects on successional trajectory in boreal forests of northwest canada.
+18,"ecosystems 2006, 9, 268–277."
+18,[crossref] 16.
+18,"wang, x."
+18,"; thompson, d.k."
+18,"; marshall, g.a."
+18,"; tymstra, c."
+18,"; carr, r."
+18,"; flannigan, m.d."
+18,increasing frequency of extreme fire weather in canada with climate change.
+18,chang.
+18,"2015, 130, 573–586."
+18,"[crossref] 17. de groot, w.j."
+18,"; flannigan, m.d."
+18,"; cantin, a.s."
+18,climate change impacts on future boreal fire regimes.
+18,manag.
+18,"2013, 294, 35–44."
+18,[crossref] 18.
+18,"liu, z.h."
+18,"; yang, j."
+18,"; chang, y."
+18,"; weisberg, p.j."
+18,"; he, h.s."
+18,spatial patterns and drivers of fire occurrence and its future trend under climate change in a boreal forest of northeast china.
+18,chang.
+18,"2012, 18, 2041–2056."
+18,[crossref] 19.
+18,"turetsky, m.r."
+18,"; kane, e.s."
+18,"; harden, j.w."
+18,"; ottmar, r.d."
+18,"; manies, k.l."
+18,"; hoy, e."
+18,"; kasischke, e.s."
+18,recent acceleration of biomass burning and carbon losses in alaskan forests and peatlands.
+18,geosci.
+18,"2010, 4, 27–31."
+18,[crossref] 20.
+18,"johnstone, j.f."
+18,"; chapin iii, f.s."
+18,"; foote, j."
+18,"; kemmett, s."
+18,"; price, k."
+18,"; viereck, l."
+18,decadal observations of tree regeneration following fire in boreal forests.
+18,"2004, 34, 267–273."
+18,[crossref] 21.
+18,"cai, w."
+18,"; yang, j."
+18,"; liu, z."
+18,"; hu, y."
+18,"; weisberg, p.j."
+18,post-fire tree recruitment of a boreal larch forest in northeast china.
+18,manag.
+18,"2013, 307, 20–29."
+18,[crossref]
+19,"remote sens. 2019, 11, 603 19 of 22 22."
+19,"liu, z."
+19,"; yang, j."
+19,quantifying ecological drivers of ecosystem productivity of the early-successional boreal larix gmelinii forest.
+19,"ecosphere 2014, 5, art84."
+19,[crossref] 23.
+19,"brown, c.d."
+19,"; liu, j."
+19,"; yan, g."
+19,"; johnstone, j.f."
+19,disentangling legacy effects from environmental filters of postfire assembly of boreal tree assemblages.
+19,"ecology 2015, 96, 3023–3032."
+19,[crossref] 24.
+19,"mack, m.c."
+19,"; treseder, k.k."
+19,"; manies, k.l."
+19,"; harden, j.w."
+19,"; schuur, e.a.g."
+19,"; vogel, j.g."
+19,"; randerson, j.t."
+19,"; chapin, f.s."
+19,recovery of aboveground plant biomass and productivity after fire in mesic and dry black spruce forests of interior alaska.
+19,"ecosystems 2008, 11, 209–225."
+19,[crossref] 25.
+19,"masek, j.g."
+19,"; hayes, d.j."
+19,"; joseph hughes, m."
+19,"; healey, s.p."
+19,"; turner, d.p."
+19,the role of remote sensing in process-scaling studies of managed forest ecosystems.
+19,manag.
+19,"2015, 355, 109–123."
+19,[crossref] 26.
+19,"fang, l."
+19,"; yang, j."
+19,atmospheric effects on the performance and threshold extrapolation of multi-temporal landsat derived dnbr for burn severity assessment.
+19,earth obs.
+19,geoinf.
+19,"2014, 33, 10–20."
+19,[crossref] 27.
+19,"french, n.h.f."
+19,"; kasischke, e.s."
+19,"; hall, r.j."
+19,"; murphy, k.a."
+19,"; verbyla, d.l."
+19,"; hoy, e.e."
+19,"; allen, j.l."
+19,using landsat data to assess fire and burn severity in the north american boreal forest region: an overview and summary of results.
+19,"wildland fire 2008, 17, 443–462."
+19,[crossref] 28.
+19,"parks, s.a."
+19,mapping day-of-burning with coarse-resolution satellite fire-detection data.
+19,"wildland fire 2014, 23, 215–223."
+19,[crossref] 29.
+19,"yang, j."
+19,"; pan, s."
+19,"; dangal, s."
+19,"; zhang, b."
+19,"; wang, s."
+19,"; tian, h."
+19,continental-scale quantification of post-fire vegetation greenness recovery in temperate and boreal north america.
+19,remote sens.
+19,environ.
+19,"2017, 199, 277–290."
+19,[crossref] 30.
+19,"veraverbeke, s."
+19,"; gitas, i."
+19,"; katagis, t."
+19,"; polychronaki, a."
+19,"; somers, b."
+19,"; goossens, r."
+19,assessing post-fire vegetation recovery using red–near infrared vegetation indices: accounting for background and vegetation variability.
+19,isprs j.
+19,photogramm.
+19,remote sens.
+19,"2012, 68, 28–39."
+19,[crossref] 31.
+19,"goetz, s.j."
+19,"; fiske, g.j."
+19,"; bunn, a.g."
+19,using satellite time-series data sets to analyze fire disturbance and forest recovery across canada.
+19,remote sens.
+19,environ.
+19,"2006, 101, 352–365."
+19,[crossref] 32.
+19,"lu, d."
+19,"; chen, q."
+19,"; wang, g."
+19,"; liu, l."
+19,"; li, g."
+19,"; moran, e."
+19,a survey of remote sensing-based aboveground biomass estimation methods in forest ecosystems.
+19,digit.
+19,"earth 2014, 9, 63–105."
+19,[crossref] 33.
+19,"glenn, e."
+19,"; huete, a."
+19,"; nagler, p."
+19,"; nelson, s."
+19,"relationship between remotely-sensed vegetation indices, canopy attributes and plant physiological processes: what vegetation indices can and cannot tell us about the landscape."
+19,"sensors 2008, 8, 2136–2160."
+19,[crossref] 34.
+19,"chu, t."
+19,"; guo, x."
+19,remote sensing techniques in monitoring post-fire effects and patterns of forest recovery in boreal forest regions: a review.
+19,remote sens.
+19,"2014, 6, 470–520."
+19,[crossref] 35.
+19,"gitas, i."
+19,"; mitri, g."
+19,"; veraverbeke, s."
+19,"; polychronaki, a."
+19,advances in remote sensing of post-fire vegetation recovery monitoring-a review.
+19,"in remote sensing of biomass-principles and applications; intech: vienna, austria, 2012."
+19,"nolan, r.h."
+19,"; lane, p.n.j."
+19,"; benyon, r.g."
+19,"; bradstock, r.a."
+19,"; mitchell, p.j."
+19,changes in evapotranspiration following wildfire in resprouting eucalypt forests.
+19,"ecohydrology 2014, 7, 1363–1377."
+19,[crossref] 37.
+19,"bond-lamberty, b."
+19,"; wang, c."
+19,"; gower, s.t."
+19,net primary production and net ecosystem production of a boreal black spruce wildfire chronosequence.
+19,chang.
+19,"2004, 10, 473–487."
+19,[crossref] 38.
+19,"alexander, h.d."
+19,"; mack, m.c."
+19,"; goetz, s."
+19,"; loranty, m.m."
+19,"; beck, p.s.a."
+19,"; earl, k."
+19,"; zimov, s."
+19,"; davydov, s."
+19,"; thompson, c.c."
+19,carbon accumulation patterns during post-fire succession in cajander larch (larix cajanderi) forests of siberia.
+19,"ecosystems 2012, 15, 1065–1082."
+19,[crossref] 39.
+19,"cai, w.h."
+19,"; yang, j."
+19,high-severity fire reduces early successional boreal larch forest aboveground productivity by shifting stand density in north-eastern china.
+19,"wildland fire 2016, 25."
+19,[crossref] 40.
+19,"chen, j.m."
+19,"; rich, p.m."
+19,"; gower, s.t."
+19,"; norman, j.m."
+19,"; plummer, s."
+19,"leaf area index of boreal forests: theory, techniques, and measurements."
+19,geophys.
+19,atmos.
+19,"1997, 102, 29429–29443."
+19,[crossref] 41.
+19,"bond-lamberty, b."
+19,"; wang, c."
+19,"; gower, s.t."
+19,"; norman, j."
+19,leaf area dynamics of a boreal black spruce fire chronosequence.
+19,tree physiol.
+19,"2002, 22, 993–1001."
+19,[crossref] 42.
+19,"chen, j.m."
+19,"; cihlar, j."
+19,retrieving leaf area index of boreal conifer forests using landsat tm images.
+19,remote sens.
+19,environ.
+19,"1996, 55, 153–162."
+19,[crossref] 43.
+19,"jonckheere, i."
+19,"; fleck, s."
+19,"; nackaerts, k."
+19,"; muys, b."
+19,"; coppin, p."
+19,"; weiss, m."
+19,"; baret, f."
+19,review of methods for in situ leaf area index determination: part i.
+19,"theories, sensors and hemispherical photography."
+19,agric.
+19,meteorol.
+19,"2004, 121, 19–35."
+19,[crossref]
+20,"remote sens. 2019, 11, 603 20 of 22 44."
+20,"hollingsworth, t.n."
+20,"; johnstone, j.f."
+20,"; bernhardt, e.l."
+20,"; chapin iii, f.s."
+20,fire severity filters regeneration traits to shape community assembly in alaska’s boreal forest.
+20,"plos one 2013, 8, e56033."
+20,[crossref] 45.
+20,"fang, l."
+20,"; yang, j."
+20,"; white, m."
+20,"; liu, z."
+20,"predicting potential fire severity using vegetation, topography and surface moisture availability in a eurasian boreal forest landscape."
+20,"forests 2018, 9, 130."
+20,[crossref] 46.
+20,"li, x."
+20,"; he, h.s."
+20,"; wu, z."
+20,"; liang, y."
+20,"; schneiderman, j.e."
+20,"comparing effects of climate warming, fire, and timber harvesting on a boreal forest landscape in northeastern china."
+20,"plos one 2013, 8, e59747."
+20,[crossref] 47.
+20,"wang, c."
+20,"; gower, s.t."
+20,"; wang, y."
+20,"; zhao, h."
+20,"; yan, p."
+20,"; lamberty, b.p."
+20,the influence of fire on carbon distribution and net primary production of boreal larix gmelinii forests in north-eastern china.
+20,chang.
+20,"2001, 7, 719–730."
+20,[crossref] 48.
+20,"weiss, m."
+20,"; baret, f."
+20,can_eye v6.4.91 user manual.
+20,available online: https://www6.paca.inra.fr/can-eye/ content/download/3052/30819/version/4/file/can_eye_user_mamanu.pdf (accessed on 5 march 2019).
+20,"zhu, z."
+20,"; woodcock, c.e."
+20,object-based cloud and cloud shadow detection in landsat imagery.
+20,remote sens.
+20,environ.
+20,"2012, 118, 83–94."
+20,[crossref] 50.
+20,"canty, m.j."
+20,"; nielsen, a.a."
+20,automatic radiometric normalization of multitemporal satellite imagery with the iteratively re-weighted mad transformation.
+20,remote sens.
+20,environ.
+20,"2008, 112, 1025–1036."
+20,[crossref] 51.
+20,"roy, d.p."
+20,"; kovalskyy, v."
+20,"; zhang, h.k."
+20,"; vermote, e.f."
+20,"; yan, l."
+20,"; kumar, s.s."
+20,"; egorov, a."
+20,characterization of landsat-7 to landsat-8 reflective wavelength and normalized difference vegetation index continuity.
+20,remote sens.
+20,environ.
+20,"2016, 185, 57–70."
+20,[crossref] 52.
+20,"qi, j."
+20,"; chehbouni, a."
+20,"; huete, a."
+20,"; kerr, y."
+20,"; sorooshian, s."
+20,a modified soil adjusted vegetation index.
+20,remote sens.
+20,environ.
+20,"1994, 48, 119–126."
+20,[crossref] 53.
+20,"white, j.c."
+20,"; wulder, m.a."
+20,"; hermosilla, t."
+20,"; coops, n.c."
+20,"; hobart, g.w."
+20,a nationwide annual characterization of 25 years of forest disturbance and recovery for canada using landsat time series.
+20,remote sens.
+20,environ.
+20,"2017, 194, 303–321."
+20,[crossref] 54.
+20,"kennedy, r.e."
+20,"; yang, z."
+20,"; cohen, w.b."
+20,detecting trends in forest disturbance and recovery using yearly landsat time series: 1.
+20,landtrendr—temporal segmentation algorithms.
+20,remote sens.
+20,environ.
+20,"2010, 114, 2897–2910."
+20,[crossref] 55.
+20,"gómez, c."
+20,"; white, j.c."
+20,"; wulder, m.a."
+20,characterizing the state and processes of change in a dynamic forest environment using hierarchical spatio-temporal segmentation.
+20,remote sens.
+20,environ.
+20,"2011, 115, 1665–1679."
+20,[crossref] 56.
+20,"jiang, z."
+20,"; huete, a."
+20,"; didan, k."
+20,"; miura, t."
+20,development of a two-band enhanced vegetation index without a blue band.
+20,remote sens.
+20,environ.
+20,"2008, 112, 3833–3845."
+20,[crossref] 57.
+20,"jin, s."
+20,"; sader, s.a."
+20,comparison of time series tasseled cap wetness and the normalized difference moisture index in detecting forest disturbances.
+20,remote sens.
+20,environ.
+20,"2005, 94, 364–372."
+20,[crossref] 58.
+20,"puissant, a."
+20,"; hirsch, j."
+20,"; weber, c."
+20,the utility of texture analysis to improve per-pixel classification for high to very high spatial resolution imagery.
+20,remote sens.
+20,"2005, 26, 733–745."
+20,[crossref] 59.
+20,"lu, d."
+20,"; weng, q."
+20,a survey of image classification methods and techniques for improving classification performance.
+20,remote sens.
+20,"2007, 28, 823–870."
+20,[crossref] 60.
+20,"beguet, b."
+20,"; guyon, d."
+20,"; boukir, s."
+20,"; chehata, n."
+20,automated retrieval of forest structure variables based on multi-scale texture analysis of vhr satellite imagery.
+20,isprs j.
+20,photogramm.
+20,remote sens.
+20,"2014, 96, 164–178."
+20,[crossref] 61.
+20,"kayitakire, f."
+20,"; hamel, c."
+20,"; defourny, p."
+20,retrieving forest structure variables based on image texture analysis and ikonos-2 imagery.
+20,remote sens.
+20,environ.
+20,"2006, 102, 390–401."
+20,[crossref] 62.
+20,"wood, e.m."
+20,"; pidgeon, a.m."
+20,"; radeloff, v.c."
+20,"; keuler, n.s."
+20,image texture as a remotely sensed measure of vegetation structure.
+20,remote sens.
+20,environ.
+20,"2012, 121, 516–526."
+20,[crossref] 63.
+20,"mountrakis, g."
+20,"; im, j."
+20,"; ogole, c."
+20,support vector machines in remote sensing: a review.
+20,isprs j.
+20,photogramm.
+20,remote sens.
+20,"2011, 66, 247–259."
+20,[crossref] 64.
+20,"gong, p."
+20,"; wang, j."
+20,"; yu, l."
+20,"; zhao, y."
+20,"; zhao, y."
+20,"; liang, l."
+20,"; niu, z."
+20,"; huang, x."
+20,"; fu, h."
+20,"; liu, s."
+20,finer resolution observation and monitoring of global land cover: first mapping results with landsat tm and etm+ data.
+20,remote sens.
+20,"2013, 34, 2607–2654."
+20,[crossref] 65.
+20,"beleites, c."
+20,"; neugebauer, u."
+20,"; bocklitz, t."
+20,"; krafft, c."
+20,"; popp, j."
+20,sample size planning for classification models.
+20,"acta 2013, 760, 25–33."
+20,[crossref] 66.
+20,"bruzzone, l."
+20,"; roli, f."
+20,"; serpico, s."
+20,an extension to multiclass cases of the jeffries–matusita distance.
+20,ieee trans.
+20,geosci.
+20,remote sens.
+20,"1995, 33, 1318–1321."
+20,[crossref]
+21,"remote sens. 2019, 11, 603 21 of 22 67."
+21,"congalton, r.g."
+21,a review of assessing the accuracy of classifications of remotely sensed data.
+21,remote sens.
+21,environ.
+21,"1991, 37, 35–46."
+21,[crossref] 68.
+21,"zuur, a.f."
+21,"; ieno, e.n."
+21,"; elphick, c.s."
+21,a protocol for data exploration to avoid common statistical problems.
+21,methods ecol.
+21,"2010, 1, 3–14."
+21,[crossref] 69.
+21,"paradis, e."
+21,"; claude, j."
+21,"; strimmer, k."
+21,ape: analyses of phylogenetics and evolution in r language.
+21,"bioinformatics 2004, 20, 289–290."
+21,[crossref] 70.
+21,"royston, p."
+21,approximating the shapiro-wilk w-test for non-normality.
+21,comput.
+21,"1992, 2, 117–119."
+21,[crossref] 71.
+21,"conover, w.j."
+21,"; johnson, m.e."
+21,"; johnson, m.m."
+21,"a comparative study of tests for homogeneity of variances, with applications to the outer continental shelf bidding data."
+21,"technometrics 1981, 23, 351–361."
+21,[crossref] 72.
+21,"prasad, a.m."
+21,"; iverson, l.r."
+21,"; liaw, a."
+21,newer classification and regression tree techniques: bagging and random forests for ecological prediction.
+21,"ecosystems 2006, 9, 181–199."
+21,[crossref] 73.
+21,"cutler, d.r."
+21,"; edwards, t.c., jr."
+21,"; beard, k.h."
+21,"; cutler, a."
+21,"; hess, k.t."
+21,"; gibson, j."
+21,"; lawler, j.j."
+21,random forests for classification in ecology.
+21,"ecology 2007, 88, 2783–2792."
+21,[crossref] 74.
+21,"berner, l.t."
+21,"; beck, p.s.a."
+21,"; loranty, m.m."
+21,"; alexander, h.d."
+21,"; mack, m.c."
+21,"; goetz, s.j."
+21,"cajander larch (larix cajanderi) biomass distribution, fire regime and post-fire recovery in northeastern siberia."
+21,"biogeosciences 2012, 9, 3943–3959."
+21,[crossref] 75.
+21,"chen, x."
+21,"; vogelmann, j.e."
+21,"; rollins, m."
+21,"; ohlen, d."
+21,"; key, c.h."
+21,"; yang, l."
+21,"; huang, c."
+21,"; shi, h."
+21,detecting post-fire burn severity and vegetation recovery using multitemporal remote sensing spectral indices and field-collected composite burn index data in a ponderosa pine forest.
+21,remote sens.
+21,"2011, 32, 7905–7927."
+21,[crossref] 76.
+21,"epting, j."
+21,"; verbyla, d."
+21,"; sorbel, b."
+21,evaluation of remotely sensed indices for assessing burn severity in interior alaska using landsat tm and etm+.
+21,remote sens.
+21,environ.
+21,"2005, 96, 328–339."
+21,[crossref] 77.
+21,"ozdemir, i."
+21,"; karnieli, a."
+21,"predicting forest structural parameters using the image texture derived from worldview-2 multispectral imagery in a dryland forest, israel."
+21,earth obs.
+21,geoinf.
+21,"2011, 13, 701–710."
+21,[crossref] 78.
+21,"song, c."
+21,"; dickinson, m.b."
+21,"; su, l."
+21,"; zhang, s."
+21,"; yaussey, d."
+21,estimating average tree crown size using spatial information from ikonos and quickbird images: across-sensor and across-site comparisons.
+21,remote sens.
+21,environ.
+21,"2010, 114, 1099–1107."
+21,[crossref] 79.
+21,"meigs, g."
+21,"; krawchuk, m."
+21,composition and structure of forest fire refugia: what are the ecosystem legacies across burned landscapes?
+21,"forests 2018, 9, 243."
+21,[crossref] 80.
+21,"jõgiste, k."
+21,"; korjus, h."
+21,"; stanturf, j.a."
+21,"; frelich, l.e."
+21,"; baders, e."
+21,"; donis, j."
+21,"; jansons, a."
+21,"; kangur, a."
+21,"; köster, k."
+21,"; laarmann, d."
+21,hemiboreal forest: natural disturbances and the importance of ecosystem legacies to management.
+21,"ecosphere 2017, 8."
+21,[crossref] 81.
+21,"johnstone, j.f."
+21,"; chapin, f.s."
+21,effects of soil burn severity on post-fire tree recruitment in boreal forest.
+21,"ecosystems 2006, 9, 14–31."
+21,[crossref] 82.
+21,"chambers, m.e."
+21,"; fornwalt, p.j."
+21,"; malone, s.l."
+21,"; battaglia, m.a."
+21,patterns of conifer regeneration following high severity wildfire in ponderosa pine–dominated forests of the colorado front range.
+21,manag.
+21,"2016, 378, 57–67."
+21,[crossref] 83.
+21,"zhao, f."
+21,"; qi, l."
+21,"; fang, l."
+21,"; yang, j."
+21,"influencing factors of seed long-distance dispersal on a fragmented forest landscape on changbai mountains, china."
+21,geogr.
+21,"2015, 26, 68–77."
+21,[crossref] 84.
+21,"tautenhahn, s."
+21,"; lichstein, j.w."
+21,"; jung, m."
+21,"; kattge, j."
+21,"; bohlman, s.a."
+21,"; heilmeier, h."
+21,"; prokushkin, a."
+21,"; kahl, a."
+21,"; wirth, c."
+21,dispersal limitation drives successional pathways in central siberian forests under current and intensified fire regimes.
+21,chang.
+21,"2016, 22, 2178–2197."
+21,[crossref] 85.
+21,"fang, l."
+21,"; yang, j."
+21,"; zu, j."
+21,"; li, g."
+21,"; zhang, j."
+21,"quantifying influences and relative importance of fire weather, topography, and vegetation on fire size and fire severity in a chinese boreal forest landscape."
+21,manag.
+21,"2015, 356, 2–12."
+21,[crossref] 86.
+21,"wu, z."
+21,"; he, h.s."
+21,"; yang, j."
+21,"; liu, z."
+21,"; liang, y."
+21,relative effects of climatic and local factors on fire occurrence in boreal forest landscapes of northeastern china.
+21,total environ.
+21,"2014, 493, 472–480."
+21,[crossref] 87.
+21,"franklin, j."
+21,"; mccullough, p."
+21,"; gray, c."
+21,terrain variables used for predictive mapping of vegetation communities in southern california.
+21,"in terrain analysis: principles and applications; wiley: new york, ny, usa, 2000; pp."
+21,331–353.
+22,"remote sens. 2019, 11, 603 22 of 22 88."
+22,"siegert, c."
+22,"; levia, d."
+22,"; hudson, s."
+22,"; dowtin, a."
+22,"; zhang, f."
+22,"; mitchell, m."
+22,small-scale topographic variability influences tree species distribution and canopy throughfall partitioning in a temperate deciduous forest.
+22,manag.
+22,"2016, 359, 109–117."
+22,[crossref] 89.
+22,"sörensen, r."
+22,"; zinko, u."
+22,"; seibert, j."
+22,on the calculation of the topographic wetness index: evaluation of different methods based on field observations.
+22,hydrol.
+22,earth syst.
+22,discuss.
+22,"2006, 10, 101–112."
+22,[crossref] 90.
+22,"bai, x."
+22,"; yang, j."
+22,"; tao, b."
+22,"; ren, w."
+22,spatio-temporal variations of soil active layer thickness in chinese boreal forests from 2000 to 2015.
+22,remote sens.
+22,"2018, 10, 1225."
+22,[crossref] 91.
+22,"bagaram, m.b."
+22,"; giuliarelli, d."
+22,"; chirici, g."
+22,"; giannetti, f."
+22,"; barbati, a."
+22,uav remote sensing for biodiversity monitoring: are forest canopy gaps good covariates?
+22,remote sens.
+22,"2018, 10, 1397."
+22,"torresan, c."
+22,"; berton, a."
+22,"; carotenuto, f."
+22,"; di gennaro, s.f."
+22,"; gioli, b."
+22,"; matese, a."
+22,"; miglietta, f."
+22,"; vagnoli, c."
+22,"; zaldei, a."
+22,"; wallace, l."
+22,forestry applications of uavs in europe: a review.
+22,remote sens.
+22,"2017, 38, 2427–2447."
+22,[crossref] 93.
+22,"aicardi, i."
+22,"; garbarino, m."
+22,"; lingua, a."
+22,"; lingua, e."
+22,"; marzano, r."
+22,"; piras, m."
+22,monitoring post-fire forest recovery using multitemporal digital surface models generated from different platforms.
+22,earsel eproc.
+22,"2016, 15, 1–8."
+22,"stephens, s.l."
+22,"; moghaddas, j.j."
+22,"; edminster, c."
+22,"; fiedler, c.e."
+22,"; haase, s."
+22,"; harrington, m."
+22,"; keeley, j.e."
+22,"; knapp, e.e."
+22,"; mciver, j.d."
+22,"; metlen, k.; et al."
+22,"fire treatment effects on vegetation structure, fuels, and potential fire severity in western u.s. forests."
+22,"2009, 19, 305–320."
+22,[crossref] 95.
+22,"stevens-rumann, c."
+22,"; shive, k."
+22,"; fulé, p."
+22,"; sieg, c.h."
+22,pre-wildfire fuel reduction treatments result in more resilient forest structure a decade after wildfire.
+22,"wildland fire 2013, 22, 1108."
+22,[crossref] 96.
+22,"lydersen, j.m."
+22,"; collins, b.m."
+22,"; brooks, m.l."
+22,"; matchett, j.r."
+22,"; shive, k.l."
+22,"; povak, n.a."
+22,"; kane, v.r."
+22,"; smith, d.f."
+22,evidence of fuels management and fire weather influencing fire severity in an extreme fire event.
+22,"2017, 27, 2013–2030."
+22,[crossref] © 2019 by the authors.
+22,"licensee mdpi, basel, switzerland."
+22,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).
