@@ -51,7 +51,8 @@ sample_out_df <- sample_df %>%
   mutate(source_type = 'article') %>%
   inner_join(refs_df, by = 'notes') %>%
   select(source_type, title, abstract, doi, notes) %>%
-  as.data.frame()
+  as.data.frame() %>%
+  slice_sample()
 
 write_refs(sample_out_df, format = 'ris', 
            file = here('_data/5c_classifier_round1',
