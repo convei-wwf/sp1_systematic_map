@@ -37,9 +37,20 @@ sample_df <- pred_df %>%
 # sum(pred_df$classification_prediction) / nrow(pred_df) ### 16.5% hit rate far higher than likely
 ```
 
+## Compare predictions to training set
+
+```{r}
+train_df <- read_csv(here('_data/5c_classifier_round1', 
+                          'predicted_training_set_2024_08_26.csv')) %>%
+  select(include, pred = classification_prediction) %>%
+  mutate(pred = as.logical(pred))
+
+table(train_df)
+```
+
 ## Attach doi if available
 
-Read in the full citations, grab the doi, and attach to the sampled citations.
+Read in the full citations, grab the doi, and attach to the sampled citations.  Shuffle the citations out to avoid unintentional bias
 
 ```{r}
 scopus_df <- read_refs(here('_data/3_refs_clean/scopus_clean_240204.ris'))
@@ -47,12 +58,14 @@ wos_df <- read_refs(here('_data/3_refs_clean/wos_clean_240126.ris'))
 refs_df <- bind_rows(scopus_df, wos_df) %>%
   select(notes, doi)
 
+set.seed(451)
+
 sample_out_df <- sample_df %>%
   mutate(source_type = 'article') %>%
   inner_join(refs_df, by = 'notes') %>%
   select(source_type, title, abstract, doi, notes) %>%
-  as.data.frame() %>%
-  slice_sample()
+  slice_sample(prop = 1) %>%
+  as.data.frame()
 
 write_refs(sample_out_df, format = 'ris', 
            file = here('_data/5c_classifier_round1',
