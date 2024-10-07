@@ -1,0 +1,878 @@
+page,p
+1,international journal of remote sensing issn: (print) (online) journal homepage: www.tandfonline.com/journals/tres20 image to attribute model for trees (itam-t): individual tree detection and classification in alberta boreal forest for wildland fire fuel characterization l.
+1,"bennett, b."
+1,"wilson, s."
+1,"selland, l."
+1,"qian, m."
+1,"wood, h."
+1,zhao & j.
+1,boisvert to cite this article: l.
+1,"bennett, b."
+1,"wilson, s."
+1,"selland, l."
+1,"qian, m."
+1,"wood, h."
+1,zhao & j.
+1,"boisvert (2022) image to attribute model for trees (itam-t): individual tree detection and classification in alberta boreal forest for wildland fire fuel characterization, international journal of remote sensing, 43:5, 1848-1880, doi: 10.1080/01431161.2022.2048914 to link to this article: https://doi.org/10.1080/01431161.2022.2048914 published online: 23 mar 2022."
+1,submit your article to this journal article views: 368 view related articles view crossmark data citing articles: 4 view citing articles full terms & conditions of access and use can be found at https://www.tandfonline.com/action/journalinformation?
+1,journalcode=tres20
+2,"international journal of remote sensing 2022, vol."
+2,"43, no. 5, 1848–1880 https://doi.org/10.1080/01431161.2022.2048914 image to attribute model for trees (itam-t): individual tree detection and classification in alberta boreal forest for wildland fire fuel characterization l."
+2,"bennetta, b."
+2,"wilson b , s."
+2,"sellanda, l."
+2,"qiana, m."
+2,"wooda, h."
+2,zhaoa and j.
+2,"boisverta a civil and environmental engineering, university of alberta, edmonton, canada; brenewable resources, university of alberta, edmonton, canada abstract article history regional and municipal decision makers rely on fuel (vegetation) received 25 february 2021 maps to inform decisions on tree stand management related to accepted 25 february 2022 wildfire management and response."
+2,remote sensing of trees is keywords used in commercial applications but has limited uptake in the fire fire management; management community.
+2,a two-stage detection and identification convolutional neural convolutional network for high-resolution rgb drone imagery is network; cnn; tree attributes; developed to address this limitation.
+2,"the detection routine is tree detection; tree based on deepforest, an existing convolutional neural network classification; uav imagery; implementation designed to recognize trees in aerial imagery. fire fuel; wildfire; deep retraining the model and implementing an adaptive window-size network workflow improves tree detection, with f1 scores reaching 85% and averaging 72% for k-fold cross-validation in boreal forest."
+2,"for clas­ sification, a vgg19 network with added data augmentation and dropout layers is trained."
+2,"when this network is implemented, manually annotated trees are recognized as coniferous with an average f1 of 97% and deciduous with an 87% f1."
+2,"overall, the developed image-to-attribute model for trees reaches a maximum f1 score of 85% considering classification after identification, with averages of 72% for coniferous trees and 57% for deciduous trees over six sites."
+2,"tree height, size, and stem density are extracted from the tree location output and geometric data."
+2,"the calculated density is compared to the density of manual annotations, with an average r2 of 0.90."
+2,"a remote preliminary proximity-based hazard assess­ ment is performed on a rural property in alberta, demonstrating the model’s ability to detect and classify trees near values-at-risk."
+2,the results indicate a potential extension to low-cost decision sup­ port in enterprise and fire-related applications.
+2,introduction wildfires are natural events that are essential to maintain the health of boreal forests.
+2,"however, fires can damage infrastructure and result in loss of life when they encroach on people, communities, and other assets in areas at risk."
+2,"due to the societal impact of wildfire events, efforts have been made to characterize wildfire potential, spread, size, and to predict behaviour after ignition."
+2,predicting wildfire risk contact j.
+2,"boisvert jbb@ualberta.ca 6-241 donadeo innovation centre for engineering (d-ice), university of alberta, edmonton, canada © 2022 informa uk limited, trading as taylor & francis group"
+3,international journal of remote sensing 1849 is important when making forest management decisions and determining optimal wildland fire response strategies to reduce these impacts.
+3,"the current strategy in canada includes broad fuel mapping, which is fed into the canadian forest fire behaviour prediction (fbp) system and fire modelling software prometheus (hirsch 1996; tymstra et al."
+3,2010).
+3,"local fuel characterization commonly relies on domain experts manually examining satellite imagery and conducting field visits to repre­ sentative local plots to collect information, such as tree species, height, density, and diameter at breast height (public lands and forests division 2005; cameron, schroeder, and beverly 2021)."
+3,"however, the use of site visits to characterize fuels across large areas, such as the canadian boreal forest, is an expensive undertaking; there is value in exploring alternative data collection methodologies such as remote sensing and machine learning methods."
+3,"further, available satellite imagery is limited to maximum resolutions of 30 cm px−1, which can limit analysis to delineating land­ cover rather than reliable individual tree identification (surový and kuželka 2019)."
+3,"to be useful for fine-scale fuel mapping and structure hazard assessments, data must be collected that is of high enough resolution to distinguish individual tree crowns, identify class or species, and calculate tree size/height."
+3,the proposed method uses high resolution (1.8 cm px−1) aerial imagery collected via a consumer grade unmanned aerial vehicle (uav) in alberta boreal forests.
+3,"imagery is used to train convolutional neural networks (cnns) to 1) identify trees on an individual scale, 2) classify trees as coniferous or deciduous; an important fuel characteristic in wildfire spread."
+3,"tree characteristics such as tree height, tree size, and stand density can then be assessed using the outputs."
+3,"wildland fires recent alberta fires that resulted in significant negative societal impacts include the 2011 slave lake fire, 2016 fort mcmurray, and 2019 chuckegg creek lake fire, resulting in a combined 98,000 evacuations, greater than $3.5b of insurable losses and over 2900 buildings destroyed (kulig et al."
+3,2018; mamuji and rozdilsky 2019; mnp llp 2020).
+3,"recently, california has also seen significant fire activity with a total of $148.5 billion in combined losses and 104 lives lost, including six firefighters and 98 civilians in 2018 (wang et al."
+3,2020).
+3,"wildfire science has benefited from the use of remote sensing and machine learning since the 1990s; piyush et al. (2020) reviewed applications in 20 areas related to wildfire science and management, including fuel characterization, fire detection, fire susceptibility mapping, fuel treatment, and planning and policy."
+3,"piyush et al. (2020) include 138 papers (table 1) applying machine learning to landscape controls on fire, with only three on fuel treatment and 10 on fuels characterization; fuel characterization is noted as an area with substantial research potential."
+3,"of these 13 papers, none were found to be applied in alberta boreal forest."
+3,"fire behaviour in tree species is known to vary, there is then an opportunity for modelling fuels locally."
+3,"here, cnns are used in fire detection, fire suscept­ ibility mapping, fire spread and growth but are not applied to remotely sensed imagery for fuel identification and classification."
+4,1850 l.
+4,bennett et al.
+4,table 1.
+4,summary of machine learning applications in wildfire management.
+4,adapted from piyush et al.
+4,(2020).
+4,domain papers domain papers fuels characterization 10 fire spread and growth 26 fire detection 41 burned area and fire severity prediction 46 fire perimeter and severity mapping 37 soil erosion and deposits 4 fire weather prediction 5 smoke and particulate levels 17 lightning prediction 3 post-fire regeneration and ecology 25 climate change 23 socioeconomic effects 1 fire occurrence prediction 25 planning and policy 6 landscape-scale burned area prediction 10 fuel treatment 3 fire susceptibility mapping 112 wildfire preparedness and response 8 landscape controls on fire 138 social factors 1 areas of concern for wildfire management include densely forested areas with a variety of tree species near values-at-risk (var).
+4,"the equations used to determine fuel loads for fire modelling vary by species, with the most distinct fuel differences occurring between coniferous and deciduous trees (lambert, ung and raulier 2005)."
+4,"because of the differ­ ences in fire behaviour, delineating coniferous and deciduous trees based on remotely sensed imagery is useful."
+4,"current fire prediction models also require mixed fuel types to be further categorized by the proportion of coniferous trees, a property that can have a significant influence on the rate of spread and the total burned area (tymstra et al."
+4,2010).
+4,"some coniferous fuel types also make considerations for tree density, in stems per hectare, though these are mostly qualitative measures (forestry canada fire danger group 1992)."
+4,"fuel characteristics at the scale of individual trees is also of interest to fbp models, community hazard assessments, and property-level exposure assessments."
+4,"the type of tree, density of trees and locations relative to vars are important inputs to firesmart canada’s home assessment process (firesmart canada 2019)."
+4,"height and crown width of a tree can serve as predictors of crown biomass, which in turn can influence crown fuel loads (zou et al."
+4,"2015; cruz, alexander and wakimoto 2010)."
+4,these properties can serve as inputs to fbp models and are key inputs for assessing the effectiveness of fuel treatments (beverly et al.
+4,2020).
+4,"the main contribution of this work is the automated calculation of tree type, height, location, and size from remote imagery for the aforementioned wildfire management purposes."
+4,"further extension of these results may lead to high-resolution fuel maps that are appropriate for fire progression modelling, facilitating forest management decisions or guiding active wildfire suppression."
+4,these applications depend on a thorough field validation prior to implementation in an operational setting.
+4,remote sensing of vegetation advancements in machine learning and remote sensing have improved remote vegeta­ tion detection in applications that could be adapted to wildfire science.
+4,"surový and kuželka (2019) reviewed the use of various forms of remote data to produce estimates of crop production, plant health, plant or tree location, and individual tree or tree stand property calculation, including directly measured elevations through technology, such as light detection and ranging (lidar), multispectral, hyperspectral, and rgb imagery."
+5,"international journal of remote sensing 1851 modern remote sensing data is obtained from various sources, including satellite, aerial imagery, and uav flights (surový and kuželka 2019)."
+5,"the use of uav imagery has increased because of reduced cost, improved image quality, and the widespread avail­ ability of photogrammetry and image stitching software."
+5,resolution of uav imagery in this study reaches 1.8 cm px−1 while very high resolution (vhr) satellite ranges from 5 m to 30 cm px−1 (surový and kuželka 2019).
+5,"the lower resolution of satellite imagery impedes its use in applications that rely on high-density pixel information, such as species classification."
+5,"the current body of uav-based vegetation detection research is focused on lidar and multispectral data, with limited rgb imagery use (surový and kuželka 2019)."
+5,aerial laser scanning (als) is commonly used for forest inventory due to its ability to produce a reliable digital terrain model (dtm) representing ground elevation even with dense canopies; point data from digital aerial photogrammetry (dap) and structure from motion (sfm) are limited to digital surface models (dsms) representing tree top elevations (surový and kuželka 2019).
+5,"multispectral and hyperspectral data is also used in uav-based solutions, particularly where tree species classification or tree health is a focus (adão et al."
+5,2017; näsi et al.
+5,2018; tang and shao 2015; surový and kuželka 2019).
+5,plant detection from uavs is considered in many applications.
+5,"surový and kuželka (2019) indicate six areas that are actively being pursued using uav sensing: forest regeneration, individual tree detection, tree or canopy height assessment, tree inventory sensing for commercial applications, tree species detection, and tree health detection."
+5,individual tree and species detection are critical to fire fuel classification as current allometric equations are based on those factors.
+5,"individual equations have been proposed to calculate biomass density for many species based on diameter at breast height and/or tree height, producing a value for organic dry mass per area (lambert, ung and raulier 2005)."
+5,"surový and kuželka (2019) reviewed 44 studies that use uav imagery to determine tree individuals, height, inventory, and species; none of these studies consider cnns for tree detection and classification."
+5,additional work is reviewed to characterize the state of uav use in tree detection and classification.
+5,diez et al. (2020) evaluated clustering techniques for tree counting in a dense japanese forest.
+5,"rgb imagery was converted to a dsm using sfm, and six clustering methods were optimized for tree detection precision and counting perfor­ mance."
+5,"iterative global maxima performed the best with precision and count error of 0.91 and 8.1%, respectively."
+5,"dbscan, fuzzy c-means, and gaussian mixture modelling all produced results with precision above 0.8 (diez et al."
+5,2020).
+5,these values were the result of significant tuning and may not generalize to new imagery.
+5,"it is noted that the best performance, iterative global maxima, was particularly sensitive to the input window size (diez et al."
+5,2020).
+5,"silver, tiwari and karnieli (2019) implement geospatial object-based image analysis (geobia) to identify vegetation in hyper-arid regions using rgb imagery."
+5,the geobia routine utilized in the study relied on the three colour bands and five calculated image texture networks.
+5,this data was clustered to separate data types and was classified based on a series of training pixels.
+5,"the process did not produce bounding boxes identifying individual objects and cannot be assessed with the same metrics, relying instead on area under curve (auc) assessments."
+5,the area under the receiver operating characteristic curve for this algorithm was between 0.72 and 0.83.
+5,lu and he (2018) used
+6,1852 l.
+6,"bennett et al. a geobia framework to assess the impact of uav image resolution on species detection and obtain a maximum classification accuracy of 83%; a random forest was used to classify vegetation based on standard deviation, mean reflectance, green ndvi, and glcm dissimilarity."
+6,"solvin, puliti and steffenrem (2020) focused on using photogram­ metric data to develop a canopy height model."
+6,the process was simplified as tree locations can be referenced from an initial planting grid.
+6,"guzmán et al. (2020) explored the association of fractals with tree parameters using terrestrial laser scanning, extract­ ing tree-specific attributes including diameter at breast height."
+6,"additional research is reviewed, highlighting the limited use of cnns for tree detection and classification (table 2)."
+6,"here, recall is the proportion of predicted boxes with an intersection-over- union (iou) greater than 50% to manually annotated trees."
+6,"alternatively, stem detection is the ratio of tree stems that lay in a box to total tree stems."
+6,"tree detection methods are challenging to directly compare because they are often purpose-built, working in limited scenarios."
+6,higher performance is often achieved in plantations due to the well- delineated crown.
+6,"this is also apparent for palm tree detection, where the palms are very prominent against the background of other vegetation."
+6,dense tree stands present additional difficulties when individual tree crowns overlap and are not uniform when viewed from overhead.
+6,"tree detection and classification with cnns with remote sensing platforms, such as uavs offering cheap, fast, and convenient collec­ tion of data across large spatial domains, methods must be considered for the extraction of information from the data."
+6,consumer grade uavs are now easily accessible to the public and often come with onboard high-resolution rgb cameras.
+6,there is an interest in the collection of data using this low-cost platform to minimize cost and maximize accessibility.
+6,"raw data collected is a set of many spatial high-resolution rgb images, converting these images to useful information is not trivial."
+6,"as discussed, individual tree locations and properties are of interest to many in the forestry and wildfire industry."
+6,this is an ‘object detection’ problem; a class of problem concerned with localizing and classifying objects within an image (zhao et al.
+6,2018).
+6,"this task is not straightforward, as objects can appear in many different contexts, in different lighting conditions, and there may be extensive variation within object classes (i.e., tree species, dog breeds, traffic sign type, etc.)."
+6,"the goal is to detect objects in diverse contexts from rgb imagery; this is a task that machine learning is well suited to, neural networks are able to detect a variety of objects in a variety of settings by extracting deep feature representations of objects."
+6,as discussed by zhao et al.
+6,"(2018), cnns are one such type of network and have the ability to develop complex and deep feature representations during training; that is, feature representations do not have to be manually designed."
+6,"zhao et al. (2018) highlight numerous advantages of using cnn architecture for object detection over other methods, including hierarchical feature representation, increased expressive capability, ease of task combinations, and large learning capacities."
+6,"common cnn architectures include vgg, resnet, and retinanet (he et al."
+6,2016; simonyan and zisserman 2014; lin et al.
+6,"2017, 2016)."
+6,vgg is a deep cnn that is available in 16 and 19 layer configurations (simonyan and zisserman 2014).
+6,"resnet, available in"
+7,table 2.
+7,selected methods and their results.
+7,results (selected) additional notes output category source input algorithm output precision recall f1 r2 tree delineation/ pulido et al.
+7,(2020) vegetation index multiple; comparison of an tree bounding 0.92 0.91 0.94 - well delineated bounding and dem array of classical and boxes plantations; results boxes deep learning methods from best method chosen mubin et al.
+7,(2019) rgb satellite lenet cnn tree bounding 0.88 0.78 0.83 - values for mature boxes palms weinstein et al.
+7,(2019) aerial rgb imagery retinanet with resnet-50 tree bounding 0.69 0.61 0.65 - ` backbone boxes braga et al.
+7,"(2020) pan sharpened mask r-cnn tree crown 0.91 0.8 0.86 - training and testing satellite delineation from same tree stand stem locations wang, zhu and wu (2019) rgb uav svm stem locations 0.98 0.99 0.98 - palm tree plantations chen et al."
+7,"(2021) rgb uav local maximum stem locations - 0.85 - - high density forest ene, næsset and gobakken airborne laser watershed algorithm stem locations 0.86 0.46 0.6 - visually distinct palms (2012) scanning huo and lindberg (2020) multispectral als template matching stem locations - - 0.73–0.94 - santoso, tani and wang (2016) multispectral multi-stage filter stem locations - >0.90 - - satellite mohan et al."
+7,"(2017) uav sfm derived local maximum stem locations 0.84 0.87 0.86 - study performed in canopy height open canopy forest model bonnet, lisein and lejeune uav sfm derived local maximum with stem locations - 0.87 - - (2017) canopy height random forest filter model xiao et al."
+7,"(2018) red, ndvi, dsm fully convolutional model stem locations 0.84 0.78 0.81 - low pass filter assuming spatial poisson process tao et al."
+7,(2020) rgb uav alexnet cnn dead pine 0.75 0.46 0.57 - locations international journal of remote sensing tao et al.
+7,(2020) rgb uav googlenet cnn dead pine 0.9 0.41 0.57 - locations (continued) 1853
+8,1854 table 2.
+8,(continued).
+8,results (selected) additional notes output category source input algorithm output precision recall f1 r2 biomass domingo et al.
+8,2019 rgb and nir multiple linear regression biomass - - - - direct biomass fit assessments from sfm derived attributes puliti et al. (2020) 10 m dem and 10- random forest above-ground - - - - band medium biomass l.
+8,bennett et al. resolution sentinel-2 satellite species lu and he (2018) multispectral uav geobia species - 0.83 - - grassland species imagery classification classification camarretta et al.
+8,(2020) individual tree two stage analytical tree species and - - - - lidar framework provenance immitzer et al.
+8,"2019 multi-temporal random forest land cover and 0.84 0.88 0.86 - satellite tree species briechle, krzystek and multispectal, dual-cnn tree species - - 0.96+ - able to classify trees vosselman (2021) lidar, and tree classifications as coniferous or polygons deciduous with f1 scores of 0.96 and 0.99 respectively fricker et al."
+8,"(2019) hyperspectral or cnn tree species - - 0.87/0.64 - here, trees are rgb classifications classified into seven species + ‘dead’ rather that deciduous or coniferous."
+8,results from hyperspectral and rgb are considered independently and displayed as hyperspectral/ rgb-only egli and höpke (2020) uav rgb imagery cnn tree species - - 0.92 - trees classified into classifications four species classes (continued)
+9,table 2.
+9,(continued).
+9,results (selected) additional notes output category source input algorithm output precision recall f1 r2 other fan et al.
+9,"(2020) individual tree adtree & convex hull tree structure - - - 0.96 nondestructive tree lidar polyhedron algorithm information; 3d volume output models of individual trees chen, xiang and moriya (2020) airborne lidar multiple; comparison of tree properties; - - - - four point cloud based tree locations, algorithms tree height, crown width marcial-pablo de jesús et al."
+9,calculated indices otsu’s method vegetation fraction - 0.87 - - accuracy shown is for (2019) from rgb and rgb data nir uav international journal of remote sensing 1855
+10,1856 l.
+10,"bennett et al. a variety of layer configurations, leverages skip connections that allow fast training and the ability to learn identity weights meaning deep networks should not underperform a shallower configuration."
+10,retinanet leverages a pyramidal feature map structure to enhance scale invariance and a novel implementation of focal loss to account for back­ ground sample imbalance (lin et al.
+10,"2017, 2016)."
+10,"scale invariance is a beneficial quality for tree detection as tree size can vary broadly within a single photo used for detection, leading to the use of the retinanet architecture for this research."
+10,the use of cnns for forest-related applications is limited.
+10,"cnns are commonly used for general image recognition, including tree detection with little extension into tree attri­ bute modelling."
+10,"braga et al. (2020) implemented a mask r-cnn to detect and delineate tree crowns in high-resolution multispectral satellite imagery, reaching recall, precision and f1 scores of 0.81, 0.91, and 0.86, respectively."
+10,mask r-cnn combines object identifica­ tion and semantic segmentation to classify image regions and assign pixels to objects.
+10,the cnns alexnet and googlenet were used to detect dead pine trees in southeastern china (tao et al.
+10,2020).
+10,"when trained on 768 samples and tested in three regions, the algorithms obtained identical f1 scores of 0.57."
+10,"this score is depressed by errors of omission, with a sub 0.5 recall in both cases."
+10,"mubin et al. (2019) considered 0.3 m px−1 satellite imagery for palm tree detection, separating young and mature palms in the workflow."
+10,"the cnn achieves precision, recall and f1 of 0.88, 0.78, and 0.83, respectively, for detection of the relatively well-delineated palm crowns."
+10,ferreira et al. (2020) detected palm species with an accuracy of 87.8 ± 4.4%.
+10,this workflow incorporated resnet-19 (he et al. 2016) in a deeplabv3+ semantic segmentation architecture (l.-c.
+10,chen et al.
+10,2018).
+10,tree classification using cnn algorithms has also seen increased research in recent years.
+10,"briechle, krzystek and vosselman (2021) use hyperspectral imagery, lidar point­ clouds, and tree location polygons to train two cnns (one per input modality) to classify trees as coniferous or deciduous, and reach f1 scores of over 96%."
+10,"the use of hyperspec­ tral and rgb imagery as inputs into cnns for the purposes of tree species classification were compared by fricker et al. (2019); authors found that classification using hyperspec­ tral offered a 23% higher accuracy compared to rgb data, though trees were classified into seven species and one dead class as opposed to coniferous/deciduous classification."
+10,"comparatively, egli and höpke (2020) were able to use 1.6 cm px−1 rgb imagery to classify trees into four classes (oak, beech, larch, and spruce) with an accuracy of 92%."
+10,deepforest is a tree detection convolutional model based on a retinanet structure with a resnet50 backbone (weinstein et al.
+10,2019; lin et al.
+10,2017; he et al.
+10,2016).
+10,"it is a research model developed and trained on a database of annotated tree data and tested on various locations in the united states, reaching recall and precision of 0.69 and 0.61, respectively, with a stem detection of 0.82."
+10,weinstein et al. (2019) overcame the low amount of available training data by relying on semi-supervised training that leveraged lidar data to improve the training set.
+10,"deepforest also acts as an interface for training and testing on new data sets for tree detection, starting either from pretrained or blank models."
+10,the performance of deepforest and accessibility of inex­ pensive technology motivate the use of rgb imagery as opposed to lidar or multi­ spectral data that can be more expensive to obtain at a high resolution.
+10,"this accessibility is critical as this work is targeted to a wide range of practitioners, such as individuals surveying their properties, communities assessing wildfire risk, fire departments and government agencies."
+11,"international journal of remote sensing 1857 in this paper, materials and methods are reviewed, including uav data collection, retinanet implementation through the deepforest python package for tree detection, and vgg19 implementation for tree classification."
+11,"the results of these algorithms are then reviewed after undertaking k-fold cross-validation of the algorithm in a variety of config­ urations, leading to implementation recommendations."
+11,"finally, the results are discussed, including the extension to attribute extraction, including tree stand density, tree size, and tree height, as well as the possible extension of these properties to wildfire science."
+11,"a remote preliminary proximity-based hazard assessment of a property is performed, and its results interpreted."
+11,the applicability of these results to future work in wildland fuel management is also discussed.
+11,materials and methods 2.1.
+11,"full workflow the combined image to attribute model for trees (itam-t) is a scheme of data collection, identification and classification algorithms, and post-processing methods resulting in individual tree locations with coniferous/deciduous labels (figure 1)."
+11,"the workflow includes components to combine and refine results, such as non-max suppression, combining and selecting bounding boxes and height trimming to remove false negatives where sfm data indicates there is no tree."
+11,itam-t output contains detected bounding box corners and associated tree classes (figure 2).
+11,"data collection imagery is captured at 10 alberta sites, primarily located in boreal forests designated as c-2 fuels (table 3 and figure 3) (lambert, ung and raulier 2005)."
+11,"the uav used is a dji mavic mini, a low-cost consumer uav accessible for use in low-budget scenar­ ios where costly solutions are out of reach and options, such as spectral imagery are infeasible."
+11,the camera utilizes a 1/23” cmos sensor with an 83° field of view capable of capturing 4000 × 3000 resolution images with a 4:3 aspect ratio or 4000 × 2250 in 16:9.
+11,the flights were manually piloted and conducted at a height of 50 to 55 m to produce sufficiently high-resolution imagery and a maximum flight speed of 2 m s−1 for consistent image overlap.
+11,flights were conducted so as to ensure at least nine images were available at all locations of the survey area as recommended by the stitching software; the absolute flight overlap varied due to the manual piloting of the drone.
+11,"the flight data is orthorectified and stitched using dronedeploy, this generates an orthophoto, a set of elevation points, dsm/dtm, and geotiff surfaces (dronedeploy 2020)."
+11,image resolution after stitching is between 0.018 and 0.020 m px−1.
+11,"this greatly exceeds high-resolution satellite imagery, which reaches resolutions of 30 cm px−1 (surový and kuželka 2019)."
+11,these orthophotos are used to develop training and testing sets for detection and classification routines.
+11,all identifiable trees are manually annotated to allow for training and testing using labelimg (figure 4).
+11,each tree is boxed to its full extent while minimizing overlap with adjacent trees.
+12,1858 l.
+12,bennett et al.
+12,figure 1.
+12,flow chart of the combined algorithm structure.
+12,tree species are identified on several images interpreted by alberta agriculture and forestry.
+12,species interpretations are used to generate classification training sets.
+12,"species-level classification results in insufficient examples per class; therefore, train­ ing sets are separated into ‘coniferous’ and ‘deciduous’."
+12,the flights are in boreal forest predominantly characterized by black spruce (conifer) and aspen (deciduous).
+12,the boreal forest natural region covers 58% of the province of alberta; main deciduous species include aspen and balsam poplar while dominant coniferous species include white and black spruce (national regions committee 2006).
+12,boreal spruce (c-2) fuels are responsible for over 50% of the hectares burned between 2006 and 2018 (alberta wildfire 2020).
+12,"the annotated images produce a total of 5859 trees for detection, with 1016 deciduous and 2687 coniferous for classification (table 4)."
+12,some trees are used for detection but not classification as only higher quality imagery is used for classification.
+12,t3 is included in classification training despite the low number of trees as they are visually distinct and
+13,international journal of remote sensing 1859 figure 2.
+13,input image and corresponding output with conifer (teal) and deciduous (magenta) bounding boxes for location 6.
+13,table 3.
+13,location descriptions.
+13,locations with the prefix t are only used for training.
+13,"location number description date surveyed 1 mixed wood stands june 5, 2020 2 mixed wood stands june 12, 2020 3 mixed wood stands june 12, 2020 4 predominantly jack pine stands june 18, 2020 5 white spruce stands june 19, 2020 6 lodgepole pine june 22, 2020 t1 conifer june 10, 2020 t2 mixed stands june 12, 2020 t3 jackpine june 18, 2020 t4 mixed wood stands with large, burned area june 5, 2020 similar to those found at location 4."
+13,t2 is not included in classification training as it was not annotated by alberta agriculture and forestry.
+13,t1 is excluded for inconsistent image quality due to excessive wind during the uav flight.
+13,tree detection the annotated rgb orthophotos (figure 4) are used to train and test a cnn to automate the tree detection process.
+13,"an existing framework, deepforest, is used as a base for this implementation (weinstein et al."
+13,2019).
+13,deepforest runs a retinanet cnn with a resnet50 backbone (he et al.
+13,2016).
+13,deepforest allows for the use of pretrained or user-trained models.
+13,"in this implementation, the pretrained model was not used in favour of training on boreal data (table 4)."
+13,the model begins with a naïve resnet architecture without using deepforest weights.
+13,this was necessary due to the resolution difference between the aerial deepforest training data and the uav data obtained (table 4).
+14,1860 l.
+14,bennett et al.
+14,figure 3.
+14,flight locations and illustrative survey subsets.
+14,"the use of deepforest is motivated by the implementation of retinanet image recogni­ tion with preprocessing, training, and testing modules in python, facilitating its use on novel data sets (weinstein et al."
+14,2019; lin et al.
+14,2017).
+14,"moreover, an image subdivision utility that splits the input image into overlapping tiles for both training and running the algorithm reduces memory requirements."
+14,image tiles are resized to a constant training input size prior to inference.
+14,"to compen­ sate for the scale differences when tree size is heterogeneous, images input for inference are split into tiles of various size prior to the resizing step in preprocessing."
+14,"when a large tile size is considered it is resized down to the training tile size, allowing large trees to appear ‘smaller’ for inference; the reverse is true for small tile sizes."
+14,"figure 5 demonstrates that the algorithm draws a higher proportion of small bounding boxes for small tile sizes and a higher proportion of large bounding boxes for large tile sizes, even though all individual tile size results have the highest proportion of trees at 150 px annotation size."
+14,an adaptive window size (aws) is introduced to address the issue of variable tree size.
+14,the proposed aws is an ensemble method where tree detection is run multiple times with different tile sizes.
+14,"bounding boxes from each run are combined with non-max suppression to eliminate overlapping boxes, utilizing a greedynms method (hosang, benenson and schiele 2017)."
+14,boxes are grouped based on an iou threshold and the box with the highest confidence value generated by the neural network is selected to represent the group.
+14,"there is no requirement to define an optimal tile size, and the effect of variable tree size in an image is reduced."
+15,international journal of remote sensing 1861 figure 4.
+15,manual tree annotations.
+15,table 4.
+15,data description by location.
+15,"t1, t2, t3, and t4 are used for training only."
+15,detector detection classification deciduous coniferous approximate average survey location training trees training trees trees survey size (ha) density (trees ha−1) 1 y 862 y 218 - 5.5 157 2 y 329 y 158 49 1.0 329 3 y 671 y 98 - 2.1 320 4 y 635 y - 556 1.5 423 5 y 717 y - 493 1.5 478 6 y 942 y - 728 1.5 628 t1 y 728 n - - 1.6 455 t2 y 417 n - - 1.4 298 t3 n - y - 58 0.6 - t4 y 558 y 542 803 8.0 70 sum 5859 1016 2687 the output of the tree detection algorithm can be used to assess tree size directly.
+15,"in training, the model learns to identify tree locations and regress a bounding box to the suspected bounds of the tree instance."
+15,"thus, model outputs include tree locations as well as relative tree sizes measured by the size of the rectangular bounding box."
+15,cnn performance is sensitive to prediction location and prediction sizing; results are only counted as correct if the box is properly located and sized to the manual annotation.
+15,"as trees are viewed nadir in the orthorectified survey, crown size can then be calculated as the simple average of the x and y dimensions of the bounding box (equation (1))."
+16,1862 l.
+16,bennett et al.
+16,table 5.
+16,"tree detection recall, precision, stem recall, and f1 for each tested image with a fixed 2000-pixel tile size and no height trimming."
+16,location recall precision stem recall f1 1 60.0% 46.4% 82.2% 52.3% 2 79.3% 78.4% 86.3% 78.8% 3 82.1% 57.2% 96.9% 67.4% 4 73.1% 66.9% 85.7% 69.8% 5 81.3% 67.6% 96.4% 73.8% 6 91.3% 76.6% 98.4% 83.3% average 77.8% 65.5% 91.0% 70.9% figure 5.
+16,"detection algorithm bounding box widths histogram in pixels for each input tile size. dx þ dy w¼ (1) 2 here, w is the tree’s ‘crown size’ dimension, and dx and dy are the x and y dimensions of trees bounding box, respectively."
+16,"tree classification after identification, trees are extracted for classification."
+16,this is achieved by cropping an individual jpg image using each bounding box and running a binary classification using vgg19 (simonyan and zisserman 2014).
+16,the classifications are limited to deciduous and
+17,international journal of remote sensing 1863 coniferous classes.
+17,vgg19 is a 19-layer deep cnn that is chosen due to its performance with limited training data.
+17,"simonyan and zisserman (2014) show that vgg19 outperforms the 16-layer vgg16 even on small datasets, while deeper networks do not improve results."
+17,this is expected because deeper networks are more susceptible to overfitting due to additional internal parameters (simonyan and zisserman 2014).
+17,"additional layers are added to the base vgg19 architecture to extend the training data and improve results, including an image processing layer that resizes input, a data augmentation layer that randomly alters training data to extend the limited training data set, an image normalization layer as implemented for vgg, and a dropout layer to reduce overfitting."
+17,data augmentation reduces over-fitting and allows better extrapola­ tion when models are trained on small data sets.
+17,"scaling itam-t applications to practical wildfire management and community-scale assessments would be improved if data collection did not require high-resolution imagery, this would be a substantial reduction in data collection costs."
+17,"an estimate of the minimum required resolution to distinguish between coniferous and deciduous trees is obtained by downsampling the dataset using a bicubic image resizing method, taking a weighted average of pixels."
+17,"images were downscaled to 50%, 25% and 12.5% of the original resolu­ tion, and k-fold testing was repeated."
+17,determination of this data collection parameter can enable informed planning of flight lines and flight equipment by anticipated users.
+17,"tree height calculation once trees have been detected in the orthomosaic, tree height can be inferred using the sfm pointcloud."
+17,"the pointcloud and the orthomosaic exist in the same geospatial coordi­ nate system; thus, 2d image detection boxes can be vertically projected in the third axis."
+17,"once projected, all points within the bounds of the vertically projected 2d box are identified and used for calculation."
+17,"tree height can then be inferred as the difference between the top 99th and bottom 1st percentiles of point height values (equation (2)). h ¼ z99 z1 (2) where h is the estimated height of the detected tree, z99 is the 99th percentile of point height values within the identified box, and z1 is the first percentile."
+17,"here, percentiles are used to add a level of robustness to outliers and errors in the sfm pointclouds."
+17,"during the tree detection process, tree bounding boxes identifying objects with heights below 1.37 m are removed to help eliminate the misclassification of ground cover as trees."
+17,"this height threshold corresponds to other wildfire studies, trees below this value are assumed not to significantly contribute to canopy fuels (cameron, schroeder, and beverly 2021)."
+17,tree stem density calculation tree stem density is calculated for each survey.
+17,a circle with a 50-metre radius is drawn at each predicted tree location.
+17,tree stems are assigned to the centre point of a tree bounding box.
+17,stems that fall within the bounds of the circle are counted.
+17,tree density can be expressed in trees per hectare (equations (3) and (4)).
+18,1864 l.
+18,bennett et al.
+18,"ntrue dtrue ¼ π502 (3) 10000 npredicted dpredicted ¼ π502 (4) 10000 here, dtrue and dpredicted are the manual and predicted tree densities (in trees per hectare), and ntrue and npredicted are the count of manually identified and predicted tree stems within the search bounds."
+18,assessment metrics 2.7.1.
+18,"tree detection and classification the itam-t and subprocesses are assessed using recall (equation (5)), precision (equation (6)) and the f1 score (equation (7)). pt r¼ (5) pt þ nf pt p¼ (6) pt þ pf p�r f1 ¼ 2 � (7) pþr where pt is the number of true positives, pf is the number of false positives, nf is the number of false negatives, r is recall, and p is precision."
+18,a tree prediction is considered a true positive if the resulting bounding boxes have an iou of 50% or higher.
+18,stem recall does not consider bounding box overlap and is the ratio of all tree stems found within a bounding box to all tree stems that are manually anno­ tated.
+18,stem locations are assumed to be in the geometric centre of bounding boxes.
+18,"recall is the ratio of true positives to total trees, and precision is a ratio of true positives to all predicted trees."
+18,"f1 is the harmonic mean, resulting in a single comparator that accounts for both precision and recall."
+18,"these statistics are consid­ ered because they are interpretable and are commonly used to assess object detec­ tion networks (padilla, netto and da silva 2020)."
+18,"recall and precision scores are sensitive to prediction box location and size, and thus help assess the algorithm’s ability to predict stem location and tree size."
+18,"the stem recall score is insensitive to box overlap, it is often used in conjunction with the recall score to further diagnose and interpret results; a high stem recall score and low recall score can indicate that trees are being detected but the bounding boxes are not sized correctly."
+18,low stem recall scores would reflect an overall poor detection performance.
+18,overestimating the density of a tree stand can result in higher than actual hazard estimates and is reflected in a low precision score.
+18,"a low recall score indicates improper or missing tree bounding box predictions at manually identified tree locations, potentially reducing the perceived hazard."
+19,international journal of remote sensing 1865 saliency maps are examined to assess the importance of pixel weights in selecting tree class by the classification network.
+19,this provides interpretability for the deep network by highlighting the areas of an image that are found to have strong influence on the final decision made by the classifier.
+19,"‘smoothgrad’ is used, which stochastically approximates the local average of gradients of the class activation function with respect to the input (smilkov et al."
+19,2017).
+19,2.7.2.
+19,tree density tree density validation is a function of tree detection performance.
+19,the model’s ability to reproduce tree densities is useful as an additional performance indicator.
+19,"crossplots between manual and predicted tree densities are useful, three metrics are also calculated r2, rmse, and rrmse (equations (8)–(10))."
+19,"�2 p yi b yi r2 ¼ 1 p (8) ðyi �yþ2 sffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi pðb yi yi þ 2 rmse ¼ (9) n rmse rrmse ¼ (10) μmanual here, r2 is the coefficient of determination, rmse is the root mean squared error, and rrmse is the relative rmse, calculated as the ratio between the rmse and the mean of the measured variable, in this case, the calculated density of manual annotations. yi and ybi are actual and predicted tree densities, respectively, and �y is the prediction mean. μmanual is the mean of manually annotated tree densities."
+19,2.7.3.
+19,assessment methodology field validation of model predictions using physical measurements taken by fuel assessment professionals is possible but is beyond the scope of this work.
+19,"moreover, these measurements are performed at a different scale and include some subjectivity and error."
+19,forestry professionals at alberta agriculture and forestry deemed the ima­ gery to be of sufficient resolution to accurately delineate and classify large trees.
+19,"therefore, the authors postulate that manual annotations on this high-resolution imagery (figure 4) have an error rate consistent with physical measurements and provides a reasonable ground truth for validation and testing the attributes calculated; a comparison of these error rates is beyond the scope of this work."
+19,"a further limitation of this work is the lack of consideration of ladder, understory, and surface fuels, which would require imagery beyond rgb and would also require on-site physical measure­ ments for validation."
+19,"this study uses a limited amount of data with only 5859 annotated trees, 1016 interpreted as deciduous and 2687 coniferous."
+19,the limited quantity of data motivates the use of a k-fold evaluation.
+19,"k-fold cross-validation better accounts for overfitting, which might not be found with a simple training-testing split and provides an"
+20,1866 l.
+20,bennett et al.
+20,table 6.
+20,"tree detection recall, precision, stem recall, and f1 for each tested survey with aws and height trimming."
+20,the average shown excludes location 1 as the elevation data is corrupted.
+20,location recall precision stem recall f1 1 49.4% 47.5% 67.1% 48.5% 2 79.6% 76.4% 91.2% 78.0% 3 84.8% 57.3% 98.7% 68.4% 4 74.2% 68.9% 84.6% 71.4% 5 84.0% 65.4% 98.6% 73.5% 6 94.2% 77.8% 100.0% 85.2% average 83.4% 69.2% 94.6% 75.3% table 7.
+20,"tree detection recall, precision, stem recall, and f1 for each tested image with aws and no height trimming."
+20,location recall precision stem recall f1 1 64.3% 48.2% 86.3% 55.1% 2 79.6% 76.4% 91.2% 78.0% 3 84.8% 57.2% 98.8% 68.3% 4 78.1% 66.3% 89.9% 71.7% 5 84.0% 65.3% 98.6% 73.5% 6 94.2% 77.7% 100.0% 85.2% average 80.8% 65.2% 94.1% 71.9% assessment of how well the algorithm would perform on each of the six locations of interest (hastie and tibshirani 2017).
+20,"k-fold is an extension of the typical training- testing split, dividing the data set into k sets for separate training and testing."
+20,"in each run, the data is trained on k-1 folds and tested on the remaining fold."
+20,descriptive statistics are averaged across all model runs.
+20,"where sparse data is considered, the use of a k-fold cross validation reduces the propensity to develop overfit models."
+20,"depending on the application, the data can be divided either ran­ domly or by natural groupings."
+20,"in this research, the data in each independent uav flight is considered a fold as conditions are approximately uniform during a flight but vary between flights."
+20,these folds are used for both detection and classification assessments.
+20,the itam-t is validated in six locations (table 4) in a k-fold cross-validation workflow.
+20,three configurations are considered to assess task specific and overall algorithm effectiveness to distinguish classification errors from identification errors.
+20,"first, results from the localization cnn are examined."
+20,these results represent the ability of the first network to identify tree locations and correctly determine bound­ ing box sizes.
+20,"next, the classification network is assessed using the professionally annotated dataset to assess classification errors."
+20,"finally, the full workflow is examined considering a predicted bounding box to be correct if it both correctly boxes the manual annotation and determines the correct class."
+20,preliminary proximity-based hazard assessment the itam-t outputs could be used to perform remote preliminary proximity-based hazard assessments of properties along the wildland urban interface.
+20,this does not replace a field hazard assessment but would be useful in inaccessible areas.
+20,imagery
+21,international journal of remote sensing 1867 table 8.
+21,"recall, precision, and f1 for classification of each tested location against manual classifications."
+21,location class recall precision f1 1 coniferous 99.3% 92.4% 95.8% deciduous 82.4% 98.2% 89.6% 2 coniferous 94.2% 95.9% 95.0% deciduous 95.5% 93.8% 94.6% 3 coniferous 98.9% 91.6% 95.1% deciduous 65.7% 93.9% 77.3% 4 coniferous 100.0% 96.4% 98.2% deciduous - - - 5 coniferous 100.0% 100.0% 100.0% deciduous - - - 6 coniferous 100.0% 98.6% 99.3% deciduous - - - average coniferous 98.7% 95.8% 97.2% deciduous 81.2% 95.3% 87.2% table 9.
+21,"recall, precision, and f1 for itam-t full workflow."
+21,location class recall precision f1 1 coniferous 47.9% 50.7% 49.3% deciduous 49.1% 65.9% 56.3% 2 coniferous 83.9% 71.5% 77.2% deciduous 78.6% 44.8% 57.0% 3 coniferous 69.8% 73.3% 71.5% deciduous 46.9% 77.3% 58.4% 4 coniferous 66.9% 82.4% 73.8% deciduous - - - 5 coniferous 78.2% 71.8% 74.9% deciduous - - - 6 coniferous 89.8% 80.6% 85.0% deciduous - - - average coniferous 72.8% 71.7% 72.0% deciduous 58.2% 62.7% 57.2% of a residence is collected using the same regiment previously described and the orthophoto is manually annotated to assess accuracy.
+21,itam-t is used to detect and classify trees near the residence.
+21,results 3.1.
+21,tree detection the proposed detection algorithm is run in three configurations: 1) single search window size; 2) adaptive window search with non-max suppression; and 3) adap­ tive search window size and height trimming.
+21,"the results are shown in tables 5, 6, and 7."
+21,further improvement is achieved with the aws implementation (table 7).
+21,the aws generates flexible bounding box sizes that are better able to capture complete trees and smaller trees.
+21,aws results in a 3.0% increase in recall and a 3.1% increase in stem recall.
+21,"because more bounding boxes are generated with the aws, precision is reduced slightly; however, the f1 score increases by an average of 1.0%, motivating the use of the aws."
+22,1868 l.
+22,bennett et al.
+22,figure 6.
+22,boxed artifacts in stitched orthophoto from location 1 showing (a) smearing and (b) off-nadir trees.
+22,"finally, height trimming is applied (table 6)."
+22,recall is not significantly impacted by height trimming as only incorrect predictions should be removed.
+22,"notably, the performance at location 1 suffers when height trimming is implemented because of corrupted elevation measurement due to poor flight conditions."
+22,"when location 1 is removed from consideration the recall, precision, and f1 values are 84.1%, 68.6%, and 75.3%, respectively, before height trimming."
+22,"after height trimming, average recall decreases from 84.1% to 83.4%, precision increases from 68.6% to 69.2%, and f1 remains constant at 75.3%."
+22,"based on these results, height trimming is recom­ mended only where precision is essential and the elevation data is trusted."
+22,"the results are separated by class to assess algorithm performance by tree type, average recall across all surveys is 78.6% for coniferous trees and 74.3% for deciduous trees after height trimming."
+22,"this is consistent with the authors experience, performance on deciduous trees is often slightly lower than coniferous."
+22,tree classification classification is run using the vgg19 algorithm after identification.
+22,the classification algorithm is evaluated in a stand-alone capacity as well as in the context of the full workflow.
+22,"stand-alone classification is run with manual tree identification as input, which idealizes the input found in a combined workflow as bounding boxes are drawn such that trees are well delineated; predicted bounding boxes are often placed in worse positions than manually identified trees."
+22,stand-alone results are the best-case that can be expected for the classification model (table 8).
+22,"the classification accuracy (table 8) is promising; however, overall performance is worse as the predicted bounding boxes are not guaranteed to match trees perfectly, as considered in table 8."
+22,"table 9 reviews the full algorithm results, including classification using the aforementioned identification workflow rather than manually annotated trees."
+22,the performance metrics in this table indicate the workflow’s ability to properly identify and classify trees.
+23,international journal of remote sensing 1869 figure 7.
+23,"saliency maps with original tree crop showing (a), (b) coniferous and (c) deciduous tree examples."
+23,these values are relative to both identification and stand-alone detection statistics as the values compare detected conifer and deciduous trees to all annotated trees of the same classes.
+23,"when only trees classified as conifers are considered, detection recall is 75.3%, and naïve classification recall is 98.7%."
+23,"the maximum expected total recall for conifers is thus 74.3%, with reductions likely attributable to detected trees with bounding boxes of poorer quality than their manual counterpart."
+23,the poor result for location 1 is
+24,1870 l.
+24,bennett et al.
+24,figure 8.
+24,impact of decreased resolution on tree classification f1 statistic. due to 1) lack of shadows and 2) notable artifacts where trees are angled or smeared because of a poorly composited orthophoto (figure 6) due to suboptimal flight conditions.
+24,"saliency maps are also produced (figure 7), and mostly show hotspots on tree features with some unexpected inclusions in (a), possibly indicating that shadows can influence the classification of a tree."
+24,"pixels receiving the most weight lie on the bounding box edges, suggesting tree classification is sensitive to lighting."
+24,"where contrasted foliage or tree tips have more weight than the darker background, lighter foliage and tree tips also contribute to classification weights (figure 7(b, c))."
+24,the ability of the classification model to correctly distinguish between coniferous and deciduous trees at decreasing resolutions is investigated.
+24,"figure 8 shows the reduction in f1 as resolution decreases, with the average f1 remaining above 65% until a resolution of 16 cm px−1."
+24,tree density the bounding box output from itam-t are used to generate additional outputs.
+24,"tree stem density is mapped and compared to the density of manually annotated trees, and routines are developed to report tree height and crown size."
+24,figure 9 shows the density comparison between manual annotations and algorithm outputs.
+24,tree height is not validated as ground-truth comparisons are not available.
+24,"density predictions are reasonable, with five r2 values above 0.80 (table 10)."
+24,"as expected, location 1 r2 is low because of poor recall due to image artifacts and an unreliable dsm."
+24,"rmse ranges between 13.5 and 47.5 trees per hectare, with an average of 26.1."
+24,"relative rmse is calculated as the ratio of rmse to the mean of manual annotation density in each plot, and ranges between 5.9% and 26.3%, with an average of 15.0%."
+24,(table 10).
+25,international journal of remote sensing 1871 figure 9.
+25,cross plots comparing density of trees detected by itam-t and manually annotated results.
+25,table 10.
+25,algorithm density outputs compared to manually annotated data.
+25,location trees in plot r2 rmse (trees ha−1) relative rmse (%) 1 862 0.656 32.2 21.4% 2 329 0.831 13.5 12.6% 3 671 0.989 47.5 26.3% 4 635 0.979 17.9 9.6% 5 717 0.919 25.2 14.0% 6 942 0.993 20.2 5.9% average 0.895 26.1 15.0%
+26,1872 l.
+26,bennett et al.
+26,figure 10.
+26,remote preliminary var hazard assessment of property along the wildland urban interface.
+26,figure 11.
+26,tree stem density map for location 3.
+26,"notably, the lowest r2 value occurs at location 1, a location that has notable artifacts in the imagery (figure 6)."
+27,international journal of remote sensing 1873 figure 12.
+27,size returns at each detected tree for location 3.
+27,preliminary proximity-based hazard assessment figure 10 shows imagery and a proximity-based hazard assessment for a residence.
+27,"this 1.3 ha survey yields a detection precision, recall, and stem recall of 68.4%, 64.7%, and 85.4%, respectively. 434 tree boxes are generated by itam-t, compared to 411 manual annotations."
+27,boxes have been coloured based on distance to the residence.
+27,"the model predicts nearby tree stands are 65% deciduous and 35% coniferous, while correctly locating dense and sparse areas."
+27,"the classifier distinguishes between coniferous and deciduous tree types in prediction boxes that properly capture the extents of the tree, allowing for a preliminary proximity-based hazard assessment of large tree fuels; note that this does not constitute a full property hazard assessment as many key aspects are not considered, including surface fuels, ladder fuels, understory fuels, roof construction and deck condition."
+27,"discussion while tree identification and classification are the focus, this does not produce results directly applicable to a fire assessment."
+27,"additional post-processing is required to extract parameters such as tree height, size, and stem density, which are indicators of fire fuel availability (wassihun et al."
+27,"2019; lambert, ung and raulier 2005; cameron, schroeder, and beverly 2021)."
+27,this is particularly valuable where these values can be mapped at a fine scale.
+27,"the targeted variables for this study are tree stem density, tree height, and tree"
+28,1874 l.
+28,bennett et al.
+28,figure 13.
+28,height returns at each detected tree for location 3. crown size.
+28,tree density and tree crown size can be simply calculated based on the output bounding boxes as previously discussed.
+28,"tree density can be calculated for any location of interest, counting the centre of each bounding box within a user-defined distance."
+28,this process can be repeated to generate a heatmap of tree density (figure 11).
+28,height and crown size can be calculated at any tree location.
+28,"crown size is a simple average of the x and y bounding box dimensions, assuming that bounding boxes encompass the tree crown as in the training data annotations (figure 12)."
+28,"bounding boxes are grid-oriented, which may cause bias when tree shapes do not align with the grid; this is expected to be negligible for trees that impact fuel variables (conifers) as these trees tend to be circular in shape when viewed nadir."
+28,this impact could be mitigated by re-fitting outputs or rotating imagery.
+28,tree height calculations leverage the structural elevation data that is calculated through sfm.
+28,"the height is assumed to be the difference between a high and low percentile return of height, with the user allowed to choose what percentiles are considered."
+28,the algorithm can also extend the search for the low percentile height as there are expected to be cases where ground points are non-existent within a bounding box.
+28,tree heights are reported for each itam-t reported bounding box (figure 13).
+28,"this is not possible in high-density tree stands where crowns overlap, and the ground is not visible from overhead; however, in this case, there is often sufficient fuel to sustain a crown fire, and tree height is less important for fire prediction."
+29,international journal of remote sensing 1875 implementation of the developed methodology is sensitive to timing of data collection as flight quality is impacted by lighting and weather.
+29,flights with visible snow accumulation were not included.
+29,"snowfall may improve results due to increased contrast between trees and the background; however, if trees are snow- covered, detection may be difficult."
+29,the presence of leaves on deciduous trees also has a direct impact on tree-detection.
+29,it may be possible to leverage this for classification as all green trees in the fall/winter would be coniferous.
+29,the high resolution of the images considered in this study (<2 cm px−1) could impact how the algorithm transfers to other applications.
+29,"obtaining 2 cm resolution could be difficult depending on the application, beyond visual line of sight flight, and avail­ able hardware, such as fixed-wing drones, aerial imagery, or satellites."
+29,"results from the classifier model assessment at decreasing resolutions may not extend to imagery from other sources; downsampling a high-resolution uav image may still propagate distinguishing features (leaf colour, branches, tree shape, etc.) that a satellite image of the same resolution would be unable to detect."
+29,assessing the performance of the model is an application-dependent problem.
+29,"property-level hazard assessments can be significantly impacted by specific fuels near the structure, with less importance given to larger scale fuel properties, such as density or tree size in outlying tree stands."
+29,missing a single tree near the structure is detrimental to the hazard assessment process and best practice hazard assessment should be followed.
+29,"thus, the methodology is proposed to supplement existing best practice rather than a replacement; large-scale application of the proposed algorithm could better inform local decision makers and provide preemptive screening for properties that may be exposed to hazards."
+29,outputs are relevant to a number of existing workflows.
+29,"partners in protection (2003), a guidebook on structure and community protection from wildfire, suggests quantitative guidelines for crown thinning near structures; crown land cover should be <40% and there should be 3–6 m between tree crowns."
+29,"here, crown landcover is defined as ‘the percentage of ground area covered by tree crowns if viewed from above’ (partners in protection 2003)."
+29,this can be calculated from model outputs as trees are located and sized with a bounding box.
+29,"they also recommended that thinning be performed at a distance of ‘two tree heights’ away from structures on level ground, an output that is also assessed by the proposed model."
+29,trees are classified as ‘surface’ or ‘crown’ fuels based on their height with trees less than 2.5 m considered as surface fuels (partners in protection 2003).
+29,fire growth simulation can also be influenced by the discussed characteristics; prometheus (tymstra et al.
+29,"2010; forestry canada fire danger group 1992) allows users to input fuel modifiers, such as ‘percent conifer’ for mixedwood forests and stand density for select fuel types."
+29,"output of itam-t can be assessed on a large spatial scale using the proposed workflow, enabling automated fine-scale fuel characterization and supplying decision makers with additional useful information."
+29,conclusion a method is presented for detecting trees from airborne uav imagery.
+29,the method is shown to achieve reasonable accuracy when compared to other methods of individual tree detection.
+29,the algorithm is intended to access information that will improve fire
+30,1876 l.
+30,"bennett et al. fuel models and, subsequently, fire risk assessment or management."
+30,"reducing fuel data collection expenses, particularly site visits, opens new avenues to reduce dangerous fires efficiently and effectively while maintaining forest health."
+30,"the focus of this applica­ tion of deep cnns is to identify trees, tree types, and related variables to extract information that may be valuable in wildfire scenarios."
+30,tree stem density and species can significantly impact the intensity and spread of wildfire (wassihun et al.
+30,"2019; lambert, ung and raulier 2005)."
+30,results show that tree density is reasonably predictable from rgb uav-captured data with an average r2 of 0.90.
+30,"additionally, tree types are well delineated between coniferous and deciduous, which, respectively, have a 98.7% and 81.2% recall when tree locations are known."
+30,"the coniferous-deciduous distinction provides valuable information to tree stand structure and fbp because of differences in fuel models, such as commonly used allometric equations (lambert, ung and raulier 2005)."
+30,a remote preliminary proximity-based hazard assessment demonstrates the utility and limitations of itam-t.
+30,"additional information extracted, such as crown size and tree heights, can be leveraged to inform additional fire-related problems."
+30,"further applications relevant to the field of wildland fire science include, informing community hazard assess­ ments, remote exposure assessments ahead of wildfires, monitoring fuel treatments, and calculation of attributes for fbp modelling."
+30,acknowledgements we acknowledge the support of dr.
+30,"jen beverly of the department of renewable resources at the university of alberta for consulting on wildland fuel considerations, and greg sather and bev wilson at alberta agriculture and forestry for facilitating orthophoto interpretation."
+30,disclosure statement no potential conflict of interest was reported by the author(s).
+30,"funding this research was funded in part by alberta agriculture and forestry through the canadian partnership for wildland fire science, grant agreement number 18grwmb06 orcid b."
+30,wilson http://orcid.org/0000-0002-9419-0209 data availability statement data may be shared upon reasonable request.
+30,surveys conducted within the bounds of provincial test plots may not be available due to standing agreements with the province.
+31,"international journal of remote sensing 1877 references adão, t., j."
+31,"hruška, l."
+31,"pádua, j."
+31,"bessa, e."
+31,"peres, r."
+31,"morais, and j."
+31,sousa.
+31,"“hyperspectral imaging: a review on uav-based sensors, data processing and applications for agriculture and forestry.”"
+31,remote sensing 9 (11): 1110. doi:10.3390/rs9111110.
+31,alberta wildfire.
+31,"“historical wildfire database.” https://wildfire.alberta.ca/resources/historical- data/historical-wildfire-database.aspx beverly, j.l., s.e.r."
+31,"leverkus, h."
+31,"cameron, and d."
+31,schroeder.
+31,“stand-level fuel reduction treatments and fire behaviour in canadian boreal conifer forests.”
+31,fire 3 (3): 35. doi:10.3390/ fire3030035.
+31,"bonnet, s., j."
+31,"lisein, and p."
+31,lejeune.
+31,“comparison of uas photogrammetric products for tree detection and characterization of coniferous stands.”
+31,international journal of remote sensing 38 (19): 5310. doi:10.1080/01431161.2017.1338839.
+31,"braga, g., r."
+31,"josé, v."
+31,"peripato, r."
+31,"dalagnol, m.p."
+31,"ferreira, y."
+31,"tarabalka, l.e.o.c."
+31,"aragão, h.f. de campos velho, e.h."
+31,"shiguemori, and f.h."
+31,wagner.
+31,“tree crown delineation algorithm based on a convolutional neural network.”
+31,remote sensing 12 (8): 1288. doi:10.3390/ rs12081288.
+31,"briechle, s., p."
+31,"krzystek, and g."
+31,vosselman.
+31,“silvi-net – a dual-cnn approach for combined classification of tree species and standing dead trees from remote sensing data.”
+31,international journal of applied earth observation and geoinformation 98 (june): 102292. doi:10.1016/j. jag.2020.102292.
+31,"camarretta, n., p.a."
+31,"harrison, a."
+31,"lucieer, b.m."
+31,"potts, n."
+31,"davidson, and m."
+31,“from drones to phenotype: using uav-lidar to detect species and provenance variation in tree productivity and structure.”
+31,remote sensing 12 (19): 3184. doi:10.3390/rs12193184.
+31,"cameron, h., schroeder, d., beverly, j."
+31,2021 predicting black spruce fuel characteristics with airborne laser scanning (als) .
+31,international journal of wildland fire 31 2 124–135 1049-8001 doi:10.1071/wf21004 . .
+31,"chen, s., d."
+31,"liang, b."
+31,"ying, w."
+31,"zhu, g."
+31,"zhou, and y."
+31,“assessment of an improved individual tree detection method based on local-maximum algorithm from unmanned aerial vehicle rgb imagery in overlapping canopy mountain forests.”
+31,international journal of remote sensing 42 (1): 106. doi:10.1080/01431161.2020.1809024.
+31,"chen, w., h."
+31,"xiang, and k."
+31,moriya.
+31,“individual tree position extraction and structural parameter retrieval based on airborne lidar data: performance evaluation and comparison of four algorithms.”
+31,remote sensing 12 (3): 571. doi:10.3390/rs12030571.
+31,"chen, l.-c., y."
+31,"zhu, g."
+31,"papandreou, f."
+31,"schroff, and h."
+31,“encoder-decoder with atrous separable convolution for semantic image segmentation.”
+31,"in computer vision – eccv 2018, edited by v."
+31,ferrari; m.
+31,hebert; c.
+31,"sminchisescu, and y."
+31,"weiss, 833."
+31,cham: springer international publishing.
+31,"cruz, m.g., m.e."
+31,"alexander, and r.h."
+31,wakimoto.
+31,”corrigendum to: assessing canopy fuel stratum characteristics in crown fire prone fuel types of western north america”.
+31,international journal of wildland fire 19 (1): iii. doi:10.1071/wf02024_co.
+31,"diez, y., s."
+31,"kentsch, m.l."
+31,"lopez caceres, h.-t."
+31,"nguyen, d."
+31,"serrano, and f."
+31,roure.
+31,“comparison of algorithms for tree-top detection in drone image mosaics of japanese mixed forests.”
+31,"in icpram valletta, malta, 75."
+31,"domingo, d., h.o."
+31,"ørka, e."
+31,"næsset, d."
+31,"kachamba, and t."
+31,gobakken.
+31,"“effects of uav image resolution, camera type, and image overlap on accuracy of biomass predictions in a tropical woodland.”"
+31,remote sensing 11 (8): 948. doi:10.3390/rs11080948.
+31,dronedeploy.
+31,“dronedeploy.”
+31,dronedeploy development team.
+31,"egli, s. and m."
+31,höpke.
+31,“cnn-based tree species classification using high resolution rgb image data from automated uav observations.”
+31,remote sensing 12 (23): 3892. doi:10.3390/rs12233892.
+31,"ene, l., e."
+31,"næsset, and t."
+31,gobakken.
+31,“single tree detection in heterogeneous boreal forests using airborne laser scanning and area-based stem number estimates.”
+31,international journal of remote sensing 33 (16): 5171. doi:10.1080/01431161.2012.657363.
+32,1878 l.
+32,bennett et al.
+32,"fan, g., l."
+32,"nan, f."
+32,"chen, y."
+32,"dong, z."
+32,"wang, h."
+32,"li, and d."
+32,“a new quantitative approach to tree attributes estimation based on lidar point clouds.”
+32,remote sensing 12 (11): 1779. doi:10.3390/rs12111779.
+32,"ferreira, m.p., d.r.a. de almeida, d. de almeida papa, j."
+32,"baldez silva minervino, h."
+32,"franklin pessoa veras, a."
+32,"formighieri, c."
+32,"alexandre nascimento santos, m."
+32,"aurélio dantas ferreira, e."
+32,"orfanó figueiredo, and e."
+32,josé linhares ferreira.
+32,“individual tree detection and species classification of amazonian palms using uav images and deep learning.”
+32,forest ecology and management 475 (november): 118397. doi:10.1016/j.foreco.2020.118397.
+32,firesmart canada.
+32,“firesmart home assessment.” https://firesmartcanada.ca/wp-content /uploads/2019/10/fs_home_assessment_final.pdf forestry canada fire danger group.
+32,development and structure of the canadian forest fire behaviour prediction system.
+32,"ottawa, on: forestry canada."
+32,"fricker, g.a., j.d."
+32,"ventura, j.a."
+32,"wolf, m.p."
+32,"north, f.w."
+32,"davis, and j."
+32,franklin.
+32,“a convolutional neural network classifier identifies tree species in mixed-conifer forest from hyperspectral imagery.”
+32,remote sensing 11 (19): 2326. doi:10.3390/rs11192326.
+32,"guzmán, q., j."
+32,"antonio, i."
+32,"sharp, f."
+32,"alencastro, and g.a."
+32,sánchez-azofeifa.
+32,”on the relationship of fractal geometry and tree–stand metrics on point clouds derived from terrestrial laser scanning.”
+32,methods in ecology and evolution 11 (10): 1309.
+32,edited by sydne record. doi10.1111/2041-210x.13437.
+32,"hastie, t. and r."
+32,tibshirani.
+32,the elements of statistical learning second edition.
+32,"new york, ny: the mathematical intelligencer."
+32,"he, k., x."
+32,"zhang, s."
+32,"ren, and j."
+32,“deep residual learning for image recognition.”
+32,"in 2016 ieee conference on computer vision and pattern recognition (cvpr), 770."
+32,ieee. doi:10.1109/ cvpr.2016.90.
+32,"hirsch, k.g."
+32,canadian forest fire behavior prediction (fbp) system: user’s guide.
+32,"7 (edmonton, ab: natural resources canada, canadian forest service, northwest region, northern forestry centre)."
+32,"hosang, j., r."
+32,"benenson, and b."
+32,schiele.
+32,“learning non-maximum suppression.”
+32,"may. http:// arxiv.org/abs/1705.02950 huo, l. and e."
+32,lindberg.
+32,“individual tree detection using template matching of multiple rasters derived from multispectral airborne laser scanning data.”
+32,international journal of remote sensing 41 (24): 9525. doi:10.1080/01431161.2020.1800127.
+32,"immitzer, m., m."
+32,"neuwirth, s."
+32,"böck, h."
+32,"brenner, f."
+32,"vuolo, and c."
+32,atzberger.
+32,“optimal input features for tree species classification in central europe based on multi-temporal sentinel-2 data.”
+32,remote sensing 11 (22): 2599. doi:10.3390/rs11222599.
+32,"kulig, j.c., i."
+32,"townshend, a."
+32,"pujadas botey, and b."
+32,shepard.
+32,"“‘hope is in our hands:’ impacts of the slave lake wildfires in alberta, canada on children.”"
+32,"in assisting young children caught in disasters, 143."
+32,cham: springer international publishing. doi:10.1007/978-3-319-62887-5_14.
+32,"lambert, m.-c., c.-h."
+32,"ung, and f."
+32,raulier.
+32,“canadian national tree aboveground biomass equations.”
+32,canadian journal of forest research 35 (8): 1996. doi:10.1139/x05-112.
+32,"lin, t.-y., p."
+32,"dollár, r."
+32,"girshick, k."
+32,"he, b."
+32,"hariharan, and s."
+32,belongie.
+32,“feature pyramid networks for object detection.”
+32,december.
+32,"lin, t.-y., p."
+32,"goyal, r."
+32,"girshick, k."
+32,"he, and p."
+32,dollár.
+32,“focal loss for dense object detection.”
+32,august.
+32,"lu, b. and y."
+32,“optimal spatial resolution of unmanned aerial vehicle (uav)-acquired imagery for species classification in a heterogeneous grassland ecosystem.”
+32,giscience & remote sensing 55 (2): 205. doi:10.1080/15481603.2017.1408930.
+32,"mamuji, a.a. and j.l."
+32,rozdilsky.
+32,“wildfire as an increasingly common natural disaster facing canada: understanding the 2016 fort mcmurray wildfire.”
+32,natural hazards 98 (1): 163. doi:10.1007/s11069-018-3488-4.
+32,"marcial-pablo de jesús, m., a."
+32,"gonzalez-sanchez, s."
+32,"iván jimenez-jimenez, r."
+32,"ernesto ontiveros- capurata, and w."
+32,ojeda-bustamante.
+32,“estimation of vegetation fraction using rgb and multispectral images from uav.”
+32,international journal of remote sensing 40 (2): 420. doi:10.1080/ 01431161.2018.1528017.
+33,international journal of remote sensing 1879 mnp llp.
+33,spring 2019 wildfire review.
+33,"edmonton, ab: alberta wildfire."
+33,"mohan, m., c."
+33,"silva, c."
+33,"klauberg, p."
+33,"jat, g."
+33,"catts, a."
+33,"cardil, a."
+33,"hudak, and m."
+33,“individual tree detection from unmanned aerial vehicle (uav) derived canopy height model in an open canopy mixed conifer forest.”
+33,forests 8 (9): 340. doi:10.3390/f8090340.
+33,"mubin, n.a., e."
+33,"nadarajoo, h."
+33,"zulhaidi mohd shafri, and a."
+33,hamedianfar.
+33,“young and mature oil palm tree detection and counting using convolutional neural network deep learning method.”
+33,international journal of remote sensing 40 (19): 7500. doi:10.1080/ 01431161.2019.1569282.
+33,"näsi, r., e."
+33,"honkavaara, m."
+33,"blomqvist, p."
+33,"lyytikäinen-saarenmaa, t."
+33,"hakala, n."
+33,"viljanen, t."
+33,"kantola, and m."
+33,holopainen.
+33,“remote sensing of bark beetle damage in urban forests at individual tree level using a novel hyperspectral camera from uav and aircraft.”
+33,urban forestry & urban greening 30 (march): 72. doi:10.1016/j.ufug.2018.01.010.
+33,national regions committee.
+33,“natural regions and subregions of alberta.”
+33,compiled by dj downing and ww pettapiece.
+33,government of alberta.
+33,natural resources canda.
+33,“canadian forest fire behavior prediction (fbp) system.”
+33,"december 16. https://cwfis.cfs.nrcan.gc.ca/background/summary/fbp padilla, r., s.l."
+33,"netto, and e.a.b. da silva."
+33,“a survey on performance metrics for object-detection algorithms.”
+33,"in 2020 international conference on systems, signals and image processing (iwssip), 237."
+33,ieee. doi:10.1109/iwssip48289.2020.9145130.
+33,partners in protection.
+33,firesmart: protecting your community from wildfire.
+33,edmonton ab: natural resources canada.
+33,"piyush, j., s.c.p."
+33,"coogan, s.g."
+33,"subramanian, m."
+33,"crowley, s."
+33,"taylor, and m.d."
+33,flannigan.
+33,a review of machine learning applications in wildfire science and management. doi:10.1139/ er-2020-0019.
+33,public lands and forests division.
+33,permanent sample plot (psp) field procedures manual.
+33,"edmonton, ab: alberta sustainable resource development, public lands and forests division, forest management branch."
+33,"pulido, d., j."
+33,"salas, m."
+33,"rös, k."
+33,"puettmann, and s."
+33,karaman.
+33,“assessment of tree detection methods in multispectral aerial images.”
+33,remote sensing 12 (15): 2379. doi:10.3390/ rs12152379.
+33,"puliti, s., m."
+33,"hauglin, j."
+33,"breidenbach, p."
+33,"montesano, c.s.r."
+33,"neigh, j."
+33,"rahlf, s."
+33,"solberg, t.f."
+33,"klingenberg, and r."
+33,astrup.
+33,“modelling above-ground biomass stock over norway using national forest inventory data with arcticdem and sentinel-2 data.”
+33,remote sensing of environment 236 (january): 111501. doi:10.1016/j.rse.2019.111501.
+33,"santoso, h., h."
+33,"tani, and x."
+33,“a simple method for detection and counting of oil palm trees using high-resolution multispectral satellite imagery.”
+33,international journal of remote sensing 37 (21): 5122. doi:10.1080/01431161.2016.1226527.
+33,"silver, m., a."
+33,"tiwari, and a."
+33,karnieli.
+33,“identifying vegetation in arid regions using object-based image analysis with rgb-only aerial imagery.”
+33,remote sensing 11 (19): 2308. doi:10.3390/ rs11192308.
+33,"simonyan, k. and a."
+33,zisserman.
+33,”very deep convolutional networks for large-scale image recognition.”
+33,"smilkov, d., n."
+33,"thorat, b."
+33,"kim, f."
+33,"viégas, and m."
+33,wattenberg.
+33,"“smoothgrad: removing noise by adding noise,” june. http://arxiv.org/abs/1706.03825 ."
+33,"solvin, t.m., s."
+33,"puliti, and a."
+33,steffenrem.
+33,"“use of uav photogrammetric data in forest genetic trials: measuring tree height, growth, and phenology in norway spruce (picea abies l."
+33,karst.).”
+33,scandinavian journal of forest research 35 (7): 322. doi:10.1080/ 02827581.2020.1806350.
+33,"surový, p. and k."
+33,kuželka.
+33,“acquisition of forest attributes for decision support at the forest enterprise level using remote-sensing techniques—a review.”
+33,forests 10 (3): 273. doi:10.3390/ f10030273.
+33,"tang, l. and g."
+33,“drone remote sensing for forestry research and practices.”
+33,journal of forestry research 26 (4): 791. doi:10.1007/s11676-015-0088-y.
+34,1880 l.
+34,bennett et al.
+34,"tao, h., c."
+34,"li, d."
+34,"zhao, s."
+34,"deng, h."
+34,"hu, x."
+34,"xu, and w."
+34,“deep learning-based dead pine tree detection from unmanned aerial vehicle images.”
+34,international journal of remote sensing 41 (21): 8238. doi:10.1080/01431161.2020.1766145.
+34,"tymstra, c., r.w."
+34,"bryce, b.m."
+34,"wotton, s.w."
+34,"taylor, and o.b."
+34,armitage.
+34,“development and structure of prometheus: the canadian wildland fire growth simulation model.”
+34,"natural resources canada, canadian forest service, northern forestry centre, information report nor- x-417."
+34,"edmonton, ab."
+34,"wang, d., d."
+34,"guan, s."
+34,"zhu, m."
+34,"mac kinnon, g."
+34,"geng, q."
+34,"zhang, h."
+34,"zheng, et al."
+34,”economic footprint of california wildfires in 2018.”
+34,nature sustainability. doi:10.1038/s41893-020-00646-7.
+34,"wang, y., x."
+34,"zhu, and b."
+34,“automatic detection of individual oil palm trees from uav images using hog features and an svm classifier.”
+34,international journal of remote sensing 40 (19): 7356. doi:10.1080/01431161.2018.1513669.
+34,"wassihun, a.n., y.a."
+34,"hussin, l.m."
+34,"van leeuwen, and z.a."
+34,latif.
+34,"“effect of forest stand density on the estimation of above ground biomass/carbon stock using airborne and terrestrial lidar derived tree parameters in tropical rain forest, malaysia.”"
+34,environmental systems research 8 (1): 27. doi:10.1186/s40068-019-0155-z.
+34,"weinstein, b.g., s."
+34,"marconi, s."
+34,"bohlman, a."
+34,"zare, and e."
+34,white.
+34,“individual tree-crown detection in rgb imagery using semi-supervised deep learning neural networks.”
+34,remote sensing 11 (11): 1309. doi:10.3390/rs11111309.
+34,"xiao, c., r."
+34,"qin, x."
+34,"huang, and j."
+34,“a study of using fully convolutional network for treetop detection on remote sensing data.”
+34,"in isprs tc i mid-term symposium “innovative sensing–from sensors to methods and applications”, vols."
+34,"4, 163."
+34,copernicus publications. doi:10.3929/ethz- b-000304447.
+34,"zhao, z.-q., p."
+34,"zheng, x."
+34,"shou-tao, and x."
+34,“object detection with deep learning: a review.”
+34,july. http://arxiv.org/abs/1807.05511 .
+34,"zou, w.-t., w.-s."
+34,"zeng, l.-j."
+34,"zhang, and m."
+34,“modeling crown biomass for four pine species in china.”
+34,forests 6 (12): 433. doi:10.3390/f6020433.

@@ -1,5 +1,5 @@
 ---
-title: "Sample 1000 - summarize with ChatGPT"
+title: "Classifier round 1 - summarize with ChatGPT"
 author: "O'Hara"
 format: 
   html:
@@ -21,7 +21,7 @@ library(httr)
 
 # Summary
 
-The 77 unique documents included from the sample of 1000 (of which 600 were screened in Colandr before stopping) have been imported into Zotero, and the pdfs copied into this repo; full text was extracted from each.  Here we will apply tips from [this blog post to post documents to ChatGPT and ask the LLM to summarize](https://www.r-bloggers.com/2024/03/how-to-scrape-pdf-text-and-summarize-it-with-openai-llms-in-r).
+The 60 unique documents included from the Round 1 classification screening have been imported into Zotero, and the pdfs copied into this repo; full text was extracted from each.  Here we will apply tips from [this blog post to post documents to ChatGPT and ask the LLM to summarize](https://www.r-bloggers.com/2024/03/how-to-scrape-pdf-text-and-summarize-it-with-openai-llms-in-r).
 
 # Data
 
@@ -43,7 +43,7 @@ Full texts were extracted from pdfs using `pdftools`, saved in `_data/5b_sample_
 Note that the `bind_rows()` call seems to reorganize the list elements when forming the dataframe, so once formed, use `txt_df` NOT `files_df` or `csv_fs`.
 
 ```{r}
-files_df <- read_csv(here('_data/5b_sample_1000/int/fulltext_files.csv'))
+files_df <- read_csv(here('_data/5c_classifier_round1/int/fulltext_files.csv'))
 
 csv_fs <- files_df$csv_out
 
@@ -74,7 +74,7 @@ count_tokens <- function(x) {
 }
 
 out_df <- txt_df %>%
-  select(title, author, year) %>%
+  select(title, author, year, key) %>%
   mutate(n_tokens = NA, summary = NA, error = NA, pass = NA)
 
 ```
@@ -82,13 +82,13 @@ out_df <- txt_df %>%
 
 ```{r, message = NA}
 
-out_f <- here('_output/phase2_sample_1000/chatgpt_summary.csv')
+out_f <- here('_output/phase3_classifier/chatgpt_summary.csv')
 
 if(!file.exists(out_f)) {
   
   endpt <- 'https://api.openai.com/v1/chat/completions'
   
-  prompt <- 'Summarize the methods of this paper, particularly methods used to estimate or quantify the societal benefits of satellite or Earth Observation data.'
+  prompt <- 'In 200 words or less, summarize the methods of this paper, focusing on methods used to estimate or quantify the societal benefits of satellite or Earth Observation data.'
   
   ### initialize token count and timer
   cum_tokens <- 0 ### to track tokens

@@ -1,0 +1,822 @@
+page,p
+1,"remote sens. 2015, 7, 12829-12858; doi:10.3390/rs71012829 open access remote sensing issn 2072-4292 www.mdpi.com/journal/remotesensing article a hybrid kernel-based change detection method for remotely sensed data in a similarity space reza shah-hosseini 1, saeid homayouni 2 and abdolreza safari 1,* 1 university college of engineering, school of surveying and geospatial engineering, university of tehran, tehran 11155-4563, iran; e-mail: rshahosseini@ut.ac.ir 2 department of geography, university of ottawa, ottawa, on k1n 6n5, canada; e-mail: saeid.homayouni@uottawa.ca * author to whom correspondence should be addressed; e-mail: asafari@ut.ac.ir; tel.: +98-21-6111-4256; fax: +98-21-8800-8837."
+1,"academic editors: gonzalo pajares martinsanz, parth sarathi roy and prasad s."
+1,thenkabail received: 31 may 2015 / accepted: 17 september 2015 / published: 30 september 2015 abstract: detection of damages caused by natural disasters is a delicate and difficult task due to the time constraints imposed by emergency situations.
+1,"therefore, an automatic change detection (cd) algorithm, with less user interaction, is always very interesting and helpful."
+1,"so far, there is no existing cd approach that is optimal and applicable in the case of (a) labeled samples not existing in the study area; (b) multi-temporal images being corrupted by either noise or non-normalized radiometric differences; (c) difference images having overlapped change and no-change classes that are non-linearly separable from each other."
+1,"also, a low degree of automation is not optimal for real-time cd applications and also one-dimensional representations of classical cd methods hide the useful information in multi-temporal images."
+1,"in order to resolve these problems, two automatic kernel-based cd algorithms (kcd) were proposed based on kernel clustering and support vector data description (svdd) algorithms in high dimensional hilbert space."
+1,"in this paper (a) a new similarity space was proposed in order to increase the separation between change and no-change classes, and also to decrease the processing time, (b) three kernel-based approaches were proposed for transferring the multi-temporal images from spectral space into high dimensional hilbert space, (c) automatic approach was proposed to extract the precise labeled samples; (d) kernel parameter w a s selected automatically by optimizing an improved cost function and (e) initial value of the kernel parameter was estimated by a statistical method based on the l2-norm distance."
+1,two different datasets including
+2,remote sens.
+2,"2015, 7 12830 quickbird and landsat tm/etm+ imageries were used for the accuracy of analysis of proposed methods."
+2,"the comparative analysis showed the accuracy improvements of kernel clustering based cd and svdd based cd methods with respect to the conventional cd techniques such as minimum noise fraction, independent component analysis, spectral angle mapper, simple image differencing and image rationing, and also the computational cost analysis showed that implementation of the proposed cd method in similarity space decreases the processing runtime."
+2,keywords: kernel-based cd; similarity space; hilbert space; remotely sensed data; clustering; one-class classifiers 1.
+2,introduction the analysis of multi-temporal earth observations is essential for change detection (cd) applications [1].
+2,"this process is for identifying the differences in spatial, spectral, and radiometric states of phenomenon by observing it at different times [2]."
+2,"cd is a useful technique for various applications such as land-cover/land-use change analysis, assessment of deforestation, damage assessment, disaster monitoring, and other environmental changes [1]."
+2,"for this purpose, several cd methods have been developed for analyzing and detecting the changed areas from multi-temporal images [3,4]."
+2,it has been generally agreed that change detection is a complicated and integrated process.
+2,"so far, there is no existing approach that is optimal and applicable in the case of (a) labeled samples not existing in the study area; (b) existence of different environmental factors such as atmospheric and light conditions in multi-temporal images; (c) multi-temporal images corrupted by either noise or radiometric differences that cannot be normalized and (d) difference images have overlapped change and no-change classes that are non-linearly separable from each other."
+2,"furthermore, for the time being, the degree of automation is far too low for real-time cd applications."
+2,hence this paper aims to resolve the issues mentioned above.
+2,change detection methods are divided into six categories in the literature: (a) images algebra (b) change vector analysis (cva); (c) image transformation; (d) post-classification comparison (e) direct classification; and (f) hybrid cd [5–7].
+2,"in images algebra method, mathematical operations such as subtraction or division applied to multi-temporal imagery; providing the difference or ratio images [8,9]."
+2,"in cva approach by computing the difference vectors between multi-temporal images, providing both the magnitude and direction of the change [10,11]."
+2,in both images algebra and cva change detection methods digital values of difference pixels or magnitude pixels are numerically compared with a pre-defined threshold to generate the change map.
+2,"these two methods are non-automatic and ineffective, because determining the appropriate threshold becomes a difficult and time-consuming task and can fail in real time applications such as disaster management [12,13]."
+2,"however, image transformation methods are based on mathematical transformation to highlight the variance between images and provide a well-designed approach to handle high dimensional data."
+2,there is no defined thematic meaning the output of this method and changed area may be difficult to locate and interpret [14].
+2,post-classification comparison technique is based on the comparison of multiple classification maps to detect the class transitions between multi-temporal images [15].
+2,"in direct classification method,"
+3,"remote sens. 2015, 7 12831 multi-temporal images are stacked together and then classified directly in order to detect the land cover transition [16]."
+3,"in both classification based methods, labeled samples are essential for training the supervised classifiers."
+3,"nevertheless, preparing of samples for training the classifiers can be a difficult task, especially for a time series of images."
+3,"all classifiers are, in general, sensitive to the noise of pixels in multi-temporal images."
+3,"on the other hand, multi-temporal classification methods are based on linear representations, and do not consider the non-linear cross-information among the pixels in different time [17,18]."
+3,"as a result, the classifier trained with samples coming from different distributions due to differences in atmospheric and light conditions."
+3,"so, classification errors in each of the input maps are directly transformed to the generated change map."
+3,"therefore, they can be inefficient for images corrupted by either noise or radiometric differences that cannot be normalized or, in the case of multi-temporal images, which have spectrally overlapped classes [1,19,20]."
+3,"to address these problems, several strategies have been presented and the approaches considered knowledgeable threshold-based image differencing or ratioing."
+3,bruzzone and prieto [21] propose two unsupervised cd techniques based on the bayes theorem.
+3,the first method is based on an automatic threshold selection that minimizes the overall change detection error probability.
+3,the second method analyzes the difference image by considering the spatial-contextual information included in the neighborhood of each pixel.
+3,the accuracy of the analysis of proposed methods was carried out on two different data sets including landsat 5 tm sensor and the synthetic data.
+3,the experimental results certified the effectiveness of both proposed methods.
+3,molina et al. [22] suggested a multisource cd approach for multi resolution data sets.
+3,"after extraction of various change indices, different thresholding algorithms were applied to these indices."
+3,"the indices are then integrated into a change detection multisource fusion procedure, for generating a final cd map."
+3,this method has been applied to airborne and spaceborne optical imageries with different spectral and spatial resolutions.
+3,the proposed cd algorithm has proven to be efficient with respect to using various spatial resolutions of sensors.
+3,"in some studies, the methods based on a similarity measure extraction and determining a proper threshold are used for automatic change detection."
+3,inglada and mercier [23] presented a new similarity measure for automatic change detection in multi-temporal sar images.
+3,tests on the simulated and real data showed that this detector performs better than all the other methods.
+3,mercier et al. [24] showed how to obtain a binary change map from the similarity measures of the local statistics of images before and after a disaster.
+3,the decision process is achieved by the use of a support vector machines (svm) approach in which a stochastic kernel has been defined.
+3,the results have shown the efficiency of the methods since it yields an appropriate binary change map for multi-sensor change detection.
+3,"however, this was demonstrated to be inefficient based on the reasons stated earlier in the case real-time cd problems."
+3,"on the other hand, change detection can be viewed as a particular case of the multi-temporal image classification problem."
+3,pajares [25] proposed an automatic method based on the hopfield neural network (hnn) for image change detection.
+3,each pixel in the difference image is a node in the hnn.
+3,"this method, unlike classical methods [21,26], uses the performance of contextual and self-data information by integrating the data and contextual information under the form of an energy function."
+3,the self-data information minimizes the errors derived from incorrect decisions taken by the neighbors of a pixel.
+3,the experimental results showed that the proposed method has proven to be robust against noise as compared with the classical methods.
+3,"nevertheless, the main disadvantage of the hnn method"
+4,"remote sens. 2015, 7 12832 originates from its high time consuming process."
+4,"this approach, however, inherits all the aforementioned problems of the classification-based cd scenario."
+4,it is only recently that authors have turned to kernel-based cd methods for change detection applications [12].
+4,guorui et al. [27] proposed a distance-based kernel change detection algorithm (dkcd).
+4,the multi-temporal images are mapped into a feature space via nonlinear mapping.
+4,"then, a simple distance measure between two feature vectors defined in feature space."
+4,their results proved a reliable performance with respect to the speed and accuracy of change detection mapping.
+4,camps-valls et al. [28] present a kernel-based method based on support vector domain description (svdd) classifier for change detection of remote sensing images.
+4,good performance of the proposed method illustrates the generality of the algorithms.
+4,volpi et al. [17] have presented an unsupervised clustering method based on an svm classifier to find the changes in multi-temporal co-registered images.
+4,two change detection schemes were adapted for very high resolution optical imagery (vhr): multi-date classification and difference image analysis.
+4,experiments on vhr images proved the reliability of the proposed approach.
+4,in kernel-based methodologies kernel-based discrimination amongst the classes of interest can be enhanced by using the nonlinear decision function and better results will be achieved.
+4,"these types of decision functions are locally linear, but in general have a complex shape that is not equivalent to a line in 2d or a hyperplane in higher dimensions [29]."
+4,the main idea of kernel methods is based on the fact that the nonlinear decision function can be obtained by running a linear algorithm in a higher dimensional reproducing kernel hilbert space (rkhs).
+4,"in classification of multi-temporal remotely-sensed data, a linear decision function is clearly not sophisticated."
+4,the traditional classification approaches solve these problems by using more sophisticated distributions in modelling the optimal bayes classifier.
+4,"but, these methods are computationally more expensive."
+4,an efficient method in this field is the kernel concept which was originally applied in support vector machines technique.
+4,the linear decision function in the kernel space corresponds to a forceful nonlinear decision function in the spectral space [12].
+4,the mapping to that space is implicitly defined by kernel functions replacing dot products in the original formulation in spectral space [2].
+4,"in the change detection problem, these kernel methods allow modeling the nonlinear nature of the change [30]."
+4,"however, none of these methods considers the cross relations between multi-temporal images in the classifier."
+4,"also, these non-automatic kernel-based methods require labeled samples for training a classifier, and as a result, they are still inefficient in real-time cd applications."
+4,"in hybrid cd method, multiple comparison methods within a framework were used."
+4,"the most commonly used strategy is a combination of images algebra and direct classification methods for the detection and classifying the changes [31,32]."
+4,this strategy was used in this paper for developing the proposed cd method.
+4,"due to attending to the previously identified problems, in this paper, a hybrid kernel-based change detection method was proposed in a similarity space which has demonstrated good results in image change detection problems with few labeled training samples in high dimensional spaces."
+4,this proposed method used all single and cross information between the multi-temporal images bands and presents a nonlinear solution in hilbert space for the change detection problem.
+4,"this leads to a strong decrease in the false alarm rate (classifying a background pixel as a change class), and a slight accuracy improvement in the generated change map."
+4,"meanwhile, the initialization of proposed algorithm was addressed automatically by finding a threshold on change vector magnitude distribution."
+5,remote sens.
+5,"2015, 7 12833 in parallel with the proposed kernel-based cd algorithm, an svdd-based change detection method was presented and analyzed."
+5,"these methods were applied on landsat tm/etm+ and quickbird multi-spectral imageries for mapping and estimating the deforestation and damaged areas caused by human activity and natural disasters, respectively."
+5,this proposed kernel-based cd method uses three approaches for mapping the data from the spectral space into higher dimensional hilbert space.
+5,"the first is based on the difference image in the spectral space, which is named as dfss (differential in spectral space)."
+5,"in the second approach, to provide the most discriminative information, a mapping function is developed to compute the difference image in hilbert space, i.e., differential in hilbert space (dfhs)."
+5,"finally, in the third approach, multi-temporal images are stacked together in spectral space and then transformed into hilbert space, namely as heaped in spectral space (heap-spc)."
+5,"in hilbert space, the complicated and nonlinear relationship between the data could be modeled linearly."
+5,"by using a similarity space, the separation between change and no-change classes increased and time of the process decreased."
+5,"in a particular case, the multi-temporal data are transformed into a spectral distance-angle-correlation-spectral value (sdacv) space [33]."
+5,"in order to determine the threshold and extract the precise training samples, a method based on integration of a change vector analysis (cva) technique and kernel-based k-means clustering algorithm was proposed."
+5,"on the other hand, proper kernel parameters of the proposed kernel-based methods were determined by using a developed cost function based on geometric and spectral similarity criteria."
+5,this precise training set was used for training the kernel-based minimum distance (kmd) and the support vector data description (svdd) classifiers.
+5,methodology 2.1.
+5,"proposed framework proposed kernel-based cd framework refers to several proposed stages, including: (a) pre-processing step; (b) similarity space and hilbert space transformations; (c) pseudo training samples extraction; (d) parameter estimation of kernel-based cd methods; (e) kernel-based cd method and (f) svdd based cd method."
+5,the flowchart of proposed method for automatic detection of changes is presented in figure 1.
+5,"as it can be seen, our focus in this paper illustrated as highlighted stages in block diagram."
+5,"in the first step of implementation, the geometric and the radiometric preprocessing are performed on the multi-temporal images."
+5,then the multi-temporal images are co-registered manually to each other.
+5,cloudiness of the study area in the quickbird dataset is symmetrically masked.
+5,"in the second step, the multi-temporal images are transformed into a similarity space."
+5,"to this end, a reference vector is needed to measure the similarity of all the pixels in the multi-temporal images."
+5,"since the objective of proposed algorithm is mapping the changes, the reference vector of change class was used."
+5,"after extracting the precise training data, the mean of precise changed training samples was calculated in order to achieve the reference change vector."
+5,"then, using the equations (13)–(16) and the reference vector from the previous step, all pixels of the image are transformed into the similarity space."
+5,"in this paper, the multi-spectral data are transformed to similarity spaces using spectral distance-angle-correlation-spectral value (sdacv) features [34]."
+6,remote sens.
+6,"2015, 7 12834 figure 1."
+6,block diagram of proposed hybrid kernel-based change detection algorithm.
+6,"in the next step, for transferring the multi-temporal images into hilbert space, three approaches between the corresponding bands were performed in hilbert space."
+6,"the first approach accounts for the difference image in the similarity space, which is named as dfss-sim (differential in similarity space)."
+7,remote sens.
+7,"2015, 7 12835 in this method, the multi-temporal images are first transferred into similarity space and then subtracted in a pixel-by-pixel method to obtain the difference image, i.e., d   d ."
+7,"the difference pixels are then mapped to the hilbert space as φ(x) = φ(xd), resulting in the kernel function k(xid, xjd) = φ(xid), φ(xjd)."
+7,"in the second approach, to provide the most discriminative information, a mapping function is developed to compute the difference image in hilbert space which is named dfhs."
+7,"for a given pixel, the rkhs feature map φ(.) corresponding to the difference pixel can be defined as:     φ  x i   η  t  φ x i t   η  t  φ x i t  ."
+7,"expanding the dot product and exploiting mercer’s conditions, the 2 2 1 1 corresponding kernel function is obtained [12,35]:        k  x i , x j   φ  x i  , φ  x j   k x i t 2  , x j t 2   k x i t1  , x j t1   k x i t 2  , x j t1   k x i t1  , x j t 2   (1) in the third approach, before and after images are stacked together before and after in spectral space and then transformed into hilbert space, which is named as heap-spc."
+7,the main issue of the automatic change detection algorithms is to find a proper initialization allowing the method to converge to a global minimum.
+7,"for this reason, in the next step, by analyzing the components of a change vector and setting an appropriate threshold, pseudo training samples are created for the change and no-change classes."
+7,these sample data are being used for determining the imprecise initial set of kernel k-means clustering parameters and training the svdd-based change detection method [17].
+7,"then, the precise training samples and kernel k-means parameters are automatically estimated by optimizing a cost function with the nature of geometrical and spectral similarity in kernel space."
+7,these samples are used as training data for training of kmd classifiers.
+7,"after the training stage of kmd classifier and svdd-based change detection method and optimization of its parameters, each pixel entered into a proposed methods and the class of each pixel is determined."
+7,the output of this step is the change map.
+7,"in dfhs approach, the difference kernel needs the estimation of the corresponding kernel parameters, e.g., two bandwidths when using two rbf kernels corresponding to two kernels in equation (17)."
+7,"in this paper, a search among two parameters θ = {σsingle, σcross} with respect to k  x i t , x j t  and k  x i t , x j t  is i i i j performed [35]."
+7,"to solve this problem, a new method to estimate the initial value of the rbf kernel parameter in the change detection problem was employed."
+7,this method is based on a statistical technique and uses the l2 distance norm.
+7,"in this new method, in the first step, two sets of spectral vectors within the first image are elected randomly."
+7,"in the next step, euclidean distance between two spectral vectors in the first image is computed and the median of this distance is selected [33]."
+7,the same process is performed for the second image.
+7,"finally, the average of the two distances, obtained from multi-temporal images, is considered as the initial estimation of rbf kernel parameter."
+7,"in the next step, a change interval is considered with respect to the initial value, so that this value is in the center of a change interval."
+7,"these ranges can be used in the grid search method to select the precise rbf kernel parameter [33,36]."
+7,this new method leads to a faster convergence of grid-searching technique for selecting the global optimum rbf kernel parameter.
+7,"thresholding scheme the main issue of proposed kernel-based cd algorithms is to find a proper threshold allowing the method to extract two pseudo training samples with high probability rate, belonging to change and no-change classes."
+7,"in order to estimate the change and no-change class distributions, the magnitude of spectral"
+8,"remote sens. 2015, 7 12836 change vector was calculated."
+8,this distribution can be seen as a mixture of two gaussian models regarding change and no-change pixels.
+8,"in the next step, by analyzing the magnitude of a change vector and setting an appropriate threshold, the pseudo training samples were created for change and no-change classes [17]."
+8,"in this paper, the proper threshold was determined by fitting a gaussian function to change the vector magnitude’s distribution of multi-temporal images."
+8,the mean and variance values of gaussian function were estimated and used as a threshold.
+8,the extracted pseudo training samples were then used for determining the imprecise initial set of kernel clustering algorithm parameters such as cluster center.
+8,kernel k-means clustering the kernel k-means clustering algorithm (kkmc) rewriting the linear k-means in rkhs (reproducing kernel hilbert space) by means of mapping functions φ(.).
+8,"the mapping to that space is implicitly defined by the kernel functions replacing the dot products in the original formulation, which only needs input samples in their spectral space."
+8,"since the k-means formulation can be expressed solely in the terms of dot products, kernel functions can replace these expressions."
+8,this helps the value of the dot product to return directly to the rkhs [35].
+8,"let x = {a1, a2, a3, ..., an} be the set of data points and “c” the number of clusters."
+8,in the first step “c” cluster centers are randomly initialized.
+8,"the kernel k-means algorithm is formulated as the minimization of the sum of the squares of distances between mapped samples and their mean: k d  φ  x  ,μ    φ  x i   μ q 2  (2) q 1 iπ q where μq denotes the mean of the cluster q and   x    q is the mapped samples in the rkhs."
+8,"by replacing  q  nq1  j   x j  and applying the kernel substitution, equation (2) becomes: q 2 1 d φ  x  , μ   k  xi , xi    k xi , x j   2  k x j, xl  (3) n q j π q n q j,lπ q where nq is the number of samples is assigned to the cluster q."
+8,"the position of cluster centers, are approximated by considering the closest samples to the center xc  arg min xi d    xi  ,  q  ."
+8,"after determining the clustering parameters, each data point assign to that cluster center whose distance is minimum [37]."
+8,"support vector data description in parallel with the proposed algorithm, another method based on support vector data description (svdd) was presented and analyzed."
+8,"after extracting the pseudo training samples of change and no-change regions, these samples are used to train the svdd classifier."
+8,now assuming a dataset xi i1 n belongs to a given class of interest.
+8,"the objective here is to find a hyper-sphere in a high dimensional hilbert space of radius r > 0 and center a, with a minimum volume containing most of these data points [28,38] (see figure 2)."
+9,remote sens.
+9,"2015, 7 12837 figure 2."
+9,schematic diagram of support vector data description.
+9,the hyper-sphere is described by the center a and radius r [39].
+9,"2 therefore one has to minimize r2 constrained to ( xi )  a  r 2 , i  1,..., n ."
+9,"however, since the training distribution may contain outliers; one introduces a set of slack variables i  0 and the problem then becomes [28]:   min  r2  c  i  (4) r ,a  i  constrained to 2 ( xi )  a  r 2  i , i  0, i  1,..., n (5) where the parameter c controls the trade-off between the volume of the hyper-sphere and the acceptable errors (penalty parameter)."
+9,"the dual functional now becomes [28,38]:   max    i ( xi ), ( xi )    i  j ( xi ), ( x j )  (6) i  i i, j  subject again to 0 i  c this constitutes a quadratic programming problem that yields a set of i fulfilling that (i) if ( xi )  a  r 2 then i  0 (ii) if ( xi )  a  r 2 then 0 i  c , and (iii) if 2 2 ( xi )  a  r 2 then i  c as a result, support vectors (sv) are those satisfying i  0 , while 2 samples whose associated i  c are considered outliers."
+9,"an equivalent formulation was proposed, in which one places a hyper-plane that separates the data from the origin with maximum margin (figure 2)."
+9,"in this case the problem reduces to [28,38]: 1 2 1  min  w    w , ,  2  i   i  i  1,..., n (7)  constrained to ξi ≥ 0 and where ν ∈ (0,1] is a regularization parameter (c) controlling the trade-off between accepting data into the class and having w small."
+9,"introducing again lagrange multipliers we reach the (equivalent) dual problem [28,38]: 1  1  min    i  j  ( xi ),  ( x j )   min    i  j k ( xi , x j )  (8) i  2 i , j    2 i , j  1 subject to 0  i  and i  1, which, once again is a quadratic programming problem.  i"
+10,remote sens.
+10,"2015, 7 12838 2.5."
+10,"kernel minimum distance classifier after determining the cluster centers and optimizing the algorithm parameters, accurate training samples of change and no-change classes can be extracted."
+10,"at this stage, training samples are used to train a kernel-based minimum distance classifier (kmd) for separating the two classes of interest."
+10,kmd classifier discrimination functions are defined based on a kernel-based distance measure.
+10,"given a data set s  x1,,xl  sampled from the input space x, a kernel k(x,y) and a function φ in a feature space satisfy k  x, y   φ  x  φ  y  ."
+10,the main advantage of the kernels is that they can be directly created t in the original input space without knowing the actual form of φ [40].
+10,"there are several typical kernels, x  y2 e.g. the radial base function (rbf) kernel k  x, y  exp( ) , the polynomial kernel 2σ2 k  x , y    x t y  1  , etc."
+10,"the kernel-based distance measure between two points defined by a kernel k, d can be estimated using equation (9) [40]: d 2  x, y   φ  x   φ  y   k  x, x   2k  x, y   k  y, y  2 (9) suppose the training data set s contains c different classes, i.e., s1, s2 ,...,sc and each class of si has c li samples, satisfying the li  l ."
+10,"let φ s i   φ  x j  |x j  s i  be the image of class si under the map i1 φ, and denote the center of φ si  as [40]: 1 φ si   φ(x j ) li x jsi (10) then, the distance between the transferred point x in rkhs φ  x  and the center of class φ  si  can be computed as [40]: d 2  φ  x  , φ  si    φ  x   φ  si   φ t  x  φ  x   φ sti φ si  2φ t  x  φ si  2 1 2 (11) k  x, x   2  k(x j , x k )   k(x, x j ) li x j ,x k si li x jsi according to equation (11), the classification rule in kmd is to assign the new point x to the class with the smallest distance [40]:   h  x   arg min 1 i  c d 2 (φ  x  , φ si ) (12) 2.6."
+10,"similarity space transformation the spectral pattern recognition techniques could characterize the properties of any phenomenon by using inter-band information and defining the spectral similarity measures [33,34]."
+10,"deterministic similarity measures were used to project the multispectral data into a new similarity space with minimum knowledge (e.g., the spectral mean vector) about classes of interest [41]."
+10,"in this new space, the pixels corresponding to any class will obtain similar values [42]."
+10,"in addition to low computational requirements, they could minimize some undesirable physical effects including noises, illumination, and"
+11,"remote sens. 2015, 7 12839 topographic variation on intra-band spectral data [34,43]."
+11,"spectral angle, distance, and correlation values have been used for material mapping by using spectral matching techniques [44]."
+11,the spectral similarity functions map the original reflectance or radiance data into a new space for a specific class of interest [33].
+11,"in this paper, the multi-spectral data are transformed into the similarity spaces using several measures such as spectral distance-angl-correlatio-value (sdacv) (figure 3) [34]."
+11,figure 3.
+11,spectral angle (θ) and distance similarity measures (d).
+11,vector di and q represent the value of bi-temporal pair of images and reference change vector respectively.
+11,"l dist  x, μ ch   (x  μ ) i 1 i ch i 2 (13)  x.μch  angle  cos1   (14)  x μch  where dist and angle are the spectral distance and angle between any multi-temporal pixel x and the mean vector μch of change classes [33,34]. 1   i 1(x i  μ x )(μ ch i  μ ch )  l corr  (15) l 1  σ x σ μ ch    spec _ value  (dist 2  (1  corr) 2 (16) where corr and spec_value are the correlation and spectral value between any multi-temporal pixel x and the mean vector uch of change classes."
+11,"in equations (13) and (15), l is number of multi-temporal image bands."
+11,"improved kernel parameter selection for almost all kernel-based algorithms, the selection of the parameters plays an essential role in the efficiency of algorithm."
+11,"in this paper, the kernel k-means clustering the kernel parameters are tuned automatically by optimizing a criterion with the nature of geometrical and similarity in hilbert space."
+11,"the geometrical part of this criterion, tries to cluster the multi-temporal image with an optimal geometrical configuration."
+11,"to achieve this purpose, the difference between the average cluster distance and the centers in the feature space is minimized and used as a geometrical criterion [17,45]."
+11,"moreover,"
+12,"remote sens. 2015, 7 12840 the similarity part of the criterion is minimizing the resemblance between the clusters."
+12,both of these geometrical and similarity parts of the criterion are combined linearly with c1 and c2 coefficients.
+12,these parameters are determined during the optimization process.
+12,these developed criterion lead to an optimal selection of kernel parameters.
+12,"the set of retained kernel parameters θ°pt is: θopt  arg min c1  g  c2  s (17) 1 k  g   d  φ  x i  ,μ q    d(μ q ,μ l )  (18)  n q 1 iπq πq  πl      2     i πq  φ  x i   μ q  φ  x j   μ l     1  1  j π l     n 1      σqσl    s      (19) 2    d φ  xi  , φ  x j   2   i π q     j π l  in equation (17), g and s are the geometrical and similarity parts of proposed cost function."
+12,to estimate this quantity; the kernel k-means is wrapped on the given pseudo-training set by varying c1; c2; θ.
+12,"the parameters minimizing the equation (17); are used as optimum kernel parameter in kernel clustering algorithm; by assigning an unknown pixel x’ to the cluster whose centroid satisfies arg min xc d(φ  x ,φ  xc ) ."
+12,this can be seen as a nonlinear minimum distance classification [45].
+12,a great number of kernel functions exist and it is difficult to explain their individual characteristics.
+12,as shown in [46] two kinds of kernels may be defined: (1) local kernels.
+12,"in this kernel type, only the data that are close or in the proximity of each others have an influence on the kernel values."
+12,"basically, all kernels that are based on a distance function are local kernels."
+12,"examples of typical local kernels are: radial basis, kmod, and inverse multi-quadric."
+12," radial basis function: k  x, x '  exp g x  x ' 2   1  kmod: k  x, x '  exp  1  1 x  x '  (20)   1 inverse multiquadratic: k  x, x '  exp    2   x  x ' 1  (2) global kernels."
+12,"in this kernel type, samples that are far away from each other still have an influence on the kernel value."
+12,"all kernels based on the dot-product are global: linear: k  x, x '  x.x ' polynomial:k  x, x '    x.x ' 1 p (20) sigmodi : k  x, x '  tanh  x.x ' 1"
+13,remote sens.
+13,"2015, 7 12841 in this paper we used linear, polynomial, rbf, and sigmoid functions as kernels in proposed kernel-based change detection methods."
+13,different kernels can be used to accommodate the wide-range of nonlinearities that may occur in the various datasets.
+13,"therefore, according to the complexity of the remote sensing datasets, an optimal kernel selection process must be carried out."
+13,"typically, this selection process could be done by optimizing a certain cost function related to an issue that must be resolved in remote sensing applications."
+13,"as stated earlier, in this paper we used an improved cost function with the nature of geometrical and similarity in hilbert space for extracting the optimum kernel types and kernel parameters."
+13,experiments 3.1.
+13,"remote sensing data in order to assess the effectiveness of the proposed approach, we considered two different data sets made up of multi-temporal-multispectral images acquired by the landsat tm/etm+ and quickbird imageries."
+13,"the first dataset refers to an area in prince george area in northern british columbia, canada, whereas the second one concerns a coastal area of sumatra, indonesia."
+13,figure 4.
+13,"true color images acquired by landsat satellite over the prince george area in northern british columbia (a), before (b) and after (c) the logging activities on 1990 and 1999, respectively [47]."
+14,remote sens.
+14,"2015, 7 12842 in the first dataset, the logging activities in 1990 occurred in prince george area in northern british columbia, canada causing environmental damage in this region."
+14,"in order to perform our change detection process and extract the deforestation areas, the landsat imagery are used in two time periods; before and after the logging."
+14,"the images have been acquired in 1990 and 1999 by landsat-5 tm and landsat-7 etm+, respectively."
+14,this multi-date images have 30 m spatial resolution and seven spectral bands.
+14,the true color images of before and after the logging activities are shown in figure 4.
+14,"in the second dataset, the 2004 indian ocean earthquake was an undersea mega thrust earthquake that occurred at 00:58:53 utc on sunday, 26 december 2004, with an epicentre off the west coast of sumatra, indonesia [48]."
+14,it was one of the deadliest natural disasters recorded in history [14].
+14,"to extract the destroyed areas affected by tsunami in coastal area, the quickbird imagery are used in two time periods; before and after the tsunami."
+14,the images have been acquired in december 2004 and january 2005 respectively.
+14,"this multi-date images have 2.5 m spatial resolution and four spectral bands of red, blue, green, and near-infrared."
+14,the true color images of before and after the tsunami are shown in figure 5.
+14,figure 5.
+14,"true color images acquired by quickbird satellite over indonesia (a), before and after the tsunami on april 2004 (b) and january 2005 (c) [49]."
+15,remote sens.
+15,"2015, 7 12843 one of the main reasons for using these two data sets is that, in both of them, due to the occurrence of natural or planned disaster, a change has been created in the natural environment."
+15,"also, the purpose of this paper is to provide an efficient and accurate method to monitor the environmental changes using each type of remotely-sensed data."
+15,"experimental results to evaluate the efficiency of the proposed method, various assessments are carried out: (1) accuracy analysis of heap-spc approach using the proposed kernel-based algorithm in spectral space; (2) a comparative evaluation of two methods for calculating the difference image such as dfss-sim and dfhs-sim approaches in similarity space; (3) sensitivity analysis of proposed kernel-based method with respect to kernels’ types and their parameters; (4) a comparative analysis between the proposed kernel-based change detection method and svdd-based change detection method; (5) evaluation of usefulness of the similarity space versus spectral space for implementing the proposed kernel-based change detection algorithm; and (6) computational cost and accuracy analysis of proposed methods against the conventional change detection methods, namely, the mnf (minimum noise fraction) change detection method, the ica (independent component analysis) based change detection method, sam (spectral angle mapper), image subtraction change detection, and image rationing change detection methods."
+15,"in proposed kernel-based change detection algorithm and svdd-based change detection method, the range of kernel parameters is as follows: (1) rbf kernel and sigmoid kernel bandwidth variation ranges are (0.1, 5) with the rate of change 0.1; (2) the degree of polynomial kernel variation range is (0, 5) with the rate of change 1 and (3) single-time and cross-time kernel parameters variation interval used in dfhs approach, are considered (0, 5) with a change rate value of 0.1 at each step."
+15,all the change intervals used in the grid search method done by automatic statistical method using l2-norm distance to estimate the optimal parameters for this interval.
+15,"to evaluate the proposed algorithm, the test data have been extracted from the images by visually comparing the multi-temporal images."
+15,"in quickbird and landsat data sets, the number of test samples for change class was 4959 and 4727 pixels and for no-change class was 3343 and 4575 pixels, respectively."
+15,these samples are selected such that they spread over the entire area that the effects of sun angle and topography should be carefully considered in the analysis.
+15,two criteria based on kappa coefficient of agreement and overall accuracy (oa) were used for quantitative accuracy analysis of the results.
+15,3.2.1.
+15,"proposed kernel-based cd method in this section, the proposed kernel-based cd method with two differencing approaches (dfss-sim and dfhs-sim) are implemented and analyzed on quickbird and landsat data sets."
+15,"in the first step, all pixels of the images are transferred into the similarity space."
+15,"then, difference images were calculated via dfss-sim and dfhs-sim approach."
+15,"in the next step, the difference images are used as input to the kernel k-means clustering algorithm."
+15,"then, after the selection of optimum parameters, a clustering algorithm is used to extract the precise training set."
+15,these samples are used for training the kmd classifier.
+15,the kmd classifier is then employed to separate the change and no-change pixels.
+15,the accuracy evaluation of proposed cd method in both data sets using dfss-sim and dfhs-sim differencing approach are presented in table 1.
+16,remote sens.
+16,"2015, 7 12844 table 1."
+16,the accuracy analysis of proposed cd method using dfss-sim and dfhs-sim approaches.
+16,"input bands dfss-sim dfhs-sim kernel classifier quickbird landsat quickbird landsat quickbird landsat type kappa oa kappa oa kappa oa kappa oa kmd sdacv sdacv linear 0.85 90.47 0.89 95.38 0.86 90.62 0.90 96.74 kmd sdacv sdacv polynomial 0.68 71.44 0.71 76.49 0.70 73.63 0.73 78.29 kmd sdacv sdacv rbf 0.90 94.39 0.89 95.67 0.74 78.21 0.82 87.64 kmd sdacv sdacv sigmoid 0.87 91.81 0.79 85.27 0.68 71.60 0.88 94.58 for quickbird dataset, the accuracy analysis of dfss-sim approach showed that, the best results were obtained by using the dfss-sim–rbf scenario (average improvement of ~4% in kappa coefficient), which is closely followed by the dfss-sim-linear and dfss-sim-sigmoid scenarios."
+16,"however, the dfss-sim-polynomial scenario did not provide sufficient accuracy."
+16,"for landsat dataset, dfss-sim-linear and dfss-sim-rbf approaches indicated the same result with a higher accuracy (average improvement of ~14% in kappa coefficient) than dfss-sim-polynomial and dfss-sim-sigmoid approaches (table 1)."
+16,"once again, the rbf kernel yielded higher accuracy than the linear, polynomial and sigmoid kernels."
+16,"it seems that, when the dfss-sim approach is used to calculate the differential image, the separation function between change and no-change classes is similar to a gaussian function."
+16,"so in this case, it is convenient to use an rbf kernel."
+16,"the accuracy analysis of dfhs-sim approach showed that, for quickbird dataset, the best results were obtained by using the dfhs-sim-linear approach (average improvement of ~15% in kappa coefficient) with respect to dfhs-sim-rbf, dfhs-sim-polynomial, and dfhs-sim-sigmoid approaches."
+16,"also, for landsat dataset, the best results were obtained by using the dfhs-sim-linear approach (average improvement of ~15% in kappa coefficient) which is closely followed by the dfhs-sim-sigmoid and dfhs-sim-rbf approaches."
+16,"however, dfhs-sim–polynomial scenario did not provide sufficient accuracy."
+16,"the results showed that, linear kernel yielded higher accuracy than the rbf, polynomial, and sigmoid kernels."
+16,"it seems that, when the dfhs-sim method is used to calculate the differential image, the separation function between change and no-change classes is similar to a linear function."
+16,"thus in this case, it is convenient to use a linear kernel."
+16,"however, for quickbird dataset, it can be noted that, the dfhs-sim scenario (average improvement of ~1.5% in kappa coefficient) performed slightly better than the dfss-sim scenario in the case of linear and polynomial kernels, but in the case of rbf and sigmoid kernel, dfss-sim scenario has a higher accuracy (average improvement of ~17.5% in kappa coefficient) than dfhs-sim scenario."
+16,"for landsat dataset, it can be noted that, the dfhs-sim scenario (average improvement of ~4% in kappa coefficient) performed slightly better than the dfss-sim scenario in almost all the cases except rbf kernel."
+16,"although, oa and kappa measurements were unbalanced, suggesting that high values of false detections were produced."
+16,"consequently, for quickbird dataset and in the case of using polynomial kernel, it is better that first, multi-temporal images are transferred to the hilbert space, then these images are subtracted pixel-by-pixel from each other, in order to obtain the difference image."
+16,"but in the case of using sigmoid kernel, it is better to use the dfss-sim approach to obtain the final difference image."
+16,"but, for landsat dataset and in the case of using polynomial and sigmoid kernels, it is better that,"
+17,"remote sens. 2015, 7 12845 multi-temporal images are first transferred into the hilbert space."
+17,"these images, are then subtracted pixel-by-pixel in order to obtain the difference image."
+17,"but in the case of using rbf kernel, it is better to use the dfss-sim approach for obtaining the final difference image."
+17,"in heap-spc approach, before and after images are stacked together and transformed into hilbert space."
+17,"to increase the accuracy of the final change maps, in addition to the original bands, some features and spectral indexes were extracted from quickbird and landsat data sets."
+17,"in the case of quickbird dataset, some features based on the co-occurrence matrix of all the bands in each of the multi-temporal images are extracted."
+17,"since, both study areas include vegetation cover, the ndvi index is therefore helpful for separation of two classes of interest."
+17,"then, a filter-based feature selection method (correlation analysis between bands) is used to select the optimal features."
+17,"finally, the best selected features for quickbird data sets are bands 1, 2, 3, and 4, the mean and variance of band 1 and ndvi."
+17,"in the case of landsat dataset, the best selected features are bands 1, 3, 4, 5, 7, and ndvi."
+17,the accuracy evaluation of the proposed cd method in both data sets using heap-spc approach are presented in table 2.
+17,table 2.
+17,the accuracy analysis of proposed cd method using heap-spc approach.
+17,input bands heap-spc classifier kernel type quickbird landsat quickbird landsat kappa o.a.
+17,kappa o.a.
+17,"bands 1,2,3,4, bands 1,3,4,5,7 kmd linear 0.90 94.89 0.78 83.63 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 kmd polynomial 0.83 87.32 0.80 86.12 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 kmd rbf 0.92 96.73 0.77 83.14 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 kmd sigmoid 0.81 85.47 0.70 75.40 µ_b1, σ_b1, ndvi ndvi the accuracy analysis of heap-spc approach showed that, for quickbird dataset, the best results were obtained by using the heap-spc–rbf scenario (average improvement of ~7% in kappa coefficient), which is closely followed by the heap-spc-linear, heap-spc-polynomial and heap-spc-sigmoid approaches."
+17,"therefore, rbf kernel yielded higher accuracy than the linear, polynomial, and sigmoid kernels."
+17,"it seems that, in this case, when the heap-spc approach is used to transfer the multi-temporal image to hilbert space, the separation function between change and no-change classes is similar to a gaussian function."
+17,"so in this case, it is convenient to use an rbf kernel."
+17,"but, for landsat dataset, the best results were achieved by using the heap-spc-polynomial scenario (average improvement of ~5% in kappa coefficient), which is closely followed by the heap-spc-linear, heap-spc-rbf and heap-spc-sigmoid approaches."
+17,"so, polynomial kernel yielded higher accuracy than the linear, rbf, and sigmoid kernels."
+17,"it seems that, in this case, when the heap-spc approach used to transfer the multi-temporal image to hilbert space, the separation function between change and no-change classes is similar to a gaussian function."
+17,"so in this case, it is convenient to use a rbf kernel."
+17,"by comparing the results showed in tables 1 and 2, it can be noted that, for quickbird datasets, heap-spc approach (average improvement of ~7% in kappa coefficient) performed slightly better than the dfss-sim scenario in almost all the cases except the sigmoid kernel."
+17,"but, heap-spc approach (average improvement of ~12% in kappa coefficient) performed better than the dfhs-sim scenario in"
+18,"remote sens. 2015, 7 12846 the case of all kernel types."
+18,"for landsat dataset, dfss-sim and dfhs-sim approaches (average improvement of ~11% and 12% in kappa coefficient) performed better than the heap-spc scenario in almost all the cases except the polynomial kernel, respectively."
+18,"it can be concluded that, for landsat datasets, implementation of proposed cd method in similarity space has provided better results than spectral space."
+18,3.2.2.
+18,"proposed svdd-based cd method in this method, each of the multi-temporal images are transferred to the hilbert space by using kernel functions."
+18,then these transferred multi-temporal images stacked together in a higher dimensional space and used as input to the svdd-based cd algorithm.
+18,"by using the pseudo training samples obtained from clustering algorithm, the svdd-based cd method was trained."
+18,"in the next step, grid-searching and cross validation method was used for selecting the best svdd parameters."
+18,"finally, svdd-based discrimination function is used to separate the change and no-change pixels."
+18,the accuracy evaluation of the proposed svdd-based cd method is presented in table 3.
+18,table 3.
+18,the accuracy analysis of proposed svdd-based cd method.
+18,input bands quickbird landsat cd method kernel type quickbird landsat kappa o.a.
+18,kappa o.a.
+18,"bands 1,2,3,4, bands 1,3,4,5,7 svdd-based linear 0.86 90.28 0.84 90.54 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 svdd-based polynomial 0.88 92.07 0.82 88.41 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 svdd-based rbf 0.91 95.28 0.90 96.22 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 svdd-based sigmoid 0.80 84.11 0.74 79.35 µ_b1, σ_b1, ndvi ndvi the accuracy assessment of svdd-based cd method showed that, for quickbird and landsat datasets, using the rbf kernel function gives a higher accuracy than using other kernel types."
+18,"once again, the rbf kernel function perform better than other kernel types."
+18,"it seems that, in proposed svdd-based cd method, the separation function between change and no-change classes is similar to a gaussian function."
+18,"so, it can be concluded that, for both datasets, the rbf kernel is the best choice for the proposed svdd-based cd method and has a higher accuracy than other kernel types (table 3)."
+18,"by comparing the results showed in tables 1–3, it can be noted that: for quickbird dataset, heap-spc approach (average improvement of ~2% in kappa coefficient) performed slightly better than the svdd-based cd method in almost all the cases except the polynomial kernel."
+18,the svdd-based cd method (average improvement of ~7% in kappa coefficient) performed better than the dfss-sim approach in almost all the cases except the sigmoid kernel.
+18,svdd-based cd and dfhs-sim approaches indicated the same result in the case of rbf kernel.
+18,"but, svdd-based cd method (average improvement of ~16% in kappa coefficient) performed better than the dfhs-sim approach in other kernel types."
+18,"for landsat dataset, svdd-based cd method (average improvement of ~6% in kappa coefficient) performed better than the heap-spc approach for all kernel types."
+18,in the case of linear and sigmoid
+19,"remote sens. 2015, 7 12847 kernels, dfss-sim and dfhs-sim approaches (average improvement of ~5% and 10% in kappa coefficient) performed better than the svdd-based cd method, respectively."
+19,the svdd-based cd and dfss-sim approaches indicated the same result in the case of rbf kernel.
+19,"but, svdd-based cd method (improvement of ~11% and 9% in kappa coefficient) performed better than the dfss-sim and dfhs-sim approaches for polynomial kernel."
+19,"finally, in the case of rbf kernel, svdd-based cd method (improvement of ~8% in kappa coefficient) performed better than the dfhs-sim approach."
+19,several discussions can be deduced from the accuracy assessment of proposed cd methods on both datasets.
+19,"in most cases, the proposed kernel-based cd framework has better results when compared with svdd-based cd method."
+19,"we can, consequently, conclude that in the proposed hybrid cd method based on cva, kkmc, and kmd approaches, each part of the algorithms initialized the other part."
+19,"so, this algorithm converges quickly and more accurate results are obtained."
+19,"the initial values, calculated at each stage of the algorithm, increased the convergence and accuracy of the results."
+19,"in the proposed kernel-based algorithm, the training procedure of kmd classifier performed by precise training samples."
+19,while the svdd-based cd method could not extract accurate training samples from initial samples and trained directly with pseudo-training samples.
+19,"in figure 6, for quickbird dataset, the change maps obtained from dfss-sim-linear (a), dfss-sim-rbf (b), dfss-sim-sigmoid (c), dfhs-sim-linear (d), heap-spc-linear (e), heap-spc-polynomial (f), heap-spc-rbf (g), heap-spc-sigmoid (h), svdd-linear (i), svdd-polynomial (j), svdd-rbf (k), svdd-sigmoid (l) approaches are shown, respectively."
+19,the black color indicates the no-change class while the red color indicates the no-change class.
+19,"as it can be seen in figure 6f and figure 6h, in change maps obtained from heap-spc-polynomial and heap-spc-sigmoid approaches, the ocean and the forest areas are somewhat detected as the change."
+19,there is clear changes for ocean and forest which are related to the normal raging in ocean and atmospheric conditions respectively; but they are not considered as change classes.
+19,"the change map shown in figure 6a–d,i, obtained from dfss-sim–linear, dfss-sim–rbf, dfss-sim-sigmoid, dfhs-sim-linear approaches, the ocean areas located in the north of the study area are also detected as the change."
+19,these changes are only due to the raging of ocean at the tsunami struck but they are not considered as change classes.
+19,"however, the change map shown in figure 6e,g,j,k, in change map obtained from heap-spc-linear, heap-spc-rbf, svdd-polynomial, and svdd-rbf approaches got limited isolated pixels and they were less noisy in essence and better results have been achieved."
+19,"in figure 7, for landsat dataset, the change maps obtained from dfss-sim-linear (a), dfss-sim–rbf (b), dfss-sim-sigmoid (c), dfhs-sim-linear (d), dfhs-sim–rbf (e), dfhs-sim-sigmoid (f), heap-spc-linear (g), heap-spc-polynomial (h), heap-spc-rbf (i), svdd-linear (j), svdd-polynomial (k), svdd-rbf (l) approaches are shown, respectively."
+20,remote sens.
+20,"2015, 7 12848 figure 6."
+20,"change maps obtained from (a) dfss-sim-linear, (b) dfss-sim-rbf, (c) dfss-sim-sigmoid, (d) dfhs-sim-linear, (e) heap-spc-linear, (f) heap-spc-polynomial, (g) heap-spc-rbf, (h) heap-spc-sigmoid, (i) svdd-linear, (j) svdd-polynomial, (k) svdd-rbf, (l) svdd-sigmoid approaches."
+21,remote sens.
+21,"2015, 7 12849 figure 7."
+21,"change maps obtained from (a) dfss-sim-linear, (b) dfss-sim-rbf, (c) dfss-sim-sigmoid, (d) dfhs-sim-linear, (e) dfhs-sim-rbf, (f) dfhs-sim-sigmoid, (g) heap-spc-linear, (h) heap-spc-polynomial, (i) heap-spc-rbf, (j) svdd-linear, (k) svdd-polynomial, (l) svdd-rbf approaches."
+21,"as it can be seen in figure 7e,g–i,k, change maps obtained from dfhs-sim–rbf, heap-spc-linear, heap-spc-polynomial, heap-spc-rbf, and svdd-polynomial methods, the agricultural areas in the southwest of study area are somewhat noisy."
+21,these changes are only due to the seasonal change and variety of cultures but they are not considered as change classes.
+21,"the change map shown in figure 7c, obtained from dfss-sim-sigmoid approach, the forest areas in the background of the study area are somewhat noisy."
+21,these changes are only due to the atmospheric condition.
+21,"however, the change map"
+22,"remote sens. 2015, 7 12850 shown in figure 7a,b,d,f,j,l obtained from dfss-sim-linear, dfss-sim-rbf, dfhs-sim-linear, dfhs-sim-sigmoid, svdd-linear, and svdd-rbf methods got limited isolated pixels and they were less noisy in essence and better results have been achieved."
+22,"in order to compare our results with the respective outputs from other similar researches, the experimental results of kernel-based cd methods were evaluated."
+22,"gustavo camps-valls et al. [28,35] proposed two kernel-based cd methods including (1) kernel-based image differencing and image ratioing cd methods and (2) svms based and svdd based multi-temporal image classifiers."
+22,synthetic and real remote sensing data sets were used for analyzing the performance of the proposed methodological framework based on kernels.
+22,it is worth mentioning that implementation of algorithm and flowchart of this framework are quite different with our proposed approach.
+22,several conclusions can be derived from accuracy assessment on synthetic dataset.
+22,"in all cases, the rbf kernel outperformed the linear kernel."
+22,"in multi-temporal image classification, the best kernel classifier is constituted by the cross-terms kernel because it includes the temporal information of image evolution."
+22,"in change detection problems, the best results were obtained by using the difference kernel."
+22,svms generally works slightly better than the svdd.
+22,"in all cases and scenes, it becomes obvious that the use of the rbf kernel provides much better results than the linear kernel."
+22,"svms classifier shows the best results; however, svdd classifier can also produce stable and robust outcomes, which confirms their suitability to application scenarios in which incomplete or partially complete information is available [28,35]."
+22,"by comparing our results illustrated in sections 3.2.1 and 3.2.2, it can be concluded that the outcome of these works are in agreement with our main findings."
+22,"in optimum kernel type and kernel parameter selection of kernel clustering algorithm, these parameters are tuned automatically by optimizing an improved cost function with the nature of geometrical and spectral similarity in kernel space."
+22,this optimization process runs for all kernel types so that the optimized kernel parameter and the corresponding kernel type that minimize the cost function to be determined.
+22,the procedure of optimal single-time and cross-time rbf kernel parameters selection corresponding to maximum value and minimum value of cost function in the dfhs-sim-rbf approach is shown in figure 8.
+22,"for this purpose, single-time and cross-time parameters of composite kernel defined in equation (17), were calculated using grid searching method in such a way for the value of the cost function to be minimized [33,36]."
+22,this result illustrates the joint optimization of σsinger and σcross (dfhs-sim-rbf).
+22,the proposed cost function showed detectable and appropriate global minima.
+22,as seen in figure 8; the white marks are placed to minimize the proposed cost function and green marks are the location of the maximum value of the proposed cost function for quickbird and landsat data sets.
+22,"therefore; the parameters θ  σsingle , σcross  that the cost function to be minimized for them can be selected."
+22,by analyzing the results it can be concluded that for both data sets; for low bandwidth values; the change and no-change clusters are not separable and the spectral similarity of clusters is overestimated.
+22,for wider bandwidths; the similarity value between change and no-change clusters is underestimated.
+22,the optimal separability between clusters is reached when the cross kernel parameters is in the range of the average euclidean distance and average similarity value among pixels within clusters.
+23,remote sens.
+23,"2015, 7 12851 figure 8."
+23,optimal multi-temporal cross kernel parameters selection in dfhs-rbf approach for quickbird (a) and landsat (b) data sets.
+23,3.2.3.
+23,"conventional cd method in order to assess the performance of the proposed hybrid cd algorithms, we compared this technique with well-known change detection methods, namely, the mnf (minimum noise fraction) cd method [50], the ica (independent component analysis) based cd method [51], sam (spectral angle mapper) [52], image subtraction cd [9,53] and image rationing cd methods [53,54]."
+23,these methods are implemented and tested on the same data in spectral space.
+23,table 4.
+23,the comparative analysis of conventional cd and proposed cd methods.
+23,input bands quickbird landsat cd method quickbird landsat kappa o.a.
+23,kappa o.a.
+23,"bands 1,2,3,4, bands 1,3,4,5,7 mnf transform 0.84 91.60 0.64 72.97 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 ica transform 0.68 85.48 0.66 75.54 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 spectral angle mapper 0.60 75.38 0.77 87.80 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 image subtraction 0.69 86.57 0.61 69.40 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 image rationing 0.61 76.45 0.63 72.17 µ_b1, σ_b1, ndvi ndvi dfss-sim-rbf sdacv sdacv 0.90 94.39 0.89 95.67 dfhs-sim-rbf sdacv sdacv 0.74 78.21 0.82 87.64 bands 1,2,3,4, bands 1,3,4,5,7 heap-spc-rbf 0.92 96.73 0.77 83.14 µ_b1, σ_b1, ndvi ndvi bands 1,2,3,4, bands 1,3,4,5,7 svdd-rbf 0.91 95.28 0.90 96.22 µ_b1, σ_b1, ndvi ndvi"
+24,remote sens.
+24,"2015, 7 12852 these results are presented in table 4 which show that for both landsat and quickbird data sets, all proposed kernel-based methods such as dfss-sim-rbf, dfhs-sim-rbf, heap-spc-rbf approaches and svdd-based cd method have higher accuracy than all well-known cd methods."
+24,the classical change detection methods show intermediate level accuracies caused by both the false alarm rate and the weak detection rate when compared to the proposed kernel-based algorithm.
+24,"since, spectral difference values for change and no-change classes in the differential image obtained in the spectral space are close to each other, the boundary separation between change and no-change classes is not readily detected."
+24,"through transferring this difference image into the hilbert space with a higher dimension, the separation of these two classes is increased and better results will be achieved."
+24,this classical method is extremely sensitive to the noise of data and error of multi-temporal data misregistration.
+24,the accuracy of the produced change map is greatly dependent on the selection of appropriate threshold.
+24,"two scenarios were considered in order to compare the computational cost of the proposed kernel-based cd methods, against the computational cost of classical algorithms."
+24,the computational runtime of each method presented in table 4 was estimated.
+24,"in the first scenario, the computational cost of classical cd methods were calculated with regard to the fact that the thresholding stage made through an operator."
+24,"therefore, the required time for selecting the appropriate threshold will be considered in processing time."
+24,"but in the second scenario, it is assumed that the thresholding stage has already been done for classical cd methods."
+24,"as a result, the computational cost analyses are only related to the computational runtime of processing cores of proposed and classical methods."
+24,"however, in both scenarios, the required time for automatic threshold selection is considered in the processing runtime of proposed cd methods."
+24,"for a fair comparison, all classical and proposed cd methods were implemented in the same programming environment."
+24,"since the runtime of the proposed kernel-based methods depend on the time of grid searching process for determining the optimized kernel parameter, therefore, it is assumed that the optimum kernel parameter is already known in both scenarios."
+24,the computational cost analysis of classical cd and proposed cd methods for both datasets when threshold is estimated by an operator (first scenario) was given in figure 9.
+24,figure 9.
+24,computational cost analysis of classical cd and proposed cd methods for quickbird and landsat datasets when thresholding stage made through an operator in classical cd methods (first scenario).
+25,remote sens.
+25,"2015, 7 12853 as seen in figure 9, the computational runtime of proposed methods are less than the classical cd methods."
+25,"in addition, dfss-sim and dfhs-sim approach have the lowest computational cost compared to other methods."
+25,it is evident that the implementation of proposed cd method in similarity space decreases the processing times.
+25,"furthermore, the conventional cd methods are largely dependent on the user interaction and are non-automatic."
+25,determination of the exact threshold is very time consuming and requires a skilled operator.
+25,the computational cost analysis of classical cd and proposed cd methods for both datasets with the thresholding stage pre-made in classical cd methods (second scenario) are presented in figure 10.
+25,figure 10.
+25,computational cost analysis of classical cd and proposed cd methods for quickbird and landsat datasets when the thresholding stage was pre-made in classical cd methods (second scenario).
+25,"comparative computational cost analysis of proposed cd method against classical cd methods showed that (see figure 10), for both datasets, the lowest computational cost was obtained by using the subtraction method."
+25,"this is closely followed by the sam, ratioing, dfss-sim and dfhs-sim approaches."
+25,"although the threshold of the proposed method is selected automatically, the processing time does not significantly change compared to the conventional cd methods."
+25,"for example, the processing time of dfss-sim, dfhs-sim, heap-spc, and svdd methods is far less than ica and mnf cd methods."
+25,it can be concluded that the implementation of proposed cd method in similarity space decreases the processing times.
+25,"consequently, in the absence of a skilled user, the processing time of conventional cd methods greatly increases."
+25,"conclusions in this paper, a kernel-based and hybrid framework is presented for change detection from remotely sensed data in a similarity space."
+25,this proposed method shows great flexibility for the problem of change detection by finding nonlinear solutions to the problem.
+25,the main issues of the framework have been discussed and resolved.
+25,"firstly, the initialization was addressed by finding a threshold on change vector magnitude distribution."
+25,a geometrically and spectral similarity inspired cost function has been proposed to estimate the optimal single-time and cross-time kernel parameters.
+25,this cost function produces clusters that minimize the similarity and maximize the distance between them.
+25,"by exploiting a proper initialization, the kernel k-means clustering is used to extract the precise training samples for the two"
+26,"remote sens. 2015, 7 12854 classes of interest."
+26,"secondly, by reformulating the simple difference cd method in the hilbert space, the similarity of the difference image in feature spaces are strongly improved."
+26,"this is accomplished by three approaches, i.e., dfss-sim, dfhs-sim, and heap-spc approaches."
+26,"thirdly, multi-temporal images are transformed into the similarity space for increasing the separation between change and no-change classes and decreasing the time of the cd process."
+26,"lastly, a new method to estimate the initial value of the rbf kernel parameter in the cd problem was proposed."
+26,this method is based on a statistical method using the l2-norm distance and leads to a faster convergence of a grid-searching techniques for selecting the global optimum rbf’s kernel parameter.
+26,"experimental comparisons showed that when only relying on the change’s magnitude, the correct discrimination of the changes becomes a difficult task."
+26,"this is related to the ambiguity of the measure, as well as to the change’s magnitude one-dimensional representation, which hides the useful information in multi-temporal data."
+26,almost all the classical methods are based on the change vector magnitude analysis and the determination of a threshold for separating the change pixels from the no-change ones.
+26,"accordingly, the information between change and no-change pixels in multi-temporal images leads to a one-dimensional change vector."
+26,while the proposed method uses all the multi-temporal bands and the mutual information between them.
+26,"thus, more information can be extracted to separate the unchanged pixels from changed ones."
+26,"in contrast, by detecting the changes in higher dimensional feature spaces, the multi-temporal information unfolds into clusters that are easily separable."
+26,"such an approach also reduces the preprocessing corrections, for the single time information is considered separately and regularized by the cross-similarity of the scenes."
+26,the proposed approach shows accuracy improvements with respect to classical change detection techniques.
+26,this indicates that a better illustration can be obtained by considering cross information between multi-temporal images.
+26,"this leads to a strong decrease in the false alarm rate, and a slight improvement in the detection rates in produced change maps."
+26,"as a result, this approach is the most accurate one."
+26,"finally, the computational cost analysis showed that implementation of proposed cd method in similarity space decrease the processing times."
+26,further research can be done in the field of combining the multi-sensor data such as optic and radar imageries.
+26,such information can be incorporated in the proposed cd framework by developing specific kernel functions.
+26,types of changes and their change directions can also be considered to extend the use of the proposed cd framework for multi- class change detection.
+26,"acknowledgements the authors sincerely appreciate the assistance and cooperation of envi excelis and pci geomatics companies for making available the multi-temporal quickbird images of earthquake tsunami in coastal areas of indonesia and landsat images of logging activities in prince george area in northern british columbia, canada, respectively."
+26,"author contributions reza shah-hosseini performed the experiments and analyzed the data and wrote the paper with significant contributions from saeid homayouni and abdolreza safari for conceived and designed the experiments, writing the first draft, interpretation of the results and editing the final manuscript."
+27,remote sens.
+27,"2015, 7 12855 conflicts of interest the authors declare no conflict of interest."
+27,references 1.
+27,"singh, a."
+27,review article digital change detection techniques using remotely-sensed data.
+27,remote sens.
+27,"1989, 10, 989–1003."
+27,"volpi, m."
+27,"; tuia, d."
+27,"; camps-valls, g."
+27,"; kanevski, m."
+27,unsupervised change detection with kernels.
+27,ieee geosci.
+27,remote sens.
+27,"2012, 9, 1026–1030."
+27,"yamazaki, f."
+27,"; matsuoka, m."
+27,remote sensing technologies in post-disaster damage assessment.
+27,earthq.
+27,"tsunami 2007, 1, 193–210."
+27,"curatola fernández, g.f."
+27,"; obermeier, w.a."
+27,"; gerique, a."
+27,"; lópez sandoval, m.f."
+27,"; lehnert, l.w."
+27,"; thies, b."
+27,"; bendix, j."
+27,land cover change in the andes of southern ecuador—patterns and drivers.
+27,remote sens.
+27,"2015, 7, 2509–2542."
+27,"tewkesbury, a.p."
+27,"; comber, a.j."
+27,"; tate, n.j."
+27,"; lamb, a."
+27,"; fisher, p.f."
+27,a critical synthesis of remotely sensed optical image change detection techniques.
+27,remote sens.
+27,environ.
+27,"2015, 160, 1–14."
+27,"olthof, i."
+27,"; fraser, r.h."
+27,detecting landscape changes in high latitude environments using landsat trend analysis: 2 classification.
+27,remote sens.
+27,"2014, 6, 11558–11578."
+27,"karnieli, a."
+27,"; qin, z."
+27,"; wu, b."
+27,"; panov, n."
+27,"; yan, f."
+27,"spatio-temporal dynamics of land-use and land-cover in the mu us sandy land, china, using the change vector analysis technique."
+27,remote sens.
+27,"2014, 6, 9316–9339."
+27,"dai, x."
+27,"; khorram, s."
+27,the effects of image misregistration on the accuracy of remotely sensed change detection.
+27,ieee trans.
+27,remote sens.
+27,"1998, 36, 1566–1577."
+27,"mas, j.-f."
+27,monitoring land-cover changes: a comparison of change detection techniques.
+27,remote sens.
+27,"1999, 20, 139–152."
+27,"vittek, m."
+27,"; brink, a."
+27,"; donnay, f."
+27,"; simonetti, d."
+27,"; desclée, b."
+27,land cover change monitoring using landsat mss/tm satellite image data over west africa between 1975 and 1990.
+27,remote sens.
+27,"2014, 6, 658–676."
+27,"lambin, e.f."
+27,"; strahlers, a.h."
+27,change-vector analysis in multi-temporal space: a tool to detect and categorize land-cover change processes using high temporal-resolution satellite data.
+27,remote sens.
+27,environ.
+27,"1994, 48, 231–244."
+27,"camps-valls, g."
+27,"; bruzzone, l."
+27,"kernel methods for remote sensing data analysis; john wiley and sons: west sussex, uk, 2009."
+27,"nemmour, h."
+27,"; chibani, y."
+27,multiple support vector machines for land cover change detection: an application for mapping urban extensions.
+27,isprs j.
+27,photogramm.
+27,remote sens.
+27,"2006, 61, 125–133."
+27,"li, x."
+27,"; yeh, a."
+27,principal component analysis of stacked multi-temporal images for the monitoring of rapid urban expansion in the pearl river delta.
+27,remote sens.
+27,"1998, 19, 1501–1518."
+27,"pang, s."
+27,"; hu, x."
+27,"; wang, z."
+27,"; lu, y."
+27,object-based analysis of airborne lidar data for building change detection.
+27,remote sens.
+27,"2014, 6, 10733–10749."
+27,"zhou, j."
+27,"; yu, b."
+27,"; qin, j."
+27,multi-level spatial analysis for change detection of urban vegetation at individual tree scale.
+27,remote sens.
+27,"2014, 6, 9086–9103."
+28,remote sens.
+28,"2015, 7 12856 17."
+28,"volpi, m."
+28,"; tuia, d."
+28,"; camps-valls, g."
+28,"; kanevski, m."
+28,unsupervised change detection by kernel clustering.
+28,"spie 2010, doi:10.1117/12.864921."
+28,"bovolo, f."
+28,"; bruzzone, l."
+28,"; marconcini, m."
+28,an unsupervised change detection technique based on bayesian initialization and semisupervised svm.
+28,"in proceedings of the ieee international geoscience and remote sensing symposium, barcelona, spain, 23–28 july 2007; pp."
+28,2370–2373.
+28,"chen, c.-f."
+28,"; son, n.-t."
+28,"; chang, n.-b."
+28,"; chen, c.-r."
+28,"; chang, l.-y."
+28,"; valdez, m."
+28,"; centeno, g."
+28,"; thompson, c.a."
+28,"; aceituno, j.l."
+28,"multi-decadal mangrove forest change detection and prediction in honduras, central america, with landsat imagery and a markov chain model."
+28,remote sens.
+28,"2013, 5, 6408–6426."
+28,"chen, j."
+28,"; gong, p."
+28,"; he, c."
+28,"; pu, r."
+28,"; shi, p."
+28,land-use/land-cover change detection using improved change-vector analysis.
+28,photogramm.
+28,remote sens.
+28,"2003, 69, 369–380."
+28,"bruzzone, l."
+28,"; prieto, d.f."
+28,automatic analysis of the difference image for unsupervised change detection.
+28,ieee trans.
+28,remote sens.
+28,"2000, 38, 1171–1182."
+28,"molina, i."
+28,"; martinez, e."
+28,"; arquero, a."
+28,"; pajares, g."
+28,"; sanchez, j."
+28,evaluation of a change detection methodology by means of binary thresholding algorithms and informational fusion processes.
+28,"sensors 2012, 12, 3528–3561."
+28,"inglada, j."
+28,"; mercier, g."
+28,a new statistical similarity measure for change detection in multi-temporal sar images and its extension to multiscale change analysis.
+28,ieee trans.
+28,geosci.
+28,remote sens.
+28,"2007, 45, 1432–1445."
+28,"mercier, g."
+28,"; derrode, s."
+28,"; pieczynski, w."
+28,"; nicolas, j.-m."
+28,"; joannic-chardin, a."
+28,"; inglada, j."
+28,copula-based stochastic kernels for abrupt change detection.
+28,"in proceedings of the ieee international geoscience and remote sensing symposium, denver, co, usa, 31 july 2006–4 august 2006; pp."
+28,204–207.
+28,"pajares, g."
+28,a hopfield neural network for image change detection.
+28,ieee trans.
+28,neural netw.
+28,"2006, 17, 1250–1264."
+28,"aach, t."
+28,"; kaup, a."
+28,bayesian algorithms for adaptive change detection in image sequences using markov random fields.
+28,signal process.
+28,image commun.
+28,"1995, 7, 147–160."
+28,"guorui, m."
+28,"; haigang, s."
+28,"; pingxiang, l."
+28,"; qianqing, q."
+28,a kernel change detection algorithm in remote sense imagery.
+28,"in proceedings of the ieee international geoscience and remote sensing symposium, denver, co, usa, 31 july 2006–4 august 2006; pp."
+28,220–224.
+28,"camps-valls, g."
+28,"; gomez-chova, l."
+28,"; munoz-mari, j."
+28,"; rojo-alvarez, j.l."
+28,"; martinez-ramon, m."
+28,kernel-based framework for multi-temporal and multisource remote sensing data classification and change detection.
+28,ieee trans.
+28,geosci.
+28,remote sens.
+28,"2008, 46, 1822–1835."
+28,"longbotham, n."
+28,"; pacifici, f."
+28,"; glenn, t."
+28,"; zare, a."
+28,"; volpi, m."
+28,"; tuia, d."
+28,"; christophe, e."
+28,"; michel, j."
+28,"; inglada, j."
+28,"; chanussot, j.; et al."
+28,"multi-modal change detection, application to the detection of flooded areas: outcome of the 2009–2010 data fusion contest."
+28,ieee j.
+28,earth obs.
+28,remote sens.
+28,"2012, 5, 331–342."
+28,"carlotto, m.j."
+28,detection and analysis of change in remotely sensed imagery with application to wide area surveillance.
+28,ieee trans.
+28,image process.
+28,"1997, 6, 189–202."
+28,"qin, r."
+28,an object-based hierarchical method for change detection using unmanned aerial vehicle images.
+28,remote sens.
+28,"2014, 6, 7911–7932."
+29,remote sens.
+29,"2015, 7 12857 32."
+29,"aleksandrowicz, s."
+29,"; turlej, k."
+29,"; lewiński, s."
+29,"; bochenek, z."
+29,change detection algorithm for the production of land cover change maps over the european union countries.
+29,remote sens.
+29,"2014, 6, 5976–5994."
+29,"hosseini, r.s."
+29,"; homayouni, s."
+29,"; safari, r."
+29,modified algorithm based on support vector machines for classification of hyperspectral images in a similarity space.
+29,remote sens.
+29,"2012, 6, 063550-1."
+29,"hosseini, r.s."
+29,"; homayouni, s."
+29,a svms-based hyperspectral data classification algorithm in a similarity space.
+29,"in proceedings of the hyperspectral image and signal processing: evolution in remote sensing, grenoble, france, 26–28 august 2009; pp."
+29,"camps-valls, g."
+29,"; gomez-chova, l."
+29,"; muñoz-mari, j."
+29,"; alonso, l."
+29,"; calpe-maravilla, j."
+29,"; moreno, j."
+29,multi-temporal image classification and change detection with kernels.
+29,"in proceedings of the image and signal processing for remote sensing xii, stockholm, sweden, 11 september 2006."
+29,"shah hosseini, r."
+29,"; entezari, i."
+29,"; homayouni, s."
+29,"; motagh, m."
+29,"; mansouri, b."
+29,classification of polarimetric sar images using support vector machines.
+29,remote sens.
+29,"2011, 37, 220–233."
+29,"bovolo, f."
+29,"; camps-valls, g."
+29,"; bruzzone, l."
+29,a support vector domain method for change detection in multi-temporal images.
+29,pattern recognit.
+29,"2010, 31, 1148–1154."
+29,"khediri, i.b."
+29,"; weihs, c."
+29,"; limam, m."
+29,kernel k-means clustering based local support vector domain description fault detection of multimodal processes.
+29,expert syst.
+29,"2012, 39, 2166–2171."
+29,"shen, z."
+29,"; he, z."
+29,"; chen, x."
+29,"; sun, c."
+29,"; liu, z."
+29,a monotonic degradation assessment index of rolling bearings using fuzzy support vector data description and running time.
+29,"sensors 2012, 12, 10109–10135."
+29,"fung, g.m."
+29,"; mangasarian, o.l."
+29,"; smola, a.j."
+29,minimal kernel classifiers.
+29,learn.
+29,"2003, 3, 303–321."
+29,"chang, c.-i."
+29,"hyperspectral imaging: techniques for spectral detection and classification; springer science and business media: baltimore, md, usa, 2003."
+29,"alberga, v."
+29,similarity measures of remotely sensed multi-sensor images for change detection applications.
+29,remote sens.
+29,"2009, 1, 122–143."
+29,"carvalho júnior, o.a."
+29,"; guimarães, r.f."
+29,"; gillespie, a.r."
+29,"; silva, n.c."
+29,"; gomes, r.a."
+29,a new approach to change vector analysis using distance and similarity measures.
+29,remote sens.
+29,"2011, 3, 2473–2493."
+29,"homayouni, s."
+29,"; roux, m."
+29,material mapping from hyperspectral images using spectral matching in urban area.
+29,"in proceedings of the ieee workshop on advances in techniques for analysis of remotely sensed data, washington, dc, usa, 27–28 october 2003."
+29,"goela, n."
+29,"; wilson, k.w."
+29,"; niu, f."
+29,"; divakaran, a."
+29,"; otsuka, i."
+29,an svm framework for genre-independent scene change detection.
+29,"in proceedings of the 2007 ieee international conference on multimedia and expo, beijing, china, 2–5 july 2007; pp."
+29,532–535.
+29,"mercier, g."
+29,"; lennon, m."
+29,support vector machines for hyperspectral image classification with spectral-based kernels.
+29,"in proceedings of the ieee international geoscience and remote sensing symposium, toulouse, france, 21–25 july 2003; volume 1, pp."
+29,288–290.
+29,pci geomatics.
+29,available online: http://www.pcigeomatics.com/resources-support/geomatica/ tutorials (accessed on 21 september 2015).
+29,wikipedia.
+29,the free encyclopedia 2004 indian ocean earthquake and tsunami.
+29,available online: http://en.wikipedia.org/wiki/2004_indian_ocean_earthquake_and_tsunami#cite_note-paris-8 (accessed on 21 september 2015).
+30,remote sens.
+30,"2015, 7 12858 49."
+30,exelis vis product documentation center.
+30,available online: http://www.exelisvis.com/docs/ imagechangetutorial.html (accessed on 21 september 2015).
+30,"zhang, l."
+30,"; liao, m."
+30,"; yang, l."
+30,"; lin, h."
+30,remote sensing change detection based on canonical correlation analysis and contextual bayes decision.
+30,photogramm.
+30,remote sens.
+30,"2007, 73, 311–318."
+30,"marchesi, s."
+30,"; bruzzone, l."
+30,ica and kernel ica for change detection in multispectral remote sensing images.
+30,"in proceedings of the ieee international geoscience and remote sensing symposium, cape town, south africa, 12–17 july 2009."
+30,"yuhas, r.h."
+30,"; goetz, a.f."
+30,"; boardman, j.w."
+30,discrimination among semi-arid landscape endmembers using the spectral angle mapper (sam) algorithm.
+30,"in summaries of the third annual jpl airborne geoscience workshop; jpl publication: pasadena, ca, usa, 1992; volume 1, pp."
+30,147–149.
+30,"kano, a."
+30,"; doi, k."
+30,"; macmahon, h."
+30,"; hassell, d.d."
+30,"; giger, m.l."
+30,digital image subtraction of temporally sequential chest images for detection of interval change.
+30,"1994, 21, 453–461."
+30,"berberoglu, s."
+30,"; akin, a."
+30,assessing different remote sensing techniques to detect land use/cover changes in the eastern mediterranean.
+30,earth obs.
+30,geoinf.
+30,"2009, 11, 46–53. © 2015 by the authors; licensee mdpi, basel, switzerland."
+30,this article is an open access article distributed under the terms and conditions of the creative commons attribution license (http://creativecommons.org/licenses/by/4.0/).

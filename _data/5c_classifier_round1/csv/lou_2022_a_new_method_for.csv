@@ -1,0 +1,768 @@
+page,p
+1,"remote sensing article a new method for long-term river discharge estimation of small- and medium-scale rivers by using multisource remote sensing and rshs: application and validation hezhen lou 1,2 , yujia zhang 1 , shengtian yang 1,2, *, xuelei wang 3 , zihao pan 1 and ya luo 4 1 college of water sciences, beijing normal university, beijing 100875, china; louhezhen@bnu.edu.cn (h.l.); 202021470034@mail.bnu.edu.cn (y.z.); 202031470004@mail.bnu.edu.cn (z.p.)"
+1,"2 beijing key laboratory of urban hydrological cycle and sponge city technology, beijing 100875, china 3 ministry of ecology and environment center for satellite application on ecology and environment, beijing 100094, china; wxuelei@bnu.edu.cn 4 school of geographic and environmental science, guizhou normal university, guiyang 550001, china; 100542600@gznu.edu.cn * correspondence: yangshengtian@bnu.edu.cn abstract: river discharge is an important hydrological parameter of river water resources."
+1,"especially in small- and medium-scale rivers, data deficiency is the biggest problem for studies of river discharge."
+1,"in recent years, remote sensing has become a rapid and convenient method to estimate river discharge."
+1,"however, remote sensing images still have some difficulty generating continuous long-term river discharge."
+1,"to address this problem, we developed a new method coupling the remote sensing hydrology station method (rshs) with statistical regression downscaling, using data from optical  satellites (landsat-8, sentinel-2), radar satellites (sentinel-1), and un-manned aerial vehicles (uavs)."
+1," we applied this method to monitor monthly river discharge for small- and medium-scale rivers from citation: lou, h."
+1,"; zhang, y."
+1,"; yang, s.; 2016 to 2020 on yunnan-guizhou plateau and evaluated the accuracy of the results."
+1,"the results show wang, x."
+1,"; pan, z."
+1,"; luo, y."
+1,"a new that (1) by applying the newly constructed method, the water body continuity index obtained by method for long-term river landsat-8 increased by 7% and the average river length percentage in the channel reached 90.7%, discharge estimation of small- and a 40% increase; (2) there were only 10 river flow data points, on average, in the 5-year period obtained medium-scale rivers by using before this method was applied; after this method was applied, more than 50 river flow data points multisource remote sensing and could be obtained, on average, extending the quantity of data fivefold; in addition, improper extreme rshs: application and validation."
+1,remote sens.
+1,"2022, 14, 1798. https:// values could also be avoided; (3) with better continuity of water body distribution, the images doi.org/10.3390/rs14081798 provided steadier river widths."
+1,the relative error of daily flow estimation from landsat-8 images was reduced by 60% and the mean percentage error was reduced by one-fourth.
+1,"the relative error academic editor: sang-eun park of the multisource remote sensing composited flow was reduced by 37% with a reduction in the received: 21 february 2022 mean percentage error of over a half; (4) in addition, we found that when the threshold difference accepted: 6 april 2022 between water bodies and land in remote sensing images is more than 0.2, the impact of water body published: 8 april 2022 recognition error on flow accuracy can be ignored."
+1,"this method helps to overcome the absence of publisher’s note: mdpi stays neutral remote sensing methods for the long-term estimation of flow series in small- and medium-scale with regard to jurisdictional claims in rivers, improves the accuracy of remote sensing methods for calculating flow, and provides ideas for published maps and institutional affil- regional water resource management and utilization. iations."
+1,keywords: long-term discharge; multisource remote sensing; rshs; downscaling; water continuity copyright: © 2022 by the authors.
+1,"licensee mdpi, basel, switzerland."
+1,introduction this article is an open access article river discharge is an important index of river water resources.
+1,"long-term and continu- distributed under the terms and ous river discharge data are of great significance for watershed water resource management conditions of the creative commons attribution (cc by) license (https:// and utilization, and the economic development of ecosystem services [1,2]."
+1,"at present, creativecommons.org/licenses/by/ there are three principal ways of monitoring long-term river discharge: hydrologic station 4.0/). measurement, hydrologic models, and estimation using remote sensing data."
+1,traditional remote sens.
+1,"2022, 14, 1798. https://doi.org/10.3390/rs14081798 https://www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2022, 14, 1798 2 of 19 hydrologic station field measurements rely on artificial stations on the ground."
+2,"limited by natural and economic conditions, the station network is sparse and uneven, and it is difficult to obtain discharge data in many areas [3,4]."
+2,"in addition, station data are often not shared and publicized, so the measured long sequence flow is difficult to utilize [5]."
+2,"hydrological models, including empirical models, physical conceptual models, and dis- tributed and semi-distributed models, can be used for the long-term simulation of river flow in study areas [6,7]."
+2,"meanwhile, a large amount of hydrological data, such as pre- cipitation, evaporation and runoff, must be used as input, adjustment and verification data [8]."
+2,"for complex models, such as physics-based distributed hydrological models, the uncertainty of input data will have a great impact on the accuracy of model results and the length of time series [9,10]."
+2,"therefore, in many regions it is often difficult to carry out long-term accurate flow calculations by using hydrological models."
+2,the development of remote sensing technology provides a new way to monitor river flow [10].
+2,"remote sensing satellites are able to continuously observe channel flow under all weather conditions and provide long-term continuous satellite images, which provide sufficient data sources for channel flow estimation."
+2,"immerzeel and droogers [9] used precipitation and evaporation data from satellites as input and correction parameters in hydrological models, which traditionally rely on limited in situ data."
+2,this improved spatial heterogeneity with equal effect for different parameters of the traditional hydrological model.
+2,"however, this approach tends to take satellite remote sensing data as indirect parameters rather than obtaining direct river flow information from remote sensing images."
+2,"therefore, there will remain some uncertainties and even errors in the estimation of the flow."
+2,"in 1996, mcfeeters [11] proposed the normalized difference water index (ndwi), which can accurately and effectively obtain water distribution information, such as water area, average channel width and river length, using remote sensing images."
+2,this can then be used for remote sensing calculations of river flow [12].
+2,the principle is that the difference between the spectral characteristics of water bodies and other ground objects can be highlighted through linear calculation of the green band and near-infrared band of satellite images to identify water bodies in the images more easily.
+2,"since then, many scholars have directly obtained river flow information through satellite remote sensing, which reduces the complexity of flow calculations and improves the utilization efficiency of remote sensing data."
+2,"bjerklie, et al. [13–15] completely relied on satellite images, such as the landsat satellite series with 30 m spatial resolution, to estimate long-term river flow by directly obtaining the water surface width, water surface elevation and surface velocity parameters of rivers without requiring complex hydrological models or measured data."
+2,"alsdorf, et al. [16] found that due to the accuracy limitation of remote sensing data, it is difficult to obtain water information and hydraulic parameters of all rivers by using a single resolution satellite alone."
+2,"furthermore, each of these data sources works well with large rivers separately but poorly for small- and medium-scale rivers."
+2,"on this basis, yang, et al. [17] proposed the remote sensing hydrology station method(rshs) for small rivers in regions with insufficient data."
+2,"by using landsat satellite data with a spatial resolution of 30 m and cm-level low-altitude uav data, they built the relationship between inundation area or river width, water depth, and river discharge based on the classical manning formula of hydraulics."
+2,long-term discharge estimation was carried out for small rivers with widths under 30 m in the unmeasured area of the arid region.
+2,"lou, et al. [6] obtained various parameters of water quantity and river channels by combining various remote sensing data and compared the results of estimated river flow, demonstrating that with the comprehensive use of multiple remote sensing data, the long-term results of estimated river flow are improved."
+2,"however, as the imaging principle of optical remote sensing satellites is the reflection of visible electromagnetic waves, they are vulnerable to the influence of meteorological conditions such as fog and clouds, especially in tropical and subtropical regions of middle and low latitudes [18], where the difference in image values between water bodies and land objects is small."
+2,only a few satellite images each year were able to extract a clear range of
+3,"remote sens. 2022, 14, 1798 3 of 19 water bodies."
+3,"therefore, the calculated river discharge results had difficulty meeting the requirements of long-term continuity."
+3,"in view of the lack of definition of remote sensing images, some researchers have attempted to solve the problem."
+3,"for example, for images completely blocked by clouds and fog, many scholars have developed cloud removal algorithms [19–21], although, due to the absence of the infrared band on sentinel-2 and other satellites with 10 m resolution, the cloud removal algorithm is difficult to apply in this series [19,22]."
+3,"currently, the cloud removal algorithm can only be used for images covered by clouds on a large scale, but for middle- and low-latitude areas such as the yunnan-guizhou plateau, the low-definition improvement in occlusion caused by thin clouds and mist on a small scale is limited."
+3,"further addressing images with low use efficiency, we can turn to other data with lower cloud content to improve its clarity and increase the use efficiency of the images."
+3,"in the fields of hydrology and meteorology, statistical linear regression, a commonly used method, is used to build a relationship between the two kinds of precipitation products to downscale and reduce error, which helps increase the data use efficiency [23,24]."
+3,"the relationship between coarse resolution precipitation data, with a long time span, and fine resolution precipitation data, with a short time span, can be established to apply coarse resolution precipitation data on a smaller scale and retain its characteristics over a long time span."
+3,this method has also been widely used to improve the utilization efficiency of remote sensing images and there have been many studies to build mapping relationships between satellite images with different resolutions.
+3,"by using relatively fine-resolution images such as the landsat series, coarse-resolution images such as those from the moderate- resolution imaging spectroradiometer (modis) are downscaled [25–27]."
+3,this method is simple in principle and can improve the utilization efficiency of remote sensing data that originally had a long time span but had problems with clarity.
+3,"moreover, it also helps process discontinuous fragments into continuous images while retaining the long time span, thereby helping the long-term flow estimation of small- and medium-scale rivers."
+3,"in addition to optical remote sensing, radar remote sensing can also become an impor- tant data source for calculating river flow."
+3,"the sentinel-1 synthetic aperture radar (sar) satellite, launched in 2016, has a high spatial resolution of 10 m."
+3,"at the same time, as an active remote sensing instrument, it is not affected by clouds, tree canopies or time of day."
+3,"it offers new options for solving the problem of discontinuous monitoring of small- and medium-scale rivers and removing the interference of clouds and fog [28], and it can be combined with traditional optical satellite data to improve the accuracy of remote sensing image flow estimation."
+3,"in summary, remote sensing, as an important means of estimating river discharge, is not restricted by time and space in the same way as the traditional station model."
+3,"combined with ndwi and other water body indices, water body information can be accurately obtained."
+3,"however, because of the limitation of the imaging principle, problems such as low image resolution and low use efficiency of images are encountered in many low latitude regions."
+3,"this paper tries to couple statistical linear regression and the remote sensing hydrology station method, integrate many kinds of remote sensing data, and build a small- and medium-scale river flow calculation method."
+3,"in view of the problem of low resolution images, it helps improve efficiency and generate continuous long-term sequences."
+3,"additionally, the accuracy of the calculation results is verified."
+3,materials and methods 2.1.
+3,study area this study selected the xingjiang river basin in the yunnan-guizhou plateau region in southwest china as a typical research area (figure 1).
+3,the xingjiang river is a tributary of the yangtze river-wujiang river system located in the upper reaches of the hongfeng lake reservoir.
+3,"it is an important supply source of the hongfeng lake reservoir, which is an important drinking water resource for guiyang [29]."
+3,"rainfall is abundant in the basin, up to 1190 mm annually."
+3,there is a saying in this area that there were never three
+4,"remote sens. 2022, 13, x for peer review 4 of 20 lake reservoir."
+4,"it is an important supply source of the hongfeng lake reservoir, which remote sens. 2022, 14, 1798 is an important drinking water resource for guiyang [29]."
+4,"rainfall is abundant 4inofthe 19 ba- sin, up to 1190 mm annually."
+4,there is a saying in this area that there were never three sunny days in a row [30].
+4,because the basin is located deep inland and in the middle of thesunny days in a row [30].
+4,"yunnan-guizhou because plateau, basin the is there is located only one field deep inlandstation, survey and in the middle of the na- huangmaocun yunnan-guizhou plateau, there is only one field survey station, huangmaocun tional hydrology station, within the basin, classifying it as a small basin with national insufficient hydrology station, within the basin, classifying it as a small basin with data."
+4,"abundant clouds in this area, especially perennial thin clouds and fog, result insufficient data. in low abundant clouds in this area, especially perennial thin clouds and fog, result in low clarity clarity of satellite remote sensing images, which greatly affects the utilization efficiency of of satellite remote sensing images, which greatly affects the utilization efficiency of remote remote sensing data [31]."
+4,it is an important water source area in the upper reaches of the sensing data [31].
+4,"it is an important water source area in the upper reaches of the yangtze yangtze river economic river economic adjacent belt, to belt, adjacent the pearltoriver the pearl system."
+4,thissystem.
+4,"river basin thisan basin is thus is thus an important economic and cultural development area where two river systems meet, and river water is and important economic and cultural development area where two river systems meet, river water a vital is a vital ecological ecological resource resource in this area. in this area."
+4,figure figure 1.
+4,overviewofofthe 1.
+4,"overview research area, theresearch including(a) area, including (a)the distribution the of remote distribution sensing of remote hydrology sensing hydrology stations in the xingjiang river basin; (b–h) the river conditions and surrounding stations in the xingjiang river basin; (b–h) the river conditions and surrounding environmentenvironment of of each segment."
+4,satellite images are collected from google each segment.
+4,satellite images are collected from google earth.
+4,earth.
+5,"remote sens. 2022, 14, 1798 5 of 19 we selected segments 0501, 0502, 0401, 0402, 0404, 0405 and 0406 through field in- vestigation and comparison, as shown in figure 1, comprising of one natural straight channel, two natural curved channels, two straight channels affected by artificial influ- ence, and two curved channels affected by artificial influence."
+5,"segment 0406 is close to huangmaocun national hydrologic station, which was used as the in situ data site for comparative analysis."
+5,these segments cover the main distribution region of the xingjiang river system and contain the key positions where tributaries are added.
+5,these segments can therefore effectively monitor the discharge changes of the xingjiang river and help verify the accuracy of the flow values calculated by the application of this method.
+5,"data this research adopts as data sources three kinds of satellite images and unmanned aerial vehicle (uav) aerial images, along with the observed hydrological data."
+5,"in terms of sar data, we chose sentinel-1a as the supplement images for their high spatial resolution and free access."
+5,"by using a dji mavic 2 uav with an hd camera and gps position- ing, the river and the surrounding environmental conditions in each study area were scanned with high spatial resolution (5 cm × 5 cm)."
+5,"with the help of the professional uav image processing software pix4d, we were able to obtain high-precision images after image synthesis, point cloud encryption, and spatial information calibration to generate centimeter-level digital surface models (dsms) and digital orthographic images (doms)."
+5,we also gathered information on the location and elevation of the segment of the digital river model.
+5,"at the same time, open and free satellite images, including landsat-8 (ls8), sentinel-1 (st1), and sentinel-2 (st2) series images, were used as data sources to identify the distribution of river channels and water bodies."
+5,"with the help of google earth engine (gee, https://earthengine.google.com/ (accessed on 21 february 2022)), image projection, image stitching, cutting and radiation correction calibration were rapidly finished in the cloud platform, and the green band and near infrared band were computed for the nor- malized index of the water body figure (ndwi) online."
+5,"for the sar data, we processed the back-scatter value into the range from −1 to 1, and chose the typical area of water body and land, and used these to obtain river reach data."
+5,"in this case, we could identify water body range from sar images as a supplement to optical images."
+5,the flow velocity and water depth were measured on site in each section.
+5,the flow velocity was measured by an ls300-a rotor current meter.
+5,the measured flow was calculated by the three-point method and processed as an average flow velocity in each section.
+5,the water depth was measured by a deeper sonar detector.
+5,"the average water depth of multiple points was combined with dsm river elevation information obtained by uav to simulate the channel water shape distribution and cross-section area, which was multiplied by the measured flow rate to obtain the channel flow rate."
+5,"for the in situ measured data, we selected the monthly discharge values from 2016 that coincided with the time range of the st1, st2 and ls8 satellites."
+5,the specific in situ discharge values were extracted from the daily discharge table of the yangtze river system (wujiang river basin) in the hydrological yearbook of 2016.
+5,table 1 summarizes these datasets.
+5,table 1.
+5,datasets parameters.
+5,timespan spatial data type data name source purpose (time resolution) resolution construct digital uav remote sensing dji mavic air 2 2020/11/4~2020/11/5 (/) 5 cm river model remote landsat-8 surface reflectance (ls8) gee 2016~2020 (15 days) 30 m sensing data sentinel-1 c-band synthetic identify water body gee 2016~2020 (10 days) 10 m aperture radar (st1) sentinel-2 surface reflectance (st2) gee 2016~2020 (10 days) 10 m rotating element measured velocity of flow and measured data current meter and 2020/11/4~2020/11/5 (/) / establish rshs water depth of river section deeper smart sonar obtain in-situ statistical data daily measured discharge hydrologic yearbook 2016 (day) / discharge data
+6,"remote sens. 2022, 14, 1798 6 of 19 2.3."
+6,methods 2.3.1.
+6,"discharge calculation: remote sensing hydrological station we used the remote sensing hydrology station method [6,17,32–35] to calculate river flow in the study area, which included three main steps: construction of hydraulic geometry, relationship between flow and parameters, and key parameter acquisition and volume estimation."
+6,"step 1: before beginning the work, a steady and typical segment should be ensured."
+6,"we obey the following rules to confirm the target segment: 1 steady river banks, 2 straight and long-enough channel, 3 few constructions and canopies, 4 single channel."
+6,"construc- tion of hydraulic geometry is carried out by mavic 2, a consumer-grade uav produced by dji company (https://www.dji.com/cn (accessed on 21 february 2022))."
+6,"currently, there are many studies that use uav ([36–38]) to carry out low-altitude flights over river sections that need to be calculated, and combine high-precision ground images and dsms to obtain elevation information."
+6,"meanwhile, on the ground, real-time kinematics (rtk) are applied to carry out field measurements and combined with uav dsm to determine the specific values of water depth, velocity, slope, and roughness."
+6,"by integrating these data, the river section shape can be fitted."
+6,"step 2: the manning formula, a classical empirical formula in hydraulics, provides a simple and highly accurate method for estimating flow [39–41]."
+6,the basic formula for calcu- lating river flow is equation (1).
+6,"the main influencing parameters are roughness, hydraulic gradient, area of water passage and wet-cycle length."
+6,"according to the natural conditions of the river channel, it was categorized into one of three types: triangle, trapezoidal or rectangle [6,39,42,43]."
+6,"the roughness and hydraulic slope were confirmed from our in situ measurement and uav low-altitude images, which would not change in short time periods."
+6,"based on the measured cross-section data, the area of water passage and wet-cycle length were ensured with the typical relationship of the channel shape."
+6,"in this case, the changing curve of the single relationship between the flow and river width was calibrated.  2 k a 3 1 q= a s2 (1) n p in the equation, k is the conversion coefficient, where 1 is taken, n is roughness, a is area of water passing section, p is wet-cycle length, and s is the hydraulic slope, which is replaced by the channel slope."
+6,"step 3: after the construction of the digital river channel, the river width became the only parameter needed for calculating the discharge of the long series."
+6,"the historical remote sensing images of the station were mainly obtained through gee and calculated into ndwi values, which were used to identify the water distribution in the river channel and select water from the images."
+6,"after the land training area and water training area were selected, the water body threshold was obtained in batches then used to calculate the width of water pixels in the channel in the training area."
+6,"for those pixels within these thresholds, we took a simple linear equation to obtain the ratio of water and land."
+6,"as a result, these pixels were divided into minor water pixels and land pixels."
+6,"for average condition of the segment, we calculated the total water area of the segment and the length of its middle line to get the average width of water range."
+6,"finally, changes of water body width in the river and non-water riverbank were monitored."
+6,table 2 summarized the parameters mentioned in rshs method and their sources.
+6,table 2.
+6,the parameter used in rshs and their sources.
+6,parameter symbol source river width - ndwi calculated from satellite images river width and depth measured in situ with the mathematical relationship based on area of water passage a the shape of river channel
+7,"remote sens. 2022, 14, 1798 7 of 19 table 2."
+7,"parameter symbol source discharge q manning formula conversion factor k refer to [28,34,44] roughness n in situ measurement river width and depth measured in situ with the mathematical relationship based on water-cycle length p the shape of river channel hydraulic gradient s uav images 2.3.2."
+7,"image downscaling: linear regression algorithm image downscaling refers to processing remote sensing images with large scale and low spatial resolution into images with small scale and high spatial resolution, which can reflect the finer differences of spatial information in images."
+7,the principle of statistical downscaling that was applied in this method is to build a correlation between different resolution datasets.
+7,"to deal with the ls8 image with 30 m resolution, the images were processed by statistical linear regression into the same 10 m resolution as st1 and st2."
+7,"the specific method was as follows: first, ls8 images were resampled from 30 m resolution to 10 m resolution, and the resampled original image (ls8 resampling image) and the target image (st2) were aligned in the image grid range."
+7,"then, the linear regression method was applied to both the original and target images from the same period to obtain the correlation coefficient."
+7,"finally, according to the difference between the target image and the calculated value, the residual image was obtained, which was taken into the original image for linear calculation to obtain the regressed image."
+7,"the specific equations are as follows: obj1i,j = coe1i,j × ori1i,j + resi,j (2) obj2i,j = coe2i,j × ori2i,j + resi,j (3) resi,j = obji,j − coei,j × orii,j (4) regi,j = coei,j × orii,j + resi,j (5) in the equations, obj is the target image (st2, st1 image)."
+7,ori is the original image (ls8 resampled image).
+7,coe1 is the correlation coefficient between ls8 and st1.
+7,coe2 is the correlation coefficient between ls8 and st2.
+7,res is the residual image.
+7,"reg is the regression image. i and j are the row and sequence numbers of grid points in the image, respectively."
+7,2.3.3.
+7,water identification assessment: water continuity index & river length ratio water body recognition by remote sensing has been a very important means of water body monitoring in recent years.
+7,"generally, the accuracy of water body recognition by remote sensing is evaluated through indicators such as river width, water area and river continuity."
+7,we generated high-precision images by uav at the test site to study the extent of the river and extract the ndwi threshold in the training area of the water body according to the method above.
+7,the pixel extent of the water was calculated to obtain the average width of the river.
+7,"then, the average width was used to divide the water area to obtain the length of the water in the channel and to calculate the relative river length within the whole river, which is named the river length percentage (li ) in this paper."
+7,"in addition, we define an index c to evaluate river continuity based on the landscape fragmentation index [28]."
+7,ni ci = 1 − (6) ai ai li = (7) rwi × lhi
+8,"remote sens. 2022, 14, 1798 8 of 19 in the equations, i is the number of the corresponding section, ni is the number of continuous water patches at section i, ai is the total number of water grid points at section i, rwi is the river width, and lhi is the overall length of the river."
+8,2.3.4.
+8,"runoff accuracy assessment: error index to evaluate the rationality and reliability of this method for runoff estimation, root mean square error (rmse) and mean percentage error (mpe) were selected as precision evaluation methods."
+8,rmse was used to analyze the overall reliability.
+8,mpe was used to evaluate the difference between the estimated flow and the measured flow of a single section.
+8,equations for these methods are as follows: v !
+8,"u ∑ ( q e − q m )2 u rmse = t (8) n 1 | qe − qm | mpe = ×∑ (9) n qm in the equations, qe is the estimated flow, qm is the measured flow, and n is the calculation number."
+8,results 3.1.
+8,"result of linear regression downscaling method for each of the seven segments, we applied identification of water bodies and river- banks on the ls8 original images and ls8 regression images."
+8,"the results showed that there were significant differences between the two images: in the original images, water bodies were discontinuous, the distribution of river width was uneven, and there were fewer pixels in the channels."
+8,"in regressed images, the water bodies were more continuous, river width was evenly distributed, and the number of water pixels increased significantly, as shown in figure 2."
+8,"among the seven segments, the water bodies identified by ls8 original images were discontinuous, with an average water body continuity index of 0.918, while the index of regression images reached 0.983, an increase of 7.1%."
+8,"affected by the spectral characteristics of the water body, ndwi images from optical satellites, such as ls8, recognize regions with deep water depth, slow flow, and smooth water surface as water bodies, as shown in figure 2(b1,c1,d1,g1)."
+8,"in these areas, the river channels are wide and there are bends in the river."
+8,deep pools are can easily be found.
+8,"in addition, the reaches with artificial dams in the river and high obstruction of water bodies have higher ndwi values, which are easy to identify [45]."
+8,many of the areas identified as land in the river channels have shallow water depths and fast flow velocities.
+8,"the ndwi value of the region with an unstable water surface is lower, so the water pixels of these reaches show poor water continuity and uneven river width distribution."
+8,"in figure 2(a1,e1,f1), rivers are narrow or straight, and the water depth is not deep."
+8,"therefore, the water bodies identified from ls8 original images are mainly distributed in the center of the river, where the water pixels show uneven river width distribution and low continuity."
+8,"in addition, the resolution of the ls8 original image is coarser than that of st2, at approximately 30 m."
+8,"the pixels close to the riverbank are usually in a mixed state of land and water, and it is difficult to separate them under the resolution of the original ls8 image."
+8,"as seen from figure 2(h1,h2), the average river length percentage in the regressed images increased from 51.2% to 90.7% after the method was applied, an increase of 40%."
+8,"the ls8 image resolution reached 10 m after method application, with the help of st2 images in the same period to determine the location of the water in the river."
+8,the ndwi value of areas with shallow depths or unstable surfaces also reached the level of other water bodies.
+8,"the scope of identified water expanded, with water pixels distributed more evenly in the river."
+8,"in addition, the pixels that originally mixed land and water were divided into water"
+9,ls8 image.
+9,"as seen from figure 2(h1,h2), the average river length percentage in the re- gressed images increased from 51.2% to 90.7% after the method was applied, an increase of 40%."
+9,"the ls8 image resolution reached 10 m after method application, with the help of st2 images in the same period to determine the location of the water in the river."
+9,the remote sens.
+9,"2022, 14, 1798 ndwi value of areas with shallow depths or unstable surfaces also reached the level 9 ofof 19 other water bodies."
+9,"the scope of identified water expanded, with water pixels distributed more evenly in the river."
+9,"in addition, the pixels that originally mixed land and water were divided into high pixels with waterndwi pixels with andndwi high values valueswith and land land pixels low pixels ndwiwith low the values."
+9,"ndwi values. remaining the remaining water bodies were connected to the originally recognized water water bodies were connected to the originally recognized water pixels, which improved pixels, continuity and solved the problem of water bodies with uneven distributions of riverdistri- which improved continuity and solved the problem of water bodies with uneven width butions of river being less width being recognizable less due to recognizable the due to the resolution effects. resolution effects."
+9,figure 2.
+9,water recognition distribution from original and regressed ls8 images.
+9,"figures (a–g) represent the water body distribution in the map before and after the method was applied to segments 0501, 0502, 0401, 0402, 0404, 0405 and 0406."
+9,"in each group, 1 represents the original image, 2 represents the regressed image."
+9,group h represents the statistical variation of seven segments in two parameters: continuity (h1) and river length percentage (h2).
+9,"bars in light blue represent original images, bars in dark blue represent regressed images."
+9,"effect of extension to runoff series from multisource data we constructed the river flow sequence of st2 optical images, st1 radar images, ls8 original optical images and ls8 regressed images and integrated the flow data into a com-"
+10,"remote sens. 2022, 14, 1798 10 of 19 posited flow sequence according to the in situ value series of typical years."
+10,"the monthly flow data series of seven sections from 2016 to 2020 were obtained, as shown in figure 3."
+10,"as in- dicated in figure 3a–g, only approximately 10 flow values were estimated in the sequences taken from the original optical images (ls8), while there were more than 50 comprehensive remote sens. 2022, 13, x for peer review 11 of 20 sequence values in the composited sequence, five times the original data."
+10,"compared with the results of various data sources, the composited sequence greatly extended the timespan of optical images and ensured the temporal continuity of flow. (e) figure 3."
+11,"remote sens. 2022, 14, 1798 11 of 19 figure 3."
+11,calculated flow sequences of each segment.
+11,"in the figure, subfigure (a–g) represent sections 0501, 0502, 0401, 0402, 0404, 0405 and 0406, respectively."
+11,"in each sequence, red circles represent st2 images, cyan meter characters stand for ls8 original images, blue crosses for st1 radar images, and green triangles for ls8 regressed images."
+11,the dark square dotted line represents the composited flow sequence after adjustment.
+11,subfigure (h) each column represents the number of composited flow values and the component source of the section.
+11,"green represents data from ls8 regressed images, blue from st1 radar images, and red from st2 optical images."
+11,the number of specific sources is marked in the corresponding color block.
+11,"as seen from the figure, st2 optical images and ls8 original optical images, the tradi- tional data sources used by flow calculation, are affected by a large amount of cloud and fog in the research area."
+11,"for 60 months over five years, the available data amount from seven sites was very small, with fewer than 30 data points from st2 images and fewer than 20 data points from ls8 original images."
+11,"in addition, due to thin cloud occlusion, the ndwi values of most pixels were generally higher when synthesizing optical images."
+11,this led to the overestimation of water body recognition when the recognition algorithm was learning to recognize water body or land pixels and mistakenly identified many areas covered by clouds as water bodies or land.
+11,"as a result, the calculated flow reached improper extreme values within 0.1 m3 /s or more than 100 m3 /s."
+11,"as an active remote sensing data source, st1 radar images are not affected by weather conditions, so without special interference, st1 images can cover the timespan of the whole year and can be used as a complete flow calculation data source."
+11,"however, radar satellites are different from optical satellites, as their imaging principle is to send electromagnetic pulses and receive echoes in the sensor, calculating underlying surface roughness based on the strength of the returned signal (backscatter)."
+11,"backscatter from water features is similar to some other surface features, such as artificial ground, which reduces identification capability for water compared to optical images, especially in ndwi images."
+11,"there is also often noise in water body recognition, as shown in the figure, where the non-flood season flow shows outliers greater than 20 m3 /s."
+11,"the flow of ls8 regressed images after downscaling is within the flow range of typical years, which can be used as a reference value for correction of flow calculated from radar images in the non-flood season."
+11,"the composited sequence retains the radar data long time span and excludes the improper extreme values in radar data with the aid of st2 images with ls8 regressed images, as shown in figure 3 in the sequence (a), (b), (c), (d)."
+11,reasonable optical image data are used as a supplement to the composited sequence to help reduce the emergence of improper extreme values in the flow data.
+11,"if there are few improper extreme values in each data source, the composited sequence will filter and adjust the reasonable estimated flow results of each data source according to the annual distribution of typical years and synthesize the flow sequence that meets the annual distribution law of true values."
+11,"accuracy comparison between runoff results from original and regressed images after statistical regression downscaling of ls8 original images in a typical year (2016), it can be seen that the daily calculated flow results were closer to the measured true value,"
+12,"remote sens. 2022, 14, 1798 12 of 19 and the rmse and mpe were greatly reduced, with a decrease in a range from 3 m3 /s to 8 m3 /s."
+12,it is shown in figure 2 that the continuity of water bodies improved after the method was applied.
+12,"as seen from figure 4 a,b, the daily flow accuracy of ls8 after regression downscaling was significantly improved."
+12,"rmse before regression was 13.5 m3 /s, and af- ter regression, it decreased to 5.4 m3 /s, reducing by nearly 60%."
+12,"this indicates that the discontinuity of the original images provided unreliable average river widths, which led to unstable discharges with an error of 13.5 m3 /s on average, and this number decreased greatly with steadier average river widths provided by water bodies with better continuity."
+12,"the mpe was reduced from approximately 216% to 44%, which shows that the average dif- ference between the calculated discharge and observed discharge decreased from 10.9 m3 /s to 4.22 m3 /s."
+12,"in the flood season, the rmse of the two flow points decreased from 8.3 m3 /s to 6.2 m3 /s, with a reduction of 25%."
+12,"the mpe decreased from 59% to 44%, indicating that the average difference between calculated discharge and observed discharge decreased from 6.73 m3 /s to 3.27 m3 /s."
+12,"according to the distribution of flow points, flows estimated before regression come with obvious random errors, which are distributed on both sides of the 1:1 line and in general relatively far away from the 1:1 line."
+12,"after downscaling, the estimated flow was distributed near the 1:1 line."
+12,"the whole fitting line slope was13 remote sens. 2022, 13, x for peer review of 20 close 2 to 1, with a smaller random error, and the fitting line r was 0.77."
+12,this shows that the fitting result of the flow point is reliable.
+12,figure 4.
+12,correlation between estimated flow and measured flow.
+12,"in the figure, (a,b) represent the figure 4."
+12,correlation between estimated flow and measured flow.
+12,"in the figure, (a,b) represent the between the comparison between comparison resultsofofestimated theresults flow estimated andand flow measured flowflow measured ls8 images fromfrom beforebefore ls8 images and after and after regression, (c,d) represent the comparison results of composited monthly flow series and meas- ured flow series before and after regression."
+12,"for all plots, the black boxes are all calculated data points in all periods and the red boxes are calculated data points in the flood season."
+13,"remote sens. 2022, 14, 1798 13 of 19 regression, (c,d) represent the comparison results of composited monthly flow series and measured flow series before and after regression."
+13,"for all plots, the black boxes are all calculated data points in all periods and the red boxes are calculated data points in the flood season."
+13,the accuracy of the composited monthly flow series also improved after regression.
+13,"as shown in figure 4c,d, the overall rmse of monthly flow reached 11.7 m3 /s before regression but decreased to 7.4 m3 /s after regression, a decrease of nearly 37%."
+13,"at the same time, mpe was reduced from 213% to 107%."
+13,this means the average difference between the calculated discharge and observed discharge decreased from 10.0 m3 /s to 5.99 m3 /s which is a significant effect.
+13,"in the flood season, the rmse of the three flows decreased from 9.43 m3 /s to 5.71 m3 /s."
+13,"the mpe decreased from 46% to 29%, as the average difference between the calculated discharge and observed discharge in flood season decreased from 8.93 m3 /s to 4.27 m3 /s."
+13,"in addition, from the distribution of flow points in the figure, the accuracy was significantly improved: the systematic error of the original monthly flow is obvious, and more flow points are distributed on the right of the 1:1 line, indicating that the estimated flow is too large."
+13,"the fitting line r2 is only 0.008, indicating that the data are relatively discrete."
+13,"after regression, the systematic error was significantly reduced so that the flow points were closer to the 1:1 line, with the slope of the fitted line closer to 1, and r2 reaching approximately 0.4, which indicates higher concentration and more reliable results."
+13,"it can be found from the figure that the accuracy of flow in the flood season is generally higher than that in the non-flood season, and the systematic error is smaller."
+13,"in the non- flood season, the estimated flow is more likely to be larger, which is discussed in section 4.3."
+13,discussion 4.1.
+13,what affects the accuracy of this method?
+13,"as shown in figure 3, under the influence of thin cloud and noise errors in the study area, the water clarity of the image is low and the flow estimation is far overestimated."
+13,"when the water clarity and natural conditions in the images change, the water area distri- bution and flow accuracy estimated by the method show significant changes."
+13,"in fact, water clarity indicates the difference between the reflection characteristics of water and land, which can be observed most directly from their ndwi value."
+13,"as we have chosen different water and land area in the images, the difference between these thresholds varies."
+13,"this study defines water clarity alone as the degree of distinction between the ndwi threshold of water pixels and land pixels in the remote sensing images, which is named pi to be the judgment standard."
+13,"pi = vwater − vland (10) in the equation, pi is the water clarity of each segment, vwater is the ndwi threshold value of water, and vland is the ndwi threshold value of land."
+13,we analyzed section 0406 and set up seven situations in this section.
+13,"in each situation, the ndwi thresholds of water bodies and land surfaces were different due to different selections of water bodies and land surface areas."
+13,"in figure 5a, water clarity values are arranged by gradients from 0 to 0.25."
+13,"as the water clarity value increases, the flow error is reduced."
+13,"its change tendency is not always the same, especially in situations where the water clarity value is less than 0.05 and the flow relative errors are 100% or more."
+13,"in these situations, a slight increase in the water clarity value leads to a significant decrease in the flow rate error, which is due to the similarity of water and land ndwi values, resulting in a large water body identification error."
+13,"as the images in the water become clearer and the water clarity value increases to over 0.05, the surfaces of the water and land differ more and the flow error starts to fall."
+13,"when the water clarity value is over 0.2, the flow errors can reach 6% and the rate of decrease slows."
+13,"this indicates that when water clarity exceeds 0.2, the difference between the water body identification error and the flow estimation accuracy is negligible, and the influence of the flow rate on estimating the effect is improved."
+14,"the water clarity value increases to over 0.05, the surfaces of the water and land differ more and the flow error starts to fall."
+14,"when the water clarity value is over 0.2, the flow errors can reach 6% and the rate of decrease slows."
+14,"this indicates that when water clarity exceeds 0.2, the difference between the water body identification error and the flow esti- remote sens. 2022, 14, 1798 mation accuracy is negligible, and the influence of the flow rate on estimating the effect is19 14 of improved."
+14,figure 5.
+14,"figure 5. (a) changediagram (a)change diagram flow of of relative flow errors relative andand errors water clarity water values, clarity in which values, the red in which line the red represents the water clarity value and the blue line represents the relative error of the flow rate; (b) line represents the water clarity value and the blue line represents the relative error of the flow rate; (b) statistical graph of the water clarity values of each section, in which the light blue column represents the original water clarity value of each section, the dark blue column represents the regressed water clarity value of each section, the orange column represents the original value of water in each section, the red column represents the regressed value of water in each section, the light green column represents the original value of land in each section, the dark green column represents the regressed value of land in each section, and the red dotted line represents the dividing line where the water clarity value is 0.2."
+14,"as seen from figure 5b, in the original sections where the regression method was not applied, most of the water clarity values are below 0.2, with only two sections exceeding 0.2."
+14,"at present, the downscaling method we adopt can significantly raise the water clarity values up to above 0.2 in the corresponding sections, but there are still some sections whose water clarity values show little effect from the regression method, due to environmental conditions or cloud cover."
+14,"according to the relationships in figure 5, the applied method in this paper helps raise water clarity values up to above 0.2, and the flow errors in the corresponding sections can thereby show a substantial decline."
+14,further application in the future and improvement of this method should focus more on adjusting and controlling
+15,"remote sens. 2022, 14, 1798 15 of 19 water clarity values in the range above 0.2, verifying the effect of water clarity values on the reduction of flow errors."
+15,what are the main influences on the long-term discharge generation of small- and medium-scale rivers?
+15,"the main factors affecting the production of long-term series flow data for small- and medium-scale rivers in this region are meteorological conditions such as clouds and fog, geographical characteristics such as river width distribution, noise errors of optical and radar satellite sensors, and the availability of remote sensing image data."
+15,"when remote sensing images are taken to directly estimate small- and medium-scale river flows at middle and low latitudes, the most influential factor is that these areas are seriously affected by clouds, shadows, and fog."
+15,"even relatively thin clouds and fog, due to their various types and different spectral attributes, cause different changes in remote sensing image values, such as ndwi [18,46]."
+15,"the value of cloud shadow is close to that of ground objects such as water bodies, which leads to the error of misidentifying water bodies even in images without direct occlusion by clouds."
+15,"most st2 and ls8 optical images in the study area are shielded by clouds, making it difficult to see the distribution of river channels and water bodies."
+15,"this also leads to the fact that even though ls8 and st2 satellites have a short revisit cycle, with averages of 25 and 47 images per year, respectively, only four and nine of these image sets could clearly identify river channels each year, which made it difficult to meet the requirements for long sequence inversion."
+15,"small- and medium-scale rivers are more difficult to accurately identify due to their narrow channels and small water surface area, which were not easy to obtain from images due to resolution limitation and interference from other ground objects."
+15,"as can be seen from figure 2, many pixels near the river banks were recognized as land before our method was applied."
+15,this is because that most of these pixels were mixed pixels with both water and land.
+15,"under landsat-8’s spatial resolution of 30 m, these pixels could cover half of the river area and caused large errors."
+15,"under high resolution of 10 m with our method applied, more pixels were divided and many of them were classified as water."
+15,"meanwhile, there were still some pixels with mixed water and land, which is inevitable."
+15,"compared with the original results, more water area has already been correctly identified."
+15,"moreover, even with the improvement in spatial resolution, a large number of artificial structures, such as paddy fields and roads around river channels, are also mistakenly identi- fied as water areas, which causes more interference with river channel recognition [44,45,47], resulting in extreme outliers in water body recognition in the images and discontinuous estimation of river flow."
+15,"in the period not covered by clouds and fog, the river in the image is only shown as one pixel wide in the ls8 images."
+15,"in areas with a high degree of vegetation coverage on the bank or where a bridge spans the river, the edge of the water body cannot be identified accurately, so the direction and width of the flow cannot be extracted from the remote sensing images."
+15,"in the st2 image, the water body performance is better, and the water area identification and flow estimation results of the river center are improved due to the higher resolution, but there are also problems due to vegetation and artificial structures."
+15,"in addition, noise errors caused by the imaging principles of different sensors also affect the production of long series flow data in small- and medium-scale rivers."
+15,"taking st2 and st1 as examples, they represent passive optical remote sensing sensors and active radar remote sensing sensors, respectively."
+15,"as mentioned above, the noise of optical images mainly comes from clouds and fog, while the noise of radar sar images mainly comes from the shadows of mountains and buildings, flat road surfaces and ships in water [28,34,44]."
+15,"a smooth road surface around the river or the shadow of a mountain may make the identification of the water area too large or too small, which does not meet the conditions of river calculation and has a certain impact on the calculation of long series flow."
+15,"it should be noted that at present, most spatial resolutions of free remote sensing data are too coarse for small- and medium-scale rivers, and satellite sensors such as modis are completely unable to be used at resolutions below 250 m."
+15,the finest sentinel series only
+16,"remote sens. 2022, 14, 1798 16 of 19 started in 2016 and access to the more sophisticated gf-2 commercial satellite is expensive and it has not seen widespread use."
+16,"therefore, ls8 is still mainly used for long sequence flow production."
+16,what are the differences between discharges in flood and nonflood seasons?
+16,"in part 3.3, we carry out the accuracy verification of the daily and monthly flow sequences of section 0406 in 2016, as shown in figure 4."
+16,we find that the flow estimation accuracy was higher in the flood season than in the non-flood season.
+16,this is because the actual channel shape distribution was more complex.
+16,"as we adopted the method of hydraulic geometric fitting of the river, there were some errors in the fitted shape of the channel under the water surface."
+16,the underwater part may be controlled by different hydraulic geometry relations corresponding to the wet season and dry season.
+16,"here, we calculated the river width error and flow error according to the true and estimated flow values of section 0406 in 2016 and their corresponding river widths, which were grouped according to the flood season and non-flood season and ranked according to the river width error from small to large."
+16,"figure 6 shows that the flow rate error growth rate was far lower than that of the river width error in the flood season, while the error flow growth rate during most of the non-flood season was higher than that of river width, which indicates that error caused by river width recognition had a larger impact on flow accuracy in the non-flood season than in the flood season."
+16,"our algorithm is more sensitive to large flow calculations; relatively speaking, the flow calculation error of low discharge may be larger."
+16,"this is because when the flow is low in the non-flood season, the water was mainly distributed in the middle of the channel, and the shape of the center of the channel was deep and narrow with a v-shape rather than wide and shallow with a u-shape."
+16,"with the slight change in the river width in this period, hydraulic aspects of the change in the flow were relatively more significant."
+16,"in the flood season, the change in discharge with river width was not significant."
+16,the influence of complex river shape on the relationship between river width and discharge exists not only with in a single section but also with a certain deviation between upper and lower sections of the same reach.
+16,"the hydraulic geometric relationship of stations may also change with changes in time, climate and topographic conditions."
+16,"if the river shape and hydraulic geometry are fitted according to the average width of the flood and non-flood seasons, and different hydraulic formulas are used remote sens. 2022, 13, x for peer review 17 of to 20 calculate them, the complex morphological changes of the river channel can be taken into account, and the errors associated with the flood and non-flood seasons can be reduced."
+16,figure 6.
+17,"remote sens. 2022, 14, 1798 17 of 19 influence of river width error on flow error in (a) flood and (b) non-flood season."
+17,the solid figure 6.
+17,"influence line, the blue line is flow error, the blue dotted line is its fitting line, solid red the solid red line line is is river width error, river width error, and the dotted red line is its fitting line."
+17,conclusions 5.
+17,"conclusions 5. solve the to solve to problems associated the problems associated with long-term small- with long-term small- andand medium-scale river flow medium-scale river flow monitoring, we developed a new method based on statistical linear regression monitoring, we developed a new method based on statistical linear regression and re- and remote sensing mote hydrologic sensing stations hydrologic to achieve stations long long to achieve sequence flow flow sequence fromfrom high-precision remote high-precision re- sensing images."
+17,with remote sensing images downscaled from 30 m to mote sensing images.
+17,"with remote sensing images downscaled from 30 m to 10 m resolu- 10 m resolution and multisource tion data integration and multisource of opticalofsatellites, data integration radar satellites optical satellites, and uavs, radar satellites river and uavs, can flowriver be calculated with high accuracy and composited according to the rationality flow can be calculated with high accuracy and composited according to the rationality of of flow data."
+17,"in this case, different information can be obtained from multi-source remote sensing images, flow data."
+17,"in this case, different information can be obtained from multi-source remote which indeed raises the utilization efficiency of these data sources."
+17,"the method was tested sensing images, which indeed raises the utilization efficiency of these data sources."
+17,the on the yunnan-guizhou plateau in southwest china and the accuracy of the results was method was tested on the yunnan-guizhou plateau in southwest china and the accuracy verified.
+17,"the results showed that (1) after this method was applied, the spatial resolution of of the results was verified."
+17,"the results showed that (1) after this method was applied, the landsat-8 was significantly improved by linear downscaling and the water continuity index spatial resolution of landsat-8 was significantly improved by linear downscaling and the was increased by 7.1%."
+17,"the average river length percentage in the channel reached 90.7%, water continuity index was increased by 7.1%."
+17,"the average river length percentage in the an increase of 40%; (2) with the help of multisource data, the outliers of the flow series were greatly reduced, and the timespan was increased from approximately 10 data points in 5 years to more than 54 monthly flow data points, ensuring the temporal continuity of the calculated flow; (3) after downscaling, the images with better water continuity showed more stable river width, which reduced the rmse of the landsat-8 estimated flow from 13.5 m3 /s to 5.4 m3 /s, only 2/5 of the original."
+17,"the mpe was reduced from 216% to 44%, specifically from 10.9 m3 /s to 4.22 m3 /s."
+17,"the rmse and mpe of the synthetic monthly sequence were also reduced, from 11.7 m3 /s to 7.4 m3 /s and from 10.0 m3 /s to 5.99 m3 /s respectively, after this method was applied."
+17,"our method is a complete set of mechanisms for image acquisition, downscaling, flow estimation and composited adjustment."
+17,it can be applied universally for flow estimation of small- and medium-scale rivers.
+17,our method can provide a means of flow estimation for areas where the scope of remote sensing methods has previously been limited.
+17,"in addition, this method can directly obtain continuous and high-precision water area inundation maps without the interference of weather and time, which will be of great value for water resource management and utilization."
+17,"author contributions: conceptualization, h.l. and y.z.; methodology, s.y. and h.l.; software, s.y. and z.p.; validation, y.z.; investigation, y.z., z.p. and y.l.; resources, y.l. and x.w.; writing—original draft preparation, h.l. and y.z.; writing—review and editing, h.l. and y.z.; visualization, y.z."
+18,"remote sens. 2022, 14, 1798 18 of 19 supervision, h.l. and s.y.; project administration, s.y."
+18,all authors have read and agreed to the published version of the manuscript.
+18,funding: this research was funded by the national natural science foundation of china (grant nos.
+18,"u1812401, 41801334), key project of philosophy and social sciences planning in guizhou province (19gzzd07), the open research fund program of state key laboratory of hydroscience and engineering (sklhse-2021-a-04), the opening fund of state key laboratory of geohazard prevention and geoenvironment protection (chengdu university of technology, sklgp2020k005), and the fundamental research funds for the central universities (2017nt11)."
+18,data availability statement: not applicable.
+18,conflicts of interest: the authors declare no conflict of interest.
+18,references 1.
+18,"alsdorf, d.e."
+18,"; rodríguez, e."
+18,"; lettenmaier, d.p."
+18,measuring surface water from space.
+18,geophys.
+18,"2007, 45."
+18,[crossref] 2.
+18,"ashmore, p."
+18,"; sauks, e."
+18,prediction of discharge from water surface width in a braided river with implications for at-a-station hydraulic geometry.
+18,water resour.
+18,"2006, 42."
+18,[crossref] 3.
+18,"bao, w."
+18,"; zhang, x."
+18,"; yu, z."
+18,"; qu, s."
+18,real-time equivalent conversion correction on river stage forecasting with manning’s formula.
+18,hydrol.
+18,"2011, 16, 1–9."
+18,[crossref] 4.
+18,"birkett, c.m."
+18,"; mertes, l.a.k."
+18,"; dunne, t."
+18,"; costa, m.h."
+18,"; jasinski, m.j."
+18,surface water dynamics in the amazon basin: application of satellite radar altimetry.
+18,geophys.
+18,atmos.
+18,"2002, 107, lba 26-1–lba 26-21."
+18,[crossref] 5.
+18,"bjerklie, d.m."
+18,"; dingman, s.l."
+18,"; vorosmarty, c.j."
+18,"; bolster, c.h."
+18,"; congalton, r.g."
+18,evaluating the potential for measuring river discharge from space.
+18,hydrol.
+18,"2003, 278, 17–38."
+18,[crossref] 6.
+18,"bjerklie, d.m."
+18,"; moller, d."
+18,"; smith, l.c."
+18,"; dingman, s.l."
+18,estimating discharge in rivers using remotely sensed hydraulic information.
+18,hydrol.
+18,"2005, 309, 191–209."
+18,[crossref] 7.
+18,"chang, x.y."
+18,studies on guizhou less sunny more rainy days.
+18,"master’s thesis, guizhou normal university, guiyang, china, 2014."
+18,"chastain, r."
+18,"; housman, i."
+18,"; goldstein, j."
+18,"; finco, m."
+18,"; tenneson, k."
+18,"empirical cross sensor comparison of sentinel-2a and 2b msi, landsat-8 oli, and landsat-7 etm+ top of atmosphere spectral characteristics over the conterminous united states."
+18,remote sens.
+18,environ.
+18,"2018, 221, 274–285."
+18,[crossref] 9.
+18,"chen, j."
+18,"; yu, j."
+18,"; bai, x."
+18,"; zeng, y."
+18,"; wang, j."
+18,fragility of karst ecosystem and environment: long-term evidence from lake sediments.
+18,agric.
+18,ecosyst.
+18,environ.
+18,"2020, 294, 106862."
+18,[crossref] 10.
+18,"chokmani, k."
+18,"; ouarda, t.b.m.j."
+18,physiographical space-based kriging for regional flood frequency estimation at ungauged sites.
+18,water resour.
+18,"2004, 40."
+18,[crossref] 11.
+18,"dinar, s."
+18,"the geographical dimensions of hydro-politics: international freshwater in the middle east, north africa, and central asia."
+18,eurasian geogr.
+18,"2012, 53, 115–142."
+18,[crossref] 12.
+18,"duan, p."
+18,"; wang, m."
+18,"; lei, y."
+18,"; li, j."
+18,research on estimating water storage of small lake based on unmanned aerial vehicle 3d model.
+18,water resour.
+18,"2021, 48, 690–700."
+18,[crossref] 13.
+18,"durand, m."
+18,"; rodriguez, e."
+18,"; alsdorf, d.e."
+18,"; trigg, m."
+18,"estimating river depth from remote sensing swath interferometry measurements of river height, slope, and width."
+18,ieee j.
+18,earth obs.
+18,remote sens.
+18,"2009, 3, 20–31."
+18,[crossref] 14.
+18,"flener, c."
+18,"; vaaja, m."
+18,"; jaakkola, a."
+18,"; krooks, a."
+18,"; kaartinen, h."
+18,"; kukko, a."
+18,"; kasvi, e."
+18,"; hyyppä, h."
+18,"; hyyppä, j."
+18,"; alho, p."
+18,seamless mapping of river channels at high resolution using mobile lidar and uav-photography.
+18,remote sens.
+18,"2013, 5, 6382–6407."
+18,[crossref] 15.
+18,"huang, c."
+18,"; thomas, n."
+18,"; goward, s.n."
+18,"; masek, j.g."
+18,"; zhu, z."
+18,"; townshend, j.r.g."
+18,"; vogelmann, j."
+18,automated masking of cloud and cloud shadow for forest change analysis using landsat images.
+18,remote sens.
+18,"2010, 31, 5449–5464."
+18,[crossref] 16.
+18,"immerzeel, w."
+18,"; droogers, p."
+18,calibration of a distributed hydrological model based on satellite evapotranspiration.
+18,hydrol.
+18,"2008, 349, 411–424."
+18,[crossref] 17.
+18,"irish, r.r."
+18,"; barker, j.l."
+18,"; goward, s.n."
+18,"; arvidson, t."
+18,characterization of the landsat-7 etm+ automated cloud-cover assessment (acca) algorithm.
+18,photogramm.
+18,remote sens.
+18,"2006, 72, 1179–1188."
+18,[crossref] 18.
+18,"jiang, h."
+18,"; wang, m."
+18,"; hu, h."
+18,"; xu, j."
+18,evaluating the performance of sentinel-1a and sentinel-2 in small waterbody mapping over urban and mountainous regions.
+18,"water 2021, 13, 945."
+18,[crossref] 19.
+18,"borah, d.k."
+18,"; bera, m."
+18,watershed-scale hydrologic and nonpoint-source pollution models: review of applications.
+18,agric.
+18,"2004, 47, 789–803."
+18,[crossref] 20.
+18,"kebede, m.g."
+18,"; wang, l."
+18,"; yang, k."
+18,"; chen, d."
+18,"; li, x."
+18,"; zeng, t."
+18,"; hu, z."
+18,discharge estimates for ungauged rivers flowing over complex high-mountainous regions based solely on remote sensing-derived datasets.
+18,remote sens.
+18,"2020, 12, 1064."
+18,[crossref] 21.
+18,"kim, y."
+18,"; park, n.-w."
+18,comparison of regression models for spatial downscaling of coarse scale satellite-based precipitation products.
+18,"in proceedings of the 2017 ieee international geoscience and remote sensing symposium (igarss), fort worth, tx, usa, 23–28 july 2017; pp."
+18,4634–4637.
+18,[crossref]
+19,"remote sens. 2022, 14, 1798 19 of 19 22."
+19,"lin, c.-h."
+19,"; tsai, p.-h."
+19,"; lai, k.-h."
+19,"; chen, j.-y."
+19,cloud removal from multitemporal satellite images using information cloning.
+19,ieee trans.
+19,geosci.
+19,remote sens.
+19,"2012, 51, 232–241."
+19,[crossref] 23.
+19,"liu, y."
+19,"; gupta, h.v."
+19,uncertainty in hydrologic modeling: toward an integrated data assimilation framework.
+19,water resour.
+19,"2007, 43."
+19,[crossref] 24.
+19,"liu, y."
+19,"; zhang, w."
+19,"; zhang, z."
+19,a conceptual data model coupling with physically-based distributed hydrological models based on catchment discretization schemas.
+19,hydrol.
+19,"2015, 530, 206–215."
+19,[crossref] 25.
+19,"lou, h."
+19,"; wang, p."
+19,"; yang, s."
+19,"; hao, f."
+19,"; ren, x."
+19,"; wang, y."
+19,"; shi, l."
+19,"; wang, j."
+19,"; gong, t."
+19,combining and comparing an unmanned aerial vehicle and multiple remote sensing satellites to calculate long-term river discharge in an ungauged water source region on the tibetan plateau.
+19,remote sens.
+19,"2020, 12, 2155."
+19,[crossref] 26.
+19,"lumbroso, d."
+19,"; gaume, e."
+19,reducing the uncertainty in indirect estimates of extreme flash flood discharges.
+19,hydrol.
+19,"2012, 414–415, 16–30."
+19,[crossref] 27.
+19,"mcfeeters, s.k."
+19,the use of the normalized difference water index (ndwi) in the delineation of open water features.
+19,remote sens.
+19,"1996, 17, 1425–1432."
+19,[crossref] 28.
+19,"milly, p.c.d."
+19,"; dunne, k.a."
+19,"; vecchia, a.v."
+19,global pattern of trends in streamflow and water availability in a changing climate.
+19,"nature 2005, 438, 347–350."
+19,[crossref] 29.
+19,"morel, m."
+19,"; booker, d.j."
+19,"; gob, f."
+19,"; lamouroux, n."
+19,consistent theoretical and empirical predictions of at-a-station hydraulic geometry exponents in stream reaches.
+19,water resour.
+19,"res. 2020, 56, e2020wr027242."
+19,[crossref] 30.
+19,"passalacqua, p."
+19,"; trung, t.d."
+19,"; foufoula-georgiou, e."
+19,"; sapiro, g."
+19,"; dietrich, w.e."
+19,a geometric framework for channel network extraction from lidar: nonlinear diffusion and geodesic paths.
+19,geophys.
+19,earth surf.
+19,"2010, 115, f01002."
+19,[crossref] 31.
+19,"platnick, s."
+19,"; king, m.d."
+19,"; ackerman, s.a."
+19,"; menzel, w.p."
+19,"; baum, b.a."
+19,"; riédi, j.c."
+19,"; frey, r.a."
+19,the modis cloud products: algorithms and examples from terra.
+19,ieee trans.
+19,geosci.
+19,remote sens.
+19,"2003, 41, 459–473."
+19,[crossref] 32.
+19,"rusnák, m."
+19,"; sládek, j."
+19,"; kidová, a."
+19,"; lehotský, m."
+19,template for high-resolution river landscape mapping using uav technology.
+19,"measurement 2018, 115, 139–151."
+19,[crossref] 33.
+19,"spiliotopoulos, m."
+19,"; adaktylou, n."
+19,"; loukas, a."
+19,"; michalopoulou, h."
+19,"; mylopoulos, n."
+19,"; toulios, l."
+19,a spatial downscaling pro-cedure of modis derived actual evapotranspiration using landsat images at central greece.
+19,"in proceedings of the first international conference on remote sensing and geoinformation of the environment (rscy2013), paphos, cyprus, 5 august 2013."
+19,[crossref] 34.
+19,"vörösmarty, c.j."
+19,"; mcintyre, p.b."
+19,"; gessner, m.o."
+19,"; dudgeon, d."
+19,"; prusevich, a."
+19,"; green, p."
+19,"; glidden, s."
+19,"; bunn, s.e."
+19,"; sullivan, c.a."
+19,"; liermann, c.r.; et al."
+19,global threats to human water security and river biodiversity.
+19,"nature 2010, 467, 555–561."
+19,[crossref] [pubmed] 35.
+19,"wang, z."
+19,"; liu, j."
+19,"; li, j."
+19,"; meng, y."
+19,"; pokhrel, y."
+19,"; zhang, h."
+19,basin-scale high-resolution extraction of drainage networks using 10-m sentinel-2 imagery.
+19,remote sens.
+19,environ.
+19,"2021, 255, 112281."
+19,[crossref] 36.
+19,"wu, g."
+19,"; liu, y."
+19,downscaling surface water inundation from coarse data to fine-scale resolution: methodology and accuracy assessment.
+19,remote sens.
+19,"2015, 7, 15989–16003."
+19,[crossref] 37.
+19,"xu, k."
+19,"; zhang, j."
+19,"; watanabe, m."
+19,"; sun, c."
+19,"estimating river discharge from very high-resolution satellite data: a case study in the yangtze river, china."
+19,hydrol.
+19,process.
+19,"2004, 18, 1927–1939."
+19,[crossref] 38.
+19,"yamazaki, d."
+19,"; ikeshima, d."
+19,"; sosa, j."
+19,"; bates, p.d."
+19,"; allen, g.h."
+19,"; pavelsky, t.m."
+19,merit hydro: a high-resolution global hydrogra- phy map based on latest topography dataset.
+19,water resour.
+19,"2019, 55, 5053–5073."
+19,[crossref] 39.
+19,"yang, s."
+19,"; bai, j."
+19,"; zhao, c."
+19,"; lou, h."
+19,"; zhang, c."
+19,"; guan, y."
+19,"; zhang, y."
+19,"; wang, z."
+19,"; yu, x."
+19,the assessment of the changes of biomass and riparian buffer width in the terminal reservoir under the impact of the south-to-north water diversion project in china.
+19,indic.
+19,"2018, 85, 932–943."
+19,[crossref] 40.
+19,"yang, s."
+19,"; guan, y."
+19,"; zhao, c."
+19,"; zhang, c."
+19,"; bai, j."
+19,"; chen, k."
+19,"determining the influence of catchment area on intensity of gully erosion using high-resolution aerial imagery: a 40-year case study from the loess plateau, northern china."
+19,"geoderma 2019, 347, 90–102."
+19,[crossref] 41.
+19,"yang, s."
+19,"; li, c."
+19,"; lou, h."
+19,"; wang, p."
+19,"; wang, j."
+19,"; ren, x."
+19,performance of an unmanned aerial vehicle (uav) in calculating the flood peak discharge of ephemeral rivers combined with the incipient motion of moving stones in arid ungauged regions.
+19,remote sens.
+19,"2020, 12, 1610."
+19,[crossref] 42.
+19,"yang, s."
+19,"; wang, j."
+19,"; wang, p."
+19,"; gong, t."
+19,"; liu, h."
+19,low altitude unmanned aerial vehicles (uavs) and satellite remote sensing are used to calculated river discharge attenuation coefficients of ungauged catchments in arid desert.
+19,"water 2019, 11, 2633."
+19,[crossref] 43.
+19,"yang, s."
+19,"; wang, p."
+19,"; lou, h."
+19,"; wang, j."
+19,"; zhao, c."
+19,"; gong, t."
+19,estimating river discharges in ungauged catchments using the slope–area method and unmanned aerial vehicle.
+19,"water 2019, 11, 2361."
+19,[crossref] 44.
+19,"zhang, x."
+19,"; yan, x."
+19,a new statistical precipitation downscaling method with bayesian model averaging: a case study in china.
+19,"2015, 45, 2541–2555."
+19,[crossref] 45.
+19,"zhou, n."
+19,"; li, x."
+19,"; shen, z."
+19,"; wu, t."
+19,"; luo, j."
+19,geo-parcel-based change detection using optical and sar images in cloudy and rainy areas.
+19,ieee j.
+19,earth obs.
+19,remote sens.
+19,"2020, 14, 1326–1332."
+19,[crossref] 46.
+19,"zhu, z."
+19,"; wang, s."
+19,"; woodcock, c.e."
+19,"improvement and expansion of the fmask algorithm: cloud, cloud shadow, and snow detection for landsats 4–7, 8, and sentinel 2 images."
+19,remote sens.
+19,environ.
+19,"2015, 159, 269–277."
+19,[crossref] 47.
+19,"zhu, z."
+19,"; woodcock, c.e."
+19,object-based cloud and cloud shadow detection in landsat imagery.
+19,remote sens.
+19,environ.
+19,"2012, 118, 83–94."
+19,[crossref]

@@ -35,19 +35,19 @@ The screening results were downloaded as two .csvs (include, exclude) on Oct 3, 
 ## Consolidate Colandr results
 
 ```{r}
-incl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_240802.csv'))
-excl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_excl_240802.csv'))
+incl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_241004.csv'))
+excl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_excl_241004.csv'))
 results_df <- bind_rows(incl_df, excl_df) %>%
   janitor::clean_names() %>%
   mutate(date_screened_t_a = as.Date(date_screened_t_a)) %>%
-  ### keep only those after the date of uploading the sample to Colandr
-  filter(date_screened_t_a >= as.Date('2024-07-08')) %>%
-  ### exclude any after the August 2nd results download
-  filter(date_screened_t_a <= as.Date('2024-08-02')) %>%
-  select(title, abstract, year = publication_year, author = authors, keywords, doi, tags,
+  ### keep only those after the date of previous download
+  filter(date_screened_t_a >= as.Date('2024-08-02')) %>%
+  ### exclude any after the Oct 4 results download
+  filter(date_screened_t_a <= as.Date('2024-10-04')) %>%
+  select(title, abstract, year = publication_year, author = authors, doi, tags,
          screening_status = t_a_status, excl_reasons = t_a_exclusion_reasons)
 
-write_csv(results_df, here('_data/5b_sample_1000/sample_screened_results_240802.csv'))
+write_csv(results_df, here('_data/5c_classifier_round1/classifier_round1_screened_results_241004.csv'))
 ```
 
 ## Isolate includes and save as .bib for Zotero
@@ -56,46 +56,49 @@ Write out dois as .csv, import into Zotero using the magic wand (add objects by 
 
 NOTES:
 
-* Colandr seems to fuck up the author order by alphabetizing when exporting... UUUUGHGHGHGHGHGHGHGH... WHHYYYYYYYY
-* Use VPN to log into UCSB account for more likely retrieval?
-* Here, we use the Colandr results to identify DOIs that are included.  We find the original cleaned sample refs and filter to the relevant DOIs and then save that out as a .bib.  This should preserve author order and avoid future fuckery.
+This screened set includes the 200 from the classifier output as well as others from the 1000-sample set in the previous round that were still in Colandr.
 
 
 ```{r}
-sample_refs <- read_refs(here('_data/3_refs_clean/sample/sample_1000_240708.ris'))
+sample_refs <- read_refs(here('_data/3_refs_clean/sample/sample_1000_240708.ris')) %>%
+  rename(key = notes)
+round1_refs <- read_refs(here('_data/5c_classifier_round1/predicted_classifier_round1_sample_200.ris')) %>%
+  rename(key = notes)
+
 x <- results_df %>%
   filter(screening_status == 'included' & !is.na(doi))
 
-sample_incl <- sample_refs %>% filter(doi %in% x$doi)
+sample_incl <- sample_refs %>% filter(doi %in% x$doi) %>%
+  mutate(year = as.integer(year))
+round1_incl <- round1_refs %>% filter(doi %in% x$doi) %>%
+  left_join(read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))) %>%
+  bind_rows(sample_incl)
 
-write_refs(sample_incl, format = 'bib', file = here('_data/5b_sample_1000/incl_bib_to_zotero.bib'))
+write_refs(round1_incl, format = 'bib', file = here('_data/5c_classifier_round1/incl_bib_to_zotero.bib'))
 
 ```
 
-Out of 77 items, 38 did not automatically find .pdfs.  For 33 of these, pdfs were found manually; of the other five, two were in Chinese, two were behind paywalls, and one was not found.
-
-
+ 
 ## Import full texts into Zotero
 
-Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
+Of the 62 references, 28 did not automatically retrieve PDFs.  Manually I found 26; two more were behind paywalls.
+
 
 ```{r}
-sbr_incl_df <- read_csv(here('_data/5b_sample_1000/sample_screened_results_240802.csv')) %>%
-  filter(screening_status == 'included')
-zot_check <- read_refs(here('_data/5b_sample_1000/incl_bib_from_zotero_240802.bib')) %>%
+zot_check <- read_refs(here('_data/5c_classifier_round1/incl_bib_from_zotero_241004.bib')) %>%
   mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
-         doi = tolower(doi))
+         doi = tolower(doi)) %>%
+  mutate(key = str_remove_all(key, '\\\\'))
 
 pdf_find <- zot_check %>% filter(is.na(file))
 ```
 
-Out of `r nrow(sbr_incl_df)` included papers, `r nrow(zot_check)` have records in Zotero; of these, `r nrow(pdf_find)` do(es) not have a .pdf available.
+Out of `r nrow(round1_incl)` included papers, `r nrow(zot_check)` have records in Zotero; of these, `r nrow(pdf_find)` do(es) not have a .pdf available.
 
 ## Copy files from Zotero to repo
 
 ```{r}
 zot_fs <- zot_check %>%
-  select(author, title, year, file) %>%
   filter(!is.na(file)) %>%
   mutate(file = str_split(file, ';')) %>%
   unnest(file) %>%
@@ -112,17 +115,17 @@ zot_fs <- zot_check %>%
   ungroup() %>%
   mutate(pdf_out = sprintf('%s_%s_%s.pdf', author_short, year, title_short),
          pdf_out = str_remove_all(pdf_out, 'NA_'),
-         pdf_out = file.path('_data/5b_sample_1000/pdf', pdf_out)) %>%
-  select(title, author, year, file, pdf_out) %>%
+         pdf_out = here('_data/5c_classifier_round1/pdf', pdf_out)) %>%
+  select(title, author, year, key, file, pdf_out) %>%
   mutate(csv_out = str_replace(pdf_out, '/pdf/', '/csv/') %>% str_replace('.pdf$', '.csv'))
 
 if(any(!file.exists(zot_fs$pdf_out))) {
-  file.copy(from = zot_fs$file, to = here(zot_fs$pdf_out)) %>% sum()
+  file.copy(from = zot_fs$file, to = zot_fs$pdf_out) %>% sum()
 }
 
 zot_fs_out <- zot_fs %>%
   select(-file)
-write_csv(zot_fs_out, here('_data/5b_sample_1000/int/fulltext_files.csv'))
+write_csv(zot_fs_out, here('_data/5c_classifier_round1/int/fulltext_files.csv'))
 ```
 
 ## Extract text from pdfs

@@ -1,0 +1,241 @@
+page,p
+1,"artificial satellites, vol."
+1,2 – 2015 doi: 10.1515/arsa-2015-0007 mesoscale convective systems monitoring on the basis of msg data – case studies k.
+1,"szafranek1),3), b."
+1,"jakubiak1), r."
+1,"lech2), m."
+1,"tomczuk2) (1) university of warsaw, interdisciplinary centre for mathematical and computational modelling, poland (2) hydrometeorological service of the polish armed forces, poland (3) military university of technology, faculty of civil engineering and geodesy, poland abstract analysis described in the paper were made in the frame of the proza (operational decision- making based on atmospheric conditions, http://projekt-proza.pl/) project co-financed by the european union through the european regional development fund."
+1,"one of its tasks was to develop an operational forecast system, which is going to support different economies branches like forestry or fruit farming by reducing the risk of economic decisions with taking into consideration weather conditions."
+1,the main purpose of the paper is to describe the method of the mcss (mesoscale convective systems) tracking on the basis of the msg (meteosat second generation) data.
+1,until now several tests were performed.
+1,the meteosat satellite images in selected spectral channels collected for central europe region for may 2010 were used to detect and track cloud systems recognized as mcss in poland.
+1,the isis tracking method was applied here.
+1,first the cloud objects are defined using the temperature threshold and next the selected cells are tracked using principle of overlapping position on consecutive images.
+1,the main benefit of using a temperature threshold to define cells is its efficiency.
+1,during the tracking process the algorithm links the cells of the image at time t to the one of the following image at time t+dt that correspond to the same cloud system.
+1,"selected cases present phenomena, which appeared at the territory of poland."
+1,they were compared to the weather radar data and ukmo um (united kingdom metoffice unified model) forecasts.
+1,the paper presents analysis of exemplary mcss in the context of near real- time prediction system development and proves that developed tool can be helpful in mcss monitoring.
+1,"keywords: mcs, tracking, msg, radar data, ukmo um 1."
+1,"main goals analysis described in this paper were performed in the frame of proza (operational decision-making based on atmospheric conditions, http://projekt-proza.pl/) project."
+1,"one of its main purposes was to forecast severe weather conditions, which can be crucial for agriculture, forestry and fruit-farming."
+1,the main goal of the analysis presented in this paper is to take full advantage of various source of data to track possibly dangerous meteorological phenomena.
+2,"92 nowadays, this problem has a very significant, practical meaning, because of many damages caused by severe weather in poland."
+2,use of different types of data increases reliability of tracking and forecasting and decreases risk of huge damages.
+2,the paper refers to the proza’s 1st tasks - development of the operational weather forecasts.
+2,"system of sudden convective phenomena forecasting, detection and monitoring is one of the subject investigated in the frame of this task."
+2,sudden storms generated during mesoscale convective systems (mcss) evolution are one of the most dangerous atmospheric phenomena.
+2,several case studies are being used for convective system classification and to define convection development precursors.
+2,"the goal was to create a system, which could track (and forecast in a future) mcs occurrence on a territory of the eastern europe in a real time based on msg data."
+2,"to perform some preliminary tests, archive msg (meteosat second generation) data has been analyzed."
+2,the paper presents results of this analysis made for the may 2010.
+2,data sets for may have been chosen because large number of mcs is usually reported in this month.
+2,"mesoscale convective systems (mcs) in poland mcs is a complex of thunderstorms, which are organized on a scale larger than individual thunderstorms."
+2,they usually last for several hours and appear mainly during warm seasons during the late afternoon and evening hours.
+2,"this convective phenomena concern meso- and upper meso- scale, which correspond to the length-scale l between 2000 and 20 km (cotton et al., 2011)."
+2,"despite relatively small size mcs are one of the most dangerous atmospheric phenomena and can cause severe weather like flash flooding, tornadoes and hail (morel and senesi, 2002a) and bring huge damage in different economies branches like forestry or fruit farming (pajek et al., 2008)."
+2,"mcs forecasting is still a challenge, methods of mcs prognosis are based on real-time observations and knowledge of the environmental conditions (ducrocq et al."
+2,1998).
+2,"taking into account current state-of-art and available data, the optimal method should take advantage of various source of data (satellite images, radar data)."
+2,"radar data were used e.g. in analysis concerning relationship between mcs and radar data (houze et al., 1990)."
+2,this study however focuses on the msg data analysis.
+2,"characteristic of european mcs were described in details in (morel and senesi, 2002b)."
+2,in europe mcs have smaller sizes (in comparison with e.g. the ones observed in america).
+2,they occur mainly over mediterranean area.
+2,this study focused on the area of the eastern europe (mainly poland).
+2,"in poland mcss number and sizes are much lower, but many cases proved that they can cause significant damages (pajek et al., 2008, www.imgw.pl)."
+2,in our studies we took into consideration the phenomena of about 600 kilometers length-scale and smaller.
+2,"this paper employs methodology developed by (morel and senesi, 2002a), who created and described mcs database using meteosat infrared channel (ir10.8) images."
+2,"they studied five warm seasons from 1993 to 1997 over europe, the western mediterranean and north africa."
+2,"as they proved, meteosat channel 9 (10.8 μm) is self-sufficient in the discrimination of mcss, so the analysis presented here has been performed using this type of data."
+2,"isis cloud tracking method numerical weather prediction models do not provide sufficient information with regards to the mcs track forecasts, therefore the msg images observations are used in this study."
+2,the isis (instrument de suivi dans l’imagerie satellitaire) cloud tracking method was applied.
+2,it is based on the overlapping of cells (cloud systems as connected sets of pixels) on the consecutive images.
+2,isis method takes also into consideration an estimated movement of
+3,"93 cloud (morel and senesi, 2002a)."
+3,during the tracking process the cells of the image at time t are linked to the one of the following image at time t+dt that correspond to the same cloud system.
+3,"the algorithm handles splits and merges of cells, takes cell movement into account and has three parameters: the brightness temperature (which corresponds to the temperature between -30°c and -55°c), area (due to (morel and senesi, 2002a, 1000 or 5000 km2 is used in practice, but here also smaller phenomena were analyzed) and a minimum overlapping thresholds."
+3,after detection of a cloud system it is tracked on the following images using isis method to create its trajectory.
+3,this tracking method was implemented for the purpose of analysis of the msg data with 5 minutes temporal resolution.
+3,"for the mcss tracking only infrared (10.8μm) msg images were used, as (morel and senesi, 2002a) proved that this channel is sufficient for this purpose."
+3,as a tool a dedicated software (hdf view) has been created (the name is the same as the popular hdf group’s tool).
+3,it has been written in c++ and compiled for linux and windows operating systems.
+3,description of the data used for analysis for the purpose of mcs monitoring msg data were used.
+3,radar data and united kingdom metoffice (ukmo) unified model (um) forecasts were used to check the mutual agreement of different types of data.
+3,the archive msg data were taken from the eumetsat data centre.
+3,"they were gathered between 1st and 31st of may and between 1st and 31st of august, 2010 by seviri (spinning enhanced visible and infrared imager) radiometer placed on the meteosat-8 (msg1) with 5 minutes temporal resolution."
+3,concerning proza’s area of interests only the europe area was selected (mainly territory of poland and other baltic basin countries).
+3,these data were processed to level 1.5 (msg15) and delivered in hdf5 format.
+3,level 1.5 stands for the result of the raw satellite data processing.
+3,"such images are corrected for radiometric and geometric effects, geolocated using a standardised projection, calibrated and radiance- linearised (eumetsat, 2013)."
+3,images show temporary cloudiness.
+3,this data were analyzed in the context of mcs using mainly the criteria of temperature (between -35° and -55°c) and area threshold.
+3,"because of a small number of mesoscale phenomena, some smaller cloud system, which could be possibly related not only to sudden storms and rainfalls, but also some smaller precipitation, were also taken into account."
+3,primary radar observations used in our study consist of 15 minutes reflectivity data collected from all radars operated in the area of baltic sea catchment.
+3,these data are integrated into 1h precipitation accumulations using a standard z-r relationship.
+3,"radar-based rainfall fields are estimated by recalibration of the reflectivity z -rainfall rate r relationship on the basis of ground measurements provided by a rain gauge network (alfieri et al., 2010)."
+3,images present reflectivity for the specified moment with the 2 km spatial resolution.
+3,"third source of data is united kingdom met office um weather forecast model (unified model, http://www.metoffice.gov.uk)."
+3,in the year 2010 the 6.6 version of the um has been explored operationally at the icm uw.
+3,the model solves the nonhydrostatic equations in central europe domain with 4 km gridpoint distances.
+3,the moist explicit physics and explicitly solved convection are main features of this version of the um model.
+3,"images 4, 8 and 12 present 1h precipitation accumulations."
+3,"analysis of various source of data give wider outlook at the investigated phenomenon, as each kind of data complements each other and gives a possibility to verify the results."
+3,all of them give an opportunity to detect severe weather condition: cloud systems related to storms and heavy rainfalls (msg) and precipitation itself (radar data and um forecasts).
+4,"examples of mcs - case studies (comparison of msg, ukmo and radar data) as the main data source msg images were used."
+4,on the basis of the cells brightness temperature mcss phenomena were detected and tracked.
+4,to verify this method the msg data were compared with other source of meteorological data: precipitation from radar data and predicted precipitation from um version 6.6 nwp (numerial weather prediction) model.
+4,"based on msg images from may 2010 (infrared channel), hdf view software found and tracked (isis method) cells possibly related to the mcss and could cause sudden and heavy rainfalls."
+4,"several cases from the whole europe were analyzed, but due to availability of radar data (the baltic sea catchment) and the project proza purpose, only selected cases were chosen and presented here."
+4,"planck’s function bv(t) describes amount of the energy per unit area, per unit solid angle, per frequency interval for black body radiation."
+4,"this value is called specific brightness bv (rybicki and lightman, 1985): 2hv 3 / c 2 bv (t ) (1) exp hv / kt  1 where: t - temperature [k], h - planck’s constant [erg s],  - frequency [s-1], c - speed of light [cms-1], k - boltzmann’s constant [erg k-1]."
+4,the corresponding parameter when investigating object other than blackbody is called specific intensity iv.
+4,analysis were based on the brightness temperature parameter bt (equivalent blackbody temperature) assigned to the emission.
+4,"majority of objects obviously do not radiate like blackbodies, but brightness temperature can be useful parameter for describing their emission."
+4,"it is introduced as follows: the observed specific intensity iv matches the specific intensity of blackbody radiation at that frequency: t such that: ‫ ݒܫ‬ൌ ‫ݒܤ‬ሺܶሻ, (2) so the brightness temperature here means the best fit planck’s function temperature for measured radiance at the mentioned frequency."
+4,brightness temperature for all objects except blackbodies depends on the frequency v.
+4,"with exactly defined scanning frequency, brightness temperature depends only on the temperature t."
+4,"on the basis of the temperature t from msg images, values of brightness temperature were calculated."
+4,temperature of mcss’ top were converted to bt using eumetsat “effective radiance and brightness temperature relation” tables (separate table for each msg channel).
+4,this parameter was used to detect mscs (fig.
+4,"1, 5, 9)."
+4,"according to (morel and senesi, 2002a) it was assumed that temperature values between -30°c and -55°c (which correspond to the bt between 150 and 240k) should be investigated here."
+4,"this first case is the rainfall, which took place on the 24th of may in the southern poland."
+4,"six consecutive msg images (13:30, 15:00, 16:30, 18:00, 19:30, 21:00 utc) are presented in the figure 1 (a-f)."
+4,"blue square indicates poland area, while green and blue"
+5,95 correspond to the area with the brightness temperature between 150 and 240.
+5,"darker color stands for the lower temperature (light green – temperature around -30°c, dark blue – temperature around -55°c)."
+5,temperature referred to the marked point for this period is presented on the plot in the fig.
+5,"figures 3 (a-c) present radar data (reflectivity in dbz) and figures 4 (a-c) - um forecast for 15:00, 18:00 and 21:00 utc."
+5,msg images show that this cloud system is rather scattered and it is the widest around 15:00-16:30.
+5,the temperature of several points reaches -55°c.
+5,"the radar data show some rainfalls (the strongest around 18:00 for the marked point), but their distribution is also very scattered."
+5,"the um forecasts also present strong rainfall in the analyzed area, but its culmination is around 21:00."
+5,the second rainfall took place on the 18th of may in the southern poland.
+5,"figures 5 (a-f) present six consecutive msg images (01:30, 03:00, 04:30, 06:00, 07:30, 09:00 utc)."
+5,"blue square indicates poland area, while green and blue correspond to the area with the brightness temperature between 150 and 240."
+5,temperature referred to the marked point for this period is presented on the plot in the figure.
+5,"figures 7 (a-c) present radar data (reflectivity in dbz) and figures 8 (a-c) - um forecast for 03:00, 06:00 and 09:00 utc."
+5,"the msg images present quite strong and compact structure, which is the biggest around 09:00."
+5,radar data proves that there was a strong rainfall in southern and central poland then and this is in high agreement with um forecast.
+5,"the third analyzed case is a precipitation, which took place on the 12th of may in the northern poland."
+5,"figures 9 (a-f) present six consecutive msg images (13:30, 15:00, 16:30, 18:00, 19:30, 21:00 utc)."
+5,"as previously, blue square indicates poland area, while green and blue correspond to the area with the brightness temperature between 150 and 240."
+5,temperature referred to the marked point for this period is presented on the plot in the figure 10.
+5,"figures 11 (a-c) present radar data (reflectivity in dbz) and figures 12 (a-c) -um forecast for 15:00, 18:00 and 21:00 utc."
+5,the msg data show a scatter cloud structure with very low temperatures (-55°c) mainly between 13:30 and 16:30.
+5,"the radar images show that there were many rainfalls in poland on that time, but had rather local character."
+5,similar situation is presented on figures with um forecasts.
+5,these types of data prove that this phenomenon cannot be classified as mcs.
+5,"when comparing various source of data one have to remember that they have different nature: msg images provide meteorological observation of cloudiness using different spectral channels (for above investigations only infrared 10.8 μm channel was used as self-sufficient for mcs detection), radar data present reflectivity, which is used to calculate total precipitation, which took place and nwp (numerical weather prediction) models shows forecasts of precipitation."
+5,the comparison of real (occurring) and predicted phenomena causes some time shift concerning analyzed meteorological situation.
+5,use of various types of data enables proper detection of mcs and their tracking.
+6,"96 1 a, b, c, d, e, f."
+6,the connsecutive ms fig.
+6,"1. w sg images, which corresppond to the 113:30, 15:00,, 16:30, 18:000, 19:30, 21:00 utc (24tht of may, 20010)."
+6,"blue sqquare indicatees poland areea, while greeen and w the brigghtness tempeerature between 150 and 240."
+6,"the blu bluee correspondd to the area with ue dot w stands for the seleccted point, which temperaature is preseented below (fig."
+6,2). m fig..
+6,the tempperature referrred to the marked point in the fig. 1 (a-f).
+6,"the temperratures are prresented fromm 13:30 utc c to 21:00 ut tc of 24th off may, 2010))."
+6,subssequent colum mns represen nt 5-minutes steps. west temperaature stands for the culmination of this phenomennon – here thhe lowest tem the low mperature was arounnd 15:00 and 18:30 utc. p red pointers indiicate momennt correspond ding to the raadar and nwwp data. r black horizoontal lines stand for the range t of the temperature b between -30°c and -55°c c.
+7,97 ( the left) the radar daata (reflectiviity in dbz) figg.
+7,"3. a, b, c. (on for 15:00, 18:00 and 211:00 utc (2 24th of may, 2010). 2 f ht) the um forecast figg."
+7,"4. a, b, c. (on the righ (precipitation) for 15:00, 18:00 and 211:00 utc (2 24th of may, 2010)."
+7,"2 the bllue dot stands for the samme point, whiich was preseented in fig."
+8,"98 5 a, b, c, d, e, f."
+8,the connsecutive ms fig.
+8,"5. w sg images, which corresppond to the 001:30, 03:00,, 04:30, th 06:000, 07:30, 09:000 utc (188 of may, 20010)."
+8,"blue sq quare indicattes poland arrea, while greeen and blue correespond to thee area with thhe brightnesss temperaturre between 1550 and 240."
+8,"the t t blue dot stands for thhe selected point, which temperature i presented below (fig."
+8,6). is m fig..
+8,the tempperature referred to the marked point in the fig. 5 (a-f).
+8,"the temperatures t are presenteed from 01:30 utc to 09 9:00 utc of 18th of may,, 2010)."
+8,subssequent columns reepresent 5-m minutes steps..
+8,the loowest tempeerature standss for the culm t phenomeenon – here tthe temperatu mination of this ure was low (arounnd -35°c) forr a long timee (from 5:00 to 7:00 and fromf 8:00 too 9:00 utc). p red pointers indiicate momennt correspond wp data. ding to the raadar and nw r black horizoontal lines sttand for the range t of the temperature b between -30°c and -55°cc.
+9,99 ( the left) the radar daata (reflectiviity in dbz) figg.
+9,"7. a, b, c. (on for 03:00, 06:00 and 099:00 utc (18th of may, 2010). 2 f ht) the um forecast figg."
+9,"8. a, b, c. (on the righ (precipitation) for 03:00, 06:00 and 099:00 utc (18th of may, 2010). 2 me point, which was preseented in fig."
+9,the bluue dot standss for the sam
+10,100 e f.
+10,the conssecutive msg fig.
+10,"9. a, b, c, d, e, g images, wh hich correspond to the 133:30, 15:00, 16:30, 18:000, 19:30, 21:00 utc (12tht of may, 20010)."
+10,"blue sq quare indicatees poland areea, while greeen and blue correespond to thee area with thhe brightnesss temperaturre between 1550 and 240."
+10,"t blue dot stands the s 1 for thee selected pooint, which teemperature is presented bbelow (fig."
+10,10). m 1 the tempperature referrred to the marked fig.
+10,"10. i the fig. 9 (a-f). point in the t temperaatures are preesented from m 13:30 utc to 21:00 ut tc of 12th of may, 2010)."
+10,5 subsequuent columnss represent 5-minutes steeps.
+10,the loweest temperatuure stands foor the culmination of this phenomenon – heere the lowesst temperaturre was from 14:30 to 17::30 utc.
+10,red pointers p indiccate moment corresponding to the raddar and nwp p data.
+10,b black b horizonntal lines staand for the raange of the teemperature between -30°c and -55°c c.
+11,101 ( the left) the radar data (reflectivvity in dbz) fig..
+11,"11. a, b, c. (on for 15:00, 18:00 and 211:00 utc (12th of may, 2010). 2 ht) the um forecast (preecipitation) figg."
+11,"12. a, b, c. (on the righ for 15:00, 18:00 and 211:00 utc (1 12th of may, 2010). 2 me point, which was preseented in fig."
+11,the bluue dot standss for the sam
+12,102 6.
+12,conclusions and outlook the paper presents examples of some preliminary analysis made for the territory of poland in the context of sudden atmospheric phenomena prediction based on different types of data.
+12,due to lack of very strong mesoscale events in the analyzed period some smaller storms and rainfalls were also investigated.
+12,based on msg infrared channel images areas possibly related to mcs were recognized and compared to the um forecasts and radar data (precipitation that in fact occurred in this area).
+12,the investigations present usability of isis method for mcs detection and tracking in poland.
+12,"comparison of various type of data (msg images, radar data and um forecasts) allow to verify the conclusions drawn on the basis of msg data analysis."
+12,described phenomena lasted for several hours and all appeared in may 2010 (during warm season).
+12,two of three were observed during late afternoon and evening hours.
+12,"their extent is relatively small and correspond to the length-scale l between 2000 and 20 km, so these criteria allow to assign them as mcs."
+12,"on the other hand, on the basis of radar data and um forecast it can be seen that case study 3 does not present well-defined, individual thunderstorm, but rather multiple, scattered precipitation."
+12,in fig. 12 a-c it can be observed that the strongest precipitation was placed outside poland and that mcs should be detected in different area.
+12,msg data allow to simply distinguish area with specific bt (here between 150 and 240k).
+12,one of the limitations of the msg data analysis presented in this paper is that information about bt is not enough for the mcss detection.
+12,"in addition, study on the shape and dimension of the selected area is necessary to identify mcs."
+12,"radar data give information about reflectivity as the measure of precipitation intensity in specified moment of time and numerical forecasts about the precipitation amount per specified period of time, usually 1 hour."
+12,"radar and msg data show the actual situation, um model gives forecasts (less reliable, but information is given in advance; the verification of um forecasts can be found at http://weryfikacja.icm.edu.pl), so radar data can be a reference for the exact precipitation localization."
+12,"as it was shown, some phenomena described as mcs on msg images appear to be smaller, spatially scattered precipitation when verifying them with other source of information."
+12,the main conclusion is that use of more than one source of data (e.g.
+12,"msg images and weather model forecast) gives higher probability of reliable mcs tracking, because different techniques complement each other."
+12,"msg data are, however, a very valuable source of information to study mcs precursors."
+12,"analysis presented here play a role of the introduction for near real-time mcs prediction system development, which could help to make decisions related to weather conditions in the forestry, agriculture, energy industry and many others fields."
+12,"the next goal is to build a system, which could help to make decisions related to weather conditions in the forestry, agriculture, energy industry and many others fields."
+12,the most reliable method would be to take advantage of all possible types of data and to crate fully-automatic tool to predict sudden atmospheric phenomena.
+12,"acknowledgement this research was supported by the inovative economy grant poig.01.03.01-00-140/08 („operational decision-making based on atmospheric conditions"") and the cost action es0905."
+12,"we used computer resources of icm (warsaw university), radar observations from baltex radar data centre (norrkoeping, sweden), satellite seviri data from eumetsat and um forecast model (united kingdom met office)."
+12,authors acknowledge helpful
+13,"103 discussions with icm staff and two reviewers, whose comments and remarks helped to improve the paper."
+13,"references alfieri l., claps p., laio f."
+13,(2010) time-dependent z-r relationships for estimating rainfall fields from radar measurements.
+13,nat.hazards and earth syst.
+13,"sciences, 10, pp."
+13,149–158.
+13,"cotton w., bryan g., van der heever s."
+13,(2011) storm and cloud dynamicsthe dynamics of clouds and precipitating mesoscale systems.
+13,"isbn: 978-0-12-088542-8, p."
+13,"morel c., senesi s. (2002a) a climatology of mesoscale convective systems over europe using satellite infrared imagery."
+13,i: methodology.
+13,q.j.r.
+13,meteorol.
+13,"soc. (2002), 128, pp."
+13,1953–1971.
+13,"morel c., senesi s. (2002b) a climatology of mesoscale convective systems over europe using satellite infrared imagery."
+13,ii: characteristics of european mesoscale convective systems.
+13,q.j.r.
+13,meteorol.
+13,"soc. (2002), 128, pp."
+13,1973–1995.
+13,"ducrocq v., tzanos, d., senesi, s."
+13,(1998) diagnostic tools using a mesoscale nwp model for the early warning of convection.
+13,meteorol.
+13,"appl., 5, pp."
+13,329–349.
+13,eumetsat (2013) msg level 1.5 image data format description doc.
+13,"eum/msg/icd/105, 4th of december 2013."
+13,houze jr.
+13,"r.a., smull b.f., dodge, p."
+13,(1990) mesoscale organization of springtime rainstorms in oklahoma.
+13,"weather rev., 118, pp."
+13,613–654.
+13,"pajek m., iwanski r., könig m, struzik p."
+13,(2008) extreme convective cases - the use of satellite products for storm nowcasting and monitoring.
+13,"2008 eumetsat meteorological satellite conference, darmstadt, germany, 2008."
+13,rybicki g.
+13,"b., lightman a."
+13,"(1985) radiative processes in astrophysics, wiley online library, isbn: 978-0-471-82759-7."
+13,"webpages: project proza: http://projekt-proza.pl results of um verification: http://weryfikacja.icm.edu.pl the institute of meteorology and water management: www.imgw.pl the uk met office: http://www.metoffice.gov.uk received: 2012-10-22, reviewed: 2015-05-26, and 2015-06-10, by m."
+13,"kruczyk, accepted: 2015-06-10."

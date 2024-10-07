@@ -1,0 +1,846 @@
+page,p
+1,"remote sensing article sar and lidar temporal data fusion approaches to boreal wetland ecosystem monitoring joshua montgomery 1,2, *, brian brisco 3 , laura chasmer 2 , kevin devito 4 , danielle cobbaert 1 and chris hopkinson 2 1 alberta environment and parks, government of alberta, 9920 108 street, edmonton, ab t5k 2m4, canada; danielle.cobbaert@gov.ab.ca 2 department of geography, university of lethbridge, 4401 university dr."
+1,"w, lethbridge, ab t1k6t5, canada; laura.chasmer@uleth.ca (l.c.); c.hopkinson@uleth.ca (c.h.)"
+1,"3 natural resources canada, government of canada, 560 rochester st., ottawa, on k1a 0e4, canada; brian.brisco@canada.ca 4 department of biological sciences, university of alberta, edmonton, ab t6g 2e9, canada; kdevito@ualberta.ca * correspondence: joshua.montgomery@gov.ab.ca; tel.: +1-403-382-7820  received: 25 october 2018; accepted: 4 january 2019; published: 16 january 2019  abstract: the objective of this study was to develop a decision-based methodology, focused on data fusion for wetland classification based on surface water hydroperiod and associated riparian (transitional area between aquatic and upland zones) vegetation community attributes."
+1,"multi-temporal, multi-mode data were examined from airborne lidar (teledyne optech, inc., toronto, on, canada, titan), synthetic aperture radar (radarsat-2, single and quad polarization), and optical (spot) sensors with near-coincident acquisition dates."
+1,results were compared with 31 field measurement points for six wetlands at riparian transition zones and surface water extents in the utikuma regional study area (ursa).
+1,the methodology was repeated in the peace-athabasca delta (pad) to determine the transferability of the methods to other boreal environments.
+1,"water mask frequency analysis showed accuracies of 93% to 97%, and kappa values of 0.8–0.9 when compared to optical data."
+1,"concordance results comparing the semi-permanent/permanent hydroperiod between 2015 and 2016 were found to be 98% similar, suggesting little change in wetland surface water extent between these two years."
+1,"the results illustrate that the decision-based methodology and data fusion could be applied to a wide range of boreal wetland types and, so far, is not geographically limited."
+1,"this provides a platform for land use permitting, reclamation monitoring, and wetland regulation in a region of rapid development and uncertainty due to climate change."
+1,the methodology offers an innovative time series-based boreal wetland classification approach using data fusion of multiple remote sensing data sources.
+1,keywords: sar; lidar; boreal wetlands; data fusion; decision-based methodology; time series 1.
+1,introduction 1.1.
+1,boreal wetlands and remote sensing wetlands in canadian boreal regions come in many sizes and forms.
+1,"these wetlands typically develop where the water table is at or near the surface, allowing water to settle, promoting development of soil conditions for hydrophytic vegetation [1]."
+1,"the majority of canada’s 150 million hectares of wetlands are found in the boreal region, where rates of forest disturbance in 2008 were found to be approximately 78%, among the highest in the world [2]."
+1,"natural resources development, agricultural land cover change, and drying from warmer climate conditions are all contributing to disturbances in remote sens. 2019, 11, 161; doi:10.3390/rs11020161 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2019, 11, 161 2 of 24 the boreal zone."
+2,"with increasing disturbance and changes to local hydrology, accurate, high resolution spatiotemporal classification of these boreal wetlands is required for understanding rates of boreal wetland change, many of which have yet to be accurately identified or mapped."
+2,"moreover, drying trends in many northern regions of canada and the united states have been observed in recent decades, where changes in ground and surface water hydrology have been observed."
+2,"in addition, natural cycles, vegetation type, and flooding lack comprehensive understanding through ineffective monitoring and/or documentation."
+2,"lowering of the water table results in increasing shrub succession into wetlands in some years, and altering of the carbon balance [3–6]."
+2,"wetland succession has been observed within localized plots and sampling areas, however, it is logistically difficult to measure these processes across broad regions."
+2,"due to these changes, there is a need to develop remote sensing classification procedures that provide a high-resolution baseline of contemporary wetland characteristics and the potential for automated mapping of temporal changes."
+2,"remote sensing offers the potential to continuously map wetland and water extents [7,8] inundated vegetation, and associated water permanencies at regional scales."
+2,"for boreal wetland studies, early remote sensing applications commonly utilized passive multispectral optical imagery as a foundational data source from which identify and map wetland features and extents."
+2,"the capture of optical information across multiple wavelengths provides the spectral separation of distinguishing features common in wetland ecosystems, such as water and different vegetation conditions and species [9,10]."
+2,"however, the passive nature of such systems (i.e., detection of (typically solar) radiation reflected from the target) make them ineffective during cloudy conditions and/or under low-light conditions [11]."
+2,"more recently, active sensors such as light detection and ranging (lidar) and synthetic aperture radar (sar) have been recognized as valuable tools for wetland mapping by remote sensing."
+2,lidar is commonly employed for high resolution three-dimensional mapping of terrain and terrestrial ecosystems.
+2,"lidar has been commonly utilized for the identification of terrain depressions, to identify probabilistic wetland locations (given gravitational gradients remain unaffected by external mechanisms)."
+2,"moreover, lidar data have recently been applied in wetland classification techniques with reasonable success [7]."
+2,"lidar’s active nature enables penetration into, and through, vegetation canopies, and thus allows the measurement of within canopy structure and terrain features below—key for distinguishing different wetland classes."
+2,"however, lidar typically acquires data in a single wavelength (most commonly 1064 nm), although state-of-the-art systems allow the simultaneous acquisition of up to 3 bands (optech titan)."
+2,the 1064 nm waveband is often absorbed by water and can provide analytical challenges in open water environments.
+2,"conversely, sar is useful for surface water and flooded vegetation mapping, due to the contrast and reflectivity between land and water associated with the high dielectric constant of water [12–14]."
+2,"multi-temporal sar data series are comparable to (cloud-free acquisitions from) optical sensor for wetland detection, largely because sar is unaffected by cloud cover and other atmospheric effects [15]."
+2,"like lidar, sar can penetrate vegetation canopies to provide information on beneath canopy flooding."
+2,"this is achieved, in part, from multi-polarized sar data, which present the opportunity to decompose imagery backscatter information into scattering mechanisms, allowing a better understanding of wetland flood extent [14]."
+2,"whilst individual remote sensing data have demonstrated success for wetland mapping, it is comprehensively recognized that data fusion methods using multiple remote sensing sources provide improved information on wetland hydrological, vegetation, and topographic attributes that are important identifiers of wetland characteristics [16,17]."
+2,"for example, irwin et al. [18] noted the use of high-resolution worldview-2 data, combined with lidar and sar, reduced water surface extent uncertainties by 11% on average."
+2,millard et al. [19] noted improved accuracy of wetland extent mapping and wetland type classification when combining lidar and sar data over individual data source analysis.
+2,"as imaging sensors become increasingly advanced and data sharing trends are moving toward more open source distribution, there are opportunities for combining multiple"
+3,"remote sens. 2019, 11, 161 3 of 24 data types through data fusion, to monitor and characterize unique environments that remain to be fully understood."
+3,"the objective of this study is to examine remote sensing decision-based approaches to enhance the ability to classify and quantify important boreal wetlands and attributes, including (a) wetland extent and type; (b) water extent and change through time; and (c) extent of flooded vegetation so that the methods can be repeated within a long-term monitoring framework."
+3,"this is performed using data fusion of (1) topographic attributes from lidar, (2) surface water hydroperiod from sar, and (3) vegetation structural attributes from lidar and optical remote sensing data."
+3,"results are compared with field validation data, allowing error of omission, and to also be investigated using data fusion to increase overall accuracies and enable complex quantification of boreal wetland attributes."
+3,"study area the research focuses on two subareas in alberta (figure 1a): a ~20 km × 20 km subset of the utikuma regional study area (ursa) region (figure 1b), including only areas of heterogeneous wetland and till moraine uplands (excluding the clay plains region); and a ~25 km × 25 km area of the peace-athabasca delta (pad) (figure 1c)."
+3,the subarea found within the pad was identified to test the applicability of remote sensing fusion classification conducted at ursa.
+3,"it should be noted the shrub (salix sp.) and graminoid dominant vegetation composition at pad is different from that at ursa, which is more heavily treed and subject to less extreme surface water fluctuations."
+3,the difference in canopy density at each site is also an important consideration with respect to determining lidar and sar signal penetration and canopy height metrics.
+3,1.2.1.
+3,utikuma regional study area ursa is a boreal forest region located approximately 100 km north of slave lake in the central mixedwood natural subregion [20].
+3,"the ursa series of study sites covers an area of 1062 km2 surrounding utikuma lake [21], established in 1998 as a long-term monitoring site to quantify key hydrological processes associated with disturbance and regeneration, nutrient cycles, and hydro-ecological changes over time in a sub-humid environment."
+3,ursa moraine complexes are comprised of a heterogeneous mixture of locally topographic low-lying wetlands and peatlands separated by upland till moraine with predominantly populus tremuloides across the northwest side of the ~60 km × 20 km transect.
+3,the southeast half of the transect is underlain by clay plains with large coverage of peatlands and greater development.
+3,wetland ecosystems are predominantly comprised of shallow ponds with submergent macrophyte vegetation that may float on open water during summer [22].
+3,"treed fens and bogs are found on poorly drained organic rich soils comprised of mainly black spruce (picea mariana) and are commonly underlain with sphagnum spp. mosses, fibric peat, grasses up to 0.5 m height, and gyttja hummocks and hollows [22]."
+3,1.2.2.
+3,"peace-athabasca delta the peace-athabasca delta (pad) formed at the western end of lake athabasca after the retreat of the laurentide ice sheet ~10,000 bp."
+3,"isostatic rebound and sedimentation by the major peace, athabasca, and birch rivers formed deltas approximately 1680, 1970, and 170 km2 , respectively [23]."
+3,"the deltas contain more than 1000 small basins (wetlands and lakes) with varying degrees of surface hydraulic connection to the main flow system, depending on location and elevation [24]."
+3,"three delta basin water level regimes are present within the pad: (i) an open or active hydraulic connection with the main flow system; (ii) a restricted connection, such as a perched channel or levee entry, to an adjacent lake or river; and (iii) isolated farther inland."
+3,"the water level fluctuation of the latter two types is independent of the main flow system, except when connected during high water events, and are referred to as perched basins."
+4,"remote sens. 2019, 11, x for peer review 4 of 24 flow to inland basins occurs during overtopping of levees as a result of ice jams, large runoff, and/or the expansion of the central lakes beyond the shoreline."
+4,"vegetation cover is important in limiting remote sens. 2019, surface 11, 161 runoff and influencing evaporation rates, while bedrock outcrop in the northeastern areas4 of 24 enhance surface runoff contribution to the ponded area [26,27]."
+4,"remote sens. 2019, 11, x for peer review 5 of 24 figure figure 1."
+4,study 1.
+4,"study site location site location and and study study areaarea withwith subsets subsets fieldfield photos: photos: (a) study (a) the sitessites the study within within alberta, alberta, canada; canada; (b) (b) regional regional location location (blue) ~20ofkm (blue) of the the×~20 20 km 20 km km ×area of area of interest (aoi) (aoi) interest subsetsubset in theinutikuma the utikuma regional regional study study area area (ursa); (ursa); (c) 25 km × (c) kmkm 25 25 × 25 km subset (red) of the(red) subset of the peace-athabasca peace-athabasca deltastudy delta (pad) (pad) study area; (d) vegetation conditions during the growing season for ursa; and (e) pad. area; (d) vegetation conditions during the growing season for ursa; and (e) pad."
+4,"data and methods this study employed multi-temporal, multi-mode sar (radarsat-2, single and quad polarization), lidar, and optical (spot) data with similar acquisition dates."
+4,"the data were acquired, and their intended purpose is summarized in table 1."
+5,"remote sens. 2019, 11, 161 5 of 24 basins typically have low relief (<2 m, referred to as shallow open water wetlands, a standard canadian national wetland class) with maximum depths ranging from 0.06 to 12.1 m (mean of 1.5 ± 1.4 m), and surface areas ranging from 0.1 to ~20 km2 ."
+5,"basins in the main portion of the delta are generally enclosed by narrow, abrupt levees that comprise a small fraction of the total area [25]."
+5,"topographic relief within the delta is low, and reconnection of abandoned channels and overland flow to inland basins occurs during overtopping of levees as a result of ice jams, large runoff, and/or the expansion of the central lakes beyond the shoreline."
+5,"vegetation cover is important in limiting surface runoff and influencing evaporation rates, while bedrock outcrop in the northeastern areas enhance surface runoff contribution to the ponded area [26,27]."
+5,"data and methods this study employed multi-temporal, multi-mode sar (radarsat-2, single and quad polarization), lidar, and optical (spot) data with similar acquisition dates."
+5,"the data were acquired, and their intended purpose is summarized in table 1."
+5,table 1.
+5,data layers used in the classification and associated information.
+5,"data derived from purpose of layer sar open water hh-sar mask of open surface water sar fdd decomposition quad-pol sar identifies flooded vegetation topographic position index lidar dem local terrain attributes optical open water spot validation for sar open water mask vegetation height layer lidar chm vegetation height road layer spot/manual quality control layer definitions: sar = synthetic aperture radar; fdd = freeman durden decomposition; dem = digital elevation model; spot = satellite pour l’observation de la terre, centre national d’études spatiales; chm = canopy height model."
+5,data 2.1.1.
+5,airborne lidar two airborne lidar datasets were available at ursa.
+5,the first was acquired during august 2008 by airborne imaging inc.
+5,"(calgary, ab, canada) using a teledyne optech altm 3100."
+5,these data were acquired as part of alberta’s provincial dataset.
+5,"the second was a multispectral acquisition captured on 6 august 2016 by use of a teledyne optech titan altm, geo-referenced using a locally situated global navigation satellite system (gnss) unit."
+5,both airborne lidar datasets exhibit coincidence between all sar acquisitions and field validation locations.
+5,an additional multispectral titan lidar survey was flown over the pad in august 2016 in a similar configuration as noted at ursa.
+5,no supplementary local geo-referencing information were acquired to support this dataset due to logistical and financial constraints.
+5,2.1.2.
+5,"optical data spot-6 (satellite pour l’observation de la terre, centre national d’études spatiales) multispectral optical imagery was acquired on 17 september 2015, which was cloud-free and delivered with an atmospheric correction applied."
+5,"each image captured 4 spectral bands, red (625–695 nm), green (530–590 nm), blue (450–524 nm), and near-infrared (nir) (760–890 nm); at a 5 m × 5 m pixel resolution."
+5,"data were acquired near coincident days to sar acquisitions, for validation purposes."
+5,2.1.3.
+5,"sar radarsat-2 images of ursa were acquired during 2015 and 2016 ice-off conditions in single polarization (hh) wide ultra-fine u24w2 (incidence angle 46.3◦ to 48.2◦ ) and u13w2 (incidence angle 38.7◦ to 41.2◦ ) descending orbit, and wide fine-quad fq10/5w (incidence angle 22.5◦ to 26.0◦ )"
+6,"remote sens. 2019, 11, 161 6 of 24 beam modes (table 2)."
+6,wide ultra-fine u2w2 (incidence angle 29.6◦ to 33.0◦ ) and wide fine-quad (fq10/5w) ascending orbit data were acquired over the pad in 2014 and 2015 (table 3).
+6,"wide ultra fine has a nominal resolution of 2.5 m × 2.5 m, and wide-fine quad has a nominal resolution of 5 m × 5 m."
+6,wide ultra-fine data were resampled to a 3 m resolution for consistency across all images.
+6,table 2.
+6,sar acquisition dates of wide ultra-fine (u13w2 and u24w2) and wide fine-quad (fq10/5w) beam modes over ursa for 2015 and 2016.
+6,2015 2016 july 20 (u24w2) may 3 (u24w2) july 27 (fq10/5w) august 13 (u24w2) may 24 (u13w2) august 4 (u13w2) september 3 (u13w2) may 27 (u24w2) august 8 (fq10/5w) september 6 (u24w2) june 17 (u13w2) august 28 (u13w2) september 27 (u13w2) june 20 (u24w2) august 31 (u24w2) october 21 (u13w2) july 11 (u13w2) september 21 (u13w2) august 13 (u24w2) july 14 (u24w2) september 24 (u24w2) table 3.
+6,sar acquisition dates of wide ultra-fine (u2w2) and wide fine-quad (fq10/5w) beam modes over pad for 2014 and 2015.
+6,"2014 2015 april 8 (fq10/5w) may 12 (u2w2) april 27 (fq10/5w) may 7 (u2w2) may 2 (fq10/5w) june 5 (u2w2) may 21 (fq10/5w) may 31 (u2w2) may 26 (fq10/5w) june 29 (u2w2) june 14 (fq10/5w) june 24 (u2w2) june 19 (fq10/5w) july 23 (u2w2) july 8 (fq10/5w) july 8 (u2w2) august 6 (fq10/5w) august 16 (u2w2) august 1 (fq10/5w) august 11 (u2w2) august 30 (fq10/5w) october 2 (u2w2) august 25 (fq10/5w) september 4 (u2w2) october 17 (fq10/5w) september 18 (fq10/5w) canopy penetration of the microwaves in the sar system allows for mapping and classification of flooded vegetation due to enhanced backscatter from the double-bounce scattering mechanism [28,29]."
+6,"this results in enhanced hh backscattering with less increase seen in vv, therefore, quad-polarized (hh, hv, vh, vv) datasets can be used to identify flooded vegetation using polarimetric decomposition techniques [29–31]."
+6,"steeper incidence angle gives better penetration into the canopy of flooded vegetation, but the steeper the angle, the more that the range is limited in fine-quad modes."
+6,2.1.4.
+6,ground validation a total of 6 wetlands within the study region were surveyed between 25 july and 4 august 2015.
+6,"positional information was acquired to determine surface water extent (i.e., location where water touches the edge of the pond) and riparian habitat boundary transects (i.e., location where the frequency of shrubs was less than ~1 shrub per 10 m radius)."
+6,"cross-sectional transects were established, extending perpendicularly away from the water’s edge and upwards from the wetlands to adjacent upland, to reflect vegetation zones and changes in vegetation community composition where prominent vegetation species were identified [8]."
+6,"positions were occupied using a topcon hiper sr gnss (livermore, ca, usa) following standard kinematic survey techniques, and were differentially corrected to a static base station using precise point positioning (ppp), yielding centimeter accuracy."
+6,"in situ field data, collected within days of remote sensing data acquisitions, were utilized for spatially validating riparian vegetation species, composition, and open water extent over time, and/or pond/lake “hydroperiod”."
+7,"remote sens. 2019, 11, 161 7 of 24 2.2."
+7,methods 2.2.1.
+7,"airborne lidar processing the 2016 titan lidar point cloud was pre-processed using teledyne optech’s lidar mapping suite, where terrascan (terrasolid, helsinki, finland) and lastools [32] were utilized for post-processing."
+7,"the raw (pre-processed) point cloud was tiled to a 1 km grid, with a 20 m buffer to mitigate potential edge effects."
+7,"each tile was ground-classified and, subsequently, height normalized to calculate the height of each non-ground point above the identified ground surface."
+7,"non-ground points were classified as low, medium, and tall vegetation, in accordance with asprs 2011 guidelines [33]."
+7,"vegetation-classified points were interrogated using a 1 m search radius to determine the 99th percentile height (p99), where only points >2 m above the ground were considered, in order to negate contributions of understory vegetation; i.e., p99 is the height at which 99% of vegetation-classified points >2 m above the ground occur."
+7,these heights were rasterized to a 1 m grid to yield a canopy height model (chm).
+7,the removal of understory vegetation by use of a minimum height cut-off is common practice in the analysis of lidar data acquired over forest environments [34].
+7,"terrascan (terrasolid, helsinki finland) and surfer (golden software, golden, co, usa) were employed to filter ground classified points and produce a 1 m × 1 m digital elevation model (dem), created using inverse distance weighting (idw) interpolation, with a 10 m search radius."
+7,a common derivative from high resolution dem data is topographic position index (tpi).
+7,tpi is a measure of the difference between the elevation value of a cell and the average elevation of nearby (neighboring) cells (within a defined radius) [34–37].
+7,"a positive value indicates higher elevation than its surrounding, whereas negative indicates it is lower."
+7,"tpi results provide the means for estimating the probability of a wetland occurring in a certain area by separating locally high and low areas, assuming gravitational drainage of surface water."
+7,"for example, the probability or landscape suitability of a wetland occurring in a topographic high (upland) may be low (for broad wetland areas and excluding local topographic depressions, e.g., forested swamps)."
+7,"a low tpi suggests high suitability for a wetland because surface water may flow towards depressions, therefore propagating the potential for wetland development."
+7,"at ursa, sar and optical data were orthorectified to the 2008 lidar dem as it had more reliable geo-referencing information."
+7,"due to the lack of local geo-referencing information, lidar data acquired at the pad exhibited small positional discrepancies, which amassed themselves as relatively large errors due to the flat nature of the region."
+7,"this resulted in the pad lidar dataset exhibiting too many uncertainties to produce a robust analysis with respect to inferring lidar-based corrections; therefore, corrections with lidar were only conducted over ursa."
+7,2.2.2.
+7,surface water extraction and hydroperiod sar-derived surface water masks were created using an intensity (db) thresholding technique developed by white et al. [14] using pci model builder (pci geomatics).
+7,the methodology was modified to extract surface water using input threshold intensity/decibel (db) range values [8].
+7,"employed sar filters (software specific naming) in the pci model builder include fgamma (gamma maximum-a-posteriori (map)) adaptive filter to preserve edges, important for surface water extent analysis [37–39]; fav (averaging mean filter) to reduce speckle [40]; and fmo (mode filtering of gray-level values) to further reduce noise of the sar images [40]."
+7,"spot 6 data were employed for the validation of sar water masks (all bands were used to inform on water versus land pixels), where surface water was classified using k-means unsupervised classification [41–43]."
+7,"binary surface water extents (i.e., 0 as non-water, 1 as water) were produced in raster format for each available sar acquisition using hh backscatter."
+7,"a measure of water permanence or hydroperiod throughout the growing season is determined using an “equals frequency” routine on the binary surface water rasters for each year, calculating the number of times a pixel is identified as water in the same geographic location."
+7,the output
+8,"remote sens. 2019, 11, 161 8 of 24 “pixel frequency” corresponds to the number of sar images/months analyzed within each year."
+8,"this is reclassified from frequency to hydroperiod classes based on stewart and kantrud [44] and cowardin et al. [45]; where water present for 1–2 months represents “temporary” (s&k class ii), 3–4 months is “seasonal” (s&k class iii), and 5–6 months is “semi-permanent/permanent” (s&k classes iv and v)."
+8,2.2.3.
+8,"sar polarimetric decompositions for flooded vegetation the freeman–durden decomposition (fdd) [46] was used to create a three-channel composite raster that estimates the contribution of surface (water or rough surface), double-bounce (flooded), and volume (tall/forested vegetation) scattering response to the total backscatter from each pixel in an image."
+8,"the double-bounce (flooded vegetation) band was isolated, and null values removed to represent only positive values in the double-bounce backscatter [31,40,47]."
+8,"to remove speckle, a 5 × 5 boxcar filter (pci geomatica) was applied, based on local pixel averaging [29]."
+8,2.2.4.
+8,"topographic position index tpi is scale dependent based on the topographic morphology of the land surface (defined by surface geology), therefore, the user needs to select parameters (e.g., window search radius) appropriate for the study area."
+8,"in order to determine the optimal search radius, multiple iterations ranging from 50 m to 500 m were tested."
+8,"optimal radii was selected based on (1) the high resolution of the data, (2) topography criteria outlined by jenness [48], and (3) circular moving polynomial windows based on the round shape and width of upland till moraines between the wetlands in the area [7]."
+8,"the range of window sizes, selected to test tpi suitability to the landscape, were based on where the “normal” maximum occurs in the surface water."
+8,"isolated outlier wetland pixels from the hydroperiod analysis, located on plateaus, were manually identified and masked out, creating an adjusted hydroperiod from the tpi."
+8,2.2.5.
+8,"decision-based workflow a decision-based methodology was developed to derive wetland ecosystem attributes that expands upon an earlier method developed by chasmer et al. [7,16] who based classification on topographic position and vegetation canopy attributes from lidar and worldview-2 spectra [16], and lidar-based intensity and structure [7]."
+8,variation in hydroperiod and impact on wetland aquatic transitional vegetation was performed using sar.
+8,"water permanence and presence of flooded vegetation integration, in fusion with lidar, follows findings by white et al. [40], and brisco et al. [49] regarding the spatial distribution of wetland attributes."
+8,"the decision-based methodology includes deriving sar (single pol) water masks, associated hydroperiod classified according to stewart and kantrud [44], and the government of alberta [50], flooded vegetation from sar (quad pol) fdd decomposition and, lastly, lidar-derived topographic index and canopy cover attributes."
+8,"the methodology is broken into four different stages: (1) surface water extraction using intensity thresholding [14], and hydroperiod analysis [8]; (2) flooded vegetation using fdd decomposition [31]; (3) lidar topographic attributes [7], and tpi [48]; and (4) data fusion of all attributes, enabling quality-controlled wetland ecosystem products."
+8,"the combination of each dataset acts as a quality control measure, high resolution wetland classification system, and creates an integrated, dynamic wetland product with potential monitoring implications."
+8,figure 2 provides an overall schematic of the methodology.
+8,a combination of statistical analyses (overall accuracy and kappa coefficient) and ground validation of the output classes were used to evaluate the best data fusion approach for mapping the riparian ecology and surface water extent of wetlands.
+9,the methodology.
+9,a combination of statistical analyses (overall accuracy and kappa coefficient) and ground validation of the output classes were used to evaluate the best data fusion approach for mapping the riparian ecology and surface water extent of wetlands.
+9,"remote sens. 2019, 11, 161 9 of 24 figure figure 2."
+9,decision-based fusionworkflow 2.
+9,"decision-baseddata datafusion of four workflow of primary products four primary surfacewater (sarsurface products(sar watermasks, masks, sar flooded vegetation layer, topographic position index from dem, and vegetation from chm)."
+9,"sar flooded vegetation layer, topographic position index from dem, and vegetation from chm)."
+9,2.2.6.
+9,"2.2.6. of of validation validation remote remote sensingproducts sensing products a direct a direct comparison comparison between between field measure field measure and remote and remote sensing-derived sensing-derived water water edge wasedge was conducted, conducted, with ecological boundaries identified based on the remote sensing data fusion with ecological boundaries identified based on the remote sensing data fusion product."
+9,the distance product.
+9,"the distance of these of these boundaries boundaries from fromedge the water’s the water’s edgecompared were then were then compared to thevalidation ground validation to the ground data (i.e., data (i.e., distance from water’s edge)."
+9,standard statistical measures include distance from water’s edge).
+9,"standard statistical measures include coefficient of determination of2 ), coefficient (r anddetermination (r ), and root mean square error (rmse). 2 root mean square error (rmse)."
+9,results 3.
+9,results 3.1.3.1.
+9,sar sar surface surface water water masks masks intensity threshold (db) surface water masks of boreal wetlands at the ursa region are shown in 2015 (figure 3).
+9,"the threshold range was similar in all images, with the average upper limit of −18 db, and the lower limit of −30 db."
+9,"decibel limits, ranging from −13 db to −14 db upper limit and −30 db lower limit, were observed in the pad, consistent with ranges found by white et al."
+10,"remote sens. 2019, 11, x for peer review 10 of 24 intensity threshold (db) surface water masks of boreal wetlands at the ursa region are shown in 2015 (figure 3)."
+10,"the threshold range was similar in all images, with the average upper limit of −18 db, and remote the sens. lower 2019, limit of −30 db."
+10,"decibel limits, ranging from −13 db to −14 db upper limit and 11, 161 −30 10 of 24 db lower limit, were observed in the pad, consistent with ranges found by white et al."
+10,intensity threshold figure 3.
+10,intensity threshold (db) sar-derived surface (db) sar-derived water masks surface water over the masks over the ursa region in the growing season of 2015.
+10,images show relatively consistent surface water extent.
+10,"optical validation optical validation optical satellite open water classification is a well-established method, and is therefore useful optical satellite open water classification is a well-established method, and is therefore useful for validation with water masks derived from other sensors [51,52]."
+10,"peiman et al. (submitted to for validation with water masks derived from other sensors [50,52]."
+10,peiman et al. (submitted to cjrs) cjrs) [53] compared both ascending and descending sar texture and intensity thresholding with [53] compared both ascending and descending sar texture and intensity thresholding with a spot- a spot-6-derived mask from 17 september 2015 over the same study area.
+10,despite slight temporal 6-derived mask from 17 september 2015 over the same study area.
+10,"despite slight temporal offset, offset, overall accuracies were >90% (kappa = 0.8–0.95) (table 4)."
+10,greater accuracy is expected without overall accuracies were >90% (kappa = 0.8–0.95) (table 4).
+10,greater accuracy is expected without the the temporal offset and with the removal of roadways and infrastructure (dark targets that appear as temporal offset and with the removal of roadways and infrastructure (dark targets that appear as errors of commission in sar data). errors of commission in sar data).
+10,table 4.
+10,confusion matrix results of near-coincident sar intensity (db) threshold-derived surface table 4.
+10,confusion matrix results of near-coincident sar intensity (db) threshold-derived surface water masks compared to a single clear sky optical spot scene from 17 september 2015.
+10,note: results water masks compared to a single clear sky optical spot scene from 17 september 2015.
+10,"note: results do not represent absolute accuracies, as the optical water masks contain some uncertainty and the do not represent absolute accuracies, as the optical water masks contain some uncertainty and the comparison results represent acquisitions from different days. comparison results represent acquisitions from different days."
+10,sar acquisition overall accuracy kappa (%) sar acquisition overall accuracy kappa (%) 3 september 2015 3 september 2015 98.5 98.5 0.95 0.95 6 september 2015 98.6 0.89 6 september 2015 27 september 2015 92.3 98.6 0.8 0.89 27 september 2015 30 september 2015 98.3 92.3 0.87 0.8 30 september 2015 98.3 0.87 3.2.
+10,surface water hydroperiod 3.2.
+10,surface water hydroperiod surface water hydroperiod classes are presented for ursa in 2015 (figure 4a) and 2016 (figure 4b).
+10,surface water hydroperiod classes are presented for ursa in 2015 (figure 4a) and 2016 (figure concordance results showing the proportion of pixels that are the same class in both 2015 and 2016 are 4b).
+10,concordance results showing the proportion of pixels that are the same class in both 2015 and detailed in table 5.
+10,"overall similarity of hydroperiods on a pixel by pixel basis is 79%, attributed to the 2016 are detailed in table 5."
+10,"overall similarity of hydroperiods on a pixel by pixel basis is 79%, low similarity of temporary and seasonal hydroperiod compared to the very high similarity between attributed to the low similarity of temporary and seasonal hydroperiod compared to the very high semi-permanent/permanent."
+10,it should be noted there have been periods in the ursa area when many similarity between semi-permanent/permanent.
+10,"it should be noted there have been periods in the ponds dried out, but precipitation between 2015 and 2016 were about the same (2 years cu m departure ursa area when many ponds dried out, but precipitation between 2015 and 2016 were about the from the long term mean between 0 and −120 mm)."
+10,"additionally, wetting events in 2016 occurred in the fall of 2016, therefore, little difference would be expected."
+11,"remote sens. 2019, 11, x for peer review 11 of 24 (2 years same sens."
+11,remote m departure from the long term mean between 0 and −120 mm).
+11,"additionally, cu161 2019, 11, 11 of 24 wetting events in 2016 occurred in the fall of 2016, therefore, little difference would be expected."
+11,surface figure 4.
+11,"surfacewater water hydroperiod hydroperiodresults, 20152015 results, (a) 2016 (a) and (b), over and 2016 (b),an ursa over an subset ursa aoi."
+11,"yellow subset aoi. hydroperiod yellow temporary indicatesindicates hydroperiod (1–2 months), temporary green forgreen (1–2 months), seasonal (3–4 months), for seasonal and blue and for semi- (3–4 months), blue permanent/permanent for (5–62016 (5–6 months). semi-permanent/permanent titan lidar months)."
+11,titan illustrates 2016 dem lidar dem topography illustratesand canopy cover. topography and canopy cover.
+11,table 5.
+11,hydroperiod class concordance and hectares (ha) area comparison between 2015 and 2016 table 5.
+11,hydroperiod class concordance and hectares (ha) area comparison between 2015 and for ursa. 2016 for ursa.
+11,"hydroperiod (s&k) concordance hectares (ha) hydroperiod (s&k) concordance hectares (ha) temporary (i) 53.0 43.6 seasonal temporary (ii) (i) 53.0 49.0 43.6 30.48 seasonal (ii) 49.0 30.48 semi-permanent (iii) 98.3 744.7 semi-permanent (iii) 98.3 744.7 note that 2015 includes only six image acquisitions, compared to 14 acquisitions in 2016, where note more scenes that theincludes 2015 over growingonly season image acquisitions, six increase the chance to compared to 14 acquisitions capture additional in 2016, temporary where or seasonal more scenes over the growing season increase the chance to capture additional temporary surface water hydroperiod events."
+11,"therefore, it is expected that a comparable number of acquisitions or seasonal surface from each yearhydroperiod water would change events."
+11,"therefore, it hydroperiod the comparative is expected that a comparable number of acquisitions results. each year would fromhydroperiods change the comparative hydroperiod results. in the pad are less defined and have regions of significant change in surface permanence in waterhydroperiods the pad (figure are lesscomparing 5)."
+11,"when defined and have the regions between difference 2014change of significant in surface and 2015 water hydroperiod permanence (figure along waterways, 5). are there when no comparing notable areas thewhere open between difference 2014 and surface water 2015 hydroperiod is changed."
+11,"some areasalong have waterways, there are no notable areas where open surface water is changed."
+11,"some greater permanence in 2015 (e.g., seen in green in the southwest quadrant of the aoi), whereas other areas have greater permanence in 2015 areas have lower (e.g., seen(e.g., permanence barilin in green southwest thelocated lake in thequadrant west of theof the aoi,aoi), and whereas other areas many wetland areas have lower permanence (e.g., baril lake located in the west of the aoi, and in the north of the aoi)."
+11,open water wetland and lake area permanence is far more variable. many wetland areas in the north of the aoi).
+11,open water wetland and lake area permanence is far approximately 18%–25% of the landscape is permanent in both years.
+11,the proportion of low more variable.
+11,"approximately 18%–25% permanence of the landscape (yellow) is mostis permanent changed along in both years.areas riparian the proportion of the largerofwater low permanence (yellow) bodies, whereas the is most changed along riparian areas of the larger proportion of low to medium (green) is the most changed overall. water bodies, whereas the proportion of low to medium (green) is the most changed overall."
+12,"remote sens. 2019, 11, 161 12 of 24 remote sens. 2019, 11, x for peer review 12 of 24 delta hydroperiod peace-athabasca delta figure 5."
+12,"peace-athabasca results for hydroperiod results for 2014 and 2015 showing notable change in watercourse surface surface water permanence over wetlands, with little change in watercourse surface water. water."
+12,flooded vegetation 3.3.
+12,"flooded vegetation fdd results for each acquisition/month in the growing season and associated yearly flooded fdd results for each acquisition/month in the growing season and associated yearly flooded vegetation occurrence for the pad, created using pixel frequency analysis, are shown in figure 6."
+12,"ice is vegetation occurrence for the pad, created using pixel frequency analysis, are shown in figure 6."
+12,"ice notably present in some areas of the waterbodies (bright purple-blue) in the early spring months (i.e., is notably present in some areas of the waterbodies (bright purple-blue) in the early spring months 8 april (i.e., 2014), 8 april andmonths and fall 2014), (i.e., (i.e., fall months 18 september 2015)2015) 18 september around the margins around of theofwetlands. the margins this this may the wetlands. have an impact on the amount of true open surface water in the images may have an impact on the amount of true open surface water in the images but should not be but should not be removed from the analysis removed from theunless outsideitthe it isunless analysis growingthe is outside season to reduce growing seasonerror associated to reduce errorwith freezingwith and associated thawing and freezing of surface thawing water that can of surface change water that daily."
+12,"overall can change there daily. is significantly overall more area of there is significantly flooded more area vegetation in 2014, but the duration of flooded vegetation, notably around larger of flooded vegetation in 2014, but the duration of flooded vegetation, notably around larger wetlands,wetlands, is longer in 2015 (indicated by darker red areas). is longer in 2015 (indicated by darker red areas)."
+12,table 66 shows table shows the differencein the difference areabetween inarea between2014 2014andand2015 thepad. 2015atatthe pad.
+12,"the thetotal flooded total flooded area is area significantly different between the two years, most notably, the total hectares is significantly different between the two years, most notably, the total hectares of temporarily of temporarily flooded areas in areas flooded in 2014 ha 2014 (25,954 in 2014 (25,954 ha incompared to 10,263 2014 compared to ha in 2015)."
+12,"10,263 while while ha in 2015). there is significantly there more is significantly flooded area in 2014, the proportion of more permanently flooded areas in more flooded area in 2014, the proportion of more permanently flooded areas in 2015 (21%) is much2015 (21%) is much higher than 2014 higher than(11.2%)."
+12,2014 (11.2%).
+12,table 6.
+12,comparison of flooded vegetation area and duration in months for 2014 and 2015.
+12,"areas flooded areas flooded 4+ year flooded veg. (ha) % of aoi flooded 1–3 months (ha) months (ha) 2014 25,954 36.5 23,046 (88.8%) 2907 (11.2%) 2015 10,263 14.4 8104 (79%) 2159 (21%)"
+13,"remote sens. 2019, 11, 161 13 of 24 remote sens. 2019, 11, x for peer review 13 of 24 figure 6."
+13,"freeman–durden decomposition results for 2014 and 2015 and frequency maps indicating floodingforfor duration ofofflooding duration each each respective respective year,year, wherewhere darkerdarker red indicates red indicates areas areas with with or flooded flooded or emergent emergent vegetation vegetation for a longer a longerthroughout forduration duration throughout theseason. the growing growingin season."
+13,"in the composite images, theimages, the composite power the power contribution contribution of each of each scattering scatteringismechanism mechanism is shown shown as follows: as follows: double-bounce double-bounce (red), (red), volume (green), volume (green), and rough and rough (blue) scattering. (blue) scattering."
+13,table 6.
+13,results 3.4.
+13,data fusion comparison of flooded vegetation area and duration in months for 2014 and 2015. results of the flooded of aoiof both riparian the data%fusion veg. vegetation areas flooded areasvegetation 1–3 and flooded flooded 4+ from year quad-polarized sar are shown in figure 7a.
+13,"flooded vegetation can be found in improbable (ha) flooded months (ha) months (ha) areas 2014such as roadways, 25,954 and appear 36.5isolated from vegetation (<2 m) 23,046 (88.8%) normally associated with 2907 (11.2%) flooded vegetation 2015 (circled 10,263 in figure 7a,b), 14.4but this effect is mitigated 8104 (79%) by intersecting the vegetation 2159 (21%) height layer from the chm and the flooded vegetation mask, creating a corrected mask of flooded vegetation 3.4."
+13,datawetlands around (figure 7b).
+13,this methodology also prohibits commission errors from areas of fusion results the results of the data fusion of both riparian vegetation and flooded vegetation from quad- polarized sar are shown in figure 7a.
+13,flooded vegetation can be found in improbable areas such as
+14,"remote sens. 2019, 11, x for peer review 14 of 24 roadways, and appear isolated from vegetation (<2 m) normally associated with flooded vegetation remote sens. 2019, 11, 161 14 of 24 (circled in figure 7a,b), but this effect is mitigated by intersecting the vegetation height layer from the chm and the flooded vegetation mask, creating a corrected mask of flooded vegetation around wetlands flooded 7b)."
+14,this (figure where vegetation nomethodology also prohibits vegetation height commission is recorded errors [54].
+14,the from areas of of flooded combination the riparian vegetation where no vegetation height is recorded [54].
+14,the combination of the riparian canopy canopy height model derived from lidar data and flooded vegetation double-bounce returns from height model derived from lidar data and flooded vegetation double-bounce returns from sar sar reduces commission errors from areas located in topographic uplands where positive values are reduces commission errors from areas located in topographic uplands where positive values are found.
+14,"this found. leaves this only leaves onlylow areaswhere lowareas where wetlands canform. form. wetlands can lastly, lastly, thethe corrected corrected flooded flooded vegetation vegetation corrected andand hydroperiod products are overlain as complimentary products, creating corrected hydroperiod products are overlain as complimentary products, creating a dynamic a dynamic wetland attribute wetland product. attribute product."
+14,"figure 7. (a) figure wetland 7. (a) with wetland flooded with vegetation flooded vegetationcommission errors outside commissionerrors outside of wetland riparianarea area and wetland riparian within surface andsurface within water, water, (b) corrected (b) corrected flooded flooded vegetation vegetation raster raster mask. mask."
+14,thethe comprehensive comprehensive wetlandattribute wetland product isisshown attribute product showninin figure figure8.
+14,attributes include 8.
+14,"attributes roadways include roadways derived from spot optical imagery, areas of high and low topography from derived from spot optical imagery, areas of high and low topography from the lidar dem topographic the lidar dem topographic position position aindex index (where (where search a search radius radius of 200 m was of 200 m was found found to be most be most suitable to suitable for the for the landscape) landscape) indicating where wetlands are most and least likely to occur; vegetation height from lidar indicating where wetlands are most and least likely to occur; vegetation height from lidar chm; chm; flooded vegetation from quad-polarized sar fdd; surface water hydroperiod from single flooded vegetation from quad-polarized sar fdd; surface water hydroperiod from single polarization polarization sar data extracted from db thresholding; and pixel frequency analysis in accordance datastewart sarwith extracted from db thresholding; and pixel frequency analysis in accordance with stewart & kantrud [44] surface water classification."
+14,"flooded vegetation is found to be located & kantrud [44] surface water classification. on the edges of the wetlands, either connected flooded vegetation to the open is found surface water to be located or adjacent, onwithin the edges but still thewetlands, of the either basin of the connected wetland. and surface to the open this is expected typical of water theseor adjacent, wetlands, but still where within a higher the basin of proportion the wetland."
+14,"this is expected and typical of these wetlands, where a higher proportion of flooded vegetation, and one species in particular, typha latifolia or common cattail, is commonly of flooded vegetation, and one found within closespecies in particular, proximity typhathese to larger ponds. latifolia or common ponds cattail, is commonly are predominantly in areas thatfound within are part of proximity close larger hydrological to larger ponds. within complexes theseor aretopredominantly adjacent ponds peatlands. in areas that are part of larger hydrological complexes within or adjacent to peatlands."
+14,"in areas with cattail, little open water is observed in these areas of flooded vegetation, but flooded vegetation and topographic attributes suggest there is a high probability these areas are inundated, due to the saturated soil requirements of cattail."
+14,"flooded vegetation combined with hydroperiod is shown in figure 9 in the pad, and areas that have both open surface water and flooded vegetation for at least one month of the year are shown in dark pink in figure 10, along with hydroperiod and flooded vegetation for each year for comparison."
+15,"remote sens. 2019, 11, 161 15 of 24 remote sens. 2019, 11, x for peer review 15 of 24 figure 8."
+15,figure 8.
+15,"complete complete data data fusion fusion the ursa productininthe product ursa region regionshowing showingall wetland attributes all wetland and attributes and remote characteristics sens. 2019, 11,derived derived x for peer from review the decision-based data fusion methodology. 16 of 24 characteristics from the decision-based data fusion methodology."
+15,"in areas with cattail, little open water is observed in these areas of flooded vegetation, but flooded vegetation and topographic attributes suggest there is a high probability these areas are inundated, due to the saturated soil requirements of cattail."
+15,"flooded vegetation combined with hydroperiod is shown in figure 9 in the pad, and areas that have both open surface water and flooded vegetation for at least one month of the year are shown in dark pink in figure 10, along with hydroperiod and flooded vegetation for each year for comparison."
+15,figure figure floodedvegetation 9.9.
+15,"flooded and hydroperiod vegetationand open water hydroperiod of open waterfor 2014and for2014 and2016 the 2016ininthe peace-athabasca peace-athabasca delta.flooded delta. vegetationisisshown floodedvegetation shown in in red, red, whereas open open surface waterisisshown surfacewater yellowtotoblue. shownininyellow blue."
+16,remote sens.
+16,"2019, 11,9.161 figure flooded vegetation and hydroperiod of open water for 2014 and 2016 in the peace-athabasca 16 of 24 delta."
+16,"flooded vegetation is shown in red, whereas open surface water is shown in yellow to blue."
+16,figure figure for for 10.
+16,visualization 10.
+16,"visualization areasinin2014 areas and 2015, 2014 and 2015,where whereboth open both surface open water water surface and flooded and flooded vegetation present for at least one month of the year are shown in purple."
+16,hydroperiod and flooded vegetation present for at least one month of the year are shown in purple.
+16,hydroperiod and flooded vegetation are also shown for reference. vegetation are also shown for reference.
+16,surface water extent and riparian vegetation validation 3.5.
+16,"surface water extent and riparian vegetation validation for clarity and display purposes, two of the six ponds are compared with field validation at clarity forursa and42display (pond (figure purposes, 11a) and pondtwo48of the six (figure ponds 11b), areare as they compared with fieldfield validation the most rigorously validatedat ursa pond 42and (figure 11a) have an and pond appropriate 48 scale spatial (figure 11b), as for display they are purposes. the most distinct rigorously riparian and uplandfield validated and vegetation zones were observed during 2015 field data collection."
+16,transition zones are have an appropriate spatial scale for display purposes.
+16,"distinct riparian and upland vegetation notably abrupt zones (vegetation zones are distinct) in most transects (figure 11a,b), except for areas were observed during 2015 field data collection."
+16,"transition zones are notably abrupt (vegetation where there is zones are distinct) in most transects (figure 11a,b), except for areas where there is encroachment of woody vegetation such as willow, alder, and birch, into grass- and forb-dominated wetland riparian areas, where patches of young woody vegetation have largely replaced tall grasses and sedge."
+16,"from the six wetlands surveyed, the rmse of the riparian transects and water edge observed in field validation data and those predicted from the model was 4.6 m, with an r2 value of 0.90 (figure 12)."
+16,most of the error is attributed to some notable surface water extent discrepancies within fen ponds with mud flats separating surface water and riparian vegetation.
+16,"vegetation species composition by transect for pond 42 and pond 48 are detailed in table 7 (pond 42), and table 8 (pond 48)."
+16,"species composition was found to be relatively consistent at each transect (t) for the wetlands, which can be divided into 3 distinct habitats (hab.), with occasional pockets of unique vegetation communities (habitat 4, figure 11a)."
+16,table 7.
+16,riparian vegetation species composition for pond 42 (refer to figure 11a for transect and derived habitat locations).
+16,pond 42 t hab.
+16,"vegetation species t1 h1 paper birch/alaska birch (6–8 m), young birch, rose, graminoids h2 young birch (1–3 m), buckbrush, snowberry, graminoids h3 cattail, water sedge, buttercup sp., bur-reed, water parsnip t2 h1 paper birch (6–8 m), green alder, young trembling aspen, rose, mosses h2 tamarack, labrador tea, willow, white spruce, young birch, graminoids h3 cattail, water sedge, reed grass, buttercup sp."
+16,"h4 cattail, water cup sp. (float), sedge sp., buttercup sp., goosefoot sp."
+16,"t3 h1 paper/alaska birch (6–8 m), rose, black currant h2 young birch (1–3 m), buckbrush, snowberry, green alder, reed grass h3 cattail, water sedge, goosefoot sp., water parsnip"
+17,"remote sens. 2019, 11, x for peer review 17 of 24 encroachment of woody vegetation such as willow, alder, and birch, into grass- and forb-dominated wetland 2019, 11, areas, riparian remote sens. 161 where patches of young woody vegetation have largely replaced tall grasses 17 of 24 and sedge."
+17,figure 11.
+17,figure validation of fieldvalidation 11.
+17,"field surface water of surface extent and water extent riparian boundaries and riparian boundaries for late july 2015. (a) (a) pond pond 42, (b) 42, (b) pond 48."
+17,"riparian habitats are riparian habitats extrapolated from are extrapolated from highly accurate field field data highly accurate points (topcon data points (topcon hiper sr hiper sr global navigation satellite global navigation system (gnss)), satellite system seriesof (gnss)), aaseries spotoptical opticalimagery, ofspot anddem imagery, and data, demdata, then tested against canopy height cover."
+17,field waypoints represent boundaries observed between riparian areas.
+18,then tested against canopy height cover.
+18,field waypoints represent boundaries observed between riparian areas.
+18,"from the six wetlands surveyed, the rmse of the riparian transects and water edge observed in field validation data and those predicted from the model was 4.6 m, with an r2 value of 0.90 (figure remote sens. 2019, 11, 161 18 of 24 12)."
+18,figure 12.
+18,regression of measured and model riparian and surface water edge accuracies (n = 31) for figure 12.
+18,regression six wetlands region inand of measured in the ursa model riparian and surface water edge accuracies (n = 31) for 2015. six wetlands in the ursa region in 2015.
+18,table 8.
+18,riparian vegetation species composition for pond 48 (refer to figure 11b for transect and most of the error is attributed to some notable surface water extent discrepancies within fen derived habitat locations). ponds with mud flats separating surface water and riparian vegetation.
+18,"vegetation species composition by transect for pond 42 and pond 48 detailed in table 7 (pond 42), and table 8 (pond are48 pond 48)."
+18,"speciest composition hab. was found to be relatively consistent at each transect (t) for the wetlands, vegetation species which can be divided into 3 distinct habitats (hab.), with occasional pockets of unique vegetation t1 h1 paper birch (6–8 m), raspberry, wheat grass sp., rye grass sp. communities (habitath2 4, figure 11a)."
+18,"young willow, young birch (<2 m), water sedge, rice grass h3 water parsnip, water sedge, bog birch, dock sp., mosses, cattail, bog birch table 7."
+18,"riparian vegetation species composition for pond 42 (refer to figure 11a for transect and t2 h1 paper birch (6–8 m), raspberry locations). derived habitath2 willow, water sedge, rice grass h3 sedge sp., young paper birch, water sedge pond 42 h4 common cattail, water sedge, goosefoot sp., mosses t hab."
+18,"vegetation species t3 h1 paper birch (6–8 m), willows, bog birch, mosses t1 h1 paper birch/alaska birch (6–8 m), young birch, rose, graminoids h2 green alder, willow, bog birch, graminoids, sedge sp."
+18,"h2 h3 young birch (1–3 m), buckbrush, cattail, snowberry, graminoids water parsnip h3 cattail, water sedge, buttercup sp., bur-reed, water parsnip t2 h1 paper birch (6–8 m), green alder, young trembling aspen, rose, mosses vegetation communities observed at pond 42 and pond 48 were diverse at the time of data h2 tamarack, labrador tea, willow, white spruce, young birch, graminoids collection, with many wetland indicator species present (cattail, sedges), showing minimal to no h3 cattail, water sedge, reed grass, buttercup sp. anthropogenic disturbance."
+18,"vegetation growth was only observed to be limited in areas where woody h4 cattail, water cup sp. (float), sedge sp., buttercup sp., goosefoot sp. vegetation, such as young willows and birch, was growing into the riparian area (e.g., habitat 2 in all t3 h1 paper/alaska birch (6–8 m), rose, black currant transects at pond 48), potentially prohibiting succession of some riparian grasses."
+18,"h2 young birch (1–3 m), buckbrush, snowberry, green alder, reed grass h3 4."
+18,"discussion cattail, water sedge, goosefoot sp., water parsnip 4.1."
+18,"subjectivity associated with manual riparian digitization the results in figure 11 and the associated accuracies in figure 12 are accurate within ~10% of the area, but the manual classification shows some obvious discrepancies and associated subjectivity of the boundaries observed in the validation dataset and model."
+18,"while optical data can be trained and classified to provide some measure of interpreted accuracy, the process is still largely determined by delineation conducted by the operator."
+18,boundary delineation of vegetation and water extent
+19,"remote sens. 2019, 11, 161 19 of 24 in some wetlands are also subjective."
+19,"crasto et al. [55] discuss how criteria outlined by jahn and dunne [56] influence remote sensing feature detection, due to bias during digitization that is often influenced by experience and interpretations that are subjective [57]."
+19,all validation data were collected by the same individual in the field and areas were digitized by the same operator.
+19,manual surveys of flooded vegetation boundaries were not conducted due to access and time limitations.
+19,"therefore, these areas could not be validated to the same degree as less saturated riparian areas, but the decomposition methodology has been well documented and studied for quality control in a variety of environments [31,46,58,59]."
+19,"any combination of uncertainties may contribute to discrepancies in the overall accuracy of the classification, and this highlights the importance of reliable ground validation data when working in logistically challenging regions."
+19,"implications for wetland classification while many studies focus on mapping known permanent waterbodies, this study differs by utilizing high spatial and temporal resolution information to create dynamic surface water and riparian vegetation thematic maps."
+19,"data availability is the most important aspect when attempting to characterize non-permanent wetlands, requiring increased temporal resolution and field measurements that represent the natural ranges in hydrological conditions."
+19,the results of this study suggest that these criteria can be met by products of the decision-based methodology presented (figures 8–10).
+19,"the methodology presented should also be useful for the identification of marsh and swamp wetlands with associated open water areas, while wet areas within fens can be identified using laser return intensity and other spectral indices that are related to the absorption of electromagnetic wavelengths by water [7,16], especially within peatland (treed fen/bog) environments."
+19,"for example, boolean statements can be implemented to determine if an area is a swamp: e.g., (1) “if” trees are present and topography is low-lying (tpi) then high potential for a swamp; (2) “if” the surface water level is above the dem then high potential for a swamp; (3) “if” no open water is present and flooded vegetation is present then more likely a swamp or fen."
+19,"however, “if” statements require calibration, which is locally dependent."
+19,"absence of these statements in the current methodology is a limitation, but they should be explored and integrated in further studies to provide a more complete classification system for boreal wetlands."
+19,future work may also investigate scattering returns from volume scattering that intersect with areas of surface water at certain times of the year to provide an indication of species type.
+19,"for example, some emergent hydrophytic vegetation, such as cattail and bulrush, tend to grow later in the growing season (july–august) in areas where soil was saturated in earlier months."
+19,"therefore, identifying the areas with transition from open water to double-bounce flooded vegetation and, lastly, volume scattering, could be an excellent indicator of these larger, slow growing species."
+19,data limitations and potential sources of error a limitation of the study relates to temporal image frequency of both sar and lidar data.
+19,increased temporal resolution will better represent short-term variations.
+19,"the canadian c-band radarsat constellation mission (rcm), expected to launch in february 2019, will offer advanced capabilities for monitoring surface water with high spatial resolution modes such as spotlight, providing enhanced monitoring of smaller wetlands [60]."
+19,"as the provincial lidar database and coverage in alberta expands and is updated, there is a growing opportunity to integrate temporal lidar datasets into wetland monitoring and enhance the understanding of precipitation variation influences, anthropogenic and climate change on surface water and wetland vegetation change."
+19,working over broad regions and in relatively remote areas like the ursa region makes it logistically difficult to collect ground validation across all wetland environments.
+19,"since classifiers or ranges for sar-derived surface water masks are variable between images and acquisition, there is a need to calibrate the intensity threshold (db) for each image to consistently extract all true open water returns from an image [14], as well as instrument calibration and ground conditions [61]."
+20,"remote sens. 2019, 11, 161 20 of 24 another limitation of this approach is found in the fine resolution used in the large spatial area."
+20,"subtle changes in riparian vegetation on the order of <2 m are difficult to extract with certainty, due to homogeneity of many of the riparian vegetation communities."
+20,"while it is easy to determine high and low topographical areas, and high, medium, and low vegetation canopy, it is difficult to discriminate between species."
+20,"for example, while it may be important to examine species encroachment or succession, the difference between a patch of 2 m tall willow trees and 2 m tall birch trees is challenging due to similarities in structure, therefore, it was found to be more convenient to group these similar canopy environments."
+20,"this is detailed in figure 7a,b and figure 8, where both elevation and canopy height are somewhat ambiguous, likely as a result of the general flatness of topography and sporadic woody vegetation regeneration in clearings and meadows."
+20,"shadow effects in the sar ascending and descending images can cause classification errors along some forested boundaries, but quality control data were not available within this study, so the extent (if at all) of such shadow-induced errors in low-lying riparian areas of the ursa study area is unknown."
+20,see kropatsch [62] for details and methods to reduce error associated with shadowing.
+20,"when using sar to derive surface water compared to other sensors, occasional omission of surface water bodies that are narrow or have mixed pixels (such as watercourses and fen pond boundaries), has been documented in shallow riparian areas [13]."
+20,"this may be a potential source of error in many boreal wetlands, where these boundary areas are mostly classified as land due to the unique scattering properties."
+20,hydrological connectivity of wetlands is of key interest to hydrologists and multi-temporal sar imagery may provide an indication of hydrological connectivity due to periodic saturation and the growth of certain species.
+20,this may not be topographically related as the water can move underground in peat.
+20,"it has implications for contaminant transport, downstream flooding, and ecosystem change."
+20,"surface water modeling would also be enhanced by delineating water extent and elevation from lidar, which can also provide further high-resolution comparative data to both optical and sar-derived surface water masks, adding utility to the wetland classification [55,63]."
+20,"conclusions the presented methodology offers a new time series-based boreal wetland classification approach using data fusion of multiple remote sensing data sources, based on hydroperiod, topography and vegetation attributes."
+20,"the results of this study indicate water mask frequency analysis can be used to determine hydroperiod and permanence in boreal environments, similarly to prairie environments, with overall accuracies of 93% to 97.2% and kappa values of 0.8–0.9% when compared to optical data."
+20,"concordance results comparing semi-permanent/permanent hydroperiod between 2015 and 2016 was found to be 98.3% correlated, suggesting there is very little change in open water extent in these wetlands between the two years."
+20,a longer time series would need to be used to determine if this is a consistent relationship given the climate cycles [20].
+20,"regression analysis of field and model riparian and surface water extents from six wetlands also yielded high accuracies (r2 = 0.9), suggesting the decision-based methodology could be applied to similar open water boreal wetlands with some certainty."
+20,"the time-intensive and potential limiting factor of the methodology is the expertise required in data preparation for multiple types of data (lidar, sar, optical)."
+20,"however, once the data preparation and foundation for data fusion has been conducted, additional data can readily be integrated and processed in the workflow."
+20,"while there are limitations associated with data availability and frequency, the strength of the study is the ability to construct and examine meaningful comprehensive wetland characterization products conforming to provincial guidelines set forth by the american wetland classification system and the canadian wetland classification system."
+20,future research using a logic-based decision-based methodology would benefit from identifying additional topographic and vegetative attributes at a higher resolution to increase class reliability.
+20,sar and optical data to compliment lidar data describing riparian vegetation communities would further enhance the hydroperiod analysis for a more comprehensive wetland classification and monitoring framework.
+20,this framework could be largely automated through machine learning algorithms and
+21,"remote sens. 2019, 11, 161 21 of 24 would provide a platform for land use permitting, reclamation monitoring, and wetland regulation in remote boreal regions of alberta."
+21,"author contributions: conceptualization, j.m., b.b., c.h.; methodology j.m., c.h., l.c.; software: c.h.; validation, j.m.; formal analysis, j.m.; investigation, k.d.; resources, b.b., c.h.; data curation, j.m., b.b.; writing—original draft preparation, j.m., c.h.; writing—review and editing, j.m, c.h., b.b., l.c.; visualization, j.m.; supervision, c.h., b.b., d.c., k.d.; project administration, b.b., c.h.; funding acquisition, c.h., b.b."
+21,"funding: hopkinson acknowledges: alberta economic development and trade, canada centre for mapping and earth observation (ccmeo); canada foundation for innovation and the campus alberta innovates program (project 32436); project-related lab personnel, research and data funding to support sar time series wetland classification and wetland ecosystem monitoring from government of alberta (economic development and trade, environment and parks), alberta sustainable resource development (now alberta environment and parks); and discovery grant funding from the natural sciences and engineering research council (rgpin-2017-04362)."
+21,"funding is also provided by the government of alberta oil sands monitoring program, wetland ecosystem monitoring; and natural resources canada, canada centre for mapping and earth observation (ccmeo)."
+21,"acknowledgments: we acknowledge support and field assistance from craig mahoney, maxim okhrimenko and reed parsons, stephanie connor."
+21,"radarsat-2 imagery was obtained and licensed from the canada centre for mapping and earth observation, earth sciences sector (ottawa) and mda with the assistance of kevin murnhagen (ccrs)."
+21,"archive lidar data were provided by alberta environment and parks, while new lidar were obtained via support from teledyne optech inc., airborne imaging inc."
+21,kalus aviation inc.
+21,accommodations at the ursa camp.
+21,conflicts of interest: the authors declare no conflict of interest.
+21,references 1.
+21,national wetlands working group.
+21,"wetlands of canada; ecological land classification series, no."
+21,"24; environment canada and polyscience publications inc.: ottawa, on, canada, 1988; p."
+21,"komers, p.e."
+21,"; stanojevic, z."
+21,rates of disturbance vary by data resolution: implications for conservation schedules using the alberta boreal forest as a case study.
+21,chang.
+21,"2013, 19, 2916–2928."
+21,[crossref] [pubmed] 3.
+21,"devito, k.j."
+21,"; mendoza, c."
+21,"; petorone, r.m."
+21,"; kettridge, n."
+21,"; waddington, j."
+21,utikuma region study area (ursa)—part 1: hydrogeological and ecohydrological studies (head).
+21,chron.
+21,"2016, 92, 57–61."
+21,[crossref] 4.
+21,"stow, d.a."
+21,"; hope, a."
+21,"; mcguire, d."
+21,"; verbyla, d."
+21,"; gamon, j."
+21,"; huemmrich, f."
+21,"; houston, s."
+21,"; racine, c."
+21,"; sturm, m."
+21,"; tape, k."
+21,remote sensing of vegetation and land-cover change in arctic tundra ecosystems.
+21,remote sens.
+21,environ.
+21,"2004, 89, 281–308."
+21,[crossref] 5.
+21,"riordan, b."
+21,"; verbyla, d."
+21,"; mcguire, a.d."
+21,shrinking ponds in subarctic alaska based on 1950–2002 remotely sensed images.
+21,geophys.
+21,"2006, 111, g04002."
+21,[crossref] 6.
+21,"kettridge, n."
+21,"; waddington, j.m."
+21,towards quantifying the negative feedback regulation of peatland evaporation to drought.
+21,hydrol.
+21,process.
+21,"2013, 28, 3728–3740."
+21,[crossref] 7.
+21,"chasmer, l."
+21,"; hopkinson, c."
+21,"; montgomery, j."
+21,"; petrone, r."
+21,"a physically based terrain morphology and vegetation structural classification for wetlands of the boreal plains, alberta, canada."
+21,remote sens.
+21,"2016, 42, 521–540."
+21,[crossref] 8.
+21,"montgomery, j."
+21,"; hopkinson, c."
+21,"; brisco, b."
+21,"; patterson, s."
+21,"; rood, s."
+21,wetland hydroperiod classification in the western prairies using multi-temporal synthetic aperture radar.
+21,hydrol.
+21,process.
+21,"2018, 31, 1476–1490."
+21,[crossref] 9.
+21,"houhoulis, p.f."
+21,"; michener, w."
+21,detecting wetland change: a rule-based approach using nwi and spot-xs data.
+21,photogramm.
+21,remote sens.
+21,"2000, 66, 205–211."
+21,"davranche, a."
+21,"; lefebvre, g."
+21,"; poulin, b."
+21,wetland monitoring using classification trees and spot-5 seasonal time series.
+21,remote sens.
+21,environ.
+21,"2000, 114, 552–562."
+21,[crossref] 11.
+21,"wang, k."
+21,"; franklin, s."
+21,"; guo, x."
+21,"; he, y."
+21,"; mcdermid, g."
+21,problems in remote sensing of landscapes and habitats.
+21,geogr.
+21,"2009, 33, 1–22."
+21,[crossref] 12.
+21,"brisco, b."
+21,"; short, n.; van der sanden, j."
+21,"; landry, r."
+21,"; raymond, d."
+21,a semi-automated tool for surface water mapping with radarsat-1.
+21,remote sens.
+21,"2009, 35, 336–344."
+21,[crossref] 13.
+21,"santoro, m."
+21,"; wegmüller, u."
+21,multi-temporal synthetic aperture radar metrics applied to map open water bodies.
+21,ieee j.
+21,earth obs.
+21,remote sens.
+21,"2014, 7, 3225–3238."
+21,[crossref]
+22,"remote sens. 2019, 11, 161 22 of 24 14."
+22,"white, l."
+22,"; brisco, b."
+22,"; pregitzer, m."
+22,"; tedford, b."
+22,"; boychuck, l."
+22,radarsat-2 beam mode selection for surface water and flooded vegetation mapping.
+22,remote sens.
+22,"2014, 40, 135–151."
+22,"wang, j."
+22,"; shang, j."
+22,"; brisco, b."
+22,"; brown, r."
+22,comparison of multidate radar and multispectral optical satellite data for wetland detection in the great lakes region.
+22,"in proceedings of the international symposium, geomatics in the era of radarsat (ger’97), ottawa, on, canada, 25–30 may 1997."
+22,"chasmer, l."
+22,"; hopkinson, c."
+22,"; quinton, w."
+22,"; veness, t."
+22,"; baltzer, j."
+22,a decision-tree classification for low-lying complex land cover types within the zone of discontinuous permafrost.
+22,remote sens.
+22,environ.
+22,"2014, 143, 73–84."
+22,[crossref] 17.
+22,"ameli, a."
+22,"; creed, i."
+22,quantifying hydrologic connectivity of wetlands to surface water systems.
+22,hydrol.
+22,earth syst.
+22,"2017, 21, 1791–1808."
+22,[crossref] 18.
+22,"irwin, k."
+22,"; beaulne, d."
+22,"; braun, a."
+22,"; fotopoulos, g."
+22,"fusion of sar, optical and airborne lidar for surface water detection."
+22,remote sens.
+22,"2017, 9, 890."
+22,[crossref] 19.
+22,"millard, l."
+22,"; richardson, m."
+22,"wetland mapping with lidar derivatives, sar polarimentric decompositions, and lidar/sar fusion using a random forest classifier."
+22,remote sens.
+22,"2013, 39, 290–307."
+22,[crossref] 20.
+22,"devito, k."
+22,"; mendoza, c."
+22,"; qualizza, c."
+22,conceptualizing water movement in the boreal plains.
+22,"implications for watershed reconstruction; synthesis report; the canadian oil sands network for research and development, environmental and reclamation research group: edmonton, ab, canada, 2012; p."
+22,[crossref] 21.
+22,"devito, k.j."
+22,"; creed, i."
+22,"; gan, t."
+22,"; mendoza, c."
+22,"; petrone, r."
+22,"; silins, u."
+22,"; smerdon, b."
+22,a framework for broad scale classification of hydrologic response units on the boreal plain: is topography the last thing to consider?
+22,hydrol.
+22,process.
+22,"2005, 19, 1705–1714."
+22,[crossref] 22.
+22,"downing, d.j."
+22,"; pettapiece, w.w."
+22,; natural regions committee.
+22,"natural regions and subregions of alberta; pub #t/852; government of alberta: edmonton, ab, canada, 2006."
+22,peace-athabasca project group.
+22,the peace-athabasca delta project technical report (1 volume) + technical appendices (3 volumes): technical report—a report on low water levels in lake athabasca and their effects on the peace-athabasca delta.
+22,"v.1 appendices—hydrologic investigations; v.2 appendices—ecological investigations; v.3 appendices—supporting studies; peace-athabasca delta project group: delta, bc, canada, 1973."
+22,"jaques, d.r."
+22,"topographic mapping and drying trends in the peace-athabasca delta, alberta using landsat mss imagery; report for wood buffalo national park; ecostat geobotanical surveys inc.: fort smith, nt, canada, 1989; p."
+22,"wolfe, b.b."
+22,"; hall, r."
+22,"; last, w.m."
+22,"; edwards, t.w.d."
+22,"; english, m."
+22,"; karst-riddoch, t.l."
+22,"; paterson, a.m."
+22,"; palmini, r."
+22,"reconstruction of multi-century flood histories from oxbox lake sediments, peace athabasca delta, alberta, canada."
+22,hydrol proces.
+22,"2006, 20, 4131–4153."
+22,[crossref] 26.
+22,"peters, d.l."
+22,"; prowse, t.d."
+22,"; marsh, p."
+22,"; lafleur, p.m."
+22,"; buttle, j.m."
+22,"persistence of water within perched basins of the peace-athabasca delta, northern canada."
+22,manag.
+22,"2006, 14, 221–243."
+22,[crossref] 27.
+22,"peters, d.l."
+22,"; prowse, t.d."
+22,"; pietroniro, a."
+22,"; leconte, r."
+22,"flood hydrology of the peace athabasca delta, northern canada."
+22,hydrol.
+22,process.
+22,"2006, 20, 4073–4096."
+22,[crossref] 28.
+22,"pope, k.o."
+22,"; rejmankova, e."
+22,"; paris, j.f."
+22,"; woodruff, r."
+22,detecting seasonal flooding cycles in marshes of the yucatan peninsula with sir-c polarimetric radar imagery.
+22,remote sens.
+22,environ.
+22,"1997, 59, 157–166."
+22,[crossref] 29.
+22,"townsend, p.a."
+22,relationship between forest structure and the detection of flood inundation in forested wetlands using c-band sar.
+22,remote sens.
+22,"2002, 23, 443–460."
+22,[crossref] 30.
+22,"brisco, b."
+22,"; kapfer, m."
+22,"; hirose, t."
+22,"; tedford, b."
+22,"; liu, j."
+22,evaluation of c-band polarisation diversity and polarimetrey for wetland mapping.
+22,remote sens.
+22,"2011, 37, 82–92."
+22,[crossref] 31.
+22,"brisco, b."
+22,mapping and monitoring surface water and wetlands with synthetic aperture radar.
+22,"in remote sensing of wetlands, applications and advances; tiner, r.w., lang, m.w., klemas, v.v., eds."
+22,"; crc press: boca raton, fl, usa, 2015; chapter 6; pp."
+22,119–136.
+22,"isenburg, m."
+22,"lastools—efficient lidar processing software (version 141017, academic)."
+22,available online: http://rapidlasso.com/lastools (accessed on 11 may 2018).
+22,american society for photogrammetry and remote sensing (asprs).
+22,"las specification, version 1.4-r6."
+22,available online: www.asprs.org (accessed on 19 september 2018).
+22,"mahoney, c."
+22,"; hall, r."
+22,"; hopkinson, c."
+22,"; filiatrault, m."
+22,"; beaudoin, a."
+22,"; chen, q."
+22,"a forest attribute mapping framework: a pilot study in a northern boreal forest, northwest territories, canada."
+22,remote sens.
+22,"2018, 10, 1338."
+22,[crossref]
+23,"remote sens. 2019, 11, 161 23 of 24 35."
+23,"guisan, a."
+23,"; weiss, s.b."
+23,"; weiss, a.d."
+23,glm versus cca spatial modeling of plant species distribution.
+23,kluwer academic publishers.
+23,plant ecol.
+23,"1999, 143, 107–122."
+23,[crossref] 36.
+23,"jones, k.b."
+23,"; heggem, d.t."
+23,"; wade, t.g."
+23,"; neale, a.c."
+23,"; ebert, d."
+23,"; nash, m.s."
+23,"; mehaffey, m.h."
+23,"; goodman, i.a."
+23,"; hermann, k.a."
+23,"; selle, a.r.; et al."
+23,assessing landscape conditions relative to water resources in the western united states: a strategic approach.
+23,environ.
+23,monit.
+23,assess.
+23,"2000, 64, 227–245."
+23,[crossref] 37.
+23,"weiss, a."
+23,topographic position and landforms analysis.
+23,"presented at esri user conference, san diego, ca, usa, 9–13 july 2001."
+23,"toutin, t."
+23,corrigendum to the paper state-of-the-art of geometric correction of remote sensing data: a data fusion perspective.
+23,"image data fusion 2011, 2, 283–286."
+23,[crossref] 39.
+23,"zhang, f."
+23,"; xie, c."
+23,"; li, k."
+23,"; xu, m."
+23,"; wang, x."
+23,"; xia, z."
+23,forest and deforestation identification based on multi-temporal polarimetric radarsat-2 images in southwestern china.
+23,remote sens.
+23,"2012, 6, 063527."
+23,[crossref] 40.
+23,"white, l."
+23,"; brisco, b."
+23,"; dabboor, m."
+23,"; schmitt, a."
+23,"; pratt, a."
+23,a collection of sar methodologies for monitoring wetlands.
+23,remote sens.
+23,"2015, 7, 7615–7645."
+23,[crossref] 41.
+23,"burrough, p.a."
+23,"; gaans, p.f.m."
+23,"; macmillan, r.a."
+23,high-resolution landform classification using fuzzy k-means.
+23,fuzzy sets syst.
+23,"2000, 113, 37–52."
+23,[crossref] 42.
+23,"burrough, p.a."
+23,"; wilson, j.p.; van gaans, p.f."
+23,"fuzzy k-means classification of topo-climatic data as an aid to forest mapping in the greater yellowstone area, usa."
+23,landsc.
+23,"2001, 16, 523."
+23,[crossref] 43.
+23,"lane, c."
+23,"; liu, h."
+23,"; autrey, b.c."
+23,"; anenkhonov, o."
+23,"; chepinoga, v."
+23,"; wu, q."
+23,improved wetland classification using eight-band high resolution satellite imagery and a hybrid approach.
+23,remote sens.
+23,"2014, 6, 12187–12216."
+23,[crossref] 44.
+23,"stewart, r.e."
+23,"; kantrud, h.a."
+23,"classification of natural ponds and lakes in the glaciated prairie region; resource publication 92; bureau of sport fisheries and wildlife, u.s."
+23,"fish and wildlife service: washington, dc, usa, 1971; p."
+23,"cowardin, l.m."
+23,"; carter, v."
+23,"; golet, f.c."
+23,"; laroe, e.t."
+23,classification of wetlands and deepwater habitats of the united states; fws/obs-79/31; u.s.
+23,"department of the interior, fish and wildlife service."
+23,"office of biological services: washington, dc, usa, 1979; p."
+23,"freeman, a."
+23,"; durden, s.l."
+23,a three-component scattering model for polarimetric sar data.
+23,ieee trans.
+23,geosci.
+23,remote sens.
+23,"1998, 36, 963–973."
+23,[crossref] 47.
+23,"touzi, r."
+23,"; boerner, w.m."
+23,"; lee, j.s."
+23,"; luenberg, e."
+23,a review of polarimetry in the context of synthetic aperture radar: concepts and information extraction.
+23,can j.
+23,remote sens.
+23,"2004, 30, 380–407."
+23,[crossref] 48.
+23,"jenness, j."
+23,"topographic position index (tpi_jen.avx) extension for arcview 3.x, v."
+23,"jenness enterprises, 2006."
+23,available online: http://www.jennessent.com/arcview/tpi.htm (accessed on 14 march 2018).
+23,"brisco, b."
+23,"; ahren, f."
+23,"; murnaghan, k."
+23,"; white, l."
+23,"; canisus, f."
+23,"; lancaster, p."
+23,seasonal change in wetland coherence as an aid to wetland monitoring.
+23,remote sens.
+23,"2017, 9, 158."
+23,[crossref] 50.
+23,alberta environment and sustainable resource development (esrd).
+23,"alberta wetland classification system; water policy branch, policy and planning division: edmonton, ab, canada, 2015."
+23,"frazier, p.s."
+23,"; page, k.j."
+23,water body detection and delineation with landsat tm data.
+23,photogramm.
+23,remote sens.
+23,"2000, 66, 1461–1468."
+23,"sawaya, k.e."
+23,"; olmanson, l.g."
+23,"; heinert, n.j."
+23,"; brezonik, p.l."
+23,"; bauer, m.e."
+23,extending satellite remote sensing to local scales: land and water resource monitoring using high-resolution imagery.
+23,remote sens.
+23,environ.
+23,"2003, 88, 144–156."
+23,[crossref] 53.
+23,"peiman, r."
+23,"; ali, h."
+23,"; brisco, b."
+23,"; hopkinson, c."
+23,an automated open-source python-based processing engine for sar water body extraction: sarwatpy.
+23,remote sens.
+23,2018. submitted.
+23,"hopkinson, c."
+23,"; chasmer, l.e."
+23,"; zsigovics, g."
+23,"; creed, i."
+23,"; sitar, m."
+23,"; kalbfleisch, w."
+23,"; treitz, p."
+23,vegetation class dependent errors in lidar ground elevation and canopy height estimates in a boreal wetland environment.
+23,remote sens.
+23,"2005, 31, 191–206."
+23,[crossref] 55.
+23,"crasto, n."
+23,"; hopkinson, c."
+23,"; forbes, d.l."
+23,"; lesack, l."
+23,"; marsh, p."
+23,"; spooner, i."
+23,"; van der sanden, j.j."
+23,a lidar-based decision-tree classification of open water surfaces in an arctic delta.
+23,remote sens.
+23,environ.
+23,"2015, 164, 90–102."
+23,[crossref] 56.
+23,"jahn, r.g."
+23,"; dunne, b.j."
+23,science of the subjective.
+23,explor.
+23,"1997, 11, 201–224."
+23,[crossref] [pubmed] 57.
+23,"goodchild, m.f."
+23,metrics of scale in remote sensing and gis.
+23,earth obs.
+23,geoinf.
+23,"2001, 3, 114–120."
+23,[crossref]
+24,"remote sens. 2019, 11, 161 24 of 24 58."
+24,"singh, g."
+24,"; yamaguchi, y."
+24,"; park, s.-e."
+24,4-component scattering power decomposition with phase rotation of coherency matrix.
+24,"in proceedings of the 2011 ieee international geoscience and remote sensing symposium, vancouver, bc, canada, 25–29 july 2011."
+24,"cui, y."
+24,"; yamaguchi, y."
+24,"; yang, j."
+24,"; park, s."
+24,"; kobayashi, h."
+24,"; singh, g."
+24,three-component power decomposition for polarimetric sar data based on adaptive scatter modeling.
+24,remote sens.
+24,"2012, 4, 1559–1572."
+24,[crossref] 60.
+24,canadian space agency.
+24,radarsat constellation.
+24,available online: http://www.asc-csa.gc.ca/eng/ satellites/radarsat (accessed on 23 june 2018).
+24,"hopkinson, c."
+24,"; pietroniro, a."
+24,"; pomeroy, j."
+24,(eds.)
+24,"hydroscan: airborne laser mapping of hydrological features and resources; canadian water resources association: saskatoon, sk, canada, 2008."
+24,"kropatsch, w.g."
+24,"; strobl, d."
+24,the generation of sar layover and shadow maps from digital elevation models.
+24,ieee trans.
+24,geosci.
+24,"remote sens 1990, 28, 98–107."
+24,[crossref] 63.
+24,"hopkinson, c."
+24,"; crasto, n."
+24,"; marsh, p."
+24,"; forbes, d.l."
+24,"; lesack, l.f.w."
+24,investigating the spatial distribution of water levels in the mackenzie delta using airborne lidar.
+24,hydrol.
+24,process.
+24,"2011, 25, 2995–3011."
+24,[crossref] © 2019 by the authors.
+24,"licensee mdpi, basel, switzerland."
+24,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).
