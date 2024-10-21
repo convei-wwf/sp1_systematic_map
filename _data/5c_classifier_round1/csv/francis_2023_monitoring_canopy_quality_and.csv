@@ -1,0 +1,657 @@
+page,p
+1,"urban forestry & urban greening 89 (2023) 128115 contents lists available at sciencedirect urban forestry & urban greening journal homepage: www.elsevier.com/locate/ufug monitoring canopy quality and improving equitable outcomes of urban tree planting using lidar and machine learning john francis a, *, mathias disney b, stephen law a, b a the alan turing institute, london nw1 2db, united kingdom b department of geography, university college london, united kingdom a r t i c l e i n f o a b s t r a c t handling editor: dr cecil konijnendijk van den urban tree canopies are fundamental to mitigating the impacts of climate change within cities as well as bosch providing a range of other important ecosystem, health, and amenity benefits."
+1,"however, urban tree planting initiatives do not typically utilize data about both the horizontal and vertical dimensions of the tree canopy, keywords: despite height being a critical determinant of the quality and value of urban canopy cover."
+1,we present a novel canopy cover pipeline that uses airborne lidar data to train a multi-task machine learning model to generate estimates of both canopy height canopy cover and height in urban areas.
+1,"we apply this to multi-source multi-spectral imagery for the case study environmental equity green infrastructure of chicago, usa."
+1,our results indicate that a multi-task unet convolutional neural network can be used to urban heat island generate reliable estimates of canopy cover and height from aerial and satellite imagery.
+1,"we then use these canopy estimates to allocate 75,000 trees from chicago’s recent green initiative under four scenarios, minimizing the urban heat island effect and then optimizing for an equitable canopy distribution, comparing results when only canopy cover is used, and when both canopy cover and height are considered."
+1,"through the introduction of this novel pipeline, we show that including canopy height within decision-making processes allows the distri­ bution of new trees to be optimised to further reduce the urban heat island effect in localities where trees have the highest cooling potential and allows trees to be more equitably distributed to communities with lower quality canopies."
+1,introduction environment.
+1,"using canopy cover alone to make policy decisions is problematic because the height of trees (poulsen et al., 2020), species of cities across the world such as london, singapore, and nairobi have trees (franceschi et al., 2022), leaf area index (rahman et al., 2015), and set forth tree planting initiatives as part of larger efforts to mitigate local environmental conditions (wang et al., 2022), all influence how climate change, improve quality of life, and promote environmental much benefit is gained from investments in additional urban greenery. equity (mayor of london, 2022; tress 2023; nyamasege, 2022)."
+1,"within indeed, quantifying the structure of canopies is crucial to understanding these initiatives, policymakers face hurdles when deciding how to the benefits of trees in urban environments (mcpherson et al., 1997)."
+1,"for allocate tree planting resources because there is little consensus sur­ example, the height of trees effects how much shade, and therefore rounding distribution strategies (young, 2011)."
+1,"additionally, there is a temperature reductions, are provided by an area with a given canopy general lack of information about the quality of urban canopies as ini­ cover (lindberg and grimmond 2011a; lindberg and grimmond tiatives tend to focus on increasing the quantity of canopy cover 2011b)."
+1,by including the height of trees into the decision-making (eisenman et al.
+1,2021).
+1,"by itself, canopy cover overlooks critical dif­ pipeline, we aim to show that resources can be allocated more effec­ ferences in canopy structures throughout urban areas."
+1,two areas with tively and comprehensively than by using canopy cover alone.
+1,"we argue similar canopy cover can provide varying benefits for communities if that tree metrics such as height can help to distinguish the value of one is comprised of low stature vegetation, shrubs, or newly planted canopy cover, which when used together can help ensure that the saplings, and the other is filled with mature stands of trees (le roux environmental and equity impacts from tree planting initiatives are et al., 2015; stephenson et al., 2014). better reaching the communities most in need."
+1,many factors influence the impact trees have on the urban this paper proposes a novel pipeline utilising machine learning (ml) * corresponding author.
+1,e-mail address: jfrancis@turing.ac.uk (j.
+1,francis). https://doi.org/10.1016/j.ufug.2023.128115 received 6 april 2023; received in revised form 7 september 2023; accepted 9 october 2023 available online 10 october 2023 1618-8667/© 2023 the authors.
+1,published by elsevier gmbh.
+1,this is an open access article under the cc by license (http://creativecommons.org/licenses/by/4.0/).
+2,francis et al.
+2,"urban forestry & urban greening 89 (2023) 128115 to generate estimates of urban canopy quality i.e., moving beyond national survey of the united states, urban residents reported that some canopy cover, by combining both canopy cover and height using a of the most important reasons to have trees in urban areas were the combination of aerial and satellite imagery."
+2,"estimated data are then trees’ aesthetic benefits such as “to help people feel calmer” (lohr et al., used to show how tree planting policies can benefit from the inclusion of 2004, p.33)."
+2,tree’s aesthetic benefits can impact people’s reported multiple canopy metrics for decision making.
+2,"this study is not intended quality of life (hipp et al., 2015) and change how they interact with their to provide the most thorough demonstration of how best to allocate outdoor environment (kuo, 2003), affecting livelihoods above and trees, but rather how the inclusion of tree height can provide important beyond measurable climate indicators."
+2,"theories such as biophyllia hy­ information regarding canopy quality not currently utilized by tree pothesis (kellert and wilson, 1993) and attention restoration theory planting policies."
+2,"previous research has used ml approaches to estimate (kaplan, 1995) have been proposed to explain these intangible health forest canopy height (li et al., 2020) but these techniques have not been and wellbeing benefit of vegetations."
+2,"moreover, research has shown that leveraged to create detailed estimates of urban canopy cover and height; the positive perceptions people have of urban trees are substantiated by we address that gap here."
+2,"to explore how the addition of canopy height higher property values (donovan and butry, 2011)."
+2,"where a city chooses can improve policy decisions we utilize the case study of chicago, usa to invest in the placement of public trees can therefore have long lasting due to the availability of open data and recent policy goals against which additive effects on the economic prospects of communities. progress can be judged."
+2,"in an effort to address inequities caused by historical investment as part of a larger environmental investment in response to the practices, chicago’s tree planting initiative contains a dedicated focus climate crisis, the mayor of chicago plans to spend 46 million dollars on environmental equity."
+2,"this echoes recent works which have called on planting and maintaining 75,000 trees between 2022 and 2026 (office tree planting initiatives to address environmental justice by targeting of the mayor, 2021)."
+2,"chicago’s mayor aims to take an “equity-centered disadvantaged communities (nyelele and kroll, 2020; foster et al., and data-driven approach” to distribute the benefits of this investment 2022)."
+2,environmental amenities such as public parks and the urban to “historically marginalized and underserved communities” (ibid.). canopy have long been inequitably distributed in urban areas here historically marginalized communities refer to communities on the throughout the united states.
+2,"in a study of 37 metropolitan areas in the south and west sides of chicago which are and have been dispropor­ united states, findings indicate that historically marginalized commu­ tionately “black, low income, and often denied access to economic op­ nities on average contain half the canopy cover of more affluent portunity” (chicago metropolitan agency for planning, 2020)."
+2,"while the neighbourhoods (locke et al., 2021)."
+2,"nowak et al. (2022) show that mayor’s office is working with various stakeholders to determine where these communities are often also associated with higher amounts of new trees should be planted, a critical (and open) question is how chi­ impervious surface, areas such as roads and concrete which present cago, and similar urban centres, should leverage canopy metrics to make barriers to where trees can be planted."
+2,"the numerous benefits provided decisions about where to plant trees to meet their climate and envi­ by trees demonstrates the scope of impacts that tree-planting in­ ronmental equity goals. vestments can have on communities, and therefore how contentious the we begin by examining the ways trees provide benefits to cities, decision of where to place trees can be, especially given the discrimi­ before exploring the methods that have previously been used to deter­ natory history of resource allocation in many american cities (locke mine where cities should plant trees."
+2,to determine where trees should et al.
+2,"2021). be planted in chicago, we propose a novel pipeline, utilising a deep learning model called unet, for generating estimates of both canopy 1.2."
+2,deciding where to plant trees cover and height which can be updated regularly using aerial and sat­ ellite imagery.
+2,"previous work has utilized the unet architecture (ron­ deciding where to plant trees requires some knowledge of the urban neberger et al., 2015) for various image segmentation tasks, but studies canopy."
+2,"surveying techniques have been used, for example, by morton have yet to leverage this technique to create estimates of canopy cover arboretum in chicago to produce a tree census based on counting trees and height in an urban environment."
+2,"additionally, we explore how in selected plots (the morton arboretum, 2021)."
+2,"an alternative to canopy height, in addition to using canopy cover, can provide nuance to surveying techniques is airborne light detection and ranging (lidar), policy decisions around how to allocate tree planting resources. which utilizes light beams to create a cloud of millions of points that can be accurate within a few centimetres (kim et al., 2020)."
+2,numerous al­ 1.1.
+2,why invest in the urban canopy?
+2,gorithms exist for detecting and measuring trees from lidar point clouds which can be used to generate three-dimensional representations the mayor of chicago committed to investing in trees because of the of the urban canopy.
+2,"lidar collection is often unavailable on a regular urban canopy’s direct impact on metrics linked to the climate crisis, basis, so ml techniques offer an alternative method to generate urban specifically rising temperatures (cmap 2020)."
+2,wang et al. (2022) canopy estimates from imagery when and where lidar data is un­ showed that while the urban canopy can be an effective way to reduce available.
+2,"for example, image segmentation has been used to identify elevated temperatures caused by the urban heat island (uhi) effect, the individual trees using natural rgb (red, green, and blue) images cooling efficiency of the tree canopy can vary substantially within cities (weinstein et al., 2019, amati et al., 2023), while multi-spectral (ms) due to local conditions."
+2,"this relationship between trees and their cooling imagery has been used to predict forest canopy height (li et al., 2020). efficiency has been well explored, particularly in relation to the amount once urban canopy estimates are identified, the complicated deci­ of impervious surface that exists within communities (ziter et al., 2019), sion of where specifically to plant trees arises."
+2,"to tackle this challenge, the species of tree (rahman et al., 2020), the level of social vulnerability bodnaruk et al. (2017) focused on the mitigation of environmental within communities (zhou et al., 2021), and the height of the tree stressors such as air pollution and the uhi effect when developing canopy (chen et al., 2020; shahidan et al., 2012)."
+2,research has optimization algorithms for determining new tree locations.
+2,"in boston, confirmed that prioritizing locations with higher cooling efficiencies can danford et al. (2014) used the gini index, a measure of the degree of lead to greater reductions in uhi per tree planted."
+2,"while we focus on the inequality in a variable’s distribution, to evaluate scenarios in which uhi effect, it is important to note that trees provide numerous envi­ tree placements are estimated based on the availability of space."
+2,"wu ronmental benefits, such as reducing levels of sulphur dioxide, ozone, et al. (2008) locate planting sites in los angeles using spatial analysis to and nitrogen dioxide (nowak et al. 2018), mitigating stormwater runoff rule out sites that are too small or too close to other urban infrastructure."
+2,"(berland et al., 2017), carbon sequestering and storage (nowak and additionally, past work in chicago used a multi criteria decision analysis crane, 2002), and enhancing urban biodiversity (zhang and jim, 2014). to identify priority areas where trees should be planted based on criteria alongside the climate benefits provided by the urban canopy, trees including income, english proficiency, air pollution, low canopy cover, also have numerous non-ecological ‘amenity’ benefits (price, 2003)."
+2,"in a urban flooding, and high temperatures (chicago region trees initiative, 2"
+3,francis et al.
+3,"urban forestry & urban greening 89 (2023) 128115 2018), while a study in new york (nyelele and kroll, 2021) utilized a with four bands at 10 m resolution, and six bands at 20 m resolution. multi-objective decision support framework to balance improvements in to measure the uhi effect, landsat-8 satellite data was used to environmental metrics and inequality of the canopy cover between more calculate the land surface temperature (lst) at 30 m spatial resolution. and less advantaged areas."
+3,"chakraborty et al. (2020) note the difference between surface uhi, the diverse methodologies put forward in previous studies, along­ which uses lst, and canopy uhi which utilizes air temperature mea­ side tools such as i-tree, demonstrate that there is no agreed upon surements."
+3,"while these measurements are not identical (chakraborty method for determining where trees should be planted in urban areas. et al., 2017, hu et al., 2019), lst is derived from satellite observations furthermore, other works have focused primarily on canopy cover which allows for a consistent data collection measure and has been without accounting for more holistic measures of canopy quality, as shown to capture intra-urban uhi differences in a large-scale study of done in this study."
+3,"taken together, prior work has provided limited the united states (chakraborty et al."
+3,2020).
+3,"while recent research has research that fuses high and low resolution natural and ms imagery to been able to examine the effect of trees on both air and surface urban predict tree height and cover simultaneously from lidar data in an heat using handheld measurements (sharmin et al., 2023), this was not urban setting."
+3,"additionally, there is limited work showing how tree practical for a study of this size."
+3,"when we reference uhi in the following height and cover can be used simultaneously within an urban planning pages of this paper, we are referring to surface uhi measured via sat­ setting to reduce the uhi effect, accounting for local environmental ellite imagery."
+3,"more information about the image data used in this paper conditions, and improve environmental equity."
+3,"through our novel can be found in supplemental table 1. pipeline, we demonstrate the use of a deep learning model to monitor tree canopy and the potential of including one measure of canopy quality, height, to supplement canopy cover when allocating urban 2.3."
+3,environmental and equity metrics trees.
+3,"lst was calculated using formulas derived from weng et al. (2004) at three timepoints in 20212 for the extent of chicago, shown on the left 2."
+3,material and methods side of fig.
+3,lst raster values were first aggregated to us census blocks.
+3,the three timepoints were then averaged together and stan­ 2.1.
+3,study area dardized to limit bias.
+3,the average lst during this period was 23.4 ◦ c with a standard deviation of 1.4 ◦ c.
+3,"more formally; this study has been carried out on the case study of chicago, the third most populous city in the us with a land area of about 600 km2."
+3,"t lst = ( b ) chicago is located right alongside lake michigan and remains heavily λq tb 1+ lnϵ segregated alongside economic as well as racial and ethnic lines with a p roughly one third split of residents between each of latino, black, and white residents (united states census bureau, 2019)."
+3,"the right side of where λis the top of atmosphere spectral radiance, tb is the brightness fig. 4 shows where these populations cluster."
+3,"many of the majority black temperature, ϵ is the emissivity, p is a physical constant, and q is the communities reside on the south and west sides, the bulk of majority botlzmann constant."
+3,"white communities occupy large portions of the north and north-east, similar to danford et al. (2014), and recent research looking at the and many of the majority latino communities can be found on the equity of urban green space (chen et al., 2023), we used the gini coef­ north-west and south-west sections of the city. ficient as a measure of urban canopy inequality."
+3,"while the gini coeffi­ to determine how the tree canopy is related to the uhi effect in cient was developed to study poverty (farris, 2010), it has also been different parts of the city, 46,149 census blocks in chicago are used as used within astronomy (abraham et al., 2003), genetics (gianola, et al., the level of analysis."
+3,"census blocks are the smallest statistical area used 2003), and to measure the inequality environmental benefits across by the united states census bureau (united states census bureau, socio-economic groups (nyelele and kroll, 2020)."
+3,"ranging from 0 to 1, a 2021)."
+3,"to examine post-hoc equity of tree placements in chicago, census gini value of 0 indicates perfect equality, where each census block has block-group data was pulled from the 2019 american community sur­ the same percent canopy cover, while a value of 1 implies that all the vey (acs) 5-year estimates (united states census bureau, 2019)."
+3,esti­ canopy cover is concentrated in a single block.
+3,"although the gini coef­ mates for the percent of households with income below the poverty level ficient allows for a measure of canopy cover equality across the city, it (categorized into quartiles), as well as the percent of white, black, says nothing about historical inequities in investment that have led to latino, and asian residents were extrapolated to the census blocks from the current canopy distribution."
+3,"to help evaluate the equity of tree the block-group data.1 placements in this paper beyond the equality measure provided by the gini coefficient, chicago’s blocks are examined post-allocation based on their majority racial/ethnic group (or are identified as having ‘no racial 2.2."
+3,"materials majority’ if the block does not contain >50% of a single racial/ethnic group) and the percent of households with income below the poverty lidar point cloud data from 2017 were retrieved from the illinois line, shown on the right side of fig."
+3,this was done to see if the addition height modernization program (2017).
+3,this data consisted of 1131 762 of tree height alongside canopy cover might actually help increase tree × 762 m tiles with a derived nominal pulse spacing of one point every 0.35 m.
+3,additional ms imagery was gathered from the national agri­ culture imagery program (naip) and the sentinel-2 satellite program.
+3,table 1 four-band naip rbg and near infrared (nir) data was collected for tree allocation scenarios. 2017 and 2021.
+3,naip data is at 1 m resolution and consists of roughly 30 tree metric (s) used variable minimized tiles in each year.
+3,"sentinel-2 data from 2017 and 2021 were also used, uhi scenario 1 (c) canopy cover lst uhi scenario 2 (d) canopy cover and height lst environmental equality 1 (e) canopy cover gini coefficient 1 environmental equality 2 (f) canopy cover and height gini coefficient block-group data is the most detailed level of demographic data captured for these types of measures by the acs."
+3,"block-groups exist as an area larger than a block, but smaller than a census tract."
+3,"block-groups are made up of a set of contiguous blocks (mean=21; sd=14), which given their spatial proximity and the generally segregated nature of chicago’s population, should give reliable 2 estimates of the block-level population."
+3,"may 17, 2021; september 10, 2021; september 26,2021 3"
+4,francis et al.
+4,urban forestry & urban greening 89 (2023) 128115 canopy equity for the most segregated and income disadvantaged groups modelling of tree heights.
+4,a canopy height model (chm) was then while the distribution policy is optimized by the gini coefficient. generated using a pitfree algorithm which allowed for individual tree detection using a local maximum filter.
+4,"finally, the chm and the indi­ 2.4."
+4,methodological pipeline vidual tree detection results were used for tree segmentation based on the dalponte and coomes (2016) algorithm.
+4,fig. 1 shows the methodological pipeline employed for this analysis.
+4,"fig. 2 shows examples of the two baseline raster layers which were first, we derive canopy estimates from airborne lidar data in 2017."
+4,"we generated from this process, one with binary values if a pixel was then train a deep learning model with this baseline data from 2017 to identified as being part of a tree, while the other raster layer contained predict canopy cover and height in 2021 when lidar data is unavai­ the average max height of each pixel."
+4,these raster layers were then lable.
+4,"next, we use a geographically weighted regression (gwr) analysis mosaiced together and stacked on top of the sentinel-2 and naip data to identify the relationship between canopy cover, canopy height and which were all projected to the extent and resolution of the naip 1 m the uhi effect in different localities throughout chicago."
+4,"finally, we use data."
+4,"these raster stacks were then cut into 9535 240 × 240 pixel an optimization algorithm to assess four different canopy distribution patches, where each pixel represents one square metre, to be used as the scenarios to minimize the uhi effect and inequitable canopy distribu­ input for the ml model. tion, comparing results when only canopy cover is used, and when both canopy cover and height are considered."
+4,deep learning model for tree canopy prediction 2.5.
+4,"data preparation to predict canopy cover and height in 2021 from only the combi­ nation of aerial and satellite imagery, we train a deep learning model baseline tree metrics were derived from the 2017 lidar data."
+4,the using 2017 lidar-derived canopy cover and height estimates.
+4,"as noted raw lidar point cloud was first processed in r using the lidr package previously, lidar data provides a highly accurate data source from (v."
+4,4.0.2) with a method similar to roussel et al.
+4,(2020).
+4,"first, a vege­ which to estimate features of the urban canopy; however, chicago’s tation mask was created using the nir and red bands of the naip im­ most recent collection of lidar data occurred six years ago."
+4,"alterna­ ages, creating a normalized difference vegetation index (ndvi) raster tively, aerial and satellite imagery from public and commercial sources layer as calculated in zhao et al."
+4,(2019).
+4,"for the tree mask, the point are collected on a more regular basis and are therefore well suited to cloud was then masked to remove non-vegetation points which prevents generate up-to-date maps for monitoring and evaluating urban tree buildings and non-biological objects from being classified as trees. policies."
+4,"a recent chicago tree census estimated that from 2010 to 2020 next, a digital terrain model normalization was run using a k-nearest the city lost about 3% of its canopy coverage, largely due to an invasive neighbour approach with inverse distance weighting to align the height pest (the morton arboretum, 2021)."
+4,this equates to differences in tens of all points relative to ground level.
+4,"for the tree mask, points below 2 m of thousands of trees across the city per year, which would be difficult to and above 25 m were filtered out to ignore small shrubbery and any forecast using only years-old lidar data but can be easily observed incidental non-vegetation points (e.g., birds), while for the pixel height through regularly acquired imagery. layer, heights were capped at 200 m to allow for better downstream for this study, we adopted a multi-task (mt) learning approach for fig."
+4,methodological pipeline.
+5,francis et al.
+5,urban forestry & urban greening 89 (2023) 128115 fig.
+5,lidar-derived canopy cover and height estimates.
+5,"the top row contains rgb images of example ml-input patches (240 m x 240 m), while the middle row is the associated lidar derived height estimates, and the bottom row is the associated lidar derived canopy cover estimates. tree canopy prediction, utilizing a fully convolutional unet architecture, fed into two separate decoding pathways, one culminating in a linear that has demonstrated good performances on various pixel-level pre­ activation function (pixel height task) and one with a sigmoid activation diction tasks (singh and nongmeikapam, 2022; mcglinchy et al., 2019; function (tree mask task)."
+5,"retrieving tree canopy height involves andersson et al., 2021; alsabhan and alotaiby, 2022)."
+5,"this approach masking the predicted tree mask over the predicted pixel height which involved combining two tasks, detecting whether a pixel belongs to a ensures only the height of pixels classified as trees are retained for later tree (tree mask) and estimating the height of a pixel (pixel height), into a analyses. single model."
+5,"we hypothesized that this combined approach would we trained a unet that maps the input ms data to pixel heights and a enable better generalisations on the individual tasks, similar to recent binary tree canopy mask, minimising the mean squared loss over all n research which tried to predict relative building and vegetation height pixels, lheight as follows; and semantic segmentation masks simultaneously (lu et al., 2022; 1∑n karatsiolis et al., 2021)."
+5,"lheight = ̂ i )2 (hi − h the unet architecture, shown in fig. 3, consists of a contracting n i encoding path that performs a series of convolutions to reduce the spatial dimension of the input image followed by an expanding decoding where hi is the lidar-derived pixel height and ĥ i is the predicted pixel path that performs de-convolutions back to the size of the input image height and the binary cross entropy loss function; with shared representations between paths to increase the resolution of 1∑n the output (ronneberger et al., 2015)."
+5,the output of the encoding path is lmask = − ̂ i )) )2 ̂ i + (1 − mi )log(1 − m (mi log m n i fig.
+5,the fully convolutional unet architecture.
+5,each pink rectangle corresponds to a multi-channel feature map.
+5,the number of z-dimension channels (filters) is denoted on top of the rectangle.
+5,the x-y dimensions of each feature map are provided at the bottom of the rectangles.
+5,white boxes represent copied feature maps.
+6,francis et al.
+6,"urban forestry & urban greening 89 (2023) 128115 across geographical locations (foody, 2003; su et al., 2012; zhang et al., where mi is the lidar-derived tree mask and m ̂ i is the predicted tree 2004) fig."
+6,4. mask from the unet model.
+6,"a gwr model calculates a unique local regression equation for each the final loss function is a simple weighted additive loss that in­ polygon (census block) and only considers a certain number of bordering corporates two hyper-parameters λ, γ."
+6,"during training, the model used polygons (the bandwidth) when calculating these coefficients, weighted the adam optimizer algorithm (kingma and ba, 2014) with a learning by their distances to the centre of the kernel (comber et al., 2023)."
+6,"an rate of 0.001 for 50 epochs using early stopping if the model does not adaptive bandwidth was implemented which resulted in roughly 250 improve after ten epochs. nearest neighbour polygons (census blocks) being included in each of ltotal = λ lheight + γlmask our 46,149 regression equations, measured from the centroid of each block."
+6,"through this local regression technique, we aim to account for the weighting of the individual losses can have a significant impact some of the neighbourhood effects not modelled explicitly but captured on the model results."
+6,"as a result, we compared two mt methods: first, a implicitly by each blocks’ neighbours."
+6,"the equations below (a, b) show naïve approach that involved systemically tuning the weights through a the formulas used to analyse these spatial relationships, first just for grid search on a small validation subset (n = 500) randomly chosen canopy cover (a) and then for canopy cover and height (b). from the training data; and second, an automatic weighting function outlined in kendall et al. (2018) which attempts to learn a relative task (a) yi = βi0 + βi1 xi1 + εi weighting that accounts for the homoscedastic uncertainty of each task. (b) yi = βi0 + βi1 xi1 + βi2 xi2 + βi3 xi1 xi2 + εi in total, 9535 240 × 240 images from 2017 were used to train the model, with 20% of these images randomly held out as a testing set."
+6,the where: input images for the model consisted of the 14 spectral bands from the i = census block xi1 = percent canopy cover at block i.
+6,naip and sentinel 2 images.
+6,"despite their lower resolution, sentinel 2 yi = outcome (lst) at block i xi2 = avg. canopy height at block i. image bands were included because they are regularly available and βi0 = intercept at block i βi1 = coefficient 1 at block i βi2 = coefficient provided minor improvements at little cost to training, shown in sup­ 2 at block i βi3 = coefficient 3 at block i ε = random error at block i. plemental table 2."
+6,"in addition to the primary model shown in fig. 3, single-task models for each output were trained, alongside a model where both the encoding and decoding features were shared by the two 2.8."
+6,determining where to plant trees tasks.
+6,separate multi-task models for the automatic and manual weighting functions were run for a total of six models.
+6,"these models simulating where to place chicago’s 75,000 trees was done through were trained and evaluated solely using data from 2017."
+6,the best per­ a set of four scenarios described in table 1.
+6,"for the two uhi scenarios, forming model was then used to predict canopy cover and height for lst predictions were minimized using the sequential least squares 2021 when lidar data does not exist (n = 12,972 240 ×240 pixel programming (slsqp) (kraft, 1988) optimisation algorithm and the images)."
+6,"to evaluate model performance, intersection over union marginal effects generated by the gwr equations (c, d)."
+6,limits based on (iou);. the initial observed climate values are placed on predictions to avoid iou = true positives+false true positives positives+false negatives predicting unobserved values.
+6,"for the two environmental equality sce­ is used for the tree mask as the dataset is highly unbalanced which narios, the gini coefficient was also minimized using slsqp and the tree would naturally inflate accuracy metrics, while mean absolute error metrics (e, f)."
+6,for the uhi scenarios block-level average canopy height (mae) is used for pixel height. was held constant; for the environmental equality scenarios a height factor was included.
+6,"looking at the 2017 lidar data, there is a positive correlation (0.603) between canopy cover and height in census blocks."
+6,"relationship between the urban canopy and the uhi effect using this correlation, average canopy height was therefore estimated to increase by 0.084 m for each percentage increase in canopy cover to to quantify how census blocks are related to the uhi effect, we allow for height to be considered in the environmental equality employed gwr (fotheringham et al."
+6,"2003; comber et al., 2023), which scenarios. is a local regression approach, with the spgwr r package (bivand et al., 2022)."
+6,"initial tests on the residuals of a global ordinary least squares (c) yi = βi0 + βi1 (xi1 + zi ∗ t) (ols) regression model revealed, as expected, a significant level of (d) yi = βi0 + βi1 (xi1 + zi ∗ t) + βi2 xi2 + βi3 (xi1 + zi ∗ t)xi2 spatial autocorrelation (moran’s i =.956, p < 0.001) in this dataset, given: zi < available space in block i & sum(zi ) = 75,000; thereby contradicting the assumptions for ols and requiring a more minimize: mean(y1 , y2 …yn ) spatially explicit model."
+6,"gwr has been extensively applied to address where: this type of spatial non-stationarity (brunsdon et al., 1996) where the i = census block xi1 = percent canopy cover at block i relationship between the dependent variable and predictors varies yi = predicted lst at block i xi2 = avg. canopy height at block i βi0 = gwr intercept at block i βi1 = gwr canopy cover effect at table 2 block i βi2 = gwr canopy height effect at block i βi3 = gwr uhi gwr results. interaction effect at block i zi = # of trees added at block i local r2 mean mean mean t = constant canopy cover added by one tree (range) canopy average interaction cover canopy effect (e) yi1 = xi1 + (zi ∗ t) effect height effect (range) (f) yi1 = xi1 + (zi ∗ t) & yi2 = xi2 + h(zai ∗ti ) (range) (range) equation b (lst 0.325 -0.392 x x given: zi < available space in block i & sum(zi ) = 75,000. predicted by (− 0.032 to (− 2.25 to minimize: (f) gini( ya1 , ya2 …yan );. canopy cover) 0.726) 2.19) (g) sum(gini( y11 , y21 …yn1 ), gini( y12 , y22 …yn2 ))."
+6,equation c (lst 0.346 -0.336 0.029 -0.225 predicted by (0.021–0.725) (− 2.36 to (− 0.225 to (− 2.05 to where: canopy cover 2.06) 0.424) 0.984) i = census block xi1 = percent canopy cover at block i. and average yi1 = new canopy cover at block i yi2 = new canopy height at block i canopy xi2 = avg. canopy height at block izi = # of trees added at block i height) t = constant canopy cover added by one tree h = constant height added 6
+7,francis et al.
+7,urban forestry & urban greening 89 (2023) 128115 fig.
+7,left: land surface temperature map.
+7,right: census-derived race/ethnicity and poverty bivariate map.
+7,land surface temperature was standardized across three time points in 2021.
+7,"for race/ethnicity, blocks were categorized if they contained 50% or more of a single group."
+7,poverty is measured as the % of households with income below the poverty line.
+7,quartile 4 represents blocks with the highest % of households with income below the poverty line. by % increase in cover ai = area of block i.
+7,"results the number of trees that could be allocated to each block was bounded by the amount of available space, determined using the 2021 3.1."
+7,canopy cover and height estimates naip data as the estimated pervious surface (ndvi >.15) not already covered by trees.
+7,"this method is similar to (codemo et al., 2022), who in total, six unet models were trained to determine which method estimate pervious surface using an nvdi value of.1 and note the need for was best able to locate trees and determine their height."
+7,the out of careful consideration of the threshold value in urban environments to sample results of these models are shown in supplemental table 2.
+7,"the capture barely vegetated areas without including impervious surfaces. model that was best able to locate trees (iou = 0.665) and determine previous work has used the national land cover data (nlcd) to their height (mae = 0.0033) was the mt model with manual weights in determine plantable areas (nowak and greenfield, 2009) similar to which only the encoder layers of the unet were shared between tasks. methods included within i-tree landscape, while more recent work has this equates to an average error of about 0.644 m for tree height and an utilized alternative historic land cover datasets (nyelele and kroll, average overlap of 66.5% between the predicted and the lidar derived 2021)."
+7,"similar to merry et al., (2013), we believe plantable land is best canopy cover."
+7,"notably, the automatic weighting function did not lead to assessed in rapidly changing urban environments using the most current any improvements."
+7,we also visually inspected the results to ascertain available imagery.
+7,"additionally, the use of naip data allows for a where predicted estimates proved most effective, and what circum­ measure of available space at the same resolution as our tree metrics, stances caused the model to struggle in its estimates of the urban canopy. while restricting our analysis to pervious space allows for a simulation of consistently, the prediction accuracy is enhanced from the incorpora­ tree placements that would not require additional changes to or in­ tion of multi-source ms imagery as opposed to a single source (naip vestments into the urban environment."
+7,"to determine how much space only) imagery model (see supplemental fig. 1 for further results). should be allotted for new trees, we follow nowak and crane (2002) fig. 5 shows five hand-picked test images from the 2017 image data, who showed the average canopy of a city tree in boston to be roughly 27 alongside the tree pixel height and canopy cover predictions generated square metres."
+7,the number of trees each block can hold was therefore by the best performing model and the lidar derived estimates.
+7,"from the available estimated pervious space not already occupied by trees the variety of areas displayed in fig. 5 we can see that canopy cover divided by the estimated space for a tree. appears to be estimated best on trees with larger crowns and in areas based on these four scenarios, the 75,000 new trees were allocated to with higher numbers of trees."
+7,"canopy cover estimates struggled when one of chicago’s 46,149 census blocks."
+7,final allocations are shown at faced with lots of smaller shrubbery and in some industrial areas.
+7,"for the scale of chicago’s 77 community areas which have been in continual canopy height at the pixel level, estimates are most precise in open areas use since the early 1920 s for city-level statistics and policymaking and with shorter trees."
+7,"as expected, areas with large numbers of (zangs, 2014)."
+7,"these community areas align with the census blocks buildings make canopy height predictions more error-prone, however perfectly by design. the model is still able to consistently infer the shape of tree crowns."
+8,francis et al.
+8,urban forestry & urban greening 89 (2023) 128115 fig.
+8,visual inspection of selected samples comparing the baseline lidar derived estimates and the 2017 ml predictions.
+8,"higher iou scores indicate better canopy cover predictions, while lower mae scores indicate better canopy height estimates."
+8,"using the best model trained from 2017 data, we next inferred the south of the city corresponds to marsh land."
+8,"interestingly, even though 2021 canopy cover and height metrics for all of chicago at a 1 m reso­ there is relatively high canopy cover in many spots along lake michigan, lution."
+8,we estimated a total city-wide cover of 19.7% and an average the average canopy height remains relatively low in most of these areas. canopy height of 7.9 m.
+8,"this indicates a slight increase in canopy cover with these estimated tree metrics in hand, analysis turned to how the from the 2017 lidar derived baseline data which estimated the city- trees are related to the uhi effect. wide cover to be about 17.9% and the average canopy height to be about 8.2 m."
+8,our canopy cover estimates are larger than recent work in 3.2.
+8,spatial regression results chicago which used different methodologies.
+8,"chicago’s 2020 tree census estimated the canopy cover to be nearly 16% when including coefficient statistics from the two sets of gwr models are shown in shrubs (the morton arboretum, 2021), while researchers at the uni­ table 2."
+8,"gwr generates a different set of coefficients for each census versity of chicago estimated canopy cover to be closer to 19% when block, maps of which can be found in supplemental fig."
+8,"not all blocks using a 2010 lidar—based land cover layer (healthy regions and demonstrate a clear negative relationship between trees and lst, and policies lab, 2021). some blocks predict increased lst as canopy cover or average canopy fig. 6 shows the unet predictions after each of the 12,974 image tiles height increases."
+8,this reflects the heterogeneity of chicago’s census from 2021 were extracted to the census blocks.
+8,"fig. 6 indicates that the blocks whereby depending on the local environmental conditions, sim­ areas of highest canopy cover are concentrated primarily in the northern ply adding more trees in some locations may not result in reduced lsts. part of the city, as well as within the many parks that line chicago’s the inclusion of canopy height leads to an improvement in goodness of eastern coast along lake michigan."
+8,"a further concentration of areas with fit, demonstrating its added effectiveness in modelling lst. higher canopy cover can be seen on chicago’s south-west side."
+8,"areas with the highest average canopy heights are found along the north- western and south-western sections of the city, while the west and 3.3."
+8,tree allocation scenarios central portions of the city have some of the lowest average canopy heights.
+8,large lines of low canopy heights throughout the city primarily fig. 7 explores how the four scenarios would allocate trees to chi­ follow the path of the chicago river as well as the major highways that cago’s 77 community areas.
+8,"for the uhi scenarios, a larger average run through the city, while the large area of low canopy height in the number of trees (n ≈ 28 and n ≈ 29) are allocated to a smaller number of blocks (n = 2658 and n = 2631), while in the environmental equality 8"
+9,francis et al.
+9,urban forestry & urban greening 89 (2023) 128115 fig.
+9,2021 predicted canopy cover and average standardized canopy height.
+9,"while tree canopy metrics were estimated for each square metre of chicago, here estimates are mapped to each of the 46,149 census blocks included in this work for visual clarity. scenarios a smaller average number of trees (n ≈ 21 & n ≈ 25) are the addition of height as a variable saw an increase in tree allocations to allocated to a larger number of blocks (n = 3549 & n = 2960)."
+9,com­ majority white census blocks.
+9,this is likely due to blocks on the far munities on the far south and north sides of chicago are the primary south-west side of the city where trees were found to be particularly beneficiaries of tree allocations aimed at reducing the uhi effect in effective at lowering the lst.
+9,examining how the addition of height in chicago.
+9,"for the environmental equality maps, communities on the the uhi scenario effects predicted temperatures, we find that city-wide western side of chicago receive most tree allocations."
+9,"in both the uhi temperatures decrease by about .04 c (decreasing by as much as 1.4 c scenario and the environmental equity scenario, adding height resulted depending on local conditions) for each metre of average canopy height in a slightly higher centralization of tree allocations."
+9,for the uhi sce­ increase across the city if canopy cover is held constant.
+9,"for the envi­ nario the addition of height resulted in more trees allocated to the ronmental equality scenarios which only considered the equality of northern and southern extremes of the city, and in the environmental canopy coverage using the gini coefficient, the addition of height as a equality scenario many trees were redistributed from southern com­ variable led to more trees allocated to majority asian, latino, white and munities into the western and central sections of the city."
+9,"next, we no racial majority census blocks than when only canopy cover was used. examine how these tree placements align with the city’s equity goals."
+9,the addition of height also led to 2% more trees allocated to blocks with table 3 explores the equity of chicago’s urban tree canopy using the the highest percentage of household income below the poverty line. 2021 canopy estimates as well as the equity of this study’s four alloca­ tion scenarios.
+9,in contrast with some previous work (chicago region 4.
+9,"discussion trees initiative, 2018; iverson and cook, 2000), this study found that blocks with the highest percentage of household income below the we present a new pipeline for estimating canopy cover and height in poverty line and majority black census blocks in chicago had some of urban areas using a deep learning approach with ms imagery and the city’s highest canopy cover and average canopy heights."
+9,for chi­ airborne lidar.
+9,"combining canopy cover with measures of canopy cago, majority latino and majority asian blocks had the lowest esti­ quality, such as height, allows better quantification of the impact of trees mated canopy cover and average canopy heights in 2021, while having in urban areas, particularly on temperature."
+9,this in turn should allow the hottest observed lsts.
+9,"despite this, relatively few trees are allocated better decisions to be made about where to plant new trees in cities to to majority latino and majority asian blocks across our four scenarios, maximize climate benefits as well as improving equity."
+9,urban tree as shown in the right side of table 3.
+9,"one reason for this, is the large canopies are constantly evolving, as are city plans more generally, discrepancies in the amount of available pervious space for new trees in therefore policymakers and urban planners need to use the most rele­ the blocks of different racial/ethnic majorities."
+9,we found that majority vant and up-to-date data.
+9,"lidar remains the most informative data for latino blocks have room for 75 fewer trees on average than majority estimating structural measures of the urban canopy, as exemplified by black blocks,. recent research in new york (ma et al., 2023)."
+9,"however, lidar data are for the uhi scenarios which only considered tree’s impact on lst, not always available, or are infrequently updated, making them less 9"
+10,francis et al.
+10,urban forestry & urban greening 89 (2023) 128115 fig.
+10,top row: tree allocations minimizing the uhi effect.
+10,bottom row: tree allocations optimizing for environmental equality.
+10,the left-side maps use canopy cover alone while the right-side maps show the allocation differences when including canopy height.
+10,a key for the community area names can be found in sup­ plemental fig.
+10,1. reliable for regular monitoring and evaluation of urban canopies.
+10,in equitable outcomes.
+10,"prior research has shown that many tree planting locations where lidar data are unavailable, ml methods which have initiatives rely on residents and community groups for tree requests, and been trained on lidar data elsewhere provide a promising alternative residents of historically marginalized communities are less likely to for researchers and governments to fill in gaps. engage with the institutions required to make these requests (pincetl, we explore how factors beyond canopy cover alone influence the 2010)."
+10,"for this work, the largest barrier to addressing tree equity that we impact trees have on the environment."
+10,"by including canopy height and identified was a lack of available pervious space for trees in some the varying localised effect of trees into the decision-making pipeline, communities, particular among chicago’s majority latino blocks."
+10,pre­ resources can be allocated more effectively.
+10,"in our case study, the in­ vious studies have noted that even when a focus is placed on planting clusion of height led to thousands more trees allocated to low income trees in historically marginalized communities, lack of space will be a and majority asian, latino, white and no racial/ethnic majority census barrier (danford et al., 2014). blocks when the gini coefficient was used to maximize tree canopy at a local level, alternative strategies exist for cities hoping to invest equality."
+10,"by including height into the tree allocation strategy, fewer in greening these communities."
+10,"strategies such as green roofs and bio­ trees were allocated to blocks with higher quality pre-existing canopies swales can provide small pockets of nature where tree planting is nor­ and were instead redistributed to blocks with relatively lower quality mally impossible, while more extensive measures can be taken to tree canopies."
+10,"when the uhi effect was minimized, the inclusion of restructure the urban landscape in communities that are largely covered height led to trees being primarily allocated to majority white and by impervious surfaces, such as the central business district of cities majority black blocks where trees were most effective at reducing land which are normally hotter than other areas of cities."
+10,"additionally, surface temperature."
+10,"more work utilizing strategies which incorporate broadening the scope of tree initiatives to include urban nature in­ multiple environmental, health and equity conditions (nyelele and vestments beyond a specific number of newly planted trees is also kroll, 2021; chicago region trees initiative, 2018) are necessary in valuable, particularly in densely developed cities (danford et al., 2014). combination with additional canopy quality metrics to ensure that eq­ investments that prioritize the maintenance and expansion of existing uity of urban canopies is being achieved while investments in urban mature canopy cover is crucial, especially in communities with limited greenery are allocated to areas where they have the strongest impacts. space for new trees."
+10,"however, even when optimal canopy cover equity is the tree allocation scenarios presented here provide a top-down unobtainable, smaller clusters of added trees can still provide important approach to distributing trees, which may be necessary to ensure local benefits (strohbach et al., 2013)."
+11,francis et al.
+11,urban forestry & urban greening 89 (2023) 128115 table 3 equity of chicago’s urban tree canopy and the four allocation scenarios.
+11,demographic avg.
+11,predicted avg.
+11,predicted avg. # of trees avg.
+11,"2021 allocation scenarios # (%) of 75,000 trees allocated3 areas (% of total 2021 canopy 2021 avg. given available scaled urban heat urban heat environmental environmental blocks) cover % canopy height pervious space lst island island (cover equality (cover equality (cover and (m) (cover and height) alone) height) alone) poverty quartiles 20.7% 7.1 101 .0732 62,400 63,200 55,700 54,700 1–3 (75%) (83.2%) (84.3%) (74.3%) (72.9%) poverty quartile 41 21.6% 7.1 126 .0439 12,600 11,800 19,300 20,300 (25%) (16.8%) (15.7%) (25.7%) (27.1%) majority2 asian 11.8% 5.2 54.5 0.285 0 0 290 740 (1.0%) (0%) (0%) (0.4%) (1.0%) majority black 22.7% 7.3 143 -0.002 31,600 31,200 36,700 30,800 (37.9%) (42.1%) (41.6%) (48.9%) (41.1%) majority latino 17.3% 6.8 67.7 0.491 9230 9020 18,500 20,700 (22.1%) (12.3%) (12.0%) (24.7%) (27.6%) majority white 21.8% 7.1 106 -0.160 30,400 31,200 14,500 16,300 (28.4%) (40.5%) (41.6%) (19.3%) (21.7%) no racial/ethnic 20.6% 6.9 79.9 0.000 3770 3520 4980 6410 majority (10.7%) (5.0%) (4.7%) (6.6%) (8.5%) notes: 1- blocks in poverty quartile 4 represent blocks with the highest percentage of households that have income below the poverty line."
+11,2- majority racial/ethnic blocks are those with at least 50% of a single group as estimated by the acs.
+11,"3- while slsqp allows for a precise allocation of trees, the numbers in this table have been rounded (and may not add to 75,000) to reflect the uncertainty contained within this pipeline."
+11,we have not discussed which types/species of trees should be plan­ these impacts vary substantially across city blocks.
+11,"this implies that ted in chicago, or how different tree species may provide varying ben­ certain types of localities may be a more effective tree planting location efits."
+11,this is beyond the scope of the current work.
+11,"darling et al. (2017, for reducing uhi effects than other locations."
+11,"lastly, we show that the p.125) assessed the positive benefits of species diversity in planting in inclusion of average canopy height provides important additional in­ chicago."
+11,they also note that it is vital that sustained resources are formation about the quality of urban canopy cover that can help provided to help marginalized communities retain trees and expand determine where planting future trees may be most effective.
+11,this their local ecosystems.
+11,simply expending resources to plant trees is not approach can help inform decisions around how urban planners should enough.
+11,"continued investment in the management of urban trees is allocate resources to meet equity and climate goals. necessary to ensure that trees reach maturity, are properly integrated not all canopy cover is equal, and in general larger trees tend to have into the local ecosystem, and that environmental justice is achieved a greater environmental effect than smaller trees, with numerous through the sustainability of urban forestry efforts (sousa-silva et al., smaller trees often unable to match the effects of a single large tree (le 2023)."
+11,"roux et al., 2015; stephenson et al., 2014)."
+11,using both horizontal and we identify several limitations in our current study.
+11,"there may be vertical measures of the urban canopy, the method laid out in this paper some spatial bias in the unet predictions because publicly available allows for a more complete assessment of the relation between the urban thermal data are only available at a lower spatial resolution than the canopy and the wider urban environment."
+11,our approach also provides a optical and lidar data.
+11,"additionally, while sentinel 2 data are global simple framework to include additional tree metrics in building a more and free, the aerial imagery and airborne lidar used in this work are holistic view of the urban canopy."
+11,while we showed how this method not universally available.
+11,"however, the acquisition and availability of could be used in two discrete scenarios, we view this pipeline to be these data is growing very rapidly, due to their utility for urban planning method agnostic and believe this framework in whole or in part could and environmental applications (wellmann et al., 2020). easily be integrated into other workflows and prioritization strategies for assessing where trees could/should be allocated, available space leveraging the code provided in the associated project github. to plant trees was based on estimates of pervious surface using ndvi."
+11,"the approach we have developed has the potential to be more widely however, there are various other options for tree planting on impervious applicable to urban areas."
+11,"more advanced ml models could be inte­ surfaces, such as installing boxes for street trees or re-configuring urban grated into this pipeline, along with higher resolution remotely-sensed areas to create new spaces for trees."
+11,"furthermore, more precise esti­ data and multiple health and environmental objectives for tree mates of useful pervious surfaces are possible by considering sur­ planting."
+11,"there is a need to test model generalizability, incorporating rounding context and size (wu et al."
+11,2008).
+11,"finally, other factors that global lidar datasets (e.g., gedi) as well as including additional ml contribute to lst in cities such as building height, land use or land cover tasks (e.g., species type, above ground carbon estimates)."
+11,more effective could be included in the gwr as controls to improve fit estimates. use of new datasets on the quality of canopy cover will be key to better decision-making around the value of and access to urban canopies.
+11,conclusion funding we demonstrate an application of ml to leverage aerial and satellite data for generating estimates of urban canopy cover and canopy height this work was supported by towards turing 2.0 under the epsrc over chicago.
+11,we show that the relationship between these urban can­ grant ep/w037211/1 & the alan turing institute. opy metrics and climate outcomes can be predicted spatially and that 11
+12,francis et al.
+12,"urban forestry & urban greening 89 (2023) 128115 credit authorship contribution statement darling, l., custic, m., scott, l., smith, c.s., 2017."
+12,increasing the benefits from urban trees while minimizing the costs: lessons learned from the chicago region trees initiative.
+12,munic.
+12,policy j.
+12,"2 (1), 119–134."
+12,"john francis: conceptualization, methodology, software, writing – donovan, g.h., butry, d.t., 2011."
+12,the effect of urban trees on the rental price of single original draft.
+12,"mathias disney: conceptualization, writing – review & family homes in portland."
+12,urban for.
+12,urban green.
+12,"10 (3), 163–168. editing."
+12,"stephen law: supervision, writing – review & editing."
+12,"eisenman, t.s., flanders, t., harper, r.w., hauer, r.j., lieberknecht, k., 2021."
+12,traits of a bloom: a nationwide survey of us urban tree planting initiatives (tpis).
+12,urban for.
+12,urban green.
+12,"61, 127006."
+12,"farris, f.a., 2010."
+12,the gini index and measures of inequality.
+12,"117 (10), declaration of competing interest 851–864."
+12,"foody, g.m., 2003."
+12,geographical weighting as a further refinement to regression the authors declare that they have no known competing financial modelling: an example focused on the ndvi-rainfall relationship.
+12,remote sens. interests or personal relationships that could have appeared to influence environ.
+12,"88, 283–293."
+12,"foster, a., dunham, i.m., bukowska, a., 2022."
+12,an environmental justice analysis of the work reported in this paper. urban tree canopy distribution and change.
+12,urban aff.
+12,"fotheringham, a.s., brunsdon, c."
+12,"charlton, m., (2003)."
+12,geographically weighted data availability regression: the analysis of spatially varying relationships.
+12,john wiley & sons.
+12,"franceschi, e., moser-reischl, a., rahman, m.a., pauleit, s., pretzsch, h., rötzer, t., 2022."
+12,"crown shapes of urban trees-their dependences on tree species, tree age and all of the data sources used throughout this paper are publicly local."
+12,"environ., eff."
+12,ecosyst.
+12,"13 (5), 748. available and can be found as referenced in the text."
+12,"the code used for gianola, d., perez-enciso, m., toro, m.a., 2003."
+12,on marker-assisted prediction of genetic value: beyond the ridge.
+12,"genetics 163 (1), 347–365. this work can be found at: https://github.com/johnfrancis13/ healthy regions & policies lab."
+12,(2021).
+12,chives.
+12,center for spatial data science at the where_to_plant_trees.
+12,university of chicago.
+12,available at: 〈https://chicago-env-explorer.netlify.app/data〉.
+12,"hipp, j.a., gulwadi, g.b., alves, s., sequeira, s., 2015."
+12,the relationship between perceived greenness and perceived restorativeness of university campuses and appendix a.
+12,supporting information student-reported quality of life.
+12,environ.
+12,behav.
+12,"48 (10), 1292-130."
+12,"hu, y., hou, m., jia, g., zhao, c., zhen, x., xu, y., 2019."
+12,comparison of surface and supplementary data associated with this article can be found in the canopy urban heat islands within megacities of eastern china.
+12,isprs j.
+12,photogramm.
+12,remote sens.
+12,"156, 160–168. online version at doi:10.1016/j.ufug.2023.128115."
+12,"illinois height modernization program, illinois state geological survey, illinois department of transportation."
+12,(2017).
+12,illinois lidar county database: illinois state references geological survey.
+12,available at: 〈https://clearinghouse.isgs.illinois.edu/dat a/elevation/illinois-height-modernization-ilhmp〉.
+12,"iverson, l.r., cook, e.a., 2000."
+12,"urban forest cover of the chicago region and its relation abraham, r.g., van den bergh, s., nair, p., 2003."
+12,a new approach to galaxy to household density and income.
+12,urban ecosyst.
+12,"4, 105–124. morphology."
+12,analysis of the sloan digital sky survey early data release.
+12,astrophys.
+12,"kaplan, s., 1995."
+12,the restorative benefits of nature: toward an integrative framework.
+12,"588 (1), 218."
+12,environ.
+12,psychol.
+12,"15 (3), 169–182."
+12,"alsabhan, w., alotaiby, t., 2022."
+12,"automatic building extraction on satellite images using karatsiolis, s., kamilaris, a., cole, i., 2021."
+12,img2ndsm: height estimation from single unet and resnet50.
+12,comput.
+12,intell.
+12,neurosci.
+12,2022. airborne rgb images with deep learning.
+12,"remote sens 2021 (13), 2417."
+12,"amati, m., tiede, j., sun, q.c., deilami, k., hurley, j., fox, a., dickson, j., 2023."
+12,"using kellert, s.r., wilson, e.o."
+12,"(eds.), 1993."
+12,the biophilia hypothesis.
+12,"island press. machine learning to identify urban forest crown bounding boxes (cbb): exploring a kendall, a., gal, y., cipolla, r., 2018."
+12,multi-task learning using uncertainty to weigh new method to develop urban forest policy.
+12,urban for.
+12,urban green.
+12,"85, 127943. losses for scene geometry and semantics."
+12,ieee conf.
+12,comput.
+12,"pattern andersson, t.r., hosking, j.s., pérez-ortiz, m., et al., 2021."
+12,seasonal arctic sea ice recognit.
+12,7482–7491. forecasting with probabilistic deep learning.
+12,commun.
+12,"12, 5124."
+12,"kim, m., park, s., irwin, j., mccormick, c., danielson, j., stensaas, g., sampath, a., berland, a., shiflett, s.a., shuster, w.d., garmestani, a.s., goddard, h.c., herrmann, d."
+12,"bauer, m., burgess, m., 2020."
+12,"positional accuracy assessment of lidar point cloud l., hopton, m.e., 2017."
+12,the role of trees in urban stormwater management.
+12,landsc. from naip/3dep pilot project.
+12,remote sens.
+12,"12 (12), 1974."
+12,urban plan.
+12,"162, 167–177."
+12,"kingma, d.p., ba, j., 2014."
+12,adam: a method for stochastic optimization. arxiv prepr.
+12,"bivand r., yu d., nakaya, t., garcia-lopez, m."
+12,"(2022) spgwr: geographically weighted arxiv 1412, 6980. regression."
+12,available at: 〈https://cran.r-project.org/web/packages/spgwr/index.
+12,"kraft, d."
+12,a software package for sequential quadratic programming.
+12,(1988).
+12,rep. html〉.
+12,"dfvlr-fb 88–28, dlr german aerospace center – institute for flight mechanics, bodnaruk, e.w., kroll, c.n., yang, y., hirabayashi, s., nowak, d.j., endreny, t.a., 2017."
+12,"koln, germany."
+12,where to plant urban trees?
+12,"a spatially explicit methodology to explore ecosystem kuo, f.e., 2003."
+12,social aspects of urban forestry: the role of arboculture in a healthy service tradeoffs.
+12,landsc.
+12,urban plan.
+12,"157, 457–467. social ecology."
+12,arbocult.
+12,"29 (3), 148–155."
+12,"brunsdon, c., fotheringham, a.s., charlton, m.e., 1996."
+12,"geographically weighted le roux, d.s., ikin, k., lindenmayer, d.b., manning, a.d., gibbons, p., 2015."
+12,single large regression: a method for exploring spatial nonstationarity.
+12,geogr.
+12,"anal. 28 (4), or several small?"
+12,applying biogeographic principles to tree-level conservation and 281–298. biodiversity offsets.
+12,conserv.
+12,"191, 558–566."
+12,"chakraborty, t., sarangi, c., tripathi, s.n., 2017."
+12,"understanding diurnality and li, w., niu, z., shang, r., qin, y., wang, l., chen, h., 2020."
+12,high-resolution mapping of interseasonality of a sub-tropical urban heat island.
+12,bound. -layer.
+12,"meteorol. 163 forest canopy height using machine learning by coupling icesat-2 lidar with (2), 287–309."
+12,"sentinel-1, sentinel-2 and landsat-8 data."
+12,earth obs.
+12,geoinf.
+12,"92, chakraborty, t., hsu, a., manya, d., sheriff, g., 2020."
+12,"a spatially explicit surface urban 102163. heat island database for the united states: characterization, uncertainties, and lindberg, f., grimmond, c.s.b., 2011a."
+12,nature of vegetation and building morphology possible applications.
+12,isprs j.
+12,photogramm.
+12,remote sens.
+12,"168, 74–88. characteristics across a city: influence on shadow patterns and mean radiant chen, j., jin, s., du, p., 2020."
+12,roles of horizontal and vertical tree canopy structure in temperatures in london.
+12,urban ecosyst.
+12,"14, 617–634. mitigating daytime and nighttime urban heat island effects."
+12,earth obs.
+12,"lindberg, f., grimmond, c.s.b., 2011b."
+12,the influence of vegetation and building geoinf.
+12,"89, 102060. morphology on shadow patterns and mean radiant temperatures in urban areas: chen, y., men, h., ke, x., 2023."
+12,optimizing urban green space patterns to improve model development and evaluation.
+12,theor.
+12,climatol.
+12,"105, 311–323. spatial equity using location-allocation model: a case study in wuhan."
+12,urban for.
+12,"locke, d.h., hall, b., grove, j.m., pickett, s.t., ogden, l.a., aoki, c., o’neil-dunne, j.p., urban green."
+12,"84, 127922."
+12,residential housing segregation and urban tree canopy in 37 us cities.
+12,npj chicago metropolitan agency for planning (c.m.a.p.)
+12,(2020).
+12,marginalized communities urban sustain.
+12,"1 (1), 1–9. — especially black communities — deserve equitable investments."
+12,"available lohr, b.v.i., pearson-mims, c.h., tarnai, j., dillman, d.a., 2004."
+12,how urban residents at: 〈https://www.cmap.illinois.gov/updates/all/-/asset_publisher/uimfslnffmb6/ rate and rank the benefits and problems associated with trees in cities.
+12,"arbocult. content/marginalized-communities-especially-black-communities-deserve-equit 30, 28–35. able-investments〉."
+12,"lu, m., liu, j., wang, f., xiang, y., 2022."
+12,multi-task learning of relative height estimation chicago region trees initiative (c.r.t.i.)
+12,(2018).
+12,master plan 2050.
+12,the morton and semantic segmentation from single airborne rgb images.
+12,remote sens.
+12,"14, arboretum."
+12,"codemo, a., pianegonda, a., ciolli, m., favargiotti, s., albatici, r., 2022."
+12,"mapping ma, q., lin, j., ju, y., li, w., liang, l., guo, q., 2023."
+12,individual structure mapping over pervious surfaces and canopy cover using high-resolution airborne imagery and six million trees for new york city usa.
+12,"data 10 (1), 102. digital elevation models to support urban planning."
+12,"sustainability 14 (10), 6149."
+12,mayor of london (2022).
+12,"mayor launches mass-tree planting package to combat climate comber, a., brunsdon, c., charlton, m., dong, g., harris, r., lu, b., lü, y., murakami, d., change."
+12,"available at: 〈https://www.london.gov.uk/press-releases/mayoral/ma nakaya, t., wang, y., harris, p., 2023."
+12,a route map for successful applications of yor-launches-massive-tree-planting-package〉. geographically weighted regression.
+12,geogr.
+12,"55 (1), 155–178."
+12,"mcglinchy, j., johnson, b., muller, b., joseph, m., diaz, j., 2019."
+12,"application of unet dalponte, m., coomes, d.a., 2016."
+12,tree-centric mapping of forest carbon density from fully convolutional neural network to impervious surface segmentation in urban airborne laser scanning and hyperspectral data.
+12,methods ecol.
+12,"7, 1236–1245. environment from high resolution satellite imagery."
+12,"in igarss 2019-2019 ieee danford, r.s., cheng, c., strohbach, m.w., ryan, r., nicolson, c., warren, p.s., 2014."
+12,international geoscience and remote sensing symposium.
+12,"ieee, pp."
+12,3915–3918.
+12,what does it take to achieve equitable urban tree canopy distribution?
+12,a boston case study.
+12,cities environ.
+12,"(cate) 7 (1), 2."
+13,francis et al.
+13,"urban forestry & urban greening 89 (2023) 128115 mcpherson, e.g., nowak, d., heisler, g., grimmond, s., souch, c., grant, r., sharmin, m., tjoelker, m.g., pfautsch, s., esperon-rodriguez, m., rymer, p.d., power, s."
+13,"rowntree, r., 1997."
+13,"quantifying urban forest structure, function, and value: the a., 2023."
+13,tree crown traits and planting context contribute to reducing urban heat.
+13,chicago urban forest climate project.
+13,urban ecosyst.
+13,"1, 49–61."
+13,urban for.
+13,urban green.
+13,"83, 127913."
+13,"merry, k., siry, j., bettinger, p., bowker, j.m., 2013."
+13,"efficient assessments of urban tree singh, n.j., nongmeikapam, k., 2022."
+13,semantic segmentation of satellite images using planting potential within or near the southern piedmont region of the united states.
+13,deepunet.
+13,"comput., environ."
+13,urban syst.
+13,"39, 39–47."
+13,"sousa-silva, r., duflos, m., barona, c.o., paquette, a., 2023."
+13,"keys to better planning and nowak, d.j., crane, d.e., 2002."
+13,carbon storage and sequestration by urban trees in the integrating urban tree planting initiatives.
+13,landsc.
+13,urban plan.
+13,"231, 104649."
+13,environ.
+13,pollut.
+13,"116 (3), 381–389."
+13,"stephenson, n.l., das, a.j., condit, r., russo, s.e., baker, p.j., beckman, n.g., nowak, d.j."
+13,"& greenfield, e.j."
+13,(2009).
+13,"urban and community forests of the southern zavala, m.a., 2014."
+13,"rate of tree carbon accumulation increases continuously with atlantic region: delaware, district of columbia, florida, georgia, maryland, north tree size."
+13,"nature 507 (7490), 90–93."
+13,"carolina, south carolina, virginia, west virginia."
+13,"newtown square, pa: u.s."
+13,"strohbach, m.w., lerman, s.b., warren, p.s., 2013."
+13,"are small greening areas enhancing department of agriculture, forest service, northern research station."
+13,general bird diversity?
+13,insights from community-driven greening projects in boston.
+13,landsc.
+13,"technical, report nrs-50."
+13,urban plan.
+13,"114, 69–79."
+13,"nowak, d.j., hirabayashi, s., doyle, m., mcgovern, m., pasher, j., 2018."
+13,"air pollution su, y.f., foody, g.m., cheng, k.s., 2012."
+13,spatial non-stationarity in the relationships removal by urban forests in canada and its effect on air quality and human health. between land cover and surface temperature in an urban heat island and its impacts urban for.
+13,urban green.
+13,"29, 40–48. on thermally sensitive populations."
+13,landsc.
+13,urban plan.
+13,"107 (2), 172–180."
+13,"nowak, d.j., ellis, a., greenfield, e.j., 2022."
+13,the disparity in canopy cover and the morton arboretum.
+13,(2021).
+13,2020 chicago region tree census report.
+13,the morton ecosystem service values among redlining classes in the united states.
+13,landsc.
+13,urban arboretum.
+13,"221, 104370."
+13,united states census bureau (2019).
+13,"selected household characteristics, 2019 american nyamasege, w."
+13,(2022).
+13,"gov’t to recruit 11,000 youths for tree planting initiative in community survey 5-year estimates."
+13,available at: 〈https://data.census.gov/〉.
+13,nairobi.
+13,k24 digital.
+13,available at: 〈https://www.k24tv.co.ke/news/11000-youths-t united states census bureau.
+13,(2021).
+13,census glossary.
+13,available at: 〈https://www.cen o-be-recruited-for-tree-planting-89178/〉. sus.gov/programs-surveys/geography/about/glossary.html#par_textimage_13〉.
+13,"nyelele, c., kroll, c.n., 2020."
+13,"the equity of urban forest ecosystem services and benefits wang, j., zhou, w., jiao, m., 2022."
+13,location matters: planting urban trees in the right in the bronx.
+13,urban for.
+13,urban green.
+13,"53, 126723. places improves cooling."
+13,front.
+13,environ.
+13,"20 (3), 147–151."
+13,"nyelele, c., kroll, c.n., 2021."
+13,"a multi-objective decision support framework to prioritize weinstein, b.g., marconi, s., bohlman, s., zare, a., white, e., 2019."
+13,individual tree tree planting locations in urban areas.
+13,landsc.
+13,urban plan.
+13,"214, 104172. -crown detection in rgb imagery using semi-supervised deep learning neural office of the mayor (2021)."
+13,mayor lightfoot announces historic investment in tree networks.
+13,remote sens.
+13,"11 (11), 1309."
+13,equity in recently passed budget.
+13,city of chicago.
+13,"available at: 〈https://www.chi wellmann, t., lausch, a., andersson, e., knapp, s., cortinovis, c., jache, j., haase, d., cago.gov/city/en/depts/mayor/press_room/press_releases/2021/november/treeeq 2020."
+13,remote sensing in urban planning: contributions towards ecologically sound uityinvestment.html〉. policies.
+13,landsc.
+13,urban plan.
+13,"204, 103921."
+13,"pincetl, s., 2010."
+13,"implementing municipal tree planting: los angeles million-tree weng, q., lu, d., schubring, j., 2004."
+13,estimation of land surface temperature–vegetation initiative.
+13,environ.
+13,manag.
+13,"45 (2), 227–238. abundance relationship for urban heat island studies."
+13,remote sens.
+13,environ.
+13,"89 (4), poulsen, j.r., medjibe, v.p., white, l.j., miao, z., banak-ngok, l., beirne, c., scott, c.t., 467–483."
+13,old growth afrotropical forests critical for maintaining forest carbon.
+13,"wu, c., xiao, q., mcpherson, e.g., 2008."
+13,a method for locating potential tree-planting ecol.
+13,biogeogr.
+13,"29 (10), 1785–1798. sites in urban areas: a case study of los angeles."
+13,usa urban for.
+13,urban green.
+13,"7 (2), price, c., 2003."
+13,quantifying the aesthetic benefits of urban forestry.
+13,urban for.
+13,urban 65–76.
+13,green.
+13,"1 (3), 123–133."
+13,"young, r.f., 2011."
+13,planting the living city.
+13,assoc.
+13,"77 (4), 368–381."
+13,"rahman, m.a., armson, d., ennos, a.r., 2015."
+13,"a comparison of the growth and cooling zangs, m., (2014)."
+13,the chicago 77: a community area handbook.
+13,arcardia publishing. effectiveness of five commonly planted urban tree species.
+13,urban ecosyst.
+13,"18, zhang, h., jim, c.y., 2014."
+13,contributions of landscape trees in public housing estates to 371–389. urban biodiversity in hong kong.
+13,urban for.
+13,urban green.
+13,"13 (2), 272–284."
+13,"rahman, m.a., stratopoulos, l.m., moser-reischl, a., zölch, t., häberle, k.h., rötzer, t., zhang, l., bi, h., cheng, p., davis, c.j., 2004."
+13,"modeling spatial variation in tree pretzsch, h., pauleit, s., 2020."
+13,traits of trees for cooling urban heat islands: a meta- diameter-height relationships.
+13,manag.
+13,"189, 317–329. analysis."
+13,build.
+13,environ.
+13,"170, 106606."
+13,"zhao, z., wang, h., wang, c., wang, s., li, y., 2019."
+13,"fusing lidar data and aerial ronneberger, o., fischer, p., brox, t., 2015."
+13,u-net: convolutional networks for imagery for building detection using a vegetation-mask-based connected filter.
+13,ieee biomedical image segmentation.
+13,in international conference on medical image geosci.
+13,remote sens.
+13,"16 (8), 1299–1303."
+13,computing and computer-assisted intervention.
+13,"springer, cham, pp."
+13,234–241.
+13,"zhou, w., huang, g., pickett, s.t., wang, j., cadenasso, m.l., mcphearson, t., grove, j."
+13,"roussel, j., auty, d., coops, n.c., tompalski, p., goodbody, t.r., meador, a.s., m., wang, j., 2021."
+13,"urban tree canopy has greater cooling effects in socially bourdon, j., de boissieu, f., achim, a., 2020. lidr: an r package for analysis of vulnerable communities in the us."
+13,"one earth 4 (12), 1764–1775."
+13,airborne laser scanning (als) data.
+13,remote sens.
+13,environ.
+13,"251, 112061."
+13,"issn 0034- ziter, c.d., pedersen, e.j., kucharik, c.j., turner, m.g., 2019."
+13,"scale-dependent 4257. interactions between tree canopy cover and impervious surfaces reduce daytime shahidan, m.f., jones, p.j., gwilliam, j., salleh, e., 2012."
+13,an evaluation of outdoor and urban heat during summer.
+13,"116 (15), 7575–7580. building environment cooling achieved through combination modification of trees with ground materials."
+13,build.
+13,environ.
+13,"58, 245–257."

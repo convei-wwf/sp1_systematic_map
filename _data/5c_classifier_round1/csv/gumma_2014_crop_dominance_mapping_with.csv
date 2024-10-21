@@ -1,0 +1,565 @@
+page,p
+1,"agriculture 2014, 4, 113-131; doi:10.3390/agriculture4020113 open access agriculture issn 2077-0472 www.mdpi.com/journal/agriculture article crop dominance mapping with irs-p6 and modis 250-m time series data murali krishna gumma 1,*, kesava rao pyla 2, prasad s."
+1,"thenkabail 3, venkataramana murthy reddi 4, gundapaka naresh 5, irshad a."
+1,mohammed 1 and ismail m.
+1,"rafi 1 1 icrisat, patancheru-502324, india; e-mails: irshad@cgiar.org (i.a.m.); icrisat.gis@cgiar.org (i.m.d.r.)"
+1,"2 national institute of rural development, rajendranagar, hyderabad-500068, india; e-mail: kesav.nird@gmail.com 3 us geological survey (usgs), flagstaff, az 86001, usa; e-mail: pthenkabail@usgs.gov 4 sairam engineers, bangalore- 560037, india; e-mail: murthyreddi@gmail.com 5 spatial information technology, jawarharlal nehru technological university, hyderabad-500072, india; e-mail: gundepaka@gmail.com * author to whom correspondence should be addressed; e-mail: m.gumma@cgiar.org; tel.: +91-40-3071-3449; fax: +91-40-3071-3071."
+1,received: 6 january 2014; in revised form: 19 march 2014 / accepted: 14 april 2014 / published: 25 april 2014 abstract: this paper describes an approach to accurately separate out and quantify crop dominance areas in the major command area in the krishna river basin.
+1,"classification was performed using irs-p6 (indian remote sensing satellite, series p6) and modis eight-day time series remote sensing images with a spatial resolution of 23.6 m, 250 m for the year 2005."
+1,temporal variations in the ndvi (normalized difference vegetation index) pattern obtained in crop dominance classes enables a demarcation between long duration crops and short duration crops.
+1,the ndvi pattern was found to be more consistent in long duration crops than in short duration crops due to the continuity of the water supply.
+1,"surface water availability, on the other hand, was dependent on canal water release, which affected the time of crop sowing and growth stages, which was, in turn, reflected in the ndvi pattern."
+1,the identified crop-wise classes were tested and verified using ground-truth data and state-level census data.
+1,"the accuracy assessment was performed based on ground-truth data through the error matrix method, with accuracies from 67% to 100% for individual crop dominance classes, with an overall accuracy of 79% for all classes."
+2,"agriculture 2014, 4 114 derived major crop land areas were highly correlated with the sub-national statistics with r2 values of 87% at the mandal (sub-district) level for 2005–2006."
+2,"these results suggest that the methods, approaches, algorithms and datasets used in this study are ideal for rapid, accurate and large-scale mapping of paddy rice, as well as for generating their statistics over large areas."
+2,"this study demonstrates that irs-p6 23.6-m one-time data fusion with modis 250-m time series data is very useful for identifying crop type, the source of irrigation water and, in the case of surface water irrigation, the way in which it is applied."
+2,the results from this study have assisted in improving surface water and groundwater irrigated areas of the command area and also provide the basis for better water resource assessments at the basin scale.
+2,keywords: irrigated area mapping; crop dominance; krishna basin; remote sensing; nagarjuna sagar; command area; ndvi and modis 250 m 1.
+2,introduction spatial information on crop distribution have been restricted by the district-level crop statistics published by state or national governments in different parts of the world.
+2,"some efforts have been made to spatially distribute the district level statistics using spatial allocation models and to prepare global maps (spatial allocation modeling (spam) datasets, future harvest, international food policy research institute (ifpri))."
+2,"however, remote sensing imagery-based mapping of dominant crops was attempted by many using seasonal imagery from satellites, like landsat [1], but it was not until recently when high temporal resolution imagery from platforms, like modis, became available that it became easier to identify dominant crops with innovative methods [2]."
+2,crop dominance mapping in the command area (the area under a reservoir or a dam for irrigation purpose) is very helpful to understand the dynamics of water availability and use in relation to rainfall.
+2,"when fine spatial and spectral resolution imagery is combined with high temporal resolution imagery, the hybrid output provides better feature identification."
+2,"census data on agricultural production provide a coarse view of how cropped areas change under irrigation supply fluctuations, and satellite imagery can provide spatially detailed maps of where cropping patterns changed the most for a given variation in water supply [3]."
+2,"satellite imagery has been increasingly used to quantify water use and productivity in irrigation systems [4,5], but has less frequently been used to identify parts of irrigated command areas that change in response to variations in water supply."
+2,"various techniques in satellite image analysis have been applied to study and map agricultural areas using different spatial resolutions [4,6–11]."
+2,"however, precise mapping of crops and their water status remains challenging [12,13]."
+2,"the use of irs-p6 imagery proved to be fast, cheap and successful in mapping areas dominated by small holding farms."
+2,"many studies were conducted using landsat data, to map land use land cover areas."
+2,this was demonstrated by draeger [13] in estimating the irrigated land area of the klamath river basin in oregon.
+2,"rundquist et al. [14] used these to make an inventory of central pivot irrigation systems in nebraska, and thiruvengadachari et al. [15] used landsat data to"
+3,"agriculture 2014, 4 115 identify irrigation patterns in semiarid areas in india."
+3,"abderrahman et al. [16] mapped the irrigated areas of the severely arid regions of saudi arabia using temporal landsat multispectral scanner and thematic mapper data, while murthy et al. [17] used irs liss (indian remote sensing satellite with linear imaging self-scanning) data to derive a cropping calendar for a canal operation schedule in india."
+3,"thenkabail et al. [18] demonstrated the use of time series coarse-resolution satellite data, such as those from the national oceanic and atmospheric administration’s (noaa) advanced very high resolution radiometer (avhrr), in mapping irrigated areas over the entire world."
+3,the most extensive study of irrigation performance assessment was carried out by alexandridis et al. [19] using noaa-avhrr data.
+3,they investigated the indus river basin to identify the irrigated areas and assessed the performance of the irrigation systems.
+3,boken et al. [20] also demonstrated the potential of noaa-avhrr for estimating irrigated areas of three states of the usa.
+3,thenkabail et al. [21] used moderate resolution imaging spectroradiometer (modis) time series data to generate land use land cover (lulc) and a map of the irrigated area for the ganges and indus river basins.
+3,"over time, the use of various satellite data has evolved along with diverse and novel techniques in analyzing them."
+3,kamthonkiat et al. [22] described a technique called the peak detector algorithm to discriminate between rainfed and irrigated rice crops in thailand.
+3,"biggs et al [12] used modis time series combined with ground-truth data, agricultural census data and landsat thematic mapper (tm) data to map surface-water irrigation, groundwater irrigation and rainfed ecosystems of the krishna river basin in the southern indian peninsula."
+3,gumma et al. [23] stressed the importance of ndvi time series to identify and separate land use change over the time.
+3,"the above literature has consistently reported that single-date fine-resolution imagery, acquired at critical growth stages, is sufficient to precisely identify where irrigation was applied, even including minor and informal irrigation."
+3,gumma et al. [11] used fusion techniques to map irrigated areas at the country level using landsat 30-m and modis 250-m data resolution.
+3,"however, it is not adequate to derive the intensity of irrigation and the cropping calendar of the crop identified."
+3,"in contrast, multi-date time series coarse-resolution imagery can be used to distinguish the differences between irrigated crop types and to derive the irrigation intensity [14,15,18,21]."
+3,"therefore, a methodology to integrate the use of both the fine and coarse spatial resolution datasets must be developed [18]."
+3,the gap between the use of fine-resolution satellite data and the use of coarse-resolution satellite data must be bridged.
+3,"moreover, the existing methodology must be modified to derive irrigated areas using fine-resolution satellite data."
+3,"studies reporting the use of multi-temporal image data for classification often include relatively few dates, possibly due to a lack of cloud-free image availability, cost and processing requirements [24]."
+3,mapping crop dominance areas is very important for water accounting and water resource allocation.
+3,precision can be achieved only when discrepancies among area estimates are effectively eliminated.
+3,previous studies have used either only irs-p6 or only modis data for mapping land use and land cover areas.
+3,this study aims to map crop dominance areas in the major command area using both irs-p6 at 23.6-m (2005–2006) and modis 250-m data.
+3,irrigation types in the command area vary from large-scale surface water to fragmented and shallow groundwater (along the river and inland valleys).
+3,"furthermore, very small fragmented supplemental irrigated areas exist."
+3,"climate and elevation vary widely, as well."
+3,"thus, the fusion of higher spatial resolution data with course-resolution modis data is ideal for mapping crop dominance in the command area."
+4,"agriculture 2014, 4 116 2."
+4,"study area the nagarjuna sagar (njs) project (16°34′24′′ n, 79°18′47′′ e) is one of the major multipurpose reservoirs in south india (figure 1)."
+4,"it is located in the lower krishna basin, which is the fifth largest river basin in india."
+4,"the gross capacity of the reservoir is 11,557 mm3 at a full storage level of +179.832 m above sea level, and the live storage capacity is 6841 mm3, with a dead storage of 4716 mm3 at 121.92 m."
+4,"dam construction was completed in 1974, although canals started serving the command from 1967."
+4,"the njs reservoir, in conjunction with the upstream hydropower reservoir, srisailam (8720 mm3), provides irrigation to the njs command of 895,500 ha, with a water allocation of 8436 mm3 (including releases to njs canals plus reservoir evaporation losses) by the first krishna disputes tribunal [25]."
+4,"the reservoir is also committed to supply 2264 mm3 to the krishna delta, which is downstream of the njs."
+4,"in addition, in 2004, nagarjuna sagar started to supply water (33 mm3) to hyderabad, a major city of ~7 million inhabitants."
+4,"currently, the njs project supplies 123 mm3 to hyderabad, and this is expected to increase to 370 mm3 by 2030 [26]."
+4,this expected demand of hyderabad is equivalent to 4% of the water allocated to the nagarjuna sagar irrigation project.
+4,"the state-level committee for integrated operation of krishna and pennar basin projects (ciokrip) was formed for the integrated operation of the lower krishna reservoirs, including srisailam, nagarjuna sagar and the krishna delta system (prakasam barrage) for the optimum utilization of the water in an integrated manner."
+4,"releases from nagarjuna sagar are made in the following priority: hyderabad water supply, krishna delta and nagarjuna sagar canals."
+4,the command area is divided in to five subregions based on the districts in which they fall.
+4,figure 1.
+4,location map of the nagarjuna sagar (ns) command area in southern india.
+4,"in the main panel, the clear polygons and italicized labels are the district boundaries with canal distributaries."
+4,the lower right inset shows the lowest administrative boundary.
+5,"agriculture 2014, 4 117 the project consists of a dam and two main canals, the nagarjuna left main canal (nslc) and the right main canal (nsrc)."
+5,the releases into the main river and both the canals are first used to generate hydropower.
+5,"the main power station on the river has a hydropower potential of 960 mw, and nslc and nsrc have a hydropower potential of 60 and 90 mw, respectively."
+5,"in 1976, each main canal was allocated 3738 mm3 for cultivable command areas (cca) of 475,500 ha in nsrc and 420,000 ha in nslc."
+5,"so far, the potential irrigated area created is 450,000 and 359,200 ha in nsrc and nslc, respectively."
+5,"the major crops grown in this region are rice, cotton, chili and maize; these crops are grown in rainy season, and during the second season, most of the rice-grown areas continue to grow rice and/or pulses."
+5,rice requires continuous irrigation.
+5,cotton and chili require irrigation after the rainy season every fifteen days.
+5,data and methods the 23.6-m irs-p6 map of the cropland areas of the study area was developed using the following datasets.
+5,"irs-p6 data different period data have different radiometric resolutions [11,27], hence their respective digital numbers (dns) carry different levels of information and cannot be directly compared."
+5,"therefore, they were converted to absolute units of radiance (w m−2 sr−1μm−1), then to apparent at-satellite reflectance (%) and, finally, to surface reflectance (%) after atmospheric correction."
+5,details on these conversions are provided due to the uniqueness of the sensors involved.
+5,dn to radiance: the irs-p6 data is 8-bit.
+5,dns were converted to radiances.
+5,"spectral radiance is computed using the following equation: ( dn  gain) r (1) 255 radiance to reflectance: a reduction in between-scene variability can be achieved through a normalization for solar irradiance by converting spectral radiance, as calculated above, to planetary reflectance or albedo [27,28]."
+5,"this combined surface and atmospheric reflectance of the earth is computed with the following formula: l d 2 p  (2) esun  cos  s where ρp is the at-satellite exo-atmospheric reflectance, lλ is the radiance (w m−2 sr−1 μm−1), d is the earth to sun distance in astronomic units at the acquisition date [27], esunλ is the mean solar exo-atmospheric irradiance (w m−2 sr−1μm−1) or solar flux [29] and θs is solar zenith angle in degrees (i.e., 90 degrees minus the sun elevation or sun angle when the scene was recorded, as given in the image header file)."
+6,"agriculture 2014, 4 118 3.2."
+6,modis 250-m time series data the modis 250-m data for the krishna river basin were downloaded from calibrated global continuous time series mega datasets [30] composed of the individual files from the nasa website [31].
+6,the modis 250-m 2005–2006 every 8 days (table 1) terra sensor data in 2 specific bands (band 2 (near-infrared) and band 1 (red)) are processed for land applications as a modis surface reflectance product (mod09q1).
+6,the mod09 is computed from modis level 3 bands 1–2 (centered at 648 nm and 858 nm).
+6,the product is an estimate of the surface reflectance for each band as it would have been measured at ground level if there were no atmospheric scattering or absorption.
+6,"original modis data is acquired as 12-bit (0 to 4096 levels) and is stretched to 16-bit (0 to 65,536 levels)."
+6,table 1.
+6,the characteristics of satellite data used in this study.
+6,irs-p6-liss3 (indian remote sensing satellite with linear imaging self-scanning (irs liss)) 4-band reflectance and modis terra 2-band reflectance data characteristics used in this study.
+6,"band irradiance spatial sensor bands range (w m−2 potential application (meters) −1 −1 (μm) sr mm ) irs-p6 water bodies and also capable of differentiating (5 october 2005, 23.6 2 0.52–0.59 1857.7 soil and rock surfaces from vegetation 21 november 2005) 3 0.62–0.68 1556.4 sensitive to water turbidity differences sensitive to the strong chlorophyll absorption 4 0.77–0.86 1082.4 region and the strong reflectance region for most soils operates in the best spectral region to distinguish 5 1.55–1.70 239.84 vegetation varieties and conditions modis absolute land cover transformation, 250 1 0.62–0.67 1528.2 (june 2005 to may 2006) vegetation chlorophyll cloud amount, vegetation land 2 0.84–0.88 974.3 cover transformation the study area, located at about 18 degrees north latitude, is subject to the influences of the oscillating sub-tropical convergence zone, which include monsoon over the region."
+6,"it is during this part of the year that there is the most change in vegetation cover, rapid changes in the dynamics of vegetation and biomass accumulation."
+6,it is also a period when cloud cover is high.
+6,"in order to retain the maximum number of time series images, we: (1) retained all images with <5 percent cloud cover; and (2) developed a cloud masking algorithm, so as to eliminate areas of cloud cover and retain the rest of the image as it is [21]."
+6,"of the 46 images, there were 16 images with 25–40 percent cloud cover."
+6,"therefore, it is important to retain non-cloud areas to get the maximum temporal coverage."
+6,"the following section contains the specifics about the cloud algorithm development, testing and implementation."
+6,the minimum reflectivity of clouds in the modis bands (b1 and b2) provide the best separability in which cloud cover is removed.
+6,"if the reflectance value in b1 is more than 18 percent, then the values"
+7,"agriculture 2014, 4 119 in b1 are replaced with a null value."
+7,"when the b1 value is null, then the corresponding value in b2 is replaced with a null value."
+7,"if the reflectance value in b1 is less than 18 percent, then the corresponding value in b2 is retained as it is."
+7,"the continuous time series analysis of modis data requires the construction of mega datasets that involve multiple bands [2,32]."
+7,a total of 92 bands were stacked into a single mega file.
+7,a separate 46 images of ndvi mega file was also created.
+7,"the single mega file facilitates: (1) in preparing monthly maximum value composite (mvc) from 46 images of ndvi and 4 bands of irs-p6 single date data; and (2) analyzing the time series data in its entirety (e.g., performing unsupervised classification of monthly mvc data and determining how classes change in magnitude over space and time)."
+7,"mega file data cube (mfdc) consists of 50 bands, coming from 4 irs-p6 bands and 46 ndvi bands from mod09q1."
+7,"ground-truth datasets ground-truth data was collected during 13–26 october 2005, for 172 sample sites covering major land use/cover classes and its percent in the study area (figure 1)."
+7,"in addition, ground-truth observations were made extensively, while driving, by manually marking on topographic maps (1:50,000) obtained from the survey of india for further reference."
+7,the geocover 2000 [33] products were also used as additional information in class identification.
+7,the approach we adopted was to look for contiguous areas of homogeneous classes within which we can sample.
+7,"a large contiguous information class constituted our sampling unit, within which we sample a representative area of 250 m by 250 m."
+7,the emphasis was on the ―representativeness‖ of the sample location in representing one of the classes to ensure the precise location of the pixel.
+7,class labels were assigned in the field.
+7,classes have the flexibility to merge to a higher class or break into a distinct class based on the land cover percentages observed at each location.
+7,the precise locations of the samples were recorded by a garmin gps unit.
+7,the sample size varied from 5 to 15 samples for each category.
+7,"it is ideal to have at least 15 samples per category, which was not feasible, due to limited resources."
+7,class labels were assigned in the field.
+7,"at each location, the following data were recorded: 1."
+7,land use land cover (lulc) classes: crop type and other land use and land cover; 2.
+7,"land cover types (% cover): trees, shrubs, grasses, built-up, water, fallow lands, weeds, different crops, sand, snow, rock and fallow farms; 3."
+7,"crop types: for kharif, rabi and summer seasons; 4."
+7,"cropping pattern: for kharif, rabi and summer seasons; 5."
+7,"cropping calendar (sowing to harvesting the crop): for kharif, rabi and summer seasons; 6."
+7,"irrigated, rainfed, supplemental irrigation at each location; 7."
+7,three hundred forty-four digital photos hot linked at 172 locations.
+7,ideal spectra creation ideal spectral signatures were generated using time series data that were extracted from 118 observation points (see figure 2).
+7,each of the points chosen to generate the ideal spectral
+8,"agriculture 2014, 4 120 signatures represents a definitive crop type and/or cropping system, such as ―irrigated-surface water-rice-rice‖ (meaning the rice field is irrigated by surface water and is rice during two seasons), ―irrigated-surface water-sugarcane‖."
+8,"multiple points with the same crop type/system, even though distributed spatially in discrete patches, were combined to create a single ideal spectral signature [2], for that cropping system between 5 and 10 points per spectra, resulting in 6 ideal crop signatures and 4 ideal signatures for other classes."
+8,major crop signatures in this study areas are shown in figure 2.
+8,figure 2.
+8,ideal spectral signatures for different crops in the study area.
+8,signatures were extracted from the precise knowledge of crop characteristics using a time series composite.
+8,classification methods the modis time series images and irs-p6 images were first converted into at-satellite reflectance and made into a single mfdc composite.
+8,"this was then classified using unsupervised iterative self-organized class (isoclass) cluster k-means classification with a convergence value of 0.99 and 50 iterations, yielding 50 classes followed by successive generalization [2,11,34,35]."
+8,unsupervised classification was used instead of supervised classification in order to capture the range of variability in phenology over the image across the study area.
+8,"for the initial grouping of classes based on decision tree algorithms, a decision tree was applied to the 50 ndvi signatures that resulted from the unsupervised classification."
+8,the temporal profiles of each class are derived from the ndvi time series data of a class.
+8,"single date imagery cannot provide a temporal profile of a class, so it is advantageous to have time series imagery, like that of modis."
+8,"the variability in the phenology of each land use class or crop type is reflected in the ndvi profile, and appropriate thresholds are determined for each class and also cropping intensity, etc."
+8,"the threshold ndvis and ndvi signatures over time help us determine the land use type, including crop intensity, surface irrigation areas, groundwater irrigation areas, rainfed and rangelands."
+9,"agriculture 2014, 4 121 in order to group them into a manageable number of distinct classes."
+9,"the decision tree is based on monthly ndvi thresholds at different crop growth stages in the season [2,32,35]."
+9,"the months and threshold values were chosen based on knowledge of the crop calendar from local experts, field observations, as well as published rice crop development stages."
+9,"crop dominance class identification and labeling was based on modis ndvi time series plots, ideal spectra, ground-truth data and very high-resolution images (google earth)."
+9,ideal spectra were generated using time series imagery with precise field plot data of the same type of land use at spatially distributed locations.
+9,"the specific protocols included grouping class spectra based on class similarities and/or comparing them with ideal/target spectra, rigorous protocols for class identification and labeling with the use of large volumes of ground-truth data and very high-resolution imagery."
+9,"after a rigorous classification process, most of the classes were identified, except some mixed classes [36]."
+9,spectral matching techniques match the class spectra derived from classification with an ideal spectra-derived modis 250-m mfdc [36].
+9,"time series data, such as the monthly modis ndvi data, are similar to hyperspectral data (12 months in time series data)."
+9,"these similarities imply that the spectral matching techniques (smts), applied for hyperspectral image analysis, also have potential for application in identifying agricultural land use classes from historical time series satellite imagery."
+9,"google earth® is a free access, internet-based application that provides very high spatial resolution images down to sub-meter resolution."
+9,"this is valuable for the visual interpretation of land cover in the area, especially to ascertain whether a class is an irrigated or rainfed cropland, when the area is well explored."
+9,"google earth data was also used to identify the presence of any irrigation structures (e.g., canals, irrigation channels, open wells)."
+9,"most of the very high-resolution imagery (vhri: <5 m; e.g., ikonos, quickbird, geoeye) for the study area was acquired from 2000 to 2010."
+9,the groundwater irrigated areas were differentiated from surface water irrigated areas using the difference in the time of sowing.
+9,"in general, groundwater irrigated areas start early, and these are patchy in spatial distribution, whereas the surface water irrigated areas (canal, stream and tank); do not start until water is allocated through the canal, etc."
+9,"this is reflected in ndvi profiles very clearly [12,37]."
+9,the mixed classes were resolved using elevation (dem) as an additional variable in the gis environment.
+9,"the resulting classes were combined into the already generated classes based on the spectral correlation coefficient, which is a combination of signature shape and magnitude [36]."
+9,"accuracy assessment was performed based on intensive field-plot information through an error matrix, based on a theoretical description given by [38] that was used to generate the error matrix."
+9,"the columns of an error matrix contain the field-plot data points, and the rows represent the results of the classified land use map [39]."
+9,the error matrix is a multi-dimensional table in which the cells contain changes from one class to another class [40].
+9,the 81 points with major land use land cover and irrigation type observations were used for the classification accuracy assessment.
+10,"agriculture 2014, 4 122 4."
+10,results and discussions 4.1.
+10,"crop dominance classification and statistics crop dominance classes were identified based on ground-truth, information from farmers, geo-referenced digital images and temporal ndvi signatures [11,36]."
+10,"ten major land use land cover classes were identified and labelled (figure 3), such as rainfed-single crop, irrigated-single crop, irrigated-surface water and groundwater-double crop (table 2)."
+10,the major part of the command area is irrigated with surface water and orchards with groundwater (figure 3).
+10,"rice is a major crop in the command area, covering more than 500,000 ha, with cotton and chili being the next."
+10,a large part of the nalgonda zone is surface water irrigated double crop rice with some more area in the guntur zone adjacent to the nalgonda zone and also in the northern part of the khammam zone.
+10,krishna also contributes to the large double cropped rice area.
+10,rice crop with pulses as the second crop is also a dominant system.
+10,"a clear chili tract can be seen in the krishna, guntur and prakasam zones as a sole crop and a contiguous zone with chili grown after cotton."
+10,being a well-known chili and cotton tract contributing to more than 6 lakh hectares is the second largest land use class.
+10,"another irrigated crop, sugarcane, is restricted in the north-central khammam and south-western prakasam zones, only after which rice is grown as the second crop."
+10,orchards are prevalent in eastern krishna and parts of the southern khammam zone.
+10,"shrub lands and rangelands (reserved forests) form an important form of land use in the command area, covering the highlands in continuation of the nallamalla hills."
+10,large patches can be seen in the guntur and krishna zones.
+10,along the river course in the nalgonda and guntur zones are the shrub land patches.
+10,figure 3.
+10,the 10 crop dominance classes of the nagarjuna sagar command area based on irs-p6 and modis time series data for 2005–2006.
+10,"sw, surface water; gw, groundwater."
+11,"agriculture 2014, 4 123 table 2."
+11,distribution of crop dominance classes with other land use/land cover for the 10 final classes.
+11,lulc (no.)
+11,areas (ha) % 01.
+11,"water bodies 45,632 2 02."
+11,"wetlands 46,833 3 03."
+11,"shrub lands/forests 216,178 12 04."
+11,"rainfed crops/rangelands 158,683 9 05."
+11,"rainfed-supplemental-chili 174,261 9 06."
+11,"rainfed-supplemental-cotton dominant chili 371,803 20 07."
+11,"irrigated-sw-rice-rice 431,992 23 08."
+11,"irrigated-sw-rice-pulses 188,125 10 09."
+11,"irrigated-sw-sugarcane-rice 82,847 4 10."
+11,"irrigated-sw/gw-orchards 141,003 8 total 1,857,358 100 4.2."
+11,temporal signature of various land use classes crop phenology was studied using temporal ndvi plots (figure 4).
+11,"these temporal ndvi profiles provided information (figure 3) which will clearly separate: (1) cropping intensities (e.g., single or double crop); (2) the crop calendar (i.e., when a crop begins and when it is harvested); and (3) the crop health and vigor (indicated by the magnitude of ndvi)."
+11,each crop dominance class (figure 3) has a distinctly different phenology depicted by the ndvi magnitude and/or seasonality (figure 4).
+11,figure 4.
+11,the temporal mean modis 250-m ndvi signatures (mean ndvi pattern) of the 10 land use classes of study area derived using data for 2005–2006.
+11,"note: the 10-class lulc map of the study area is in figure 3, and the area statistics are in table 2."
+12,"agriculture 2014, 4 124 the temporal class signatures also allow the separation of rainfed crops from irrigated crops based on factors, such as when a crop calendar begins and the magnitude of signatures."
+12,"for example, class 7 (figure 3) shows a kharif crop beginning around june 20, ndvi peaking around 15 august and the crop harvested by the end of october."
+12,"the rabi crop begins around 15 november, ndvi peaking around 15 february and all crops harvested by 15 april."
+12,"around 26 october, (figure 4), class 6 has the lowest ndvi and a uniquely high ndvi (compared with all other classes) around 15 december."
+12,such distinctive features indicate a unique class with a firm set of characteristics that define that class.
+12,this can be said of all classes depicted in figure 3.
+12,"comparisons with national statistics and other studies after generating the final classified map for the five zones, nalgonda zone (14 mandals) was selected, and mandal-wise (sub-district) statistics were obtained from the district collectorate office to compare with modis-derived statistics (figure 5, table 3)."
+12,"there was more or less equal over-estimation in different mandals, making the average area have little positive change (3188 ha)."
+12,the rice crop area varied from 1% to 63% above the national agriculture statistics (nas) in the positive range and −43% to −4% in the negative range.
+12,"similarly for cotton, it is 0% to 83% in the positive range and −34% to −1% in the negative range, indicating overall negative change (−2810 ha)."
+12,"chili area varied from 0% to 83% and −22% to −7%, showing an overall low positive change (143 ha)."
+12,it can also be seen that some of the values with high positive change in all the crops are due to low absolute area under the crops (munagala and nadigudem).
+12,similar is the case in the negative range area under all the crops (miryalaguda and mellacheruvu).
+12,this indicates that the major crop growing areas do not show a great increase.
+12,the scatter plot for three major crops in the nalgonda zone exhibit a good correlation between modis-derived statistics and nas statistics for the years 2005–2006.
+12,table 3.
+12,comparison of irs- and modis-derived statistics and national agriculture statistics (nas) for nalgonda zone during the years 2005–2006.
+12,"area (ha) % difference mandals modis nas modis nas modis nas rice cotton chili rice rice cotton cotton chili chili peddavoora 3,688 3,879 3,613 4,500 436 365 5 20 −19 nidamnoor 15,422 13,569 1,226 1,208 40 67 −14 −1 41 neredcherla 17,611 18,957 1,549 1,675 272 474 7 8 43 nadigudem 3,246 4,315 161 175 3 20 25 8 83 munagala 1,276 3,480 94 555 0 0 63 83 0 miryalaguda 16,882 11,843 466 379 37 34 −43 −23 −7 mellachervu 12,569 12,660 8,224 7,954 2,695 2,205 1 −3 −22 mattampally 10,527 9,785 2,984 2,234 578 644 −8 −34 10 kodad 14,476 13,947 920 926 25 84 −4 1 70 huzurnagar 10,737 11,200 0 0 6 0 4 0 0 garidepally 12,843 10,400 0 8 5 0 −23 0 0 damercherla 12,037 13,337 6,904 6,192 681 735 10 −12 7 chilkur 6,794 8,050 23 0 6 0 16 0 0 anumula 10,704 10,201 1,998 5,166 61 72 −5 61 15 total 148,811 145,623 28,162 30,972 4,843 4,700 2 8 16"
+13,"agriculture 2014, 4 125 4.4."
+13,"comparison with other studies the results of the present study were compared against irrigated area statistics obtained from other published independent datasets, which are modis 500 m and modis 250 m."
+13,"the present study results in slightly higher areas, as shown in table 4."
+13,table 4.
+13,comparison of irrigated areas from various datasets.
+13,"area in ha land use class# irs-p6 + modis 250 m modis 500 m [41] modis 250 m [42] (present study) left bank irrigated agriculture 422,196 561,900 556,657 rainfed: supplemental 220,276 100,500 158,880 rainfed agriculture 183,563 56,100 63,744 right bank irrigated agriculture - 282,200 287,310 rainfed—supplemental - 327,400 387,184 rainfed agriculture - 137,500 94,940 4.5."
+13,accuracy assessment through error matrix table 5 shows the error matrices for the kharif (monsoon) season.
+13,accuracy assessment was performed through the error matrix whether a known particular crop area is classified as the same crop (without the type of irrigation) or another crop.
+13,"this process was done using 81 independent field-plot observation points, and they are summarized in table 5."
+13,each of the ground-truth points refers to one of ten classes.
+13,"the user accuracy varied from 57% to 100% across ten classes, with an overall accuracy of 79.01%."
+13,"however, it must be noted that most cotton and chili classes are inter-mixed."
+13,"therefore, if we combine all crop classes into one class, the accuracy of rice mapping will be very high (about 95%)."
+13,"therefore, an uncertainty of about 20% is due to the inter-mix among the various crop classes."
+13,"therefore, accuracy will be very high between crop lands and non-crop land classes."
+13,the irrigated classes generally have higher classification accuracies than the rainfed or mixed irrigated/rainfed classes (table 5).
+13,utility of these maps in decision-making crop dominance mapping using the fusion techniques yielded better classification accuracy and helps in making appropriate decisions regarding water allocation and contingency plans for drought and climate scenarios.
+13,"simulations can be generated for different scenarios of climate change, and appropriate interventions can be introduced in the command area."
+13,"specifically where land use changes are moving towards a low water availability regime (tail-enders in the command area), it is necessary to provide a sustainable solution balancing the upstream areas and the tail-enders."
+13,"the spatial dimension of this information not only provides a perspective view of the command area land use, but also helps in understanding the water use of each land use with reference to its location in the command area."
+13,this will lead to prioritizing the allocation of water to the land use or changing the land use according to water availability.
+14,"agriculture 2014, 4 126 figure 5."
+14,scatter plot showing correlations between modis-derived areas and nas in the nalgonda zone of the nagarjuna sagar (njs) command area during the years 2005–2006.
+15,"agriculture 2014, 4 127 table 5."
+15,accuracy assessment of the land use classes delineated in the nagarjuna sagar command areas using the error matrix for the years 2005–2006.
+15,"01 02 03 04 05 06 07 08 09 10 reference totals number correct producers accuracy users accuracy 01 3 0 0 0 0 0 0 0 0 0 3 3 100% 100% 02 0 5 0 0 0 0 0 0 0 0 5 5 100% 100% 03 0 0 2 0 0 0 1 0 0 0 2 2 100% 67% 04 0 0 0 6 1 0 2 0 0 0 7 6 86% 67% 05 0 0 0 1 4 1 1 0 0 0 6 4 67% 57% 06 0 0 0 0 1 11 0 1 0 0 13 11 85% 85% 07 0 0 0 0 0 1 17 0 1 1 25 17 68% 85% 08 0 0 0 0 0 0 2 7 0 1 8 7 88% 70% 09 0 0 0 0 0 0 1 0 3 0 4 3 75% 75% 10 0 0 0 0 0 0 1 0 0 6 8 6 75% 86% column total 3 5 2 7 6 13 25 8 4 8 81 64 01, water bodies; 02, wetlands; 03, shrub lands/forests; 04, rainfed crops/rangelands; 05, rainfed-supplemental-chili; 06, rainfed-supplemental-cotton dominant chili; 07, irrigated-sw-rice-rice; 08, irrigated-sw-rice-pulses; 09, irrigated-sw-sugarcane-rice; 10, irrigated-sw/gw-orchards; overall classification accuracy = 79.01%; overall kappa statistics = 0.7539."
+16,"agriculture 2014, 4 128 5."
+16,"conclusions this research combined irs-p6 and modis 250-m time series data with ground-truth data to map crop dominance areas and other lulc classes in the major command area, which is dominated by smallholder agriculture."
+16,"the data fusion approach combined with spectral matching techniques was used to map heterogeneous and patchy major crop land areas, including rainfed areas that dominate homogeneous crop land areas."
+16,the major cropped area classes were mapped with error matrix accuracy between 67% and 100%.
+16,"overall, cropland areas were over-estimated by 20% to 57% using remote sensing data, methods and approaches when compared with mandal-level statistics."
+16,mapping major crop land areas at higher resolution is the first step in characterizing and understanding specific crops.
+16,precise and up-to-date crop type maps are important for water resource allocation and planning according to demand.
+16,this approach was appropriate for crop dominance classification and intensity (single or double crop) with the irrigation source in the command area.
+16,"this study demonstrates significant strengths in using irs-p6 23.6-m data (in fusion with time series modis 250-m data) in identifying fragmented and minor crop land areas with irrigation sources, such as surface irrigation, groundwater and rainfed agriculture."
+16,"however, fragmented mixed cropland areas are better mapped using very high-resolution (<5 m) data in fusion with time series coarser resolution data."
+16,acknowledgments this study is supported by the consultative group of international agriculture research (cgiar) research program (crp) 1.1.
+16,we would like to thank international water management institute (iwmi) for providing satellite imagery and the agriculture department of andhra pradesh for providing crop statistics on the study area.
+16,author contributions prasad s.
+16,thenkabail proposed and designed this study.
+16,"murali krishna gumma, kesava rao pyla, prasad s."
+16,thenkabail and irshad a.
+16,"mohammed carried out analysis, results and discussions."
+16,"gundapaka naresh, venkataramana murthy reddi and ismail m.d."
+16,rafi provided ground-truth.
+16,introduction and literature survey was provided by kesava rao pyla and irshad a.
+16,mohammed.
+16,all the authors drafted the respective contributions and draft manuscript was given to language and technical editor.
+16,conflicts of interest the authors declare no conflict of interest.
+16,references 1.
+16,"oetter, d.r."
+16,"; cohen, w.b."
+16,"; berterretche, m."
+16,"; maiersperger, t.k."
+16,"; kennedy, r.e."
+16,land cover mapping in an agricultural setting using multiseasonal thematic mapper data.
+16,remote sens.
+16,environ.
+16,"2001, 76, 139–155."
+17,"agriculture 2014, 4 129 2."
+17,"gumma, m.k."
+17,"; nelson, a."
+17,"; thenkabail, p.s."
+17,"; singh, a.n."
+17,mapping rice areas of south asia using modis multitemporal data.
+17,"remote sens. 2011, 5, doi:10.1117/1.3619838."
+17,"thiruvengadachari, s."
+17,"; murthy, c.s."
+17,"; raju, p.v."
+17,"remote sensing of bhankra canal command area, harayana, india; nrsa: hyderabad, india, 1997."
+17,"thiruvengadachari, s."
+17,"; sakthivadivel, r."
+17,"satellite remote sensing for assessment of irrigation system performance: a case study in india; research report 9; international irrigation management institute: colombo, sri lanka, 1997."
+17,"bastiaanssen, w.g.m."
+17,"; bos, m.g."
+17,irrigation performance indicators based on remotely sensed data: a review of literature.
+17,irrig.
+17,drain.
+17,"1999, 13, 291–311."
+17,"ambast, s.k."
+17,"; keshari, a.k."
+17,"; gosain, a.k."
+17,satellite remote sensing to support management of irrigation systems: concepts and approaches.
+17,irrig.
+17,drain.
+17,"2002, 51, 25–39."
+17,"bastiaanssen, w.g.m."
+17,"; molden, d.j."
+17,"; thiruvengadachari, s."
+17,"; smit, a.a.m.f.r."
+17,"; mutuwatte, l."
+17,"; jayasinghe, g."
+17,"remote sensing and hydrologic models for performance assessment in sirsa irrigation circle, india; international water management institute: patancheru, india, 1999."
+17,"ozdogan, m."
+17,"; woodcock, c.e."
+17,"; salvucci, g.d."
+17,monitoring changes in summer irrigated crop area in southeastern turkey using remote sensing.
+17,"in proceedings of the 2003 ieee international geoscience and remote sensing symposium, igarss, melborne, australia, 21–25 july 2003; pp."
+17,1570–1572.
+17,"sakthivadivel, r."
+17,"; thiruvengadachari, s."
+17,"; amerasinghe, u."
+17,"; bastiaanssen, w.g.m."
+17,"; molden, d."
+17,"performance evaluation of the bhakra irrigation system, india, using remote sensing and gis techniques; international water management institute: colombo, sri lanka, 1999."
+17,"velpuri, n.m."
+17,"; thenkabail, p.s."
+17,"; gumma, m.k."
+17,"; biradar, c.b."
+17,"; noojipady, p."
+17,"; dheeravath, v."
+17,"; yuanjie, l."
+17,influence of resolution in irrigated area mapping and area estimations.
+17,photogramm.
+17,remote sens.
+17,"2009, 75, 1383–1395."
+17,"gumma, m.k."
+17,"; thenkabail, p.s."
+17,"; hideto, f."
+17,"; nelson, a."
+17,"; dheeravath, v."
+17,"; busia, d."
+17,"; rala, a."
+17,mapping irrigated areas of ghana using fusion of 30 m and 250 m resolution remote-sensing data.
+17,remote sens.
+17,"2011, 3, 816–835."
+17,"biggs, t.w."
+17,"; thenkabail, p.s."
+17,"; gumma, m.k."
+17,"; scott, c.a."
+17,"; parthasaradhi, g.r."
+17,"; turral, h.n."
+17,"irrigated area mapping in heterogeneous landscapes with modis time series, ground truth and census data, krishna basin, india."
+17,remote sens.
+17,"2006, 27, 4245–4266."
+17,"draeger, w.c."
+17,monitoring irrigated land acreage using landsat imagery: an application example.
+17,"in proceedings of the erim 11th international symposium on remote sensing of environment, las vegas, nv, usa, 1977; see n78-14464 05-43, pp."
+17,515–524.
+17,"rundquist, d.c."
+17,"; richardo, h."
+17,"; carlson, m.p."
+17,"; cook, a."
+17,the nebraska center-pivot inventory—an example of operational satellite remote sensing on a long term basis.
+17,photogramm.
+17,remote sens.
+17,"1989, 55, 587–590."
+17,"thiruvengadachari, s."
+17,satellite sensing of irrigation pattern in semiarid areas: an indian study.
+17,photogramm.
+17,remote sens.
+17,"1981, 47, 1493–1499."
+17,"abderrahman, w.a."
+17,"; bader, t.a."
+17,remote sensing application to the management of agricultural drainage water in severely arid region: a case study.
+17,remote sens.
+17,environ.
+17,"1992, 42, 239–246."
+18,"agriculture 2014, 4 130 17."
+18,"murthy, c.s."
+18,"; raju, p.v."
+18,"; jonna, s."
+18,"; hakeem, k.a."
+18,"; thiruvengadachari, s."
+18,"satellite derived crop calendar for canal operation schedule in bhadra project command area, india."
+18,remote sens.
+18,"1998, 19, 2865–2876."
+18,"thenkabail, p.s."
+18,"; biradar, c.m."
+18,"; turral, h."
+18,"; noojipady, p."
+18,"; li, y."
+18,"; vithanage, j."
+18,"; dheeravath, v."
+18,"; velpuri, m."
+18,"; schull, m."
+18,"; cai, x.; et al."
+18,"an irrigated area map of the world (1999) derived from remote sensing; research report 105; international water management institute: colombo, sri lanka, 2006."
+18,"alexandridis, t."
+18,; asi.
+18,"; ali, s."
+18,"water performance indicators using satellite imagery for the fordwah eastern sadiqia (south) irrigation and drainage project; international water management institute: colombo, sri lanka,1999; p."
+18,"boken, v.k."
+18,"; hoogenboom, g."
+18,"; kogan, f.n."
+18,"; hook, j.e."
+18,"; thomas, d.l."
+18,"; harrison, k.a."
+18,potential of using noaa-avhrr data for estimating irrigated area to help solve an inter-state water dispute.
+18,remote sens.
+18,"2004, 25, 2277–2286."
+18,"thenkabail, p.s."
+18,"; schull, m."
+18,"; turral, h."
+18,ganges and indus river basin land use/land cover (lulc) and irrigated area mapping using continuous streams of modis data.
+18,remote sens.
+18,environ.
+18,"2005, 95, 317–341."
+18,"kamthonkiat, d."
+18,"; honda, k."
+18,"; turral, h."
+18,"; tripathi, n.k."
+18,"; wuwongse, v."
+18,discrimination of irrigated and rainfed rice in a tropical agricultural system using spot vegetation ndvi and rainfall data.
+18,remote sens.
+18,"2005, 26, 2527–2547."
+18,"gumma, m.k."
+18,"; mohanty, s."
+18,"; nelson, a."
+18,"; arnel, r."
+18,"; mohammed, i.a."
+18,"; das, s.r."
+18,"remote sensing based change analysis of rice environments in odisha, india."
+18,environ.
+18,"manag. 2014, in press."
+18,"knight, j.f."
+18,"; lunetta, r.l."
+18,"; ediriwickrema, j."
+18,"; khorram, s."
+18,regional scale land-cover characterization using modis-ndvi 250 m multi-temporal imagery: a phenology based approach.
+18,giscience remote sens.
+18,"2006, 43, 1–23."
+18,krishna water disputes tribunal.
+18,"further report of the krishna water disputes tribunal; government of india: new delhi, india, 1976; p."
+18,"van rooijen, d."
+18,"; turral, h."
+18,"; biggs, t.w."
+18,"sponge city: water balance of mega-city water use and wastewater use in hyderabad, india."
+18,irrig.
+18,drain.
+18,"2005, 54, s81–s91."
+18,"thenkabail, p.s."
+18,"; enclona, e.a."
+18,"; ashton, m.s."
+18,"; legg, c.; de dieu, m.j."
+18,"hyperion, ikonos, ali, and etm+ sensors in the study of african rainforests."
+18,remote sens.
+18,environ.
+18,"2004, 90, 23–43."
+18,"markham, b.l."
+18,"; barker, j.l."
+18,"landsat mss and tm post- calibration dynamic ranges, exoatmospheric reflectances and at-satellite temperatures; landsat technical notes, 1; earth observation satellite company: lanham, maryland, august 1986."
+18,"neckel, h."
+18,"; labs, d."
+18,the solar radiation between 3300 and 12500 å.
+18,"1984, 90, 205–258."
+18,international water management insttitute data store house pathway (iwmidsp).
+18,available online: http://www.iwmidsp.org (accessed on 12 december 2010).
+18,"nasa, modis data, moderate resolution imaging spectrometer (modis)."
+18,available online: http://modis-land.gsfc.nasa.gov (accessed on 25 august 2013).
+18,"gumma, m.k."
+18,"; thenkabail, p.s."
+18,"; maunahan, a."
+18,"; islam, s."
+18,"; nelson, a."
+18,mapping seasonal rice cropland extent and area in the high cropping intensity environment of bangladesh using modis 500 m data for the year 2010.
+18,isprs j.
+18,photogramm.
+18,remote sens.
+18,"2014, 91, 98–113."
+19,"agriculture 2014, 4 131 33."
+19,"nasa, geo cover 2000."
+19,available online: https://zulu.ssc.nasa.gov/mrsid/ (accessed on 25 august 2013).
+19,"gumma, m.k."
+19,"; gauchan, d."
+19,"; nelson, a."
+19,"; pandey, s."
+19,"; rala, a."
+19,temporal changes in rice-growing area and their impact on livelihood over a decade: a case study of nepal.
+19,agric.
+19,ecosyst.
+19,environ.
+19,"2011, 142, 382–392."
+19,"gumma, m.k."
+19,"; thenkabail, p.s."
+19,"; muralikrishna, i.v."
+19,"; velpuri, m.n."
+19,"; gangadhararao, p.t."
+19,"; dheeravath, v."
+19,"; biradar, c.m."
+19,"; acharya nalan, s."
+19,"; gaur, a."
+19,"changes in agricultural cropland areas between a water-surplus year and a water-deficit year impacting food security, determined using modis 250 m time-series data and spectral matching techniques, in the krishna river basin (india)."
+19,remote sens.
+19,"2011, 32, 3495–3520."
+19,"thenkabail, p.s."
+19,"; gangadhararao, p."
+19,"; biggs, t."
+19,"; gumma, m.k."
+19,"; turral, h."
+19,"spectral matching techniques to determine historical land use/land cover (lulc) and irrigated areas using time-series avhrr pathfinder datasets in the krishna river basin, india."
+19,photogramm.
+19,remote sens.
+19,"2007, 73, 1029–1040."
+19,"gumma, m.k."
+19,"; thenkabail, p.s."
+19,"; nelson, a."
+19,mapping irrigated areas using modis 250 meter time-series data: a study on krishna river basin (india).
+19,"water 2011, 3, 113–131."
+19,"jensen, j.r."
+19,"introductory digital image processing: a remote sensing perspective, 3rd ed."
+19,"; prentice hall: upper saddle river, nj, usa, 2004; p."
+19,"congalton, r.g."
+19,a review of assessing the accuracy of classifications of remotely sensed data.
+19,remote sens.
+19,environ.
+19,"1991, 37, 35–46."
+19,"congalton, r.g."
+19,"; green, k."
+19,"assessing the accuracy of remotely sensed data: principles and practices; crc press: new york, ny, usa, 1999."
+19,"gaur, a."
+19,"; biggs, t.w."
+19,"; gumma murali, k."
+19,"; pardhasaradhi, g."
+19,"; turral, h."
+19,water scarcity effects on equitable water distribution and land use in major irrigation project—a case study in india.
+19,irrig.
+19,drain.
+19,"2008, 134, 26–35."
+19,"venot, j.-p."
+19,"; jella, k."
+19,"; bharati, l."
+19,"; george, b."
+19,"; biggs, t."
+19,"; rao, p.g."
+19,"; gumma, m.k."
+19,"; acharya, s."
+19,"farmers’ adaptation and regional land-use changes in irrigation systems under fluctuating water supply, south india."
+19,irrig.
+19,drain.
+19,"2010, 136, 595–609. © 2014 by the authors; licensee mdpi, basel, switzerland."
+19,this article is an open access article distributed under the terms and conditions of the creative commons attribution license (http://creativecommons.org/licenses/by/3.0/).

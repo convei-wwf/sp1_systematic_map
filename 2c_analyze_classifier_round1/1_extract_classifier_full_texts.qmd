@@ -1,0 +1,156 @@
+---
+title: "Phase 3: gather and extract full texts for included items in classifier set 1"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(synthesisr)
+library(pdftools)
+library(here)
+```
+
+# Summary
+
+After running the classifier model, sampled 200 documents (100 predicted include, 100 predicted exclude) and imported into Colandr for a title/abstract screening, then pull in includes and excludes lists.  Export a .ris of the includes to be ported into Zotero to gather .pdfs.  
+
+# Data
+
+The samples were randomly selected from the classifier-predicted references and saved as a .ris on 9/24/24, and uploaded to Colandr.  The screening criteria outlined in the planning/protocol document were used to determine inclusion/exclusion.  Some documents were tagged with additional information, e.g., "maybe" for some included documents that seemed like they may not actually meet the criteria.
+
+The screening results were downloaded as two .csvs (include, exclude) on Oct 3, 2024.
+
+# Methods
+
+## Consolidate Colandr results
+
+```{r}
+incl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_241004.csv'))
+excl_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_excl_241004.csv'))
+results_df <- bind_rows(incl_df, excl_df) %>%
+  janitor::clean_names() %>%
+  mutate(date_screened_t_a = as.Date(date_screened_t_a)) %>%
+  ### keep only those after the date of previous download
+  filter(date_screened_t_a >= as.Date('2024-08-02')) %>%
+  ### exclude any after the Oct 4 results download
+  filter(date_screened_t_a <= as.Date('2024-10-04')) %>%
+  select(title, abstract, year = publication_year, author = authors, doi, tags,
+         screening_status = t_a_status, excl_reasons = t_a_exclusion_reasons)
+
+write_csv(results_df, here('_data/5c_classifier_round1/classifier_round1_screened_results_241004.csv'))
+```
+
+## Isolate includes and save as .bib for Zotero
+
+Write out dois as .csv, import into Zotero using the magic wand (add objects by identifier) to auto grab PDFs.  For ones that Zotero does not automatically find .pdfs, use Google Scholar to see if other pdfs are available.  If behind a paywall (inaccessible from UCSB library) or no DOI then the paper will not be included in the full text screening.
+
+NOTES:
+
+This screened set includes the 200 from the classifier output as well as others from the 1000-sample set in the previous round that were still in Colandr.
+
+
+```{r}
+sample_refs <- read_refs(here('_data/3_refs_clean/sample/sample_1000_240708.ris')) %>%
+  rename(key = notes)
+round1_refs <- read_refs(here('_data/5c_classifier_round1/predicted_classifier_round1_sample_200.ris')) %>%
+  rename(key = notes)
+
+x <- results_df %>%
+  filter(screening_status == 'included' & !is.na(doi))
+
+sample_incl <- sample_refs %>% filter(doi %in% x$doi) %>%
+  mutate(year = as.integer(year))
+round1_incl <- round1_refs %>% filter(doi %in% x$doi) %>%
+  left_join(read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))) %>%
+  bind_rows(sample_incl)
+
+write_refs(round1_incl, format = 'bib', file = here('_data/5c_classifier_round1/incl_bib_to_zotero.bib'))
+
+```
+
+ 
+## Import full texts into Zotero
+
+Of the 62 references, 28 did not automatically retrieve PDFs.  Manually I found 26; two more were behind paywalls.
+
+
+```{r}
+zot_check <- read_refs(here('_data/5c_classifier_round1/incl_bib_from_zotero_241004.bib')) %>%
+  mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
+         doi = tolower(doi)) %>%
+  mutate(key = str_remove_all(key, '\\\\'))
+
+pdf_find <- zot_check %>% filter(is.na(file))
+```
+
+Out of `r nrow(round1_incl)` included papers, `r nrow(zot_check)` have records in Zotero; of these, `r nrow(pdf_find)` do(es) not have a .pdf available.
+
+## Copy files from Zotero to repo
+
+```{r}
+zot_fs <- zot_check %>%
+  filter(!is.na(file)) %>%
+  mutate(file = str_split(file, ';')) %>%
+  unnest(file) %>%
+  filter(str_detect(file, '.pdf$')) %>%
+  mutate(title = str_remove_all(title, '\\{|\\}') %>% str_squish(),
+         author_short = str_remove_all(tolower(author), ',.+|\\}.+|[^a-z]'),
+         title_short = str_replace_all(tolower(title), '[^a-z0-9]+', '_'),
+         year = str_extract(year, '[0-9]{4}')) %>%
+  rowwise() %>%
+  mutate(title_end = ifelse(nchar(title_short) > 32, 
+                            str_locate_all(title_short, '_')[[1]][4, 1]-1, 
+                            nchar(title_short)),
+         title_short = str_sub(title_short, 1, title_end)) %>%
+  ungroup() %>%
+  mutate(pdf_out = sprintf('%s_%s_%s.pdf', author_short, year, title_short),
+         pdf_out = str_remove_all(pdf_out, 'NA_'),
+         pdf_out = here('_data/5c_classifier_round1/pdf', pdf_out)) %>%
+  select(title, author, year, key, file, pdf_out) %>%
+  mutate(csv_out = str_replace(pdf_out, '/pdf/', '/csv/') %>% str_replace('.pdf$', '.csv'))
+
+if(any(!file.exists(zot_fs$pdf_out))) {
+  file.copy(from = zot_fs$file, to = zot_fs$pdf_out) %>% sum()
+}
+
+zot_fs_out <- zot_fs %>%
+  select(-file)
+write_csv(zot_fs_out, here('_data/5c_classifier_round1/int/fulltext_files.csv'))
+```
+
+## Extract text from pdfs
+
+Save out as .csvs for further processing/examination.
+
+```{r}
+pdf_fs <- here(zot_fs$pdf_out)
+csv_fs <- here(zot_fs$csv_out)
+
+for(i in seq_along(pdf_fs)) {
+  ### i <- 1
+  f <- pdf_fs[i]
+  f_out <- csv_fs[i]
+  if(!file.exists(f_out)) {
+    message(f_out)
+    doc_df <- data.frame(t = pdf_text(f)) %>%
+      mutate(page = 1:n(),
+             t = str_squish(t)) %>%
+      unnest_tokens(input = t, output = p, token = 'sentences', drop = TRUE) %>%
+      ### drop arbitrarily short tokens
+      filter(nchar(p) > 5)
+    
+    write_csv(doc_df, f_out)
+  }
+}
+```
+

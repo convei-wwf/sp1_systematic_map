@@ -1,0 +1,167 @@
+---
+title: "Classifier round 1 - summarize with ChatGPT"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: !expr NA
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(tidytext)
+library(here)
+library(httr)
+```
+
+# Summary
+
+The 60 unique documents included from the Round 1 classification screening have been imported into Zotero, and the pdfs copied into this repo; full text was extracted from each.  Here we will apply tips from [this blog post to post documents to ChatGPT and ask the LLM to summarize](https://www.r-bloggers.com/2024/03/how-to-scrape-pdf-text-and-summarize-it-with-openai-llms-in-r).
+
+# Data
+
+See script 1 in this folder.
+
+# Methods
+
+## Get OpenAI token
+
+```{r}
+api_key <- Sys.getenv('OPENAI')
+```
+
+
+## Gather full texts
+
+Full texts were extracted from pdfs using `pdftools`, saved in `_data/5b_sample_1000/csv`.  Each row is a sentence parsed from the pdfs using `tidytext::unnest_tokens()`.  Not perfect, but good enough for government work.  We'll group the documents and summarize the sentences into an entire full text.
+
+Note that the `bind_rows()` call seems to reorganize the list elements when forming the dataframe, so once formed, use `txt_df` NOT `files_df` or `csv_fs`.
+
+```{r}
+files_df <- read_csv(here('_data/5c_classifier_round1/int/fulltext_files.csv'))
+
+csv_fs <- files_df$csv_out
+
+txt_df <- lapply(here(csv_fs), data.table::fread) %>%
+  setNames(csv_fs) %>%
+  bind_rows(.id = 'file') %>%
+  group_by(file) %>%
+  summarize(fulltext = paste(p, collapse = ' '), .groups = 'drop') %>%
+  ### rough guess to tokens, about 4 characters per token
+  mutate(n_tokens = round(nchar(fulltext) / 4)) %>%
+  mutate(doc_id = paste0('text', 1:n())) %>%
+  inner_join(files_df, by = c('file' = 'csv_out')) %>%
+  select(-pdf_out)
+  
+```
+
+## API access - first pass
+
+Upgrading to ChatGPT 4o-mini instead of 3.5-turbo - cheaper, just as fast, and more capable.  Also 8X the context window (128k vs. 16k) and output tokens (16k vs 4k), and 200k tokens per minute instead of 60k.
+
+```{r}
+count_tokens <- function(x) {
+  word_count <- data.frame(x) %>%
+    unnest_tokens(output = word, input = x, token = 'words') %>%
+    .$word %>% length()
+  ### see https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+  tokens <- round(word_count / .75)
+}
+
+out_df <- txt_df %>%
+  select(title, author, year, key) %>%
+  mutate(n_tokens = NA, summary = NA, error = NA, pass = NA)
+
+```
+
+
+```{r, message = NA}
+
+out_f <- here('_output/phase3_classifier/chatgpt_summary.csv')
+
+if(!file.exists(out_f)) {
+  
+  endpt <- 'https://api.openai.com/v1/chat/completions'
+  
+  prompt <- 'In 200 words or less, summarize the methods of this paper, focusing on methods used to estimate or quantify the societal benefits of satellite or Earth Observation data.'
+  
+  ### initialize token count and timer
+  cum_tokens <- 0 ### to track tokens
+  start_time <- proc.time()
+  
+  # fail_vec <- c(40, 64, 85)
+  # for(i in fail_vec) {
+  for(i in 1:nrow(txt_df)) {
+    ### i <- 1
+    fulltxt <- txt_df$fulltext[i]
+    
+    n_tokens <- count_tokens(fulltxt)
+    
+    out_df$n_tokens[i] <- n_tokens
+    message('Processing fulltext #', i, ' with ', n_tokens, ' tokens...')
+    
+    if(n_tokens > 128000) {
+      message('Too many tokens! skipping')
+      out_df$error[i] <- 'manual: context window exceeded'
+      next()
+    }
+    
+    post_body <- list(
+      model = 'gpt-4o-mini',
+      messages = list(
+        ### is this first part actually used?
+        list(role = 'system', content = 'You are a helpful research assistant with a background in economic methods.'),
+        list(role = 'user', content = str_c(prompt, fulltxt))
+      ),
+      temperature = 0.7
+    )
+    
+    response <- POST(
+      url = endpt,
+      body = post_body,
+      encode = 'json',
+      add_headers(
+        Authorization = paste('Bearer', api_key),
+        `Content-Type` = 'application/json'
+      )
+    )
+    
+    x <- content(response, 'parsed')
+    
+    if(is.null(x$error$code)) {
+      out_text <- x$choices[[1]]$message$content %>% str_replace_all('\\n|\\r', '  ')
+      out_df$summary[i] <- out_text
+      out_tokens <- count_tokens(out_text)
+      cum_tokens <- cum_tokens + out_tokens
+      out_df$pass[i] <- 1
+    } else {
+      message('Error code: ', x$error$code)
+      if(x$error$code == 'rate_limit_exceeded') {
+        message('Rate limit exceeded: Taking a short nap!')
+        Sys.sleep(15)
+      }
+      out_df$error[i] <- x$error$code
+    }
+    
+    cum_tokens <- cum_tokens + n_tokens
+    elapsed_time <- round((proc.time() - start_time)[3], 1)
+    token_rate <- round(cum_tokens / (elapsed_time/60))
+      
+    message('Cumulative token count ', cum_tokens, ' in ', elapsed_time, ' sec...')
+    message('Token rate ', token_rate, ' per minute...')
+    if(token_rate > 150000) {
+      message('...Pausing for 15 sec to avoid exceeding 200,000 tokens per minute!')
+      Sys.sleep(15)
+    }
+  }
+  
+  write_csv(out_df, out_f)
+}
+
+```
+

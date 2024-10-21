@@ -81,7 +81,7 @@ sbr_results_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl
             excl_reasons = paste0(unique(excl_reasons), collapse = ';'),
             .groups = 'drop') %>% 
   mutate(title_short = make_short_title(title)) %>%
-  ### fix colandr fuckups - why does colandr change things?!
+  ### fix mistakes that were in Colandr from the original SBR but have since been fixed
   mutate(year = case_when(title_short == 'assessing the full effects of public inv' ~ 2014, 
                           title_short == 'data poverty a global evaluation for 200' ~ 2016,
                           title_short == 'the socio economic value of satellite ea' ~ 2020,
@@ -102,7 +102,10 @@ sbr_key2 <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))
 check <- sbr_out_df %>%
   filter(!key %in% sbr_key2$key)
 
-write_csv(sbr_out_df, here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+### NOTE: some manual edits were made to this file - overwrite at your peril!
+# write_csv(sbr_out_df, here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+
+sbr_out_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
 ```
 
 ## Examine inclusion/exclusion vs. tags

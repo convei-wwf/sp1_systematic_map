@@ -1,0 +1,193 @@
+page,p
+1,"accepted from open call enabling efficient service function chains at terrestrial-satellite hybrid cloud networks bohao feng, guanglei li, guanwen li, yuming zhang, huachun zhou, and shui yu abstract cantly enhance network performance from dif- ferent perspectives including programmability, the great improvements in both satellite and controllability and interoperability."
+1,"in particular, terrestrial networks have motivated the academ- sdn decouples the control plane from the for- ic and industrial communities to rethink their warding plane for on-demand packet transmis- integration."
+1,"as a result, there is an increasing sions; nfv decouples network functions from interest in new-generation hybrid satellite-terres- proprietary hardware appliances for flexible ser- trial networks, where sufficient flexibility should vice deployments; and lisn decouples identifiers be enabled to deploy customized sfcs to satisfy of users and networks from locators for mobility the growing diversity of user needs."
+1,"however, it support, routing scalability alleviation, and hetero- is still challenging to achieve such a nice vision, geneous network convergence. since many key issues remain unaddressed com- the great improvements in both satellite and prehensively such as framework design, commu- terrestrial networks have motivated academic and nication procedures and resource optimization. industrial communities to rethink their integra- therefore, in this article, we focus on how to tion."
+1,"hence, there is an increasing interest on how efficiently deploy customized sfcs at terrestri- to evolve broadband satellite networks with the al-satellite hybrid cloud networks."
+1,"in particular, new terrestrial network techniques, and due to we first propose an elastic framework used for the weak processing capacities of orbiting sat- sfc deployment at clouds, and second propose ellites, related efforts mainly focus on clouds of an efficient sfc mapping approach for improve- satellite ground segments and terrestrial networks ment of system resource utilization."
+1,"finally, we [10–12], where sdn and nfv are leveraged as verify the proposed framework at a proof-of- key enablers for deployment of customized sfcs concept prototype via a number of use cases, (service function chaining) [13]."
+1,"in this way, virtu- and evaluate the proposed mapping approach alized service functions (sfs) can be composed through extensive simulations based on a real- orderly according to various user needs with cor- world topology."
+1,"related experimental and sim- responding traffic traversed on demand, greatly ulation results have confirmed the feasibility and prompting network agility, utilization, and user benefits of our proposed framework and map- experience, in addition to a remarkable reduc- ping approach. tion in system opex and capex (operational and capital expense) for network operators."
+1,"more- introduction over, massive computation and traffic can be off- the integration of satellite and terrestrial networks loaded by terrestrial-satellite hybrid clouds, sharply has long been regarded as a promising approach decreasing the processing burden for orbiting sat- for ubiquitous internet access and multimedia ellites. service delivery [1]."
+1,"however, constrained by however, it is challenging to achieve such a technical and economic bottlenecks at that time, vision as many key issues remain unaddressed satellite communications were first applied to a comprehensively, such as framework design, number of specific fields such as emergency res- communication procedures and resource cue and space exploration [2]."
+1,"in recent years, optimization [10, 11]."
+1,"thus, in this article, we with new advanced technologies emerging, satel- concentrate on how to efficiently deploy cus- lites can provide high data throughput and serve tomized sfcs in terrestrial-satellite hybrid cloud as an important complement to terrestrial net- networks, on the basis of our previous works works, especially in the upcoming 5g era [3–5]."
+1,"specifically, we first propose an elas- on the other hand, it is widely accepted that tic framework for virtualized sfc deployment the original design of the terrestrial internet can at clouds."
+1,"then, we propose an efficient sfc no longer meet the growing diversity and com- mapping approach that considers both sf mul- plicated requirements of today’s users, resulting tiplexing and sfc merging, for improvement of in many serious problems particularly in flexibility, resource utilization of underlying cloud systems. scalability, and efficiency [6]."
+1,"as a result, many finally, we verify the proposed sfc deployment clean-slate communication paradigms have framework at our newly implemented proof- been proposed in the past decade, such as of-concept prototype via a number of use sdn (software-defined networking) [7], nfv cases, and evaluate the proposed sfc mapping (network functions virtualization) [8] and lisn approach through extensive simulations based (loc/id split networking) [9], aiming to signifi- on a real-world topology."
+1,"related experimental digital object identifier: bohao feng, guanglei li, guanwen li, yuming zhang, and huachun zhou (corresponding author) are with beijing jiaotong university; 10.1109/mnet.2019.1800426 shui yu is with the university of technology sydney 94 authorized licensed use limited to: univ of calif santa barbara."
+1,"downloaded on october 04,2024 at 18:49:08 utc from ieee xplore."
+1,restrictions apply.
+1,0890-8044/19/$25.00 © 2019 ieee ieee network • november/december 2019
+2,feedback service policies service instructions server service layer learning agent orchestrator report instructions requests instructions adaptation knowledge knowledge parsing engine adaptation layer manager database instructions report network strategies network instructions forwarder network layer learning agent controller feedback analysis realm process realm operation realm figure 1.
+2,"the proposed sfc deployment framework. and simulation results have confirmed the feasi- bility and benefits of our proposed framework for the sake of efficiency, sf multiplexing is considered as a key principle of the proposed sfc mapping and mapping approach. approach, which prefers to map requested sfs of an sfc to virtual machines that have already run the rest of this article is organized as fol- lows."
+2,"the proposed sfc deployment framework them, rather than directly opening new virtual machines for these sfs."
+2,"another principle is to merge is illustrated in the next section, followed by the sfcs indicated in requests with corresponding sfcs that have been deployed at clouds. proposed sfc mapping approach."
+2,"then, we intro- duce the implemented proof-of-concept proto- type system, and perform several experiments to addition, an nla is used to improve routing and assess the proposed framework."
+2,"after that, we traffic engineering strategies performed by the evaluate performance of the proposed sfc map- forwarders according to neural networks and ping approach."
+2,"finally, we summarize this article reinforcement learning algorithms."
+2,"consequent- and discuss our future work. ly, it needs to acquire enough information from the underlying forwarders such as running states the proposed sfc deployment framework and rewards, make decisions for better strate- in this section, we present our proposed sfc gies, and distribute them to related forwarders deployment framework at terrestrial and satellite through the nc. ground segment clouds."
+2,"as for the al, it is formed by parsing engines as shown in fig. 1, the proposed framework (pes), adaptation managers (ams), and a kd, consists of three horizontal layers, namely the ser- which aims at request parsing, sfc deployment, vice layer (sl), adaptation layer (al), and network and status knowledge storage separately."
+2,"in par- layer (nl), which are used for service provision- ticular, a parsing engine is used to match user ing, request adaptation, and network forwarding, requests with appropriate sfcs that contain respectively."
+2,these layers are further divided into necessary virtual sfs.
+2,"for example, requests for three decoupled vertical realms based on their popular videos may need an sfc that contains functionalities, namely the analysis realm (ar), several virtual sfs such as a traffic analyzer ser- the process realm (pr), and the operation realm vice for network security protection, a cache (or), which are in charge of computational analy- service for efficient data sharing, and a video sis, scheduling process and operation performing, transcoder service for link congestion alleviation, separately. under certain capacity requirements."
+2,"then, with in particular, there are three components in an sfc request resolved by the pe according to the sl, servers in the or, service orchestrators user demands, an am decides which forwarders (sos) in the pr, and service learning agents are involved and where related sfs are placed (slas) in the ar."
+2,"a server is managed by its relat- at cloud networks, on the basis of status knowl- ed so, for service initiation, adjustment, and ter- edge gained from the kd and the proposed sfc mination on demand in terms of virtual sfs."
+2,it also mapping approach.
+2,"afterward, it delivers corre- reports running status, such as physical and virtual sponding instructions to relevant sos and ncs, resource utilizations, to its assigned knowledge and the latter will change the instructions into database (kd) at the al."
+2,an sla is responsible relevant configurations for corresponding servers for optimizations of service policies executed by and forwarders.
+2,"note that the servers and for- virtual sfs through machine learning algorithms. warders may load related policies and strategies hence, it receives necessary feedback from virtual from slas and nlas if necessary."
+2,"in this way, a sfs at the servers, and updates their policies via customized sfc is deployed at clouds based on the sla after analytic calculations. user needs."
+2,"similarly, there are three components at the figure 2 shows an example of how to deploy nl, forwarders in or, network controllers (ncs) the proposed framework at a satellite ground in the pr, and network learning agents (nlas) segment cloud, and several new elements of the in the ar."
+2,"a forwarder steers traffic based on hetnet architecture [12] are introduced for inter- instructions issued by its corresponding nc, and actions with satellite segments and other terres- it actively or positively reports link conditions trial cloud networks."
+2,"in particular, access routers and throughput to an assigned kd at the al."
+2,"in (ars) are in charge of user access, service regis- authorized licensed use limited to: univ of calif santa barbara."
+2,"downloaded on october 04,2024 at 18:49:08 utc from ieee xplore."
+2,restrictions apply.
+2,ieee network • november/december 2019 95
+3,am nc kd pe nla users satellite segment ar forwarder sg other domains br server br so sla terrestrial cloud network ground segment cloud figure 2.
+3,"an example of how to deploy the proposed framework at a satellite ground segment cloud. tration, and location updates."
+3,"satellite gateways tion model, while sfc’a remains unchanged and (sgs) and border routers (brs) are boundaries provides services for its former corresponding of the ground segment cloud, and they perform customers. inter-domain routing with satellite segments and as for sfc merging procedures in detail, other terrestrial cloud networks under guidance assume that there are p running sfcs that are the of the nc."
+3,"note that the hetnet architecture same as the requested sfc at clouds, and they is designed for heterogeneous network conver- are ranked based on remaining service time in gence, which prompts inter-domain routing to descending order."
+3,"when receiving a request, for the control plane, decoupling from intra-domain example, sfcb, the am will merge sfcb with the routing."
+3,"in this way, each hetnet domain can first q (q  p) running sfcs respectively."
+3,"if sfc b leverage its preferred protocols and techniques to is successfully merged with a running sfc, for provide network services, and the cloud deploy- example, sfc’b, the am will also maintain service ing the proposed framework can be seen as one time and resource consumption of sfcb and sfc’b of its edge networks, following its registration and separately."
+3,"in this way, once one of them is ter- communication processes. minated, the am can release related resources consumed by the expired sfc."
+3,"the proposed sfc mapping approach in this section, we detail our proposed sfc map- the experimental and simulation results ping approach to improve resource utilization of in this section, we verify the feasibility and advan- cloud networks. tages of the proposed sfc deployment framework our proposed sfc mapping approach is through our newly implemented proof-of-concept based on the assumptions that software-based prototype."
+3,"then, we evaluate performance of the sfs are run over virtual machines at clouds, and proposed sfc mapping approach via extensive that opening new virtual machines requires con- simulations based on a real-world topology. siderable extra consumption of substrate server resources."
+3,"hence, for the sake of efficiency, sf the implemented prototype multiplexing is considered as a key principle of the prototype is implemented based on the het- the proposed sfc mapping approach, which pre- net architecture testbed [12] with integration of fers to map requested sfs of an sfc to virtual the odl-sfc (opendaylight, https://docs.open- machines that have already run them, rather than daylight.org/en/latest/downloads.html) release, directly opening new virtual machines for these which mainly realizes forwarding-plane function- sfs."
+3,"thus, by reducing the number of opened vir- alities of the proposed framework."
+3,"as shown in tual machines on substrate servers, more resourc- fig. 3, the logical topology consists of 26 virtual es can be saved for accommodation of other sfc machines and one commercial inmarsat satellite mappings. terminal, and is further divided into four domains another principle of the proposed approach including an sdn/nfv-enabled sgsc (satellite is to merge sfcs indicated in requests with cor- ground segment cloud), a real-world satellite responding sfcs that have been deployed at segment, the public ipv4 internet, and two edge clouds."
+3,"in particular, when a new request arrives, cloud networks (ecns)."
+3,"the experiments are per- for example, sfc a , the am will first check if formed based on the communications between there are deployed sfcs at substrate cloud net- user 1 and user 2 in a client-server manner, and works that are the same as sfca."
+3,"if not, the am for simplicity, we only verify our proposed sfc will map sfca to clouds based on the proposed deployment framework at the sgsc that enables optimization model that considers sf multiplex- network service header (nsh) [15] encapsula- ing for system cost minimization [14]."
+3,"otherwise, tions for traffic steering."
+3,"note that necessary het- the am will select one of the deployed sfcs, net eid-loc and netid-loc bindings are directly for example, sfc’a, and then will map sfca and configured in ncs of three domains, so that sfc’a as a whole to clouds according to the opti- involved ars and brs are able to perform user mization model, with their resource consump- access and inter-domain routing correctly. tions accumulated."
+3,"if their mapping is performed as for the sgsc, there are two ovs-based successfully, the am will release resources con- (openvswitch, https://github.com/yyang13/ovs_ sumed by sfc’ a after corresponding service nsh_patches) pes used to match different flows migrations."
+3,"otherwise, sfc a will be directly with suitable sfcs, four ovs-based forwarders deployed at clouds on the basis of the optimiza- that transmit traffic based on instructions distrib- 96 authorized licensed use limited to: univ of calif santa barbara."
+3,"downloaded on october 04,2024 at 18:49:08 utc from ieee xplore."
+3,restrictions apply.
+3,ieee network • november/december 2019
+4,nc2 inmarsat terminal satellite segment (ipv4) r2 the ipv4 public internet ar2 hetnet-ecn2 br2 user2 sf-transcoder with cache r：router sf-ta am/nc sg f：forwarder nc1 sfc-p sfc-p f2 pe2 r1 f3 ar1 hetnet-ecn1 br1 br3 pe1 f1 user1 f4+fw hetnet-sgsc sfc-p sf-cache sf-ids sfc-p figure 3.
+4,"the logical topology built by the proof-of-concept prototype. uted by the am/nc, four sfc proxies that encap- 700 sulate and de-encapsulate nshs of user packets normal flow for traditional sfs, four virtual sfs used to provide 600 web-scan flow different network services including traffic analy- qos-based sfc sis (http://www.ntop.org/), data caching, video 500 security-based sfc transcoding, and intrusion detections (https:// packets/s 400 www.snort.org/) respectively, and one virtual server with simplified functions of am and nc for 300 sfc deployments."
+4,"in the following, we validate the proposed framework through three typical 200 use cases, namely, security as a service, caching 100 as a service, and transcoding as a service."
+4,"security as a service: to resist attacks, oper- 0 ators always place a number of security-based 0 10 20 30 40 50 60 70 middleboxes that all flows have to traverse in their time/s network domains, resulting in poor flexibility and figure 4."
+4,the throughput at f1 for the qos-based user experience.
+4,"however, with the proposed and security-based sfc. framework, security-based sfcs can be efficiently deployed at clouds with user flows steered on demand, comprehensively improving network throughput of these suspicious flows exceeds a elasticity and efficiency. pre-defined threshold, the traffic-analyzer-based for example, when a flow is delivered to the sf will send abstracted logs to the am/nc, and sgsc, it will be allocated with a qos-based sfc ask the latter to distribute new instructions to pe1 that contains a traffic-analyzer-based sf for light- and related forwarders, redirecting the web-scan weight anomaly detections and a cache-based sf flow to the security-based sfc before traversing for effective data storage and sharing."
+4,if there are the cache-based sf of the qos-based sfc.
+4,"as no threats detected by the traffic-analyzer-based shown in fig. 4, it can be observed that at around sf, the flow will pass through the cache-based sf 30 seconds, the suspicious flows at f1 are steered before transmitting to a destination."
+4,"otherwise, to the security-based sfc decoupled from the the traffic-analyzer-based sf will notify the am/ qos-based sfc for further advanced treatment."
+4,"nc to distribute a new instruction to pe1, which note that with better detection mechanisms, sus- steers the flow to another security-based sfc that picious flows can be quickly identified and for- has various security-based sfs such as a firewall warded for data cleaning."
+4,(fw) and an intrusion detection system (ids) for caching as a service: to reduce redundancy further data cleaning.
+4,"only when the flow suc- traffic and improve the user experience, operators cessfully gets through these security-based sfs always leverage caching servers to store popular can it be sent back to the sfs contained in the data locally, especially for satellite links character- qos-based sfc. ized by long prorogation delay and high bit error to emulate this use case, we first issue a nor- rate."
+4,"thus, to emulate such a use case, normal mal flow sent from user 1 to user 2."
+4,"then, we requests from user1 will traverse a cache-based launch a web-scan flow based on nikto (https:// sf of the qos-based sfc."
+4,"then, if the requested cirt.net/nikto2) at user1."
+4,"afterward, the traffic-an- data are cached locally, the cache-based sf will alyzer-based sf detects many suspicious flows return them to user1 directly."
+4,"otherwise, it will and records their meta-data in logs."
+4,when the deliver the requests toward user2.
+4,when related authorized licensed use limited to: univ of calif santa barbara.
+4,"downloaded on october 04,2024 at 18:49:08 utc from ieee xplore."
+4,restrictions apply.
+4,ieee network • november/december 2019 97
+5,"ward, if the requested videos are cached locally, the transcoder-based sf will convert the video streams into different bit rates based on user requests."
+5,"as shown in fig. 5, video images with high bit rates consume more bandwidth but with higher definition."
+5,it is expected that transcod- er-based sfs can play a more important role for qos guarantee if they are able to adjust video streaming rates adaptively based on the link status obtained from the am/nc.
+5,"performance evaluation to evaluate the performance of the proposed sfc mapping approach, extensive simulations are performed based on a real-world topology (http://www.topology-zoo.org/maps/attmpls. jpg), which contains 25 nodes and 55 links."
+5,"a greedy approach is also implemented as a com- parison, which ranks substrate servers only based on their remaining resources for sf deployment at the cloud."
+5,note that details of parameter settings figure 5.
+5,"the throughput of video streams at 900kb/s, 600kb/s, and 300kb/s, are presented in [14]. with corresponding image qualities."
+5,figure 6 shows the average ratio of cost (defined as the total resource costs of sub- strate servers and links) and revenue (defined 8 as demanded resource amounts of accepted greedy approach without sfc merging requests for virtual sfcs) of each approach as greedy approach with sfc merging request arrival intensity (defined as the average proposed approach without sfc merging number of sfc requests per time unit) grows.
+5,"it average cost/revenue 6 proposed approach (with sfc merging) can be observed that the proposed sfc mapping approach has a much lower average cost/reve- nue ratio than the greedy approaches regardless 4 of with or without sfc merging, because the pro- posed approach multiplexes sfs when deploying sfcs, sharply reducing the number of opened 2 vms at the cloud."
+5,"therefore, it saves much more resources than the greedy approaches, which contributes to a much higher sfc request accep- 0 0.2 0.4 0.6 0.8 1.0 tance ratio."
+5,"in addition, it can be seen that the arrival intensity ( ) approaches with sfc merging have a smaller cost/revenue ratio than those without sfc merg- figure 6."
+5,"the average ratio of cost and revenue. ing, since the number of opened vms is further decreased by sfc merging."
+5,"therefore, the effec- tiveness of the proposed sfc mapping approach data are returned, the pe2 will redirect them to is confirmed as being able to comprehensively the cache-based sf with related nsh encapsula- improve utilization efficiency of cloud resources. tions."
+5,"afterward, the cache-based sf will cache the data according to its local caching policy."
+5,"summary and future works suppose that user 1 subscribes 5,000 files from in this article, we propose an elastic sfc deploy- user 2, and its requests follow zipf distribution ment framework and an efficient sfc mapping with a = 1.0 at 10hz."
+5,the cache-based sf lever- approach for terrestrial-satellite hybrid cloud net- ages least recently used (lru) as a local cach- works.
+5,"a number of use cases are performed ing policy, and its cache size ranges from 0 files based on our implemented proof-of-concept to 200 files."
+5,"based on the experimental results, prototype, which confirm the feasibility of the the average user latency has dropped sharply proposed framework."
+5,extensive simulations are from 3493.75ms without caching to 1044.40ms conducted to evaluate the performance of the with 200-file caching items.
+5,"therefore, deploying sfc mapping approach, and related results also a cache-based sf at the sgsc is one of the key prove its advantages."
+5,"in our future work, we will enablers for performance enhancement. integrate tensorflow into our prototype for traffic transcoding as a service: as the internet is analysis, policy optimization, and effective routing, dominated by video-on-demand (vod) traffic, and explore more simple sfc mapping algorithms transcoders are another key sf that should be that can be adopted online. contained in qos-based sfcs for bandwidth effi- ciency improvement."
+5,"likewise, to emulate this acknowledgment use case, assume the transcoder-based sf has this article is supported by the national natural pulled several popular videos hosted by user2."
+5,science foundation of china under grant no.
+5,"then, when the subscriptions of user 1 are deliv- 61802014; the china postdoctoral science foun- ered to the sgsc, pe1 will assign them another dation under grant no."
+5,2018m641171; and the qos-based sfc that goes through the traffic-an- fundamental research funds for the central uni- alyzer-based sf and transcoder-based sf.
+5,after- versities under grant no.
+5,2018rc003.
+5,98 authorized licensed use limited to: univ of calif santa barbara.
+5,"downloaded on october 04,2024 at 18:49:08 utc from ieee xplore."
+5,restrictions apply.
+5,ieee network • november/december 2019
+6,references [15] p.
+6,quinn and j.
+6,"guichard, “service function chaining: cre- ating a service plane via network service headers,” com- [1] c."
+6,"niephaus, m."
+6,"kretschmer, and g."
+6,"ghinea, “qos provi- puter, vol. 47, no. 11, 2014, pp."
+6,"38–44. sioning in converged satellite and terrestrial networks: a survey of the state-of-the-art,” ieee commun."
+6,"tut., vol. 18, no. 4, 2016, pp."
+6,2415–41.
+6,biographies [2] b.
+6,"evans et al., “1945–2010: 65 years of satellite history bohao feng received his b.s. and ph.d. degrees from beijing from early visions to latest missions,” proc."
+6,"ieee, vol. 99, no."
+6,"jiaotong university in 2011 and 2017, respectively."
+6,"he is cur- 11, 2011, pp."
+6,"1840–57. rently with the school of electronic and information engineering, [3] g."
+6,"giambene, s."
+6,"kota, and p."
+6,"pillai, “satellite-5g integration: beijing jiaotong university."
+6,"he has participated in several nation- a network perspective,” ieee network, vol. 32, no. 5, 2018, al research programs of china such as the “973 program” and pp."
+6,25–31.
+6,“863 program.”
+6,his research interests include software-defined [4] f.
+6,"mazzenga et al., “integrated public mobile radio net- networks, network functions virtualization, information-centric works/satellite for future railway communications,” ieee networks, service function chains, mobile internet, and satellite wireless commun., vol. 24, no. 2, 2017, pp."
+6,90–97. networks.
+6,he has served on the tpc for a number of interna- [5] n.
+6,"cheng et al., “air-ground integrated mobile edge net- tional conferences such as ieee icc and ieee globecom. works: architecture, challenges and opportunities,” ieee commun., vol. 56, no. 8, 2018, pp."
+6,26–32.
+6,g uanglei l i is pursuing the ph.d. degree in telecommunica- [6] h.
+6,"zhang et al., “smart identifier network: a collaborative tions and information system at beijing jiaotong university."
+6,"his architecture for the future internet,” ieee network, vol. 30, research interests include service function chains and network no. 3, 2016, pp."
+6,46–51. security.
+6,[7] r.
+6,"amin, m."
+6,"reisslein, and n."
+6,"shah, “hybrid sdn networks: a survey of existing approaches,” ieee commun."
+6,"tut., guanwen li is pursuing the ph.d. degree in telecommunica- vol. 20, no. 4, 2018, pp."
+6,3259–3306. tions and information systems at beijing jiaotong university.
+6,his [8] j.
+6,herrera and j.
+6,"botero, “resource allocation in nfv: research interests include satellite networks and service function a comprehensive survey,” ieee trans."
+6,"man., vol. chains. 13, no. 3, 2016, pp."
+6,518–32.
+6,[9] b.
+6,"feng et al., “locator/identifier split networking: a prom- yuming zhang is pursuing the ph.d. degree in telecommunica- ising future internet architecture,” ieee commun."
+6,"tut., tions and information systems at beijing jiaotong university."
+6,"his vol. 19, no. 4, 2017, pp."
+6,2927–48. research interests include network functions virtualization and [10] l.
+6,"bertaux et al., “software defined networking and virtu- mobile networks. alization for broadband satellite networks,” ieee commun."
+6,"mag., vol. 53, no. 3, 2015, pp."
+6,54–60.
+6,huachun zhou received his b.s. degree from people’s police [11] r.
+6,"ferrus et al., “sdn/nfv-enabled satellite communica- officer university of china in 1986, and received his m.s. and tions networks: opportunities, scenarios and challenges,” ph.d. degrees from beijing jiaotong university in 1989 and phys."
+6,"commun., vol. 18, no. 2, 2016, pp."
+6,"95–112. 2009, respectively."
+6,his research interests include satellite net- [12] b.
+6,"feng et al., “hetnet: a flexible architecture for hetero- works, mobility management, and network management. geneous satellite-terrestrial networks,” ieee network, vol. 31, no. 6, 2017, pp."
+6,86–92.
+6,"shui yu is currently a full professor at the school of software, [13] a."
+6,"medhat et al., “service function chaining in next university of technology sydney, australia."
+6,"his research inter- generation networks: state of the art and research chal- ests include security and privacy, networking, big data, and lenges,” ieee commun."
+6,"mag., vol. 55, no. 2, 2017, pp. 216– mathematical modelling."
+6,his h-index is 32.
+6,he is the vice chair 23. of the technical committee on big data of the ieee communi- [14] b.
+6,"feng et al., “efficient mappings of service function cation society, and a distinguished lecturer of the ieee commu- chains at terrestrial-satellite hybrid cloud networks,” proc. nication society."
+6,"he is currently serving on the editorial boards ieee globecom, abu dhabi, uae, 2018, pp."
+6,"1–6. of ieee cst, ieee tcss, ieee iot, and ieee cl."
+6,authorized licensed use limited to: univ of calif santa barbara.
+6,"downloaded on october 04,2024 at 18:49:08 utc from ieee xplore."
+6,restrictions apply.
+6,ieee network • november/december 2019 99

@@ -1,0 +1,654 @@
+page,p
+1,"remote sensing article emergent challenges for science suas data management: fairness through community engagement and best practices development jane wyngaard 1, *,† , lindsay barbieri 2,† , andrea thomer 3 , josip adams 4 , don sullivan 5 , christopher crosby 6 , cynthia parr 7 , jens klump 8 , sudhir raj shrestha 9 and tom bell 10 1 center for research computing, university of notre dame, notre dame, in 46556, usa 2 rubenstein school of environment and natural resources, gund institute for environment, university of vermont, burlington, vt 05401, usa 3 school of information, university of michigan, ann arbor, mi 48109, usa 4 uas project office, u.s."
+1,"geological survey, denver, co 80225, usa 5 nasa ames research center, moffett field, ca 94035-0001, usa 6 unavco, boulder, co 80301, usa 7 agricultural research service national agricultural, library united states department of agriculture, beltsville, md 20705, usa 8 mineral resources, commonwealth scientific and industrial research organisation, kensington, wa 6151, australia 9 esri washington dc regional office, vienna, va 22182, usa 10 earth research institute, university of california, santa barbara, ca 93106, usa * correspondence: jwyngaar@nd.edu; tel.: +1-574-631-5163 † these authors contributed equally to this work."
+1, received: 20 may 2019; accepted: 10 july 2019; published: 31 july 2019  abstract: the use of small unmanned aircraft systems (suas) as platforms for data capture has rapidly increased in recent years.
+1,"however, while there has been significant investment in improving the aircraft, sensors, operations, and legislation infrastructure for such, little attention has been paid to supporting the management of the complex data capture pipeline suas involve."
+1,"this paper reports on a four-year, community-based investigation into the tools, data practices, and challenges that currently exist for particularly researchers using suas as data capture platforms."
+1,"the key results of this effort are: (1) suas captured data—as a set that is rapidly growing to include data in a wide range of physical and environmental sciences, engineering disciplines, and many civil and commercial use cases—is characterized as both sharing many traits with traditional remote sensing data and also as exhibiting—as common across the spectrum of disciplines and use cases—novel characteristics that require novel data support infrastructure; and (2), given this characterization of suas data and its potential value in the identified wide variety of use case, we outline eight challenges that need to be addressed in order for the full value of suas captured data to be realized."
+1,"we conclude that there would be significant value gained and costs saved across both commercial and academic sectors if the global suas user and data management communities were to address these challenges in the immediate to near future, so as to extract the maximal value of suas captured data for the lowest long-term effort and monetary cost."
+1,"keywords: suas; drone; rpas; uav; data; management; fair; community; standards; practices remote sens. 2019, 11, 1797; doi:10.3390/rs11151797 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2019, 11, 1797 2 of 19 1."
+2,"introduction small unmanned aircraft systems (suas)—also known as remotely piloted aircraft systems (rpas), unmanned aerial vehicles (uav), or often colloquially as ‘drones’—are rapidly becoming a ubiquitous tool for data collection across a wide range of private and public applications worldwide."
+2,"this application space includes multiple academic fields (electrical, chemical, and civil engineering; environmental sciences; and others) for which suas are changing how and which data are captured."
+2,"while this new platform shares much in common with traditional remote sensing techniques, the particular combination of varied spatiotemporal resolutions, operational practices, and wide spectrum of heterogeneous data being collected with suas has led to a unique set of data management challenges."
+2,"additionally, various global efforts and technological advances in the sphere of data management are opening unique opportunities for enhancing the potential of suas as an environmental sensing technology."
+2,"this paper compiles four years of extensive community engagement around the complexities, nuances, and importance of suas data management, and seeks to lays the motivations and foundations for future global suas user community engagements."
+2,"we do so by: (1) outlining the potential value gains of normalising good data management practices for suas collected data, (2) detailing the unique complexities of suas data while pointing to analogous sectors and existing resources that might be leveraged, and (3) identifying key challenges and needs from the community in order to expand the value potential for suas data."
+2,"henceforth we will use “suas data” to refer to the primary research data captured on-board suas, rather than data relating solely to the suas platform itself."
+2,in many cases the former requires and therefore includes the latter.
+2,"to provide context for later sections, the remainder of this section outlines the current state of suas use in academia and the corresponding state of suas data management."
+2,"following which, section 2 details the authors’ engagement with the global community on this topic by: summarising what methods of community engagement were undertaken, including detailing which geographical regions and domains of expertise were included; and highlighting others working in this space and the resources that are currently available."
+2,"drawing on the outcomes of this engagement, section 3 presents the core characteristics of suas captured data which inform the need for suas specific data management practices and infrastructure."
+2,"finally, section 4 discusses the community distilled key challenges arising from sections 2 and 3, before section 5 concludes."
+2,"current use of suas in research the rapid adoption of suas for scientific data collection has been driven largely by the flexible functionality now possible due to key technological advances: lowered hardware costs, increased battery energy density, widespread sensor miniaturization, and the availability of sophisticated autopilot hardware and software."
+2,"lagging but globally following these technological advances, have been new aviation regulations in multiple countries [1] that facilitate the legal operation of suas."
+2,"thus, it is now possible and highly attractive for even small and modestly funded research teams to incorporate suas data into their investigations."
+2,"as platforms for scientific data collection, suas offer several functional advantages when compared with many traditional methods: (i) the ability to collect higher spatial and or temporal resolution data; (ii) a reduced impact on sensitive environments being monitored; (iii) lowered risks to workers and equipment involved in data collection in dangerous environments; (iv) a highly flexible platform from which a wide range of parameters might be monitored simultaneously; and (v) access to many data that what would otherwise be practically inaccessible, all (vi) often at a significantly lower cost than traditional methods might incur [2–4]. suas datasets are therefore generally parameter-rich and uniquely high-resolution datasets that consequently potentially offer unique and novel reuse value across multiple academic, commercial, governmental, and non profit use cases."
+2,the value of these advantages to primary data users is evident in the number and domain variety of recently published peer-reviewed articles that include various terms for suas (see figure 1).
+3,"remote sens. 2019, 11, 1797 3 of 19 this growth is paralleled by significant growth of the commercial suas sector (e.g., agriculture, mining, civil engineering, disaster response, cargo delivery, entertainment), with some forecasts estimating a market value of usd 100 billion in the next five to ten years [5–8]."
+3,"the commercial market is further driving the rapid advancement of suas (flight platforms, sensor miniaturization, wireless telemetry, sophisticated autonomous navigation, operations, and legislation) to meet the needs of commercial suas use in: agriculture, mining, civil engineering and infrastructure, search and rescue and disaster responses, cargo and data delivery, conservation, entertainment, and many more use cases. (a) (b) figure 1."
+3,graphs depicting growth and distribution of publications.
+3,"in (a), as small unmanned aircraft systems (suas) have become more prevalent as platforms for scientific data collection, there has been a corresponding increase in their prominence within the academic peer-reviewed literature."
+3,"this graph shows this growth in blue, with the number of publications found in a web of science literature search on the topic of suas."
+3,"by comparison, the number of suas publications that also referenced the management of data, is shown in red at a much lower rate."
+3,"search terms used in the search for papers referencing suas included: “unmanned aerial systems”, “unmanned aerial system”, “unmanned aircraft systems”, “unmanned aircraft system”, “unmanned aerial vehicle”, “unmanned aircraft vehicle”, “unmanned aerial vehicles”, “unmanned aircraft vehicles”, “remotely piloted aircraft system”, “remotely piloted aircraft systems”, “remotely piloted aerial systems”, and “remotely piloted aerial system”."
+3,"for searches seeking both the terms used for suas and references to data management the following terms were included in relation to data: “data”, “metadata”, “data management”, “data integration”, “integrate data”, “data fusion”, “data standards”, “data interoperability”, “informatics”, “data synthesis”, and “data curation”."
+3,"based on the same search terms, (b) categorizes the total number of publications returned, into the academic field under which they were published through 2018. (a) references to suas in web of science through 2018. (b) percent publications in the 15 most prominent web of science research areas through 2018."
+4,"remote sens. 2019, 11, 1797 4 of 19 these advances are being made across and through novel and developing commercialization models as the industry evolves."
+4,"as a result business models include the sale of both products and services, and both proprietary and open source suas solutions."
+4,"for researchers, each of these models offers a variety of value trade-offs: from fully customizable and purpose-built solutions giving full access to all metadata, at the cost of development effort and time; through to less configurable but ready to fly platforms, or full data capture flight and post-processing analytics services."
+4,"the latter generally also involves higher monetary costs, and provides less contextual information with their data but are easily and rapidly deployed."
+4,"current suas data management research data management infrastructure and procedures have always been important but have become more complex and costly as the quantity of available data has significantly increased [9,10]."
+4,"why and how suas data management is critical to realising its full value is an outcome of this community-engaged work, discussed in more detail in section 3."
+4,"however, suas users who have attempted to publish their data are familiar with why it is also particularly challenging."
+4,"a typical suas based project, for instance, will involve multiple stakeholders (e.g., scientists, engineer, pilot), technologies (e.g., suas, controllers, computers, software systems, sensors, paper notebooks), parameters (e.g., flight platform attitude, scientific sensor calibration date and processes, scientific parameters, comensual environmental conditions), and complex processes (e.g., data triage, data compression, data pre- and post-processing), many of which can impact the interpretation of the data."
+4,"capturing information about each of these disparate components is commonly necessary for initial data product generation and interpretation, and many are required for data publication and future reuse."
+4,"unfortunately, because scholarly and scientific suas users represent a relatively small user market with niche needs, the challenges of suas data management have not yet been widely addressed either by industry stakeholders."
+4,"as a result, individual researchers are developing their own ad hoc data management strategies."
+4,this is problematic in the long term for multiple reasons.
+4,"first, this substantially adds to the learning curve of suas technologies: new-to-suas researchers must already navigate complex legal, technical, and institutional spaces, and developing a data management strategy from scratch further increases the required overhead."
+4,"for researchers specifically seeking to take advantage of suas as a new and otherwise more affordable means of data capture, the economic and time costs of developing robust data management workflows can be prohibitive."
+4,"second, the repeated reinvention of ad hoc data management workflows represents a significant amount of effort."
+4,"not only is this an inefficient use of finite research resources, but these idiosyncratic workflows pose a roadblock to the development of common tools and workflows."
+4,"without a collective articulation of suas data management best practices, there is no alternative even for those motivated to collaborate on the development of common better commercial and open source software and tools, exacerbating the issue as more ad hoc workflows are developed and used."
+4,"third and finally, the lack of common data practices risks diminishing the trustworthiness and reproducibility of research based on suas data."
+4,"without shared data practices and methods of documenting workflows, suas data-based research is often plagued by poor or heterogeneous documentation, unknown or non-standard quality control methods, and methodological uncertainty."
+4,the current opacity of suas data workflows makes thorough scientific assessment and peer review difficult.
+4,"opportunities for suas data management the described landscape presents a problematic picture, yet the rapid growth of suas as a revolutionary sensor platform across multiple sectors has arrived at a highly opportune moment."
+4,"key developments and shifts in social, political, and particularly academic attitudes worldwide present a unique opportunity to the suas user community."
+4,"specifically, the coincidence of the following"
+5,"remote sens. 2019, 11, 1797 5 of 19 present an opportunity: (i) the push for open science and fair (findable accessible interoperable reusable) [9] data, (ii) the corresponding maturing of data technologies, and (iii) the lack of momentum behind any substandard normalized practices and the minimal amount of legacy suas data currently available that would otherwise require significant effort to migrate or reprocess."
+5,the following elaborates on each of these opportunities.
+5,1.3.1.
+5,"the push for open science and fairness at the same time as suas are emerging as a standard tool for researchers, the broader research community is building momentum in actively moving towards normalising open science and fair data practices."
+5,this is evidenced by the wealth of work calling for better research practices [11–14]; the numerous calls for improving reproducibility and cross-disciplinary data use through better practices [15–18]; and the many non-academic calls for data sharing from a range of government bodies [19–21].
+5,the significant traction that the fair nomenclature has gained—as a succinct framing of core good data management practices—further demonstrates this momentum [22–24].
+5,1.3.2.
+5,"the corresponding maturation of data technologies as industry has moved to extract economic advantages from big data, the technologies required to manage, manipulate, and mine value in large and heterogeneous, datasets of mixed quality have significantly matured [25–27]."
+5,"the breadth of associated tools available is extremely wide but a few high-visibility and relevant examples include; the growth in capabilities and use of cloud resources [28–31], google’s beta dataset search engine [32] with the required enabling dataset schema, the international earth and space science community’s effort to develop standards that connect researchers, publishers and data repositories [33,34], and the increase in efforts to utilize machine learning tools on classical big data for a multitude of applications including the geosciences [35,36]."
+5,1.3.3.
+5,the lack of norms or legacy suas data the lack of community accepted best practices for suas data management is both a challenge and an opportunity.
+5,"as a new technology, researchers are still grappling with how best to use suas."
+5,"this provides a window of opportunity within which: the ”cost” of adopting new practices is minimal, and the net quantity of suas captured scientific data still relatively small, the cost of adopting new formats, metadata standards, calibration methods—and all of the other crucial components of data archival—will not be significantly added to by the need for backwards compatibility or mass re-ingestion and processing of previously captured data."
+5,"this window, however, is closing rapidly, as researchers globally are creating all of these components for themselves in ad hoc and isolated manners, and rapidly accumulating data."
+5,"materials and methods in light of the above, over the past four years (2014–2019) the authors have pursued a wide-ranging, largely volunteer-based, effort to engage with the growing community of researchers using suas for data collection on challenges of data management."
+5,"initially this involved looking to both the emerging suas science community and to the many mature analogous domains for applicable best practices, and included considering standards and conventions used by large scale government and research institutions using both suas and more traditional remote sensing technologies."
+5,this was followed by running multiple workshops and conference sessions with the aim of identifying key needs and available resources for suas data management.
+5,"the progression of core engagement meetings involved are shown in figure 2, at each of which we sought input from both academic and commercial suas users, suppliers, and developers and data management professionals."
+5,"this process was largely driven by academic researcher needs, the perceived value opportunity, and community request and interest."
+5,"as a result the focus has been on academic data more than commercial, however, both were consulted and across both the spectrum of fields of expertise engaged spans engineering disciplines,"
+6,"remote sens. 2019, 11, 1797 6 of 19 earth and environmental sciences, agricultural sciences, library and information science, and the humanities."
+6,in the following sections the key threads of this engagement are summarized and groups are highlighted for the purposes of directing interested parties to possible resources or potential starting points for future efforts.
+6,"rda: suas data interest group idw19 optimise eu cost action13 rda21 rda joint meeting22 2017 – present pushing the science drone data standards community mvng ig data for development, ig ethics & social aspects of data, interest group sessions bringing boundaries in wyngaard fwd on standardizing ig small unmanned aircraft systems’ data, ig health data, science data suas science data ig rda/niso privacy implications of research data sets together international suas rda20 collection barbieri multiple users and data professionals in wyngaard, barbieri suas speakers isarra: mtng & flight week29 the context of commercial and data ig formed; integration of suas-captured atm..."
+6,"barbieri academic sectors blog posted suas in atmospheric science barbieri, et.al."
+6,"agu16 ams14 barbieri, agu17 poster session poster wyngaard poster session agu18 other hosting organization barbieri, wyngaard session co-chairs c3dis28 invited talk barbieri barbieri barbieri, wyngaard rpas and earth/environ."
+6,"idw pre-event,23 idw24 sciences gis drones4good wyngaard, motshegwa agu15 aggateway12 ncar uas workshop26 vocamp27 data drones4good, african context poster session aggateway meeting to sessions & formation of develop an wyngaard wyngaard, barbieri barbieri, interface and present with suas data github ontology design wyngaard the precision ag council’s barbieri pattern for suas data rda25 geospatial data group vardeman, thomer, adams, suas data collab."
+6,"barbieri barbieri, wyngaard wyngaard, barbieri, klump, bell, desell q3 q4 q1 q2 q3 q4 q1 q2 q3 q4 q1 q2 q3 q4 q1 q2 2015 2016 2017 2018 esip 1 esip 2,3 esip 6 esip 8 esip 11 drone cluster drones: uas in suas data mgmt minimal information framework for suas formed navigating the agriculture workshop-hackathon thomer, wyngaard barbieri, wyngaard new frontiers teng 1-day event of data esip 4 muliple speakers esip 9 collection & drones: explore the landscape applying semantic tech to suas data esip: drone cluster management corbett, barbieri, barberie joint session between semantic web and 2015 – present wyngaard, drone clusters sessions bringing barbieri esip-nasa5 esip-nasa7 thomer, barbieri, wyngaard together north american, frontiers in review of suas use in earth science review of available suas data and particularly federal agricultural & nasa goddard uav summer internships mgmt standards & practices energy data bhakta, teng nasa goddard uav summer internships agency, suas users and edmonds, teng upsie webinar10 collection & data professionals in the application opportunities, challenges, and progress context of commercial and messinger, in managing the suas/rpas academic earth sciences hunt, barbieri wyngaard, thomer, barbieri figure 2."
+6,"this timeline summarize the events the authors have used to engage with governmental organizations, commercial suas platform and tool providers, academic scientists, and both commercial and academic data professionals."
+6,event references are available in appendix a.
+6,community engagement 2.1.1.
+6,earth science information partners federation born out of a perceived need within the earth science information partners (esip) federation a drone cluster [37] was initiated by authors barbieri and wyngaard in 2015.
+6,"esip is “an open, networked community that brings together science, data and information technology practitioners."
+6,"esip is supported by nasa, noaa, usgs, ogc, and 110+ member organizations” [38]."
+6,"since then this cluster has run multiple sessions at esip meetings, hosted interns, and produced prototyping projects [39]."
+6,"at the 2017 summer esip meeting, the cluster held a 1-day workshop on suas data where individual researchers and representatives from multiple commercial (esri, dji, sensefly, ogc), and federal (nasa, nist, noaa, usgs) organizations attended and presented on their perspectives on suas data management approaches [40]."
+6,"a key outcome of this workshop that spurred further conversations with industry, was input from suas users indicating that key metadata were missing from what was exposed by commercial suas providers."
+6,this lack limited either their ability to perform accurate analyses or to publish the data in a manner that would now be considered necessary to meet the conceptual requirements of fair.
+6,"some examples of these missing metadata for instance included: attitude, air speed, temperature, camera calibration date and method, autopilot firmware version, gps instantaneous error, and many other parameters the relevance of which was use case dependant."
+6,"when approached about the need for these metadata, both dji and sensefly responded with enthusiasm for hearing from the scientific community regarding what specific values were desired."
+6,this places the onus on the user community
+7,"remote sens. 2019, 11, 1797 7 of 19 to clearly articulate and clarify what metadata are desired so that commercial providers may expose such in a manner that does not divulge proprietary information."
+7,2.1.2.
+7,"research data alliance to engage a more global community (esip is a largely north american based organization), in late 2016 a suas data interest group (ig) [41] was chartered within the research data alliance (rda)."
+7,rda is a multinational organization funded to “...build the social and technical bridges that enable open sharing of data” [42].
+7,"since review and endorsement, the ig has held sessions at each of the biannual rda plenaries; through these efforts, it has been possible to initiate working relationships with multiple other rda groups pioneering technological, legal, political, and ethical efforts in the global push for better open data practices and tooling."
+7,"further, as an international organization rda holds biannual meetings in 2 global hemispheres, it has been possible to engage with a geographically far larger distribution of researchers."
+7,"additional key events and communities through and beyond the rda and esip, this effort has been bolstered by engagement with multiple groups specifically examining issues related to suas data."
+7,"in many cases these groups are creating resources of value to the broader community, while others are exemplars for the suas community to look to for guidance and foundations."
+7,"the following seeks to highlight some of these for two reasons: (1) to facilitate greater collaboration within and across domains where groups have developed a resources others might reuse and build on, and (2) to propose possible foundational building blocks from existing analogous efforts."
+7,"it should be noted, however, that this list is not a complete set of all relevant parties, and is biased by (a) the practical limitations of who the volunteer-based esip and rda efforts were able to reach, and (b) the reality that in many cases those doing notable work do not currently have any public facing instance of such."
+7,"regardless of these limitations, figure 3 summarizes which organizations and community groups have been key in identifying particular challenges to suas data management, and the following sections briefly highlight some of the key community groups for reference and further engagement."
+7,2.2.1.
+7,"oceanographic sciences underwater gliders are an remarkably analogous system to suas, and the oceanographic research community has put significant effort into standardising their data management procedures."
+7,it may consequently serve the suas community well to adopt some of their tools and practices.
+7,key members of this effort include the us integrated ocean observing system (ioos) who have a glider data assembly center (dac) [43] and have therefore defined a netcdf standard to which glider data submitted to their data archive must adhere.
+7,"the uk oceanids command and control data system [44,45], alternatively, have a real-time web portal interface to deployed science gliders."
+7,the tool stack created to support this interface was built to enable the automation of both operations and science data analytics (including data quality control and assurance processes) and is built largely on standards by the open geospatial consortium (ogc) and world wide web consortium (w3c).
+7,2.2.2.
+7,"atmospheric science in february 2017 ncar’s earth observing laboratory (eol) hosted a workshop that we participated in, with the proposed goal of: “...to collect information about the needs of the nsf funded community in using suas for atmospheric research...”."
+7,"while the workshop was focused on key issues other than data management, the final report [46] emphasizes the need for formal sensor qualification research and the creation of standardized use procedures, an issue the international society for atmospheric research using remotely piloted aircraft (isarra) [47] is also discussing."
+7,"for instance, the impact of placement of common atmospheric sensors on multi-rotors on data quality has now been the subject of multiple studies [48–51]."
+8,"remote sens. 2019, 11, 1797 8 of 19 . ac da pro pro ts oc. ols m ed ls pr ta ta ma ."
+8,"pr to ta mt ve ce et & ct s (m ytics l pra dure na on da mg ct le nan ics (m a) da erro ices da a) da for orr t, a cati lyt et ta r c ta du ve al na ce gm u an atio pro er se op or u ns oceanographic sciences se 1 2 3 4 5 6 7 8 ioos ocean the u.s."
+8,integrated observing system oceanid atmospheric sciences isarra int.
+8,society for atmospheric research using remotely piloted aircraft nasa national aeronautics and space admin.
+8,"ncar national ctr. for atmospheric research agricultural sciences & industry aggateway cgiar consultative group for international agricultural research usda united states department of agriculture traditional remote sensing manned aircraft innovative optical tools optimise for proximal sensing of ecophysiological processes satellites usgs united states geological survey earth & space science informatics (essi) open aerial map, opentopography, radiant earth, uaspse unmanned aircraft systems, esri, pix4d plant sciences, and education dronecode, dji, senseﬂy, blackswift data organizations agu americal geophysical union ands australian national data service crossref esip federation of earth science information partners gofair findable accessible interoperable reusable rda research data alliance standards bodies asprs american society for photogrammetry & remote sensing dot u.s."
+8,department of transportation faa federal aviation administration ocg open geospatial consortium w3c world wide web consortium 1 2 3 4 5 6 7 8 figure 3.
+8,the above diagram is a summarized view of the many different communities the authors have interacted with in considering suas data management.
+8,"additionally, it calls out the eight key challenges to suas data management that this paper highlights."
+8,"these eight challenges are discussed in detail in section 3, but are listed here in order to identify primary sources for engagement."
+8,"each community, organization, and field listed here has called out these challenges through reports, papers, posters, conference sessions, community calls, and a multitude of informal conversations at various meetings, flying fields, and hallways."
+8,the grouping by discipline or role is an indication of the context within which this effort engaged with each; but in many cases these communities and organizations are contributing to multiple fields and act in multiple roles.
+9,"remote sens. 2019, 11, 1797 9 of 19 2.2.3."
+9,agricultural sciences the commercial field of precision agriculture is actively investigating solutions particularly for data analytics and integration from not just suas but also the many diverse sensor streams now feeding commercial precision farming.
+9,"an aggateway 2017 meeting we engaged with highlighted these challenges in a panel, and commercial suas providers such as sensefly are working with esri and pix4d analytics tool providers to develop de facto standards for image metadata [52]."
+9,"this work includes considering mechanisms for embedding parameters regarding crop type, and status, and also factors such as current weather."
+9,"beyond these commercial efforts, the united states department of agriculture is also exploring standardized protocols, vocabularies, and metadata schema for suas data capture [53,54]."
+9,2.2.4.
+9,"traditional remote sensing the infrastructure built to support remote sensing data management prior to the advent of suas (namely primarily: satellites, and manned aircraft, along with smaller blimps, kites, rockets, and balloons) are unfortunately not entirely directly portable to suas applications for various reasons as will be discussed in section 3."
+9,"however, while many studies continue to explore where suas fit within the optimal uses cases for all possible remote sensing platforms; a great deal of existing expertise, knowledge, and infrastructure can be drawn on in building new infrastructure for suas data."
+9,"two clear instances of this include the use of photogrammetric techniques in stitching suas imagery, and the use of standardized spectral band processing algorithms and indices for suas data interpretation."
+9,"an example of specific knowledge transfer from remote sensing to suas is the work by the eu based optimise [55] who have been working on standardized spectral information systems for many years, and who have most recently expanded to include practices for suas mounted spectral sensors."
+9,"their engagement with the spectral sensing community, including an in-depth survey of optical suas practices and community knowledge is ongoing, with initial survey results available in [56]."
+9,"similarly the united states geological survey, who have extensive experience using manned aircraft, have one of the few publicly accessible suas data management plans [57] based largely on their historical experience and domain knowledge."
+9,"finally, the esa and nasa’s culture of making data appropriately open [58,59] and of using or publishing open source software [60,61] are arguably models for suas to follow."
+9,"while manned aircraft engineering standards are not often directly applicable to suas, the development processes, decision metrics, and operational practices used are increasingly applicable as suas are integrated into controlled airspaces."
+9,"furthermore, manned aircraft data processing tool stacks are often built on widely used standards such as those from the ogc’s aviation domain working group [62]; again suas would likely do well to follow this example."
+9,2.2.5.
+9,earth & space science informatics (essi) as a field of commerce and research essi spans effectively all of the organizations and groups identified in figure 3.
+9,"the organizations particularly named here are specifically grouped as organizations or projects who are currently working particularly on the practicalities of embedding metadata and hosting, serving, and providing cloud analytics services for suas data."
+9,"however, these are not the only organizations working in this space as other passages in this section indicate."
+9,"open aerial map [63] is a webportal for suas data that has arisen out of the non-governmental sector, largely driven by citizen disaster response use of suas."
+9,as such their focus is visible band imagery from non-scientific suas platforms.
+9,opentopography [64] provides dois and a searchable interface to community contributed data topography data.
+9,"it is not solely focused on suas data is focused on high resolution data, largely but not exclusively captured using lidar."
+9,"data sets contributed consist of source imagery (for photogrammetry), point clouds, and raster derivatives."
+9,radiant earth [65] is a large scale project seeking to become a global portal and cloud analytics
+10,"remote sens. 2019, 11, 1797 10 of 19 provider of remote sensing data. suas data are not a focus but some community members have experimented with contributing visible imagery to their systems and using their tools for analytics."
+10,"uaspse (unmanned plant sciences, and education) [66] project is a national science foundation funded project focused on suas data for agricultural research and supporting community access to such data."
+10,all four of these portals are providing a service to a community that can be built on.
+10,"the common biggest weakness across these is that while some support the submission of metadata none provide any guidance on what is required or suitable, and due to the lack of community formalization these metadata are largely not machine readable."
+10,the need for common practices regarding embedding metadata into suas data particularly near the source has been the subject of many conversations within this engagement effort.
+10,"this has covered both the need for common parameters and schema, and available technical approaches with various commercial drone and software providers."
+10,"some of these key organizations engaged with were: the open source linux foundation managed dronecode project [67], dji, sensefly, black swift technologies [68], and as described above we have followed the work of esri and pix4d in developing standards for use within their tool-sets."
+10,"results emerging from the above described engagement efforts have been two key results: (1) how suas data are unique and consequently in part require a measure of custom data management solutions, and (2) eight challenges that would need to be addressed in order for the full potential value of suas data to be accessed."
+10,"as described, these results are not the outcomes of a formalized study or survey but are what have emerged from the focused four year effort to engage with the relevant community members (shown in figure 2), and summarized in figure 3."
+10,3.1. suas data are unique and in need of unique management infrastructure suas data are uniquely 5+ dimensional all suas data are associated with a location in both time and 3-dimensional space.
+10,"while location- and time- stamped data are not unusual, multiple streams of simultaneously recorded values captured from a moving 3-dimensional trajectory at sporadic temporal intervals are uncommon, and this is what suas enable."
+10,"furthermore, to correctly interpret many suas data requires additional metadata, such as the time-series stream of the suas attitude, or an instantaneous measure of local luminosity. suas data is therefore unique for its mandatory 5+ dimensionality: multiple co-captured geospatially-tagged measurements of varying precision, taken within multiple discretized time periods, along a 3-dimensional trajectory. suas data provide uniquely high spatiotemporal resolutions suas are being used in the sciences largely as they are a low-cost way of quickly capturing high spatial and temporal resolution data."
+10,"for instance, spatially, even low cost suas can achieve <5 cm/pixel horizontal ground resolution imagery, and they have the entirely unique ability to sample at similar resolutions in fully customized vertical profiles."
+10,"further, temporally, suas systems may be deployed both repeatedly, and dynamically in response to real-time changing circumstances, with periodicities ranging from minutes to years."
+10,"this high temporal resolution is most visibly advantageous in the use of suas in disaster response (e.g., wildfires, flooding, or earthquakes), but it is equally useful in scientific research that can be subject to both unforeseen changes in long planned observations (e.g., unpredictable wildlife activity, or unforeseen operational restrictions) and spontaneous opportunities (e.g., an unanticipated flooding event of an area of interest). suas consequently are providing a uniquely high resolution low cost offering that neither manned aircraft systems or satellites—both of which require months of planning and very large budgets—nor ground based sensors or other low altitude platforms (e.g., kites, balloons) can"
+11,"remote sens. 2019, 11, 1797 11 of 19 readily offer. suas data are classically big suas data are big in all four of the classic big data characteristic ‘vs’ [69]."
+11,"the variety in form, function and veracity of suas data is only limited by current sensor miniaturising technology and regulations, but currently commonly includes both low cost and professional grade: multi- and hyper- spectral imagery; multiple lidar and radar sensing technologies; a wide range of gas and particulate matter sensors; mechanisms for water, genomics, and other physical sample capture; and common time series parameters such as temperature, pressure, humidity, and the local characteristics of radio frequency signals."
+11,"the volume of data that suas can quickly capture is nontrivial, particularly with spectral sensors, with a single flight able to return tens of gigabytes of raw data."
+11,"in many cases, increasing the sampling rate at which suas mounted sensors can capture quality data means air speeds may also be increased allowing larger areas to be covered."
+11,it is probable that this will drive sensor engineering and consequently capture rates are likely to continue increasing going forwards as technology improves.
+11,"between increasing capture rates and growth in the use of suas for data capture, both instantaneous and net suas data velocities will most likely increase in the future. suas data are increasingly created by small science large unmanned system technologies such as unmanned planes or underwater gliders have historically been accessible only to researchers working at large scale and often government based research institutions with the resources to build and maintain large scale research facilities."
+11,"however, small suas have made it possible for small and modestly funded teams of researchers to use unmanned technologies."
+11,"the adoption of suas technology by these smaller and more ad hoc teams has consequences for the management of these data both as it increases the quantity of data being captured by researchers overall, and because it increases the need for common practices that cross discipline boundaries."
+11,"whereas large scale research endeavors (sometimes called big science) often have correspondingly robust plans and infrastructures for data archiving and management, smaller scale teams (sometimes called small science or little science) have correspondingly ad hoc and idiosyncratic data management practices [11,13]."
+11,eight community distilled suas data management challenges to be addressed 1.
+11,"sensor use procedures: sensor specific, tested and qualified use procedural best practices and standards are urgently needed in common human and machine readable languages."
+11,"these best practice methodology and procedural guidelines should be developed and provided either by the manufacturer or the research community and include: mounting requirements on various platforms, calibration, ground truthing, and maintenance procedures, sample rates, flight patterns, and required metadata for data use and publication."
+11,the need for these and the aforementioned emphasis on machine and human readability is both for user ease and so as to enable greater automation in the capture of data provenance.
+11,"as mentioned existing initial work on this issue has already appeared within the atmospheric community [48,49] and the agricultural sciences [52]."
+11,"while these procedures are largely currently not instantiated in open machine readable forms, they represent a direction for others to follow and contribute further to."
+11,"operational practices: having best practices regarding operational protocols for scientific research will lower the barrier to entry for new users, allow training materials to be standardized for the many new training courses being created, and reduce the burden on operators which can only lead to safer operations."
+11,"further, while many countries have now begun to settle on regulations, many research organizations are still grappling with their own internal policies and protocols."
+11,"researcher operational best practices, created based on the experience of those who have been operating for longer, could serve to accelerate organizational protocol deployment in a country agnostic manner."
+11,one examples of such that is readily accessible comes from university
+12,"remote sens. 2019, 11, 1797 12 of 19 of exeter’s remote sensing laboratory [70], and another is the university of california’s risk assessment and operating policy [71]."
+12,analytics and error correction procedures: best practices and acceptable error tolerances for primary sensor taxonomy branches and the associated processes need to be defined so as to avoid unintentional—but easy to introduce—errors [72].
+12,"these are needed equally by tool providers (commercial and open source) so as to allow them to build to a standard, and by user community so as ensure correct data interpretation."
+12,"defining such will additionally contribute to efforts to define sensor use best practices and metadata creation, capture, and archive tooling."
+12,"data and metadata data formats: guidelines regarding best practice metadata and data formats would serve the community, not as any form of restriction, but rather as a simple means of reducing workloads for both research suas operators and technical developers of: sensors, suas platforms, and the many components necessary in a data management tool stack."
+12,having published recommended open formats based on community experience would similarly lower the barrier to novel experiments and enable both open source and commercial developers to create reusable tools.
+12,"data and metadata provenance practices: given that a typical suas data capture project involves multiple: sensors, mechanical and electrical platforms, complex data transformations, and stakeholders, and that information regarding each of these commonly has a bearing on how a dataset should be interpreted."
+12,the provenance and workflow metadata—the record of the processes that created the data—are particularly important.
+12,"definitions of what parameters are required to make a data value, set, or product reusable—in potentially other scenarios than that for which it was originally captured or created—is necessary as both a practical guideline for operations and to facilitate the creation of tools to support the automated capture of this provenance."
+12,"data product levels: defining suggested data product levels for various data types would facilitate both data archives and single researchers in determining what data should be archived, at what quality levels, at what resolutions, and with what associated metadata as required for likely reuse."
+12,"this could be done for various primary parameter taxonomy branches, such for spectral data captured for agricultural sciences, and for atmospheric time series for atmospheric sciences."
+12,a crucial and complex sub-component to data product level definitions is the potential ethics driven policies that will govern sharing suas data.
+12,"fair does not require open access, and others are exploring the ethical implications of both fair and open data in general [73,74]."
+12,"not least because of their historical military associations of suas but also due to the potential to easily violate important privacy restrictions with suas mounted sensors, the community needs to discuss both locally and internationally, what best practices might be for governing suas data’s desirable degree and form of openness."
+12,"data management and analytics tools: as shown in figure 3, many of the relevant organizations already have some portion of a suas data analytics and management tool stack."
+12,"however, the tools these bodies offer are only suas specific in a minority of cases."
+12,"rather, the majority were developed for other data types and are now being adapted for suas."
+12,"more resources and effort are therefore necessary to accelerate these adaptations; and it is noteworthy that by addressing the above challenges, it would becomes significantly easier for resource pooling across development efforts."
+12,data management education: as the domain grows there is an increasing demand for introductory information that properly addresses the multitude of new expertise needed to effectively use suas.
+12,in response many universities and other institutions are beginning to formally train research suas operators.
+12,an acknowledged but core missing component of these training curricula is any information on comprehensive consideration for science data good
+13,"remote sens. 2019, 11, 1797 13 of 19 practices."
+13,"bringing together data management training and suas training offers a convenient opportunity, but one that depends heavily on investment being made first in the above challenges."
+13,"discussion as detailed in section 3, the primary outcomes of engaging with the nascent suas community are: (a) the identification of how suas data are unique and where there are shared characteristics with more traditional data capture platforms, and (b) that as a result there are eight community identified challenges to improving suas data management."
+13,"regarding how suas data are unique, the following should be noted."
+13,"(1) though there are many geospatial data formats that capture vector and raster data, stationary time series data, and high dimensionality data, and while tool stacks exist for processing and managing these data, these tools do not currently readily support the particular combination of metadata streams and multiple parameter capture suas data often consist of or require for correct interpretation."
+13,"similarly (2), the high spatial and temporal resolutions suas data are capable of capturing presents a new complicating factor for data management infrastructure."
+13,"these resolutions require both potentially new multidimensional formats, schemas, and ontologies (or at least new workflow tools for handling the novel combination of such suas data involved), and also demand high processing times, more automated quality control, and new data product distribution tools."
+13,"considering (3) that the majority of tool stacks build for bigdata assume operation on cloud or at least mains powered computing resources, in many cases there is a need for real-time suas data processing on low power or low bandwidth edge compute devices."
+13,"finally (4), research has shown [14,75,76], that the range of data practices utilized by smaller teams should be considered a feature rather than a bug; this is because the data workflows and practices must be customized to the unique contexts and goals of a given group, project, and organizational structure."
+13,standardized workflows across all smaller research teams are neither achievable nor desirable.
+13,"consequently, suas data management solutions need to be created with the necessarily diverse data practices of a small lab researcher specifically in mind, and this is all the more so true given the wide spectrum of disciplines suas users include."
+13,regarding the challenges outlined.
+13,"as new sensors, suas platforms, and analytics techniques develop, it is clear that addressing solutions to these challenges will require updates and extensions."
+13,"however, initial efforts on each are the only way to ensure such periodic updates, extensions, and community-driven maintenance will be plausibly practical, sustainable, and backwards compatible to any degree in the long term."
+13,"further, by initiating the development of solutions to any of the following in a collaborative manner with a view to long term sustainability, partial solutions will be both immediately accessible for use by others and accessible for extension, iteration, and improvement such that gradually more complete solutions naturally arise."
+13,"that is, provided long term maintainability and extensibility are considered in initial work."
+13,"conclusions the use of suas for data capture is increasing rapidly, both for commercial applications and as a new platform for data capture for a wide and diverse spectrum of research fields."
+13,"as a nascent field with many avenues of development underway to increase both operational and scientific platform maturity, the issue of managing and optimising the data flow from sample to knowledge product has not been extensively explored."
+13,"this paper describes an effort to explore what resources are currently available for handling suas data, what approaches are currently being used, and where there are challenges to fully realising suas data’s value."
+13,"as a largely unfunded effort subject largely to the authors abilities to take advantage of opportunities that either arose organically or were commensal, this exploration was not comprehensive."
+13,"it has, however, engaged with a significant breadth of domain users, developers, commercial participants, and analogous mature fields from which suas might learn."
+13,"in addition to finite scope, a key limitation in this engagement is that the majority of work was done in north america, however, this was not exclusive, with 6 out of the 28 formal engagements"
+14,"remote sens. 2019, 11, 1797 14 of 19 listed occurring elsewhere in the world."
+14,to the best of our knowledge this is the only effort to achieve the above at any international scale.
+14,there are two significant novel outcomes of this work.
+14,"(1) the identification of the combination of characteristics that suas data commonly exhibit, shows that while it shares many traits with more traditional methods of data capture, the combined differences mean existing infrastructure as currently developed and deployed is not capable of enabling users to fully realize the potential value of suas data."
+14,"these primary characteristics were: (i) suas data are uniquely 5+ dimensional, (ii) suas data provide uniquely high spatiotemporal resolutions, (iii) suas data are classically big, and (iv) suas data are increasingly created by small science."
+14,"(2) the detailing of eight specific challenges that must be addressed in order for suas to become a trusted, reliable, and optimally useful data capture platform: (i) sensor use procedures, (ii) operational practices, (iii) analytics and error correction procedures, (iv) data and metadata data formats, (v) data and metadata provenance practices, (vi) data product levels, (vii) data management and analytics tools, (viii) data management education."
+14,"based on these, we conclude that a conscious and determined effort by a global selection of researchers, to openly draft community driven data management best practices for the capture and management of suas data, would likely realize many gains and be an important step towards supporting the reproducibility and reliability of drone data research, as well as increasing the reuse of suas data."
+14,"in the immediate future, it would cost time and effort, but in the very near future it would; (i) significantly reduce the total quantity of poorly curated suas data likely to otherwise be lost in the near future; (ii) minimize the length of what will otherwise be an extended period of partial and inadequate data management tooling for suas users making operations inefficient over a longer period of time than necessary; (iii) allow the community to circumvent the familiar larger and more expensive challenges of legacy data rescue and community wide retooling, and retraining; (iv) lower the barrier to entry for researchers entering the field and seeking to produce robust and reusable data; (v) enable collaborative rather than disparate and ad hoc building of common suas data infrastructure; and finally (vi) increase the transparency of suas data processing workflows."
+14,"the window of opportunity within which to craft such is finite and closing, given the immediate need for data tooling and practices and already growing set of suas data."
+14,"two possible relatively simple future tasks that may serve the community well as initial steps towards addressing these challenges include: a comprehensive and detailed review and comparison of what metadata are exposed on different common suas platforms, and a formal survey of existing suas data management approaches and different data analytics algorithms used."
+14,author contributions: j.w. and l.b. have led the effort behind the research and writing required to produce this article.
+14,a.t. has been intrumental in contributing to the framing of these ideas within the broader context of information science.
+14,"j.a., d.s., c.c., c.p., j.k., s.r.s., and t.b. were all leading collaborators in gathering the information and concepts presented here both in the article writing process and over the course of the work investigative."
+14,funding: this research was partially funded by earth science information partners and the research data alliance us.
+14,conflicts of interest: the authors declare no conflicts of interest.
+14,abbreviations the following abbreviations are used in this manuscript: suas small unmanned aircraft systems ig interest group nasa the national aeronautics and space administration usgs united states geological survey usda united states department of agriculture
+15,"remote sens. 2019, 11, 1797 15 of 19 appendix a table a1."
+15,references for figure 2.
+15,"notes speaker link 1 l barbieri, j wyngaard http://commons.esipfed.org/2015summermeeting 2 j wyngaard, l barbieri http://commons.esipfed.org/node/8799 3 m."
+15,"messinger, r."
+15,"hunt, http://commons.esipfed.org/node/8798 l."
+15,"barbieri 4 t corbett, l barbieri, https://2016esipsummermeeting.sched.com/event/6uh7 s barberie /drones-explore-the-landscape-technical-physical 5 k bhakta, w teng https://osf.io/ub84e/ 6 https://2017esipwintermeeting.sched.com/event/9bkt/u w teng assdrones-in-agriculture 7 https://www.lucidchart.com/documents/view/c99183b1-6 k edmonds, w teng 58a-4b36-8848-490b89344800/0 8 multiple speakers https://osf.io/view/esipsummermeeting2017/ 9 a thomer, l barbieri, https://www.esipfed.org/meetings/upcoming-meetings/e j wyngaard sip-winter-meeting-2018 10 j wyngaard, a thomer, https://digitalag.org/unmanning_data.php l barbieri 11 https://www.esipfed.org/meetings/upcoming-meetings/e a thomer, j wyngaard sip-winter-meeting-2018 12 http://www.aggateway.org/econnectivityactivities/coun l barbieri cils/precisionag.aspx 13 http://optimise.dcs.aber.ac.uk/workshops-meetings/2017- j wyngaard 3/annual-workshop-and-mc-meeting-february-2016/ https://ams.confex.com/ams/97annual/webprogram/pap 14 l barbieri er317061.html https://agu.confex.com/agu/fm15/meetingapp.cgi/paper 15 /80038,https://agu.confex.com/agu/fm15/meetingapp.cgi l barbieri, j wyngaard /paper/84585,https: //agu.confex.com/agu/fm15/meetingapp.cgi/paper/69625 16 https://agu.confex.com/agu/fm16/meetingapp.cgi/paper l barbieri, j wyngaard /175599 17 https://agu.confex.com/agu/fm17/meetingapp.cgi/sessi l barbieri, j wyngaard on/30530 18 https://agu.confex.com/agu/fm18/meetingapp.cgi/paper l barbieri /349789 19 http://www.codata.org/events/conferences/international- j wyngaard, l barbieri data-week-2016 https://www.rd-alliance.org/groups/small-unmanned-airc 20 l barbieri, j wyngaard raft-systems%e2%80%99-data-ig,https://www.rd-alliance. org/blogs/drones-emerging-scientific-tools-trade.html 21 https://www.rd-alliance.org/ig-small-unmanned-aircraft-s l barbieri ystems-data-rda-10th-plenary-meeting 22 https://www.rd-alliance.org/plenaries/rda-eleventh-plena j wyngaard, k anderson ry-meeting-berlin-germany/rda-11th-plenary-programme 23 https://www.eventbrite.ca/e/drones4good-international- j wyngaard, t motshegwa data-week-tickets-51720620769 24 https://rd-alliance.org/ig-small-unmanned-aircraft-syste j wyngaard, l barbieri ms%e2%80%99-data-rda-12th-plenary-meeting"
+16,"remote sens. 2019, 11, 1797 16 of 19 table a1."
+16,"notes speaker link 25 j wyngaard, l barbieri, j https://drive.google.com/drive/folders/1eu1cyflampxw klump, t bell, t desell phpdpl7jn-exn7jyus1w 26 https://www.eol.ucar.edu/system/files/uas.workshop.20 l barbierii 180206.pdf c vardeman, a thomer, j 27 adams, l barbieri, https://github.com/vocamp/dronedata j wyngaard 28 j wyngaard http://www.c3dis.com/ 29 l barbieri http://www.isarra.org/?"
+16,page_id=377 references 1.
+16,"stöcker, c."
+16,"; bennett, r."
+16,"; nex, f."
+16,"; gerke, m."
+16,"; zevenbergen, j."
+16,review of the current state of uav regulations.
+16,remote sens.
+16,"2017, 9, 459."
+16,[crossref] 2.
+16,"anweiler, s."
+16,"; piwowarski, d."
+16,multicopter platform prototype for environmental monitoring.
+16,clean.
+16,"2017, 155, 204–211."
+16,[crossref] 3.
+16,"cho, r."
+16,"how drones are advancing scientific research|lamont-doherty earth observatory; technical report; columbia university: new york, ny, usa, 2017."
+16,"colin, c."
+16,the potential of drones in researc.
+16,"technical report, environmental biophysics; 2015."
+16,available online: http://www.environmentalbiophysics.org/the-potential-of-drones-in-research (accessed on 14 november 2017).
+16,drones reporting for work.
+16,available online: www.goldmansachs.com/insights/technology-driving-inn ovation/drones/ (accessed on 19 march 2019).
+16,"levick, r."
+16,drone industry just beginning to take off.
+16,"forbes magazine, 15 may 2018."
+16,commercial drones are here: the future of unmanned aerial systems.
+16,available online: https://www.mckinsey.com/industries/capital-projects-and-infrastructure/our-insights/comme rcial-drones-are-here-the-future-of-unmanned-aerial-systems (accessed on 25 november 2018).
+16,"shacklett, m.e."
+16,how the drone market is picking up speed.
+16,available online: https://www.pobonlin e.com/blogs/23-geodatapoint-blog/post/101409-how-the-drone-market-is-picking-up-speed (accessed on 25 november 2018).
+16,"wilkinson, m.d."
+16,"; dumontier, m."
+16,"; aalbersberg, i.j."
+16,"; appleton, g."
+16,"; axton, m."
+16,"; baak, a."
+16,"; blomberg, n."
+16,"; boiten, j.w.; da silva santos, l.b."
+16,"; bourne, p.e.; et al."
+16,the fair guiding principles for scientific data management and stewardship.
+16,"data 2016, 3, 160018."
+16,[crossref] [pubmed] 10.
+16,realizing the power of enterprise data.
+16,available online: https://www.veritas.com/form/whitepaper/real izing-the-power-of-enterprise-data (accessed on 19 march 2019).
+16,"cragin, m.h."
+16,"; palmer, c.l."
+16,"; carlson, j.r."
+16,"; witt, m."
+16,"data sharing, small science and institutional repositories."
+16,philos.
+16,trans.
+16,a math.
+16,"2010, 368, 4023–4038."
+16,[crossref] [pubmed] 12.
+16,"kowalczyk, s."
+16,"; shankar, k."
+16,data sharing in the sciences.
+16,technol.
+16,"2011, 45, 247–294."
+16,[crossref] 13.
+16,"wallis, j.c."
+16,"; rolando, e."
+16,"; borgman, c.l."
+16,"if we share data, will anyone use them?"
+16,data sharing and reuse in the long tail of science and technology.
+16,"plos one 2013, 8, e67332."
+16,[crossref] [pubmed] 14.
+16,"borgman, c.l."
+16,the conundrum of sharing research data.
+16,"2012, 63, 1059–1078."
+16,[crossref] 15.
+16,"nosek, b.a."
+16,"; spies, j.r."
+16,"; motyl, m."
+16,scientific utopia: ii.
+16,restructuring incentives and practices to promote truth over publishability.
+16,perspect.
+16,psychol.
+16,"2012, 7, 615–631."
+16,[crossref] [pubmed] 16.
+16,"peng, r.d."
+16,reproducible research in computational science.
+16,"science 2011, 334, 1226–1227."
+16,[crossref] [pubmed] 17.
+16,"martone, m.e."
+16,force11: building the future for research communications and e-scholarship.
+16,"bioscience 2015, 65, 635–635."
+16,[crossref] 18.
+16,"lecarpentier, d."
+16,"; wittenburg, p."
+16,"; elbers, w."
+16,"; michelini, a."
+16,"; kanso, r."
+16,"; coveney, p."
+16,"; baxter, r."
+16,eudat: a new cross-disciplinary data infrastructure for science.
+16,digit.
+16,"curation 2013, 8, 279–287."
+16,[crossref]
+17,"remote sens. 2019, 11, 1797 17 of 19 19."
+17,"orszag, p."
+17,open government directive.
+17,memorandum for the heads of executive departments and agencies.
+17,available online: https://obamawhitehouse.archives.gov/open/documents/open-gover nment-directive 20.
+17,commission decision of 12 december 2011 on the reuse of commission documents.
+17,"union 2011, 3, 229–232."
+17,the world bank.
+17,"open data gaining momentum in africa; the world bank: washington, dc, usa, 2015."
+17,"stall, s."
+17,"; parsons, m.a."
+17,"; lehnert, k."
+17,"; cutcher-gershenfeld, j."
+17,"; hanson, b."
+17,enabling fair data across the earth and space sciences—eos.
+17,available online: https://eos.org/agu-news/enabling-fair-data-across-the -earth-and-space-sciences (accessed on 11 decemebr 2018).
+17,"wilkinson, m.d."
+17,"; verborgh, r.; da silva santos, l.o.b."
+17,"; clark, t."
+17,"; swertz, m.a."
+17,"; kelpin, f.d.l."
+17,"; gray, a.j.g."
+17,"; schultes, e.a.; van mulligen, e.m."
+17,"; ciccarese, p.; et al."
+17,interoperability and fairness through a novel combination of web technologies.
+17,peerj comput.
+17,"sci. 2017, 3, e110."
+17,[crossref] 24.
+17,"mons, b."
+17,"; neylon, c."
+17,"; velterop, j."
+17,"; dumontier, m."
+17,"; da silva santos, l.o.b."
+17,"; wilkinson, m.d."
+17,"cloudy, increasingly fair; revisiting the fair data guiding principles for the european open science cloud."
+17,"use 2017, 37, 49–56."
+17,[crossref] 25.
+17,"elankavi, r."
+17,"; kalaiprasath, r."
+17,"; udayakumar, r."
+17,data mining with big data revolution hybrid.
+17,smart sens.
+17,intell.
+17,"2017, 10, 560–573."
+17,[crossref] 26.
+17,"lv, z."
+17,"; song, h."
+17,"; basanta-val, p."
+17,"; steed, a."
+17,"; jo, m."
+17,"next-generation big data analytics: state of the art, challenges, and future research topics."
+17,ieee trans.
+17,"2017, 13, 1891–1899."
+17,[crossref] 27.
+17,"gökalp, m.o."
+17,"; kayabay, k."
+17,"; zaki, m."
+17,"; koçyiğit, a."
+17,"; eren, p.e."
+17,"; neely, a."
+17,"big-data analytics architecture for businesses: a comprehensive review on new open-source big-data tools; cambridge service alliance: cambridge, uk, 2017."
+17,"stein, l.d."
+17,"; knoppers, b.m."
+17,"; campbell, p."
+17,"; getz, g."
+17,"; korbel, j.o."
+17,data analysis: create a cloud commons.
+17,"nature 2015, 523, 149–151."
+17,[crossref] 29.
+17,"hashem, i.a.t."
+17,"; yaqoob, i."
+17,"; anuar, n.b."
+17,"; mokhtar, s."
+17,"; gani, a."
+17,"; ullah khan, s."
+17,the rise of “big data” on cloud computing: review and open research issues.
+17,"2015, 47, 98–115."
+17,[crossref] 30.
+17,"chaudhary, s."
+17,"; somani, g."
+17,"; buyya, r."
+17,"research advances in cloud computing; springer: berlin, germany, 2017."
+17,von oehsen.
+17,"; fox, g."
+17,"; ziolkowski, m."
+17,"; bedrossian, a."
+17,"; fay, d."
+17,"; bottum, j."
+17,"; atkins, d."
+17,"; blatecky, a."
+17,"; mcmullen, r."
+17,"; tannenbaum, t.; et al."
+17,"the future of cloud for academic research computing; technical report; national science foundation: alexandria, va, usa, 2017."
+17,dataset search.
+17,available online: https://toolbox.google.com/datasetsearch (accessed on 25 november 2018).
+17,"stall, s."
+17,"enabling findable, accessible, interoperable, and reusable data-eos."
+17,available online: https://eos.org/editors-vox/enabling-findable-accessible-interoperable-and-reusable-data (accessed on 25 november 2018).
+17,enabling fair data project.
+17,available online: http://www.copdess.org/enabling-fair-data-project/ (accessed on 25 november 2018).
+17,"l’heureux, a."
+17,"; grolinger, k."
+17,"; elyamany, h.f."
+17,"; capretz, m.a.m."
+17,machine learning with big data: challenges and approaches.
+17,"ieee access 2017, 5, 777–797."
+17,[crossref] 36.
+17,"karpatne, a."
+17,"; ebert-uphoff, i."
+17,"; ravela, s."
+17,"; babaie, h.a."
+17,"; kumar, v."
+17,machine learning for the geosciences: challenges and opportunities.
+17,ieee trans.
+17,knowl.
+17,data eng.
+17,"2018, 31, 1544–1554."
+17,[crossref] 37.
+17,"barbieri, l."
+17,"; wyngaard, j."
+17,drone cluster—federation of earth science information partners.
+17,available online: http://wiki.esipfed.org/index.php/drone_cluster (accessed on 14 november 2018).
+17,"burgess, a."
+17,"esip|connecting science, data and users."
+17,available online: http://www.esipfed.org/ (accessed on 14 april 2018).
+17,"barbieri, l."
+17,"; wyngaard, j."
+17,"; bhakta, k."
+17,"; teng, b."
+17,drone cluster esip.
+17,available online: https://osf.io/n uvem/ (accessed on 14 november 2018).
+17,"esip summer meeting 2017|25–28 july 2017—bloomington, in|esip."
+17,available online: http://www.esipfe d.org/meetings/upcoming-meetings/esip-summer-meeting-2017 (accessed on 14 april 2018).
+17,"barbieri, l."
+17,"; wyngaard, j."
+17,small unmanned aircraft systems’ data ig.
+17,available online: https://www.rd-alliance.org/groups/small-unmanned-aircraft-systems%e2%80%99-data-ig (accessed on 18 february 2018).
+17,research data alliance (rda).
+17,available online: http://rd-alliance.org/ (accessed on 8 may 2012).
+18,"remote sens. 2019, 11, 1797 18 of 19 43."
+18,ioos glider dac v2.
+18,available online: https://github.com/ioos/ioosngdac (accessed on 14 november 2018).
+18,nmf vehicles.
+18,available online: https://mars.noc.ac.uk/ (accessed on 26 november 2018).
+18,"buck, j."
+18,"; phillips, a."
+18,"; lorenzo, a."
+18,"; kokkinaki, a."
+18,"; hearn, m."
+18,"; gardner, t."
+18,"; thorne, k."
+18,"oceanids command and control (c2) data system-marine autonomous systems data for vehicle piloting, scientific data users, operational data assimilation, and big data."
+18,"in proceedings of the american geophysical union, fall meeting, new orleans, la, usa, 11–15 december 2017."
+18,"argrow, b.m."
+18,"; axisa, d."
+18,"; chilson, p."
+18,"; ellis, s."
+18,"; fladeland, m."
+18,"; frew, e.w."
+18,"; jacob, j."
+18,"; lord, m."
+18,"; moore, j."
+18,"; oncley, s.; et al."
+18,"final report ncar/eol community workshop on unmanned aircraft systems for atmospheric research; ncar: boulder, co, usa, 2017."
+18,international society for atmospheric research using remotely piloted aircraft.
+18,available online: http://www.isarra.org/ (accessed on 19 march 2019).
+18,"rossi, m."
+18,"; brunelli, d."
+18,gas sensing on unmanned vehicles: challenges and opportunities.
+18,"in proceedings of the 2017 new generation of cas (ngcas), genoa, italy, 6–9 september 2017; pp."
+18,117–120.
+18,"villa, t."
+18,"; gonzalez, f."
+18,"; miljievic, b."
+18,"; ristovski, z."
+18,"; morawska, l."
+18,an overview of small unmanned aerial vehicles for air quality measurements: present applications and future prospectives.
+18,"sensors 2016, 16, 1072."
+18,[crossref] [pubmed] 50.
+18,"greene, b.r."
+18,"; segales, a.r."
+18,"; waugh, s."
+18,"; duthoit, s."
+18,"; chilson, p.b."
+18,considerations for temperature sensor placement on rotary-wing unmanned aircraft systems.
+18,atmos.
+18,"2018, 11, 5519–5530."
+18,[crossref] 51.
+18,"greene, b.r."
+18,"; segales, a.r."
+18,"; bell, t.m."
+18,"; pillar-little, e.a."
+18,"; chilson, p.b."
+18,environmental and sensor integration influences on temperature measurements by rotary-wing unmanned aircraft systems.
+18,"sensors 2019, 19, 1470."
+18,[crossref] [pubmed] 52.
+18,exif and xmp tag information read by pix4d desktop.
+18,available online: https://support.pix4d.co m/hc/en-us/articles/205732309-exif-and-xmp-tag-information-read-by-pix4d-desktop (accessed on 17 november 2019).
+18,ltar-neon collaboration to quantify rangeland vegetation production.
+18,available online: https://www. ars.usda.gov/research/project/?
+18,accnno=429391 (accessed on 19 march 2019).
+18,department of agriculture.
+18,ag data commons.
+18,available online: https://data.nal.usda.gov (accessed on 19 may 2019).
+18,essem cost action es1309.
+18,available online: http://optimise.dcs.aber.ac.uk/ (accessed on 19 march 2019).
+18,"aasen, h."
+18,state-of-the-art in uav remote sensing survey-first insights into applications of uav sensing systems.
+18,photogramm.
+18,remote sens.
+18,"2017, 42, 1–4."
+18,[crossref] 57.
+18,"cynthia, f."
+18,"; benjamin, t."
+18,"; kim, r."
+18,"usgs unmanned aircraft systems data delivery specification; technical report; united states geological survey: denver, co, usa, 2018."
+18,open access at the european space agency.
+18,available online: http://open.esa.int/open-access-at-esa/ (accessed on 19 march 2019).
+18,data and information policy.
+18,available online: https://science.nasa.gov/earth-science/earth-science-data/ data-information-policy (accessed on 19 march 2019).
+18,gsfc open source software.
+18,available online: https://opensource.gsfc.nasa.gov/ (accessed on 19 march 2019).
+18,"mattmann, c.a."
+18,computing: a vision for data science.
+18,"nature 2013, 493, 473."
+18,[crossref] [pubmed] 62.
+18,aviation domain working group.
+18,available online: https://www.opengeospatial.org/projects/groups/avi ationdwg (accessed on 19 march 2019).
+18,openaerialmap.
+18,available online: http://openaerialmap.org (accessed on 17 november 2018).
+18,about|opentopography.
+18,available online: http://opentopo.sdsc.edu/dataspace/datasets (accessed on 10 april 2019).
+18,radiant earth foundation—earth imagery for impact.
+18,available online: https://www.radiant.earth/ (accessed on 4 october 2019).
+18,uaspse-upsie unmanning data mondays.
+18,available online: https://digitalag.org/unmanning_data.php (accessed on 17 november 2018).
+18,"foundation, l."
+18,dronecode.
+18,available online: https://www.dronecode.org/ (accessed on 13 march 2016).
+18,black swift technologies.
+18,available online: https://bst.aero/ (accessed on 13 december 2018).
+18,"hitzler, p."
+18,"; janowicz, k."
+18,"linked data, big data, and the 4th paradigm."
+18,semant.
+18,"web 2013, 4, 233–235."
+19,"remote sens. 2019, 11, 1797 19 of 19 70."
+19,"cunliffe, a.m."
+19,"; anderson, k."
+19,"; debell, l."
+19,"; duffy, j."
+19,a uk civil aviation authority (caa)-approved operations manual for safe deployment of lightweight drones in research.
+19,remote sens.
+19,"2017, 38, 1–8."
+19,[crossref] 71.
+19,unmanned aircraft system (drone) policy.
+19,available online: https://policy.ucop.edu/doc/3500671/drone (accessed on 19 march 2019).
+19,"congalton, r.g."
+19,remote sensing and geographic information system data integration: error sources and.
+19,photogramm.
+19,remote sens.
+19,"1991, 57, 677–687."
+19,"boeckhout, m."
+19,"; zielhuis, g.a."
+19,"; bredenoord, a.l."
+19,the fair guiding principles for data stewardship: fair enough?
+19,genet.
+19,"2018, 26, 931."
+19,[crossref] 74.
+19,"serwadda, d."
+19,"; ndebele, p."
+19,"; grabowski, m.k."
+19,"; bajunirwe, f."
+19,"; wanyenze, r.k."
+19,open data sharing and the global south—who benefits?
+19,"science 2018, 359, 642–643."
+19,[crossref] 75.
+19,"weber, n.m."
+19,"; baker, k.s."
+19,"; thomer, a.k."
+19,"; chao, t.c."
+19,"; palmer, c.l."
+19,value and context in data use: domain analysis revisited.
+19,technol.
+19,"2013, 49, 1–10."
+19,[crossref] 76.
+19,"chao, t.c."
+19,"; cragin, m.h."
+19,"; palmer, c.l."
+19,data practices and curation vocabulary (dpcvocab): an empirically derived framework of scientific data practices and curatorial processes.
+19,assoc.
+19,technol.
+19,"2015, 66, 616–633."
+19,[crossref] c 2019 by the authors.
+19,"licensee mdpi, basel, switzerland."
+19,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).
