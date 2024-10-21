@@ -23,7 +23,7 @@ def validate_data_table_path(path):
             encoding = result['encoding']
         with open(path, 'r', encoding=encoding) as file:
             header = file.readline().strip().split(',')
-            if not all(column in header for column in ['include', 'abstract']):
+            if not all(column in header for column in ['abstract']):
                 raise argparse.ArgumentTypeError(
                     f'"{path}" file must contain "include" and "abstract" columns.')
     except Exception as e:

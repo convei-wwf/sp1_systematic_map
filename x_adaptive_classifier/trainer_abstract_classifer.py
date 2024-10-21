@@ -27,6 +27,28 @@ for logger in LOGGERS:
 ACCURACY_METRIC = load_metric("accuracy", trust_remote_code=True)
 
 
+class EarlyStoppingByLoss(TrainerCallback):
+    def __init__(self, patience=4):
+        self.patience = patience
+        self.best_loss = None
+        self.epochs_no_improve = 0
+
+    def on_evaluate(self, args, state, control, **kwargs):
+        current_loss = kwargs['metrics'].get('eval_loss')
+        if current_loss is None:
+            return
+
+        if self.best_loss is None or current_loss < self.best_loss:
+            self.best_loss = current_loss
+            self.epochs_no_improve = 0
+        else:
+            self.epochs_no_improve += 1
+
+        if self.epochs_no_improve >= self.patience:
+            print(f"Stopping training as there is no improvement in loss for {self.patience} epochs.")
+            control.should_training_stop = True
+
+
 def validate_data_table_path(path):
     try:
         with open(path, 'rb') as f:
@@ -66,6 +88,7 @@ def compute_metrics(p):
 
 
 def main():
+    model_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     parser = argparse.ArgumentParser(description="Train a classifier for include/exclude on abstracts for CONVEI project.")
     parser.add_argument(
         'data_table_path',
@@ -157,7 +180,9 @@ def main():
         train_dataset=tokenized_train_dataset,
         eval_dataset=tokenized_eval_dataset,
         compute_metrics=compute_metrics,
-        callbacks=[CSVLoggerCallback(log_file='training_log.csv')],
+        callbacks=[
+            CSVLoggerCallback(log_file=f'training_log_{model_datetime}.csv'),
+            EarlyStoppingByLoss(patience=4)],
     )
 
     for param in model.parameters():
@@ -166,7 +191,7 @@ def main():
     trainer.train()
 
     saved_model_name = (
-        f'convei_abstract_classifier_{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}')
+        f'convei_abstract_classifier_{model_datetime}')
     os.makedirs('models', exist_ok=True)
     model_path = os.path.join('models', saved_model_name)
     trainer.save_model(model_path)
@@ -186,7 +211,7 @@ def main():
         cm = confusion_matrix(y_true, y_pred)
         disp = ConfusionMatrixDisplay(confusion_matrix=cm)
         disp.plot(cmap=plt.cm.Blues)
-        plt.savefig(f'{name}.png')
+        plt.savefig(f'{name}_{model_datetime}.png')
         plt.close()
         plt.show()
 
