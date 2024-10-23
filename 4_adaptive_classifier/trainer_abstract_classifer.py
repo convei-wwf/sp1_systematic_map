@@ -15,10 +15,13 @@ from transformers import Trainer, TrainingArguments
 from transformers import TrainerCallback
 from transformers.modeling_outputs import SequenceClassifierOutput
 from transformers import XLNetTokenizer, XLNetForSequenceClassification
+from transformers import default_data_collator
+
 import chardet
 import matplotlib.pyplot as plt
 import pandas as pd
 import torch
+from torch.utils.data import DataLoader
 
 
 LOGGERS = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
@@ -30,7 +33,7 @@ for logger in LOGGERS:
 CONFUSION_FIGS = 'confusion_figs'
 os.makedirs(CONFUSION_FIGS, exist_ok=True)
 ACCURACY_METRIC = load_metric("accuracy", trust_remote_code=True)
-CLASS_WEIGHTS = [1.0, 1.0]  # Adjust weights as needed
+CLASS_WEIGHTS = [1.0, 5.0]  # Adjust weights as needed
 
 class WeightedXLNetForSequenceClassification(XLNetForSequenceClassification):
     def __init__(self, config, class_weights=None):
@@ -142,32 +145,39 @@ class CSVLoggerCallback(TrainerCallback):
         # plt.close()
 
 
-def compute_metrics(p):
-    preds = p.predictions.argmax(-1)
-    return ACCURACY_METRIC.compute(predictions=preds, references=p.label_ids)
-
 # def compute_metrics(p):
 #     preds = p.predictions.argmax(-1)
-#     labels = p.label_ids
-#     accuracy = accuracy_score(labels, preds)
-#     precision, recall, f1, _ = precision_recall_fscore_support(
-#         labels, preds, average='binary', pos_label=1
-#     )
-#     return {
-#         'accuracy': accuracy,
-#         'precision': precision,
-#         'recall': recall,
-#         'f1': f1,
-#     }
+#     return ACCURACY_METRIC.compute(predictions=preds, references=p.label_ids)
+
+def compute_metrics(p):
+    preds = p.predictions.argmax(-1)
+    labels = p.label_ids
+    accuracy = accuracy_score(labels, preds)
+    precision, recall, f1, _ = precision_recall_fscore_support(
+        labels, preds, average='binary', pos_label=1
+    )
+    return {
+        'accuracy': accuracy,
+        'precision': precision,
+        'recall': recall,
+        'f1': f1,
+    }
 
 
 def main():
-    model_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    parser = argparse.ArgumentParser(description="Train a classifier for include/exclude on abstracts for CONVEI project.")
+    parser = argparse.ArgumentParser(
+        description="Train or continue training a classifier for include/exclude on abstracts for the CONVEI project.")
     parser.add_argument(
         'data_table_path',
         type=validate_data_table_path,
         help="Path to the CSV file containing 'include' and 'abstract' columns.")
+    parser.add_argument(
+        '--model_path',
+        type=str,
+        help="Optional path to a pre-trained model to continue training.")
+
+
+    model_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
 
     args = parser.parse_args()
     print(f'cuda is available: {torch.cuda.is_available()}')
@@ -181,13 +191,16 @@ def main():
 
     # Initial train-test split
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, stratify=y, random_state=42)
+        X, y, test_size=0.2,
+        #stratify=y,
+        random_state=42)
 
     # Apply undersampling to the training set
     rus = RandomUnderSampler(
-        sampling_strategy={0: 2 * sum(y_train == 1), 1: sum(y_train == 1)},
+        sampling_strategy={0: sum(y_train == 1), 1: sum(y_train == 1)},
         random_state=42)
-    X_train_balanced, y_train_balanced = rus.fit_resample(X_train.to_frame(), y_train)
+    X_train_balanced, y_train_balanced = rus.fit_resample(
+        X_train.to_frame(), y_train)
 
     # Identify the samples that were tossed out
     tossed_samples_mask = ~X_train.index.isin(X_train_balanced.index)
@@ -216,12 +229,20 @@ def main():
     # model = XLNetForSequenceClassification.from_pretrained('xlnet-base-cased', num_labels=2)
 
     config = XLNetConfig.from_pretrained('xlnet-base-cased', num_labels=2)
-    model = WeightedXLNetForSequenceClassification.from_pretrained(
-        'xlnet-base-cased',
-        config=config,
-    )
-    model.class_weights = torch.tensor(CLASS_WEIGHTS, dtype=torch.float)
-
+    if args.model_path is None:
+        model = WeightedXLNetForSequenceClassification.from_pretrained(
+            'xlnet-base-cased',
+            config=config,
+            class_weights=CLASS_WEIGHTS
+        )
+    else:
+        tokenizer = XLNetTokenizer.from_pretrained(args.model_path)
+        config = XLNetConfig.from_pretrained(args.model_path)
+        model = WeightedXLNetForSequenceClassification.from_pretrained(
+            args.model_path,
+            config=config,
+            class_weights=CLASS_WEIGHTS
+        )
 
     for name, param in model.named_parameters():
         print(f"{name}: requires_grad={param.requires_grad}")
@@ -238,73 +259,102 @@ def main():
     tokenized_train_dataset.set_format("torch")
     tokenized_eval_dataset.set_format("torch")
 
-    num_epochs = 50
+    num_epochs = 25
     batch_size = 16
 
     steps_per_epoch = len(train_dataset) // batch_size
     gradient_accumulation_steps = steps_per_epoch
 
     total_steps = steps_per_epoch // gradient_accumulation_steps * num_epochs
-    warmup_steps = int(0.2 * total_steps)
+    warmup_steps = int(0.1 * total_steps)
 
     class ConfusionMatrixCallback(TrainerCallback):
-        def __init__(self, model_datetime):
+        def __init__(self, model_datetime, train_dataset, eval_dataset):
             self.model_datetime = model_datetime
+            self.train_dataset = train_dataset
+            self.eval_dataset = eval_dataset
 
         def on_evaluate(self, args, state, control, metrics=None, **kwargs):
             step = state.global_step
-            accuracy = metrics.get('eval_accuracy')
-            loss = metrics.get('eval_loss')
+            eval_accuracy = metrics.get('eval_accuracy')
+            eval_loss = metrics.get('eval_loss')
             model = kwargs['model']
-            eval_dataloader = kwargs['eval_dataloader']
+            device = model.device
 
             # Move model to evaluation mode
             model.eval()
-            all_preds = []
-            all_labels = []
-            device = model.device
 
-            with torch.no_grad():
-                for batch in eval_dataloader:
-                    # Move inputs and labels to the device
-                    inputs = {k: v.to(device) for k, v in batch.items() if k != 'labels'}
-                    labels = batch['labels'].to(device)
-                    outputs = model(**inputs)
-                    logits = outputs.logits
-                    all_preds.append(logits.detach().cpu())
-                    all_labels.append(labels.cpu())
+            # Create DataLoaders
+            eval_dataloader = DataLoader(
+                self.eval_dataset,
+                batch_size=args.per_device_eval_batch_size,
+                collate_fn=default_data_collator)
+            train_dataloader = DataLoader(
+                self.train_dataset,
+                batch_size=args.per_device_eval_batch_size,
+                collate_fn=default_data_collator)
 
-            predictions = torch.cat(all_preds)
-            labels = torch.cat(all_labels)
+            # Function to compute predictions and confusion matrix
+            def compute_confusion_matrix_and_accuracy(dataloader):
+                all_preds = []
+                all_labels = []
+                with torch.no_grad():
+                    for batch in dataloader:
+                        # Move inputs and labels to the device
+                        inputs = {k: v.to(device) for k, v in batch.items() if k != 'labels'}
+                        labels = batch['labels'].to(device)
+                        outputs = model(**inputs)
+                        logits = outputs.logits
+                        all_preds.append(logits.detach().cpu())
+                        all_labels.append(labels.cpu())
 
-            # Convert to numpy arrays
-            y_pred = predictions.argmax(-1).numpy()
-            y_true = labels.numpy()
+                predictions = torch.cat(all_preds)
+                labels = torch.cat(all_labels)
 
-            # Compute confusion matrix
-            cm = confusion_matrix(y_true, y_pred)
-            disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-            disp.plot(cmap=plt.cm.Blues)
+                # Convert to numpy arrays
+                y_pred = predictions.argmax(-1).numpy()
+                y_true = labels.numpy()
 
-            plt.title(f'Confusion Matrix at Step {step}\nAccuracy: {accuracy:.4f}, Loss: {loss:.4f}')
+                # Compute confusion matrix
+                cm = confusion_matrix(y_true, y_pred)
+                # Compute accuracy
+                acc = accuracy_score(y_true, y_pred)
+                return cm, acc
+
+            # Compute confusion matrices and accuracies
+            cm_eval, acc_eval = compute_confusion_matrix_and_accuracy(eval_dataloader)
+            cm_train, acc_train = compute_confusion_matrix_and_accuracy(train_dataloader)
+
+            # Plotting confusion matrices side by side
+            fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+
+            disp_eval = ConfusionMatrixDisplay(confusion_matrix=cm_eval)
+            disp_eval.plot(cmap=plt.cm.Blues, ax=axes[0], colorbar=False)
+            axes[0].set_title(f'Eval Confusion Matrix at Step {step}\nAccuracy: {acc_eval:.4f}, Loss: {eval_loss:.4f}')
+
+            disp_train = ConfusionMatrixDisplay(confusion_matrix=cm_train)
+            disp_train.plot(cmap=plt.cm.Blues, ax=axes[1], colorbar=False)
+            axes[1].set_title(f'Train Confusion Matrix at Step {step}\nAccuracy: {acc_train:.4f}')
+
+            plt.tight_layout()
             os.makedirs(f'{CONFUSION_FIGS}/{self.model_datetime}', exist_ok=True)
             plt.savefig(f'{CONFUSION_FIGS}/{self.model_datetime}/confusion_matrix_step_{step}_{self.model_datetime}.png')
             plt.close()
 
     training_args = TrainingArguments(
-        output_dir='./final_results',
+        output_dir=f'./model_steps/{model_datetime}',
         eval_strategy="epoch",
         save_strategy="epoch",
-        learning_rate=1e-5,
+        learning_rate=5e-7,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=num_epochs,
         logging_dir='./final_logs',
-        metric_for_best_model="accuracy",
+        metric_for_best_model="f1",
         greater_is_better=True,
         load_best_model_at_end=True,
         max_grad_norm=0.5,
-        lr_scheduler_type="cosine_with_restarts",
+        lr_scheduler_type="cosine",
         warmup_steps=warmup_steps,
         gradient_accumulation_steps=gradient_accumulation_steps,
     )
@@ -321,9 +371,12 @@ def main():
                 steps_per_epoch=1,
                 model_datetime=model_datetime
             ),
-            ConfusionMatrixCallback(model_datetime=model_datetime)],
+            ConfusionMatrixCallback(
+                model_datetime=model_datetime,
+                train_dataset=tokenized_train_dataset,
+                eval_dataset=tokenized_eval_dataset
+            )],
     )
-
 
     for param in model.parameters():
         param.data = param.data.contiguous()
@@ -339,21 +392,6 @@ def main():
 
     eval_results = trainer.evaluate()
     print(eval_results)
-
-    for name, dataset in [
-            ('eval', tokenized_eval_dataset),
-            ('train', tokenized_train_dataset)]:
-        predictions = trainer.predict(dataset)
-        y_pred = predictions.predictions.argmax(-1)
-        y_true = predictions.label_ids
-
-        # Compute confusion matrix
-        cm = confusion_matrix(y_true, y_pred)
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-        disp.plot(cmap=plt.cm.Blues)
-        plt.savefig(f'{name}_{model_datetime}.png')
-        plt.close()
-        plt.show()
 
 
 if __name__ == '__main__':
