@@ -1,0 +1,313 @@
+page,p
+1,"the current issue and full text archive of this journal is available at www.emeraldinsight.com/1477-7835.htm meq 18,3 a disaster information and monitoring system utilizing earth observation 246 machiko louhisuo, teppo veijonen and jussi ahola vtt technical research centre of finland, espoo, finland, and toshikazu morohoshi national research institute for earth science and disaster prevention, ibaragi, japan abstract purpose – this paper aims to present disaster information and a monitoring system in order to utilize earth observation data in the operative process of early warning, mitigation and management of natural disasters."
+1,"the system is aimed at integrating earth observation data analysis with modern icts including gis, grid, mobile communication and web technology to support disaster monitoring and to share disaster information during a crisis."
+1,design/methodology/approach – the system development concerned outlining an operative disaster monitoring and management process.
+1,"the process was derived from actual practices, suggestions and needs of different user groups involved in disaster management."
+1,"after investigating state-of-the-art icts and reviewing the existing tools and databases, a suitable system architecture was designed and a prototype system was implemented, adapting to a proven software development process."
+1,findings – the prototype system implementation demonstrated how satellite-based data can be used to support disaster management processes.
+1,disaster monitoring requires information system infrastructure that would enable communication and integrate various distributed information sources and services.
+1,"originality/value – the result gives ideas for establishing an operative disaster management process involving local authorities, disaster analysts and the public."
+1,the process integrates earth observation data analysis with modern icts and improves the methods of early warning.
+1,the developed concept can be used as the basis for future development of automated real-time disaster monitoring.
+1,"keywords natural disasters, geographic information systems paper type research paper the satellite data from esa mission envisat were obtained from esa within the category-1 project ao-1550, use of sar data for natural disaster mitigation in the mobile environment."
+1,sar data were processed by the vexcel 3d sar processor.
+1,"the project is carried out under cooperation between vtt technical research centre of finland, and the national research institute for earth science and disaster prevention of japan (nied), kyusyu tokai university, management of environmental kochi technical university, institute of geographical sciences and natural resources research quality: an international journal vol."
+1,18 no.
+1,"3, 2007 (igsnrr) china, and universiti sains malaysia (usm)."
+1,"the system development was carried out pp. 246-262 as one of applications of the finnish national research project, environment monitoring using q emerald group publishing limited 1477-7835 earth observation (envimon), which is partially funded by national technology agency of doi 10.1108/14777830710731725 finland (tekes)."
+2,"introduction disaster natural disasters like earthquakes, volcanic eruptions, floods, and landslides claim monitoring many human lives and damage a great deal of property."
+2,the developing regions of the world suffer particularly severe damage due to their lack of infrastructure and system emergency services.
+2,the need for real-time disaster management is acknowledged.
+2,"natural disaster management and disaster analysis require various information sources such as rainfall data and geo-spatial information, including maps on geological 247 features and frequent disaster areas."
+2,this information has been managed by different local and governmental authorities.
+2,"worldwide activities of harmonizing geo-spatial information have produced a large variety of geographic information system (gis) data products, and gis software tools are widely available to support usage of those products (annoni et al., 2005a)."
+2,"even after harmonization, the databases and system components are often geographically spread."
+2,the availability of various types of observation data brings up another demand for data archiving.
+2,"advanced information technology such as grid technology helps to provide, securely and rapidly, large archives of earth observation satellite data, and integrated service with other observation data including gis databases."
+2,it makes diverse information accessible and affordable.
+2,"during the last decade the amount of web-based applications and services has been growing enormously (web server survey, 2006)."
+2,"web technology is used as a method for distributing information, but it is also used as a communication tool which involves two-way communications."
+2,"in particular, the presentation methods of information have improved."
+2,"web mapping services have some history already, and recently new visualization tools have been developed."
+2,"virtual globes such as google earth provide visualization that is easy to understand, helping to distribute necessary information in a fast and effective way."
+2,"furthermore, mobile phones with global positioning system (gps), car navigation systems, and wireless networks that provide backbone to other mobile terminals such as personal digital assistants (pdas) are widely available and collaborating with different types of real-time services."
+2,japan is one of the countries where state-of-the-art information and communication technology (ict) has been implemented in the society.
+2,"mobile and internet services, most notably, are acting as a main information sharing tool, as they are among a wide range of other nations (economic research office, general policy division, information and communications policy bureau, 2004, 2006)."
+2,"there has been a remarkable effort toward the harmonization of diverse spatial information by digitalization and standardization of data interfaces and formats during the last decade in japan (hoshino et al., 2003; takakuwa et al., 2001)."
+2,this effort has brought great amount of data available for gis tools in and also catalysed the development of faster and more accurate processing and analysis of earth observation data.
+2,japan is also known as one of the planet’s disaster-prone countries.
+2,"their disaster assessment, monitoring and management activities have been supported by the best technology at each generation."
+2,"however, the long experience and history of development has resulted a combination of new and old, small and large systems and tools that differ between local to national scales."
+2,"no operational information systems have been established that would integrate earth observation data analysis and modern information technology – including gis, grid, mobile communication and web technology – to the"
+3,meq operative disaster management process through disaster mitigation to recovery.
+3,"the 18,3 problem in the disaster management is not lack of technology or existence of the relevant information, but often the lack of accessibility of the information."
+3,"earth observation satellites orbit round the earth several times each day, providing up-to-date information about the land and sea surfaces."
+3,"the more the number of satellites increase, the more frequent observation is possible."
+3,advanced methods of 248 mapping and image analysis make it possible to provide accurate disaster information derived from satellites over the disaster area.
+3,"however, the potential of earth observation data and satellite images in disaster management has not yet been fully discovered."
+3,only recently has the on-line availability of near real time data has been improved.
+3,"on the other hand, the suitable earth observation data analysis methods and especially automated processes have not been ready to be used operatively."
+3,"the objective of the disaster information and monitoring system described in this article is to make use of earth observation data in the operative process of early warning, mitigation and management of natural disasters – and to make the available data easily accessible."
+3,"the system is also aimed at utilizing existing software tools and databases in use in different phases of disaster management, and to be the base for future development of automated real-time disaster monitoring and management."
+3,"the system development has been conducted as a practical software development applying the process described in (jaaksi et al., 1999)."
+3,"after requirements specification and use case analysis, the system architecture was designed."
+3,"the essential functionalities were selected in the system prototype implementation, providing means to demonstrate portions of the described process in practice."
+3,the prototype system uses a flood disaster as an example case.
+3,"as for earth observation data, the prototype supports processing and analysis of synthetic aperture radar (sar) satellite data."
+3,"following a brief background recitation, the following chapters present the disaster monitoring processes outlined during the project."
+3,the functionality of the disaster monitoring and information system is described using user scenarios emerging from the monitoring process.
+3,"further on, the presentation of the prototype system’s architecture is followed by conclusions and recommendations."
+3,"background this article discusses a software system that has been developed as one of the applications in the envimon project (environment monitoring using earth observation) that was carried out between 2004 and 2006 (ahola, 2006)."
+3,"the objective of envimon project is to build prototype information systems for diverse environment monitoring applications in application areas varying from forestry to traffic monitoring, and from seasonal phenomena monitoring to natural disaster monitoring."
+3,"the applications have common requirements for top level functionality concerning collection of data coming from a diversity of sensors, pre-processing and analyzing the data, and delivering the final products to other systems, users and decision makers."
+3,"some of the applications require near real-time operation, and the processing involved in such applications must be carried out as quickly and reliably as possible."
+3,"to achieve speed in the processing, human-related tasks must be minimized and make the processing chain as automatic as possible."
+3,"although some of the analysis steps still require manual work by experts, the rudimentary processing phases can be automated to achieve the near real-time requirement around the clock."
+4,"in addition to developing the diverse earth observation applications, one of the disaster primary goals of envimon has been to specify and implement a common framework monitoring called eoframe that facilitates the development of automated earth observation data processing chains (kotovirta et al., 2006)."
+4,the objective of the framework is to function system as an open and flexible platform onto which the applications and services can be built with a minimum effort.
+4,"practically, natural disasters occur with a combination of several factors in the 249 environment."
+4,the disaster analysis requires interoperability between diverse environment-related information.
+4,a framework approach is now getting more common to improve information exchange and to increase the efficiency of application development and system maintenance.
+4,"in addition to the envimon project, related research activities are topical in japan (yamamoto et al., 2006), in europe (alegre and sassier, 2006; annoni et al., 2005b; couturier et al., 2005) and in north america (keller et al., 2003; meertens et al., 2005; youn et al., 2005)."
+4,"disaster monitoring and management process the development of the envimon disaster information and monitoring system has been concerned with outlining an operative disaster monitoring and management process (louhisuo et al., 2005)."
+4,"the process has been derived from actual practices at disaster cases in the past, suggestions and needs of different user groups who are involved in disaster monitoring and management process."
+4,the overview of the disaster monitoring and management process is illustrated in figure 1.
+4,it describes the information flow from the disaster occurrence to the figure 1.
+4,overview of the natural disaster monitoring process
+5,meq post-disaster activities.
+5,"the outermost oval shows the disaster monitoring process 18,3 operated by users’ groups which belong to the organizations that are responsible for monitoring, analysis, and decision making; i.e. local authorities, duty officers and disaster analysts."
+5,"the innermost oval represents the concerned public, such as people located in the disaster areas."
+5,the disaster monitoring process in figure 1 incorporates a disaster monitoring and 250 information system that is used for sharing disaster information and for providing relevant earth observation based added-value information.
+5,"the process concerns following steps: (1) the disasters or symptoms of a disaster are discovered by a human or by pre-installed ground, air- and space-born sensors."
+5,they are then reported to and recognized by the local authority.
+5,the local authority inputs disaster information into the system.
+5,"the disaster information can be geo-location information and stored in the gis database through the system, so that it can easily interoperate with other gis products, such as historical disaster information."
+5,the system helps to identify the responsible organization and contact information for each incidence.
+5,"(2) after disaster recognition, the initial impact and countermeasure are determined using available information."
+5,"throughout the process, the critical information is distributed to the general public, including people in the affected area, using the traditional area announcement siren, alert messages on the tv screen, and also by the broadcasting functions of mobile phones, car navigation systems, and fax machines."
+5,"the critical information includes the initial disaster information, alert message, evacuation order if necessary, and the nearest evacuation area and the route to get there."
+5,(3) on-site inspection is carried out by the local authorities.
+5,"the up-to-date information is continuously registered in the system and delivered to concerned organizations through the system, as well as to the people in the affected area, if necessary."
+5,"(4) while this initial operation is activated, the appropriate satellite data from the affected area are acquired."
+5,the data can be from a new acquisition and archived data from a past observation.
+5,"(5) the acquired data are transferred to the data processing facility through a high speed network, and the data are processed for further analysis by a duty officer – i.e. a monitoring user."
+5,(6) the processed data are analyzed to extract the damaged area.
+5,the prior registered information from the on-site inspection is used as auxiliary data.
+5,the initial damaged area map is available to the local authority and to the public through the system.
+5,the result of the initial analysis is forwarded to the disaster analyst for further investigation.
+5,(7) a disaster analyst carries out the further investigation and determines the high-risk area for secondary disaster – the high-risk map.
+5,"the analyst uses the satellite-derived data together with the rainfall map, geological data, historical disaster maps, and the data from pre-installed ground sensors."
+5,using the
+6,"high-risk map, the local authority distributes alert messages and updated disaster evacuation route maps through the system, to the people in high-risk area. monitoring (8) the relevant disaster information is published on the web."
+6,the information can system be used for educational purposes in order to improve the public awareness of the disasters.
+6,(9) the system will continue monitoring the area.
+6,"when a disaster or a symptom of disaster is observed by the satellite or ground sensor, alert messages will be 251 sent to the concerned organization by the system."
+6,"throughout the process, the relevant data are stored in the archiving system and updated in the disaster database for future use during any phase of the operation."
+6,"due to the delays related to earth observation data acquisition and processing, the disaster monitoring can be considered as a near-real-time process."
+6,the time scales of the described process range from the rapid time cycles of on-site rescue actions and decisions up to the long-term monitoring activity.
+6,the disaster can be registered to the system when the first disaster reports are received.
+6,"the initial information about the disaster is then immediately available, and data acquisition can be started."
+6,data acquisition is executed in parallel with local operations such as on-site inspection.
+6,in the worst case the data acquisition can be the bottleneck of the process.
+6,"largely depending on the data type, source and delivery method, the acquisition can take from less than an hour, up to a day."
+6,"after the data has been received, the initial damaged area map can typically be produced in less than an hour, depending on satellite data type and the type and impact of the disaster."
+6,the long-term monitoring activity may involve time spans of weeks or even months.
+6,monitoring can be set up for areas where disasters are likely to appear.
+6,the monitoring activity would regularly invoke data acquisition for the area and ideally the disaster analysis would be able to recognise disaster symptoms even before a disaster occurs.
+6,"user scenarios in the outlining and specification of the process described above, four roles for the involved human actors were identified (louhisuo et al., 2005; veijonen et al., 2006)."
+6,these roles were considered as the different user perspectives to the system.
+6,"in the system development, each user perspective would be provided with appropriate views and functionality to fulfil the corresponding user needs."
+6,the different user roles are listed below (see figure 2): .
+6,"local authorities operate near the disaster location, providing the initial disaster information and using the available satellite-based disaster area maps to support the rescue and evacuation actions."
+6,"for a new disaster, and for disasters that are set to be periodically monitored, the system initiates data acquisition for the disaster site. ."
+6,"prompted by the system, the monitoring user acquires and pre-processes data."
+6,"with the tools provided by the system, the monitoring user provides the initial satellite-image based disaster area map."
+6,the map becomes available for local authorities and other users. .
+6,the disaster map is refined further into a high-risk map by disaster analysts.
+6,"utilizing additional information sources such as rainfall maps, geological data or"
+7,"meq 18,3 252 figure 2."
+7,"user roles and information flow in the disaster monitoring process disaster history, the analysts use their expertise to provide a prognosis for the near-future development of the disaster and to estimate the high-risk area for the secondary disaster. ."
+7,"the largest user group is the public, including the people in the affected areas as well as media and institution representatives."
+7,for this user group the system provides up-to-date information about the ongoing disasters.
+7,"the system can also act as a channel for providing the disaster observations by the public, bringing the notice to the local authorities."
+7,the functionality of the system will be described here as user scenarios for each user role.
+7,the scenarios are accompanied with use case diagrams that were used in the system specification as for analysis of the tasks of each user type.
+7,"in addition, example screen shots are displayed for visualizing the implementation of the prototype system user interface."
+7,1) local authority scenario occurrence of a disaster can be considered as an entry-point to the presented disaster monitoring and management process cycle.
+7,the first concerned system user will be a local authority that will initiate the disaster into the system for further analysis and monitoring.
+7,"information regarding a new disaster arrives, for example as an emergency call to the local authority."
+7,"the user is logged in to the system, and is able to see the most recent ongoing disasters in the area if any."
+7,"as it is apparent that a new disaster is in question, the user establishes a new disaster entry in the system during or after the emergency call."
+7,"the user feeds in the available disaster information – location information, impact level, damage to infrastructure etc. – and the new disaster appears as the latest one in the system."
+7,the organisation responsible for the disaster remains as
+8,yet undefined.
+8,"the user reports to the responsible manager, and the local organisation disaster manager will discuss the neighbour or other relevant organisations about who will monitoring take responsibility of the new disaster management."
+8,"as a new disaster gets initiated in the system, an alert message will be passed to monitoring users and analysts in order system to start disaster data acquisition and analysis."
+8,later on – after the monitoring user has acquired and processed satellite data – the responsible local authority contact person will receive sms messages as the damage 253 area map or the high-risk map is released or updated in the system.
+8,the local authority user can access the maps and utilize them in local operations.
+8,"based on the damage area map and the high-risk map as well as site inspection data, the local authority decides upon evacuation and rescue operations."
+8,the local authority also decides about the alerts or information to be published.
+8,"in analysing disaster management operations, local authorities may consult the stored disaster history information."
+8,"in figure 3 the tasks of the local authority are presented as a uml (unified mark-up language) use case diagram (fowler, 2003)."
+8,figure 4 presents views from the user interface that has been developed for the local authority user.
+8,the screen snapshot on upper left contains list of the disaster in the area which is presented in the map viewer.
+8,the user can select of the area of interest by assigning an area with the map tool on the screen.
+8,the listed disasters correspond to the selected area.
+8,"after selecting a single disaster from the list, detailed disaster information will be presented in the disaster information window."
+8,"2) monitoring user scenario the monitoring user is responsible for acquiring, monitoring and pre-processing the satellite data that is needed for disaster analysis."
+8,"after the local authority has added a new disaster to the system, an alert message about a new disaster is sent to the figure 3."
+8,tasks of the local authority
+9,"meq 18,3 254 figure 4."
+9,prototype user interface examples for the local authority user monitoring user on duty.
+9,the user opens the disaster information and gets the disaster location information as the basis for the data search.
+9,the tasks of the monitoring user are presented in figure 5 as a uml use case diagram.
+9,"the procedure of the monitoring user is simplified and as automated as possible in order to minimize human errors and speed up the entire operation including early warning, evacuation and rescue."
+9,"when the system has received the satellite data, the user is informed about data availability."
+9,"depending on the disaster type and satellite data type, the system automatically selects appropriate methods for filtering and damage area extraction from available choices."
+9,"during the procedure, certain tasks of map production would require user interaction."
+9,"in the flooding case, the system calls the analysis software module to calculate a threshold value for water area extraction."
+9,the system shows the result of the water area map with the automatically detected initial threshold value.
+9,the user can visually inspect the result and interactively adjust the threshold value.
+9,"the system allows the user to display several map alternatives for comparison as shown in figure 6, and the user selects the one to be stored in the system database."
+10,disaster monitoring system 255 figure 5.
+10,tasks of the monitoring user figure 6.
+10,"part of the user interface for visual comparison of flood map alternatives in area extraction finally, the monitoring user releases the damage area map so it becomes accessible by other users."
+10,"when a new or updated damage area map is released, the system will send an alert message to the disaster analyst on duty and to the responsible local authority."
+10,"3) disaster analyst scenario the disaster analyst is responsible for analyzing the disaster, investigating the damage and estimating the high-risk area for the secondary disaster."
+10,the disaster analyst receives an alert message when the damage area map is ready for further analysis.
+11,"meq in the analysis task, the disaster analyst may utilize auxiliary data such as rainfall 18,3 maps and weather forecasts for flooding analysis."
+11,the result of analysis is the definition of the high-risk area that can be categorized to alert levels.
+11,the areas of different alert levels are indicated on the high-risk map.
+11,the high-risk map is uploaded to the system to be released and shared by local authorities and other users.
+11,"again, an alert message is passed to the local authority to inform them about the availability of 256 the newly released high-risk map."
+11,"in figure 7, the tasks of the disaster analyst are presented as a uml use case diagram."
+11,"in the prototype system, the functions for the disaster analyst were not implemented."
+11,"the scenario and requirements were, however, specified for the future system development."
+11,"4) public user scenario for the broader public, including the people in the affected areas, the system provides a web-based information service, where people can find information published for the ongoing and past disasters."
+11,the information is targeted to private citizens as well as to the media.
+11,the people in the disaster area and high-risk areas need the up-to-date information for the evacuation.
+11,"this critical information is distributed using traditional siren alert and alert message on the tv screen, and also by broadcasting function of mobile phones, car navigation systems, and fax machines."
+11,the public users can be divided into three subtypes (figure 8): people located in the affected areas.
+11,these people receive broadcasted alert messages and may want to access further information.
+11,a link to that information is given in the alert message.
+11,this information need is focused onto a specific disaster and to a limited number of people living near the disaster location.
+11,their information access needs to be prioritized and it should not be disturbed by the simultaneous service use of other public users.
+11,registered public users.
+11,these users contain media representatives who author and publish disaster announcements and news.
+11,"in addition to media, these users may also be experts or representatives of other organizations relevant to disaster monitoring and management."
+11,"these users use the system for professional communication purposes, figure 7."
+11,tasks of the disaster analyst
+12,disaster monitoring system 257 figure 8.
+12,the three public user types and their tasks and they should be provided with an undisturbed service if possible.
+12,"thus, the information site needs to be restricted to registered users only."
+12,general public users.
+12,these people may have relatives or friends in affected areas or they are otherwise interested in a specific disaster.
+12,these users access a public web site with information about the ongoing disasters.
+12,"in the prototype system, information services for the public users were not yet implemented."
+12,"however, supportive use of public virtual globe software was explored as a tool for distributing disaster area maps."
+12,figure 9 presents an example of displaying a flood map with google earth viewer.
+12,system architecture the framework for the system specification has been derived from the disaster monitoring and management process descried above.
+12,the information model and architecture of the system have been designed to support this process.
+12,the system is aiming to increase interoperability of newly developed and existing tools and data that can be used in disaster management.
+12,the system prototype is currently being implemented as a web application that provides the geographically spread clients with views to a shared disaster database.
+12,"for the professional users – local authorities, monitoring users and disaster analysts – authentication (meaning registration and login) will be required."
+12,for public users the released information will be presented on a public web site and will be available with no login required.
+12,the components of the system architecture are presented in figure 10.
+12,the disaster monitoring application runs under a web server.
+12,"in the prototype implementation, the web server also hosts a gis web map server, but the gis utility can also be distributed to a dedicated map server."
+12,the system uses an sql database for storing information about disasters.
+12,"the disaster information also contains references to the satellite data, disaster area map and high-risk map images."
+12,the data and image files themselves are stored on the server’s disk storage.
+12,the satellite-based data requires processing and analysis before it can be used as a disaster area map.
+12,the processing includes geometrical correction of the satellite data.
+13,"meq 18,3 258 figure 9."
+13,flood map displayed on google earth virtual globe figure 10.
+13,disaster monitoring application architecture
+14,such pre-processing algorithms are encapsulated into eoframe service modules that disaster can be utilized – not only by disaster monitoring but also commonly by other earth monitoring observation applications.
+14,"according to the concept of the eoframe framework, these modules can be implemented using web services technology, enabling service system distribution, for example based on available computation resources (kotovirta et al., 2006)."
+14,the prototype system utilizes level 0 data (raw data) from envisat advanced 259 synthetic aperture radar (asar).
+14,acquired sar data is transferred to the sar processing facility located in japan using a high-speed connection in order to produce single look complex (slc) images and then power images.
+14,this sar data processing chain is another algorithm to be formed into a modularized processing service.
+14,further analysis methods are used for extracting the damage area from the pre-processed image data.
+14,"in the prototype, the flooding case was investigated."
+14,"for the flood analysis, a water area extraction method was implemented as another eoframe service module."
+14,the water area extraction module calculates an appropriate threshold value to extract the water area using a histogram of intensity value on each pixel.
+14,the communicational function of the disaster monitoring and information system is two-fold.
+14,it serves as an information channel between the involved authorities and experts in their task of producing and sharing up-to-date information and prognosis for the disaster circumstances.
+14,"on the other hand, the system serves as a web-based information source for the general public, responding to their need for disaster information."
+14,"in addition to disaster information web pages, the system can also use google earth viewer as an optional channel for publishing satellite-based disaster maps."
+14,the web-based information is supported by mobile channels for sending alert messages.
+14,"cell-based broadcast messages can be sent to all mobile phones located in a specified area, regardless of the subscription."
+14,regular sms messages are used for communication during the satellite data processing and map production process.
+14,public users may also subscribe to disaster alert messages.
+14,"conclusions and recommendations development of the envimon disaster monitoring and information system has been an effort to specify and establish an operative infrastructure for connecting satellite derived information to end users such as rescue officers, disaster analysts and the people in the affected areas, as well as the broader public."
+14,"the system provides tools and methods for satellite data processing and analysis, data management, and distribution."
+14,frequent data acquisition of satellite data and its fast delivery are key factors of real time monitoring.
+14,traditional alert systems need to be reconsidered in order to benefit from the technology.
+14,"a disaster alert messaging service has been started, on a subscription basis, for testing purposes in a few small- to mid-sized cities in japan."
+14,"in the case of hiroshima which has 200,000 residences, a landslide alert messaging service started on a subscription basis (hiroshima disaster prevention web site, 2006)."
+14,"in one month, the number of subscribers was 4,500, and after one year it has increased to 11,500."
+14,this service was operated on a local level using multimedia
+15,"meq messaging, facing the limit of server capacity and traffic load."
+15,"however, it proves the 18,3 interest by citizens and the potential usefulness of mobile phones for information handling during crises."
+15,"the development should be carried out in close cooperation with the local authorities and service providers, i.e. mobile and navigation operators."
+15,it is important to get the concerned organizations involved in the system development at early stage.
+15,260 car navigation using 3g communication has also potential to play the role of information handling during crises.
+15,"it operates real-time services already, so it can use for routing people to avoid travel into the dangerous area."
+15,some of the local authorities are using mobile phones with gps functions for their daily operations.
+15,the information can be reported to the local centre with gps-derived location information.
+15,the market share of gps-installed mobile phones will most probably expand continuously.
+15,that enables the public to play an important role as a member of a local authority by reporting disaster information to the system with geo-location data.
+15,"the e-community platform used in several cities in japan follows this future concept (ikeda, 2006; kawai et al., 2006; nagasaka et al., 2006)."
+15,"with the experiences on specifying and developing the system so far – and after deriving experiences from piloting the system, the further aim is to extend the system from the prototype implementation, to cover more earth observation data types and provide analysis methods for supporting more disaster types."
+15,the future development would be concerned with verifying and refining the underlying operative disaster monitoring process.
+15,"to get the users familiar with the systems and processes being developed, an e-learning environment for analysts and rescue staff could be considered."
+15,"the future development would also involve the discussed aspects of mobile communications and navigation, as well as the communal aspects of the e-community concept."
+15,the system utilizing earth observation is one complementary tool for carrying out the disaster management and mitigation in the best possible way.
+15,"references ahola, j."
+15,"(2006), “environment monitoring using earth observation”, avali business opportunities from space technology (technology programs report, august 2006), tekes, helsinki, pp."
+15,"alegre, c. and sassier, h."
+15,"(2006), “win: a new geo-information architecture for risk management”, proceedings of the 12th ec & ec gis workshop, innsbruck, austria, 21-23 june 2006."
+15,"annoni, a., atkinson, m., denzer, r., hecht, l., millot, m., pichler, g., sassen, a-m., couturier, m. and alegre, c. (2005a), towards an open disaster risk management service architecture for inspire and gmes, european commission, london."
+15,"annoni, a., bernard, l., douglas, j., greenwood, j., laiz, i., lloyd, m., sabeur, z., sassen, a.-m. and serrano, j.-j. (2005b), “orchestra: open architecture and spatial data infrastructure for risk management”, proceedings of the international conference on risk and emergency management, hannover, germany, 8-9 june 2005."
+15,"couturier, m. and wilkinson, e."
+15,"(2005), “open advanced system for improved crisis management (oasis)”, proceedings of the 2nd international conference on information systems for crisis response and management, brussels, belgium, 18-20 april 2005."
+16,"economic research office, general policy division, information and communications policy disaster bureau (2004), general policy division, information and communications policy bureau (2004), information and communications in japan, white paper 2004, ministry of public monitoring management, home affairs, posts and telecommunications, tokyo. system economic research office, general policy division, information and communications policy bureau (2006), information and communications in japan, white paper 2006, ministry of public management, home affairs, posts and telecommunications, japan."
+16,"261 fowler, m."
+16,"(2003), uml distilled: a brief guide to the standard object modelling language, 3rd ed., addison-wesley, reading, ma."
+16,"hiroshima disaster prevention web site (2006), hiroshima prefecture, japan (in japanese only) available at: www.bousai.pref.hiroshima.jp/hdis/index.jsp (accessed 31 october 2006)."
+16,"hoshino, y., maruyama, h. and shimoyama, y."
+16,"(2003), “steps towards digital japan”, proceedings of the cambridge conference 2003, cambridge, uk, 21-25 july 2003."
+16,"ikeda, s."
+16,"(2006), “risk governance framework and e-community platform of disaster risk communication: the second stage of the nied research project”, proceedings of the international disaster reduction conference, davos, switzerland, 27 august-1 september 2006, vol. 3, p."
+16,"jaaksi, a., aalto, j.-m., aalto, a. and vättö, k."
+16,"(1999), tried & true object development – industry-proven approaches with uml, cambridge university press, cambridge."
+16,"kawai, t."
+16,"(2006), “building ‘e-community’ which is strong against disaster”, proceedings of the international disaster reduction conference, davos, switzerland, 27 august-1 september 2006, vol. 3, p."
+16,"keller, r. and owens, t.j."
+16,"(2003), “geon (geoscience network) – a first step in creating cyberinfrastructure for the geosciences”, electronic seismologist, vol."
+16,74 no.
+16,"kotovirta, v., kanniainen, j., veijonen, t. and neuvonen, s."
+16,"(2006), “building an application framework for monitoring the environment”, proceedings of the igarss 2006, denver, colorado, usa, 31 july-4 august 2006."
+16,"louhisuo, m., rauste, y., andersson, k., häme, t., ahola, j. and morohoshi, t."
+16,"(2005), “use of sar data for natural disaster mitigation in the mobile environment”, proceedings of the 2004 envisat and ers symposium, salzburg, at, 6-10 september 2004 european space agency, (special publication) esa sp (2005) no. 572, pp."
+16,2013-20.
+16,"meertens, c., seber, d., baru, c. and wright, m."
+16,"(2005), “geon developments for searching, accessing, and visualizing distributed data”, paper presented at the american geophysical union, fall meeting, san francisco, ca, 5-9 december 2005, in23c-03."
+16,"nagasaka, t."
+16,"(2006), “disaster risk governance by e-community”, proceedings of the international disaster reduction conference, davos, switzerland, 27 august-1 september 2006, vol. 3, p."
+16,"takakuwa, n."
+16,"(2001), “geographic data clearinghouse activity in gsi (geographical survey institute)”, proceedings of the international conference on dublin core and metadata applications 2001, national institute of informatics tokyo, japan, 22-26 october 2001, pp."
+16,287-8.
+16,"veijonen, t., louhisuo, m., ahola, j., timonen, m. and morohoshi, t."
+16,"(2006), “envimon disaster monitoring system”, proceedings of the international disaster reduction conference, davos, switzerland, 27 august-1 september 2006."
+16,"vol. 3, pp."
+16,812-14.
+16,"web server survey (2006), web server survey, netcraft ltd, available at: http://news.netcraft. com/archives/2006/10/06/october_2006_web_server_survey.html (accessed 31 october 2006)."
+17,"meq yamamoto, n., nakamura, r., yamamoto, h., tsuchida, s., kojima, i., tanaka, y. and sekiguchi, s."
+17,"(2006), “geo grid: grid infrastructure for integration of huge satellite imagery and 18,3 geoscience data sets”, proceedings of the 6th ieee international conference on computer and information technology (cit’06), seoul, korea, 20-22 september 2006, p."
+17,"youn, c., baru, c., bhatia, k., chandra, s., lin, k., memon, a., memon, g. and seber, d."
+17,"(2005), “geongrid portal: design and implementations”, paper presented at the gce’05 workshop on grid computing based on sc’05, seattle, wa, 18 november 2005."
+17,262 corresponding author machiko louhisuo can be contacted at: machiko.louhisuo@vtt.fi to purchase reprints of this article please e-mail: reprints@emeraldinsight.com or visit our web site for further details: www.emeraldinsight.com/reprints
+18,reproduced with permission of the copyright owner.
+18,further reproduction prohibited without permission.

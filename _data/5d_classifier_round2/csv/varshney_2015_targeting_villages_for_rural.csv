@@ -1,0 +1,273 @@
+page,p
+1,"big data volume 3 number 1, 2015 mary ann liebert, inc."
+1,doi: 10.1089/big.2014.0061 original article targeting villages for rural development using satellite image analysis kush r.
+1,"varshney,1,2,* george h."
+1,"chen,3 brian abelson,1,4 kendall nowocin,3 vivek sakhrani,5 ling xu,6 and brian l."
+1,"spatocco7 abstract satellite imagery is a form of big data that can be harnessed for many social good applications, especially those focusing on rural areas."
+1,"in this article, we describe the common problem of selecting sites for and planning rural development activities as informed by remote sensing and satellite image analysis."
+1,effective planning in poor rural areas beneﬁts from information that is not available and is difﬁcult to obtain at any appreciable scale by any means other than algorithms for estimation and inference from remotely sensed images.
+1,we discuss two cases in depth: the targeting of unconditional cash transfers to extremely poor villages in sub-saharan africa and the siting and planning of solar-powered microgrids in remote villages in india.
+1,"from these cases, we draw out some common lessons broadly applicable to informed rural development."
+1,key words: data mining; machine learning; predictive analytics introduction conﬂict and disasters. .
+1,"the need to minimize [the although urbanization has been one of humanity’s possibilities of shocks] undermines people’s ability to deﬁning storylines in the past century, the world seize opportunities, which generally come with a mea- bank estimates that 47.0% of the world’s population sure of risk.’’"
+1,"many rural people are stuck in poverty still lives in rural areas; this estimate is 70.6% for traps along several dimensions.3 the least developed countries according to the united in this article focused on social good, we discuss de- nations classiﬁcation.1 poverty is a serious issue in velopment activities aimed at uplifting rural popula- many rural areas."
+1,"the international fund for agricul- tions out of these poverty traps, speciﬁcally caused by tural development (ifad) recently reported that at lack of assets and limited opportunities."
+1,"in particu- least 70% of the world’s very poor people live in rural lar, we show how data-driven approaches can enable areas, with south asia having the largest number of such programs to be more efﬁcient and effective."
+1,"we rural poor people and sub-saharan africa having the detail two such examples: one addressing lack of assets highest incidence of rural poverty.2 and the other addressing lack of opportunities due to ifad reports that2 ‘‘rural poverty results from lack insufﬁcient infrastructure. of assets, limited economic opportunities and poor one way to cushion the poor against shocks is via education and capabilities, as well as disadvantages unconditional cash transfers, in which households are rooted in social and political inequalities. ."
+1,"house- given money with no strings attached; recipients are holds fall into poverty primarily as a result of shocks free to pursue their own goals with those funds along such as ill health, poor harvests, social expenses, or whichever dimension or dimensions make sense to 1 datakind datacorps, new york, new york."
+1,"2 mathematical sciences and analytics department, ibm thomas j."
+1,"watson research center, yorktown heights, new york."
+1,"3 department of electrical engineering and computer science, 5engineering systems division, 6health sciences and technology division, and 7department of materials science and engineering, massachusetts institute of technology, cambridge, massachusetts."
+1,"4 enigma, new york, new york."
+1,"*address correspondence to: kush varshney, phd, mathematical sciences and analytics department, ibm thomas j."
+1,"watson research center, 1101 kitchawan road, yorktown heights, ny 10598, e-mail: krvarshn@us.ibm.com ª kush r."
+1,varshney et al.
+1,"2015; published by mary ann liebert, inc."
+1,"this open access article is distributed under the terms of the creative commons license (http://creativecommons.org/licenses/by/4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly credited."
+2,42 varshney et al. them.
+2,unconditional cash transfer programs have been selco foundation.
+2,"the objective in this case is to shown to alleviate poverty in randomized controlled tri- determine the optimal grid layout and design in villages als because the poor are able to seize opportunities that based on the locations of houses, other buildings, and would have been too risky without the cash transfer.4 roads extracted from satellite imagery."
+2,then villages another way to cushion rural communities against can be ranked by the cost-effectiveness of the design. shocks is by improving diversiﬁcation opportunities these two cases of rural development are not and creating less risky environments through better in- unique.
+2,"one of the classical problems in remote sens- frastructure and utilities, including roads, electricity, ing, the determination of land use and land cover,7 and water, as well as services such as education, basic can be used to inform agricultural decision making, healthcare, information and communication technol- quantify deforestation, and perform other tasks for the ogy services, and ﬁnancial services.2 within the infra- beneﬁt of the rural poor."
+2,"night-time illumination im- structure and utilities category, decentralized energy aging provides valuable data for estimating access to production is especially effective to alleviate poverty electricity (or lack thereof).8 in rural communities.5 examples more similar to the two rural selection investment in rural development requires a good problems mentioned above include selecting locations deal of planning."
+2,"especially under budget constraints, for the extraction of potable water,9 selecting sites for one is required to select which rural locations, villages, the placement of microscale hydropower stations,10 or other jurisdictional divisions to target for develop- and selecting warehouse locations and villages to be ment activities in order to optimally utilize resources served by logistics companies for the delivery of goods according to criteria of interest."
+2,a major obstacle for ordered via e-commerce.
+2,another related problem is the planning of rural development activities is the the selection of paths over rural areas to be served by lack of existing infrastructure.
+2,many of the rural poor internet-service-providing high-altitude balloons such live in remote villages without access to roads and com- as google’s project loon. munication services.
+2,"this presents logistical and ﬁnan- the remainder of the article is organized as follows. cial challenges to gathering data across large numbers in the section satellite imagery, we discuss the avail- of villages in a region."
+2,it is precisely this information ability and characteristics of satellite images of rural that is essential to the targeting and planning of rural areas.
+2,"we describe the givedirectly unconditional development activities. cash transfer case in the section targeting uncondi- one option to overcome the logistical challenges of tional cash transfers, followed by the selco founda- acquiring data from people on the ground is remote sens- tion electriﬁcation case in the section planning rural ing."
+2,remotely sensed satellite imagery can be analyzed electriﬁcation.
+2,"in discussion and conclusions, we dis- from the rural development perspective to yield action- cuss some of the common lessons we can draw from able insights for planning."
+2,"in this work, we describe two deploying these types of solutions and conclude. sample cases of satellite image analysis for prioritizing villages for different types of rural development; our satellite imagery overall intention is to put forth a general paradigm for several satellites in orbit above the earth are used for using remote sensing for social good in the rural setting. acquiring images of the ground."
+2,"most are very expen- the ﬁrst case we detail is the selection of villages to sive endeavors, but a recent trend has seen startup receive unconditional cash transfers in east africa by companies such as skybox imaging, planet labs, and the nongovernmental organization (ngo) givedir- urthecast launch low-cost satellite imaging solutions.11 ectly.6 the criterion is to select the poorest villages as the usefulness of satellite images can be examined indicated by the types of roofs of households, which along several dimensions of satellite design character- are distinguishable in satellite images."
+2,"poorer house- istics and acquisition conditions, such as spatial res- holds tend to live under thatched roofs and less poor olution, temporal resolution, spectral range, spectral households under metal roofs; thus, givedirectly resolution, cloud coverage, time of capture, and off-nadir would like to operate in villages with the largest pro- angle."
+2,finer resolutions and a larger spectral range tend portions of households living under thatched roofs. to incur higher costs of acquisition.
+2,it is possible to more the second case we detail is the selection of villages easily distinguish foliage if the spectral range includes to receive investment in microgrid and renewable en- infrared frequencies.
+2,a large off-nadir angle impacts ergy generation development in india by the ngo the visibility of the sides of buildings rather than just
+3,targeting villages for rural development 43 their tops.
+3,clouds are opaque except at radio frequen- work to other organizations.
+3,"first, funds are solicited cies, and so typical satellite images taken of cloud- from individual and institutional donors."
+3,once a sufﬁ- covered areas do not show anything of use.
+3,"very low cient amount has been collected, the ngo initiates a temporal resolution may result in images of different campaign to disburse the donations to the extremely areas being acquired in different seasons of the year, in poor."
+3,the ﬁrst part of a campaign is enrolling ex- which visual characteristics of the ground are different. tremely poor households to be recipients; the second keeping the costs of imagery down is particularly is transferring funds to recipients via mobile money important in social good endeavors.
+3,"fortunately, satel- systems; and the third is conducting telephone and lite imagery is generally available for free or at low cost in-person follow-up with each recipient. with enough quality to be useful for tasks such as the targeting extremely poor households starts by iden- ones described in the sequel, including areas such as tifying broad regions of the country with high poverty india and sub-saharan africa."
+3,"for example, the google rates through data from the national census (which maps api allows the free downloading of visible-light does not have the granularity to make village-level de- satellite images with enough spatial resolution to dis- terminations of poverty)."
+3,"within those regions, villages tinguish buildings; with the startup companies joining and households are selected through a transparent cri- the fray, the ﬁeld of satellite imaging is poised to be de- terion that is associated with extreme poverty."
+3,in kenya mocratized.
+3,"free or low-cost imagery sometimes lacks and uganda, where the ngo currently operates, the quality in some dimensions, such as images available extremely poor tend to live in homes with thatched in adjacent regions from different seasons or images roofs, whereas the less poor tend to live in homes with taken with large off-nadir angles."
+3,solutions need to metal roofs.
+3,"villages with a large percentage of low-quality be robust against these issues, for example, by building housing (as well as access to a mobile money agent) are different machine learning models for images taken in targeted."
+3,"after villages and households within villages different seasons or by sufﬁciently rectifying images be- have been selected, money is transferred directly to re- fore further processing."
+3,"free imagery may also suffer cipients’ mobile accounts. from image compression artifacts, but such artifacts the existing approach to village selection involved have been shown to not signiﬁcantly degrade machine multiple rounds of site visits because governmental or learning tasks encountered in remote sensing.12 other poverty data do not exist at village-level resolu- tion."
+3,"in this project, we developed a remote sensing sys- targeting unconditional cash transfers tem that estimates the quality and density of housing in the ﬁrst case we describe is a pro bono satellite image large areas of central east africa to facilitate village se- analysis project developed through the datakind data- lection, thereby eliminating the need for the most ex- corps in conjunction with givedirectly, an ngo that pansive and expensive ﬁrst round of site visits."
+3,"note aims to help people living in extreme poverty by making that although other data and factors can help reﬁne unconditional cash transfers to them via mobile tele- the indication of poverty, givedirectly uses roof type phony.6 unlike other charitable giving, unconditional as the only indicator and thus it is the only indicator cash transfers do not presuppose that livestock, training we consider in our approach."
+3,"speciﬁcally, we applied programs, or any other items are best for the recipients. a combination of image processing and machine learn- evidence from several randomized control trials shows ing methods on free satellite imagery from google that this method of charity has large positive effects on maps, trained on crowdsourced data, to build a regres- multiple measures of recipients’ well-being.4 addition- sion model for the number of houses of different roof ally, by forgoing large intermediary infrastructures, do- types in an image patch."
+3,"the machine learning model nations can be used extremely efﬁciently; to date, more allowed us to construct heat maps of housing density than 90% of each donated dollar has reached a recipient. and thatched-roof proportion from individual image in this section, we ﬁrst provide a summary of the project patch-level estimates and aggregate these estimates to and then provide more technical details. produce village-level proportions of thatched roofs, resulting in a ranked list of villages to target."
+3,"summary the data-driven prioritization of villages was initially currently operating in kenya and uganda, givedir- deployed in three districts in kenya in february 2014. ectly takes an end-to-end operations model comprising in total, the villages selected through the proposed ap- several steps and does not outsource or subcontract proach received over 4 million u.s. dollars in direct"
+4,44 varshney et al. cash transfers.
+4,"this satellite image analysis approach all roofs in the region are approximately the same saved approximately 100 person-hours of effort that size and shape, and have consistent appearance condi- would have been incurred as a result of manual village tioned on the type of roof."
+4,"therefore, we used template selection methods.6 matching13 with two different small templates to lo- cate all roofs in an image patch: one completely white technical details and the other a typical thatched roof center from one as discussed above, our objective was to estimate the of the training images."
+4,"template matching algorithms number of thatched roofs and the number of metal have a threshold value as a parameter; since our ulti- roofs in small image patches in east africa, or equiva- mate objective was to derive features for regressions, lently the total number of roofs and the proportion we did not ﬁx a single threshold but took counts of of roofs that are metal."
+4,example satellite image patches roofs in the image patch at several different threshold from the google maps api are shown in figure 1. values as features.
+4,"the human visual system is able to distinguish metal moreover, we trained a random forests classiﬁer roofs from thatched roofs because the metal roofs based on the distribution of colors in a small area sur- are bright white or gray rectangles, whereas thatched rounding the roof locations in the training set to distin- roofs are brownish with less crisp and slightly less guish metal and thatched roofs, and applied it to obtain straight edges. soft classiﬁcations for each roof location obtained via we wanted to learn machine learning models for the template matching."
+4,"each pixel is represented by the two variables of interest because it would have three numbers: a red, a green, and a blue intensity been too cumbersome for human annotators to man- value; the color distribution is simply the set of three ually label the approximately 50,000 image patches histograms constructed from the intensity values in needed to cover the three kenyan districts in the the small area."
+4,the average roof type classiﬁcation score pilot campaign.
+4,"however, it was not unreasonable to at each template and threshold provided us with an- use human annotators to produce a training set."
+4,there- other set of features for the ultimate regressions.
+4,"we fore, over one weekend, we enlisted 10 volunteers to also used the color distribution values of the entire label approximately 1,500 image patches through an image patch as features. interactive crowdsourcing platform we developed that with these three types of features and the response allows the user to click on roofs and label them as variables from the crowdsourced data, we trained ran- metal or thatched."
+4,a screenshot of the application dom forests regressions for the total number of roofs in may be found in ref.6 the image patch and for the proportion of roofs metal fig.
+4,sample satellite image patches of the region with (a) thatched roofs in the center and (b) a metal roof in the center.
+5,targeting villages for rural development 45 in the image patch.
+5,"we found that separate classiﬁers in the feature extraction and separate regression functions for different satellite acquisition conditions (i.e., hazy, wet, and dry) yielded better accuracy than the same models for all conditions due to signiﬁcant variation in visual appearance of imagery under the different conditions.6 we obtained a 10-fold cross-validation mean abso- lute error of 1.95 on the number of roofs and 0.162 on the proportion metal."
+5,"while our ﬁnal step was to ag- gregate individual image patches to village-level pro- portion thatched, we did not have ground truth labels for images of entire villages, and so we characterized the error as follows."
+5,"villages cover an area approxima- tely 150 image patches in size, which is also the number of image patches in the testing partition of each fold of the tenfold cross-validation."
+5,"therefore, we averaged the estimated aggregate proportion thatch in the test parti- tion and compared it to the true aggregate proportion thatch, and averaged across the 10-folds."
+5,"the resulting absolute error of the ‘‘village-level’’ proportion thatched was 0.020, which is 2.87% when expressed as an abso- fig."
+5,heat maps of three districts in kenya lute percentage error.
+5,"the village-level error was much showing (a) estimated proportion of roofs that smaller because the individual image patch estimates are metal, and (b) estimated number of roofs per were fairly unbiased. 400 · 400 pixel image."
+5,"using the learned random forest regressions, we scored all three kenyan districts of interest to obtain the heat maps in figure 2."
+5,"we aggregated the estimates within village boundaries to obtain the village-level quarters for sons who have reached puberty but have results shown graphically in figure 3, which can also not yet married, and so on."
+5,"the algorithm counted be presented as a ranked list of villages for givedirectly’s each of these structures as a separate roof, whereas targeting."
+5,"obtaining geographic coordinates for village the humans on the ground only counted the roofs of boundaries in order to carry out the aggregation, as the main houses."
+5,"this issue presents an area for future shown in figure 3, was nontrivial."
+5,"processing the only research. source of these boundaries, a collection of pdf ﬁles, required signiﬁcant manual effort.6 in the course of the february 2014 campaign, the givedirectly staff members who visited the targeted villages to enroll individual households also manu- ally collected statistics on household roof types."
+5,"in comparing the village-level proportion thatched values obtained from the satellite image analysis to the ones obtained on the ground, we found that the estimated values were much larger than the values obtained by staff members."
+5,we also found that the correlation be- tween the two sets of values was not as high as we would have liked.
+5,in analyzing these observations fur- fig.
+5,"estimated proportion of roofs that are ther, we found the root cause to be the fact that house- metal per village. holds may construct thatched-roof structures separate from the main house to be used as kitchens, sleeping"
+6,46 varshney et al.
+6,planning rural electriﬁcation the village.
+6,"although several companies have found the second case we describe is a project initiated solvent business models deploying such systems, they through the 2014 mit ideas global challenge and are not likely candidates for impacting the much larger in partnership with the selco foundation, an india- multimillion person electriﬁcation challenge due to based ngo that focuses on energy access for under- the amount of time and human capital it would require served communities."
+6,"of india’s 1.2 billion citizens, to go house by house."
+6,"a better method would be to le- approximately 300 million (or 25%) lack access to elec- verage existing repositories of satellite imagery from tricity.14 although most urban poor have access to grid which we can automatically map villages and extract power, although unpredictable and erratically priced, valuable house-level data. rural indians have no such hope of being connected another failure mode of many microgrid companies to the larger network due to their distance from pri- is a distinct inability to scale up power supply for exist- mary infrastructure, lower population densities, and ing consumers and to expand to future sites."
+6,"micro- exorbitant cost of power on a per kwh basis due to grids are often designed to provide a particular level transmission losses from physical distance and stealing. of service at minimal cost, and as a result the hardware for these reasons, rural indians (70% of the total pop- (converters, wire gauges, etc.) lock consumers in at ulation15) often have the greatest need but fewest alter- maximum power levels in spite of the fact that once natives beyond biomass and kerosene."
+6,"unfortunately, electriﬁed, per-capita demand tends to grow quickly. neither of these offers the developmental promise with digital village modeling, this evolution in demand that electricity does in the form of education, commu- can be statistically modeled to assist decision making. nication, or manufacturing."
+6,"of the few electriﬁcation at a larger business model level, companies currently options available, one of the most exciting opportuni- rely on site-by-site tailored approaches for electriﬁca- ties is the creation of stand-alone village-sized micro- tion and as a result are unable to translate success grids powered by local generation and distributed from one location to another and unlock the enormous among the participants."
+6,such distribution grids are ex- market potential.
+6,"modeling what characteristics make citing not only because they allow for more efﬁcient use locations similar and suitable could improve a compa- of renewably generated energy but also because they ny’s ability to transfer success across locations. are designed to operate independently from any larger we propose to empower microgrid and renewable grid and therefore are unaffected by the remoteness generation development in rural india through a soft- of a site. ware tool that rapidly identiﬁes, digitizes, and models rural development sites."
+6,"unlike shl systems that in- summary stall electriﬁcation systems at the individual house in spite of the excitement surrounding microgrids, there level, microgrid installations demand a greater degree have been relatively few successful long-term players in of planning as an increasing percentage of the cost– the market as a result of the signiﬁcant challenges performance nexus is functional on the extent of wiring faced during implementation."
+6,compared to ﬁrst-world and sizing of shared generation and storage systems.
+6,"in grid development, microgrid companies face distinct this respect, microgrids have signiﬁcant spatial chal- challenges that greatly hinder their ability to succeed— lenges that do not exist in more simplistic rural electri- challenges that we believe can be surmounted by data ﬁcation solutions."
+6,"to address this, our tool will enable analytics."
+6,"first, most microgrid companies face large microgrid developers to effectively and efﬁciently ana- knowledge gaps pertaining to village geographies and lyze rural sites and plan infrastructures most optimal topologies."
+6,"little to no information about the village’s for long-term growth through three main ways: size and building layout exists prior to project selection, and as a result village identiﬁcation and modeling is 1."
+6,site identiﬁcation and selection: india has vast mostly done via arbitrary personal connections and ad numbers of unique rural areas without electricity. hoc paper-and-pencil planning methods.
+6,"compounding these sites vary substantially in their topologies this problem is the fact that most rural power companies and housing proﬁles, both of which strongly in- have historically focused on solar home lighting (shl) ﬂuence microgrid planning for a speciﬁc site."
+6,in systems as their main tool for electriﬁcation.
+6,"these order to provide these key parameters, the ﬁrst systems are installed house by house and operate in a part of our tool rapidly analyzes satellite images standalone manner from the rest of the buildings in and automatically extracts villages and building"
+7,targeting villages for rural development 47 features.
+7,"these hundreds of digitized villages can mate the number of thatched and metal roofs, in then be rapidly compared on the basis of popula- planning rural electriﬁcation, we aim to estimate the tion, size, density, and shape. cost of installing a microgrid in a village with the 2."
+7,"site modeling and optimization: once a site has help of information on locations and shapes of build- been located and its features have been analyzed, ings in the village."
+7,"in contrast to the google maps sat- grid developers need to design an energy infra- ellite imagery used in the givedirectly example, we structure overlay."
+7,our software models the village used here commercial satellite imagery that included buildings and simulates various grid topologies near-infrared measurements as well.
+7,"at a high level, with user-input cost functions."
+7,this allows devel- our tool has two steps.
+7,"in the ﬁrst step, it identiﬁes opers to select the most optimal design speciﬁc to where buildings are in satellite images of villages."
+7,"in the site. the second step, it simulates thousands of different 3."
+7,"site expansion planning: once electriﬁed, de- microgrid wiring topologies per village and estimates mand tends to grow in time as a result of expand- the cost for each wiring topology based on the actual ing individual usage proﬁles as well as village costs incurred by our partner organizations."
+7,this sec- development.
+7,"using past and present satellite im- ond phase of work beneﬁts from an iterative process ages of electriﬁed villages, our tool projects the of comparing projected costs with the actual costs for growth of a village following initial electriﬁcation former projects."
+7,we describe these two steps next. to allow designers to oversize bottleneck hard- ware and allow for grid growth in time.
+7,building detection.
+7,it would be an immensely time- consuming task to manually identify the large technical details number of houses necessary to our desired analysis.
+7,"unlike the satellite imagery analysis for targeting un- however, we can manually label a few villages and conditional cash transfers where the goal was to esti- learn a model of buildings from these labeled villages."
+7,"4. (a) sample satellite image of a rural village in india. (b) ground truth label of the village where red indicates ‘‘building,’’ white indicates ‘‘not building,’’ and green indicates ‘‘not sure,’’ which includes pixels very close to the building boundaries."
+8,48 varshney et al.
+8,"we manually labeled 596 buildings across 10 villages in to learn a model of buildings, we begin by partition- rayagada, orissa, india, to serve as ground truth."
+8,"in ing a satellite image of a village into small regions using particular, for each satellite image of a village, the a seed-based region-growing image segmentation algo- ground truth data consist of another image that indi- rithm that groups together adjacent pixels of similar cates for each pixel in the satellite image whether color."
+8,"the algorithm also uses a recent boundary detec- it is part of a building, not part of a building, or ‘‘not tor16 that can parse various instances of weak color gra- sure.’’"
+8,an example satellite image of a village and dients between a building and the ground surrounding its corresponding ground truth label are shown in it.
+8,an example image segmentation result is shown figure 4. in figure 5a.
+8,"next, for each image region, we compute fig."
+8,"for the village in figure 4, we show results of our data processing: (a) segmentation of the satellite image, (b) estimate of which image segments are part of a building, and (c) polygonization of estimated building segments."
+9,"targeting villages for rural development 49 a feature vector, which describes that region’s basic once we have an estimate of where buildings are at color and geometry information as well as some ratios the pixel level, we can ﬁt polygons for where different that may be indicative of either building or vegetation. buildings appear."
+9,"an example polygonization is speciﬁcally, the basic color and geometry information shown in figure 5c."
+9,"unfortunately, many of the villages we include in the feature vector are the region’s color we encounter have buildings of similar rooftops and distribution (of pixels within the region), area, and color lumped together, such as many of the buildings diameter."
+9,"we also include each region’s ratio of perimeter in the ﬁrst row of the satellite image in figure 4a. to area (gives a coarse measure of polygon complexity), our polygonization process is currently unable to tease standard deviation of grayscale values (tree regions tend apart such adjacent buildings."
+9,"the clumping of like- to have noisier grayscale values than building regions), roofed buildings can affect the accuracy of the load the normalized ratio g/(r + g + b) (vegetation regions and cost estimate by misrepresenting the building’s tend to have a larger fraction of green compared to all col- size."
+9,"for example, if two small houses are clumped to- ors), and the r/nir ratio (this ratio has previously been gether and recognized as one building, it would be es- found to be indicative of vegetation17)."
+9,"for each region, timated as a single larger structure, such as school or we can obtain a label for whether it is part of a building barn, which would have different power requirements or not by looking at what the most popular ground truth than the two small houses."
+9,a user could manually label is among pixels in the region.
+9,"regions with a most edit the polygons to obtain a more accurate result, in popular label of ‘‘not sure’’ are ignored."
+9,"finally, we train which case the automatic building detection could a random forest classiﬁer on image regions, each of be viewed as providing a helpful initial guess, which which is now represented as a feature vector. mitigates the amount of manual labor needed."
+9,"even to estimate the location of buildings for an unlabeled without manual editing, the simulations of wiring to- satellite image of a village, we again begin by segmenting pologies using the automatic building detection yielded the image into regions and computing feature vectors useful ballpark estimates for the cost of installing micro- per image region."
+9,then we use the trained random forest grids in a large number of villages. classiﬁer to determine whether each region is part of a building.
+9,we can assemble the classiﬁcation results per simulating wiring topologies to estimate cost of install- region into an image that shows where the buildings ing a microgrid.
+9,"once buildings have been polygon- are estimated to be, as shown in figure 5b."
+9,"to evaluate ized (fig. 5c), the village can be run through various the quality of such an image of estimated building loca- simulations to identify optimal wiring conﬁgurations tions, we compute the dice coefﬁcient18—a measure of of a chosen topology."
+9,we run monte carlo simulations overlap where 0 is no overlap and 1 is perfect over- for one to ‘‘x’’ (user deﬁned) number of generation lap—between the detected building pixels and the ground truth building pixels.
+9,"speciﬁcally, for two sets a (of pixels declared to be buildings by our algorithm) and b (of pixels that are part of buildings according to ground truth), the dice coefﬁcient is given by 2jaxbj/ (jaj + jbj), where ‘‘j$j’’ denotes set cardinality and ‘‘x’’ denotes set intersection."
+9,"using this evaluation criterion, we obtained a leave-one-out cross-validation mean dice coefﬁcient of 0.66."
+9,"importantly, this error metric is com- puted based on pixels rather than regions."
+9,measuring error based on regions we computed does not account for the arbitrariness of the choice of segmentation algo- rithm used to compute regions.
+9,"another algorithm could, for instance, either use different regions or not use regions at all in order to estimate whether each pixel in an unlabeled image is part of a building or fig."
+9,"for the village in figure 4, we show not."
+9,"regardless of what algorithm is used, the dice coef- the results of the load estimation model. ﬁcient above can be used to evaluate the quality of detecting buildings in an image."
+10,"50 varshney et al. the conﬁguration with the greatest savings in cost (wiring, components, labor, total cost, etc.) at a speci- ﬁed level of service per customer."
+10,"an input ﬁle of the microgrid parameters (voltage, labor rates, component costs, etc.) with information on the distribution and sizing of the various buildings in the village is used to run the simulation."
+10,"first, the ap- proximate power draw from each structure is esti- mated."
+10,we do this by using area as a proxy for total number of inhabitants and also modulate the demand on the basis of the proximity of the house to the cen- troid of the village and its number of nearest neighbors.
+10,these variables provide load estimates per house that are then validated against the experiences of the micro- fig.
+10,"user-deﬁned and inputted cost factors grid partner, in this case selco."
+10,figure 6 provides a that can be used to develop the total cost load estimate calculation for each house in the village. of the village.
+10,"with approximate load draws, we are then able to sample thousands of potential hardware placements for solar generation and battery storage locations."
+10,"these locations act as important nodes within the wir- nodes through a detailed cost function to simulate ing network and therefore inﬂuence variables like the thousands of wiring schematics and their respective total amount of wire, resistance loss, and labor implicit costs."
+10,"the wiring topology can be deﬁned by the user, in a particular design."
+10,"in particular, the cost equation and in this case a modular interconnected ‘‘hub for the village takes into account many variables, exam- and spoke’’ approach (each house is a spoke to a hub ples of which are outlined in figure 7. generation node that is interconnected to other each permutation of the number and placement of hub generation nodes)."
+10,the simulation can identify storage/generation nodes corresponds to a speciﬁc fig.
+10,"for the village in figure 4, we show the results of the minimized total cost for the monte carlo runs of each hub generation node from 1 to ‘‘x’’ (x = 20)."
+11,targeting villages for rural development 51 cost range.
+11,these variables are sampled in parametric ple of the projected cost of the village in its optimal space via a monte carlo method and the wiring costs conﬁguration with wiring based on the extracted build- are estimated via straight-line distances between points ings.
+11,this is compared with the wiring results based mated with a minimum spanning tree to connect a on the ground truth buildings (fig. 9b).
+11,the number higher voltage-level architecture between nodes.
+11,fig- of hub generation nodes and average cost per house ure 8 shows the minimization curve of the total village obtained from the extracted buildings are comparable cost for a given number of hub generation nodes. to those obtained from the ground truth buildings.
+11,"once complete, the algorithm selects for the cheap- this further validates the building detection algorithm. est conﬁgurations and presents approximate per house these simulation results provide microgrid design- costs for project deployment."
+11,figure 9a shows an exam- ers and implementers with critical information for fig.
+11,the optimal conﬁgurations for the (a) building location estimate and (b) ground truth have a comparable number of hub generation nodes and average house cost.
+12,52 varshney et al.
+12,"a diagram illustrating the general workﬂow required for planning rural development activities based on satellite image analysis. proposal writing and planning, such as power require- satellite image analysis are poised to change rural devel- ments, cost per house, total village cost, number and opment into a data-driven enterprise. placement of generation nodes, and size and length the two example problems and the several others of wire."
+12,"furthermore, by monitoring villages via satel- mentioned in the introduction all involve an image pro- lite imagery postelectriﬁcation, we can begin to ob- cessing component to derive features, a machine learn- serve the impact of electriﬁcation on village growth. ing component to estimate suitability criteria, and an we can couple this spatial growth information with operations research component to determine optimal growth in per-capita demand to create a model of planning and resource allocation, that is, the full pipe- how villages grow postelectriﬁcation."
+12,"from this line of descriptive analytics, predictive analytics, and growth model, we can simulate microgrid conﬁgura- prescriptive analytics."
+12,"this is a common workﬂow that tions based not on the village’s current loads and to- can be used in almost any rural development applica- pography, but on its projected future loads and tion that is constrained by cost or human resources. topography."
+12,"by intelligently designing microgrid sys- the workﬂow is summarized in figure 10; we note tems to accommodate this future demand, we can se- that these stages should be continually evaluated and lect hardware to prevent premature bottlenecks in reﬁned as informed by inputs from local experts. generation, storage, and current ﬂow, which are com- when developing technical solutions or products for mon hindrances to the successful long-term imple- use in rural contexts, the onus of understanding the mentation of microgrids. customer is signiﬁcantly complicated by the fact that innovators, foreign or domestic, rarely live or interact discussion and conclusion with the ﬁnal user in their normal spheres of activity."
+12,"social good projects in rural settings are hampered by as a result, the ability to apply latent intuition during lack of ground knowledge necessary for informed plan- the design process is severely limited and the impor- ning and decision making."
+12,"this lack of knowledge tance of engaging with local expertise is multiplied stems from the lack of infrastructure to allow easy when creating a developing world product than one data gathering from remote rural locations, which is for consumers similar to the producer."
+12,"for exam- one of the reasons why social good projects are needed ple, without consulting locals, it would not be possible in the ﬁrst place."
+12,"remote sensing provides an avenue to to know that families in rural kenya build separate overcome this barrier to rural development programs thatched-roof sleeping structures for their unmarried, when paired with satellite image analysis and other postpubescent sons."
+12,recall that this issue of separate advanced modeling.
+12,"with the emergence of low-cost thatched-roof structures caused overestimation in the satellite imaging and subsequent mass generation of data, proportion of households with thatched roofs."
+12,"simi- we see remote sensing-supported planning playing larly, without iterative interaction with the microgrid an increasingly important role in rural development companies in india, it would be quite difﬁcult to deter- going forward."
+12,"as we have discussed and illustrated mine the actual costs of available hardware and maxi- through two real-world examples, remote sensing and mum capabilities of an ad-hoc labor force."
+13,targeting villages for rural development 53 another key learning has been that infrastructural author disclosure statement growth dynamics are frequently quite different than no competing ﬁnancial interests exist. those that innovators tend to be familiar with in their host environments.
+13,images taken in different seasons references can vary signiﬁcantly and can have downstream con- 1.
+13,world bank.
+13,world development indicators.
+13,"washington, dc, 2013."
+13,international fund for agricultural development.
+13,rural poverty report. sequences if unaccounted for.
+13,"for instance, villages rome, italy, 2011. existing along the ﬂood plains of the ganges river fre- 3."
+13,"banerjee av, duﬂo e."
+13,poor economics: a radical rethinking of the way to fight global poverty.
+13,"publicaffairs: new york, ny, 2011. quently relocate depending on the degree of ﬂooding or 4."
+13,"haushofer j, shapiro j."
+13,household response to income changes: evi- varying location of fertile soil.
+13,assuming that homes dence from an unconditional cash transfer program in kenya.
+13,"cam- and livelihood locations exist with the same degree of bridge, ma: abdul latif jameel poverty action lab, 2013."
+13,world bank.
+13,decentralized energy services to fight poverty: outcome dynamism as in the western built environment would driven engagement of small and medium size enterprises in the provi- result in a picture that is artiﬁcially static in its mobility sion of energy services in ida countries.
+13,"washington, dc, 2009."
+13,"abelson b, varshney kr, sun j."
+13,targeting direct cash transfers to the ex- or economic activities.
+13,lessons from western planning tremely poor.
+13,proc acm sigkdd conf knowl disc data min. 2014;1563– cannot easily be ported over to nonurbanized regions 1572.
+13,"verburg ph, schot pp, dijst mj, veldkamp a."
+13,"land use change modelling: and, as a result, remotely sensed data like satellite im- current practice and research priorities."
+13,geojournal.
+13,2004;61:309–324. agery must be accompanied by deep knowledge of 8.
+13,"doll cnh, pachauri s."
+13,estimating rural populations without access to electricity in developing countries through night-time light satellite im- the social dynamic. agery.
+13,energy pol.
+13,2010;38:5661–5670.
+13,"with all of these learnings in mind, we would still 9."
+13,"jaiswal rk, mukherjee s, krishnamurty j, saxena r."
+13,role of remote sensing like to emphasize that existing image analysis tech- and gis techniques for generation of groundwater prospect zones towards rural development—an approach.
+13,int j remote sens. 2003;24: niques from the literature are usually sufﬁcient to 993–1008. tackle selection problems in rural development when 10.
+13,"dudhani s, sinha ak, inamdar ss."
+13,"assessment of small hydropower po- tential using remote sensing data for sustainable development in india. used properly, and thus should not be a bottleneck in energy pol."
+13,2006;34:3195–3205. such projects.
+13,the key is in determining and modeling 11.
+13,kumagai j.
+13,5 earth-imaging start-ups coming to a sky near you.
+13,ieee spectrum.
+13,"2014;51:20–21. the right criteria, whether it is something simple like 12."
+13,"hu q, wu w, xia t, et al."
+13,exploring the use of google earth imagery and type of rooﬁng material or something complicated object-based methods in land use/cover mapping.
+13,remote sens.
+13,2013;5:6026–6042. like the cost of the optimal grid topology.
+13,though sat- 13.
+13,brunell r.
+13,template matching techniques in computer vision: theory and ellite imagery presents particularly a useful tool for practice.
+13,"chichester, uk: wiley, 2009. tackling a new suite of developing world problems, 14."
+13,international energy agency.
+13,world energy outlook 2011 electricity access database.
+13,"paris, france. the functionalities and dependencies are often outside 15."
+13,"census data, 2011."
+13,"ministry of home affairs, government of india, of the innovator’s set of expectations and must be in- new delhi."
+13,"isola p, zoran d, krishnan d, adelson eh."
+13,crisp boundary detection using vestigated in parallel. pointwise mutual information.
+13,european conference on computer vision 2014.
+13,acknowledgments 17.
+13,"birth gs, mcvey gr."
+13,measuring color of growing turf with a reﬂectance spectrophotometer.
+13,agronomy j.
+13,1968;60:640–649.
+13,the authors thank ramesh sridharan for introduc- 18.
+13,dice lr.
+13,"measures of the amount of ecologic association between ing them to each other, and tilek mamutov for dis- species."
+13,ecology 1945;26:297–302. cussions about project loon.
+13,"varshney and abelson thank datakind for teaming them, connecting them cite this article as: varshney kr, chen gh, abelson b, nowocin k, sakhrani v, xu l, spatocco bl (2015) targeting villages for rural to givedirectly, and supporting the cash transfer village development using satellite image analysis."
+13,"big data 3:1, 41–53, selection project."
+13,"they also thank givedirectly for part- doi: 10.1089/big.2014.0061. nership, especially joy sun and carolina toth."
+13,"chen, nowocin, sakhrani, xu, and spatocco thank ideas global challenge for their ﬁnancial support, dr."
+13,"robert stoner for his continued mentorship and support, the tata center for innovation and design for their ﬁ- abbreviations used nancial support and guidance, and numerous conver- ifad ¼ international fund for agricultural development ngo ¼ nongovernmental organization sations with selco in helping to ideate, design, and shl ¼ solar home lighting reﬁne the tool toward optimal usefulness."

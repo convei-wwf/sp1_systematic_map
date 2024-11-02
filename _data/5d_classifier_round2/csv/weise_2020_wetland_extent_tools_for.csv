@@ -1,0 +1,527 @@
+page,p
+1,"remote sensing of environment 247 (2020) 111892 contents lists available at sciencedirect remote sensing of environment journal homepage: www.elsevier.com/locate/rse review wetland extent tools for sdg 6.6.1 reporting from the satellite-based t wetland observation service (swos) ⁎ kathrin weisea, , rene höfera, jonas frankeb, anis guelmamic, will simonsond, javier muroe, brian o’connord, adrian strauche, stephan flinkf, jonas eberleg, eric minoh, susanne thulini, petra philipsoni, eric van valkengoedj, john truckenbrodtg, franziska zanderg, antonio sánchezk, christoph schröderk, frank thonfeldl,m, eleni fitokan, emma scottd, matthew lingd, michael schwarza, ina kunza, grit thürmera, anouska plasmeijero, lammert hilaridesf a jena-optronik gmbh, otto-eppenstein-straße 3, 07745 jena, germany b rss - remote sensing solutions gmbh, dingolﬁnger str."
+1,"9, 81673 münchen, germany c research institute for the conservation of mediterranean wetlands of the tour du valat, le sambuc, 13200 arles, france d un environment programme world conservation monitoring centre, 219 huntingdon road, cambridge cb3 0dl, uk e center for remote sensing of land surfaces (zfl), university of bonn, genscherallee 3, 53113 bonn, germany f wetlands international, p.o."
+1,"box 471, 6700 al wageningen."
+1,"the netherlands g friedrich-schiller university, jena, remote sensing section, 07743 jena, germany h u.t."
+1,"semide/emwis t.u., bp23, 06901 sophia antipolis, france i brockmann geomatics sweden ab torshamnsgatan 39, se-164 40 kista, sweden j terrasphere imaging & gis b.v."
+1,"keizersgracht 125-127, 1015 cj amsterdam, the netherlands k etc-uma, ediﬁcio de investigación ada byron c\arquitecto francisco peñalosa, 29010 málaga, spain l german remote sensing data center (dfd), german aerospace center (dlr), münchener straße 20, 82234 weßling, germany m department of remote sensing, university of würzburg, oswald-külpe-str."
+1,"86, 97074 würzburg, germany n the greek biotope/wetland centre (ekby) 14th km thessaloniki-mihaniona, 570 01 thermi, po.box 60394, greece o iucn european regional oﬃce, boulevard louis schmidt 64, 1040 brussels, belgium a r t i c le i n fo a b s t r a c t keywords: wetlands are the most fragile and threatened ecosystems worldwide, and also one of the most rapidly declining."
+1,"wetland decline at the same time wetlands are typically biodiversity hotspots and provide a range of valuable ecosystem services, wetland management and monitoring such as water supply and puriﬁcation, disaster risk reduction, climate change adaptation, and carbon seques- sdg reporting tration."
+1,"ramsar reporting pressures on wetlands are likely to further intensify in the coming decades due to increased global demand for sentinel land and water, and due to climate change."
+1,"stakeholders at all levels of governance have to be involved to slow, copernicus stop and reverse these processes."
+1,"however, the information they need on wetland extent, their ecological character, and their ecosystem services is often scattered, sparse and diﬃcult to ﬁnd and access."
+1,"the freely available sentinel satellite data of the copernicus programme, as well as the landsat archive, provide a comprehensive basis to map and inventory wetland areas (extent), to derive information on the ecological status, as well as long- and short-term trends in wetland characteristics."
+1,"however, making use of these earth observation (eo) resources for robust and standardized wetland monitoring requires expert knowledge on often complex data processing techniques, which impedes practical implementation."
+1,"in this respect, the satellite- based wetland observation service (swos), a horizon 2020 funded project (www.swos-service.eu) has devel- oped and made disseminated monitoring approaches based on eo data, speciﬁcally designed for less experienced satellite data users."
+1,"the swos monitoring tools aim at assisting countries in conducting national wetland inventories for their sustainable development goals (sdg) reporting and monitoring obligations, and additionally facilitates other monitoring obligations such as those required by the ramsar convention and supports decision-making in local conservation activities."
+1,the four main components of the swos approach are: map and indicator production; software development; capacity building; and initializing the geo wetlands community portal.
+1,wetland ⁎ corresponding author.
+1,e-mail address: kathrin.weise@jena-optronik.de (k.
+1,weise). https://doi.org/10.1016/j.rse.2020.111892 received 16 november 2018; received in revised form 7 may 2020; accepted 13 may 2020 available online 20 june 2020 0034-4257/ © 2020 elsevier inc.
+1,all rights reserved.
+2,"weise, et al."
+2,"remote sensing of environment 247 (2020) 111892 managers and data analysists from more than ﬁfty wetland sites and river basins across europe, the middle east, and africa investigated the beneﬁts and limitations of this eo-based wetland mapping and monitoring approach."
+2,"we describe research that applies the swos tools to test their potential for the mapping of wetlands in a case study based in albania, and show its eﬀectiveness to derive metrics relevant to the monitoring of sdg indicator 6.6.1."
+2,"introduction across diﬀerent spatial resolutions (guo et al., 2017)."
+2,"compared to systems such as landsat or terra, copernicus operational missions, wetlands are rich in biodiversity and provide diverse and valuable also known as the sentinels, oﬀer valuable monitoring possibilities ecosystem services such as water supply and puriﬁcation, disaster risk through: (i) increased availability of eo data from diﬀerent sensors reduction, recreation, climate change adaptation and carbon seques- (sar and optical); (ii) improved spatial resolutions; (iii) larger cov- tration (mitsch et al., 2015; junk et al., 2013; van asselen et al., 2013; erages; and (iv) shorter repetition cycles (berger et al., 2012)."
+2,"the keddy et al., 2009; brander et al., 2006; schuyt, 2005)."
+2,"however, at the sentinel satellites are therefore an excellent data source to map wetland same time wetlands are the most fragile and threatened ecosystem types extent, to derive information on the ecological status and trends in worldwide, and also one of the fastest declining."
+2,"approximately 35% of wetlands and to map long- and short-term changes (mahdianpari et al., the natural wetlands have been lost worldwide between 1970 and 2015 2019; muro et al., 2016)."
+2,"the data are consistently available for every (ramsar, 2018; darrah et al., 2019; davidson et al., 2018) and 76% of part of the world, including large, remote and inaccessible areas."
+2,"the freshwater plants and animals disappeared during the same period data are also complemented by the archive of landsat data from the (davidson, 2014; ramsar, 2018). 1970s onwards, allowing the monitoring of changes and the impact of furthermore, the pressure on wetlands is likely to intensify in the conversion, drainage and other threats to wetlands over long periods coming decades due to increased global demands for land, water and (vogelmann et al., 2016; jin et al., 2017)."
+2,satellite-based assessment of energy.
+2,"of particular concern are african wetlands (langan et al., wetlands is often impeded by their dynamics, frequent cloud cover, and 2018)."
+2,"increasing rates of land conversion to agriculture, infrastructure their sometimes transitional nature (dronova et al., 2015)."
+2,"sar data are development, water diversion, and water pollution are some of the frequently used to assess highly dynamic wetlands and wetlands in main factors causing wetland degradation and loss (schuyt, 2005; mea, cloud-prone areas (dabboor and brisco, 2018; white et al., 2015; 2005)."
+2,"wohlfart et al., 2018)."
+2,"however, in addition to satellite data, ground water scarcity, more frequent and severe droughts, and ﬂoods are data are indispensable for calibrating and validating satellite-based major threats to society."
+2,the degradation of wetlands exacerbates these mapping results.
+2,"ground information is often complemented by very threats (ramsar, 2018)."
+2,"for example, hydrological disconnection of high resolution (vhr) data through visual interpretation of google ﬂoodplains from rivers leads to a decline in habitat for biodiversity earth or similar data layers (amani et al., 2019; liao et al., 2019). while enhancing the risk of devastating ﬂood events (brgm, 1998; original vhr data are very costly and only cover small areas and often acreman and holden, 2013)."
+2,drained peatlands lose their essential with only few acquisitions.
+2,"the revisit time is not as high and con- properties in terms of water storage and regulation, causing soil sub- sistency not as good as for freely available data such as landsat or sidence and contributing to climate change due to the release of en- sentinel."
+2,"vhr (and likewise hyperspectral and lidar) data are usually ormous quantities of greenhouse gases into the atmosphere because of thus not feasible for reproducible, robust and operational wetland peat carbon oxidation or peat ﬁres (konecny et al., 2016; page et al., monitoring."
+2,"large-scale operational wetland monitoring requires con- 2002). sistent data, ﬂexible and powerful methods that are capable of dealing in the context of wetland loss and degradation worldwide, appro- with heterogeneous data, and common standards, deﬁnitions and priate planning and management for wetlands is essential."
+2,"the devel- guidelines towards user-friendly tools (rebelo et al., 2018)."
+2,"wetland opment and implementation of policies can address the drivers of mapping activities at regional or even national level, require powerful wetland loss as well as the solutions to prevent, mitigate and reverse computational architectures such as cloud computing platforms (amani such loss (ramsar, 2018)."
+2,"in many cases, restoration measures are ne- et al., 2019; hird et al., 2017). cessary to recover a good ecological status of aquatic ecosystems in support of sustainable development goal (sdg) 6 and its target (carvalho et al., 2019; grizzetti et al., 2017)."
+2,"the implementation of 6.6, in this paper we demonstrate an eo-based approach to the mapping measures requires careful planning and management, as well as reli- of, and reporting on, the extent of water-related ecosystems (indicator able, regularly-updated spatial information on the status of wetlands: 6.6.1), based on a case study for albania."
+2,"we address the geospatial their extent, ecological character and ecosystem services (finlayson information needs of the global indicator framework as developed and et al., 2016). implemented by the inter-agency and expert group on sdg indicators timely qualitative and quantitative information about wetlands is (iaeg-sdgs) of the united nations statistical commission (https:// usually not available to decision makers, and to address this situation unstats.un.org/sdgs/metadata/ﬁles/metadata-06-06-01a.pdf), whilst there is a growing interest in the use of earth observation (eo) for showing how the swos indicator tools also have utility for ramsar wetland monitoring."
+2,"satellite-based information can ﬁll information national reporting. gaps and enables support planning, management and reporting by users and decision-makers (rebelo et al., 2018)."
+2,eo enables access to the 2.
+2,the 2030 agenda for sustainable development and sdg necessary historical and up-to-date geospatial monitoring information indicator 6.6.1 for small and large areas for data-driven and evidence-based decision- making processes involving stakeholders at all levels of governance.
+2,"the united nations (un) conference on sustainable development, satellite-based mapping helps to identify and deﬁne measures to derive also known as the earth summit 2012, led to the foundation of the baseline information on wetland ecosystem quality, diagnose wetland agenda 2030 for sustainable development, which was subsequently threats and pressures, monitor changes in extent and condition, and agreed and adopted by the un general assembly."
+2,"the 2030 agenda is inform improved management. data and evidence driven, consisting of a framework of 17 sustainable many diﬀerent data sources are used for wetland monitoring in- development goals (sdgs) and 169 targets, supported by 247 in- cluding aerial photos, synthetic aperture radar (sar), multispectral and dicators as established by the iaeg-sdgs."
+2,"each government is required hyperspectral data, and light detection and ranging data (lidar), to deﬁne their own targets, guided by the global level of ambition, but 2"
+3,"weise, et al."
+3,"remote sensing of environment 247 (2020) 111892 taking into account their national circumstances and speciﬁcities (un, reporting, such that there are now two reporting lines and methodol- 2016)."
+3,the indicators are intended as a management tool for countries ogies in place. to implement development strategies and report on progress towards deﬁned approaches for deriving the ﬁve sub-indicators of sdg in- the sdg targets.
+3,"it is important, therefore, that countries have strategies dicator 6.6.1 at national level exist (table 1)."
+3,"in contrast, the ramsar in place for regular and routine monitoring in order to report on their approach is based on a single indicator, namely wetland extent."
+3,"in both indicators, assess progress, and set targets."
+3,"yet the indicator framework cases, change represents a shift from one condition of extent to another represents a challenge for countries, especially those with low in- over time and is measured against a baseline."
+3,"for the sdg sub-in- country capacity in terms of human and infrastructural resources, to dicators, baseline conditions vary across the diﬀerent sub-indicators. follow indicator methodological guidelines which involve complex sub-indicator 1 uses a ﬁve-year baseline (average national spatial ex- analyses of statistical and non-statistical sources of data, such as eo tent from 2001 to 2005)."
+3,"sub-indicators 3 and 5 use historical or (un water, 2018a)."
+3,"eo has a key role to play in providing the primary modelled data, while sub-indicator 4 uses a natural reference condition. observations for some of the sdg indicators, fulﬁlling the monitoring for sub-indicators 1 and 2, all globally available eo data will be shared function required by countries (paganini et al., 2018)."
+3,the eo-based with countries by indicator custodians for validation.
+3,"data will be mapping products and associated methodologies provided by the swos shared annually at national, sub-national and water-body scales."
+3,"re- project can contribute to reporting on sdg 3 (health and wellbeing), porting requires countries to validate these data every ﬁve years to sdg 6 (water and sanitation), and sdg 15 (life on land) in particular. ensure accuracy of global datasets."
+3,here we demonstrate the utility of the swos tools for sdg 6.6.1.
+3,there are some essential diﬀerences between the sdg and ramsar sdg 6 focuses on water resources.
+3,"it aims to “ensure availability and indicators (see also table 1): sustainable management of water and sanitation for all” by 2030 and is a major step towards tackling water access issues and ensuring global • ramsar includes marine, salt and brackish wetlands (up to a depth sustainable water management (un water, 2018b)."
+3,"there are eight not exceeding 6 meters at low tide), whilst the sdg framework only targets under sdg 6 (targets 1 to 6 plus targets 6.a and 6.b), of which considers freshwater wetlands, with the exception of mangroves and target 6.6 is most relevant for the eo approaches of the swos project: estuaries; “by 2020, protect and restore water-related ecosystems, including • the categories for ramsar reporting are marine/coastal, inland and mountains, forests, wetlands, rivers, aquifers and lakes” (un water, man-made wetlands, whilst the categories for sdg reporting are 2018c)."
+3,"this target recognizes the importance of wetlands and other lakes, river and estuaries, artiﬁcial waterbodies, and vegetated ecosystems for providing a regular supply of freshwater for domestic, wetlands; agricultural and industrial usage (dickens et al., 2017)."
+3,"it is served by a • ramsar considers only one indicator on spatial extent of wetlands in single indicator, 6.6.1 – change in extent of water-related ecosystems a country (in kilometers squared or hectares), whilst the sdg in- over time – for which there are ﬁve sub-indicators to cover the three dicator 6.6.1 has additional sub-indicators for water quality and main aspects of extent: quantity, quality and the spatial extent or sur- quantity; face area (table 1)."
+3,"the iaeg-sdgs categorize the indicators in dif- • ramsar requires countries to provide data, which are often un- ferent tier levels and updated indicator 6.6.1 as a tier i indicator (the veriﬁed, whilst for sdg indicator 6.6.1 global eo datasets are used most mature of the three) as of march, 2019."
+3,"this means that the in- and then countries are responsible for validating them. dicator is conceptually clear, has an established methodology and data are regularly produced by a critical mass of countries."
+3,"however, in table 1 provides an overview of the sdg 6.6.1 sub-indicators and reality data are not regularly produced by countries and the ﬁve sub- the ramsar indicator with the approaches to derive them as well as the indicators represent a signiﬁcant challenge for ongoing and routine contribution of the satellite-based wetland observation service reporting by countries."
+3,the ramsar convention secretariat has put (swos) project.
+3,"since sdg indicator 6.6.1 refers to change, the sub- forward a second methodology, based on existing ramsar national indicators listed in table 1 have to be examined for multiple times steps table 1 sdg 6.6.1 monitoring: iaeg-sdgs and ramsar approaches compared (based on un water, 2018b and finlayson, 2018)."
+3,"(sub-) indicator approach categorization swos contribution iaeg-sdg sub-indicator 1 spatial extent of water- global eo-derived products lakes, rivers and estuaries indicator on total wetland extent derived from the swos related ecosystems presented to countries to lulc map product. validate artiﬁcial water bodies natural open water bodies vegetated wetlands artiﬁcial water bodies (including mangroves) vegetated wetlands sub-indicator 2 water quality of lakes and countries report based on chlorophyll a (chl-a) swos water quality indicators including chl-a, tss and artiﬁcial water bodies national data total suspended solids coloured dissolved organic matter (cdom) (tss) sub-indicator 3 quantity of water countries report based on rivers none (based on in situ sampling) (discharge) national data estuaries sub-indicator 4 water quality imported countries report based on none (based on in situ sampling) from sdg indicator 6.3.2a national data sub-indicator 5 quantity of groundwater countries report based on none (boreholes for water level detection) within aquifers national data ramsar single indicator only (no spatial extent of water- countries report through marine/coastal indicator on total wetland extent derived from the swos sub-indicators) related ecosystems ramsar national reporting lulc map product and integrating the same deﬁnitions provided by the ramsar methodology: inland marine/coastal man-made wetlands inland man-made wetlands a proportion of bodies of water with good ambient water quality."
+4,"weise, et al."
+4,remote sensing of environment 247 (2020) 111892 to enable a comparison and assessment of trends.
+4,approach our methodological approach to operationalizing an open-access 3.
+4,the satellite-based wetland observation service (swos) eo-based monitoring protocol and tools for 6.6.1 monitoring and re- project porting consisted of four steps.
+4,"firstly, recognizing inconsistencies in the deﬁnition and mapping of wetlands across diﬀerent policy frame- the satellite-based wetland observation service (swos; horizon works and geographical settings, we developed a standardized no- 2020 grant no 642088, 2015-2018) has developed tools for using menclature to allow wetland classes to be accurately assigned to the sentinel and other remotely-sensed data to assist wetland management, 6.6.1 reporting categories."
+4,"secondly, we developed the ‘geoclassiﬁer’ monitor and report on obligations of environmental policies at diﬀerent toolbox that incorporates indicator tools and allows the computation of scales (from local to global), and contribute to an improved integration wetland extent values according to the 6.6.1 reporting categories. of wetlands in the development of policies."
+4,"the swos objectives were thirdly, we developed an on-line portal (the geo-wetlands community to: portal, http://portal.swos-service.eu) to provide access to the maps and eo data sources required as input datasets for 6.6.1 reporting."
+4,"fourthly, 1."
+4,"develop tools for map and swos indicator production, demon- we generated a national service case demonstration of the approach strated for wetland locations in europe, africa and the middle east based on the country of albania. (see 5.3 and table 2 for details)."
+4,"develop software in the form of a freely available swos software toolbox called geoclassiﬁer, a compilation of methods developed 3.2."
+4,nomenclature within swos 3.
+4,"provide training in order to develop capacity in using satellite data due to the transitional and dynamic nature of wetlands, many in- and analysis tools consistencies appear in their mapping and delineation."
+4,wetland map- 4.
+4,"initialize the geo wetlands community portal, which is making ping is challenging due to the nature of wetlands as a composition of available all maps produced in the frame of swos. diﬀerent land cover types with a variety of speciﬁc characteristics in- cluding how they change at diﬀerent temporal and spatial scales diﬀerent service cases have been implemented in swos to de- (gallant, 2015)."
+4,questions on how to delineate the boundaries of monstrate how satellite derived information could be applied and in- wetlands vary according to the user and context.
+4,"as a result, the exact tegrated into very diﬀerent services for planning, management and upper and lower limits of wetlands are arbitrary boundaries in any reporting for users working at local, national and global levels."
+4,"the deﬁnition (mitsch and gosselink, 2015)."
+4,"similarly, when it comes to service cases have been developed based on user requirements from their classiﬁcation, diﬀerent systems are used by diﬀerent users leading organizations in europe, africa and the middle east."
+4,"maps and swos to inconsistencies at global (hu et al., 2017) and regional (amler et al., indicators for about ﬁfty demonstration sites (including wetland sites 2015) levels."
+4,"however, when nomenclatures do not contain many and their catchment areas) have been produced."
+4,"the maps and swos wetland-relevant classes, a signiﬁcant proportion of wetland areas can indicators were used as inputs to the development of service cases, go undetected as they are merged with larger classes such as agriculture which included national wetland inventory and delineation, national (perennou et al., 2012)."
+4,"additionally, there is a common confusion ramsar reporting, land transformation and national wetland policies, between inundated areas and wetland habitats, which could lead to monitoring wetlands in arid and semi-arid regions, mangrove mon- some interpretation errors when it comes to their classiﬁcation using itoring, peatland monitoring, the european union water framework eo-based tools (perennou et al., 2018). directive and sdg 6.6.1 reporting under the 2030 agenda for in swos, standards and guidelines were developed to facilitate sustainable development (abdul malak et al., 2019). more accurate and consistent wetland mapping in the future."
+4,using standardized nomenclatures allows comparability between diﬀerent wetland locations and mapping dates and to producing harmonized table 2 examples of swos indicators and swos sub-indicators used for sdg 6.6.1 and ramsar reporting.
+4,the listed in- dicators can be derived using tools included in the geoclassiﬁer software; the swos sub-indicators listed are examples.
+4,"a comprehensive list of swos indicators and sub-indicators can be found in abdul malak et al., 2019."
+4,all indicators that calculate changes require at least two lulc mapping results.
+4,swos indicator swos sub-indicator 1 total wetland extent total wetland extent natural wetland extent (ramsar deﬁnitions) human-made wetland extent (ramsar deﬁnitions) vegetated wetland extent (sdg 6.6.1 deﬁnitions) lakes rivers and estuaries (sdg 6.6.1 deﬁnitions) artiﬁcial water bodies (sdg 6.6.1 deﬁnitions) selected classes extent 2 change in wetland area surface change for all wetland classes surface change for natural wetland classes surface change for artiﬁcial wetland classes 3 change to agriculture & urbanization 4 wetlands artiﬁcialization and degradation 5 status of wetland threats 6 extent of open water wetland habitats with permanent open water wetland habitats with temporary open water wetland habitats without open water flooded areas that are not wetland habitats 7 status and trend of water quality 8 ecosystem fragmentation 4
+5,"weise, et al."
+5,"remote sensing of environment 247 (2020) 111892 mapping results within countries, regions and globally."
+5,mapping of wetlands community portal (e.g.
+5,"snap, qgis, r, erdas imagine, envi/ wetland ecosystems becomes user and policy relevant if the right no- idl, ecognition, arcgis). menclature can be applied."
+5,"swos integrated the ramsar typology (finlayson, 2018) into three widely used classiﬁcation systems for 4."
+5,"service case demonstration at national level: the example of mapping and reporting purposes: corine land cover (clc), fao land albania cover classiﬁcation system (lccs fao) and the mapping and assess- ment of ecosystem services classiﬁcation system (maes), enhanced within the swos project, maps for about ﬁfty wetlands across a with new wetland classes based on the european nature information wide range of climate zones were produced as a demonstration of how system (eunis) classiﬁcation."
+5,"additionally, we also integrated a land the swos tools are applicable globally."
+5,"these wetlands were proposed use/land cover (lulc) change nomenclature, largely inspired by the by several stakeholders and users during consultations according to the land and ecosystem accounting (leac) classiﬁcation system, enhanced wetlands’ speciﬁc characteristics and national or international sig- with new classes to report on conversions from wetland and water niﬁcance and interest."
+5,"in this paper, we showcase the example of classes to other land cover classes and vice versa."
+5,albania and the producing of baseline data for reporting against the the three standard nomenclatures were used in combination with 6.6.1 wetland extent sub-indicator.
+5,albania is a small country in south- the ramsar typology for covering both the non-wetland and wetland east europe with a size of about 28.784 km2.
+5,it is characterized by a habitats within the total area being mapped.
+5,"for example, clc in- diverse landscape and pronounced topography, particularly in the east, corporates some of the non-identiﬁed ramsar wetland types as an ad- with elevations reaching more than 2,700 m."
+5,most rivers run westwards ditional (4th) level of the original corine land cover hierarchical to the adriatic sea forming ﬂoodplains largely used for agriculture. system.
+5,"the new classes have been integrated under all the corine besides numerous channelized rivers with a certain level of hydropower land categories: “artiﬁcial areas”, “agricultural areas” and “forests and infrastructure, there are still a number of largely unregulated rivers – semi-natural areas”, as well as under “wetlands” and “water bodies”. among the last in europe (lazaj & xhelilaj 2017)."
+5,according to the köppen-geiger climate classiﬁcation albania covers several zones with 3.3.
+5,"software for map and indicator generation hot-summer mediterranean (csa) and oceanic climates (cfb) dom- inating, and warm-summer mediterranean (csb), warm humid con- the geoclassiﬁer toolbox was developed to provide a suite of tinental (dfb) and humid subtropical (cfa) climates also occurring powerful tools for viewing, processing and analyzing optical and sar (kottek et al., 2006)."
+5,"on a regional to global level, albania is favoured remote sensing data."
+5,"it allows the performing of segmentation, classi- by relatively little cloud coverage (sudmanns et al., 2019; wilson and ﬁcation and indicator calculation (table 2)."
+5,"in addition to the freely jetz, 2016)."
+5,"wetland monitoring with optical data, however, is often available satellite data of the sentinel and landsat missions, the geo- hampered by a greater degree of cloud coverage at local scales due to classiﬁer toolbox can be applied to data in raster format from any sa- higher evaporation rates and locations in topographic depressions tellite."
+5,"the classiﬁer algorithm is a maximum likelihood approach, acting as cloud traps."
+5,"the study area comprises the total land area of which classiﬁes the land cover types according to training samples to be albania plus the coastal zone, because of its signiﬁcance for wetland generated by the user in the toolbox."
+5,other classiﬁcation approaches areas. will be integrated into the toolbox in the future.
+5,the generation of re- presentative training samples is a crucial step in the classiﬁcation 5.
+5,"methods process, which requires expert knowledge or training, in addition to ancillary data."
+5,"particularly in the ramsar nomenclature, some classes/ the methodology was based on the mapping of wetlands and water- ecosystems can consist of a diversity of land covers, generally making it related ecosystems using optical landsat-8 satellite images combined diﬃcult to classify using satellite data."
+5,"this means that the feasibility/ with hydrological parameters derived from digital elevation models limitation of mapping classes using satellite data, as well as the in- (dems) according to three steps: potential wetlands mapping; land use corporation of ancillary data and expert knowledge, must be considered land cover (lulc) and habitats mapping; and swos indicators com- in the classiﬁcation (perennou et al., 2018). putation."
+5,"all geoclassiﬁer tools, (developed in the frame of swos and sev- eral previous and parallel projects) have been made available in a 5.1."
+5,potential wetlands mapping stand-alone graphical user interface.
+5,"selected tools are implemented also in a cloud version, so far just for demonstration."
+5,"the image viewer, potential wetlands mapping allows the delineation of areas where as a key component of the software, has been designed to provide water-related ecosystems could occur with a high level of probability. comfortable and easy-to-use functionalities for the collection of training the delineation of (potential) wetlands often relies on topographic in- areas and integration of ground knowledge for a supervised classiﬁca- dices or their combination with eo data (beven and kirkby, 1979; tion."
+5,"any of the three available nomenclatures for lulc mapping, or bwangoy et al., 2010; agren et al."
+5,"2014; ludwig et al., 2019; rapinel the nomenclatures for lulc change and the surface water dynamics et al., 2019)."
+5,"the present assessment was based on the mapping of open (swd) mapping, can be applied."
+5,"updates or additional hierarchical surface water dynamics (swd) using optical landsat-8 time series for nomenclatures can be integrated easily into the geoclassiﬁer software. the year 2015, which was combined with hydrological and topographic indices derived from a dem (eu-dem with ~25 m of spatial resolu- 3.4."
+5,the geo-wetlands community portal tion).
+5,"these dem-derived metrics include the slope (calculated in de- grees directly from the dem), the topographic wetness index (twi) the swos portal was developed (http://portal.swos-service.eu/), using the algorithm proposed and tested by merot et al. (2003) and acting at the same time as the community portal of geo-wetlands sørensen et al. (2006) and a new enhanced hydro-geomorphological (https://geowetlands.org/), which is an initiative of the group on earth index for the delineation of ﬂoodplain areas, mainly inspired by the observations (geo)."
+5,the portal provides geospatial data and informa- path distance methodology provided by the european joint research tion on wetlands.
+5,"the maps and indicators resulting from the swos centre (jrc) for the modelling of stream riparian zones (clerici et al., project are visualized on the portal together with additional data, such 2013). as geo-located images, videos, an overview of available satellite data, the resulting product is a layer that integrates many diﬀerent lulc and external resources."
+5,"in addition to the geoclassiﬁer, other software classes (not only wetland habitats) and represents the inﬂuencing area was used to calculate additional indicators (abdul malak et al., 2019) of wetland ecosystem functions and services."
+5,"thus, it should not be and to generate and design the maps available through the geo- considered as a delimitation of the actual/existing wetland habitats."
+6,"weise, et al."
+6,"remote sensing of environment 247 (2020) 111892 this case it has been used to deﬁne and delineate the mapping area envelope surrounding wetland and water-related ecosystems (delinea- where most of the wetlands and water-related ecosystems occur in tion of actual wetlands in contrast to probability mapping of potential albania, and also to detect potential ancient wetlands that have been wetlands)."
+6,"the mapping process was undertaken using the maximum lost (abou diwan and doumit, 2016), typically due to their conversion likelihood classiﬁer implemented in the swos software (geoclassiﬁer) into agricultural lands during the last century."
+6,as the result is a layer with the segmentation and classiﬁcation of landsat-8 images using the depicting potential wetlands (probabilities) according to their topo- same data as for the swd mapping.
+6,"the ﬁnal sub-product is a map graphic position and short-term water dynamics, validation is not un- representing the location and delineation of actual wetland and water- equivocal since there are no equivalent reference data or straightfor- related ecosystems that are characterized according to the clc-ramsar ward validation techniques. hybrid nomenclature."
+6,both potential wetland and lulc maps were validated against the existing national wetlands inventory (marieta 5.2.
+6,"land use land cover mapping, wetland classiﬁcation and validation et al., 2003)."
+6,"validation of remote sensing derived wetland map products is often the second implementation step of the methodology aimed to a challenging task because of the dynamic and complex nature of these produce a lulc map for the country of albania, within the functional ecosystems and so requires a totally diﬀerent validation procedure."
+6,fig 1.
+6,potential wetlands in albania mapped by combining surface water dynamics with topographic and hydrological indices 6
+7,"weise, et al."
+7,"remote sensing of environment 247 (2020) 111892 whereas the validation of lulc products are pretty straightforward, 6."
+7,"results & discussion surface water dynamics, water quality or potential wetland maps need historical data for validation, in-situ sampling of water constituents and a nationwide potential wetlands map for the country of albania speciﬁc sampling procedures."
+7,"the validation strategy for the lulc map was generated, distinguishing between areas ranging from very low products in swos follows a tried and trusted quantitative approach, probability of occurrence of wetlands to very high probability as well as adapted from olofsson et al."
+7,(2014). temporarily and permanently ﬂooded areas that are also considered the selection of validation data is a critical step to appraise map here as having an important potential to hold wetland habitats (fig.
+7,1). accuracy as it serves as a reference dataset and is deemed to be the the map excludes all built up areas using an urban mask derived from “truth” for what is being mapped.
+7,"a combination of a location-based the global urban footprint dataset (esch et al., 2013); such land con- validation by users and an external validation of lulc mapping pro- versions are generally considered irreversible and the probability of ducts is recommended. ﬁnding functional wetland habitats is very low, although urban wet- location-based validation attempts to engage users, where possible, lands can provide important ecosystem services locally (boyer and to provide samples for a subset of points at their site, via ﬁeld cam- polasky, 2004)."
+7,"most of the wetland area in albania is distributed in the paigns or, if not possible, via photointerpretation by experts with west of the country, where extensive ﬂoodplains are found."
+7,"the wet- knowledge of wetland sites. lands encompass the internationally famous sites of the buna delta, external validation has the objective to achieve a more consistent skadar lake, and the karavasta lagoon."
+7,"many other smaller wetlands and independent accuracy assessment using a standard protocol for such as glacial lakes, karst lakes and small peatlands were successfully multiple wetland sites."
+7,this work can be done using laco-wiki identiﬁed in the middle and the eastern parts of the country.
+7,"coastal (https://laco-wiki.net/), an established, open and free online validation areas are depicted as permanently ﬂooded areas as well. package, which gives access to google and bing imagery, copernicus according to the validation results (fig. 2), more than 97 % of the web services and other datasets available through a web map service wetland habitats identiﬁed in the existing national inventory dataset (wms). are included within the four highest probability classes of the potential in any case the dates for satellite and ﬁeld data acquisition should wetlands map: “high” probability (6.07 %), “very high” probability be as close as possible and use the same nomenclature."
+7,"the number of (19.21 %), “temporarily” ﬂooded area (32.16 %) and “permanently” points should be determined from an equation derived from the mul- ﬂooded area (39.81 %)."
+7,"if the two probability classes “medium” and tinomial distribution (congalton and green, 2009) through stratiﬁed “low” are added to the previous four, the total area covered represents random sampling, so as to be certain that all classes will have control 18 % of the country."
+7,"given that inventoried wetlands represent 3 % of points and therefore be assessed. the national territory (excluding rivers and streams, which were not included in the national inventory), it is important to note that the potential wetlands map could highly overestimate the extent of “real” 5.3."
+7,indicators calculation wetland habitats.
+7,"the produced potential wetlands map (fig. 1) revealed several in- within the swos geoclassiﬁer there is an indicators toolbox with a teresting features, such as the maliqi former swamp, north to the city of variety of swos indicators and sub-indicators for monitoring wetland korçë (40°43'19.15""n, 20°47'31.98""e)."
+7,"it appears with the highest status and trends (see table 2, abdul malak et al., 2019)."
+7,"the swos probability of being a wetland (fig. 3), although it is now a large indicator for wetland extent uses the categories of water-related eco- agricultural area."
+7,"it was indeed a large swamp before it was drained systems according to the reporting requirements of the sdg indicator during the middle of the last century (qafko, 1995)."
+7,6.6.1 (https://unstats.un.org/sdgs/metadata/ﬁles/metadata-06-06- the mapping of actual wetland areas (fig. 4) shows the presence of 01a.pdf).
+7,"this categorizes wetlands into the three classes 1) lakes, 18 wetland habitat types (both natural and human-made) according to rivers and estuaries, 2) artiﬁcial water bodies and 3) vegetated wet- the clc-ramsar nomenclature."
+7,of note are the previously mentioned lands.
+7,"based on the lulc map, it is then possible to map all water- sand, shingle or pebble shores, the coastal lagoons, and coastal marshes. related ecosystems according to the three categories."
+7,"the abundant small water storage areas spread all over the country were also successfully identiﬁed, as well as some large vegetated fig 2."
+7,"evaluation of the potential wetlands product by comparison with the national wetlands inventory dataset of albania (cover percentage of each class of the potential wetlands map within the national inventory dataset, marieta et al., 2003)."
+8,"weise, et al."
+8,remote sensing of environment 247 (2020) 111892 fig 3.
+8,former maliqi swamp appears with a very high probability in the potential wetlands map (on left).
+8,"the former wetland has been drained and is used for intensive agriculture as shown on a landsat-8 image from april 2014 (on right, r-g-b: swir-nir-green)."
+8,this land use transformation was considered in the consecutive lulc classiﬁcation when the area was not delineated as an actual wetland (see fig.
+8,"4). wetland habitats like wet meadows, riparian forests, small natural in- training is to have basic gis and image processing knowledge."
+8,at least land marshlands and karst lakes. two 3-days trainings are recommended.
+8,"the ﬁrst training is a hands-on the swos tool enabled the generating of data to compute indicator training to guide through the whole processing; the second training is sdg 6.6.1, more precisely the areas of ""lakes, rivers and estuaries"", more in-depth, directly responding to use cases of the participants."
+8,"for ""artiﬁcial water bodies"" and ""vegetated wetlands""."
+8,"fig. 5 provides va- a trained user who knows the wetland area of interest, it can be as- lues of direct relevance for national reporting on the wetland extent sumed that it takes in average about ﬁve days to produce maps and to sub-indicator."
+8,areal statistics are provided in table 3.
+8,"the comparison derive the inputs for sdg 6.6.1 sub-indicator reporting for an area of of these results with the data extracted from the national wetlands in- max 100 x 100 km2. ventory shows very good agreement, with low error rates equal to the swos indicators toolbox (part of the swos geoclassiﬁer) al- 6.28% and 4.70% for omission and commission errors, respectively lows the derivation of indicators that assess the status and trends of (table 4)."
+8,there are several explanations for the diﬀerences between wetland ecosystems; some of them directly link to sdg sub-indicators the national inventory data and our results.
+8,"first, our results are based (i.e. wetland extent uses the categories of water-related ecosystems for only on optical and dem data."
+8,speciﬁc wetland types might be missed sdg 6.6.1).
+8,"the swos water quality products provide only a partial in the potential wetland mapping since optical data are of limited use in picture of the spatial variation in water quality parameter levels in large detecting wetlands under dense forest canopies (chapman et al., 2015). open water bodies over time, thereby addressing a subset of the needs second, at large scales a general increase in wetland area is reported, of sdg 6.6.1, sub-indicator 2."
+8,"these products can nevertheless be which can be attributed to improved technologies, particularly higher helpful in assessing water quality status and trends over time (including spatial resolutions of eo sensors, and improved methods rather than a spatial variations), especially in countries where other data do not exist real increase in wetland extent (davidson et al., 2018)."
+8,"wetland iden- or where water quality is irregularly monitored (olmanson et al., tiﬁcation, characterization and monitoring by means of satellite data 2015)."
+8,"although it is not a formal sdg sub-indicator, countries with the are among the most complex topics in environmental remote sensing, required capacity should monitor ecosystem health."
+8,"eo derived pro- due to the complex and spatio-temporally dynamic ecosystem variables ducts can indicate change in health of ecosystems but countries should of wetlands (perennou et al., 2018; gallant, 2015)."
+8,in order to minimize implement suitable ground-based surveys.
+8,"the swos lulc change and inaccuracies in information derived from eo data, and thus misleading swd products can be used to compute indicators that could help assess guidance for policy and management decisions, a thorough under- the health of wetland ecosystems."
+8,"for example, of relevance would be standing of wetland ecosystems combined with remote sensing ex- the detection of a high turnover of natural to artiﬁcial land cover, pertise is fundamental."
+8,"in this regard, the capacity development of suggesting an overall intensiﬁcation in land use (e.g."
+8,"leemhuis et al., swos, mainly achieved through several user workshops and trainings, 2017), as would an increase in the area of open water in artiﬁcial was a major outcome of the project."
+8,"even though the geoclassiﬁer was wetlands while it decreased in natural ones (mwo, 2018)."
+8,"both cases designed in a user-friendly interface, users who intend to produce maps could be representative of a decline in ecosystem health and allow the and indicators still need training."
+8,"the main aim of training sessions is to planning of restoration activities. teach users how to translate satellite data into service cases and how to another important result of the swos project is catalysing the es- work in accordance with the developed swos methodologies, for the tablishment of the geo-wetlands community, an open and collabora- sake of harmonization of products."
+8,a precondition to participate in the tive initiative centred on an advanced spatial data infrastructure that 8
+9,"weise, et al."
+9,remote sensing of environment 247 (2020) 111892 fig 4.
+9,"identiﬁcation of ""actual"" wetlands within the potential wetlands layer of albania using a lulc classiﬁcation based on the clc-ramsar nomenclature. serves open data on wetlands to users."
+9,"it will assist the implementation innovative eo-based approaches in the future monitoring program of of eo-based wetland monitoring through disseminating best practices. their wetlands (mainly those provided by swos), and this is being built the initiative is part of the group on earth observations (geo) work into the framework of the tunisian national wetlands strategy (im- program since 2017."
+9,geo wetlands is the home of the geo-wetlands plementation phase 2020–2025).
+9,community portal and a wetlands knowledge base (www.geowetlands. org).
+9,the initiative functions as a collaborative framework for the 7.
+9,conclusions whole wetland eo community.
+9,"its success therefore is grounded on the participation and active contribution of users of wetland data, data the pressure on wetlands today is intense and is likely to build in providers and remote sensing experts, and wetland policy experts. the coming decades due to climate change and increased global demand these partnerships are crucial to serve the needs of agenda 2030 and for land and water (junk et al., 2013; middleton and souter, 2016; particularly to assist countries with their reporting obligations under moomaw et al., 2018)."
+9,"the rising availability of free and open eo data, target 6.6 on water-related ecosystems."
+9,"one relevant example is the such as the sentinel satellite data of the copernicus program and long- willingness of the tunisian ramsar national authority (represented by term landsat archive, provide the basis for mapping wetlands and the general directorate of forestry) to better integrate these new contributing to sdg reporting obligations."
+9,the swos mapping and 9
+10,"weise, et al."
+10,remote sensing of environment 247 (2020) 111892 fig 5.
+10,water-related ecosystems in albania mapped according to the sgd 6.6.1 deﬁnition.
+10,"table 3 relevance to national government departments, agencies and ministries relevant statistics for reporting on sdg indicator 6.6.1 in albania. responsible for issues related to the environment, water and natural total area of lakes rivers and estuaries 663 km2 resources, and therefore also the monitoring of the 6.6.1 sub-indicators."
+10,"total area of artiﬁcial water bodies 163 km2 wetland maps and products were generated for about ﬁfty wetland total area of vegetated wetlands 175 km2 locations across europe, africa and the middle east, and albania was used as a national demonstration of key wetland mapping functional- ities serving international reporting obligations."
+10,"the swos tools were monitoring tools are designed to assist countries in acquiring baseline designed to be as intuitive as possible, but capacity development is information regarding water-related ecosystems for the sdg reporting needed to ensure the right use and consistent outcomes."
+10,"the capacity and monitoring obligations, facilitating ramsar-related and other development activities of swos showed that it is important to clearly monitoring obligations, and supporting decision-making in local con- focus on the feasibility of remote sensing-based wetland monitoring, servation activities."
+10,we have demonstrated how swos tools can gen- but also its limitations.
+10,guidance documents were therefore developed erate statistics on the extent of wetland and water-related ecosystems in to facilitate the correct and proper use of the tools.
+10,equipped with this support of sdg indicator 6.6.1 reporting.
+10,"the utility of such tools is of right information, and working across all sectors and levels of 10"
+11,"weise, et al."
+11,remote sensing of environment 247 (2020) 111892 table 4 confusion matrix of the classiﬁed wetland habitats in the produced lulc map using the geoclassiﬁer compared with those derived from the national inventory of albania (classes are grouped based on the sgd 6.6.1 deﬁnitions).
+11,"national wetlands inventory none lake, rivers and estuaries artiﬁcial water bodies vegetated wetlands commission errors lulc other classes 0.00% 0.94% 1.86% 2.00% 100.00% lake, rivers and estuaries 0.00% 90.44% 0.23% 4.29% 4.76% artiﬁcial water bodies 0.00% 0.15% 97.36% 0.36% 0.52% vegetated wetlands 0.00% 8.47% 0.55% 93.36% 8.81% omission errors n/a 9.56% 2.64% 6.64% overall commission error 4.70% overall omission error 6.28% governance, decision makers can help to slow, stop and reverse wetland document]."
+11,url. https://www.swos-service.eu/wp-content/uploads/2019/03/ degradation processes.
+11,swos_report_web.pdf.
+11,"abou diwan, g., doumit, j., 2016."
+11,ancient wetlands of the biqā‘: a buﬀer zone between the hinterlands of sidon and berytus in the roman period.
+11,archéol.
+11,architect.
+11,study conception and design liban.
+11,"16, 215–254."
+11,"acreman, m., holden, j., 2013."
+11,how wetlands aﬀect ﬂoods.
+11,"wetlands 33, 773–786. https://doi.org/10.1007/s13157-013-0473-2."
+11,"kathrin weise, eric mino, eleni fitoka, javier muro, anis ågren, a.m., lidberg, w., strömgren, m., ogilvie, j., arp, p.a., 2014."
+11,"evaluating digital guelmami, lammert hilarides, eric van valkengoed, adrian strauch, terrain indices for soil wetness mapping – a swedish case study."
+11,hydrol.
+11,earth syst.
+11,"18, 3623–3634. https://doi.org/10.5194/hess-18-3623-2014."
+11,"jonas franke, susanne thulin, petra philipson, jonas eberle, brian amani, m., mahdavi, s., afshar, m., brisco, b., huang, w., mohammad javad mirzadeh, o’connor, christoph schröder, rene höfer s., white, l., banks, s., montgomery, j., hopkinson, c., 2019."
+11,canadian wetland inventory using google earth engine: the ﬁrst map and preliminary results.
+11,remote sens.
+11,"11, 842. https://doi.org/10.3390/rs11070842."
+11,"acquisition of data amler, e., schmidt, m., menz, g., 2015."
+11,deﬁnitions and mapping of east african wet- lands: a review.
+11,remote sens.
+11,"7, 5256–5282. https://doi.org/10.3390/rs70505256."
+11,"berger, m., moreno, j., johannessen, j.a., levelt, p.f., hanssen, r.f., 2012."
+11,"esa’s sentinel anis guelmami, eric van valkengoed, javier muro, antonio missions in support of earth system science."
+11,remote sens.
+11,environ.
+11,"sentinel missions sánchez, new opportun."
+11,"120, 84–90. https://doi.org/10.1016/j.rse.2011.07.023."
+11,"beven, k.j., kirkby, m.j., 1979."
+11,"a physically based, variable contributing area model of basin hydrology / un modèle à base physique de zone d’appel variable de l’hy- analysis and interpretation of data drologie du bassin versant."
+11,hydrol.
+11,"24, 43–69. https://doi.org/10.1080/ 02626667909491834."
+11,"boyer, t., polasky, s., 2004."
+11,"valuing urban wetlands: a review of non-market valuation anis guelmami, javier muro, antonio sánchez (optical data pro- studies."
+11,"wetlands 24, 744–755. https://doi.org/10.1672/0277-5212(2004) cessing and mapping) 024[0744:vuwaro]2.0."
+11,"franziska zander, anis guelmami, emma scott (indicators compu- brander, l.m., florax, r.j.g.m., vermaat, j.e., 2006."
+11,the empirics of wetland valuation: a comprehensive summary and a meta-analysis of the literature.
+11,environ.
+11,resource tation) econ.
+11,"33, 223–250. https://doi.org/10.1007/s10640-005-3104-4."
+11,"john truckenbrodt (sar processing), michael schwarz, ina kunz, brgm, 1998."
+11,etude bibliographique sur l’impact des gravières sur les crues de rivière.
+11,grit thürmer (programming) rap.
+11,brgm r 4002.
+11,"bwangoy, j.-r.b., hansen, m.c., roy, d.p., grandi, g.d., justice, c.o., 2010."
+11,wetland mapping in the congo basin using optical and radar remotely sensed data and derived drafting of manuscript topographical indices.
+11,remote sens.
+11,environ.
+11,"114, 73–86. https://doi.org/10.1016/j. rse.2009.08.004."
+11,"carvalho, l., mackay, e.b., cardoso, a.c., baattrup-pedersen, a., birk, s., blackstock, kathrin weise, rene höfer, jonas eberle, will simonson, anis k.l., borics, g., borja, a., feld, c.k., ferreira, m.t., globevnik, l., grizzetti, b., guelmami, brian o’connor, christoph schröder, anouska plasmeijer, hendry, s., hering, d., kelly, m., langaas, s., meissner, k., panagopoulos, y., penning, e., rouillard, j., sabater, s., schmedtje, u., spears, b.m., venohr, m., van de eef silver, javier muro, frank thonfeld."
+11,"bund, w., solheim, a.l., 2019."
+11,protecting and restoring europe’s waters: an analysis of the future development needs of the water framework directive.
+11,total environ.
+11,"658, 1228–1238. https://doi.org/10.1016/j.scitotenv.2018.12.255."
+11,"critical revision chapman, b., mcdonald, k., shimada, m., rosenqvist, a., schroeder, r., hess, l., 2015."
+11,mapping regional inundation with spaceborne l-band sar.
+11,remote sens.
+11,"7, jonas franke, frank thonfeld, will simonson, susanne thulin, 5440–5470. https://doi.org/10.3390/rs70505440."
+11,"clerici, n., weissteiner, c.j., paracchini, m.l., boschetti, l., baraldi, a., strobl, p., 2013."
+11,"petra philipson, eric mino, stephan flink, matthew ling, kathrin pan-european distribution modelling of stream riparian zones based on multi-source weise, adrian strauch."
+11,earth observation data.
+11,indic.
+11,"24, 211–223. https://doi.org/10.1016/j.ecolind."
+11,2012.06.002.
+11,"congalton, r.g., green, k., 2009."
+11,"assessing the accuracy of remotely sensed data: acknowledgements principles and practices, 2nd edition."
+11,"lewis publishers, boca raton."
+11,"dabboor, m., brisco, b., 2018."
+11,wetland monitoring and mapping using synthetic aperture radar.
+11,"in: gokce, d."
+11,"(ed.), wetlands management - assessing risk and sustainable the swos project received funding from the european union's solutions."
+11,"intechopen, pp."
+11,61–86.
+11,"horizon 2020 research and innovation program under grant agreement darrah, s.e., shennan-farpón, y., loh, j., davidson, n.c., finlayson, c.m., gardner, r.c., no."
+11,642088.
+11,"swos was supported by the ramsar convention on walpole, m.j., 2019."
+11,improvements to the wetland extent trends (wet) index as a tool for monitoring natural and human-made wetlands.
+11,indic.
+11,"99, 294–298."
+11,"wetlands and more than twenty user organizations in europe, africa https://doi.org/10.1016/j.ecolind.2018.12.032. and the middle east."
+11,"davidson, n.c., 2014."
+11,how much wetland has the world lost?
+11,long-term and recent trends in global wetland area.
+11,freshwater res.
+11,"65, 934. https://doi.org/10."
+11,1071/mf14173.
+11,"references davidson, n.c., fluet-chouinard, e., finlayson, c.m., 2018."
+11,global extent and distribu- tion of wetlands: trends and issues.
+11,freshwater res.
+11,"69, 620. https://doi.org/ 10.1071/mf17019."
+11,"abdul malak, d., schröder, c., guitart, c., simonson, w., ling, m., scott, e., brown, c., dickens, c., rebelo, l.-m., nhamo, l., 2017."
+11,"guideline and indicators for target 6.6 of the flink, s., franke, j., fitoka, e., guelmami, a., hatziiordanou, l., höfer, r., mino, e., sdgs: “change in the extent of water-related ecosystems over time”."
+11,"in: report by the philipson, p., plasmeijer, a., sánchez, a., silver, e., strauch, a., thulin, s., weise, k., international water management institute."
+11,"cgiar research program on water, land 2019."
+11,"enhanced wetland monitoring, assessment and indicators to support european and ecosystems (wle). and global environmental policy."
+11,"in: swos technical publication, [www dronova, i., gong, p., wang, l., zhong, l., 2015."
+11,mapping dynamic cover types in a large 11
+12,"weise, et al."
+12,remote sensing of environment 247 (2020) 111892 seasonally ﬂooded wetland using extended principal component analysis and object- 2015.1006250. based classiﬁcation.
+12,remote sens.
+12,environ.
+12,"158, 193–206. https://doi.org/10.1016/j."
+12,"moomaw, w.r., chmura, g.l., davies, g.t., finlayson, c.m., middleton, b.a., natali, rse.2014.10.027."
+12,"s.m., perry, j.e., roulet, n., sutton-grier, a.e., 2018."
+12,"wetlands in a changing climate: esch, t., marconcini, m., felbier, a., roth, a., heldens, w., huber, m., schwinger, m., science, policy and management."
+12,"wetlands 38, 183–205. https://doi.org/10.1007/ taubenböck, h., müller, a., dech, s., 2013."
+12,"urban footprint processor—fully auto- s13157-018-1023-8. mated processing chain generating settlement masks from global data of the muro, j., canty, m., conradsen, k., hüttich, c., nielsen, a.a., skriver, h., remy, f., tandem-x mission."
+12,ieee geosci.
+12,remote sens.
+12,"10, 1617–1621. https://doi.org/ strauch, a., thonfeld, f., menz, g., 2016."
+12,short-term change detection in wetlands 10.1109/lgrs.2013.2272953. using sentinel-1 time series.
+12,remote sens.
+12,"8, 795. https://doi.org/10.3390/ finlayson, c.m., 2018."
+12,ramsar convention typology of wetlands.
+12,"in: finlayson, c.m., rs8100795."
+12,"everard, m., irvine, k., mcinnes, r., middleton, b.a., van dam, a.a., davidson, n.c."
+12,"olmanson, l.g., brezonik, p.l., bauer, m.e., 2015."
+12,"remote sensing for regional lake (eds.), the wetland book - i."
+12,"springer, dordrecht, pp."
+12,1529–1532.
+12,"water quality assessment: capabilities and limitations of current and upcoming finlayson, c.m., milton, g.r., prentice, r.c., 2016."
+12,wetland types and distribution.
+12,in: satellite systems.
+12,"in: younos, t., parece, t.e."
+12,"(eds.), advances in watershed science finlayson, c.m., milton, g.r., prentice, r.c., davidson, n.c."
+12,"(eds.), the wetland and assessment the handbook of environmental chemistry, springer, cham, pp."
+12,book - ii.
+12,"springer netherlands, dordrecht, pp."
+12,1–17. https://doi.org/10.1007/978- 111–140.
+12,94-007-6173-5_186-1.
+12,"olofsson, p., foody, g.m., herold, m., stehman, s.v., woodcock, c.e., wulder, m.a., gallant, a.l., 2015."
+12,the challenges of remote monitoring of wetlands.
+12,remote sens.
+12,"7, 2014."
+12,good practices for estimating area and assessing accuracy of land change.
+12,10938–10950. https://doi.org/10.3390/rs70810938.
+12,remote sens.
+12,environ.
+12,"148, 42–57. https://doi.org/10.1016/j.rse.2014.02.015."
+12,"grizzetti, b., pistocchi, a., liquete, c., udias, a., bouraoui, f., van de bund, w., 2017."
+12,"paganini, m., petiteville, i., ward, s., dyke, g., steventon, m., harry, j., kerblat, f., 2018."
+12,human pressures and ecological status of european rivers.
+12,7. https://doi.
+12,"satellite earth observations in support of the sustainable development goals, special org/10.1038/s41598-017-00324-3."
+12,edition 2018.
+12,esa – eogb (earth observation graphic bureau).
+12,"guo, m., li, j., sheng, c., xu, j., wu, l., 2017."
+12,a review of wetland remote sensing.
+12,"page, s.e., siegert, f., rieley, j.o., boehm, h.-d.v., jaya, a., limin, s., 2002."
+12,"the amount sensors 17, 777. https://doi.org/10.3390/s17040777. of carbon released from peat and forest ﬁres in indonesia during 1997."
+12,"nature 420, hird, j.n., delancey, e.r., mcdermid, g.j., kariyeva, j., 2017."
+12,"google earth engine, 61–65. https://doi.org/10.1038/nature01131. open-access satellite data, and machine learning in support of large-area probabilistic perennou, c., beltrame, c., guelmami, a., vives, p.t., caessteker, p., 2012."
+12,existing areas wetland mapping.
+12,remote sens.
+12,"9, 1315. https://doi.org/10.3390/rs9121315. and past changes of wetland extent in the mediterranean region: an overview."
+12,"hu, s., niu, z., chen, y., 2017."
+12,global wetland datasets: a review.
+12,"wetlands 37, 807–817."
+12,mediterran.
+12,"38, 14. https://doi.org/10.1007/s13157-017-0927-z."
+12,"perennou, c., guelmami, a., paganini, m., philipson, p., poulin, b., strauch, a., tottrup, jin, h., huang, c., lang, m.w., yeo, i.-y., stehman, s.v., 2017."
+12,"monitoring of wetland c., truckenbrodt, j., geijzendorﬀer, i.r., 2018."
+12,chapter six - mapping mediterranean inundation dynamics in the delmarva peninsula using landsat time-series imagery wetlands with remote sensing: a good-looking map is not always a good map.
+12,in: from 1985 to 2011.
+12,remote sens.
+12,environ.
+12,"190, 26–41. https://doi.org/10.1016/j."
+12,"bohan, d.a., dumbrell, a.j., woodward, g., jackson, m."
+12,"(eds.), advances in rse.2016.12.001."
+12,"ecological research, next generation biomonitoring: part 1."
+12,"academic press, pp."
+12,"junk, w.j., an, s., finlayson, c.m., gopal, b., květ, j., mitchell, s.a., mitsch, w.j., 243–277. https://doi.org/10.1016/bs.aecr.2017.12.002."
+12,"robarts, r.d., 2013."
+12,"current state of knowledge regarding the world’s wetlands and qafko, g., 1995."
+12,sugarbeet growing in albania: the oﬃcial aspects.
+12,la vulgarisation their future under global climate change: a synthesis.
+12,aquat.
+12,"75, 151–167. agricole dans les pays de la méditerranée du nord-est."
+12,montpellier: ciheam.
+12,cahiers https://doi.org/10.1007/s00027-012-0278-z.
+12,"options méditerranéennes 2, 143–147."
+12,"keddy, p.a., fraser, l.h., solomeshch, a.i., junk, w.j., campbell, d.r., arroyo, m.t.k., ramsar convention on wetlands, 2018."
+12,"global wetland outlook: state of the world’s alho, c.j.r., 2009."
+12,wet and wonderful: the world’s largest wetlands are conservation wetlands and their services to people.
+12,"ramsar convention secretariat, gland, priorities."
+12,"bioscience 59, 39–51. https://doi.org/10.1525/bio.2009.59.1.8."
+12,switzerland.
+12,"konecny, k., ballhorn, u., navratil, p., jubanski, j., page, s.e., tansey, k., hooijer, a., rapinel, s., fabre, e., dufour, s., arvor, d., mony, c., hubert-moy, l., 2019."
+12,"mapping vernimmen, r., siegert, f., 2016."
+12,"variable carbon losses from recurrent ﬁres in potential, existing and eﬃcient wetlands using free remote sensing data."
+12,environ. drained tropical peatlands.
+12,global change biol.
+12,"22, 1469–1480. https://doi.org/10."
+12,manage.
+12,"247, 829–839. https://doi.org/10.1016/j.jenvman.2019.06.098. 1111/gcb.13186."
+12,"rebelo, l.-m., finlayson, c.m., strauch, a., rosenqvist, a., perennou, c., tøttrup, c., kottek, m., grieser, j., beck, c., rudolf, b., rubel, f., 2006."
+12,"world map of the köppen- hilarides, l., paganini, m., wielaard, n., siegert, f., ballhorn, u., navratil, p., franke, geiger climate classiﬁcation updated. metz 15, 259–263. https://doi.org/10.1127/ j., davidson, n., 2018."
+12,"the use of earth observation for wetland inventory, assess- 0941-2948/2006/0130. ment and monitoring: an information source for the ramsar convention on langan, c., farmer, j., rivington, m., smith, j.u., 2018."
+12,tropical wetland ecosystem wetlands.
+12,in: ramsar technical report no.10.
+12,"ramsar convention secretariat, gland, service assessments in east africa; a review of approaches and challenges."
+12,environ.
+12,switzerland.
+12,model.
+12,"software 102, 260–273. https://doi.org/10.1016/j.envsoft.2018.01.022."
+12,"schuyt, k.d., 2005."
+12,"economic consequences of wetland degradation for local populations lazaj, l., xhelilaj, r., 2017."
+12,"mapping of hydropower plant in albania, using geographic in africa."
+12,"53, 177–190. https://doi.org/10.1016/j.ecolecon.2004.08.003."
+12,information system.
+12,"in: help-cso project ﬁnal report [www document], url."
+12,"sørensen, r., zinko, u., seibert, j., 2006."
+12,on the calculation of the topographic wetness http://www.ecoalbania.org/wp-content/uploads/2017/05/hpps_al_ﬁnal-report_me- index: evaluation of diﬀerent methods based on ﬁeld observations.
+12,hydrol.
+12,earth kapak.pdf.
+12,"10, 101–112."
+12,"leemhuis, c., thonfeld, f., näschen, k., steinbach, s., muro, j., strauch, a., lópez, a., sudmanns, m., tiede, d., augustin, h., lang, s., 2019."
+12,"assessing global sentinel-2 cov- daconto, g., games, i., diekkrüger, b., 2017."
+12,sustainability in the food-water-eco- erage dynamics and data availability for operational earth observation (eo) appli- system nexus: the role of land use and land cover change for water resources and cations using the eo-compass.
+12,"digital earth 1–17. https://doi.org/10.1080/ ecosystems in the kilombero wetland, tanzania."
+12,"sustainability 9, 1513. https://doi."
+12,17538947.2019.1572799. org/10.3390/su9091513.
+12,"un water, 2018a."
+12,monitoring methodology for sdg indicator 6.6.1 [www document].
+12,"liao, j., zhen, j., zhang, l., metternicht, g., 2019."
+12,"understanding dynamics of mangrove url. https://www.unwater.org/app/uploads/2018/05/step-by-step-methodology- forest on protected areas of hainan island, china: 30 years of evidence from remote 6-6-1_revision-2018-03-02_final.pdf. sensing."
+12,"sustainability 11 (19), 5356."
+12,"un water, 2018b."
+12,progress on water-related ecosystems.
+12,"in: piloting the monitoring ludwig, c., walli, a., schleicher, c., weichselbaum, j., riﬄer, m., 2019."
+12,"a highly au- methodology and initial ﬁndings for sdg indicator 6.6.1 [www document], url. tomated algorithm for wetland detection using multi-temporal optical satellite data. https://www.unwater.org/app/uploads/2018/12/sdg6_indicator_report_661_ remote sens."
+12,environ.
+12,"224, 333–351. https://doi.org/10.1016/j.rse.2019.01.017."
+12,progress-on-water-related-ecosystems_english_2018-1.pdf.
+12,"mahdianpari, m., salehi, b., mohammadimanesh, f., homayouni, s., gill, e., 2019."
+12,"the united nations, 2016."
+12,the sustainable development agenda [www document].
+12,united ﬁrst wetland inventory map of newfoundland at a spatial resolution of 10 m using nations sustainable development url. https://www.un.org/ sentinel-1 and sentinel-2 data on the google earth engine cloud computing platform. sustainabledevelopment/development-agenda/ accessed 8.28.19.
+12,remote sens.
+12,"11, 43. https://doi.org/10.3390/rs11010043. van asselen, s., verburg, p.h., vermaat, j.e., janse, j.h., 2013."
+12,"drivers of wetland marieta, m., fitoka, e., bego, f., 2003."
+12,inventory of albanian wetlands.
+12,ecat and greek conversion: a global meta-analysis.
+12,"plos one 8, e81292. https://doi.org/10.1371/ biotope/wetland centre (ekby), thermi, greece. journal.pone.0081292."
+12,"mediterranean wetlands observatory, 2018."
+12,mediterranean wetlands outlook 2.
+12,"vogelmann, j.e., gallant, a.l., shi, h., zhu, z., 2016."
+12,perspectives on monitoring gradual solutions for sustainable mediterranean wetlands.
+12,"tour du valat, france. change across the continuity of landsat sensors using time-series data."
+12,remote sens.
+12,"merot, ph., squividant, h., aurousseau, p., hefting, m., burt, t., maitre, v., kruk, m., environ."
+12,landsat 8 sci.
+12,"results 185, 258–270. https://doi.org/10.1016/j.rse.2016."
+12,"butturini, a., thenail, c., viaud, v., 2003."
+12,testing a climato-topographic index for 02.060. predicting wetlands distribution along an european climate gradient.
+12,model.
+12,"un water, 2018c."
+12,"sustainable development goal 6: synthesis report 2018 on water and 163, 51–71. https://doi.org/10.1016/s0304-3800(02)00387-3. sanitation [www document]."
+12,"url. https://sustainabledevelopment.un.org/ middleton, b.a., souter, n.j., 2016."
+12,"functional integrity of freshwater forested wetlands, content/documents/19901sdg6_sr2018_web_3.pdf. hydrologic alteration, and climate change."
+12,ecosyst.
+12,"health sustain. 2, e01200."
+12,"white, l., brisco, b., dabboor, m., schmitt, a., pratt, a., 2015."
+12,a collection of sar https://doi.org/10.1002/ehs2.1200. methodologies for monitoring wetlands.
+12,remote sens.
+12,"7, 7615–7645. https://doi."
+12,"millennium ecosystem assessment (ed.), 2005."
+12,ecosystems and human well-being: wet- org/10.3390/rs70607615. lands and water synthesis: a report of the millennium ecosystem assessment.
+12,"world wilson, a.m., jetz, w., 2016."
+12,"remotely sensed high-resolution global cloud dynamics for resources institute, washington, dc. predicting ecosystem and biodiversity distributions."
+12,"plos biol. 14, e1002415."
+12,"mitsch, w.j., gosselink, j.g., 2015."
+12,"wetlands, fifth edition."
+12,"john wiley and sons, inc, https://doi.org/10.1371/journal.pbio.1002415."
+12,"hoboken, nj."
+12,"wohlfart, c., winkler, k., wendleder, a., roth, a., 2018."
+12,"terrasar-x and wetlands: a mitsch, w.j., bernal, b., hernandez, m.e., 2015."
+12,ecosystem services of wetlands.
+12,j. review.
+12,remote sens.
+12,"10, 916. https://doi.org/10.3390/rs10060916."
+12,biodiv.
+12,ecosyst.
+12,manage.
+12,"11, 1–4. https://doi.org/10.1080/21513732."

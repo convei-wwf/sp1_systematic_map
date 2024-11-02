@@ -1,0 +1,550 @@
+page,p
+1,"int j appl earth obs geoinformation 90 (2020) 102126 contents lists available at sciencedirect int j appl earth obs geoinformation journal homepage: www.elsevier.com/locate/jag assessing the benefit of satellite-based solar-induced chlorophyll t fluorescence in crop yield prediction bin penga,b,*, kaiyu guana,b,c,*, wang zhoua, chongya jianga,c, christian frankenbergd,e, ying sunf, liyin hed, philipp köhlerd a department of natural resources and environmental sciences, college of agricultural, consumer and environmental sciences, university of illinois at urbana-champaign, urbana, illinois, usa b national center of supercomputing applications, university of illinois at urbana-champaign, urbana, illinois, usa c center for advanced bioenergy and bioproducts innovation, university of illinois at urbana-champaign, urbana, illinois, usa d division of geological and planetary sciences, california institute of technology, pasadena, ca, usa e jet propulsion laboratory, california institute of technology, pasadena, ca, usa f soil and crop sciences section, school of integrative plant science, cornell university, ithaca, ny, usa article info abstract keywords: large-scale crop yield prediction is critical for early warning of food insecurity, agricultural supply chain solar-induced chlorophyll fluorescence management, and economic market."
+1,"satellite-based solar-induced chlorophyll fluorescence (sif) products have crop yield revealed hot spots of photosynthesis over global croplands, such as in the u.s."
+1,midwest.
+1,"however, to what extent prediction these satellite-based sif products can enhance the performance of crop yield prediction when benchmarking forecasting against other existing satellite data remains unclear."
+1,here we assessed the benefits of using three satellite-based machine learning sif products in yield prediction for maize and soybean in the u.s.
+1,"midwest: gap-filled sif from orbiting carbon observatory 2 (oco-2), new sif retrievals from the tropospheric monitoring instrument (tropomi), and the coarse-resolution sif retrievals from the global ozone monitoring experiment-2 (gome-2)."
+1,"the yield prediction performances of using sif data were benchmarked with those using satellite-based vegetation indices (vis), including normalized difference vegetation index (ndvi), enhanced vegetation index (evi), and near-infrared reflectance of vegetation (nirv), and land surface temperature (lst)."
+1,five machine-learning algorithms were used to build yield prediction models with both remote-sensing-only and climate-remote-sensing-combined variables.
+1,we found that high-resolution sif products from oco-2 and tropomi outperformed coarse-resolu- tion gome-2 sif product in crop yield prediction.
+1,"using high-resolution sif products gave the best forward predictions for both maize and soybean yields in 2018, indicating the great potential of using satellite-based high-resolution sif products for crop yield prediction."
+1,"however, using currently available high-resolution sif products did not guarantee consistently better yield prediction performances than using other satellite-based remote sensing variables in all the evaluated cases."
+1,"the relative performances of using different remote sensing variables in yield prediction depended on crop types (maize or soybean), out-of-sample testing methods (five- fold-cross-validation or forward), and record length of training data."
+1,"we also found that using nirv could generally lead to better yield prediction performance than using ndvi, evi, or lst, and using nirv could achieve similar or even better yield prediction performance than using oco-2 or tropomi sif products."
+1,we concluded that satellite-based sif products could be beneficial in crop yield prediction with more high-resolu- tion and good-quality sif products accumulated in the future.
+1,introduction hansen and indeje 2004; isengildina-massa et al.
+1,2008).
+1,"generally, a crop yield forecasting system can be based on either physical or sta- crop yield forecasting at a regional to global scale is important for tistical models."
+1,"physical-model-based approach usually uses a crop early warning of food insecurity, agricultural supply chain manage- model to dynamically simulate crop growth and yield formation pro- ment, and economic market prediction (everingham et al. 2002; cesses (brown et al."
+1,2018; jones et al.
+1,2017; jones et al.
+1,"2003; peng ⁎ corresponding author at: department of natural resources and environmental sciences, college of agricultural, consumer and environmental sciences, university of illinois at urbana-champaign, urbana, illinois, usa e-mail addresses: binpeng@illinois.edu (b."
+1,"peng), kaiyug@illinois.edu (k."
+1,guan). https://doi.org/10.1016/j.jag.2020.102126 received 4 december 2019; received in revised form 8 march 2020; accepted 7 april 2020 0303-2434/ © 2020 the authors.
+1,published by elsevier b.v.
+1,this is an open access article under the cc by license (http://creativecommons.org/licenses/by/4.0/).
+2,"peng, et al."
+2,int j appl earth obs geoinformation 90 (2020) 102126 et al. 2018a; peng et al.
+2,2020; rosenzweig et al.
+2,"2013; shelia et al. generating new high-resolution sif products, the near-infrared re- 2019)."
+2,"however, due to the complexity and relatively lower perfor- flectance of vegetation (nirv) (badgley et al. 2017), a new combination mance of these physical models at large scales, statistical models are of red and near-infrared band reflectance from moderate resolution widely used in operational large-scale crop yield forecasting systems imaging spectroradiometer (modis), has been found to be well cor- (chipanshi et al."
+2,2015; li et al.
+2,2019; newlands et al.
+2,"2014; peng et al. related with sif and can lead to improved gpp estimates relative to the 2018b). normalized difference vegetation index (ndvi) and fpar, which in- statistical crop yield models are data-driven, and thus the type, dicates that nirv can also be potentially applied for crop yield esti- volume, as well as quality of input data are among the key factors de- mation."
+2,"to our best knowledge, there is still no studies testing the termining the model performance."
+2,"earlier studies developing statistical performance of nirv in crop yield prediction. models for crop yield forecasting mainly rely on environmental factors this study aims at assessing the potential application of satellite- as inputs, such as climate and soil condition (legler et al."
+2,1999; phillips based high-resolution sif products from gap-filled oco-2 and et al.
+2,1999; potgieter et al.
+2,2002; qian et al.
+2,2009).
+2,"later, satellite data tropomi in estimating maize and soybean yield in the u.s."
+2,midwest. has been proved to be beneficial in operational crop yield forecasting the yield prediction performance using satellite-based high-resolution systems.
+2,"using satellite data only or adding satellite data upon en- sif will be benchmarked with those using coarse-resolution gome-2 vironmental information can generally lead to better yield estimation sif, several modis-based vegetation indices (ndvi, evi, and nirv), than traditional statistical crop yield models only using environmental and lst."
+2,"by conducting this assessment and intercomparison study, we factors (li et al."
+2,2019).
+2,"the application of various remote sensing want to answer the following questions: (1) does high-resolution sif products across a diverse spectral range in crop yield estimation has products perform better than coarse-resolution sif products in crop been extensively explored (guan et al. 2017), including (but not limited yield prediction?"
+2,"(2) does high-resolution sif products perform better to) surface reflectance (you et al. 2017), vegetation indices (bolton and than vegetation indices and lst in crop yield prediction?"
+2,answer to friedl 2013; cai et al.
+2,2019; chipanshi et al.
+2,2015; johnson 2014; these questions could guide the development of operational yield pre- lobell et al.
+2,2015; newlands et al.
+2,"2014; peng et al. 2018b), land sur- diction system using multi-source remote sensing data. face temperature (lst) (cai et al."
+2,2017; johnson 2014; li et al.
+2,"2019; you et al. 2017), fraction of photosynthetically-active radiation (fpar) (bastiaanssen and ali 2003; jiang et al. 2004), gross primary pro- 2."
+2,"study area and data ductivity (gpp) (he et al. 2018), evapotranspiration (anderson et al."
+2,"2016; yang et al. 2018), active microwave based backscattering and 2.1."
+2,study area passive microwave based vegetation optical depth (chaparro et al.
+2,2018; guan et al.
+2,2017).
+2,we focused on rainfed maize and soybean yield estimation over 12 satellite-based solar-induced chlorophyll fluorescence (sif) has states in the u.s.
+2,"midwest, including illinois, indiana, iowa, kansas, recently demonstrated to be effective in capturing the spatial and michigan, minnesota, missouri, nebraska, north dakota, ohio, south temporal variabilities of terrestrial carbon uptake (frankenberg et al."
+2,"dakota, and wisconsin (fig."
+2,"in 2018, harvested area over these 12 2011; guanter et al."
+2,2014; joiner et al.
+2,2013; parazoo et al.
+2,2013; shiga states accounted for 87% and 83% of u.s. total harvested area for maize et al.
+2,2018).
+2,"although agricultural areas are always hot spots on the and soybean, respectively, which corresponded to 89% and 84% of u.s. satellite-based sif maps during the peak growing season, few studies total maize and soybean productions, respectively."
+2,the rainfed maize have directly explored the use of satellite sif data in crop yield esti- and soybean harvested area in these 12 states accounted for 66% and mation.
+2,"guanter et al. (2014) and guan et al. (2016) were the first to 73% of u.s. total harvested area, which corresponded to 69% and 74% indirectly link sif retrieval and crop yield."
+2,"they first estimated gpp of u.s. total productions in 2018 for corn and soybean, respectively through linear scaling with or without accounting for stoichiometry and (fig."
+2,"2). photosynthetic pathways, and then benchmarked with aggregated net primary productivity (npp) estimated from production of all crops, 2.2."
+2,historical crop yield and acreage data from usda nass instead of yield for individual crops mainly due to the coarse spatial resolution (0.5 degree) of the global ozone monitoring experiment-2 we obtained county-level harvested yield and acreage data for both (gome-2) gridded sif products used in their studies.
+2,a recent work rainfed maize and soybean from the u.s.
+2,department of agriculture using sif products from the scanning imaging absorption spectrometer (usda) national agricultural statistics service (nass) quick stats for atmospheric chartography (sciamachy) and gome-2 for wheat database (quickstats.nass.usda.gov).
+2,"for counties without any irrigated yield prediction in australia showed sif was no better than enhanced yield records, their yield was considered to be rainfed."
+2,"for irrigated vegetation index (evi), largely due to the low spatial and temporal counties, we only included yield records that were explicitly reported as resolution of sciamachy and gome-2 sif products and also low “nonirrigated” as rainfed yield. signal-to-noise ratio in these coarse-resolution sif products (cai et al."
+2,2019).
+2,"more recently, the orbiting carbon observatory 2 (oco-2) and the tropospheric monitoring instrument (tropomi) can provide sif 2.3."
+2,historical climate data retrievals at much higher spatial resolutions (frankenberg et al.
+2,"2014; köhler et al. 2018), which opens the opportunity for large-scale crop historical climate data were obtained from the parameter-elevation yield estimation using satellite-based sif."
+2,"although the original oco-2 relationships on independent slopes model (prism), which has a 4-km sif product has its limitations in sparse sampling swath and long revisit spatial resolution (daly et al."
+2,2008).
+2,"we used monthly mean tempera- cycle (sun et al. 2018), data-driven gap-filling of oco-2 sif can provide ture (tair), precipitation (prec), and vapor pressure deficit (vpd) as spatial continuous and high resolution (0.05 degree) sif products (li climate variables in yield prediction models."
+2,tair and prec are com- and xiao 2019; yu et al.
+2,2018; zhang et al.
+2,2018).
+2,"however, there are monly used in building crop yield prediction models as they represent still no studies directly using these satellite-based high-resolution sif the basic meteorological condition over a region (li et al."
+2,"2019; lobell products for crop yield prediction, and further comparing the perfor- and burke 2010; lobell et al."
+2,2015; peng et al. 2018b).
+2,vpd has been mances of using satellite-based high-resolution sif products with those found to be a dominant factor in indicating crop water stress over the of using coarse-resolution sif products and traditional vegetation in- u.s.
+2,midwest (lobell et al.
+2,2014).
+2,though vpd is highly correlated with dices or lst in crop yield prediction.
+2,"therefore, the benefits of using tair, adding vpd upon tair and prec still improved the forecasting satellite-based high-resolution sif products in operational crop yield performance of yield (peng et al. 2018b)."
+2,the original 4-km data was estimation remains unclear.
+2,besides the above advancements in aggregated to the county level without differentiating crop types.
+3,"peng, et al."
+3,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+3,satellite-based monthly averaged sif products reveal a summer photosynthesis hotspot over the u.s.
+3,"midwest, where maize and soybean fields dominate the landscape. (a) gridded 5 km tropomi sif at 740 nm over the contiguous united states (conus) in july, 2018; (b) gridded 5 km sif ¯ oco2 _ 005 converted to 740 nm over the conus in july, 2018; (c) county-level harvesting area fraction for maize in 2018; and (d) county-level harvesting area fraction for soybean in 2018."
+3,the 12 states in the u.s.
+3,midwest are highlighted using thick black lines.
+3,"satellite data product, which assumed cloud-free condition as a first-order approx- imation (frankenberg et al."
+3,2011; köhler et al.
+3,2018).
+3,2.4.1.
+3,"satellite-based sif data besides sif¯ oco2 _ 005 and tropomi sif products, we also used a we used a spatially contiguous global oco-2 sif product at 0.05° coarse-resolution sif products from gome-2 (köhler et al."
+3,"2015). and 16-day resolutions (sif ¯ oco2 _ 005 ) (yu et al. 2018), which is a ma- gome-2 is on board eumetsat’s polar orbiting meteorological op- chine learning prediction of oco-2 nadir sif using modis nadir bi- erational satellites (metop-a and metop-b), and a nadir-scanning directional reflectance distribution function (brdf)-adjusted re- medium-resolution uv/vis spectrometer with a spectral range between flectance (nbar) products (mcd43a4 and mcd43c4)."
+3,the original 240 and 790 nm.
+3,a subchannel ranging from 720-758 nm were used to instantaneous oco-2 sif retrievals at 757 nm and 771 nm were scaled retrieve sif signal at 740 nm from gome-2 observations (köhler et al. to 757 nm using (sif757 + 1.5×sif771)/2 to improve the accuracy and 2015).
+3,"before gridded into 0.5° product, the instantaneous sif retrievals finally converted to daily mean sif before used for model training and were converted to daily mean values using the daily correction factor prediction."
+3,"biome- and time-step-specific feedforward artificial neural approach (frankenberg et al. 2011), which is the same with tropomi network (ann) models were trained and cross-validated using co-lo- sif product (köhler et al."
+3,2018).
+3,this product is available since 2007 cated oco-2 footprints and modis nbar data.
+3,"this product shows and we used all data from 2015 to 2018. high quality when benchmarked with independent airborne sif mea- following köhler et al. (2018), we scaled sif¯ oco2 _ 005 at 757 nm to surements (yu et al."
+3,2018).
+3,"the data is available after september of tropomi sif retrieval channel (around 740 nm) by multiplying a 2014, and we used all the data from 2015 to 2018. factor of 1.56, which was determined based on a reference sif emission we also used the tropomi ungridded daily sif product with a shape derived from leaf-level measurements (magney et al."
+3,2017).
+3,the footprint size of about 7 km x 3.5 km at nadir (köhler et al.
+3,"2018). scaled sif¯ oco2 _ 005 , tropomi gridded sif products at 740 nm, and tropomi is on board the sentinel 5 precursor (s-5 p)."
+3,"sif retrieval was gome-2 sif product were then aggregated to monthly and county level conducted at a spectral window ranging from 743–758 nm, which is a mean values for maize and soybean separately using crop fraction de- subset of tropomi’s band 6 (725–775 nm)."
+3,"tropomi sif data is termined from the yearly cropland data layer (cdl, see section 2.4.3 for available after february of 2018."
+3,we gridded the footprint-level tro- details).
+3,pomi sif data to 0.05° to match the spatial resolution of sif ¯ oco2 _ 005 product used in this study.
+3,a sif value contributes to a grid cell average 2.4.2.
+3,modis data if the footprint covers the center of this grid cell (köhler et al.
+3,2018).
+3,"we used ndvi, evi, nirv, and lst data from modis as additional we converted the instantaneous tropomi sif to daily average by remote sensing based predictors for crop yield estimation."
+3,both ndvi applying a day length correction factor contained in the tropomi sif and evi were from the terra 16-day global vegetation indices product 3
+4,"peng, et al."
+4,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+4,pearson correlation coefficients (r) among county-level climate and remote sensing variables in july (left column) and august (right column) as well as final harvested yield for maize (top) and soybean (bottom) in 2018.
+4,"sif(oco2), sif(tropomi), and sif(gome2) in the x-axis represent sif ¯ oco2 _ 005, tropomi and gome-2 sif products, respectively. with a spatial resolution of 250 m (mod13q1.006), which contains the 2.4.3."
+4,cdl from usda nass best available vegetation index values from all the modis acquisitions the usda nass cdl was used to aggregate the remote sensing within the 16-day period.
+4,nirv was calculated using the daily modis variables to county level for corn and soybean separately.
+4,the cdl data nadir brdf-adjusted reflectance (nbar) product with a spatial re- is a yearly multi-satellite based crop type classification product using solution of 500 m (mcd43a4.006) following the definition of nirv= decision tree supervised classifier and has a 30 m spatial resolution.
+4,"the ( nir r )/( nir + r ) × nir , where nir and r represent the surface classification accuracy for maize and soybean is above 95% over the reflectance at near-infrared and red bands, respectively (badgley et al."
+4,midwest (boryan et al.
+4,2011).
+4,"for modis vis and lst data, we 2017)."
+4,daily nirv was then composited into 16-day data following a aggregated all the modis pixels with fractions of corn or soybean larger similar maximum-value approach with ndvi and evi.
+4,daytime lst than 50% within a county.
+4,"for sif data, we conducted simple weighted data was from the aqua 8-day global land surface temperature and average of all the 5 km grids within a county using corn or soybean area emissivity product with a spatial resolution of 1 km (myd11a2.006). fraction as weights."
+4,"we choose aqua daytime lst product here as the aqua satellite goes cross the equator at approximately local time 1:30 p.m., which is closer 3."
+4,"method to the time of maximum canopy temperature, incoming solar radiation, as well as most possible stressing conditions for crops on clear days, 3.1."
+4,crop yield model development compared with terra satellite with a visiting time of 10:30 a.m..
+4,we did not use the nighttime lst product as it has little correlation with crop we used five different machine learning algorithms to develop the yield (johnson 2014).
+4,"all 8-day or 16-day modis data were firstly crop yield model, including the least absolute shrinkage and selection aggregated to monthly scale, and finally aggregated to county-level operator regression (lasso) (tibshirani 1996), ridge regression mean values for maize and soybean separately using crop area fractions (ridge) (hoerl and kennard 1970), support vector regression (svr) determined from the yearly 30 m usda nass cropland data layer (smola and schölkopf 2004), random forest regression (rf) (breiman (cdl, see section 2.4.3 for details)."
+4,"all modis pixels with area fraction 2001), and artificial neural network (ann) (gardner and dorling 1998; of corn or soybean larger than 50% within a specific county were specht 1991)."
+4,lasso and ridge are both regularized regression averaged as the county-level mean values. methods and their difference is that lasso uses l1 regularization while ridge uses l2 regularization (fu 1998; tibshirani 1996).
+4,both lasso 4
+5,"peng, et al."
+5,int j appl earth obs geoinformation 90 (2020) 102126 and ridge have the same penalty parameter to be tuned.
+5,the svr is a ¯ oco2 _ 005 and tropmi sif in we trained and tested the models using sif kernel-based regression method solving nonlinear regression problems 2018 separately.
+5,"for the forward method, the models were trained by transferring the data to a higher-dimensional space through a kernel using sif ¯ oco2 _ 005 during 2015–2017 while tested using sif¯ oco2 _ 005 and function."
+5,we used the radial basis function (rbf) kernel for svr tropomi sif in 2018 separately.
+5,"for the sake of fair comparison, the (suykens and vandewalle 1999) as it usually gives better accuracy than data length for model training and testing using other remote sensing, linear and polynomial kernels."
+5,"rf is a binary-tree based machine climate, or combined variables was consistent with that of sif products. learning algorithm, which builds an ensemble of decision trees with different subsets of variables."
+5,the ann is based on a collection of ar- 4.
+5,"results tificial neurons, which loosely model the neurons in a biological brain and can receive inputs, change their internal states (activation) ac- 4.1."
+5,"correlation of crop yield with climate and remote sensing variables in cording to the inputs, and produce outputs depending on the inputs and 2018 activation."
+5,"we used the multilayer perceptron (mlp) regressor (gardner and dorling 1998), which is feedforward ann and trains the spatial patterns of crop yield in 2018 were better correlated using backpropagation with no activation function in the output layer. with remote sensing variables (sif, ndvi, evi, nirv, and lst) than we choose the l-bfgs method to optimize the squared-loss as it con- climate factors (tair, prec, and vpd)."
+5,among the tested remote sensing verges faster and performs better for small datasets.
+5,"all these methods variables, sif from oco-2 and tropomi, evi, nirv in july and sif have been previously explored for crop yield estimation at varied scales from oco-2 and tropomi, and nirv in august showed correlation (cai et al."
+5,2019; jeong et al.
+5,2016; jiang et al.
+5,2004).
+5,the main purpose coefficients larger than 0.8 with maize yield.
+5,"similarly, sif from oco-2 of using multiple algorithms with varied complexity here is to test and tropomi and nirv in august also showed correlation coefficients whether the differences in yield predictability using different remote larger than 0.8 with soybean yield."
+5,"the correlation coefficient between sensing variables are consistent when using different algorithms to sif from gome-2 and crop yield was smaller than those between sif build the crop yield model. from oco-2 and tropomi and crop yield, sometimes even ranked the lowest among all the remote sensing variables, such as in august for 3.2."
+5,experiment design both maize and soybean.
+5,lst negatively correlated with crop yield.
+5,"for maize, the correlation coefficient between lst and yield in july is we conducted two groups of experiments: one group used only re- larger than that in august."
+5,"for soybean, the correlation coefficient be- mote sensing variables, while another group used both climate and tween lst and yield in august is larger than that in july."
+5,among the remote sensing variables as predictors.
+5,"remote sensing variables in- three climate factors, vpd was negatively correlated with crop yield cluded monthly sif, ndvi, evi, nirv, and lst during the growing and precipitation was positively correlated with crop yield for both corn season."
+5,"we used monthly air temperature, precipitation, and vpd and soybean, while air temperature was negatively correlated with crop during the growing season as climate variables in the second group of yield for maize and positively correlated with crop yield for soybean. experiments as these variables combined can provide reasonable pre- vpd showed higher correlation coefficients than tair and prec with diction performance among all the climate-only models (li et al. 2019; both maize and soybean yields."
+5,"for example, the correlation coeffi- peng et al. 2018b)."
+5,"the growing season in this study was defined as may cients between vpd and maize yield were -0.69 and -0.60 in july and to september, which aligned with the actual growing season of corn and august, respectively; while those between tair and maize yield were soybean in the u.s."
+5,midwest.
+5,"all variables were standardized by re- only -0.20 and -0.03 in july and august, respectively. moving their mean values and scaling to unit variance before used for there were also strong correlations among different climate and model training and testing, which can help avoid bad performance if remote sensing variables themselves."
+5,"strong positive correlation coef- the individual features are not standard normally distributed data. ficients were observed among the sif and vis for both maize and soy- two different out-of-sample validation methods were used to bean, while lst negatively correlated with other remote sensing vari- quantify the yield estimation performance."
+5,one was the repeated five- ables.
+5,"vpd also negatively correlated with all the remote sensing fold-cross-validation (ffcv) method, and the other one was the forward variables, except lst with which vpd showed positive correlation method."
+5,"the repeated ffcv method runs the ffcv for n times, each of coefficients indicating that lst and vpd are good crop stress indicators which randomly splits the whole dataset into 5 folds, and uses 4 folds when crop growth condition is sub-optimal."
+5,"compared with vpd, the for training and 1 fold for testing within a ffcv loop."
+5,"we choose correlation between tair and the remote sensing variables were rela- n = 100 corresponding to 500 training-testing splits in total, which tively weak. balanced well between accuracy and computation burden."
+5,the forward method used all data from years before the prediction year as training 4.2.
+5,ffcv of yield prediction performance using only remote sensing dataset.
+5,"for both repeated ffcv and forward methods, all the five al- variables gorithms were automatically optimized by tuning their hyperpara- meters using ffcv on their training dataset."
+5,the training data was we first evaluated the tested yield prediction performance of those shuffled in a consistent way to avoid the impact of internal structures models only using remote sensing variables with ffcv out-of-sample (both spatial and temporal) in training data on ffcv.
+5,the prediction validation method.
+5,the results for training and testing with data during performance was then assessed using the testing dataset.
+5,"we used 2015–2018 and in 2018 only are shown in fig. 3 and 4, respectively. coefficient of determination (r2), root mean square error (rmse), and for maize and soybean yield prediction during 2015–2018, nirv per- mean absolute bias (mab) as statistical metrics in performance as- formed consistently better than other remote sensing variables with the sessment."
+5,"for repeated ffcv method, we reported both mean and highest r2 and lowest rmse."
+5,"the performance of sif ¯ oco2 _ 005 in maize standard deviation of these two metrics evaluated over the 500 yield prediction was slightly better than ndvi, evi, and lst, while training-testing splits."
+5,"gome-2 sif has the lowest performance with lowest r2 and largest to better demonstrate the benefit of using sif ¯ oco2 _ 005 and rmse in crop yield prediction among all the remote sensing variables tropomi sif in yield prediction, we evaluated the performance using (fig."
+5,"when these models were trained and tested using data in 2018, data during 2015–2018 (4-year case hereafter) and only in 2018 (1-year the performance of using sif from gome-2 still showed the lowest case hereafter) mainly considering the data availability of sif ¯ oco2 _ 005 performance, while the performances of using other remote sensing (2015–2018) and tropomi (2018 only) sif products."
+5,"for the 4-year variables were quite similar, especially when using nonlinear machine case with ffcv validation methods, we only used sif ¯ oco2 _ 005 for model learning algorithms."
+5,"overall, we still observed that nirv, sif ¯ oco2 _ 005, training and testing."
+5,"for the 1-year case with ffcv validation method, and tropomi sif performed better than other remote sensing 5"
+6,"peng, et al."
+6,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+6,testing performance of maize (top panels) and soybean (bottom panels) yield prediction using only remote sensing variables and evaluated with five-fold- cross-validation method during 2015–2018.
+6,the performance metrics (left panels for r2 and right panels for rmse) are calculated for 500 random training-testing splits and then both means (filled bars) and standard deviations (error bars) of the metrics are derived.
+6,"sif(oco2) and sif(gome2) in the legend represent ¯ oco2 _ 005 and gome-2 sif products, respectively."
+6,"sif variables (gome-2 sif, ndvi, evi, and lst) in maize and soybean yield variables with the highest r2 and lowest rmse (fig."
+6,sif ¯ oco2 _ 005 prediction (fig.
+6,"for maize, nirv performed consistently better than showed similar performance with evi or ndvi in yield prediction for other remote sensing variables with the highest r2 and lowest rmse both maize and soybean."
+6,when the models were trained and tested across the five algorithms.
+6,"for soybean, sif ¯ oco2 _ 005 had a slightly better using data in 2018, nirv still performed best for maize yield prediction. mean performance compared with nirv and tropomi sif, but we for soybean yield prediction, nirv performed best when using linear noted that the performance differences among these three variables yield prediction algorithms, while both sif ¯ oco2 _ 005 and vis had similar were marginal."
+6,results from mab metric were consistent with the performances when using nonlinear yield prediction algorithms.
+6,si- above results from r2 and rmse (fig.
+6,"s1 and s2), i.e., sif ¯ oco2 _ 005, milar to the results obtained when only using remote sensing variables tropomi sif, and nirv had the lowest mab among all the remote in crop yield prediction, using sif from gome-2 had the lowest per- sensing variables for both maize and soybean yield prediction. formance in crop yield prediction with climate and remote sensing combined models."
+6,"mab results showed that sif ¯ oco2 _ 005 , tropomi sif, 4.3."
+6,"ffcv of yield prediction performance using combined climate and ndvi, evi, and nirv had comparable mabs, especially in soybean yield remote sensing variables prediction with climate and remote sensing combined models, while gome-2 sif and lst had much larger mabs (fig."
+6,s3 and s4).
+6,we then evaluated the tested yield prediction performance of those models using combined climate and remote sensing variables with 4.4.
+6,forward yield prediction in 2018 ffcv out-of-sample validation method.
+6,"the results for training and testing with data during 2015–2018 and in 2018 only are shown in the spatial patterns of forward yield prediction in 2018 using dif- fig. 5 and 6, respectively."
+6,"for both maize and soybean yield prediction ferent climate and remote sensing combined variables and random during 2015–2018, nirv performed best among all the remote sensing forest models are shown in fig. 7 and 8 for maize and soybean, 6"
+7,"peng, et al."
+7,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+7,testing performance of maize (top panels) and soybean (bottom panels) yield prediction using only remote sensing variables and evaluated with five-fold- cross-validation method in 2018.
+7,the performance metrics (left panels for r2 and right panels for rmse) are calculated for 500 random training-testing splits and then both means (filled bars) and standard deviations (error bars) of the metrics are derived.
+7,"sif(oco2), sif(tropomi), and sif(gome2) in the legend represent ¯ oco2 _ 005 , tropomi and gome-2 sif products, respectively."
+7,sif respectively.
+7,we showed the results from the random forest models zero compared with using other remote sensing variables for both corn because they had the best yield prediction performance as shown in and soybean (fig.
+7,fig. 3 to fig.
+7,the models were trained using data from 2015-2017.
+7,"for sif, we trained the model using sif ¯ oco2 _ 005 data during 2015-2017, 5."
+7,discussion while validated the model using both sif ¯ oco2 _ 005 and tropomi data in 2018.
+7,"for both maize and soybean, using sif ¯ oco2 _ 005 and tropomi sif 5.1."
+7,potential of using satellite-based sif products in crop yield prediction products gave the best yield prediction performances.
+7,"for example, ¯ oco2 _ 005 in yield prediction in 2018 achieved a r2 of 0.77 and using sif in this study, we demonstrated that using high-resolution sif pro- rmse of 18.11 bu/acre (1.14 t/ha) for maize, and r2 of 0.78 and rmse ducts from oco-2 and tropomi could significantly improve the yield of 5.31 bu/acre (0.36 t/ha) for soybean, respectively."
+7,using tropmi prediction performance compared with using coarse-resolution sif sif in yield prediction gave similar performance as that using products from gome-2.
+7,this is mainly because higher resolution of ¯ oco2 _ 005 in 2018 with some performance degradation as the models sif ¯ oco2 _ 005 and tropomi sif enables better quantification of sif sig- sif were trained using sif ¯ oco2 _ 005.
+7,"using gome-2 sif gave the lowest nals from cropland, and gome-2 has a lower signal-to-noise ratio."
+7,"our performance in maize yield prediction with an r2 of 0.53 and rmse of study also demonstrated that using high-resolution sif products from 25.95 bu/acre (1.63 t/ha), while its performance was slightly better oco-2 and tropomi could bring benefits in crop yield prediction."
+7,for than using lst for soybean yield prediction.
+7,"nirv performed best example, using sif products from oco-2 and tropomi achieved the among other remote sensing variables besides sif."
+7,"bias distribution in best yield prediction performances for both maize and soybean with yield prediction showed that using sif ¯ oco2 _ 005 , tropmi sif, and nirv either five-fold-cross-validation in 2018 (fig. 4) or forward prediction could lead to more centralized and narrower bias distributions around in 2018 (figs. 7, 8, and 9)."
+7,"however, our results also showed that using 7"
+8,"peng, et al."
+8,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+8,testing performance of maize (top panels) and soybean (bottom panels) yield prediction using combined climate and remote sensing variables and evaluated with five-fold-cross-validation method during 2015–2018.
+8,the performance metrics (left panels for r2 and right panels for rmse) are calculated for 500 random training-testing splits and then both means (filled bars) and standard deviations (errorbars) of the metrics are derived.
+8,"sif(oco2) and sif(gome2) in the legend represents sif ¯ oco2 _ 005 and gome-2 sif products, respectively. current high-resolution sif products did not guarantee consistently photosynthesis (liu et al."
+8,"2019; yang and van der tol 2018; zeng et al. better yield prediction performances than using other remote sensing 2019), which may improve the crop yield prediction too."
+8,the total variables in all the evaluated cases.
+8,"the relative performances of using emitted sif from chlorophyll is attenuated by reabsorption and scat- different remote sensing variables in yield prediction depended on crop tering within the leaf and canopy making the observed canopy sif is a types (maize or soybean), out-of-sample testing methods (five-fold- variable fraction of total emitted sif."
+8,"the conversion from satellite- cross-validation or forward), and length of training data."
+8,"however, observed sif to total emitted sif is non-trivial, as we need to estimate considering that the high-reslution sif products we used here have a the escape ratio, which is determined by sun-sensor geometry, canopy spatial resolution of 5 km while other modis-based variables are at structure, and leaf optical properties."
+8,"recent work by zeng et al. (2019) finer (≤ 1 km) resolutions, we are still optimistic in the performance of proposed a practical approach to approximate the escape ratio for near using sif data for crop yield prediction since higher spatial resolution of infrared sif using the nirv-to-fpar ratio, making conversion from sa- sif data would allow better separation of corn and soybean than the tellite-observed sif to total emitted sif feasible at large scale."
+8,"to test current 5 km data we used in this study. the performances of these alternative ways of using sif data in crop there are several possible ways that can lead to potential im- yield prediction, we compared the performances of using monthly sif, provement for the yield prediction performance using sif."
+8,"firstly, dif- growing season maximum and accumulated sif, and the monthly total ferent ways of using sif data in building crop yield prediction models emitted sif from sif ¯ oco2 _ 005 in yield prediction during 2015–2018 may lead to different performances."
+8,"for example, considering that the (fig."
+8,"we used scaling relationships between ndvi and fpar to sif signal is integrable over time, we may also use growing season calculate fpar (gitelson et al. 2014), and subsequently estimated es- accumulated sif or maximum sif in crop yield prediction."
+8,converting cape ratio and total emitted sif (zeng et al.
+8,2019).
+8,we observed that satellite-observed sif (angular sif from top canopy) into whole-canopy using monthly mean sif actually achieved better performances than total emitted sif has been found to better correlated with canopy other alternative ways of using sif data for both maize and soybean 8
+9,"peng, et al."
+9,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+9,testing performance of maize (top panels) and soybean (bottom panels) yield prediction using combined climate and remote sensing variables and evaluated with five-fold-cross-validation method in 2018.
+9,the performance metrics (left panels for r2 and right panels for rmse) are calculated for 500 random training-testing splits and then both means (filled bars) and standard deviations (errorbars) of the metrics are derived.
+9,"sif(oco2), sif(tropomi), and sif(gome2) in the legend represent sif ¯ oco2 _ 005 , tropomi and gome-2 sif products, respectively. yield prediction."
+9,"the reason may be that monthly mean sif provides nebraska, north dakota, and wisconsin) with cdl data available since more temporal information to capture crop stress at various stages than 2003."
+9,"for maize yield prediction, additional 4 to 6 years (7 to 9 years in growing season maximum and accumulated sif, and there are un- total) of training data could further improve the yield prediction per- certainties in estimations of both fpar and escape ratio when deriving formances in 2018."
+9,"after that, the yield prediction performances were the total emitted sif."
+9,"whether using total emitted sif could lead to relatively stable, and more training data did not necessarily mean better improved yield prediction performance when better fpar estimation yield prediction performance any more."
+9,"for soybean, the change of and new approximation of escape ratio become available deserves yield prediction performance with increased years of training data was further investigation. relatively noisy."
+9,"these results indicated that the maize yield prediction secondly, we note that the yield prediction performance reported performances using sif could be further improved with more training here was only optimized with limited training data."
+9,for fair comparison data accumulated.
+9,"besides new data from oco-2/3 and tropomi, between sif and other remote sensing predictors, we only used the data recent advancements in developing gap-filled oco-2 sif products since during 2015 to 2018 for model training, which may be not enough for 2000 (li and xiao 2019) and attempts in reconciling inconsistencies operational application aiming at higher performance in yield predic- among multi-sensor observations in last two decades (parazoo et al. tion."
+9,"with the increase of training data, the yield prediction perfor- 2019; wen et al. 2020) may also help in accumulating more sif data for mance of using sif products may be further improved."
+9,"to test this training crop yield prediction models, though the uncertainties from the hypothesis, we trained random forest models with different years of reconstructed sif data may propagate to the final yield prediction training data before 2018 and tested the model performances using data which needs further investigation in future studies. in 2018 (fig."
+9,"the models used evi, ndvi, nirv and lst as remote thirdly, better quality of future sif products may further improve sensing variables, all of which are available since early 2000s."
+9,these the performance in yield prediction.
+9,"new satellite missions, such as experiments were restricted to six states (illinois, indiana, iowa, fluorescence explorer (flex) (drusch et al. 2016), can provide sif 9"
+10,"peng, et al."
+10,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+10,comparison between the spatial patterns of observed and predicted maize yield in 2018 using random forest model with climate and remote sensing combined variables as inputs.
+10,the models were trained using data from 2015-2017.
+10,"sif(oco2), sif(tropomi), and sif(gome2) represent sif ¯ oco2 _ 005, tropomi, and gome- 2 sif products, respectively."
+10,"for sif ¯ oco2 _ 005 data during 2015-2017, while validated the model using both ¯ oco2 _ 005 and tropomi sif, we trained the model using sif ¯ oco2 _ 005 and tropomi data in 2018."
+10,"rmse values outside and inside the parentheses are in bu/acre and t/ha, respectively."
+10,"sif products with higher spatial resolutions than existing sif products. seemed a good indicator for predicting soybean yield, but not for maize statistical downscaling also has the potential to further improve the yield."
+10,"we also found that lst shows better predictability for maize yield spatial resolution of existing sif products although previous efforts than soybean yield (fig. 11), which may be partly caused by the fact mainly focused on downscaling the coarse-resolution sif products, such that soybean yield is less sensitive to high temperature and vpd than as those from gome-2 (duveiller and cescatti 2016; duveiller et al. maize mainly due to relatively higher optimal growth temperature and 2019). stable sowing density of soybean over the last two decades (lobell et al."
+10,2014).
+10,performance variation among using different remote sensing variables 5.3.
+10,performance variation among using different machine-learning we also observed differences in the yield prediction performances algorithms when using different vis and lst.
+10,"among the tested vis, nirv had an overall best performance in predicting maize and soybean yield in- although we were not aiming to compare the performances of dif- dicating great potential of using nirv in crop yield prediction. ferent machine learning algorithms in crop yield estimation in this compared with traditional remote-sensing-based vis, nirv has a more study, we did see performance difference among the selected five al- direct physical interpretation as it approximates the proportion of nir gorithms."
+10,"generally, we found the nonlinear algorithms (rf, svm, and light reflected by vegetation canopy (badgley et al."
+10,2017).
+10,"nirv also ann) perform better than the linear algorithms (lasso and ridge). minimizes the impacts of soil background and sun-canopy-sensor geo- lasso and ridge performed similarly, and the three nonlinear algo- metry (badgley et al."
+10,2019; badgley et al.
+10,2017).
+10,our study is the first rithms achieved similar performances in yield prediction for both maize one that used nirv for crop yield prediction at large scales.
+10,"ndvi and soybean, which are consistent with previous studies (cai et al."
+11,"peng, et al."
+11,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+11,comparison between the spatial patterns of observed and predicted soybean yield in 2018 using random forest model with climate and remote sensing combined variables as inputs.
+11,the models were trained using data from 2015-2017.
+11,"sif(oco2), sif(tropomi), and sif(gome2) represent sif ¯ oco2 _ 005 , tropomi and gome-2 sif products, respectively."
+11,"for sif ¯ oco2 _ 005 data during 2015-2017, while validated the model ¯ oco2 _ 005 and tropomi sif, we trained the model using sif using both sif ¯ oco2 _ 005 and tropomi data in 2018."
+11,"rmse values outside and inside the parentheses are in bu/acre and t/ha, respectively."
+11,2019).
+11,"other advanced machine learning algorithms, such as deep including lasso, ridge, svm, rf and ann."
+11,we found that using high- learning algorithms (oliveira et al.
+11,"2018; you et al. 2017), may have resolution sif products from oco-2 and tropomi outperformed using the potential to improve the absolute performance in crop yield pre- coarse-resolution sif product from gome-2 in yield prediction."
+11,we also diction.
+11,"however, we expect that the relative performance using sif found that using high-resolution sif products from oco-2 and and other remote sensing based predictors would not change even when tropomi gave the best forward predictions for both maize and soy- using more advanced algorithms to build crop yield prediction models, bean yields in 2018, indicating great potential of using satellite-based which needs further testing. high-resolution sif products for crop yield prediction."
+11,"however, using currently available high-resolution sif products did not guarantee 6."
+11,"conclusion consistently better yield prediction performances than using other sa- tellite-based remote sensing variables in all the evaluated cases, in- with more satellite-based high-resolution sif products becoming dicating there are still opportunities to improve the quality and re- available, there is a need to assess the potential benefits of using these solution of satellite-based high-resolution sif products."
+11,we also found sif products in operational crop yield prediction.
+11,"in this study, we that using nirv could generally lead to better yield prediction perfor- evaluated the relative performances of using high-resolution sif pro- mance than using ndvi, evi, or lst, and using nirv could achieve ducts from oco-2 and tropomi, coarse-resolution sif product from similar or even better yield prediction performance than using the two gome-2, and modis-based vis (including ndvi, evi, and nirv) and high-resolution sif products."
+11,these findings indicate that satellite- lst in predicting maize and soybean yield of the u.s.
+11,midwest.
+11,"both based high-resolution sif products could be beneficial in crop yield remote-sensing-only and climate-remote-sensing-combined yield pre- prediction with more high-resolution and good-quality sif products diction models were built using five machine-learning algorithms, accumulated in the future and nirv is very promising for crop yield 11"
+12,"peng, et al."
+12,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+12,bias distribution of predicted maize (left) and soybean (right) yield in 2018 using random forest model with climate and remote sensing combined variables as inputs.
+12,the models were trained using data from 2015-2017.
+12,"sif(oco2), sif(tropomi), and sif(gome2) represent sif ¯ oco2 _ 005 , tropomi and gome-2 sif products, respectively."
+12,"for sif¯ oco2 _ 005 and tropomi sif, we trained the model using sif ¯ oco2 _ 005 data during 2015-2017, while validated the model using both ¯ oco2 _ 005 and tropomi data in 2018."
+12,sif fig.
+12,"testing performance of maize (top panels) and soybean (bottom panels) yield prediction using climate variables plus monthly sif, growing season maximum and accumulated sif during may to september, or monthly total emitted sif from sif ¯ oco2 _ 005 ."
+12,the performances were evaluated with five-fold-cross-validation method during 2015–2018.
+12,the performance metrics (left panels for r2 and right panels for rmse) are calculated for 500 random training-testing splits and then both means (filled bars) and standard deviations (errorbars) of the metrics are derived.
+13,"peng, et al."
+13,int j appl earth obs geoinformation 90 (2020) 102126 fig.
+13,performance change with increasing years of training data.
+13,the random forest models with climate-remote-sensing-combined variables were trained using data before 2018 and validated using data in 2018.
+13,the numbers in x-axis represent the number of years before 2018.
+13,"for example, 3 and 15 in the x-axis mean training data are from 2015 to 2017, and 2003 to 2017, respectively."
+13,"it has to be noted that model training and validation were conducted over six states with cdl data since 2003, including illinois, indiana, iowa, nebraska, north dakota, and wisconsin. prediction."
+13,"to our best knowledge, this study is the first one that writing - review & editing."
+13,"philipp köhler: data curation, writing - compares yield prediction performances of using different sif products review & editing. (high-resolution versus coarse-resolution) and using optical-based vis (including the newly developed nirv) and thermal-based lst, which declaration of competing interest can provide insights on developing operational crop yield forecasting system using multi-source remote sensing data."
+13,similar studies outside the u.s.
+13,corn belt are also needed to assess the performances of using the authors declare that they have no known competing financial different remote sensing data in crop yield prediction. interests or personal relationships that could have appeared to influ- ence the work reported in this paper.
+13,"credit authorship contribution statement acknowledgements bin peng: conceptualization, methodology, software, validation, formal analysis, investigation, data curation, visualization, writing - b.p., k.g., w.z., and c.j. acknowledged the support from following original draft, writing - review & editing."
+13,"kaiyu guan: funding ac- nasa programs: new investigator, carbon monitoring system, carbon quisition, supervision, project administration, resources, cycle science, and harvest program."
+13,"k.g. also acknowledged support conceptualization, writing - review & editing."
+13,wang zhou: data from nsf career award.
+13,"all the data used in this study are publically curation, writing - review & editing."
+13,chongya jiang: writing - review available.
+13,county-level maize and soybean yield and acreage survey & editing.
+13,"christian frankenberg: data curation, writing - review & data are available from usda nass through https://quickstats.nass. editing."
+13,"ying sun: data curation, writing - review & editing."
+13,liyin he: usda.gov/.
+13,usda nass cdl data is available through https:// 13
+14,"peng, et al."
+14,int j appl earth obs geoinformation 90 (2020) 102126 nassgeodata.gmu.edu/cropscape/.
+14,"modis products are available at gitelson, a.a., peng, y., huemmrich, k.f., 2014."
+14,relationship between fraction of ra- https://e4ftl01.cr.usgs.gov/.
+14,tropomi footprint sif data is available at diation absorbed by photosynthesizing maize and soybean canopies and ndvi from remotely sensed data taken at close range and from modis 250m resolution data. ftp://fluo.gps.caltech.edu/data/tropomi/ungridded/.
+14,"sif ¯ oco2 _ 005 is remote sensing of environment 147, 108–120. available at https://cornell.app.box.com/s/cavtg50y80udbdirg022gm guan, k., berry, j., zhang, y., joiner, j., guanter, l., badgley, g., lobell, d.b., 2016. 5whugmth02."
+14,gome-2 sif product is available at ftp://fluo.gps.
+14,improving the monitoring of crop productivity using spaceborne solar-induced fluorescence.
+14,"global change biology 22, 716–726. caltech.edu/data/philipp/gome-2/."
+14,"prism weather data is available guan, k., wu, j., kimball, j.s., anderson, m.c., frolking, s., li, b., hain, c.r., lobell, at http://www.prism.oregonstate.edu/."
+14,"d.b., 2017."
+14,"the shared and unique values of optical, fluorescence, thermal and mi- crowave satellite data for estimating large-scale crop yields."
+14,"remote sensing of environment 199, 333–349."
+14,appendix a.
+14,"supplementary data guanter, l., zhang, y., jung, m., joiner, j., voigt, m., berry, j.a., frankenberg, c., huete, a.r., zarco-tejada, p., lee, j.-e., moran, m.s., ponce-campos, g., beer, c., camps- supplementary material related to this article can be found, in the valls, g., buchmann, n., gianelle, d., klumpp, k., cescatti, a., baker, j.m., griffis, t.j., 2014."
+14,"global and time-resolved monitoring of crop photosynthesis with chlor- online version, at doi:https://doi.org/10.1016/j.jag.2020.102126. ophyll fluorescence."
+14,"proceedings of the national academy of sciences 111, e1327–e1333."
+14,"references hansen, j.w., indeje, m., 2004."
+14,linking dynamic seasonal climate forecasts with crop simulation for maize yield prediction in semi-arid kenya.
+14,"agricultural and forest meteorology 125, 143–157."
+14,"anderson, m.c., zolin, c.a., sentelhas, p.c., hain, c.r., semmens, k., tugrul yilmaz, m., he, m., kimball, s.j., maneta, p.m., maxwell, d.b., moreno, a., beguería, s., wu, x., gao, f., otkin, j.a., tetrault, r., 2016."
+14,the evaporative stress index as an indicator of 2018.
+14,regional crop gross primary productivity and yield estimation using fused agricultural drought in brazil: an assessment based on crop yield impacts.
+14,remote landsat-modis data.
+14,"remote sensing 10, 372."
+14,"sensing of environment 174, 82–99."
+14,"hoerl, a.e., kennard, r.w., 1970."
+14,"ridge regression: biased estimation for nonorthogonal badgley, g., anderegg, l.d.l., berry, j.a., field, c.b., 2019."
+14,terrestrial gross primary problems.
+14,"technometrics 12, 55–67."
+14,production: using nirv to scale from site to globe.
+14,"global change biology 00, 1–10."
+14,"isengildina-massa, o., irwin, s.h., good, d.l., gomez, j.k., 2008."
+14,"the impact of situation badgley, g., field, c.b., berry, j.a., 2017."
+14,canopy near-infrared reflectance and terrestrial and outlook information in corn and soybean futures markets: evidence from wasde photosynthesis.
+14,"science advances 3, e1602244. reports."
+14,"journal of agricultural and applied economics 40, 89–103."
+14,"bastiaanssen, w.g.m., ali, s., 2003."
+14,"a new crop yield forecasting model based on satellite jeong, j.h., resop, j.p., mueller, n.d., fleisher, d.h., yun, k., butler, e.e., timlin, d.j., measurements applied across the indus basin, pakistan."
+14,"agriculture, ecosystems & shim, k.-m., gerber, j.s., reddy, v.r., kim, s.-h., 2016."
+14,"random forests for global environment 94, 321–340. and regional crop yield predictions."
+14,"plos one 11, e0156571."
+14,"bolton, d.k., friedl, m.a., 2013."
+14,"forecasting crop yield using remotely sensed vegetation jiang, d., yang, x., clinton, n., wang, n., 2004."
+14,an artificial neural network model for indices and crop phenology metrics.
+14,"agricultural and forest meteorology 173, 74–84. estimating crop yields using remotely sensed information."
+14,"international journal of boryan, c., yang, z., mueller, r., craig, m., 2011."
+14,"monitoring us agriculture: the us remote sensing 25, 1723–1732. department of agriculture, national agricultural statistics service, cropland data layer johnson, d.m., 2014."
+14,an assessment of pre- and within-season remotely sensed variables program.
+14,"geocarto international 26, 341–358. for forecasting corn and soybean yields in the united states."
+14,"remote sensing of breiman, l., 2001."
+14,random forests.
+14,mach learn 45 (5).
+14,"environment 141, 116–128."
+14,"brown, j.n., hochman, z., holzworth, d., horan, h., 2018."
+14,"seasonal climate forecasts joiner, j., guanter, l., lindstrot, r., voigt, m., vasilkov, a., middleton, e., huemmrich, provide more definitive and accurate crop yield predictions."
+14,"agricultural and forest k., yoshida, y., frankenberg, c., 2013."
+14,"global monitoring of terrestrial chlorophyll meteorology 260–261, 247–254. fluorescence from moderate-spectral-resolution near-infrared satellite measurements: cai, y., guan, k., lobell, d., potgieter, a.b., wang, s., peng, j., xu, t., asseng, s., zhang, methodology, simulations, and application to gome-2."
+14,"atmospheric measurement y., you, l., peng, b., 2019."
+14,"integrating satellite and climate data to predict wheat techniques 6, 2803–2823. yield in australia using machine learning approaches."
+14,"agricultural and forest me- jones, j.w., antle, j.m., basso, b., boote, k.j., conant, r.t., foster, i., godfray, h.c.j., teorology 274, 144–159."
+14,"herrero, m., howitt, r.e., janssen, s., keating, b.a., munoz-carpena, r., porter, c.h., cai, y., moore, k., pellegrini, a., elhaddad, a., lessel, j., townsend, c., solak, h., semret, rosenzweig, c., wheeler, t.r., 2017."
+14,"toward a new generation of agricultural system n., 2017."
+14,"crop yield predictions - high resolution statistical model for intra-season data, models, and knowledge products: state of agricultural systems science. forecasts applied to corn in the us."
+14,"gro intelligence, inc."
+14,"agricultural systems 155, 269–288."
+14,"chaparro, d., piles, m., vall-llossera, m., camps, a., konings, a.g., entekhabi, d., 2018."
+14,"jones, j.w., hoogenboom, g., porter, c.h., boote, k.j., batchelor, w.d., hunt, l.a., l-band vegetation optical depth seasonal metrics for crop yield assessment."
+14,"remote wilkens, p.w., singh, u., gijsman, a.j., ritchie, j.t., 2003."
+14,"the dssat cropping sensing of environment 212, 249–259. system model."
+14,"european journal of agronomy 18, 235–265."
+14,"chipanshi, a., zhang, y., kouadio, l., newlands, n., davidson, a., hill, h., warren, r., köhler, p., frankenberg, c., magney, t.s., guanter, l., joiner, j., landgraf, j., 2018."
+14,"qian, b., daneshfar, b., bedard, f., reichert, g., 2015."
+14,evaluation of the integrated global retrievals of solar induced chlorophyll fluorescence with tropomi: first re- canadian crop yield forecaster (iccyf) model for in-season prediction of crop yield sults and inter-sensor comparison to oco-2.
+14,"geophysical research letters 45 (10), across the canadian agricultural landscape."
+14,"agricultural and forest meteorology 206, 456–463."
+14,137–150.
+14,"köhler, p., guanter, l., joiner, j., 2015."
+14,"a linear method for the retrieval of sun-induced daly, c., halbleib, m., smith, j.i., gibson, w.p., doggett, m.k., taylor, g.h., curtis, j., chlorophyll fluorescence from gome-2 and sciamachy data."
+14,atmos.
+14,"8, pasteris, p.p., 2008."
+14,physiographically sensitive mapping of climatological tem- 2589–2608. perature and precipitation across the conterminous united states.
+14,"international legler, d.m., bryant, k.j., o’brien, j.j., 1999."
+14,"impact of enso-related climate anomalies journal of climatology 28, 2031–2064. on crop yields in the u.s."
+14,"climatic change 42, 351–375."
+14,"drusch, m., moreno, j., del bello, u., franco, r., goulas, y., huth, a., kraft, s., li, x., xiao, j., 2019."
+14,"a global, 0.05-degree product of solar-induced chlorophyll middleton, e.m., miglietta, f., mohammed, g., 2016."
+14,"the fluorescence explorer fluorescence derived from oco-2, modis, and reanalysis data."
+14,"remote sensing 11, mission concept—esa’s earth explorer 8."
+14,ieee transactions on geoscience and 517.
+14,"remote sensing 55, 1273–1284."
+14,"li, y., guan, k., yu, a., peng, b., zhao, l., li, b., peng, j., 2019."
+14,"toward building a duveiller, g., cescatti, a., 2016."
+14,spatially downscaling sun-induced chlorophyll fluores- transparent statistical model for improving crop yield prediction: modeling rainfed cence leads to an improved temporal correlation with gross primary productivity. corn in the u.s.
+14,"field crops research 234, 55–65."
+14,"remote sensing of environment 182, 72–89."
+14,"liu, x., guanter, l., liu, l., damm, a., malenovský, z., rascher, u., peng, d., du, s., duveiller, g., filipponi, f., walther, s., köhler, p., frankenberg, c., guanter, l., cescatti, gastellu-etchegorry, j.-p., 2019."
+14,"downscaling of solar-induced chlorophyll fluores- a., 2019."
+14,a spatially downscaled sun-induced fluorescence global product for en- cence from canopy level to photosystem level using a random forest model.
+14,remote hanced monitoring of vegetation productivity.
+14,earth syst.
+14,data discuss.
+14,"2019, sensing of environment 203, 110772."
+14,"lobell, d.b., burke, m.b., 2010."
+14,"on the use of statistical models to predict crop yield everingham, y.l., muchow, r.c., stone, r.c., inman-bamber, n.g., singels, a., responses to climate change."
+14,"agricultural and forest meteorology 150, 1443–1452."
+14,"bezuidenhout, c.n., 2002."
+14,"enhanced risk management and decision-making cap- lobell, d.b., roberts, m.j., schlenker, w., braun, n., little, b.b., rejesus, r.m., hammer, ability across the sugarcane industry value chain based on seasonal climate forecasts."
+14,"g.l., 2014."
+14,"greater sensitivity to drought accompanies maize yield increase in the agricultural systems 74, 459–477."
+14,midwest.
+14,"science 344, 516–519."
+14,"frankenberg, c., fisher, j.b., worden, j., badgley, g., saatchi, s.s., lee, j.-e., toon, g.c., lobell, d.b., thau, d., seifert, c., engle, e., little, b., 2015."
+14,"a scalable satellite-based crop butz, a., jung, m., kuze, a., yokota, t., 2011."
+14,new global observations of the ter- yield mapper.
+14,"remote sensing of environment 164, 324–333. restrial carbon cycle from gosat: patterns of plant fluorescence with gross primary magney, t.s., frankenberg, c., fisher, j.b., sun, y., north, g.b., davis, t.s., kornfeld, a., productivity."
+14,"geophysical research letters 38, l17706."
+14,"siebke, k., 2017."
+14,"connecting active to passive fluorescence with photosynthesis: a frankenberg, c., o’dell, c., berry, j., guanter, l., joiner, j., köhler, p., pollock, r., method for evaluating remote sensing measurements of chl fluorescence."
+14,"new taylor, t.e., 2014."
+14,"prospects for chlorophyll fluorescence remote sensing from the phytologist 215, 1594–1608."
+14,orbiting carbon observatory-2.
+14,"remote sensing of environment 147, 1–12."
+14,"newlands, n.k., zamar, d.s., kouadio, l.a., zhang, y., chipanshi, a., potgieter, a., toure, fu, w.j., 1998."
+14,penalized regressions: the bridge versus the lasso.
+14,"journal of compu- s., hill, h.s.j., 2014."
+14,"an integrated, probabilistic model for improved seasonal tational and graphical statistics 7, 397–416. forecasting of agricultural crop yield under environmental uncertainty."
+14,"frontiers in gardner, m.w., dorling, s., 1998."
+14,"artificial neural networks (the multilayer percep- environmental science 2, 1–21. tron)—a review of applications in the atmospheric sciences."
+14,"atmospheric oliveira, i., cunha, r.l., silva, b., netto, m.a., 2018."
+14,"a scalable machine learning system environment 32, 2627–2636. for pre-season agriculture yield forecast. arxiv preprint arxiv 1806, 09244."
+15,"peng, et al."
+15,"int j appl earth obs geoinformation 90 (2020) 102126 parazoo, n.c., bowman, k., frankenberg, c., lee, j.-e., fisher, j.b., worden, j., jones, modelling & software 115, 144–154."
+15,"d.b.a., berry, j., collatz, g.j., baker, i.t., jung, m., liu, j., osterman, g., o’dell, c., shiga, y.p., tadić, j.m., qiu, x., yadav, v., andrews, a.e., berry, j.a., michalak, a.m., sparks, a., butz, a., guerlet, s., yoshida, y., chen, h., gerbig, c., 2013."
+15,interpreting 2018.
+15,atmospheric co2 observations reveal strong correlation between regional net seasonal changes in the carbon balance of southern amazonia using measurements of biospheric carbon uptake and solar induced chlorophyll fluorescence.
+15,geophysical xco2 and chlorophyll fluorescence from gosat.
+15,"geophysical research letters 40, research letters 45, 1122–1132."
+15,2829–2833.
+15,"smola, a.j., schölkopf, b., 2004."
+15,a tutorial on support vector regression.
+15,"statistics and parazoo, n.c., frankenberg, c., köhler, p., joiner, j., yoshida, y., magney, t., sun, y., computing 14, 199–222."
+15,"yadav, v., 2019."
+15,"towards a harmonized long-term spaceborne record of far-red solar specht, d.f., 1991."
+15,a general regression neural network.
+15,ieee transactions on neural induced fluorescence.
+15,"journal of geophysical research: biogeosciences. networks 2, 568–576."
+15,"peng, b., guan, k., chen, m., lawrence, d.m., pokhrel, y., suyker, a., arkebauer, t., lu, sun, y., frankenberg, c., jung, m., joiner, j., guanter, l., köhler, p., magney, t., 2018."
+15,"y., 2018a."
+15,improving maize growth processes in the community land model: overview of solar-induced chlorophyll fluorescence (sif) from the orbiting carbon implementation and evaluation.
+15,"agricultural and forest meteorology 250–251, observatory-2: retrieval, cross-mission comparison, and global monitoring for gpp."
+15,64–89.
+15,"remote sensing of environment 209, 808–823."
+15,"peng, b., guan, k., pan, m., li, y., 2018b."
+15,"benefits of seasonal climate prediction and suykens, j.a., vandewalle, j., 1999."
+15,least squares support vector machine classifiers. satellite data for forecasting us maize yield.
+15,"geophysical research letters 45, neural processing letters 9, 293–300."
+15,9662–9671.
+15,"tibshirani, r., 1996."
+15,regression shrinkage and selection via the lasso.
+15,"journal of the peng, b., guan, k., tang, j., ainsworth, e.a., asseng, s., bernacchi, c.j., cooper, m., royal statistical society."
+15,series b (methodological) 267–288.
+15,"delucia, e.h., elliott, j.w., ewert, f., grant, r.f., gustafson, d.i., hammer, g.l., jin, wen, j., köhler, p., duveiller, g., parazoo, n.c., magney, t.s., hooker, g., yu, l., chang, z., jones, j.w., kimm, h., lawrence, d.m., li, y., lombardozzi, d.l., marshall-colon, c.y., sun, y., 2020."
+15,"a framework for harmonizing multiple satellite instruments to a., messina, c.d., ort, d.r., schnable, j.c., vallejos, c.e., wu, a., yin, x., zhou, w., generate a long-term global high spatial-resolution solar-induced chlorophyll fluor- 2020."
+15,towards a multiscale crop modelling framework for climate change adaptation escence (sif).
+15,"remote sensing of environment 239, 111644. assessment."
+15,"nature plants 6, 338–348."
+15,"yang, p., van der tol, c., 2018."
+15,"linking canopy scattering of far-red sun-induced chlor- phillips, j., rajagopalan, b., cane, m., rosenzweig, c., 1999."
+15,the role of enso in de- ophyll fluorescence with reflectance.
+15,"remote sensing of environment 209, 456–467. termining climate and maize yield variability in the us cornbelt."
+15,"international yang, y., anderson, m.c., gao, f., wardlow, b., hain, c.r., otkin, j.a., alfieri, j., yang, journal of climatology 19, 877–888."
+15,"y., sun, l., dulaney, w., 2018."
+15,"field-scale mapping of evaporative stress indicators of potgieter, a.b., hammer, g.l., butler, d., 2002."
+15,"spatial and temporal patterns in crop yield: an application over mead, ne, usa."
+15,"remote sensing of environment 210, australian wheat yield and their relationship with enso."
+15,australian journal of 387–402.
+15,"agricultural research 53, 77–89."
+15,"you, j., li, x., low, m., lobell, d., ermon, s., 2017."
+15,"deep gaussian process for crop yield qian, b., de jong, r., warren, r., chipanshi, a., hill, h., 2009."
+15,statistical spring wheat prediction based on remote sensing data.
+15,"aaai, pp."
+15,4559–4566. yield forecasting for the canadian prairie provinces.
+15,"agricultural and forest me- yu, l., wen, j., chang, c.y., frankenberg, c., sun, y., 2018."
+15,"high resolution global teorology 149, 1022–1031."
+15,"contiguous solar-induced chlorophyll fluorescence (sif) of orbiting carbon rosenzweig, c., jones, j.w., hatfield, j.l., ruane, a.c., boote, k.j., thorburn, p., antle, observatory-2 (oco-2)."
+15,"geophysical research letters 46, 1449–1458."
+15,"j.m., nelson, g.c., porter, c., janssen, s., asseng, s., basso, b., ewert, f., wallach, d., zeng, y., badgley, g., dechant, b., ryu, y., chen, m., berry, j.a., 2019."
+15,"a practical ap- baigorria, g., winter, j.m., 2013."
+15,the agricultural model intercomparison and proach for estimating the escape ratio of near-infrared solar-induced chlorophyll improvement project (agmip): protocols and pilot studies.
+15,agricultural and forest fluorescence.
+15,"remote sensing of environment, 111209. meteorology 170, 166–182."
+15,"zhang, y., joiner, j., alemohammad, s.h., zhou, s., gentine, p., 2018."
+15,"a global spatially shelia, v., hansen, j., sharda, v., porter, c., aggarwal, p., wilkerson, c.j., hoogenboom, contiguous solar-induced fluorescence (csif) dataset using neural networks."
+15,"g., 2019."
+15,"a multi-scale and multi-model gridded framework for forecasting crop biogeosciences 15, 5779–5800."
+15,"production, risk analysis, and climate change impact studies."
+15,environmental 15

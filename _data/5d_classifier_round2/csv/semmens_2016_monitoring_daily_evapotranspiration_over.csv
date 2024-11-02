@@ -1,0 +1,619 @@
+page,p
+1,remote sensing of environment 185 (2016) 155–170 contents lists available at sciencedirect remote sensing of environment journal homepage: www.elsevier.com/locate/rse monitoring daily evapotranspiration over two california vineyards using landsat 8 in a multi-sensor data fusion approach kathryn a.
+1,"semmens a,⁎, martha c."
+1,"anderson a, william p."
+1,"kustas a, feng gao a, joseph g."
+1,"alﬁeri a, lynn mckee a, john h."
+1,"prueger b, christopher r."
+1,"hain c, carmelo cammalleri d, yun yang a, ting xia e, luis sanchez f, maria mar alsina f, mónica vélez g a usda-ars, hydrology and remote sensing laboratory, beltsville, md, usa b usda-ars, national laboratory for agriculture and the environment, ames, ia, usa c earth system science interdisciplinary center, university of maryland, college park, md, usa d european commission joint research centre, institute for environment and sustainability, climate risk management unit, italy e tsinghua university, beijing, china f e&j gallo winery viticulture research, modesto, ca, usa g university of puerto rico-rio piedras, usda hispanic serving institutions national program, puerto rico a r t i c l e i n f o a b s t r a c t article history: california's central valley grows a signiﬁcant fraction of grapes used for wine production in the united states."
+1,"received 26 march 2015 with increasing vineyard acreage, reduced water availability in much of california, and competing water use in- received in revised form 29 july 2015 terests, it is critical to be able to monitor regional water use and evapotranspiration (et) over large areas, but also accepted 25 october 2015 in detail at individual ﬁeld scales to improve water management within these viticulture production systems."
+1,available online 11 november 2015 this can be achieved by integrating remote sensing data from multiple satellite systems with different spatiotem- keywords: poral characteristics.
+1,"in this research, we evaluate the utility of a multi-scale system for monitoring et as applied landsat 8 over two vineyard sites near lodi, california during the 2013 growing season, leading into the drought in early evapotranspiration 2014."
+1,the system employs a multi-sensor satellite data fusion methodology (starfm: spatial and temporal vineyard adaptive reﬂective fusion model) combined with a multi-scale et retrieval algorithm based on the two- modis source energy balance (tseb) land-surface representation to compute daily et at 30 m resolution.
+1,"in this system, fusion tseb is run using thermal band imagery from the geostationary environmental operational satellites (goes; 4- energy ﬂuxes km spatial resolution, hourly temporal sampling), the moderate resolution imaging spectroradiometer (modis) data (1 km resolution, daily acquisition) and the new landsat 8 satellite (sharpened to 30 m resolution, ~16 day acquisition)."
+1,"estimates of daily et generated in two neighboring ﬁelds of pinot noir vines of different age agree with ground-based ﬂux measurements acquired in-ﬁeld during most of the 2013 season with relative mean ab- solute errors on the order of 19–23% (root mean square errors of approximately 1 mm d−1), reducing to 14–20% at the weekly timestep relevant for irrigation management (~5 mm wk−1)."
+1,"a model overestimation of et in the early season was detected in the younger vineyard, perhaps relating to an inter-row grass cover crop."
+1,"spatial pat- terns of cumulative et generally correspond to measured yield maps and indicate areas of variable crop moisture, soil condition, and yield within the vineyards that could require adaptive management."
+1,"the results suggest that multi-sensor remote sensing observations provide a unique means for monitoring crop water use and soil mois- ture status at ﬁeld-scales over extended growing regions, and may have value in supporting operational water management decisions in vineyards and other high value crops."
+1,published by elsevier inc.
+1,this is an open access article under the cc by-nc-nd license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+1,"introduction agriculture & usda national agricultural statistics service, 2014)."
+1,"given the high value of this crop commodity, the continued growth in california, as the state producing over 90% of wine in the united production, and limited water availability in the state, there is signiﬁ- states, has seen steady growth in the amount of acreage dedicated to cant interest in developing efﬁcient water management strategies for wine-grape production with approximately 615,000 acres planted in california vineyards."
+1,"of particular importance for high quality wine 2014, up from 610,000 in 2013 (california department of food and grapes is controlled water stress at key points during the growing sea- son."
+1,"to effectively manage water stress, adequate moisture is main- ⁎ corresponding author. tained from bud break until fruit set, followed by moderate water e-mail address: kalese@gmail.com (k.a."
+1,semmens). stress through veraison (change of color of grapes) and ripening in http://dx.doi.org/10.1016/j.rse.2015.10.025 0034-4257/published by elsevier inc.
+1,this is an open access article under the cc by-nc-nd license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+2,156 k.a.
+2,semmens et al.
+2,/ remote sensing of environment 185 (2016) 155–170 order to focus plant resources on fruit maturation rather than foliage ex- or longer if cloud cover is persistent.
+2,"while there are tir satellites that pansion (robinson, 2006)."
+2,"ideally, this balancing of water stress would provide daily coverage (e.g., geostationary satellites, and moderate res- require daily monitoring of vineyard soil moisture status, but ground- olution polar orbiting systems like the moderate resolution imaging based measurements may not always be representative of whole-ﬁeld spectroradiometer — modis), these are too coarse in resolution (km- conditions and are costly to install and maintain, especially for large scale or larger) to provide the required ﬁeld-scale information."
+2,there- scale and distributed production systems.
+2,"one method to efﬁciently as- fore, an integrated multi-sensor approach that combines the beneﬁts sess and monitor water use and stress in vineyards is through satellite of the high spatial resolution of landsat and the high temporal resolu- based estimation of evapotranspiration (et), quantifying the net loss tion of modis and geostationary satellites to provide daily ﬁeld-scale of water vapor from the crop ﬁeld to the atmosphere."
+2,et estimates may be of signiﬁcant beneﬁt to vineyard managers.
+2,"et is a major surface water balance component in semi-arid environ- in this paper, we extend the multi-sensor et mapping technique de- ments typical of many viticulture areas (moussa, chahinian, & scribed by cammalleri, anderson, gao, hain and kustas (2013, 2014) to bocquillon, 2007)."
+2,"for vineyards, et is usually modeled as a function viticultural systems and evaluate its performance in comparison with of potential et under unstressed conditions and vegetation cover ﬁeld measurements."
+2,"this energy balance approach combines multi- fraction (riou, pieri, & le clech, 1994; riou, valancogne, & pieri, 1989). scale and multi-temporal sharpened tir imagery from geostationary however, more complex soil–vegetation–atmosphere transfer satellites (4 km, hourly), modis (1 km, daily) and landsat (30 m, ~bi- (svat) models have been developed to estimate seasonal et and ac- weekly to monthly) using the spatial and temporal adaptive reﬂec- count for common soil management practices in viticulture such as tance fusion model (starfm) data fusion methodology developed by the use of grass cover between rows (montes, lhomme, demarty, gao, masek, schwaller, and hall (2006)."
+2,cammalleri et al.
+2,"(2013) prevot, & jacob, 2014)."
+2,"et has been estimated for vineyards using described initial implementation and evaluation of the et fusion meth- weighing lysimeters, eddy covariance, or energy balance using the odology over rainfed corn and soybean ﬁelds in the walnut creek bowen ratio but such “point measurements” are difﬁcult to extrapolate watershed (iowa) using ﬂux data collected during the soil moisture ex- to whole ﬁelds and basins and in-ﬁeld spatial variability is missed periment of 2002 (smex02)."
+2,"it was subsequently tested for corn and (teixeira, bastiaanssen, & bassoi, 2007)."
+2,"thus, complete ﬁeld-scale cotton under both rainfed and irrigated management at two sites with maps of et can be of signiﬁcant value in managing vineyards and efﬁ- contrasting climate conditions: a semi-arid site (part of the bushland ciently planning irrigation schemes, particularly when implemented evapotranspiration and agricultural remote sensing experiment over extensive acreages."
+2,"2008; bearex08, evett et al., 2012) near bushland, tx, and at a more irrigation amounts at 80% of full potential et have been found to temperate ameriﬂux site near mead, ne (cammalleri, anderson, gao, maximize berry size for raisin and table grapes (williams, 2001). et al."
+2,2014).
+2,both of these studies used data from landsats 5 and 7.
+2,"over-irrigation can reduce yield and compromise quality in certain this paper discusses application of the multi-scale et data fusion grape varieties (chaves et al., 2007; williams, grimes, & phene, 2010), system to a new kind of crop (wine grapes) grown in a mediterranean but there is still debate over amounts and timing of irrigation for a climate, and to data collected with the new thermal infrared sensor given environment and grape variety (chaves et al., 2007)."
+2,"regardless (tirs) system on-board landsat 8, which was launched in feb of of the debate on application amount, it is clear that et and water use 2013."
+2,"the vineyard architecture presents unique challenges to the estimates are necessary to effectively manage high productivity and two-source energy balance (tseb) model that forms the land-surface quality in viticultural systems. representation in the retrieval algorithm, given the highly structured land-surface temperature (lst), derived from thermal infrared nature of the vine rows and the common practice of growing a cover (tir) imagery acquired from satellites such as landsat, has successfully crop between rows to control springtime soil moisture conditions."
+2,the been used to estimate et over a range of spatial scales.
+2,"this is because data fusion algorithm was applied over a region in the california central lst is sensitive to local moisture variations, providing valuable informa- valley near the city of lodi for the 2013 growing season, and evaluated tion on surface energy budget partitioning (anderson, allen, morse, & with micrometeorological data collected in two pinot noir vineyards at kustas, 2012)."
+2,several workable approaches to tir-based et mapping different stages of maturity.
+2,"the satellite-based ﬂux retrievals are com- have been developed (e.g., bastiaanssen, menenti, feddes, & holtslag, pared to eddy covariance measurements, as well as in-ﬁeld soil mois- 1998; su, 2002; allen, tasumi, & trezza, 2007; anderson, kustas, et al., ture and yield data."
+2,2012).
+2,"due to large uncertainties in determining absolute lst, most of in section 2 we provide a description the data fusion package, these approaches use relative variability in lst, measured either tempo- followed by a description of the study area and input and evaluation rally (time-differential methods) or spatially (end-member pixel datasets in section 3."
+2,"results and conclusions are presented in scaling), to more accurately estimate et."
+2,"the surface energy balance al- sections 4 and 5, including planned future work. gorithm for land (sebal; bastiaanssen et al., 1998) and the mapping evapotranspiration with internalized calibration (metric; allen et al., 2."
+2,model descriptions 2007) are examples of approaches using tir end-member pixels to rep- resent limiting and non-limiting moisture conditions.
+2,"the atmosphere– a schematic overview of the data fusion processing package, includ- land exchange inverse (alexi; anderson, norman, diak, kustas, & ing inputs and image processing steps, is shown in fig."
+2,"the main diag- mecikalski, 1997; anderson et al., 2007) model uses the time- nostic input, the land surface temperature (lst), can be retrieved from differential approach, measuring the morning lst rise and relating the various thermal imaging sensors over a range of different spatial and change to surface moisture and heat ﬂuxes."
+2,another approach for esti- temporal resolutions.
+2,"remotely sensed lst inputs drive a multi-scale mating et, the crop coefﬁcient approach, uses meteorological data and surface energy balance algorithm (anderson, kustas, et al., 2012), as de- crop speciﬁc coefﬁcients instead of lst (allen, pereira, raes, & smith, scribed below."
+2,1998).
+2,"crop coefﬁcient techniques, however, do not capture short- term variability in soil moisture and vegetation stress conditions 2.1."
+2,"alexi (anderson, allen, et al., 2012) which are important to vineyard manage- ment."
+2,"vegetation stress and soil moisture status do have a thermal sig- the multi-scale energy balance modeling scheme has its foundation nature, which is effectively exploited in energy balance approaches. on coarse-scale regional ﬂux estimates from the atmosphere–land ex- for viticultural decision making, water use information is most use- change inverse (alexi) model, driven primarily by a diagnostic mea- ful at ﬁeld or sub-ﬁeld scales, making the 30 m resolution of landsat surement of the morning rate of surface temperature rise, which can imagery particularly important."
+2,"unfortunately, the landsat overpass be acquired from geostationary satellites."
+2,"the use of a time-differential frequency is often insufﬁcient, typically with an ~16 day revisit interval lst measurement, rather than absolute instantaneous measurements"
+3,semmens et al.
+3,/ remote sensing of environment 185 (2016) 155–170 157 fig.
+3,"schematic overview of the inputs and processing steps in the et data fusion system. of lst, reduces model sensitivity to errors in temperature retrieval due 2014)."
+3,"alexi-retrieved latent heat ﬂux (λe2) at time t2 (just before to atmospheric and emissivity correction (anderson et al., 1997)."
+3,"this local noon) is upscaled to 24-h time-integrated daily et (etd, mm d−1) is analogous to the use of within-scene temperature scaling in locally using the ratio of instantaneous to daily insolation: calibrated algorithms like metric, but in alexi the scaling is in time rather than in the space domain."
+3,"etd ¼ f sun  rs24 =λ ð2þ alexi is based on the two-source energy balance (tseb) land sur- face representation of norman, kustas, and humes (1995) with im- where fsun = λe2 / rs2 is the ratio of latent heat to insolation at time t2, proved parameterizations described in kustas and norman (1999)."
+3,"rs24 (mj m−2 d−1) is the time-integrated daily insolation rate, and λ is the tseb treats the radiometric temperature (trad) as the average of the latent heat of vaporization."
+3,"cammalleri, anderson, and kustas soil (ts) and vegetation (tc) temperature components weighted by frac- (2014) compared several daily upscaling techniques, including use of tional vegetation cover (fc)."
+3,"these component temperatures are used to reference et and evaporative fraction, and found the insolation tech- solve the energy balance for the soil (subscript s), canopy (subscript nique to be the least biased and least sensitive to errors in retrieval c) and combined system associated with a mixed pixel: estimates when tested at an ensemble of ﬂux tower sites within the us, and over multiple seasonal cycles. ðrns þ rnc þ–g ¼ ðhs þ h c þ þ ðλes þ λec þ ð1þ gaps in the daily et maps, primarily due to cloud cover which prevents lst retrieval using thermal band imagery, were ﬁlled where rn is net radiation, g is the soil heat ﬂux, h is sensible heat, and using a technique described by anderson, kustas, et al. (2012), pre- λe is latent heat."
+3,"ts and tc constrain estimates of hs and hc, partitioning serving the ratio of actual-to-reference et (fret) during the gap pe- of net radiation between the soil and canopy layers, as well as g."
+3,canopy riods.
+3,"the fret timeseries are ﬁltered, smoothed and gap-ﬁlled at transpiration λec is estimated using a modiﬁed priestley–taylor each pixel using a savitzky–golay ﬁlter in an effort to reduce day- approach with the coefﬁcient indirectly regulated by stress signals con- to-day noise while still preserving signals associated with real veyed by tc, and the soil evaporation, λes, is computed as a residual to changes in surface moisture conditions."
+3,daily et is recovered by eq.
+3,"(1). multiplying the gap-ﬁlled fret ﬁelds by maps of daily reference et, to support regional applications, alexi couples tseb with an atmo- computed using the food and agriculture organization (fao) pen- spheric boundary layer (abl) model to simulate changes in near- man–monteith formulation for a grass reference site (allen et al., surface air temperature (ta) that are consistent with tseb modeled 1998). surface ﬂuxes (anderson et al., 1997, 2007)."
+3,"the tseb is applied at for a detailed description of the alexi model, the reader is referred two times during the morning hours, at approximately 1.5 h after to anderson et al."
+3,"(1997, 2007)."
+3,additional model inputs are discussed local sunrise (t1) and 1.0 h before local noon (t2).
+3,"the abl component in section 3.3, below. of alexi relates the rise in ta within the mixed layer over the time inter- val (t1 to t2) to the time-integrated inﬂux of h from the surface, thus 2.2."
+3,"disalexi providing a means for surface energy closure (mcnaughton & spriggs, 1986; anderson et al., 1997)."
+3,"anderson et al. (1997) demonstrated to map ﬂux distributions at higher spatial resolution than can be that alexi is most sensitive to the change in trad between t1 and t2, supported by geostationary satellite data, an alexi ﬂux disaggregation and relatively insensitive to absolute bias in trad."
+3,"this approach also scheme known as disalexi can be implemented (norman et al., 2003; eliminates the need for specifying ta boundary conditions to the sensi- anderson et al., 2004; anderson, kustas, et al., 2012)."
+3,"this disaggrega- ble heat computations a priori. tion approach uses higher resolution tir imagery from sensors like for this study, goes-east and -west imager instruments provided landsat, modis and even airborne sensors (anderson et al., 2011; the 11 μm brightness temperature observations used to determine anderson, kustas, et al., 2012) to spatially disaggregate the coarser- trad at a 4-km spatial resolution (hain, crow, anderson, & yilmaz, resolution alexi ﬂux estimates."
+3,the tseb is run over each alexi pixel
+4,158 k.a.
+4,semmens et al.
+4,/ remote sensing of environment 185 (2016) 155–170 area within the modeling domain using high resolution lst imagery ac- with row spacing approximately 3.35 m and average vine spacing quired at the time of the landsat/modis/aircraft overpass.
+4,the air tem- along the row of 1.52 m.
+4,both ﬁelds have east–west row orientation.
+4,"be- perature boundary condition (set at a nominal blending height of 50 m) cause winds are typically from the west in this area, the towers were lo- for that alexi pixel area is iteratively adjusted until the aggregated 24-h cated on the eastern edge of the ﬁelds such that the dominant fetch for et, spatially averaged over the alexi pixel, matches the alexi 24-h et. both towers typically lies within the target ﬁeld boundaries."
+4,"the reader is referred to anderson, kustas, et al."
+4,"(2012), cammalleri soil moisture is carefully controlled throughout the growing season et al. (2013) and cammalleri, anderson, gao, et al. (2014) for further to regulate vine water availability at different phenological stages."
+4,a description.
+4,"in this way, ﬂux conservation is enforced at the scale of grass cover crop between vine rows germinates in the late winter/ the alexi pixel (4 km in this case) between multi-scale et assessments. early spring and is used to deplete soil moisture that accumulates within the data fusion package, etd maps are created at 30-m from winter rains."
+4,this inter-row grass canopy remains green until spatial resolution on predominantly clear landsat overpass dates late may/early june when temperatures rise and the dry season com- using landsat thermal imagery sharpened to 30-m as described in mences.
+4,"in some years, the cover crop may be mowed prior to senes- section 3.3.1.1."
+4,"in addition, etd maps were created at 1 km resolution cence to further control soil moisture evolution in a given ﬁeld (see for each day during the modeling period using the modis swath lst photograph of site 2 in fig. 2 from the 2014 growing season)."
+4,drip irri- product.
+4,"the modis etd maps were gapﬁlled in a manner analogous gation typically commences sometime later in june and is continued to the alexi et time series, by smoothly preserving fret between sam- until harvest if necessary."
+4,decisions to begin irrigation in a ﬁeld for a pling dates.
+4,"these maps were then resampled onto the landsat 30 m season are triggered by various factors, including visual assessment of (utm) grid using nearest neighbor interpolation for ingestion into canopy water stress, spot measurements of leaf water potential with starfm. pressure chambers, soil moisture and upcoming weather conditions."
+4,harvest for pinot noir in the central valley typically occurs in early 2.3.
+4,starfm september.
+4,"in 2013, the average yield in the northern ﬁeld was 25.76 t ha−1 (metric tons per hectare), while in the southern ﬁeld it the spatial and temporal adaptive reﬂectance fusion model was 16.93 t ha−1."
+4,"(starfm) (gao et al., 2006) was used to fuse the periodic 30-m resolu- the area immediately surrounding the study ﬁelds is mainly tion landsat et maps with the daily 1-km modis maps to form a daily vineyards of varying cultivars and ages (fig."
+4,new vineyards are 30-m et product.
+4,"again, consistency between landsat and modis et being planted at rapid rates in this area and throughout the county to is achieved by using the alexi et as a common normalization ﬁeld in meet the growing demand for california wines."
+4,other cultivated areas disalexi.
+4,"starfm develops spatially distributed weighting factors de- in the vicinity of the lodi vineyards include some ﬁelds of hay and alfal- scribing the spectral and spatial relationship between an existing fa, as well as a few nut tree orchards."
+4,"surrounding the cultivated area landsat/modis image pair that is then used to govern the disaggrega- along the streambed are large expanses of unirrigated pasture and tion of modis images on days when landsat data are not available grassland, which senesce rapidly in the summer resulting in low et (the prediction date)."
+4,the optimal training pair for a given prediction and high lst (red areas in fig.
+4,2). date is selected by searching all possible pairs (where there are landsat and modis retrievals on the same day) and determining which modis 3.2.
+4,micrometeorological and biological ﬁeld measurements scene among these pairs is best correlated with the modis image on the prediction date.
+4,"the derived weighting function is then applied to the grapex measurements include ground, airborne, and satellite re- modis image on the prediction date to disaggregate the image to mote sensing, surface energy balance, turbulence and mean proﬁle landsat scale."
+4,"in this application, a single training pair was used for measurements of wind, temperature and water vapor focusing on each prediction date, although starfm also allows use of two training above, below and between vine canopies, surface and sub-surface soil pairs from bracketing dates."
+4,"the reader is referred to gao et al. (2006) moisture, along with ground-based biophysical measurements of leaf for more details on the starfm algorithm, and cammalleri et al. area index (lai) and leaf-level conductance, transpiration and photo- (2013) and cammalleri, anderson, gao, et al. (2014) for a schematic synthesis."
+4,"micrometeorological measurements commenced on day of describing applications of starfm to et data fusion. year (doy) 97 (april 7) in 2013, and continued through 2014 and into instantaneous and daily surface energy balance components on 2015."
+4,"several intensive observation periods (iops) were conducted in landsat dates, as well as fused daily et over the full study period, 2013–2015 to collect biophysical measurements of the vine canopy dur- were extracted from the 30-m utm grids at the site of the two towers ing different phenological stages, and high resolution airborne imagery using a ﬂux footprint model based on approximations from hsieh, coincident with landsat 8 overpass times to provide validation of satel- katul, and chi (2000), with fetch extending upwind of the tower and lite derived variables."
+4,"this study focuses on data collected during the horizontal dispersion related to standard deviation in wind direction 2013 growing season (doy 97-300). as described in li, kustas, anderson, prueger, and scott (2008)."
+4,the two vineyards were instrumented with identical tower-based sensor packages.
+4,focusing on the micrometeorological and surface 3.
+4,"experimental site and datasets ﬂux measurements associated with the eddy covariance (ec) technique, these sensors include a sonic anemometer (csat3, campbell scientiﬁc, 3.1."
+4,"study area logan, utah), which measures the orthogonal wind velocity compo- nents, co-located with an open-path gas analyzer (ec-150, campbell wine grape production is expanding in the central valley region of scientiﬁc) measuring concentrations of water vapor and carbon dioxide."
+4,"california, an area with characteristic warm days and cool nights and both instruments were mounted 5 m above ground level (agl) facing an evaporative demand ranging from 889 to 1270 mm of water during due west and operated at a sampling frequency of 20 hz."
+4,"(the mention the growing season (williams, 2001)."
+4,"as part of the usda-ars grape of trade names of commercial products in this article is solely for the remote sensing atmospheric proﬁling and evapotranspiration experi- purpose of providing speciﬁc information and does not imply recom- ment (grapex), two pinot noir vineyards, located at the border of sac- mendation or endorsement by the us department of agriculture.) ramento and san joaquin counties (fig. 2), were instrumented in 2013 additional instruments above-ground include a four-component net with ﬂux towers and in-ﬁeld ground measurements of soil moisture radiometer (cnr-1, kipp and zonen, delft, netherlands) mounted at and temperature."
+4,"the larger, northern ﬁeld (site 1; 34.4 ha) is more ma- 6 m agl, upward and downward facing quantum sensors (li-190, li-cor, ture (7–8 years old) while the vines in the southern ﬁeld (site 2; 21 ha) lincoln, nebraska) mounted at 6 m agl to measure incident and reﬂected are 4–5 years old."
+4,"the height of the vines ranges between 2 and 2.5 m, photosynthetically active radiation, a combined humidity and"
+5,semmens et al.
+5,/ remote sensing of environment 185 (2016) 155–170 159 fig.
+5,"landsat 8-derived land surface temperature (°c), sharpened to 30 m spatial resolution, over the study area in central california, sacramento county at the border (black line) to san joaquin county on july 14th, 2013 at 18:41 utc."
+5,outlined ﬁelds highlight site 1 to the north (7–8 year old pinot noir vines) and site 2 to the south (4–5 year old pinot noir vines).
+5,black dots denote ﬂux tower locations and soil moisture locations near the towers.
+5,"site photos to the right show the maturity of the vines and condition of cover crop on april 8, 2014 (the year after the study period examined here), as well as the ﬂux tower instrumentation."
+5,"the orange box indicates the nominal 4 km alexi pixel size. temperature sensor (hmp45c, vaisala, helsinki, finland) mounted at 5 m, the observed ﬂuxes were corrected for closure errors by assigning the a pair of thermal infrared thermometers (si-111, campbell scientiﬁc) residual to the latent heat ﬂux (prueger et al., 2005). mounted at 2.5 m to measure surface and canopy temperature, and a tip- in addition to micrometeorological data, episodic biophysical ping bucket rain gauge (te525, texas electronics, dallas, texas)."
+5,subsur- measurements were also collected during grapex to monitor lai de- face sensors include a cross-row transect of ﬁve soil heat ﬂux plates velopment in the cover crop and vines.
+5,"the lai measurements were (hft-3, radiation energy balance systems, bellevue, washington) buried made using a li-cor lai-2000 instrument along several transects at a depth of 8 cm."
+5,"each heat ﬂux plate was paired with two thermocou- collecting 4 samples (under the vine, a quarter of the distance from ples buried at 2 and 5 cm depths and a soil moisture probe (hydraprobe, the vine row, in the center of the inter-row, and ¾ of the distance stevens water monitoring systems, portland, or) buried at a depth of from the vine row) to obtain an estimate of the effective lai of the 5 cm."
+5,the soil surface heat ﬂux (g) measurement includes the soil heat vine/inter-row system.
+5,"measurements were made with and without in- ﬂux across the heat ﬂow transducer (gt) and heat storage in the soil cluding the inter-row cover crop, which had a very minor impact on the layer above the transducers (s), such that g = gt + s (see lai measurements for the ﬁeld iops in june and august."
+5,"vines grow in e.g., brutsaert, 1982)."
+5,"soil moisture in the storage layer was estimated the early spring and rapidly expand in leaf area mid to late may, and from the hydraprobe soil moisture sensors near each soil heat ﬂux sensor the observed lai increased throughout the season until harvest in package."
+5,"there were also three soil moisture proﬁle systems installed early september. within 100 m of each tower with sensors located at 30, 60 and 90 cm in addition, yield maps for the 2013 harvest in both ﬁelds were pro- depths."
+5,"volumetric soil water and temperature were recorded hourly at vided by e & j gallo winery, generated following the protocol of these depths."
+5,bramley and williams (2001).
+5,"advanced technology viticulture (atv, the eddy covariance data were processed with temperature and joslin, australia) yield monitor systems were installed on three self- vapor pressure measurements used to correct for oxygen and density propelled, over-the-row, trunk-shaking mechanical gh9000 aim har- effects on the evaporative and carbon ﬂuxes (webb–pearman– vesters (agricultural industrial manufacturing, lodi, ca, usa)."
+5,"yield leuning—wpl correction; webb, pearman, & leuning, 1980)."
+5,"further monitors consist of a combined dgps receiver and antenna as well as processing included applying a 2-d coordinate rotation (cr) forcing a specialized grape weighing and data recording system consisting of v = w = 0 (kaimal & finnigan, 1994) and corrections for sensor dis- a load cell weight bridge, belt speed sensor and data logger."
+5,"harvest placement (sd) and frequency response (fr) attenuation (massman & data were transferred into a clean-up script written in r studio software lee, 2002)."
+5,"the cr and fr corrections were found to have a relatively (rstudio inc., boston, ma, usa) to convert mass ﬂow units into tons per small effect on the ﬂuxes compared to the wpl."
+5,"in addition to the turbu- hectare, eliminate outliers, and normalize harvesters."
+5,"yield data points lent ﬂuxes, mean wind speed and wind direction were computed from more than three standard deviations from the mean were removed to the csat3 measurements."
+5,typical closure ratios (h + λe)/(rn − g) for reduce scatter which usually results in less than 5% of total yield point daytime conditions where rn n 0 were on the order of 0.91 for site 1 and removal.
+5,"after clean-up, the data were kriged to 3 × 3 m resolution 0.80 for site 2."
+5,"for comparison with modeled energy balance estimates, grids."
+6,160 k.a.
+6,semmens et al.
+6,/ remote sensing of environment 185 (2016) 155–170 fig.
+6,landcover classiﬁcation map used in disalexi processing.
+6,national land cover dataset (nlcd) data were modiﬁed to include a vineyard classiﬁcation for the study area.
+6,"model inputs regression tree analysis trained with modis 1 km lai data to maintain consistency in lai between landsat and modis processing (see gao, 3.3.1."
+6,"remote sensing data anderson, kustas, & wang, 2012; cammalleri et al., 2013)."
+6,all model 3.3.1.1.
+6,disalexi-landsat.
+6,"landsat 8 (l8) data between doy 90 and 300 table 1 of 2013 were collected over the study area (lying in the overlap be- list of 22 landsat 8 scenes used in this study, doy and time of acquisition, path and row, tween path 43/row 33 and path 44/row 33) and a total of 22 scenes and the transmittance and upwelling path radiance (w m−2 μm−1 sr−1) output from were processed (see table 1)."
+6,"data from the l8 tirs band 10 were atmo- modtran used to atmospherically correct the thermal band. spherically corrected using modtran (berk, bernstein, & robertson, year doy hhmm path row transmittance upwelling path 1989) following procedures described by li et al., 2004."
+6,"measurements (utc) radiance of the atmospheric proﬁle from radiosonde observations, ozone and vis- 2013 106 18:47 44 33 0.923 0.485 ibility estimates were input to modtran to obtain path radiance and 2013 115 18:41 43 33 0.803 1.567 down-welling sky radiance and transmittance, and used to produce sur- 2013 131 18:41 43 33 0.875 0.913 face brightness temperature."
+6,"the assumed emissivity ﬁelds used to con- 2013 154 18:47 44 33 0.746 1.995 2013 163 18:41 43 33 0.731 2.215 vert to surface radiometric temperature (trad, or lst) were based on the 2013 170 18:47 44 33 0.789 1.601 methods of french et al. (2005) using estimates of fraction vegetation 2013 179 18:41 43 33 0.808 1.482 cover (anderson et al., 2007)."
+6,"the resulting 100-m lst images (native 2013 186 18:47 44 33 0.886 0.965 tirs resolution) were spatially sharpened to the 30-m resolution of 2013 195 18:41 43 33 0.787 1.672 the shortwave l8 bands using a data mining sharpener (dms) tech- 2013 202 18:47 44 33 0.823 1.218 2013 211 18:41 43 33 0.871 0.952 nique based on regression tree analysis (gao, kustas, & anderson, 2013 218 18:47 44 33 0.825 1.257 2012)."
+6,"this signiﬁcantly enhances the sharpness of ﬁeld boundaries, 2013 227 18:41 43 33 0.868 1.048 while still conserving energy at the native 100-m scale of the tirs 2013 234 18:47 44 33 0.852 1.177 sensor."
+6,"2013 243 18:41 43 33 0.777 1.949 2013 250 18:47 44 33 0.837 1.282 shortwave reﬂectance band data from l8 were calibrated and atmo- 2013 259 18:41 43 33 0.785 1.693 spherically corrected using a modiﬁed version of the landsat ecosystem 2013 266 18:47 44 33 0.733 2.236 disturbance adaptive processing system (ledaps; masek et al., 2006)."
+6,"2013 275 18:41 43 33 0.695 2.443 broadband visible and near-infrared albedo were extracted from the 2013 282 18:47 44 33 0.785 1.728 six reﬂectance bands output from ledaps according to liang, 2000."
+6,"in 2013 291 18:41 43 33 0.865 1.034 2013 298 18:47 44 33 0.892 0.866 addition, 30 m maps of leaf area index (lai) were derived using a"
+7,semmens et al.
+7,/ remote sensing of environment 185 (2016) 155–170 161 input ﬁelds were subset to a study area mask for use within disalexi. infrared (nir) (0.790–0.810 μm) wavelengths.
+7,"the tir images were the cfmask cloud mask layer (zhu, wang, & woodcock, 2015), recently acquired with an inframetrics 760 scanner in the 8–12 μm range."
+7,"de- included in the landsat surface reﬂectance climate data record distrib- tails of image acquisition and processing can be found in neale et al. uted by the eros data center, was applied to screen out cloud impacted (2012)."
+7,"visible and thermal band imagery used in this study were areas of the domain. collected on june 12, 2013 (doy 163) at ~ 13:15 pst, approximately 2.5 h after the l8 overpass of the grapex site."
+7,the original resolution 3.3.1.2.
+7,disalexi-modis.
+7,"daily modis lai maps were generated from was 0.05 m for the visible bands (nir (0.8 μm), red (0.655 μm), and the 4-day composite product (mcd15a3, collection 5; myneni, 2014)."
+7,green (0.562 μm)) and 0.38 m for the thermal band.
+7,all bands were these 4-day maps were smoothed and gapﬁlled to daily timesteps fol- aggregated through averaging to 5 m resolution.
+7,"a simple linear re- lowing the procedure described by gao et al. (2008), which uses the gression between landsat 8 and the aircraft thermal imagery timesat algorithm for analyzing satellite time-series data for seasonal- (r 2 = 0.76) was used to adjust the airborne thermal data for the ity and other temporally dynamic vegetation properties (jönsson & time difference in the acquisition before running disalexi."
+7,"aircraft eklundh, 2004)."
+7,"the smoothing procedure gives higher weight to red and nir imagery from the prior day (doy 162) were used due clear-sky and high quality modis lai retrievals, as identiﬁed in the to issues with the shortwave sensors on doy 163."
+7,an exponential product quality control layers.
+7,"daily modis ndvi maps were generated function was ﬁt between landsat 8 lai and aircraft ndvi, with a r2 from 16 day composites (mod13a2, collection 5; huete, justice, & value of 0.98."
+7,"this ﬁtted function was used to provide 5-m resolution leeuwen, 2014)."
+7,input modis albedo maps were generated from the lai inputs to disalexi.
+7,solar zenith angle (szn)-extended modis/terra + aqua 30 arc sec global gap-filled snow-free bidirectional reﬂectance distribution 3.3.2.
+7,"regional meteorological inputs function (brdf) (modis brdf/albedo cmg gap-filled snow-free alexi/disalexi also require several meteorological inputs for exe- product mcd43gf v005) parameters product available by request cution, including time-series of hourly solar radiation and wind speed from university of massachusetts boston (dr."
+7,crystal schaaf).
+7,"daily al- for each modeling date, along with air temperature and vapor pressure bedo was calculated using solar zenith angle and total albedo calculated ﬁelds used for computing reference et used in the temporal gap-ﬁlling as the weighted average of white (25%) and black sky (75%) albedo as- of alexi and disalexi-modis ﬁelds."
+7,"in addition, alexi requires pre- suming a nominal partitioning of diffuse and direct beam radiation dawn proﬁles of atmospheric potential temperature for the abl closure under clear-sky conditions."
+7,"daily lai, ndvi, and albedo were estimated routine."
+7,"in this study hourly insolation, temperature, wind and pressure using a spline interpolation."
+7,"modis lst and view angle maps were gen- ﬁelds were obtained from the narr dataset (mesinger et al., 2006). erated from terra instantaneous swath 1 km data (mod11_l2, collec- these ﬁelds were mapped to the 4 km alexi grid and converted to tion 5; wan, 2014) using the modis conversion toolkit (version 2.0) each sensor's projection at both daily and overpass times for ingestion and geolocation ﬁelds (mod03) to obtain correct georegistration."
+7,lst into disalexi. was sharpened using dms to reduce the bowtie effect due to off-nadir pixel smearing.
+7,"in this case, dms was run using the 1 km modis 3.3.3."
+7,"landcover ndvi, effectively reproducing the sharpening procedure (kustas, landcover class is used to specify surface roughness parameters and norman, anderson, & french, 2003) used in prior implementations of vegetation optical properties used in alexi/disalexi (anderson et al., disalexi (cammalleri anderson, gao, et al., 2013, 2014)."
+7,2007).
+7,"the alexi model uses the university of maryland (umd) global land cover dataset at 1-km resolution, based on observations from the 3.3.1.3."
+7,alexi-goes.
+7,"alexi was executed on daily timesteps over a do- advanced very high resolution radiometer (avhrr; hansen, defries, main covering the contiguous united states at a spatial resolution of townshend, & sohlberg, 2000)."
+7,for the higher resolution modis and 4 km.
+7,"lst inputs were computed from 11 μm brightness temperature landsat disaggregation experiments, landcover classiﬁcation (fig. 3) observations from the goes-east (at 75°w) and goes-west (at was determined from the 30 m national land cover dataset (nlcd; 105°w) imager instruments at a spatial resolution of 4-km (nadir)."
+7,"fry et al., 2011)."
+7,"for modis, the nlcd map was upscaled to 1 km the raw brightness temperature observations were atmospherically using the highest percentage class within each modis pixel."
+7,"in addition, corrected using atmospheric proﬁles of temperature and mixing ratio the landcover classiﬁcation was modiﬁed in arcgis to include a vine- following the single channel algorithm of price (1983)."
+7,atmospheric yard classiﬁcation as a rough approximation (fig.
+7,"in disalexi, a proﬁles of temperature and mixing ratio used in the atmospheric cor- nominal vegetation height of 2.3 m was used to compute roughness rection were computed from the ncep regional reanalysis (narr) parameters for pixels with vineyard classiﬁcation. dataset (mesinger et al., 2006)."
+7,cloud-free pixels are determined by using the bi-spectral composite threshold technique which applies a se- 4.
+7,"results and discussion ries of threshold tests using goes 3.7 and 11.0 μm brightness tempera- ture measurements (jedlovec, haines, & lafontaine, 2008)."
+7,vegetation 4.1.
+7,"model evaluation cover fraction was obtained from the 4-day modis leaf area index prod- uct, and albedo information from 16-day modis albedo composites flux estimates from disalexi-landsat on landsat overpass dates, (mod43c; moody, king, platnick, schaaf, & gao, 2005."
+7,"hourly incoming averaged over the tower footprint using methods described by li et al. shortwave and longwave radiation were provided from the national (2008), are compared to ec observations in fig. 4, both for instanta- land data assimilation system-2 (nldas-2) meteorological forcing neous (landsat overpass time) retrievals and upscaled 24-h estimates. dataset at a 0.125° spatial resolution (cosgrove et al., 2003)."
+7,"at both the north site (site 1) and south site (site 2), simulated instan- taneous and 24-h ﬂuxes (net radiation, latent heat, sensible heat, soil 3.3.1.4."
+7,high resolution aircraft imagery.
+7,"during the grapex13 experi- ﬂux, solar radiation) on landsat observation dates fall generally along ment, high resolution aircraft thermal imagery were obtained periodi- the one-to-one line against in-ﬁeld measurements."
+7,quantitative mea- cally from a system operated by utah state university and used in sures of all ﬂux comparisons are shown in table 2.
+7,"modeled insolation prior usda ﬁeld experiments (anderson et al., 2004, 2005, chavez, and net radiation agree well with local measurements, indicating the neale, hipps, prueger, & kustas, 2005; neale et al., 2012)."
+7,these images narr radiative forcing inputs and assumed bulk albedo are reasonable were used as input to disalexi to conﬁrm structure apparent in the at these two sites.
+7,landsat-derived 24-h et ﬂuxes have low root mean landsat-resolution et maps.
+7,"the system consists of three kodak square errors (rmse) of 0.63 to 0.67 mm/d for both sites, while the per- megaplus1 4.2i digital cameras with interference ﬁlters forming spectral cent error in et estimates on landsat dates (expressed as mean absolute bands in the green (0.545–0.555 μm), red (0.665–0.675 μm) and near difference [mad] divided by the mean observed ﬂux, following"
+8,162 k.a.
+8,semmens et al.
+8,/ remote sensing of environment 185 (2016) 155–170 fig.
+8,"(top panels) scatterplots comparing observed ﬂuxes and estimates obtained with disalexi-landsat on landsat overpass dates for instantaneous ﬂuxes (rs — solar radiation, rn — net radiation, λe — latent heat, h — sensible heat, g — soil ﬂux) for the two ﬂux tower sites."
+8,(bottom panels) scatterplots comparing observed and landsat-retrieved 24-h ﬂuxes for two ﬂux tower sites in the vineyards.
+8,"table 2 statistical measures of model performance at sites 1 and 2 at instantaneous and 24-h (d) timesteps for landsat overpass dates, and for starfm daily and weekly output between doy 100-300."
+8,variable rn h g le rnd hd gd led etd et(fusion) et(fusion) site unit w m−2 w m−2 w m−2 w m−2 mj m−2 d−1 mj m−2 d−1 mj m−2 d−1 mj m−2 d−1 mm d−1 mm d−1 mm wk−1 1 n 22 22 22 22 22 22 22 22 22 199 28 1 mean p 549 135 103 311 15.72 3.85 1.71 10.16 4.15 4.18 29.53 1 mean o 553 173 79 297 15.25 3.65 1.49 9.95 4.06 3.97 28.14 1 mbe −4 −37 25 13 0.47 0.20 0.22 0.21 0.09 0.21 1.39 1 rmse 39 50 32 47 0.91 1.51 0.50 1.54 0.63 0.92 4.93 1 mad 22 41 26 38 0.74 1.09 0.42 1.18 0.48 0.71 4.04 1 % error 3.9 24.0 33.2 12.7 4.8 29.8 28.4 11.9 11.9 18.8 14.4 1 r2 0.86 0.53 0.09 0.55 0.97 0.34 0.06 0.83 0.83 0.67 0.76 2 n 22 22 22 22 22 22 22 22 22 199 28 2 mean p 537 153 112 272 15.30 4.54 1.95 8.82 3.60 3.68 25.96 2 mean o 556 195 143 219 15.11 4.84 2.17 8.11 3.31 3.24 22.89 2 mbe −19 −42 −31 54 0.19 −0.30 −0.22 0.71 0.29 0.44 3.07 2 rmse 42 63 35 79 0.87 1.22 0.65 1.63 0.67 0.96 5.76 2 mad 26 55 31 64 0.70 1.01 0.55 1.26 0.51 0.75 4.50 2 % error 4.7 28.0 22.0 29.2 4.6 20.8 25.2 15.5 15.5 23.2 19.6 2 r2 0.87 0.03 0.40 0.40 0.97 0.31 0.04 0.73 0.73 0.46 0.49 a.
+8,"et — evapotranspiration; rn — net radiation; h — sensible heat; g — soil ﬂux; λe — latent heat; fusion columns summarize daily and weekly et output over the full course of the experiment, d — 24-h ﬂuxes on landsat dates; the rest are ﬂuxes at the time of landsat overpass. b. n — number of data points; mean p — mean predicted/modeled; mean o — mean observed; mbe — mean bias error (mean p − mean o); rmse — root mean square error; mad — mean absolute difference (absðp−oþ); % error — percent error is the mean absolute difference divided by the mean observed ﬂux; r2 — coefﬁcient of determination in regression of p on o."
+9,semmens et al.
+9,"/ remote sensing of environment 185 (2016) 155–170 163 recommendations by willmott, 1982; willmott & matsuura, 2005) sensing approach to monitoring energy ﬂux and evapotranspiration dy- is 12% for site 1 and 16% for site 2 — consistent with results obtained namics in vineyards. in earlier studies using disalexi (anderson, kustas, et al., 2012; cammalleri et al., 2013; cammalleri, anderson, gao, et., 2014)."
+9,"temporal patterns in evapotranspiration (et) statistics are also provided in table 2 for daily and weekly 30-m et estimates from the starfm fusion algorithm (“fusion” et), including timeseries of observed and modeled daily et for the 2013 growing both landsat overpass dates and dates between overpasses."
+9,the percent season at sites 1 and 2 are shown in fig.
+9,"on average over this period, errors from the fused daily time series are somewhat larger than for the the observed et at site 1 was 80% of reference et — matching the target landsat dates alone, with values of 19% for site 1 and 23% for site 2 and believed to maximize berry size (williams, 2001)."
+9,"observed seasonal with rmse of 0.92 and 0.96 mm/d, respectively."
+9,"an increase in error is cumulative et at site 2 was about 82% of the seasonal et value for site to be expected, since the majority of the days in this timeseries are re- 1, but with similar reference et conditions, resulting in an average covered by fusion rather than direct retrieval from landsat imagery. actual-to-reference et ratio of 65% for this tower site."
+9,"at the weekly timestep, relevant to irrigation management, percent er- the utility of disaggregation as a validation tool is clearly apparent. rors reduce to 14 and 20% due to time-averaging of random errors."
+9,"the in general, agreement between model and tower measurements signif- difference in apparent model performance between sites 1 and 2 is due icantly improves in moving from the alexi-goes scale (4-km pixels) to primarily to an early season bias at site 2, which is discussed in detail in landsat scale (30 m) — particularly at site 1."
+9,"the model estimates at the section 4.2. various scales tend to converge at site 2 after doy 210, indicating this the average modeled and measured et over the course of the exper- tower site is more representative of the local landscape."
+9,"the role that iment is between 3 and 4 mm d−1, with higher rates of water consump- the modis et plays in guiding the temporal interpolation of 30 m ﬂuxes tion at site 1 (more mature) than at the younger site 2."
+9,"the average et between landsat overpasses is evident in the starfm timeseries. values reported here are consistent with other studies of water use in for comparison with starfm, results are also shown from a simple vineyards; for example, teixeira et al. (2007) reported average et of landsat-only interpolation scheme conserving the ratio of actual-to- 3.3 mm d− 1 in irrigated vineyards in the são francisco river basin, reference et through linear interpolation between landsat overpasses."
+9,"brazil, a semi-arid region with average rainfall of 570 mm per year cammalleri et al. (2013) found signiﬁcant improvement in daily et re- and monthly air temperature averages of 24–30 °c."
+9,the correspondence trieved using starfm over the landsat-only interpolation in an imple- to in-ﬁeld measurements supports the applicability of this remote mentation over rainfed soybean ﬁelds in central iowa during smex02.
+9,"time series of observed daily et (blue dots), et retrievals from alexi (gray line), disalexi-modis (aqua line) and disalexi-landsat (red diamonds), along with 30 m daily et estimates from starfm (solid red line) and landsat-only interpolation (dotted red line) for site 1 (top panel) and site 2 (bottom panel)."
+9,rainfall events are shown as blue bars.
+10,164 k.a.
+10,semmens et al.
+10,/ remote sensing of environment 185 (2016) 155–170 fig.
+10,"comparison of landsat-retrieved and measured leaf area index (lai, top panel) and land surface temperature (lst, middle panel) at the time of overpass (~1840 utc) for each landsat overpass date at sites 1 and 2."
+10,"bottom panel shows difference in et between sites 1 and 2 as inferred from ec observations and the starfm retrievals, smoothed with a 10-day moving average."
+10,the period prior to doy 160 when the early season model bias at site 2 is signiﬁcant has been highlighted.
+10,starfm was better able to capture et response to a rainfall event that collected in the ﬁeld.
+10,this may indicate an enhanced localized response occurred between landsat overpasses.
+10,"in the current study, however, to the precipitation event that is not completely captured by the ther- the starfm and landsat-only interpolation techniques show similar mal signal, as explored further in section 4.2. performance (fig."
+10,"this is due to the greatly improved temporal sam- a similar enhancement in ec measurements of latent heat ﬂux was pling available with landsat 8 at this california site, given its location not observed in site 2 following this rainfall event, and the fused et within the overlap between adjacent wrs paths and the low cloud timeseries for site 2 agrees well with observations during this time pe- cover during the growing season. riod and for the remainder of the experiment season."
+10,"this is further ev- at site 1, et estimates from the direct landsat retrievals and the idence that the et enhancement at site 1 was a very localized surface fused daily timeseries largely follow the observed values especially in phenomenon, and not driven by prevailing meteorological conditions. early and late season."
+10,"the observed et is underestimated during the however, water consumption is overestimated at site 2 in the early sea- middle part of the season between approximately doy 180 and 210. son prior to doy 175."
+10,"a small wet bias is also evident in the very early this departure is preceded by a large precipitation event on doy 175. season at site 1, before doy 106."
+10,"a comparable underestimation in et is observed during this time period there are several possible sources for the early season wet bias in the when the tseb is applied directly to lst, lai and meteorological data disalexi-landsat and fused daily et estimates."
+10,it may reﬂect biases in
+11,semmens et al.
+11,/ remote sensing of environment 185 (2016) 155–170 165 fig.
+11,time series of observed (solid lines) and fusion modeled (dotted lines) et for sites 1 (red) and 2 (blue) are shown in top panel.
+11,"average soil moisture (sm; volumetric water content ∗ 10) shown as solid lines in bottom panel is plotted with values on the right axis, as well as approximate weekly irrigation rates shown with squares (liters per vine/50). the coarse-scale early springtime alexi daily et estimates over this re- vineyard and may require adjustment to substrate and canopy atmo- gion, which form the basis for the spatial disaggregation accomplished spheric resistance factors speciﬁc to a vineyard canopy architecture — through disalexi."
+11,"to date, studies evaluating alexi ﬂuxes through dis- effectively adding a “third” understory vegetation layer to the tseb."
+11,"in aggregation have been principally focused on the mid-continent grow- ongoing work, model behavior will be assessed during the 2013–2014 ing season, starting between doy 130 and 150."
+11,"there is evidence to and 2014–2015 winter periods, and if similar bias behavior is observed, suggest that the time window for lst rise signal used in alexi during simple modiﬁcations will be developed for viticultural applications of the winter/early spring may need adjustment to compensate for shorter tseb. daylength."
+11,"these adjustments will be evaluated in follow-on studies, a ﬁnal possibility is that there may be exacerbated instrumental looking at continuous model time behavior between the grapex biases near the beginning of the experiment due to local disturbance 2013, 2014 and 2015 campaigns."
+11,"however, given the fact that the to the soil and cover crop near the tower site, introduced during instal- early season is reasonably well-modeled at site 1, lying within the lation."
+11,"there is ancillary anecdotal evidence that is consistent with this same alexi pixel, alexi biases may not be the primary issue in this case. theory."
+11,"again, extension of the modeling experiment into the 2014 the exacerbated early season bias at site 2 prior to doy 160 may also and 2015 ﬁeld campaigns will help to determine if this was a short- relate to errors in the landsat retrievals of lai and lst — the two prima- term (instrumental) or persistent (model) bias. ry disalexi inputs that govern disaggregation of the 4-km alexi ﬂux to fig. 7 demonstrates the relative time behavior of et ﬂuxes (model the subpixel level."
+11,"unless the landsat inputs are signiﬁcantly different and measurements) and soil moisture conditions during the 2013 between the two ﬁelds, the disaggregation strategy will apportion sim- growing season."
+11,the soil moisture data represent averages of measure- ilar disaggregated ﬂuxes to the two ﬁelds.
+11,"indeed the difference in ments at 30, 60 and 90 cm at 3 locations near the tower in site 1, and 2 starfm et between sites appears to be well correlated in time with dif- locations in site 2 (one set of measurements at site 2 was non- ferences in landsat lai and lst retrievals, with relatively small differ- representative due to issues with the adjacent irrigation tubing)."
+11,also ences observed before doy 160 (fig.
+11,"while there were no lai shown are approximate weekly irrigation amounts, expressed in units observations during the early period, the landsat-derived lai appears of weekly liters per vine, included here to demonstrate the time to overestimate ﬁeld values until midseason."
+11,"however, manual adjust- variability in rates of water supplied through the drip lines."
+11,"given the ment of landsat lai inputs to disalexi for vineyard pixels toward average vine spacing within the ﬁelds, 1 l per vine translates to approx- values observed in sites 1 and 2 did not appreciably impact the modeled imately 0.2 mm of water."
+11,irrigation scheduling is designed to maintain et.
+11,the timeseries in landsat lst departures between sites appears to relatively constant soil moisture content during the critical period of follow observations well (fig.
+11,"note that the absolute offset in landsat grape development, as evidenced in the soil moisture measurements lst with respect to observations is not as important as in-scene variabil- in fig."
+11,"in 2013, irrigation commenced in mid-june as the cover crop ity due to the ﬂux normalization step with respect to the 4-km alexi- senesced and was suspended one or two days before harvest (around based et estimates."
+11,doy 245) to prevent the harvesting machines from becoming mired another consideration for the early season bias is the presence of the in mud.
+11,"irrigation resumed post-harvest until october 4 (doy 275). inter-row cover crop, which is at peak greenness early in the season and in terms of cumulative water use, starfm reproduced observed is completely senesced by doy ~160 as the vines leaf out."
+11,"this transition values derived from the ec measurements in site 1 over the period involves a migration of transpiring vegetation from the soil surface be- doy 106-245 (from ﬁrst landsat date to harvest date) within 14 mm tween rows, where turbulent exchange is relatively suppressed, to the (2% error) due to time-averaging of random daily error component tops of the vines which are better coupled with the free atmosphere. and good model performance later in the season."
+11,cumulative et for this transition occurred later in the season in 2013 for the younger site 2 is more signiﬁcantly overestimated at doy 245 by about 84 mm
+12,166 k.a.
+12,semmens et al.
+12,"/ remote sensing of environment 185 (2016) 155–170 (16%), resulting from the early season wet bias discussed above."
+12,"the model predicts a lower total et cumulative value for site 2 than for site 1, in accordance with the observed difference between the two ﬁelds."
+12,spatial patterns in evapotranspiration (et) spatial patterns in the fused 30-m ﬂux ﬁelds of daily et over the course of the growing season are varied and complex.
+12,"fig. 8 demon- strates variability in modeled daily and cumulative et through the study period over a 4 × 4 km box, approximating the alexi pixel area, including the grapex vineyards near the center."
+12,"early in the season (doy 110), et is relatively uniformly distributed over the area while the background grasslands are still green."
+12,"on doy 140, the highest et rates are associated with a few young vineyards in the southeast quad- rant of the image — likely resulting from early irrigation applied to help establish the newly planted vines."
+12,"on doy 170, four ﬁelds of alfalfa south of the grapex vineyards are highlighted."
+12,alfalfa has a relatively high water use requirement among agricultural crops.
+12,daily water use in the grapex vineyards diminishes prior to harvest (around doy 245 in 2013).
+12,"et variations between ﬁelds can be a result of different crop types or irrigation practices, or may relate to different soil charac- teristics such as texture and water holding capacity."
+12,"cumulative et gradually increases throughout the season as well (fig. 8, right column) but rapidly increases between doy 230 and 260, the period covering highest maturity of vines and harvest time."
+12,"while most ﬁelds in the surrounding area are vineyards of varying levels of maturity, the four alfalfa ﬁelds directly south of the two grapex ﬁeld sites have a distinctly different et signal over time."
+12,"the high temporal frequency of clear-sky landsat acquisitions over this study area (approximately every 9 days) enables the identiﬁcation of when these ﬁelds (together roughly 600 by 650 m2) were cut (between doy 202 and 211, fig. 9), with the et signal showing very strongly on doy 202 and a few days later is equivalent to background et."
+12,note that this scale of change (sub-modis pixel scale) is not likely to be ro- bustly recovered by the landsat/modis fusion process.
+12,such localized change detection can only be accomplished with sufﬁcient sampling at the landsat scale.
+12,cumulative seasonal et (fig. 10) over a broader (9 × 9 km) area sur- rounding the grapex study site demonstrates the spatial detail in water use information that can be generated using sharpened l8 tirs imagery.
+12,"unplanted gullies in vineyards in the southeast are detectable, as is variability in the low-density residential area in the northwest cor- ner of the image (in contrast to the dense stand of eucalyptus trees due south)."
+12,"at landsat scale, it is possible to quantify seasonal water use by crop and landcover type — again, this is not possible with modis."
+12,"subﬁeld variability in water use and yield to better understand the reliability of sub-ﬁeld variations in water use apparent at the landsat 30-m scale, a high resolution (5 m) 24-h et map was derived for the instrumented vineyard ﬁelds by applying disalexi to thermal and ndvi imagery obtained by aircraft on the day of the june 12, 2013 landsat 8 overpass (doy 163)."
+12,"the within-ﬁeld et variability at 5 m resolution (fig. 11b) is generally spatially similar to that apparent in the 30 m resolution et estimates (fig. 11c), albeit with much ﬁner detail, partially resolving the individual vine rows."
+12,the higher resolution of the aircraft imagery enables identiﬁcation of distinct features.
+12,"for example, an old river bed is seen in both images in the lower half of the southern ﬁeld where et is slightly higher due fig."
+12,spatial timeseries (every 30 days) of 24-h et (left column) and cumulative et (right column) over a 4 × 4 km area including the two vineyard sites instrumented for grapex.
+12,individual ﬁelds are easily distinguishable as are times of higher et (and possible irrigation).
+13,semmens et al.
+13,/ remote sensing of environment 185 (2016) 155–170 167 fig.
+13,"two up close snapshots of site 1 and site 2, as well as the alfalfa ﬁeld just south of these ﬁelds."
+13,"the four alfalfa ﬁelds have very high et on day 202, but just a few days later are essentially bare due to harvesting. to different soil characteristics."
+13,the small rectangular areas of low cu- stress indicators.
+13,"the et maps at both aircraft and landsat scale, howev- mulative et and high lst in the southern end of site 1 (north ﬁeld) er, do provide some information about sub-ﬁeld variability in realized are vernal pools — ephemeral ponds which are protected by state and yield."
+13,"for example, the effects of soil texture variations in the upper federal law from new cultivation activities."
+13,"these areas have not been left corner of the north ﬁeld are evident, leading to lower local yields planted in vines and are not irrigated."
+13,the central part of the northern and seasonal evaporative losses.
+13,"the region of higher water use in the ﬁeld shows higher rates of et at both scales, coinciding with a region central part of this ﬁeld resulted in higher yields in 2013."
+13,variable of more vigorous vine growth.
+13,"lower et in the upper left of the northern rates of water application across the ﬁeld, informed by high-resolution ﬁeld is associated with soil texture discontinuities."
+13,"the major soil type in aircraft or medium resolution landsat imagery, may serve to better ho- the two ﬁelds is kimball silt loam but there are small areas within the mogenize production across individual ﬁelds."
+13,"research investigating ﬁeld (such as in the upper left corner of the northern ﬁeld) with silt multi-year yield variability in the grapex ﬁelds, and correlations with loam and gravelly loam soils which have poor to moderate water stor- anomalies in et and vegetation index, is underway. age capacity."
+13,"the area of low et/high lst at the top middle of the north- ern ﬁeld is associated with a house, parking area and storage sheds 5."
+13,conclusions where equipment is kept for maintaining the ﬁelds (blanked in the air- craft image).
+13,"performance of multi-sensor and scale data fusion approach to the aircraft imagery from doy 163 was collected prior to the rainfall mapping et using goes, modis and landsat tir and shortwave event on doy 175 (fig."
+13,"during the period doy 180-210 when the lo- calized enhancement in ec latent heat ﬂux was observed at site 1, winds were primarily from the sw – passing over the vernal pool systems, which terminate a local drainage system within that ﬁeld."
+13,"one possible explanation for that enhancement might be that the pools and sur- rounding drainages saturated during the rain event, contributing to higher evaporative losses within the tower footprint for several days as the area dried."
+13,"given that these features are classiﬁed as vernal pools, this may not be unreasonable."
+13,"the l8 tirs data at native resolu- tion are too coarse to resolve such small scale cooling impacts on the lst ﬁeld, and indeed the dms thermal sharpening technique would er- roneously impose a higher lst over the low ndvi area associated with the pools."
+13,a high resolution aircraft acquisition during this period would have helped to identify localized moisture enhancements within the footprint.
+13,"in 2014 and 2015, grapex integrated imaging using un- manned aerial vehicles (uavs), which may be easier to deploy in rapid response to episodic change events."
+13,"within-ﬁeld spatial variability in et at 30 m resolution, both at daily and cumulative timesteps (fig. 11c and d) shows some regions of general spatial correspondence with yield maps produced for both ﬁelds at harvest (fig. 11a)."
+13,"yield in wine grape production is carefully managed to support both wine quality and regional marketing consider- ations, and is not always well-correlated (and is sometimes anti- correlated) with climatic drivers."
+13,this may make year-to-year prediction fig.
+13,cumulative seasonal et (mm) map (9 × 9 km) on doy 290 surrounding the of at-harvest yield difﬁcult using remote-sensing based vegetation and grapex study.
+14,168 k.a.
+14,semmens et al.
+14,/ remote sensing of environment 185 (2016) 155–170 fig.
+14,"spatial distribution of a) yield (metric tons per ha) at the end of the 2013 season; b) 24-h evapotranspiration (etd) at 5 m resolution from disalexi applied to aircraft imagery for doy 163; c) 24-h evapotranspiration (etd) at 30 m resolution from disalexi applied to landsat lst for doy 163; d) cumulative evapotranspiration (doy 106-245) at the end of season at 30 m resolution derived from starfm daily et output. imagery was assessed in an application over two vineyard sites in cen- despite the observed limitations, the et data fusion methodology tral california using data products from the new landsat 8 satellite. described here can provide detailed information about daily and sea- both temporal and spatial timeseries of et show interesting details in sonal water use patterns that may not be easily acquired with other water use variability within the individual ﬁelds as well as in contrast methodologies."
+14,"this information, if generated operationally, can be of with the surrounding area."
+14,daily et over the 2013 growing season utility for irrigation managers at the scale of individual ﬁelds as well was retrieved at 30-m spatial resolution using a landsat/modis fusion as for regional monitoring of water use toward allocation and conserva- approach with percent errors of 19 and 23% in comparison with ec tion efforts.
+14,"while decisions regarding irrigation amount and timing de- measurements from ﬂux tower sites established in irrigated ﬁelds pend on multiple factors, such as visual appearance, measurements of with 8 and 5-year old pinot noir vines, respectively (sites 1 and 2), leaf water potential, and other plant health measures, daily et can pro- and rmse on the order of 1 mm d−1 for the full fused daily timeseries vide a more comprehensive measurement of how entire ﬁeld sites are covering the growing season."
+14,"in comparison, percent errors for landsat faring, especially useful for large operations. overpass dates were 12 and 16% for sites 1 and 2, respectively (rmse in ongoing work, the data fusion methodology is being applied over ~0.5 mm d−1), indicating some degradation in model performance for other cropping regions with different management characteristics and days when actual landsat-scale tir imagery is not available. to forested areas as well."
+14,"the ability to monitor water use effectively cumulative et maps from doy 106 to 245 (date of ﬁrst landsat 8 at ﬁeld scale is signiﬁcant both for viticulture, where maintaining a del- scene to harvest) demonstrate strong variability in seasonal water use icate balance of moderate water stress during the growing season is crit- in relationship to crop type and water management strategy."
+14,"cumula- ical for wine grape production, and for other agricultural and forest tive et was predicted to within 2% for the more mature vineyard (site production systems in regions where there are many competing water 1), while in the younger vineyard site, cumulative et was overestimated uses and limited water supply. by 16% due to an early season wet bias."
+14,"this overestimation may have an instrumental component, or may in part relate to issues with model pa- acknowledgments rameterizations of canopy architecture relating to a between-row grass cover crop used to consume excess springtime moisture."
+14,"this bias will we would like to acknowledge the support for the internship of be further investigated using data collected between the 2013, 2014 monica velez from the usda natural resources career track-puerto and 2015 growing seasons."
+14,rico/usda hispanic serving institutions national program-preparing comparison with a higher resolution (5 m) et map generated using students for career paths with the usda forest service by linking stu- tir and shortwave imagery acquired during a grapex iop indicated dent success with experiential learning opportunities.
+14,funding provid- that much of the sub-ﬁeld structure in et apparent at landsat-scale ed by ernest and julio gallo winery made possible the acquisition and can be associated with real features on the ground.
+14,general spatial cor- processing of the high resolution aircraft imagery used in this study.
+14,"in respondence of fused daily and cumulative et maps with within-ﬁeld addition we would like to thank the staff of viticulture, chemistry and variability in at-harvest yield maps suggest potential utility for adaptive enology division of ernest and julio gallo winery, in particular nick precision management of irrigation applications to homogenize grape dokooozlian, luis sanchez, and martin mendez-costabel who made production across ﬁelds."
+14,combined utility for yield prediction of syn- possible the collection of the ﬁeld validation data.
+14,"the us department chronized timeseries of daily et (indicating water limitations) and veg- of agriculture (usda) prohibits discrimination in all its programs and etation index maps (indicating growth rate and phenological stage), activities on the basis of race, color, national origin, age, disability, and both generated using starfm, is under investigation. where applicable, sex, marital status, familial status, parental status,"
+15,semmens et al.
+15,"/ remote sensing of environment 185 (2016) 155–170 169 religion, sexual orientation, genetic information, political beliefs, repri- experiment 2008 (bearex08): a ﬁeld experiment evaluating methods for quantify- ing et at multiple scales."
+15,"advances in water resources, 50, 4–19. sal, or because all or part of an individual's income is derived from any french, a.n., jacob, f., anderson, m.c., kustas, w.p., timmermans, w., gieske, a., ... public assistance program."
+15,"(not all prohibited bases apply to all pro- brunsell, n."
+15,(2005).
+15,surface energy ﬂuxes with the advanced spaceborne thermal grams.)
+15,persons with disabilities who require alternative means for emission and reﬂection radiometer (aster) at the iowa 2002 smacex site (usa).
+15,"remote sensing of environment, 99(1–2), 55–65. communication of program information (braille, large print, audiotape, fry, j., xian, g., jin, s., dewitz, j., homer, c., yang, l., ..."
+15,"wickham, j."
+15,(2011).
+15,completion of etc.) should contact usda's target center at (202) 720-2600 (voice the 2006 national land cover database for the conterminous united states. and tdd).
+15,"to ﬁle a complaint of discrimination, write to usda, director, photogrammetric engineering and remote sensing, 77(9), 858–864."
+15,"gao, f., anderson, m.c., kustas, w.p., & wang, y."
+15,(2012).
+15,"simple method for retrieving leaf ofﬁce of civil rights, 1400 independence avenue, s.w., washington, area index from landsat using modis leaf area index products as reference."
+15,"journal of d.c. 20250-9410, or call (800) 795-3272 (voice) or (202) 720-6382 applied remote sensing, 6(1), 063554."
+15,(tdd).
+15,usda is an equal opportunity provider and employer.
+15,"gao, f., kustas, w.p., & anderson, m.c."
+15,(2012).
+15,a data mining approach for sharpening thermal satellite imagery over land.
+15,"remote sensing, 4, 3287–3319."
+15,"gao, f., masek, j., schwaller, m., & hall, f."
+15,(2006).
+15,on the blending of the landsat and references modis surface reﬂectance: predicting daily landsat surface reﬂectance.
+15,"ieee transactions on geoscience and remote sensing, 44, 2207–2218."
+15,"allen, r.g., pereira, l.s., raes, d., & smith, m."
+15,(1998).
+15,"crop evapotranspiration: guidelines gao, f., morisette, j."
+15,"t., wolfe, r."
+15,"e., ederer, g., pedelty, j., masuoka, e., ... for computing crop water requirements."
+15,"united nations fao, irrigation and drainage nightingale, j."
+15,(2008).
+15,an algorithm to produce temporally and spatially con- paper.
+15,"56, (fao - food and agriculture organization of the united nations, 300 pp., tinuous modis-lai time series."
+15,"geoscience and remote sensing letters, ieee, rome, italy)."
+15,"5(1), 60–64."
+15,"allen, r.g., tasumi, m., & trezza, r."
+15,(2007).
+15,"satellite-based energy balance for mapping hain, c.r., crow, w.t., anderson, m.c., & yilmaz, m.t."
+15,(2014).
+15,diagnosing neglected soil evapotranspiration with internalized calibration (metric) — model.
+15,"journal of moisture source/sink processes via a thermal infrared-based two-source energy bal- irrigation and drainage engineering, 133, 380–394. ance model."
+15,journal of hydrometeorology (under review).
+15,"anderson, m.c., allen, r.g., morse, a., & kustas, w.p."
+15,(2012).
+15,"use of landsat thermal im- hansen, m.c., defries, r.s., townshend, j.r.g., & sohlberg, r."
+15,(2000).
+15,global land cover agery in monitoring evapotranspiration and managing water resources.
+15,remote classiﬁcation at 1 km spatial resolution using a classiﬁcation tree approach.
+15,"sensing of environment, 122, 50–65."
+15,"international journal of remote sensing, 21, 1331–1364."
+15,"anderson, m.c., kustas, w.p., alﬁeri, j.g., gao, f., hain, c., prueger, j.h., ..."
+15,"chavez, j.l."
+15,"hsieh, c.i., katul, g., & chi, t."
+15,(2000).
+15,an approximate analytical model for footprint esti- (2012).
+15,mapping daily evapotranspiration at landsat spatial scales during the mation of scalar ﬂuxes in thermally stratiﬁed atmospheric ﬂows.
+15,advances in water bearex'08 ﬁeld campaign.
+15,"advances in water resources, 50, 162–177."
+15,"resources, 23, 765–772."
+15,"anderson, m.c., kustas, w.p., norman, j.m., hain, c.r., mecikalski, j.r., schultz, l., ..."
+15,"gao, f."
+15,"huete, a., justice, c., & leeuwen, w.v."
+15,(2014).
+15,modis vegetation index — mod13a2.
+15,(2011).
+15,mapping daily evapotranspiration at ﬁeld to continental scales using geosta- nasa land processes distributed active archive center (lp daac).
+15,usgs/earth resources tionary and polar orbiting satellite imagery.
+15,"hydrology and earth system sciences, 15, observation and science (eros) center: sioux falls, south dakota."
+15,223–239.
+15,"jedlovec, g.j., haines, s.l., & lafontaine, f.j."
+15,(2008).
+15,"spatial and temporal varying thresh- anderson, m.c., neale, c.m.u., li, f., norman, j.m., kustas, w.p., jayanthi, h., & chavez, j. olds for cloud detection in goes imager."
+15,"ieee geoscience and remote sensing society, (2004)."
+15,"upscaling ground observations of vegetation water content, canopy height, 46, 1705–1717. and leaf area index during smex02 during aircraft and landsat imagery."
+15,"remote jönsson, p., & eklundh, l."
+15,(2004).
+15,"timesat — a program for analyzing time-series of sat- sensing of environment, 92, 447–464. ellite sensor data."
+15,"computers and geosciences, 30, 833–845."
+15,"anderson, m.c., norman, j.m., diak, g.r., kustas, w.p., & mecikalski, j.r."
+15,(1997).
+15,"a two- kaimal, j.c., & finnigan, j.j."
+15,(1994).
+15,"atmospheric boundary layer ﬂows, their structure and source time-integrated model for estimating surface ﬂuxes using thermal infrared re- measurement."
+15,new york: oxford university press (289 pp.). mote sensing.
+15,"remote sensing of environment, 60, 195–216."
+15,"kustas, w.p., norman, j.m., anderson, m.c., & french, a.n."
+15,(2003).
+15,"estimating subpixel anderson, m.c., norman, j.m., kustas, w.p., li, f., prueger, j.h., & mecikalski, j.m."
+15,(2005). surface temperatures and energy ﬂuxes from the vegetation index-radiometric tem- effects of vegetation clumping on two-source model estimates of surface energy perature relationship.
+15,"remote sensing of environment, 85, 429–440. ﬂuxes from an agricultural landscape during smacex."
+15,"journal of hydrometeorology, kustas, w.p., & norman, j.m."
+15,(1999).
+15,"evaluation of soil and vegetation heat ﬂux predic- 6, 892–909. tions using a simple two-source model with radiometric temperatures for partial anderson, m.c., norman, j.m., kustas, w.p., li, f., prueger, j.h., & mecikalski, j.r."
+15,(2007).
+15,a canopy cover.
+15,"agricultural and forest meteorology, 94, 13–29. climatological study of evapotranspiration and moisture stress across the continental li, f., jackson, t.j., kustas, w.p., schmugge, t.j., french, a.n., cosh, m.h., & bindlish, r."
+15,united states: 1.
+15,model formulation.
+15,"journal of geophysical research, 112, d11112."
+15,(2004).
+15,"deriving land surface temperature from landsat 5 and 7 during smex02/ anderson, m.c., norman, j.m., mecikalski, j.r., torn, r.d., kustas, w.p., & basara, j.b."
+15,smacex.
+15,"remote sensing of environment, 92, 521–534."
+15,(2004).
+15,"a multi-scale remote sensing model for disaggregating regional ﬂues to mi- li, f., kustas, w.p., anderson, m.c., prueger, j.h., & scott, r.l."
+15,(2008).
+15,effect of remote sens- crometeorological scales.
+15,"journal of hydrometeorology, 5, 343–363. ing spatial resolution on interpreting tower-based ﬂux observations."
+15,"remote sensing bastiaanssen, w.g.m., menenti, m., feddes, r.a., & holtslag, a.a.m."
+15,(1998).
+15,"a remote sens- of environment, 112, 337–349. ing surface energy balance algorithm for land (sebal): 1."
+15,formulation.
+15,"journal of liang, s."
+15,(2000).
+15,"narrowband to broadband conversions of land surface albedo i: algo- hydrology, 212-213, 198–212. rithms."
+15,"remote sensing of environment, 76, 213–238."
+15,"berk, a., bernstein, l.s., & robertson, d.c."
+15,(1989).
+15,"modtran: a moderate resolution model masek, j.g., vermote, e.f., saleous, n.e., wolfe, r.e., hall, f.g., huemmrich, k.f., ..."
+15,"lim, t. - for lowtran 7."
+15,gl-tr-89-0122.
+15,"bedford, ma: air force geophysics lab, 38."
+15,(2006).
+15,"a landsat surface reﬂectance dataset for north america, 1990–2000."
+15,"ieee bramley, r.g.v., & williams, s.k."
+15,(2001).
+15,"a protocol for the construction of yield maps from geoscience and remote sensing letters, 3, 68–72. data collected using commercially available grape yield monitors."
+15,"adelaide, s.a.: cooper- massman, w.j., & lee, x."
+15,(2002).
+15,eddy covariance ﬂux corrections and uncertainties in ative research centre for viticulture. long term studies of carbon and energy exchanges.
+15,"agricultural and forest brutsaert, w."
+15,(1982).
+15,evaporation into the atmosphere.
+15,"dordrecht, the netherlands: d."
+15,"meteorology, 113, 121–144."
+15,reidel 299 pp.
+15,"mcnaughton, k.g., & spriggs, t.w."
+15,(1986).
+15,a mixed-layer model for regional evaporation.
+15,"california department of food and agriculture, & usda national agricultural statistics boundary-layer meteorology, 34, 243–262."
+15,service (2014).
+15,california grape acreage report 2014 crop.
+15,"available on-line http:// mesinger, f., et al."
+15,(2006).
+15,north american regional reanalysis.
+15,"bulletin of the american www.nass.usda.gov/statistics_by_state/california/publications/fruits_and_nuts/ meteorological society, 87, 343–360. http://dx.doi.org/10.1175/bams-87-3-343. 201503grpac.pdf montes, c., lhomme, j. -p., demarty, j., prevot, l., & jacob, f."
+15,(2014).
+15,"a three-source svat cammalleri, c., anderson, m.c., & kustas, w.p."
+15,(2014).
+15,upscaling of evapotranspiration modeling of evaporation: application to the seasonal dynamics of a grassed vineyard. ﬂuxes from instantaneous to daytime scales for thermal remote sensing applications.
+15,"agricultural and forest meteorology, 191, 64–80."
+15,"hydrology and earth system sciences, 18, 1885–1894."
+15,"moody, e.g., king, m.d., platnick, s., schaaf, c.b., & gao, f."
+15,(2005).
+15,"spatially complete cammalleri, c., anderson, m.c., gao, f., hain, c.r., & kustas, w.p."
+15,(2014).
+15,mapping daily global spectral surface albedos: value-added datasets derived from terra evapotranspiration at ﬁeld scales over rainfed and irrigated agricultural areas using modis land products.
+15,"ieee transactions on geoscience and remote sensing, 43, remote sensing data fusion."
+15,"agricultural and forest meteorology, 186, 1–11."
+15,144–158.
+15,"cammalleri, c., anderson, m.c., gao, f., hain, c.r., & kustas, w.p."
+15,(2013).
+15,"a data fusion ap- moussa, r., chahinian, n., & bocquillon, c."
+15,(2007).
+15,distributed hydrological modelling of a proach for mapping daily evapotranspiration at ﬁeld scale.
+15,"water resources research, mediterranean mountainous catchment — model construction and multi-site valida- 49(8), 4672–4686. tion."
+15,"journal of hydrology, 337, 35–51."
+15,"chaves, m.m., santos, c.r., ortuno, m.f., rodrigues, m.l., lopes, c.m., maroco, j.p., & myneni, r."
+15,(2014). 4-day modis lai/fpar — mcd15a3.
+15,"sioux falls, south dakota: nasa pereira, j.s."
+15,(2007).
+15,"deﬁcit irrigation in grapevine improves water-use efﬁciency land processes distributed active archive center (lp daac), usgs/earth resources while controlling vigour and production quality."
+15,"annals of applied biology, 150, observation and science (eros) center."
+15,237–252.
+15,"neale, c.m.u., geli, h., kustas, w.p., alﬁeri, j.g., gowda, p.h., evett, s.r., ..."
+15,"howell, t.a."
+15,"chavez, j.l., neale, c.m.u., hipps, l.e., prueger, j.h., & kustas, w.p."
+15,(2005).
+15,comparing air- (2012).
+15,soil water content estimation using a remote sensing based hybrid evapo- craft based remotely sensed energy balance ﬂuxes with eddy covariance tower data transpiration modeling approach.
+15,"advances in water resources, 50, 152–161. using heat ﬂux source area functions."
+15,"journal of hydrometeorology, 6, 923–940."
+15,"norman, j.m., anderson, m.c., kustas, w.p., french, a.n., mecikalski, j., torn, r., ..."
+15,"tanner, cosgrove, b.a., et al."
+15,(2003).
+15,real-time and retrospective forcing in the north american b.c.w.
+15,(2003).
+15,remote sensing of surface energy ﬂuxes at 101-m pixel resolutions.
+15,land data assimilation system (nldas) project.
+15,"journal of geophysical research, water resources research, 39http://dx.doi.org/10.1029/2002wr001775."
+15,"108, d228842http://dx.doi.org/10.1029/2002jd003118.2003."
+15,"norman, j.m., kustas, w.p., & humes, k.s."
+15,(1995).
+15,"a two-source approach for estimating evett, s.r., kustas, w.p., gowda, p.h., anderson, m.c., prueger, j.h., & howell, t.a."
+15,(2012). soil and vegetation energy ﬂuxes from observations of directional radiometric surface overview of the bushland evapotranspiration and agricultural remote sensing temperatures.
+15,"agricultural and forest meteorology, 77, 263–293."
+16,170 k.a.
+16,semmens et al.
+16,"/ remote sensing of environment 185 (2016) 155–170 price, j.c."
+16,(1983).
+16,estimating surface temperatures from satellite thermal infrared data.
+16,a usgs/earth resources observation and science (eros) center. simple formulation for the atmospheric effect.
+16,"remote sensing of environment, 13, webb, e.k., pearman, g.i., & leuning, r."
+16,(1980).
+16,correction of ﬂux measurements for 353–361. density effects due to heat and water vapor transfer.
+16,"quarterly journal of the royal prueger, j.h., hatﬁeld, j.l., kustas, w.p., hipps, l.e., macpherson, j.i., & parkin, t.b."
+16,(2005).
+16,"meteorological society, 106, 85–100."
+16,"tower and aircraft eddy covariance measurements of water vapor, energy and carbon williams, l.e., grimes, d.w., & phene, c.j."
+16,(2010).
+16,the effects of applied water at various dioxide ﬂuxes during smacex.
+16,"journal of hydrometeorology, 6, 954–960. fractions of measured evapotranspiration on reproductive growth and water produc- riou, c., pieri, p., & le clech, b."
+16,(1994).
+16,consommation d'eau de la vigne en conditions tivity of thompson seedless.
+16,"irrigation science, 28, 233–243. hydriques non limitantes."
+16,formulation simpliﬁes de la transpiration.
+16,"vitis, 33, williams, l.e."
+16,(2001).
+16,irrigation of winegrapes.
+16,"practical winery and vineyard journal, 109–115."
+16,"november/december 2001 available on-line http://www.practicalwinery.com/ riou, c., valancogne, c., & pieri, p."
+16,(1989).
+16,un modele simple d'interception du novdec01p42.htm rayonnement solaire par la vigne — veriﬁcation experimentale.
+16,"agronomie, 9, willmott, c.j."
+16,(1982).
+16,some comments on the evaluation of model performance.
+16,"bulletin 441–450. of the american meteorological society, 63, 1309–1313."
+16,"robinson, j."
+16,(ed.).
+16,(2006).
+16,the oxford companion to wine (pp. 840) (3rd ed.).
+16,"oxford willmott, c.j., & matsuura, k."
+16,(2005).
+16,advantages of the mean absolute error (mae) over university press. the root mean square error (rmse) in assessing average model performance.
+16,"climate su, z."
+16,(2002).
+16,"the surface energy balance system (sebs) for estimation of the turbulent research, 30, 79–82. heat ﬂuxes."
+16,"hydrology and earth sciences, 6, 85–99."
+16,"zhu, z., wang, s., & woodcock, c.e."
+16,(2015).
+16,"improvement and expansion of the fmask al- teixeira, a. d."
+16,"c., bastiaanssen, w.g.m., & bassoi, l.h."
+16,(2007).
+16,"crop water parameters of ir- gorithm: cloud, cloud shadow, and snow detection for landsats 4–7, 8, and sentinel 2 rigated wine and table grapes to support water productivity analysis in the sao images."
+16,"remote sensing of environment, 159, 269–277."
+16,"francisco river basin, brazil."
+16,"agricultural water management, 94, 31–42."
+16,"wan, z."
+16,(2014).
+16,modis land surface temperature product — mod11_l2 v005.
+16,"sioux falls, south dakota: nasa land processes distributed active archive center (lp daac),"

@@ -1,0 +1,267 @@
+page,p
+1,"ecological informatics 66 (2021) 101474 contents lists available at sciencedirect ecological informatics journal homepage: www.elsevier.com/locate/ecolinf application of google earth engine python api and naip imagery for land use and land cover classification: a case study in florida, usa ritika prasai a, *, t."
+1,"wayne schwertner a, kumar mainali e, heather mathewson a, hemanta kafley a, swosthi thapa d, dinesh adhikari d, paul medley b, c, jason drake b, c a department of wildlife, sustainability, and ecosystem sciences, tarleton state university, stephenville, tx 76402, usa b center for spatial ecology and restoration, school of the environment, florida a&m university, tallahassee, fl 32307, usa c usda forest service, national forests in florida, tallahassee, fl 32307, usa d institute of forestry, pokhara campus, pokhara, 33700, nepal e conservation innovation center, chesapeake conservancy, annapolis, md, usa a r t i c l e i n f o a b s t r a c t keywords: the analysis of land use and land cover data provides invaluable support to a variety of land management and google earth engine conservation activities."
+1,"however, historically its application has been limited by high costs associated with data python acquisition, analysis, and classification."
+1,"in recent years, freely available satellite imagery and geospatial data sets naip and rapid advancement in data analysis capabilities provide immense opportunities to understand and solve the imagery land use land cover real-world environmental problems."
+1,open-source platforms such as google earth engine (gee) provide a jupyter notebook planetary-scale environmental science data and analyses capability at much greater efficiency and accuracy than the traditional workflows.
+1,"we evaluated the gee python api utility for classifying the freely available naip aerial imagery of 2017 to derive the land use land cover (lulc) information of a panhandle area of florida, usa."
+1,we identified eight major lulc classes with an overall accuracy of 86% and kappa value of 79%.
+1,"we completed all remote sensing data analyses procedures including data retrieval, classification, and report preparation in the jupyter notebook, an open-source web application."
+1,computation time for the procedure was less than 15 min.
+1,"our results demonstrate the usefulness of this approach for conducting land use and land cover analysis using much less time, money, and human resources."
+1,"the open-source nature of gee python api and its library of remote sensing data could benefit remote sensing projects throughout the world, especially where access to commercial image processing software packages and remote sensing data are limited."
+1,"introduction challenges of data storage, transmission, and management (hanberry, 2020)."
+1,"remote sensing technologies have undergone a significant ad­ one area of research that has experienced a dramatic positive impact vancements recently that allow a much higher temporal and spatial of these new technologies is the analysis of land use and land cover resolution of the data captured at a wider spectrum of spectral signa­ (lulc), which is the pattern over the earth's surface formed due to tures, and these advancements are dramatically changing the way we various natural and socio-economic activities (google earth engine, observe the earth (bartłomiej et al., 2017)."
+1,rapid improvements in in­ 2021).
+1,"lulc mapping is a useful approach to plan and manage land formation and communication technologies are providing an unprece­ resources, develop land parcels (chang et al., 2018), and provide a dented source of information that allows a more detailed and comprehensive understanding of the interaction (inman and lyons, comprehensive picture of the state of our planet in comparison to 2020) and relationship of anthropogenic activities with the environment traditional workflows, which are time-consuming (chang et al., 2018), (john et al., 2019)."
+1,"land cover includes natural features like snow, labor-intensive (ekmekci et al., 2016), and potentially error-prone forest, soil, water, and grassland whereas land use includes agricultural (gorelick et al., 2017)."
+1,"whereas the modern technologies make spatio- and urban development, canals, and other man-made features (chang temporal analysis of massive data possible, they also bring new et al., 2018)."
+1,* corresponding author.
+1,e-mail address: ritika.prasai@go.tarleton.edu (r.
+1,prasai). https://doi.org/10.1016/j.ecoinf.2021.101474 received 3 april 2021; received in revised form 27 september 2021; accepted 25 october 2021 available online 28 october 2021 1574-9541/© 2021 elsevier b.v.
+1,all rights reserved.
+2,prasai et al.
+2,"ecological informatics 66 (2021) 101474 the history of lulc analysis extends back to the 1930s, when in­ vestigators began looking at lulc change as a result of human activities (araya and hergarten, 2008)."
+2,"however, land cover can also be caused by factors other than anthropogenic, such as flooding, fire, ecosystem changes, weather, climate fluctuations."
+2,"land use affects land cover and land cover affects land use, however land use is not a sole cause for land cover change and vice versa (kitalika et al., 2018)."
+2,"in mid-1970s, re­ searchers found that the land cover change modifies the earth's surface, affecting atmosphere energy exchanges and, in turn impacting regional climate (araya and hergarten, 2008)."
+2,"this period coincided with the introduction of markov stochastic process analysis to study land change and trend (araya and hergarten, 2008), mainly emphasizing planning and management of land use (koldunov and cristini, 2018)."
+2,"prior to the early-1980s, lulc analysis utilized traditional surveying methods (araya and hergarten, 2008), but after that analysis of remotely sensed data (e.g., aerial photography) became more common (inman and lyons, 2020)."
+2,"researchers also started building databases using data of various resolutions and scales to meet the needs of envi­ ronmental change research (john et al., 2019)."
+2,"after 1990, interdisciplinary research flourished and two aspects of lulc grew rapidly: study of lulc mechanisms, and regional and global change model research (medjahed et al., 2016)."
+2,"united nations envi­ ronment program launched the land cover assessment and planning project in 1996 (araya and hergarten, 2008)."
+2,"the united states global change research council linked lulc research with climate change and ozone layer depletion (araya and hergarten, 2008), and it remains a priority in the area of global change research (medjahed et al., 2016)."
+2,"some hurdles to lulc change research remain however (koldunov and cristini, 2018), including how land use is influenced by weather, pre­ cision, drawing, technician's skill, and a perceived neglect of non- remotely sensed data (araya and hergarten, 2008)."
+2,"quality land cover classification is essential for land planning and management (kitalika et al., 2018)."
+2,"land cover provides information on how people are using/utilizing the land (chang et al., 2018)."
+2,"current, accurate, and detailed land cover information is vital for land managers and policy makers responsible for developing and implementing con­ servation strategies and policies (kitalika et al., 2018)."
+2,"despite the need for quality land cover information, mapping of large-area, especially high spatial-resolution land cover mapping, is a difficult task for a va­ riety of reasons including large data volumes (köhl et al., 2006), complexity of developing training and validation datasets (köhl et al., 2006), data availability (koldunov and cristini, 2018), heterogeneity in data (leroux et al., 2018) and landscape conditions (medjahed et al., 2016)."
+2,"the challenges of analytical workflow of large data for land- cover mapping are arguably addressed by few dedicated software pro­ grams that intend to develop precision lulc while incorporating expert knowledge into the process (bartłomiej et al., 2017; köhl et al., 2006)."
+2,"of those that are available, even fewer are open-source (medjahed et al., 2016; midekisa et al., 2017)."
+2,"a software is regarded as an open-source software (oss) if its source code is made available and its license grants the “rights to use and modify the software to anyone and for any purpose, including non-exclusive commercial exploitation and redistri­ bution of derivate works of the software itself” (mutanga and kumar, 2019)."
+2,"this lack of oss for lulc development may present obstacles to users, especially those lacking extensive financial resources."
+2,"however, recent years have seen the proliferation of a variety of oss with lulc potential such as google earth engine (gee) and python."
+2,researchers can access gee and its datasets on either an application programming interface for javascript and python or via an online web-hosted code editor with an integrated development environment that uses the fig.
+2,"(top): location of our study area in the map of south-east us, with our javascript api (bartłomiej et al., 2017; chang et al., 2018; köhl et al., case study area outlined in a red circle."
+2,(bottom): naip imagery of the study 2006).
+2,"when combined with freely available remote sensing data such area in northwestern florida, usa, with rgb bands overlaid."
+2,"(for interpreta­ as those provided by the united states department of agriculture's na­ tion of the references to colour in this figure legend, the reader is referred to the tional agricultural imagery program (naip), they present the possibility web version of this article.) of significantly expanding the use of oss in lulc development."
+2,gee is a cloud computing platform designed to store and process landscape-scale 2
+3,prasai et al.
+3,ecological informatics 66 (2021) 101474 fig.
+3,"methodological framework within gee. to global-scale data sets (chang et al., 2018) for analysis and decision- (john et al., 2019)."
+3,"in addition, the creators of gee also made significant making."
+3,"following the free availability of the naip imagery in 2003 efforts to ease the burden of image pre-processing, i.e., the tedious and the landsat series in 2008, google archived both datasets and linked procedures such as mosaicking and image averaging that are necessary them to its cloud computing engine for open-source use (bartłomiej prior to analysis (inman and lyons, 2020). et al., 2017)."
+3,"today, gee's public data archive contributed by 50 gee can be useful for a variety of applications, including vegetation different data providers comprises of multi-petabyte catalogue of im­ mapping and monitoring (inman and lyons, 2020), land-cover mapping agery and scientific datasets covering more than forty years of climate (hanberry, 2020), crops mapping (medjahed et al., 2016), disaster and weather, satellite imagery, and geophysical characteristics, many of management (bartłomiej et al., 2017; chang et al., 2018), earth which updated and expanded daily (wesson, 2021)."
+3,"the launch of this sciences-related studies (owen et al., 2015), and many others (inman high-performance cloud computing platform has provided accessibility and lyons, 2020)."
+3,"the easily accessible and user-friendly front-end to global-scale, high efficiency geospatial data storage (bartłomiej et al., provides a convenient environment for interactive data and algorithm 2017), processing, and analysis for free or at low cost (gorelick et al., development (bartłomiej et al., 2017; chang et al., 2018; hanberry, 2017; inman and lyons, 2020)."
+3,"users do not need the large processing 2020; köhl et al., 2006), and users are also able to add and curate their powers of the latest computers or the latest software (google earth own data (inman and lyons, 2020) and collections (john et al., 2019), engine, 2021)."
+3,"this advancement renders researchers with limited re­ while using google's cloud resources for processing (perkel, 2015)."
+3,"one sources, specifically in the impoverished nations of the world, the same important and highly valued dataset of gee is naip which acquires ability to undertake analysis as those in the most developed nations aerial imagery of the continental us during the agricultural growing 3"
+4,prasai et al.
+4,ecological informatics 66 (2021) 101474 fig.
+4,"locations of the training dataset in a small area of the study area, and the python script used to generate the locations."
+4,gee operates with the simple programming languages like java and table 1 python that render the platform user-friendly.
+4,we used python api to nlcd (2016) land-cover classes and derived merged classes. assess gee database in this study.
+4,"nlcd classes (2016) description merged classes python is one of the most popular open-source object-oriented pro­ gramming languages (sidhu et al., 2018; stephen, 2018)."
+4,"it has a simple open water/perennial ice/ nlcd value 11 & value 12 snow water and readable code (sidhu et al., 2018), and is easy to apply in complex nlcd value 21 developed, open space software development processes."
+4,"this aids in a test-driven software nlcd value 22 developed, low intensity developed application development approach (sidhu et al., 2018), as well as ma­ nlcd value 23 developed, medium intensity chine learning, data analytics, (stephen, 2018), and pattern recognition nlcd value 24 developed, high intensity (teodoro et al., 2009)."
+4,"python is supported in multiple tools (stephen, nlcd value 31 barren land (rock, snow, clay) barren nlcd value 41 deciduous forest 2018) and permitted by many provisioned frameworks (sidhu et al., nlcd value 42 evergreen forest forest 2018; thieme et al., 2020), and has found widespread use in application nlcd value 43 mixed forest development (teodoro et al., 2009) and implementation of automation nlcd value 51 dwarf scrub shrub land testing process (stephen, 2018; teodoro et al., 2009)."
+4,"nlcd value 52 shrub/scrub nlcd value 71 grassland/herbaceous much of python's popularity owes to its fully constructed program­ nlcd value 72 sedge/herbaceous ming library that can be used in all major operating systems and plat­ herbaceous nlcd value 73 lichens forms (teodoro et al., 2009)."
+4,"moreover, python has an active and nlcd value 74 moss growing user community and a website with extensive documentation nlcd value 81 pasture/hay planted/ (stephen, 2018)."
+4,"taken together, these freely available assets present nlcd value 82 cultivated crops cultivated nlcd value 90 woody wetlands tremendous potential for addressing a variety of remote-sensing pro­ wetlands nlcd value 95 emergent herbaceous wetlands jects."
+4,"our objective of this study was to evaluate the utility of gee py­ thon api to generate a lulc map from naip imagery, using a region of the florida panhandle. seasons."
+4,its primary goal is to make digital orthophotography available to governmental agencies and the public within a year of acquisition 2.
+4,"materials and methods (phan et al., 2020)."
+4,"begun in 2003, naip initially produced imagery on a 5-year cycle using film cameras but changed to a 3-year cycle utilizing 2.1."
+4,"study area digital sensors in 2009 (powell, 2009)."
+4,"naip ortho imagery has a 1-m ground sample resolution, with a horizontal accuracy to within six a region of the florida panhandle near tallahassee, florida, usa, meters of photo-identifiable ground control points (phan et al., 2020). including portions of gadsden, leon, and wakulla counties, served as naip has found broad application in a variety of applications, including the case study area for this project (fig."
+4,"we selected the study area of environmental change detection (powell, 2009), biodiversity assess­ approximately 1316 km2, within the geographical extent of ment (phan et al., 2020), education (phan et al., 2020; powell, 2009), − 84.42291◦ , 30.55397◦ , − 84.14871◦ , 30.08362◦ ."
+4,"we clipped the study public health and safety, engineering, and landscape architecture ap­ area from the 2017 naip aerial imagery."
+4,"the area is extremely hetero­ plications development (powell, 2009), hydrology (powell, 2009), geneous with different lulc classes that could test the applicability of infrastructure maintenance (shamshiri et al., 2018), and real estate sales our proposed method adequately."
+4,"(hanberry, 2020)."
+5,prasai et al.
+5,ecological informatics 66 (2021) 101474 2.3.
+5,training data we assumed that most researchers using the described workflow may not have prior knowledge of the study area or are unable to complete the fieldwork necessary to create supervised training sites.
+5,"therefore, we used predefined national land-cover database (nlcd) 2016 data, available in gee database, to train the naip imagery."
+5,"national land- cover database provides lulc data for the usa at a 30-m resolution (tiwari et al., 2017)."
+5,we addressed the difference in resolution by specifying the ‘scale value’ of naip imagery to 30 in training function to match the resolution of nlcd data while training the dataset.
+5,this resampled the original naip imagery matching the spatial resolution of nlcd landcover product.
+5,the model training was achieved with 10 iterations of the model.
+5,"for the model training, we randomly sampled the data from 147,467 loca­ tions distributed across the study area."
+5,"this dataset was randomly split into a training dataset (70% of the total, 103,226 points) and validation dataset (30%, 44,240 points) to ensure an independent validation of the model trained with training data (fig."
+5,image classification we predicted the lulc classes with the predictor variables of naip imageries; this required extracting the values of 2017 naip bands and associated landcover for each of the locations in training data (the same was done for validation data for model evaluation).
+5,"once the training data was prepared, we predicted all the 19 lulc classes of nlcd product."
+5,the resulting prediction of 19 classes were merged into 8 broad classes to produce the final map of prediction (table 1).
+5,"landcover prediction was performed with a random forest (rf) classifier (vali et al., 2020) (fig."
+5,"random forest is one of the most common classifiers used for the land-cover classification based on the remote sensing data, owing to its simplicity and power in yielding robust models (vali et al., 2020; venkatappa et al., 2019)."
+5,"like other non- parametric supervised classifiers, rf does not make any assumptions about the distribution of data (28) and has shown promising results in classifying remote sensing data, overtaking the field's earlier classifiers such as linear regression, maximum likelihood, k-nearest neighbor and classification and regression tree (cart) (vollrath et al., 2020; wang et al., 2015)."
+5,"random forest is an ensemble classifier made of a set of tree-structured predictors (carts) such that each tree depends on a random subset of training observations that are sampled independently with replacement (vali et al., 2020; venkatappa et al., 2019)."
+5,at each fig.
+5,"classified map of the study area using random forest classifier algo­ splitting node of the trees, a subset of features is randomly selected to rithm in google earth engine python api."
+5,"the classification produced all 19 grow the tree (vali et al., 2020). classes of landcover in nlcd data."
+5,model training was performed in jupyter notebook environment.
+5,model validation 2.2.
+5,"methodological framework using the validation data, we generated a confusion matrix to eval­ we completed data retrieval and classification in the open-source uate overall accuracy."
+5,this allowed an assessment of user's accuracy (the web application jupyter notebook (fig.
+5,"we applied gee-python al­ number of correctly classified pixels divided by the total number of gorithms to load naip imagery and reduce the image to median pixel pixels predicted within that lulc class) and producer's accuracy (the values (john et al., 2019; phan et al., 2020). number of correctly classified pixels divided by the total number of median composition method is considered when faster and easier pixels truly in that lulc class) for each lulc class."
+5,"we changed labels of analysis is needed and it produces satisfactory accuracy (phan et al., nlcd classes to 1–19 such as nlcd ‘11’ to ‘1’ prior to running validation 2020)."
+5,the image composition defines the target reflectance of the of the output to make the comparison easier.
+5,"we merged class ‘peren­ composited image (köhl et al., 2006)."
+5,the median provides the finest nial/ice snow’ to class 1 since the study area did not have area covered balance between over saturated and lower pixel values (google earth with ice/snow.
+5,"engine, 2021)."
+5,"because naip aerial imagery is generally cloud free (<10% area covered with cloud) (phan et al., 2020), filtering images 2.6."
+5,script based on cloud cover was not necessary.
+5,"the complete python script used in this study (data retrieval to data processing, model training and model evaluation) is available at https:// github.com/ritikaprasai/naip-aerial-imagery-file 5"
+6,prasai et al.
+6,ecological informatics 66 (2021) 101474 fig.
+6,final land use land cover map of the study area generated by merging 19 landcover classes of fig. 4 into 8 major classes.
+6,this step merged closely related and more confused classes into broader classes.
+6,"results wasniewski et al., 2020)."
+6,"online resources, tutorials, and instructions are available to provide spatial distribution of the predicted 8 classes of lulc are shown in users skills to handle this platform well (hanberry, 2020; köhl et al., fig. 5, which can be downloaded in a raster or geotiff format from the 2006; owen et al., 2015)."
+6,"in addition, google offers gee workshops for google earth engine."
+6,overall training accuracy for the model was 86% those with various coding and remote sensing experience (bartłomiej and training accuracy kappa value was 79% for this model.
+6,"the vali­ et al., 2017)."
+6,"however, new users should approach this tool with dation accuracy for the model was 88% and kappa value was 81%."
+6,the caution.
+6,"at times, experienced programmers can find gee difficult to class-wise accuracy varied between 76% to 95% ."
+6,"among the most master (köhl et al., 2006)."
+6,"some suggested approaches and scripts misclassified classes included barren areas which were sometimes mis- provided in the gee user community worked as prescribed but had to be classified as developed land cover because of similarity in their spec­ employed with care to maintain methodological consistency (köhl et al., tral signatures."
+6,2006).
+6,"this is no different than other image processing software where diligence is required (hanberry, 2020), but the ease with which gee 4."
+6,"discussion scripts could be borrowed (inman and lyons, 2020), cut, and pasted without scrutinizing the science behind the scripted operations makes we present a novel approach for performing supervised classification gee somewhat risky in the hands of less-experienced users (köhl et al., to produce a lulc map using naip imagery that greatly reduces manual 2006). labeling load (generating training samples is a time-consuming process), using our approach, lulc maps can be produced using few lines of cost, and time."
+6,"all remote sensing analyses, i.e., image retrieval, image code in python with satisfactory accuracy."
+6,"this method could be of great analysis, classification, and report generation were completed in gee benefit when classification is needed for large (state or county units) or python api, which proved to be a powerful and efficient tool."
+6,after inaccessible areas.
+6,"the method and processing workflow with a focus on completing the data retrieval, image classifications and map overlay the unification of different data formats are a solid foundation to turn entirely in gee-python api (and using gee python api in several other similar projects into a community-based platform for data processing, projects), we conclude that gee python api is a very useful tool for analysis, and conversion in future."
+6,it can be the best option during a time many remote sensing projects.
+6,researchers having some prior pro­ of urgency when quick visualization is required.
+6,"therefore, the open- gramming language experience, particularly in parallel processing, source nature of gee python api and its library of remote sensing should be able to use gee python api much more easily than those data are immensely useful for remote sensing projects throughout the without such experience (chang et al., 2018; ekmekci et al., 2016; world."
+6,our suggested techniques can be applied in any lulc 6
+7,prasai et al.
+7,"ecological informatics 66 (2021) 101474 classification needs, particularly for the projects where access to com­ john, j., chithra, n.r., thampi, s.g., 2019."
+7,"prediction of land-use/cover change in the bharathapuzha river basin, india using geospatial techniques."
+7,environ.
+7,monit. mercial image processing software packages and remote sensing data assess.
+7,"191, 354. https://doi.org/10.1007/s10661-019-7482-4. are limited."
+7,"kitalika, a.j., machunda, r.l., komakech, h.c., njau, k.n., 2018."
+7,land-use and land- cover changes on the slopes of mount meru-tanzania.
+7,world environ.
+7,"13, 5."
+7,conclusion 331–352. https://doi.org/10.12944/cwe.13.3.07.
+7,"köhl, m., magnussen, s., marchetti, m., 2006."
+7,"sampling methods, remote sensing and gis multiresource forest inventory."
+7,"springer-verlag, berlin, germany."
+7,"conventional methods adopted for lulc classification are very labor koldunov, n.v., cristini, l., 2018."
+7,programming as a soft skill for project managers: how intensive and time consuming.
+7,"on the contrary, advanced technology to have a computer take over some of your work."
+7,geosci.
+7,"45, 295–303. https:// doi.org/10.5194/adgeo-45-295-2018. like gee, a cloud-based processor, prove to be a powerful and efficient leroux, c., jones, h., pichon, l., guillaume, s., lamour, j., taylor, j., naud, o., tool to access and process remote sensing data, train a model and make crestey, t., lablee, j.l., tisseyre, b., 2018."
+7,"geofis: an open source, decision-support plots for a case study of lulc prediction with aerial imageries."
+7,besides tool for precision agriculture data.
+7,"agricuture 8, 73. https://doi.org/10.3390/ agriculture8060073."
+7,"naip aerial imagery, both landsat (tm, etm+ and oli) and sentinel-2 medjahed, s.a., ait saadi, t., benyettou, a., ouali, m., 2016."
+7,a new post-classification (a and b) are available in gee which can enhance the model accuracy if and band selection frameworks for hyperspectral image classification.
+7,egypt.
+7,"j. those products are used with good practice of processing (e.g., atmo­ remote sens."
+7,space sci.
+7,"19, 163–173. https://doi.org/10.1016/j.ejrs.2016.09.003."
+7,"midekisa, a., holl, f., savory, d.j., andrade-pacheco, r., gething, p.w., bennett, a., spheric corrections for cloud cover and snow cover)."
+7,"sturrock, h.j.w., 2017."
+7,mapping land-cover change over continental africa using landsat and google earth engine cloud computing.
+7,"plos one 12, e0184926. https:// author contributions doi.org/10.1371/journal.pone.0184926."
+7,"mutanga, o., kumar, l., 2019."
+7,google earth engine applications.
+7,remote sens.
+7,"11, 591. https://doi.org/10.3390/rs11050591."
+7,"conceptualization, ritika prasai; methodology, ritika prasai; data owen, h.j.f., duncan, c., pettorelli, n., 2015."
+7,"testing the water: detecting artificial cleaning, ritika prasai, swosthi thapa, and dinesh adhikari; formal water points using freely available satellite data and open source software."
+7,"remote analysis, ritika prasai and paul medley; writing—original draft prepa­ sens."
+7,"1, 61–72. https://doi.org/10.1002/rse2.5."
+7,"perkel, j.m., 2015."
+7,programming: pick up python.
+7,"nature 518, 125–126. https://doi. ration, ritika prasai, swosthi thapa, and dinesh adhikari; wri­ org/10.1038/518125a. ting—review and editing, t."
+7,"wayne schwertner, hemanta kafley, phan, t.n., kuch, v., lehnert, l.w., 2020."
+7,"land cover classification using google earth heather mathewson, jason drake, and paul medley, kumar mainali; engine and random forest classifier—the role of image composition."
+7,remote sens.
+7,"12 (15), 2411. https://doi.org/10.3390/rs12152411. supervision, hemanta kafley, jason drake, and paul medley."
+7,"all authors powell, w.g., 2009."
+7,identifying land-use/land-cover (lulc) using national have read and agreed to the published version of the manuscript.
+7,agriculture imagery program (naip) data as a hydrologic model input for local flood plain management.
+7,thesis.
+7,"texas state university, san marcos, texas, usa."
+7,"funding shamshiri, r., hameed, i.a., pitonakova, l., weltzien, c.k., balasundram, s.k., yule, i.j., grift, e.t., chowdhary, g., 2018."
+7,simulation software and virtual environments for this research received no external funding. acceleration of agricultural robotics: features highlights and performance comparison.
+7,agric.
+7,"11, 12–20. https://doi.org/10.25165/j. ijabe.20181104.4032."
+7,"declaration of competing interest sidhu, n., pebesma, e., câmara, g., 2018."
+7,using google earth engine to detect land-cover change: singapore as a use case.
+7,remote sens.
+7,"51, 486–500. https://doi.org/ 10.1080/22797254.2018.1451782."
+7,the authors declare no conflict of interest.
+7,"stephen, h., 2018."
+7,trend analysis of las vegas land-cover and temperature using remote sensing.
+7,"land 7, 135. https://doi.org/10.3390/land7040135."
+7,"acknowledgments teodoro, a.c., pais-barbosa, f., veloso-gomes, j., taveira-pinto, f., 2009."
+7,evaluation of beach hydromorphological behaviour and classification using image classification techniques.
+7,coast.
+7,"56, 1607–1611."
+7,"we would like to extend our heartfelt gratitude to florida agricul­ thieme, a., yadav, s., oddo, p.c., fitz, j.m., mccartney, s., king, l.a., keppler, j., tural and mechanical university, centre for spatial ecology and resto­ mccarty, g.w., hively, w.d., 2020."
+7,using nasa earth observations and google ration for their support during the project.
+7,thanks to dr.
+7,qiusheng wu earth engine to map winter cover crop conservation performance in the chesapeake bay watershed.
+7,remote sens.
+7,environ.
+7,"248, 111943. https://doi.org/10.1016/j. for his online resource materials. rse.2020.111943."
+7,"tiwari, j., sharma, s.k., patil, r.j., 2017."
+7,"an integrated approach of remote sensing and references gis for land-use and land-cover change detection: a case study of banjar river watershed of madhya pradesh, india."
+7,world environ.
+7,"12, 157–164. https:// doi.org/10.12944/cwe.12.1.18."
+7,"araya, y.h., hergarten, c., 2008."
+7,"a comparison of pixel and object-based land-cover vali, a., comai, s., matteucci, m., 2020."
+7,"deep learning for land-use and land-cover classification: a case study of the asmara region, eritrea."
+7,wit trans.
+7,"built environ. classification based on hyperspectral and multispectral earth observation data: a 100, 233–243. https://doi.org/10.2495/geo080231. review."
+7,remote sens.
+7,"12, 2495. https://doi.org/10.3390/rs12152495."
+7,"bartłomiej, o., matuszak, j., janusz, ć., 2017."
+7,"decoding of gps data for single point venkatappa, m., sasaki, n., shrestha, r.p., tripathi, n.k., ma, h.o., 2019."
+7,determination positioning computation by using python programming language.
+7,multidisc.
+7,sci. of vegetation thresholds for assessing land-use and land-use changes in cambodia geoconf.
+7,"17, 193–202. https://doi.org/10.5593/sgem2017/22. using the google earth engine cloud-computing platform."
+7,remote sens.
+7,"11, 1514."
+7,"chang, y., hou, k., li, x., zhang, y., chen, p., 2018."
+7,review of land use and land cover https://doi.org/10.3390/rs11131514. change research progress.
+7,iop conf.
+7,"ser. 113, 012087 https://doi.org/10.1088/ vollrath, a., mullissa, a., reiche, j., 2020."
+7,angular-based radiometric slope correction 1755-1315/113/1/012087. for sentinel-1 on google earth engine.
+7,remote sens.
+7,"12, 1867. https://doi.org/ ekmekci, b., mcanany, c.e., mura, c., 2016."
+7,an introduction to programming for 10.3390/rs12111867. bioscientists: a python-based primer.
+7,plos comp.
+7,"biol. 12 https://doi.org/10.1371/ wang, h., zhao, y., pu, r., zhang, z., 2015."
+7,"mapping robinia pseudoacacia forest health journal.pcbi.1004867. conditions by using combined spectral, spatial, and textural information extracted google earth engine, 2021."
+7,"retrieved march 10, 2021, from. https://developers.google. from ikonos imagery and random forest classifier."
+7,remote sens.
+7,"7, 9020–9044. com/earth-engine/datasets/. https://doi.org/10.3390/rs70709020."
+7,"gorelick, n., hancher, m., dixon, m., ilyushchenko, s., thau, d., moore, r., 2017."
+7,"wasniewski, a., hoscilo, a., zagajewski, b., moukétou-tarazewicz, d., 2020."
+7,assessment google earth engine: planetary-scale geospatial analysis for everyone.
+7,remote sens. of sentinel-2 satellite images and random forest classifier for rainforest mapping in environ.
+7,"202, 18–27. https://doi.org/10.1016/j.rse.2017.06.031."
+7,gabon.
+7,"forests 11, 941. https://doi.org/10.3390/f11090941."
+7,"hanberry, b.b., 2020."
+7,classifying large wildfires in the united states by land-cover.
+7,"wesson, k., 2021."
+7,chesapeake bay program partnership high-resolution land cover remote sens.
+7,"12, 2966. https://doi.org/10.3390/rs12182966."
+7,classification accuracy assessment methodology.
+7,"retrieved june 16, 2021, from."
+7,"inman, v.l., lyons, m.b., 2020."
+7,automated inundation mapping over large areas using https://chesapeakeconservancy.org/wp-content/uploads/2017/01/chesapeake_con landsat data and google earth engine.
+7,remote sens.
+7,"12, 1348. https://doi.org/ servancy_accuracy_assessment_methodology.pdf."
+7,10.3390/rs12081348.
