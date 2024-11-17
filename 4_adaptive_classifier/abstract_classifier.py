@@ -43,7 +43,7 @@ def main():
         'data_table_path',
         type=validate_data_table_path,
         help="Path to the CSV file containing 'abstract' column.")
-    parser.add_argument('--batch_size', type=int, default=16)
+    parser.add_argument('--batch_size', type=int, default=1)
     args = parser.parse_args()
     cuda_available = torch.cuda.is_available()
     print(f'cuda is available: {cuda_available}')
