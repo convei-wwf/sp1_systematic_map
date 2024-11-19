@@ -9,6 +9,11 @@ import chardet
 import pandas as pd
 import torch
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+torch.backends.cudnn.benchmark = True
+torch.backends.cudnn.deterministic = True
+
+
 # transformer loggers are noisy, this quiets them
 LOGGERS = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
 for logger in LOGGERS:
@@ -80,7 +85,7 @@ def main():
     with torch.no_grad():
         for batch in tqdm(dataloader, desc="Predicting"):
             batch = tuple(t.to(device) for t in batch)
-            inputs = {'input_ids': batch[0].to(device), 'attention_mask': batch[1].to(device)}
+            inputs = {'input_ids': batch[0].to(device), 'attention_mask': batch[1].to(device, non_blocking=True)}
             outputs = model(
                 input_ids=batch[0].to(device),
                 attention_mask=batch[1].to(device))
