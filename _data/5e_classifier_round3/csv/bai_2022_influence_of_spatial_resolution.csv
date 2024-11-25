@@ -1,0 +1,1112 @@
+page,p
+1,"remote sensing article influence of spatial resolution on satellite-based pm2.5 estimation: implications for health assessment heming bai 1, * , yuli shi 2 , myeongsu seong 1 , wenkang gao 3 and yuanhui li 4 1 research center for intelligent information technology, nantong university, nantong 226019, china; myeongsuseong@ntu.edu.cn 2 school of remote sensing and geomatics engineering, nanjing university of information science and technology, nanjing 210044, china; ylshi@nuist.edu.cn 3 state key laboratory of atmospheric boundary layer physics and atmospheric chemistry, institute of atmospheric physics, chinese academy of sciences, beijing 100029, china; gaowenkang@mail.iap.ac.cn 4 nanjing environmental monitoring center of jiangsu province, nanjing 210013, china; liyh@jshb.gov.cn * correspondence: hemingbai@ntu.edu.cn abstract: satellite-based pm2.5 estimation has been widely used to assess health impact associated with pm2.5 exposure and might be affected by spatial resolutions of satellite input data, e.g., aerosol optical depth (aod)."
+1,"here, based on multi-angle implementation of atmospheric correction (ma- iac) aod in 2020 over the yangtze river delta (yrd) and three pm2.5 retrieval models, i.e., the mixed effects model (me), the land-use regression model (lur) and the random forest model (rf), we compare these model performances at different spatial resolutions (1, 3, 5 and 10 km)."
+1,the pm2.5 estimations are further used to investigate the impact of spatial resolution on health assessment.
+1,our cross-validated results show that the model performance is not sensitive to spatial resolution change for the me and lur models.
+1,"by contrast, the rf model can create a more accurate pm2.5 prediction with a finer aod spatial resolution."
+1,"additionally, we find that annual population-weighted mean citation: bai, h."
+1,"; shi, y."
+1,"; seong, m."
+1,"; (pwm) pm2.5 concentration and attributable mortality strongly depend on spatial resolution, with gao, w."
+1,"; li, y."
+1,influence of spatial larger values estimated from coarser resolution.
+1,"specifically, compared to pwm pm2.5 at 1 km resolution on satellite-based pm2.5 resolution, the estimation at 10 km resolution increases by 7.8%, 22.9%, and 9.7% for me, lur, estimation: implications for health and rf models, respectively."
+1,"the corresponding increases in mortality are 7.3%, 18.3%, and 8.4%."
+1,assessment.
+1,remote sens.
+1,"2022, 14, our results also show that pwm pm2.5 at 10 km resolution from the three models fails to meet the 2933. https://doi.org/10.3390/ national air quality standard, whereas the estimations at 1, 3 and 5 km resolutions generally meet the rs14122933 standard."
+1,"these findings suggest that satellite-based health assessment should consider the spatial academic editors: simone lolli, resolution effect."
+1,kai qin and xin yang keywords: pm2.5 retrieval; aod; spatial resolution; health assessment received: 10 may 2022 accepted: 17 june 2022 published: 19 june 2022 publisher’s note: mdpi stays neutral 1.
+1,"introduction with regard to jurisdictional claims in exposure to fine particulate matter (particulate matter with a diameter <2.5 µm, pm2.5 ) published maps and institutional affil- causes a variety of negative effects on human health [1,2]."
+1,"thus, it is crucial to accurately iations. estimate the pm2.5 exposures for health assessment."
+1,"satellite remote sensing is an effective way to estimate pm2.5 with continuous temporal and spatial coverage [3,4]."
+1,satellite-derived aerosol optical depth (aod) is a widely used proxy for pm2.5 [5].
+1,copyright: © 2022 by the authors.
+1,"many scholars have estimated pm2.5 concentrations with different spatio-temporal reso- licensee mdpi, basel, switzerland. lutions by using aod data and various models [6–10]."
+1,"wei et al. [11,12] developed the this article is an open access article space–time extremely randomized tree model to generate daily pm2.5 data at a spatial distributed under the terms and resolution of 1 km in china by using maiac aod products."
+1,geng et al. [13] provided near conditions of the creative commons real-time pm2.5 data in china on a daily scale at a spatial resolution of 10 km.
+1,"these data attribution (cc by) license (https:// were based on a two-stage machine learning model and multiple data sources, including creativecommons.org/licenses/by/ official modis aod products."
+1,zhang et al. [14] created monthly pm2.5 estimates in china 4.0/). by using a land-use regression model and modis aod product.
+1,numerous studies have remote sens.
+1,"2022, 14, 2933. https://doi.org/10.3390/rs14122933 https://www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2022, 14, 2933 2 of 18 also used satellite aod data to retrieve pm2.5 concentrations at a regional scale, such as the yangtze river delta (yrd) [15–20]."
+2,the performance of the aod-based pm2.5 retrieval models may be affected by the aod spatial resolution.
+2,"however, the conclusions of this issue are not consistent in previous studies [17,21–23]; their work mainly focuses on the traditional statistical regression models, and such analysis is lacking for machine learning models."
+2,lee et al. [23] used the linear mixed-effect model to estimate pm2.5 in the southeastern united states.
+2,they found that the model using 1 km aod data showed a better performance than that using 10 km aod data.
+2,li et al. [21] conducted similar work in northern china but found that the 1 km model performance was slightly lower than the 10 km model.
+2,the yrd region also experienced such a difference in performance between 3 and 10 km aod data [17].
+2,the inconsistent conclusions may be because the linear model can not effectively capture the nonlinear relationship between aod and pm2.5 involving different spatial scales [24].
+2,"previous studies have extensively used satellite-derived pm2.5 data to assess pm2.5-related health effects [9,25–31]."
+2,these health assessments were performed at a wide range of spatial resolutions from 1 to 50 km and may suffer from a potential uncertainty due to the impact of satellite data resolution on pm2.5 estimations.
+2,"numerous studies have investigated the impact of spatial resolution on pm2.5 attributable mortality, and they found that the coarser resolution typically leads to lower estimated mortality [32–35]."
+2,"these studies, however, were based on the air quality model simulations."
+2,few studies have evaluated the sensitivity of human health to spatial resolution using satellite-derived pm2.5 data.
+2,"furthermore, the findings of previous model studies above were mainly for the united states and european regions."
+2,"whether these findings hold for heavily polluted areas, such as the yrd region, remains unclear."
+2,"as outlined above, satellite aod spatial resolution may affect the performance of the pm2.5 retrieval model."
+2,"previous studies, however, have drawn inconsistent conclusions on this topic [17,21–23], and fewer have investigated the spatial resolution effect using machine learning models."
+2,"regarding the sensitivity of the pm2.5 -related health impacts to spatial resolution, existing studies were mostly based on the air quality model simulations and mainly focused on western countries or regions [32–35]."
+2,"the application of their findings is questionable for satellite-derived pm2.5 data, especially in heavily polluted areas."
+2,the above limitations motivate us to conduct this work with the following contribu- tions.
+2,"first, we explore aod spatial resolution effect on pm2.5 retrieval model performance, including machine learning and statistical regression methods."
+2,"second, this work uses satellite-derived pm2.5 to investigate the sensitivity of the associated health impacts to spatial resolution in the yrd region, one of the most polluted areas in china."
+2,"here, by using satellite aod at spatial resolutions of 1, 3, 5 and 10 km, this study analyzes the impact of spatial resolution on the aod–pm2.5 correlation."
+2,"additionally, satellite aod is used to estimate pm2.5 based on three different retrieval models (i.e., the mixed effects model (me), the land-use regression model (lur) and the random forest model (rf)), and we compare these model performances at different aod spatial resolutions."
+2,"finally, this work uses aod-based pm2.5 estimation to assess population- weighted pm2.5 and attributable mortality and further explores these health assessments’ sensitivity to spatial resolution."
+2,data and methods 2.1.
+2,"study area the study region is the yangtze river delta (yrd), which is located in eastern china."
+2,this region contains a total of 26 cities and covers 2.2% of the national land area [36].
+2,"based on the latest statistical yearbook in 2020, yrd accounts for 11.4% of the national population and 20.2% of the national gross domestic product."
+2,"despite a significant declining trend of pm2.5 concentrations in the recent decades observed in yrd, this region is still one of the most polluted areas in china [12]."
+3,tional population and 20.2% of the national gross domestic product.
+3,"despite a signi declining trend of pm2.5 concentrations in the recent decades observed in yrd, th gion is still one of the most polluted areas in china [12]."
+3,"remote sens. 2022, 14, 2933 3 of 18 2.2."
+3,data sets 2.2.1.
+3,maiac aod product 2.2.
+3,data sets the study used the multi-angle implementation of atmospheric correction iac) 2.2.1.
+3,maiac aod productaod with a 1 km spatial resolution (mcd19a2 product).
+3,this product over y 2020 was obtained from the nasa earthdata website (https://earthdata.nasa.gov the study used the multi-angle implementation of atmospheric correction (maiac) cessed on 18 october 2021)).
+3,we used aod retrievals at a wavelength of 550 nm aod with a 1 km spatial resolution (mcd19a2 product).
+3,this product over yrd in 2020 high-quality assurance (qacloudmask = clear and qaadjacenymask = clear) [11].
+3,the m was obtained from the nasa earthdata website (https://earthdata.nasa.gov/ (accessed algorithm generates aod retrievals from the darkest to the brightest surfaces over on 18 october 2021)).
+3,"we used aod retrievals at a wavelength of 550 nm with high-quality and a detailed description of this algorithm can be seen elsewhere [37,38]."
+3,pre assurance (qacloudmask = clear and qaadjacenymask = clear) [11].
+3,"the maiac algorithm studies have shown a good performance of maiac aod data over china [11,39]. generates aod retrievals from the darkest to the brightest surfaces over land, and a detailed aqua and terra maiac aod retrievals were averaged to enlarge the spatia description of this algorithm can be seen elsewhere [37,38]."
+3,previous studies have shown a erage and to increase the number of valid data samples [11].
+3,"this new 1 km aod d good performance of maiac aod data over china [11,39]. was further averaged to create aod data at three additional spatial resolutions (3, aqua and terra maiac aod retrievals were averaged to enlarge the spatial coverage 10 km). and to increase the number of valid data samples [11]."
+3,"this new 1 km aod dataset was further averaged to create aod data at three additional spatial resolutions (3, 5 and 10 km)."
+3,2.2.2.
+3,ground-based pm2.5 measurements 2.2.2.
+3,"ground-based hourly pm2.5 observations at 163 stations over yrd in 2020 were collected fro pm2.5 measurements china national hourly pm2.5 observations at environmental 163 stations over monitor yrd in center (cnemc, 2020 were http://www.cnemc.cn collected from the cessed on 13 august 2021))."
+3,"hourly measurements < 1 china national environmental monitor center (cnemc, http://www.cnemc.cn (accessed μg/m 3 were removed becaus are below on 13 august 2021))."
+3,hourly instruments’ limit the measurements 3 were [16]. of detection < 1 µg/m dailybecause removed mean pm 2.5 values were they are calculated from the hourly time series when there were more below the instruments’ limit of detection [16].
+3,daily mean pm2.5 values were then calculatedthan 18 measuremen from the hourly each day [40]. time series when we adopted there 24 h than were more average pm2.5 concentrations 18 measurements on each here because the day [40]. widely used for pm 2.5-related health assessment.
+3,during matching maiac aod we adopted 24 h average pm2.5 concentrations here because they are widely used for ground-based pm2.5 -related health assessment.
+3,"pmduring 2.5 data, one aod pixel may cover multiple pm2.5 sites, especial matching maiac aod and ground-based pm2.5 coarser resolutions. data, one aod pixel may cover multiple pm2.5cases, for these sites, pm 2.5 concentrations from multiple sites were especially for coarser resolutions."
+3,"for aged to ensure one matchup for a these cases, pm2.5 concentrations from multiple sites wereaod given to the value. averaged spatial ensure distribution of 16 one matchup tions is shown in figure 1a. for a given aod value."
+3,the spatial distribution of 163 stations is shown in figure 1a. presents figure 1.
+3,panel (a)figure the locations 1.
+3,panel of pm (a) presents the2.5 monitoring locations of pmstations (magenta 2.5 monitoring dots)(magenta stations and demdots) at and de in theresolution km spatial 1 km spatial resolution yangtze in thedelta.
+3,yangtze river river panel (b)delta. showspanel (b) shows the spatial the spatial distribution distribution of the natural logarithmnatural logarithm of population in 2020. count in 2020. of population count and population 2.2.3.
+3,population2.2.3.
+3,"mortality data and mortality data datapopulation the population the the gridded came fromdata came frompopulation of the the gridded world, version population 4 [41]."
+3,"version of the world, the data are available the data theavailable fromare from data socioeconomic and applications the socioeconomic center and(https:// data applications c sedac.ciesin.columbia.edu/data/collection/gpw-v4 (accessed on 27 june 2021)). (https://sedac.ciesin.columbia.edu/data/collection/gpw-v4 this study (accessed on 27 june 2 used the 2020 population count with 1 km spatial resolution."
+3,the gridded population data were adjusted by using the seventh china census in 2020.
+3,"specifically, for a given city in yrd, we scaled the gridded values by the ratio of the city’s total population from census data to gridded data."
+3,the spatial distribution of 2020 adjusted population estimates with 1 km spatial resolution in yrd is shown in figure 1b.
+3,"additionally, the 1 km population count data were summed up to generate data with three coarser resolutions (3, 5 and 10 km)."
+3,note that the spatial coverage of the 1 × 1 km grid cell is different between mcd19a2
+4,"remote sens. 2022, 14, 2933 4 of 18 and the gridded population data."
+4,"thus, we interpolated these two datasets to the same regular grid using the nearest neighbor algorithm before generating coarser resolution data."
+4,the national-level age structure and the age-specific and disease-specific mortality for 2019 were obtained from the global burden of disease study 2019 (gbd 2019) dataset (https://vizhub.healthdata.org/gbd-compare/ (accessed on 29 march 2021)).
+4,"note that all datasets used in this study are for 2020 except the gbd data, which are only available until 2019."
+4,2.2.4.
+4,"auxiliary data the auxiliary data used in this study include land use, surface elevation and meteoro- logical data."
+4,the land-use data contain land cover and normalized difference vegetation index (ndvi).
+4,ten types of land cover at 30 m resolution for 2020 were obtained from globeland30 dataset (http://www.globallandcover.com/ (accessed on 13 october 2021)).
+4,"land cover data at multiple spatial resolutions (1, 3, 5 and 10 km) were generated by calculating land cover percentages for each grid in yrd at corresponding spatial scales."
+4,"monthly ndvi data at 1 km resolution came from the modis product (mod13a3) and were simply aggregated to three additional spatial resolutions (3, 5 and 10 km)."
+4,elevation data were obtained from the shuttle radar topography mission (srtm) digital elevation model (dem) at 90 m resolution (https://earthexplorer.usgs.gov/ (accessed on 13 october 2021)).
+4,"we resampled the 90 m elevation data to 1 km resolution data (shown in figure 1a) and further aggregated the resampled the dem data to coarser resolutions (3, 5 and 10 km)."
+4,meteorological variables associated with surface pm2.5 were extracted from the ecmwf era5 hourly reanalysis (https://cds.climate.copernicus.eu/ (accessed on 12 october 2021)).
+4,"these variables include air temperature at an altitude of 2 m (t), the surface atmospheric pressure (p), 10 m u-wind (u10 ) and v-wind (v10 ) component, total column water (tcw), total column ozone (tco), relative humidity (rh), and planetary boundary layer height (pblh)."
+4,the hourly meteorological data for 2020 between 10:00 a.m. and 2:00 p.m. local time were averaged to be consistent with satellite overpass times [11].
+4,"another reanalysis dataset of era5-land had a high resolution of 0.1◦ × 0.1◦ ; however, we did not use the era5-land data given that pblh, rh, tcw and tco variables are not included in the dataset."
+4,"the meteorological data have a spatial resolution of 0.25◦ × 0.25◦ and were resampled to four finer spatial resolutions (1, 3, 5 and 10 km) using the nearest neighbor algorithm."
+4,methods gridded data at four spatial resolutions were collocated with daily surface pm2.5 measurements.
+4,"these collocated pairs were used to build three satellite-based pm2.5 retrieval models including the mixed effects model (me), the land-use regression model (lur) and the random forest model (rf)."
+4,"based on pm2.5 retrievals using the above models, we further estimated the deaths attributable to pm2.5 pollution in yrd in 2020."
+4,the detailed introduction of each model is as follows.
+4,2.3.1.
+4,"the mixed effects model the me model is a linear approach, which takes into consideration both fixed and random effects."
+4,"the model is represented by equation [42]: pmij = α + µ j + β + νj × aodij + ε ij µ j νj ∼ n (0, 0), ∑      (1) where pmij is the daily average pm2.5 concentration at monitoring site i on day j; aodij is the aod value for the pixel corresponding to site i on day j; α and µ j are the fixed and day-specific random effects for intercept, respectively; β and νj are the fixed and day-specific random effect for slope, respectively; ε ij is the error term; σ is an unstructured variancecovariance matrix for day-specific random effects."
+4,"in the me model, the fixed effect"
+5,"remote sens. 2022, 14, 2933 5 of 18 explains the average effect of aod on pm2.5 for the entire study period."
+5,the random effect represents the daily variability in the pm2.5 –aod relationship [42].
+5,2.3.2.
+5,the land-use regression model a stepwise linear regression method is adopted for building the lur model [43].
+5,"input predictors for the lur model include land cover, ndvi, population, dem, aod, meteorological parameters, geographical locations and dummy variables (month and day)."
+5,"note that predictors for the final lur model with four spatial resolutions are different, especially for land cover variables."
+5,"for instance, land cover predictors for the 1 km lur model only include cultivated land, wetland and water body, whereas the land cover predictors additionally contain forest, grass land and artificial land for the 3 km lur model."
+5,one possible explanation for this is that distributions of some land cover variables of the lur model samples differ obviously among different resolutions.
+5,"for instance, since most air quality monitoring stations in the yrd region are located in urban areas [44], artificial land cover ratios of 1 km lur model samples are primarily equal to 1."
+5,"thus, the 1 km lur model could hardly capture the relationship between pm2.5 and the artificial land cover ratio, thus discarding this land cover variable."
+5,the artificial land cover ratio increasingly varies between samples as the resolution of lur model samples becomes coarser (not shown).
+5,"therefore, the lur model possibly captures the response of pm2.5 to changes in artificial land cover ratio variation and finally includes this variable as an input predictor."
+5,note that other input predictors besides land use generally hold for different spatial resolutions.
+5,2.3.3.
+5,"the random forest model the rf model is based on a set of decision trees [45,46]."
+5,it can be used for both classification and regression.
+5,the model has only two important hyperparameters to tune: the number of predictors randomly sampled as candidates at each split (max_features) and the number of trees to grow (n_estimators).
+5,input predictors for the rf model are the same as the lur model.
+5,we carried out a grid search approach to find the optimized hyperparameters [15].
+5,"for the rf model at 1, 3, 5 and 10 km resolution, the optimized values of max_features (n_estimators) are 9 (900), 10 (800), 13 (700) and 11 (300), respectively."
+5,2.3.4.
+5,model evaluation we used 10-fold cross validation (cv) to evaluate the performance of the above satellite- based pm2.5 retrieval models.
+5,"all samples were randomly divided into 10 subsets; nine of them were used for training, and the remaining one was used for validation."
+5,this process was repeated 10 times until every subset was tested.
+5,"based on predicted pm2.5 concentrations from 10-fold cv and surface measurements, this study calculated the determination coefficient (r2 ) and root-mean-square error (rmse) to assess the model performance."
+5,2.3.5.
+5,"exposure and health impact assessments for each pm2.5 retrieval model and each spatial resolution, the daily pm2.5 retrievals in yrd were averaged to annual values."
+5,these annual values were further used to calcu- late annual population-weighted mean (pwm) pm2.5 concentration over the entire yrd area.
+5,"additionally, we adopted a method from the gbd 2019 project to estimate deaths attributable to exposure to annual mean pm2.5 , based on the following equation [47]: rr a,d ( pmi ) − 1   m = ∑ popi,a × mbi,a,d × (2) i,a,d rr a,d ( pmi ) where m is attributable death in yrd in 2020; i, a, and d represent grid, age group and cause of death, respectively; pop is population count; mb stands for the baseline mortality rate; rr(pm) is the relative risk associated with exposure at level pmi ."
+5,"this work used an updated rr, which is based on a meta regression–bayesian, regularized, trimmed"
+6,"𝑅𝑅 , (𝑃𝑀 ) − 1 𝑀= 𝑃𝑂𝑃 , × 𝑀𝐵 , , × 𝑅𝑅 , (𝑃𝑀 ) , , where m is attributable death in yrd in 2020; i, a, and d represent grid, age grou remote sens. 2022, 14, 2933 cause of death, respectively; pop is population count; mb stands for 18 baseline the 6 of tality rate; rr(pm) is the relative risk associated with exposure at level pmi."
+6,"this used an updated rr, which is based on a meta regression–bayesian, regula trimmed (mr-brt) spline from the gbd 2019 [48]."
+6,"five mortality endpoints assoc frompm (mr-brt) splinewith the2.5gbd 2019 [48]. pollution were five mortalityincluding estimated, endpoints associated stroke, withheart ischemic pm2.5disease ( pollution were estimated, including stroke, ischemic heart disease (ihd), chronic obstruc- chronic obstructive pulmonary disease (copd), lung cancer (lc) and lower respir infection(copd), tive pulmonary disease cancer lungthat (lri)."
+6,note age (lc) groupand andlower in this infection respiratory mb used study are(lri). both national note that age group and mb used in this due to a lack of refined data. study are both national level due to a lack of refined data.
+6,results 3.
+6,results 3.1.
+6,the impact of3.1.
+6,"impact of spatial the resolution spatial on aod–pm2.5 correlation resolution correlation on aod–pm 2.5 figure 2a shows figure the correlation 2a showscoefficients the correlation coefficients between between pm2.5 pm2.5 concentration andconcentration aod at and at 1, 3, 5 and 10 km resolutions for different seasons."
+6,"as can be seen, the correlation 1, 3, 5 and 10 km resolutions for different seasons."
+6,"as can be seen, the correlation generally erally decreases with the decrease in aod spatial resolution."
+6,this pattern is evide decreases with the decrease in aod spatial resolution.
+6,"this pattern is evident for spring, spring, and the correlation decreases from 0.44 to 0.40 as resolution decreases from 1 and the correlation decreases from 0.44 to 0.40 as resolution decreases from 1 to 10 km. km."
+6,"additionally, figure 2a shows a seasonal variation of the correlation irrespect additionally, figure 2a shows a seasonal variation of the correlation irrespective of aod aod spatial resolution, with the highest value in winter and the lowest in spring. spatial resolution, with the highest value in winter and the lowest in spring."
+6,note that that this seasonal pattern may change over time.
+6,"for instance, yang et al. [49] foun this seasonal pattern may change over time."
+6,"for instance, yang et al. [49] found that the the aod–pm2.5 correlation in yrd in 2016 was highest in january and lowest in m aod–pm2.5 correlation in yrd in 2016 was highest in january and lowest in march."
+6,"in in contrast, the highest and lowest in 2014 appeared in september and july, respect contrast, the highest and lowest in 2014 appeared in september and july, respectively."
+6,"figure 2. (a) the correlation figure 2. (a)coefficients between the correlation pm2.5 concentration coefficients between pmand aod at the and 2.5 concentration resolutions aod atof the resolut 1, 3,the 1, 3, 5 and 10 km over yangtze 5 and 10 km overdelta river for different the yangtze riverseasons."
+6,"based delta for on theseasons. spatial aod–pm different based on 2.5the spatial correlation for eachpm day correlation 2.5 in for each summer, the day in summer, box-and-whisker the box-and-whisker in panel in panel (b) shows 10th, 25th, 50th,(b) shows 75th and 10th, 25th 75th and 90th percentile values 90th percentile values of the correlation for different resolutions."
+6,note that the spatial aod–pm2.5 that the of the correlation for different resolutions.
+6,note aod–pm2.5 correlation for a given day is excluded in panel (b) if the number of aod–pm2.5 p correlation for a given day is excluded in panel (b) if the number of aod–pm2.5 pairs is less than 10. less than 10.
+6,the aod–pm2.5 correlation in summer initially decreases as the resolution changes aod–pm theincreases from 1 to 3 km and then 2.5 correlation in summer initially decreases as the resolution ch gradually as the resolution continues to become coarser from 1 to 3 km and (figure 2a).
+6,this spatial resolution effectthen increases is partly gradually because as the a coarser aodresolution continues resolution can to be coarser (figure 2a).
+6,this spatial resolution effect is partly because better capture the spatial variation of pm2.5 in summer.
+6,"to examine this explanation, we a coarser aod re tion can better capture the spatial variation of pm 2.5 in summer."
+6,to examine this e plot the box-and-whisker based on the spatial aod–pm2.5 correlation for each day in summer (figure 2b).
+6,"as the resolution becomes coarser, the median of spatial aod–pm2.5 correlation in summer dramatically increases from 0.23 to 0.39 (figure 2b)."
+6,"however, this feature does not hold for other seasons (not shown)."
+6,figure 2b shows a higher spatial correlation at a coarser aod resolution in summer.
+6,"one possible explanation is that aod values are overestimated for these retrievals near cloud pixels [50,51]."
+6,this situation appears more frequently in summer when the cloud amount is the highest versus other seasons [52].
+6,"after aggregating aod products for coarser resolutions, the overestimated aod values tend to be smoothed, thereby improving the aod–pm2.5 correlation."
+6,"to examine this point, we choose a case on 15 august 2020 when the number of aod–pm2.5 pairs is the highest in summer and plot the spatial distributions of aod and pm2.5 in this case for different resolutions, as shown in figure 3."
+6,"in this case, aod at a 1 km resolution is widely missing due to cloud cover, and some aod values are"
+7,"cloud pixels [50,51]."
+7,this situation appears more frequently in summer when the c amount is the highest versus other seasons [52].
+7,"after aggregating aod produc coarser resolutions, the overestimated aod values tend to be smoothed, thereb proving the aod–pm2.5 correlation."
+7,"to examine this point, we choose a case on 15 gust 2020 when the number of aod–pm2.5 pairs is the highest in summer and plo remote sens. 2022, 14, 2933 spatial distributions of aod and pm2.5 in this case for different resolutions, 7 of 18 as show figure 3."
+7,"in this case, aod at a 1 km resolution is widely missing due to cloud cover some aod values are likely high due to cloud contamination rather than high poll cloudaggregating levels. likely high due to contamination aod products rather for coarser than high resolutions pollution may mitigate levels."
+7,"aggregating aod this situatio this case, the aod–pm 2.5 correlations at the resolutions of 1, 3, 5, and 10 km are 0.64, products for coarser resolutions may mitigate this situation."
+7,"in this case, the aod–pm2.5 0.70, correlations at the respectively. and 0.75, of resolutions 1, 3, 5, and 10 km are 0.64, 0.69, 0.70, and 0.75, respectively."
+7,figuredistributions figure 3.
+7,the spatial aod and pm 3.
+7,"the spatialofdistributions 2.5 concentration of aod on 15 august and pm2.5 concentration 2020 on 15 at the2020 at the august 1, (b) 3, resolutions of (a)lutions (a) 51,and of (c) (b) (d) 105km. 3, (c) and the colored (d) 10 km."
+7,"the dots and background colored color represent dots and background color represent pm2.5 concentration and aod, and concentration respectively. each the inset inthe aod, respectively. panel inset in is thepanel each scatterplot is the between pmbetween scatterplot 2.5 pm and aod."
+7,the impact of spatial 3.2.
+7,"resolution the impact on pm of spatial 2.5 retrieval resolution model on pm 2.5 retrieval model here, we investigate the impact of aod spatial resolution on model performance for different pm2.5 retrieval algorithms, i.e., the mixed effects model (me), the land-use regression model (lur) and the random forest model (rf)."
+7,the 10-fold cross validation results for these three models are shown in figures 4–6.
+7,"as can be seen, the performance is not sensitive to the aod spatial resolution for both me and lur models."
+7,"specifically, for the me model with different resolutions (figure 4), r2 remains at 0.78, and rmse ranges from 10.2 to 10.4 µg/m3 ."
+7,"r2 ranges from 0.51 to 0.52, and rmse ranges from 15.5 to 15.7 µg/m3 for the lur model (figure 5)."
+7,the lur model shows the poorest performance compared to other models.
+7,this is partly because the lur model severely underestimates high-level pm2.5 (figure 5).
+7,our results show that aod data at a finer spatial resolution cannot improve the performance of me and lur models in the yrd region.
+7,"this finding was also observed in the same region [17], northern china [21], and the southeastern united states [22] based on the traditional statistical regression."
+7,"nevertheless, it still needs to further examine this finding by using multi-year aod data with finer resolution and more spatial coverage in the future."
+8,ranges from 10.2 to 10.4 μg/m .
+8,"r ranges from 0.51 to 0.52, and rmse ranges from 15.5 to 15.7 μg/m3 for the lur model (figure 5)."
+8,the lur model shows the poorest performance compared to other models.
+8,this is partly because the lur model severely underesti- mates high-level pm2.5 (figure 5).
+8,our results show that aod data at a finer spatial res- olution cannot improve the performance of me and lur models in the yrd region.
+8,"this finding was also observed in the same region [17], northern china [21], and the south- remote sens. 2022, 14, 2933 eastern united states [22] based on the traditional statistical regression."
+8,"nevertheless, it 8 of 18 still needs to further examine this finding by using multi-year aod data with finer res- olution and more spatial coverage in the future."
+8,figure 4.
+8,scatter plots of 10-fold cross validation (cv) results for the mixed effects (me) model at figure 4.
+8,"scatter plots of 10-fold cross validation (cv) results for the mixed effects (me) model at the resolutions of (a) 1, (b) 3, (c) 5 and (d) 10 km."
+8,the color bar represents the counts of samples.
+8,"r2, the resolutionsrmse of (a)and 1, n (c)coefficient (b)are3,the 5 and (d) 10 km."
+8,"the color of determination, bar represents root-mean-square the error and counts number of samples."
+8,"r2 , of samples, rmse andpeer respectively."
+8,"n are the dashed line stands for the 1:1 line. the coefficient of determination, root-mean-square error and number9 of samples, remote sens. 2022, 14, x for review of 20 respectively."
+8,the dashed line stands for the 1:1 line. plots5.ofscatter figure 5.
+8,"scatterfigure of 10-fold plotscross 10-fold cross validation validation for for (cv) results (cv) results thethe land-use regression land-use regression (lur) (lur) model model at the resolutions of (a) 1, (b) 3, (c) 5 and (d) 10 km."
+8,"the color bar represents the counts of at the resolutions of (a) 1, samples."
+8,"r , rmse and n are the coefficient of determination, root-mean-square error and number 2 (b) 3, (c) 5 and (d) 10 km."
+8,the color bar represents the counts of samples.
+8,"r2 , rmse and nofare samples, thedetermination, respectively. of the coefficient for the 1:1 line. dashed line standsroot-mean-square error and number of samples, respectively."
+8,the dashed line stands for the 1:1 line.
+9,remotesens.
+9,"remote sens.2022, 14,2933 2022,14, x for peer review of18 109 of 20 figure6.6."
+9,"scatter figure scatterplots of10-fold plotsof crossvalidation 10-foldcross (cv)results validation(cv) for the the random results for forest (rf) random forest model at (rf) model at the resolutions of (a) the resolutions of (a) 1, (b) 3, (c) 5 and (d) 10 km."
+9,the color bar represents the counts of samples.
+9,"r2 , , 1, (b) 3, (c) 5 and (d) 10 km."
+9,the color bar represents the counts of samples.
+9,"r 2 rmse and n are the coefficient of determination, root-mean-square error and number of samples, rmse and n are the coefficient of determination, root-mean-square error and number of samples, respectively."
+9,the dashed line stands for the 1:1 line. respectively.
+9,the dashed line stands for the 1:1 line.
+9,"by contrast,the bycontrast, theperformance performanceof therf ofthe rfmodel sensitiveto modelisissensitive aodspatial toaod resolution, spatialresolution, with higher prediction accuracy at a finer resolution (figure 6)."
+9,"specifically, with higher prediction accuracy at a finer resolution (figure 6)."
+9,"specifically, by comparing by compar- ingperformance the the performance between 1 and110and between km,10rkm, r improves 2 2 improves from from 0.85 0.88,toand 0.88, to0.85 and decreases rmse rmse de- creases from 8.6 to 37.9 μg/m 3."
+9,"furthermore, the rf model at a 1 km resolution success- from 8.6 to 7.9 µg/m ."
+9,"furthermore, the rf model at a 1 km resolution successfully predicts fully the predictspm high-level the high-level pm2.5 observation (figure 6a), whereas the rf model at 2.5 observation (figure 6a), whereas the rf model at coarser resolution coarser resolution commonly commonly underestimates themunderestimates (figure 6b–d)."
+9,we them (figure also compared6b–d).
+9,"pmwe also compared 2.5 estimates from pm the 1 km rf model with the currently available data, e.g., chinahighpm2.5 from 2.5 estimates from the 1 km rf model with the currently available data, e.g., chapchi- nahighpm data 2.5 from set [11,12] chap data set [11,12] (https://weijing-rs.github.io/product.html (https://weijing-rs.github.io/product.html (accessed on 19 june 2021)). (ac- cessed the pm2.5 onestimates 19 june from 2021))."
+9,"the pm2.5 estimates chinahighpm 2.5 data from have chinahighpm higher accuracy with 2.5 datacv have r higher 2 of 0.90 our 1with accuracy than km rf cvmodel r2 of (cv 0.90 r 2 as our than 0.88).1 km rf model the furthermore, (cvspatial r2 as 0.88)."
+9,"furthermore, distribution of annual the spatial distribution of annual pm pm2.5 concentrations in 2020 over the yrd region is overall similar between these two data 2.5 concentrations in 2020 over the yrd region is overall similar (figure sources between7).these two data compared sources to the chap (figure 7). the dataset, compared annual pm to the chap dataset, 2.5 concentration fromthe annual our rf modelpm2.5 isconcentration relatively high, from our rf in especially model yrdhigh, is relatively the southern especially region. in thereason south- one possible yrd ernthis for is region. in datareason one possible the difference sampling for this is the since study didin thisdifference data not sampling consider the since this missing study in values did not consider satellite the missing aod product cloudy in under values satellite aod or snow/ice product under cloudy or surfaces. snow/ice surfaces."
+10,"2933 sens. 2022, 14, x for peer review remote sens."
+10,"2022, 14,remote 10 of 18 11 distribution figure 7."
+10,spatial figure of annual 7.
+10,spatial 2020 over pm2.5ofinannual distribution the pm2.5 inyrd 2020 region from over the yrdour (a) 1 from region km rf our (a) 1 km model and (b) chap dataset (https://weijing-rs.github.io/product.html (accessed model and (b) chap dataset (https://weijing-rs.github.io/product.html (accessed on 19 june 2021)). on 19 2021)).
+10,"in general, the performance of the me model in this work is comparable to previous studies focusing oninthe yrd region. general, of theour in contrast, the performance merf model model haswork betteris prediction in this comparable to prev accuracy (see table 1). focusing studies specifically, cvyrd on the r2 values region.ofinthe 10 km our contrast, lme modelare rfmodel has0.80 andprediction better 0.73 from zheng et al.(see curacy [18]table and 1)."
+10,"maspecifically, et al."
+10,"[17], cv r2 values ofby respectively. thecomparison, 10 km lme modelcv r2are of 0.80 and our 10 km me from is 0.78. modelzheng note et al. andour [18]that malur et al.model worse than the performancebyis comparison, [17], respectively."
+10,cv r2 of ou traditional statistical km me model is model regression in the 0.78.
+10,"note thatyrd ourregion from previous lur model studies performance [16–19]. is worse than the tr this may be partly because input predictors for our lur model do not include additional tional statistical regression model in the yrd region from previous studies [16–19]. geographic information, may be partlye.g., because road lengthinputand density. for predictors additionally, our lur modelbai etdoal.not [15]include and additi used 5 km rf wang et al. [20] geographic model and e.g., information, xgboost 3 kmroad lengthmodel and to retrieve density."
+10,"pm2.5 in the bai additionally, yrdet al."
+10,"[15] wangand region, respectively, et al. used 5 km [20]reported they cvrf r2 model as 0.65and km xgboost and30.80. model has our rf model to retrieve better pm2.5 in performance, withyrdcv 2 r of respectively, region, 0.84 for both and3 and they 5 km reported models.cv r2 as 0.65 and 0.80."
+10,"our rf model better performance, with cv r2 of 0.84 for both 3 and 5 km models."
+10,table 1.
+10,comparison of performances of different aod-based pm2.5 retrieval models in the yangtze river delta region.
+10,table 1.
+10,comparison of performances of different aod-based pm2.5 retrieval models in the y tze river delta region.
+10,spatial model cross-validation related study model model cross-validation related study model resolution r2 spatial resolution rmse r2 rmse zheng et al.
+10,[18] zhenglme et al. [18] 10 km lme 10 km0.80 0.80 17.89 17.89 10 km 10 km0.73 0.73 18.30 18.30 ma et al.
+10,[17] ma etlmeal.
+10,[17] lme 3 km 3 km0.67 0.67 15.82 15.82 jiang et al.
+10,[19] jiang gwr et al. [19] 10 km gwr 10 km0.79 0.79 - - xiao et al.
+10,[16] xiaotwo-stage et al. [16] 1 km two-stage 1 km0.77 0.77 - - bai et al.
+10,[15] rf 5 km 0.65 15.69 bai et al.
+10,[15] rf 5 km 0.65 15.69 wang et al.
+10,[20] xgboost 3 km 0.80 11.57 wang et al.
+10,[20] xgboost 3 km 0.80 11.57 1 km 0.78 10.39 1 km 0.78 10.39 3 km 0.78 10.25 this study me 3 km0.78 0.78 10.20 10.25 this study 5 km me 10 km 5 km0.78 0.78 10.39 10.20 1 km 10 km0.51 0.78 15.72 10.39 3 km 1 km0.51 0.51 15.49 15.72 this study lur 5 km 3 km0.51 0.51 15.46 15.49 this study lur 10 km 5 km0.52 0.51 15.57 15.46 1 km 10 km0.88 0.52 7.86 15.57 3 km 1 km0.84 0.88 8.71 7.86 this study rf 5 km 3 km0.84 0.84 8.80 8.71 this study rfkm 10 5 km0.85 0.84 8.60 8.80 lme: linear mixed effect; gwr: geographically weighted regression;10rf: kmrandom forest; xgboost: 0.85 extreme 8.60 gradient boosting; me: mixed effect; lur: land-use regression.
+10,"input predictors for the me model in this study only include aod, lme: whereaslinear mixed the lme effect; model gwr:additional requires geographically weightede.g., input predictors, regression; rf: random forest; xgb air temperature. extreme gradient boosting; me: mixed effect; lur: land-use regression."
+10,"input predictors for th although the rf model performance is sensitive to resolution, regional annual aver- ages of pm2.5 concentrations based on this model are similar among different resolutions"
+11,"remote sens. 2022, 14, 2933 11 of 18 and are all about 36 µg/m3 (see table 2)."
+11,"the standard deviation (sd) and interquartile range (iqr) of annual pm2.5 throughout all grids in yrd generally increase as the res- olution becomes coarser, indicating that the rf model at coarser resolution can create a larger spatial variability of annual pm2.5 concentrations."
+11,"for the me model, as resolution decreases from 1 to 10 km, the regional annual average of pm2.5 gradually decreases from 37.0 to 35.4 µg/m3 , and sd and iqr both slightly increase (table 2)."
+11,"for the lur model, regional mean, sd and iqr values all fluctuate as the resolution changes (table 2)."
+11,table 2.
+11,"main statistics of annual (2020) pm2.5 concentration (µg/m3 ) estimated by the mixed effects (me), the land-use regression (lur) and the random forest (rf) models."
+11,"spatial resolutions pm2.5 retrieval models statistics 1 km 3 km 5 km 10 km mean 37.0 36.3 35.7 35.4 me model sd 2.2 2.2 2.1 2.3 iqr 2.9 3.0 3.0 3.2 mean 23.6 32.2 31.2 33.8 lur model sd 25.1 8.0 11.7 7.9 iqr 21.6 8.9 14.2 8.9 mean 36.3 36.4 35.7 35.9 rf model sd 4.0 4.2 4.7 4.6 iqr 6.2 6.4 7.3 7.0 notes: sd, standard deviation; iqr, interquartile range."
+11,"given that the rf model has a better performance compared to the me and lur models, and the prediction accuracy of the 1 km rf model is the best among the four different resolutions, we recommend using the 1 km rf model to estimate pm2.5 in the yrd region."
+11,the impact of spatial resolution on health assessment annual population-weighted mean (pwm) pm2.5 estimated at different spatial res- olutions is shown in figure 8a.
+11,"as the resolution becomes coarser, pwm pm2.5 clearly increases regardless of which pm2.5 retrieval model is used (figure 8a)."
+11,"based on the me model, pwm pm2.5 at 10 km resolution is 7.8% higher than the result at 1 km resolution."
+11,"this difference is 22.9% and 9.7% for the lur and rf models, respectively."
+11,"additionally, figure 8a shows that the spatial resolution has an essential impact on achievement of the national air quality standard (35 µg/m3 )."
+11,"pwm pm2.5 concentrations estimated at 1, 3 and 5 km resolution meet the standard for lur and rf models, whereas estimates at 10 km resolution fails to meet the standard for all models (figure 8a)."
+11,"furthermore, mortality attributable to pm2.5 is also sensitive to resolution change, as shown in figure 8b."
+11,mortality estimated at 10 km resolution increases by 7.3% compared to that at 1 km resolution for me model.
+11,"this increase is 18.3% and 8.4% for the lur and rf models, respectively."
+11,pwm pm2.5 and attributable mortality notably increase with decreasing spatial res- olution in yrd (figure 8).
+11,"one reason for this sensitivity is that annual pm2.5 increases with coarser spatial resolutions in the northern yrd, especially in areas along the yangtze river; these areas usually correspond to highly polluted and densely populated regions."
+11,figure 9 shows the spatial distribution of annual pm2.5 at 1 km from the rf model and its difference from coarser resolutions.
+11,"as can be seen, annual pm2.5 at 3 km increases widely in yrd compared to 1 km (figure 9b), and this pattern still holds in the northern yrd when going to coarser resolutions (figure 9c,d)."
+11,"the sensitivity of pwm pm2.5 to spatial resolution is further investigated for different sub-regions of yrd, as shown in figure 10."
+11,"for annual pwm pm2.5 from the me and rf models, the estimation gradually increases as resolution decreases from 1 to 10 km in northeast yrd (sub-region 1) and northwest yrd (sub-region 2)."
+11,"by contrast, pwm pm2.5 is less sensitive to resolution in southern yrd"
+12,"remote sens. 2022, 14, 2933 12 of 18 remote sens. 2022, 14, x for peer review (sub-region 3)."
+12,"although not shown here, pwm pm2.5 from the lur model is sensitive to resolution for all sub-regions in yrd."
+12,"figure figure 8. (a) annual mean (pwm) pmmean 8. (a) annual population-weighted population-weighted 2.5 and(pwm) pm2.5 and (b) difference (b) difference in attr in attributable remote sens. 2022, 14, x for peer review mortality as a function of spatial resolution."
+12,"red, green and blue lines mortality as a function of spatial resolution."
+12,"red, green and blue lines in each panel represent in14each panel repre results of 20 sults estimated by the mixed effects estimated by the mixed effects (me), the land-use regression (lur) and the random forest (rf) random (me), the land-use regression (lur) and the (rf) models, respectively. models, respectively."
+12,pwm pm2.5 and attributable mortality notably increase with decreasing spa olution in yrd (figure 8).
+12,"one reason for this sensitivity is that annual pm2.5 in with coarser spatial resolutions in the northern yrd, especially in areas along the tze river; these areas usually correspond to highly polluted and densely popula gions."
+12,figure 9 shows the spatial distribution of annual pm2.5 at 1 km from the rf and its difference from coarser resolutions.
+12,"as can be seen, annual pm2.5 at 3 km in widely in yrd compared to 1 km (figure 9b), and this pattern still holds in the n yrd when going to coarser resolutions (figure 9c,d)."
+12,"the sensitivity of pwm p spatial resolution is further investigated for different sub-regions of yrd, as sh figure 10."
+12,"for annual pwm pm2.5 from the me and rf models, the estimation gr increases as resolution decreases from 1 to 10 km in northeast yrd (sub-region northwest yrd (sub-region 2)."
+12,"by contrast, pwm pm2.5 is less sensitive to resolu southern yrd (sub-region 3)."
+12,"although not shown here, pwm pm2.5 from the lur is sensitive to resolution for all sub-regions in yrd."
+12,figure 9.
+12,figure (a)spatial 9. (a) distributionofofannual spatialdistribution pm annual 2.5 at 1 pm km and (b–d) its difference from coarser res- 2.5 at 1 km and (b–d) its difference from coarser olutions.
+12,pm 2.5 retrievals in this figure are based on the random forest (rf) model.
+12,annual pm2.5 resolutions.
+12,pm2.5 retrievals in this figure are based on the random forest (rf) model.
+12,annual pm2.5 estimations at 1 km are first aggregated to arithmetic mean values at a coarse resolution.
+12,"then, estimations at 1 km are first aggregated to arithmetic mean values at a coarse resolution."
+12,"then, these these aggregated values are compared to that from the pm2.5 retrieval model at the coarse resolu- aggregated values are compared to that from the pm2.5 retrieval model at the coarse resolution. tion."
+13,figure 9. (a) spatial distribution of annual pm2.5 at 1 km and (b–d) its difference from coarser res- olutions.
+13,pm2.5 retrievals in this figure are based on the random forest (rf) model.
+13,annual pm2.5 estimations at 1 km are first aggregated to arithmetic mean values at a coarse resolution.
+13,"then, remote sens. 2022, 14, 2933 13 of 18 these aggregated values are compared to that from the pm2.5 retrieval model at the coarse resolu- tion."
+13,figure 10.
+13,annual figure 10.
+13,annual population-weighted population-weighted mean (pwm) mean pm(pwm)as pm as a function a 2.5function of spatial of spatial resolution. resolution.
+13,"panels 2.5 panels (a,b) are based on pm2.5 retrievals from the mixed effects (me) and random forest (rf) on pm2.5 (a,b) are based models. retrievals from the mixed red, green and blue lines in each panel stand for sub-region 1 (northeast yrd), sub-region red, effects (me) and random forest (rf) models. green and blue2lines in each (northwest panel yrd) and stand for sub-region sub-region 1 (northeast 3 (southern yrd), yrd), respectively."
+13,figure 1a for 2different see sub-region (northwest sub-regions.
+13,"yrd) and sub-region remote sens. 2022, 14, x for peer review 3 (southern yrd), respectively."
+13,see figure 1a for different sub-regions. 15 of 20 another possible reason for the sensitivity of health assessments to spatial resolution is that resolution affects the spatial coverage of pm2.5 retrievals.
+13,"annual pm2.5 estimated at another possible reason for the sensitivity of health assessments to spatial resolu- is commonly 1 km resolution tion invalid over water bodies (e.g., rivers and lakes), which is is that resolution affects the spatial coverage of pm2.5 retrievals."
+13,"annual pm2.5 esti- because high-quality assurance used in mated at 1 km resolution is this studyinvalid commonly masksover aod values water bodiesover (e.g.,inland water rivers and lakes), bodies and coastal water areas with high uncertainty [39,53]."
+13,"as the resolution which is because high-quality assurance used in this study masks aod values over in- becomes coarser, pm2.5 estimates land water cover bodies more ofand water coastal bodies water areaswhere with high annual pm2.5 [39,53]. uncertainty is usuallyas thehigh; resolu- tion becomes coarser, pm meanwhile, coarser population grids include more densely populated sub-grids near water2.5 is 2.5 estimates cover of more water bodies where annual pm usually bodies."
+13,"these spatial high; meanwhile, expansions coarser likely result population in an increasegrids in pwminclude pmmore densely populated 2.5 with decreasing sub-grids near water bodies."
+13,these spatial expansions likely result in an increase in pwm resolution.
+13,an example of the above explanation is shown in figure 11.
+13,"as can be seen, pm2.5 with decreasing resolution."
+13,"an example of the above explanation is shown in fig- the annual 1 kmure pm11. from 2.5as theseen, can be rf model the annual over 1 kmyangtze river pm2.5 from the and taihu rf model lake over is invalid."
+13,"yangtze river and in contrast, the annual pm taihu lake is2.5 tends to be valid and takes high values when decreasing invalid."
+13,"in contrast, the annual pm2.5 tends to be valid and takes high values 11a–d). resolution (figurewhen resolution is this tendency decreasing also observed (figure 11a–d)."
+13,"this the population fortendency (figure is also observed for11e–h). the popu- consequently, bothlation (figure 11e–h). high-level pm2.5 consequently, and dense both high-level population pm2.5 andexpand, spatially dense population leadingspatially to a higher pwm pm2.5 .expand, leading to a higher pwm pm 2.5."
+13,figure 11.
+13,spatial figure 11.
+13,"spatial distribution distribution of (top panels) of annual (top panels) pm2.5annual pm2.5 estimated estimated by the random by the random forestforest (rf)(rf) model and (bottom panels) population in northeast yrd (sub-region 1 in figure 1a) for the resolu- model and (bottomtions panels) population in northeast yrd (sub-region 1 in figure 1a) for the resolutions of (a,e) 1, (b,f) 3, (c,g) 5 and (d,h) 10 km."
+13,"population data in bottom panels are normalized by of (a,e) 1, (b,f) 3, (c,g) and (d,h) 10z-scores. 5 standardized using km."
+13,population data in bottom panels are normalized by using standardized z-scores.
+13,"discussion our results show that the aod–pm2.5 correlation generally decreases as the aod spatial resolution becomes coarser, consistent with previous studies [54–56]."
+13,"this pattern, however, is the opposite in summer."
+13,one possible explanation for this unexpected result is that aod values collocated to pm2.5 observations are frequently near cloud pixels in
+14,"remote sens. 2022, 14, 2933 14 of 18 4."
+14,"discussion our results show that the aod–pm2.5 correlation generally decreases as the aod spatial resolution becomes coarser, consistent with previous studies [54–56]."
+14,"this pattern, however, is the opposite in summer."
+14,"one possible explanation for this unexpected result is that aod values collocated to pm2.5 observations are frequently near cloud pixels in summer, and these aod retrievals at finer resolution are likely unreliable due to cloud contamination."
+14,"by contrast, chudnovsky et al. [55] indicated that maiac 1 km aod retrievals remain reliable under partly cloudy conditions."
+14,"this cloud effect should be further investigated in the future, perhaps in combination with a full-coverage aod dataset."
+14,"additionally, after applying vertical and humidity corrections of aod following previous works [57,58], the spatial resolution effect on the aod–pm2.5 correlation still holds (not shown)."
+14,note that the spatial resolution range may affect the sensitivity of aod–pm2.5 correlation on resolution.
+14,"for instance, wu et al. [57] found that, as degrading spatial resolution, the correlation in shenzhen city in summer rapidly increases until reaching the peak at about 1 km resolution and then slowly decreases when going to coarser resolutions."
+14,"this work indicates that aod data at a finer spatial resolution cannot improve the performance of the pm2.5 retrieval models based on the traditional statistical regression (i.e., me and lur models)."
+14,the spatial resolution effect on the pm2.5 retrieval model is inconsistent among the previous studies [21–23].
+14,"for instance, lee et al. [23] showed a better performance of the me model at a 1 km aod resolution in the southeastern united states (us) compared with 10 km resolution."
+14,"conversely, this trend is opposite in northern china [21]."
+14,"hence, we speculate that the sensitivity of the pm2.5 retrieval model on aod spatial resolution varies by region."
+14,northwest yrd (sub-region 2 in figure 1a) shows a better performance of the me model as the resolution becomes coarser (not shown).
+14,"for the other two sub-regions, the me model performance is still insensitive to aod spatial resolution (not shown)."
+14,"for the pm2.5 retrieval model based on machine learning (i.e., the rf model), the results presented here show that a finer aod spatial resolution can produce a more accurate pm2.5 prediction."
+14,this conclusion still holds for the three sub-regions in yrd (not shown).
+14,"therefore, machine learning is likely a good way to solve the spatial resolution effect on pm2.5 prediction."
+14,note that pm2.5 prediction accuracy may not keep improving when satellite data spatial resolution continues to be enhanced.
+14,"for instance, based on micro-satellite images, zheng et al. [59] used a convolutional neural network and random forest approach to estimate pm2.5 and compared prediction accuracy between different input image sizes (i.e., 670, 500, 200 and 100 m)."
+14,"they found that as the image size decreases, the performance improves at first until reaching the peak at 200 m, after which the performance degrades."
+14,"we find that health assessment strongly depends on spatial resolution, with larger values estimated from coarser resolution."
+14,this sensitivity holds for all three pm2.5 retrieval models.
+14,previous studies have drawn inconsistent conclusions regarding the spatial resolu- tion effect on health assessment.
+14,"most of them have shown that pwm pm2.5 decreases as spatial resolution becomes coarser [33,34,60,61]."
+14,"by contrast, thompson et al. [62] found that pwm pm2.5 and attributable death are not sensitive to resolution."
+14,"furthermore, punger and west [32] showed that pwm pm2.5 increases with resolution from 12 to 36 km and then decreases when going to coarser resolutions."
+14,a possible reason for the above inconsistent conclusions may be that the spatial resolution range is different among different studies.
+14,"for instance, li et al. [35] found that pm2.5 attributable mortality in the us gradually decreases at degrading resolution (0.5◦ × 0.66◦ , 1◦ × 1.25◦ , 2◦ × 2.5◦ , and 4◦ × 5◦ )."
+14,punger and west [32] reproduced this result for a similar resolution range but found an opposite change in health assessment when comparing estimations between 12 and 36 km.
+14,"to further examine this resolution range effect, we create pwm pm2.5 at resolutions ranging from 1 to 15 km (in 2 km increments) by simply averaging 1 km pm2.5 concentrations."
+14,although not
+15,"remote sens. 2022, 14, 2933 15 of 18 shown here, we find that, as resolution becomes coarser, pwm pm2.5 gradually increases until reaching a peak at 9 km, after which pwm pm2.5 is relatively flat."
+15,our study has some limitations.
+15,"first, this work is limited to the yrd region in 2020."
+15,the findings presented here may not be applicable for different periods and/or different regions.
+15,"given that the impact of satellite data spatial resolution on the pm2.5 retrieval model likely varies by region, it would be highly interesting to examine regional variation in this resolution impact in the future."
+15,this further work should include different represen- tative areas and long-term satellite data.
+15,"second, we set a limited spatial resolution range (i.e., 1, 3, 5, and 10 km) to investigate the sensitivity of the pm2.5 retrieval model on aod spatial resolution."
+15,"it remains unclear whether our sensitivity findings are reproduced for a wider resolution range (e.g., sub-km scale)."
+15,higher spatial resolution satellite data are likely beneficial for pm2.5 retrieval.
+15,"however, this benefit may be clearly shown when supported by additional refined data, e.g., meteorological fields, given the complex relationship be- tween satellite observation and ground pm2.5 measurements."
+15,this speculation is supported by a recent study in which they used ultrahigh-resolution top-of-atmosphere reflectance (toar) to build different pm2.5 retrieval models without including additional factors [63].
+15,"they found that the model performance changes little, with the resolution varying from 30 m to 9 km (see their figure 2a)."
+15,"they speculated that incorporating urban micro-climate products may improve the pm2.5 prediction accuracy at a high resolution, e.g., 90 m [63]."
+15,"in the future, we will further check our findings by using satellite data at higher spatial resolution than maiac data (e.g., 20 m aod product from sentinel-2), in combination with meteorological fields from computational fluid dynamics (cfd) simulations."
+15,"conclusions based on multi-angle implementation of atmospheric correction (maiac) aerosol optical depth (aod) and other auxiliary data in 2020 over the yangtze river delta (yrd), this work investigates the effect of aod spatial resolution on the performance of satellite- based pm2.5 retrieval models."
+15,"overall, we find that the spatial resolution effect varies by method."
+15,"specifically, the pm2.5 retrieval model performance is not sensitive to resolution change (i.e., 1, 3, 5 and 10 km) for the mixed effects model (me) and the land-use regression model (lur)."
+15,"by contrast, the pm2.5 retrieval model based on random forest (rf) can perform a more accurate pm2.5 prediction with a finer aod spatial resolution."
+15,"r2 increases from 0.85 to 0.88, and rmse decreases from 8.6 to 7.9 µg/m3 when comparing the rf model performance between 1 and 10 km."
+15,these findings provide further evidence that machine learning may be an effective way to build the aod–pm2.5 relationship involving different spatial scales.
+15,"we also examine the spatial resolution effect on health assessment using the satellite-derived pm2.5 estimation at spatial resolutions of 1, 3, 5 and 10 km."
+15,our results show that annual population-weighted mean (pwm) pm2.5 concentration and attributable mortality gradu- ally increase as the resolution becomes coarser.
+15,"mortality estimated at 10 km resolution increases by 18.3%, 8.4% and 7.3% compared to that at 1 km resolution for the lur, rf and me models, respectively."
+15,"note that pwm pm2.5 at 10 km fails to meet the national air quality standard (35 µg/m3 ), whereas the estimate at finer resolutions generally meets the standard."
+15,these findings suggest that caution is needed when interpreting the health assessment at the coarser resolution for the yrd region.
+15,"overall, we recommend using satellite-derived pm2.5 based on a machine learning method and finer spatial resolution aod data for regional health assessment."
+15,"nevertheless, the resolution effect covering a wider range of finer spatial resolution (e.g., <1 km) should be further investigated in the future."
+15,"author contributions: conceptualization, h.b.; methodology, y.s. and w.g.; software, y.l.; val- idation, h.b. and m.s.; formal analysis, m.s.; investigation, h.b. and y.s.; resources, w.g.; data curation, h.b. and w.g.; writing—original draft preparation, h.b.; writing—review and editing, h.b.; visualization, y.l.; supervision, h.b.; project administration, h.b.; funding acquisition, h.b. and w.g."
+15,all authors have read and agreed to the published version of the manuscript.
+16,"remote sens. 2022, 14, 2933 16 of 18 funding: this work was funded by the national key research and development program of china (no."
+16,"2018yfc1507701), jiangsu provincial double-innovation doctor program (no."
+16,"jsscbs20211072), nantong university scientific research foundation for the introduced talents (no. 135419629079), and the environmental science research program of nanjing municipal ecology and environment bureau (no."
+16,202104).
+16,data availability statement: publicly available datasets were analyzed in this study.
+16,mcd19a2 product was obtained from the nasa earthdata website (https://earthdata.nasa.gov/ (accessed on 18 october 2021)).
+16,"hourly pm2.5 observations at 163 stations over yrd in 2020 were collected from the china national environmental monitor center (cnemc, http://www.cnemc.cn (accessed on 13 august 2021))."
+16,"the population data came from the gridded population of the world, version 4, which are available from the socioeconomic data and applications center (https://sedac.ciesin. columbia.edu/data/collection/gpw-v4 (accessed on 27 june 2021))."
+16,the national-level age structure and the age-specific and disease-specific mortality for 2019 were obtained from the global burden of disease study 2019 (gbd 2019) dataset (https://vizhub.healthdata.org/gbd-compare/ (accessed on 29 march 2021)).
+16,land cover at 30 m resolution for 2020 were obtained from globeland30 dataset (http://www.globallandcover.com/ (accessed on 13 october 2021)).
+16,ecmwf era5 data were obtained from https://cds.climate.copernicus.eu/ (accessed on 12 october 2021).
+16,chinahighpm2.5 came from chap data set (https://weijing-rs.github.io/product.html (accessed on 19 june 2021)).
+16,the data produced in this study are available on request from the corresponding author.
+16,acknowledgments: the authors appreciate modis maiac team for the aerosol products used.
+16,conflicts of interest: the authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+16,references 1.
+16,"yin, p."
+16,"; brauer, m."
+16,"; cohen, a."
+16,"; burnett, r.t."
+16,"; liu, j."
+16,"; liu, y."
+16,"; liang, r."
+16,"; wang, w."
+16,"; qi, j."
+16,"; wang, l.; et al."
+16,long-term fine particulate matter exposure and nonaccidental and cause-specific mortality in a large national cohort of chinese men.
+16,environ.
+16,health perspect.
+16,"2017, 125, 117002."
+16,[crossref] [pubmed] 2.
+16,"liu, c."
+16,"; chen, r."
+16,"; sera, f."
+16,"; vicedo-cabrera, a.m."
+16,"; guo, y."
+16,"; tong, s."
+16,"; coelho, m.s.z.s."
+16,"; saldiva, p.h.n."
+16,"; lavigne, e."
+16,"; matus, p.; et al."
+16,ambient particulate air pollution and daily mortality in 652 cities.
+16,"2019, 381, 705–715."
+16,"[crossref] [pubmed] 3. van donkelaar, a."
+16,"; martin, r.v."
+16,"; brauer, m."
+16,"; hsu, n.c."
+16,"; kahn, r.a."
+16,"; levy, r.c."
+16,"; lyapustin, a."
+16,"; sayer, a.m."
+16,"; winker, d.m."
+16,"global estimates of fine particulate matter using a combined geophysical-statistical method with information from satellites, models, and monitors."
+16,environ.
+16,technol.
+16,"2016, 50, 3762–3772."
+16,"[crossref] [pubmed] 4. van donkelaar, a."
+16,"; martin, r.v."
+16,"; spurr, r.j.d."
+16,"; drury, e."
+16,"; remer, l.a."
+16,"; levy, r.c."
+16,"; wang, j."
+16,optimal estimation for global ground-level fine particulate matter concentrations.
+16,geophys.
+16,atmos.
+16,"2013, 118, 5621–5636."
+16,[crossref] 5.
+16,"shin, m."
+16,"; kang, y."
+16,"; park, s."
+16,"; im, j."
+16,"; yoo, c."
+16,"; quackenbush, l.j."
+16,estimating ground-level particulate matter concentrations using satellite-based data: a review.
+16,gisci.
+16,remote sens.
+16,"2020, 57, 174–189."
+16,[crossref] 6.
+16,"geng, g."
+16,"; zhang, q."
+16,"; martin, r.v.; van donkelaar, a."
+16,"; huo, h."
+16,"; che, h."
+16,"; lin, j."
+16,"; he, k."
+16,estimating long-term pm2.5 concentrations in china using satellite-based aerosol optical depth and a chemical transport model.
+16,remote sens.
+16,environ.
+16,"2015, 166, 262–270."
+16,[crossref] 7.
+16,"lin, c."
+16,"; li, y."
+16,"; lau, a.k.h."
+16,"; deng, x."
+16,"; tse, t.k.t."
+16,"; fung, j.c.h."
+16,"; li, c."
+16,"; li, z."
+16,"; lu, x."
+16,"; zhang, x.; et al."
+16,estimation of long-term population exposure to pm2.5 for dense urban areas using 1-km modis data.
+16,remote sens.
+16,environ.
+16,"2016, 179, 13–22."
+16,[crossref] 8.
+16,"park, y."
+16,"; kwon, b."
+16,"; heo, j."
+16,"; hu, x."
+16,"; liu, y."
+16,"; moon, t."
+16,estimating pm2.5 concentration of the conterminous united states via interpretable convolutional neural networks.
+16,environ.
+16,pollut.
+16,"2020, 256, 113395."
+16,"[crossref] 9. van donkelaar, a."
+16,"; martin, r.v."
+16,"; brauer, m."
+16,"; boys, b.l."
+16,use of satellite observations for long-term exposure assessment of global concentrations of fine particulate matter.
+16,environ.
+16,health perspect.
+16,"2015, 123, 135–143."
+16,[crossref] 10.
+16,"di, q."
+16,"; kloog, i."
+16,"; koutrakis, p."
+16,"; lyapustin, a."
+16,"; wang, y."
+16,"; schwartz, j."
+16,assessing pm 2.5 exposures with high spatiotemporal resolution across the continental united states.
+16,environ.
+16,technol.
+16,"2016, 50, 4712–4721."
+16,[crossref] 11.
+16,"wei, j."
+16,"; li, z."
+16,"; cribb, m."
+16,"; huang, w."
+16,"; xue, w."
+16,"; sun, l."
+16,"; guo, j."
+16,"; peng, y."
+16,"; li, j."
+16,"; lyapustin, a.; et al."
+16,improved 1 km resolution pm2.5 estimates across china using enhanced space–time extremely randomized trees.
+16,atmos.
+16,"2020, 20, 3273–3289."
+16,[crossref] 12.
+16,"wei, j."
+16,"; li, z."
+16,"; lyapustin, a."
+16,"; sun, l."
+16,"; peng, y."
+16,"; xue, w."
+16,"; su, t."
+16,"; cribb, m."
+16,reconstructing 1-km-resolution high-quality pm2.5 data records from 2000 to 2018 in china: spatiotemporal variations and policy implications.
+16,remote sens.
+16,environ.
+16,"2021, 252, 112136."
+16,[crossref] 13.
+16,"geng, g."
+16,"; xiao, q."
+16,"; liu, s."
+16,"; liu, x."
+16,"; cheng, j."
+16,"; zheng, y."
+16,"; xue, t."
+16,"; tong, d."
+16,"; zheng, b."
+16,"; peng, y.; et al."
+16,tracking air pollution in china: near real-time pm2.5 retrievals from multisource data fusion.
+16,environ.
+16,technol.
+16,"2021, 55, 12106–12115."
+16,[crossref] [pubmed] 14.
+16,"zhang, z."
+16,"; wang, j."
+16,"; hart, j.e."
+16,"; laden, f."
+16,"; zhao, c."
+16,"; li, t."
+16,"; zheng, p."
+16,"; li, d."
+16,"; ye, z."
+16,"; chen, k."
+16,"national scale spatiotemporal land-use regression model for pm2.5, pm10 and no2 concentration in china."
+16,atmos.
+16,environ.
+16,"2018, 192, 48–54."
+16,[crossref]
+17,"remote sens. 2022, 14, 2933 17 of 18 15."
+17,"bai, h."
+17,"; zheng, z."
+17,"; zhang, y."
+17,"; huang, h."
+17,"; wang, l."
+17,comparison of satellite-based pm2.5 estimation from aerosol optical depth and top-of-atmosphere reflectance.
+17,aerosol air qual.
+17,"2021, 21, 1–17."
+17,[crossref] 16.
+17,"xiao, q."
+17,"; wang, y."
+17,"; chang, h.h."
+17,"; meng, x."
+17,"; geng, g."
+17,"; lyapustin, a."
+17,"; liu, y."
+17,full-coverage high-resolution daily pm 2.5 estimation using maiac aod in the yangtze river delta of china.
+17,remote sens.
+17,environ.
+17,"2017, 199, 437–446."
+17,[crossref] 17.
+17,"ma, z."
+17,"; liu, y."
+17,"; zhao, q."
+17,"; liu, m."
+17,"; zhou, y."
+17,"; bi, j."
+17,satellite-derived high resolution pm2.5 concentrations in yangtze river delta region of china using improved linear mixed effects model.
+17,atmos.
+17,environ.
+17,"2016, 133, 156–164."
+17,[crossref] 18.
+17,"zheng, y."
+17,"; zhang, q."
+17,"; liu, y."
+17,"; geng, g."
+17,"; he, k."
+17,estimating ground-level pm2.5 concentrations over three megalopolises in china using satellite-derived aerosol optical depth measurements.
+17,atmos.
+17,environ.
+17,"2016, 124, 232–242."
+17,[crossref] 19.
+17,"jiang, m."
+17,"; sun, w."
+17,"; yang, g."
+17,"; zhang, d."
+17,modelling seasonal gwr of daily pm2.5 with proper auxiliary variables for the yangtze river delta.
+17,remote sens.
+17,"2017, 9, 346."
+17,[crossref] 20.
+17,"wang, j."
+17,"; he, l."
+17,"; lu, x."
+17,"; zhou, l."
+17,"; tang, h."
+17,"; yan, y."
+17,"; ma, w."
+17,"a full-coverage estimation of pm2.5 concentrations using a hybrid xgboost-wd model and wrf-simulated meteorological fields in the yangtze river delta urban agglomeration, china."
+17,environ.
+17,"2022, 203, 111799."
+17,[crossref] 21.
+17,"li, r."
+17,"; mei, x."
+17,"; chen, l."
+17,"; wang, z."
+17,"; jing, y."
+17,"; wei, l."
+17,influence of spatial resolution and retrieval frequency on applicability of satellite-predicted pm2.5 in northern china.
+17,remote sens.
+17,"2020, 12, 736."
+17,[crossref] 22.
+17,"hu, x."
+17,"; waller, l.a."
+17,"; lyapustin, a."
+17,"; wang, y."
+17,"; al-hamdan, m.z."
+17,"; crosson, w.l."
+17,"; estes, m.g."
+17,"; estes, s.m."
+17,"; quattrochi, d.a."
+17,"; puttaswamy, s.j.; et al."
+17,estimating ground-level pm2.5 concentrations in the southeastern united states using maiac aod retrievals and a two-stage model.
+17,remote sens.
+17,environ.
+17,"2014, 140, 220–232."
+17,[crossref] 23.
+17,"lee, m."
+17,"; kloog, i."
+17,"; chudnovsky, a."
+17,"; lyapustin, a."
+17,"; wang, y."
+17,"; melly, s."
+17,"; coull, b."
+17,"; koutrakis, p."
+17,"; schwartz, j."
+17,spatiotemporal prediction of fine particulate matter using high-resolution satellite images in the southeastern us 2003–2011.
+17,environ.
+17,epidemiol.
+17,"2016, 26, 377–384."
+17,[crossref] [pubmed] 24.
+17,"yang, q."
+17,"; yuan, q."
+17,"; yue, l."
+17,"; li, t."
+17,"; shen, h."
+17,"; zhang, l."
+17,mapping pm2.5 concentration at a sub-km level resolution: a dual-scale retrieval approach.
+17,isprs j.
+17,photogramm.
+17,remote sens.
+17,"2020, 165, 140–151."
+17,[crossref] 25.
+17,"wang, c."
+17,"; wang, y."
+17,"; shi, z."
+17,"; sun, j."
+17,"; gong, k."
+17,"; li, j."
+17,"; qin, m."
+17,"; wei, j."
+17,"; li, t."
+17,"; kan, h.; et al."
+17,effects of using different exposure data to estimate changes in premature mortality attributable to pm2.5 and o3 in china.
+17,environ.
+17,pollut.
+17,"2021, 285, 117242."
+17,[crossref] [pubmed] 26.
+17,"ford, b."
+17,"; heald, c.l."
+17,exploring the uncertainty associated with satellite-based estimates of premature mortality due to exposure to fine particulate matter.
+17,atmos.
+17,"2016, 16, 3499–3523."
+17,[crossref] [pubmed] 27.
+17,"ghude, s.d."
+17,"; chate, d.m."
+17,"; jena, c."
+17,"; beig, g."
+17,"; kumar, r."
+17,"; barth, m.c."
+17,"; pfister, g.g."
+17,"; fadnavis, s."
+17,"; pithani, p."
+17,premature mortality in india due to pm 2.5 and ozone exposure.
+17,geophys.
+17,"2016, 43, 4650–4658."
+17,[crossref] 28.
+17,"li, t."
+17,"; guo, y."
+17,"; liu, y."
+17,"; wang, j."
+17,"; wang, q."
+17,"; sun, z."
+17,"; he, m.z."
+17,"; shi, x."
+17,estimating mortality burden attributable to short-term pm2.5 exposure: a national observational study in china.
+17,environ.
+17,"2019, 125, 245–251."
+17,[crossref] 29.
+17,"lu, x."
+17,"; lin, c."
+17,"; li, w."
+17,"; chen, y."
+17,"; huang, y."
+17,"; fung, j.c.h."
+17,"; lau, a.k.h."
+17,analysis of the adverse health effects of pm2.5 from 2001 to 2017 in china and the role of urbanization in aggravating the health burden.
+17,total environ.
+17,"2019, 652, 683–695."
+17,[crossref] 30.
+17,"apte, j.s."
+17,"; marshall, j.d."
+17,"; cohen, a.j."
+17,"; brauer, m."
+17,addressing global mortality from ambient pm 2.5.
+17,environ.
+17,technol.
+17,"2015, 49, 8057–8066."
+17,[crossref] 31.
+17,"li, j."
+17,"; liu, h."
+17,"; lv, z."
+17,"; zhao, r."
+17,"; deng, f."
+17,"; wang, c."
+17,"; qin, a."
+17,"; yang, x."
+17,estimation of pm2.5 mortality burden in china with new exposure estimation and local concentration-response function.
+17,environ.
+17,pollut.
+17,"2018, 243, 1710–1718."
+17,[crossref] [pubmed] 32.
+17,"punger, e.m."
+17,"; west, j.j."
+17,the effect of grid resolution on estimates of the burden of ozone and fine particulate matter on premature mortality in the usa.
+17,air qual.
+17,atmos.
+17,"health 2013, 6, 563–573."
+17,[crossref] [pubmed] 33.
+17,"parvez, f."
+17,"; wagstrom, k."
+17,impact of regional versus local resolution air quality modeling on particulate matter exposure health impact assessment.
+17,air qual.
+17,atmos.
+17,"health 2020, 13, 271–279."
+17,[crossref] 34.
+17,"korhonen, a."
+17,"; lehtomäki, h."
+17,"; rumrich, i."
+17,"; karvosenoja, n."
+17,"; paunu, v.-v."
+17,"; kupiainen, k."
+17,"; sofiev, m."
+17,"; palamarchuk, y."
+17,"; kukkonen, j."
+17,"; kangas, l.; et al."
+17,influence of spatial resolution on population pm2.5 exposure and health impacts.
+17,air qual.
+17,atmos.
+17,"health 2019, 12, 705–718."
+17,[crossref] 35.
+17,"li, y."
+17,"; henze, d.k."
+17,"; jack, d."
+17,"; kinney, p.l."
+17,the influence of air quality model resolution on health impact assessment for fine particulate matter and its components.
+17,air qual.
+17,atmos.
+17,"health 2016, 9, 51–68."
+17,[crossref] 36.
+17,"hu, c."
+17,"; liu, s."
+17,"; wang, y."
+17,"; zhang, m."
+17,"; xiao, w."
+17,"; wang, w."
+17,"; xu, j."
+17,anthropogenic co2 emissions from a megacity in the yangtze river delta of china.
+17,environ.
+17,pollut.
+17,"2018, 25, 23157–23169."
+17,[crossref] 37.
+17,"lyapustin, a."
+17,"; wang, y."
+17,"; korkin, s."
+17,"; huang, d."
+17,modis collection 6 maiac algorithm.
+17,atmos.
+17,"2018, 11, 5741–5765."
+17,[crossref] 38.
+17,"lyapustin, a."
+17,"; wang, y."
+17,"; laszlo, i."
+17,"; kahn, r."
+17,"; korkin, s."
+17,"; remer, l."
+17,"; levy, r."
+17,"; reid, j.s."
+17,multiangle implementation of atmospheric correction (maiac): 2.
+17,aerosol algorithm.
+17,geophys.
+17,"2011, 116, d03211."
+17,[crossref] 39.
+17,"zhang, z."
+17,"; wu, w."
+17,"; fan, m."
+17,"; wei, j."
+17,"; tan, y."
+17,"; wang, q."
+17,evaluation of maiac aerosol retrievals over china.
+17,atmos.
+17,environ.
+17,"2019, 202, 8–16."
+17,[crossref] 40.
+17,"barrero, m.a."
+17,"; orza, j.a.g."
+17,"; cabello, m."
+17,"; cantón, l."
+17,categorisation of air quality monitoring stations by evaluation of pm10 variability.
+17,total environ.
+17,"2015, 524, 225–236."
+17,[crossref]
+18,"remote sens. 2022, 14, 2933 18 of 18 41."
+18,"doxsey-whitfield, e."
+18,"; macmanus, k."
+18,"; adamo, s.b."
+18,"; pistolesi, l."
+18,"; squires, j."
+18,"; borkovska, o."
+18,"; baptista, s.r."
+18,"taking advantage of the improved availability of census data: a first look at the gridded population of the world, version 4."
+18,geogr.
+18,"2015, 1, 226–234."
+18,[crossref] 42.
+18,"lee, h.j."
+18,"; liu, y."
+18,"; coull, b.a."
+18,"; schwartz, j."
+18,"; koutrakis, p."
+18,a novel calibration approach of modis aod data to predict pm2.5 concentrations.
+18,atmos.
+18,"2011, 11, 7991–8002."
+18,[crossref] 43.
+18,"shi, t."
+18,"; hu, y."
+18,"; liu, m."
+18,"; li, c."
+18,"; zhang, c."
+18,"; liu, c."
+18,land use regression modelling of pm2.5 spatial variations in different seasons in urban areas.
+18,total environ.
+18,"2020, 743, 140744."
+18,[crossref] [pubmed] 44.
+18,"bai, h."
+18,"; yan, r."
+18,"; gao, w."
+18,"; wei, j."
+18,"; seong, m."
+18,spatial representativeness of pm2.5 monitoring stations and its implication for health assessment.
+18,air qual.
+18,atmos.
+18,"health 2022, 1, 1–11."
+18,[crossref] 45.
+18,"breiman, l."
+18,random forests.
+18,learn.
+18,"2001, 45, 5–23."
+18,[crossref] 46.
+18,tin kam ho random decision forests.
+18,"in proceedings of the 3rd international conference on document analysis and recognition, montreal, qc, canada, 14–16 august 1995; volume 1, pp."
+18,278–282.
+18,"gbd 2019 risk factors collaborators global burden of 87 risk factors in 204 countries and territories, 1990–2019: a systematic analysis for the global burden of disease study 2019."
+18,"lancet 2020, 396, 1223–1249."
+18,[crossref] 48.
+18,"mcduffie, e.e."
+18,"; martin, r.v."
+18,"; spadaro, j.v."
+18,"; burnett, r."
+18,"; smith, s.j."
+18,"; o’rourke, p."
+18,"; hammer, m.s.; van donkelaar, a."
+18,"; bindle, l."
+18,"; shah, v.; et al."
+18,source sector and fuel contributions to ambient pm2.5 and attributable mortality across multiple spatial scales.
+18,commun.
+18,"2021, 12, 3594."
+18,[crossref] 49.
+18,"yang, q."
+18,"; yuan, q."
+18,"; yue, l."
+18,"; li, t."
+18,"; shen, h."
+18,"; zhang, l."
+18,the relationships between pm2.5 and aerosol optical depth (aod) in mainland china: about and behind the spatio-temporal variations.
+18,environ.
+18,pollut.
+18,"2019, 248, 526–535."
+18,[crossref] 50.
+18,"christensen, m.w."
+18,"; neubauer, d."
+18,"; poulsen, c.a."
+18,"; thomas, g.e."
+18,"; mcgarragh, g.r."
+18,"; povey, a.c."
+18,"; proud, s.r."
+18,"; grainger, r.g."
+18,unveiling aerosol–cloud interactions—part 1: cloud contamination in satellite products enhances the aerosol indirect forcing estimate.
+18,atmos.
+18,"2017, 17, 13151–13164."
+18,[crossref] 51.
+18,"chand, d."
+18,"; wood, r."
+18,"; ghan, s.j."
+18,"; wang, m."
+18,"; ovchinnikov, m."
+18,"; rasch, p.j."
+18,"; miller, s."
+18,"; schichtel, b."
+18,"; moore, t."
+18,aerosol optical depth increase in partly cloudy conditions.
+18,geophys.
+18,atmos.
+18,"2012, 117."
+18,[crossref] 52.
+18,"zhao, w."
+18,"; zhang, n."
+18,"; sun, j."
+18,"spatiotemporal variations of cloud amount over the yangtze river delta, china."
+18,meteorol.
+18,"2014, 28, 371–380."
+18,[crossref] 53.
+18,"wang, y."
+18,"; wang, j."
+18,"; levy, r.c."
+18,"; shi, y.r."
+18,"; mattoo, s."
+18,"; reid, j.s."
+18,first retrieval of aod at fine resolution over shallow and turbid coastal waters from modis.
+18,geophys.
+18,"2021, 48, 1–9."
+18,[crossref] 54.
+18,"chudnovsky, a.a."
+18,"; kostinski, a."
+18,"; lyapustin, a."
+18,"; koutrakis, p."
+18,spatial scales of pollution from variable resolution satellite imaging.
+18,environ.
+18,pollut.
+18,"2013, 172, 131–138."
+18,[crossref] [pubmed] 55.
+18,"chudnovsky, a.a."
+18,"; tang, c."
+18,"; lyapustin, a."
+18,"; wang, y."
+18,"; schwartz, j."
+18,"; koutrakis, p."
+18,a critical assessment of high-resolution aerosol optical depth retrievals for fine particulate matter predictions.
+18,atmos.
+18,"2013, 13, 10907–10917."
+18,[crossref] 56.
+18,"mei, l."
+18,"; strandgren, j."
+18,"; rozanov, v."
+18,"; vountas, m."
+18,"; burrows, j.p."
+18,"; wang, y."
+18,a study of the impact of spatial resolution on the estimation of particle matter concentration from the aerosol optical depth retrieved from satellite observations.
+18,remote sens.
+18,"2019, 40, 7084–7112."
+18,[crossref] 57.
+18,"wu, j."
+18,"; liang, j."
+18,"; zhou, l."
+18,"; yao, f."
+18,"; peng, j."
+18,"impacts of aod correction and spatial scale on the correlation between high-resolution aod from gaofen-1 satellite and in situ pm2.5 measurements in shenzhen city, china."
+18,remote sens.
+18,"2019, 11, 2223."
+18,[crossref] 58.
+18,"wang, z."
+18,"; chen, l."
+18,"; tao, j."
+18,"; zhang, y."
+18,"; su, l."
+18,satellite-based estimation of regional particulate matter (pm) in beijing using vertical-and-rh correcting method.
+18,remote sens.
+18,environ.
+18,"2010, 114, 50–63."
+18,[crossref] 59.
+18,"zheng, t."
+18,"; bergin, m.h."
+18,"; hu, s."
+18,"; miller, j."
+18,"; carlson, d.e."
+18,estimating ground-level pm2.5 using micro-satellite images by a convolutional neural network and random forest approach.
+18,atmos.
+18,environ.
+18,"2020, 230, 117451."
+18,[crossref] 60.
+18,"karvosenoja, n."
+18,"; kangas, l."
+18,"; kupiainen, k."
+18,"; kukkonen, j."
+18,"; karppinen, a."
+18,"; sofiev, m."
+18,"; tainio, m."
+18,"; paunu, v.v."
+18,"; ahtoniemi, p."
+18,"; tuomisto, j.t.; et al."
+18,integrated modeling assessments of the population exposure in finland to primary pm2.5 from traffic and domestic wood combustion on the resolutions of 1 and 10 km.
+18,air qual.
+18,atmos.
+18,"health 2011, 4, 179–188."
+18,[crossref] 61.
+18,"tainio, m."
+18,"; sofiev, m."
+18,"; hujo, m."
+18,"; tuomisto, j.t."
+18,"; loh, m."
+18,"; jantunen, m.j."
+18,"; karppinen, a."
+18,"; kangas, l."
+18,"; karvosenoja, n."
+18,"; kupiainen, k.; et al."
+18,evaluation of the european population intake fractions for european and finnish anthropogenic primary fine particulate matter emissions.
+18,atmos.
+18,environ.
+18,"2009, 43, 3052–3059."
+18,[crossref] 62.
+18,"thompson, t.m."
+18,"; saari, r.k."
+18,"; selin, n.e."
+18,air quality resolution for health impact assessment: influence of regional characteristics.
+18,atmos.
+18,"2014, 14, 969–978."
+18,[crossref] 63.
+18,"yang, q."
+18,"; yuan, q."
+18,"; li, t."
+18,"ultrahigh-resolution pm2.5 estimation from top-of-atmosphere reflectance with machine learning: theories, methods, and applications."
+18,environ.
+18,pollut.
+18,"2022, 306, 119347."
+18,[crossref] [pubmed]

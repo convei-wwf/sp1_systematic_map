@@ -1,0 +1,721 @@
+page,p
+1,"remote sensing article an observing system simulation experiment framework for air quality forecasts in northeast asia: a case study utilizing virtual geostationary environment monitoring spectrometer and surface monitored aerosol data hyeon-kook kim 1 , seunghee lee 1 , kang-ho bae 1 , kwonho jeon 2 , myong-in lee 1 and chang-keun song 1, * 1 department of urban and environmental engineering, ulsan national institute of science and technology, ulsan 44919, korea; hyeonkook@unist.ac.kr (h.-k.k.); seungheelee@unist.ac.kr (s.l.); baegh1223@unist.ac.kr (k.-h.b.); milee@unist.ac.kr (m.-i.l.)"
+1,"2 global environment research division, national institute of environmental research, incheon 22689, korea; jeon0019@korea.kr * correspondence: cksong@unist.ac.kr; tel.: +82-52-217-2835 abstract: prior knowledge of the effectiveness of new observation instruments or new data streams for air quality can contribute significantly to shaping the policy and budget planning related to those instruments and data."
+1,"in view of this, one of the main purposes of the development and application of the observing system simulation experiments (osse) is to assess the potential impact of new  observations on the quality of the current monitoring or forecasting systems, thereby making this  framework valuable."
+1,"this study introduces the overall osse framework established to support air citation: kim, h.-k."
+1,"; lee, s."
+1,"; bae, quality forecasting and the details of its individual components."
+1,"furthermore, it shows case study k.-h."
+1,"; jeon, k."
+1,"; lee, m.-i."
+1,"; song, c.-k. results from northeast asia and the potential benefits of the new observation data scenarios on the an observing system simulation pm2.5 forecasting skills, including the pm data from 200 virtual monitoring sites in the gobi desert experiment framework for air quality forecasts in northeast asia: and north korean non-forest areas (newpm) and the aerosol optical depths (aod) data from south a case study utilizing virtual korea’s geostationary environment monitoring spectrometer (gems aod)."
+1,performance statistics geostationary environment suggest that the concurrent assimilation of the newpm and the pm data from current monitoring monitoring spectrometer and surface sites in china and south korea can improve the pm2.5 concentration forecasts in south korea by 66.4% monitored aerosol data.
+1,remote sens. on average for october 2017 and 95.1% on average for february 2018.
+1,"assimilating the gems aod 2022, 14, 389. https://doi.org/ improved the performance of the pm2.5 forecasts in south korea for october 2017 by approximately 10.3390/rs14020389 68.4% (~78.9% for february 2018)."
+1,this osse framework is expected to be continuously implemented academic editor: carmine serio to verify its utilization potential for various air quality observation systems and data scenarios.
+1,"hopefully, this kind of application result will aid environmental researchers and decision-makers in received: 16 november 2021 performing additional in-depth studies for the improvement of pm air quality forecasts."
+1,accepted: 12 january 2022 published: 14 january 2022 keywords: observing system simulation experiments; satellite observation; surface observation; publisher’s note: mdpi stays neutral data assimilation; air quality forecasting with regard to jurisdictional claims in published maps and institutional affil- iations.
+1,"introduction air quality deterioration owing to the abundance of pm2.5 (particulate matter with an copyright: © 2022 by the authors. aerodynamic diameter below 2.5 µm) is a widespread and severe environmental problem licensee mdpi, basel, switzerland. threatening human and ecosystem health [1]."
+1,air quality prediction or the forecasting of this article is an open access article pm2.5 air quality is a useful tool for the governmental agencies in terms of planning and for distributed under the terms and the public with regard to health protection and air quality management.
+1,"however, there conditions of the creative commons are significant differences between the predicted and observed concentrations, due to the attribution (cc by) license (https:// high uncertainties embedded in the numerical simulation of atmospheric pm."
+1,"therefore, creativecommons.org/licenses/by/ enhancing the accuracy of pm2.5 concentration prediction by adding more and reliable 4.0/). information to the modelling system is important."
+1,"data assimilation (da), where the remote sens."
+1,"2022, 14, 389. https://doi.org/10.3390/rs14020389 https://www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2022, 14, 389 2 of 21 observation information is combined with the atmospheric models, can help improve pm simulation by reducing the uncertainties in the input data, such as the initial conditions or boundary conditions."
+2,this means that a sufficient volume of observation data that adequately reflects the spatial and temporal features of aerosol pollution is necessary for the da to function properly [2].
+2,the regular surface monitoring of the air quality in the aforementioned areas would provide routine and basic information for the more optimized predictions and management of regional air quality.
+2,"in addition to surface observations, satellite observations can improve the accuracy of pm air quality forecasts by providing spatially extensively scanned air pollution data in real or semi-real time, including in locations that surface monitoring cannot cover."
+2,"until now, aerosol properties have been observed widely by a number of low earth orbit (leo) satellites [3]."
+2,"the korean geostationary environment monitoring spectrometer (gems) was launched on 18 february 2020, equipped with an uv-vis spectrometer that enables fast sampling at higher temporal resolutions than the leo satellites."
+2,the gems can scan the air quality in east asia up to eight times during the daytime and can continuously observe air pollutants over the asian region [3].
+2,"although complete datasets have not yet been publicly disclosed by the environmental satellite centre (esc, https://nesc.nier.go.kr/, accessed on 8 july 2021), it is necessary to develop a routine approach in advancing toward the use of these data with regard to improving air quality forecasting, in case they become available."
+2,"a tremendous amount of human and financial resources is required to develop an in- tegrated observation framework, including surface observation networks and space-borne satellites."
+2,"therefore, a prior evaluation of the potential benefits of using new observational instruments would be very helpful."
+2,"in this sense, the osse can objectively justify the additional value from and optimal design of new observation systems [4]."
+2,osses refer to a set of experiments that estimate the potential impact of future observing systems in an existing monitoring or forecasting system [4].
+2,"the osse has been widely applied in the meteorological research fields [5], but its use in the field of air quality management, particularly with regard to aerosols, has been limited [4]."
+2,the air quality over the korean peninsula varies significantly depending on the regional emission distributions and meteorological patterns.
+2,"the air quality of south korea, located downwind of large anthropogenic emissions and natural dust sources in north korea and china, is highly likely to be affected by transboundary particulate air pollution."
+2,"for example, biomass fuel-burning activities in north korea may significantly degrade the air quality in seoul, south korea [6]."
+2,"moreover, asian dust transported from the gobi desert and other deserts over the southern part of mongolia can affect the air quality of downwind regions, including eastern china and the korean peninsula [7,8]."
+2,we established an osse framework to improve the forecasting of pm2.5 air quality on the korean peninsula and in the surrounding areas in northeast asia.
+2,"in this paper, we first describe the sub-modules and key technical elements of the osse framework that we developed."
+2,"then, we present the results of an application of the osse framework that assesses the potential impacts of the expanded surface observation network and the utilization of aerosol optical depth (aod) observations from a virtual gems on the pm2.5 air quality forecasting in northeast asia for october 2017 and february 2018, respectively."
+2,materials and methods 2.1.
+2,osse framework for regional air quality forecasting the osse has a variety of practical applications and the organization of the osse framework depends heavily on its intended use.
+2,the osse framework developed here consists of five sub-modules: nature run (nr); synthetic observation (so); data assimila- tion (assim); control run and assimilation run (crnar); and comparison and feedback (cnf) (figure 1).
+3,"remote sens. 2022, 14, 389 3 of 21 figure 1."
+3,the schematic for the osse framework developed in the study.
+3,2.1.1.
+3,nature run module nr is the module where a simulation is performed to generate a reference that is close to the observed atmospheric state.
+3,this module uses a three-dimensional eulerian chemistry transport model with a good performance and at the highest available spatial resolution.
+3,"as shown in figure 1, for the simulation of the most natural air quality state, the community multiscale air quality (cmaq) model version 4.7.1 [9,10] was employed."
+3,"this cmaq model is being used as one of the main models at the air quality forecast center of korea (e.g., [11,12])."
+3,the meteorological fields were specified from the simulations by the weather research and forecasting model (wrf) version 3.9.1.
+3,the emissions input into the cmaq model were from the smoke-asia version 1.3.1 [13].
+3,the emission inventory for air pollutants used in the nr module was the comprehensive regional emissions inventory for atmospheric transport experiments version 2015 (create 2015) [14].
+3,the create 2015 is an updated version of the air pollutant emissions of the year 2010 from the anthropogenic source in east asia [14].
+3,"if necessary, a biogenic emission (e.g., megan [15]) and a biomass burning emission (e.g., bluesky [16] or global fire emissions database (gfed) [17]) model or database could be included in the nr module."
+3,the nr modelling system was established at a high-resolution system (9 km × 9 km) in east asia (figure 2).
+3,"the nr is not perfect, and its drawbacks should be investigated against the actual observational data; if the drawbacks could hinder the purpose of the osse, then the nr may need to be calibrated [5,18]."
+3,2.1.2.
+3,synthetic observation module the so module allows for synthetic observation corresponding to a potential ob- servation system or device.
+3,"for the so, the methodology that reconstructs the data of the potential measurement device considered in the scenario should be established."
+3,"so is created by reflecting the specifications of the potential observation equipment in the nr results, such as observation strategy, data retrieval algorithm, and observation error characteristics."
+3,"in this module, the so production is conducted in three steps: (1) scenario determination for the measuring equipment; (2) data creation and inputting for the so calculation; and (3) so calculation and preparing appropriate dimensional data for the scenario."
+3,specific details on the data reconstruction are presented in the “scenarios and data reconstruction” section.
+4,"remote sens. 2022, 14, 389 4 of 21 figure 2."
+4,the observing system simulation experiments (osse) testbed domain.
+4,"the nr boundary in blue shows the domain for the nature run; the cr and ar boundaries in red indicate the domain for control and assimilation runs, respectively."
+4,2.1.3.
+4,"assimilation module in this module, the synthetic observation (so) sets for pm2.5 , pm10 , and aod from the virtual systems are provided for another model to perform da in the spacetime di- mension of the model."
+4,"we used the wrf model coupled with chemistry (wrf–chem) version 3.9.1, implemented with the goddard chemistry aerosol radiation and trans- port (gocart) [19] aerosol scheme."
+4,the data assimilation technique was based on the three-dimensional variational (3-d var) method coded by the national centres for en- vironmental prediction (ncep) gridpoint statistical interpolation (gsi) [20–22].
+4,"the gsi 3d-var was used to determine the optimal analysis field that minimizes the cost function j, which is expressed as follows: 2j (x) = ( x − xb ) t b−1 ( x − xb ) + [y0 − h ( x )] t r−1 [y0 − h ( x )], (1) where x is a vector of analysis; xb is the forecast or background vector; y0 is an observation vector; b is the background error covariance (bec) matrix; h is an observation operator; and r is the observation error covariance matrix."
+4,"for the da of any observation with the gsi system, a model-simulated observation is required at the locations of the observation through the observation operator (or “forward operator”)."
+4,"model simulated pm2.5 , pm10 , and aod were reconstructed by aggregating individual aerosol species simulated from the wrf–chem gocart module."
+4,"pm2.5 and pm10 are calculated as follows: pm2.5 = ρ[ p2.5 + 1.375sulfate + bc1 + bc2 + 1.8(oc1 + oc2 ) + d1 + 0.286d2 + ss1 + 0.942ss2 ], (2) pm10 = ρ[ p2.5 + 1.375sulfate + bc1 + bc2 + 1.8(oc1 + oc2 ) + d1 + d2 + d3 + 0.87d4 + ss1 + ss2 + ss3 ], (3) where ρ is dry air density; p2.5 represents the unspecified fine aerosols; sulfate denotes sulfate aerosols; d1 , d2 , and d3 (ss1 ,ss2 , and ss3 ) denote mineral dust (sea salt) aerosols in the three smallest particle size bins and d4 is mineral dust in the fourth smallest particle size bin (effective radius of 4.5 mm); and oc1 and oc2 (bc1 and bc2 ) are hydrophobic and hydrophilic oc (bc), respectively."
+4,"the aod (τ) for each aerosol type is expressed as follows:   n ktop τ(λ) = ∑i=1 ∑k=1 eext λ, nri , re f f i cik ρdk dk , (4)"
+5,"remote sens. 2022, 14, 389 5 of 21 where eext denotes the extinction coefficient; cik represents the aerosol mass for species i at the kth layer; ρd is dry air density; and d denotes layer depth."
+5,"here, eext is defined as a function of wavelength λ, refractive index nri , and effective radius re f f i ."
+5,"additional details on the observation operators for pm2.5 , pm10 , and aod are reported by [23–25]."
+5,the background error covariance matrix b was computed using the national mete- orological center (nmc) method [26] that calculates systematic errors according to the model simulation time difference.
+5,"in this study, the 24-h and 12-h forecasting datasets were used to derive the model background error covariance for each month."
+5,"in this manner, the statistical data of error were generated for 15 aerosols (sulfate, carbon component, sand dust, sea salt, and the remaining ultrafine dust) in the gocart scheme [19]."
+5,"for the observation error covariance regarding the pm2.5 and pm10 data synthesized from the nr, the error formula used in the observing system experiment (ose) was applied."
+5,"measurement (ε m ) and representative (ε r ) errors were specified for each pm observation value (pobs ) with preset parameters as in the following formulas [25,27]: ε m = 1.5 + 0.0075 pobs , (5) r ∆x εr = εt ε m , (6) l where ε t is the adjustable parameter set as 0.5, as reported by schwartz et al. [28]; ∆x is the model grid resolution (27 km for domain 1 and 9 km for domain 2 in this case); and ε lu is the radius of the influence of an observation, specified as 3 km here according to elbern et al."
+5,then the total pm error (ε pm ) is represented as: q ε pm = ε2m + ε2r .
+5,"(7) the total observation errors for the virtual gems aod (ε aod ) are defined differently depending on whether the aod is observed over the ocean or on land: ε ocean = 0.185τ + 0.037, (8) ε land = 0.137τ + 0.08, (9) where, ε water and ε land are the observation errors at sea and on land, respectively [29]."
+5,additional details on the assimilation system are available in kim et al.
+5,"it is noted that the criteria for thinning performed before applying the gems aod value to the gsi data assimilation system were adjusted, which improved the quality of data assimilation significantly."
+5,"after the sensitivity tests, the thinning interval for the gems satellite aod data assimilation was empirically set to 27 km for domain 1 and 9 km for domain 2, in accordance with the horizontal resolution of the model."
+5,2.1.4.
+5,"control run and assimilation run module in this module, two types of models are established and are usually performed in parallel."
+5,the first is the control run (cr) that is performed without employing any da.
+5,"the second is the assimilation run (ar), where the synthesized data for the new instrument (i.e., so) are assimilated."
+5,"it is important to use different models for the nr and the control and assimilation runs (cr and ar) to avoid the identical or fraternal twin problem and to obtain more realistic results from the full osse [5,18]."
+5,the identical twin problem means that the forecast attains excessively optimistic results due to the use of the same model for both nature and assimilation runs.
+5,"instead of using the model setting used for nr (i.e., cmaq model), this crnar module uses the weather research and forecasting model coupled with chemistry (wrf–chem) model version 3.9.1 [31]."
+6,"remote sens. 2022, 14, 389 6 of 21 the cr and ar using wrf–chem were performed in the two domains simultane- ously."
+6,"the first modelling domain (domain 01, d01) covered the northeast asia region at a horizontal resolution of 27 km, and the second (d02) was nested within domain 1, focusing on the korean peninsula with a 9 km × 9 km horizontal grid system."
+6,the model grid system contained 31 vertical levels topped at 50 hpa.
+6,"in order to further avoid the identical twin problem and to induce more differences between the model results, we used the emission database for global atmospheric research–hemispheric transport of air pollution (edgar–htap) [32,33] as the anthropogenic emission input."
+6,"we also used biogenic emissions and dust emissions that were calculated online using the model of emissions of gases and aerosols from nature (megan) [15] and the gocart module, respectively (table 1)."
+6,"the employed physical parameterizations in the wrf–chem model include the grell-3d scheme for cumulus convection, the single moment-6 (wsm6) for cloud microphysics, the unified noah land surface model for the land surface, the yonsei university (ysu) scheme for the planetary boundary layer (pbl), the goddard shortwave scheme, and the rapid radiative transfer model (rrtm) for longwave."
+6,refer to [30] and the references therein.
+6,table 1.
+6,"the settings for the nature run (nr), control run (cr), and data assimilation run (ar) in the osse."
+6,"air quality model setting input observation for da cmaq version 4.7.1 with • horizontal resolution: a single domain of a 9 km × 9 km resolution system (438,806 grids) • vertical layers: 25 nr • gas-phase chemistry scheme: saprc99 ⊥ not used • aerosol scheme: aero5 ψ • meteorology: output of wrf version 3.9.1 • emissions: create2015 for anthropogenic sources wrf–chem version 3.9.1 model with • horizontal resolution: a mother domain of a 27 km × 27 km resolution system (22,225 grids) and son domain of a 9 km × 9 km resolution system (13,192 grids) cr • vertical layers: 31 not used • gas-phase chemistry scheme: mozart version 4 • aerosol scheme: gocart • emissions: edgar–htap for anthropogenic sources and megan for biogenic sources same as cr but for 6-hourly data assimilation pm10 and pm2.5 from nr at real station location ar 1 • data assimilation method: gsi 3d-var (1306 sites) pm10 and pm2.5 from nr at the locations of the real monitoring sites and 100 sites over the gobi desert ar 2 same as ar1 and ar3 but for the input observation for da area and 100 sites over the north korean non-forest area (1506 sites) aod from nr consistent with time and spatial ar 3 same as ar1 and ar2 but for the input observation for da resolution of the gems satellite (746,115 locations) ⊥ [34] and ψ [10]."
+6,2.1.5.
+6,"comparison and feedback module in this module, by comparing the errors of the cr and ar results to those from the nr, the value of the data scenarios that can be brought to the key research objective (e.g., the improvement of the fine pm forecasting score) was evaluated."
+6,three statistics were used to compare the model performance: mean bias (mb); root mean square error (rmse); and
+7,"remote sens. 2022, 14, 389 7 of 21 correlation coefficient (r)."
+7,"furthermore, a percentage of improvement (pi) [35] for the ar was calculated to quantify the efficiency of the model running with da (i.e., ar)."
+7,"the mb is expressed as follows: 1 n n ∑1 mean bias (mb) = ( mi − o i ) , (10) where mi denotes the modeled concentration; oi is the observed concentration; and n is the number of data samples."
+7,"the closer the mb is to 0, the more optimized the prediction performance."
+7,the rmse is determined as follows: s 2 ∑1n ( mi − oi ) rmse = .
+7,"(11) n when the rmse is close to 0, the model performs better in the prediction."
+7,the r is expressed as follows: !
+7,"1 n oi − o mi − m ( n − 1) ∑1 r= · , (12) σo σm where o, m, σo , and σm represent the mean and the standard deviation of the observations and model forecasts, respectively."
+7,"the value of r ranges between −1 and 1, with the strongest negative linear relationship at r = −1 and the strongest positive linear relationship at r = 1."
+7,"the percentage of improvement (pi) is expressed as follows: ""  # rmse ar 2  pi ar = 100 1 − , (13) rmsecr where rmse ar and rmsecr are the rmse values of ar and cr, respectively."
+7,"the closer the pi is to 100%, the more optimized the method improvement."
+7,implementation of pm2.5 forecasting 2.2.1.
+7,"spatial and temporal scope this study conducted a case study to highlight the purpose of applying the osse framework described in the methods section, for which we developed a testbed modelling system at a high horizontal resolution (9 km × 9 km) using cmaq (figure 2 and table 1), and examined whether it performed stably."
+7,the spatial domain of the osse testbed was in east asia.
+7,"specifically, the nr domain ranged within a latitude of 10 to 58◦ and longitude of 51 to 160◦ (shown in blue in figure 2)."
+7,"however, the cr and ar were conducted in domains (shown in red in figure 2) smaller than the nr."
+7,"by applying the new data scenarios to the testbed, we examined the improvement of the pm2.5 forecasting skills for october 2017 and february 2018."
+7,"it should be noted that the base year of the emission inventory (ei) that we used focused on the emissions of air pollutants in 2015, not 2017 or 2018."
+7,the ei for the year 2015 was the best available when we were conducting this study.
+7,2.2.2.
+7,"scenarios and data reconstruction using the nr results, we reconstructed the sets of synthetic observation (so) data for the new observation data scenarios in china and korea."
+7,the first scenario was sustaining the current surface monitoring networks in china and south korea without any changes (scenario 1 in figure 3).
+7,"using the nr results, the concentration fields of pm2.5 and pm10 were reconstructed as follows:"
+8,"remote sens. 2022, 14, 389 8 of 21 pm2.5 = [ fine sul f ate] + [ fine nitrate] + [ fine ammonium] + [ elemental carbon] +[ fine organic matter ] + [ fine sea salt] + [unspeciated fine particle], (14) pm10 = [pm2.5 ] + [coarse particle], (15) where coarse particles include the coarse mode particulates of sea salt, sulfate, ammonium, nitrate, and the inert crustal species (i.e., asoil and acors in the cmaqv4.7.1 model)."
+8,figure 3.
+8,the schematic of the osse scenarios.
+8,"then, the reconstructed pm2.5 and pm10 concentration fields at the surface monitoring sites (1306 sites) located in china and south korea were extracted and converted into the so database for the application of the data assimilation (i.e., ar1 in table 1)."
+8,"the second scenario entailed installing 100 pm observatories each in north korea and in the gobi desert, and a simulation was performed to evaluate whether this observing plan would be helpful for pm2.5 forecasting (scenario 2 in figure 3)."
+8,"in scenario 2, the reconstructed pm2.5 and pm10 concentration fields were also extracted at the locations of the added surface air monitoring sites in north korea and the gobi desert in the nr simulation data."
+8,"then, so datasets for pm2.5 and pm10 were derived at 200 virtual measurement points in north korea and the gobi desert and used for the data assimilation (ar2 in table 1)."
+8,the third scenario entailed utilizing the aod data from the korea geostationary orbiting satellites (gems) (scenario 3 in figure 3) for the data assimilation in the osse to improve the prediction accuracy of pm2.5 in the domain.
+8,the aod values were calculated based on the nr results from the area where the gems scanning range (yellow-lined area in figure 3) overlapped with the nr (blue-lined area in figure 4) and ar model domain
+9,"remote sens. 2022, 14, 389 9 of 21 areas (red-lined area in figure 3)."
+9,the aod values located in the overlapped areas between the nr and ar model domains (green area in figure 3) were extracted and used for data assimilation (ar3 in table 1).
+9,figure 4.
+9,the nr results for (a) october 2017 and (b) february 2018.
+9,top figures: the distribution of the monthly averages of the simulated pm2.5 mass concentrations in nr.
+9,mid-figures: the correlation coefficients between the nr pm2.5 concentration and the ground-observed pm2.5 concentration at the surface monitoring sites.
+9,bottom figures: the mean bias of the simulated pm2.5 mass concentrations.
+10,"remote sens. 2022, 14, 389 10 of 21 the so database construction for aod was more complicated than that for the pm."
+10,the virtual aod was reconstructed by integrating the aerosol extinction coefficient (bext ) with regard to the vertical height (z) of the nr model: z aod = bext (z) dz.
+10,(16) bext values were calculated from the mass concentration of the major aerosol compo- nents by applying the revised version of the interagency monitoring of protected visual environments (improve) algorithm [33] to the chemical and meteorological variables calculated from the nr: bext = 2.2 f s ( rh ) [small sul f ate] + 4.8 f l ( rh ) [ large sul f ate] + 2.4 f s ( rh ) [small nitrate] + 5.1 f l ( rh ) [ large nitrate] + 2.8 [small organic mass] + 6.1 [ large organic mass] + (17) 10 [ elemental carbon] + [ fine soil ] + 1.7 f ss ( rh ) [sea salt] + 0.6 [coarse particle].
+10,"details on splitting the aerosol species (i.e., sulfate, nitrate, and total organic mass) into small and large size groups and allocating hygroscopic growth factors for the different size groups of particles can be found in other studies (e.g., [35])."
+10,the cmaq aod data computed in this way were stored as potential gems aod data by selecting the data fields located within the determined scan area of the gems and then regridding them into each unit grid of the gems.
+10,"in this study, the virtual gems aod data were derived from the following equation: ∑ ω × aodcmaq  aodgems = , (18) ∑ω a overlapped where ω = a and aoverlapped is the individual cmaq grid area overlapping the grid gems area of the gems (agems ); and aodcmaq denotes the aod reconstructed using the nr results."
+10,the reconstructed gems aod data had a time resolution of 1 h from 00 to 07 utc at a horizontal resolution of approximately 7 km × 8 km.
+10,results 3.1.
+10,"performance of the nature run the proper evaluation of the nr in terms of its spatio-temporal variability and the prevention of the identical twin problem are recommended for the improvement of the osse framework and the achievement of more realistic results [5,18,36]."
+10,this section shows the evaluation results for the nr simulation performance.
+10,we evaluated the cmaq air quality model of the nr module by comparing the modelled and the observed pm2.5 concentrations at the surface monitoring networks located in china and korea for october 2017 and february 2018 (figure 4).
+10,"while the nr generally captures the temporal variability of the observed pm2.5 mass concentrations in the domain (correlation coefficient in figure 4), it tends to underpredict across the domain for both october 2017 and february 2018 (mean bias in figure 4)."
+10,"the temporal correlation coefficient in the nr tends to decrease further from the neighboring areas of the major metropolitan areas in china and south korea (e.g., beijing–tianjin–hebei region (bth), shandong peninsula (sdp), shanghai (sh), seoul metropolitan area (sma)) to the direction of remote areas (i.e., inner mongolia (inm)) in northern china."
+10,"for instance, the correlation coefficients (r) in october 2017 in bth, sdp, sh, and sma were as high as 0.7 (range 0.2–0.9), 0.7 (0.1–0.9), 0.6 (0.4–0.8), and 0.6 (0.3–0.8), respectively, and those in february 2018 were 0.6 (0.1–0.9), 0.6 (0.3–0.9), 0.6 (0.5–0.8), and 0.8 (0.6–0.9), respectively."
+10,the estimated correlation coefficients (r) in inner mongolia were 0.6 (0.2–0.9) in october 2017 and 0.2 (−0.2–0.7) in february 2018.
+10,"with regard to bias statistics, the nr also shows better performance in the neighboring areas of the major metropolitan areas than the remote arid land areas in northern china (i.e., inm)."
+10,the average concentrations of the
+11,"remote sens. 2022, 14, 389 11 of 21 observed pm2.5 in bth, sdp, sh, sma, and inm for october 2017 were 61, 46, 24, 17, and 38 µg/m3 , respectively, and those for february 2018 were 69, 59, 44, 32, and 34 µg/m3 , respectively."
+11,"for the observations provided, the nr results in october 2017 in bth, sdp, sh, sma, and inm were approximately 35, 40, 40, 56, and 62% lower than the observed values, respectively, and those in february 2018 were approximately 45, 41, 30, 50, and 63% lower, respectively."
+11,"a previous study [37] proposed the model performance goals (e.g., bias ≤ ± 30%) and criteria (e.g., bias ≤ ± 60%) for fine particulate matter, and these have been actively cited in numerous modelling studies."
+11,the nr biases shown over the major metropolitan areas in china and south korea generally meet the criteria but exceed the goals.
+11,"although the bias only meets the performance criteria, the nr results are being used for subsequent experiments because the current focus is on checking whether the entire system functions correctly."
+11,"in other words, the nr results are being used as the base data to derive the synthetic observation data (see the next section)."
+11,"future efforts should be made to improve the predictions in the underpredicted areas in order to achieve more realistic experiment results [5,18]."
+11,we discuss the model bias issue in the “nr module” section.
+11,potential effects of new observation data we attempted to quantify the impact of assimilating new surface pm and gems aod data on the pm2.5 mass concentration forecasts on the korean peninsula through the intercomparison of four parallel simulation experiments.
+11,"among the four simulation experiments, one served as the control run (cr) that did not employ any da and the other three served as the assimilation run (ar) group that employed 3dvar da using three sets of observation data."
+11,"as shown in table 1 and figure 3, ar1 assimilated the surface pm2.5 and pm10 observation data from the 1306 current monitoring sites in china and south korea, whereas ar2 assimilated the surface pm2.5 and pm10 observation from the current sites plus the virtual sites."
+11,ar3 performed the assimilation of solely gems aod.
+11,we performed da in one-way nested domains for northeast asia (d01) and the korean peninsula (d02) simultaneously at 6-h intervals in october 2017 and february 2018.
+11,"figure 5 shows the distribution of the monthly averages of the individual pm2.5 forecasts of nr, cr, ar1, ar2, and ar3 in the northeast asia domain (d01) at 00:00 utc."
+11,"together with the equivalent distribution on the korean peninsula, figure 6 shows the distribution of the monthly averages of the respective deviations of the individual pm2.5 forecasts from the corresponding nr values."
+11,"the nr results are supposed to be the observed concentrations (i.e., reference values)."
+11,"the pm2.5 concentrations simulated by the cr were usually higher than those by the nr in the gobi desert, the inland areas of eastern china, manchuria, and the korean peninsula in both october 2017 and february 2018 (figures 5 and 6)."
+11,"this large cr bias pattern for pm2.5 mass is partly attributed to the difference in the emission amounts used in wrf–chem (i.e., cr) and cmaq (i.e., nr)."
+11,"for example, the amounts of pm2.5 , so2 , nox, and nmvoc emissions in china that were used for the cr were 12.4, 33.2, 19, and 7.5% higher than those for the nr, respectively."
+11,it is also partly associated with the use of different aerosol modules in the nr and cr.
+11,"namely, the gocart aerosol module in the cr internally calculated the dust occurrences in the desert area, whereas the aero5 module in nr did not."
+12,"remote sens. 2022, 14, 389 12 of 21 figure 5."
+12,"the distribution of the average pm2.5 concentrations in east asia for the nr and ars (i.e., ar1, ar2, and ar3) at 00:00 universal time coordinated (utc) from october 2017 to february 2018 (unit: µg/m3 )."
+13,"remote sens. 2022, 14, 389 13 of 21 figure 6."
+13,"the distribution of the average pm2.5 concentrations on the korean peninsula for the nr, ars, and the ar mean bias against the nr pm2.5 at 00:00 utc from october 2017 to february 2018 (unit: µg/m3 )."
+14,"remote sens. 2022, 14, 389 14 of 21 the assimilation of surface pm observation data (i.e., ar1 and ar2) exhibited less overestimation tendencies compared to the cr in china and on the korean peninsula and yield pm2.5 concentration forecasts that were closer to the nr results (figure 5)."
+14,"both ar2 (assimilating new observation data along with current observation data) and ar1 (assimilating just current observation data) appeared to provide almost similar pm2.5 concentration forecasts in d01, but there were differences in pm2.5 concentration forecast values in the gobi desert and certain areas of the korean peninsula."
+14,ar2 was found to further reduce the overpredictions in the gobi desert and north korea compared to ar1 (figures 5 and 6).
+14,this demonstrates that adding 200 gobi desert and north korean observation sites to the existing monitoring networks in china and the korean peninsula can improve pm2.5 prediction.
+14,"in addition to north korea, parts of the seoul metropolitan area (sma) in south korea experienced some improvement in the initial field of pm (figure 6)."
+14,"the ar2 mb values across north korea were smaller than the ar1 mb values, and the ar2 mb values in south korea also somewhat decreased more than the ar1 mb in both october 2017 and february 2018."
+14,"for example, a decrease in mb was observed across north korea and in the western part of the sma of south korea."
+14,"this improvement is partly attributed to the pollution characteristics of the sma, which is constantly exposed to multiple sources of aerosol pollution from the local and surrounding areas."
+14,a previous study based on the potential source density function (psdf) and backward trajectory analysis reported that coal burning for industrial processes in north korea contributed to a high level of sulfate aerosols in the sma during october 2015 [38].
+14,"including the observation of such particulate pollution in north korea in the current da system reduced the bias errors of the pm2.5 forecasts in north korea initially, and subsequently in the sma of south korea."
+14,"when only the satellite aod data were assimilated (ar3), pm forecasts improved to a certain level (figures 5 and 6), although the improvement in the initial field was less than that of the ar1 and ar2 cases."
+14,additional quantitative analyses to determine the model that achieved the most optimized improvement in the pm2.5 forecasts are presented in figures 7–9.
+14,"a set of scatter plots presenting three statistics (r, mb, and rmse) in figure 7 help to determine which model offers relatively more optimized pm2.5 forecasts at 00:00 utc across south korea."
+14,"for october 2017 (february 2018), the control run (cr) demonstrated a moderate correlation and the model’s overestimation and large errors were comparable with the fictitious observations (i.e., nr) at the surface monitoring sites in south korea, as shown by the r, mb, and rmse values of 0.42 (0.29), 8.05 µg/m3 (8.63 µg/m3 ), and 10.08 µg/m3 (16.39 µg/m3 ), respectively."
+14,"however, the assimilation runs (ar1–ar3) showed significant improvements in the pm2.5 forecasts."
+14,"in october 2017 (february 2018), ar1 and ar2 at 00:00 utc showed an increase of approximately 0.3 (0.5) in the correlation coefficient (r) value and a respective decrease of approximately 6.0 µg/m3 (6.8 µg/m3 ) and 6.6 µg/m3 (11.4 µg/m3 ) in the mb and rmse values, respectively, compared to the cr, thereby indicating similar improvements for pm2.5 forecasts."
+14,the effect of the ar3 on the pm2.5 forecasts was slightly smaller than those of the other assimilation cases.
+14,"ar3 showed an improvement in the pm2.5 forecasts at 00:00 utc, an increase in the r value in october 2017 (february 2018) of approximately 0.02 (0.09), and a decrease in the mb and rmse values in october 2017 (february 2018) of approximately 5.2 µg/m3 (6.5 µg/m3 ) and 4.5 µg/m3 (7.9 µg/m3 ), respectively."
+14,"in short, these results suggest that the addition of new surface pm2.5 data and the sole use of gems aod data are very effective in improving the initial field of pm air quality forecasts."
+14,"figure 8 shows the time series of pm2.5 concentration forecasts (i.e., cr, ars) and the corresponding observations (i.e., nr) for the experimental periods."
+14,the line graphs show the averaged hourly pm2.5 mass concentrations of nr and ars across the 208 monitoring sites in south korea.
+15,"remote sens. 2022, 14, 389 15 of 21 figure 7."
+15,scatter plots for the ar pm2.5 mass concentrations (unit: µg/m3 ) and the corresponding nr pm2.5 at 208 monitoring sites in south korea at 00:00 utc from october 2017 to february 2018.
+15,figure 8.
+15,"the time series of the simulated results for pm2.5 of nr, cr, and ars at 208 monitoring sites in south korea in october 2017 and february 2018."
+16,"remote sens. 2022, 14, 389 16 of 21 figure 9."
+16,the diurnal variations of the percentage improvement (pi) of pm2.5 forecasts by ars along with the rmse of the cr (rmse_cr) at the 208 monitoring sites in south korea for october 2017 and february 2018.
+16,"all models, including the cr and ars, captured the diurnal variations of the nr pm2.5 mass concentrations both in october 2017 and february 2018."
+16,"the cr consistently and severely overpredicted, whereas the ars tended to approach the observation levels."
+16,"assimilating the aod produced (ar3) more optimized forecasts than assimilating the surface observations (ar1 and ar2) for most hours in october 2017, whereas assimilating the surface pm produced better forecasts than assimilating the aod in february 2018."
+16,"this pattern may be attributed to the different vertical distributions and source characteristics of surface pm and satellite aod values [23,39,40]."
+16,"for instance, the pm2.5 aerosols in the relatively warm season with fewer strong wind events (october 2017) are more likely to be distributed at higher mixing heights and influenced by slowly injected pollution from local sources, such as industrial activities and automobiles, in addition to the pollution in the medium-range transported by moderate winds."
+16,"moreover, pm2.5 tends to contribute to optical properties more than coarse size particles in the absence of dust events from the desert (e.g., [39])."
+16,"therefore, in this circumstance, the effect of assimilating the da is likely to last longer because the da of satellite aod treats the total aerosol mass throughout the vertical column and maintains similar vertical structures [40]."
+16,"in contrast with october, the pm2.5 aerosols in the cold season with frequent strong wind events (february 2018) are more likely to be distributed at lower mixing heights and influenced by the rapidly injected pollution from local sources, such as residential heating and automobiles, as well as the pollution in the long-range transported from the remote sources, including dust transported from the desert areas by strong winds."
+16,"therefore, the effect of the da is likely to fade quickly when assimilating the surface pm observations [40]."
+16,"meanwhile, the forcasting skills of ar1 and ar2 showed a marginal difference, imply- ing a small potential benefit for pm2.5 concentration forecasts on the korean peninsula due to the inclusion of the new surface observation data into the da process."
+16,"for example, ar1 overpredicted the hourly pm2.5 concentrations in october 2017 and february 2018 by factors of 2.7 and 1.26, respectively, and ar2 overpredicted the same concentrations by factors of 2.66 and 1.24, respectively."
+16,"this represents reductions of approximately 1.1% and 1.4% in the overprediction rates of ar2 against ar1 in october 2017 and february 2018, respectively."
+17,"remote sens. 2022, 14, 389 17 of 21 figure 9 shows the percentage of improvement (pi) of the forecasting skill by the ars (i.e., pi_ar1, pi_ar2, and pi_ar3), along with the forecasting errors of the base model (i.e., rmse_cr) as a function of the time of day for october 2017 and february 2018."
+17,"the pi values in october 2017 show that assimilating the satellite aod can significantly improve pm2.5 concentration forecasts more than assimilating the surface pm (i.e., greater values of pi_ar3 than of pi_ar1 or pi_ar2), whereas those from february 2018 show the opposite trend."
+17,"the cause of these patterns is explained above (i.e., the different vertical distributions and source characteristics of the surface pm and satellite aod values)."
+17,"in october 2017, the hourly rmse values for the cr varied from 9.0 to 10.3 µg/m3 ."
+17,"in this period, solely assimilating the current surface observation resulted in an approximately 63.7% (=pi_ar1) improvement in the pm2.5 concentration forecasts, assimilating the new surface observations along with the current surface observations resulted in an approxi- mately 66.4% (=pi_ar_2) improvement, and solely assimilating the satellite aod resulted in an approximately 68.4% (=pi_ar3) improvement."
+17,"in february 2018, the hourly rmse values for the cr varied from 13.4 to 15.8 µg/m3 ."
+17,"in this period, only assimilating the current surface observations (ar1) or assimilating the new surface observations along with the current surface observations (ar2) improved forecasts by approximately 95.1% (i.e., pi_ar1 ≈ pi_ar2) and solely assimilating the satellite aod improved forecasts by approximately 78.9% (=pi_ar3)."
+17,"in october 2017, the pi values by ar1 and ar2 were the highest at approximately 88% and 89% at 00:00 utc lead time, respectively, then decreased gradually until 08:00, increased for approximately 2 h, decreased again until 17:00, and then slowly increased."
+17,"in contrast with ar1 and ar2, ar3 started at approximately 69.4% at 00:00 utc lead time, which was approximately 1% higher than the average level, peaked at 06:00 (pi ~ 81%), decreased until 08:00, rebounded for 2 h, fell until 17:00, and then increased gradually."
+17,"according to the comparison between the pi values of ar1 and ar2, including new observations from the gobi desert and north korea in the current da improved the pm2.5 concentration forecasts by 4.2% in october 2017."
+17,the daily fluctuations of pi values calculated for ar1–ar3 in february 2018 were neither dynamic nor large compared to october 2017.
+17,"the maximum pi values (~98%) by ar1 and ar2 were commonly derived in the early morning at 01:00 utc (i.e., morning at 10:00 korea standard time (kst)) lead time and the minimum values (~92%) in the early evening at 20:00 utc (early morning at 5:00 kst) lead time."
+17,"ar3 started at 90% at 00:00 utc lead time, peaked at 02:00 (~90.5%), and then decreased gradually until the end time."
+17,"in contrast with the october 2017 results, the effects of the new observations from the gobi desert and north korea on the current da were likely to be marginal in terms of improving the pm2.5 concentration forecasts in february 2018 (~0.05%)."
+17,"overall, pi values increased on average by approximately 45% upon assimilating the surface observations and by approximately 15% upon assimilating the satellite aod in february 2018 compared to the cases in october 2017."
+17,"according to the mean diurnal cycles of pi, the maxima-to-minima amplitudes for ar1, ar2, and ar3 were approximately 39.3, 36.3, and 21.8%, respectively, in october 2017 and approximately 6.0, 5.9, and 21.7%, respectively, in february 2018."
+17,"therefore, the effects of the da on the pm2.5 concentration forecasts were larger and more stable in february 2018 than in october 2017."
+17,"previous studies reported that the concurrent da of both surface pm2.5 and satellite aod observations produced more optimized forecasting scores than the da of a single source of observation [28,40]."
+17,"in future studies, both gems aod and surface pm observa- tions should be assimilated together over the testbed to examine the synergistic effect of assimilating different aerosol observations on pm2.5 forecasts."
+18,"remote sens. 2022, 14, 389 18 of 21 4."
+18,discussion 4.1.
+18,"nature run module the nr in the current osse framework represented the temporal variations of the observed pm2.5 mass concentrations and showed significant underpredictions in the do- main, especially in the suburban and remote areas (refer to the “performance of the nature run” section)."
+18,"this bias should be reduced to ensure more realistic osse experiments [5,18]."
+18,"the occurrence of bias and errors in the pm air quality simulations are associated with the complicated outer sources, such as the inaccurate emissions and meteorological data and ill-defined initial and boundary conditions for the model, as well as the model’s systematic bias associated with the inadequate representation of the atmospheric process [37,41]."
+18,"in our case, one of the possible causes of the significant underpredictions is the outdated air quality model."
+18,"the cmaq model of the nr in the current osse framework is equipped with outdated modules for atmospheric chemistry and organic aerosol treatment compared to the recent versions of the cmaq model (e.g., [42])."
+18,"therefore, to derive more realistic nr results in the osse framework, the cmaq model employed in the current osse framework needs to be updated."
+18,data scenario the installation of 100 new observation sites in the gobi desert and in north korea is hypothetical.
+18,this scenario was created solely to assess the feasibility of applying the developed osse framework.
+18,"the model experiment showed that assimilating new pm data from the 100 gobi desert observation sites (i.e., ar2) was effective for pm2.5 forecasts in the desert area, but its effect on pm2.5 forecasts on the korean peninsula area was not clearly shown."
+18,"this is likely due to the fact that there were no dust events severely influencing the air quality in south korea at the time of modelling, such as asian dust events [7]."
+18,"for the period that asian dust events severely affect the air quality in south korea, this scenario is expected to contribute to improving pm2.5 forecasts on the korean peninsula."
+18,assimilation run module we used the 3dvar method for data assimilation in the current osse framework.
+18,the realistic estimates of background error covariance (bec) are critical for an effective osse [5].
+18,"the 3dvar method is computationally efficient and allows for multiple species in the analysis vector, but its weak point is the use of invariant bec [28]."
+18,"as mentioned in previous studies (e.g., [24,28,39]), we may consider introducing advanced da methods, such as the ensemble kalman filter (enkf), which compute multivariate and flow-dependent bec into the current osse framework."
+18,"computing power, which has continued to advance until recently, continues to open up opportunities for easing operational applications, even as the number of control variables increases in enkf."
+18,data assimilation system the capability of the data assimilation system adopted in this study can be expanded by constantly adding new observation data from various sources [28].
+18,"recently, a collab- orative multidimensional atmospheric data-sharing platform (cmads) was established in the national strategic project of korea for fine particulate matter."
+18,"it aims to integrate various air quality and meteorological datasets in northeast asia and to share them with relevant stakeholders, including the atmospheric environmental researchers and practi- tioner communities."
+18,gems data are also expected to be shared via this platform in the near future.
+18,linking the current osse framework to the cmads may allow for the application and evaluation of the system in various ways.
+18,"for example, through the assimilation of the planetary boundary layer height (pblh) derived by lidar observation shared in cmads, we are likely to experience a certain level of improvement in the pm2.5 forecasts."
+18,this is because pblh is one of the important determinants of the mixing volume of pollutants in the atmosphere ([39] and references therein).
+18,"in addition to aod, various gas-phase data"
+19,"remote sens. 2022, 14, 389 19 of 21 observed by the gems can be regarded as important when used in the data assimilation system in the current osse framework."
+19,conclusions we presented a recently developed osse framework and the results of a case study conducted over northeast asia.
+19,"in the case study, we focused on the potential benefits of new pm observations from the gobi desert and north korea (newpm) and new aod observations from the gems (gems aod) being added into the data assimilation with regard to the performance of the pm2.5 forecasts."
+19,"through the case study, we preliminarily tested and verified the utilization potential of the osse that we had established."
+19,"for example, the performance statistics suggest that the concurrent assimilation of newpm and the pm data from current monitoring sites in china and south korea can improve the pm2.5 concentration forecasts in south korea by 66.4% on average for october 2017 (~95.1% on average for february 2018)."
+19,"in addition, assimilating even just the gems aod could derive an approximately 68.4% improvement in the performance of the pm2.5 forecasts in south korea for october 2017 (~78.9% for february 2018)."
+19,we found that the osse framework could be a useful platform for preparing new air quality observations or data systems by providing the adequate evaluation of them in advance.
+19,further studies over additional periods with new observation scenarios in other locations using bigger cr and ar boundaries and employing additional updated versions of the emissions database and model systems may be required; they would verify the feasibility of the current osse framework.
+19,"author contributions: conceptualization, c.-k.s., k.j. and h.-k.k.; methodology, c.-k.s., s.l., m.-i.l. and h.-k.k.; software, s.l. and h.-k.k.; validation, k.-h.b. and h.-k.k.; formal analysis, s.l., k.-h.b. and h.-k.k.; investigation, s.l., k.-h.b. and h.-k.k.; writing—original draft preparation, h.-k.k.; writing—review and editing, c.-k.s., m.-i.l. and h.-k.k.; visualization, h.-k.k. and s.l.; supervision, c.-k.s.; project administration, c.-k.s. and k.j.; funding acquisition, c.-k.s. and k.j."
+19,all authors have read and agreed to the published version of the manuscript.
+19,"funding: this work was supported by a grant from the national institute of environmental research (nier), funded by the ministry of environment (me) of the republic of korea (nier-2020-04-02-086 and nier-2021-04-02-189)."
+19,"this research was also supported by the friend (fine particle research initiative in east asia considering national differences) project through the national research foun- dation of korea (nrf), funded by the ministry of science and ict (grant no."
+19,2020m3g1a1114615).
+19,"in addition, this research was supported by basic science research program through the nrf funded by the ministry of education (2019r1i1a1a01045978)."
+19,institutional review board statement: not applicable.
+19,informed consent statement: not applicable.
+19,data availability statement: the data that support the findings of this study are available from the corresponding author (c.-k.
+19,"song), upon reasonable request."
+19,acknowledgments: the authors would like to thank e.-r.
+19,kim at the ulsan national institute of science and technology (unist) for the preparation of the meteorological modeling data and also k.-h kim at unist for helping with the installation of the wrf–chem gsi system used in this study.
+19,conflicts of interest: the authors declare no conflict of interest.
+19,references 1.
+19,world health organization regional office for europe.
+19,"review of evidence on health aspects of air pollution: revihaap project: technical report; world health organization; regional office for europe: copenhagen, denmark, 2021."
+19,"carmichael, g.r."
+19,"; sandu, a."
+19,"; chai, t."
+19,"; daescu, d.n."
+19,"; constantinescu, e.m."
+19,"; tang, y."
+19,predicting air quality: improvements through advanced methods to integrate models and measurements.
+19,comput.
+19,"2008, 227, 3540–3571."
+19,[crossref] 3.
+19,"kim, j."
+19,"; jeong, u."
+19,"; ahn, m.-h."
+19,"; kim, j.h."
+19,"; park, r.j."
+19,"; lee, h."
+19,"; song, c.h."
+19,"; choi, y.-s."
+19,"; lee, k.-h."
+19,"; yoo, j.-m.; et al."
+19,new era of air quality monitoring from space: geostationary environment monitoring spectrometer (gems).
+19,meteorol.
+19,"2020, 101, e1–e22."
+19,[crossref]
+20,"remote sens. 2022, 14, 389 20 of 21 4."
+20,"timmermans, r."
+20,"; lahoz, w."
+20,"; attié, j.-l."
+20,"; peuch, v.-h."
+20,"; edwards, d."
+20,"; eskes, h."
+20,"; builtjes, p."
+20,"observing system simulation experiments (osses) for air quality applications; steyn, d.g., chaumerliac, n., eds."
+20,"; air pollution modeling and its application xxiv; springer international publishing: cham, switzerland, 2016; pp."
+20,581–585.
+20,"masutani, m."
+20,"; schlatter, t.w."
+20,"; errico, r.m."
+20,"; stoffelen, a."
+20,"; andersson, e."
+20,"; lahoz, w."
+20,"; woollen, j.s."
+20,"; emmitt, g.d."
+20,"; riishøjgaard, l.-p."
+20,"; lord, s.j."
+20,observing system simulation experiments.
+20,"in data assimilation: making sense of observations; lahoz, w., khattatov, b., menard, r., eds."
+20,"; springer berlin heidelberg: berlin/heidelberg, germany, 2010; pp."
+20,647–679.
+20,"kim, i.s."
+20,"; lee, j.y."
+20,"; wee, d."
+20,"; kim, y.p."
+20,"estimation of the contribution of biomass fuel burning activities in north korea to the air quality in seoul, south korea: application of the 3d-pscf method."
+20,atmos.
+20,"2019, 230, 104628."
+20,[crossref] 7.
+20,"jung, m.-i."
+20,"; son, s.-w."
+20,"; kim, h.c."
+20,"; kim, s.-w."
+20,"; park, r.j."
+20,"; chen, d."
+20,"contrasting synoptic weather patterns between non-dust high particulate matter events and asian dust events in seoul, south korea."
+20,atmos.
+20,environ.
+20,"2019, 214, 116864."
+20,[crossref] 8.
+20,"filonchyk, m."
+20,characteristics of the severe march 2021 gobi desert dust storm and its impact on air pollution in china.
+20,"chemosphere 2022, 287, 132219."
+20,[crossref] [pubmed] 9.
+20,"byun, d."
+20,"; schere, k.l."
+20,"review of the governing equations, computational algorithms, and other components of the models-3 community multiscale air quality (cmaq) modeling system."
+20,"2006, 59, 51–77."
+20,[crossref] 10.
+20,"foley, k.m."
+20,"; roselle, s.j."
+20,"; appel, k.w."
+20,"; bhave, p.v."
+20,"; pleim, j.e."
+20,"; otte, t.l."
+20,"; mathur, r."
+20,"; sarwar, g."
+20,"; young, j.o."
+20,"; gilliam, r.c.; et al."
+20,incremental testing of the community multiscale air quality (cmaq) modeling system version 4.7.
+20,geosci.
+20,model dev.
+20,"2010, 3, 205–226."
+20,[crossref] 11.
+20,"chang, l.-s."
+20,"; cho, a."
+20,"; park, h."
+20,"; nam, k."
+20,"; kim, d."
+20,"; hong, j.-h."
+20,"; song, c.-k."
+20,human-model hybrid korean air quality forecasting system.
+20,air waste manag.
+20,assoc.
+20,"2016, 66, 896–911."
+20,[crossref] [pubmed] 12.
+20,"lee, j.-j."
+20,"; lee, j.-b."
+20,"; kim, o."
+20,"; heo, g."
+20,"; lee, h."
+20,"; lee, d."
+20,"; kim, d.-g."
+20,"; lee, s.-d."
+20,crop residue burning in northeast china and its impact on pm2.5 concentrations in south korea.
+20,"atmosphere 2021, 12, 1212."
+20,[crossref] 13.
+20,"woo, j.-h."
+20,"; choi, k.-c."
+20,"; kim, h.k."
+20,"; baek, b.h."
+20,"; jang, m."
+20,"; eum, j.-h."
+20,"; song, c.h."
+20,"; ma, y.-i."
+20,"; sunwoo, y."
+20,"; chang, l.-s.; et al."
+20,development of an anthropogenic emissions processing system for asia using smoke.
+20,atmos.
+20,environ.
+20,"2012, 58, 5–13."
+20,[crossref] 14.
+20,"woo, j.-h."
+20,"; kim, y."
+20,"; kim, h.-k."
+20,"; choi, k.-c."
+20,"; eum, j.-h."
+20,"; lee, j.-b."
+20,"; lim, j.-h."
+20,"; kim, j."
+20,"; seong, m."
+20,development of the create inventory in support of integrated climate and air quality modeling for asia.
+20,"sustainability 2020, 12, 7930."
+20,[crossref] 15.
+20,"guenther, a."
+20,"; karl, t."
+20,"; harley, p."
+20,"; wiedinmyer, c."
+20,"; palmer, p.i."
+20,"; geron, c."
+20,estimates of global terrestrial isoprene emissions using megan (model of emissions of gases and aerosols from nature).
+20,atmos.
+20,"2006, 6, 3181–3210."
+20,[crossref] 16.
+20,"larkin, n.k."
+20,"; o’neill, s.m."
+20,"; solomon, r."
+20,"; raffuse, s."
+20,"; strand, t."
+20,"; sullivan, d.c."
+20,"; krull, c."
+20,"; rorig, m."
+20,"; peterson, j."
+20,"; ferguson, s.a."
+20,the bluesky smoke modeling framework.
+20,"wildland fire 2009, 18, 906–920."
+20,[crossref] 17.
+20,"van der werf, g.r."
+20,"; randerson, j.t."
+20,"; giglio, l.; van leeuwen, t.t."
+20,"; chen, y."
+20,"; rogers, b.m."
+20,"; mu, m.; van marle, m.j.e."
+20,"; morton, d.c."
+20,"; collatz, g.j.; et al."
+20,global fire emissions estimates during 1997–2016.
+20,earth syst.
+20,"data 2017, 9, 697–720."
+20,[crossref] 18.
+20,"timmermans, r.m.a."
+20,"; lahoz, w.a."
+20,"; attié, j.l."
+20,"; peuch, v.h."
+20,"; curier, r.l."
+20,"; edwards, d.p."
+20,"; eskes, h.j."
+20,"; builtjes, p.j.h."
+20,observing system simulation experiments for air quality.
+20,atmos.
+20,environ.
+20,"2015, 115, 199–213."
+20,[crossref] 19.
+20,"chin, m."
+20,"; rood, r.b."
+20,"; lin, s.-j."
+20,"; müller, j.-f."
+20,"; thompson, a.m."
+20,atmospheric sulfur cycle simulated in the global model gocart: model description and global properties.
+20,geophys.
+20,atmos.
+20,"2000, 105, 24671–24687."
+20,[crossref] 20.
+20,"purser, r.j."
+20,"; wu, w.-s."
+20,"; parrish, d.f."
+20,"; roberts, n.m."
+20,numerical aspects of the application of recursive filters to variational statistical analysis.
+20,part i: spatially homogeneous and isotropic gaussian covariances.
+20,weather rev.
+20,"2003, 131, 1524–1535."
+20,[crossref] 21.
+20,"purser, r.j."
+20,"; wu, w.-s."
+20,"; parrish, d.f."
+20,"; roberts, n.m."
+20,numerical aspects of the application of recursive filters to variational statistical analysis.
+20,part ii: spatially inhomogeneous and anisotropic general covariances.
+20,weather rev.
+20,"2003, 131, 1536–1548."
+20,[crossref] 22.
+20,"wu, w.-s."
+20,"; purser, r.j."
+20,"; parrish, d.f."
+20,three-dimensional variational analysis with spatially inhomogeneous covariances.
+20,weather rev.
+20,"2002, 130, 2905–2916."
+20,[crossref] 23.
+20,"jiang, z."
+20,"; liu, z."
+20,"; wang, t."
+20,"; schwartz, c.s."
+20,"; lin, h.-c."
+20,"; jiang, f."
+20,probing into the impact of 3dvar assimilation of surface pm10 observations over china using process analysis.
+20,geophys.
+20,atmos.
+20,"2013, 118, 6738–6749."
+20,[crossref] 24.
+20,"liu, z."
+20,"; liu, q."
+20,"; lin, h.-c."
+20,"; schwartz, c.s."
+20,"; lee, y.-h."
+20,"; wang, t."
+20,three-dimensional variational assimilation of modis aerosol optical depth: implementation and application to a dust storm over east asia.
+20,geophys.
+20,atmos.
+20,"2011, 116, 399–411."
+20,[crossref] 25.
+20,"pagowski, m."
+20,"; liu, z."
+20,"; grell, g.a."
+20,"; hu, m."
+20,"; lin, h.c."
+20,"; schwartz, c.s."
+20,implementation of aerosol assimilation in gridpoint statistical interpolation (v.
+20,3.2) and wrf-chem (v.
+20,3.4.1).
+20,geosci.
+20,model dev.
+20,"2014, 7, 1621–1627."
+20,[crossref] 26.
+20,"parrish, d.f."
+20,"; derber, j.c."
+20,the national meteorological center’s spectral statistical-interpolation analysis system.
+20,weather rev.
+20,"1992, 120, 1747–1763."
+20,[crossref] 27.
+20,"elbern, h."
+20,"; strunk, a."
+20,"; schmidt, h."
+20,"; talagrand, o."
+20,emission rate and chemical state estimation by 4-dimensional variational inversion.
+20,atmos.
+20,"2007, 7, 3749–3769."
+20,[crossref] 28.
+20,"schwartz, c.s."
+20,"; liu, z."
+20,"; lin, h.-c."
+20,"; mckeen, s.a."
+20,simultaneous three-dimensional variational assimilation of surface fine particulate matter and modis aerosol optical depth.
+20,geophys.
+20,atmos.
+20,"2012, 117, 110–117."
+20,[crossref] 29.
+20,"choi, m."
+20,"; kim, j."
+20,"; lee, j."
+20,"; kim, m."
+20,"; park, y.j."
+20,"; holben, b."
+20,"; eck, t.f."
+20,"; li, z."
+20,"; song, c.h."
+20,goci yonsei aerosol retrieval version 2 products: an improved algorithm and error analysis with uncertainty estimation from 5-year validation over east asia.
+20,atmos.
+20,"2018, 11, 385–408."
+20,[crossref]
+21,"remote sens. 2022, 14, 389 21 of 21 30."
+21,"kim, g."
+21,"; lee, s."
+21,"; im, j."
+21,"; song, c.-k."
+21,"; kim, j."
+21,"; lee, m.-i."
+21,aerosol data assimilation and forecast using geostationary ocean color imager aerosol optical depth and in-situ observations during the korus-aq observing period.
+21,giscience remote sens.
+21,"2021, 58, 1175–1194."
+21,[crossref] 31.
+21,"grell, g.a."
+21,"; peckham, s.e."
+21,"; schmitz, r."
+21,"; mckeen, s.a."
+21,"; frost, g."
+21,"; skamarock, w.c."
+21,"; eder, b."
+21,fully coupled “online” chemistry within the wrf model.
+21,atmos.
+21,environ.
+21,"2005, 39, 6957–6975."
+21,[crossref] 32.
+21,"janssens-maenhout, g."
+21,"; dentener, f."
+21,"; van aardenne, j."
+21,"; monni, s."
+21,"; pagliari, v."
+21,"; orlandini, l."
+21,"; klimont, z."
+21,"; kurokawa, j."
+21,"; akimoto, h."
+21,"; ohara, t.; et al."
+21,"edgar-htap: a harmonized gridded air pollution emission dataset based on national inventories; european commission, joint research centre, institute for environment and sustainability: luxemburg, 2012; pp."
+21,available online: https://publications.jrc.ec.europa.eu/repository/handle/jrc68434 (accessed on 15 october 2020).
+21,"hand, j.l."
+21,"; copeland, s.a."
+21,"; day, d.e."
+21,"; dillner, a.m."
+21,"; indresand, h."
+21,"; malm, w.c."
+21,"; mcdade, c.e."
+21,"; moore, c.t."
+21,"; pitchford, m.l."
+21,"; schichtel, b.a.; et al."
+21,improve (interagency monitoring of protected visual environments): spatial and seasonal patterns and temporal variability of haze and its constituents in the united states; 2011.
+21,available online: http: //vista.cira.colostate.edu/improve/spatial-and-seasonal-patterns-and-temporal-variability-of-haze-and-its-constituents-in- the-united-states-report-v-june-2011/ (accessed on 29 january 2019).
+21,"carter, w.p."
+21,"implementation of the saprc-99 chemical mechanism into the models-3 framework; united states environmental protection agency: washington, dc, usa, 2000; pp."
+21,1–101.
+21,available online: https://intra.cert.ucr.edu/~{}carter/pubs/s99mod3 .pdf (accessed on 30 january 2021).
+21,"rio, m.h."
+21,"; santoleri, r."
+21,improved global surface currents from the merging of altimetry and sea surface temperature data.
+21,remote sens.
+21,environ.
+21,"2018, 216, 770–785."
+21,[crossref] 36.
+21,"arnold, c.p."
+21,"; dey, c.h."
+21,"observing-systems simulation experiments: past, present, and future."
+21,meteorol.
+21,"1986, 67, 687–695."
+21,[crossref] 37.
+21,"boylan, j.w."
+21,"; russell, a.g."
+21,"pm and light extinction model performance metrics, goals, and criteria for three-dimensional air quality models."
+21,atmos.
+21,environ.
+21,"2006, 40, 4946–4959."
+21,[crossref] 38.
+21,"kim, n.k."
+21,"; kim, i.s."
+21,"; song, i.h."
+21,"; park, s.m."
+21,"; lim, h.b."
+21,"; kim, y.p."
+21,"; shin, h.j."
+21,"; lee, j.y."
+21,"temporal variation of sulfate concentration in pm2.5 and major factors enhancing sulfate concentration in the atmosphere of seoul, korea."
+21,air qual.
+21,atmos.
+21,"health 2021, 14, 985–999."
+21,[crossref] 39.
+21,"wang, y."
+21,"; sartelet, k.n."
+21,"; bocquet, m."
+21,"; chazette, p."
+21,"; sicard, m."
+21,"; d’amico, g."
+21,"; léon, j.f."
+21,"; alados-arboledas, l."
+21,"; amodeo, a."
+21,"; augustin, p.; et al."
+21,assimilation of lidar signals: application to aerosol forecasting in the western mediterranean basin.
+21,atmos.
+21,"2014, 14, 12031–12053."
+21,[crossref] 40.
+21,"werner, m."
+21,"; kryza, m."
+21,"; guzikowski, j."
+21,can data assimilation of surface pm2.5 and satellite aod improve wrf-chem forecasting?
+21,a case study for two scenarios of particulate air pollution episodes in poland.
+21,remote sens.
+21,"2019, 11, 2364."
+21,[crossref] 41.
+21,"russell, a."
+21,"; dennis, r."
+21,narsto critical review of photochemical models and modeling.
+21,atmos.
+21,environ.
+21,"2000, 34, 2283–2324."
+21,[crossref] 42.
+21,"wyat appel, k."
+21,"; napelenok, s."
+21,"; hogrefe, c."
+21,"; pouliot, g."
+21,"; foley, k.m."
+21,"; roselle, s.j."
+21,"; pleim, j.e."
+21,"; bash, j."
+21,"; pye, h.o.t."
+21,"; heath, n.; et al."
+21,"overview and evaluation of the community multiscale air quality (cmaq) modeling system version 5.2; springer: cham, switzerland, 2018; pp."
+21,69–73.

@@ -1,0 +1,947 @@
+page,p
+1,"agronomy article in-season prediction of corn grain yield through planetscope and sentinel-2 images fenling li 1 , yuxin miao 2, * , xiaokai chen 1 , zhitong sun 1 , kirk stueve 3 and fei yuan 4 1 college of natural resources and environment, northwest a&f university, yangling, xianyang 712100, china 2 precision agriculture center, department of soil, water, and climate, university of minnesota, st."
+1,"paul, mn 55108, usa 3 ceres imaging, oakland, ca 94612, usa 4 department of geography, minnesota state university, mankato, mn 56001, usa * correspondence: ymiao@umn.edu abstract: crop growth and yield monitoring are essential for food security and agricultural economic return prediction."
+1,remote sensing is an efficient technique for measuring growing season crop canopies and providing information on the spatial variability of crop yields.
+1,"in this study, ten vegetation indices (vis) derived from time series planetscope and sentinel-2 images were used to investigate the potential to estimate corn grain yield with different regression methods."
+1,a field-scale spatial crop yield prediction model was developed and used to produce yield maps depicting spatial variability in the field.
+1,"results from this study clearly showed that high-resolution planetscope satellite data could be used to detect the corn yield variability at field level, which could explain 15% more variability than sentinel-2a data at the same spatial resolution of 10 m."
+1,comparison of the model performance and variable importance measure between models illustrated satisfactory results for assessing corn productivity with vis.
+1,"the green chlorophyll vegetation index (gcvi) citation: li, f."
+1,"; miao, y."
+1,"; chen, x.; values consistently produced the highest correlations with corn yield, accounting for 72% of the sun, z."
+1,"; stueve, k."
+1,"; yuan, f."
+1,in-season observed spatial variation in corn yield.
+1,more reliable quantitative yield estimation could be made prediction of corn grain yield using a multi-linear stepwise regression (msr) method with multiple vis.
+1,good agreement between through planetscope and sentinel-2 observed and predicted yield was achieved with the coefficient of determination value being 0.81 at images.
+1,"agronomy 2022, 12, 3176. 86 days after seeding."
+1,"the results would help farmers and decision-makers generate predicted yield https://doi.org/10.3390/ maps, identify crop yield variability, and make further crop management practices timely. agronomy12123176 academic editor: keywords: corn yield; planetscope; sentinel-2; vegetation index; multi-linear stepwise regression; stefano amaducci random forest regression received: 25 october 2022 accepted: 13 december 2022 published: 15 december 2022 1."
+1,"introduction publisher’s note: mdpi stays neutral monitoring and predicting crop phenology, growth, and yield is an important compo- with regard to jurisdictional claims in nent of global food security and plays a key role in domestic and global markets, policies, published maps and institutional affil- and decision-making [1,2]."
+1,"yield is commonly measured using manual sampling and iations. ground-based visits, which are extremely time and labor-consuming, and difficult to pro- vide information on the spatial variability of crop yield [3]."
+1,"due to the lack of a large amount of input data on management practices, such as variety, sowing date, seed rate, fertilization copyright: © 2022 by the authors. schedule, irrigation, etc., it is difficult to use crop growth models to monitor crop growth licensee mdpi, basel, switzerland. and estimate yield at regional scales [4–6]."
+1,"however, rapid and effective acquisition of this article is an open access article crop yield information, accurate forecast of crop productivity, and understanding of yield distributed under the terms and variability at a regional scale are critical to farm management and decision making [7]. conditions of the creative commons compared to crop growth models, remote sensing (rs) technology provides real- attribution (cc by) license (https:// time and large-area data collection capabilities at a range of spatial scales, which has creativecommons.org/licenses/by/ already been used to produce numerous agriculture-related parameters [8–10]."
+1,"crop yield 4.0/). estimation has been emphasized as a critical component of rs applications in agricultural agronomy 2022, 12, 3176. https://doi.org/10.3390/agronomy12123176 https://www.mdpi.com/journal/agronomy"
+2,"agronomy 2022, 12, 3176 2 of 18 studies."
+2,"there have been many attempts in the applications of rs to estimate the final yields for wheat (triticum aestivum l.) [9,11,12], barley (hordeum vulgare."
+2,"l) [13,14], maize (zea mays l.) [15,16], rice (oryza sativa l.) [10,17,18], potato (solanum tuberosum l.) [19], cotton (gossypium l.) [20–22], and a variety of fruits [23–25]."
+2,"all the studies indicated that rs technology was prospective and promising in regional crop yield estimation, monitoring, and mapping."
+2,satellite-based rs techniques can obtain satisfactory images at local and regional scales.
+2,"advanced very high resolution radiometer (avhrr) and moderate-resolution imaging spectroradiometer (modis) data with coarse spatial-resolutions have been repeatedly adapted to estimate crop yields at the global and national levels [2,26–28]."
+2,remote sensing data with medium spatial-resolution provides a guarantee for dynamic monitoring of crop growth and yield estimation at county-scale with time-efficient surface observations [28–30].
+2,"such as, landsat 8 (30 m)and coarse spatial-resolution (1/3 km) proba-v images were used together to extract temporal characteristics of alfalfa farms and model alfalfa yield in the moghan plain, iran [12]."
+2,"nevertheless, an accurate crop yield estimation with sufficient lead time at field scale is more important for farmers in crop management, resource mobilization, agri-commodity trading, and crop insurance [6,9]."
+2,"more often than not, estimating crop yield at the field level has been laborious and complex due to the difficulty of obtaining actual crop yield data in the field and rs data with high spatiotemporal and spectral resolution [6,12,31,32]."
+2,"skakun’s research showed that moving to coarser resolution data of 10 m, 20 m, and 30 m reduced the explained yield variability to 86%, 72%, and 59%, respectively [33]."
+2,"in recent years, sentinel-2 satellite imagery has been successfully used to model crop grain yield at field and within-field scales due to its spectral bands (visible and near infrared (nir), red-edge (re), and short-wave infrared bands), spatial resolutions (10 m, 20 m and 20 m), and open accessibility [3,7,11,34,35]."
+2,hunt et al. demonstrated accurate verification of within-field variability and relatively high accuracy of yield estimation and mapping at 10 m resolution using sentinel-2 data (rmse 0.66 t/ha) [7].
+2,the increased spatial resolution of satellites provides more granular data for accurate monitoring of crop status and enables high-precision yield estimation at field and within-field scales.
+2,"recent years, planetscope images with spatial resolution of 3 m provide more detailed surface information in the visible and nir bands, and have been shown to outperform in precision agriculture research [36,37]."
+2,"skakun et al. showed that 100% of the within-field corn and soybean yield variability could be explained with a 3 m image (planetscope satellite), which was 14% higher than sentinel-2 (10 m) [33]."
+2,"on the one hand, the performance of planetscope data in yield estimation needs to be verified."
+2,"on the other hand, it is still a challenge to accurately predict yield well ahead of harvest at field and within-field scales with minimal field input data [6,38,39]."
+2,the photosynthesis of green plants is the essence of crop yield.
+2,"the crop physiolog- ical factors, such as chlorophyll concentration, leaf area index, the ground biomass, etc., influence the crop yield potential, which is defined as the maximum attainable yield per unit land area that can be achieved without stress factors [40]."
+2,"spectral information in different rs bands, especially optical bands, is optimized for the calculation of relevant vis, which are proved to be sensitive to crop physiological parameters and commonly used to predict crop yields [9,12,41]."
+2,"studies have shown that early season vis have significant correlations with corn yields [8,42]."
+2,"nevertheless, vis performed differently in crop yield estimation."
+2,while the enhanced vegetation index (evi) was believed the best predictor for the corn belt [1].
+2,shanahan et al. suggested that the green normalized difference vegetation index (gndvi) had greater potential to estimate final corn grain yields than the normal- ized difference vegetation index (ndvi) and transformed soil-adjusted vegetation index (tsavi) [43].
+2,"the perpendicular vegetation index (pvi) provided better average prediction accuracy than ndvi, green vegetation index (gvi), and soil adjusted vegetation index (savi) in the corn crop yield prediction studied by panda et al."
+2,"liaqat et al. found savi was better associated with wheat yields when compared to modified soil adjusted vegetation index (msavi), ndvi, and evi [9]."
+2,the wide dynamic range vegetation index
+3,"agronomy 2022, 12, 3176 3 of 18 (wdrvi) demonstrated the highest correlation with county-level statistical corn yields [28]."
+3,the sensitivity of vis to yield estimation remains to be verified.
+3,empirical methods based on statistical regression between rs derived variables and crop yield are the most commonly used approaches [11].
+3,"the availability of many indices has led to multiple vis being chosen and combined with statistical models for more accurate crop yield estimation [9,45,46]."
+3,"recent years have witnessed an emergence of machine learning (ml) regression models to develop an empirical relationship between crop yield and crop canopy features, such as random forest regression (rfr) [7,28] because of their ability to autonomously solve large non-linear problems using datasets from multiple sources [46]."
+3,"in this study, actual field-level harvester corn grain yield data, as well as time-series images from the planetscope and sentinel-2 a satellites, were obtained to develop vis- based corn yield estimation models by the comparison of unary linear regression (ulr), stepwise multiple linear regression (smlr) and rfr ml methods."
+3,"the main purposes of this research were to investigate the sensitivity of vis derived from high spatial-resolution images to corn yield prediction, to explore the ability of planetscope data to estimate within-field corn yield variability in comparison to the results with sentinel-2 data, and to understand the optimal growth period for corn yield estimation."
+3,materials and methods 2.1.
+3,"field site and grain yield acquisition the corn field was located in wheaton, minnesota (mn), usa (96.37e, 45.74n), which comprised an area of approximately 100 ha (figure 1)."
+3,"the farming in this region is characterized by one harvest per year, with corn being the prevalent crop."
+3,"generally, the corn crop is typically planted in early to late may and harvested between late september to early october."
+3,"the normal annual precipitation in this region ranges from 455 to 635 mm, and a mean annual temperature of 1.7 to 5.0 ◦ c [47]."
+3,"soils in this region are primarily developed in lacustrine parent material with poor drainage, and the dominant type was silty clay loam soil."
+3,less topographic relief was observed in this field with slope variations of less than 1%.
+3,the corn hybrid 76s92 vt2pro widely adapted to different environments was cultivated in this study.
+3,"it has an excellent vigor early in the season, strong stress tolerance, very good late season standability, and consistent yielding with fast dry down."
+3,urea fertilizer was spread prior to planting corn on 6 may 2018.
+3,in-season topdressing was applied with 28% urea ammonium nitrate solution and a y-drop system after corn canopy closure on 26 june 2018.
+3,this year was a normal year without extreme weather.
+3,agronomic management practices were conventional for row crop agriculture in this region of the usa.
+3,"by the end of the crop season, the field was harvested with a gps-referenced 8-row john deere rotor combine harvester equipped with optical yield monitors."
+3,the combine monitor was calibrated using the same corn hybrid.
+3,the yield was determined as the grain biomass collected during harvest and recorded in megagram per hectare (mg·ha−1 ) on a standard moisture basis of 15.5%.
+3,"due to the cutting width of 6 m of the combine harvester used in this field, and the the furthest distance of 6 m for the yield points, all the yield points were resampled to 10 m resolution using the inverse distance weighting (idw) spatial interpolation method."
+4,"agronomy 2022, 12, 3176 4 of 18 figure 1."
+4,location of the study area. (a) study area and sample dataset distribution; (b) true color composite red-green-blue of planetscope (left) and sentinel-2 a (right) images on 17 july 2018.
+4,satellite data collection and preprocessing 2.2.1.
+4,planetscope image processing a total of eight planetscope surface reflectance (sr) image products (level 3b) were collected during the corn growing season from june to middle august.
+4,"all the images were orthorectified, atmospherically corrected using the 6sv2.1 radiative transfer code, scaled, and delivered as analytic 4-band products [48]."
+4,"planetscope satellite imagery has 4 multi-spectral bands including blue (455–515 nm), green (500–590 nm), red (590–670 nm), and nir (780–860 nm) with a 3 m resolution."
+4,all the bands were resampled to 10 m resolution to match that of sentinel-2 data.
+4,2.2.2.
+4,"sentinel-2a image processing six cloud-free sentinel-2a images (level 1c) were downloaded from the european space agency (esa) website (https://scihub.copernicus.eu/dhus/#/home, accessed on 1 march 2020)."
+4,radiometric calibration and atmospheric correction were performed in the sen2cor processor released by esa.
+4,the corrected data were resampled to 10 m in the snap processor using the nearest neighbor interpolation method.
+4,"to be consistent with planetscope data, the blue (458–523 nm), green (543–578 nm), red (650–680 nm), and nir (785–900 nm) bands were used to extract vis."
+4,details of the satellite images used in this study are shown in table 1.
+4,all the images were projected to a cartographic projection (wgs84-utm).
+4,table 1.
+4,satellite images collected during the corn growing season in 2018.
+4,"image acquisition date days after seeding (das) growth stage product level 3 jun., 18 jun., 5 jul., 17 jul."
+4,"29, 44, 61, 73 v6, v10, v17, vt planetscope level 3b 23 jul., 30 jul., 8 aug., 15 aug."
+4,"79, 86, 95, 102 r1, r2, r3, r4 7 jul., 17 jul."
+4,"63, 73 v17, vt sentinel-2a level 1c 22 jul., 27 jul., 6 aug., 11 aug."
+4,"78, 83, 93, 98 r1, r2, r3, r3"
+5,"agronomy 2022, 12, 3176 5 of 18 2.3."
+5,"vegetation indices numerous vis have been developed and widely applied in cropland cover changes, vegetation classification, environmental change detection, crop detection, and yield esti- mation."
+5,"in this study, ten commonly used vis related to vegetation growth and biomass were calculated from planetscope and sentinel-2a images to evaluate variation in yield, including sr, msr, ndvi, gndvi, savi, evi2, mcari2, msavi, wdrvi, and gcvi (see table 2 for expressions)."
+5,table 2.
+5,"vis calculated using satellite imagery, where r is the reflectance of each band."
+5,vegetation index equation references sr (simple ratio) rnir /rred [49] msr (modified simple ratio) (rnir /rred − 1)/sqrt(rnir /rred + 1) [50] ndvi (normalized differenced vegetation index) (rnir − rred )/(rnir + rred )  [51] gndvi (green normalized differenced vegetation index) (rnir − rgreen )/ rnir + rgreen [52] savi (optimized soil-adjusted vegetation index) 1.5(rnir − rred )/(rnir + rred + 0.5) [53] evi2 (enhanced vegetation index) 2.5(rnir − rred )/(rnir + 2.4∗rred + 1) [54] mcari2 (modified chlorophyll absorption reflectivity index) 1.5[2.5(rnir −rred )−1.3(rnir −rgreen )] [55] q √ (2rnir +1)2 −(6rnir −5 rred )−0.5  q  msavi (modified soil-adjusted vegetation index) 0.5 2rnir + 1 − (2rnir + 1)2 − 8(rnir − rred ) [56] wdrvi (wide dynamic range vegetation index) (0.2rnir − rred )/(0.2rnir + rred ) [57] gcvi (green chlorophyll vegetation index) rnir /rgreen − 1 [58] 2.4.
+5,"data analysis based on the ten vis, ulr and smlr were adopted to establish the corn yield estima- tion equations in a linear relationship."
+5,"in smlr, the best yield model at each growth stage was chosen according to the akaike information criterion (aic), which was computed with the stepaic function from the mass library in r studio [59]."
+5,"rfr algorithms have been widely employed to relate remotely sensed data to crop physicochemical parameters [7,28]."
+5,it is one of the representatives of ensemble learning algorithms that integrate many decision trees and outputs results by voting.
+5,"a group of decision trees are independently trained in regression problems, and their predictions are averaged as the final output [60]."
+5,"in this study, a rfr algorithm was performed to test the utility of the generated vis in predicting corn yield in a nonlinear regression model."
+5,the optimal random forest model was built using the 5-fold gridsearchcv method in the scikit-learn library in python 3.8.
+5,the algorithm uses each set of hyperparameters to train the model within the specified parameter range and selects the combination of hyperparameters with the minimum error of the verification set.
+5,"the approximate range of the optimal parameters for rfr model was obtained through repeated attempts, and then the optimal solution was specified under the small range for the obtained results."
+5,"the number of decision trees in the study was set to 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 30, 50, 100, 150 and 200, respectively."
+5,"the randomly selected feature numbers of each decision tree were set to 60%, 70%, 80% and 100% of the total feature numbers, respectively."
+5,"the maximum tree depth was set to 3, 5, 7, 9, 10, 15 and 20, respectively."
+5,"in addition, rfr enables feature screening, in which the importance of a variable in estimating crop yield can also be evaluated, indicating the contribution of this feature to model construction."
+5,calibration and validation datasets a total of 174 equally spaced sample points in the corn field were selected to extract yield data from the idw-interpolated yield maps and the vi values from planetscope and sentinel-2 images.
+5,it was cross divided into 87 calibration sets and 87 validation sets (figure 1).
+5,the coefficient of determination (r2 ) and root mean square error (rmse) of measured and predicted yields in the validation sets were used to evaluate model performance to validate the accuracy and robustness of the derived yield estimation models.
+6,"agronomy 2022, 12, 3176 6 of 18 3."
+6,results 3.1.
+6,description of the yield data the raw yield data outside the field mean ±3 sd were cleaned to remove inaccurate grain yield measurements.
+6,"the cleaned corn yield data of 64,803 yield points were measured and resampled to 10 m resolution using the inverse distance weighting (idw) spatial interpolation method."
+6,idw-interpolated yield showed a minimum yield of 3.82 mg·ha−1 and a maximum yield of 15.90 mg·ha−1 in this field.
+6,the mean corn yield in this field was 12.33 mg·ha−1 and the standard deviation was 2.03 mg·ha−1 .
+6,"correlation between yield and environment variables it is generally considered that environmental factors have a certain degree of influence on the formation of yield, and are potential factors affecting spatial distribution of yield."
+6,"at within field level, the spatial variation of weather is relatively uniform."
+6,"topographical features, such as altitude, slope, and aspect have certain impacts on grain yield, especially at the regional scale [11]."
+6,"most of the study area is fairly flat, with an altitude difference of less than 3 m."
+6,"in total, 76.3% of the area had a slope of less than 1 degree (figure 1)."
+6,"the correlation coefficients between corn yield with altitude, slope, and aspect did not pass the significance test (p > 0.01), indicating that topographical features were unsuitable to be used as influencing factors in crop yield estimation in this study."
+6,"under 150 randomly generated points in each soil textures, the anova analysis revealed no significant difference in corn yield among clay loam, loam, sandy loam, silt loam, and silty clay loam soil types."
+6,"correlation between yield and vegetation index correlation analysis was conducted between corn yield and vis in each growth period based on planetscope images and sentinel images, respectively (figure 2)."
+6,all the vis were significantly and positively correlated with corn yield (p < 0.01) except for the stage das29.
+6,"as the corn growth period progressed, the correlation between planetscope-based vis and yield increased first and then decreased (figure 2a)."
+6,the inflection point appeared on das86.
+6,the coefficient of determination (r2 ) ranged from 0.56 (mcari2) to 0.72 (gcvi) on das86.
+6,figure 2b shows a similar correlation trend with sentinel images.
+6,all the highest correlations appeared on das93 except for gcvi (0.64) and gndvi (0.63) on das98.
+6,the r2 ranged from 0.42 (mcari2) to 0.61 (gcvi) on das93.
+6,the correlation analysis demonstrated that gcvi and gndvi outperformed other vis in corn yield prediction.
+6,figure 2.
+6,coefficient of determination (r2 ) between vis and corn yield at different growth stages based on (a) planetscope images and (b) sentinel-2 images.
+7,"agronomy 2022, 12, 3176 7 of 18 3.4."
+7,yield estimation and validation 3.4.1.
+7,"yield-ulr model according to the correlation analysis results above, the yield-ulr model at each growth stage was built based on the vi with the highest correlation as the independent variable."
+7,all vis were linearly correlated with corn yield.
+7,the performance of each estimation model was summarized in table 3.
+7,almost all the best yield-ulr models were obtained by the gcvi at each growth stage except for das29 (mcari2) and das44 (gndvi).
+7,much lower correlations were found between the yield and vis at the early growth stage before v10 (das29 and das44).
+7,"at these stages, the plant was in the early vegetative period and its future growth could be largely uncertain due to various environmental stresses or different field management strategies, resulting in less accurate predictions of corn grain yield."
+7,field topdressing was carried out after this growth period.
+7,"the gcvi derived from planetscope images could explain 72% variability in corn yield on das86, which is also the best estimation accuracy for yield prediction across the 8 growth stages. while the best yield estimation model constructed with sentinel images was on das98, which explained 63.9% of the corn yield variability."
+7,"during such stages from r2 (blistering) to r3 (milking), corn is in its early reproductive period having almost maximum plant greenness and photosynthetic capacity, thus indicating the potential yield."
+7,table 3.
+7,the best yield-ulr models constructed with planetscope and sentinel-2 images.
+7,yield-ulr model based on planetscope images yield-ulr model based on sentinel-2 images growth stage models r2 rmse growth stage models r2 rmse das29 −11.06mcari2 + 16.15 0.03 2.27 das44 34.68gndvi − 9.40 0.32 1.91 das61 1.99gcvi − 4.99 0.61 1.45 das63 1.46gcvi + 1.10 0.56 1.53 das73 1.69gcvi − 5.44 0.60 1.46 das73 2.76gcvi − 1.28 0.48 1.65 das79 1.69gcvi − 493 0.64 1.38 das78 1.54gcvi − 1.03 0.58 1.49 das86 2.20gcvi − 6.78 0.72 1.22 das83 1.32gcvi + 0.31 0.57 1.51 das95 1.81gcvi − 3.85 0.65 1.37 das93 1.27gcvi + 1.64 0.61 1.45 das102 2.21gcvi − 4.71 0.64 1.39 das98 1.01gcvi + 3.06 0.64 1.39 3.4.2.
+7,yield-smlr model the ten vis were used to construct the yield-smlr models by smlr according to the aic and significance test.
+7,the model accuracy and other details are shown in tables 4 and 5.
+7,yield-smlr models performed better than the yield-ulr ones.
+7,"the coefficient of determination values ranged from 0.29 (das29) to 0.81 (das86) with planetscope images, and 0.57 (das63) to 0.66 (das98) with sentinel-2 images."
+7,"in the early growth stage (das29 and das44) for planetscope iamges, the indices related to soil background removal (savi and msavi) had a greater impact on the yield model due to the lower coverage."
+7,"in the reproductive growth stage, vis sensitive to the chlorophyll concentration in a wide range of chlorophyll variations, such as gcvi, gndvi, and wdrvi contributed more to the yield estimation."
+7,"however, maybe due to the coarse resolution of sentinel data, yield could be well interpreted by combining mcari2 and wdarvi (responsive to leaf chlorophyll concentration) with the savi and savi (sensitive to ground reflectance)."
+7,"in general, the planetscope-based yield-smlr models had lower aic value than that of the sentinel- based ones in a similar growth period."
+7,"all the coefficients of the best planetscope-based yield-smlr on das86 passed the significance test (p < 0.01) and could be expressed as, yield = 7595.13 − 43,343.22 evi2 − 53.88 gcvi + 29,035.99 gndvi + 43,528.09 mcari2 − 81.58 sr + 38,108.57 wdrvi."
+8,"agronomy 2022, 12, 3176 8 of 18 table 4."
+8,the accuracy of the planetscope-based yield-smlr model in each growth period.
+8,"growth stage independent variables aic r2 rmse das29 gcvi, gndvi, mcari2, savi, sr, wdrvi 129.97 0.29 1.95 das44 msavi, ndvi, savi, sr, wdrvi 101.10 0.48 1.67 das61 evi2, gcvi, gndvi, mcari2, ndvi 69.20 0.64 1.39 das73 evi2, gcvi, gndvi, mcari2, sr, wdrvi 70.48 0.64 1.38 das79 evi2, gcvi, gndvi, ndvi, sr, wdrvi 35.79 0.76 1.13 das86 evi2, gcvi, gndvi, mcari2, sr, wdrvi 15.51 0.81 1.01 das95 evi2, gcvi, gndvi, ndvi, sr, wdrvi 56.52 0.69 1.28 das102 evi2, gcvi, gndvi, mcari2, sr, wdrvi 61.24 0.68 1.31 table 5."
+8,the accuracy of sentinel-based yield-smlr model in each growth period.
+8,"growth stage independent variables aic r2 rmse das63 mcari2, msr, savi, sr, wdrvi 83.33 0.57 1.51 das73 evi2, gcvi, gndvi, mcari2, msavi, ndvi, savi, sr, wdrvi 83.36 0.61 1.44 das78 evi2, mcari2, ndvi, savi, wdrvi 73.00 0.62 1.43 das83 evi2, gcvi, gndvi, mcari2, msavi, ndvi, savi, sr, wdrvi 78.20 0.63 1.40 das93 evi2, gndvi, mcari2, msr, savi, sr, wdrvi 75.13 0.63 1.41 das98 evi2, mcari2, msavi, msr, savi, wdrvi 54.51 0.66 1.26 3.4.3."
+8,yield-rfr model the ten vis were also adopted to construct corn yield estimation models based on the rfr algorithm.
+8,"table 6 clearly showed that yield-rfr models captured the variability in corn yield over the growing season well, compared with yield-ulr and yield-smlr models."
+8,the r2 was improved from 0.81 to 0.90 at das86 for planetscope-based yield-rfr model and 0.63 to 0.89 at das93 for sentinel-based ones (table 6).
+8,table 6.
+8,"the yield-rfr model constructed with planetscope and sentinel images (parameters represented the n-estimations, max-features, and depth in rfr)."
+8,"yield-rfr model with planetscope images yield-rfr model with sentinel images growth stage parameters r2 rmse growth stage parameters r2 rmse das29 10, 70%, 5 0.75 1.10 das44 10, 80%, 8 0.82 0.96 das61 7, 70%, 6 0.85 0.86 das63 9, 90%, 3 0.81 1.01 das73 3, 60%, 10 0.79 1.05 das73 5, 100%, 4 0.78 1.07 das79 5, 80%, 7 0.86 0.84 das78 7, 50%, 3 0.82 0.97 das86 9, 100%, 10 0.90 0.73 das83 5, 50%, 10 0.85 0.86 das95 3, 100%, 12 0.80 1.05 das93 9, 70%, 12 0.89 0.75 das102 3, 50%, 7 0.78 1.09 das98 7, 50%, 3 0.85 0.88 3.4.4."
+8,model comparison and validation the validation datasets were input into the optimal models above to assess the accu- racy of each yield model.
+8,the performance of each model with planetscope images was summarized in figure 3 based on r2 and rmse measurements.
+8,"as shown in figure 3, the performance of the rfr method was evidently lower than that of the ulr and smlr ap- proaches in each growth stage, which was contrary to the prediction results in section 3.4.3 and may indicate overfitting problems in the ml modeling."
+8,"overall, among the three regression methods, the smlr method performed the best, with the highest r2 and lowest rmse across the growing season."
+8,"significant increases in r2 were observed across all yield prediction methods on das86, with the rmse values of 0.98, 0.94, and 1.2 mg·ha−1 for yield-ulr, yield-smlr, and yield-rfr, respectively."
+9,"agronomy 2022, 12, 3176 9 of 18 figure 3."
+9,model validation in each growth stage based on planetscope images. (a) r2 and (b) rmse.
+9,"for the sentinel-based models, similar results were presented (figure 4)."
+9,figure 4 clearly showed that the smlr method outperformed the ulr and rfr in corn yield prediction.
+9,"the best prediction timing by the yield-smlr model was on das93, with the maximum correlation (r2 = 0.77) and the minimum rmse value of 0.99 mg·ha−1 ."
+9,"this was followed by the das83, with the r2 and rmse values of 0.74 and 1.07 mg·ha−1 , respectively."
+9,figure 4.
+9,model validation in each growth stage based on sentinel images. (a) r2 and (b) rmse.
+9,"overall, results based on both satellite image sources showed that the best performing approach for corn yield estimation was smlr."
+9,"the highest r2 and lowest rmse values in validation sets were observed during the r2 to r3 stages (das86 for planetscope data and das93 for sentinel data), which could explain 79% and 77% variability in corn yield."
+9,the optimal time to predict yield was later with sentinel data than with planetscope data.
+9,imagery was collected from both sensors on das73.
+9,"the models could explain up to 73% of within-field yield variability with planetscope data, whereas, 68% with sentinel-2 data."
+9,this was contributed to the different spatial resolutions.
+9,high spatial resolution imagery can more accurately reflect the crop growth status and capture the within-field variability of crop growth conditions (figure 1b).
+9,"when comparing the corn yield prediction and validation results of both images together, it was observed that the vis of planetscope images resulted in better performance in corn yield estimation than sentinel images at similar growth stages both in the calibra- tion and validation datasets (figure 5)."
+9,"the prediction ability increased with the growth period before the vegetative growth stage, stabilized in the reproductive growth stage, and decreased slightly in the later stage after r3."
+10,"agronomy 2022, 12, 3176 10 of 18 figure 5."
+10,r2 difference between planetscope images and sentinel images based on smlr method. (a) calibration set and (b) validation set.
+10,the scatter plots in figures 6 and 7 showed how well the predicted corn yields fitted the actual yields under different regression methods and growth stages.
+10,"the predicted yield values were linearly correlated with the observed values (demonstrated by the dashed lines), while the correlation was less consistent in rfr."
+10,the larger deviations of the predicted corn yield from the 1:1 line indicated that all the estimation methods experienced higher levels of overestimation of corn yields at lower actual yields.
+10,"the models gave the best estimation results when the corn yield was greater than 10 mg·ha−1 , especially at the r2 and r3 growth stages."
+10,3.4.5.
+10,corn yield mapping on key growth stages with smlr method vegetation index matrices were substituted into the optimal yield-smlr models on das86 and das93 to map the corn yield.
+10,the field was symbolized by nine yield categories using an equal interval strategy based on the predicted grain yield (figure 8).
+10,the prediction results were generally in good agreement with the actual distribution of corn yield.
+10,the loss of correlation might be due to different ground resolutions beween yield data (even after resampling) and actual satellite image ground resolution.
+10,"resampling from 3 m to 10 m of planetscope data caused a loss of spectral information, but it was still more informative than the 10 m sentinel data."
+10,the pattern observed confirmed that the resampled planetscope data outperformed sentinel data for corn yield estimation.
+10,these results also highlighted the ability of the smlr method to estimate corn grain yield before harvest at the field scale.
+10,figure 6.
+11,"agronomy 2022, 12, 3176 11 of 18 figure 6."
+11,scatter plots of the measured versus predicted corn yields with different regression methods in each growth stage based on planetscope images.
+11,"(dashed red line, green line, blue line and black solid line are the regression line of yield-ulr, yield-smlr and yield-rfr, and1:1 line, respectively)."
+11,figure 7.
+11,scatter plots of the measured versus predicted corn yields with different regression methods in each growth stage based on sentinel images.
+11,"(dashed red line, green line, blue line and black solid line are the regression line of yield-ulr, yield-smlr and yield-rfr, and1:1 line, respectively)."
+12,"agronomy 2022, 12, 3176 12 of 18 figure 8."
+12,maps of simulated grain yield by the proposed regression models.
+12,discussion 4.1.
+12,"vegetation index for corn yield estimation spectral vis provide composite properties of leaf chlorophyll, leaf area, optical mea- sures of canopy greenness, and canopy structure, which lay a theoretical foundation for using vis to estimate crop yield."
+12,"rs methods for crop yield prediction currently rely on broadband vis, such as the ndvi, evi, savi, etc."
+12,"due to the different growth statuses and cultivars of crops, there were significant differences in vi selection and yield estimation accuracy [9]."
+12,"skakun et al. argued that the most important spectral bands explaining corn and soybean yield variability were green, re, and nir [33]."
+12,we computed 10 vis from time-series of planetscope and sentinel-2 data and analyzed the correlation between vis and corn grain yield.
+12,"it clearly showed that the gcvi captured the variability in corn yield well over the growing season except for das29 and das44, having the highest r2 values in yield-ulr models (table 3), followed by gndvi (figure 2; table 3)."
+12,"gcvi, gndvi, evi2, and wdrvi entered almost all yield-smlr models at each growth stage (table 4)."
+12,the variable importance measure of the rfr model illustrated the effects of each vi on the estimation of corn yield.
+12,we made statistics on the order of variable importance entering each rfr model (eight models with planetscope images and six from sentinel images).
+12,figure 9a showed the order statistics for each vi in all models.
+12,"for example, gcvi appeared four times in the first importance (vip1) of 14 models."
+12,figure 9b showed the accumulated count for each importance.
+12,"the variable importance statistics also confirmed the performance of gcvi and gndvi, which appeared nine and six times, respectively, ranking in the top two positions in the variable importance lists for all models."
+12,"specific absorption coefficients of chlorophylls in the green spectral regions are much smaller than in the red region, which does not saturate at moderate to high chlorophyll contents."
+12,"the gcvi and gndvi were proposed by replacing the original red band with green band, which enabled more precise estimation of chlorophyll concentration in a greater dynamic range of chlorophyll variations, and were more sensitive to green crop lai and biomass than the vis calculated with red band, such as ndvi, savi, evi2 and sr [33,52,58,61]."
+13,"agronomy 2022, 12, 3176 13 of 18 figure 9."
+13,variable importance for modelling corn yield with random forest regression. (a) the order statistics for each vi in all rfr models (eight models with planetscope images and six from sentinel images). (b) the statistics of accumulated count for vis in all rfr models.
+13,the results were consistent with reported studies.
+13,"based on sentinel-2 images, kayad et al. illustrated that gndvi could provide the highest r2 value of 0.48 for monitoring the within-field variability of corn grain yield [31]."
+13,"shanahan et al. compared ndvi, tsavi, and gndvi in estimating final grain yield for corn and indicated that gndvi acquired during mid-grain filling was highly correlated with grain yield and could be used to produce relative yield maps depicting spatial variability in fields [28]."
+13,"the yield- ulr models showed a weak correlation with a single vi for evaluating grain yield, while yield-smlr and yield-rfr models constructed through multiple vis could enhance the prediction ability of corn yields."
+13,"the yield-smlr model could explain 81% variability in corn yield on das86 with planetscope images, while sentinel images could explain 66% variability on das98."
+13,"in this study, since the within-field environmental variables such as topographical and meteorological conditions were relatively uniform and stable, the yield level could be indicated by crop growth status, which could be monitored by vis sensitive to chlorophyll and biomass, especially the gcvi and gndvi."
+13,"in summary, this study demonstrated that it was feasible to monitor corn yields with vis during a suitable growth period."
+13,model selection for corn yield estimation vis could be especially beneficial for corn yield estimation when used together.
+13,"the rfr method did not achieve the expected accuracy perhaps due to the small dataset in this study [12,34]."
+13,"although rfr had a slightly higher r2 and lower rmse compared to other algorithms in the calibration models, better performance was achieved for corn yield using a smlr method for the validation sets, which implied a better generalization capability of the smlr than rfr and ulr."
+13,the rfr method incorporating various variables did not always show the highest estimation accuracy [28].
+13,"in sakamoto’s study, the performance of the proposed rfr method was about the same or slightly worse, with a higher rmse than the conventional polynomial regression model for corn grown in iowa and illinois [28]."
+13,this was probably because of an overfitting issue that caused accuracy deterioration against expectations [62].
+13,"in addition, at a regional scale, the cropland ecosystem was complex and many of the processes involved were nonlinear, which made the ml algorithm possible [63]."
+13,"however, the analysis in this field-scale study revealed a linear correlation relationship between the vis and corn yield, which may imply corn yield prediction within-field was not best represented in nonlinear models in this study."
+13,the smlr method has been widely investigated to determine the best feature subsets for crop yield prediction [64] and had acceptable corn yields estimation capability in this study.
+13,this method selected more important vis according to the aic to build a yield estimation model.
+13,"when a vi had an insignificant effect on the output, the model after removing this variable would still show high correlation and low rmse."
+13,the superiority of the smlr could be attributed to its
+14,"agronomy 2022, 12, 3176 14 of 18 ability to detect all possible combinations between input variables and gave the optimal subset of input variables."
+14,"remote sensing data selection for yield estimation rs is an attractive tool for monitoring spatiotemporal patterns of vegetation growth, which enhances the process of monitoring the development of agricultural crops and estimating their yields."
+14,the relatively high yield estimation accuracy was obtained using high resolution satellite images.
+14,"at present, sentinel-2 imagery was considered the most suitable remotely sensed data for crop yield estimation at field level [11]."
+14,al-gaadi et al. [65] revealed that sentinel-2 images enabled the reduction in the generalization in crop spectral reflection and delineation of sharp field boundaries so that the relationship between actual and predicted potato yield values produced an r2 value that increased from 0.39 for landsat-8 images to 0.47 for sentinel-2 images.
+14,hunt et al. [7] demonstrated that sentinel-2 data was more accurate at 10 m resolution than 20 m for within-field wheat yield in the uk.
+14,"when compared landsat data with sentinel-2 and planetscope, only 59% of yield variability could be explained with 30 m image data."
+14,they thought the rest was lost because of coarsening and mixture effects inside the 30 m pixel [33].
+14,"this study compared planetcsope and sentinel-2 satellite images for corn yield estimation, and the resampled planetscope data explained 15% more corn yield variability than the sentinel-2 data at the same spatial resolution of 10 m (table 4)."
+14,"although planetscope images were resampled to the resolution of 10 m, they still had relatively detailed and accurate canopy information than the sentinel data."
+14,this may imply that high spatial-resolution satellite data has the potential to provide relatively accurate estimates of yield variability at the field scale.
+14,timing for corn yield estimation by remotely sensed data identifying the best timing will be beneficial to farmers and crop management to accurately predict yield well ahead of harvest time with minimal remotely sensed data.
+14,"the growth characteristics of corn in the vegetative growth stage may not fully reflect the accumulation of organic matter in yield organs at the late mature stage, resulting in poor prediction accuracy of corn grain yield."
+14,the tasseling stage is a critical transition period for corn from vegetative growth to reproductive growth.
+14,it is believed that the fastest matter accumulation and the most fertilizer absorption stage occur from 10 days before tasseling to 25 to 30 days after tasseling.
+14,the corn growth from the tasseling stage to silking stage directly determined the dry matter accumulation of crop yield organs.
+14,unganai and kogan found that a corn yield estimation model could be constructed with vis approximately 6 weeks prior to harvest time from the 1.1 km spatial-resolution avhrr data in southern africa [45].
+14,"results from modis data and county-level statistical yields revealed that the optimal time was typically in the late vegetative growing season, 13 days before the silking stage for corn in the usa [28]."
+14,the best time for wheat yield prediction with the 30 m spatial-resolution landsat 8 was found to be the beginning of the full biomass period from the 138th to 167th day of the year [66].
+14,"based on field measured corn yield, the precision of the yield-smlr model increased over time (table 4) with sentinel-2 images in this study, reflecting that it was more accurate to predict corn yield near the harvest than in the earlier growth stages."
+14,this result was consistent with the findings by kayad et al.
+14,"their study demonstrated that sentinel-2 images could provide a clear description of the corn grain yield at the within-field scale during the physiological maturity stages (r4–r6), crop ages of 105 to 135 days from planting in north italy."
+14,the results with planetscope images indicated that corn yield could be accurately estimated when high spatial-resolution satellite data was available during the crop growing period between the r2 (blistering) and r3 (milking) stages with prediction accuracy above 81%.
+14,it is not surprising that this stage could be used to estimate the corn yield.
+14,"at the end of silking stage, the maximum plant height is achieved, and the potential kernel number is determined."
+14,"after this stage, the nutrients in corn are transferred to grains in the maturity stage and the chlorophyll content in leaves decreases."
+14,"therefore, the correlation between"
+15,"agronomy 2022, 12, 3176 15 of 18 the vi and crop yield decreases, which leads to a low yield estimation accuracy."
+15,our results suggested that r2 (das86) was the most suitable phenological stage for corn yield estimation in this study area using planetscope images.
+15,the digitization footprint estimation indicated that the total amount of field data accumulated by farmers increased to over 768 mb/ha in 2020 [67].
+15,"among them, remotely sensed data from different platforms played a major contribution."
+15,"in terms of digitization footprint contribution, the image data storage of 6.5 kb/ha (planetscope image on das86) would be used instead of 76.6 kb/ha (8 planetscope and 6 sentinel 2a images) for corn yield estimation in this study."
+15,"according to the best yield prediction model, the storage of vis used for yield estimation at das86 is about 8.4 kb/ha."
+15,yield prediction during the optimal growth period can greatly reduce the storage of remote sensing data.
+15,"research challenge although satellite rs data are very valuable due to their large-scale coverage, spatial resolution is still a concern in yield estimation at the field and within-field scales."
+15,this study demonstrated that it was possible to predict the corn grain yield at the field level with vis based on planetscope images during r2 to r3 growth stage.
+15,"certainly, more studies are needed to further evaluate the smlr and ml models using larger datasets."
+15,years of yield data and more fields are needed to verify the estimation accuracy.
+15,"in addition, averaging 6 m yield values to the 10 m resolution reduces the variance of yield that could be explained with satellite data, therefore increasing the coefficient of determination [33]."
+15,further research is needed to explore the 6 m yield estimation ability with 3 m planetscope data only.
+15,conclusions vegetation indices derived from planetscope and sentinel-2 images were employed to investigate the potential of estimating corn yield with regression methods.
+15,"results from this study clearly showed that high spatial-resolution planetscope satellite imagery could be used to detect the corn yield variability at the field level, and it could explain 15% more variability than sentinel-2 data at the same spatial resolution of 10 m."
+15,"the green chlorophyll vegetation index (gcvi) values consistently produced the highest correlations with corn yield, accounting for 72% of the observed spatial variation in corn yield."
+15,more reliable quantitative yield estimation could be made using a smlr method with multiple vis.
+15,good agreement between the observed and predicted yields was achieved with the coefficient of determination value being 0.81 at 86 days after seeding.
+15,more studies are needed to further evaluate the smlr and ml models using larger datasets.
+15,"author contributions: conceptualization, f.l.; methodology, f.l.; software, f.l. and z.s.; validation, f.l.; formal analysis, f.l.; investigation, k.s.; resources, y.m.; data curation, f.l. and x.c.; writing— original draft preparation, f.l.; writing—review and editing, f.y., y.m. and k.s.; visualization, f.l.; project administration, y.m..; funding acquisition, y.m."
+15,all authors have read and agreed to the published version of the manuscript.
+15,"funding: this research was funded by the national natural science foundation of china (41701398), usda nrcs conservation innovation grant on-farm trial program (nr213a750013g005) and the usda national institute of food and agriculture (state project 1016571)."
+15,data availability statement: the data presented in this study are available on request from the corresponding author.
+15,the data are not yet publicly available.
+15,conflicts of interest: the authors declare no conflict of interest.
+15,references 1.
+15,"medina, h."
+15,"; tian, d."
+15,"; abebe, a."
+15,on optimizing a modis-based framework for in-season corn yield forecast.
+15,earth obs.
+15,"2021, 95, 102258."
+15,[crossref] 2.
+15,"tian, h."
+15,"; wang, p."
+15,"; tansey, k."
+15,"; han, d."
+15,"; zhang, j."
+15,"; zhang, s."
+15,"; li, h."
+15,"a deep learning framework under attention mechanism for wheat yield estimation using remotely sensed indices in the guanzhong plain, pr china."
+15,earth obs.
+15,"2021, 102, 102375."
+15,[crossref]
+16,"agronomy 2022, 12, 3176 16 of 18 3."
+16,"zhao, y."
+16,"; potgieter, a.b."
+16,"; zhang, m."
+16,"; wu, b."
+16,"; hammer, g.l."
+16,predicting wheat yield at the field scale by combining high-resolution sentinel-2 satellite imagery and crop modelling.
+16,remote sens.
+16,"2020, 12, 1024."
+16,[crossref] 4.
+16,"chahbi, a."
+16,"; zribi, m."
+16,"; lili-chabaane, z."
+16,"; duchemin, b."
+16,"; shabou, m."
+16,"; mougenot, b."
+16,"; boulet, g."
+16,estimation of the dynamics and yields of cereals in a semi-arid area using remote sensing and the safy growth model.
+16,remote sens.
+16,"2014, 35, 1004–1028."
+16,[crossref] 5.
+16,"wu, s."
+16,"; yang, p."
+16,"; ren, j."
+16,"; chen, z."
+16,"; li, h."
+16,regional winter wheat yield estimation based on the wofost model and a novel vw-4densrf assimilation algorithm.
+16,remote sens.
+16,environ.
+16,"2021, 255, 112276."
+16,[crossref] 6.
+16,"dhakar, r."
+16,"; sehgal, v.k."
+16,"; chakraborty, d."
+16,"; sahoo, r.n."
+16,"; mukherjee, j."
+16,"; ines, a.v.m."
+16,"; shirasth, p.b."
+16,"; roy, s.b."
+16,field scale spatial wheat yield forecasting system under limited field data availability by integrating crop simulation model with weather forecast and satellite remote sensing.
+16,agric.
+16,"2022, 195, 103299."
+16,[crossref] 7.
+16,"hunt, m.l."
+16,"; blackburn, g.a."
+16,"; carrasco, l."
+16,"; redhead, j.w."
+16,"; rowland, c.s."
+16,high resolution wheat yield mapping using sentinel-2.
+16,remote sens.
+16,environ.
+16,"2019, 233, 111410."
+16,[crossref] 8.
+16,"johnson, d.m."
+16,an assessment of pre-and within-season remotely sensed variables for forecasting corn and soybean yields in the united states.
+16,remote sens.
+16,environ.
+16,"2014, 141, 116–128."
+16,[crossref] 9.
+16,"liaqat, m.u."
+16,"; cheema, m.j.m."
+16,"; huang, w."
+16,"; mahmood, t."
+16,"; zaman, m."
+16,"; khan, m.m."
+16,evaluation of modis and landsat multiband vegetation indices used for wheat yield estimation in irrigated indus basin.
+16,comput.
+16,electron.
+16,agric.
+16,"2017, 138, 39–47."
+16,[crossref] 10.
+16,"wang, j."
+16,"; dai, q."
+16,"; shang, j."
+16,"; jin, x."
+16,"; sun, q."
+16,"; zhou, g."
+16,"; dai, q."
+16,"field-scale rice yield estimation using sentinel-1a synthetic aperture radar (sar) data in coastal saline region of jiangsu province, china."
+16,remote sens.
+16,"2019, 11, 2274."
+16,[crossref] 11.
+16,"segarra, j."
+16,"; gonzález-torralba, j."
+16,"; aranjuelo, í."
+16,"; araus, j.l."
+16,"; kefauver, s.c."
+16,"estimating wheat grain yield using sentinel-2 imagery and exploring topographic features and rainfall effects on wheat performance in navarre, spain."
+16,remote sens.
+16,"2020, 12, 2278."
+16,[crossref] 12.
+16,"azadbakht, m."
+16,"; ashourloo, d."
+16,"; aghighi, h."
+16,"; homayouni, s."
+16,"; shahrabi, h.s."
+16,"; matkan, a."
+16,"; radiom, s."
+16,alfalfa yield estimation based on time series of landsat 8 and proba-v images: an investigation of machine learning techniques and spectral-temporal features.
+16,remote sens.
+16,environ.
+16,"2022, 25, 100657."
+16,[crossref] 13.
+16,"bendig, j."
+16,"; bolten, a."
+16,"; bennertz, s."
+16,"; broscheit, j."
+16,"; eichfuss, s."
+16,"; bareth, g."
+16,estimating biomass of barley using crop surface models (csms) derived from uav-based rgb imaging.
+16,remote sens.
+16,"2014, 6, 10395–10412."
+16,[crossref] 14.
+16,"johnson, m.d."
+16,"; hsieh, w.w."
+16,"; cannon, a.j."
+16,"; davidson, a."
+16,"; bédard, f."
+16,crop yield forecasting on the canadian prairies by remotely sensed vegetation indices and machine learning methods.
+16,agric.
+16,meteorol.
+16,"2016, 218, 74–84."
+16,[crossref] 15.
+16,"zhang, m."
+16,"; zhou, j."
+16,"; sudduth, k.a."
+16,"; kitchen, n.r."
+16,estimation of maize yield and effects of variable-rate nitrogen application using uav-based rgb imagery.
+16,biosyst.
+16,"2020, 189, 24–35."
+16,[crossref] 16.
+16,"yang, w."
+16,"; nigon, t."
+16,"; hao, z."
+16,"; paiao, g.d."
+16,"; fernández, f.g."
+16,"; mulla, d."
+16,"; yand, c."
+16,estimation of corn yield based on hyperspectral imagery and convolutional neural network.
+16,comput.
+16,electron.
+16,agric.
+16,"2021, 184, 106092."
+16,[crossref] 17.
+16,"wan, l."
+16,"; cen, h."
+16,"; zhu, j."
+16,"; zhang, j."
+16,"; zhu, y."
+16,"; sun, d."
+16,"; du, x."
+16,"; zhai, l."
+16,"; weng, h."
+16,"; li, y.; et al."
+16,grain yield prediction of rice using multi-temporal uav-based rgb and multispectral images and model transfer–a case study of small farmlands in the south of china.
+16,agric.
+16,meteorol.
+16,"2020, 291, 108096."
+16,[crossref] 18.
+16,"franch, b."
+16,"; bautista, a.s."
+16,"; fita, d."
+16,"; rubio, c."
+16,"; tarrazó-serrano, d."
+16,"; sánchez, a."
+16,"; skakun, s."
+16,"; vermote, e."
+16,"; becker-reshef, i."
+16,"; uris, a."
+16,within-field rice yield estimation based on sentinel-2 satellite data.
+16,remote sens.
+16,"2021, 13, 4095."
+16,[crossref] 19.
+16,"fortin, j.g."
+16,"; anctil, f."
+16,"; parent, l.é."
+16,"; bolinder, m.a."
+16,site-specific early season potato yield forecast by neural network in eastern canada.
+16,precis.
+16,agric.
+16,"2011, 12, 905–923."
+16,[crossref] 20.
+16,"feng, a."
+16,"; zhou, j."
+16,"; vories, e.d."
+16,"; sudduth, k.a."
+16,"; zhang, m."
+16,yield estimation in cotton using uav-based multi-sensor imagery.
+16,biosyst.
+16,"2020, 193, 101–114."
+16,[crossref] 21.
+16,"ashapure, a."
+16,"; jung, j."
+16,"; chang, a."
+16,"; oh, s."
+16,"; yeom, j."
+16,"; maeda, m."
+16,"; maeda, a."
+16,"; dube, n."
+16,"; landivar, j."
+16,"; hague, s.; et al."
+16,developing a machine learning based cotton yield estimation framework using multi-temporal uas data.
+16,isprs j.
+16,photogramm.
+16,remote sens.
+16,"2020, 169, 180–194."
+16,[crossref] 22.
+16,"xu, w."
+16,"; chen, p."
+16,"; zhan, y."
+16,"; chen, s."
+16,"; zhang, l."
+16,"; lan, y."
+16,cotton yield estimation model based on machine learning using time series uav remote sensing data.
+16,earth obs.
+16,"2021, 104, 102511."
+16,[crossref] 23.
+16,"gutiérrez, s."
+16,"; wendel, a."
+16,"; underwood, j."
+16,ground based hyperspectral imaging for extensive mango yield estimation.
+16,comput.
+16,electron.
+16,agric.
+16,"2019, 157, 126–135."
+16,[crossref] 24.
+16,"apolo-apolo, o.e."
+16,"; martínez-guanter, j."
+16,"; egea, g."
+16,"; raja, p."
+16,"; pérez-ruiz, m."
+16,deep learning techniques for estimation of the yield and size of citrus fruits using a uav.
+16,agron.
+16,"2020, 115, 126030."
+16,[crossref] 25.
+16,"sumesh, k.c."
+16,"; ninsawat, s."
+16,"; som-ard, j."
+16,"integration of rgb-based vegetation index, crop surface model and object-based image analysis approach for sugarcane yield estimation using unmanned aerial vehicle."
+16,comput.
+16,electron.
+16,agric.
+16,"2021, 180, 105903."
+16,"doraiswamy, p.c."
+16,"; hatfield, j.l."
+16,"; jackson, t.j."
+16,"; akhmedov, b."
+16,"; prueger, j."
+16,"; stern, a."
+16,crop condition and yield simulations using landsat and modis.
+16,remote sens.
+16,environ.
+16,"2004, 92, 548–559."
+16,[crossref] 27.
+16,"guan, k."
+16,"; wu, j."
+16,"; kimball, j.s."
+16,"; anderson, m.c."
+16,"; frolking, s."
+16,"; li, b."
+16,"; hain, c.r."
+16,"; lobell, d.b."
+16,"the shared and unique values of optical, fluorescence, thermal and microwave satellite data for estimating large-scale crop yields."
+16,remote sens.
+16,environ.
+16,"2017, 199, 333–349."
+16,[crossref]
+17,"agronomy 2022, 12, 3176 17 of 18 28."
+17,"sakamoto, t."
+17,incorporating environmental variables into a modis-based crop yield estimation method for united states corn and soybeans through the use of a random forest regression algorithm.
+17,isprs j.
+17,photogramm.
+17,remote sens.
+17,"2020, 160, 208–228."
+17,[crossref] 29.
+17,"siyal, a.a."
+17,"; dempewolf, j."
+17,"; becker-reshef, i."
+17,rice yield estimation using landsat etm + data.
+17,remote sens.
+17,"2015, 9, 095986."
+17,[crossref] 30.
+17,"claverie, m."
+17,"; ju, j."
+17,"; masek, j.g."
+17,"; dungan, j.l."
+17,"; vermote, e.f."
+17,"; roger, j.c."
+17,"; skakun, s.v."
+17,"; justice, c."
+17,the harmonized landsat and sentinel-2 surface reflectance data set.
+17,remote sens.
+17,environ.
+17,"2018, 219, 145–161."
+17,[crossref] 31.
+17,"lambert, m.j."
+17,"; traoré, p.c.s."
+17,"; blaes, x."
+17,"; baret, p."
+17,"; defourny, p."
+17,estimating smallholder crops production at village level from sentinel-2 time series in mali’s cotton belt.
+17,remote sens.
+17,environ.
+17,"2018, 216, 647–657."
+17,[crossref] 32.
+17,"schwalbert, r.a."
+17,"; amado, t.j.c."
+17,"; nieto, l."
+17,"; varela, s."
+17,"; corassa, g.m."
+17,"; horbe, t.a.n."
+17,"; rice, c.w."
+17,"; peralta, n.r."
+17,"; ciampitti, i.a."
+17,forecasting maize yield at field scale based on high-resolution satellite imagery.
+17,biosyst.
+17,"2018, 171, 179–192."
+17,[crossref] 33.
+17,"skakun, s."
+17,"; kalecinski, n.i."
+17,"; brown, m.g.l."
+17,"; johnson, d.m."
+17,"; vermote, e.f."
+17,"; roger, j."
+17,"; franch, b."
+17,"assessing within-field corn and soybean yield variability from worldview-3, planet, sentinel-2, and landsat 8 satellite imagery."
+17,remote sens.
+17,"2021, 13, 872."
+17,[crossref] 34.
+17,"kayad, a."
+17,"; sozzi, m."
+17,"; gatto, s."
+17,"; marinello, f."
+17,"; pirotti, f."
+17,monitoring within-field variability of corn yield using sentinel-2 and machine learning techniques.
+17,remote sens.
+17,"2019, 11, 2873."
+17,[crossref] 35.
+17,"tomíček, j."
+17,"; mišurec, j."
+17,"; lukeš, p."
+17,prototyping a generic algorithm for crop parameter retrieval across the season using radiative transfer model inversion and sentinel-2 satellite observations.
+17,remote sens.
+17,"2021, 13, 3659."
+17,[crossref] 36.
+17,"mudereri, b.t."
+17,"; dube, t."
+17,"; adel-rahman, e.m."
+17,"; niassy, s."
+17,"; kimathi, e."
+17,"; landmann, t."
+17,a comparative analysis of planetscope and sentinel-2 space-borne sensors in mapping striga weed using guided regula rised random forest classification ensemble.
+17,photogramm.
+17,remote sens.
+17,"2019, 42, 701–708."
+17,[crossref] 37.
+17,"sadeh, y."
+17,"; zhu, x."
+17,"; dunkerley, d."
+17,"; walker, j.p."
+17,"; zhang, y."
+17,"; rozenstein, o."
+17,"; manivasagam, v.s."
+17,"; chenu, k."
+17,fusion of sentinel-2 and planetscope time-series data into daily 3 m surface reflectance and wheat lai monitoring.
+17,earth obs.
+17,"2021, 96, 102260."
+17,[crossref] 38.
+17,"pantazi, x.e."
+17,"; moshou, d."
+17,"; alexandridis, t."
+17,"; whetton, r.l."
+17,"; mouazen, a.m."
+17,wheat yield prediction using machine learning and advanced sensing techniques.
+17,comput.
+17,electron.
+17,agric.
+17,"2016, 121, 57–65."
+17,[crossref] 39.
+17,"gaso, d.v."
+17,"; berger, a.g."
+17,"; ciganda, v.s."
+17,predicting wheat grain yield and spatial variability at field scale using a simple regression or a crop model in conjunction with landsat images.
+17,comput.
+17,electron.
+17,agric.
+17,"2019, 159, 75–83."
+17,[crossref] 40.
+17,"řezník, t."
+17,"; pavelka, t."
+17,"; herman, l."
+17,"; lukas, v."
+17,"; širucek, p."
+17,"; leitgeb, s."
+17,"; leitner, f."
+17,prediction of yield productivity zones from landsat 8 and sentinel-2a/b and their evaluation using farm machinery measurements.
+17,remote sens.
+17,"2020, 12, 1917."
+17,[crossref] 41.
+17,"jaafar, h.h."
+17,"; ahmad, f.a."
+17,crop yield prediction from remotely sensed vegetation indices and primary productivity in arid and semi-arid lands.
+17,remote sens.
+17,"2015, 36, 4570–4589."
+17,[crossref] 42.
+17,"battude, m."
+17,"; bitar, a.a."
+17,"; morin, d.m."
+17,"; cros, j."
+17,"; huc, m."
+17,"; sicre, c.m."
+17,"; dantec, v.l."
+17,"; demarez, v."
+17,estimating maize biomass and yield over large areas using high spatial and temporal resolution sentinel-2 like remote sensing data.
+17,remote sens.
+17,environ.
+17,"2016, 184, 668–681."
+17,[crossref] 43.
+17,"shanahan, j.f."
+17,"; schepers, j.s."
+17,"; francis, d.d."
+17,"; varvel, g.e."
+17,"; wilhelm, w.w."
+17,"; tringe, j.m."
+17,"; schlemmer, m.r."
+17,"; major, d.j."
+17,use of remote-sensing imagery to estimate corn grain yield.
+17,agron.
+17,"2001, 93, 583–589."
+17,[crossref] 44.
+17,"panda, s.s."
+17,"; ames, d.p."
+17,"; panigrahi, s."
+17,application of vegetation indices for agricultural crop yield prediction using neural network techniques.
+17,remote sens.
+17,"2010, 2, 673–696."
+17,[crossref] 45.
+17,"unganai, l.s."
+17,"; kogan, f.n."
+17,drought monitoring and corn yield estimation in southern africa from avhrr data.
+17,remote sens.
+17,environ.
+17,"1998, 63, 219–232."
+17,[crossref] 46.
+17,"chlingaryan, a."
+17,"; sukkarieh, s."
+17,"; whelan, b."
+17,machine learning approaches for crop yield prediction and nitrogen status estimation in precision agriculture: a review.
+17,comput.
+17,electron.
+17,agric.
+17,"2018, 151, 61–69."
+17,[crossref] 47.
+17,"bierman, p.m."
+17,"; rosen, c.j."
+17,"; venterea, r.t."
+17,"; lamb, j.a."
+17,survey of nitrogen fertilizer use on corn in minnesota.
+17,agric.
+17,"2012, 109, 43–52."
+17,[crossref] 48.
+17,planet team.
+17,"planet imagery product specifications; planet labs inc.: san francisco, ca, usa, 2018; available online: https: //www.planet.com/products/satellite-imagery/files/planet_combined_imagery_product_specs_december2017.pdf (accessed on 12 april 2018)."
+17,"jordan, c.f."
+17,derivation of leaf-area index from quality of light on the forest floor.
+17,"ecology 1969, 50, 663–666."
+17,[crossref] 50.
+17,"chen, j.m."
+17,evaluation of vegetation indices and a modified simple ratio for boreal applications.
+17,remote sens.
+17,"1996, 22, 229–242."
+17,[crossref] 51.
+17,"rouse, j.w."
+17,"; hass, r.h."
+17,"; schell, j.a."
+17,"; deering, d.w."
+17,monitoring vegetation systems in the great plains with erts.
+17,third earth resour.
+17,technol.
+17,satell.
+17,"1973, 1, 309–317."
+17,"gitelson, a.a."
+17,"; kaufman, y.j."
+17,"; merzlyak, m.n."
+17,use of a green channel in remote sensing of global vegetation from eos-modis.
+17,remote sens.
+17,environ.
+17,"1996, 58, 289–298."
+17,[crossref] 53.
+17,"baret, f."
+17,"; jacquemoud, s."
+17,"; hanocq, j.f."
+17,the soil line concept in remote sensing.
+17,remote sens.
+17,"1993, 7, 65–82."
+17,[crossref] 54.
+17,"jiang, z."
+17,"; huete, a.r."
+17,"; didan, k."
+17,"; miura, t."
+17,development of a two-band enhanced vegetation index without a blue band.
+17,remote sens.
+17,environ.
+17,"2008, 112, 3833–3845."
+17,[crossref]
+18,"agronomy 2022, 12, 3176 18 of 18 55."
+18,"haboudane, d."
+18,"; miller, j.r."
+18,"; pattey, e."
+18,"; zarco-tejada, p.j."
+18,"; strachan, i.b."
+18,hyperspectral vegetation indices and novel algorithms for predicting green lai of crop canopies: modeling and validation in the context of precision agriculture.
+18,remote sens.
+18,environ.
+18,"2004, 90, 337–352."
+18,[crossref] 56.
+18,"qi, j."
+18,"; chehbouni, a."
+18,"; huete, a.r."
+18,"; kerr, y.h."
+18,"; sorooshian, s."
+18,a modified soil adjusted vegetation index.
+18,remote sens.
+18,environ.
+18,"1994, 48, 119–126."
+18,[crossref] 57.
+18,"gitelson, a.a."
+18,wide dynamic range vegetation index for remote quantification of biophysical characteristics of vegetation.
+18,plant physiol.
+18,"2004, 161, 165–173."
+18,[crossref] 58.
+18,"gitelson, a.a."
+18,"; viña, a."
+18,"; arkebauer, t.j."
+18,"; rundquist, d.c."
+18,"; keydan, g."
+18,"; leavitt, b."
+18,remote estimation of leaf area index and green leaf biomass in maize canopies.
+18,geophys.
+18,"2003, 30, 1248."
+18,[crossref] 59.
+18,r core team.
+18,r: a language and environment for statistical computing.
+18,"r foundation for statistical computing, vienna, austria."
+18,available online: https://www.r-project.org (accessed on 12 april 2018).
+18,"breiman, l."
+18,random forests.
+18,learn.
+18,"2001, 45, 5–32."
+18,[crossref] 61.
+18,"lobell, d.b."
+18,"; thau, d."
+18,"; seifert, c."
+18,"; engle, e."
+18,"; little, b."
+18,a scalable satellite-based crop yield mapper.
+18,remote sens.
+18,environ.
+18,"2015, 164, 324–333."
+18,[crossref] 62.
+18,"belgiu, m."
+18,"; drăguţ, l."
+18,random forest in remote sensing: a review of applications and future directions.
+18,isprs j.
+18,photogramm.
+18,remote sens.
+18,"2016, 114, 24–31."
+18,[crossref] 63.
+18,"mkhabela, m.s."
+18,"; bullock, p."
+18,"; raj, s."
+18,"; wang, s."
+18,"; yang, y."
+18,crop yield forecasting on the canadian prairies using modis ndvi data.
+18,agric.
+18,for meteorol.
+18,"2011, 151, 385–393."
+18,[crossref] 64.
+18,"gopal, p.m."
+18,"; bhargavi, r."
+18,performance evaluation of best feature subsets for crop yield prediction using machine learning algorithms.
+18,artif.
+18,intell.
+18,"2019, 33, 621–642."
+18,"al-gaadi, k.a."
+18,"; hassaballa, a.a."
+18,"; tola, e.k."
+18,"; kayad, a.g."
+18,"; madugundu, r."
+18,"; alblewi, b."
+18,"; assiri, f."
+18,prediction of potato crop yield using precision agriculture techniques.
+18,"plos one 2016, 11, e0162219."
+18,[crossref] [pubmed] 66.
+18,"nagy, a."
+18,"; szabó, a."
+18,"; adeniyi, o.d."
+18,"; tamás, j."
+18,wheat yield forecasting for the tisza river catchment using landsat 8 ndvi and savi time series and reported crop statistics.
+18,"agronomy 2021, 11, 652."
+18,[crossref] 67.
+18,"kayad, a."
+18,"; sozzi, m."
+18,"; paraforos, d.s."
+18,"; rodrigues, f.a., jr."
+18,"; cohen, y."
+18,"; fountas, s."
+18,"; francisco, m."
+18,"; pezzuolo, a."
+18,"; grigolato, s."
+18,"; marinello, f."
+18,how many gigabytes per hectare are available in the digital agriculture era?
+18,a digitization footprint estimation.
+18,comput.
+18,electron.
+18,agric.
+18,"2022, 198, 107080."
+18,[crossref]

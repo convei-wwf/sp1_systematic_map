@@ -1,0 +1,1733 @@
+page,p
+1,"drones article autonomous unmanned aerial vehicles in bushfire management: challenges and opportunities shouthiri partheepan 1,2, * , farzad sanati 1 and jahan hassan 1 1 school of engineering and technology, central queensland university, norman gardens, qld 4701, australia; f.sanati@cqu.edu.au (f.s.); j.hassan@cqu.edu.au (j.h.)"
+1,"2 department of mathematics, faculty of science, eastern university sri lanka, vantharumoolai, chenkalady, batticaloa 30000, sri lanka * correspondence: s.partheepan@cqumail.com abstract: the intensity and frequency of bushfires have increased significantly, destroying prop- erty and living species in recent years."
+1,"presently, unmanned aerial vehicle (uav) technology ad- vancements are becoming increasingly popular in bushfire management systems because of their fundamental characteristics, such as manoeuvrability, autonomy, ease of deployment, and low cost."
+1,"uavs with remote-sensing capabilities are used with artificial intelligence, machine learning, and deep-learning algorithms to detect fire regions, make predictions, make decisions, and optimize fire-monitoring tasks."
+1,"moreover, uavs equipped with various advanced sensors, including lidar, visual, infrared (ir), and monocular cameras, have been used to monitor bushfires due to their potential to provide new approaches and research opportunities."
+1,"this review focuses on the use of uavs in bushfire management for fire detection, fire prediction, autonomous navigation, obstacle avoidance, and search and rescue to improve the accuracy of fire prediction and minimize their impacts on people and nature."
+1,the objective of this paper is to provide valuable information on various uav-based bushfire management systems and machine-learning approaches to predict and effectively respond to bushfires in inaccessible areas using intelligent autonomous uavs.
+1,this paper aims to assemble information about the use of uavs in bushfire management and to examine the benefits and limitations of existing techniques of uavs related to bushfire handling.
+1,"however, we conclude that, despite the potential benefits of uavs for bushfire management, there are shortcomings citation: partheepan, s."
+1,"; sanati, f.; in accuracy, and solutions need to be optimized for effective bushfire management."
+1,"hassan, j."
+1,autonomous unmanned aerial vehicles in bushfire keywords: unmanned aerial vehicle; sensor; machine learning; deep learning; bushfire management management: challenges and opportunities.
+1,"drones 2023, 7, 47. https://doi.org/10.3390/ drones7010047 1."
+1,"introduction academic editor: emanuel peres forests are essential global resources that provide a wide range of social, economic, received: 20 december 2022 and environmental benefits."
+1,"they offer significant ecological support to all species, provide revised: 5 january 2023 vital ecosystem services, and protect cultural and social aspects."
+1,"however, the intensity and accepted: 6 january 2023 frequency of bushfires have been increasing significantly in recent years, and giant forest published: 10 january 2023 areas are destroyed every year because of human activities [1] as well as natural causes."
+1,"bushfire affects almost three hundred thousand people worldwide, burning millions of hectares of land and costing billions of dollars [2] every year, and controlling widespread bushfires remains a challenge for humanity."
+1,copyright: © 2023 by the authors.
+1,"research in 2012 estimated that 15 civilians died due to a bushfire, close to the average licensee mdpi, basel, switzerland. of 13 people per year [3] thus far."
+1,"australian parliament media reported that 75 people died, this article is an open access article including 13 victorian firefighters, 1 casual firefighter, and 3 south australian firefighters [4]. distributed under the terms and forest fire management victoria recorded that 47 people in victoria and 28 people in south conditions of the creative commons australia died."
+1,"experts estimate that, in the coming years, the spread of forest fires will attribution (cc by) license (https:// dramatically increase due to climate change [5]."
+1,"effective control of bushfires is considered creativecommons.org/licenses/by/ one of the essential roles in protecting and preserving natural resources [6,7]."
+1,4.0/).
+1,"drones 2023, 7, 47. https://doi.org/10.3390/drones7010047 https://www.mdpi.com/journal/drones"
+2,"drones 2023, 7, 47 2 of 34 several traditional methods and tools, such as satellite images, wireless sensor net- works (wsns), smoke detectors, watchtowers, human monitors, and remotely piloted vehicles, have been used to monitor and detect bushfires [8]."
+2,"for instance, the australian csiro [9] long-running project has a computational system named spark for bushfire spread predictions."
+2,users can design their fire propagation models by building on spark’s computational fire propagation solver with manually entered information into a tool that uses an algorithm to predict the fire behaviour.
+2,"however, traditional methods and other models are deemed inefficient and have different practical problems, such as less reliability, high cost, and inadequate capability; moreover, they rely on manual human decision-making and input."
+2,"recent technological advancements can overcome the limitations of traditional fire detection methods’ limitations and significantly contribute to the early detection and suppression of bushfires to inspect the affected area and help people overcome impacts, including human death, economic losses, and environmental damage."
+2,"as a result, uavs have been proposed as an appropriate technology to handle bushfires due to their vast capabilities [10]."
+2,"in addition, uavs can access high-risk zones without human interaction, confirm fire, and provide real-time updates with complete accuracy for strategic and tactical planning, with no risk to human lives [11]."
+2,"uavs with vision-based remote-sensing techniques have become a most popular tool for effective bushfire monitoring, detection systems [12], and even fighting fires with low cost and more accuracy."
+2,"in recent years, worldwide attention and research related to uav forest fire appli- cations have increased considerably because of their ability to capture clear images from low altitudes and challenging locations, such as areas covered by smoke, impaired vision, polluted air, and hazardous conditions."
+2,"uav-based forest fire management systems can cover functions, such as detecting fires in progress and predicting the future expansion and direction of a fire based on real-time data [13]."
+2,figure 1 illustrates the challenges and effects of bushfires and suggestions for uav- based solutions for overcoming bushfire-related impacts.
+2,this paper reviews existing literature on bushfire management and examines future uses for prediction in fire monitor- ing.
+2,"we primarily aim to collect information about uavs used in bushfire management systems and to evaluate their benefits and limitations for various applications in uav-based bushfire management, such as bushfire detection and prediction."
+2,a further objective of this paper is to highlight the potential limitations of intelligent autonomous uavs as fire detection technology and to highlight the need for them to navigate and predict fire behaviour in uncertain conditions.
+2,"furthermore, we note that uav-based bushfire management can contribute to in- creased accuracy and positively impact social, economic, and environmental factors."
+2,"recog- nition techniques are used in fire detection and monitoring, a field where significant advances have been made over the past few decades."
+2,data must be fed into complex math- ematical models (which are difficult to gather in real-time and in unfamiliar conditions) to use prediction methods.
+2,"there are other obstacles, as well as hardware failures, adverse weather, communication breakdowns, and regulation issues."
+2,figure 1.
+2,solutions to reduce impacts of bushfires and the challenges they pose.
+2,"in recent years, machine-learning and remote-sensing technologies have enabled the monitoring and detection of forest fires more efficiently."
+2,research has shown the possibility
+3,"drones 2023, 7, 47 3 of 34 of using uavs to identify and even extinguish forest fires; however, further development of this technology still needs to be improved."
+3,"further, using uavs in combination with other remote-sensing techniques will require additional investigation."
+3,"our main objective was to conduct a thorough bibliographic review of the use of uavs in bushfire management and describe the advantages and limitations of using uavs to manage fire in a variety of applications, including fire detection, fire prediction, autonomous navigation, obstacle avoidance, and search and rescue."
+3,the paper reviews the existing literature on bushfire management approaches and the potential uses of uavs.
+3,"this paper also explores how uav-based bushfire management can improve prediction accuracy and boost the social, economic, and environmental benefits of better management."
+3,"by identifying limitations of using uavs in bushfire management, this paper seeks to motivate further research and development to accelerate the research and development in this crucial field."
+3,this paper is motivated by the lack of a survey focusing comprehensively on these issues.
+3,table 1 demonstrates most of the shortcomings of existing surveys that this paper will cover on uav applications in bushfire management.
+3,"in particular, this paper contributes to the following: • review of the existing literature on the understanding of bushfire management and investigating the role of uavs in bushfire management applications and their benefits and limitations."
+3,• specifying and exploring different technologies adapted to uavs to increase perfor- mance accuracy.
+3,"• studying and analysing uav-based applications on bushfire management, research trends, and the challenges facing uavs in each application domain."
+3,• identifying and examining uav technical and environmental challenges across differ- ent application domains.
+3,table 1.
+3,comparison of existing surveys on uav-based tasks in bushfire management applications with the findings of this paper.
+3,uav-based tasks in bushfire management uav-based technologies references search and obstacle detection detection prediction navigation swarm ml sensors rescue and avoidance [14] x x x [15] x x [10] x x x [16] x x [17] x x x [1] x x x [18] x x x x our work x x x x x x x the rest of this paper is organised as follows: section 2 outlines the methodology for the paper.
+3,section 3 reviews the existing surveys related to bushfire management systems.
+3,section 4 discusses the literature related to bushfire applications and the key technologies used in such scenarios.
+3,the last section reviews the challenges and development issues related to this research area before concluding the paper.
+3,"methodology this paper summarizes the existing research and demonstrates the uav-based ap- proach, sensors utilized by the uav, and machine-learning approaches as well as their asso- ciated advantages and downsides in bushfire management tasks."
+3,the following questions are investigated through a comprehensive literature review consisting of the following: 1.
+3,how are uav technologies utilized in bushfire management?
+3,what benefits and limitations do using uavs impose in bushfire management?
+3,how efficiently is uav technology used to manage bushfires?
+4,"drones 2023, 7, 47 4 of 34 as a result, the literature review assessed many research studies from journals, con- ferences, and other electronic databases to integrate and synthesize the information."
+4,"a variety of keywords were used to locate relevant study papers, including wildfire, forest fire, bushfire, sensors, swarms, autonomous uavs, machine learning, prediction, detection, obstacle detection and avoidance, search and rescue, and navigation, in databases, such as elsevier, ieee, scopus, mdpi, google scholar, springer, and science direct."
+4,"a total of 1026 papers were identified by our search (figure 2), of which we selected the most relevant for further evaluation and excluded others."
+4,a higher number of studies have been performed on the applications of fire detection compared with other uav-based bushfire applications.
+4,"comparatively, a few studies have been found in obstacle detection and avoidance based on uav-based bushfire management."
+4,the visual representation of the structure of the reviewed works illustrates in figure 3.
+4,figure 2.
+4,statistical analysis of experiments on different types of uav-based operations in bushfire management systems.
+4,figure 3.
+4,structure of the reviewed work.
+5,"drones 2023, 7, 47 5 of 34 3."
+5,related work a preliminary literature review shows that previous studies related to uavs are widely being researched on understanding and modelling a predicting system in disaster man- agement.
+5,uavs with various types of technology are being used or tested to monitor and detect bushfires.
+5,a few literature surveys have been conducted to summarize the research work performed around the world regarding uav-based bushfire management systems.
+5,hossain et al. [1] discussed and summarized the research conducted worldwide until 2019 in the domain of uav-based bushfire monitoring and detection.
+5,"the author initially covered some of the research work performed at various universities and research centres, such as the university of south florida, university of alaska fairbanks, concordia university, united states forest service (usfs), and nasa arms research centre (nasa- arc), since 1961."
+5,"the authors also mentioned the operations and infrastructure, such as sensors, aircraft type, and communication of uavs used as forest fire monitoring systems."
+5,they noted several positive points of using uavs while highlighting the constraints of using such technology.
+5,"similarly, yuan et al. [18] followed the same concept as hossain by conducting a literature survey of the applications of uavs for bushfire management."
+5,the relevant research undertaken during this period is also systematically arranged as per the approach employed in the previous analysis of hossain.
+5,the author discussed uavs with vision-based systems that focus on the drawbacks of image capture failure and improve the quality of the acquired data.
+5,some researchers proposed an outline for robotic technology-based uavs for forest firefighting.
+5,roldán-gómez et al. [14] enlisted and discussed the different types of robots in the context of firefighting missions.
+5,"mainly, the focus is on the operation of the compre- hensive application of drone swarms in firefighting."
+5,"in addition to this, it addresses some of the problems of current operations, challenges that have to be overcome, and the current limitations in the autonomy and communications of uavs."
+5,"on the other hand, akhloufi et al. [10] reviewed the previous works related to uavs, specifically for wildland fires."
+5,"the authors considered onboard sensor instruments, fire perception algorithms, and coordination strategies based on an application-specific outline."
+5,"in addition, they proposed recent frameworks of both aerial vehicles and unmanned ground vehicles (ugv) for a more efficient wildland firefighting strategy at a larger scale are presented."
+5,"however, the author expressed the limitations in autonomy, reliability, fault tolerance, and the future scope of deep learning in developing autonomous operational systems with or without human intervention."
+5,literature analysis and discussion 4.1.
+5,"requirements of uav-based bushfire management systems fire incidents are becoming more dangerous, more complicated, and more extensive in scale [8]."
+5,these incidents result in increasingly more work for the first responders to respond.
+5,"a possible technical solution is using unmanned firefighting equipment, which would prevent further damage and protect the firefighters."
+5,the use of uavs in this context is increasingly considered promising [19].
+5,"as a matter of fact, uavs can be applied for several purposes within firefighting practices, such as risk assessment, detection, and extinguishment."
+5,each uav observes the terrain with onboard sensors during the fire detection process to identify fire automatically.
+5,"generally, the flight plan is strictly bounded due to the limitations of uav capabilities, such as duration, range, altitude, and sensor resolution [20]."
+5,"multiple uavs can work simultaneously along their predetermined paths, depending on the size and characteristics of the surveillance region, to detect a target."
+5,"once the fire has been confirmed, the ground station and decision support system should deliver estimations of the fire features so that firefighters can effectively guide their efforts."
+5,"for these types of operations to be effective, different types of uavs equipped with sensors must work together with a single ground control centre."
+5,figure 4 shows the components of uavs involved in detection and monitoring tasks.
+6,"drones 2023, 7, 47 6 of 34 in addition, all uavs engaged in bushfire missions should function at night and during the day—even in the most challenging weather conditions—to ensure a successful detection process."
+6,a gps receiver and an inertial measurement unit (imu) should be equipped with these aircraft for automatic flying along paths and automatic geolocalization of their positions.
+6,"furthermore, they must be able to communicate effectively with each other so they can solve their tasks as efficiently as possible."
+6,"consequently, every uav should be equipped with all sensors necessary to detect fires and onboard communication devices that enable the uav to receive commands from a ground control centre, relay information back to it, and exchange information with other uavs."
+6,figure 4.
+6,components of a uav-based bushfire management system.
+6,role and benefits of uavs in bushfire management systems effective time management is crucial in bushfire situations.
+6,uavs are gaining popular- ity due to their flexibility and low cost in comparison with traditional methods of disaster management.
+6,"uavs are primarily used to gather situational awareness in fire incidents, which can be used to direct the efforts of firefighters in locating and controlling hot spots."
+6,"for that purpose, uavs have been used for initial detection and rescue operations."
+7,"drones 2023, 7, 47 7 of 34 these missions may be performed using uavs capable of flying rapidly, flying to a location, mapping the area affected by the fire, and sharing the information with all relevant authorities within a few minutes [21]."
+7,"during search and rescue operations, uavs provide rescuers with critical information about the route that must be followed to reduce the time required to locate victims and intervene."
+7,"furthermore, this helps to reduce the time it takes to find victims and intervene [22]."
+7,"additionally, a uav can carry a variety of sensors, including a thermal imaging camera with multiple colour options."
+7,"together, all these sensors give a better picture of the fire’s spread and speed, which allows authorities to develop a better plan for fire relief."
+7,"further, this reduces the risk for humans and alleviates life-threatening situations by enabling them to operate uavs cite akhloufi. 2020 remotely."
+7,"hence, uavs have had a significant impact on providing information for decision making."
+7,drones are generally less expensive and make it easier to collect high-quality geospatial data after a disaster compared with manned aircraft and satellite images.
+7,"many countries, such as australia, the united states, canada, and europe, have been using uavs as an integral part of firefighting in the modern era."
+7,changing climate has led to longer bushfire seasons and this has increased the cost of firefighting in the case of the usa [23].
+7,"thus, the use of uavs in firefighting has increased in the usa [24]."
+7,"for instance, the los angeles fire department used uavs in 2017 to tackle fires [25]."
+7,"according to the department of interior statistics, federal firefighters used uavs for 340 bushfires in oregon and used them in 12 states total in the same period [26]."
+7,"similarly, in canada, the alberta government hired elevated robotic services, which deploys uavs to mines to help firefighters locate the fire [27]."
+7,"further, researchers at the university of british columbia used uavs in december 2017 to inspect the wreckage caused by the bushfires that ravaged the province [28]."
+7,"songsheng li, a computer engineering researcher at guangdong college of business and technology in zhaoqing, china, is developing an early warning system for bushfires that uses uavs to assess forest fire risks, gather environmental data, and patrol forests [29]."
+7,"furthermore, china’s aviation industry corporation (avic) developed an amphibious aircraft, the ag600, designed to be used in forest firefighting and maritime rescue opera- tions [30]."
+7,bushfire activity in the past few years has been significantly higher in australia than in other countries in the region.
+7,"more than 85% of australia’s firefighting air services are owned or leased by the australian government, with the remainder sourced from other countries."
+7,"therefore, the country has now set its sights on expanding its aerial firefighting."
+7,advancement of uav technologies in bushfire management this section addresses the most relevant technologies adopted in uavs in bushfire management.
+7,"uav structure, working methodology, navigation, and flying features have seen tremendous progress in recent decades."
+7,"several factors have contributed to the performance of uavs, including their geometric structure; the mechanisms used for flying, sensing, path planning, and intelligent behaviour; and the adoption of uavs [31]."
+7,4.3.1.
+7,"types of uav uavs can be categorized into fixed-wing, rotary-wing, and hybrid fixed/rotary wing (figure 5) based on their designs, autonomy, size, weight, flying mechanisms, and power source [32,33]."
+7,"a fixed-wing uav can be flown at high altitudes and can rapidly survey a wide area, while the rotary uavs can hover at low altitudes and collect high-resolution data [11,34]."
+7,"a fixed-wing uav, also known as a vertical takeoff/landing uav (vtol), is used for the initial recognition of a coalition within an airspace coalition through its superior flight capabilities and computation capabilities."
+7,rotary-wing uavs (htol- horizontal takeoff/landing uavs) are also called observer uavs because they contribute to the sensing and recording capabilities of the coalition.
+7,"the structures of fixed-winged uavs are generally simpler than those of rotary-winged uavs, so they require less complicated maintenance and repair processes and, therefore,"
+8,"drones 2023, 7, 47 8 of 34 can operate for longer periods and at higher speeds [35]."
+8,"furthermore, they can carry larger payloads over longer distances while using less power, as they have natural gliding capabilities with no power requirement."
+8,"in contrast, rotary-winged uavs are capable of vertical takeoffs and landings, while fixed-winged uavs require a runway or launcher [35]."
+8,"a hybrid drone is a uav that combines the advantages of fixed-wing, and rotary-wing uavs [36]."
+8,"clearly, all three types: fixed-wing [37,38], rotary wing [39,40], and hybrid [36] uavs are effectively used in different bushfire management operations."
+8,the latest uavs used in bushfire management and their specifications are given in table 2.
+8,"early detection of forest fires has been used with both fixed-wing and rotary drones, both equipped with cameras, either optical or thermal [36]."
+8,uavs can be deployed in different numbers and scenarios based on the frequency and severity of bushfires in a region.
+8,"for instance, the european union funded a project called comet, which explored unmanned systems for monitoring forest fires [41]."
+8,"the researchers developed their system based on three uavs: two fixed wings and one rotary wing, which worked together to conduct a variety of prescribed fire experiments to test its detection and monitoring capabilities."
+8,"comparatively, many authors suggested rotary-wing uavs for the detection task."
+8,"for instance, the authors [42] used a six rotor uav (dji s900) with a sony a7 camera for the bushfire detection model."
+8,"furthermore, another researcher [43] used crazyfile 2.0; this is an open-source nano aerial vehicle at only 27 g in weight and is equipped with a mini arducam 320*240 resolution camera."
+8,the author proved that the open-source quadrotor navigated autonomously toward the fire with the help of imu and imitated its behaviour in the real environment.
+8,"considering accurate image matching with 80% overlap and 60% side lap, bilgilioglu et al. [44] used a dji phantom 4 type uav."
+8,these flights captured images using a 1/2.300 cmos sensor to ensure the coverage ratio.
+8,figure 5.
+8,different categories of frequently used uav models in bushfire management.
+9,"drones 2023, 7, 47 9 of 34 table 2."
+9,specifications of uavs in bushfire management systems.
+9,"uav mission camera payload height airtime battery remark yuncgoetus object detection and thermal excellent 4k video camera, more stable and faster, yuneec typhoon h 10.4 kg 1 km (3000 feet) 25 min 4s 5400 mah lipo battery collision avoidance camera/cgo3 and folding rotor arms for compact storage 4k uhd powered by 28 motors, fitted with water hose from a aerones firefighting − 200 kg (440 pounds) 900 feet (274.3 m) 30 min − fire truck, controlled by a pilot remotely fpv cameras, 8 motors, the landing gear is inverted, plenty of thermal cameras, space available for recording videos and collecting freefly alta 8 obstacle detection and standard hd 9.1 kg (20 pounds) - 35 min 6s lipo various data, do not fly in temperatures exceeding cmos 45 ºc (113 ºf) or below −20 ºc (−4 ºf). camera is removable, have option for two-controller: dji inspire 1 search and rescue, xt or x3 fc350 120 m 18 min lipo 6s 10.5 kg piloting and camera control, provides surveillance high-sensitivity infrared scaning can capture images while in motion, navigate in dji inspire 2 object sense x7 or x5s or x4s 4.250 kg (9.37 pounds) 32.8 feet (10 m) 25 min lipo 6s extremely cold areas flybycopters rtk multi gnss gps, autopilot flight controller, thermal surveying sony a6000, flir 20 min - surveying/mapping 100 kg 30 m (98 feet) specialise in heavy-duty, have 36 propellers, fly x8 vue pro 640 r almost 1000 feet under 6 min uncooled vox microbolometer dual camera system, stabilised by a 3-axis gimbal, dji mavic 2 enterprise thermal camera and 30 m 31 min lipo search and rescue 1.1 kg autonomous flight mode, include obstacle detection 1/200 cmos, effective pixels: system 48 m visual camera multi payload configurations, dual battery, ads-b dji matrice 210 detection fpv camera 6.14 kg 10 m 24 min lipo 6s tb50 receiver, ip43 weatherproofing"
+10,"drones 2023, 7, 47 10 of 34 4.3.2."
+10,"sensors advances in aircraft bushfire detection will depend on developing new or more powerful sensors and on the small size, increased power efficiency, lower prices, and enhanced performance of existing sensors that will enable their use in a broader range of platforms."
+10,"various sensors, including lidar, visual, ir, and monocular, have proven helpful in detection operations [45,46]."
+10,"however, how sensors are used is quite diverse, depending on their purpose and nature."
+10,"for instance, thermal cameras are useless in daylight during hot summer days, fixed cameras are ineffective in dark weather (such as clouds, evening, and night), and infrared sensors cannot detect smoke [47]."
+10,a sensor can be classified as active or passive based on its principal functionality.
+10,"the passive sensor reads only the energy emitted by an object from another source, such as the sun reflected on the object or the scenery under observation."
+10,"in contrast, active sensors radiate light or emit waves that are detected when they bounce back."
+10,a camera must do a great deal of image processing to obtain useful information from the chunks of raw data it obtains from the sensor.
+10,"thermal or ir cameras, optical or visual cameras, and spectrometers are commonly used as passive sensors in sensing applications [45,48,49]."
+10,"apart from the additional algorithm required for calculating the range and other parameters of the bushfire and obstacles, extracting points of interest is a separate process that requires additional processing power [50]."
+10,"sensors that work in visible light are optical or visual cameras, such as monocular and stereo cameras [51]."
+10,they capture images of the surrounding environment and objects to provide valuable information.
+10,"the advantages of cameras are their small size, weight, low power consumption, flexibility, and ease of mounting."
+10,"contrary to this, the disadvantages of using such sensors include their high sensitivity to weather conditions, lack of picture clarity, sensitivity to lighting levels, and the background’s colour contrast."
+10,"when any of these factors are involved in the process, the quality of the captured image drops dramatically."
+10,"thermal or infrared (ir) cameras, which have a longer wavelength than visible light, are used in low-light conditions as infrared light is used [51]."
+10,"since thermal cameras output distorted, blurry, and low-resolution images compared to rgb cameras, it is possible to analyse the data of a thermal camera by generating artificial control points and analysing them to determine inclination and orientation [52]."
+10,"however, their performance can also be improved by combining them with a visual camera during the night or in poor lighting conditions."
+10,"there are various types of active sensors, such as lidars [53], sonars [54], and radars [55]."
+10,"a sensor of this type has a fast response, is resistant to weather and lighting conditions, can scan a more extensive area, requires little processing power, and can return accurate data about obstacles, such as their distance and angle."
+10,"sensors for light detection and ranging (lidar) use two mechanisms: laser pulses to illuminate surfaces, while the other measures the time it takes for the vibrations to bounce back to determine the distance."
+10,data collection using lidar is fast and extremely accurate.
+10,it can detect small objects due to their short wavelength and reconstruct images of the surrounding environment in monochrome and colour.
+10,"however, transparent objects, such as clear glass, can never be detected by lidar."
+10,"ultrasonic or sonar sensors emit sound waves and listen for their reflections to calculate the distance between an object and the sensor [45,56]."
+10,"the object’s transparency does not affect sonar sensors, in contrast to lidars."
+10,"for example, lidars cannot discern clear glass, while sonar sensors are not impacted by colour."
+10,"however, objects that reflect sound in a different direction than the receiver or whose materials absorb sound will degrade the performance of the sonar sensor."
+10,"a radio detection and ranging (radar) sensor transmits a radio signal, which is reflected back to the radar when it encounters an object."
+10,the radar calculates the distance between an object and the radar based on the time it takes to bounce back the signal.
+10,"unlike other sensors, radars can function in any weather condition, regardless of lighting conditions or cloud cover."
+11,"drones 2023, 7, 47 11 of 34 they also provide wide coverage, making them perfect for outdoor use."
+11,"despite this, radars cannot provide accurate dimensions of objects due to their low output resolution, which makes only detection possible [57]."
+11,"as outlined in table 3, different types of sensors and cameras have been summarised with their positive and negative features, which are most commonly used in uav-based forest fire detection systems."
+11,table 3.
+11,different types of sensors/cameras used in firefighting uavs and their positive/negative features.
+11,"sensors/camera features infrared sensor capture the thermal radiation of fire sensitive to varying atmosphere: may lead false alarm lidar detect smoke by examining the backscattered laser light sensitive to varying atmosphere: may lead false alarm semiconductor gas sensors high immunity against disturbances heat and smoke detectors work properly in indoor environments environmental factors affect the performance in outdoor satellite imagery difficult for early fire detection: long scan period, low flexibility visible spectrum ccd/cmos imaging sensors less sensitive to heat flux capable of recording high resolution image much cheaper performance less influenced by environmental changes infrared thermographic camera detect less environmental information lower spatial resolution than visible spectrum cameras expensive with high maintenance cost visual imaging detector do not depend on emissions from carbon dioxide and other products influenced by fire’s radiant intensity surveillance cameras locate the smoke plump’s locations good in day time detection wireless sensor network (wsn) monitor in specific environmental conditions(fire) short communication range low bandwidth inexpensive doesn’t need much maintenance limited battery life barometer measure air pressure temperature sensor measure the temperature global positioning sensor (gps) navigation compass sensor navigation internal measurement unit (imu) estimate the vehicle position 4.3.3."
+11,machine-learning algorithms machine learning (ml) uses data and algorithms to automatically learn without human assistance and to adjust actions to improve decision-making accuracy.
+11,machine learning is a vital component of artificial intelligence (ai) and can be used in data and algorithms to make classifications and predictions related to the problem.
+11,ml algorithms learn directly from data and develop their internal model without external influences.
+11,"furthermore, ml approaches have been widely used in many disaster management systems, importantly, bushfire management."
+11,"in particular, ml approaches have been used in bushfire applications, such as fire detection [18,58–64], fire mapping [65–67], fire weather and climate change prediction [68], fire occurrence, fire behaviour prediction [69], fire effects [70,71], and fire management [62,72,73]."
+11,many types of research have been conducted in recent decades with uav and machine-learning algorithms in bushfire management.
+11,"generally, ml algorithms fall into the categories of supervised, unsupervised, and semi-supervised learning."
+11,supervised ml uses an algorithm to learn the parameters of that function using the available data to classify the data or predict outcomes accurately.
+11,unsu- pervised learning uses algorithms to analyse and cluster unlabelled datasets to discover hidden patterns or data groupings without the need for human intervention.
+11,"the third category, semi-supervised learning, falls in the middle of supervised and unsupervised learning."
+11,it uses a small quantity of labelled data and a large quantity of unlabelled data for prediction.
+11,the following items provide the most commonly used ml methods from these learning paradigms based on their similarity.
+11,instance-based algorithm: instance-based learning models involve decision problems using examples of training data considered necessary or necessary [74].
+11,"by comparing new data to the database using a similarity measure, such methods establish a database of sample data and make predictions based on the best match [74]."
+11,"regarding their functionality, several bushfire management operations employ instance-based algorithms (table 4)."
+11,"an example is a k-nearest neighbour (knn) algorithm, a simple but very effective instanced-"
+12,"drones 2023, 7, 47 12 of 34 based algorithm that uses the euclidean distance to calculate data points’ similarity to one another [17]."
+12,another popular instance-based algorithm type is support vector machines (svms).
+12,svm determines the boundary separating the boundaries of each class in an n-dimensional space based on n dimensions of data.
+12,the distance between the nearest points of each class determines the optimal hyperplane in which the decision boundary is maximized.
+12,"for classification and regression problems, recently developed dl algorithms have proved more efficient than svms [17]."
+12,"however, for limited training samples, svms may offer better performances."
+12,a self-organizing map (som) is an instance-based algorithm for detecting features or reducing dimensional.
+12,"unlike error correction, som uses competitive learning and preserves the input space’s topological properties using a neighbourhood function."
+12,it performs topologically ordered mappings to produce two-dimensional representations of training samples from an input space.
+12,"bayesian algorithm: bayesian algorithms use bayes’ theorem explicitly to solve problems, such as classification and regression, where every pair of features is independent."
+12,"the bayesian network (bn), also known as the bayes net/belief network, is a popular bayesian algorithm in many applied domains (table 5)."
+12,"it specifies probabilistic relationships be- tween variables in an intuitive graphical language, along with tools for calculating the probability resulting from those relationships [17]."
+12,"another form of bn is naive bayes, which multiplies each input variable’s conditional probability by the likelihood function as the output."
+12,the fast and straightforward implementation of nb makes it a good solution for problems that do not presume conditional independence.
+12,"however, the prediction accuracy can be low when this assumption is violated [17]."
+12,ensemble algorithm: the ensemble method incorporates several weaker models that are independently trained to make an overall prediction that is based on combining their predictions.
+12,the results of these methods are usually more accurate than those of a single model.
+12,the random forest (rf) is an ensemble model consisting of many decision trees that are individually trained.
+12,"as part of an rf model, each component decision tree makes a classification decision based on the maximum number of votes."
+12,the class that received the most votes is chosen as the final classification.
+12,"an rf can also perform regressions, and the final output is determined by averaging the individual tree outputs."
+12,"by minimizing the correlation between trees and reducing the model variance, this algorithm achieves a high degree of performance but at the expense of increasing bias and loss of interpretability."
+12,"despite the increased performance, the increased bias and loss of interpretability come with the improved performance [17] (table 6)."
+12,deep-learning algorithm and artificial neural networks: artificial neural networks have evolved into deep-learning algorithms in the modern era.
+12,"these methods design more extensive neural networks and handle large datasets of labelled analogue data, such as images, text, audio, and video."
+12,"artificial neural networks (anns) are built from a set of inputs multiplied linearly, each with a weight associated with it."
+12,the final weighted sum is converted into the output signal using a nonlinear activation function.
+12,a deep neural network (dnn) uses many layers of hidden information.
+12,"this includes convolutional neural networks (cnns), widely used in image analysis, and recurrent neural networks (rnns), which are useful for modelling dynamic temporal phenomena."
+12,"many different types of hyperparameters can be used when designing dnns, in- cluding the connectivity between nodes, the number of layers, and the types of activation functions [17]."
+12,"an ann is typically trained by processing input data that feeds through network layers and activation functions to create an output, regardless of its architecture."
+12,"an error measurement is used to gauge the performance of models in the supervised setting, which compares the result with labelled training data."
+12,table 7 shows the summary of bushfire management studies based on deep learning and artificial neural networks.
+13,"drones 2023, 7, 47 13 of 34 table 4."
+13,instance-based algorithms used in different bushfire management studies.
+13,"author algorithm other algorithms application imagery purpose study area result limitations uncertainty in proba-v reflectance developing an automated one class support imagery, landsat-8 detection dates, hard aqm-proba [75] vector machine algorithm burn area mapping methodology for producing global brazilian savanna - to detect smaller (oc-svm) oli data, viirs burned areas about 4 active fire data fire data products with the accuracy to 10 pixels in size fuzzy vhr ikonos assess the influence of higher-order very high support vector imagery (parnitha implementation [66] complementary burn area mapping spectral and spatial features on the greece classification machine (svm) challenges criterion (fuzcoc) and rhodes datasets) mapping accuracy ann : 98.32% support vector artificial neural satellite images, own prediction accuracy, [76] wildfire prediction predict the occurrence of wildfires canada - machine (svm) networks (ann) dataset svm : 97.48% prediction accuracy table 5."
+13,bayesian algorithms used in different bushfire management studies.
+13,"author algorithm other algorithms application imagery purpose study area limitations fire behaviour prediction simulate the spread of wildfires, dynamic bayesian wildfire behaviour assumptions on constant weather [69] models (behave, - predict the fire behaviour and canada network (dbn) prediction and fuel conditions farsite) characteristics relying exclusively on landsat-8 input classifications, the fire time bayesian updating of mapping the active phase of series would be limited to burn [77] - wildfire mapping landsat-8, sentinel-2, detection primarily early in the land cover (bulc) modis burned areas using multiple british columbia algorithm sources of information active fire phase."
+13,"sentinel-2, the fire time step would be limited to burn detection in late july perform an analysis of prediction and analysis the multilateral relations general directorate of forestry [78] bayesian network - southwest of turkey - of forest fire that may influence forest data fire causes"
+14,"drones 2023, 7, 47 14 of 34 table 6."
+14,ensemble algorithms used in different bushfire management studies.
+14,"author algorithm other algorithms application imagery purpose study area result limitations inconsistent human activities, low correlation between monthly climate gradient boosting deep neural predict wildfire size based data, and a lack of [68] wildfire prediction dataset from kaggle us 32% accuracy decision tree networks on climate features geographic features including elevation and slope assess the performance of rf for classifying fire severity, assess the relative importance of different > 95% accuracy for challenging of radiative - wildfire severity indices in improving fire south-eastern [67] random forest mapping landsat imagery australia transfer models (rtms) severity classification, unburnt vegetation parameterization examine how additional sampling effort from new fires can improve the rf classification accuracy."
+14,"lack of comparable data multiple linear identify the factors that european 96.3% variance of rf, 44% and complexity of factors [79] random forest fire occurrence european fire database regression influence fire occurrence mediterranean region variance of lr affecting fire risk and occurrence general linear map the forest-fire model (glm), susceptibility zones in the boosted regression tree forest-fire landsat-8 oli and 0.89 area under the curve [80] mixture province, and evaluate the southern iran - (brt) susceptibility map modis satellite images (auc) value discriminant relative importance of the analysis (mda) influencing factors neighbouring vegetation model performed better visualize the spatial than the standard model [81] random forest k-fold cross wildfire susceptibility dataset of the mapped fire probability of future area liguria region in italy - validation map perimeters in winter and summer burning seasons, the model performed 83.4% into 91.7% in the winter season"
+15,"drones 2023, 7, 47 15 of 34 table 7."
+15,artificial neural networks and deep-learning algorithms used in different bushfire management studies.
+15,"author algorithm other algorithms application imagery purpose result limitations find an effective approach for cnn, rcnn, k-means forest fire prevention with 83% recognition rate, >3.2 fps not sensitive to [62] yolov3 fire detection aerial imagery small-scale area clustering uavs, improve the efficiency of frame rate fire detection logistic regression (lr), 94.1% accuracy in daytime finding small fire spots deep convolutional neural in an image is a [82] computational vision fire detection fire image dataset estimating the flame area scenarios and 94.8% in network (dcnn) nighttime scenarios challenging task (cv) techniques deep convolutional neural transfer learning from increase the fire detection rate, [63] mobilenet-v2, fourier fire detection dataset from the internet reduce the storage for edge - - network (dcnn) analysis devices 95% accuracy of faster improve the performance of fire r-cnn/alexnet model, 99.6% cnn, region proposal pascal voc dataset, accuracy of faster [83] faster r-cnn network fire detection corsican fire database detection and significantly - network (rpn) (cfdb) r-cnn/vgg16 model, 99.7% decreases the detection errors accuracy of faster rcnn/resnet101 model faster region-based long short-term identify suspected fire regions [84] convolutional neural fire detection flickr-fire dataset reduced false detection - network (r-cnn) memory (lstm) and non-fire regions"
+16,"drones 2023, 7, 47 16 of 34 regression algorithm: the regression algorithm is one of the supervised learning algo- rithms in machine learning that helps identify predictors between data points and labels."
+16,the regression model uses the measure of the error to refine the predictions made by the model over time according to the relationship between variables.
+16,"in machine learning, regression algorithms are used to predict future values."
+16,"through regression analysis, future values are predicted using the input data/historical data."
+16,"an ml label is defined as the target predicted variable, while regression helps determine whether a label is related to data points."
+16,table 8 shows the summary of bushfire management studies based on a regression algorithm.
+16,table 8.
+16,regression algorithms used in different bushfire management studies.
+16,"author algorithm other algorithms application imagery purpose study area result limitations linear regression, uci machine predict forest montesinos [58] regression ridge regression, fire detection learning fire-prone park in - - lasso regression repository areas portugal random forest (rf), improve the spanish egif auc values: calibration is logistic boosting regression prediction lr—0.686, extremely wildfire (general rf—0.746, [85] regression trees (brt), and accuracy of statistics of spain time- support vector occurrence brt—0.730, consuming in (lr) regression wildfires) svm—0.709 machines (svm) methods database svm 4.3.4."
+16,simulation models a bushfire model predicts and understands bushfire behaviour through numerical simulation.
+16,"as a result of the simulation system, bushfire suppression can be improved in terms of safety, risk reduction, and damage reduction."
+16,"the objective of such a system is to recreate fire behaviour, such as the speed at which a fire spreads, the direction in which it spreads, and the amount of heat it generates [86] in addition to estimating fire effects, fire simulation attempts to measure fuel consumption, tree mortality, smoke production, and the ecological impacts of fire [87]."
+16,"additionally, a simulation system can provide bushfire managers with predictions of fire propagation, thereby, increasing the effectiveness of suppression efforts and potentially reducing costs."
+16,several fire-spreading simulators have been developed in the past (table 9).
+16,"spark is one of the toolkits for processing, simulating, and analysing bushfires from start to finish."
+16,"spark’s gpu-based computational fire propagation solver enables users to design custom fire propagation models by including input, processing, and visualization components tailored to bushfire modelling [88]."
+16,meteorological forecasts can be read directly into spark models to provide weather information [89].
+16,"the spark platform easily incorporates environmental data, such as land slope, vegetation, and un-burnable areas into the fire spread rate calculation and leverages this information."
+16,"however, an extended period can introduce a large amount of uncertainty into results due to changes in the environmental components."
+16,wfds (wildland-urban interface fire dynamics simulator) is based on the fds (fire dynamics simulator) developed at the u.s.
+16,national institute of standards and technology (nist) [90].
+16,"an approximation to the fluid dynamics, combustion, and thermal degradation of solid fuels is used in this fully three-dimensional, physics-based, semi-coupled fire atmosphere model [91]."
+16,"in wfds, data assimilation is limited to nudging weather data with only limited capabilities [90]."
+17,"drones 2023, 7, 47 17 of 34 table 9."
+17,simulation model and their specifications used in different studies.
+17,"simulator task programming language cost mathematical model input data output data graphical interface output fire severity maps, fire standardized spatial behaviour and effects data, gis software, fleat (fire and landfire data layers, low severity, moderate severity, landscape ecology fire severity mapping c++ - models, 2d & 3d state-and-transition landfire canopy fuels high severity assessment tool) [92] models, landscape fire layers, 3 digital map succession model layers fire ignition location and time, fire duration, wind downscaling, simulation domain size, maximum reaction velocity, net fuel bilinear interpolation and frequency of wind web-based wildfire field forecast updates, loading, rate of spread, wind factor, wildfire predictions c - process, digital terrain 2d simulator (wws) [93] propagating flux ratio, slope factor, model (dtm), grads(grid analysis mass-consistent model and display system) optimum reaction velocity software, nco (netcdf operator) software gas transport formulation, fuel height, fuel density, spread rate, intensity, fuel depletion, firetec [94] fire behaviour prediction - open source hydrodynamics model surface area, the heat of 2d & 3d combustion, fuel moisture fraction, hygrad, anderson fuel model huygens’ principle, spread rate, intensity, fire size, location, timing, surface farsite [95,96] wildfire predictions c++ open source behave fire behaviour fuel depletion, eight data 2d & 3d prediction system, fire, crown fire spread, fire rothermel model layers, gis layers acceleration, fuel moisture available fuels, wind speed and direction, burn iterations per time step, iterates to burn cellular automata (ca) completely, flammability exponent, patterns of fuels, moisture levels, hexfire [97] wildfire prediction c open source model, hexsim - individuals, rate of proximity exponent, wind, ignition sites, management spread (ros) map ember creation rate, interventions ember max distance, ember step length—wind, ember step length—random"
+18,"drones 2023, 7, 47 18 of 34 another popular simulator is the fire area simulator ( farsite ) [98,99], which simulates fire spread and behaviour in diverse terrain, fuel, and weather conditions."
+18,"this simulator uses the fire behaviour prediction system behave, which was developed by rothermel [86]."
+18,the farsite model has been selected as the best fire growth prediction model by many federal land management agencies [87] due to its flexibility and free availability to anyone.
+18,"however, this requires fuel layers that are expensive and difficult to construct."
+18,"although most existing vegetation layers and databases do not quantify fuel infor- mation to the level of detail and resolution needed for running the farsite model, most fire and land managers need more fuel maps to run farsite."
+18,"due to inexperience with modelling and mapping vegetation and fuels under fire conditions, some efforts to cre- ate farsite layers from existing maps have failed [87]."
+18,"in addition, prometheus is the canadian wildland fire growth simulation model based on fire weather index and fire behaviour prediction subsystems of the fire danger rating system [100]."
+18,"the model com- putes fire behaviour and spread depending on conditions, such as fuel, topography, and weather."
+18,it is a user-friendly software; users can modify fuel and weather data as ascii files [87].
+18,the phoenix [101] fire characterization model was developed in australia to help manage bushfire risk.
+18,this simulation tool directly relates the impacts of various manage- ment strategies to changes in fire characteristics across the landscape and the nature of the impact on various values and assets in the landscape [87].
+18,"in contrast to many standard fire behaviour models, phoenix can adapt to changes in fire conditions, fuel, weather, and topographic conditions as the fire moves and grows."
+18,"apart from this, there are many fire simulation tools, such as fire!"
+18,"[102], extended swarm [103], firemaster [104], firestation [105], embyr [105], wildfire analyst [106], fsim [107], nexus [108], flammap [109], behaveplus [110], fofem [111], and firetec [94] are available for bushfire prediction."
+18,"simulators mainly concentrate on mathematical principles, inputs and outputs, and programming languages for defining the parameters."
+18,modelling bushfires primarily intends to develop procedures that can be incorporated into calculation tools for forest fire management and research.
+18,"it is important to identify, before an event occurs, the likely occurrence place and the progress and possible damage a bushfire could cause, particularly in the event that multiple ignitions occur simultaneously."
+18,"in addition to developing different bushfire management systems, computer science and numerical weather prediction have played a vital role in the evolution of bushfire spread models."
+18,"the development of more powerful, versatile, and sophisticated coupled systems has facilitated the management of bushfires in response to advancements in modelling, numerical methods, and remote sensing."
+18,applications of uavs in bushfire management systems this section will review different strategies for using uavs in bushfire management systems.
+18,"as with any bushfire management system, they should sense or perceive their surroundings through sensors while flying over the affected area."
+18,since the accuracy of de- tection operations depends on the quality and intensity of data provided by a camera.
+18,"most researchers have used infrared and visual cameras for monitoring operations; however, intelligent use of the combined multiple environmental sensors is yet to be seen."
+18,"moreover, the system should utilise appropriate decision-making technology to in- crease prediction accuracy."
+18,"based on the literature studied, fire behaviour prediction, pre-mission path planning, and adaptation to environments are highly important aspects."
+18,"appropriate algorithms and, in some cases, combinations of algorithms could be utilised to achieve more efficient responses to uncertain conditions."
+18,4.4.1.
+18,fire detection one of the primary objectives of the bushfire monitoring system is fire detection.
+18,the detection of bushfires can be assessed onboard or by the ground station to detect the
+19,"drones 2023, 7, 47 19 of 34 presence of fire using gathered information uavs while patrolling over the high-risk zones."
+19,"data processed by sensors detect fires and then extract fire-related measures, which are then passed on to subsystems for action in such a scenario."
+19,early fire detection will enable the authorities to respond quickly and with as much force as possible when fighting forest fires.
+19,"the traditional methods, such as smoke detectors and thermal sensors, need to provide exact information about where, what size, and how fast the fire is spreading."
+19,"onboard sensors used in uavs can overcome these limitations by detecting fires early, being flexible, having a wide field of view, measuring their size, propagation direction, and rate of spread, and locating them precisely."
+19,"bushfire detection may be difficult if the flames are hidden under a heavy forest canopy or smoke, as the flames may only become visible once they reach the forest crown."
+19,"many fire factors, such as heat, light, smoke, motion, and chemical by-products have been used in detection algorithms and computer vision techniques with the detection process to overcome this limitation [8]."
+19,"furthermore, high-sensitivity infrared cameras or sensors are required for effective flame detection during nighttime operations and when dealing with natural phenomena, such as fog, steam, and clouds [1]."
+19,reliable early detection systems should consider multiple fire factors in both day and night operations to obtain reliable bushfire detection.
+19,the advancement of uavs featuring sensors has been widely used for bushfire detec- tion over the last few decades using computer vision techniques.
+19,the detection of bushfires can be assessed onboard or by the ground station to detect the presence of fire using gath- ered information uavs while patrolling over the high-risk zones.
+19,"in such a scenario, data processed by sensors detect fires and then extract fire-related measures, which are then passed on to subsystems for action."
+19,"researchers used image processing techniques with features, such as motion, colour, and coordinates to detect smoke produced by the fire [40,112–114] to onboard visual and infrared sensors data for fire detection [18]."
+19,"for instance, infrared cameras and automatic image processing techniques have relied on the bosque system for fire detection, including the rejection of false alarms [115]."
+19,table 10 summarizes the applications of uavs in bushfire detection operations.
+19,table 10.
+19,applications of uavs in bushfire detection.
+19,author mission sensor ml methods remarks convolutional neural jiao et al.
+19,[62] fire detection infrared camera network (cnn) and only sensitive to large-area bushfires.
+19,"yolov3 high immunity against disturbances, krüll et al."
+19,"[60] fire detection and gas sensors (h2 and cxhx) - reduce false alarm, detect fire spot verification and thermal camera under insufficient vision."
+19,"applicable for small scale, an merino on-board infrared or visual et al."
+19,[116] fire monitoring - evolution on the fire-front is difficult to cameras estimate.
+19,"barometer, humidity minimum no-of false positives, good sensor, global positioning deep learning yolo accuracy in real-time data, lower cost, goyal et al."
+19,"[59] early forest fire detection sensor (gps), imu, algorithm quickly reported to the authority, fire compass detected within 12 h of its initiation dealing time-varying delays in motion sun et al."
+19,"[61] forest fire detection and optical flow sensor bilateral aerial tracking, enforced the velocity monitoring teleoperation synchronization reduced false alarm, enhanced yuan et al."
+19,"[113] forest fire detection and - reliability, non-fire regions wrongly monitoring on-board visual camera extracted temperature sensor, barometer, global deviation error obtained, data loss in wardihani real-time forest fire positioning sensor (gps), - the transmission process, wind speed et al. [117] monitoring inertial measurement unit shifted drones from the flight path (imu), compass sensor good in daytime wildfire detection, block-based forest fire deep convolutional works well on some nighttime wildfire pan et al. [63] detection surveillance camera network video clips, low false alarm rate, reliable in long-term surveillance task reliable and accurate fire detection, yadav [64] fire detection infrared camera, gps deep learning, yolov3 real-time fire detection, drone cannot perform more intricate movement"
+20,"drones 2023, 7, 47 20 of 34 ref. [114] used conventional cameras on towers to provide a continuous sequence of video frames of an alerting area."
+20,the author suggested an image processing technique with a thresholding process for fire detection that distinguished fire from non-fire in select regions of interest (rois) to save computational costs.
+20,"pastor et al. [118], and dios et al. [119] used statistical data fusion techniques to merge individually processed data from each visual and infrared camera of a rotary-wing uav."
+20,another study performed by israeli aircraft industries equipped both forward-looking infrared (flir) and visible spectrum cameras to develop a uav.
+20,"they used both sensors to process data and produce information, such as fire characteristics (global fire monitoring center, 2001)."
+20,"furthermore, a fire segmentation algorithm for forest fire detection and monitoring using a small uav was developed based on vipin et al. [12], consisting of a rule-based colour model [120]."
+20,"then, the effectiveness of fire detection and monitoring was assessed using the dji f550."
+20,severe fire conditions can cause hardware failure in a uav.
+20,"therefore, multiple uavs working in collaboration can provide more reliable continuous monitoring."
+20,"a simulation was proposed for fire monitoring tasks, allowing obtaining a complete view of fire propa- gation by using multiple uavs [121]."
+20,the information gathered from several uavs from different points of view was used to estimate the evolution of the fire.
+20,another study has been proposed in a bushfire front monitoring task with up to nine uavs that incorporate wind [122].
+20,"moreover, two different uav models: a multi-copter and a fixed-wing model, were analysed."
+20,"in addition, the researchers analysed both the advantages and disadvan- tages of msta and vdn algorithms in terms of the task complexity and scalability with the number of uavs."
+20,"similarly, an experiment with qball x-4 quadrotors was explored with a group of six uavs patrolling around the fire perimeter to provide information with minimum latency [123]."
+20,"initially, they started by forming a leader–follower model for detecting fire, and later on, the model was expanded by adding fault-tolerant cooperative control (ftcc)."
+20,"furthermore, an effective path planning algorithm for uavs tasked to monitor a forest fire was implemented to evaluate the time evolution of a bush fire [124]."
+20,"as a result of using multiple uavs, the effectiveness of the mission, when and which uav should be taken down for refuelling, the coordination of uav paths to cover the most critical areas, and how to measure the performance of the entire fleet of uavs have been addressed."
+20,4.4.2.
+20,"fire behaviour prediction predicting fire propagation and using autonomous intelligence is essential for devel- oping quick, effective, and advanced firefighting strategies."
+20,"therefore, the evolution of the fire front and other properties of the fire are very important, such as the fire front location, the spread rate, the flame height, the angle at which the flames incline, and the size of the burning area."
+20,"by analysing the gathered information, an appropriate machine-learning algorithm can be developed to predict fire behaviour, navigate in the optimal path, and avoid obstacles while flying over the fire zone."
+20,fire-behaviour prediction is an essential task of fire-monitoring operations to provide continuous information about the fire to firefighters and to help develop effective firefight- ing strategies.
+20,"this task involves predicting the propagation, estimating the rate of fire spread, fire intensity, post-fire damage evaluation, and fire descriptions, such as the fire front location, flame height, and so on."
+20,many fire prediction methodologies have been developed with the aid of visual and infrared cameras and machine-learning algorithms in recent decades.
+20,sherstjuk et al. [20] used a combination of the multi-uav-based automatic monitoring system and remote-sensing techniques that estimate necessary fire parameters and predict fire spreading.
+20,"the authors reported achieving, under different terrain and weather conditions, 96% accuracy in predicting fire behaviour."
+20,a grid-based probability model [121] estimated the propagation direction using the probability of fire spreading to the surrounding grids.
+21,"drones 2023, 7, 47 21 of 34 in addition, many other intelligent algorithms have also been investigated [65,66,125,126], including random forest, svm, ann, dnn, and mdp."
+21,these approaches are widely applied in bushfire behaviour predictions due to their adequate high performance in different surroundings.
+21,toujani et al. [127] proposed an approach based on the markov process for the burned area prediction in northern tunisia.
+21,spatiotemporal factors influencing fire behaviour are classified using a self-organising map (som).
+21,liang et al. [128] estimated the scale of a bushfire using the size of the burned area and the fire’s duration.
+21,"the prediction models were established as a back propagation neural network (bpnn), a recurrent neural network (rnn), and long short-term memory (lstm)."
+21,"as a result, they found the highest accuracy achieved when using lstm among the other classification methods."
+21,table 11 shows research-based ml methods and different types of sensors and cameras used in uav-based bushfire prediction applications.
+21,table 11.
+21,applications of uavs in bushfire prediction.
+21,"author mission sensor ml methods remarks master [modis (moderate resolution imaging gaussian process regression signals received were biased to the hultquist spectroradiometer)/aster (gpr), random forests higher canopy levels, inconsistency post-fire burn severity (rf), support vector et al."
+21,[70] (advanced spaceborne between field plot size and image thermal emission and regression (svr) resolution.
+21,"reflection radiometer)] airborne sensor langford and tracking and quantification moderate- resolution deep neural networks effective for large-scale mapping of imaging spectroradiometer hoffman [71] of wildfire (modis), landsat (dnn) wildfire and imbalanced data rare class prediction in the balanced omission and commission moderate-resolution errors, improved precision of the mithal et al."
+21,"[65] burned area mapping imaging spectroradiometer absence of true labels (rapt), artificial neural detected area while maintaining (modis), landsat network (ann) higher coverage enables timely and cost-effective collins [67] bushfire severity mapping satellite, landsat random forest classifiers recovery, enables rehabilitation and restoration efforts resulted in high classification fuzzy complementary accuracy, dimensionality reduction dragozi criterion (fuzcoc), method should be regarded when burned area mapping vhr ikonos imagery et al."
+21,"[66] support vector machine additional is added in the (svm) classifier classification, not implemented in single software interface 4.4.3."
+21,autonomous navigation uavs have been proposed as an adequate technology for bushfire management be- cause of their capabilities and attributes.
+21,"however, uavs must be fully aware of their state, location, direction, navigation speed, starting point, and target location to complete the mission [129]."
+21,"sometimes, due to internal and external constraints, it is not easy to proceed with the task by uavs."
+21,"in some disaster relief situations, it would not be easier to obtain a map of the target area in advance."
+21,building maps simultaneously as the flight would be essential for efficient management under such circumstances.
+21,"literature related to navigation problems, the markov decision problem (mdp), and the partially observable markov decision problem (pomdp) has been recommended while making navigation decisions under uncertain conditions [72,73,121,130]."
+21,"similarly, the navigation problem under an uncertain environment in a cluttered and gps-denied envi- ronment using onboard autonomous uavs was proposed by vanegas, and gonzalez [131]."
+21,"the authors compared and integrated two online pomdp solvers, partially observable monte carlo planning (pomcp) [132] and an adaptive belief tree (abt), to form a modular system architecture along with a motion control module and perception module."
+21,"accuracy in uncertain conditions plays an essential role in any autonomous navigation system since it can detect, provide crucial information about obstacles in the way, and reduce collision risks."
+21,"obstacle detection and avoidance are the essential characteristics of autonomous navigation since these characteristics can detect and provide the necessary information (such as distances between the uav and obstacles) of nearby obstacles, which will help reduce the risks of collision and operation errors."
+22,"drones 2023, 7, 47 22 of 34 if an obstacle is becoming closer to uavs, the uav should be able to avoid or change direction under the instructions given by the obstacle avoidance module."
+22,"in addition, the uav navigation process needs to find an optimal path between the target position and starting position based on the shortest flying time, minimum cost of work, and the shortest flying route."
+22,the uav needs to avoid obstacles.
+22,uavs with consumer-based digital cameras and fire-detection algorithms are used for inspection purposes.
+22,"the study [43] used monocular cameras for collecting videos, and simultaneous localization and mapping (slam) systems were used for navigation."
+22,"the simulation results showed that both methods allowed the aircraft to track bushfires accurately, scale with different numbers of aircraft, and generalize to different bushfire shapes [133]."
+22,"a novel algorithm was implemented with block-based texture features, colour features, and artificial neural networks (ann) to detect smoke and flame from a single image [1]."
+22,"the proposed algorithm for existing uav-based fire monitoring systems can provide rapid, reliable, and continuous detection under any situation."
+22,"despite their positive results, many issues related to uav-based forest fire monitoring systems, including their architecture, sensors, suitable platforms, and remote sensing, still need to be further investigated."
+22,"however, localized environmental and terrain conditions combined with natural disturbances, such as wind, atmospheric pressure, and temperature, cause losses in uav sensory information, such as fire factor prediction and navigation near the fire."
+22,a proper mechanism and path-planning strategy must be developed to improve the prediction accuracy and resolve the above-mentioned issues.
+22,4.4.4.
+22,obstacle detection uavs have become integral to a wide range of public activities today due to their intelligence and autonomy.
+22,"thus, intelligent collision avoidance systems enable uavs to be safer by preventing accidents with other objects and reducing risk."
+22,the first stage of any collision avoidance system is detecting obstacles with high accuracy and efficiency.
+22,"while flying over high-risk zones, uavs should be able to sense their surroundings and the environment to locate obstacles."
+22,"therefore, uavs require sensitive sensors, and thus lightweight sensors may be the best choice due to their size, weight, and power constraints."
+22,"additionally, authors suggested that uavs equipped with more than one sensor can be more effective in detecting threats than those equipped with only one sensor [45]."
+22,"various factors may influence obstacle detection, including size, direction, and wind speed."
+22,several approaches were presented for obstacle detection in vision-based navigation.
+22,"various approaches [134–136] have used a 3d model, while other approaches [134,137,138] calculated the distance of the obstacles."
+22,methods based on optical flow [139–141] or perspective cues [142] can also estimate the presence of an obstacle without considering a 3d model.
+22,"however, optical flow approaches do not deal with forwarding movement because of the opening problem."
+22,"therefore, frontal obstacles would only provide a movement component normal to the perceived edges, not actual frontal movement information."
+22,"sift descriptors, and multi-scale oriented-patches (mops) are combined in [143] to provide 3d information about objects by extracting their edges and corners."
+22,"the presented approach, nonetheless, requires a long computational time."
+22,4.4.5.
+22,"obstacle avoidance collision avoidance systems are vital for both non-autonomous and autonomous vehicles since they can detect, provide crucial information about obstacles, and reduce collision risks."
+22,"a number of factors are involved in collisions, including operator negligence, equipment failure, and bad weather conditions."
+22,intelligent collision avoidance methods can significantly reduce the risk of collisions between planes and save lives in this way.
+22,a uav collision avoidance system ensures that no collision occurs with stationary or moving obstacles.
+22,the obstacle avoidance operation concludes by finding obstacles and calculating the distances between the uav and obstacles when an obstacle is nearby.
+22,"for that purpose,"
+23,"drones 2023, 7, 47 23 of 34 the collision avoidance system can detect obstacle characteristics (such as the velocity, size, and position), calculate the risk of collision if the object is approaching, and make collision avoidance decisions as a result of the calculations [45]."
+23,visual sensors are used to obtain visual information for obstacle avoidance based on optical flow-based and slam-based methods.
+23,"based on optical flow, gosiewski et al. [144] used image processing techniques to avoid obstacles by obtaining the depth of the image and formulating local information flow."
+23,yasin et al. [45] reviewed the strategies and mechanisms in uavs for obstacle detection and collision avoidance.
+23,"they discussed the different types of sensors, such as passive sensors: camera, infrared, and active sensors: radar, lidar, and sonar for collision avoidance in the context of uavs."
+23,"the survey categorised collision avoidance techniques into geometric, force- field, optimisation-based, sense, and avoid methods and explained different scenarios and technical aspects."
+23,al-kaff et al. [134] presented a bio-inspired approach to detect the change of obstacle size during flight and to mimic human eyes for obstacle detection and avoidance in uavs.
+23,"the system concluded with vision-based navigation, and an obstacle-detection algorithm was performed based on the input images captured from the front camera."
+23,this could identify the obstacle by comparing the sequential images and finding the nearest obstacles.
+23,"however, the vision-based method in some specific operations needs to acquire an accurate distance."
+23,"in contrast, the slam algorithm in uavs can navigate and avoid obstacles with environmental information [145]."
+23,4.4.6.
+23,"search and rescue a search and rescue operation’s primary objectives are to save lives, protect civilians, and manage disasters."
+23,"using onboard cameras and navigation sensors, uavs could help disaster responders identify potential victims in large disaster areas scouted in the skies by uavs."
+23,"sar missions can be drastically reduced by using uavs, resulting in significant financial savings, time savings, and the ability to save lives [146]."
+23,"several fundamental fac- tors must be considered when designing a uav-based search and rescue system, including the restrictions on energy consumption, the hazards of the environment, the data quality, and communication between uavs [147,148]."
+23,"furthermore, the authors in [148] analysed how these parameters affect search performance and studied different search algorithms."
+23,"recent research has shown that uavs can be highly useful for sar operations [146,147,149]."
+23,"as part of a search and rescue mission, a uav may be deployed in heavy snow and woods at night and during the day to identify victims."
+23,"the use of unmanned aerial vehicles with electro-optical sensors, real-time processing modules, and advanced communication systems can improve the ability of government authorities and rescue agencies to identify and locate wounded and missing people during disasters and afterwards [146]."
+23,"moreover, this multipurpose uav can carry emergency kits or life-support devices that can be dropped on victims in an emergency [147]."
+23,an innovative uav-routing framework that maximizes mobility and transmission power for emergency message delivery and gathering is introduced in [150].
+23,an article published in [151] presented a way to obtain information about a disaster-affected region.
+23,"this method is accomplished by taking photos in real-time, marking their positions and altitudes, and sending those images and flight characteristics to a ground control station, creating a three-dimensional danger map based solely on local information."
+23,"researchers showed how uavs equipped with vision cameras [152] and ml techniques [153,154] can assist in avalanche sar operations."
+23,"according to [155], data from onboard sensors provide colour and depth information for detecting a human body."
+23,"furthermore, the authors presented a computational model that rotates the point of view around the target and is size-invariant."
+23,table 12 outlined the uav-based other applications in bushfire management.
+24,"drones 2023, 7, 47 24 of 34 table 12."
+24,other applications of uavs in bushfire management.
+24,"author mission sensor ml methods remarks al-kaff obstacle detection and monocular camera size expansion algorithm high sensitivity to lightening condition et al. [134] avoidance partially observable capability to deal with the high-level sandino target detection uncertainty, vision-based camera markov decision process et al."
+24,"[72] uav navigation (pomdp), adaptive belief environment, incorporates target detection uncertainty tree (abt) partially observable better tracking performance, target location ragi et al."
+24,"[72] uav navigation vision-based camera markov decision process (pomdp)) error is strongly influenced by the uav partially observable explored and detected target without vanegas and uav navigation in collision, robust in uncertainties in a on-board sensor markov decision gonzalez [131] gps-denied environment gps-denied and cluttered environment, path process(pomdp) found to navigate without collision inferred the wildfire dynamics and deep reinforcement parameters, tracked and monitored the fire seraj and human-centred active learning (rl), transitions, and provided high-quality online sensing of wildfire visual camera gombolay [156] model-based distributed information, outperformed prior work for control algorithm distributed control of uavs for wildfire tracking forest fire localization and deep convolutional neural feature lost due to direct resizing, avoided zhao et al."
+24,"[73] gps recognition network (dcnn) forest mist images wrongly classified improve the forest fire deep learning, yolov3 high precision with low time cost, jiao et al. [157] detection accuracy and slr camera network transmission ability needs to be enhanced efficiency 5."
+24,challenges of uav-based bushfire management the application of uavs to bushfire operations has received sufficient attention due to their significant impact on remote sensing.
+24,"however, some challenges prevent firefighters from adapting uav applications and affect the accuracy and performance of operations with uavs."
+24,"as a result, this section highlights the challenges of uavs in bushfire operations, which may be used to improve processes in the future."
+24,"technical challenges new challenges arise in the design of the systems, the performance of networks, the optimization of communication channels, remote sensing, and the exploration of energy constraints in light of the technical requirements of aerial applications."
+24,"for example, uavs operating cooperatively on disaster rescue must meet tight timing synchronization requirements, whereas considerable communication delays may be tolerated in disaster area scanning applications [147]."
+24,"in some disaster areas, transmission rates are low, while in others, high rates are required for applications, such as identifying trapped people [147]."
+24,we examine the existing technical challenges associated with uav-based bushfire management in this section.
+24,uav energy limitations: one of the greatest challenges is battery power consumption since uavs depend on their onboard battery to power their operations.
+24,the power consumption is particularly an issue for smaller-sized uavs that cannot carry larger batteries due to their payload capacity limitations [158].
+24,"in some instances, uavs must be operated over disaster-stricken regions for extended periods."
+24,"this is not always possible due to limited onboard power sources for uav hovering, data processing, wireless communications, and image analysis."
+24,researchers are investigating ways to extend uav power supplies while on a mission to avoid disruptions.
+24,"for example, energy harvesting using far-field wireless power transfer from dedicated power sources has been proposed [159,160]."
+24,"ubiquitous solutions for implementing in situ and contactless power supply for commodity uavs, particularly small-sized ones, are yet to be available in the market."
+24,camera limitation: there is a need to address the limitations of current lightweight digital cameras based on their radiometric and geometrical properties.
+24,uav digital cameras are not designed for remote-sensing applications and are designed for the general market.
+24,"in addition, the camera’s detectors may also become saturated in areas with high contrasts, such as when the affected area includes a dark forest and a snow-covered field."
+24,"additionally, many cameras suffer from vignetting, where the central part of the image appears brighter"
+25,"drones 2023, 7, 47 25 of 34 than the edges [161]."
+25,"several techniques can be used to improve the quality of the image, such as using micro four-thirds cameras with fixed interchangeable lenses instead of retractable lenses."
+25,"this results in significantly enhanced calibrations; removing blurry, under or overexposed, and saturated images can make a large difference in the processing stage [162]."
+25,"absence or inaccuracy of gps signals: in addition to allowing autonomous uavs to navigate in indoor environments without gps signals, another challenge is to enable them to make a safe landing [163]."
+25,a uav uses gps sensors to pinpoint its location before taking off so that it can plan a flight path to its destination [164].
+25,"a gps may not function properly due to obstructions or inadequate satellite signals, and the accuracy of such a system may be decreased for low-cost uavs."
+25,it is challenging to fly in settings without gps and to only rely on onboard sensors for localization.
+25,"this is particularly true when obstacles must be avoided in the airspace or when the target’s location is unclear, so that the uav has to fly and explore until it reaches the target."
+25,multi-uav collaboration: enhancing efficiency requires collaboration and coordination among uavs.
+25,"moreover, the uavs have been integrated with cooperative wireless net- works to provide communication facilities between them in managing bushfires."
+25,"during such situations, tight timing synchronization between multiple uavs is required when they work together on bushfire monitoring."
+25,"at the same time, extensive communication delays can be tolerated when the application scans the disaster area."
+25,there is a limit to the payload capacity of mini-uavs due to their small size [147].
+25,"to effectively manage disasters, they must cooperate among the team, and with the ground network, such as a cloud, with many available options, such as radars, infrared cameras, thermal cameras, and image sensors [165]."
+25,"path planning: for autonomous operations of uavs to cover the area of interest as per dy- namic situations, intelligent trajectory planning and optimization are necessary [166]."
+25,"while the trajectories need to be optimized for addressing the situation’s needs (e.g., fire spot loca- tions), optimizations are also required for a trajectory to be energy efficient [167,168]."
+25,"this optimization raises the need for multi-criteria optimizations, which becomes a multi-agent optimization problem when applied to multi-uav scenarios."
+25,"this would lead to more complexity in the optimization model, and convergence time could be an issue in real-time systems involving uav onboard computers."
+25,"in addition, dy- namic changes may occur during bushfire monitoring, such as the joining or disconnection of uavs, the removal of physical obstacles, and the threat of dynamic changes."
+25,"the uav’s previous path must be changed, and new directions must be calculated dynamically [169] in these situations."
+25,"therefore, high-performance techniques in dynamic path planning are needed to monitor a system efficiently."
+25,environmental challenges weather conditions challenge uavs because they often lead to deviations from their predetermined paths.
+25,"weather challenges become particularly difficult and cardinal when natural or human-made disasters occur, including rain, snow, bush clouds, hurricanes, lightning, or air pollution."
+25,uavs risk failing to accomplish their missions due to adverse weather conditions in such scenarios.
+25,"there is considerable evidence [170] that power consumption is more sensitive to environmental factors, such as side winds than to altitude or payload."
+25,"during clear and well-defined shadows on a sunny day, the automated image-matching algorithms used in the triangulation process and digital elevation model generation may have critical problems [162]."
+25,"if the clouds are moving quickly, shaded areas can appear differently on different images acquired during the same mission, thus, causing the aerial triangulation process to fail for some images and also causing errors in digital elevation models that are generated automatically."
+25,a mosaic with poor visual quality can also result
+26,"drones 2023, 7, 47 26 of 34 from the automated colour-balancing algorithms when they are affected by patterns of light and shade across images [162]."
+26,"safe and controlled uav landings under dynamic conditions, such as a moving plat- form or oscillating platforms, are affected by this environmental disturbance."
+26,different methodologies or algorithms should be implemented to minimise the effects of such uncer- tainties and disturbances.
+26,"as part of [171], the authors proposed a method of triangular mesh generation that considers the wind field and performs online adjustments that min- imise the losses due to the identified wind field to optimise the coverage in urban areas."
+26,"the authors [166,172] proposed the collision avoidance of uavs to deal with the instability caused by winds, sensor noise, and unknown obstacle acceleration."
+26,"the system’s accuracy is based on the characteristics of uavs, such as obstacle detec- tion and avoidance as well as finding the optimal path and shortest flying path, in uncertain environmental conditions."
+26,"the collision avoidance methods considered approach is robust with low data overheads and low response times, which would be a better choice in all kinds of environments for avoiding obstacles to ensure the safety of the uavs."
+26,"moreover, a more efficient path planning algorithm is necessary to integrate and make sure to reach the destination after avoiding collisions without becoming stuck."
+26,"conclusions uavs can be utilized in bushfire management systems to detect fire faster, provide imagery from difficult-to-reach locations, make operations safer, and save lives."
+26,"however, research shows that modern technologies in bushfire management systems need to be more efficient, which is evident in large-scale bushfires due to poor management systems [173]."
+26,"in this paper, we examined the efficiency of using uavs for bushfire management, including fire detection, fire prediction, search and rescue, navigation, and other technologies used to maximize the accuracy of results."
+26,"furthermore, this paper discussed the benefits and drawbacks of using uavs in bushfire management by compiling relevant data about the use of uavs in bushfire man- agement."
+26,this paper demonstrated that localized environmental and terrain impediments make it difficult for uavs to predict fire factors accurately and to navigate.
+26,a review of a significant amount of recent research showed the difficulty of locating bushfires using environmental sensors and gps data.
+26,"this paper highlighted the significance of the architecture, sensors, suitable platforms, and remote-sensing capabilities of uav-based bushfire management."
+26,"infrared cameras mounted on uavs most often form part of a multisensor payload, usually in combination with rgb and thermal sensors."
+26,this is convenient since operators can capture visual and thermal data simultaneously.
+26,it is more effective to aggregate knowledge from different sources rather than only from one sensor.
+26,"despite adverse weather conditions, uavs must be capable of battling fires as they increase in size, frequency, and intensity."
+26,uavs need to have high energy efficiency when dealing with large fires or operations that last a long time.
+26,"moreover, when working with firefighters, the uavs must be reliable and equipped with advanced thermal sensors, longer flight times, heat resistance, obstacle avoidance, and waterproofing to operate in all temperatures and conditions."
+26,"hence, there is high urgency for more development in the aforementioned areas using robust and global optimization algorithms for bush- fire management."
+26,"furthermore, device vibration, poor camera quality, fast movement, and uav rotation often disturb images and cause low-quality imaging."
+26,uavs with machine-learning and deep-learning technology can address numerous operational and management challenges in bushfire management.
+26,"in some cases, the sensors equipped on the uavs are inadequate to sense the information for a large-scale affected region."
+26,"furthermore, uavs may fail to detect fire in smoke or cloudy situations and may make false or missed detections due to uncertainty; this reduces the potential acceptable level of the firefighting industries and government authorities."
+27,"drones 2023, 7, 47 27 of 34 moreover, uav-based bushfire management still has several drawbacks, such as high initial costs, the loss of uavs due to uncertainty or hardware failure, sensor capabilities, technical issues, the absence of established procedures for processing massive amounts of data, and the requirement of experts."
+27,"ultimately, robust uav-based bushfire management can result in significant social, economic, and environmental benefits associated with bushfire management as well as enhancing decision-making and firefighting."
+27,"author contributions: conceptualization, s.p., f.s. and j.h.; methodology, s.p.; validation, s.p., f.s. and j.h.; formal analysis, s.p.; writing—original draft preparation, s.p.; writing— editing, s.p.; reviewing the manuscript, s.p., f.s. and j.h.; visualization, s.p.; supervision, f.s. and j.h."
+27,all authors have read and agreed to the published version of the manuscript.
+27,funding: this research received no external funding.
+27,data availability statement: not applicable.
+27,conflicts of interest: the authors declare no conflict of interest.
+27,abbreviations the following abbreviations are used in this manuscript: abt adaptive belief tree lstm long short-term memory ai artificial intelligence master modis/aster ann artificial neural network mdp markov decision process arc ames research center ml machine learning aster advanced space-borne thermal emission reflection radiator modis moderate resolution imaging spectroradiometer avic aviation industry corporation mops multi-scale oriented patches bpnn back-propagation neural network nasa national aeronautics and space administration csiro commonwealth scientific and industrial research organisation nist national institute of standards and technology ccd charge coupled device nn neural network cmos complementary metal-oxide semiconductor pomcp partially observable monte carlo planning cnn convolutional neural network pomdp partially observable markov decision process dbnet deep belif network radar radio detection and ranging dcnn deep convolutional neural networks rf random forest dl deep learning rapt rare class prediction in absence of true labels dss decision support system rgb red green blue dt decision tree rl reinforcement learning embyr ecological model for burning the yellowstone region rnn recurrent neural network farsite fire area simulator roi region of interest fds fire dynamics simulator sar search and rescue
+28,"drones 2023, 7, 47 28 of 34 fire fire response experiment sift scale-invariant feature transform flir forward-looking infrared slam simultaneous localization and mapping fofem first order fire effects model slr single-lens reflex fsim feature-similarity sonar sound navigation and ranging ftcc fault-tolerant cooperative control som self-organizing map fuzcoc fuzzy complementary criterion svr support vector regression gpr gaussian process regression uav unmanned aerial vehicle gps global positioning system ugv unmanned ground vehicle ieee institute of electrical and electronics engineers usfs united states forest service imu inertial measurement unit wfds wildland-urban fire dynamics simulator ir infrared wsn wireless sensor network knn k-nearest neighbour yolo you only look once lidar light detection and ranging references 1."
+28,"hossain, f.a."
+28,"; youmin, z."
+28,"; yuan, c."
+28,"; su, c."
+28,wildfire flame and smoke detection using static image features and artificial neural network.
+28,"in proceedings of the 2019 first international conference on industrial artificial intelligence (iai), shenyang, china, 23–27 july 2019; pp."
+28,"ivić, m."
+28,artificial intelligence and geospatial analysis in disaster management.
+28,photogramm.
+28,remote.
+28,"2019, xlii-3/w8, 161–166."
+28,[crossref] 3.
+28,"thomas, d."
+28,"; butry, d."
+28,"; gilbert, s."
+28,"; webb, d."
+28,"; fung, j."
+28,"the costs and losses of wildfires; national institute of standards and technology special publication; national institute of standards and technology: gaithersburg, md, usa, 2017; volume 1215."
+28,"richards, l."
+28,"; brew, n."
+28,"; smith, l."
+28,2019–20 australian bushfires—frequently asked questions: a quick guide.
+28,"2019, 2, 1–10."
+28,"wuebbles, d.j."
+28,"; fahey, d.w."
+28,"; hibbard, k.a."
+28,"; arnold, j.r."
+28,"; deangelo, b."
+28,"; doherty, s."
+28,"; easterling, d.r."
+28,"; edmonds, j."
+28,"; edmonds, t."
+28,"; hall, t.; et al."
+28,fourth natl.
+28,assess.
+28,"(nca4) 2017, 1, 470."
+28,"weiskittel, a.r; maguire, d.a."
+28,"response of douglas-fir leaf area index and litterfall dynamics to swiss needle cast in north coastal oregon, usa."
+28,"2007, 64, 121–132."
+28,[crossref] 7.
+28,"kolarić, d."
+28,"; skala, k."
+28,"; dubravić, a.t."
+28,integrated system for forest fire early detection and management.
+28,period.
+28,"2008, 110, 205–211."
+28,"allison, r.s."
+28,"; johnston, j.m."
+28,"; craig, g."
+28,"; jennings, s."
+28,airborne optical and thermal remote sensing for wildfire detection and monitoring.
+28,"sensors 2016, 16, 1310."
+28,[crossref] 9.
+28,"csiro, model library."
+28,available online: https://research.csiro.au/spark/resources/model-library (accessed on 10 june 2021).
+28,"akhloufi, m.a."
+28,"; castro, n.a."
+28,"; couturier, a.t."
+28,"unmanned aerial systems for wildland and forest fires: sensing, perception, cooperation and assistance. arxiv 2020, arxiv:2004.13883."
+28,"afghah, f."
+28,"; razi, a."
+28,"; chakareski, j."
+28,"; ashdown, j."
+28,wildfire monitoring in remote areas using autonomous unmanned aerial vehicles.
+28,"in proceedings of the ieee infocom 2019—ieee conference on computer communications workshops (infocom wkshps), paris, france, 29 april–2 may 2019; pp."
+28,835–840.
+28,"vipin, v.t."
+28,image processing based forest fire detection.
+28,emerg.
+28,technol.
+28,"2012, 2, 87–95."
+28,"zhang, y."
+28,"; jiang, j."
+28,bibliographical review on reconfigurable fault-tolerant control systems.
+28,control.
+28,"2008, 32, 229–252."
+28,[crossref] 14.
+28,"roldán-gómez, j.j."
+28,"; gonzález-gironda, e."
+28,"; barrientos, a."
+28,a survey on robotic technologies for forest firefighting: applying drone swarms to improve firefighters’ efficiency and safety.
+28,"2021, 11, 363."
+28,[crossref] 15.
+28,"arif, m."
+28,"; alghamdi, k.k."
+28,"; sahel, s.a."
+28,"; alosaimi, s.o."
+28,"; alsahaft, m.e."
+28,"; alharthi, m.a."
+28,"; arif, m."
+28,role of machine learning algorithms in forest fire management: a literature review.
+28,robot.
+28,autom.
+28,"2021, 5, 212–226."
+28,"barmpoutis, p."
+28,"; papaioannou, p."
+28,"; dimitropoulos, k."
+28,"; grammalidis, n."
+28,a review on early forest fire detection systems using optical remote sensing.
+28,"sensors 2020, 20, 6442."
+28,[crossref] [pubmed]
+29,"drones 2023, 7, 47 29 of 34 17."
+29,"jain, p."
+29,"; coogan, s.c.p."
+29,"; subramanian, s.g."
+29,"; crowley, m."
+29,"; taylor, s."
+29,"; flannigan, m.d."
+29,a review of machine learning applications in wildfire science and management.
+29,environ.
+29,"2020, 28, 478–505."
+29,[crossref] 18.
+29,"yuan, c."
+29,"; zhang, y."
+29,"; liu, z."
+29,"a survey on technologies for automatic forest fire monitoring, detection, and fighting using unmanned aerial vehicles and remote sensing techniques."
+29,"2015, 45, 783–792."
+29,[crossref] 19.
+29,"dieteren, s.h.p."
+29,application of drone technology for firefighting.
+29,"bachelor’s thesis, university of twente, enschede, the netherlands, 2021."
+29,"sherstjuk, v."
+29,"; zharikova, m."
+29,"; sokol, i."
+29,forest fire-fighting monitoring system based on uav team and remote sensing.
+29,"in proceedings of the 2018 ieee 38th international conference on electronics and nanotechnology (elnano), kyiv, ukraine, 24–26 april 2018; pp."
+29,663–668.
+29,"nex, f."
+29,"; remondino, f."
+29,"preface: latest developments, methodologies, and applications based on uav platforms."
+29,"drones 2019, 3, 26."
+29,[crossref] 22.
+29,"daud, s.m.s.m."
+29,"; yusof, m.y.p.m."
+29,"; heo, c.c."
+29,"; khoo, l.s."
+29,"; singh, m.k.c."
+29,"; mahmood, m.s."
+29,"; nawawi, h."
+29,applications of drone in disaster management: a scoping review.
+29,"justice 2022, 62, 30–42."
+29,[crossref] 23.
+29,using drones to eliminate future forest fires.
+29,available online: https://futuristspeaker.com/technology-trends/using-drones- to-eliminate-future-forest-fires/ (accessed on 25 june 2022).
+29,“like the chain saw”: drones have become a lifesaving tool for fighting wildfires.
+29,available online: https://cronkitenews. azpbs.org/2019/07/19/wildfire-drones/ (accessed on 12 august 2022).
+29,drones are fighting wildfires in some very surprising ways.
+29,available online: https://www.nbcnews.com/mach/science/ drones-are-fighting-wildfires-some-very-surprising-ways-ncna820966 (accessed on 12 august 2022).
+29,’the best friend a firefighter could have’: how drones help battle oregon wildfires.
+29,available online: https://kcby.com/ news/local/the-best-friend-a-firefighter-could-have-how-drones-help-battle-oregon-wildfires (accessed on 18 august 2022).
+29,firefighters are using drones to fight the raging wildfire in alberta.
+29,available online: https://www.businessinsider.com/ alberta-irefighters-are-using-drones-2016-5 (accessed on 16 august 2022).
+29,surveying the fury: drones assess costs of 2017 bc wildfires.
+29,available online: https://news.ubc.ca/2017/12/15/surveying- the-fury-drones-count-the-costs-of-the-2017-b-c-wildfires/ (accessed on 23 august 2022).
+29,"li, s."
+29,wildfire early warning system based on wireless sensors and unmanned aerial vehicle.
+29,unmanned veh.
+29,"2018, 7, 76–91."
+29,[crossref] 30.
+29,"firefighting aircraft market—growth, trends, covid-19 impact, and forecast (2022–2027)."
+29,available online: https://www. researchandmarkets.com/reports/4772034/firefighting-aircraft-market-growth-trends (accessed on 3 september 2022).
+29,"ahmed, f."
+29,"; mohanta, j.c."
+29,"; keshari, a."
+29,"; yadav, p.s."
+29,recent advances in unmanned aerial vehicles: a review.
+29,"2022, 47, 7963–7984."
+29,[crossref] 32.
+29,"gachoki, n.m."
+29,"; muhia, a.m."
+29,"; kiio, m.n."
+29,"; gachoki, n.m."
+29,"; muhia, a.m."
+29,"; kiio, m.n."
+29,quad-rotor uans and their motion planning: a review proceeding of sustainable research and innovation conference.
+29,"in proceeding of the sustainable research and innovation conference, nairobi, kenya, 3–5 may 2017."
+29,"bithas, p.s."
+29,"; michailidis, e.t."
+29,"; nomikos, n."
+29,"; vouyioukas, d."
+29,"; kanatas, a.g."
+29,a survey on machine-learning techniques for uav-based communications.
+29,"sensors 2019, 19, 5170."
+29,[crossref] 34.
+29,"doctor, a."
+29,"; khirani, d."
+29,"; raut, r.d."
+29,"; narwane, v.s."
+29,literature review on employment of unmanned aerial vehicles for disaster management.
+29,"in proceedings of the international conference on industrial engineering and operations management, pilsen, czech republic, 23–26 july 2019; pp."
+29,1339–1347.
+29,"idrissi, m."
+29,"; salami, m."
+29,"; annaz, f."
+29,"a review of quadrotor unmanned aerial vehicles: applications, architectural design and control algorithms."
+29,intell.
+29,robot.
+29,"2022, 104, 1–33."
+29,[crossref] 36.
+29,"kinaneva, d."
+29,"; hristov, g."
+29,"; raychev, j."
+29,"; zahariev, p."
+29,early forest fire detection using drones and artificial intelligence.
+29,"in proceedings of the 2019 42nd international convention on information and communication technology, electronics and microelectronics (mipro), opatija, croatia, 20–24 may 2019; pp."
+29,1060–1065.
+29,"georgiev, g.d."
+29,"; hristov, g."
+29,"; zahariev, p."
+29,"; kinaneva, d."
+29,forest monitoring system for early fire detection based on convolutional neural network and uav imagery.
+29,"in proceedings of the 2020 28th national conference with international participation (telecom), sofia, bulgaria, 29–30 october 2020; pp."
+29,57–60.
+29,"shin, j.-i."
+29,"; seo, w.-w."
+29,"; kim, t."
+29,"; park, j."
+29,"; woo, c.-s."
+29,using uav multispectral images for classification of forest burn severity—a case study of the 2019 gangneung forest fire.
+29,"forests 2019, 10, 1025."
+29,[crossref] 39.
+29,"ciullo, v."
+29,"; rossi, l."
+29,"; pieri, a."
+29,experimental fire measurement with uav multimodal stereovision.
+29,remote sens.
+29,"2020, 12, 3546."
+29,[crossref] 40.
+29,"chamoso, p."
+29,"; gonzález-briones, a."
+29,"; de la prieta, f."
+29,"; corchado, j.m."
+29,computer vision system for fire detection and report using uavs.
+29,"in proceedings of the robust solutions for fire fighting (rsff’18) workshop, l’aquila, italy, 19–20 july 2018; pp."
+29,40–49.
+29,"ollero, a."
+29,"; alcázar, j."
+29,"; cuesta, f."
+29,"; lópez-pichaco, f."
+29,"; nogales, c."
+29,helicopter teleoperation for aerial monitoring in the comets multi-uav system.
+29,"in proceedings of the third iarp workshop on service, assistive and personal robots, madrid, spain, 14–16 october 2003."
+29,"chen, y."
+29,"; zhang, y."
+29,"; xin, j."
+29,"; yi, y."
+29,"; liu, d."
+29,"; liu, h."
+29,a uav-based forest fire detection algorithm using convolutional neural network.
+29,"in proceedings of the 2018 37th chinese control conference (ccc), wuhan, china, 25–27 july 2018; pp."
+29,10305–10310.
+30,"drones 2023, 7, 47 30 of 34 43."
+30,"esfahlani, s.s."
+30,mixed reality and remote sensing application of unmanned aerial vehicle in fire and smoke detection.
+30,integr.
+30,"2019, 10, 42–49."
+30,[crossref] 44.
+30,"bilgilioglu, b.b."
+30,"; ozturk, o."
+30,"; sariturk, b."
+30,"; seker, d.z."
+30,object based classification of unmanned aerial vehicle (uav) imagery for forest fires monitoring.
+30,feb-fresenius environ.
+30,"2019, 28, 1005–1010."
+30,"yasin, j.n."
+30,"; mohamed, s.a.s."
+30,"; haghbayan, m.-h."
+30,"; heikkonen, j."
+30,"; tenhunen, h."
+30,"; plosila, j."
+30,unmanned aerial vehicles (uavs): collision avoidance systems and approaches.
+30,"ieee access 2020, 8, 105139–105155."
+30,[crossref] 46.
+30,"wargo, c.a."
+30,"; church, g.c."
+30,"; glaneueski, j."
+30,"; strout, m."
+30,unmanned aircraft systems (uas) research and future analysis.
+30,"in proceedings of the 2014 ieee aerospace conference, big sky, mt, usa, 1–8 march 2014; pp."
+30,"sahin, y.g."
+30,"; ince, t."
+30,early forest fire detection using radio-acoustic sounding system.
+30,"sensors 2009, 9, 1485–1498."
+30,[crossref] 48.
+30,"mizumachi, m."
+30,"; kaminuma, a."
+30,"; ono, n."
+30,"; ando, s."
+30,robust sensing of approaching vehicles relying on acoustic cues.
+30,"sensors 2014, 14, 9546–9561."
+30,[crossref] 49.
+30,"van leeuwen, ."
+30,"b; groen, f.c.a."
+30,"vehicle detection with a mobile camera: spotting midrange, distant, and passing cars."
+30,ieee robot.
+30,autom.
+30,"2005, 12, 37–43."
+30,[crossref] 50.
+30,"beard, r."
+30,"; saunders, j."
+30,reactive vision based obstacle avoidance with camera field of view constraints.
+30,"in proceedings of the aiaa guidance, navigation and control conference and exhibit, honolulu, hi, usa, 18–21 august 2008."
+30,"kóta, f."
+30,"; zsedrovits, t."
+30,"; nagy, z."
+30,sense-and-avoid system development on an fpga.
+30,"in proceedings of the 2019 international conference on unmanned aircraft systems (icuas), atlanta, ga, usa, 11–14 june 2019; pp."
+30,575–579.
+30,"hartmann, w."
+30,"; tilch, s."
+30,"; eisenbeiss, h."
+30,"; schindler, k."
+30,determination of the uav position by automatic processing of thermal images.
+30,photogramm.
+30,remote.
+30,"2012, 39, 111–116."
+30,[crossref] 53.
+30,"zhang, f."
+30,"; chen, j."
+30,"; li, h."
+30,"; sun, y."
+30,"; shen, x.s."
+30,distributed active sensor scheduling for target tracking in ultrasonic sensor networks.
+30,"2012, 17, 582–593."
+30,[crossref] 54.
+30,"benet, g."
+30,"; blanes, f."
+30,"; simó, j.e."
+30,"; pérez, p."
+30,using infrared sensors for distance measurement in mobile robots.
+30,robot.
+30,auton.
+30,"2002, 40, 255–266."
+30,[crossref] 55.
+30,"li, h."
+30,"; miao, d."
+30,"; chen, j."
+30,"; sun, y."
+30,"; shen, x."
+30,networked ultrasonic sensors for target tracking: an experimental study.
+30,"in proceedings of the globecom 2009—2009 ieee global telecommunications conference, honolulu, hi, usa, 30 november–4 december 2009; pp."
+30,"armingol, j.m."
+30,"; alfonso, j."
+30,"; aliane, n."
+30,"; clavijo, m."
+30,"; campos-cordobés, s."
+30,"; escalera, a.d.; del ser, j."
+30,"; fernández, j."
+30,"; garcía, f."
+30,"; jiménez, f.; et al."
+30,chapter 2—environmental perception for intelligent vehicles.
+30,"in intelligent vehicles; jiménez, f., ed."
+30,"; butterworth-heinemann: oxford, uk, 2018; pp."
+30,23–101.
+30,"nijsure, y.a."
+30,"; kaddoum, g."
+30,"; mallat, n.k."
+30,"; gagnon, g."
+30,"; gagnon, f."
+30,cognitive chaotic uwb-mimo detect-avoid radar for autonomous uav navigation.
+30,ieee trans.
+30,intell.
+30,transp.
+30,"2016, 17, 3121–3131."
+30,[crossref] 58.
+30,"elshewey, a."
+30,"; elsonbaty, a."
+30,forest fires detection using machine learning techniques.
+30,xi’an jianzhu keji daxue xuebao/j.
+30,xi’an univ.
+30,archit.
+30,technol.
+30,"2020, xii, 510–517."
+30,"goyal, s."
+30,"; kaur, a."
+30,"; vohra, h."
+30,"; singh, a."
+30,a yolo based technique for early forest fire detection.
+30,innov.
+30,technol.
+30,explor.
+30,"2020, 9, 1357–1362."
+30,[crossref] 60.
+30,"krüll, w."
+30,"; tobera, r."
+30,"; willms, i."
+30,"; essen, h."
+30,"; von wahl, n."
+30,"early forest fire detection and verification using optical smoke, gas and microwave sensors."
+30,procedia eng.
+30,"2012, 45, 584–594."
+30,[crossref] 61.
+30,"sun, h."
+30,"; song, g."
+30,"; wei, z."
+30,"; zhang, y."
+30,"; liu, s."
+30,bilateral teleoperation of an unmanned aerial vehicle for forest fire detection.
+30,"in proceedings of the 2017 ieee international conference on information and automation (icia), macao, china, 18–20 july 2017; pp."
+30,586–591.
+30,"jiao, z."
+30,"; zhang, y."
+30,"; xin, j."
+30,"; mu, l."
+30,"; yi, y."
+30,"; liu, h."
+30,"; liu, d."
+30,a deep learning based forest fire detection approach using uav and yolov3.
+30,"in proceedings of the 2019 first international conference on industrial artificial intelligence (iai), shenyang, china, 23–27 july 2019; pp."
+30,"pan, h."
+30,"; badawi, d."
+30,"; cetin, a.e."
+30,computationally efficient wildfire detection method using a deep convolutional network pruned via fourier analysis.
+30,"sensors 2020, 20, 2891."
+30,[crossref] [pubmed] 64.
+30,"yadav, r."
+30,deep learning based fire recognition for wildfire drone automation.
+30,fair j.
+30,"2020, 3, 1–8."
+30,"mithal, v."
+30,"; nayak, g."
+30,"; khandelwal, a."
+30,"; kumar, v."
+30,"; nemani, r."
+30,"; oza, n.c."
+30,mapping burned areas in tropical forests using a novel machine learning framework.
+30,remote sens.
+30,"2018, 10, 69."
+30,[crossref] 66.
+30,"dragozi, e."
+30,"; gitas, i.z."
+30,"; stavrakoudis, d.g."
+30,"; theocharis, j.b."
+30,burned area mapping using support vector machines and the fuzcoc feature selection method on vhr ikonos imagery.
+30,remote sens.
+30,"2014, 6, 12005–12036."
+30,[crossref] 67.
+30,"collins, l."
+30,"; griffioen, p."
+30,"; newell, g."
+30,"; mellor, a."
+30,the utility of random forests for wildfire severity mapping.
+30,remote.
+30,environ.
+30,"2018, 216, 374–384."
+30,[crossref] 68.
+30,machine learning wildfire prediction based on climate data.
+30,available online: http://noiselab.ucsd.edu/ece228-2020/projects/ report/75report.pdf (accessed on 23 may 2022) 69.
+30,"khakzad, n."
+30,modeling wildfire spread in wildland-industrial interfaces using dynamic bayesian network.
+30,reliab.
+30,"2019, 189, 165–176."
+30,[crossref] 70.
+30,"hultquist, c."
+30,"; chen, g."
+30,"; zhao, k."
+30,"a comparison of gaussian process regression, random forests and support vector regression for burn severity assessment in diseased forests."
+30,remote.
+30,"2014, 5, 723–732."
+30,[crossref]
+31,"drones 2023, 7, 47 31 of 34 71."
+31,"langford, z."
+31,"; kumar, j."
+31,"; hoffman, f."
+31,wildfire mapping in interior alaska using deep neural networks on imbalanced datasets.
+31,"in proceedings of the 2018 ieee international conference on data mining workshops (icdmw), singapore, 17–20 november 2018; pp."
+31,770–778.
+31,"sandino, j."
+31,"; vanegas, f."
+31,"; gonzalez, f."
+31,"; maire, f."
+31,autonomous uav navigation for active perception of targets in uncertain and cluttered environments.
+31,"in proceedings of the 2020 ieee aerospace conference, big sky, mt, usa, 7–14 march 2020; pp."
+31,"zhao, y."
+31,"; ma, j."
+31,"; li, x."
+31,"; zhang, j."
+31,saliency detection and deep learning-based wildfire identification in uav imagery.
+31,"sensors 2018, 18, 712."
+31,[crossref] 74.
+31,"aha, d.w."
+31,"; kibler, d."
+31,"; albert, m.k."
+31,instance-based learning algorithms.
+31,learn.
+31,"1991, 6, 37–66."
+31,[crossref] 75.
+31,"pereira, a.a."
+31,"; pereira, j.m.c."
+31,"; libonati, r."
+31,"; oom, d."
+31,"; setzer, a.w."
+31,"; morelli, f."
+31,"; machado-silva, f."
+31,"; de carvalho, l.m.t."
+31,burned area mapping in the brazilian savanna using a one-class support vector machine trained by active fires.
+31,remote sens.
+31,"2017, 9, 1161."
+31,[crossref] 76.
+31,"sayad, y.o."
+31,"; mousannif, h."
+31,"; moatassime, h.a."
+31,predictive modeling of wildfires: a new dataset and machine learning approach.
+31,fire saf.
+31,"2019, 104, 130–146."
+31,[crossref] 77.
+31,"crowley, m.a."
+31,"; cardille, j.a."
+31,"; white, j.c."
+31,"; wulder, m.a."
+31,"multi-sensor, multi-scale, bayesian data synthesis for mapping within-year wildfire progression."
+31,remote.
+31,"2019, 10, 302–311."
+31,[crossref] 78.
+31,"sevinc, v."
+31,"; kucuk, o."
+31,"; goltas, m."
+31,a bayesian network model for prediction and analysis of possible forest fire causes.
+31,manag.
+31,"2020, 457, 117–723."
+31,[crossref] 79.
+31,"oliveira, s."
+31,"; oehler, f."
+31,"; san-miguel-ayanz, j."
+31,"; camia, a."
+31,"; pereira, j.m.c."
+31,modeling spatial patterns of fire occurrence in mediter- ranean europe using multiple regression and random forest.
+31,manag.
+31,"2012, 275, 117–129."
+31,[crossref] 80.
+31,"pourghasemi, h.r."
+31,"; gayen, a."
+31,"; lasaponara, r."
+31,"; tiefenbacher, j.p."
+31,application of learning vector quantization and different machine learning techniques to assessing forest fire influence factors and spatial modelling.
+31,environ.
+31,"2020, 184, 109321."
+31,[crossref] 81.
+31,"tonini, m."
+31,"; d’andrea, m."
+31,"; biondi, g."
+31,"; degli esposti, s."
+31,"; trucchia, a."
+31,"; fiorucci, p."
+31,a machine learning-based approach for wildfire susceptibility mapping.
+31,the case study of the liguria region in italy.
+31,"geosciences 2020, 10, 105."
+31,[crossref] 82.
+31,"alves, j."
+31,"; soares, c."
+31,"; torres, j.m."
+31,"; sobral, p."
+31,"; moreira, r.s."
+31,automatic forest fire detection based on a machine learning and image analysis pipeline.
+31,"in proceedings of the world conference on information systems and technologies, galicia, spain, 30 march 2019; pp."
+31,240–251.
+31,"barmpoutis, p."
+31,"; dimitropoulos, k."
+31,"; kaza, k."
+31,"; grammalidis, n."
+31,fire detection from images using faster r-cnn and multidimen- sional texture analysis.
+31,"in proceeedings of the icassp 2019—2019 ieee international conference on acoustics, speech and signal processing (icassp), brighton, uk, 12–17 may 2019; pp."
+31,8301–8305.
+31,"kim, b."
+31,"; lee, j."
+31,a video-based fire detection using deep learning models.
+31,"2019, 9, 2862."
+31,[crossref] 85.
+31,"rodrigues, m.; de la riva, j."
+31,an insight into machine-learning algorithms to model human-caused wildfire occurrence.
+31,environ.
+31,model.
+31,softw.
+31,"2014, 57, 192–201."
+31,[crossref] 86.
+31,"wu, r."
+31,"; chen, c."
+31,"; ahmad, s."
+31,"; volk, j.m."
+31,"; luca, c."
+31,"; harris, f.c."
+31,"; dascalu, s.m."
+31,a real-time web-based wildfire simulation system.
+31,"in proceedings of the iecon 2016—42nd annual conference of the ieee industrial electronics society, florence, italy, 23–26 october 2016; pp."
+31,4964–4969.
+31,"papadopoulos, g.d."
+31,"; pavlidou, f.-n."
+31,a comparative review on wildfire simulators.
+31,ieee syst.
+31,"2011, 5, 233–243."
+31,[crossref] 88.
+31,"miller, c."
+31,"; hilton, j."
+31,"; sullivan, a."
+31,"; prakash, m."
+31,spark—a bushfire spread prediction tool.
+31,"in proceedings of the international symposium on environmental software systems, melbourne, australia, 25–27 march 2015; pp."
+31,262–271.
+31,spark: predicting bushfire spread.
+31,available online: https://data61.csiro.au/en/our-research/our-work/safety-and-security/ disaster-management/spark (accessed on 28 october 2022).
+31,"bakhshaii, a."
+31,"; johnson, e.a."
+31,a review of a new generation of wildfire—atmosphere modeling.
+31,"2019, 49, 565–574."
+31,[crossref] 91.
+31,"mell, w."
+31,"; jenkins, m.a."
+31,"; gould, j."
+31,"; cheney, p."
+31,a physics-based approach to modelling grassland fires.
+31,"wildland fire 2007, 16, 1–22."
+31,[crossref] 92.
+31,"keane, r.e."
+31,"; karau, e.."
+31,evaluating the ecological benefits of wildfire by integrating fire and ecosystem simulation models.
+31,model.
+31,"2010, 221, 1162–1172."
+31,[crossref] 93.
+31,"arca, b."
+31,"; ghisu, t."
+31,"; casula, m."
+31,"; pellizzaro, g."
+31,"; duce, p."
+31,a web-based wildfire simulator for operational applications.
+31,"in proceedings of the ii international conference on fire behaviour and risk, alghero, italy, 26–29 may 2015."
+31,"linn, r."
+31,"; reisner, j."
+31,"; colman, j.j."
+31,"; winterkamp, j."
+31,studying wildfire behavior using firetec.
+31,"wildland fire 2002, 11, 233–246."
+31,[crossref] 95.
+31,"salis, m."
+31,"; arca, b."
+31,"; alcasena, f."
+31,"; arianoutsou, m."
+31,"; bacciu, v."
+31,"; duce, p."
+31,"; duguy, b."
+31,"; koutsias, n."
+31,"; mallinis, g."
+31,"; mitsopoulos, i.; et al."
+31,predicting wildfire spread and behaviour in mediterranean landscapes.
+31,"wildland fire 2016 25, 1015–1032."
+31,[crossref] 96.
+31,"zigner, k."
+31,"; carvalho, l.m.v."
+31,"; peterson, s."
+31,"; fujioka, f."
+31,"; duine, g.-j."
+31,"; jones, c."
+31,"; roberts, d."
+31,"; moritz, m."
+31,"evaluating the ability of farsite to simulate wildfires influenced by extreme, downslope winds in santa barbara, california."
+31,"fire 2020, 3, 29."
+31,[crossref] 97.
+31,"schumaker, n.h."
+31,"; watkins, s.m."
+31,"; heinrichs, j.a."
+31,hexfire: a flexible and accessible wildfire simulator.
+31,"land 2022, 11, 1288."
+31,[crossref] [pubmed] 98.
+31,"finney, m.a."
+31,farsite: a fire area simulator for fire managers.
+31,"in proceedings of the biswell symposium: fire issues and solutions in urban interface and wildland ecosystems, walnut creek, ca, usa, 15–17 february 1994; pp."
+31,55–56.
+32,"drones 2023, 7, 47 32 of 34 99."
+32,"finney, m.a."
+32,"farsite fire area simulator model development and evaluation; us department of agriculture, forest service, rocky mountain research station: fort collins, co, usa, 1998; p."
+32,rural fire research.
+32,available online: https://www.ruralfireresearch.co.nz/tools/prometheus (accessed on 13 september 2022).
+32,"tolhurst, k."
+32,"; shields, b."
+32,"; chong, d."
+32,phoenix: development and application of a bushfire risk management tool.
+32,emerg.
+32,manag.
+32,"2008, 23, 47–54."
+32,"green, k."
+32,"; finney, m."
+32,"; campbell, j."
+32,"; weinstein, d."
+32,"; landrum, v."
+32,using gis to predict fire behavior.
+32,"1995, 93, 21–25."
+32,"li, x."
+32,"; magill, w."
+32,modeling fire spread under environmental influence using a cellular automaton approach.
+32,complex.
+32,"2001, 8, 1–14."
+32,"eklund, p."
+32,a distributed spatial architecture for bush fire simulation.
+32,geogr.
+32,"2001, 15, 363–378."
+32,[crossref] 105.
+32,"lopes, a.m.g."
+32,"; cruz, m.g."
+32,"; viegas, d.x."
+32,firestation—an integrated software system for the numerical simulation of fire spread on complex topography.
+32,environ.
+32,model.
+32,softw.
+32,"2002, 17, 269–285."
+32,[crossref] 106.
+32,"ramírez, j."
+32,"; monedero, s."
+32,"; buckley, d."
+32,new approaches in fire simulations analysis with wildfire analyst.
+32,"in proceedings of the fifth international wildland fire conference, sun city, south africa, 9–13 may 2011; pp."
+32,fsim-wildfire risk simulation software.
+32,available online: https://www.firelab.org/project/fsim-wildfire-risk-simulation- software (accessed on 14 august 2022).
+32,"scott, j.h."
+32,nexus: a system for assessing crown fire hazard.
+32,fire manag.
+32,"notes 1999, 59, 20–24."
+32,"finney, m.a."
+32,an overview of flammap fire modeling capabilities.
+32,"in proceedings of the fuels management-how to measure success, portland, or, usa, 28–30 march 2006; pp."
+32,213–220.
+32,"andrews, p.l."
+32,"behaveplus fire modeling system: past, present, and future."
+32,"in proceedings of the seventh symposium on fire and forest meteorology, bar harbor, maine, boston, ma, usa, 23–25 october 2007; 13p."
+32,"brown, m."
+32,fofem: the first-order fire effects model adapts to the 21st century.
+32,fire sci.
+32,"brief 2009, 62, 1–8."
+32,"martinez-de dios, j.r."
+32,"; arrue, b.c."
+32,"; ollero, a."
+32,"; merino, l."
+32,"; gómez-rodríguez, f."
+32,computer vision techniques for forest fire perception.
+32,image vis.
+32,comput.
+32,"2008, 26, 550–562."
+32,[crossref] 113.
+32,"yuan, c."
+32,"; ghamry, k.a."
+32,"; liu, z."
+32,"; zhang, y."
+32,unmanned aerial vehicle based forest fire monitoring and detection using image processing technique.
+32,"in proceedings of the 2016 ieee chinese guidance, navigation and control conference (cgncc), nanjing, china, 12–14 august 2016; pp."
+32,1870–1875.
+32,"cruz, h."
+32,"; eckert, m."
+32,"; meneses, j."
+32,"; martínez, j."
+32,efficient forest fire detection index for application in unmanned aerial systems (uass).
+32,"sensors 2016, 16, 893."
+32,[crossref] 115.
+32,"arrue, b.c."
+32,"; ollero, a."
+32,"; de dios, j.r.m."
+32,an intelligent system for false alarm reduction in infrared forest-fire detection.
+32,ieee intell.
+32,their appl.
+32,"2000, 15, 64–73."
+32,[crossref] 116.
+32,"merino, l."
+32,"; caballero, f."
+32,"; martínez-de-dios, j.r."
+32,"; maza, i."
+32,"; ollero, a."
+32,an unmanned aircraft system for automatic forest fire monitoring and measurement.
+32,intell.
+32,robot.
+32,"2012, 65, 533–548."
+32,[crossref] 117.
+32,"wardihani, e."
+32,"; ramdhani, m."
+32,"; suharjono, a."
+32,"; setyawan, t.a."
+32,"; hidayat, s.s."
+32,"; helmy, s.w."
+32,"; triyono, e."
+32,"; saifullah, f."
+32,real-time forest fire monitoring system using unmanned aerial vehicle.
+32,technol.
+32,"2018, 13, 1587–1594."
+32,"pastor, e."
+32,"; barrado, c."
+32,"; royo, p."
+32,"; santamaria, e."
+32,"; lopez, j."
+32,"; salami, e.t."
+32,architecture for a helicopter-based unmanned aerial systems wildfire surveillance system.
+32,geocarto int.
+32,"2011, 26, 113–131."
+32,[crossref] 119.
+32,"martínez-de dios, jo.r."
+32,"; merino, l."
+32,"; caballero, f."
+32,"; ollero, a."
+32,automatic forest-fire measuring using ground stations and unmanned aerial systems.
+32,"sensors 2011, 11, 6328–6353."
+32,[crossref] 120.
+32,"premal, c.e."
+32,"; vinsley, s.s."
+32,image processing based forest fire detection using ycbcr colour model.
+32,"in proceedings of the 2014 international conference on circuits, power and computing technologies [iccpct-2014], nagercoil, india, 20–21 march 2014; pp."
+32,1229–1237.
+32,"merino, l."
+32,"; caballero, f.; de dios, j.r.m."
+32,"; maza, i."
+32,"; ollero, a."
+32,automatic forest fire monitoring and measurement using unmanned aerial vehicles.
+32,"in proceedings of the sixth international congress on forest fire research, coimbra, portugal, 10–16 november 2010."
+32,"viseras, a."
+32,"; meissner, m."
+32,"; marchal, j."
+32,wildfire front monitoring with multiple uavs using deep q-learning.
+32,"ieee access 2021, 1."
+32,[crossref] 123.
+32,"ghamry, k.a."
+32,"; zhang, y."
+32,cooperative control of multiple uavs for forest fire monitoring and detection.
+32,"in proceedings of the 2016 12th ieee/asme international conference on mechatronic and embedded systems and applications (mesa), auckland, new zealand, 29–31 august 2016; pp."
+32,"casbeer, d.w."
+32,"; beard, r.w."
+32,"; mclain, t.w."
+32,"; li, s.-m."
+32,"; mehra, r.k."
+32,forest fire monitoring with multiple small uavs.
+32,"in proceedings of the 2005, american control conference, portland, or, usa, 8–10 june 2005; pp."
+32,3530–3535.
+32,"pierce, a."
+32,"; farris, c."
+32,"; taylor, a."
+32,"use of random forests for modeling and mapping forest canopy fuels for fire behavior analysis in lassen volcanic national park, california, usa."
+32,manag.
+32,"2012, 279, 77–89."
+32,[crossref] 126.
+32,"ganapathi subramanian, s."
+32,"; crowley, m."
+32,using spatial reinforcement learning to build forest wildfire dynamics models from satellite images.
+32,front.
+32,"ict 2018, 5, 6."
+32,[crossref] 127.
+32,"toujani, a."
+32,"; achour, h."
+32,"; faïz, s."
+32,estimating forest fire losses using stochastic approach: case study of the kroumiria mountains (northwestern tunisia).
+32,artif.
+32,intell.
+32,"2018 32, 882–906."
+32,[crossref] 128.
+32,"liang, h."
+32,"; zhang, m."
+32,"; wang, h."
+32,a neural network model for wildfire scale prediction using meteorological factors.
+32,"ieee access 2019, 7, 176746–176755."
+32,[crossref]
+33,"drones 2023, 7, 47 33 of 34 129."
+33,"lu, y."
+33,"; xue, z."
+33,"; xia, g.-s."
+33,"; zhang, l."
+33,a survey on vision-based uav navigation.
+33,geo-spat.
+33,"2088, 21, 21–32."
+33,[crossref] 130.
+33,"ragi, s."
+33,"; chong, e.k.p."
+33,uav path planning in a dynamic environment via partially observable markov decision process.
+33,ieee trans.
+33,aerosp.
+33,electron.
+33,"2013, 49, 2397–2412."
+33,[crossref] 131.
+33,"vanegas, f."
+33,"; gonzalez, f."
+33,enabling uav navigation with sensor and environmental uncertainty in cluttered and gps-denied environments.
+33,"sensors 2016, 16, 666."
+33,[crossref] 132.
+33,"silver, d."
+33,"; veness, j."
+33,monte-carlo planning in large pomdps.
+33,"in proceedings of the 23rd international conference on neural information processing systems, bali, indonesia, 6–9 december 2010; volume 2, pp."
+33,2164–2172.
+33,"julian, k.d; kochenderfer, m.j."
+33,distributed wildfire surveillance with autonomous aircraft using deep reinforcement learning.
+33,control.
+33,"2019, 42, 1768–1778."
+33,[crossref] 134.
+33,"al-kaff, a."
+33,"; garcía, f."
+33,"; martín, d."
+33,"; de la escalera, a."
+33,"; armingol, j.m."
+33,obstacle detection and avoidance system based on monocular camera and size expansion algorithm for uavs.
+33,"sensors 2017, 17, 1061."
+33,[crossref] [pubmed] 135.
+33,"broggi, a."
+33,"; cattani, s."
+33,"; patander, m."
+33,"; sabbatelli, m."
+33,"; zani, p."
+33,a full-3d voxel-based dynamic obstacle detection for urban scenario using stereo vision.
+33,"in proceedings of the 16th international ieee conference on intelligent transportation systems (itsc 2013), the hague, the netherlands, 6–9 october 2013; pp."
+33,71–76.
+33,"gao, y."
+33,"; ai, x."
+33,"; rarity, j."
+33,"; dahnoun, n."
+33,obstacle detection with 3d camera using uv-disparity.
+33,"in proceedings of the international workshop on systems, signal processing and their applications, wosspa, tipaza, algeria, 9–11 may 2011; pp."
+33,239–242.
+33,"jian, l."
+33,"; li, x.-m."
+33,vision-based navigation and obstacle detection for uav.
+33,"in proceedings of the 2011 international conference on electronics, communications and control (icecc), ningbo, china, 9–11 september 2011; pp."
+33,1771–1774.
+33,"saha, s."
+33,"; natraj, a."
+33,"; waharte, s."
+33,a real-time monocular vision-based frontal obstacle detection and avoidance for low cost uavs in gps denied environment.
+33,"in proceedings of the 2014 ieee international conference on aerospace electronics and remote sensing technology, yogyakarta, indonesia, 13–14 november 2014; pp."
+33,189–195.
+33,"merrell, p.c."
+33,"; lee, d.-j."
+33,"; beard, r.w."
+33,obstacle avoidance for unmanned air vehicles using optical flow probability distributions.
+33,"in proceedings of the mobile robots xvii, spie, pennsylvania, pa, usa, 29 december 2004."
+33,"beyeler, a."
+33,"; zufferey, j.-c."
+33,"; floreano, d."
+33,3d vision-based navigation for indoor microflyers.
+33,"in proceedings of the 2007 ieee international conference on robotics and automation, rome, italy, 10–14 april 2007; pp."
+33,1336–1341.
+33,"hrabar, s."
+33,"; sukhatme, g.s."
+33,"; corke, p."
+33,"; usher, k."
+33,"; roberts, j."
+33,combined optic-flow and stereo-based navigation of urban canyons for a uav.
+33,"in proceedings of the 2005 ieee/rsj international conference on intelligent robots and systems, edmonton, ab, canada, 2–6 august 2005; pp."
+33,3309–3316.
+33,"celik, k."
+33,"; chung, s.j."
+33,"; clausman, m."
+33,"; somani, a.k."
+33,monocular vision slam for indoor aerial vehicles.
+33,"in proceedings of the 2009 ieee/rsj international conference on intelligent robots and systems, st."
+33,"louis, mo, usa, 10–15 october 2009; pp."
+33,1566–1573.
+33,"lee, j.o."
+33,"; lee, k.h."
+33,"; park, s.h."
+33,"; im, s.g."
+33,"; park, j."
+33,obstacle avoidance for small uavs using monocular vision.
+33,aircr.
+33,aerosp.
+33,technol.
+33,"2011, 83, 397–406."
+33,[crossref] 144.
+33,"gosiewski, z."
+33,"; ciesluk, j."
+33,"; ambroziak, l."
+33,vision-based obstacle avoidance for unmanned aerial vehicles.
+33,"in proceedings of the 2011 fourth international congress on image and signal processing, shanghai, china, 15–17 october 2011; pp."
+33,2020–2025.
+33,"gageik, n."
+33,"; benz, p."
+33,"; montenegro, s."
+33,obstacle detection and collision avoidance for a uav with complementary low-cost sensors.
+33,"ieee access 2015, 3, 599–609."
+33,[crossref] 146.
+33,"alsamhi, s.h."
+33,"; shvetsov, a.v."
+33,"; kumar, s."
+33,"; shvetsova, s.v."
+33,"; alhartomi, m.a."
+33,"; hawbani, a."
+33,"; rajput, n.s."
+33,"; srivastava, s."
+33,"; saif, a."
+33,"; nyangaresi, v.o."
+33,uav computing-assisted search and rescue mission framework for disaster and harsh environment mitigation.
+33,"drones 2022, 6, 154."
+33,[crossref] 147.
+33,"luo, c."
+33,"; miao, w."
+33,"; ullah, h."
+33,"; mcclean, s."
+33,"; parr, g."
+33,"; min, g."
+33,unmanned aerial vehicles for disaster management.
+33,"in geological disaster monitoring based on sensor networks; springer: berlin, germany, 2019; pp."
+33,83–107.
+33,"waharte, s."
+33,"; trigoni, n.."
+33,supporting search and rescue operations with uavs.
+33,"in proceedings of the 2010 international conference on emerging security technologies, canterbury, uk, 6–7 september 2010; pp."
+33,142–147.
+33,"alsamhi, s.h."
+33,"; almalki, f.a."
+33,"; ma, o."
+33,"; ansari, m.s."
+33,"; angelides, m.c."
+33,performance optimization of tethered balloon technology for public safety and emergency communications.
+33,telecommun.
+33,"2020, 75, 235–244."
+33,[crossref] 150.
+33,"huang, z."
+33,"; chen, c."
+33,"; pan, m."
+33,multiobjective uav path planning for emergency information collection and transmission.
+33,ieee internet things j.
+33,"2020, 7, 6993–7009."
+33,[crossref] 151.
+33,"suzuki, t."
+33,"; meguro, j."
+33,"; amano, y."
+33,"; hashizume, t."
+33,"; hirokawa, r."
+33,"; tatsumi, k."
+33,"; sato, k."
+33,"; takiguchi, j.-i."
+33,information collecting system based on aerial images obtained by a small uav for disaster prevention.
+33,"in proceedings of the spie—the international society for optical engineering, gifu, japan, 9 january 2008; pp."
+33,538–543.
+33,"bejiga, m.b."
+33,"; zeggada, a."
+33,"; nouffidj, a."
+33,"; melgani, f."
+33,a convolutional neural network approach for assisting avalanche search and rescue operations with uav imagery.
+33,remote sens.
+33,"2017, 9, 100."
+33,[crossref] 153.
+33,"alsamhi, s.h."
+33,"; ma, o."
+33,"; ansari, m.s."
+33,"predictive estimation of the optimal signal strength from unmanned aerial vehicle over internet of things using ann. arxiv 2018, arxiv:1805.07614."
+33,"alsamhi, s."
+33,"; ma, o."
+33,"; ansari, m."
+33,"artificial intelligence-based techniques for emerging robotics communication: a survey and future perspectives. arxiv 2018, arxiv:1804.09671."
+33,"al-kaff, a."
+33,"; gómez-silva, m.j."
+33,"; moreno, f.m."
+33,"; de la escalera, a."
+33,"; armingol, j.m."
+33,an appearance-based tracking algorithm for aerial search and rescue purposes.
+33,"sensors 2019, 19, 652."
+33,[crossref]
+34,"drones 2023, 7, 47 34 of 34 156."
+34,"seraj, e."
+34,"; gombolay, m."
+34,coordinated control of uavs for human-centered active sensing of wildfires.
+34,"in proceedings of the 2020 american control conference (acc), denver, co, usa, 1–3 july 2020; pp."
+34,1845–1852.
+34,"jiao, z."
+34,"; zhang, y."
+34,"; mu, l."
+34,"; xin, j."
+34,"; jiao, s."
+34,"; liu, h."
+34,"; liu, d."
+34,a yolov3-based learning strategy for real-time uav-based forest fire detection.
+34,"in proceedings of the 2020 chinese control furthermore, decision conference (ccdc), hefei, china, 22–24 august 2020; pp."
+34,4963–4967.
+34,"fotouhi, a."
+34,"; qiang, h."
+34,"; ding, m."
+34,"; hassan, m."
+34,"; giordano, l.g."
+34,"; garcia-rodriguez, a."
+34,"; yuan, j."
+34,"survey on uav cellular communi- cations: practical aspects, standardization advancements, regulation, and security challenges."
+34,ieee commun.
+34,tutor.
+34,"2019, 21, 3417–3442."
+34,[crossref] 159.
+34,"hoseini, s.a."
+34,"; hassan, j."
+34,"; bokani, a."
+34,"; kanhere, s.s."
+34,in situ mimo-wpt recharging of uavs using intelligent flying energy sources.
+34,"drones 2021, 5, 89."
+34,[crossref] 160.
+34,"hoseini, s.a."
+34,"; hassan, j."
+34,"; bokani, a."
+34,"; kanhere, s.s."
+34,trajectory optimization of flying energy sources using q-learning to recharge hotspot uavs.
+34,"in proceedings of the ieee infocom 2020—ieee conference on computer communications workshops (infocom wkshps), toronto, on, canada, 6–9 july 2020; pp."
+34,683–688.
+34,"shakhatreh, h."
+34,"; sawalmeh, a.h."
+34,"; al-fuqaha, a."
+34,"; dou, z."
+34,"; almaita, e."
+34,"; khalil, i."
+34,"; othman, n.s."
+34,"; khreishah, a."
+34,"; guizani, m."
+34,unmanned aerial vehicles (uavs): a survey on civil applications and key research challenges.
+34,"ieee access 2019, 7, 48572–48634."
+34,[crossref] 162.
+34,"whitehead, k."
+34,"; hugenholtz, c.h."
+34,"remote sensing of the environment with small unmanned aircraft systems (uass), part 1: a review of progress and challenges."
+34,unmanned veh.
+34,"2014, 2, 69–85."
+34,[crossref] 163.
+34,"dupont, q.f.m."
+34,"; chua, d.k.h."
+34,"; tashrif, a."
+34,"; abbott, e.l.s."
+34,potential applications of uav along the construction’s value chain.
+34,procedia eng.
+34,"2017, 182, 165–173."
+34,[crossref] 164.
+34,"hehn, m."
+34,"; d’andrea, r."
+34,a flying inverted pendulum.
+34,"in proceedings of the 2011 ieee international conference on robotics and automation, shanghai, china, 9–13 may 2011; pp."
+34,763–770.
+34,"luo, c."
+34,"; nightingale, j."
+34,"; asemota, e."
+34,"; grecos, c."
+34,a uav-cloud system for disaster sensing applications.
+34,"in proceedings of the 2015 ieee 81st vehicular technology conference (vtc spring), glasgow, uk, 11–14 may 2015; pp."
+34,"zhang, n."
+34,"; gai, w."
+34,"; zhang, g."
+34,"; zhang, j."
+34,an active disturbance rejection control guidance law based collision avoidance for unmanned aerial vehicles.
+34,aerosp.
+34,technol.
+34,"2018, 77, 658–669."
+34,[crossref] 167.
+34,"hoseini, s.a."
+34,"; bokani, a."
+34,"; hassan, j."
+34,"; salehi, s."
+34,"; kanhere, s.s."
+34,energy and service-priority aware trajectory design for uav-bss using double q-learning.
+34,"in proceedings of the 2021 ieee 18th annual consumer communications & networking conference (ccnc), las vegas, nv, usa, 9–12 january 2021; pp."
+34,"salehi, s."
+34,"; hassan, j."
+34,"; bokani, a."
+34,"; hoseini, s.a."
+34,"; kanhere, s.s."
+34,"poster abstract: a qos-aware, energy-efficient trajectory opti- mization for uav base stations using q-learning."
+34,"in proceedings of the 2020 19th acm/ieee international conference on information processing in sensor networks (ipsn), sydney, nsw, australia, 21–24 april 2020; pp."
+34,329–330.
+34,"luo, c."
+34,"; mcclean, s.i."
+34,"; parr, g."
+34,"; teacy, l."
+34,"; de nardi, r."
+34,uav position estimation and collision avoidance using the extended kalman filter.
+34,ieee trans.
+34,technol.
+34,"2013, 62, 2749–2762."
+34,[crossref] 170.
+34,"ruangwiset, a."
+34,the application of unmanned aerial vehicle to precision agriculture: verification experiments of the power consumption.
+34,"in proceedings of the 2014 international conference on information science, electronics and electrical engineering, sapporo, japan, 26–28 april 2014; pp."
+34,968–971.
+34,"rodriguez, l."
+34,"; balampanis, f."
+34,"; cobano, j.a."
+34,"; maza, i."
+34,"; ollero, a."
+34,wind efficient path planning and reconfiguration of uas in future atm.
+34,"in proceedings of the twelfth usa/europe air traffic management research and development seminar (atm2017), seattle, wa, usa, 26–30 june 2017."
+34,"cole, k."
+34,"; wickenheiser, a.m."
+34,reactive trajectory generation in an unknown environment.
+34,"in proceedings of the 2017 ieee/rsj international conference on intelligent robots and systems (iros), vancouver, bc, canada, 24–28 september 2017; pp."
+34,2151–2157.
+34,wildfires.
+34,available online: https://www.who.int/health-topics/wildfires#tab=tab_1 (accessed on 25 september 2022).
+34,"disclaimer/publisher’s note: the statements, opinions and data contained in all publications are solely those of the individual author(s) and contributor(s) and not of mdpi and/or the editor(s)."
+34,"mdpi and/or the editor(s) disclaim responsibility for any injury to people or property resulting from any ideas, methods, instructions or products referred to in the content."

@@ -1,0 +1,878 @@
+page,p
+1,may 2022 ainslie et al.
+1,"681 operational evaluation of a wildfire air quality model from a forecaster point of view bruce ainslie,a rita so,a and jack chenb a air quality science unit, meteorological services canada, environment and climate change canada, vancouver, british columbia, canada b air quality research division, science and technology branch, environment and climate change canada, ottawa, ontario, canada (manuscript received 21 april 2021, in ﬁnal form 9 february 2022) abstract: an evaluation of an operational wildﬁre air quality model (wfaqm) has been performed."
+1,evaluation metrics were chosen through an analysis of interviews and a survey of professionals who use wfaqm forecasts as part of their daily responsibilities.
+1,"the survey revealed that professional users generally focus on whether forecast air quality will exceed thresholds that trigger local air quality advisories (e.g., an event), their analysis scale is their region of responsibility, they are interested in short-term (≈24 h) guidance, missing an event is worse than issuing a false alarm, and there are two types of users}one that takes the forecast at face value, and the other that uses it as one of several information sources."
+1,"guided by these ﬁndings, model performance of environment and climate change canada’s current operational wfaqm (firework) was assessed over western canada during three (2016–18) summer (may–september) wildﬁre seasons."
+1,evaluation was performed at the geographic scale at which individual forecasts are issued (the forecast region) using gridded particulate matter 2.5 (pm2.5) ﬁelds developed from a machine learning–based downscaling of satellite and meteorological data.
+1,"for the “at face value” user group, model performance was measured using the peirce skill score."
+1,"for the “as information source” user group, model performance was measured using the divergence skill score."
+1,"for this metric, forecasts were ﬁrst converted to event probabilities using binomial regression."
+1,"we ﬁnd when forecasts are taken at face value, firework cannot outperform a nearest-neighbor-based persistence model."
+1,"however, when forecasts are considered as an information source, firework is superior to the persistence-based model."
+1,keywords: forecast veriﬁcation/skill; model evaluation/performance; air quality; forest ﬁres 1.
+1,introduction association 2019).
+1,"exposure to wildﬁre smoke has been associ- ated with a variety of health impacts, including premature deaths in recent years, there has been an emergence of wildﬁre- (doubleday et al."
+1,"2020; matz et al. 2020), respiratory morbidity related trends across western north america: areas burned (reid et al. 2016), and cardiovascular disease (liu et al."
+1,2015). by wildﬁres in canada (gillett et al.
+1,2004; coops et al.
+1,"2018) in response to these deleterious air quality and health impacts, and the united states (westerling 2016; dennison et al. 2014) daily air quality forecasts using models that include wildﬁre emis- have increased, indices related to ﬁre-conducive weather have sions in the united states [the national air quality forecasting increased over parts of western north america (abatzoglou et al. 2019), the likelihood of extreme ﬁre conditions in west- capability (lee et al. 2017), the high-resolution rapid refresh- ern canada has increased (kirchmeier-young et al."
+1,"2017), smoke model (james et al."
+1,"2018), bluesky (larkin et al. 2009), and and the length of ﬁre season has increased in western canada airpact (herron-thorpe et al. 2014)] and in canada [firework (hanes et al."
+1,2019).
+1,the impact of these recent trends is (chen et al. 2019) and the bluesky canada model (craig et al. evident in records of ambient particulate matter 2.5 (pm2.5) in 2012)] are routinely made.
+1,"in this paper, we are interested in assess- the western united states (o’dell et al."
+1,"2019; mcclure and ing the quality of guidance provided by such models, but this under- jaffe 2018; jaffe et al. 2008) and canada (munoz-alpizar et al. taking is complicated by two related issues."
+1,"first, model evaluation 2017), as well as in ambient ozone observations in the western is not about certifying the “truth” of a model (oreskes et al."
+1,1994); united states (jaffe et al.
+1,"2013, 2008; gong et al."
+1,"2017; brey and rather, it is about showing a model is acceptable for its intended fischer 2016) and british columbia (british columbia lung use."
+1,"consequently, evaluation is contingent on the model’s purpose and context (rykiel 1996)."
+1,"second, air quality forecasters use many lines of reasoning when issuing nonﬁre air quality forecasts (ryan 2016), and if we believe similar considerations hold for wildﬁre denotes content that is immediately available upon publica- smoke forecasts, then the model’s purpose and context need to be tion as open access. fully investigated and integrated into any model assessment."
+1,the forecaster context or point of view (how good is the guid- supplemental information related to this paper is available ance?)
+1,"differs from that of the model developer (how well do we at the journals online website: https://doi.org/10.1175/waf-d-21- know the system?), the regulator (to what extent can we use the 0064.s1. model to establish policy?), and the public health ofﬁcer (how well can it estimate exposure?)."
+1,"accordingly, methods used to corresponding author: bruce ainslie, bruce.ainslie@canada.ca evaluate wildﬁre air quality models (wfaqms) from the point doi: 10.1175/waf-d-21-0064.1 for information regarding reuse of this content and general copyright information, consult the ams copyright policy (www.ametsoc.org/pubs reuselicenses)."
+1,unauthenticated | downloaded 11/23/24 06:03 pm utc
+2,"682 weather and forecasting volume 37 of view of the developer (e.g., chen et al."
+2,2008; herron-thorpe model for episodic phenomena like air quality events (garner et al.
+2,2014; pavlovic et al.
+2,2016; chen et al.
+2,"2019; pan et al. 2020), and thompson 2012). the regulator (e.g., dreessen et al. 2016), and the public health in the present research, we evaluate the abilities of an opera- ofﬁcer (e.g., yao et al."
+2,"2013, 2016; yuchi et al."
+2,2016; matz et al. tional wfaqm over parts of three ﬁre seasons in western 2020) may not be applicable to the forecaster point of view.
+2,fur- canada.
+2,"because model skill is context dependent, we exam- thermore, dennis et al. (2010) suggest that model evaluation can ined, a priori, the forecaster decision-making process through be pursued from four perspectives or frameworks: operational a series of interviews and questionnaires (section 3a) in order (are we getting the right answer?), dynamic (are we capturing to understand how model guidance is used by air quality fore- the observed variability?), diagnostic (are we getting the right casters during the ﬁre season. answer for the right reason?), or probabilistic (what is our conﬁ- in this article, we adopt a broad deﬁnition of a forecaster: a dence in the prediction?)."
+2,"each framework addresses different professional who regularly uses wfaqm guidance in their deci- concerns, which are intimately tied to the model’s purpose and sion-making process."
+2,"this group includes traditional weather intended use. forecasters, air quality meteorologists and health community a review of past forecaster-focused evaluations of air quality professionals."
+2,"these professionals make use of wfaqm output forecast models, using operational and diagnostic frameworks for different reasons."
+2,"during the wildﬁre season, weather fore- with and without wildﬁre capacities, reveals a variety of evalua- casters and air quality meteorologists are often concerned about tion approaches (rolph et al."
+2,2009; stein et al.
+2,2009; eder et al. whether smoke from both nearby and distant ﬁres will be 2010).
+2,"rolph et al. (2009) examined the performance of the advected into the geographic region of their responsibility (e.g., national oceanic and atmospheric administration (noaa) forecast region)."
+2,"if so, they need to ascertain if it will mix to the operational smoke forecast system from the forecaster point of surface (in which case they need to assess whether an air quality view."
+2,"since the analysis focused on quantifying agreements or visibility advisory is warranted) or whether the smoke will stay between forecast and observed smoke plumes, a deﬁnition of aloft (in which case they need to decide whether a warning about concentration threshold was required to delineate the plumes. smoky skies is sufﬁcient)."
+2,"if smoke is already in their location, they evaluated model performance using various concentration forecasters need to determine if they should continue or rescind thresholds, two different satellite products, and two evaluation any existing air quality or visibility advisories."
+2,health community metrics [ﬁgure of merit in space (boybeyi et al. 2001) and professionals are concerned with whether forecast smoke expo- measure of effectiveness (warner et al.
+2,2004)].
+2,"they found sure, in terms of concentration and duration, will necessitate the model performance to be dependent on the selected satellite implementation of preventative measures. product and concentration threshold, where higher thresholds we realize these professionals have expert knowledge of air had the effect of isolating plumes from larger and more intense quality matters within their areas of responsibility and have, ﬁres."
+2,"the eder et al. (2010) forecaster point of view evaluation where possible, access to near-real-time air quality observations. of ozone forecasts over charlotte, north carolina, used standard thus, to help contextualize evaluation results, we benchmark the statistical metrics, including mean bias and root-mean-square wfaqm against a simple persistence-based model (section 3d), error, as well as categorical skill scores, such as false alarm rate, focusing on western canada where wildﬁre events were preva- hit rate, and critical success index, to quantify model skill. lent during the 2016–18 analysis period."
+2,"since most of this area is it is easy to become overwhelmed by the multidimensional unmonitored, we used machine learning to downscale various nature of selecting metrics and forecast ﬁelds for an evaluation, satellite products in order to develop surface gridded pm2.5 con- and steyn and galmarini (2008) note the importance of estab- centrations (section 3b) to serve as “observations” in this data- lishing evaluation criteria in advance of any analysis."
+2,"other- sparse analysis region. wise, there is a tendency for research to “proceed in gradualist way until, out of exhaustion (of funds, human energy, or com- 2."
+2,"data description puter resources), the model is declared satisfactory” (steyn and galmarini 2008)."
+2,"for this reason, we set as our ﬁrst task a."
+2,"spatiotemporal extent of study the establishment of suitable evaluation criteria, through an 1) geographic domain exploration of how forecasters and other professionals use wfaqm guidance during the wildﬁre season."
+2,our analysis domain is western canada (fig.
+2,"for opera- even after a decision has been made regarding evaluation tional forecasting purposes, environment and climate change criteria, it is insufﬁcient to simply calculate and report these canada (eccc) has subdivided this domain into 187 forecast results}they need to be placed in some context."
+2,"emery et al. regions, with areas ranging in size from 117 to 91 372 km2."
+2,"during (2017) and boylan and russell (2006) propose benchmarks to the study period, there were 149 active ambient surface pm2.5 be used for ozone, pm2.5, and visibility, to allow results to be monitors in this domain, which were unevenly distributed across placed in the broader context of historical work."
+2,"however, the forecast regions, with only 52 forecast regions having one or benchmarks deﬁned under nonﬁre conditions are not likely to more monitors."
+2,"a variety of meteorological and air quality data- be suitable to wfaqm, due to large variability in pm2.5 con- sets, with varying spatial scales and extents, were used in this centrations associated with wildﬁre activity (jaffe et al."
+2,2008). work.
+2,"we reprojected all gridded datasets to a common 10-km here we propose that in the absence of standardized metrics resolution 278 3 371 lambert conic conformal grid using the and thresholds, it should be possible to benchmark wfaqm python “pyproj” cartographic transformation library (whitaker performance using persistence, which makes a good reference et al."
+2,2011).
+2,unauthenticated | downloaded 11/23/24 06:03 pm utc
+3,may 2022 ainslie et al.
+3,683 fig.
+3,model evaluation spatial domain.
+3,gray shading shows elevation in meters (based on the usgs global 30-arc-s digital elevation model).
+3,dashed red lines demarcate the 187 forecast regions.
+3,blue lines show provincial and territorial political boundaries.
+3,the 149 air quality monitors having daily pm2.5 data are marked by blue circles.
+3,"in the south- western part of the domain, there are numerous small forecast regions and many air quality monitors."
+3,the upper-right inset shows this region in more detail.
+3,provincial and state abbre- viations are given in bold text.
+3,2) temporal domain or equal to 2.0 mg m23 were retained.
+3,a total of 71 808 obser- vations from the 149 stations was used this study.
+3,"the main focus of our analysis spans parts of three (2016–18) summer (may–september, mjjas) wildﬁre seasons."
+3,these sum- 2) satellite data mers were characterized by an extreme ﬁre event in alberta (may 2016; landis et al. 2018) and two extreme ﬁre seasons in various satellite datasets were used for creating our gridded british columbia (bc): july–august 2017 (b.c.
+3,wildﬁre service surface pm2.5 concentration ﬁeld.
+3,we used noaa’s hazard 2017) and july–august 2018 (canadian interagency forest fire mapping system (hms; ruminski et al. 2006) smoke polygons centre inc.
+3,2018).
+3,wfaqm output for this analysis period was to delineate daily smoke extent.
+3,aerosol optical depth (aod) available for a total of 215 days.
+3,"calendar plots showing model from the moderate-resolution imaging spectroradiometer availability and total ﬁre activity are given in the online (modis) instruments, using the multi-angle implementation of supplemental material (fig."
+3,"atmospheric correction (maiac) algorithm (lyapustin et al. 2018), was the main satellite product used to infer surface pm2.5 b."
+3,observational datasets concentrations.
+3,"because of maiac’s inability to provide infor- mation over cloudy or snow-covered regions, we also used daily 1) ambient pm2.5 data averaged aod (at 550 nm) from the modern-era retrospective ambient surface pm2.5 data was obtained from 149 moni- analysis for research and applications, version 2 (merra-2) toring sites, operated mainly by canada’s national air pollu- (randles et al."
+3,2017; buchard et al.
+3,2017).
+3,"finally, level 3 tion surveillance (naps) program and british columbia’s (18 3 18), version 6, daily tropospheric carbon monoxide ministry of environment and climate change strategy."
+3,"most (co) and cloud fraction data from the atmospheric infrared of the data were collected directly from these agencies, but sounder (airs), on board the eos/aqua satellite (tian et al. some was from the near-real-time airnow (https://www. 2013), were also used in analysis. airnow.gov/) and eccc’s veriﬁcation of air quality models c."
+3,reanalysis data database.
+3,"where possible, ﬁnal quality controlled observa- tions were used in place of near-real-time data."
+3,"as the main we used synoptic typing and clustering of synoptic-scale purpose of this paper is to evaluate air quality forecasts during pressure patterns to account for the inﬂuence of nonlocal wildﬁre season, only daily average observations greater than meteorological factors in the machine learning model."
+3,to this unauthenticated | downloaded 11/23/24 06:03 pm utc
+4,"684 weather and forecasting volume 37 end, daily sea level pressure ﬁelds from the national centers by standard statistical metrics, did not outperform a persistence- for environmental prediction and the national center for based pm2.5 forecast (not shown)."
+4,"yet, informal interviews with atmospheric research (ncep–ncar) reanalysis (kalnay forecasters revealed these forecasts were invaluable in their day- et al. 1996) at a 2.58 3 2.58 resolution over the north paciﬁc to-day decision-making."
+4,"from these interviews and subsequent (1108–157.58w, 408–62.58n) were obtained over the 1948–2018 meetings with the firework model development team, we time frame. became aware of the need to better understand the decision- making process of professional air quality forecasters."
+4,to this d.
+4,"wildfire air quality model output end, a 10-question survey was sent to wfaqm users."
+4,"survey the main objective of this study is the evaluation of forecast questions were aimed at understanding what model output(s) surface pm2.5 concentrations from eccc’s firework were the most important and how the model is used in decision- wfaqm, which became operational in 2016 (eccc 2000b). making (see the supplemental material for a list of the questions firework is an augmented version of eccc’s operational and response options)."
+4,"the questions were closed-ended, with global environmental multiscale–modeling air quality and respondents given a range of answers to choose from, although chemistry (gem-mach; gong et al. 2015) air quality fore- on six of the questions users were given the chance to enter their casting model, via the inclusion of near-real-time biomass own response."
+4,respondents were also encouraged to write in burning emissions.
+4,we used the difference in surface pm2.5 comments on four of the questions. concentrations between firework and gem-mach as an estimate of the wildﬁre contribution to surface air quality 2) survey respondents and data analysis (munoz-alpizar et al.
+4,2017).
+4,"only a brief summary of gem- the survey was disseminated indirectly by posting requests for mach and firework is provided here, as they are more fully respondents to different air quality user group email lists and described by chen et al. (2019) and pavlovic et al."
+4,(2016). directly via email to colleagues and associates.
+4,"survey purpose, gem-mach is an in-line, one-way coupled regional chemical description and web address were posted to multiple agencies transport model with a full description of atmospheric chemistry across western canada and western united states, namely, the and atmospheric processes (gong et al. 2015) embedded within bc interagency air quality working group (with 23 unique eccc’s global environmental multiscale (gem; côté et al. email addresses), the northwest airquest working group 1998) weather prediction model."
+4,"the operational gem-mach (159 addresses), eccc weather forecasters in vancouver model implements a two-bin sectional representation of the pm (27 addresses) and edmonton (25 addresses), and the bluesky size distribution with a ﬁne component representing pm2.5 and a canada user group (approximately 30 addresses)."
+4,"survey coarse component representing pm10 and operates on a 10-km details were also directly emailed to contacts in western canada grid resolution with 80 vertical levels extending up to 0.1 hpa forestry and health communities (12 addresses), and to two over a north american domain (eccc 2000a)."
+4,firework pro- colleagues at alberta environment and parks.
+4,"overall, these vides 48-h forecasts twice daily (model initialized at 0000 and groups comprise professionals working in the ﬁelds of air 1200 utc) from april to october."
+4,"originally, biomass burning quality, health, and scientiﬁc research representing federal emissions in firework were based on the u.s."
+4,"forestry service’s (both american and canadian), state, provincial, tribal, uni- fire emission production simulator."
+4,"since 2019, biomass burning versity, and regional agencies."
+4,"it is likely there is some dupli- emissions have been updated to use the canadian forest fire cation in the sets of people contacted, so the actual number of emission prediction system (cffeps; chen et al."
+4,2019). people who were made aware of the survey would be less than to assess forecast performance of the current operational ver- the sum of the numbers given above.
+4,"the survey results were sion of firework, the newer cffeps version was rerun in fore- compiled approximately 6 months after the end of the wildﬁre cast mode over much of the 2016–18 wildﬁre seasons."
+4,"a total of season, and there was a total of 23 unique respondents. 215 days of firework forecasts are used to assess forecast per- the majority (19 of the 23) of the respondents were air qual- formance."
+4,"for the purpose of training our machine learning ity meteorologists, with six from the bc ministry of the envi- model (section 3b), additional surface ﬁelds (temperature, rela- ronment and climate change strategy, three from the metro tive humidity, wind vectors, pm2.5, and o3 concentrations) vancouver regional government, four from agencies within from the gem-mach model, which unlike firework, does washington state, three from the saskatchewan ministry of the not include biomass burning emissions, were obtained over the environment, two from within idaho, and one from the ontario summers of 2014–18, totaling 710 analysis days."
+4,"since the model domain covers the entire north america continent, only a ministry of the environment, conservation and parks."
+4,"the four subset of the firework output covering western canada was respondents from the health community consisted of one each used in this study. from bc, manitoba, yukon, and the northwest territories."
+4,analysis of the survey consisted of ranking responses and examining response variability.
+4,"from this preliminary analysis, 3."
+4,methods some general conclusions were drawn.
+4,because of the qualita- a.
+4,"wildfire air quality model user survey tive and subjective nature of the survey, we ﬁrst presented our ﬁndings to the bc interagency working group and conducted 1) survey development additional in-person interviews with two bc-based forecasters."
+4,"a preliminary evaluation of firework forecasts during the the results from these secondary consultations were used to 2017 bc wildﬁre season showed the operational model, measured ﬁnalize our evaluation framework."
+4,unauthenticated | downloaded 11/23/24 06:03 pm utc
+5,may 2022 ainslie et al.
+5,685 3) survey and interview results ﬁelds is common in areas such as human health exposure assessments (yu et al. 2018; van donkelaar et al.
+5,2016; di analysis of the survey and interviews resulted in ﬁve ideas et al.
+5,"2016; hu et al. 2014), policy and regulatory assessments central to our evaluation methodology: (preisler et al. 2015; van donkelaar et al. 2015), and analyses 1) in general, respondents tend to focus on model guidance for (marsha and larkin 2019; robichaud et al."
+5,2016).
+5,recent the upcoming 24-h period (with some looking only as far out increases in wildﬁre activity in the paciﬁc northwest (doubleday as 12 h) and discount forecasts beyond 24 h due to the possi- et al. 2020) have led to a number of efforts to produce gridded bility of extreme ﬁre behavior.
+5,such ﬁre behavior and its pm2.5 concentrations using statistical models (lassman et al. impact on surrounding meteorology cannot be captured by 2017; reid et al. 2015) and machine learning methods (reid models initialized with static ﬁre intensities and locations. et al.
+5,"2015; zou et al. 2019), with the latter approach shown to also, several respondents explained that during the ﬁre have better model performance."
+5,"to capture the dependency of season, their day-to-day workﬂow often centered around the pm2.5 concentration on ﬁre activity, these studies used satellite- process of issuing, extending, or rescinding advisories, which derived ﬁre and smoke data, including modis ﬁre radiative forces them to have a short-term focus."
+5,the telephone inter- power (yao and henderson 2014; yao et al.
+5,"2018), modis view revealed occasionally longer range (.48 h) forecasts ﬁre count (geng et al."
+5,"2018; hu et al. 2014), and hms smoke are used to plan weekend work schedules. plume position (yao and henderson 2014; ford et al."
+5,2017).
+5,2) the majority of respondents are most concerned with the meteorological data from satellites or models are often included prospects of air quality levels exceeding thresholds that to better characterize the dispersion of wildﬁre smoke (reid require the issuing of air quality advisories or the need to ini- et al.
+5,2015; geng et al.
+5,2018). tiate preventative actions.
+5,"that is, they are event focused."
+5,guided by the recent work of reid et al. (2015) and zou et al.
+5,"3) in general, respondents usually have greater concerns with (2019), we used the extreme gradient boosting algorithm of models not forecasting an event (a miss) than with models chen and guestrin (2016), here referred as the extreme gradient forecasting an event that does not materialize (a false alarm). boosting machine (xgbm), to downscale daily merra and 4) respondents tend not to focus on model output at the point maiac aod data in order to estimate surface pm2.5 concen- of surface measurement (only 1 response), but instead are trations."
+5,"in addition to the aod datasets, the xgbm downscal- interested in concentrations over their entire region of inter- ing also used year, day of year, elevation, synoptic conditions, est."
+5,"these regions include the eccc forecast region or airs level3 co and cloud fraction, gem-mach forecast tem- municipal boundary (12 responses), the local health area perature, relative humidity, u- and v-wind components, o3, and (1 response), provincial air zone boundaries (3 responses), pm2.5 to predict gridded surface pm2.5 concentrations at a and entire state or provincial (7 responses) boundaries. 10-km resolution (table 1)."
+5,"the xgbm was trained with cross 5) the discussions of the survey ﬁndings, as well as the in- validation, via the “xgboost” package in python, on daily sum- person interviews, revealed two types of users: one that mer (mjjas) data over the 2014–18 timeframe."
+5,the hyperpara- takes the guidance at face value and the other who uses meters used in the ﬁnal xgbm are provided in table s1. model guidance as one of several information sources in hyperparameter tuning was done using a grid search strategy their decision-making process.
+5,"this distinction was made with ﬁvefold cross validation, where parameters were chosen evident when respondents described how they make use of based on mean squared errors. the model output and how this information is used in con- our goal is to evaluate firework performance over all of the junction with other pertinent information sources (section 3f). mostly unmonitored western canada using the xgbm model we also found respondents tend to use forecast output from output as a reference gridded pm2.5 dataset."
+5,"to evaluate how the 1200 utc model initialization run more often than the well this dataset matches the available observations, a tenfold 0000 utc run, as the 1200 utc run output provides the most cross-validation technique (10cv) was applied, where the moni- up-to-date guidance at the start of the working day in western toring data were randomly split into 10 groups, closely following north america."
+5,the most common event threshold was a similar work by zou et al.
+5,"(2019), reid et al. (2015), and yao et al."
+5,"pm2.5 concentration of 25 mg m23 (24-h average), likely (2013)."
+5,"from the data split, 10 sets of model training and testing related to the air quality objective threshold used in bc."
+5,"based exercises were performed, each withholding one of the datasets on this feedback, we decided to focus our evaluation at the for testing, while using the remaining 9 for training."
+5,"the result is scale of the eccc forecast region, using guidance from the a full set of daily xgbm-predicted concentrations at monitoring ﬁrst 24 h from the 1200 utc initialization run output."
+5,"we also sites whose sole use is for xgbm evaluation (xgbm-evaluate). use two event-based metrics with a 25 mg m23 threshold: a con- a ﬁnal model was trained using all available monitoring data to tingency table–based one for the “at face value” users and an predict daily pm2.5 concentrations at each grid cell, which were information-based one for the “as information source” users. then averaged over each forecast region to produce a dataset of daily pm2.5 concentrations at each of the 187 forecast regions for b."
+5,gridded surface pm2.5 concentrations the purpose of the firework evaluation (xgbm-benchmark).
+5,as most of the eccc forecast regions do not have pm2.5 c.
+5,"clustering and synoptic typing monitors (fig. 1), we developed a gridded daily surface pm2.5 concentration dataset to allow for evaluation across all fore- a clustering and synoptic typing analysis was used to cast regions."
+5,the development and use of gridded pm2.5 account for the inﬂuence of nonlocal meteorological factors unauthenticated | downloaded 11/23/24 06:03 pm utc
+6,686 weather and forecasting volume 37 table 1.
+6,datasets used in xgbm to create the gridded daily surface pm2.5 concentrations.
+6,variables data source temporal resolution spatial resolution dependent variable pm2.5 from monitoring stations eccc and airnow hourly; averaged to daily point location predictor variables merra2 aod nasa 3-hourly; averaged to daily 0.58 3 0.6258 maiac aod nasa daily 1 km synoptic conditions (ncep) noaa daily 2.58 3 2.58 airs level 3 co nasa daily 18 3 18 airs level 3 cloud fraction nasa daily 18 3 18 fire emissions eccc hourly; averaged to daily 10 km gem-mach temperature eccc hourly; averaged to daily 10 km gem-mach relative humidity eccc hourly; averaged to daily 10 km gem-mach u- and v-wind component eccc hourly; averaged to daily 10 km gem-mach o3 eccc hourly; daily maximum 8-h avg 10 km gem-mach pm2.5 eccc hourly; averaged to daily 10 km elevation usgs (gtopo30) } 1 km year annual day of year daily in the machine learning model (section 3b).
+6,"in brief, the e."
+6,forecast guidance “at face value” evaluation analysis followed the approach of reuten et al. (2012) and the survey showed one group of users took the forecast guid- consisted of a principal component analysis (pca) on the ance at face value.
+6,"since this group is both event focused and daily summer sea level pressure, followed by a k-means takes the forecast at face value, we reasoned that a traditional clustering of the leading nine empirical orthogonal function 2 3 2 contingency matrix scoring should be used."
+6,"furthermore, components."
+6,"a four cluster solution was identiﬁed and respondents in general considered a missed event to be a more subsequently, each day in the analysis period was assigned serious model shortcoming than a false alarm}a trade-off com- to one of these four synoptic types, which were later used mon to other forecasting situations (manzato and jolliffe 2017). as inputs in the machine learning model."
+6,"the four clusters this preference is a measure of a forecast’s value, as opposed to differ most notably in the positioning of the paciﬁc high its quality, and accounting for this trade-off is unfortunately user and the strength and orientation of surface pressure gra- speciﬁc (richardson 2012)."
+6,"however, for users whose cost–loss dients over western canada (fig."
+6,"more details about structure can be summarized by a ﬁxed cost that is incurred every the pca and clustering are given in the supplemental time an advisory is issued and a ﬁxed loss for not taking preven- material. tative action when an event occurs, the peirce skill score (pss) d."
+6,simple forecast model can be used to measure the maximum potential value of a fore- cast in terms of a minimized cost–loss ratio (richardson 2012).
+6,"to benchmark the performance of firework, a simple note that the terms “cost” and “loss” are not synonymous, and persistence-based forecast model (sfm) was developed. the usage of these terms in the interpretation of forecast value the sfm is meant to be a counterfactual model (i.e., what a differs from their meanings in statistics, where often both terms forecaster might use in the absence of wfaqm output) are used to describe a penalty function to be optimized."
+6,"the pss and reﬂects the best guess of the current conditions based can also be used to assess forecast quality and has the nice prop- on observations from the nearest available monitoring site. erty of being independent of event base rate (e.g., the climatolog- it represents the most basic information available to fore- ical prevalence of an event)."
+6,pss is deﬁned as casters and is used solely to benchmark firework model performance.
+6,"furthermore, this model is consistent with (ad 2 bc) pss 5 5 h 2 f, (1) both the description of the forecast process described by (b 1 d)(a 1 c) ryan (2016) and from our interviews, in that forecasters where a is the number of correctly forecast events (hits); b is often use nearby observations to “anchor” forecasts in the number of false alarms; c is the number of missed events; d unmonitored areas."
+6,the sfm is a mixture of nearest-neigh- the number of correctly forecast nonevents (correct negatives); bor interpolation and persistence.
+6,"for each grid cell in our h 5 a/(a 1 c) is the hit rate; and f 5 b/(b 1 d) is the probabil- 10-km resolution analysis domain, we used the previous day’s ity of false detection."
+6,"pss is positively oriented with range observation from the nearest available monitor as that grid [21, 1] and optimal score of 1."
+6,to eliminate the possibility of cell’s present-day forecast.
+6,"the distance between a given grid obtaining an estimated h and f of zero or one, we have taken a cell and its nearest available monitor ranged from a minimum bayesian approach (katz and ehrendorfer 2006) in computing of 0 to maximum of 2193 km, with a median distance of pss, where an additional count was added to each element 429 km. (a, b, c, d) in the contingency table."
+6,unauthenticated | downloaded 11/23/24 06:03 pm utc
+7,may 2022 ainslie et al. 687 f.
+7,"forecast guidance “as information source” evaluation model performance will be tied to synoptic-scale weather pat- terns in some way, but its impact will likely vary between loca- the second subgroup of users took a more nuanced “as infor- tions."
+7,"for example, under a synoptic pattern associated with a mation source” view toward the firework forecast and uses its weakened paciﬁc high, bc coastal locations may experience off- guidance to supplement information gleaned from other sources. shore ﬂow while locations in the interior of bc may experience an example from a member of this group described how they stagnant conditions."
+7,"each meteorological setup presents its own use firework output: problems for smoke forecasting, and so we felt that to properly 1) first, look at the firework output, keying on where the account for the synoptic inﬂuence as a ﬁxed effect would require model has large ﬁres or ﬁres of interest to my forecast building a nested synoptic1msczone model."
+7,"unfortunately, region. we did not have enough data to fully model this set of nested 2) next, look at satellite ir data and ask: does firework interactions."
+7,"thus, we modeled the synoptic inﬂuence as a four- have all of the important ﬁres?"
+7,level random effect.
+7,"3) return to the firework output, this time asking, where is we performed a nonlinear spline-based binomial regression the smoke going?"
+7,"using a generalized additive model (gam) from the mgcv 4) check the satellite aod and ask, is the model putting library (wood 2006) to relate the probability of an event to smoke in locations consistent with this imagery?"
+7,"our predictors: 5) talk with the ﬁre interagency group and ask, are there  updates to ﬁre weather indices?"
+7,"p event|fcst) ∼ s(fireimpacts) 1 s(baserate) 1 s(synop) 1 , (2) 6) if so, ask, are these in areas with active ﬁres affecting my forecast region?"
+7,"where p(event|fcst) represents the probability of an event given 7) if so, adjust the forecast to take this new information into the forecast; the s(·) functions are the ﬁtted smooths for the fire- account."
+7,"impacts, baserate, and synop predictors; fireimpacts is the wildﬁre-only pm2.5 forecast concentrations; baserate is the his- it is clear from this step-by-step example that the firework torical event frequency at each forecast region expressed in log forecast is but one of many pertinent sources of information odds; synop is a four-level random effects factor representing the and that these sources are compared, combined, discarded, or daily synoptic sea level pressure pattern; and  are the residuals updated during the decision-making process. assumed to follow a binomial distribution."
+7,a complementary a natural way to evaluate the forecast would then be to ask log–log link function was used to linearize the predictors to the how much information does the model provide to the user response variable.
+7,this link function was chosen over the logit or (roulston and smith 2002; ahrens and walser 2008).
+7,"as there probit functions since our probabilities were not symmetrically is a strong link between information and probabilities, we ﬁrst distributed with respect to forecast concentrations (e.g., the distri- convert our deterministic forecasts into event probabilities bution of forecasts by concentration was not symmetric with few using binomial regression (wilks 2011) before scoring these forecasts for high concentrations and many forecasts for low probabilistic forecasts in terms of their information content. concentrations)."
+7,the unknown smooth function for ﬁre impact concentrations [s(fireimpacts)] was ﬁtted using a basis of adap- 1) conversion to probabilistic forecasts: tive splines and thin plate splines were used to ﬁt the baserate additive mixed effects binomial regression impact.
+7,a restricted maximum likelihood penalty was used in we converted the deterministic forecasts into probabilistic the ﬁtting.
+7,the autocorrelation in the residuals was checked ones by applying a binomial regression with a daily average subjectively through the autocorrelation and partial autocorre- pm2.5 event threshold of 25 mg m23.
+7,"we regressed the log odds lation plots, where the partial correlation at the different lags of an event on a set of predictors including wildﬁre-only pm2.5 were generally less than 0.05 with no obvious patterns. forecast concentrations, synoptic conditions, and the forecast the gam model was independently ﬁtted for firework region’s event base rate."
+7,"the wildﬁre-only pm2.5 forecasts were and sfm using the xgbm-benchmark dataset to establish used instead of the total forecast concentration in order to mini- either the presence or absence of an event. mize the regional variability in pm2.5 baseline conditions, which allows for a better pooling of forecasts from each region."
+7,"this is 2) divergence skill score a small adjustment, since, with the exception of wildﬁre events, the information content of a probabilistic forecast can be quan- most regions in western canada have low ambient pm2.5 con- tiﬁed in terms of relative entropy, which measures the divergence centrations with annual average concentrations around 5 mg m23 between the forecast distribution and observation distribution (british columbia lung association 2017)."
+7,"a ﬁve-level, summer (weijs et al."
+7,2010).
+7,"the relative-entropy-based divergence score month factor was initially considered as a predictor, but was later (ds) for a single forecast–observation pair (oi, fi) is deﬁned as dropped as it was not statistically signiﬁcant and did not improve the overall ﬁt of the model."
+7,"the synoptic predictor was initially oi (1 2 oi ) considered as a four-level ﬁxed-effect factor and every level was dsi 5 oi log2 1 (1 2 oi )log2 , (3) fi (1 2 fi ) found to be signiﬁcant; however, it is not intuitive how a particu- lar synoptic pattern could affect model performance in the same where oi is either 1 (event occurred) or 0 (event did not occur); way for every forecast region and every potential upwind/down- fi is the forecast event probability (0 , fi , 1)."
+7,ds measures wind wildﬁre-forecast region conﬁguration.
+7,our thinking is that how much information (in bits) is gained going from climatology unauthenticated | downloaded 11/23/24 06:03 pm utc
+8,688 weather and forecasting volume 37 table 2.
+8,comparison of xgbm model performance based on tenfold cv at monitor locations on potentially smoke impacted days with similar studies.
+8,number obs. mean modeled mean mean bias r rmse notes study mg m23 mg m23 mg m23 mg m23 method (location) timeframe this study 4472 23.6 23.5 20.1 0.85 17.2 xgbm (western canada) 3 ﬁre seasons yao et al.
+8,(2013) 2062 } } } 0.70 } multiple linear regression (british columbia) 2003–12 reid et al.
+8,(2015) 1540 } } } 0.90 1.5 gradient boosted machine (northern california) summer 2008 zou et al.
+8,"(2019) } } 21.4 } 0.73 30.3 community multiscale air quality model (paciﬁc northwest) august–september 2017 (e.g., the base rate) to the observations."
+8,"ds is a negatively ori- our main assessment of xgbm’s suitability as a benchmarking ented score with range (0, ‘)."
+8,the ds for each model is the mean dataset is based on comparisons of firework pss and dss value of the dsi from each of its forecasts.
+8,"similar to other veriﬁ- scores when computed using either observations or the xgbm- cation metrics, ds can be transformed into a positively oriented evaluate dataset."
+8,"a single score is computed for each forecast skill score, dss, with range (‘, 1) through the normalization with region, and if a region has more than one monitor, scores were climatology (dsref) and a perfect-forecast (dsperf) score by calculated using the median of the region’s monitored values."
+8,"as a result, each forecast region provides at most a single value for ds 2 dsref ds dss 5 512 : (4) comparison."
+8,"figure 2 summarizes the results of these compari- dsperf 2 dsref dsref sons via scatterplots for pss (fig. 2a) and dss (fig. 2b), where scores based on monitoring data are referenced to the x axis and a random forecast with the same marginal distribution as those based on the xgbm-evaluate output to the y axis."
+8,"within climatology produces a dss of 0 and a perfect forecast has a each plot, the sampling uncertainties are shown by thin gray lines dss of 1."
+8,"dss can be decomposed into three components: and forecast region base rates are represented in marker color. reliability (rel), resolution (res), and uncertainty (unc): the 95% conﬁdence intervals for both the pss and dss were res 2 rel estimated using 1000 replicates from a moving-block bootstrap dss 5 , (5) (wilks 2011) from the python recombinator package (https:// unc pypi.org/project/recombinator)."
+8,we used its optimal_block_ where unc measures the uncertainty (in bits) of the forecast length algorithm to determine block lengths and its circular_ situation (with range from 0 to 1 bit); rel measures the con- block_bootstrap algorithm to estimate conﬁdence intervals.
+8,"in ditional bias in the forecast probabilities [negatively oriented both scatterplots, markers generally fall along the 1:1 line, indi- with range [0, ‘)]; and res measures the amount of informa- cating that the xgbm is a suitable surrogate for monitoring data, tion in the forecast (positively oriented with range [0, unc]). and given the size of the sampling uncertainty, scores based on the formulae for calculating these components are given in the xgbm-evaluate outputs are consistent with those based on the supplemental material. the monitoring data."
+8,similar scatterplots for the sfm model are given in the supplemental material (fig.
+8,further analysis 4.
+8,"results using the wilcoxon signed rank tests, a nonparametric test, reveal no statistically signiﬁcant differences between the xgbm-evalu- a. xgbm output evaluation ate and observation based scores, where p values were greater as the xgbm output is used as the basis for evaluating fire- than 0.05 (table 3)."
+8,"work and sfm performance, we ﬁrst present an evaluation of based on these results, we conclude that the xgbm xgbm to show that it is “ﬁt for purpose,” speciﬁcally, we output is an adequate surrogate for the monitoring data, demonstrate that the xgbm-evaluate dataset replicates when performance is assessed using the pss and dss observations when it comes to calculating pss and dss."
+8,for metrics.
+8,"the outputs from xgbm-benchmark can thus be benchmarking purposes only, table 2 lists the performance used in the evaluation of firework without the constraints of the xgbm-evaluate dataset when evaluated using stan- of the limited spatial coverage provided by the surface mon- dard statistical measures."
+8,the results in the table are consis- itors over our western canada analysis region. tent with similar machine learning-based analyses of surface b.
+8,“at face value” evaluation: pss pm2.5 concentrations during ﬁre-impacted conditions (zou et al.
+8,2019; yao et al. 2013); results from reid et al.
+8,"(2015) we now use the xgbm-benchmark output as an observational show substantially lower rmse, which is likely due to its surrogate to evaluate model pss performance at each of the shorter study period and smaller spatial domain. 187 forecast regions."
+8,figure 3 shows firework (x axis) versus unauthenticated | downloaded 11/23/24 06:03 pm utc
+9,may 2022 ainslie et al.
+9,689 fig.
+9,scatterplot of (a) pss and (b) dss scores for firework when using observations (x axis) and xgbm (y axis) modeled pm2.5 concentrations.
+9,sampling uncertainty (95% conﬁdence intervals) is indicated by thin gray lines centered on each point.
+9,symbols are colored by base rate.
+9,also shown is the 1:1 line in black.
+9,"sfm (y axis) forecast region scores, along with sampling uncer- • forecast concentrations explain the most amount of model tainty (gray lines are 95% conﬁdence interval) and forecast variance and its effect is nonlinear, region base rate (marker color)."
+9,"results from a wilcoxon signed • forecast region base rate is a signiﬁcant predictor, and rank test, a nonparametric test with null hypothesis that the • the synop factor is a signiﬁcant random effect. median difference between pairs of scores from the two model is regression summaries and diagnostic plots are provided in the zero, is given in table 4. supplemental material (tables s2 and s3; figs."
+9,s4 and s5).
+9,"at the 95% conﬁdence level, sfm has higher pss than fire- regression results are shown in fig. 4, where we use each model’s work, indicating that the simple persistence approach performs regression to estimate event probabilities as a function of forecast better at capturing smoke events than the deterministic fire- concentrations [p(event|fcst)] and assume a ﬁxed base rate of 0."
+9,"work model forecasts when the forecast is taken at face value. 043, which equals to the mean base rate observed over all the the biggest difference in pss is observed at forecast regions for forecast regions."
+9,"in this ﬁgure, we scale the event probabilities by which firework has low scores (,0.1) and sfm produces the 0.043 base rate since the resulting ratio represents the change scores in the range of 0.2–0.6."
+9,"these performance differences in event probability as one moves from the prior [e.g., the are largely isolated to 25 forecast regions found in southern p(event) base rate] to the posterior [p(event|fcst)] given the saskatchewan (sk) and manitoba (mb), where the base rate model likelihood [p(fcst|event)] and forecast [p(fcst)]: is low (≈0.1)."
+9,"in many of these regions, firework never once forecast an event."
+9,the low skill score in these regions may be p(event|fcst) p(fcst|event) 5 : (6) due to their distance from the more predominant ﬁre locations p(event) p(fcst) situated in the central interior of bc.
+9,"we speculate the resulting also included in the plot is a horizontal line at y 5 1, where large source-receptor distances may have made predicting the posterior is equal to prior, and we use a logarithmic scale plume location and smoke dispersion extremely challenging. on the y axis in order to highlight the importance of values both above and below this line."
+9,forecasts whose values lie c.
+9,"additive mixed effects binomial regression above (or below) the y 5 1 line suggest the forecaster should the binomial regression, ﬁt using the gam for both mod- proportionally revise their expectations of an event upward els, shows (or downward) from the climatological norm."
+9,both models table 3.
+9,"results of wilcoxon signed rank tests on the difference in means, where a signiﬁcance level of 0.05 is used, for the firework deterministic wfaqm and the simple forecast model when observations are either the monitoring data or xgbm- evaluate output."
+9,metric models monitor xgbm difference (monitor–xgbm) p value pss firework 0.47 0.45 0.02 0.10 sfm 0.58 0.56 0.03 0.06 dss firework 0.42 0.40 0.02 0.54 sfm 0.27 0.29 20.01 0.70 unauthenticated | downloaded 11/23/24 06:03 pm utc
+10,690 weather and forecasting volume 37 fig.
+10,comparison of pss scores at each forecast region (along with 95% conﬁdence intervals indicated by the thin gray lines) over fig.
+10,gam-predicted event probabilities as a function of fore- 2016–18 summers.
+10,marker shading is representative of forecast cast concentration assuming a ﬁxed base rate of 0.043 for firework region base rate.
+10,also shown is 1:1 line. (blue) and sfm (green).
+10,color shading around each curves gives 95% conﬁdence intervals.
+10,"the event probabilities [p(event|fcst)] produce more support for an event as forecast concentrations have been scaled by the 0.043 event base rate [p(event)] and have increase, although the sfm needs to forecast higher concentra- been plotted on a logarithmic scale."
+10,also included is a horizontal line at p(event|fcst)/p(event) 5 1 indicating where the forecast tions than firework to produce comparable event probabili- provides no new information beyond knowledge of the base rate. ties.
+10,"note that firework provides large support for an event by the time pm2.5 forecast concentrations reach 10 mg m23, which is well below the 25 mg m23 event threshold deﬁnition."
+10,"these both models, the majority of forecast probabilities are either at regression curves cannot be used directly to assess the informa- or below 0.1."
+10,"firework produces more forecasts of event proba- tion supplied by each model, since this depends on the distribu- bility 0.8 or larger."
+10,the low rel values for both firework tion of forecasts made in each forecast region along with each (0.016 bits) and sfm (0.018 bits) implied both models were well region’s base rate. calibrated.
+10,"the average event uncertainty (unc) before the forecast is 0.68 bits and on average, firework forecasts provide d."
+10,information based skill score: dss 0.29 bits of information while the sfm only 0.18 bits.
+10,"to assess the information provided by firework and sfm, figure 5c compares sfm and firework dss values by fore- the ﬁtted model-speciﬁc binomial regression was used to convert cast region."
+10,"from this plot, we see a performance reversal from forecasts into event probabilities."
+10,"we used these probabilities, that of pss (fig. 3), with firework generally performing better together with the event outcomes determined by xgbm-bench- than sfm at many forecast regions."
+10,"wilcoxon signed rank tests mark, to calculate mean forecast region dss, unc, rel, and between the two models in table 4 indicates that the differences res values."
+10,"figures 5a and 5b shows reliability diagrams for in model performance are statistically signiﬁcant (p , 0.01)."
+10,"firework and sfm, where the observed event frequencies are of interest to us is whether firework performance is uniform plotted against forecast probabilities."
+10,model probabilities have across western canada.
+10,"the binomial regression shows the prob- been placed into 11 bins: 0.05, 0.1–0.9 in increments of 0.1, and ability of correctly forecasting an event is concentration depen- 0.95."
+10,"for firework, the binomial regression produces a very well dent."
+10,"as a result, it is possible that during the ﬁre season, some calibrated model, with conditional event frequencies almost regions, perhaps due to proximity to forested areas, will have always equal to the forecast probability, such that the points lie forecasts for lower (or higher) concentrations."
+10,"in such instances, along the 1:1 line. one might expect pss or dss would show a spatial dependence."
+10,"the conversion of the sfm output to a probabilistic forecast figure 6 shows spatial plots of firework pss, dss and forecast produces a less well calibrated model with forecast probabilities region event base rate."
+10,spatial plots for the sfm are not shown consistently smaller than the conditional event frequencies.
+10,for as they are similar to those of firework and can be found in the table 4.
+10,results of wilcoxon signed rank test on the difference in means in pss and dss between firework and the simple forecast model.
+10,"metric model 1 model 2 model 1 model 2 model 1–model 2 p value pss firework sfm 0.31 0.44 20.13 ,0.01 dss firework sfm 0.37 0.19 0.18 ,0.01 unauthenticated | downloaded 11/23/24 06:03 pm utc"
+11,may 2022 ainslie et al.
+11,691 fig.
+11,reliability plots for (a) firework and (b) sfm.
+11,the inset in each ﬁgure gives the distributions for the forecast probabilities (note logarithmic scale).
+11,scatter- plots of dss at each forecast region for (c) firework vs sfm.
+11,marker shading representative of base rate.
+11,also shown is 1:1 line and 95% conﬁdence intervals (thin gray lines). supplemental material (fig.
+11,"note that only forecast regions may not be substantial differences in model performance where scores are signiﬁcantly (p , 0.05) different from zero are between the regions. shaded."
+11,"to include uncertainty in the spatial pss and dss analysis, we also plot these scores, along with their 95% conﬁ- 5."
+11,"discussion dence intervals, by forecast region longitude in fig."
+11,a similar plot for the sfm is given in the supplemental material (fig.
+11,s7). a.
+11,"wildfire air quality model user survey from these plots, we ﬁnd both pss and dss have similar the number of survey respondents (23) is small and presents spatial variability, with highest scores in coastal, central, and a challenge in drawing broad conclusions about wfaqm usage southern bc, which are all regions with generally high base and preferences, although we likely surveyed a reasonable per- rates and close proximity to high ﬁre emissions locations centage of professional users in western canada."
+11,"nonetheless, it (fig."
+11,"the lowest scores are observed in southern sk and is interesting to note that two aspects about model usage that mb, regions with low base rates and large distances from ﬁre arose from the survey and informal interviews, namely, the locations."
+11,"the dss plot suggests southern and coastal bc get importance of local forecast region as the appropriate spatial the most informative forecasts, while the pss plot suggests the scale and the focus on events rather than absolute concentra- southern prairie forecasts have little to no value."
+11,"although tions, were also identiﬁed as important to ozone air quality fore- there appears to be a decreasing trend in mean pss and dss casters in the united states (eder et al."
+11,2010).
+11,"another scores when forecast regions are arranged from west to east, interesting ﬁnding is the focus on near-term (up to 24 h) guidance the overlapping uncertainty bounds in fig. 7 suggest there and the discounting of longer (.48 h) time frames."
+11,one cited unauthenticated | downloaded 11/23/24 06:03 pm utc
+12,692 weather and forecasting volume 37 fig.
+12,spatial maps of mean (a) pss and (b) dss at each forecast region for firework over 2016–18 summers. (c) the base rate at each forecast region is shown.
+12,"only forecast regions where scores are signiﬁ- cantly (p , 0.05) different from zero are colored. reason was the propensity of wildﬁres to exhibit explosive using the binomial regression to calibrate forecasts would growth, which can potentially make long range forecasting using allow uncertainty to be passed to these users."
+12,pennington et al. static ﬁre size and location problematic.
+12,"for instance, garcia- (2019) ﬁnds the public gathers its air quality information from menendez et al. (2014) show small changes in the timing of a variety of sources; thus, it is likely that in addition to how approximately 2–3 h of ﬁre emission can have considerable they treat the forecast guidance, the general public will have impact on downwind peak surface concentrations."
+12,"furthermore, different concerns, priorities, and thresholds than those iden- the identiﬁcation of the “as information source” group of users is tiﬁed via our user survey, potentially resulting in different consistent with the stewart et al. (2004) analysis of decision-mak- evaluation metrics and scales in both time and space."
+12,such a ing around precipitation forecasts and snow removal.
+12,"they found user survey would also complement ongoing work investigat- forecasts are supplemented with radar data, discussions with ing how weather information and warnings provided by other agencies, and personal observations and concluded that eccc are being used by the general public (silver 2015)."
+12,"the decisions around public safety and weather are rarely based on methods used in this study could also be extended to other weather information alone}an important point not addressed in user groups, where interest in exposure (yao et al. 2016), this study. prescription renewals (mclean et al."
+12,2015; yao et al.
+12,"2013), forecasters also stressed that a missed event is a more severe community vulnerability (rappold et al. 2017), or visibility forecast error than a false alarm."
+12,"yet our current model evalua- (brewer and moore 2009) have previously been identiﬁed. tion framework only indirectly accounts for this (e.g., via pss’s dual ability to quantify model skill and maximum potential b."
+12,binomial regression model value) and only for the “at face value” users.
+12,"garner and thompson (2012) looked at ozone forecast performance from it is not surprising that forecast concentration is an impor- the perspective of costs associated with issuing a warning against tant predictor in the binomial regression, and that the ability the health beneﬁts from avoided exposure but only in terms of to predict an event increases with increasing forecast con- generic cost–loss ratios, without pinning down the exact user centration."
+12,"we suspect model performance is sensitive to cost–loss ratio. synoptic conditions, but we could not adequately account we speculate a user survey targeting the general public for this source of variability as a ﬁxed effect, as it is likely would reveal a greater preponderance of “at face value” users conditioned on the relative positioning of ﬁre location, than found in the present study."
+12,"if this were to be the case, prevailing winds and forecast region."
+12,"without more data, unauthenticated | downloaded 11/23/24 06:03 pm utc"
+13,may 2022 ainslie et al.
+13,693 fig.
+13,mean (a) pss and (b) dss scores (along with 95% conﬁdence intervals) at each forecast region for fire- work over 2016–18 summers.
+13,forecast regions have been grouped by province/territory and then sorted by their longi- tude (from west to east) within each province/territory.
+13,"note: nt (northwest territories), bc (british columbia), ab (alberta), sk (saskatchewan), and mb (manitoba). inclusion of a ﬁxed effect synoptic factor could lead to over- highlights the importance of evaluation criteria in the assessment ﬁtting problems (bröcker 2010). process."
+13,"koo et al. (2015) came to a similar conclusion when the concentration-base rate-probability curves produced looking at model performance from a regulatory point of by the binomial regression (e.g., fig. 4) reveal a model’s view: they show two models can both exhibit “acceptable” behavior over the range of environmental conditions it was performance [under the boylan and russell (2006) metrics exercised under, while the dss reﬂects model behavior under and thresholds] but nonetheless provide different policy the distribution of forecast situations."
+13,"as a result, evaluation guidance."
+13,"they stress the importance of selecting context- using the dss becomes context dependent, making it difﬁcult dependent evaluation criteria. to compare model performance across different studies."
+13,"the “at face value” users are better served with the persis- tence-based model as it tends to have less missed events, albeit c."
+13,"skill scores with higher false alarms, while expert users are better off using the deterministic firework model, as it provides a higher infor- the reversal in the relative rankings between firework and mation content."
+13,"sfm, when scoring using pss versus dss, is noteworthy and we ﬁnd mean base rate to be 0.043, implying users achieve maximum beneﬁt from the forecast when their cost–loss ratio is this value too (richardson 2012)."
+13,"furthermore, we ﬁnd users are willing to accept more false alarms if that translates to fewer misses, suggesting their cost–loss ratio is relatively small and possibly close to the mean base rate of 0.043."
+13,we use an event threshold based on results from our survey.
+13,"the chosen pm2.5 event threshold of 25 mg m23 was the most common reply, one heavily inﬂuenced by the large number of bc respondents, although other thresholds were mentioned in the responses."
+13,we have looked at the effect of choosing different thresholds on the “at face value” analysis.
+13,the relative operating characteristic curves for firework and sfm (not shown) indicate that our “at face value” ﬁndings are insensitive to event threshold.
+13,"from fig. 6, it appears higher pss scores occur at locations with higher base rates, despite the fact that pss is an event base rate independent score."
+13,additional analyses looking at fig.
+13,spatial map of total pm2.5 ﬁre emissions (in kilotonnes) the relationship between skill scores and base rates are over the evaluation period by forecast region. shown in the supplemental material (table s4).
+13,"in these, we unauthenticated | downloaded 11/23/24 06:03 pm utc"
+14,"694 weather and forecasting volume 37 regressed the skill scores as a function of base rate for each should be benchmarked against persistence models using model to see whether it is a signiﬁcant predictor and include robust statistical analysis to quantify uncertainties, especially the critical success index (csi), a base-rate-dependent metric, in remote locations with sparse pm2.5 measurements. as a benchmark for comparison purposes."
+14,"while there is evi- • they should also make use of additional proxy measurements dence of a relationship between base rate and both skill scores, from low-cost detectors or remote sensing outputs to supple- as the 95% ci of the ﬁtted slopes do not contain 0, the amount ment pm2.5 measurements in locations with limited ambient of variability in pss that can be explained by base rate alone is monitoring. fairly low (adjusted r2 of approximately 0.2 for firework)."
+14,"• in forecast situations, model evaluation focused on concentra- for both models, the pss base rate relationship is weaker than tion biases, correlations, and errors are often less pertinent the corresponding csi association based on the spearman cor- that evaluations focusing on episode onset and duration. relation coefﬁcient."
+14,"it is possible the base rate dependence the deterministic firework model achieves higher dss arises due to the presence of another factor, such as proximity scores than the sfm, indicating the deterministic model adds to ﬁre, which has an inﬂuence on surface concentrations and in value for sophisticated users."
+14,using binomial regression to turn affects model performance. calibrate forecast would allow the uncertainty of the forecast to be passed to face value users.
+14,"conclusions it must be remembered that air quality forecast systems pro- we have undertaken an evaluation of an operational wfaqm vide guidance to air quality forecasters, which supplements, not replaces, other tools and techniques used at the desk (eder et al. over three wildﬁre seasons from the forecaster perspective."
+14,we 2010).
+14,"for advisories speciﬁc to wildﬁre smoke, rappold et al. surveyed 23 professional users to determine how guidance from (2014) show economic and health beneﬁts are dependent on the numerical wildﬁre smoke forecast model output is used."
+14,"the level of adherence to the advisories, but there is limited evidence survey shows respondents are most concerned with short-term to gauge how effective these advisories are (fish et al."
+14,2017).
+14,"it is (24 h) forecast mainly due to the nature of issuing or rescinding our hope that with more accurate models, we can increase advi- advisories, but also due to skepticism about the ability to model sory adherence and ultimately the beneﬁts these models provide. ﬁre behavior and smoke transport out past one day."
+14,professional users are also mainly concerned with the ability of models to forecast air quality episodes (or “events”) with more concern that acknowledgments.
+14,the project was guided by environment forecasts not miss events than to issue false alarms.
+14,"there appears and climate change canada, meteorological services of to be two types of forecasters, likely distinguished by their experi- canada, prediction and services west."
+14,"we thank the aq fore- casters in the united states and canada for their participation ence with wildﬁre smoke forecasts: one that takes the numerical in the user survey, and to the air quality meteorologists at guidance at face value, and the other as one of many different metrovancouver, bcmoe and the forecasters at eccc for information sources."
+14,"based on the survey ﬁndings, we develop an their participation in our face to face meetings."
+14,"we would also evaluation framework which stresses the forecast region spatial like to thank the anonymous reviewers for their constructive scale, is event focused and is from the forecaster point of view. comments."
+14,two separate means of scoring model performance are applied and tailored to how the model forecast is interpreted by the two data availability statement.
+14,observed and model generated target groups. data were used in this analysis.
+14,"naps air quality data were since we are interested in model performance over western obtained from http://data.ec.gc.ca/data/air/national-air-pollution- canada, a large region with relatively few monitors, we use surveillance-naps-program/data-donnees."
+14,the maiac satellite machine learning to downscale satellite and meteorological data data were obtained from https://ladsweb.modaps.eosdis.nasa. to create gridded surface pm2.5 concentration ﬁelds.
+14,we ﬁnd gov/.
+14,"bc ministry of environment and climate change strategy this output to be a reliable substitute for monitoring data, at least air quality data were obtained from ftp://ftp.env.gov.bc.ca/pub/ for evaluations using the pss and dss metrics, which allows us outgoing/air/."
+14,data from the airnow archive were obtained to examine forecast performance across all of western canada. from https://www.airnow.gov/.
+14,"the msc forecast region shape- we ﬁnd the relative rankings of model performance to be depen- ﬁles were taken from https://dd.weather.gc.ca/meteocode/ dent on user perspective, highlighting the need for the selection geodata/."
+14,noaa hms smoke polygons were obtained from of evaluation criteria that are consistent with the model’s ftp://satepsanone.nesdis.noaa.gov/fire/hms/gis/archive/. intended use (steyn and galmarini 2008).
+14,"merra-2 output and airs level3 co data were obtained our research is also relevant to model developers, where from disc.gsfc.nasa.gov."
+14,daily ncep reanalysis data were we ﬁnd the following: obtained from ftp://ftp.cdc.noaa.gov/datasets/ncep.reanalysis.
+14,• modelers should directly engage with professional forecasters dailyavgs/.
+14,eccc’s gem-mach and firework model output and the general public to learn how wfaqm forecasts are can be made available upon request to the authors. used and use that knowledge to develop targeted evaluation metrics.
+14,"references • modelers should utilize hindcast model experiments over a sufﬁciently large number of historical ﬁre seasons to assess the abatzoglou, j."
+14,"t., a."
+14,"williams, and r."
+14,"barbero, 2019: global beneﬁts of future model development."
+14,wfaqm performance emergence of anthropogenic climate change in ﬁre weather unauthenticated | downloaded 11/23/24 06:03 pm utc
+15,may 2022 ainslie et al. 695 indices.
+15,geophys.
+15,"lett., 46, 326–336, https://doi.org/10."
+15,"c ôté, j., s."
+15,"gravel, a."
+15,"methot, a."
+15,"patoine, m."
+15,"roch, and 1029/2018gl080959."
+15,"staniforth, 1998: the operational cmc-mrb global ahrens, b., and a."
+15,"walser, 2008: information-based skill scores environmental multiscale (gem) model."
+15,part i: design for probabilistic forecasts.
+15,"rev., 136, 352–363, considerations and formulation."
+15,"rev., 126, https://doi.org/10.1175/2007mwr1931.1. 1373–1395, https://doi.org/10.1175/1520-0493(1998)126, b.c."
+15,"wildﬁre service, 2017: 2017 season summary."
+15,"rep., 1373:tocmge.2.0."
+15,"co;2. https://www2.gov.bc.ca/gov/content/safety/wildﬁre-status/about- craig, k., s."
+15,"raffuse, s."
+15,"sakiyama, d."
+15,"lyder, and g."
+15,"hicks ii, 2012: bcws/wildﬁre-history/wildﬁre-season-summary."
+15,"the bluesky western canada wildﬁre smoke forecasting sys- boybeyi, z., n."
+15,"ahmad, d."
+15,"bacon, t."
+15,"dunn, m."
+15,"hall, tem. 11th annual cmas conf., chapel hill, nc, university of p."
+15,"lee, r."
+15,"sarma, and t."
+15,"wait, 2001: evaluation north carolina, 52, https://cmascenter.org/conference/2012/ of the operational multiscale environment model with grid agenda.cfm. adaptivity against the european tracer experiment."
+15,"dennis, r., and coauthors, 2010: a framework for evaluating meteor., 40, 1541–1558, https://doi.org/10.1175/1520-0450(2001) regional-scale numerical photochemical modeling systems."
+15,"040,1541:eotome.2.0."
+15,environ.
+15,"fluid mech., 10, 471–489, https://doi.org/10.1007/ boylan, j."
+15,"w., and a."
+15,"russell, 2006: pm and light extinction s10652-009-9163-2. model performance metrics, goals, and criteria for three-dimen- dennison, p."
+15,"e., s."
+15,"brewer, j."
+15,"arnold, and m."
+15,"moritz, sional air quality models."
+15,atmos.
+15,"environ., 40, 4946–4959, 2014: large wildﬁre trends in the western united states, https://doi.org/10.1016/j.atmosenv.2005.09.087."
+15,1984–2011.
+15,geophys.
+15,"lett., 41, 2928–2933, https://doi.org/ brewer, p., and t."
+15,"moore, 2009: source contributions to visibility 10.1002/2014gl059576. impairment in the southeastern and western united states."
+15,"di, q., i."
+15,"kloog, p."
+15,"koutrakis, a."
+15,"lyapustin, y."
+15,"wang, and j."
+15,air waste manage.
+15,"assoc., 59, 1070–1081, https://doi.org/10."
+15,"schwartz, 2016: assessing pm2.5 exposures with high spa- 3155/1047-3289.59.9.1070. tiotemporal resolution across the continental united states."
+15,"brey, s."
+15,"j., and e."
+15,"fischer, 2016: smoke in the city: how often environ."
+15,"technol., 50, 4712–4721, https://doi.org/10.1021/ and where does smoke impact summertime ozone in the acs.est.5b06121."
+15,united states?
+15,environ.
+15,"technol., 50, 1288–1294, https:// doubleday, a., j."
+15,"schulte, l."
+15,"sheppard, m."
+15,"kadlec, r."
+15,"dhammapala, doi.org/10.1021/acs.est.5b05218."
+15,"fox, and t."
+15,"isaksen, 2020: mortality associated with british columbia lung association, 2017: state of the air 2017. wildﬁre smoke exposure in washington state, 2006–2017: a tech."
+15,"rep., british columbia lung association, 23 pp., case-crossover study."
+15,environ.
+15,"health, 19, 4, https://doi.org/10. https://bclung.ca/sites/default/ﬁles/state%20of%20the%20air% 1186/s12940-020-0559-2. 202017%20-%20merged.pdf."
+15,"dreessen, j., j."
+15,"sullivan, and r."
+15,"delgado, 2016: observations and }}, 2019: 2019 state of the air."
+15,"rep., british columbia impacts of transported canadian wildﬁre smoke on ozone lung association, 9 pp., https://bclung.ca/sites/default/ﬁles/ and aerosol air quality in the maryland region on june 9–12, 1074-state%20of%20the%20air%202019_r9.pdf."
+15,air waste manage.
+15,"assoc., 66, 842–862, https://doi."
+15,"bröcker, j., 2010: regularized logistic models for probabilistic org/10.1080/10962247.2016.1161674. forecasting and diagnostics."
+15,"rev., 138, 592–604, eder, b., and coauthors, 2010: using national air quality forecast https://doi.org/10.1175/2009mwr3126.1. guidance to develop local air quality index forecasts."
+15,"buchard, v., and coauthors, 2017: the merra-2 aerosol rean- amer."
+15,meteor.
+15,"soc., 91, 313–326, https://doi.org/10.1175/ alysis, 1980 onward."
+15,part ii: evaluation and case studies.
+15,2009bams2734.1.
+15,"climate, 30, 6851–6872, https://doi.org/10.1175/jcli-d-16- emery, c., z."
+15,"liu, a."
+15,"russell, m."
+15,"odman, g."
+15,"yarwood, and 0613.1."
+15,"kumar, 2017: recommendations on statistics and bench- canadian interagency forest fire centre inc, 2018: canada marks to assess photochemical model performance."
+15,air report 2017.
+15,"rep., 11 pp., https://www.ciffc.ca/sites/ waste manage."
+15,"assoc., 67, 582–598, https://doi.org/10.1080/ default/ﬁles/2019-03/2017_canada_report_2018_05_04.pdf."
+15,10962247.2016.1265027.
+15,"chen, j., j."
+15,"vaughan, j."
+15,"avise, s."
+15,"o’neill, and b."
+15,"lamb, 2008: eccc, 2000a: data and products of the regional air quality deter- enhancement and evaluation of the airpact ozone and ministic prediction system."
+15,environment and climate change pm2.5 forecast system for the paciﬁc northwest.
+15,geophys.
+15,"canada, accessed 3 may 2022, https://eccc-msc.github.io/open- res., 113, d14305, https://doi.org/10.1029/2007jd009554. data/msc-data/nwp_raqdps/readme_raqdps_en/."
+15,"}}, k."
+15,"anderson, r."
+15,"pavlovic, m."
+15,"moran, p."
+15,"engleﬁeld, eccc, 2000b: data and products of the regional air quality d."
+15,"thompson, r."
+15,"munoz-alpizar, and h."
+15,"landry, 2019: deterministic prediction system firework."
+15,"environment and the firework v2.0 air quality forecast system with biomass climate change canada, accessed 3 may 2022, https://eccc- burning emissions from the canadian forest fire emissions msc.github.io/open-data/msc-data/nwp_raqdps-fw/readme_ prediction system v2.03."
+15,geosci.
+15,"model dev., 12, 3283–3310, raqdps-fw_en/. https://doi.org/10.5194/gmd-12-3283-2019."
+15,"fish, j."
+15,"a., m."
+15,"peters, i."
+15,"ramsey, g."
+15,"sharplin, n."
+15,"corsini, and chen, t., and c."
+15,"guestrin, 2016: xgboost: a scalable tree boosting m."
+15,"eckert, 2017: effectiveness of public health messaging system."
+15,proc. 22nd acm sigkdd int.
+15,"conf. on knowledge and communication channels during smoke events: a rapid discovery and data mining, san francisco, ca, association systematic review."
+15,environ.
+15,"manage., 193, 247–256, https:// for computing machinery, 785–794, https://doi.org/10.1145/ doi.org/10.1016/j.jenvman.2017.02.012."
+15,2939672.2939785.
+15,"ford, b., m."
+15,"burke, w."
+15,"lassman, g."
+15,"pﬁster, and j."
+15,"pierce, coops, n."
+15,"c., t."
+15,"hermosilla, m."
+15,"wulder, j."
+15,"white, and 2017: status update: is smoke on your mind?"
+15,using social d.
+15,"bolton, 2018: a thirty year, ﬁne-scale, characterization media to assess smoke exposure."
+15,atmos.
+15,"phys., 17, of area burned in canadian forests shows evidence of 7541–7554, https://doi.org/10.5194/acp-17-7541-2017. regionally increasing trends in the last decade."
+15,"plos one, garcia-menendez, f., y."
+15,"hu, and m."
+15,"odman, 2014: simulating 13, e0197218, https://doi.org/10.1371/journal.pone.0197218. smoke transport from wildland ﬁres with a regional-scale air unauthenticated | downloaded 11/23/24 06:03 pm utc"
+16,696 weather and forecasting volume 37 quality model: sensitivity to spatiotemporal allocation of ﬁre simulating regulatory outcomes and the relationship to model emissions.
+16,"total environ., 493, 544–553, https://doi.org/10. performance."
+16,atmos.
+16,"environ., 116, 159–171, https://doi.org/10. 1016/j.scitotenv.2014.05.108. 1016/j.atmosenv.2015.06.036."
+16,"garner, g."
+16,"g., and a."
+16,"thompson, 2012: the value of air quality landis, m."
+16,"s., e."
+16,"edgerton, e."
+16,"white, g."
+16,"wentworth, forecasting in the mid-atlantic region."
+16,"climate soc., 4, a."
+16,"sullivan, and a."
+16,"dillner, 2018: the impact of the 69–79, https://doi.org/10.1175/wcas-d-10-05010.1."
+16,"2016 fort mcmurray horse river wildﬁre on ambient air geng, g., and coauthors, 2018: satellite-based daily pm2.5 pollution levels in the athabasca oil sands region, alberta, estimates during ﬁre seasons in colorado."
+16,geophys.
+16,canada.
+16,"total environ., 618, 1665–1676, https://doi.org/ atmos., 123, 8159–8171, https://doi.org/10.1029/2018jd028573."
+16,10.1016/j.scitotenv.2017.10.008.
+16,"gillett, n."
+16,"p., a."
+16,"weaver, f."
+16,"zwiers, and m."
+16,"flannigan, larkin, n."
+16,"k., and coauthors, 2009: the bluesky smoke modeling 2004: detecting the effect of climate change on canadian framework."
+16,"wildland fire, 18, 906–920, https://doi.org/ forest ﬁres."
+16,geophys.
+16,"lett., 31, l18211, https://doi.org/10."
+16,10.1071/wf07086.
+16,1029/2004gl020876.
+16,"lassman, w., b."
+16,"ford, r."
+16,"gan, g."
+16,"pﬁster, s."
+16,"magzamen, gong, w., p."
+16,"makar, j."
+16,"zhang, j."
+16,"milbrandt, s."
+16,"gravel, k."
+16,"hayden, e."
+16,"fischer, and j."
+16,"pierce, 2017: spatial and temporal a."
+16,"macdonald, and w."
+16,"leaitch, 2015: modelling aerosol cloud estimates of population exposure to wildﬁre smoke during meteorology interaction: a case study with a fully coupled the washington state 2012 wildﬁre season using blended air quality model (gem-mach)."
+16,atmos.
+16,"environ., 115, model, satellite, and in situ data."
+16,"geohealth, 1, 106–121, 695–715, https://doi.org/10.1016/j.atmosenv.2015.05.062. https://doi.org/10.1002/2017gh000049."
+16,"gong, x., a."
+16,"kaulfus, u."
+16,"nair, and d."
+16,"jaffe, 2017: quantifying lee, p., and coauthors, 2017: naqfc developmental forecast o3 impacts in urban areas due to wildﬁres using a generalized guidance for ﬁne particulate matter (pm2.5)."
+16,"forecasting, additive model."
+16,environ.
+16,"technol., 51, 13 216–13 223, 32, 343–360, https://doi.org/10.1175/waf-d-15-0163.1. https://doi.org/10.1021/acs.est.7b03130."
+16,"liu, j."
+16,"c., g."
+16,"pereira, s."
+16,"uhl, m."
+16,"bravo, and m."
+16,"bell, hanes, c."
+16,"c., x."
+16,"wang, p."
+16,"jain, m.-a."
+16,"parisien, j."
+16,"little, and 2015: a systematic review of the physical health impacts m."
+16,"flannigan, 2019: fire-regime changes in canada over from non-occupational exposure to wildﬁre smoke."
+16,environ. the last half century.
+16,"res., 49, 256–269, https:// res., 136, 120–132, https://doi.org/10.1016/j.envres.2014.10.015. doi.org/10.1139/cjfr-2018-0293."
+16,"lyapustin, a., y."
+16,"wang, s."
+16,"korkin, and d."
+16,"huang, 2018: modis herron-thorpe, f., and coauthors, 2014: air quality simulations collection 6 maiac algorithm."
+16,atmos.
+16,"tech., 11, of wildﬁres in the paciﬁc northwest evaluated with surface 5741–5765, https://doi.org/10.5194/amt-11-5741-2018. and satellite observations during the summers of 2007 and manzato, a., and i."
+16,"jolliffe, 2017: behaviour of veriﬁcation measures 2008."
+16,atmos.
+16,"phys., 14, 12 533–12 551, https://doi.org/ for deterministic binary forecasts with respect to random 10.5194/acp-14-12533-2014. changes and thresholding."
+16,quart.
+16,meteor.
+16,"soc., 143, hu, x., l."
+16,"waller, a."
+16,"lyapustin, y."
+16,"wang, and y."
+16,"liu, 2014: 1903–1915, https://doi.org/10.1002/qj.3050."
+16,"improving satellite-driven pm2.5 models with moderate reso- marsha, a., and n."
+16,"larkin, 2019: a statistical model for lution imaging spectroradiometer ﬁre counts in the southeast- predicting pm2.5 for the western united states."
+16,air ern u.s.
+16,geophys.
+16,"atmos., 119, 11 375–11 386, https:// waste manage."
+16,"assoc., 69, 1215–1229, https://doi.org/10. doi.org/10.1002/2014jd021920."
+16,1080/10962247.2019.1640808.
+16,"jaffe, d., w."
+16,"hafner, d."
+16,"chand, a."
+16,"westerling, and d."
+16,"spracklen, matz, c."
+16,"j., m."
+16,"egyed, g."
+16,"xi, j."
+16,"racine, r."
+16,"pavlovic, r."
+16,"rittmaster, 2008: interannual variations in pm2.5 due to wildﬁres in the s."
+16,"henderson, and d."
+16,"stieb, 2020: health impact analy- western united states."
+16,environ.
+16,"technol., 42, 2812–2818, https://doi.org/10.1021/es702755v. sis of pm2.5 from wildﬁre smoke in canada (2013–2015, jaffe, d."
+16,"a., n."
+16,"wigder, n."
+16,"downey, g."
+16,"pﬁster, a."
+16,"boynard, 2017–2018)."
+16,"total environ., 725, 138506, https://doi.org/10. and s."
+16,"reid, 2013: impact of wildﬁres on ozone excep- 1016/j.scitotenv.2020.138506. tional events in the western u.s."
+16,environ.
+16,"technol., mcclure, c."
+16,"d., and d."
+16,"jaffe, 2018: us particulate matter air 47, 11 065–11 072, https://doi.org/10.1021/es402164f. quality improves except in wildﬁre-prone areas."
+16,"james, e., r."
+16,"ahmadov, and g."
+16,"grell, 2018: realtime wildﬁre acad."
+16,"usa, 115, 7901–7906, https://doi.org/10.1073/pnas. smoke prediction in the united states: the hrrr-smoke 1804353115. model."
+16,"geophysical research abstracts, vol."
+16,"20, abstract mclean, k., j."
+16,"yao, and s."
+16,"henderson, 2015: an evaluation of the egu2018-19526, https://meetingorganizer.copernicus.org/eg british columbia asthma monitoring system (bcams) and u2018/egu2018-19526.pdf."
+16,pm2.5 exposure metrics during the 2014 forest ﬁre season.
+16,"kalnay, e., and coauthors, 1996: the ncep/ncar 40-year int."
+16,environ.
+16,"public health, 12, 6710–6724, https://doi."
+16,reanalysis project.
+16,meteor.
+16,"soc., 77, 437–471, org/10.3390/ijerph120606710. https://doi.org/10.1175/1520-0477(1996)077,0437:tnyrp.2."
+16,"munoz-alpizar, r., and coauthors, 2017: multi-year (2013–2016) 0."
+16,"pm2.5 wildﬁre pollution exposure over north america as katz, r."
+16,"w., and m."
+16,"ehrendorfer, 2006: bayesian approach to determined from operational air quality forecasts."
+16,atmo- decision making using ensemble weather forecasts.
+16,"wea. sphere, 8, 179, https://doi.org/10.3390/atmos8090179."
+16,"forecasting, 21, 220–231, https://doi.org/10.1175/waf913.1."
+16,"o’dell, k., b."
+16,"ford, e."
+16,"fischer, and j."
+16,"pierce, 2019: kirchmeier-young, m."
+16,"c., f."
+16,"zwiers, n."
+16,"gillett, and contribution of wildland-ﬁre smoke to us pm2.5 and its a."
+16,"cannon, 2017: attributing extreme ﬁre risk in western inﬂuence on recent trends."
+16,environ.
+16,"technol., 53, canada to human emissions."
+16,"climatic change, 144, 365–379, 1797–1804, https://doi.org/10.1021/acs.est.8b05430. https://doi.org/10.1007/s10584-017-2030-0."
+16,"oreskes, n., k."
+16,"shrader-frechette, and k."
+16,"belitz, 1994: veriﬁcation, koo, b., n."
+16,"kumar, e."
+16,"knipping, u."
+16,"nopmongcol, t. validation, and conﬁrmation of numerical models in the earth sakulyanontvittaya, m."
+16,"odman, a."
+16,"russell, and sciences."
+16,"science, 263, 641–646, https://doi.org/10.1126/science."
+16,"yarwood, 2015: chemical transport model consistency in 263.5147.641."
+16,unauthenticated | downloaded 11/23/24 06:03 pm utc
+17,may 2022 ainslie et al.
+17,"697 pan, l., and coauthors, 2020: evaluating a ﬁre smoke simulation ruminski, m., s."
+17,"kondragunta, r."
+17,"draxler, and j."
+17,"zeng, 2006: algorithm in the national air quality forecast capability recent changes to the hazard mapping system. 15th int."
+17,"(naqfc) by using multiple observation data sets during the emission inventory conf., new orleans, la, environmental southeast nexus (senex) ﬁeld campaign."
+17,geosci.
+17,"model protection agency, 34 pp., https://www3.epa.gov/ttnchie1/ dev., 13, 2169–2184, https://doi.org/10.5194/gmd-13-2169-2020. conference/ei15/session10/ruminski_pres.pdf."
+17,"pavlovic, r., j."
+17,"chen, k."
+17,"anderson, m."
+17,"moran, p.-a."
+17,"beaulieu, ryan, w."
+17,"f., 2016: the air quality forecast rote: recent changes d."
+17,"davignon, and s."
+17,"cousineau, 2016: the firework air and future challenges."
+17,air waste manage.
+17,"assoc., 66, 576– quality forecast system with near-real-time biomass burning 596, https://doi.org/10.1080/10962247.2016.1151469. emissions: recent developments and evaluation of perfor- rykiel, e."
+17,"j., 1996: testing ecological models: the meaning of val- mance for the 2015 north american wildﬁre season."
+17,air idation.
+17,"modell., 90, 229–244, https://doi.org/10.1016/ waste manage."
+17,"assoc., 66, 819–841, https://doi.org/10.1080/ 0304-3800(95)00152-2."
+17,10962247.2016.1158214.
+17,"silver, a., 2015: watch or warning?"
+17,"perceptions, preferences, and pennington, a."
+17,"f., k."
+17,"sircar, j."
+17,"hsu, h."
+17,"zahran, s."
+17,"damon, usage of forecast information by members of the canadian and m."
+17,"mirabelli, 2019: communication channels for air public."
+17,meteor.
+17,"appl., 22, 248–255, https://doi.org/10.1002/met. quality alerts in the united states."
+17,"rep., 14, 1452. 100860, https://doi.org/10.1016/j.pmedr.2019.100860."
+17,"stein, a."
+17,"f., g."
+17,"rolph, r."
+17,"draxler, b."
+17,"stunder, and preisler, h."
+17,"k., d."
+17,"schweizer, r."
+17,"cisneros, t."
+17,"procter, m."
+17,"ruminski, m."
+17,"ruminski, 2009: veriﬁcation of the noaa smoke forecast- and l."
+17,"tarnay, 2015: a statistical model for determining impact ing system: model sensitivity to the injection height."
+17,"fore- of wildland ﬁres on particulate matter (pm2.5) in central cali- casting, 24, 379–394, https://doi.org/10.1175/2008waf2222166.1. fornia aided by satellite imagery of smoke."
+17,environ.
+17,"pollut., stewart, t."
+17,"r., r."
+17,"pielke, and r."
+17,"nath, 2004: understanding user 205, 340–349, https://doi.org/10.1016/j.envpol.2015.06.018. decision making and the value of improved precipitation randles, c."
+17,"a., and coauthors, 2017: the merra-2 aerosol forecasts: lessons from a case study."
+17,"meteor. reanalysis, 1980 onward."
+17,"part i: system description and data soc., 85, 223–236, https://doi.org/10.1175/bams-85-2-223. assimilation evaluation."
+17,"climate, 30, 6823–6850, https://doi."
+17,"steyn, d."
+17,"g., and s."
+17,"galmarini, 2008: evaluating the predictive org/10.1175/jcli-d-16-0609.1. and explanatory value of atmospheric numerical models: rappold, a."
+17,"g., n."
+17,"fann, j."
+17,"crooks, j."
+17,"huang, w."
+17,"cascio, between relativism and objectivism."
+17,open atmos.
+17,"j., 2, r."
+17,"devlin, and d."
+17,"diaz-sanchez, 2014: forecast-based 38–45, https://doi.org/10.2174/1874282300802010038. interventions can reduce the health and economic burden of tian, b., e."
+17,"manning, e."
+17,"fetzer, e."
+17,"olsen, and s."
+17,"wong, 2013: wildﬁres."
+17,environ.
+17,"technol., 48, 10 571–10 579, https://doi."
+17,airs/amsu/hsb version 6 level 3 product user guide. org/10.1021/es5012725.
+17,"rep., jet propulsion laboratory, 40 pp., https:// }}, j."
+17,"reyes, g."
+17,"pouliot, w."
+17,"cascio, and d."
+17,"diaz-sanchez, docserver.gesdisc.eosdis.nasa.gov/repository/mission/airs/3.3_ 2017: community vulnerability to health impacts of wildland sciencedataproductdocumentation/3.3.4_productgeneration ﬁre smoke exposure."
+17,environ.
+17,"technol., 51, 6674–6682, algorithms/v6_l3_user_guide.pdf. https://doi.org/10.1021/acs.est.6b06200. van donkelaar, a., r."
+17,"martin, m."
+17,"brauer, and b."
+17,"boys, reid, c."
+17,"e., m."
+17,"jerrett, m."
+17,"petersen, g."
+17,"pﬁster, p."
+17,"moreﬁeld, 2015: use of satellite observations for long-term exposure i."
+17,"tager, s."
+17,"raffuse, and j."
+17,"balmes, 2015: assessment of global concentrations of ﬁne particulate matter."
+17,spatiotemporal prediction of ﬁne particulate matter during the 2008 northern california wildﬁres using machine learn- environ.
+17,"health perspect., 123, 135–143, https://doi.org/10. ing."
+17,environ.
+17,"technol., 49, 3887–3896, https://doi.org/10. 1289/ehp.1408646. 1021/es505846r. }}, and coauthors, 2016: global estimates of ﬁne particulate }}, m."
+17,"brauer, f."
+17,"johnston, m."
+17,"jerrett, j."
+17,"balmes, and matter using a combined geophysical-statistical method with c."
+17,"elliott, 2016: critical review of health impacts of wildﬁre information from satellites, models, and monitors."
+17,environ. smoke exposure.
+17,environ.
+17,"health perspect., 124, 1334–1343, sci."
+17,"technol., 50, 3762–3772, https://doi.org/10.1021/acs.est. https://doi.org/10.1289/ehp.1409277. 5b05833."
+17,"reuten, c., b."
+17,"ainslie, d."
+17,"steyn, and p."
+17,"jackson, 2012: warner, s., n."
+17,"platt, and j."
+17,"heagy, 2004: user-oriented two- impact of climate change on ozone pollution in the lower dimensional measure of effectiveness for the evaluation of fraser valley, canada."
+17,"atmos.–ocean, 50, 42–53, https://doi. transport and dispersion models."
+17,"meteor., 43, 58–73, org/10.1080/07055900.2011.643444. https://doi.org/10.1175/1520-0450(2004)043,0058:utmoef."
+17,"richardson, d."
+17,"s., 2012: economic value and skill."
+17,forecast veriﬁ- 2.0.
+17,"co;2. cation, i."
+17,"jolliffe, and d."
+17,"stephenson, eds., john wiley weijs, s."
+17,"v., r. van nooijen, and n. van de giesen, 2010: kull- & sons, 167–184, https://doi.org/10.1002/9781119960003.ch9. back–leibler divergence as a forecast skill score with classic robichaud, a., r."
+17,"ménard, y."
+17,"zatseva, and d."
+17,"anselmo, 2016: reliability-resolution-uncertainty decomposition."
+17,"multi-pollutant surface objective analyses and mapping of air rev., 138, 3387–3399, https://doi.org/10.1175/2010mwr3229.1. quality health index over north america."
+17,air qual.
+17,atmos.
+17,"westerling, a."
+17,"l., 2016: increasing western us forest wildﬁre health, 9, 743–759, https://doi.org/10.1007/s11869-015-0385-9. activity: sensitivity to changes in the timing of spring."
+17,philos.
+17,"rolph, g."
+17,"d., and coauthors, 2009: description and veriﬁcation of trans."
+17,"soc., b371, 20150178, https://doi.org/10.1098/rstb. the noaa smoke forecasting system: the 2007 ﬁre season."
+17,2015.0178.
+17,"forecasting, 24, 361–378, https://doi.org/10.1175/2008 whitaker, j., and coauthors, 2011: pyproj v1.8.9."
+17,python package waf2222165.1.
+17,"index, https://pypi.org/project/pyproj/."
+17,"roulston, m."
+17,"s., and l."
+17,"smith, 2002: evaluating probabilistic wilks, d."
+17,"s., 2011: statistical methods in the atmospheric sciences. forecasts using information theory."
+17,"rev., 130, elsevier academic press, 704 pp. 1653–1660, https://doi.org/10.1175/1520-0493(2002)130,1653: wood, s., 2006: generalized additive models: an introduction epfuit.2.0."
+17,co;2. with r.
+17,"chapman and hall/crc, 416 pp."
+17,unauthenticated | downloaded 11/23/24 06:03 pm utc
+18,"698 weather and forecasting volume 37 yao, j., and s."
+18,"henderson, 2014: an empirical model to estimate wildﬁre seasons."
+18,environ.
+18,"technol., 52, 13 239–13 249, daily forest ﬁre smoke exposure over a large geographic area https://doi.org/10.1021/acs.est.8b01921. using air quality, meteorological, and remote sensing data."
+18,"yu, h., a."
+18,"russell, j."
+18,"mulholland, t."
+18,"odman, y."
+18,"hu, h."
+18,"chang, j."
+18,environ.
+18,"epidemiol., 24, 328–335, https://doi.org/ and n."
+18,"kumar, 2018: cross-comparison and evaluation of air 10.1038/jes.2013.87. pollution ﬁeld estimation methods."
+18,atmos.
+18,"environ., 179, 49–60, }}, m."
+18,"brauer, and s."
+18,"henderson, 2013: evaluation of a https://doi.org/10.1016/j.atmosenv.2018.01.045. wildﬁre smoke forecasting system as a tool for public health yuchi, w., j."
+18,"yao, k."
+18,"mclean, r."
+18,"stull, r."
+18,"pavlovic, protection."
+18,environ.
+18,"health perspect., 121, 1142–1147, https:// d."
+18,"davignon, m."
+18,"moran, and s."
+18,"henderson, 2016: doi.org/10.1289/ehp.1306768."
+18,"blending forest ﬁre smoke forecasts with observed data }}, j."
+18,"eyamie, and s."
+18,"henderson, 2016: evaluation of a spa- can improve their utility for public health applications. tially resolved forest ﬁre smoke model for population-based atmos."
+18,"environ., 145, 308–317, https://doi.org/10.1016/j. epidemiologic exposure assessment."
+18,environ. atmosenv.2016.09.049.
+18,"epidemiol., 26, 233–240, https://doi.org/10.1038/jes.2014.67."
+18,"zou, y., and coauthors, 2019: machine learning-based integration }}, m."
+18,"brauer, s."
+18,"raffuse, and s."
+18,"henderson, 2018: machine of high-resolution wildﬁre smoke simulations and observations learning approach to estimate hourly exposure to ﬁne particu- for regional health impact assessment."
+18,environ.
+18,"res. late matter for urban, rural, and remote populations during public health, 16, 2137, https://doi.org/10.3390/ijerph16122137."
+18,unauthenticated | downloaded 11/23/24 06:03 pm utc

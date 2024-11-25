@@ -1,0 +1,394 @@
+page,p
+1,"journal of cleaner production 265 (2020) 121792 contents lists available at sciencedirect journal of cleaner production journal homepage: www.elsevier.com/locate/jclepro grid-scale agricultural land and water management: a remote- sensing-based multiobjective approach yikuan tang a, b, fan zhang a, b, bernard a."
+1,"engel c, xiao liu a, b, qiong yue a, b, ping guo a, b, * a center for agricultural water research in china, china agricultural university, beijing, 100083, china b wuwei experimental station for efﬁcient water use in agriculture, ministry of agriculture and rural affairs, wuwei, 733000, china c department of agricultural and biological engineering, purdue university, west lafayette, in, 47907, usa a r t i c l e i n f o a b s t r a c t article history: this paper developed a remote-sensing-based multiobjective (rsm) approach to formulate sustainable received 27 january 2020 agricultural land and water resources management strategies at a grid scale."
+1,"to meet the spatial reso- received in revised form lution and accuracy need of agricultural management, downscaled precipitation data sets were obtained 15 april 2020 with the help of global precipitation measurement (gpm) data and other spatial information."
+1,"spatial crop accepted 17 april 2020 available online 23 april 2020 water requirement information were obtained via the combination use of the penman-monteith method, remote sensing information (mod16/pet) and virtual water theory."
+1,"through integrating these spatial data and considering the impact of different spatial environments on crop growth, a grid-based integer keywords: remote-sensing-based multiobjective multiobjective programming (gimp) model was developed to determine best suitable crop planting approach types at all grids."
+1,"gimp can simultaneously consider several conﬂicting objectives: crop growth suit- downscaling ability, crop spatial water requirements, and ecosystem service value."
+1,"further, gimp results were agricultural land and water planning inputted into a grid-based nonlinear fractional multiobjective programming (gnfmp) model with three sustainable development of agriculture objectives: maximize economic beneﬁts, maximize water productivity, and minimize blue water utili- zation, to optimize irrigation-water allocation."
+1,"to verify the validity of the proposed approach, a real- world application in the middle reaches of heihe river basin, northwest china was conducted."
+1,"results show that the proposed method can improve the ecosystem service value by 0.36  108 cny, the eco- nomic beneﬁt by 21.85%, the irrigation-water productivity by 25.92%, and reduce blue water utilization rate by 24.32% comparing with status quo."
+1,© 2020 elsevier ltd.
+1,all rights reserved.
+1,"introduction development of regional agriculture (li et al., 2019b)."
+1,"when dealing with real-world problems, some basic parameters, such as precip- global economic development and population growth jointly itation and evapotranspiration (et), have high spatiotemporal deepen the water shortage and environmental crisis, which is an variability (tang et al., 2019), increasing the difﬁculty in modeling. urgent global problem facing humankind."
+1,"agriculture is the largest the emergence of remote sensing technology produces more water consumer and one of the major leading sources of environ- spatial information (michaelides et al., 2009), and brings hope to mental degradation (zhang et al., 2019b)."
+1,"the limited agricultural solve the above problems (bastiaanssen et al., 2000)."
+1,"it is a hot issue land and water resources are the major constraint on agricultural to make full use of remote sensing information in optimizing production, which calls for more efﬁcient resource utilization management of agricultural spatial resources for improving the strategies."
+1,mathematical optimization models have been proved as utilization efﬁciency of limited resource.
+1,"therefore, a remote- important tools in optimally allocating limited agricultural land sensing-based multiobjective (rsm) approach is necessary for (gui et al., 2016) and water resources (li et al., 2019a), maintaining determining crop planting type and allocating limited irrigation- ecological health (zhang et al., 2019b) and supporting sustainable water to spatial grids (1 km  1 km) with the help of remote sensing information."
+1,precipitation and et play a very important role in the manage- ment of agricultural land and water resources.
+1,especially for some * corresponding author.
+1,"center for agricultural water research in china, china arid and semi-arid regions, there is strong spatial variability and agricultural university, tsinghuadong street no."
+1,"17, beijing, 100083, pr china. temporal distribution in precipitation and et, which need to be e-mail address: guop@cau.edu.cn (p."
+1,guo). https://doi.org/10.1016/j.jclepro.2020.121792 0959-6526/© 2020 elsevier ltd.
+1,all rights reserved.
+2,tang et al.
+2,"/ journal of cleaner production 265 (2020) 121792 considered in decision-making processes (tang et al., 2019)."
+2,"in considered as a possible solution method in dealing with the gimp recent years, the global precipitation measurement (gpm, huffman and gnfmp model. et al., 2019) data with higher spatial resolution (0.1 ), time reso- in this study, a rsm approach was developed to improve the lution (30 min), and higher accuracy in arid and semi-arid regions spatial resolution of agricultural resource management schemes was widely used around the world."
+2,"however, spatial resolution and and ensure sustainable agricultural management, which has the accuracy of gpm data is too coarse to meet the requirements of rsm following advantages: 1) some key factors with high spatial vari- approach."
+2,"many efforts have been made to downscaling the gpm ability can be obtained based on remote sensing information; 2) the data, and many factors were considered, such as geographic loca- optimal crop planting type can be determined at each grid by the tion information (longitude, latitude) and topographical data gimp model considering resources, efﬁciency and environmental (slope, aspect, elevation, chen et al., 2017)."
+2,"agnew and palutikof factors; and 3) the corresponding water-allocation schemes based (2000) attempted to improve the accuracy of precipitation by us- on gimp results can be calculated through gnfmp considering ing multivariate regression with the interpolation of residuals, but conﬂicting objectives. remote sensing data were ignored."
+2,previous research developed a downscaling method of spatial sharpening based on multivariate 2.
+2,"development of methodology data (immerzeel et al., 2009)."
+2,"therefore, this paper attempts to use multivariate linear regression with the residual correction (mlrr) 2.1."
+2,"overview of the problem method to obtain down-scaled precipitation data with high accu- racy based on gpm data, terrain factors, and geographic location modern agriculture advocates a green, efﬁcient and sustainable information."
+2,"thereafter, the obtained spatial distribution precipi- way to use limited land and water resources."
+2,"however, the spatial tation was evaluated by a cross-validation method (goovaerts, resolution of existing research about land and water resources 2000)."
+2,"as for another key parameter in agricultural production optimization cannot meet the precise management requirements planning, et information from remote sensing has high noise and in real production."
+2,"for example, most previous management uncertainty (velpuri et al., 2013)."
+2,"to address this problem, tang schemes cannot determine crop planting type and irrigation-water et al. (2019) developed a new method combining the fao in speciﬁc spatial locations inside a river basin or irrigation area."
+2,"in penman-monteith (pm, allen et al., 1998) method with remote order to provide more practical decision support information, river sensing mod16/pet data (mu et al., 2007), to obtain more accurate basin managers urgently need more precise optimization results to spatial reference evapotranspiration (et0)."
+2,this study further at- manage agricultural production.
+2,"recently, the monitoring devel- tempts to transfer the spatial et0 information to spatial crop water opment of remote sensing in ground precipitation and evapo- requirement (cwr, allan, 1993) and crops virtual water content transpiration provide possible inputs for a rsm approach, but these (vwc, su et al., 2014) through virtual water theory (hoekstra, 2011). spatial data always need to be processed to meet managers’ re- these spatial information can be used to formulate more sustain- quirements."
+2,"when managing land resources, excessively pursuing able agricultural production strategies in optimization models. economic beneﬁts may cause degradation of the ecological envi- complexities in agricultural production systems, such as ronment, excessive use of blue water resources, and reduce the nonlinear relationships (fasakhodi et al., 2010), multiple conﬂicting value of the total ecosystem services."
+2,"thus, to use land and water objectives (li et al., 2019d), socio-economic conditions (li et al., resources in a more efﬁcient and sustainable way, decision makers 2019a) and environment impacts (zhang et al., 2019b), were are facing the following issues."
+2,1) how to determine which crops attempted to solve.
+2,"in agricultural resources management, major are most suitable to plant on each spatial grid?"
+2,"a reasonable tasks are to determine the type of crops and water allocation in planting location can not only improve crop yield and quality, but speciﬁc spatial locations."
+2,"thus, mixed 0e1 integer programming also improve water use efﬁciency."
+2,"2) due to different potential was developed to obtain crop-planting structure on cropping plots evapotranspiration and precipitation amounts in different spatial (chono et al., 2012)."
+2,"when determining the crop planting structure, grids, how can requirements for blue water resources be reduced crop suitability should be considered due to its high spatial vari- through management measures?"
+2,"3) how can grain yield, water use ability, which is an important indicator for evaluating the situation efﬁciency and total system beneﬁts be simultaneously guaranteed?"
+2,"of crop growth environments (such as soil, terrain, and climate, especially for arid and semi-arid areas, water managers have to not abah and petja, 2017)."
+2,"spatiotemporal variability of cwr and pre- only consider the utilization efﬁciency and production efﬁciency of cipitation in different spatial locations should also be taken into blue water, but also pay attention to farmers’ pursuit of economic consideration in planning agricultural production strategies. beneﬁts."
+2,"therefore, a grid-based integer multiobjective programming therefore, the framework developed in this study (fig. 1) at- (gimp) integrated integer 0e1 programming and multiobjective tempts to solve these problems, and can be divided into four parts. programming was developed to obtain the crop planting structure 1) acquisition and processing of basic spatial data."
+2,"2) establishing a at a grid scale, which can consider crop growth suitability, spatial gimp model for optimal spatial crop planting structure at grid scale."
+2,"cwr, and ecosystem service value simultaneously."
+2,"for water 3) formulating a gnfmp model to obtain spatial irrigation-water management, some efforts have been made to allocate agricultural allocation."
+2,"4) application of the proposed approach to a real- water resources, such as zhang et al."
+2,(2018).
+2,"however, few of them world case study for improving land and water use efﬁciency. can conduct nonlinear, multiobjective, and fractional problem in planning water allocation at a grid-scale with the help of a spatial 2.2."
+2,"spatial analysis of basic data crop planting structure, and thus these optimization schemes without spatial location information cannot provide managers 2.2.1."
+2,spatial analysis of precipitation precise water allocation schemes in each grid.
+2,"to address such a some key factors, such as terrain factors (slope, aspect), problem, this paper further establishes a grid-based nonlinear geographical location information (latitude, longitude) and gpm fractional multiobjective programming (gnfmp) model consid- data are integrated to obtain monthly precipitation results with ering multiple objectives, including economic beneﬁts, irrigation- higher spatial resolution and accuracy."
+2,"the speciﬁc steps of the water productivity, and blue water utilization efﬁciency at the mlrr method are listed as follows. same time."
+2,"to generate satisfactory results from the proposed models, the minimum deviation method (li et al., 2019b) is (1) pre-processing"
+3,tang et al.
+3,/ journal of cleaner production 265 (2020) 121792 3 fig.
+3,framework of the grid-based precise optimization approach.
+3,"use projection transformation, resampling and spatial modeling to process the monthly gpm data, slope and aspect data, and then y ¼ a0 þ a1 x1 þ a2 x2 þ a3 x3 þ a4 x4 þ a5 x5 þ a6 x6 (1) remove invalid values to obtain these data with a spatial resolution of 1 km in the wgs-1984 coordinate system."
+3,"where y is the precipitation value of meteoroly ¼ a0 þ a1 x1 þ a2 x2 þ a3 x3 þ a4 x4 þ a5 x5 þ a6 x6 ogical stations; x1, x2, x3, x4, x5, (2) multiple linear regression x6 represent the monthly normalized value of gpm, dem, latitude, longitude, aspect, and slope of the meteorological station, respec- the multiple linear regression (mlr) method is used for tively; a0 ; a1 ; a2 ; a3 ; a4 ; a5 ; a6 represent the regression coefﬁcients, downscaling the spatial data, and the typical form can be shown as respectively. follows."
+3,the regression results of each grid can be obtained by the following function.
+4,tang et al.
+4,/ journal of cleaner production 265 (2020) 121792 be assumed as the real value of et0.
+4,"according to previous research, yj ¼ a0 þ a1 x1j þ a2 x2j þ a3 x3j þ a4 x4j þ a5 x5j þ a6 x6j (2) mod16/pet can be converted to et0 through the following function."
+4,"where yj is the regression results of the jth grid; x1j, x2j, x3j, x4j, x5j, et0 ¼ f ðpetmod16 þ (6) x6j represent the monthly normalized value of gpm, dem, latitude, longitude, aspect, and slope of the jth grid."
+4,"(3) inverse distance weighting (2) crop water requirements calculating residuals between obtained values from the mlr cwr are the main reference when formulating optimization method and observed results from ground meteorological stations. models to guide water allocation (caselles et al., 1992), and can be the idw method for spatially interpolating the residuals can be calculated by the following formula (westerhoff, 2015): shown as follows."
+4,"etc ¼ kc  et0 (7) p n zi dpi where, etc is the crop water requirement, mm; kc is the crop co- rj ¼ i¼1 (3) efﬁcient; et0 is the spatial reference crop evapotranspiration, mm."
+4,"pn p di i¼1 (3) virtual water content (vwc) where rj is the residual value of the jth grid, zi is the residual of the the crop vwc can be calculated as equation (8) shows (li et al., ith meteorological station, n is the number of stations, di is the 2019b)."
+4,"thus, the vwc value of different crops varies with the crop distance from the jth grid to the ith meteorological station, p is the planting type, spatial location, and time period. power of distance."
+4,"vwc ¼ 1; 000  etc  a (8) (4) precipitation downscaling results where vwc is the virtual water content, m3; the factor 1,000 is the ﬁnal precipitation of each grid will be obtained as follows: meant to convert the etc in mm into m; a is the irrigated area, m2."
+4,"the virtual water is further converted into blue water and green pj ¼ yj þ rj (4) water by the following formulas (li et al., 2019b)."
+4,"where pj is the precipitation of the jth grid, yj is the multiple vwcb ¼ 1; 000  etb  a (9) regression results of the jth grid, rj is the residual of the jth grid."
+4,"vwcg ¼ 1; 000  etg  a (10) (5) validation where vwcb is the monthly blue water component, m3; vwcg is the cross-validation method (goovaerts, 2000) is used for the monthly green water component, m3; etg is monthly green measuring the applicability of the mlrr method by comparing water evapotranspiration, mm; etb is monthly blue water evapo- with gpm data, linear regression (lr), mlr, and idw method."
+4,"thus, transpiration, mm."
+4,"the etg (su et al., 2014) and etb (li et al., 2019b) root mean square error (rmse), mean absolute error (mae), and can be estimated by the cropwat model (hoekstra et al., 2011). mean relative error (mre) are used for the criteria to evaluate different methods."
+4,"equations of these indicators are shown as etg ¼ minðetc ; epþ (11) follows. vﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ etb ¼ w (12) un up p n u ðpi  mi þ2 jpi  mi j ep is the effective precipitation, mm; and w is the net irrigation- t i¼1 rmse ¼ …mae ¼ i¼1 …mre water; if the effective rainfall is greater than or equal to etc, w is 0, n n (5) mm."
+4,n   1 x  absðpi  mi þ ¼   n i¼1 pi 2.3.
+4,"crop spatial planting structure optimization where, pi is the i th estimated result, mi is the i th observation the gimp model is established for allocating limited land re- result, n is the number of samples. sources, which aims to manage tradeoffs among land use efﬁciency, resources saving, and environmental impacts."
+4,"in the gimp model, 2.2.2."
+4,"spatial analysis of evapotranspiration and vwc mixed 0e1 integer programming can determine the type of crops to obtain spatial evapotranspiration and vwc, meteorological on each grid."
+4,"the objectives of this model include maximizing crop data from meteorological stations are used for estimating et0 growth suitability, maximizing the value of ecosystem services, and through the pm equation."
+4,"then, the results obtained can be ﬁtted minimizing the irrigation-water demand."
+4,constraints of the gimp by monthly mod16/pet remote sensing data to calculate the spatial model can ensure grain yield and economic beneﬁts of farmers.
+4,"the et0 information of all grids (tang et al., 2019)."
+4,based on information overall structure of the gimp model is now discussed.
+4,"appendix i obtained, the monthly vwc can be generated."
+4,the detailed steps lists meanings of the symbols and applies to all of the following are shown as follows. functions.
+4,(1) spatial et0 2.3.1.
+4,"objectives pm equation is used for calculating et0 (pm results), which can (1) maximize system crop growth suitability"
+5,tang et al.
+5,"/ journal of cleaner production 265 (2020) 121792 5 according to planting suitability of different crops in each grid obtained by the evaluation method (he et al., 2018), the objective of x n mni a  amax i ; ci (13i) maximizing systemic crop growth suitability can be shown as n¼1 follows."
+5,x n x i maxf1 ¼ mni hni (13a) n¼1 i¼1 2.4.
+5,"spatial irrigation-water optimization based on the crop space planting structure, a gnfmp model was established to optimize irrigation-water allocation."
+5,"objectives of (2) minimize spatial crop water requirements of system the gnfmp model include maximize economic beneﬁts, maximize net irrigation-water productivity, and minimize blue water utili- in order to save limited irrigation-water, it is necessary to zation."
+5,the meanings of the symbols can be found in appendix i. minimize the total crop water demand.
+5,the objective function can be represented as follows.
+5,2.4.1.
+5,objectives !
+5,"x n x i x t x t minf2 ¼ mni a etcnit  epnt (13b) (1) maximize gross economic beneﬁts: n¼1 i¼1 t¼1 t¼1 crop water production functions was approved to a useful tool for describing the relationship between yield of a certain crop and water resources (smilovic et al., 2016)."
+5,"during the whole growth (3) maximize ecosystem service value period, the crop water production function can be expressed as a quadratic function based on experimental data (li et al., 2019c)."
+5,"the according to existing research (zhang et al., 2019b), the regional gross economic beneﬁts can be expressed as follows: ecosystem service value is related to the total crop planting area, 2 !"
+5,2 3 and the relationship between these two parameters can be char- x n x i x t x t acterized by a function.
+5,"with help of this relationship, the objective maxf1 ’ ¼ mni abi 4ai wnit þ bi wnit þ ci 5 of maximizing ecosystem service value can be expressed as follows. n¼1 i¼1 t¼1 t¼1 !"
+5,"(14a) x n x i maxf3 ¼ f mni a (13c) n¼1 i¼1 (2) maximize irrigation-water productivity: irrigation-water productivity, the ratio of total crop yield to total 2.3.2."
+5,"constraints irrigation-water, is used for measuring the production efﬁciency."
+5,the speciﬁc objective function can be expressed as follows.
+5,"(1) suitability constraints: "" !"
+5,2 # n p p i p t p t mni ¼ 0 or 1; cn; i (13d) mni a ai wnit þ bi wnit þ ci n¼1 i¼1 t¼1 t¼1 maxf2 ’ ¼ (14b) n p p i p t x i mni awnit =l mni  1; ci; n (13e) n¼1 i¼1 t¼1 i¼1 (2) food security constraints: (3) minimize blue water utilization rate: n x x i mni aci  fd$po; cigrain crop (13f) blue water utilization rate is the ratio of total vwcb to the total n¼1 i¼1 vwc.
+5,this objective can be expressed as: n p p i p t mni vwcbnit (3) economic beneﬁt constraint n¼1 i¼1 t¼1 minf3 ’ ¼ (14c) n p p i p t n x x i mni vwcnit mni abi ci  cn (13g) n¼1 i¼1 t¼1 n¼1 i¼1 (4) planting area constraints 2.4.2.
+5,constraints x n mni a  amini ; ci (13h) (1) water supply constraint n¼1
+6,tang et al.
+6,/ journal of cleaner production 265 (2020) 121792 china.
+6,"it is divided by the yingluo and zhengyi gorge hydrological n x x i station as three parts including upstream, midstream and down- mni awnit  lqt ; ct (14d) stream."
+6,the geolocation of the study area is shown in fig.
+6,"2. n¼1 i¼1 the study area is the middle reach of the heihe river basin, which is one of the main food production areas in northwest china (2) food security constraints: (zhang et al., 2019b)."
+6,"the main crops of this region are ﬁeld corn 2 (i ¼ 1), seed corn (i ¼ 2), wheat (i ¼ 3) and some economic crops !"
+6,2 x i x n x t x t (i ¼ 4).
+6,"the growth period of these crops is concentrated from april mni a4ai wni þ bi wni to september (t ¼ 1, 2 … 6, respectively)."
+6,both farmland area and i¼1 n¼1 t¼1 t¼1 the water consumption in the middle reach occupy over 80% of the 3 heihe river basin.
+6,"due to high evapotranspiration (et0 is þ ci 5  fd$po; cigrain crops (14e) 1,453e2,351 mm) and low precipitation (60e280 mm) in the re- gion, irrigation is the main source of water for crops, accounting for more than 90% of the total water consumption."
+6,"unreasonable use of the land and water resources lead to too much water used in the (3) crop water requirements constraints: middle reach, destroying the basin ecological environment (zhang et al., 2019a)."
+6,it is urgent for the middle reach of heihe river basin x n x n to ﬁnd a more sustainable agricultural production strategy.
+6,"there- mni ðwnit þ epnt þ  mni etminnit cn; t fore, to improve the utilization efﬁciency of limited land and water i¼1 i¼1 resources, this study attempts to help regional managers optimally (14f) determine the main crop planting type for each grid (a ¼ 1 km2, n ¼ 2,150) on cultivated land in the study area, and the amount of x i x i irrigation-water to each grid during different time periods. mni ðwnit þ epnt þ  mni etc nit cn; t (14g) the slope and aspect data (the spatial resolution is 90 m) of the i¼1 i¼1 study area come from the geospatial data cloud (http://www. gscloud.cn/sources/)."
+6,the elevation distribution (spatial resolution (4) non-negative constraint is 30 m) is derived from the aster gdem data.
+6,the soil types (spatial resolution is 1 km) are from the heihe plan data manage- wnit  0; cn; i; t (14h) ment center (http://www.heihedata.org/).
+6,"the distribution of aspect, slope, dem, and soil type in the study area are shown in fig."
+6,fig. 3 indicates that the aspect and slope of the study area have 2.5.
+6,model solution method high spatial variability.
+6,"the dem varies greatly between 1,234 m and 3,633 m above sea level, and the soil type is also very complex there are multi-objective, integer, nonlinear, and fractional with 13 species."
+6,"in this area, spatial crop planting structure and programming in the dimp and dnfmp models in this paper."
+6,"thus, optimal water distribution are determined according to cwr and the minimum deviation method is used for converting the multi- precipitation."
+6,"however, cwr and precipitation are affected by objective model into a single-objective model for solving multiple many factors, such as terrain, soil, meteorological, and basic agri- objectives (li et al., 2019b)."
+6,"the speciﬁc steps are as follows: cultural facilities (tang et al., 2019)."
+6,"with the change of geographical location, these factors have high spatial variability."
+6,step 1 model the gimp.
+6,remote sensing technology is considered as a potential tool to step 2 transform each objective function into a model with obtain spatial et and precipitation information.
+6,"according to actual minimized objective. conditions, two assumptions have been made in processing remote step 3 solve each objective separately to obtain the maximum sensing data: 1) the soil water remains the same before and after and minimum values of each objective: f1max ; f1min ; f2max ; f2min ; the growth period (allen et al., 1998); 2) due to the deep ground- f3max ; f3min . water depth in study area, the groundwater recharge is negligible step 4 convert multiobjective to single-objective model by the (chadha and chadha, 2007). following formula, and solve it to obtain the spatial crop deterioration of the ecological environment of the study area planting structure: and limited water and soil resources jointly call for more precise allocation schemes in space."
+6,"thus, the rsm approach was applied to f1max  f1 f2max  f2 f3max  f3 this area."
+6,"in this process, several questions are desired to be solved: max ¼ þ þ (15) f1max  f1min f2max  f2min f3max  f3min 1) high spatial variability exists in evapotranspiration and precipi- tation; 2) existing spatial resolution of remote sensing data is insufﬁcient for practical resources planning problems; 3) few step 5 input the results of the gimp model to the gnfmp model, research efforts attempt to establish precise optimization models at and then repeat steps 2 to 4 to generate the spatial water allo- a grid scale; and 4) conﬂicting objectives cannot be considered cation results. simultaneously in the decision-making process."
+6,"to address the above problems, gimp and gnfmp are developed to generate 3."
+6,application spatial decision-making alternatives for supporting decision makers in managing limited agricultural water and soil resources.
+6,study area 3.2.
+6,"data collection the heihe river basin (37 500 -42 400 n, 98 e101300 e) is the second largest inland river basin in china, located in the middle of this study selected 2014 as the typical year."
+6,"the remote sensing the hexi corridor and the eastern part of gansu province, northwest data used in this paper were collected from the global precipitation"
+7,tang et al.
+7,/ journal of cleaner production 265 (2020) 121792 7 fig.
+7,location of the study area.
+7,"slope map (a), aspect map (b), dem (c), and soil type map (d) in the study area."
+7,"measurement (gpm) data (released on april 1st, 2014, spatial res- yield, and the available planting area of each crop are shown in olution is 0.1, time resolution is month, huffman et al., 2019), and table 1."
+7,"modis/pet data (spatial resolution is 1 km, time resolution is kc (crop coefﬁcient) values of ﬁeld corn, seed corn (jiang et al., month)."
+7,"meteorological data were downloaded from the china 2014), wheat (kang et al., 2003) and economic crop (li et al., meteorological data service center (http://data.cma.cn/en). 2019c) can be obtained from previous studies."
+7,"the local popula- socio-economic information, crop planting area, crop yield, tion in 2014 was 82.07  104, the minimum grain demand per water supply information, and hydrological information during capital is 400 kg/per capital and the minimum gross economic 2004e2018 were collected from the statistical yearbook of beneﬁt of the study area is determined according to the historic zhangye city and ﬁeld research and trials."
+7,"irrigation-water pro- average net income per km2, which is 110.61  108 cny."
+7,"kc values, duction functions of different crops can be obtained from previous the monthly agricultural available groundwater, and surface water research (li et al., 2017)."
+7,"due to the priority position of economic supply in the study area are shown in table 2. crops, linear irrigation-water production functions is chosen for through previous studies, the relationship between the reﬂecting the relationship between irrigation-water and crop ecosystem service value and the total crop planting area in this yield."
+7,"the irrigation-water production function, market price, study area can be expressed as: ev ¼ 49:21a762:20 a15:56 (zhang et al.,"
+8,tang et al.
+8,"/ journal of cleaner production 265 (2020) 121792 table 1 irrigation-water production function, market price, crop yield and available crop planting area."
+8,"crop irrigation-water production function of crop (102 kg/km2) (x is the amount of market price（cny/ crop yield (104 kg/ available crop planting irrigation-water, cm) kg） km2) area (km2) lower upper bound bound field corn y ¼ 3,281.67 þ 199.83  x-1.22  x2 2.32 83.85 149.59 495.81 seed corn y ¼ 3,604.24 þ 179.58  x-1.23  x2 3.05 80.07 869.74 1,195.62 wheat y ¼ 2,328.55 þ 167.67  x-1.44  x2 2.26 84.39 195.97 267.31 economic y ¼ 52,388.43 þ 2099.00  x 4.02 605.47 335.22 832.39 crop table 2 kc values of crops and the available water supply in each month."
+8,"time kc value of main crops water supply（104 m3） field corn seed corn wheat economic crop surface water ground water april 0.20 0.22 0.30 0.51 3,837.53 2,342.30 may 0.44 0.50 1.15 0.86 15,618.13 2,366.09 june 0.53 1.16 1.15 1.03 23,341.89 2,335.39 july 1.46 1.20 0.93 1.05 30,835.91 2,351.78 august 1.14 1.20 0.64 28,765.76 2,335.12 september 1.22 0.60 0.62 14,925.84 2,291.28 2019b)."
+8,the functional relationship between mod16/pet and pm 2014 to 2018.
+8,"the comparison of gpm data and ground observa- results is: et0 ¼ 0.7884  petmod16－28.3826 (tang et al., 2019)."
+8,"the tions is shown in fig. 5 (a). effective precipitation can be estimated by ep ¼ a, p."
+8,"in fig. 5 (a), a visible difference exists between the gpm data and where ev represents ecosystem service value, 108 cny; a is the the observation data, and the distribution is very scattered. total crop planting area in study area, 104 ha; et0 is the reference regression methods were used to ﬁt the gpm data based on the crop evapotranspiration, mm; petmod16, mm."
+8,"ep is the effective ground observations, and the comparison results are shown in precipitation, mm; ais the effective precipitation coefﬁcient, fig. 5 (b)."
+8,"the deterministic coefﬁcient (r2, gui et al., 2016) of these dimensionless."
+8,"based on previous studies, 0.8 was chosen for a in two data is 0.67, indicating that more accurate data are needed to this area (zhang et al., 2018); p is precipitation, mm. meet the requirements in the optimization model."
+8,"in order to the crop suitability data (spatial resolution is 1 km) of wheat further improve the accuracy of remote sensing information, the (he et al., 2018), corn and economic crop (he et al., 2020) of this multiple linear regression method was used."
+8,"through the calcula- study area came from previous studies, which are shown in fig."
+8,"4. tion, the regression equation can be obtained, which is shown in the suitability of ﬁeld corn and seed corn was not distinguished in equation (16)."
+8,"the corresponding mlr results are shown in fig. 5 collected data, and thus their suitability is assumed the same. (c)."
+8,results analysis and discussion y ¼ 0:75*x1 þ 0:27*x2 þ 0:13*x3 þ 0:01*x4 þ 0:04*x5  0:5*x6  0:20 (16) 4.1.
+8,results analysis and discussion of spatial basic data 2 fig. 5 (c) shows that the r of the multiple regression results 4.1.1.
+8,downscaling and accuracy analysis of precipitation have been improved to 0.80.
+8,"the scatter distribution is more gpm data were released on april 1st, 2014, and the growth convergent, and the consistency between the predicted results and period of each crop in the study area is between april and june. the actual results is improved."
+8,"that is, when using remote sensing thus, this study uses the gpm data during the growth period from gpm data, terrain factors, and the geographic location information fig."
+8,crop suitability in the middle reach of heihe river basin.
+9,tang et al.
+9,/ journal of cleaner production 265 (2020) 121792 9 fig.
+9,"comparison of monthly ground observation precipitation with gpm values (a), the linear regression results (b) and the multiple regression results (c). to obtain the spatial precipitation distribution results, the accuracy potential evapotranspiration and low precipitation are suffering in of results can be further improved."
+9,"then, mlrr results can be ob- arid conditions, where irrigation plays a more important role in tained after residual correction based on mlr results. agricultural production."
+9,"these information can obviously help to verify the validity of the mlrr method, four datasets, regional managers formulate more sustainable agricultural pro- including gpm, lr results, mlr results, and idw results, were used duction strategies to improve water use efﬁciency. for comparing with mlrr results through the cross-validation according to the virtual water theory, the monthly vwc of crops method."
+9,"three indicators, rmse, mae, and mre, of each dataset on each grid can be calculated."
+9,fig. 9 shows accumulated vwc of can be calculated and are shown in table 3.
+9,it is clear that the mlrr each crop during whole growth period.
+9,the vwc values of the same method has the best performance among these methods.
+9,"mlrr can crop in different grids have large gaps, and the vwc values of not only improve the accuracy of prediction results, but also help different crops in the same grid are also different."
+9,these spatio- downscale the gpm to smaller grid (1 km  1 km). temporal information will be considered in the rsm approach.
+9,the ﬁnal downscaling precipitation results (mlrr results) can be generated as fig. 6 (b) (taking the typical year of june as an 4.2.
+9,results analysis and discussion of dimp model example).
+9,fig. 6 (a) shows the original gpm data with low spatial resolution (a).
+9,it can be found that the spatial resolution of the the optimization results of the gimp model are shown in fig.
+9,"10 mlrr results has been improved, indicating that mlrr can help (a)."
+9,"the total planted area obtained of ﬁeld corn, seed corn, wheat, provide more precise data to meet the requirements of precise and economic crops are 393 km2, 870 km2, 267 km2, and 396 km2, agricultural management."
+9,the mlrr results from april to respectively.
+9,"to make a comparison with gimp results, three single- september on cultivated land (fig. 7) can be obtained in the same objective models with objective f1, f2, and f3, respectively, as well way."
+9,"in fig. 7, monthly precipitation obtained shows large spatio- as the same constraints as gimp were created."
+9,"after solving these temporal variability, and the areas with high precipitation are models, optimization results can be obtained as shown in fig. 10(b mainly mountainous areas near the upper reach."
+9,"in summary, and c, d)."
+9,"optimization objectives of f1, f2, and f3 each focus on one mlrr results can provide regional water managers more detailed certain aspect, ignoring other important impacts."
+9,the gimp model information on a smaller scale.
+9,"these information will be input to comprehensively considered all three objectives, and rational the dimp and gnfmp models to determine crop planting structure spatial distribution results can be obtained."
+9,"as shown in fig. 10, we and water allocation schemes. found that: 1) economic crop are mainly concentrated in south areas, which may be caused by its high water demand and crop 4.1.2."
+9,"results analysis and discussion of vwc suitability; 2) the distribution of wheat relatively scattered in the through a ﬁtting function and modd16/pet data, the monthly study area, because the north with high potential evapotranspira- et0 results for each grid of cultivated ﬁeld can be obtained as shown tion and low precipitation can save the limited water recourse, in fig. 8, which have high spatiotemporal variability."
+9,"according to while its crop suitability is higher in the south; 3) ﬁeld corn and the results obtained, the southern parts of the study area (closer to seed corn are concentrated in the central region, where the crop the upper reaches of the heihe river basin with higher elevation) suitability of these crops are higher than others; 4) seed corn has featured as low potential evapotranspiration and high precipitation the greatest advantages and the largest planting area among all may be relatively humid, and thus have low irrigation-water de- crops, which is consistent with its economic beneﬁt and crop mand."
+9,"on the contrary, the northern parts (closer to the lower suitability performance; 5) areas with no allocated crop are mainly reaches of the heihe river basin with lower elevation) with high located in regions with high potential evapotranspiration, low table 3 rmsr, mae, mre and the ranking of gpm, lr, mlr, idw, mlrr datasets."
+9,method rmse rank of rmse mae rank of mae mre rank of mre gpm 42.5827 4 34.3659 4 0.4609 5 lr 44.0797 5 35.2389 5 0.4551 4 mlr 28.4422 3 22.1755 3 0.4424 3 idw 24.9587 2 20.9421 2 0.3695 2 mlrr 24.1615 1 18.0322 1 0.3688 1
+10,tang et al.
+10,/ journal of cleaner production 265 (2020) 121792 fig.
+10,"gpm precipitation (a), and downscaling precipitation results (b) of june 2014."
+10,"the precipitation from april to september in typical year on cultivated land. precipitation, and low suitability of all four crops."
+10,"that is, if regional reduce the total water demand."
+10,the ecosystem service value of the managers want to alleviate the pressure on the ecological envi- system can be increased by 0.36  108 cny.
+10,"these results will be ronment in the study area, the areas with no allocated crop could be input to the gnfmp model for optimizing spatial water allocation. returned to forests to meet local policy requirements."
+10,"decision makers can determine the best planting location of each crop with the help of these results, and thus the utilization efﬁciency of land 4.3."
+10,results analysis and discussion of dnfmp model resources and system beneﬁts can be improved.
+10,as comparison made in fig.
+10,"11, dimp can provide suitable based on gimp results and necessary spatial information, opti- planting locations for seed and ﬁeld corn, while the status quo can mization results of monthly irrigation-water allocation can be hardly provide such information."
+10,more economic crop should be calculated through the gnfmp model as fig. 13 shows.
+10,"the red area planted to enhance the economic beneﬁt of the agricultural system, means that location has no irrigation-water allocation in the cur- especially in south areas with high suitability and low evaporation. rent month, which mainly are the areas with no crop planted in the dimp results show that some areas should not be farmed when gimp model."
+10,the red area has a signiﬁcant increasing trend in attempting to improve the total value of ecosystem services and august and september because the wheat has been harvested in ensure the grain output and economic beneﬁts simultaneously.
+10,"results provide more detailed water allocation schemes of the objective-value comparisons among these models have been whole basin, which cannot be obtained by previous optimization made in fig."
+10,the objective values of the gimp model are be- models.
+10,"regional managers can allocate the limited irrigation- tween the upper and lower values of the three single objective water based on optimization results obtained to improve water models, illustrating that the gimp model can effectively manage use efﬁciency of the river basin. tradeoffs among resources, efﬁciency and ecological objectives."
+10,"the to make comparisons with gnfmp results, three single- results can ensure current economic beneﬁts and food security and objective models with objectives f1’, f2’, and f3’ separately as well as the same constraints with gnfmp were created."
+10,the objective
+11,tang et al.
+11,/ journal of cleaner production 265 (2020) 121792 11 fig.
+11,"monthly et0 results on each grid for cultivated ﬁelds, 2014."
+11,"vwc of each crop for each grid in 2014. values of the gnfmp model, single-objective models, and current gnfmp model can effectively improve all objectives relative to the situation are shown in fig."
+11,"it is noteworthy that each single current situation and will contribute to agricultural systems man- objective model only obtain the best value in this objective, but agement in river basins. perform poorly on others."
+11,the multiobjective model can manage tradeoffs among multiple objectives to obtain more reasonable 5.
+11,conclusions results.
+11,"compared with the current situation, the gnfmp model improves the gross economic beneﬁt of 24.17  108 cny, increases this study proposed a rsm approach for managing agricultural the irrigation-water productivity of 0.50 kg/m3, and reduces the land and water resources in smaller spatial resolution."
+11,"this blue water utilization rate by 0.18, indicating that results of the approach coupled several remote sensing data sets to generate"
+12,tang et al.
+12,/ journal of cleaner production 265 (2020) 121792 fig.
+12,optimization results of spatial planting structure. spatial downscaled data sets of gpm precipitation with the help of the mlrr method.
+12,"spatial cwr and vwc results can be calculated based on mod16/pet data, pm mothed and virtual water theory."
+12,"after getting these spatial data sets, gimp model and gnfmp model were developed to generate optimal spatial crop planting structure and irrigation-water allocation schemes respectively."
+12,decision makers can obtain more detailed spatial allocation schemes of agricultural land and water resources in river basins through rsm.
+12,the main conclusions are as follows.
+12,"(1) the mlrr method for downscaling the gpm data sets has higher accuracy than lr, mlr, and idw in precipitation prediction."
+12,"the mlrr results show the high spatiotemporal variability in study area, which increased from north to south."
+12,"the obtained spatial vwc results show that high spatiotemporal variability also exists in the et and vwc, and decreased from north to south."
+12,"(2) gimp results can help managers determine which crop are suitable for planting in all grids, and indicate that seed corn fig."
+12,status quo of crop planting structure in 2014. has the greatest advantages and the largest planting area.
+12,the objective values of different optimization models in gimp.
+13,tang et al.
+13,/ journal of cleaner production 265 (2020) 121792 13 fig.
+13,irrigation-water allocation in each month.
+13,the objective values of optimization models and status quo for the study area.
+13,"gimp successfully managed tradeoffs among resources, ef- declaration of competing interest ﬁciency, and ecological objectives, its results reduced the total water requirements and increased the ecosystem ser- the authors declare that they have no known competing vice value by 0.36 108 cny. ﬁnancial interests or personal relationships that could have (3) the grid-based water allocation results obtained from appeared to inﬂuence the work reported in this paper."
+13,gnfmp effectively made tradeoffs among multiple objec- tives.
+13,"compared with the status quo, it improved the gross credit authorship contribution statement economic beneﬁt by 21.85%, increased the irrigation-water productivity by 25.92%, and reduced blue water utilization yikuan tang: conceptualization, methodology, formal analysis, rate by 24.32%."
+13,writing - review & editing.
+13,"fan zhang: conceptualization, writing - review & editing."
+13,bernard a.
+13,engel: writing - review & editing.
+13,rsm results can intuitively show the suitable crop planting type xiao liu: writing - review & editing.
+13,"qiong yue: writing - review and optimal irrigation-water allocation on each grid, which is more & editing."
+13,"ping guo: resources, writing - review & editing, funding practical for decision makers."
+13,"the rsm approach proposed in this acquisition. research can not only improve the spatiotemporal resolution and efﬁciency of agricultural systems, but also contribute to environ- mental restoration in the middle and lower reaches of the heihe acknowledgments river."
+13,the study can also be applied to other similar regions.
+13,"some key factors, such as soil water, irrigation facilities and technology, this research was supported by the national natural science regional policies haven’t been fully considered in this study."
+13,"a foundation of china (41871199, 51621061)."
+13,"the authors would decision-making system can help these methods more accessible for extend the appreciation to anonymous reviews and editors for their practical managers, which will be considered as our future work. comments and suggestions that signiﬁcantly helpful in improving the quality of this paper."
+14,tang et al.
+14,/ journal of cleaner production 265 (2020) 121792 appendix i.
+14,deﬁnitions of symbols used in dimp and dnfmp models.
+14,"indices, variables, objective functions, and parameters description."
+14,"deﬁnition indices n index of grid (i ¼ 1,2, …,n) i index of crop (i ¼ 1,2, …,i) t index of period (i ¼ 1,2, …,t) max superscript of maximum min superscript of minimum variables mni the variables of whether to plant crops i for the grid n wnit net water allocation to the crop i for the grid n in period t (mm) objective functions f1 objective functions for system crop growth suitability (dimensionless) f2 objective functions for spatial crop water requirements of system (m3) f3 objective functions for ecosystem service value (cny) f1’ objective functions for gross economic beneﬁts (cny) f2’ objective functions for net irrigation-water productivity (kg/m3) f3’ objective functions for blue water utilization rate (dimensionless) parameters hni crop suitability of crop i for the grid n (dimensionless) a area for each grid (km2) etc nit crop water requirement of crop i for grid n in period t (mm) epnt effective precipitation for grid n in period t (mm) ev ecosystem service value (cny) fd minimum grain demand per capital (kg/per capital) po population bi beneﬁt per unit yield of crop i (cny/kg) ci actual crop yield per unit area of crop i (kg/m3) cn current net proﬁt of study area (cny) amin i minimum planting area of crop i amax i maximum planting area of crop i ai quadratic coefﬁcient of crop water production function of crop i (dimensionless) bi primary coefﬁcient of crop water production function of crop i (dimensionless) ci constant term of the crop water production function of crop i (dimensionless) qt water supply for study area in period t (m3) l proportion of agricultural water utilization of study area (dimensionless) etmin nit minimum water requirement for growth of crop i for grid n in period t (mm) vwcb nit blue water components of crop i for grid n in period t (mm) vwcnit virtual water content of crop i for grid n in period t (mm) references agricultural proﬁt and nitrogen load management in japan."
+14,"paddy water en- viron. 10, 113e120."
+14,"fasakhodi, a.a., nouri, s.h., amini, m., 2010."
+14,"water resources sustainability and abah, r.c., petja, b.m., 2017."
+14,"crop suitability mapping for rice, cassava, and yam in optimal cropping pattern in farming systems; a multi-objective fractional goal north central nigeria."
+14,agric.
+14,"sci. 9, 96e108. programming approach."
+14,water resour.
+14,"manag. 24, 4639e4657."
+14,"agnew, m.d., palutikof, j.p., 2000."
+14,"gis-based construction of baseline climatologies goovaerts, p., 2000."
+14,geostatistical approaches for incorporating elevation into the for the mediterranean using terrain variables.
+14,"res. 14, 115e127. spatial interpolation of rainfall."
+14,"hydrol 228, 113e129."
+14,"allan, j., 1993."
+14,"fortunately there are substitutes for water: otherwise our hydro- gui, z., li, m., guo, p., 2016."
+14,simulation-based inexact fuzzy semi-inﬁnite pro- political futures would be impossible.
+14,"in: oda, priorities for water resources gramming method for agricultural cultivated area planning in the shiyang river allocation and management."
+14,"oda, london, pp. 13e26."
+14,basin.
+14,irrigat.
+14,drain.
+14,"143 (2), 5016011."
+14,"allen, r.g., pereira, l.s., raes, d., smith, m., 1998."
+14,"crop evapotranspiration: guide- he, l., bao, j., daccache, a., wang, s., guo, p., 2020."
+14,optimize the spatial distribution lines for computing crop water requirements.
+14,in: food and agriculture orga- of crop water consumption based on a cellular automata model: a case study of nization.
+14,"fao irrigation and drainage, rome, italy."
+14,paper no.
+14,"56. the middle heihe river basin, china."
+14,total environ.
+14,"720, 137569."
+14,"bastiaanssen, w.g.m., molden, d.j., makin, i.w., 2000."
+14,"remote sensing for irrigated he, l., wang, s., peng, c., tan, q., 2018."
+14,optimization of water consumption distri- agriculture: examples from research and possible applications.
+14,agric.
+14,water bution based on crop suitability in the middle reaches of heihe river.
+14,sus- manag.
+14,"46, 0-155. tainability 10, 2119."
+14,"caselles, v., delegido, j., sobrino, j.a., hurtado, e., 1992."
+14,"evaluation of the maximum hoekstra, a.y., chapagain, a.k., mekonnen, m.m., aldaya, m.m., 2011."
+14,"the water evapotranspiration over the la mancha region, spain, using no a a avhrr data."
+14,footprint assessment manual: setting the global standard.
+14,"earthscan, london."
+14,"sens. 13 (5), 939e946."
+14,"huffman, g.j., stocker, e.f., bolvin, d.t., nelkin, e.j., tan, jackson, 2019."
+14,"gpm imerg chadha, s.s., chadha, v., 2007."
+14,linear fractional programming and duality.
+14,"final precipitation l3 1 month 0.1 degree x 0.1 degree v06, greenbelt, md."
+14,"res. 15 (2), 119e125."
+14,"goddard earth sciences data and information services center (ges disc), chen, t., ren, l., yuan, f., yang, x., jiang, s., tang, t., liu, y., zhao, c., zhang, l., 2017."
+14,"accessed: [data access date], 10.5067/gpm/imerg/3b-month/06."
+14,"comparison of spatial interpolation schemes for rainfall data and application in immerzeel, w.w., rutten, m.m., droogers, p., 2009."
+14,spatial downscaling of trmm hydrological modeling.
+14,"water 9, 342. precipitation using vegetative response on the iberian peninsula."
+14,remote sens.
+14,"chono, s., maeda, s., kawachi, t., imagawa, c., buma, n., takeuchi, j., 2012."
+14,"opti- environ. 113, 362e370. mization model for cropping-plan placement in paddy ﬁelds considering jiang, x., kang, s., tong, l., li, f., li, d., ding, r., qiu, r., 2014."
+14,crop coefﬁcient and
+15,tang et al.
+15,"/ journal of cleaner production 265 (2020) 121792 15 evapotranspiration of grain maize modiﬁed by planting density in an arid re- smilovic, m., gleeson, t., adamowski, j., 2016."
+15,crop kites: determining crop-water gion of northwest china.
+15,agric.
+15,"water manag. 142, 135e143. production functions using crop coefﬁcients and sensitivity indices."
+15,"wa- kang, s., gu, b., du, t., zhang, j., 2003."
+15,"crop coefﬁcient and ratio of transpiration to ter resour. 97, 193e204. evapotranspiration of winter wheat and maize in a semi-humid region."
+15,agric.
+15,"su, x., li, j., singh, v.p., 2014."
+15,"optimal allocation of agricultural water resources water manag. 59, 239e254. based on virtual water subdivision in shiyang river basin."
+15,water resour.
+15,"li, k., huang, g., wang, s., 2019a."
+15,"market-based stochastic optimization of water manag. 28, 2243e2257. resources systems for improving drought resilience and economic efﬁciency in tang, y., zhang, f., wang, s., zhang, x., guo, s., guo, p., 2019."
+15,a distributed interval arid regions.
+15,clean.
+15,"prod. 233, 522e537. nonlinear multiobjective programming approach for optimal irrigation water li, m., fu, q., guo, p., singh, v.p., zhang, c., yang, g., 2019b."
+15,stochastic multi- management in an arid area.
+15,agric.
+15,"water manag. 220, 13e26. objective decision making for sustainable irrigation in a changing environ- velpuri, n.m., senay, g.b., singh, r.k., bohms, s., verdin, j.p., 2013."
+15,a comprehensive ment.
+15,clean.
+15,"prod. 223, 928e945. evaluation of two modis evapotranspiration products over the conterminous li, m., fu, q., singh, v.p., ji, y., liu, d., zhang, c., li, t., 2019c."
+15,an optimal modelling united states: using point and gridded fluxnet and water balance et.
+15,remote approach for managing agricultural water-energy-food nexus under uncer- sens.
+15,"environ. 139 (4), 35e49. tainty."
+15,"total environ. 651, 1416e1434."
+15,"westerhoff, r.s., 2015."
+15,"using uncertainty of penman and penmanemonteith li, m., fu, q., singh, v.p., liu, d., li, t., 2019d."
+15,stochastic multi-objective modeling for methods in combined satellite and ground-based evapotranspiration estimates. optimization of water-food-energy nexus of irrigated agriculture.
+15,water remote sens.
+15,"environ. 169, 102e112."
+15,"resour. 127, 209e224."
+15,"zhang, f., guo, s., zhang, c., guo, p., 2019a."
+15,"an interval multiobjective approach li, m., jiang, y., guo, p., li, j., 2017."
+15,irrigation water optimal allocation considering considering irrigation canal system conditions for managing irrigation water. stakeholders of different levels.
+15,trans.
+15,agric.
+15,"mach. 48 (5), 199e207 j."
+15,clean.
+15,"prod. 211, 293e302. (in chinese)."
+15,"zhang, f., yue, q., engel, b.a., guo, s., guo, p., li, x., 2019b."
+15,"a bi-level multiobjective michaelides, s., levizzani, v., anagnostou, e., bauer, p., kasparis, t., lane, j.e., 2009. stochastic approach for supporting environment-friendly agricultural planting precipitation: measurement, remote sensing, climatology and modeling."
+15,atmos. strategy formulation.
+15,total environ.
+15,"693, 133593."
+15,"94, 0-533."
+15,"zhang, f., zhang, c., yan, z., guo, s., wang, y., guo, p., 2018."
+15,"an interval nonlinear mu, q., heinsch, f.a., zhao, m., running, s.w., 2007."
+15,development of a global multiobjective programming model with fuzzy-interval credibility constraint evapotranspiration algorithm based on modis and global meteorology data. for crop monthly water allocation.
+15,agric.
+15,"water manag. 209, 123e133."
+15,remote sens.
+15,"environ. 111, 519e536."

@@ -1,0 +1,365 @@
+page,p
+1,"geospatial health 8(3), 2014, pp."
+1,"s647-s659 redefining climate regions in the united states of america using satellite remote sensing and machine learning for public health applications alexander liss1,2*, magaly koch2,3, elena n."
+1,"naumova1,2 1department of civil and environmental engineering, tufts university, medford, usa; 2tufts initiative for forecasting and modeling of infectious diseases, medford, usa; 3center for remote sensing, boston university, boston, usa abstract."
+1,existing climate classification has not been designed for an efficient handling of public health scenarios.
+1,this work aims to design an objective spatial climate regionalization method for assessing health risks in response to extreme weather.
+1,specific climate regions for the conterminous united states of america (usa) were defined using satellite remote sensing (rs) data and compared with the conventional köppen-geiger (kg) divisions.
+1,"using the nationwide database of hospitalisations among the elderly (≥65 year olds), we examined the utility of a rs-based climate regionalization to assess public health risk due to extreme weather, by comparing the rate of hospitalisations in response to thermal extremes across climatic regions."
+1,"satellite image composites from 2002-2012 were aggregated, masked and compiled into a multi-dimensional dataset."
+1,"the conterminous usa was classified into 8 distinct regions using a stepwise regionalization approach to limit noise and collinearity (lkn), which exhibited a high degree of consistency with the kg regions and a well-defined regional delineation by annual and seasonal temperature and precipitation values."
+1,"the most populous was a temperate wet region (10.9 million), while the highest rate of hospitalisations due to exposure to heat and cold (9.6 and 17.7 cases per 100,000 persons at risk, respectively) was observed in the relatively warm and humid south-eastern region."
+1,rs-based regionalization demonstrates strong potential for assessing the adverse effects of severe weather on human health and for decision support.
+1,its utility in forecasting and mitigating these effects has to be further explored.
+1,"keywords: remote sensing, lkn-regionalization, machine learning, morbidity, climate, classification, decision support, united states of america."
+1,introduction 1943).
+1,"although an alternative method, based on a con- cept of potential evapotranspiration and soil water the widely adopted köppen-geiger (kg) climate clas- budget, has been introduced, this common climate clas- sification system, developed in 1884 by the sification approach is also derived from the same set of russian/german climatologist wladimir köppen, is meteorological proxies (thornthwaite, 1931, 1948). based on the concept that regional climate can be emerging data sources, such as vegetation indices, spec- defined by a prevalent phenology (geiger and pohl, tral radiation patterns, surface albedo and other meas- 1954; koppen et al., 2011)."
+1,"due to the complexities ures, available with the advent of satellite remote sensing associated with a reliable determination of phenology (rs) technology, allow for a definition of a prevailing over large and remote areas in the pre-satellite era, avail- phenological pattern at virtually every place worldwide. able proxies, such as temperature and precipitation, it is now feasible to derive such patterns directly from were used to determine regions with similar climate."
+1,"rs data using one of the existing vegetation indices, e.g."
+1,"while the kg climate classification is still actively used the normalized difference vegetation index (ndvi) to quantify climate variation (chen and chen, 2013), (carroll et al., 2000)."
+1,"the spectral characteristics of the the arbitrary nature of suggested parameters in this clas- ndvi allow the differentiation of phenology and states sification system has been criticised (thornthwaite, of vegetation."
+1,the moderate-resolution imaging spectra- radiometer (modis) on board nasa’s terra and aqua satellites generate data for worldwide ndvi composites corresponding author: with 16 days overlapping temporal resolution and vari- elena n.
+1,"naumova ous spatial resolutions (lpdaac-nasa, 2000-2013)."
+1,"tufts initiative for forecasting and modeling of infectious diseases the temporal feature offers better understanding of 196 boston avenue, medford, ma 02155, usa tel. +1 617-627-2273 local weather variability and its implications for spatial e-mail: elena.naumova@tufts.edu regionalization."
+2,s648 a.
+2,"liss et al. - geospatial health 8(3), 2014, pp."
+2,"s647-s659 spatial regionalization can be viewed as a special need to consider both socio-economic and climatic case of a classification problem that aims to assign a characteristics in understanding temporal variability finite set of labels (i.e. climate categories or classes) to of weather-sensitive health conditions (cohen et al., a very large number of multidimensional objects (i.e."
+2,"2008; chui et al., 2009; jagai et al., 2009, 2012). pixels, representing a defined area on the ground) exposure to extreme weather events is associated based on their similarity."
+2,classification algorithms are with a wide range of adverse health consequences.
+2,"heat typically divided into supervised classification, which waves and cold spells cause an increase in mortality and seeks to assign labels known a priori and unsupervised morbidity (goldberg et al., 2011; anderson et al., 2013; classification, which derives classes based on proper- xie et al., 2013; margolis, 2014)."
+2,"the relationships ties of the data (arnold, 2003)."
+2,"spatial regionalization between low environmental temperature, vulnerability is usually discussed in the context of post office service of specific population groups, common co-morbidities, areas, school districts and political jurisdictions susceptibility and resilience of an individual have been (barkan et al., 2006; tasnádi, 2011; tong and a subject of intense research for the last quarter of the murray, 2012)."
+2,it was shown that p-regions prob- century.
+2,the recent report from the u.s.
+2,"global change lem’s complexity belongs to a non-deterministic poly- research program (national climate assessment, nomial-hard (also known as np-hard) group of prob- 2014) emphasises that certain people and communities lems and quickly becomes computationally intractable in the usa are especially vulnerable climate change vul- in finite time (duque et al., 2011)."
+2,"several attempts to nerable with respect to climate change, including chil- use machine learning and objective climate regional- dren, the elderly, the sick, the poor and some communi- ization methods based on intrinsic properties of the ties of colour (watts, 1972; rango, 1980, 1985, data have been made in the past."
+2,"consensus clustering bragagni et al., 2012)."
+2,"individuals aged 75 years and and hierarchical clustering, an attractive classification over are five times more likely than a younger person to method for climate research that produces intuitive suffer mortality as a result of lowered or raised core results where one large cluster is subdivided into body temperature due to exposure to cold or heat smaller ones when the number of required classes (rango, 1980)."
+2,"according to a study on accidental increases (fovell and fovell, 1993; fovell, 1997), have hypothermia, 73% of elderly patients died as a result been used for this task."
+2,"the hierarchical clustering was (seman et al., 2009)."
+2,"the last canicule of summer 2003 performed using only temperature and precipitation remains a searing memory for europe, france, in par- proxies, obtained from climate stations, to reduce ticular."
+2,record highs were broken in many french cities computational complexity.
+2,fovell’s regionalization when relentless heat dragged on for over a week.
+2,"it was produced 8, 14 and 25 nested clusters within the con- the hottest and the deadliest summer europe had seen terminous united states of america (usa) with vari- in 150 years with 14,802 lives claimed by heat wave, ous levels of detail, e.g."
+2,unal et al. (2003) used hierar- the vast majority of which were people over the age of chical clustering to redefine climate zones of turkey 75.
+2,"concurrent illnesses, common among individuals of and arbabi (2011) classified the climate in iran based advanced age, exacerbate the health risks associated on meteorological observations into 4 clusters."
+2,while with exposure to extreme weather events.
+2,"older people attractive and intuitive, hierarchical clustering requires are more susceptible to the heat or cold injury due to building a complete distance matrix."
+2,"with increased physiological and psychological changes attributed to numbers of data points and dimensions in the dataset aging (horvath and rochelle, 1977). this quickly becomes infeasible in finite time and the effects of extreme weather on human health requires climate proxies to reduce complexities."
+2,"one may depend on built infrastructure, mitigation strate- of the possible solutions to the problem of the expo- gies and overall health status of the affected popula- nentially growing size of the complete distance matrix tion."
+2,"multiple studies demonstrate that prevailing cli- is to relax a contiguity requirement and to define a mate patterns in the patient’s geographic region may number of desired distinct regions a-priory. account for substantial differences in health outcomes spatial climate regionalization is essential for large- from similar weather conditions (kalkstein and scale epidemiological studies to properly address geo- davis, 1989; montero et al., 2012; ebi and mills, graphic heterogeneity."
+2,administrative boundaries are 2013).
+2,"climate differences play a major role in assess- typically used to design relatively homogeneous ing population vulnerability scores and in developing administrative units, which are further adjusted in efficient early warning systems and public health models by including information on population com- interventions (o’neill and ebi, 2009; johnson et al., position and density."
+2,"our own research highlights the 2012; aubrecht et al., 2013; chebana et al., 2013;"
+3,"liss et al. - geospatial health 8(3), 2014, pp."
+3,"s647-s659 s649 pascal et al., 2013; xie et al., 2013)."
+3,this paper links 50.00 for the climate analysis of the conterminous health consequences due to the weather events as united states.
+3,"the resulting 521 by 1,201 pixel short term atmospheric conditions and illustrates that images covered the entire extent of the usa with 8 such impact may differ in different locations based on days temporal resolution."
+3,therefore vegetation index their climate patterns.
+3,these findings are especially data was aggregated in a layered space-time series valuable for predicting short-term health effects due containing 430 individual time steps.
+3,the water to extreme weather as climate changes.
+3,"the hospital- reflectance pattern differs significantly from almost isations and adverse health consequences are meas- any other surface material by absorbing most of the ured in relatively short intervals, usually days but incoming radiation."
+3,"in order to avoid misclassifica- sometimes several days or weeks, if lag structure or tion due to the water reflectance pattern, the water incubation period/vector cycle is considered."
+3,the bodies needed to be masked.
+3,there are many different long-term climate patterns modify these effects.
+3,"a cli- ways water pixels can be excluded from ndvi com- mate classification system can provide a valuable posite for this analysis, e.g."
+3,"terrasarx radar data, the insight for potential vulnerability to extreme weather normalized difference water index (ndwi) or the events in a uniform manner at refined temporal and normalized humidity index (nhi)."
+3,for the continental spatial resolution for large regions.
+3,"however system- usa land features, such as roads or water bodies, are atic investigations of the utility of these classification well mapped."
+3,"consequently, the existing geographical systems for public health applications and their ability information systems (gis) water body features were to reflect population at risk, although needed for epi- used to mask out open water."
+3,"in other cases, when the demiological applications, are lacking."
+3,"by under- region is remote, less populated and less well charted, standing the differences in those effects the preventive the other methods can be used."
+3,"using the vector map strategies can be better tailored to local needs and cli- of coast lines, lakes and large water bodies over the matic conditions. conterminous united states, a corresponding raster the objectives of this study were two: dividing the mask was built in the same geographic coordinates to divide the contiguous area of the conterminous and spatial resolution as the original multilayer com- usa into spatial regions based on the prevailing phe- posites and applied to the original composites to nology using machine learning algorithms; then per- exclude pixels associated with water bodies from the forming an assessment of suitability of proposed analysis. regionalization for epidemiological studies using a nationwide database of hospitalisations of elderly spatial regionalization americans maintained by the centers of medicare and medicaid services (cms)."
+3,"using satellite imagery, the spatial regionalization was performed in the following three major delineated materials and methods steps aiming to limit noise and collinearity (the l- step), classify the regions using k-means algorithm (the remote sensing k-step), and nominate the selected area for future analysis (the n-step), lkn in short."
+3,"first, dimension- to accomplish the first objective, version 5 of ality and space-time collinearity were reduced using modis ndvi mesurements and pixel quality (qa) principal components analysis (pca), whose goal was data from july 4, 2002 to july 3, 2012 were obtained to remove additive noise and orthogonalise the through the online data pool at the nasa land dataset."
+3,"the data in the original time series, consisting processes distributed active archive center (lp of 430 individual ndvi composites constructed with daac) and the united states geological survey 8 days interval naturally, have a very high degree of (usgs)/earth resources observation and science spatial and temporal collinearity."
+3,"the first 12 compo- (eros) center, sioux falls, south dakota (lpdaac- nents out of the total of 430 from pca analysis collec- nasa, 2000-2013)."
+3,"each file, downloaded in hierar- tively maintain more than 90 percent of the variability chical data format from earth observation satellites within the original time series."
+3,"after applying pca, the (hdf-eos) contained composite ndvi, vegetation resulting amount of variance was significant enough to index (vi-qa) quality information and other capture small difference in weather patterns and, at datasets."
+3,"each ndvi composite has a worldwide cov- the same time, to remove noise and unwanted autocor- erage that was clipped to a bounding box covering relation and time variance."
+3,"next, given a set of n data longitude 65.00 to 125.00 and latitude 24.00 to points distributed over time t xn,t ∈ rn*t the clustering"
+4,s650 a.
+4,"liss et al. - geospatial health 8(3), 2014, pp."
+4,"s647-s659 algorithm was applied to minimise the clustering information on the station’s spatial location, such as objective function: its latitude and longitude, was recorded in addition to the meteriological data."
+4,"data was scrubbed of errors (c1, ..., ck) = 1 σ k min n d (xi, ck), and checked for the absence of improbable values, n i =1 = 1, ..., k such as temperature readings outside of a conceivable where c1, ..., ck represent the centres of the respective range between 80f below zero (-62 ºc) to 130f above clusters 1 to k, and d (xi, ck), is a distance measure zero (+54.5 ºc), sudden intraday jumps of more than between each point and centre of the clusters, and k is 75f or other outliers."
+4,surface temperature was inter- the number of classes that the data set needs to be par- polated to the same scale as ndvi data using a modi- titioned into.
+4,"to implement a k-means classification fied shepard’s inverse distance weighting method algorithm, a target number of regions k was deter- (franke and nielson, 1980; renka, 1988). mined by maximising cluster validity index."
+4,"the for each of the climatic regions, defined by the spa- calinski-harabasz cluster validity index (ch-index) tial regionalization method described above, basic sta- also known as the variance ratio criterion (vrc) tistics were computed for daily minimum and maxi- (caliński and harabasz, 1974) was used to measures mum temperature and amount of precipitation for dif- within-group and between-group dispersion using the ferent seasons."
+4,"the analysis included mean annual following equation: daily temperature and precipitation, mean tempera- ture over the hot season (june-august) and the mean σi ni d2 (ci, c) n - nc daily temperature and precipitation over the cold sea- vrc = σi σx ci d2 (xi, c) * nc - 1 son (december-february)."
+4,"based on these results, each region was assigned a unique name reflecting the gen- where n is the total number of points, nc the number eralised climate pattern in this particular region, e.g. of clusters, d2 (ci, c) the within group distances and hot, humid summer; warm, dry winter, etc., which is d2 (xi, ci) the distance between cluster centres."
+4,"vrc used as the base for the lkn regionalization. assigns a higher score to a partition that is more com- pact, well defined and contains well separated clusters."
+4,"analysis of suitability for epidemiological studies based on the results of these steps, the area of conter- minous usa was partitioned with an unsupervised to complete the second objective, population at risk classification algorithm and the preliminary assign- within each region and the rate of hospitalisations due ment of regions was performed."
+4,"finally, kernel convo- to cold weather and hot weather were estimated and lution to the output of the classification algorithm was compared across climate regions."
+4,the population at applied to create regions for nomination (the n-step). risk was limited to medicare subscribers aged 65 and the convolution made the inter-cluster edges less older and residing in a given region and estimated from jagged and more smoothly defined.
+4,"this step also the annual counts of eligible medicare beneficiaries helps to remove discontinuities and very small clusters separately for each zip code, age group and gender."
+4,"the fully contained within larger regions. number of medicare beneficiaries was aggregated per each individual zip code and an aggregate number of climate zone properties recipients per county and state belonging to that zip code was computed for spatial analysis and visualisa- minimum and maximum daily temperatures and tion. amounts of precipitation were extracted from major rates of hypothermia for each of the suggested ground based meteorological stations in the united regions were estimated using the number of hospitali- states and its territories, as well as from water buoys sations due to hypothermia and population at risk per provided by the national oceanic and atmospheric spatial unit."
+4,"hospitalisation records (n=74,030) was administration national climatic data center, global abstracted that contained medical diagnoses recorded historical climate network (noaa-ncdc ghcn as “effects of reduced temperature” by the v.2) (noaa, 2014)."
+4,"for each day during the study international classification of diseases, 9th revision period, gauges were included that provided valid (icd-9 codes 991.0-991.8) from approximately 219 weather data for that day."
+4,"the number of meteorolog- million hospitalisation records obtained from the ical stations included in the dataset each day varied center for medicare and medicaid services for the 16- from a minimum of 1,058 to the maximum of 1,411 year period between january 1st, 1991 and december stations throughout this period."
+4,"for each station, 31st, 2006."
+4,"we abstracted 41,927 hospitalisation"
+5,"liss et al. - geospatial health 8(3), 2014, pp."
+5,s647-s659 s651 fig.
+5,"pseudo-colour composite of the first three principal components. records that contained medical diagnoses recorded as range of temperatures described above, the actual “effects of heat and light” (icd-9 codes 992.0-992.9) range of temperatures was used. from the same set of hospitalisation records."
+5,each record contained the date of admission and zip code of results the patient’s residence.
+5,"thus, each hospitalisation record and diagnose in the original dataset could be the first 12 principal components collectively assigned to a specific region based on patient’s place of explained 92.6% of the variance in the original residence. dataset."
+5,the pseudo-colour composite image of the the rate of a disease in a particular region was first three components showed low noise and the defined as the number of hospitalisations divided by absence of image artefacts.
+5,fig. 1 presents a pseudo- the average number of elderly persons living in this colour composite image of the first three components region.
+5,for hospitalisations related to exposure to heat each assigned to a separate colour channel.
+5,this figure or cold exposure was defined as a number of people- demonstrates smooth changing colours without any day residents were exposed to five degree f tempera- noticeable noise in the image.
+5,each colour combina- ture band in each zone.
+5,for exposure to cold the range tion represents a different combination of values for of minimum daily temperatures was bounded between the first three principal components.
+5,"conversely, an -35 °f (-37.2 °c) and 65 °f (18.3 °c)."
+5,"for exposure to image derived from the last three principal compo- heat the range of minimum daily temperatures was nents demonstrates a lot of irregular noise, banding similarly bounded between 40 °f (4.5 °c) and 120 °f and other image artefacts in large quantities."
+5,2 (48.9 °c).
+5,in case a region did not experience the full presents a pseudo-colour composite image of the last fig.
+5,pseudo-colour composite of the last three principal components.
+6,s652 a.
+6,"liss et al. - geospatial health 8(3), 2014, pp."
+6,s647-s659 fig.
+6,regions over conterminous usa as defined by the proposed non-supervised lkn regionalization prior to nomination.
+6,"colors represent distinct labels assigned by the classification procedure, but prior to climate categories nomination. three components each assigned to a separate colour filter was applied that produced smooth, mostly con- channel."
+6,this figure demonstrates that pca decompo- tiguous regions.
+6,fig. 3 presents the political bound- sition removed significant amount of random noise aries of the conterminous usa overlaid on the output and image artefacts prior to the classification.
+6,"it has from the classification algorithm and the geographic been shown that the pca automatically projects to the distribution of different regions, as defined by the subspace where the global solution of k-means cluster- method described above. ing lies, and thus facilitates k-means clustering to find basic statistics of climate characteristics for the near-optimal solutions (ding and he, 2004)."
+6,eight cli- study period for each of the eight regions were com- mate regions maximised the vrc.
+6,consequently the puted.
+6,"the proposed method achieves good separation entire spatial extent of the conterminous usa was between regions for customary weather proxies, such classified into eight distinct regions using k-means as temperature and precipitation, for both cold and classification."
+6,subsequently a 15 x 15 majority kernel hot seasons.
+6,figs. 5 and 6 show climatic separation by table 1.
+6,"average annual and seasonal, daily minimum ambient temperatures and precipitation levels per each of the eight defined zones in conterminous usa."
+6,"annual hot season* cold season** prevailing climate with lkn elevation colour code (m) temperature precipitation temperature precipitation temperature precipitation (°c) (mm) (°c) (mm) (°c) (mm) cool, wet summers with cold, 271 7.5 845 15.2 1.03 -7.5 0.68 moderately dry winters (cwcd) (204; 339) (5.9; 9.1) (768; 923) (13.4; 17.0) (0.35; 1.71) (-11.9; -3.1) (0.26; 1.09) hot, wet summers with warm, 193 16.1 737 20.4 1.03 4.3 1.17 moderately wet winters (hwhd) (7; 379) (13.4; 18.9) (484; 990) (19.6; 21.3) (0.57; 1.49) (2.6; 6.0) (0.44; 1.89) temperate, wet summers with 183 12.1 1088 17.6 1.31 -2.8 1.34 temperate, wet winters (twtw) (87; 280) (10.2; 14) (994; 1183) (16.3; 18.9) (0.43; 2.18) (-5.9; 0.4) (0.73; 1.94) temperate, arid summers with 1370 11.1 253 18.3 0.29 -0.7 0.30 emperate, arid winters (tata) (1110; 1631) (7.6; 14.7) (184; 322) (17.0; 19.6) (0.10; 0.47) (-2.6; 1.3) (0.00; 0.65) hot, wet summers with warm, 69 16.6 1254 19.9 1.42 4.3 2.07 wet winters (hwhw) (1; 149) (14; 19.1) (1115; 1393) (19.2; 20.7) (0.66; 2.19) (2.1; 6.4) (1.16; 2.99) temperate, wet summers 335 8.8 699 16.4 0.91 -7.2 0.50 with cold moderately dry (206; 465) (6.8; 10.8) (540; 859) (14.6; 18.1) (0.11; 1.71) (-11.3; -3.2) (0.07; 0.92) winters (twcd) temperate, moderately dry 720 12.8 432 17.5 0.40 2.2 0.63 summers with arid, temperate (446; 994) (9.9; 15.7) (351; 513) (16.5; 18.5) (0.14; 0.67) (0.5; 4.0) (0.00; 1.37) winters (tdta) cool, moderately dry summers 1169 6.8 358 12.1 0.62 -8.2 0.23 with arid, cold winters (cdca) (766; 1573) (5.4; 8.1) (304; 413) (10.6; 13.7) (0.28; 0.95) (-11.1; -5.2) (0.06; 0.40) * june-august; **december-february."
+7,"liss et al. - geospatial health 8(3), 2014, pp."
+7,"s647-s659 s653 minimum daily temperature and precipitation during ately dry summers and cold, arid winter (cdca) with the cold season between december and january and 445 thousand elderly residents."
+7,"the highest hospitali- warm season between june and august separately sation rates due to heat and cold temperatures was across eight regions defined by the proposed regional- observed in region 5 best characterised by hot, wet ization method with the colour representing separate summers and warm, wet winters (hwhw) with 9.6 regions and the colour transparency proportional to and 17.7 hospitalisations per 100,000 persons at risk, each quintile of the data distribution."
+7,based on the dis- respectively.
+7,"the lowest hospitalisation rate due to tribution of resulting climate parameters intuitive, cli- heat was observed in region 8 characterised by cool, mate description for each region reflecting the prevail- moderately dry summers and cold arid winters (cdca) ing weather patterns in each region during cold and with 4.5 hospitalisations per 100,000 persons at risk. warm periods of the year was suggested."
+7,"climate the lowest hospitalisation rate due to cold was parameters for each of the eight defined zones and observed in region 4 characterised by temperate, arid their intuitive climatological descriptions are sum- summers and winters (tata) with 9.1 hospitalisations marised in table 1 and shown on the map overlaid per 100,000 persons at risk (table 2). with political borders (fig."
+7,population at risk was computed for each region for discussion each 10 degree f minimum daily temperature range.
+7,"the largest population at risk, with 10.9 million elder- this study proposes a new approach to spatial par- ly residents, was in a region (number 3) best charac- titioning, a three-step lkn regionalization method terised by temperate, wet summers and winters built upon a fundamental idea, suggested by wladimir (twtw)."
+7,"the smallest population at risk resided in a köppen nearly two centuries ago, that climate of a region (number 8) best characterised by cool, moder- region can be distinguished by the phenology of that fig."
+7,eight climate regions of conterminous usa as defined by the proposed non supervised lkn regionalization colour coded with overlaid political borders.
+8,s654 a.
+8,"liss et al. - geospatial health 8(3), 2014, pp."
+8,s647-s659 fig.
+8,climatic separation by minimum daily temperature and fig.
+8,climatic separation by minimum daily temperature and precipitation during the cold season between december and precipitation during the hot season between june and august january across eight regions defined by the proposed regionali- across eight regions defined by the proposed regionalization zation method with the colour representing separate regions and method with the colour representing separate regions and the the colour transparency proportional to each quintile of the data colour transparency proportional to each quintile of the data distribution. distribution. region.
+8,phenology is very sensitive to minor climate observing satellites.
+8,"furthermore, the utility of the sug- nuances and changes in profile, which allows a gested regionalization was assessed for public health researcher to differentiate regions with varying climate research and that of defined regions was evaluated for patterns and detect effects of climate changes."
+8,limited the assessment of population vulnerability due to technological capacity at his time forced köppen and exposure to ambient heat and cold temperatures. his contemporary researchers to use proxy variables climate classification is a subset of the larger group and simplified decision rules.
+8,"an alternative objective of ‘p-region’ problems, which collectively belong to a method of defining climate regions has now been ‘np-hard’ set of optimisation problems."
+8,"several introduced based on actual phenology and annual veg- attempts to classify global or regional climate based on etation cycle derived directly from the worldwide measuring or interpreting various proxy variables measurements by a constellation of nasa’s earth- have been made (fovell, 1997; unal et al., 2003; chen table 2."
+8,populations at risk and mean hospitalisation counts for hypothermia and hyperthermia for the climate regions defined by the lkn regionalization method.
+8,"population number of hypothermia number of hyperthermia prevailing climate types per class hospitalisations hospitalisations according to the lkn code thousands mean mean annual rate* annual rate* per year annual count annual count cool, wet summers with cold, 3,282 469 14.3 199 6.06 moderately dry winters (cwcd) hot, wet summers with warm, 5,130 649 12.7 478 9.32 moderately wet winters (hwhd) temperate, wet summers with 10,928 1,550 14.2 841 7.70 temperate, wet winters (twtw) temperate, arid summers 1,227 112 9.1 98 7.98 with temperate, arid winters (tata) hot, wet summers with warm, 5,343 944 17.7 512 9.58 wet winters (hwhw) temperate, wet summers with 3,355 510 15.2 240 7.15 cold moderately dry winters (twcd) temperate, moderately dry 1,954 186 9.5 112 5.73 summers with arid, temperate winters (tdta) cool, moderately dry summers 445 78 17.5 20 4.50 with arid, cold winters (cdca) *per 100,000 at risk."
+9,"liss et al. - geospatial health 8(3), 2014, pp."
+9,s647-s659 s655 table 3.
+9,populations at risk and mean hospitalization counts for hypothermia and hyperthermia for the climate regions defined by the köppen-geiger regionalization method.
+9,"population number of hypothermia number of hyperthermia prevailing climate types per class hospitalisations hospitalisations according to the köppen-geiger code thousands mean mean annual rate* annual rate* per year annual count annual count tropical monsoon climate (am) 274 7 2.6 6 2.2 tropical, wet-dry climate (aw) 297 9 3.0 16 5.4 a-category: “tropical” 571 16 2.8 22 3.9 mid-latitude steppe and desert (bsh) 487 24 4.9 43 8.8 tropical and subtropical steppe (bsk) 2,742 290 10.6 136 5.0 tropical and subtropical desert (bwh) 470 28 6.0 46 9.8 b-category: “arid” 3,699 342 9.2 225 6.1 humid, subtropical climate (cfa) 9,360 1,586 16.9 997 10.7 maritime, temperate climate (cfb) 91 22 24.1 5 5.5 dry summer, mediterranean climate (csa) 318 39 12.3 20 6.3 dry summer, subtropical climate (csb) 1,089 141 12.9 40 3.7 c-category “temperate” 10,858 1,788 16.5 1,062 9.8 hot summer, continental climate (dfa) 11,724 1,617 13.8 955 8.1 warm summer, continental climate (dfb) 4,444 666 15.0 223 5.0 continental subarctic climate (dfc) 64 10 15.7 2 3.1 warm summer, continental climate (dsb) 292 54 18.5 12 4.1 continental subarctic or boreal, i.e. taiga (dsc) 0.038 0 0 0 0.0 hot summer, continental climate dwa 9 2 21.2 1 10.6 warm summer, continental climate (dwb) 1 0 0 1 96.2 d-category: “cold” 16,534 2,349 14.2 1,194 7.2 *per 100,000 at risk. and chen, 2013)."
+9,the most often used proxies were subset before the analysis.
+9,"unsupervised classification, ambient temperature and precipitation, with a quite on the other hand, uses similarity measures derived complicated set of decision rules."
+9,an example of cli- from the data itself to assign class labels.
+9,many differ- mate zone determinants for a popular kg climate clas- ent methods exist for defining similarity metrics.
+9,these sification system is listed in table 4.
+9,"objective methods are often domain-specific and use the concept research, that identifies climate characteristics based of various “distance measures”."
+9,"usually the goal of an on data properties, should not, at least in theory, unsupervised classification algorithm is to maximise depend on a set of predefined parameters."
+9,"the similarity within the clusters, while increasing dissimi- machine learning methods should be able to divide larity between the clusters."
+9,"in the case of regionaliza- regional climate characteristics based on the properties tion based on climate, the “true” climate is not known of the data itself."
+9,"therefore, these methods are espe- beforehand."
+9,"the objective of this analysis was to avoid cially suitable for researchers who want to detect small an involvement of expert opinions in regionalization but persistent changes in regional climate. process whenever possible, making unsupervised clas- the complex problem of separating a large data set sification the most appealing method."
+9,"the hierarchical into a number of distinct cohesive classes is well clustering method, as suggested by fovell and fovell known and often arises in many areas of scientific data (1993) and fovell (1997) is very attractive."
+9,"it creates analysis and machine learning, including data mining an intuitive, hierarchical structure of nested regions. and pattern recognition, image processing and target however, it is very computationally expensive."
+9,a full acquisition.
+9,"there are two major groups of algorithms distance matrix required for this method to analyse employed: supervised and unsupervised (theodoridis remote sensing data described above would exceed and koutroumbas, 2009)."
+9,the supervised method 150 billion entries - a challenging problem even by works best when an expert is available and it is possi- today’s computing standards.
+9,the suggested method ble to determine a “true” group membership of a data groups regions based on the “similarity” of the phe-
+10,s656 a.
+10,"liss et al. - geospatial health 8(3), 2014, pp."
+10,s647-s659 table 4.
+10,"description of köppen-geiger climate classification definitions and decision criteria for 16 regions in conterminous usa. 1st 2nd 3rd description criteria a tropical tcold ≥18c f rainforest pdry ≥60 m monsoon not (af) & pdry ≥100–map/25 w savannah not (af) & pdry <100–map/25 b arid map <10×pthreshold w desert map <5×pthreshold s steppe map ≥5×pthreshold h hot mat ≥18 k cold mat <18 c temperate thot >10 & 0 <tcold <18 s dry summer psdry <40 & psdry <pwwet/3 w dry winter pwdry <pswet/10 f without dry season not (cs) or (cw) a hot summer thot≥22 b warm summer not (a) & tmon10 ≥4 c cold summer not (a or b) & 1 ≤tmon10 <4 d cold thot >10 & tcold ≤0 s dry summer psdry <40 & psdry <pwwet/3 w dry winter pwdry <pswet/10 f without dry season not (ds) or (dw) a hot summer thot ≥22 b warm summer not (a) & tmon10 ≥4 c cold summer not (a, b or d) d very cold winter not (a or b) & tcold <–38 e polar thot <10 t tundra thot >0 f frost thot ≤0 criteria description: map = mean annual precipitation; mat = mean annual temperature; thot = temperature of the hottest month; tcold = temperature of the coldest month; tmon10 = number of months where the temperature is above 10c; pdry = precipitation of the driest month; psdry = precipitation of the driest month in summer; pwdry = precipitation of the driest month in winter; pswet = precipitation of the wettest month in summer; pwwet = precipitation of the wettest month in winter; pthreshold = varies according to the following rules (if 70% of map occurs in winter then pthreshold = 2 x mat, if 70% of map occurs in summer then pthreshold = 2 x mat + 28, otherwise pthreshold = 2 x mat + 14)."
+10,"summer (winter) is defined as the warmer (cooler) six month period of october to march and april to september. nology signature based on a vegetation index as bouldin, 1979), which is based on a ratio of within- recorded by earth observation satellites."
+10,"thus this cluster and between-cluster distances, the dunn’s clustering method derives regional climate assignment index (dunn, 1973) with multiple variations that are from statistical properties of collected data and does based on geometrical measures of cluster compactness not require an input of additional decision rules. and separation."
+10,"there is an ongoing discussion about to determine an optimal number of distinct parti- the applicability of cluster validity indices in the pres- tions (climatic regions) we applied the caliński- ence of noise, outliers and other properties often harabasz cluster (1974) validity index, a quantitative encountered in environmental, spatial and public measure specifically designed to evaluate the quality of health datasets (kim and ramakrishna, 2005)."
+10,dunn’s data partitioning.
+10,"determination of the quality of data index, for example, is sensitive to noisy clusters and partitioning is an important, but challenging, step to the presence of outliers as well as being computation- insure quality unsupervised classification."
+10,"there are a ally intensive (bezdek and pal, 1998)."
+10,"as a variance number of other cluster validation measures proposed ratio measure it is usually more stable in the presence in the literature, e.g. the db criterion (davies and of white noise than dunn’s index or the db criterion."
+11,"liss et al. - geospatial health 8(3), 2014, pp."
+11,"s647-s659 s657 it was found that the number of regions selected using lishing economic and social policies, such as availabil- vrc methodology matches the number of major ity and amount of heating assistance, and by changing regions as determined by fovell’s hierarchical cluster- behaviour to reduce an effect of climatic stress."
+11,"the ing methodology, which indirectly confirmed the effect of adaptation requires further exploration. appropriateness of the selected cluster validity measure."
+11,"a systematic approach to defining climatic condi- climate properties of each of the eight zones, such as tions is essential for conducting studies to examine dif- average high and low temperatures, average range of ferential effects of temporal extremes in various cli- temperatures in cold and hot seasons and amounts of mates."
+11,"while generally accepted, the kg classification precipitation in these seasons demonstrate contrasting produces a much skewed distribution of population meteorological characteristics across the eight clusters. across usa."
+11,the majority of the susceptible population the suggested regionalization method is not based on (about 80%) is concentrated just in 3 out of 16 defined expert opinions but rather intricate properties of the regions for this territory (table 3).
+11,"even an aggregation data and allows detection of small changes in the cli- of smaller regions into four main categories is insuffi- mate characteristics, which is especially important in cient to resolve this issue."
+11,the uneven distribution may the context of climate change.
+11,"it is not practical to fre- result in high instability of disease rates and risk esti- quently modify a complex set of expert rules, like kg mation, which is one of the main questions for epi- classification trees (see table 4)."
+11,"in fact, these rules demiological studies of the effects of extreme weather have remained practically unchanged for more than a and/or climate change on human health."
+11,the proposed century.
+11,"by using a frequently updated worldwide data regionalization represents a relatively even distribution stream from the eos constellation, the proposed deci- of vulnerable populations across defined regions to sion support method can capture small changes in the offer a more suitable approach for national-scale epi- climate patterns over regions of various size in a rela- demiological studies, which are often sensitive to large tively short time frame."
+11,"in the future, quantification of variations in population sizes. cluster differences based on a customary set of proxies, such as temperature and precipitation, and compari- conclusions son of the resulting assignments with existing climate classification systems needs further study."
+11,"the proposed objective clustering and decision sup- climate and human health are deeply interconnected port method produce sensible, spatial divisions for the (mcmichael, 2012)."
+11,several studies have demonstrat- conterminous usa.
+11,"the suggested method provides an ed the impact of cold and hot weather on human mor- attractive, computationally efficient alternative to the tality and morbidity in the presence of a geographic hierarchical clustering method to perform a spatial and climatic heterogeneity over a large, spatial extent regionalization based on local climate conditions."
+11,"this (keatinge and donaldson, 2001; basu and samet, work adapts a number of machine learning algo- 2002; curriero et al., 2002; yu et al., 2012). rithms, such as clustering and kernel filtering, spatial separation of a large, contiguous area into smaller interpolation and principal component analysis suit- regions with similar prevailing climate conditions able for decision support frameworks in a public allows quantification of the effects of short-term expo- health applications."
+11,the use of frequently updated sure to extreme weather events and long-term adapta- remote-sensing satellite data streams and machine tions to the prevailing climate conditions.
+11,this work learning algorithms allow for frequent revisions.
+11,this shows that hospitalisations due to exposure to cold in empowers researchers to capture temporal climate warm regions with wet summers and winters (hwhw) changes and their effect on human health.
+11,the advan- were almost twice higher than in temperate regions tage of climate classification based on remotely sensed with arid summers and winters (tata).
+11,"similarly, for data with regard to mitigating adverse effects of severe hospitalisations related to heat exposure in the hot wet weather on human health has a strong potential and region hwhw also almost twice higher when com- needs to be further explored by both meteorological pared to cold, dry region (cdca)."
+11,the substantial fluc- and public health communities.
+11,the heavily populated tuations of hospitalisation rates across regions might regions in the warm south-east (the “sunbelt”) should be indicative of adaptation processes.
+11,"people adapt to be carefully explored and evaluated for developing climatic conditions by creating protective infrastruc- preventive strategies to reduce thermal stress related ture, including location-specific heating and cooling hospitalisations in vulnerable populations."
+11,"the analy- systems, by designing urban environments in which sis of cluster optimality and validity, extension of buildings and transit systems are connected, by estab- health-based climate classification to other regions in"
+12,s658 a.
+12,"liss et al. - geospatial health 8(3), 2014, pp."
+12,"s647-s659 the world, further assessment of a regional resilience chen d, chen hw, 2013."
+12,using the köppen classification to to climate change and applications to infectious and quantify climate variation and change: an example for 1901– other diseases and health conditions are recommended 2010.
+12,"environ dev 6, 69-79. future steps."
+12,"chui kk, webb k, russell rm, naumova en 2009."
+12,"geographic variations and temporal trends of salmonella- acknowledgements associated hospitalization in the u.s. elderly, 1991-2004: a time series analysis of the impact of haccp regulation."
+12,bmc the authors would like to express their gratitude to dr.
+12,"kurt public health 9, 447."
+12,pennell and dr.
+12,gilbert e.
+12,"metcalf (tufts university, medford, cohen sa, egorov ai, jagai js, matyas bt, demaria jr a, chui ma, usa), two anonymous reviewers for their insightful com- kkh, griffiths jk, naumova en, 2008."
+12,"the seeds of two ments and suggestions to alexandra kulinkina (tufts gastrointestinal diseases: socioeconomic, environmental, and university) and daniel aronov (oxford university, oxford, uk) demographic factors related to cryptosporidiosis and giardia- for editorial assistance."
+12,"tufts university school of engineering, sis in massachusetts."
+12,"environ res 108, 185-191."
+12,"tufts institute for the environment (tie), tufts initiative for curriero fc, heiner ks, samet jm, zeger sl, strug l, patz ja, modeling infectious diseases (informid), university of 2002."
+12,"temperature and mortality in 11 cities of the eastern mississippi medical center, boston financial research, inc and united states."
+12,"am j epidemiol 155, 80-87."
+12,nasa roses 2013 grant provided financial support.
+12,"davies dl, bouldin dw, 1979."
+12,a cluster separation measure.
+12,"ieee trans pattern anal mach intell 1, 224-227."
+12,"references ding c, he x, 2004."
+12,k-means clustering via principal compo- nent analysis.
+12,"banff, icml 2004, 225-232 pp."
+12,"anderson gb, dominici f, wang y, mccormack mc, bell ml, dunn jc, 1973."
+12,"a fuzzy relative of the isodata process and peng rd, 2013."
+12,heat-related emergency hospitalizations for its use in detecting compact well-separated clusters.
+12,"j cyb 3, respiratory diseases in the medicare population."
+12,am j respir 32-57.
+12,"crit care med 187, 1098-1103."
+12,"duque jc, church rl, middleton rs, 2011."
+12,"the p-regions arbabi a, 2011."
+12,cluster-based method for understanding the problem.
+12,"geogr anal 43, 104-126. climactic diversity of iran."
+12,"afr j agric res 6, 6525-6529."
+12,"ebi kl, mills d, 2013."
+12,"winter mortality in a warming climate: arnold gm, 2003."
+12,cluster analysis.
+12,"j r stat soc series d 52, a reassessment.”"
+12,"wiley interdiscip rev clim change 4, 203- 407-408."
+12,"aubrecht c, steinnocher k, köstl m, züger j, loibl w, 2013."
+12,"fovell rg, 1997."
+12,consensus clustering of u.s. temperature and long-term spatio-temporal social vulnerability variation con- precipitation data.
+12,"j clim 10, 1405-1427. sidering health-related climate change parameters particularly fovell rg, fovell myc, 1993."
+12,climate zones of the contermi- affecting elderly.
+12,"nat hazards 68, 1371-1384. nous united states defined using cluster analysis."
+12,"j clim 6, barkan jd, densham pj, rushton g, 2006."
+12,space matters: 2103-2135. designing better electoral systems for emerging democracies.
+12,"fowlkes eb, mallows cl, 1983."
+12,"a method for comparing two am j pol sci 50, 926-939. hierarchical clusterings."
+12,"j am stat assoc 78, 553-569."
+12,"basu r, samet jm, 2002."
+12,"relation between elevated ambient franke r, nielson g, 1980."
+12,smooth interpolation of large sets temperature and mortality: a review of the epidemiologic evi- of scattered data.
+12,"int j numer methods eng 15, 1691-1704. dence."
+12,"epidemiol rev 24, 190-202."
+12,"geiger r, pohl w, 1954."
+12,"eine neue wandkarte der klimagebiete bezdek jc, pal nr, 1998."
+12,some new indexes of cluster validity. der erde nach w.
+12,"köppens klassifikation (a new wall map of trans sys man cyber part b 28, 301-315. the climatic regions of the world according to w."
+12,"köppen’s bragagni g, alberti a, castelli g, lari f, 2012."
+12,ipotermia acci- classification).
+12,"erdkunde 8, 58-61. dentale nell’anziano - hypotermia in the elderly."
+12,"ital j med 6, goldberg ms, gasparrini a, armstrong b, valois mf, 2011."
+12,47-51.
+12,"the short-term influence of temperature on daily mortality in caliński t, harabasz j, 1974."
+12,"a dendrite method for cluster the temperate climate of montreal, canada."
+12,"environ res 111, analysis."
+12,"commun stat 3, 1-27."
+12,853-860.
+12,"carroll ml, dimiceli cm, sohlberg ra, townshend jrg, horvath sm, rochelle rd, 1977."
+12,hypothermia in the aged.
+12,modis normalized difference vegetation index.
+12,"environ health perspect 20, 127-130."
+12,university of maryland.
+12,"jagai js, castronovo da, monchak j, naumova en, 2009."
+12,"chebana f, martel b, gosselin p, giroux jx, ouarda tbmj, seasonality of cryptosporidiosis: a meta-analysis approach."
+12,"a general and flexible methodology to define thresholds environ res 109, 465-478. for heat health watch and warning systems, applied to the jagai js, sarkar r, castronovo d, kattula d, mcentee j, ward province of québec (canada)."
+12,"int j biometeorol 57, 631-644."
+12,"h, kang g, naumova en, 2012."
+12,seasonality of rotavirus in
+13,"liss et al. - geospatial health 8(3), 2014, pp."
+13,"s647-s659 s659 south asia: a meta-analysis approach assessing associations j occup environ med 51, 13-25. with temperature, precipitation, and vegetation index."
+13,"plos pascal m, wagner v, le tertre a, laaidi k, honoré c, bénichou one 7, 1-14."
+13,"f, beaudeau p, 2013."
+13,"definition of temperature thresholds: the johnson dp, stanforth a, lulla v, luber g, 2012."
+13,developing example of the french heat wave warning system.
+13,"int j an applied extreme heat vulnerability index utilizing socioeco- biometeorol 57, 21-29. nomic and environmental data."
+13,"appl geogr 35, 23-31."
+13,"rango n, 1980."
+13,old and cold: hypothermia in the elderly.
+13,"kalkstein ls, davis re, 1989."
+13,"weather and human mortality: geriatrics 35, 93-96. an evaluation of demographic and interregional responses in rango n, 1985."
+13,the social epidemiology of accidental the united states.
+13,"ann assoc am geogr 79, 44-64. hypothermia among the aged."
+13,"gerontologist 25, 424-430."
+13,"keatinge wr, donaldson cg, 2001."
+13,"mortality related to cold renka rj, 1988."
+13,multivariate interpolation of large sets of scat- and air pollution in london after allowance for effects of asso- tered data.
+13,"acm trans math softw 14, 139-148. ciated weather patterns."
+13,"environ res 86, 209-216."
+13,"seman ap, golim v, gorzoni ml, 2009."
+13,"[study on accidental kim m, ramakrishna rs, 2005."
+13,new indices for cluster validity hypothermia in institutionalized elderly].
+13,rev assoc med bras assessment.
+13,"pattern recognit lett 26, 2353-2363."
+13,"55, 663-671."
+13,"koppen w, volken e, brönnimann s, 2011."
+13,"the thermal zones tasnádi a, 2011."
+13,"the political districting problem: a survey. of the earth according to the duration of hot, moderate and society and economy 33, 543-554. cold periods and to the impact of heat on the organic world."
+13,"theodoridis s, koutroumbas k, 2009."
+13,pattern recognition.
+13,"meteorol z 20, 351-360."
+13,"london, academic press, 961 pp."
+13,"lpdaac-nasa, 2000-2013."
+13,"modis vegetation data thornthwaite cw, 1931."
+13,the climates of north america: (mod13 and myd13).
+13,nlpdaa center.
+13,"sioux falls, south according to a new classification."
+13,"geographical review 21, dakota, nasa."
+13,633-655.
+13,"margolis h, 2014."
+13,"heat waves and rising temperatures: human thornthwaite cw, 1943."
+13,problems in the classification of cli- health impacts and the determinants of vulnerability.
+13,in: mates.
+13,"geographical review 33, 233-255."
+13,global climate change and public health.
+13,"pinkerton ke, rom thornthwaite cw, 1948."
+13,"an approach toward a rational classi- wn (eds), springer, new york 7, 85-120. fication of climate."
+13,"geogr review 38, 55-94."
+13,"mcmichael aj, 2012."
+13,"insights from past millennia into climatic tong d, murray at, 2012."
+13,spatial optimization in geography. impacts on human health and survival.
+13,"proc natl acad sci u ann assoc am geogr 102, 1290-1309."
+13,"s a 109, 4730-4737."
+13,"unal y, kindap t, karaca m, 2003."
+13,"redefining the climate montero jc, mirón ij, criado-álvarez jj, linares c, díaz j, zones of turkey using cluster analysis."
+13,"int j climatol 23, 1045- 2012."
+13,influence of local factors in the relationship between 1055. mortality and heat waves: castile-la mancha (1975–2003).
+13,"watts aj, 1972."
+13,"hypothermia in the aged: a study of the role of sci total environ, 414, 73-80. cold-sensitivity."
+13,"environ res 5, 119-126."
+13,"national climate assessment, 2014."
+13,"washington dc, usgcr xie h, yao z, zhang y, xuy, xu x, liu t, lin h, lao x, program."
+13,"available at: http://nca2014.globalchange.gov rutherford s, chu c et al., 2013."
+13,"short-term effects of the (accessed on may 2014). 2008 cold spell on mortality in three subtropical cities in noaa, 2014."
+13,"global historical climatology network daily guangdong province, china."
+13,"environ health perspect 121, dataset overivew."
+13,available at: https://gis.ncdc.noaa.gov/geo- 210-216. portal/catalog/search/resource/details.page?
+13,"id=gov.noaa.ncdc: yu w, mengersen k, wang x, ye x, guo y, pan x, tong s, c00838 (accessed on march 2014)."
+13,"daily average temperature and mortality among the eld- o’neill ms, ebi kl, 2009."
+13,temperature extremes and health: erly: a meta-analysis and systematic review of epidemiological impacts of climate variability and change in the united states. evidence.
+13,"int j biometeorol 56, 569-581."

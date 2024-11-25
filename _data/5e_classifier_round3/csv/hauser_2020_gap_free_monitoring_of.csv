@@ -1,0 +1,978 @@
+page,p
+1,"remote sensing technical note gap-free monitoring of annual mangrove forest dynamics in ca mau province, vietnamese mekong delta, using the landsat-7-8 archives and post-classification temporal optimization leon t."
+1,"hauser 1, *, nguyen an binh 2 , pham viet hoa 2 , nguyen hong quan 3,4 and joris timmermans 1,5 1 department of environmental biology, institute of environmental sciences, leiden university, p.o."
+1,"box 9518, 2300 ra leiden, the netherlands; j.timmermans@cml.leidenuniv.nl 2 ho chi minh city institute of resources geography, vietnam academy of science and technology, ho chi minh city 700000, vietnam; nabinh@hcmig.vast.vn (n.a.b.); pvhoa@hcmig.vast.vn (p.v.h.)"
+1,"3 institute for circular economy development, vietnam national university, ho chi minh city 700000, vietnam; nh.quan@iced.org.vn 4 center of water management and climate change, institute for environment and resources, vietnam national university, ho chi minh city 700000, vietnam 5 biogeography & macroecology lab, department theoretical and computational ecology, institute for biodiversity and ecosystem dynamics, university of amsterdam (uva), 1090 ge amsterdam, the netherlands * correspondence: l.t.hauser@cml.leidenuniv.nl  received: 19 september 2020; accepted: 6 november 2020; published: 13 november 2020  abstract: ecosystem services offered by mangrove forests are facing severe risks, particularly through land use change driven by human development."
+1,remote sensing has become a primary instrument to monitor the land use dynamics surrounding mangrove ecosystems.
+1,"where studies formerly relied on bi-temporal assessments of change, the practical limitations concerning data-availability and processing power are slowly disappearing with the onset of high-performance computing (hpc) and cloud-computing services, such as in the google earth engine (gee)."
+1,"this paper combines the capabilities of gee, including its entire landsat-7 and landsat-8 archives and state-of-the-art classification approaches, with a post-classification temporal analysis to optimize land use classification results into gap-free and consistent information."
+1,"the results demonstrate its application and value to uncover the spatio-temporal dynamics of mangrove forests and land use changes in ngoc hien district, ca mau province, vietnamese mekong delta."
+1,the combination of repeated gee classification output and post-classification optimization provides valid spatial classification (94–96% accuracy) and temporal interpolation (87–92% accuracy).
+1,the findings reveal that the net change of mangroves forests over the 2001–2019 period equals −0.01% annually.
+1,"the annual gap-free maps enable spatial identification of hotspots of mangrove forest changes, including deforestation and degradation."
+1,post-classification temporal optimization allows for an exploitation of temporal patterns to synthesize and enhance independent classifications towards more robust gap-free spatial maps that are temporally consistent with logical land use transitions.
+1,the study contributes to a growing body of work advocating full exploitation of temporal information in optimizing land cover classification and demonstrates its use for mangrove forest monitoring.
+1,"keywords: data fusion; forest monitoring; google earth engine; landsat; mangrove forests; multi-temporal analysis; remote sensing; satellite earth observation; time series analysis; vietnam remote sens. 2020, 12, 3729; doi:10.3390/rs12223729 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2020, 12, 3729 2 of 16 1."
+2,introduction ecosystem services offered by mangrove forests are facing severe risks.
+2,"within the transition zone of land and sea of (sub)tropical coastal regions, mangroves have carved out a distinct niche to flourish and thereby provide vital services to mankind."
+2,"specifically, mangrove ecosystems have shown to be one of the world’s most productive in terms of carbon sequestration, shelter and breeding grounds for aquatic species, and as important physical barriers against tides and ocean surges [1–4]."
+2,"despite the multitude of crucial ecosystem services these coastal forests offer to communities in coastal regions of more than 124 countries, the status of mangrove forests in many regions is under pressure due to forest loss and land degradation, caused by overexploitation and land use change driven by human development [5–7]."
+2,"due to the inaccessible, ever-changing, and extensive nature of these mangroves, remote sensing has become a primary instrument to monitor the health and dynamics of these ecosystems [8–10]."
+2,"the field of satellite remote sensing has moved into an era in which a tremendous wealth of earth observation (eo) data are gathered at increasing spectral, spatial, and temporal resolutions—supporting the wide-spread application of satellite data for studying global changes [11]."
+2,orbiting eo satellites allow us to repeatedly revisit areas of interest to study temporal changes and facilitate time series analysis.
+2,the iconic landsat-7 and landsat-8 missions both offer average revisit intervals of 16 days and observations that go back as early as the year 2000.
+2,the later landsat-8 mission collected over 3.35 petabyte of scenes over the course of a single year in 2017 [12].
+2,these data collections hold great potential to improve our monitoring efforts of mangrove ecosystems and study changes over time.
+2,a critical review by younes cardenas et al. (2017) on using satellite remote sensing to monitor mangrove ecosystems points out that the majority of studies conducted—reviewing 55 recent peer-reviewed articles using landsat/aster imagery—are not making full use of the wealth of eo data available [13].
+2,the authors specify that most studies between 2001–2016 used fewer than 10 images and longitudinal studies often analyze temporal changes with 7–11 years between scenes which leaves much of the potential of current satellite archives unlocked [13].
+2,"yet, mangrove forests are frequently part of fast-changing landscapes driven by land use change at the interplay of volatile aquaculture markets, policy-making, and the biophysical dynamics of erosion, sedimentation, and changing tides [14–16]."
+2,this raises the question of how we can better unlock the potential of available satellite imagery archives to facilitate high temporal resolution monitoring of the fast-paced land use processes surrounding mangrove forest ecosystems.
+2,"the advances in high-performance computing (hpc) in combination with cloud-computing services, such as provided by the google earth engine platform (gee), allow us to address the major challenges of processing and handling enormous eo datasets and turning these into comprehensible information [13,17–21]."
+2,"the gee platform provides straightforward hpc cloud access to many of the major satellite archives as well as numerous image classifiers for mapping applications, including classification and regression trees (cart) and random forests (rf) approaches."
+2,"illustrative of its capabilities, hansen et al. (2013) mapped global forest cover change products from over 650 thousand landsat-7 scenes [22]."
+2,"following this, a large body of regional studies has demonstrated high mapping accuracies using gee’s land use classifiers (cart) with landsat images [19,23,24]."
+2,"more specifically, we observe an increasing use and successful implementation (accuracies between 92% and 97%) of gee-based land use classification for mangrove mapping [25–27]."
+2,"through gee, we can efficiently organize longitudinal time series from satellite observations and independent classification efforts can be repeated over time with ease."
+2,these time series can be valuable to study and monitor temporal changes in land use.
+2,"conversely, the temporal dependencies of each time point in the series can also be used to further optimize the time series in terms of missing information and consistency."
+2,"in other words, the temporal domain can facilitate post-classification optimization of gee output towards maps that are gap-free and temporally consistent with logical land use transitions as well as provide a means of cross-validation."
+2,this is particularly crucial in cases
+3,"remote sens. 2020, 12, 3729 3 of 16 with hampering climatic conditions (clouds, snow, dust, and aerosols), instrumentation errors, losses of image data during data transmission, or high uncertainties in information processing [28]."
+3,"temporal gap-filling and smoothing approaches are common practice in remote sensing of phenology and cropping cycles through continuous parameters, such as vegetation indices (e.g., ndvi, evi) and surface parameters (land surface temperature) [28–32]."
+3,"however, in discrete land cover classification exercises, this practice remains less common, including in combination with the gee platform [33,34]."
+3,"current studies tend to focus on gap-filling based on spatially neighboring pixels [35,36], spectral similarity, and/or multi-sensor (source) data fusion [34,37,38], rather than temporal integration."
+3,"as such, few land use studies have taken full advantage of temporal dependencies to reduce both information gaps and inconsistent land use transitions [13,39–41]."
+3,"this is a particularly rare undertaking for the monitoring of mangrove forests land use changes, whereas consistent and gap-free time series are crucial to closely monitor mangrove deforestation, degradation, and disturbance [13,15]."
+3,"land use changes tend to follow logical temporal land use transitions which can guide the optimization of classification maps [13,40]."
+3,"the main objective of our study is to deploy high-performance computing techniques to monitor mangrove forest cover changes in our case study area; the mangrove-rich ngoc hien district, ca mau province in the vietnamese mekong delta."
+3,"rather than a single land use classification approach, we demonstrate how independent land use classifications conducted in gee can be combined to optimize classification results in terms of completeness and consistency."
+3,"as such, the study exploits both; (1) the computational capacity of gee to deal with the entire landsat-7 and -8 archives and (2) the temporal element of a longitudinal time series to optimize land use classification results into “gap-free” and temporally consistent information."
+3,"this can help us better understand the spatio-temporal dynamics of mangrove forests, in terms of extent, distribution, and land use change and disturbances that threaten their conservation."
+3,materials and methods 2.1.
+3,"study area the study area focuses on vietnam’s southernmost district, ngoc hien, ca mau province, located in the southern mekong delta between latitude 8◦ 330 –8◦ 450 n and longitude 104◦ 420 45”–105◦ 30 54”e, spanning an area of 743 km2 (see figure 1)."
+3,"the district has been well-studied for its importance as a major aquaculture hub and its significant reserves of vietnam’s largest and last remaining old-growth mangrove forests, including the internationally acknowledged ramsar site of mui ca mau (2012) and unesco biosphere reserve (2009) [42–44]."
+3,the landscape supports both ecologically important mangrove ecosystems and the economic livelihoods based on aquaculture.
+3,remote sensing data pre-processing this study makes use of the archives of landsat’s later missions embodied by the landsat-7 and landsat-8 multispectral imagery available through gee’s public data catalogue of atmospherically corrected surface reflectance data.
+3,"we have made use of all available 30 m spatial resolution bands of both missions, this implies: two short-wave infrared (swir) bands and four/five visible and near-infrared (vnir) bands for landsat-7 and landsat-8, respectively."
+3,the study area is centered within the path-rows of 125–054 and 126–064 with an average 16-day revisit time.
+3,"the landsat-7 and -8 quality assessment bands and calculated f-mask were used to filter out pixels containing clouds, cirrus, cloud shadow, and atmospheric contamination of the reflectance signal."
+3,table 1 gives an overview of the available images for each year.
+3,based on the spectral reflectance of all available images annual median composites are compiled that provide consistent cloud-free median images of spectral reflectance [45].
+3,the malfunction of the scan line corrector (slc) of the landsat-7 imager has resulted in that on average around a quarter of the data in a landsat-7 scene is missing from the 31st of may 2003 onwards [46].
+3,"these products hence have considerable data gaps,"
+4,materials and methods 2.1.
+4,"study area remote sens. 2020, 12, 3729 4 of 16 the study area focuses on vietnam’s southernmost district, ngoc hien, ca mau province, located in the southern mekong delta between latitude 8°33′–8°45′n and longitude 104°42′45″– 105°3′54″e, spanning but still maintain an area the same of 743 km radiometric 2 (see and figurecorrections geometric 1)."
+4,the district has as data been well-studied collected for its prior to the slc failure.
+4,"theas importance combination of high cloudiness a major aquaculture hub and its region of the with slc significant failure reserves ofresults in limited vietnam’s usability largest and last of the years remaining 2003–2012.mangrove old-growth therefore, our analysis forests, deploys including a cautionary interpretation the internationally acknowledged of these ramsaryears.site furthermore, years characterized by slc failure are combined bi-annually to increase of mui ca mau (2012) and unesco biosphere reserve (2009) [42–44]."
+4,"the landscape supports both data availability, the region,mangrove coverage ofimportant ecologically and to lower uncertainties. ecosystems and the economic livelihoods based on aquaculture."
+4,locationofofstudy figure1.1.
+4,location figure area. studyarea.
+4,table 1.
+4,"overview of used images, per sensor (landsat-7 and landsat-8) per scene pathway, and missing pixels and anomalous land use transitions assessed with temporal data fusion."
+4,years impeded by the slc-malfunction are shaded in grey.
+4,"missing pixels luc anomalies available images for gap filling detected year ls-7 ls-8 no. of no. of % % 125–054 126–064 125–054 126–064 pixels pixels 2001–2002 19 23 1 0.0 0 0.0 2003–2004 † 22 19 0 0.0 449 0.0 2005–2006 † 24 17 257 0.0 1321 0.1 2007–2008 † 10 7 1352 0.1 3220 0.3 2009–2010 † 12 11 78 0.0 4352 0.5 2011–2012 † 11 9 6846 0.7 5112 0.5 2013 (10) (8) 7 13 6468 0.7 8918 0.9 2014 21 19 143 0.0 2131 0.2 2015 16 * 12 * 17 * 19 * 5 0.0 976 0.1 2016 14 17 60 0.0 1372 0.1 2017 18 14 438 0.0 2964 0.3 2018 17 19 1026 0.1 2028 0.2 2019 17 20 3914 0.4 3720 0.4 * = training year, † = scan line corrector (slc) malfunction."
+5,"remote sens. 2020, 12, 3729 5 of 16 2.3."
+5,"land cover classification after pre-processing, the resulting cloud-free median multispectral annual composites are used to characterize land use, and the land use changes over time."
+5,"the land use classification scheme of our study takes into consideration four dominant land uses within the ngoc hien district, namely (1) dense mangrove forest, (2) sparse mangroves, (3) aquaculture/waterbodies, and (4) built-up and barren lands."
+5,dense mangrove forest is defined by a minimum of 30% canopy cover.
+5,vegetated mangrove areas that are 10–30% crown cover are classified as sparse mangroves.
+5,we conducted a supervised classification to develop land use maps.
+5,"there are several classification algorithms available within gee, including; classification and regression trees (cart), random forest (rf), naïve bayes, and support-vector machine (svm)."
+5,"our study opted for the commonly used cart classifier which has produced relatively high accuracies when applied to landsat data in numerous settings [19,23,24,26]."
+5,"more specifically, several studies have reported the highest accuracy for cart land use classification of coastal wetlands and mangroves using gee compared to other classifiers [25,27]."
+5,"most importantly, we ran trails in the study area for both cart and rf in which the first yielded the highest classification accuracy (94–96% for cart, against 89–94% for rf, respectively)."
+5,gee code implementations of both approaches and its validation against test data can be found in the supplementary materials table s1.
+5,"within cart, a decision tree (dt) classifier was instantiated and trained on field data using gee’s default parameters."
+5,the cart algorithm runs through a series of nodes that recursively split the input data in such a way that there is a decrease in entropy and an increase in information gain after the split.
+5,gee’s cart uses the gini impurity index to decide the input features which will provide the best split at each node.
+5,a tabular overview of the exact decision rules for building the model can be found in supplementary materials table s2.
+5,one disadvantage of the dt classifier is the considerable sensitivity to the training dataset.
+5,"a small change to the training data can result in a very different set of subsets and can result in overfitting [19,47]."
+5,"nevertheless, our training and validation data relies on extensive fieldwork, including 514 georeferenced points gathered in-situ across the ngoc hien district in 2015, subdivided into the four classes; dense mangroves (n = 247), sparse mangroves (n = 72), waterbodies/aquaculture ponds (n = 120), and built-up and barren lands (n = 75)."
+5,"we used 70% of the field data for training and the remaining 30% for validation, thereby estimating the classification errors independently."
+5,"following the initial training of the classifier, it is then deployed backward (ls-7) or forward (ls-8) through the time series based on spectral/change information of the surface reflectance data available in the composite datasets."
+5,"based on this method, land cover maps are generated from the surface reflectance of pre-processed yearly median composites between 2001 and 2019."
+5,the workflow of gee pre-processing and land use classification is presented schematically in figure 2.
+5,gee code can be accessed through the urls published in supplementary materials table s1.
+5,"post-classification optimization through time series temporal data fusion the longitudinal temporal data of the landsat archives enabled the use of neighboring time points to cross-validate findings, fill in missing data through temporal data fusion, detect and revise illogical land use changes in the post-classification analysis [33,39–41,46,48]."
+5,gap-filling through consideration of the temporal dimension in years preceding and following a missing value has allowed us to interpolate missing pixels to assure spatial and temporal continuity over the study area.
+5,"the approach for temporal interpolation follows an adaptation of inverse distance weighting methods applied to discrete land use classification data, the basic assumption is that a temporally distributed variable at short distance is generally more similar than at larger"
+6,"within cart, a decision tree (dt) classifier was instantiated and trained on field data using gee’s default parameters."
+6,the cart algorithm runs through a series of nodes that recursively split the input data in such a way that there is a decrease in entropy and an increase in information gain after the split.
+6,gee’s cart uses the gini impurity index to decide the input features which will provide the best split at each node.
+6,"a tabular overview of the exact decision rules for building the remote sens. 2020, 12, 3729 6 of 16 model can be found in suppl."
+6,mater.
+6,one disadvantage of the dt classifier is the considerable sensitivity to the training dataset.
+6,"a small change to the training data can result in a very different set of subsets distance andthe [49,50]. result in approach can applied [19,47]."
+6,"nevertheless, overfittingintegrates our training land use classes and validation of adjacent data relies years weighted by aonpower (p = 1.5) extensive fieldwork, including of the distance 514 (d) to thegeoreferenced points gathered year of interpolation, formulatedin-situ in anacross the ngoc equation as: hien district in 2015, subdivided into the four classes; dense  mangroves  (n = 247), sparse mangroves (n = n 72), waterbodies/aquaculture ponds (n = 120), and built-up  x and barren lands (n = 75)."
+6,"we used 70% 1   ẑi=0 = maxz  p  of the field data for training and the  30% remaining for validation, thereby estimating the i=1 dz,i   classification errors independently. in which i = 0 indicates following training the initialthe of thetoclassifier, time point it is then be interpolated deployed with predictedbackward land use (ls-7) or forward (ẑ), and which = n indicate i (ls-8) through thethe time series n years based adjacent on spectral/change where land use (z) hasinformation of theas been observed. surface such, reflectance pixels missingdata available valid in the composite observations datasets. are estimated basedinto by taking on account this method, land cover a seven-year maps pattern andarescoring generated from the neighboring surface time reflectance points, in which ofobservations pre-processed yearlyin nearest median composites time weight betweenthe the heaviest. 2001 and 2019. time the workflow seven-year window of gee pre-processing corresponds and land use with the consecutive classification years is presented with full data schematically availability (2013–2019). in the figure land2."
+6,gee code use class accessed can bethe scored will be the highestthrough usedurls published in suppl.
+6,mater.
+6,s1. for gap-filling.
+6,figure2.2.
+6,data figure dataprocessing chainand processingchain workflowofofthe andworkflow studyseparated thestudy separatedininaarepeated repeated(1) geeland (1)gee landuse use classification process and (2) post-classification optimization based on the temporal integration classification process and (2) post-classification optimization based on the temporal integration of landof use classification land output. use classification output.
+6,"similarly, further optimization of classification results can be achieved by taking into account that land use changes usually occur characterized by a logical transition [40,41]."
+6,"land use changes and transitions follow ecological rules [40,41]."
+6,"for instance, the growth of dense mangrove forests takes at least multiple years."
+6,understanding these land use transitions can help setting rules determined by ecology and feasibility to detect illogical land use transition from remotely sensed time series.
+6,"in our study, we have opted for a post-classification approach to detect and revise illogical land use (see table 2)."
+6,"the assessment of uncertainties and reclassification by the cart classifier based on the temporal exclusion of certain illogical transition rules (e.g., maximum a posteriori (map) classification rule in a bayesian framework [41]) has not been embedded within the gee platform."
+6,"therefore, a post-classification approach that scores the likelihood of land use classes to occur based on temporal context is deployed."
+6,table 2 provides an overview of the anomalies detected.
+6,"similar to the gap-filling of missing pixels, illogical land use transitions are revised by distance weighting of neighboring time points (analyzing a seven-year pattern) of the pixel under scrutiny to determine what land cover time"
+7,"remote sens. 2020, 12, 3729 7 of 16 is most remote remote probable remote sens."
+7,"2020, sens."
+7,"remote 12, 2020, sens.sens. 2020, x12, for 2020, xto for 12, be x12, peerforin place."
+7,"for peer x review peer review peer the review reviewentire workflow from pre-processing, land cover classification, 7 of716 7 of716 of 16 of 16 post-classification optimization is presented schematically in figure 2’s diagram."
+7,"remote sens. 2020, 12, x for peer review remote sens."
+7,remote remote remote remote sens.
+7,"2020, sens."
+7,"2020, 12, 12,2020, 2020, for 2020, x 12, for 12, xinter-annual peer 12, xpeer x for x for peer for remote peer review reviewpeer sens."
+7,"review review review remote 2020, 12, x for peer review sens. 2020, 12, x for peer review 7 of7716 7 of 16 of7 16 of 16 of 16 7 of 1 table 2."
+7,table table remote remote table scheme 2.
+7,scheme remote remote sens.
+7,"scheme of2020, 2."
+7,"scheme sens. 2020, 2020, logical of2020, 12, 12, logical of12, 12, xfor xofremote xlogical for for logical x for peer inter-annual peer remote peer sens."
+7,"peer review review 2020, inter-annual sens. land inter-annual review review x for 12,use land 2020, 12, land changes. use remote x for peeruse landchanges. use peer sens."
+7,review changes.
+7,color changes.
+7,"2020, 12,color review scheme color color scheme scheme indicates scheme x for peer indicates review aindicates classification a classification indicates of of 777of of7of16 a classification a classification of 7 16 of16 16 of of 16 7 of 16 7 of 1 table mangrove mangrove mangrove 2."
+7,scheme forest mangroveforest table remote table table 2. land forest sens.
+7,table table2.
+7,scheme forest land 2.
+7,2.ofuse 2.
+7,"scheme land logical 2020, change use land scheme 12, scheme scheme ofschemeofxchange use logicalof inter-annual for of use of logical trends. change logical remote peerchange trends."
+7,table logical logical the trends. land trends.the inter-annual sens.
+7,"2020, review inter-annual 2."
+7,"scheme inter-annual inter-annual inter-annual color 12, xthe land land use use colorthe land forscheme remote of land changes. color peer land use color scheme use scheme changes."
+7,"review table logical use use changes. alsoscheme also 2020, inter-annual changes."
+7,2. changes. changes.
+7,"color applies 12, scheme color also x also scheme applies color for color color color schemeofland schemeapplies multi-annually. multi-annually. applies scheme peer use logical scheme scheme indicates multi-annually. indicates review indicates multi-annually. inter-annual indicates changes. indicates indicates aaclassification classification a color a classification a classification land a classificationscheme use of of of changes. classification indicates of of indicatesof7 of 16 a color classification scheme of7 of 1 indicates table table table scheme 2.2.2."
+7,scheme logical ofofof logical logical table inter-annual 2.inter-annual inter-annual scheme land of land logical land use changes. use use changes. inter-annual changes.
+7,color color color landscheme scheme scheme indicates aaclassification indicates use changes.
+7,color indicates aclassification classification scheme ofofof a classification of mangrove table forest mangrove table mangrove mangrove mangrove 2.land scheme 2. use forest forestscheme forest forest land of change land land logical of land use use use trends. change logical table mangrove use inter-annual change change change inter-annual 2.
+7,the trends.
+7,schemetrends. forest trends. trends.
+7,theland color the of land theland theuse scheme color use logical table color use mangrove changes. scheme inter-annual change color color 2. changes. scheme also scheme scheme scheme color applies also forest color trends. also also applies of scheme logical land also landthe applies multi-annually. scheme use applies use applies color indicates multi-annually. indicates inter-annual changes. changescheme multi-annually. trends. multi-annually. multi-annually. a classification land a color also scheme classification the use applies color of of color changes. indicates scheme also multi-annually. a scheme indicates classification applies of multi-annua mangrove mangrove mangrove forest forest forest mangrove forest land use change trends.
+7,the color scheme also applies multi-annually. landland land use use mangrove usechange change change dense trends. trends. forest the trends. land the the color use color color sparse scheme scheme scheme trends. change also also also applies theapplies applies colormulti-annually. multi-annually. scheme also applies multi-annually. multi-annually.
+7,built year 1 year year 1 year 1year1year 2 year mangrove table2 year dense 2 land 2scheme 2. forest dense of dense use change table logical sparse sparse trends. inter-annual 2.
+7,scheme sparse the of color table logical land use scheme scheme inter-annual 2.changes.also ofapplies land color usemulti-annually. scheme inter-annual logical indicates changes.
+7,colorbuilt athe land built scheme built use changes. indicates classification a classification of color scheme of indicates year mangrove 1 forest year land use mangrove 2 mangroves change dense trends. forest land use mangrove the change color sparse forest scheme waterbodies/paddies also trends. land waterbodies/paddies the applies use waterbodies/paddies change color waterbodies/paddies trends. multi-annually. scheme also applies color also multi-annually.
+7,built scheme applies multi-annua 1year yearyear year year1 year year 1 1111 yearyear mangrove2 mangroves mangroves year year2 2 forest year year year 2landmangroves densedense year 1 222year 1dense use dense dense dense dense dense mangrove mangroves change mangroves year forest year 2 2sparse sparse trends.mangroves sparse year mangroves land sparse 1 sparse the dense sparse sparse use dense sparse mangrove color change year scheme forest 2 also land trends.
+7,the dense sparse sparse use change color applies waterbodies/paddies trends. schemeenv/mudlands built multi-annually. alsothe env/mudlands sparse built built applies colorbuilt built env/mudlands env/mudlands built built built scheme multi-annually. also applies built built multi-annua year 1 1 year dense 2 2 mangroves mangroves dense sparse mangroves sparse waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies dense waterbodies/paddies waterbodies/paddies waterbodies/paddies built env/mudlands waterbodies/paddies year year year 1 year year 2mangroves1 dense  year 2  sparse sparse built built dense dense dense mangroves mangroves dense mangroves mangroves mangroves mangroves mangroves mangroves mangroves mangroves mangroves mangroves mangroves  mangroves mangroves mangroves mangroves mangroves mangroves mangroves mangroves mangroves   env/mudlands mangroves mangroves waterbodies/paddies mangroves waterbodies/paddies  env/mudlands mangroves env/mudlands env/mudlands env/mudlands env/mudlands env/mudlands env/mudlands waterbodies/paddies env/mudlands   waterbodies/paddies env/mudlands env/mudlands year 1 year 2 year 1 dense  year 2 yearsparse  1 dense year 2 sparse  dense sparsebuilt  built sparse dense sparse dense dense dense dense sparse mangroves sparse dense dense mangroves mangroves mangroves mangroves mangroves mangroves dense dense mangroves mangroves mangroves mangroves mangroves mangroves  dense  mangroves dense     mangroves mangroves  mangroves   dense  mangroves  mangroves    mangroves mangroves       mangroves waterbodies/paddies mangroves env/mudlands   waterbodies/paddies env/mudlands    waterbodies/paddies  dense dense sparse mangroves mangroves mangroves dense  mangroves   mangroves mangroves  densemangroves  mangroves  mangroves    mangroves env/mudlands   env/mudlands   sparse sparse mangroves sparse sparse mangroves mangroves mangroves   sparse   mangroves         sparse  mangroves            sparse mangroves sparse sparse waterbodies/paddies waterbodies/paddiessparse waterbodies/paddies waterbodies/paddies dense sparse mangroves mangroves mangroves mangroves mangroves  sparse dense   mangroves   mangroves  dense  mangroves             waterbodies/paddies sparse mangroves waterbodies/paddies sparse      mangroves   sparse     mangroves                  waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies waterbodies/paddies      waterbodies/paddies waterbodies/paddies waterbodies/paddies               built built built env/mudlands env/mudlands built env/mudlands env/mudlands built env/mudlands sparse mangroves waterbodies/paddies waterbodies/paddies built  sparse env/mudlands waterbodies/paddies    mangroves    sparse    mangroves waterbodies/paddies                   builtbuilt built built builtenv/mudlands env/mudlands built built env/mudlands env/mudlands env/mudlands env/mudlands env/mudlands built built    env/mudlands env/mudlands  built  env/mudlands           waterbodies/paddies built env/mudlands deforestation; deforestation; deforestation; deforestation; built deforestation; env/mudlands waterbodies/paddies forest built deforestation; forest forest  degradation; forest  degradation; forestdegradation; env/mudlands forest degradation; degradation;built degradation;    waterbodies/paddies reforestation; reforestation;  reforestation; reforestation; env/mudlands reforestation; unchanged reforestation;   unchanged  unchanged  unchanged forest.
+7,unchanged forest.
+7,unchanged forest.
+7,forest.
+7,forest.
+7, forest.
+7,       deforestation; deforestation; deforestation; deforestation; deforestation; deforestation; deforestation; forestforest forest forest deforestation; degradation; degradation; forest forest forest degradation; degradation; degradation; degradation; degradation; deforestation; deforestation; forest reforestation; reforestation; degradation; reforestation; reforestation; reforestation; forest reforestation; reforestation; unchanged degradation; forest unchanged reforestation; unchanged unchanged forest.
+7,unchanged unchanged unchanged forest.
+7,unchanged degradation; forest.
+7,forest.
+7,forest.
+7,reforestation; forest.
+7,forest.
+7,reforestation; unchanged forest.
+7,forest.
+7,unchange built env/mudlands built env/mudlands deforestation; deforestation; forest forest degradation; degradation; deforestation;  forest built env/mudlands reforestation; degradation; deforestation; reforestation; forest unchanged unchanged forest.
+7,reforestation; degradation;  unchanged forest.
+7,reforestation;  unchange forest.
+7,results 3.
+7,results3.3.
+7,results 3.3.
+7,results tested 3.
+7,results results results results 3.3.3. the gap-filling results results results results results forest deforestation; 3.3.algorithm’s results degradation; deforestation; predictive 3.
+7,results performance reforestation; forest deforestation; degradation; using a k-fold forest unchanged reforestation; forest. strategy.
+7,degradation; leave-one-out unchanged forest.
+7,unchange reforestation; 3.
+7,results results 3.
+7,results 3.
+7,"results in these tests, we purposely removed a datapoint to run the gap-filling algorithm to predict the land use temporal temporal and 3."
+7,temporal spatial results and temporal and accuracy andspatial spatialspatial 3.
+7,accuracy accuracy results assessment temporal accuracy assessment assessment assessment and spatial 3.
+7,resultsand accuracy temporal assessment temporal temporal basedtemporal on and spatial temporal temporal and and temporal temporal temporal temporal temporal and accuracy and spatial spatial spatial and and and and spatialaccuracy accuracy accuracy spatial spatial spatial neighbors.
+7,spatial assessment accuracy assessment accuracy accuracy temporal accuracy we accuracy assessment assessment assessment assessment and assessment assessed assessment spatial assessment accuracy the percentage ofspatial assessment correctly accuracy assessment predicted land use classifications.
+7,"temporal and spatial accuracy temporal and assessment accuracyand spatialtemporal spatial accuracy assessment assessment we have conductedclassification this classificationfor of allofsurface available classification surface reflectance, pixels reflectance, and of using years asurface a cart in the classifier analysis. ran within gee and trained classification classification classification classification classification classification of of of surface surface classification classification classification classification temporal and of of of surface surface reflectance, of ofspatialof surface surface reflectance, surface of reflectance, surface surface surface accuracy temporal reflectance, reflectance, reflectance, classification reflectance, and using reflectance,using using reflectance, reflectance, assessment spatial using aaccuracy oftemporal using aclassification usingusing using cart using surface aaand cart cart using using cart aacartcart reflectance, aaassessment cart classifier aaclassifier cart cart cartclassifier cart reflectance, spatial of classifier using surface classifier classifier ran classifier ran classifier classifier using classifier classifier accuracy ran ran ran awithin reflectance, cart ran within within ranran aran ran within ran within within cart assessment within gee gee within within classifier gee and within withingee using geegee and gee gee and classifier gee trained gee andandand trained trained andand ran andaran and cart andtrained within trained trained trained within trained geeand classifier trained trained trained gee and rantrained withi traine classification separately classification separately for forboth bothof surface landsat-7, of surface landsat-7, separately reflectance, and classification for -8 reflectance, and both on -8 of on using collected surface landsat-7, separatelyclassification using collecteda field a reflectance, forcart field and cart both classifier data, -8 of on data, produces surface classifier using produces collected landsat-7, ran reflectance, a 95.6% ran field and within cart within -8 95.6% and data, on gee and 94.1% gee classifier using collectedand 94.1% produces a and accuracy rantrained cart field within trained accuracy 95.6% classifier data, andgee and produces 94.1%ran withi traine 95.6% accurac taken separately separately separately separately separately separately separately separately separately both fortogether, for separately forseparately both for for forfor both both for both for fortemporal landsat-7, both landsat-7,both bothlandsat-7, both both landsat-7, landsat-7, integration and landsat-7, landsat-7, landsat-7, separately landsat-7, and landsat-7, and-8 and on and -8 and and for and -8 and on and on-8-8 and -8 on on ofcollected collected both -8 collected on-8 on -8 on landsat-7, on collectedon collected gee’s field collected collected collected collected field collected individual field data, field field data, field and fielddata,data, field field field data, produces -8data, data, data, ondata, produces produces data, produces land produces use 95.6% produces produces produces collected produces 95.6% produces 95.6% classification 95.6% and 95.6% 95.6% field 95.6% 95.6% and 95.6%and data, 95.6% and and 94.1% and94.1% and and 94.1% and 94.1% accuracy 94.1% 94.1% produces and 94.1% accuracy maps accuracy 94.1% 94.1% accuracy 95.6% accuracy 94.1% accuracy accuracy into accuracy and accuracy accuracy 94.1% accuracy confiners separately for classification confiners for ls-7 for for both both ls-7 landsat-7, and of classification surface ls-8, separately landsat-7, confiners and ls-8, forand -8 reflectance, respectively, for both ls-7 on -8 respectively, of separately on andcollected using surface confiners field reflectance, classification for collected landsat-7, forthe ls-8, for the for areference field and cart both respectively, ls-7 reference data, -8 data, of landsat-7, on produces classifier surface using yearproduces collected2015 a 95.6% reflectance, ran andcart field within (table 95.6% -8 and on classifier 3). data,and 94.1% gee using the collected produces 94.1% aaccuracy and rancarttrained gap-filling field within 95.6% accuracy classifier gee data, and and ran 94.1% produces traine withi accurac 95.6% confiners a gap-free confiners confiners for confiners for for sequence confiners confiners confiners confiners ls-7 forfor ls-7 andforls-7 of for forand ls-7ls-7 maps ls-7 ls-8, and ls-7 ls-7 ls-8, andand andthat and and ls-8, ls-8, respectively, ls-8, confiners ls-8, respectively, follow respectively,ls-8, ls-8, respectively, for logical respectively, ls-7 respectively, for for respectively, respectively, and the for the land for the forfor ls-8, for for the use thereference reference the referencethe transitions the yearand reference reference reference reference respectively, reference year year year 2015 2015 ls-8, for year 2015 enabled yearyear year for year the 2015 (table 2015 the 2015 2015 2015 (table reference respectively, (table (table (table us 2015 3). to (table (table reference (table 3)."
+7,the analyze 3).
+7,(table the for 3). year the 3).
+7,"the the yearthethe the the the 3). 2015 gap-filling 2015 reference gap-filling gap-filling gap-filling land gap-filling gap-filling the gap-filling use 3).3). year (table gap-filling (table gap-filling the2015 the (table gap-fillin gap-filling confiners confiners for for confinersls-7 algorithm’s confiners and ls-7 separately for forandls-8, ls-7 for both performance ls-7 ls-8, and respectively, respectively, ls-8, separately landsat-7, confiners and to respectively, for predict ls-8, for and bothfor -8 land respectively, ls-7 onfor landsat-7, separately and confiners the use for reference thethe collected type for ls-8, reference for for the reference field and basedboth ls-7 -8 respectively, year data, on reference on and year2015 year collected landsat-7, the year for 2015 2015 produces (table and seven-year ls-8, the 2015 (table (table field 95.6% -8 respectively, reference 3). data, on 3). pattern (table the 3). and the collected for year 3). gap-filling the producesgap-filling 94.1% the the 2015gap-filling 95.6% accuracy field surrounding data, gap-filling (table reference and produces 3). year94.1% the2015 accurac 95.6% (table gap-fillin trends algorithm’s algorithm’s algorithm’s algorithm’s algorithm’s algorithm’s algorithm’s occurring performance performance performance performance performanceto performance performance throughout algorithm’s to available predict algorithm’s the to to topredict predict toto performance predict land predict predict predict performance landland use land data. algorithm’s land landuse type land use use use land use type useto type type based type to based type predict type use predict based performance based on based on the based based changes land on on land on the the use the seven-year onon the the use the were to predict seven-year type seven-year seven-year seven-year seven-year type grouped based pattern seven-year based land pattern patternon pattern pattern on use surrounding pattern the pattern into the four based pattern surrounding seven-year type surrounding surrounding surrounding surrounding surrounding seven-year categories on the surrounding pattern seven-year surroundinp algorithm’s algorithm’s algorithm’s performance algorithm’s performance algorithm’s performance confiners performance to predict to performance for ls-7 predict to and toto predict land predict confiners land predict ls-8, foruseland land use ls-7 type land respectively, type use confiners and use usebasedtotype based type type for ls-8, on based the for based on based the respectively, ls-7 the on on reference seven-year andon the seven-year the the seven-year for year ls-8, seven-year seven-year the 2015pattern pattern respectively, reference surrounding pattern pattern (table pattern 3). surrounding year for the the2015 surrounding surrounding surrounding reference (table gap-filling 3). yearthe gap-fillin 2015 missing missing missing pixels algorithm’s missing missing pixels missing missing missing pixels pixels pixels hovers pixels pixels pixels hovers performance hovers hovers hovers between between hovers hovers hovers between algorithm’s between missing between 87 between missing between to 87 to between 87 predict pixels 87 92% pixelsto 87 87 87 87 to performance to 92% to to 92% to hovers 92% 92% to92% hovers land algorithm’s 92% depending depending 92% depending missing use between depending depending depending depending between on depending type on the on performance predict pixels 87 87 on the year onto on based on to hovers on the the the 92% year land the 92% yearyear (table the the yearon year (table use depending between (table (table year year the 4)."
+7,(table (table depending to type (table 4).
+7,(table 4). predict seven-year 87 4).
+7,4).4).
+7,4). on 4). based tothe on land 92% the on pattern year year the use depending (table (table seven-year surrounding type 4).
+7,4).based on on the year the pattern surroundin seven-year (table 4).
+7,(tablep illustrated missing missing missing pixels missing through pixelshovers missing pixelspixels hovers algorithm’s the pixels color hovers between hoversbetween hovers scheme between 87 between performance to 87 92% betweento 87 algorithm’s in 87 to92%87 to table to depending to 92% predict 92% 92% 2. depending only depending depending performance land on depending use algorithm’s mangrove the on to type year the on on predict on year the the based theforest (table performance year year land year (table on 4).
+7,(table (table the use changes to(table 4). type 4). predict were 4).
+7,4).4). seven-year based land onconsidered the pattern use type seven-yearin theon based surrounding pattern the surroundin seven-year p missing pixels hovers missing between pixels 87 to hovers 92% depending between missing pixels 87 hovers to on 92% the depending between year (table 87 to on 92% the depending year (table on 4). the year (table 4). trend mapsmissing (other landpixels table use tablehovers table table3. changes 3.
+7,3. missing validation 3.
+7,"validation validation validationbetween remain pixels 87 results results results results hovers to table of of of white). 92% land missing land of3. land betweenmoreover, depending land use useuse validation use pixels 87 classification classification classification classification hovers to on table results we the 92% of for year for 3. land for used between (table depending landsat-7 for landsat-7 use validation landsat-7 landsat-7 150 87 and × 4). on and and results andto 150 92% the landsat-8. classification of landsat-8."
+7,landsat-8.
+7,landsat-8. myear land box depending for use averages (table landsat-7 on 4).and the classification toyear landsat-8. for (table landsat-74). and lan validation table 3.
+7,table table table 3.3.
+7,validation validation 3.
+7,validation results results of landof results table results useland 3.of of classification land land use validationuse use for landsat-7 classification classification classification results for for for of land useand landsat-7 landsat-7 landsat-7 landsat-8. and and and classification landsat-8.
+7,landsat-8. for landsat-7 and landsat-8.
+7,landsat-8. highlight general table 3.
+7,table table trends table 3.
+7,table validation and 3.
+7,validation 3.
+7,table reduce validation validation results 3.
+7,validation of uncertainties results validation results results land of results landuse results table of of of land land land by use use classification use of3. spatial classification classification classification validation land use ground use for results classification classification truth from regularization.
+7,landsat-7 for table field landsat-7 of 3. for for validation land survey landsat-7 for for landsat-7 andclassification use landsat-7 landsat-7 landsat-8. and andlandsat-8. results and and landsat-8. and of landsat-8. for landsat-7 landsat-8. land use classification landsat-8. for landsat-7 and lan and landsat-8.
+7,ground ground ground truth groundground truth from ground truth truth truth fromfrom field from truth from field survey from field field field survey survey survey field ground survey survey truth from field ground truth from field survey survey table 3.
+7,validation results tableof 3.
+7,ground ground validation land truth use water truth water from water from classification results table field field ofsurvey 3.
+7,survey ground land truth use for landsat-7 validation waterfrom from classification results field andof survey land for landsat-7 landsat-8. usewaterclassification and landsat-8. for landsat-7 and lan land cover dense ground sparse truth waterground ground fromwater truth truth water field water water from surveyfrom field built field ground survey environment/ survey truth water field total survey ground classified truth user from field accuracy survey land land cover cover dense dense land cover groundsparse sparse ground truth truth dense from land field from cover survey field sparsesurvey builtbuilt denseenvironment/ environment/ sparse total total built environment/ classified classified useruser accuracy total accuracybuilt environment/ classified user accuracy total c 3.
+7,"resultsland land cover land land cover land land cover type cover cover cover densedense dense dense dense mangrove dense sparse land sparse cover sparse mangrove sparse sparse sparse bodies/pondsdense bodies/ponds water bodies/ponds bodies/ponds bodies/ponds bodies/ponds groundbodies/ponds built water bodies/ponds truth water sparse from built environment/ environment/ built built built mudflats field built environment/ environment/ ground survey environment/ (ls7/ls8) environment/ totaltotal bodies/ponds water bodies/ponds truth classified classified from total total total pixels field total built user classified classified environment/ classified (ls7/ls8) survey ground classified user accuracy user bodies/ponds water truth accuracy user user (%) accuracy accuracy accuracy total (ls7/ls8) from field classified survey user accuracy type type type land typetype type type mangrove mangrove cover mangrove mangrove mangrovedense mangrove mangrove mangrove land type mangrove mangrove type cover mangrovemangrove mangrove mangrove water sparse mangrove waterdense mangrove water land (ls7/ls8) type mudflats cover mangrove mangrove mudflats mudflats sparse mangrove mudflats (ls7/ls8) built mudflats mudflats mudflats dense (ls7/ls8) (ls7/ls8) (ls7/ls8) environment/ (ls7/ls8) (ls7/ls8)pixelspixels (ls7/ls8) mangrove (ls7/ls8) mudflats pixels pixels (ls7/ls8) total sparse pixels built pixels pixels (ls7/ls8) (ls7/ls8) classified (ls7/ls8) mudflats (ls7/ls8) (ls7/ls8) (%)user (%)(ls7/ls8) environment/ (%) (ls7/ls8) (%) (%)(%)accuracy (ls7/ls8) pixels (ls7/ls8) (ls7/ls8) user accuracy total (ls7/ls8) (%) mudflats built (ls7/ls8) pixels (ls7/ls8) (ls7/ls8) (ls7/ls8)(ls7/ls8) environment/ classified user (%)(%) pixels total c( (ls7/ls8) accuracy (ls7/ls8) land cover land land cover land cover cover dense dense dense dense sparse sparse sparse sparse (ls7/ls8) bodies/ponds (ls7/ls8) (ls7/ls8) (ls7/ls8) built bodies/ponds (ls7/ls8) (ls7/ls8) (ls7/ls8) environment/ built built environment/ built environment/ environment/ (ls7/ls8) bodies/ponds (ls7/ls8)total classified total total total classified classified user classified (ls7/ls8) accuracy user bodies/ponds user accuracy user accuracy accuracy typetype mangrove mangrove type mangrove bodies/ponds mangrovebodies/ponds mangrove bodies/pondswater mangrove type mudflats mudflats mangrove (ls7/ls8) water mangrove (ls7/ls8) pixels pixels mudflats (ls7/ls8) (ls7/ls8) water (%) (ls7/ls8) (ls7/ls8) (%) pixels (ls7/ls8) mudflats (ls7/ls8) (ls7/ls8)(%) pixels (ls7/ls8) type typetypetype land mangrove cover mangrove ls7 ls7mangrove ls7 ls7 mangrove ls8 ls7 dense ls8 mangrovels8 ls8 ls7 land ls8 mangrove ls7 ls7 cover ls7 mangrove ls8 mangrove ls7 sparse ls8 ls8 ls8 ls7 ls8 ls7 bodies/ponds dense ls7 ls7 ls7 ls8 land (ls7/ls8) ls8 ls7 ls8 ls8 cover ls8 mudflats (ls7/ls8) ls7 ls8 ls7 mudflats sparse ls7 ls8 mudflats ls7 built ls8 ls7 ls7 (ls7/ls8) dense ls7 mudflatsls8 environment/ (ls7/ls8) ls8 ls7 ls8 ls7 (ls7/ls8) ls8 ls8 ls8 (ls7/ls8) pixels ls7 (ls7/ls8) ls8 ls7 ls7 pixels ls7 sparse ls7total ls7 (ls7/ls8) ls8 built ls8ls8 pixels (ls7/ls8) pixels classified ls7 ls8 environment/ ls8 ls8 ls7 (ls7/ls8)ls7 (ls7/ls8) (%) ls7 (%) ls7 ls8 ls7 (ls7/ls8) ls8 (ls7/ls8) user ls7 ls8 accuracy ls8 ls8built total (%) (ls7/ls8) ls7 ls8 ls8 (ls7/ls8) (%) (ls7/ls8) environment/ classified ls7 ls8 ls8user ls7 total accuracy ls7ls8c( temporal anddense spatial dense accuracy type ls7 ls7 ls7 ls8 assessment mangrove ls8 ls8 ls7 type ls7 ls7 ls8 (ls7/ls8) mangrove ls7ls8 ls8 ls7 (ls7/ls8) mangrove ls8 ls7ls7 ls8 bodies/ponds (ls7/ls8) (ls7/ls8) type ls8 ls7 mangrove ls7 ls8 ls7 mangrove mudflats ls7 ls8 bodies/ponds (ls7/ls8) ls8ls8 ls8 ls7 mangrove ls7ls7 ls7 mudflats pixels ls8 ls8 ls8 (ls7/ls8) ls8 bodies/ponds (ls7/ls8) ls7 ls7ls7 (%) ls8 ls7 ls8 ls8 ls8 mudflats (ls7/ls8) pixels (ls7/ls8) ls7 (ls7/ls8)(%) ls8 pixels (ls7/ls8) dense dense dense dense dense dense ls7 72 ls7 ls8 84 ls8dense ls7 dense 1115 1ls7 ls8 555072ls7 ls8 ls7 0 00ls7 ls7 ls8 ls8 dense (ls7/ls8) ls8 ls7 000ls8 ls7 ls8 ls7 ls7 00050ls8 ls8 ls7 ls8 ls8ls7 000ls7 0(ls7/ls8) ls8 ls7 73ls8 7389ls7 ls7 ls8 89ls8 ls7 ls7 ls8 98.63 0(ls7/ls8) ls7 ls8 ls8 ls7 94.38ls8ls7 ls8 ls8 ls7 ls7 ls8( results 72 ls772 72 847272 84 84 84 18484 1 ls8 11ls7 5 ls8 572 55 ls8 08400 0ls8 100100ls7 0 ls7 572 0084 000 ls8 0 00ls8 73 10 73 73 50ls8 89 0 98.63 89 89 98.63 98.63 0 98.63 098.63 94.38 094.38 73 94.38 94.38 8989 0 ls8 0 98.63 94.38 73 results results results results classification results mangrove ls7 ls8 ls7 ls8 ls8 ls7 ls7 ls7 ls8 ls7 ls7 ls8 ls8 ls7 results ls7 dense ls7 ls8 72 72 ls8 ls7 84 ls7 ls8 ls7 ls7 ls8084 ls8 0ls7 7373 ls773 898989 ls8 ls7 98.63 98.63ls7 ls8 94.38 73 94.38 94.38ls8 98.63 94.38 results results classification results classification results mangrove mangrove mangrove mangrovedense mangrove mangrove mangrove ls7 mangrove ls8 dense mangrove ls7 ls8 ls7 mangrove ls8 ls7 dense ls8 ls7 ls7 ls8 ls7 ls7 ls8 ls8 ls7 ls8 ls7ls8 ls7 ls7 ls8 ls8 ls7 ls8 ls7ls8ls7 ls8 ls8 ls7 ls7ls8 72 84 1 5 0 0 0 0 73 89 98.63 94.38 classification of surface1 reflectance, 84sparseusing a725cart classifier ran 5 0 within 0gee and73 5 trained separately results sparse 72 1 84 0 sparse 10 72 84 0 10 0 890 0 98.63 0 94.38 73 0 89 0 98.63 73 94.38 results results results dense densedense sparsedense mangrove sparse sparse sparse mangrove mangrove mangrove 72sparse sparse sparse dense 72 84 72 72 110 184 184 11 0 841 000 084 sparse 051dense120 20 520 20 0516 1616 0516 15 20 22202084 16 2 0 222020 0202 dense 01202 0 0 16 20 00016150 0000 02084 002 000023 73 0 2020 73 232 23231889 73 2316 7389 18 18 98.63 0 86.96 18 89 8986.96 98.63 180286.96 94.38 0 86.96 86.96 86.96 98.63 88.89 98.63 94.38 288.89 23 88.89 88.89 0 94.38 94.38 18 86.96 88.89 0 98.63 88.89 23 classification results 1 20 16 2 0 88.89 classification results classification results mangrove results mangrove mangrove sparse mangrove mangrove 72 0 mangrove 20 20 201 16 1 16 72 mangrove 2 720 0 0 10 232323 73 5 0 0 181818 89 086.96 86.96 0 0 98.63 88.89 23 88.89 88.89 94.38 73 0 1889 86.96 0 73 94.38 results results results mangrove mangrove classification for both landsat-7, mangrove mangrove and -8 on1 collected sparse mangrove field sparse 20 20 data, 1 produces sparse 2 95.6% and 1 0 94.1% 02 0 0accuracy 2 23 2316 0confiners for ls-7 classification mangrove mangrove classification 0mangrove classification classification mangrove 2 mangrove classification 16 16 016 18 182 86.96 2 88.89 classification classification water water mangrovewater water 1 0 water 02 water 20 2 20 0 86.96 23 88.89 0 18 0 86.96 23 88.89 sparse sparse sparse water mangrove 0 0 0 001 mangrove mangrove classification sparse water water water sparse water sparse 12 1 2 36 2 02 36 36 36 38 038 sparse 002 00 002 000037 374037 2400 97.3040 40 97.30 95.00 classification classification classification 0 0 0 0 1 1 2 38 0 36 382 38 212the 20016 0 0 gap-filling 36036 3812 37 0 00algorithm’s 37 40 36 97.30 0 97.30 097.30 97.3095.00 38 37 95.00 95.00 95.00 40 0 88.89 0 97.30 95.00 37 ls-8, andmangrove respectively, mangrove mangrove 1 1 for bodies/ponds water bodies/ponds bodies/ponds bodies/ponds bodies/ponds mangrove water bodies/ponds bodies/ponds bodies/ponds mangrove 0 1 0the 1 0 0 01reference 0 0 20 0 16 0 020 16 200bodies/ponds bodies/ponds 0 mangrove 20 water year 1 120 1 16 2015 2 16 22021612 (table 2 36362 0 36 0 2 bodies/ponds water mangrove 3). 38 03838 120 010 000 0 23 020 3823 23 373718 37 23 1623 0180 performance 86.96 404018 40 18 2 18 86.96 97.30 86.96 97.30 0 88.89 2 86.96 86.96 88.89 95.00 3723 to 88.89 95.00 95.00 88.89 0 4018 97.30 0 86.96 95.00 88.89 23 0 built1 1 2 02 36 36 38 38 002 0 0 0 0 38 1 37 37 2 0 40 40 36 97.30 38 95.00 classification classification classification classification bodies/ponds built built builtbuilt 0 built 1 36 0 97.30 95.00 37 0 40 0 97.30 37 95.00 predictwater land built use waterwater water type bodies/ponds builtbuilt built water based on the seven-year bodies/ponds built water pattern bodies/pondssurrounding water missing pixels hovers between 0built1 0 10 1110 1 1010 0 10environment/ environment/ 0environment/ 0 210001 0 00136 000environment/ 01 built 11121 1012 381 11103836 0 038 000 24 36 1 38 38 24 1022424 0 0121 001 21 36 21 0 03701 26 38 2622 26 1224 37 37 22 97.30 0 92.31 36 40 4092.31 0 97.30 38 95.45 37 97.3095.00 40 0 95.00 0 97.30 37 95.00 built environment/ environment/ environment/ environment/ environment/ environment/ bodies/ponds bodies/ponds 0 002 bodies/ponds 21 36 36 01 011 built environment/ bodies/ponds 00 00 0 24 1024 24 021 24 21 3721 026 21 21 0 26 37 262640 26 40 2224 22 22 222240 22 97.30 192.31 21 92.31 95.45 92.31 21 95.00 92.31 97.30 92.31 92.31 95.00 095.45 26 95.45 95.45 95.45 26 95.45 95.45 24 95.00 2222 2192.31 95.45 92.31 95.45 26 87bodies/ponds to bodies/ponds 92%bodies/ponds depending mudflats environment/ mudflats mudflats mudflats mudflats environment/ mudflats mudflats on the1 year mudflats built 1 (table 0environment/ 0mudflats mudflats built 0 4). 0 1 1 1environment/ 01mudflats built 0 0 24 1 24 01 21 21 0 26 26 1 24 22 221 92.31 0 95.45 2192.31 95.45 26 24 22 2192.31 26 95.45 builtbuilt builtbuilt total ground mudflats total ground 74 1 total ground total ground total total total groundground total total ground mudflats ground total ground ground environment/ 84 total 0mudflats environment/ 22 ground 0 24 24 24 1 39 39 39 01mudflats environment/ 40 24 0 24 24 24 1 24 24 01 21 21 2121 0 159159 2624 1169 169169 24169 221 2221 2192.31 0 92.31 95.45 26 24 95.45 22 2192.31 159 95.45 26 environment/ environment/ environment/ environment/ 1 truth 1 74 pixel 0 1 74 01 74 84 74 0 747474 84 0 84 22 84 848484 1 22 22 0 124 222222 0 ground 22 1 39 24 1 2424 1 39 74 74 24 0 40 1 039 84 3939 84 40 40 24 40 0pixel2222 40 0 4040 24 24 24 7424 2121 242424 39 2124 21 84 2139 21159 26 21 40 22 159 26 212140 159 169 159 26159 22 26 15924 16924 22 169 39 92.31 169 92.31 40 95.4595.45 22 21 92.31159 95.45169159 24 169 21 total truth truth truth pixel ground truth pixel total pixel pixel ground truth total pixel truth truthtruth truth pixel pixel pixel mudflats 74 74 84truth pixel mudflats22 22 24 74 39total ground mudflats 40 22 40 for 24 39 21 and 15915924 24169169 mudflats mudflats table mudflats mudflats producer producer truth producer producertruth producer total 3. pixel producer producer producer validation pixel97.30 ground 97.30 results 100.0 84 producer truth producer total of pixel 90.91 ground land use 66.67 24 classification 92.31 39 84 truth total producer pixel 95.00 ground landsat-7 74 100.0 24 24 84 100.0 21 2240 landsat-8. 39 21 40 159 24 169 21 159 accuracy 97.30 (%)(%) 97.30 97.30 100.0 97.30 97.30 97.3074 100.0 100.090.91 100.0 100.0 100.0 100.0 84 90.9190.91 66.67 90.91 90.9190.91 90.91 22 66.67 66.67 92.31 66.67 66.67 97.30 97.30 66.67 66.67 74 24 92.31 92.31 95.00 92.3192.31 100.0 92.31 100.0 92.3139 84 95.00 95.00 95.00 95.00 90.91 100.0 95.00 90.91 95.00 40 100.0 22 66.67 97.30 100.0 100.0 100.0 66.677424 100.0 100.0 100.0 24 92.3192.31 100.0 39100.0 100.0 84 100.0 100.0100.0 100.0 90.91 95.00 95.00 21 22 40 66.67 159 100.0 100.0 24 24 92.31 100.0 39 100.0 169 2195.00 40 159 100.0 24 169 100.0 21 159 ground totaltotal totaltotal ground accuracy ground producer accuracy accuracy accuracy ground (%) accuracy(%) (%) producer (%) accuracy producer (%) accuracy producer (%) 74accuracy accuracy truth pixel 74 (%)(%)(%) 84 84 74 7497.30 22 84 97.30 84 accuracy 100.0 22 truth 100.024 22 22 24 overall (%) pixel 90.91 90.91 39 24 accuracy 24 66.67 39 97.30 66.67 (%) 40 39 92.3139 40 truth 92.31 100.0 (ls7/ls8) 95.00 40pixel 24 4024 100.0 95.00 90.91 24 66.67 97.30 21 100.024 21100.0 92.31 100.0 21 159 100.0 21 159 159 95.00 90.91 169 159 66.67 169 169 100.0 92.31 169 100.095.00 95.60 94.08 100.0 100.0 truthtruth pixelpixel truth accuracy truth pixelpixel accuracy (%) overalloverall accuracyoverall overall accuracy ground accuracy (%) (%) (%) truth accuracy accuracy(ls7/ls8) (%) (%) from (ls7/ls8) (ls7/ls8) (ls7/ls8) accuracy field overall (%) survey(%) accuracy (%) (ls7/ls8) overall accuracy (%) (ls7/ls8) 95.60 95.60 95.60 95.60 94.08 94.08 94.08 94.08 94.08 95.60 94.08 producer overall overall overall producer accuracy accuracy accuracy (%) (%) (%)(ls7/ls8) (ls7/ls8) (ls7/ls8) overall producer accuracy (ls7/ls8) 95.60 95.60 95.60 94.08 94.08 94.08 95.60 producer producer 97.30 100.0overall 90.91 accuracy97.30 66.67 (%) (ls7/ls8) 100.0 92.31 overall 95.00 90.91 66.67 97.30 92.31 overall 100.0 100.0 100.0 95.00accuracy 90.91 66.67100.0 92.31 100.0 95.00 95.60 94.08 95.60 100.0 100.0 producer producer accuracy (%) accuracyoverall (%) accuracy (%) (ls7/ls8) accuracy (%) accuracy (%) (ls7/ls8) built (%) (ls7/ls8) 94.08 95.60 94.08 97.3097.30100.0 97.3090.91 97.30100.0 100.066.67 100.090.91 90.9192.31 90.9166.67 66.6795.00 66.6792.31 92.3195.00 92.3195.00 95.00 100.0 water 100.0 100.0 100.0100.0 100.0100.0100.0 total user accuracy accuracy (%)table accuracy table (%)table accuracy table 4."
+7,table 4.
+7,(%) (%) table table table 4.
+7,validationvalidation 4.4.4.
+7,validation validation validation validation results results validation validation results results dense ofresults table land resultsof land results table results ofoverall of ofuse of 4. land 4. of of accuracy land validation land use landsparse land land use use use use classification use validation (%) for overall (ls7/ls8) classification table results classification classification classification classification use for landsat-7 classification classification results of4. for ofland validation land for for accuracy for for landsat-7 use (%) landsat-7 classification landsat-7 landsat-7 landsat-7 for landsat-7 use landsat-7 environment and classification (ls7/ls8) results and and and andand and landsat-8.
+7,overall of landsat-8. land landsat-8.
+7,landsat-8.
+7,landsat-8. and for accuracy for use landsat-7 classified years landsat-8.
+7,landsat-8.
+7,landsat-8.
+7,years (%) classification years years withyears yearswith years years landsat-7 with (ls7/ls8) with slcand and with slc with with slc 95.60 landsat-8.
+7,slc accuracy slc with for landsat-7 slc slc slc landsat-8.
+7,94.08 yearsand 95.60 with years with slc 94.08 landsat-8 slc cover land table type overall 4.
+7,validation accuracy overall resultsoverall (%) accuracy accuracy (ls7/ls8) (%) (ls7/ls8) ofaccuracy land use bodies/ponds (%) (ls7/ls8) (%) classification 95.60 95.60 94.0895.6094.0894.08 95.6094.08 table are 4. malfunction malfunction malfunction malfunction arevalidation are shaded malfunction are shaded shaded shaded in grey table results in are ofconsidering 4. grey malfunction in grey grey inmalfunction shaded mangrove land validation are considering considering the overall use in classification considering the table results shadedgrey the higher malfunction in the higher considering mangrove of 4. grey higher areuse land validation for higherconsidering uncertainties. uncertainties. the higherfor (ls7/ls8) landsat-7 results classification shaded the uncertainties. uncertainties. and uncertainties. land of landsat-8.
+7,landsat-7 for use inhigher higher grey /mudflats classification considering and landsat-8. theand years withlandsat-8.
+7,landsat-7 uncertainties. higherfor slc pixelsyears yearsand landsat-7 uncertainties. with slc slc (%) withlandsat-8 malfunction malfunction malfunction areare are shaded shaded shaded in grey inin considering grey grey considering are considering shaded thethe in thehigher higher grey higherconsidering (ls7/ls8)uncertainties. uncertainties. the uncertainties. uncertainties. malfunction table 4.
+7,validation malfunction shaded areare shaded grey in in results table ofconsidering 4. malfunction grey areuse land validation considering the results classification shaded higher table the in malfunction 4. grey uncertainties. land of validation for areuse higher (ls7/ls8) classification landsat-7 uncertainties. shaded considering inand results the (ls7/ls8) landfor of landsat-8. higher grey use considering years (ls7/ls8) landsat-7 classification withlandsat-8. theand uncertainties. higherfor slc yearsand landsat-7 uncertainties.
+7,slc withlandsat-8 year year year temporal temporal temporal gap-filling year gap-filling gap-filling accuracy year accuracy temporal accuracy (%) gap-filling (%) (%) accuracy temporal gap-filling (%) accuracy (%) classification results table 4.
+7,table table 4.
+7,validation validation validationresults malfunction of results are year land shaded ls7of year results use land of year in ls8 temporal land classification use year year malfunction grey temporal ls7 use classification temporal temporal considering are gap-filling classification temporal shaded ls8 gap-filling for the inlandsat-7 for ls7 accuracy for landsat-7 gap-filling gap-filling year grey malfunction higher ls8areaccuracy landsat-7 gap-fillingandaccuracy accuracy temporal shaded uncertainties. considering ls7 (%) landsat-8. and landsat-8.
+7,accuracy the in ls8(%) gap-filling grey higher table 4.
+7,validation results of land use classification for landsat-7 and landsat-8.
+7,years with slcand (%) landsat-8.
+7,(%) (%)ls7years with years accuracy uncertainties. considering ls8 years slc with thels7 with slc (%) higher slc uncertainties.
+7,ls8 year temporal year temporal gap-filling year accuracy (%) malfunction malfunction aremangrove malfunction dense shaded are malfunction are are shaded 2001–2002 shaded in grey in shaded grey 72in 2001–2002 in grey2001–2002 2001–2002 2001–2002 grey 2001–2002 2001–2002 considering 2001–2002 considering 84 considering higher 1the the considering the 5higher - gap-filling 2001–2002- 0 ---uncertainties. higher uncertainties. the2001–2002 - -- 0 2001–2002 0uncertainties. higher temporal uncertainties.
+7,0 accuracy (%) - temporal gap-filling year 73- 89 gap-filling accuracy (%) - 98.63 94.38 accuracy (%) year 2001–2002 2003–2004 2001–2002 2003–2004 2003–2004 temporal year gap-filling 2001–2002 2003–2004 - 85.67 85.67 - accuracy temporal gap-filling year (%) 2001–2002 85.67 0 2003–2004 - temporal 85.67 18 gap-filling accuracy 85.67 accuracy (%) (%) - sparse mangrove 1 2003–2004 2003–2004 2003–2004 2003–2004 2003–2004 0 20 2 85.67 85.67 16 2003–2004 85.67 2 85.67 85.67 0 85.67 23 86.96 88.89 yearyear 2003–2004 2001–2002 year temporal 2005–2006 year 2003–2004 2005–2006 2005–2006 2005–2006 temporaltemporal temporal 2001–2002 gap-filling gap-filling gap-filling 2003–2004 2005–2006 85.67 accuracy 85.19 gap-filling 85.19 85.19 accuracy 85.67 85.19- 2001–2002 accuracy (%)(%) (%) 2003–2004 accuracy 2005–2006 (%)- 85.67 85.19 - 85.67 85.19 water bodies/ponds 2005–2006 0 2005–2006 2005–2006 2005–2006 0 1 2 85.19 2005–2006 36 85.19 85.19 38 85.19 0 0 85.19 37 40 97.30 95.00 2005–2006 2003–2004 2007–2008 2005–2006 2001–2002 2003–2004 2005–2006 85.19 85.67 86.64 85.19- 2003–2004 2005–2006 85.67 85.19 85.67 85.19 2001–2002 2001–2002 2007–2008 2007–2008 2007–2008 2001–2002 2007–2008 2007–2008 2007–2008 2007–2008 - -86.64 2007–2008 86.64 2007–2008 86.64 86.64 - 86.64 86.64 86.64 2007–2008 86.64 86.64 86.64 built 2007–2008 2005–2006 2005–2006 86.64 85.19 2003–2004 2009–2010 2003–2004 2009–2010 2007–2008 1 2009–2010 0 2009–2010 2009–2010 2003–2004 0 1 2007–2008 185.67 2009–2010 85.67 85.43 85.43 85.43 86.64 085.67 85.43 85.43 24 2005–2006 2007–2008 21 2009–2010 85.19 86.64 26 85.43 22 85.19 86.64 92.31 95.45 85.43 environment/mudflats 2003–2004 2009–2010 2009–2010 2009–2010 2009–201085.67 85.43 85.43 85.43 85.43 2009–2010 2007–2008 2011–2012 2009–2010 2011–2012 2011–2012 2011–2012 2007–2008 2009–2010 2011–2012 85.43 87.16 87.16 87.16 86.64 85.43 87.16 2007–2008 2009–2010 2011–2012 86.64 85.43 87.16 86.64 85.43 87.16 total ground truth 2011–2012 2005–2006 2005–20062005–2006 2011–2012 2011–2012 2011–2012 2005–2006 87.16 85.19 2011–2012 85.19 85.19 87.16 85.19 87.16 87.16 87.16 74 2011–2012 2009–2010 84 2013 22 2011–2012 2013 2013 24 2009–2010 39 2011–2012 2013 87.16 40 85.43 90.41 87.16 90.41 90.41 24 2009–2010 21 2011–2012 2013 85.43 159 87.16 90.41 169 85.43 87.16 90.41 pixel 2007–2008 2013 2007–2008 20132013 2013 2013 2007–2008 90.41 2013 86.64 90.41 86.64 90.41 90.41 90.41 86.64 90.41 2007–2008 2013 2011–2012 2014 2013 86.64 2011–2012 2013 90.41 87.16 91.68 90.41 2011–2012 2013 87.16 90.41 87.16 90.41 producer accuracy2009–2010 2014 2014 2014 2014 2014 (%) 97.30 2009–2010 2014 2014 100.0 92.31 90.91 66.67 85.43 2014 91.68 2014 91.68 91.68 91.68 95.0091.68 2014 91.68100.0 100.0 91.68 91.68 91.68 91.68 2009–2010 2009–2010 2014 2013 2015 2014 85.43 85.43 2013 2014 85.43 91.68 90.41 91.80 91.68 2013 2014 90.41 91.68 90.41 91.68 2015 2015 overall 2015 2015 2015 2015 accuracy 2015 91.80 91.80 91.80 2015 (%) (ls7/ls8) 2015 91.80 91.80 91.80 91.80 2015 91.80 91.80 91.80 95.60 94.08 2011–2012 2011–20122011–2012 2011–2012 2015 2014 2016 2015 87.1687.16 87.16 2014 2015 87.16 91.80 91.68 86.92 91.80 2014 2015 91.68 91.80 91.68 91.80 20162016 2016 2016 2016 2016 2016 2016 86.92 86.92 86.92 2016 86.92 86.92 86.92 86.92 2016 86.92 86.92 86.92 20132013 2013 2017 2013 20172016 2015 2017 2016 2017 2017 90.4190.41 2015 90.41 2016 2017 87.40 87.40 90.41 86.92 91.80 87.40 86.92 87.40 87.40 2015 2016 2017 91.80 86.92 87.40 91.80 86.92 87.40 2017 2017 2017 2017 87.40 87.40 87.40 87.40 20142014 2014 20182017 20142016 2018 2017 2018 2018 91.68 2016 91.68 87.40 86.89 91.68 2017 2018 86.89 86.89 86.92 91.68 87.40 86.89 2016 2017 2018 86.92 87.40 86.89 86.92 87.40 86.89 2018 2018 2018 2018 86.89 2018 86.89 86.89 86.89 86.89 20152015 2015 20192018 20152017 2019 2018 2019 2019 91.80 2017 2018 91.80 91.80 2019-86.89 87.40 - 91.80 86.89 - - 2017 2018 2019 87.40 86.89 - 87.40 86.89 - 2019 2019 2019 2019 - 2019 -- - - 2016 2019 20162018 2019 86.92 2018 2019 - 86.89 86.92 - 2018 2019 86.89 - 86.89 - 20162016 86.92 86.92 2019 2019 - 2019 - - 2017 2017 20172017 87.40 87.40 87.40 87.40 2018 2018 20182018 86.89 86.89 86.89 86.89 2019 2019 20192019 - - - -
+8,"remote sens. 2020, 12, 3729 8 of 16 table 4."
+8,validation results of land use classification for landsat-7 and landsat-8.
+8,years with slc malfunction are shaded in grey considering the higher uncertainties.
+8,year temporal gap-filling accuracy (%) 2001–2002 - 2003–2004 85.67 2005–2006 85.19 2007–2008 86.64 2009–2010 85.43 2011–2012 87.16 2013 90.41 2014 91.68 2015 91.80 2016 86.92 2017 87.40 2018 86.89 2019 - an overview of all land use classification maps after gap-filling and post-processing for logical land use transitions is presented in figure 3.
+8,"the maps depict all years with full data-availability and therefore the highest reliability ranging from 2001–2002, and 2013–2019."
+8,"a visual inspection of the temporal dynamics indicates that the central regions in ngoc hien have been subject to a high frequency of land use changes whereas towards the coast, specifically the western cape, stable havens of dense mangrove forest have to large extent been minimally subjected to forest clearance and land use change."
+8,"over the years, three core mangrove forests areas can be identified (see figure 1, for commune locations); (1) the cluster in the south-east of ngoc hien, including the eastern part of tan an commune and adjacent southern tam giang tay commune, (2) the mangrove forest strip along the southern coastline, and (3) the largest core mangrove area is located in the western tips of ngoc hien district; dat mui commune which encloses the ca mau cape national park and the north-western part of vien an commune."
+8,the total land use changes over time are highlighted in figure 4.
+8,these results show that the total shares of land use cover between four classes have remained relatively stable with yearly fluctuations.
+8,"in the span of two decades, we find sparse mangrove cover fluctuating between 33,000 ha and 40,000 ha and dense mangrove forests hovering between 18,000 ha and 24,000 ha."
+8,the average net change of dense mangroves over the 2001–2019 equals −0.01% annually.
+8,"in recent years since 2013, we observe upward trends in dense mangrove forest cover as well as built environment and mudflats."
+8,sparse mangrove cover has been decreasing in that same period.
+8,waterbodies/ponds have remained more or less equal.
+8,"despite these overall trends, the figure conceals the spatial dynamics behind the distribution of mangrove forests and land use changes that characterize the region."
+8,"to gain insight into the spatial distribution of land use changes, an aggregated trend map was created (figure 5) to identify hotspots of mangrove forest change while leaving changes of non-forest classes out of consideration."
+8,"generally, the dense mangrove patches in the eastern regions have shrunk in size and extent, whereas the core mangrove forests on the western cape have seen an expansion through sedimentation and seaward colonization."
+8,ngoc hien’s central communes have seen an increased integration of dense mangroves patches in the mosaic of waterbodies/ponds and sparse mangrove cover.
+8,"areas most prone to mangrove forest loss and degradation are the eastern central regions, possibly due to its vicinity to districts with higher urban development, infrastructure, and aquaculture production [51]."
+8,the trend map presented in figure 5 gives insight into the spatial distribution of temporal dynamics of mangrove forest loss and gains.
+8,the map highlights how coastal erosion along the southward coastline and sedimentation along the westward frontier have resulted in losses and gains of mangrove forests.
+8,"the strip of dense mangrove forests serving as a protective buffer along ngoc hien’s southern coastline has seen shifting land use changes; on the one hand, inland regrowth and increased connectivity are observed, whereas on the other hand coastal erosion is becoming increasingly severe"
+9,land use transitions is presented in figure 3.
+9,"the maps depict all years with full data-availability and therefore the highest reliability ranging from 2001–2002, and 2013–2019."
+9,"a visual inspection of the temporal dynamics indicates that the central regions in ngoc hien have been subject to a high frequency of land use changes whereas towards the coast, specifically the western cape, stable remote sens. havens 2020, 12,mangrove of dense 3729 9 of 16 forest have to large extent been minimally subjected to forest clearance and land use change."
+9,"over the years, three core mangrove forests areas can be identified (see figure 1, for commune locations); (1) the cluster in the south-east of ngoc hien, including the eastern part leading to seaward losses of dense mangrove forest."
+9,"in ngoc hien’s western regions, dat mui and of tan an commune and adjacent southern tam giang tay commune, (2) the mangrove forest strip vien an communes (see figure 1, for commune locations), the remaining core mangrove forests have along the southern coastline, and (3) the largest core mangrove area is located in the western tips of seen relatively few land use changes except for seaward mangrove expansion and colonization caused ngoc hien district; dat mui commune which encloses the ca mau cape national park and the north- by coastal sedimentation (figure 5). western part of vien an commune."
+9,figure3.
+9,figure seriesof timeseries 3.
+9,"time ofland landuse usemaps ngochien mapsofofngoc districtfrom hiendistrict from2001–2002 and2013–2019, 2001–2002and 2013–2019,displayed displayed are all are all years with full years with full data availability (non-slc data availability (non-slc malfunction)."
+10,the total land use changes over time are highlighted in figure 4.
+10,these results show that the total shares of land use cover between four classes have remained relatively stable with yearly fluctuations.
+10,"in the span of two decades, we find sparse mangrove cover fluctuating between 33,000 ha and 40,000 ha and dense mangrove forests hovering between 18,000 ha and 24,000 ha."
+10,the average net change of dense mangroves over the 2001–2019 equals −0.01% annually.
+10,"in recent years since 2013, remotewe 2020, 12,upward observe sens. 3729 trends in dense mangrove forest cover as well as built environment and10 of 16 mudflats."
+10,sparse mangrove cover has been decreasing in that same period.
+10,waterbodies/ponds have remained more or less equal.
+10,figure figure 4.
+10,temporal 4.
+10,temporal totalland changesinintotal changes cover surface land cover surfaceacross acrossfour land four useuse land classes in ngoc classes hien hien in ngoc district. district.
+10,remote sens.
+10,"years 2020, years with 12,with x forslcslc peer malfunctionare malfunction review areshaded shaded in in grey greyconsidering consideringthethe higher uncertainties. higher uncertainties. 10 of 16 despite these overall trends, the figure conceals the spatial dynamics behind the distribution of mangrove forests and land use changes that characterize the region."
+10,"to gain insight into the spatial distribution of land use changes, an aggregated trend map was created (figure 5) to identify hotspots of mangrove forest change while leaving changes of non-forest classes out of consideration."
+10,"generally, the dense mangrove patches in the eastern regions have shrunk in size and extent, whereas the core mangrove forests on the western cape have seen an expansion through sedimentation and seaward colonization."
+10,ngoc hien’s central communes have seen an increased integration of dense mangroves patches in the mosaic of waterbodies/ponds and sparse mangrove cover.
+10,"areas most prone to mangrove forest loss and degradation are the eastern central regions, possibly due to its vicinity to districts with higher urban development, infrastructure, and aquaculture production [51]."
+10,the trend map presented in figure 5 gives insight into the spatial distribution of temporal dynamics of mangrove forest loss and gains.
+10,the map highlights how coastal erosion along the southward coastline and sedimentation along the westward frontier have resulted in losses and gains of mangrove forests.
+10,"the strip of dense mangrove forests serving as a protective buffer along ngoc hien’s southern coastline has seen shifting land use changes; on the one hand, inland regrowth and increased connectivity are observed, whereas on the other hand coastal erosion is becoming increasingly severe leading to seaward losses of dense mangrove forest."
+10,"in ngoc hien’s western regions, dat mui and vien an communes (see figure 1, for commune locations), the remaining core figure5.5."
+10,mangrove figure mangrove forest trend trend map (2001–2019) mapuse (2001–2019)ofof150 150 150×for × mm 150 box averages. box averages. expansion mangrove forests have seen relatively few land changes except seaward mangrove and colonization caused by coastal sedimentation (figure 5).
+10,discussion 4.
+10,discussion 4.1.
+10,overcoming 4.1.
+10,"observation gaps overcomingobservation gaps in monitoring mangrove monitoring in mangrove thecritical ininthe reviewby criticalreview by younes younes cárdenas cárdenas et al.(2017) et al. basedonon5555 (2017)based recent recent peer-reviewed peer-reviewed journal journal articles using landsat or aster images to monitor mangrove forests, the authors conclude that thethe articles using landsat or aster images to monitor mangrove forests, the authors conclude that majorityofofmulti-temporal majority multi-temporal studies focus on studies focus onlyaafraction on only availablesatellite fractionofofavailable satellite imagery imagery on on with with average average 7–11 years 7–11 between years betweenscenes of multitemporal scenes of multitemporalanalysis [13]."
+10,"[13]. analysis yet, high yet, temporal changechange detection high temporal mangrove ofdetection offorests mangroveis vital in mapping forests threats is vital in fromthreats mapping aquaculture expansion and from aquaculture coastaland development expansion coastal asdevelopment as well ascyclic well as to understand to understand such processes processescyclic as loggingsuch in production as logging areas in production areasbiomass and seasonal and [15]."
+10,"influctuations seasonal biomass fluctuations our study, [15]."
+10,"in our study, 446 unique scenes 446wereunique scenesinto processed were processed annual medianintocomposites annual tomedian study the composites temporal study the temporal to dynamics of mangrovedynamics forests mangrove of in forests in one one of vietnam’s mostofprominent vietnam’s most regions prominent regions for mangrove conservation, ngoc hien district in the ca mau for mangrove conservation, ngoc hien district in the ca mau province."
+10,despite a large number province.
+10,"despite a of large number of scenes per composite (15.4 scenes on average), it still resulted in a high number of pixels with no observations and/or illogical land use transitions for different years between 2001– 2019 (see table 1)."
+10,"following temporal gap-filling and post-classification optimization, the resulting optimized time series allowed us to better monitor the state of mangrove forests in ngoc hien with spatial and temporal continuity and logical consistency in transitions."
+11,"remote sens. 2020, 12, 3729 11 of 16 scenes per composite (15.4 scenes on average), it still resulted in a high number of pixels with no observations and/or illogical land use transitions for different years between 2001–2019 (see table 1)."
+11,"following temporal gap-filling and post-classification optimization, the resulting optimized time series allowed us to better monitor the state of mangrove forests in ngoc hien with spatial and temporal continuity and logical consistency in transitions."
+11,post-classification temporal optimization accurate land use classification remains a challenging undertaking in landscapes dominated by aquaculture and mangrove forest land use [13].
+11,"in our study, the accuracy assessment for the reference year 2015 yielded assuring accuracy confiners (table 3)."
+11,we used 514 single-year reference data points observed in-situ for training the classifier and validation of the results.
+11,"ideally, we would have such data available for multiple years; however, this is difficult to acquire and organize."
+11,"with limited availability of ground-truth data, reducing classification uncertainties and increasing temporal consistency is key to provide high-quality land use maps."
+11,the use of yearly median composites allowed for fast computational processing and a comprehensible annual time series output for policy and decision-makers.
+11,"nevertheless, the application of median composites also poses disadvantages."
+11,adequate composites still require the presence of sufficient high-quality observations.
+11,"moreover, a year-round even temporal distribution of scenes is required to facilitate an adequate median composite that is representative for the entire year."
+11,"knowledge regarding yearly phenology, the impact of tides of reflectance signals, trends in biophysical parameters (functional traits) of mangrove ecosystems is for a large part still lacking to make appropriate judgments on possible biases in median composites [13]."
+11,"in other words, gaining more understanding regarding these temporal processes, also within yearly cycles, will help gain insight into the robustness of median composites for mangrove forest ecosystems."
+11,"further challenges in accurate classifications of mangrove forests are raised by; (1) the fine-grained landscape mosaic with mangrove plots and aquaculture ponds often sized at sub-pixel (30 m × 30 m) measures, (2) the unknown implications of tidal effects on spectral signals and the high level of water vapor observed in these coastal regions, and (3) recent trends towards integrated mangrove-shrimp farming production systems which have made discrimination between mangrove, aquaculture paddy land use classes more ambivalent [9,13,15,52,53]."
+11,these challenges highlight the importance of making the most of the temporal information available to lower uncertainties in the final classification product.
+11,this is particularly important when noise in remote sensing signals is high—which is commonly the case in cloud-covered mangrove regions—and when multi-annual validation/training data are scarce.
+11,"several situations can cause illogical changes in a land use time series, such as classification errors, reflectance signal noise, and imperfect image co-registration."
+11,"here, we demonstrated how the exploitation of information in the temporal domain allowed for additional optimization and a means of cross-validation of the gee classification outputs."
+11,studying temporal patterns and cross-validating land use changes in relation to the previous and following years help increase the robustness to noise and credibility of classification efforts.
+11,"specifically, the temporal information of land cover maps in a time series has been used to detect illogical land use changes and improve classification results [48]."
+11,the approach for temporal mangrove monitoring outlined is relatively easy to implement using gee output and post-classification optimization.
+11,"at the same time, it provides valid spatial classification (table 3; 94–96% accuracy) and temporal interpolation (table 4; 87 to 92% accuracy)."
+11,"temporal interpolation follows a simple discrete inverse distance weighting algorithm, however other and more advanced statistical learning approaches can potentially be interesting alternatives [41,49,50,54–56]."
+11,figure 5 illustrates the further implementation of our gap-free time series in studying multi-temporal mangrove land use trends in ngoc hien.
+11,"bi-temporal approaches risk highlighting observations that result from isolated instances that can introduce inconsistencies and uncertainties in classification, especially considering the, at times, unfavorable signal-to-noise ratios found in satellite remote sensing [13]."
+11,"instead of comparing two single timestamps, the integration of yearly"
+12,"remote sens. 2020, 12, 3729 12 of 16 gap-free land use classification enables temporal cross-validation along logical land use transitions and gap-filling based on temporally neighboring information."
+12,"this temporally dense analysis allows us to fully assess the direction and frequency of land use changes affecting mangrove forests [57,58]."
+12,this is also important to ensure that the unchanged forest between two time points has remained undisturbed in the years in between.
+12,"moreover, the multi-annual approach allows us to assess and quantify observed land use changes, e.g., forest disturbances, at a high temporal frequency, thereby opening venues to better monitor and study mangrove forest disturbance regimes and mangrove degradation processes as compared to bi-temporal land use change."
+12,"the land use trend map (figure 5) facilitates the detection of hotspots for mangrove forest change; deforestation, degradation, and regrowth."
+12,"while the map is informative for deforestation and the land use change drivers behind it, the assessment of forest degradation remains arbitrary inherent to the operationalization of the land use classification scheme."
+12,this ties in with the challenges and complexity of defining forest degradation [59].
+12,a large variety of existing definitions of forest degradation require different methods for assessment based on the objectives of the intended study [60].
+12,the gap-free land use change maps presented here may help flag changes in mangrove forest extent.
+12,"however, to overcome the arbitrariness of classes, complimentary maps on quantitative canopy/leaf traits and biomass can further enhance our ability to assess forest degradation and forest regrowth along a spectrum of ecologically relevant indicators [61–63]."
+12,"future implementation the case study presented here builds on and contributes to a growing body of work advocating that approaches that account for temporal information in optimizing land cover classification are superior to temporally independent time series classifications and other single-date methods [39,64]."
+12,"the application of the post-classification optimization to stabilize land cover trajectories, mitigate unrealistic land cover transitions and overcome the limitations and costs of obtaining ancillary and field data are still rarely applied in land use time series studies [39,64]."
+12,gee implementation of these methods within its standard functionality offers an opportunity to improve temporal consistency and promote temporally dense analyses as a common practice.
+12,"in addition to the post-classification method presented here, other opportunities to fully benefit from the temporal information available would be a gee implementation of methods combining the probability functions of land use trajectories and the propagation of classification uncertainties temporally to decide on the final classification outcome [33,39–41,46,54,65]."
+12,"furthermore, data fusion of multiple sensors have shown large potential to further increase the temporal resolution of analysis [34,37,38]."
+12,"in particular, the integration of optical and lidar or synthetic aperture radar imaging offers opportunities for high-frequency temporal analyses that are independent of the weather and cloud cover [66]."
+12,conclusions our study aimed to advance temporal mangrove forest monitoring efforts to benefit from the potential that currently available satellite earth observation data and cloud-based high-performance computing can offer.
+12,the temporal domain of these information-dense datasets opens opportunities to apply data fusion principles to optimize classification outputs to be gap-free and temporally consistent with logical land use transitions as well as provide a means of cross-validation.
+12,"the results of our case study on mangrove forests demonstrate how this information can be valuable in understanding the spatio-temporal dynamics, processes, and trends of land use changes and improve decision-making with detailed information."
+12,"thereby, our study builds on and contributes to a growing body of work advocating that accounting for temporal information in optimizing land cover classification is superior to temporally independent classifications in time series and other single-date methods."
+12,"despite growing awareness, most mangrove forest cover classification studies are yet to take full advantage of earth observation’s potential and the rich temporal information available from time series data."
+12,"implementation of temporal optimization, either post-classification or during the classification"
+13,"remote sens. 2020, 12, 3729 13 of 16 process, within future implementations or that can be automated on top of gee’s output as presented here, can hopefully contribute to advance mangrove monitoring studies towards fully unlocking the potential of data available as the field of earth observation keeps evolving."
+13,the integration of synthetic aperture radar remote sensing in addition to optical observations will be key in advancing the approach presented here and increase the temporal resolution by overcoming data gaps due to weather or lighting conditions.
+13,"supplementary materials: the following are available online at http://www.mdpi.com/2072-4292/12/22/3729/s1, table s1: links to the gee code implementation used for this study, table s2: decision rules of the regression tree (cart) build for land use classification (2015) by landsat-7 and landsat-8 respectively."
+13,"author contributions: conceptualization, l.t.h. and n.a.b.; methodology, l.t.h. and n.a.b.; coding, l.t.h. and n.a.b.; validation, n.a.b. and p.v.h.; investigation, n.a.b. and p.v.h.; resources, n.a.b. and p.v.h.; data curation, n.a.b.; writing—original draft preparation, l.t.h.; writing—review and editing, n.h.q. and j.t.; visualization, l.t.h.; supervision, l.t.h. and p.v.h.; project administration, n.a.b. and p.v.h.; funding acquisition, p.v.h."
+13,all authors have read and agreed to the published version of the manuscript.
+13,"funding: this research was funded by vietnam academy of science and technology, grant number ðlte00.06/20-21 and the apc was funded by the institute of environmental sciences (cml), leiden university."
+13,acknowledgments: this research was partly supported by vietnam academy of science and technology through the project ðlte00.06/20-21.
+13,conflicts of interest: the authors declare no conflict of interest.
+13,references 1.
+13,"clough, b."
+13,"continuing the journey amongst mangroves; isme mangrove educational book series no.1; isme publications: okinawa, japan, 2013; isbn 9784906584161."
+13,"kuenzer, c."
+13,"; tuan, v.q."
+13,assessing the ecosystem services value of can gio mangrove biosphere reserve: combining earth-observation- and household-survey-based analyses.
+13,geogr.
+13,"2013, 45, 167–184."
+13,[crossref] 3.
+13,"brander, l.m."
+13,"; wagtendonk, a.j."
+13,"; hussain, s.s."
+13,"; mcvittie, a."
+13,"; verburg, p.h."
+13,"; de groot, r.s."
+13,"; van der ploeg, s."
+13,ecosystem service values for mangroves in southeast asia: a meta-analysis and value transfer application.
+13,ecosyst.
+13,"2012, 1, 62–69."
+13,[crossref] 4.
+13,"siikamäki, j."
+13,"; sanchirico, j.n."
+13,"; jardine, s.l."
+13,global economic potential for reducing carbon dioxide emissions from mangrove loss.
+13,"usa 2012, 109, 14369–14374."
+13,[crossref] 5.
+13,"costanza, r."
+13,"; de groot, r."
+13,"; sutton, p.c."
+13,"; van der ploeg, s."
+13,"; anderson, s.j."
+13,"; kubiszewski, i."
+13,"; farber, s."
+13,"; turner, r.k."
+13,changes in the global value of ecosystem services.
+13,environ.
+13,chang.
+13,"2014, 26, 152–158."
+13,[crossref] 6.
+13,"duke, n.c."
+13,"; meynecke, j.-o."
+13,"; dittmann, s."
+13,"; ellison, a.m."
+13,"; anger, k."
+13,"; berger, u."
+13,"; cannicci, s."
+13,"; diele, k."
+13,"; ewel, k.c."
+13,"; field, c.d.; et al."
+13,a world without mangroves?
+13,"science 2007, 317, 41b–42b."
+13,[crossref] 7.
+13,"giri, c."
+13,"; ochieng, e."
+13,"; tieszen, l.l."
+13,"; zhu, z."
+13,"; singh, a."
+13,"; loveland, t."
+13,"; masek, j."
+13,"; duke, n."
+13,status and distribution of mangrove forests of the world using earth observation satellite data.
+13,biogeogr.
+13,"2010, 20, 154–159."
+13,[crossref] 8.
+13,"heumann, b.w."
+13,satellite remote sensing of mangrove forests: recent advances and future opportunities.
+13,geogr.
+13,"2011, 35, 87–108."
+13,[crossref] 9.
+13,"kuenzer, c."
+13,"; bluemel, a."
+13,"; gebhardt, s."
+13,"; quoc, t.v."
+13,"; dech, s."
+13,remote sensing of mangrove ecosystems: a review.
+13,remote sens.
+13,"2011, 3, 878–928."
+13,[crossref] 10.
+13,"giri, c."
+13,observation and monitoring of mangrove forests using remote sensing: opportunities and challenges.
+13,remote sens.
+13,"2016, 8, 783."
+13,[crossref] 11.
+13,"belward, a.s."
+13,"; skøien, j.o."
+13,"who launched what, when and why; trends in global land-cover observation capacity from civilian earth observation satellites."
+13,isprs j.
+13,photogramm.
+13,remote sens.
+13,"2015, 103, 115–128."
+13,[crossref] 12.
+13,"soille, p."
+13,"; burger, a."
+13,"; de marchi, d."
+13,"; kempeneers, p."
+13,"; rodriguez, d."
+13,"; syrris, v."
+13,"; vasilev, v."
+13,a versatile data-intensive computing platform for information retrieval from big geospatial data.
+13,futur.
+13,gener.
+13,comput.
+13,"2018, 81, 30–40."
+13,[crossref] 13.
+13,"cárdenas, n.y."
+13,"; joyce, k.e."
+13,"; maier, s.w."
+13,monitoring mangrove forests: are we taking full advantage of technology?
+13,earth obs.
+13,geoinf.
+13,"2017, 63, 1–14."
+13,[crossref]
+14,"remote sens. 2020, 12, 3729 14 of 16 14."
+14,"hamilton, s.e."
+14,"; casey, d."
+14,creation of a high spatio-temporal resolution global database of continuous mangrove forest cover for the 21st century (cgmfc-21).
+14,biogeogr.
+14,"2016, 25, 729–738."
+14,[crossref] 15.
+14,"hauser, l.t."
+14,"; vu, g.n."
+14,"; nguyen, b.a."
+14,"; dade, e."
+14,"; nguyen, h.m."
+14,"; nguyen, t.t.q."
+14,"; le, t.q."
+14,"; vu, l.h."
+14,"; tong, a.t.h."
+14,"; pham, h.v."
+14,"uncovering the spatio-temporal dynamics of land cover change and fragmentation of mangroves in the ca mau peninsula, vietnam using multi-temporal spot satellite imagery (2004–2013)."
+14,geogr.
+14,"2017, 86, 197–207."
+14,[crossref] 16.
+14,"li, f."
+14,"; liu, k."
+14,"; tang, h."
+14,"; liu, l."
+14,"; liu, h."
+14,analyzing trends of dike-ponds between 1978 and 2016 using multi-source remote sensing images in shunde district of south china.
+14,"sustainability 2018, 10, 3504."
+14,[crossref] 17.
+14,"azzari, g."
+14,"; lobell, d."
+14,landsat-based classification in the cloud: an opportunity for a paradigm shift in land cover monitoring.
+14,remote sens.
+14,environ.
+14,"2017, 202, 64–74."
+14,[crossref] 18.
+14,"gorelick, n."
+14,"; hancher, m."
+14,"; dixon, m."
+14,"; ilyushchenko, s."
+14,"; thau, d."
+14,"; moore, r."
+14,google earth engine: planetary-scale geospatial analysis for everyone.
+14,remote sens.
+14,environ.
+14,"2017, 202, 18–27."
+14,[crossref] 19.
+14,"shelestov, a."
+14,"; lavreniuk, m."
+14,"; kussul, n."
+14,"; novikov, a."
+14,"; skakun, s."
+14,exploring google earth engine platform for big data processing: classification of multi-temporal satellite imagery for crop mapping.
+14,front.
+14,earth sci.
+14,"2017, 5, 17."
+14,[crossref] 20.
+14,"yang, c."
+14,"; yu, m."
+14,"; hu, f."
+14,"; jiang, y."
+14,"; li, y."
+14,utilizing cloud computing to address big geospatial data challenges.
+14,comput.
+14,environ.
+14,urban syst.
+14,"2017, 61, 120–128."
+14,[crossref] 21.
+14,"yang, c."
+14,"; xu, y."
+14,"; nebert, d."
+14,redefining the possibility of digital earth and geosciences with spatial cloud computing.
+14,digit.
+14,"earth 2013, 6, 297–312."
+14,[crossref] 22.
+14,"hansen, m.c."
+14,"; potapov, p.v."
+14,"; moore, r."
+14,"; hancher, m."
+14,"; turubanova, s.a."
+14,"; tyukavina, a."
+14,"; thau, d."
+14,"; stehman, s.v."
+14,"; goetz, s.j."
+14,"; loveland, t.r.; et al."
+14,high-resolution global maps of 21st-century forest cover change.
+14,"science 2013, 342, 850–853."
+14,[crossref] [pubmed] 23.
+14,"johansen, k."
+14,"; phinn, s.r."
+14,"; taylor, m."
+14,"mapping woody vegetation clearing in queensland, australia from landsat imagery using the google earth engine."
+14,remote sens.
+14,environ.
+14,"2015, 1, 36–49."
+14,[crossref] 24.
+14,"thwal, n.s."
+14,"; ishikwawa, t."
+14,"; watanabe, h."
+14,"comparison of random forest, k-nearest neighbor, and support vector machine classifiers for land cover classification using sentinel-2 imagery."
+14,"sensors 2017, 18, 18."
+14,[crossref] 25.
+14,"farda, n.m."
+14,multi-temporal land use mapping of coastal wetlands area using machine learning in google earth engine.
+14,iop conf.
+14,earth environ.
+14,"2017, 98, 012042."
+14,[crossref] 26.
+14,"mondal, p."
+14,"; liu, x."
+14,"; fatoyinbo, t.e."
+14,"; lagomasino, d."
+14,evaluating combinations of sentinel-2 data and machine-learning algorithms for mangrove mapping in west africa.
+14,remote sens.
+14,"2019, 11, 2928."
+14,[crossref] 27.
+14,"li, w."
+14,"; el-askary, h."
+14,"; qurban, m.a."
+14,"; li, j."
+14,"; manikandan, k."
+14,"; piechota, t."
+14,using multi-indices approach to quantify mangrove changes over the western arabian gulf along saudi arabia coast.
+14,indic.
+14,"2019, 102, 734–745."
+14,[crossref] 28.
+14,"belda, s."
+14,"; pipia, l."
+14,"; morcillo-pallarés, p."
+14,"; rivera-caicedo, j.p."
+14,"; amin, e."
+14,"; de grave, c."
+14,"; verrelst, j."
+14,datimes: a machine learning time series gui toolbox for gap-filling and vegetation phenology trends detection.
+14,environ.
+14,model.
+14,softw.
+14,"2020, 127, 104666."
+14,[crossref] 29.
+14,"zeng, l."
+14,"; wardlow, b."
+14,"; xiang, d."
+14,"; hu, s."
+14,"; li, d."
+14,"a review of vegetation phenological metrics extraction using time-series, multispectral satellite data."
+14,remote sens.
+14,environ.
+14,"2020, 237, 111511."
+14,[crossref] 30.
+14,"weiss, d.j."
+14,"; atkinson, p.m."
+14,"; bhatt, s."
+14,"; mappin, b."
+14,"; hay, s.i."
+14,"; gething, p.w."
+14,an effective approach for gap-filling continental scale remotely sensed time-series.
+14,isprs j.
+14,photogramm.
+14,remote sens.
+14,"2014, 98, 106–118."
+14,[crossref] 31.
+14,"noormets, a."
+14,phenology of ecosystem processes.
+14,"in climate change 2013—the physical science basis 53; springer science & business media: new york, ny, usa, 2013; isbn 978-1-107-05799-1."
+14,"gutman, g."
+14,"; masek, j.g."
+14,long-term time series of the earth’s land-surface observations from space.
+14,remote sens.
+14,"2012, 33, 4700–4719."
+14,[crossref] 33.
+14,"wulder, m.a."
+14,"; coops, n.c."
+14,"; roy, d.p."
+14,"; white, j.c."
+14,"; wulder, m.a."
+14,"; coops, n.c."
+14,"; roy, d.p."
+14,"; white, j.c."
+14,land cover 2.0.
+14,remote sens.
+14,"2018, 39, 4254–4284."
+14,[crossref] 34.
+14,"ienco, d."
+14,"; interdonato, r."
+14,"; gaetano, r."
+14,"; minh, d.h.t."
+14,combining sentinel-1 and sentinel-2 satellite image time series for land cover mapping via a multi-source deep learning architecture.
+14,isprs j.
+14,photogramm.
+14,remote sens.
+14,"2019, 158, 11–22."
+14,[crossref]
+15,"remote sens. 2020, 12, 3729 15 of 16 35."
+15,"asare, y.m."
+15,"; forkuo, e.k."
+15,"; forkuor, g."
+15,"; thiel, m."
+15,evaluation of gap-filling methods for landsat 7 etm+ slc-off image for lulc classification in a heterogeneous landscape of west africa.
+15,remote sens.
+15,"2019, 41, 2544–2564."
+15,[crossref] 36.
+15,"chen, j."
+15,"; zhu, x."
+15,"; vogelmann, j.e."
+15,"; gao, f."
+15,"; jin, s."
+15,a simple and effective method for filling gaps in landsat etm+ slc-off images.
+15,remote sens.
+15,environ.
+15,"2011, 115, 1053–1064."
+15,[crossref] 37.
+15,"dusseux, p."
+15,"; corpetti, t."
+15,"; hubert-moy, l."
+15,"; corgne, s."
+15,combined use of multi-temporal optical and radar satellite images for grassland monitoring.
+15,remote sens.
+15,"2014, 6, 6163–6182."
+15,[crossref] 38.
+15,"adepoju, k.a."
+15,"; adelabu, s.a."
+15,improving accuracy of landsat-8 oli classification using image composite and multisource data with google earth engine.
+15,remote sens.
+15,"2020, 11, 107–116."
+15,[crossref] 39.
+15,"gómez, c."
+15,"; white, j.c."
+15,"; wulder, m.a."
+15,optical remotely sensed time series data for land cover classification: a review.
+15,isprs j.
+15,photogramm.
+15,remote sens.
+15,"2016, 116, 55–72."
+15,[crossref] 40.
+15,"yang, g."
+15,"; fang, s."
+15,"; dian, y."
+15,"; bi, c."
+15,improving seasonal land cover maps of poyang lake area in china by taking into account logical transitions.
+15,isprs int.
+15,geo-inf.
+15,"2016, 5, 165."
+15,[crossref] 41.
+15,"cai, s."
+15,"; liu, d."
+15,"; sulla-menashe, d."
+15,"; friedl, m.a."
+15,remote sensing of environment enhancing modis land cover product with a spatial—temporal modeling algorithm.
+15,remote sens.
+15,environ.
+15,"2014, 147, 243–255."
+15,[crossref] 42.
+15,"tue, n.t."
+15,"; dung, l.v."
+15,"; nhuan, m.t."
+15,"; omori, k."
+15,"carbon storage of a tropical mangrove forest in mui ca mau national park, vietnam."
+15,"catena 2014, 121, 119–126."
+15,[crossref] 43.
+15,"van, t.t."
+15,"; wilson, n.n."
+15,"; thanh-tung, h.h."
+15,"; quisthoudt, k.k."
+15,"; quang-minh, v.v."
+15,"; tuan, l.x.l."
+15,"; dahdouh-guebas, f."
+15,"; koedam, n."
+15,changes in mangrove vegetation area and character in a war and land use change affected region of vietnam (mui ca mau) over six decades.
+15,acta oecol.
+15,"2015, 63, 71–81."
+15,[crossref] 44.
+15,"ha, t.t.p."
+15,"; van dijk, h."
+15,"; visser, l."
+15,"impacts of changes in mangrove forest management practices on forest accessibility and livelihood: a case study in mangrove-shrimp farming system in ca mau province, mekong delta, vietnam."
+15,"land use policy 2014, 36, 89–101."
+15,[crossref] 45.
+15,"moreno-martínez, á."
+15,"; camps-valls, g."
+15,"; kattge, j."
+15,"; robinson, n."
+15,"; reichstein, m."
+15,"; van bodegom, p."
+15,"; kramer, k."
+15,"; cornelissen, j.h.c."
+15,"; reich, p."
+15,"; bahn, m.; et al."
+15,a methodology to derive global maps of leaf traits using remote sensing and climate data.
+15,remote sens.
+15,environ.
+15,"2018, 218, 69–88."
+15,[crossref] 46.
+15,"roy, d.p."
+15,"; ju, j."
+15,"; lewis, p."
+15,"; schaaf, c."
+15,"; gao, f."
+15,"; hansen, m."
+15,"; lindquist, e."
+15,"multi-temporal modis—landsat data fusion for relative radiometric normalization, gap filling, and prediction of landsat data."
+15,remote sens.
+15,environ.
+15,"2008, 112, 3112–3130."
+15,[crossref] 47.
+15,"bishop, c.m."
+15,"pattern recognition and machine learning; information science and statistics; springer: new york, ny, usa, 2016; isbn 9781493938438."
+15,"shen, h."
+15,"; li, x."
+15,"; cheng, q."
+15,"; zeng, c."
+15,"; yang, g."
+15,"; li, h."
+15,"; zhang, l."
+15,missing information reconstruction of remote sensing data: a technical review.
+15,ieee geosci.
+15,remote sens.
+15,"2015, 3, 61–85."
+15,[crossref] 49.
+15,"knotters, m."
+15,"; hoogland, t."
+15,"a disposition of interpolation techniques; statutory research tasks unit for nature and the environment; wot-werkdocument 190: wageningen, the netherlands, 2010."
+15,"lepot, m."
+15,"; aubin, j.-b."
+15,"; clemens, f.h."
+15,"interpolation in time series: an introductive overview of existing methods, their performance criteria and uncertainty assessment."
+15,"water 2017, 9, 796."
+15,[crossref] 51.
+15,"son, n.-t."
+15,"; chen, c.-f."
+15,"; chang, n.-b."
+15,"; chen, c.-r."
+15,"; chang, l.-y."
+15,"; thanh, b.-x."
+15,"mangrove mapping and change detection in ca mau peninsula, vietnam, using landsat data and object-based image analysis."
+15,ieee j.
+15,earth obs.
+15,remote sens.
+15,"2014, 8, 503–510."
+15,[crossref] 52.
+15,"tran, t.t.h."
+15,"; ha, t."
+15,"; bush, s.r."
+15,"; mol, a.p.j."
+15,"; dijk, h."
+15,van organic coasts?
+15,regulatory challenges of certifying integrated shrimp e mangrove production systems in vietnam.
+15,rural stud.
+15,"2012, 28, 631–639."
+15,[crossref] 53.
+15,"baumgartner, u."
+15,"; kell, s."
+15,"; nguyen, t.h."
+15,arbitrary mangrove-to-water ratios imposed on shrimp farmers in vietnam contradict with the aims of sustainable forest management.
+15,"springerplus 2016, 5, 1–10."
+15,[crossref] 54.
+15,"lahoz, w.a."
+15,"; schneider, p."
+15,data assimilation: making sense of earth observation.
+15,front.
+15,environ.
+15,"2014, 2, 1–28."
+15,[crossref] 55.
+15,"abercrombie, s.p."
+15,"; friedl, m.a."
+15,improving the consistency of multitemporal land cover maps using a hidden markov model.
+15,ieee trans.
+15,geosci.
+15,remote sens.
+15,"2016, 54, 703–713."
+15,[crossref] 56.
+15,"gong, w."
+15,"; fang, s."
+15,"; yang, g."
+15,"; ge, m."
+15,using a hidden markov model for improving the spatial-temporal consistency of time series land cover classification.
+15,isprs int.
+15,geo-inf.
+15,"2017, 6, 292."
+15,[crossref]
+16,"remote sens. 2020, 12, 3729 16 of 16 57."
+16,"jia, k."
+16,"; liang, s."
+16,"; zhang, n."
+16,"; wei, x."
+16,"; gu, x."
+16,"; zhao, x."
+16,"; yao, y."
+16,"; xie, x."
+16,land cover classification of finer resolution remote sensing data integrating temporal features from time series coarser resolution data.
+16,isprs j.
+16,photogramm.
+16,remote sens.
+16,"2014, 93, 49–55."
+16,[crossref] 58.
+16,"hilker, t."
+16,"; wulder, m.a."
+16,"; coops, n.c."
+16,"; linke, j."
+16,"; mcdermid, g."
+16,"; masek, j.g."
+16,"; gao, f."
+16,"; white, j.c."
+16,a new data fusion model for high spatial- and temporal-resolution mapping of forest disturbance based on landsat and modis.
+16,remote sens.
+16,environ.
+16,"2009, 113, 1613–1627."
+16,[crossref] 59.
+16,"modica, g."
+16,"; merlino, a."
+16,"; solano, f."
+16,"; mercurio, r."
+16,an index for the assessment of degraded mediterranean forest ecosystems.
+16,"2015, 24, 1–13."
+16,[crossref] 60.
+16,"wu, b."
+16,"; meng, x."
+16,"; ye, q."
+16,"; sharma, r.p."
+16,"; duan, g."
+16,"; lei, y."
+16,"; fu, l."
+16,method of estimating degraded forest area: cases from dominant tree species from guangdong and tibet in china.
+16,"forests 2020, 11, 930."
+16,[crossref] 61.
+16,"lausch, a."
+16,"; erasmi, s."
+16,"; king, d.j."
+16,"; magdon, p."
+16,"; heurich, m."
+16,"understanding forest health with remote sensing-part i-a review of spectral traits, processes and remote-sensing characteristics."
+16,remote sens.
+16,"2016, 8, 29."
+16,[crossref] 62.
+16,"shrestha, s."
+16,"; miranda, i."
+16,"; kumar, a."
+16,"; pardo, m.l.e."
+16,"; dahal, s."
+16,"; rashid, t."
+16,"; remillard, c."
+16,"; mishra, d.r."
+16,identifying and forecasting potential biophysical risk areas within a tropical mangrove ecosystem using multi-sensor data.
+16,earth obs.
+16,geoinf.
+16,"2019, 74, 281–294."
+16,[crossref] 63.
+16,"pham, t.d."
+16,"; le, n.n."
+16,"; ha, n.t."
+16,"; nguyen, l.v."
+16,"; xia, j."
+16,"; yokoya, n."
+16,"; to, t.t."
+16,"; trinh, h.x."
+16,"; kieu, l.q."
+16,"; takeuchi, w."
+16,"estimating mangrove above-ground biomass using extreme gradient boosting decision trees algorithm with fused sentinel-2 and alos-2 palsar-2 data in can gio biosphere reserve, vietnam."
+16,remote sens.
+16,"2020, 12, 777."
+16,[crossref] 64.
+16,"hermosilla, t."
+16,"; wulder, m.a."
+16,"; white, j.c."
+16,"; coops, n.c."
+16,"; hobart, g.w."
+16,"; hermosilla, t."
+16,"; wulder, m.a."
+16,"; white, j.c."
+16,"; coops, n.c."
+16,disturbance-informed annual land cover classification maps of canada’s forested ecosystems for a 29-year landsat time series disturbance-informed annual land cover classification maps of canada’s.
+16,remote sens.
+16,"2018, 44, 67–87."
+16,[crossref] 65.
+16,"lewis, p."
+16,"; gómez-dans, j."
+16,"; kaminski, t."
+16,"; settle, j."
+16,"; quaife, t."
+16,"; gobron, n."
+16,"; styles, j."
+16,"; berger, m."
+16,an earth observation land data assimilation system (eo-ldas).
+16,remote sens.
+16,environ.
+16,"2012, 120, 219–235."
+16,[crossref] 66.
+16,"pham, t.d."
+16,"; yokoya, n."
+16,"; bui, d.t."
+16,"; yoshino, k."
+16,"; friess, d.a."
+16,"remote sensing approaches for monitoring mangrove species, structure, and biomass: opportunities and challenges."
+16,remote sens.
+16,"2019, 11, 230."
+16,[crossref] publisher’s note: mdpi stays neutral with regard to jurisdictional claims in published maps and institutional affiliations. © 2020 by the authors.
+16,"licensee mdpi, basel, switzerland."
+16,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).

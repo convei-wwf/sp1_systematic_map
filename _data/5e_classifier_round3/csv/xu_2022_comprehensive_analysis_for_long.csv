@@ -1,0 +1,805 @@
+page,p
+1,"original research published: 20 april 2022 doi: 10.3389/feart.2022.875145 comprehensive analysis for long-term hydrological simulation by deep learning techniques and remote sensing chaowei xu†, yizhen wang†, hao fu * and jiashuai yang college of urban and environmental sciences, peking university, beijing, china hydrological simulation plays a very important role in understanding the hydrological processes and is of great signiﬁcance to ﬂood forecasting and optimal allocation of water resources in the watershed."
+1,"the development of deep learning techniques has brought edited by: new opportunities and methods for long-term hydrological simulation research at the ling yao, watershed scale."
+1,"different from traditional hydrological models, the application of deep institute of geographic sciences and natural resources research (cas), learning techniques in the hydrological ﬁeld has greatly promoted the development trend of china runoff prediction and provides a new paradigm for hydrological simulation."
+1,"in this study, a reviewed by: cnn–lstm model based on the convolutional neural network (cnn) and long short-term yuyue xu, nanjing university, china memory (lstm) network, and a cnn–gru model based on cnn and gated recurrent unit xiaotong zhang, (grn) are constructed to study the watershed hydrological processes."
+1,"to compare the beijing normal university, china performance of deep learning techniques and the hydrological model, we also constructed shuisen chen, guangzhou institute of geography, the distributed hydrological model: soil and water assessment tool (swat) model based china on remote sensing data."
+1,"these models were applied to the xixian basin, and the promising *correspondence: results had been achieved, which veriﬁed the rationality of the method, with the majority of hao fu fuhao@pku.edu.cn percent bias error (pbe) values ranging between 3.17 and 13.48, nash–sutcliffe efﬁciency † these authors have contributed (nse) values ranging between 0.63 and 0.91, and kling–gupta efﬁciency (kge) values equally to this work and share ﬁrst ranging between 0.70 and 0.90 on a monthly scale."
+1,the results demonstrated their strong authorship ability to learn complex hydrological processes.
+1,"the results also indicated that the specialty section: proposed deep learning models could provide the certain decision support for the this article was submitted to water environment management at the watershed scale, which was of great environmental informatics and remote signiﬁcance to improve the hydrological disaster prediction ability and was conducive sensing, a section of the journal to the sustainable development of water resources."
+1,"frontiers in earth science keywords: hydrological simulation, soil and water assessment tool, deep learning techniques, remote sensing, received: 13 february 2022 cnn–lstm, cnn–gru accepted: 21 march 2022 published: 20 april 2022 citation: 1 introduction xu c, wang y, fu h and yang j (2022) comprehensive analysis for long- hydrological simulation uses a mathematical model to simulate the hydrological process in the basin term hydrological simulation by deep learning techniques and and realizes it on the computer, which is one of the most important tasks in hydrological research remote sensing."
+1,"(mishra et al., 2017; koster et al., 2018; qi, zhang, and wang 2019; xu, han, and fu 2022)."
+1,it has front.
+1,earth sci.
+1,"10:875145. received extensive attention from hydrologists and has become an important tool for studying doi: 10.3389/feart.2022.875145 watershed water resources (arsenault et al., 2015; xiong et al., 2019; zhou et al., 2019)."
+1,hydrological frontiers in earth science | www.frontiersin.org 1 april 2022 | volume 10 | article 875145
+2,xu et al.
+2,"deep learning and remote sensing simulation also has a very important guiding signiﬁcance for the prediction accuracy of runoff and many hydrological sustainable utilization of water resources (ravazzani et al., 2015; simulation cases based on deep learning have emerged wang g."
+2,"q. et al., 2015; wang h."
+2,"l. et al., 2015; xu y."
+2,"y et al., (althoff, rodrigues, and da silva 2021; bai h. et al., 2021; 2020; yin z."
+2,"l et al., 2021)."
+2,"hussain et al., 2020)."
+2,"the usage of deep learning in a at present, the main method of hydrological simulation at the previously published article can be seen in a related study (sit watershed scale is the watershed hydrological model (freeze and et al., 2020)."
+2,"we can see that the commonly used deep learning harlan 1969; bultot and dupriez 1976; beven and kirkby 1979; networks for hydrological forecasting mainly include the long zhao 1992; arnold et al., 1998; edijatno et al., 1999)."
+2,"the short-term memory network (lstm) (hochreiter and watershed hydrological model is a scientiﬁc way that schmidhuber 1997), convolutional neural network (cnn) generalizes complex hydrological phenomena and processes to (lecun 1989), and gated recurrent unit (gru) (cho et al., simulate the runoff generation and conﬂuence of the watershed."
+2,2014).
+2,"lstm is a widely used deep learning model, which can the study of the watershed hydrological model provides us with better deal with hydrological data with long-term dependence."
+2,"it an important tool for scientiﬁc understanding and rational is very suitable for processing time series data such as utilization of water resources, and provides an important hydrological and water quality information and has been scientiﬁc basis for water resources management and decision- successfully applied to the ﬁeld of hydrological forecasting (hu making (fonseca et al., 2014)."
+2,"the watershed hydrological model et al., 2019; xu w. et al., 2020; bai y. et al., 2021; feng et al., 2021; includes a lumped model and distributed model, and also a semi- lees et al., 2021; lu et al., 2021; yin h."
+2,"l. et al., 2021; yuan et al., distributed model (jaiswal, ali, and bharti 2020)."
+2,the rapid 2021).
+2,"the convolution layer and pooling layer of cnn can better development of remote sensing technology has provided a lot mine the effective information contained in the data and retain of convenience for the application of distributed hydrological the characteristics of the data in the time dimension, which is models (silvestro et al., 2015; xu et al., 2021)."
+2,"the soil and water conducive to and improves the prediction accuracy of hydrology assessment tool (swat), designed and developed by jeff simulation (pulido-calvo and portela 2007; kabir et al., 2020; arnold in the 1990s for the u.s."
+2,"department of agriculture kim and song 2020; van et al., 2020)."
+2,"gru is further optimized (usda) agricultural research service (ars) (arnold et al., 1998; on the basis of lstm and gets a more concise expression."
+2,"studies srinivasan, arnold, and jones 1998), is a comprehensive have shown that gru can achieve good performance in various watershed distributed hydrological model, which has an hydrological prediction tasks (ayzel and heistermann 2021; explicit physical mechanism."
+2,"the swat model is designed to sibtain et al., 2021; zhao et al., 2021). simulate the quality and quantity of surface and groundwater and however, related studies have shown that a single model has predict the environmental impact of land use, land management not yet been able to extract spatiotemporal features practices, and climate change, which is widely applied over the simultaneously, which affects the prediction accuracy in the world (arnold et al., 2012; fohrer et al., 2014; dwarakish and hydrology ﬁeld (chhetri et al., 2020; miau and hung 2020)."
+2,"ganasri 2015; krysanova and srinivasan 2015; worku, khare, the combination of deep learning models can give full play to the and tripathi 2017; nguyen and dietrich 2018; tan et al., 2019; advantages of each model and improve the generalization ability, xue et al., 2019; raihan et al., 2020)."
+2,"the swat model has a thereby improving the performance of the model (chhetri et al., strong physical foundation, which can simulate a variety of 2020)."
+2,"the combination of cnn and lstm can not only quickly hydrological physical and chemical processes, such as runoff extract the effective features in the data but also fully consider the and sediment by spatial information provided by remote long-term dependence of the time series, so as to achieve accurate sensing and gis (worku, khare, and tripathi 2017)."
+2,"swat runoff prediction, which has a certain reference value for has a global user community with an active technical support mastering the hydrological environment of the basin (hong forum that facilitates its applications to be an effective tool for et al., 2020)."
+2,"similarly, combining the advantages of cnn’s watershed management (samimi et al., 2020). spatial processing capability and gru’s temporal processing in addition to the watershed hydrological model, deep capability can also be applied to hydrological forecasting learning techniques have also been widely used in the (miau and hung 2020)."
+2,"hence, in order to improve the hydrological ﬁeld due to their small data requirements and simulation accuracy and increase the generalization ability, strong plasticity (rezaeianzadeh et al., 2014; beven 2020; gu this study combines cnn with lstm and gru to construct et al., 2020; van et al., 2020)."
+2,"especially in recent years, the the cnn–lstm model and cnn–gru model."
+2,"then the two explosive development of deep learning has brought innovations deep learning models and the swat model are applied to and breakthroughs to hydrological simulation and will become an hydrological simulation at a watershed scale with long-term important research direction in the future (abbas et al., 2020; hydrological data."
+2,"the main objectives of this study are 1) to alizadeh et al., 2021; lei et al., 2021)."
+2,it will also become an develop the coupled models: cnn–lstm and cnn–gru based important driving force to promote the development of on deep learning techniques; 2) to evaluate the performance hydrological simulation of basins and provide new of the proposed deep learning models against the existing opportunities for the research and application of ﬂood hydrology model (swat model).
+2,"the remainder of this forecasting (sit et al., 2020)."
+2,"deep learning can effectively article is organized as follows: section 2 describes the improve the summary and expression of data distribution methods and study area; section 3 summarizes the rules with the increase in training samples and the research results; section 4 is the discussions; and lastly, diversiﬁcation of data characteristics, thus improving the the conclusions are drawn in section 5."
+2,frontiers in earth science | www.frontiersin.org 2 april 2022 | volume 10 | article 875145
+3,xu et al.
+3,"deep learning and remote sensing 2 materials and methods ot  σ(wo · [ht−1 , xt ] + bo ), (9) deep learning models where σ is sigmoid function, bf , bi , bc , and bo are the cnn is a commonly used feedforward neural network in deep corresponding bias; wf , wi , wc , and wo are the weight learning, which is mainly composed of ﬁve parts: input layer, matrixes; tanh is hyperbolic tangent function; ht−1 is the convolution layer, pooling layer, dense layer, and output layer. output of hidden state of previous step; and xt is the input."
+3,"the convolutional layer is the core of the cnn neural network, the gru network is an improved network based on lstm. where convolution is performed when data are passed to the gru combines the forget gate and input gate into an “update convolution layer. gate.”"
+3,the input layer is expressed by eq.
+3,"1: the calculation of the gru unit neural network is as follows: x1,1 / x1,n ft  σwf · [ht−1 , xt ] , (10) ⎢ ⎡ ⎢ . .."
+3,"⎤⎥⎥⎥⎥, x⎢ ⎢ ⎣ .."
+3,"⎢ · . ⎥⎦ (1) it  σ(wi · [ht−1 , xt ]), (11) xm,1 / xm,n ht  tanh wc · ft ht−1 , xt , (12) where x represents the input data matrix, x represents the data ht  (1 − it )ht−1 + it ht , (13) feature, n represents the length of time, and m is the number of where xt is the input, ft is a reset gate, it is an update gate, tanh is data features. the activation function, σ is the sigmoid function, ht is the hidden the convolution layer is carried out by using eq. 2 and the state, ht is the output of the hidden state, ht−1 is the output of the time series can be obtained through the convolution layer: hidden state of the previous step, and wf , wi , and wc are the oc  fc (x ⊗ wc + bc ), (2) weight matrixes of the corresponding gate and the hidden state."
+3,"because a single neural network often has limitations in where ⊗ is convolution operation, the convolution kernel wc is dealing with practical problems, it is a development trend to weight vector, bc is the bias, fc (·) is activation function, relu combine two or more algorithms in order to make use of their usually, and oc is mapping results. respective advantages."
+3,"hydrological data has the characteristics of the pooling operation is used to select the most important temporal and spatial correlation, so it is necessary to combine the features of the convolutional layer sequence."
+3,the commonly used advantages of each model for comprehensive modeling.
+3,"with learning pooling method is maximum pooling, which is expressed as spatial (cnn) and temporal (lstm) features, a new deep learning equation 3 and equation 4: scheme was proposed in this study, called cnn–lstm."
+3,"the op (k)  max(oc (2k − 1), oc (2k)), (3) framework of the proposed cnn–lstm model is outlined in figure 1a and can be expressed as eqs 14-16."
+3,"in addition, we op  max(oc ), (4) also constructed a cnn–gru model to compare the performance where op (k) is the k-th pooling result and op is the global of different combined models (figure 1b). maximum pooling result."
+3,"co  f(x ⊗ w + b), (14) finally, the combination of temporal features is implemented by the dense layer, and the output layer outputs the results of the where x is the input matrix, f is relu function, ⊗ is the dense layer, as shown in equation 5 and equation 6. convolution operation, w is the weight, and b is the bias."
+3,"od  fd op × wd + bd , (5) qt,i ⎝⎢ ⎜ q t  f⎛⎡ ⎥⎟ ⎣ et,j ⎤⎥⎥⎦⎞ ⎢ ⎢ ⎠, (15) y  fo (od × wo + bo ), (6) rt,j where wd is the weight matrix of the dense layer, bd is bias, fd (·) qt,i  qt−1 , qt−2 , . . . qt−i et,j  et−1 , et−2 , . . . et−j rt,j is the activation function of the dense layer, wo is the weight  rt−1 , rt−2 , . . . rt−j , (16) matrix of the output layer, bo is the bias of the output layer, andfo is the activation function of the output layer, softmax usually. where qt is the prediction discharge at time t, qt,i is the discharge lstm is a variant structure of the recurrent neural network from the previous t-i to t-1 (i is the time scale), et,j is the (rnn) and has three “gate” structures, namely the forget gate, evaporation from the previous t-j to t-1 (j is the time scale), input gate, and output gate, and a memory unit to selectively rt,j is the rainfall from the previous t-j to t-1, andf(·) is the receive information transmitted into the neural network. system transfer function."
+3,"forget gate: ft  σwf · [ht−1 , xt ] + bf , (7) soil and water assessment tool model the swat model is a continuous, physically based, and input gate: distributed hydrologic model."
+3,"the swat model is widely it  σ(wi · [ht−1 , xt ] + bi ), (8) used to simulate water quality and quantity as well as to assess the impacts of physical changes to a catchment, such as land use output gate: and climate changes."
+3,the hydrology module is the main module frontiers in earth science | www.frontiersin.org 3 april 2022 | volume 10 | article 875145
+4,xu et al.
+4,"deep learning and remote sensing figure 1 | flowchart of the proposed deep learning models (a) cnn–lstm and (b) cnn–gru. of the swat model, including surface runoff, inﬁltration, ﬂow, qgw is the return ﬂow of groundwater, all measured in mm, subsurface runoff, evapotranspiration, snowmelt runoff, and and t is time, measured in months or days."
+4,the calculation of transmission loss.
+4,"the hydrological process of the swat qsurf is crucial and can be expressed by a soil conservation model is calculated in two parts: slope runoff and channel service curve number (scs-cn) method (division, ﬂood routing."
+4,the water balance equation is the calculation united states.
+4,soil conservation service.
+4,"engineering, 1986): basis of water transfer in swat."
+4,"(ri − ia )2 t qsurf  , ri > ia , (18) swt  sw0 + rday − qsurf − e − wseep − qgw , (17) ri − ia − s i1 25400 s − 254, (19) cn where swt is the soil moisture content at termination time, sw0 is the soil moisture content at start time, rday is rainfall, qsurf is where ri is the precipitation, ia is the initial abstraction, ands is the surface runoff, e is evapotranspiration, wseep is the lateral the potential maximum retention after the beginning of the frontiers in earth science | www.frontiersin.org 4 april 2022 | volume 10 | article 875145"
+5,xu et al.
+5,deep learning and remote sensing figure 2 | study area. runoff.
+5,"the cn is the parameter corresponding to various soil input data include climate data, terrain map (figure 2), soil and land conditions and can be obtained from tables (grove, data (figure 3a), and land use/land cover map (figure 3b)."
+5,"harbor, and engel 1998)."
+5,"if ri < ia , qsurf  0."
+5,spatial input data used to set up swat were sourced from the potential evapotranspiration is calculated using the publicly available datasets (table 1).
+5,"the accuracy of these penman–monteith method (jung, lee, and moon 2016)."
+5,"a datasets has been evaluated and widely used in hydrological kinematic storage model is used to predict the lateral ﬂow, simulations (li et al., 2013; fuka et al., 2014; satge et al., 2015; whereas the return ﬂow is simulated by creating a shallow alemayehu, van griensven, and bauwens 2016; zhao 2016; aquifer (arnold et al., 1998)."
+5,"the muskingum method is used alemayehu et al., 2018; bouslihim et al., 2019; duan et al., for channel ﬂood routing (mccarthy 1939)."
+5,"2019; rivas-tabares et al., 2020)."
+5,"when the model is built, the watershed is divided into several sub-basins according to the digital elevation model (dem), and model setting then the sub-basins are further divided into several hydrological 2.1.1 soil and water assessment tool model setting response units (hru) according to different land use and soil the swat model for the xixian basin has been built using types."
+5,"the swat model runs separately on each hru unit to information concerning land use, soil properties, and climate predict the runoff of each hru, and then the total runoff of the data."
+5,arcswat (2012 version) is used as the graphical user watershed is obtained through channel ﬂood routing. interface for the swat model.
+5,"the swat model setup includes four steps: watershed delineation, hydrological response unit study area and dataset analysis, input database building, and swat simulation: 1) the xixian basin is located in xinyang city, in the southeast of first, with the “watershed automatic delimitation,” all the henan province, with an area of 10,190 km2 (31.52°–32.72° n, topographical inputs were calculated starting from a 30 m 113.25°–114.77° e) (figure 2)."
+5,"the main rivers of the basin are the resolution dem to deﬁne the watershed features like shi river, zhugan river, and qingshui river, which belong to the boundaries, river network, sub-basins, and to derive slope huaihe river basin."
+5,the terrain exhibits high elevation in the east related parameters.
+5,"2) the second phase is the hru and low elevation in the west, elevations in the study area range deﬁnition."
+5,"the land-use code is converted into a code that can from 40 to 1,020 m, with a mean elevation of 142 m (figure 2). be recognized by swat through the land-use index table."
+5,"the the annual rainfall is 800–1400 mm, with a mean value of soil data came from the food and agriculture organization of the 1,060 mm, 50% takes place in the ﬂood season (focused on united nations (fao) (table 1), which was reclassiﬁed into 8 june to september)."
+5,"the average potential evaporation is categories, and then soil-plant-air-water (spaw) software was 850 mm."
+5,the xixian basin has a humid to semi-arid transition used to calculate the attributes required by the swat soil zone with a temperature of about 14–16°c.
+5,the major land-use database.
+5,the soil index table was also established.
+5,"the land types of the study area are forest and cultivated land. area in a sub-basin can be further divided into the hrus, which the hydrological data of the study are from the hydrological are the basic computing elements of the swat model."
+5,"in this bureau, including rainfall, evaporation, and discharge data study, a sub-basin was subdivided into only one hru that was (monthly scale) from 1976 to 1997."
+5,the major geospatial characterized by the dominant land use and soil type.
+5,"3) third, frontiers in earth science | www.frontiersin.org 5 april 2022 | volume 10 | article 875145"
+6,xu et al.
+6,deep learning and remote sensing figure 3 | geographic information of the study area: (a) soil types and (b) land use.
+6,table 1 | data source and description.
+6,"data description source dem 30 m*30 m geospatial data cloud site, computer network information center, chinese academy of sciences (http://www.gscloud.cn) land use 79 m*79 m; 30 m*30 m usgs (https://eartheplorer.usgs.gov) soil 1000 m*1000 m food and agriculture organization (fao) (http://www.fao.org/nr/land/soils/digital-soil-map-of-the-world/) meteorological monthly cfsr (https://globalweather.tamu.edu/) figure 4 | results of parameter sensitivity analysis."
+6,frontiers in earth science | www.frontiersin.org 6 april 2022 | volume 10 | article 875145
+7,xu et al.
+7,deep learning and remote sensing table 2 | calibrated values of the model parameters.
+7,parameter physical meaning range result r__cn2 initial scs runoff curve number for moisture condition ll −0.2-1 0.13 v__alpha_bf baseﬂow alpha factor 0–1.0 0.92 v__gw_delay delay for groundwater recharge (days) 30-450 371.60 v__gwqmn threshold level for shallow aquifer (mm h2o) 0-2 1.93 v__gw_revap groundwater re-evaporation coefﬁcient 0–0.2 0.07 v__esco soil evaporation coefﬁcient 0.6-1 0.81 r__ch_n2 manning coefﬁcient in the main channel −0.5–0.5 0.12 v__ch_k2 effective hydraulic conductivity in main channel alluvium 5-130 5.78 v__alpha_bnk baseﬂow alpha factor for bank storage (days) 0–1.0 0.51 r__sol_awc(..)
+7,available water capacity of soil layer −0.5–0.5 0.23 r__sol_k (..)
+7,saturated hydraulic conductivity of soil layer (mm h-1) −0.8–0.8 -0.15 r__sol_bd (..)
+7,density of soil mass −0.5–0.5 -0.07 v__sftmpn degree of snowfall (°c) −5.0–5.0 4.06 figure 5 | technology roadmap of deep learning models for rainfall-runoff simulation and prediction.
+7,"“write input table,” daily meteorological data, including 2.1.2 deep learning models setting temperature, relative humidity, sunshine duration, wind speed, this study constructs integrated deep learning models and rainfall, were obtained from the databases of climate (cnn–lstm and cnn–gru) based on the matlab forecast system reanalysis (cfsr: https://climatedataguide. language."
+7,the cnn–lstm model constructed in this study ucar.edu/climate-data/climate-forecast-system-reanalysis-cfsr). mainly includes the following steps (figure 5): 1) the rainfall rainfall data came from hydrological stations in the watershed. runoff and its related factors are pre-processed by a standardized these data were written to swat tables for swat method and the input characteristic map is obtained by sliding simulation.
+7,"4) fourth, “swat simulation,” set the name of window."
+7,"2) feature extraction is carried out for the characteristic the simulation, output, simulation period, and other map of runoff through cnn, in which the convolution layer and information for simulation and then run the simulation. pool layer can compress the number of parameters, so as to the parameter sensitivity analysis (200 model runs) was extract more obvious features reﬂecting the change of streamﬂow also performed with the auto-calibration software swat- and reduce overﬁtting and the dense layer can summarize and cup using the sequential uncertainty fitting (sufi2) output the aforementioned features."
+7,"3) the extracted features are optimization program for streamﬂow (abbaspour, vejdani, converted into the corresponding data format of lstm through and haghighat 2007)."
+7,the p-value and t-stat are used to the lstm layer.
+7,"through the three-gate mechanism in lstm, the evaluate the sensitivity of the swat model parameters."
+7,"the data mining of time series is carried out to obtain its internal smaller the p-value, the larger the t-stat and the more change of streamﬂow and obtain the prediction model."
+7,4) the sensitive it is.
+7,the results of parameters sensitivity analysis sigmoid function is used as the output activation function to are shown in figure 4.
+7,we can see that the curve number output the result of the prediction.
+7,the settings of the cnn–gru (cn) is the most sensitive parameter for streamﬂow model are similar.
+7,"in all, normalized input (rainfall evaporation simulation."
+7,the period 1975 to 1976 served as a warm-up and streamﬂow) is passing to the cnn layer.
+7,"the feature output period for the model, allowing state variables to assume (after the convolution layer) is input to lstm/gru by a realistic initial values for the calibration period."
+7,monthly ﬂattening layer. discharges from 1976 to 1990 are used for calibration and the the super parameter setting affects the performance of the remaining data from 1990 to 1997 are used to validate.
+7,the models to a certain extent.
+7,"throughout all of our selected parameters are summarized in table 2. experiments, the relatively better super parameter and frontiers in earth science | www.frontiersin.org 7 april 2022 | volume 10 | article 875145"
+8,xu et al.
+8,deep learning and remote sensing figure 6 | train processes.
+8,"(a) training loss; (b) training rmse). activation function are determined: ﬁrst, a sequence input graphical comparisons."
+8,the nash–sutcliffe efﬁciency layer inputs sequence data to a network.
+8,"the folding layer is (nse) (legates and mccabe 1999), percent bias error used to convert sequences to a batch of images."
+8,"then, a 2d (pbe) (bennett et al., 2013), and kling–gupta efﬁciency convolutional layer with 32 ﬁlters of size (10 1) and ""same’ (kge) (gupta et al., 2009) were adopted to evaluate the padding is used."
+8,"after the normalization, we create an model performance. average pooling layer with pool size (1 1) and stride (10 10)."
+8,the activation function is “elu.”
+8,"apply sequence unfolding layer and ﬂatten layer to transform the input (qo − qs )2 nse  1 − 2, (20) into channel dimensions, and then feed the features to two qo − qo  lstm layers."
+8,"the hidden units of each lstm layer are 128 and 32, respectively."
+8,"we also added a dropout layer to prevent qs − qo pbe  p100%, (21) the model from overﬁtting with a probability of 0.25."
+8,"finally, qo fully connected layer and regression layer are used to output."
+8, 2 the adam is chosen as the optimizer.
+8,"in this study, we used kge  1 − (r − 1)2 + (α − 1)2 + β − 1 , (22) the root mean square error (rmse) as an objective criterion. σs qs the training process is shown in figure 6. α β , (23) σo qo where qo is the observed discharge, qs is the simulated discharge, statistical criteria and model evaluation qo is the mean of observed discharge, qs is the mean of simulated performance discharge, σ s is the standard deviation of simulated discharge, σ o the performance of the deep learning models and swat is the standard deviation of observed discharge, and r is the model can be computed using statistical indices and correlation coefﬁcient."
+8,frontiers in earth science | www.frontiersin.org 8 april 2022 | volume 10 | article 875145
+9,xu et al.
+9,deep learning and remote sensing figure 7 | distribution of land-use area ratio of xixian watershed.
+9,table 3 | rates of change of land use of the study area from 1990 to 1997.
+9,time 1990 1991 1992 1993 1994 1995 1996 1997 land use cultivated land — 0.53 −0.16 1.27 −0.47 −0.05 −0.03 −0.24 forest land — −1.00 0.62 −2.14 1.23 0.01 −0.29 −0.11 grass land — −4.76 −11.29 −9.52 −3.24 −3.22 −3.06 −9.31 water — −2.61 −3.14 −10.02 −4.81 −2.20 3.60 4.94 urban land — −4.47 1.49 −24.97 −30.19 −6.15 −7.53 7.69 3 results indicating both swat and deep learning models represented observed discharges well.
+9,"all correlation coefﬁcients (both land-use change calibration and validation period) were above 0.8, suggesting due to data source limitations, we analyzed the land use in the that both swat and deep learning models captured the study basin from 1990 to 1997."
+9,the distribution of the land-use area area’s hydrologic characteristics well and reproduced acceptable ratio of xixian watershed is shown in figure 7.
+9,it can be seen that discharge simulations.
+9,"however, the swat model has poor there are ﬁve types of land use in the study area, mainly including performance in the initial stage (figure 8d), which is due to cultivated land and forest land, which account for about 90% of the watershed state at the initial time is not really enough."
+9,in the basin area.
+9,"of these, cultivated land is the main land-use type, addition, there was a signiﬁcant difference between the accounting for about 60% and the second is forest, accounting for calibration and validation period; both deep learning models about 30%."
+9,"in order to fully demonstrate the degree of land type and the swat model were well in the calibration period, transfer of xixian watershed from 1990 to 1997, the rates of while the swat model was better in the validation period change in land use were used to conduct the research."
+9,the rates of (table 4).
+9,this may be linked to the variability of rainfall and change of land used in the study area are shown in table 3.
+9,it is runoff.
+9,"deep learning models were less effective for time series worth noting that the degree of land-use change in the study area simulation with greater variability, and the swat model was is not obvious, which is very beneﬁcial for our research, and will suitable for long-term prediction."
+9,"moreover, the performance was have a litter impact on the hydrological model. very similar for the two deep learning methods (figures 8e,f), which was also consistent with the characteristics of deep learning."
+9,"the pbe of deep learning models was less than 10% comparing the results of deep learning for both calibration and validation period, which revealed super models and hydrological model ﬁne simulation performance in the ﬂood volume."
+9,this illustrated the calibration results in table 2 were input into the swat the advantages of deep learning in time series data processing. model.
+9,the results of the deep learning models were artiﬁcially the pbe of the swat model was less than 20% but greater than divided into calibration and validation periods.
+9,the discharge 10% for validation periods and all pbe>0.
+9,the reason was that the hydrographs and the relationship between observed and overall physical mechanism of the swat model was clear and simulated discharges are shown in figure 8.
+9,"the observed and represented the entire hydrological process, so the overall ﬁt was simulated discharge agreed well (figure 8a and figure 8b), better (nse is closer to 1)."
+9,the deep learning models were the frontiers in earth science | www.frontiersin.org 9 april 2022 | volume 10 | article 875145
+10,xu et al.
+10,"deep learning and remote sensing figure 8 | simulated results of deep learning models and hydrological model (the scatters of different models in (a) calibration and (b) validation period; the discharges hydrographs in (c) 1976–1997, (d) 1976, (e) 1992, and (f) 1997 years)."
+10,table 4 | comparison of prediction performances in deep learning models and hydrological model.
+10,"period nse pbe kge cnn–lstm cnn–gru swat cnn–lstm cnn–gru swat cnn–lstm cnn–gru swat calibration (1976–1990) 0.85 0.84 0.88 5.07 3.17 9.2 0.90 0.88 0.80 validation (1990–1997) 0.63 0.64 0.91 9.94 5.94 13.48 0.71 0.70 0.83 mining of hydrological data and have no physical meaning obtained satisfactory results, indicating that the relationship between behind it, so it is better for the simulation of data values (the rainfall and runoff in the basin was relatively stable, and it is less pbe is relatively small), but not as good as the swat model for affected by anthropogenic activities."
+10,"however, when the leading time the overall discharge hydrograph."
+10,"in addition, we could ﬁnd that is 1, the model performance of cnn–gru was not as good as 5 and the simulation result of the swat model was always greater than 10 (the scatter of the deviates from the ideal ﬁt in figure 9a) whereas the observed value in low discharge, which was the reason why there was a little difference in cnn–lstm (figure 9b), which the pbe>0."
+10,kge could integrate nse and pbe to better evaluate indicated that the performance of the cnn–lstm model is more the model performance.
+10,there is substantial variation in results stable.
+10,the cnn–lstm model had better generalization capability across the calibration and validation period of deep learning and prediction accuracy.
+10,"in summary, the deep learning model’s models and swat model; deep learning performed well during performance in different leading times indicated that deep learning calibration but swat during validation."
+10,this also veriﬁed the techniques could provide an acceptable prediction precision. impact of data variability on deep learning models.
+10,"size-dependent of training samples in comparing the deep learning results for deep learning models different leading times in order to explore the inﬂuence of training samples on the to evaluate the simulation ability of the deep learning models in simulation performance, the training set sizes of cnn–lstm various leading times, 1-, 5-, and 10-month-ahead discharges and cnn–gru are set to 70%, 50, and 30% respectively, and were set."
+10,the discharge hydrographs and scatter diagrams are other super parameters remain unchanged.
+10,we can see that when shown in figure 9.
+10,"in different leading times, the models had the training set becomes smaller, the model performance also frontiers in earth science | www.frontiersin.org 10 april 2022 | volume 10 | article 875145"
+11,xu et al.
+11,deep learning and remote sensing figure 9 | predicted results and scatters of different leading times (a) cnn–gru; (b) cnn–lstm (obq: observed discharge; sim: simulation discharge).
+11,frontiers in earth science | www.frontiersin.org 11 april 2022 | volume 10 | article 875145
+12,xu et al.
+12,deep learning and remote sensing table 5 | performance of deep learning models under different size of training samples.
+12,"cnn–lstm cnn–gru sample (70%) sample (50%) sample (30%) sample (70%) sample (50%) sample (30%) calibration nse 0.85 0.85 0.83 0.85 0.85 0.84 pbe 5.07 6.18 −3.78 3.17 5.41 −4.83 kge 0.88 0.86 0.80 0.90 0.87 0.82 validation nse 0.63 0.62 0.62 0.64 0.62 0.60 pbe 11.94 12.72 2.9 5.94 9.87 −1.17 kge 0.71 0.70 0.67 0.70 0.70 0.67 figure 10 | results of deep learning modes under different training samples (in turn: 1981, 1992, and 1997). decreases (table 5)."
+12,"therefore, although deep learning can obtain results of this study are not affected by the land-use change."
+12,"from better results, there are certain requirements for the data set."
+12,"in the results in sections 3.2–3.4, we can see that deep learning addition, compared with the cnn–lstm model, the size of the models acquire an acceptable predicted value but not as well as training set has a greater impact on the cnn–gru model (the the swat model in some respects."
+12,"this is because deep learning red circle in figure 10), indicating that the cnn–gru model is models do not consider the changes of heterogeneity within the more sensitive to the size of training samples, which may be basin, but only mine and extract information features from the related to the internal structure of cnn–gru: gru has a data to ﬁnd its rules for training and prediction, which leads to a simpler structure, a gate less than lstm, fewer parameters, higher level representation of the underlying data sources (saba and simpliﬁes matrix operation, so the performance of gru is et al., 2019)."
+12,"furthermore, deep learning is capable of extracting more dependent on data set than lstm."
+12,"we also ﬁnd that the substantial features without being explicitly instructed, hence, it is training samples are not better (table 5)."
+12,"therefore, the selection more immune to raw and noisy data (sahiner et al., 2019); of appropriate samples has a certain impact on the model results. however, it cannot consider the variability of rainfall and runoff caused by anthropogenic activities."
+12,"the swat model needs to calibrate parameters through certain underlying surface 4 discussion data, meteorological data, and hydrological data to comprehend the model (arnold et al., 1998), hence, it considers more the land-use change has an important impact on runoff variables."
+12,"it can also be seen from figure 10 that all models simulation (cheng et al., 2022; wang et al., 2021)."
+12,"however, have a good simulation effect in large discharge, but the the land-use change in the study area is small (table 3), so the simulation error is large in low discharge."
+12,this veriﬁes that frontiers in earth science | www.frontiersin.org 12 april 2022 | volume 10 | article 875145
+13,xu et al.
+13,"deep learning and remote sensing the change in the underlying surface has a greater impact on small 5 conclusion ﬂoods in the basin and the model is more suitable for simulating the ﬂow of large ﬂoods (breuer et al., 2009)."
+13,"we can also see that this study develops the deep learning models, and the the swat model has poor performance in the initial stage distributed hydrological model for hydrological simulation (figure 10d), which may be related to the data or the setting and the results show their applicability."
+13,"the proposed of the watershed state at the initial time, which is also the reason architecture builds the foundation for subsequent why the swat model is not as accurate as deep learning models hydrological analysis."
+13,this study mainly has the following in the initiation stage.
+13,"therefore, physical models, though are conclusions: 1) the time series neural network: cnn–lstm deterministic and reliable, do not always perform well due to their and cnn–gru are constructed and applied to simulate the intrinsic limitations (islam 2011). monthly discharge in xixian basin."
+13,"at the same time, the although the deep learning models have achieved well results, distributed hydrological model—swat model—is compared they cannot show the internal process of runoff simulation, have no and analyzed."
+13,"2) the model’s application ability is evaluated practical physical signiﬁcance, and cannot be carried out through in the xixian basin."
+13,"the results demonstrate that both models certain measurements or remote sensing data (isik et al., 2013). can provide a good performance at basin-scale hydrological moreover, the deep learning models have a certain dependence on simulation."
+13,"3) although deep learning techniques can be used training samples and the scale of training samples has an important for hydrological simulation, their training set and leading impact on the effect of deep learning models (section 3.4)."
+13,"if a ﬂood times have a certain impact on the simulation results, and event is beyond the training data range, the model would perform reasonable model settings should be carried out to obtain the poorly with high uncertainty."
+13,the swat model can apply in the optimal solution.
+13,"4) the cnn network is used to extract local ungauged watershed with related remote sensing data (sisay et al., features of data, and lstm and gru networks are used to 2017)."
+13,"in addition, the swat model is based on the physical process learn and predict time series to realize deep mining of data and its mechanism is independent of the size of training samples."
+13,it features.
+13,"their combination solves the problem that a single can simulate the runoff at any point of the river in the basin and model is difﬁcult to obtain the optimal solution, and provides completely simulate the process from rainfall to runoff in all sub- new ideas and methods for hydrological simulation to basins."
+13,"therefore, the simulation space of the swat model is wider. improve the accuracy of ﬂood volume."
+13,"the swat model can also explore the impact of climate change or human activities (under different land-use environments) on runoff change (swain et al., 2021)."
+13,"data availability statement in all, it is notable that the deep learning models can be applied to the hydrological simulation at a monthly scale and the results the original contributions presented in the study are included in are good (table 4 and figure 8)."
+13,"however, several studies have the article/supplementary material, further inquiries can be shown that deep learning has certain requirements for datasets: directed to the corresponding author. the distribution curve of datasets should be smooth (gong et al., 2014; jaderberg et al., 2015)."
+13,"for data with abnormal points, especially mutation points and low correlation, the deep learning author contributions models will have certain problems or special processing of abnormal data (cubuk et al., 2018; feng et al., 2020; irrgang et al., 2020; zuo conceptualization, cx and yw; data curation, cx; formal et al., 2020)."
+13,"this research studies the hydrological simulation on the analysis, cx and yw; investigation, hf; methodology, cx monthly scale, which meets the speciﬁc requirements of the deep and yw; project administration, hf; resources, hf; software learning model for the input data."
+13,"for the continuous hydrological and code, cx and yw; supervision, hf; writing—original draft, simulation on the daily scale or the hourly scale, because the data cx and yw; writing review & editing, yw and jy. show mutation points, corresponding processing operations need to be carried out, which also needs to be further studied in the future."
+13,"however, the deep learning models do not need too much watershed funding information but only need hydrological data, which are more convenient to apply."
+13,"hence, it is necessary to select an this research was funded by the major science and technology appropriate model according to the comprehensive balance of program for water pollution control and treatment (grant no. application and data requirements in the future."
+13,2014zx07203-008).
+13,"abbaspour, k."
+13,"c., vejdani, m., and haghighat, s."
+13,(2007).
+13,"“swat- references cup calibration and uncertainty programs for swat,” in modsim 2007: international congress on modelling and simulation, abbas, a., baek, s., kim, m., ligaray, m., ribolzi, o., silvera, n., et al."
+13,1603–1609.
+13,(2020).
+13,"’surface and sub-surface flow estimation at high temporal alemayehu, t., kilonzo, f., van griensven, a., and bauwens, w."
+13,(2018).
+13,evaluation resolution using deep neural networks.
+13,hydrol.
+13,590. doi:10.1016/j. and application of alternative rainfall data sources for forcing hydrologic jhydrol.2020.125370 models in the mara basin.
+13,hydrol.
+13,"49, 1271–1282. doi:10.2166/nh.2017.081 frontiers in earth science | www.frontiersin.org 13 april 2022 | volume 10 | article 875145"
+14,xu et al.
+14,"deep learning and remote sensing alemayehu, t., van griensven, a., and bauwens, w."
+14,(2016).
+14,"’evaluating cfsr and dwarakish, g."
+14,"s., and ganasri, b."
+14,(2015).
+14,impact of land use change on watch data as input to swat for the estimation of the potential hydrological systems: a review of current modeling approaches.
+14,cogent evapotranspiration in a data-scarce eastern-african catchment.
+14,geosci.
+14,"1, 1115691. doi:10.1080/23312041.2015.1115691 j."
+14,hydrologic eng.
+14,"21, 05015028. doi:10.1061/(asce)he.1943-5584.0001305 edijatno, n."
+14,"n., yang, x."
+14,"l., makhlouf, z., and michel, c."
+14,(1999).
+14,"’gr3j: a daily alizadeh, b., bafti, a."
+14,"g., kamangir, h., zhang, y., wright, d."
+14,"b., and franz, k."
+14,watershed model with three free parameters.
+14,hydrological sci.
+14,journal- (2021).
+14,’a novel attention-based lstm cell post-processor coupled with journal des sci.
+14,"hydrologiques 44, 263–277. doi:10.1080/02626669909492221, bayesian optimization for streamﬂow prediction."
+14,"hydrol., 601. doi:10.1016/j."
+14,"feng, r., fan, g."
+14,"w., lin, j."
+14,"y., yao, b."
+14,"z., and guo, q."
+14,(2021).
+14,’enhanced long jhydrol.2021.126526 short-term memory model for runoff prediction.
+14,hydrologic eng.
+14,26. doi:10.
+14,"althoff, d., rodrigues, l."
+14,"n., and da silva, d."
+14,(2021).
+14,’addressing hydrological 1061/(asce)he.1943-5584.0002035 modeling in watersheds under land cover change with deep learning.
+14,"feng, z."
+14,"k., niu, w."
+14,"j., tang, z."
+14,"y., jiang, z."
+14,"q., xu, y., liu, y., et al."
+14,(2020).
+14,water resour.
+14,"154, 103965. doi:10.1016/j.advwatres.2021.103965 ’monthly runoff time series prediction by variational mode decomposition arnold, j."
+14,"g., srinivasan, r., muttiah, r."
+14,"s., and williams, j."
+14,(1998).
+14,large area and support vector machine based on quantum-behaved particle swarm hydrologic modeling and assessment part i: model development.
+14,optimization.
+14,hydrol.
+14,583. doi:10.1016/j.jhydrol.2020.124627 water resour.
+14,"assoc 34, 73–89. doi:10.1111/j.1752-1688.1998.tb05961.x fohrer, n., dietrich, a., kolychalow, o., and ulrich, u."
+14,(2014).
+14,"’assessment of the arsenault, r., gatien, p., renaud, b., brissette, f., and martel, j.-l."
+14,(2015).
+14,a environmental fate of the herbicides flufenacet and metazachlor with the comparative analysis of 9 multi-model averaging approaches in hydrological swat model.
+14,environ.
+14,"43, 75–85. doi:10.2134/jeq2011.0382 continuous streamﬂow simulation."
+14,hydrol.
+14,"529, 754–767. doi:10.1016/j."
+14,"fonseca, a., botelho, c., boaventura, r."
+14,"r., and vilar, v."
+14,(2014).
+14,"’integrated jhydrol.2015.09.001 hydrological and water quality model for river management: a case study ayzel, g., and heistermann, m."
+14,(2021).
+14,’the effect of calibration data length on on lena river.
+14,total environ.
+14,"485, 474–489. doi:10.1016/j.scitotenv.2014. the performance of a conceptual hydrological model versus lstm and gru: 03.111 a case study for six basins from the camels dataset."
+14,comput.
+14,"geosciences freeze, r."
+14,"a., and harlan, r."
+14,(1969).
+14,"’blueprint for a physically-based, digitally- 149, 104708. doi:10.1016/j.cageo.2021.104708 simulated hydrologic response model."
+14,hydrol.
+14,"9, 237–258. doi:10.1016/ bai, h., li, g., liu, c., li, b., zhang, z., and qin, h."
+14,(2021).
+14,"hydrological 0022-1694(69)90020-1 probabilistic forecasting based on deep learning and bayesian fuka, d."
+14,"r., walter, m."
+14,"t., macalister, c., degaetano, a."
+14,"t., steenhuis, t."
+14,"s., and optimization algorithm."
+14,hydrol.
+14,"52, 927–943. doi:10.2166/nh.2021.161 easton, z."
+14,(2014).
+14,"’using the climate forecast system reanalysis as weather bai, y., bezak, n., zeng, b., li, c., sapač, k., and zhang, j."
+14,(2021).
+14,daily runoff input data for watershed models.
+14,hydrological process.
+14,"28, 5613–5623. doi:10."
+14,forecasting using a cascade long short-term memory model that considers 1002/hyp.10073 different variables.
+14,water resour.
+14,manage.
+14,"35, 1167–1181. doi:10.1007/ gong, y."
+14,"c., wang, l."
+14,"w., guo, r."
+14,"q., and lazebnik, s."
+14,(2014).
+14,’multi-scale s11269-020-02759-2 orderless pooling of deep convolutional activation features.
+14,"computer vis. - bennett, n."
+14,"d., croke, b."
+14,"w., guariso, g., guillaume, j."
+14,"a., hamilton, s."
+14,"h., eccv 2014, pt vii 8695, 392–407. doi:10.1007/978-3-319-10584-0_26 jakeman, a."
+14,"j., et al."
+14,(2013).
+14,"characterising performance of environmental grove, m., harbor, j., and engel, b."
+14,(1998).
+14,’composite vs.
+14,distributed curve models.
+14,environ.
+14,model.
+14,softw.
+14,"40, 1–20. doi:10.1016/j.envsoft.2012.09.011 numbers: effects on estimates of storm runoff depths."
+14,water resour.
+14,"beven, k."
+14,(2020).
+14,"deep learning, hydrological processes and the uniqueness of assoc."
+14,"34, 1015–1023. doi:10.1111/j.1752-1688.1998.tb04150.x place."
+14,hydrological process.
+14,"34, 3608–3613. doi:10.1002/hyp.13805 gu, h."
+14,"t., xu, y."
+14,"p., ma, d., xie, j."
+14,"k., liu, l., and bai, z."
+14,(2020).
+14,"’a surrogate beven, k."
+14,"j., and kirkby, m."
+14,(1979).
+14,"’a physically based, variable contributing model for the variable inﬁltration capacity model using deep learning area model of basin hydrology/un modèle à base physique de zone d’appel artiﬁcial neural network."
+14,hydrol.
+14,588. doi:10.1016/j.jhydrol.2020.125019 variable de l’hydrologie du bassin versant.
+14,assoc.
+14,scientiﬁc hydrol.
+14,"24, gupta, h."
+14,"v., kling, h., yilmaz, k."
+14,"k., and martinez, g."
+14,(2009).
+14,"’decomposition 43–69. doi:10.1080/02626667909491834 of the mean squared error and nse performance criteria: implications for bouslihim, y., rochdi, a., paaza, n."
+14,"e., and liuzzo, l."
+14,(2019).
+14,’understanding the improving hydrological modelling.
+14,hydrol.
+14,"377, 80–91. doi:10.1016/j."
+14,effects of soil data quality on swat model performance and hydrological jhydrol.2009.08.003 processes in tamedroust watershed (morocco).
+14,earth sci.
+14,160. doi:10.
+14,"hochreiter, s., and schmidhuber, j."
+14,(1997).
+14,’long short-term memory.
+14,neural 1016/j.jafrearsci.2019.103616 comput.
+14,"9, 1735–1780. doi:10.1162/neco.1997.9.8.1735 breuer, l., huisman, j."
+14,"a., willems, p., bormann, h., bronstert, a., croke, b."
+14,"w., hong, j., lee, s., bae, j."
+14,"h., lee, j., park, w."
+14,"j., lee, d., et al."
+14,(2020).
+14,"’, 12, 2927. et al."
+14,(2009).
+14,’assessing the impact of land use change on hydrology by doi:10.3390/w12102927development and evaluation of the combined ensemble modeling (luchem).
+14,i: model intercomparison with current land machine learning models for the prediction of dam inﬂowwater use.
+14,water resour.
+14,"32, 129–146. doi:10.1016/j.advwatres.2008.10.003 hu, r., fang, f., pain, c."
+14,"c., and navon, i."
+14,(2019).
+14,"rapid spatio-temporal flood bultot, f., and dupriez, g."
+14,(1976).
+14,’conceptual hydrological model for an prediction and uncertainty quantiﬁcation using a deep learning method.
+14,average-sized catchment-area .1.
+14,concepts and relationships.
+14,hydrol.
+14,"29, j."
+14,hydrol.
+14,"575, 911–920. doi:10.1016/j.jhydrol.2019.05.087 251–272. doi:10.1016/0022-1694(76)90040-8 hussain, d., hussain, t., khan, a."
+14,"a., naqvi, s."
+14,"a., and jamil, a."
+14,(2020).
+14,"’a deep cheng, x., xu, y., and gun, z."
+14,(2022).
+14,what derived regional changes in learning approach for hydrological time-series prediction: a case study of the number and surface area of lakes across the yangtze river basin gilgit river basin.
+14,earth sci.
+14,inform.
+14,"13, 915–927. doi:10.1007/s12145-020- during 2000–2019: human or climatic factors?"
+14,water resour.
+14,"res., 00477-2 e2021wr030616. doi:10.1029/2021wr030616 irrgang, c., saynisch-wagner, j., dill, r., boergens, e., and thomas, m."
+14,(2020).
+14,"chhetri, m., kumar, s., roy, p."
+14,"p., and kim, b."
+14,(2020).
+14,"deep blstm-gru ’self-validating deep learning for recovering terrestrial water storage from model for monthly rainfall prediction: a case study of simtokha, bhutan."
+14,gravity and altimetry measurements.
+14,geophys.
+14,"47. doi:10.1029/ remote sensing 12. doi:10.3390/rs12193174 2020gl089258 cho, kyunghyun., van merriënboer, bart., bahdanau, dzmitry., and bengio, isik, s., kalin, l., schoonover, j."
+14,"e., srivastava, p., and lockaby, b."
+14,(2013).
+14,yoshua.
+14,(2014).
+14,on the properties of neural machine translation: encoder- ’modeling effects of changing land use/cover on daily streamﬂow: an decoder approaches.
+14,sci. doi:10.3115/v1/w14-4012 artiﬁcial neural network and curve number based hybrid approach.
+14,"cubuk, e."
+14,"d., zoph, b., mane, d., vasudevan, v., and le, q."
+14,(2018).
+14,hydrol.
+14,"485, 103–112. doi:10.1016/j.jhydrol.2012.08.032 autoaugment: learning augmentation policies from data."
+14,"islam, zahidul."
+14,(2011).
+14,a review on physically based hydrologic modeling.
+14,"division, united states."
+14,soil conservation service.
+14,engineering (1986). .
+14,"urban jaderberg, m., simonyan, k., zisserman, a., and kavukcuoglu, k."
+14,(2015).
+14,“’spatial hydrology for small watersheds.
+14,"washington: engineering division, soil transformer networks,” in paper presented at the proceedings of the 28th conservation service, us department of agriculture."
+14,"international conference on neural information processing systems, duan, z., tuo, y., liu, j."
+14,"z., gao, h."
+14,"k., song, x."
+14,"f., zhang, z."
+14,"x., et al."
+14,(2019).
+14,"montreal, canada, 2."
+14,"hydrological evaluation of open-access precipitation and air temperature jaiswal, r."
+14,"k., ali, s., and bharti, b."
+14,(2020).
+14,’comparative evaluation of conceptual datasets using swat in a poorly gauged basin in ethiopia.
+14,"hydrol. 569, and physical rainfall-runoff models."
+14,water sci.
+14,10. doi:10.1007/s13201- 612–626. doi:10.1016/j.jhydrol.2018.12.026 019-1122-6 frontiers in earth science | www.frontiersin.org 14 april 2022 | volume 10 | article 875145
+15,xu et al.
+15,deep learning and remote sensing j.
+15,"arnold, j."
+15,"g., d."
+15,"moriasi, d."
+15,"n., p."
+15,"gassman, p."
+15,"w., k."
+15,"abbaspour, k."
+15,water resources of the upper po river basin.
+15,water resour.
+15,manag.
+15,"29, c., m."
+15,"white, m."
+15,"j., r."
+15,"srinivasan, r., et al."
+15,(2012).
+15,"swat: model use, 1193–1215. doi:10.1007/s11269-014-0868-8 calibration, and validation."
+15,trans.
+15,"asabe 55, 1491–1508. doi:10.13031/2013."
+15,"rezaeianzadeh, m., tabari, h., yazdi, a."
+15,"a., isik, s., and kalin, l."
+15,(2014).
+15,"’flood 42256 flow forecasting using ann, anfis and regression models."
+15,neural comput.
+15,"jung, c."
+15,"g., lee, d."
+15,"r., and moon, j."
+15,(2016).
+15,’comparison of the appl.
+15,"25, 25–37. doi:10.1007/s00521-013-1443-6 penman-monteith method and regional calibration of the rivas-tabares, d., de miguel, a., willaarts, b., and tarquis, a."
+15,(2020).
+15,’self- hargreaves equation for actual evapotranspiration using swat- organizing map of soil properties in the context of hydrological modeling.
+15,"simulated results in the seolma-cheon basin, south korea."
+15,model.
+15,"88, 175–189. doi:10.1016/j.apm.2020.06.044 hydrological sci."
+15,journal-journal des sci.
+15,"hydrologiques 61, 793–800."
+15,"saba, l., biswas, m., kuppili, v., godia, e."
+15,"c., suri, h."
+15,"s., edla, d."
+15,"r., et al."
+15,(2019). doi:10.1080/02626667.2014.943231 the present and future of deep learning in radiology.
+15,radiol.
+15,"114, kabir, s., patidar, s., xia, x."
+15,"l., liang, q."
+15,"h., neal, j., and pender, g."
+15,(2020).
+15,"’a deep 14–24. doi:10.1016/j.ejrad.2019.02.038 convolutional neural network model for rapid prediction of fluvial flood sahiner, b., pezeshk, a., hadjiiski, l."
+15,"m., wang, x."
+15,"s., drukker, k., cha, k."
+15,"h., et al."
+15,inundation.
+15,hydrol.
+15,590. doi:10.1016/j.jhydrol.2020.125481 (2019).
+15,deep learning in medical imaging and radiation therapy.
+15,"kim, d."
+15,"y., and song, c."
+15,(2020).
+15,"developing a discharge estimation model for 46, e1–e36. doi:10.1002/mp.13264 ungauged watershed using cnn and hydrological image."
+15,"water 12, 3534."
+15,"samimi, m., mirchi, a., moriasi, d., ahn, s., alian, s., taghvaeian, s., et al."
+15,"(2020). doi:10.3390/w12123534 ’modeling arid/semi-arid irrigated agricultural watersheds with swat: koster, r."
+15,"d., liu, q., mahanama, s."
+15,"p., and reichle, r."
+15,(2018).
+15,"’improved applications, challenges, and solution strategies."
+15,hydrol.
+15,"590, 125418."
+15,hydrological simulation using smap data: relative impacts of model doi:10.1016/j.jhydrol.2020.125418 calibration and data assimilation.
+15,"hydrometeorology 19, 727–741. doi:10."
+15,"satge, f., bonnet, m."
+15,"p., timouk, f., calmant, s., pillco, r., molina, j., et al."
+15,"(2015). 1175/jhm-d-17-0228.1 accuracy assessment of srtm v4 and aster gdem v2 over the altiplano krysanova, v., and srinivasan, r."
+15,(2015).
+15,’assessment of climate and land use watershed using icesat/glas data.
+15,"remote sensing 36, 465–488."
+15,change impacts with swat.
+15,environ.
+15,"change 15, 431–434. doi:10.1007/ doi:10.1080/01431161.2014.999166 s10113-014-0742-5 sibtain, m., li, x."
+15,"s., azam, m."
+15,"i., and bashir, h."
+15,(2021).
+15,"applicability of a three- lecun, y."
+15,(1989).
+15,"“generalization and network design strategies,” in stage hybrid model by employing a two-stage signal decomposition connectionism in perspective."
+15,"approach and a deep learning methodology for runoff forecasting at lees, t., buechel, m., anderson, b., slater, l., reece, s., coxon, g., et al."
+15,(2021).
+15,"swat river catchment, pakistan."
+15,polish j.
+15,environ.
+15,"30, 369–384."
+15,"’benchmarking data-driven rainfall-runoff models in great britain: a doi:10.15244/pjoes/120773 comparison of long short-term memory (lstm)-based models with four silvestro, f., gabellani, s., rudari, r., delogu, f., laiolo, p., and boni, g."
+15,(2015).
+15,lumped conceptual models.
+15,hydrol.
+15,earth syst.
+15,"25, 5517–5534. doi:10."
+15,’uncertainty reduction and parameter estimation of a distributed 5194/hess-25-5517-2021 hydrological model with ground and remote-sensing data.
+15,hydrol.
+15,"earth legates, d."
+15,"r., and mccabe, g."
+15,(1999).
+15,"’evaluating the use of ""goodness-of-fit"" syst."
+15,"19, 1727–1751. doi:10.5194/hess-19-1727-2015 measures in hydrologic and hydroclimatic model validation."
+15,water resour.
+15,"sisay, e., halefom, a., khare, d., singh, l., and worku, t."
+15,(2017).
+15,hydrological res.
+15,"35, 233–241. doi:10.1029/1998wr900018 modelling of ungauged urban watershed using swat model."
+15,model.
+15,"earth lei, x."
+15,"x., chen, w., panahi, m., falah, f., rahmati, o., uuemaa, e., et al."
+15,(2021).
+15,environ.
+15,"3, 693–702. doi:10.1007/s40808-017-0328-6 ’urban flood modeling using deep-learning approaches in seoul, south sit, m., demiray, b."
+15,"z., xiang, z."
+15,"r., ewing, g."
+15,"j., sermet, y., and demir, i."
+15,(2020).
+15,a korea.
+15,"hydrol., 601. doi:10.1016/j.jhydrol.2021.126684 comprehensive review of deep learning applications in hydrology and li, p., shi, c., li, z."
+15,"h., muller, j."
+15,"p., drummond, j., li, x."
+15,"y., et al."
+15,(2013).
+15,water resources.
+15,water sci.
+15,"82, 2635–2670. doi:10.2166/wst.2020.369 evaluation of aster gdem using gps benchmarks and srtm in china."
+15,"srinivasan, r."
+15,"s., arnold, j."
+15,"g., and jones, c."
+15,(1998).
+15,’hydrologic unit modeling j.
+15,"remote sensing 34, 1744–1771. doi:10.1080/01431161.2012.726752 of the united states with the soil and water assessment tool."
+15,"water lu, d., konapala, g., painter, s."
+15,"l., kao, s."
+15,"c., and gangrade, s."
+15,(2021).
+15,’streamﬂow resour.
+15,"14, 315–325. doi:10.1080/07900629849231 simulation in data-scarce basins using bayesian and physics-informed swain, s."
+15,"s., mishra, a., chatterjee, c., and sahoo, b."
+15,(2021).
+15,’climate-changed machine learning models.
+15,"hydrometeorology 22, 1421–1438. doi:10.1175/ versus land-use altered streamﬂow: a relative contribution assessment jhm-d-20-0082.1 using three complementary approaches at a decadal time-spell."
+15,"mccarthy, g."
+15,(1939).
+15,"“unit hydrograph and flood routing,” in conference of j."
+15,hydrol.
+15,596. doi:10.1016/j.jhydrol.2021.126064 north atlantic division.
+15,"tan, m."
+15,"l., gassman, p."
+15,"w., srinivasan, r., arnold, j."
+15,"g., and yang, x."
+15,(2019).
+15,"a miau, s., and hung, w."
+15,(2020).
+15,"’river flooding forecasting and anomaly review of swat studies in southeast asia: applications, challenges and detection based on deep learning."
+15,"ieee access 8, 198384–198402. doi:10.1109/ future directions."
+15,"water, 11. doi:10.3390/w11050914 access.2020.3034875 van, s."
+15,"p., le, h."
+15,"m., thanh, d."
+15,"v., dang, t."
+15,"d., loc, h."
+15,"h., and anh, d."
+15,(2020).
+15,"mishra, h., denis, d."
+15,"m., suryavanshi, s., kumar, m., srivastava, s."
+15,"k., denis, a."
+15,"f., ’deep learning convolutional neural network in rainfall-runoff modelling. et al."
+15,(2017).
+15,hydrological simulation of a small ungauged agricultural j.
+15,"hydroinformatics 22, 541–561. doi:10.2166/hydro.2020.095 watershed semrakalwana of northern india."
+15,water sci.
+15,"7, 2803–2815."
+15,"wang, g."
+15,"q., zhang, j."
+15,"y., pagano, t."
+15,"c., liu, y."
+15,"l., liu, c."
+15,"s., bao, z."
+15,"x., et al. doi:10.1007/s13201-017-0531-7 (2015)."
+15,"’using hydrological simulation to detect human-disturbed epoch in nguyen, v."
+15,"t., and dietrich, j."
+15,(2018).
+15,’modiﬁcation of the swat model to runoff series.
+15,water sci.
+15,"71, 691–699. doi:10.2166/wst.2014.526 simulate regional groundwater flow using a multicell aquifer."
+15,"hydrological wang, h."
+15,"l., wu, z."
+15,"n., hu, c."
+15,"h., and du, x."
+15,(2015).
+15,’water and nonpoint process.
+15,"32, 939–953. doi:10.1002/hyp.11466 source pollution estimation in the watershed with limited data availability pulido-calvo, i., and portela, m."
+15,(2007).
+15,application of neural approaches to based on hydrological simulation and regression model.
+15,environ.
+15,pollut.
+15,one-step daily flow forecasting in portuguese watersheds.
+15,hydrol.
+15,"332, res."
+15,"22, 14095–14103."
+15,"1–15. doi:10.1016/j.jhydrol.2006.06.015 wang, y."
+15,"p., wang, s., wang, c., and zhao, w."
+15,(2021).
+15,"’runoff sensitivity qi, j."
+15,"y., zhang, x."
+15,"s., and wang, q."
+15,(2019).
+15,’improving hydrological increases with land use/cover change contributing to runoff decline across simulation in the upper mississippi river basin through enhanced the middle reaches of the yellow river basin.
+15,"hydrol., 600. doi:10.1016/j."
+15,freeze-thaw cycle representation.
+15,hydrol.
+15,"571, 605–618. doi:10. jhydrol.2021.126536 1016/j.jhydrol.2019.02.020 worku, t., khare, d., and tripathi, s."
+15,(2017).
+15,"modeling runoff-sediment raihan, f., beaumont, l."
+15,"j., maina, j., islam, a."
+15,"s., and harrison, s."
+15,(2020).
+15,response to land use/land cover changes using integrated gis and swat ’simulating streamﬂow in the upper halda basin of southeastern model in the beressa watershed.
+15,environ.
+15,earth sci.
+15,76. doi:10.1007/s12665- bangladesh using swat model.
+15,hydrological sci.
+15,journal-journal 017-6883-3 des sci.
+15,"hydrologiques 65, 138–151. doi:10.1080/02626667.2019.1682149 xiong, m."
+15,"s., liu, p., cheng, l., deng, c., gui, z."
+15,"l., zhang, x."
+15,"j., et al."
+15,(2019).
+15,"ravazzani, g., barbero, s., salandin, a., senatore, a., and mancini, m."
+15,(2015).
+15,an ’identifying time-varying hydrological model parameters to improve integrated hydrological model for assessing climate change impacts on simulation efﬁciency by the ensemble kalman filter: a joint assimilation frontiers in earth science | www.frontiersin.org 15 april 2022 | volume 10 | article 875145
+16,xu et al.
+16,deep learning and remote sensing of streamﬂow and actual evapotranspiration.
+16,hydrol.
+16,"568, 758–768. doi:10."
+16,"zhao, x."
+16,"h., lv, h."
+16,"f., wei, y."
+16,"z., lv, s."
+16,"j., and zhu, x."
+16,"(2021). 1016/j.jhydrol.2018.11.038 streamﬂow forecasting via two types of predictive xu, c."
+16,"w., han, z."
+16,"y., and fu, h."
+16,(2022).
+16,remote sensing and hydrologic- structure-based gated recurrent unit models.
+16,"water 13, 91. doi:10."
+16,hydrodynamic modeling integrated approach for rainfall-runoff simulation in 3390/w13010091 farm dam dominated basin.
+16,front.
+16,environ.
+16,"9. doi:10.3389/fenvs.2021.817684 zhou, m."
+16,"m., qu, s."
+16,"m., chen, x."
+16,"q., shi, p., xu, s."
+16,"j., chen, h."
+16,"y., et al."
+16,"(2019)., 11."
+16,"xu, w., jiang, y."
+16,"n., zhang, x."
+16,"l., li, y., zhang, r., and fu, g."
+16,(2020).
+16,"’using water, 86610.3390/w11040866."
+16,impact assessments of rainfall-runoff long short-term memory networks for river flow prediction.
+16,hydrol.
+16,"51, characteristics response based on land use change via hydrological 1358–1376. doi:10.2166/nh.2020.026 simulation xu, y."
+16,"y., li, j., wang, j."
+16,"d., chen, j."
+16,"l., liu, y."
+16,"b., ni, s."
+16,"n., et al."
+16,(2020).
+16,"’assessing zuo, g."
+16,"g., luo, j."
+16,"g., wang, n., lian, y."
+16,"n., and he, x."
+16,(2020).
+16,’decomposition water storage changes of lake poyang from multi-mission satellite data and ensemble model based on variational mode decomposition and long short- hydrological models.
+16,hydrol.
+16,590. doi:10.1016/j.jhydrol.2020.125229 term memory for streamﬂow forecasting.
+16,hydrol.
+16,585. doi:10.1016/j.jhydrol.
+16,"xu, y."
+16,"y., lin, j., zhao, j."
+16,"w., and zhu, x."
+16,(2021).
+16,’new method improves 2020.124776 extraction accuracy of lake water bodies in central asia.
+16,hydrol.
+16,"603. doi:10. 1016/j.jhydrol.2021.127180 conﬂict of interest: the authors declare that the research was conducted in the xue, f., shi, p., qu, s."
+16,"m., wang, j."
+16,"j., and zhou, y."
+16,(2019).
+16,’evaluating the absence of any commercial or ﬁnancial relationships that could be construed as a impact of spatial variability of precipitation on streamﬂow simulation using a potential conﬂict of interest.
+16,swat model.
+16,"water policy 21, 178–196. doi:10.2166/wp.2018.118 yin, h."
+16,"l., zhang, x."
+16,"w., wang, f."
+16,"d., zhang, y."
+16,"n., xia, r."
+16,"l., and jin, j."
+16,(2021).
+16,"publisher’s note: all claims expressed in this article are solely those of the authors ’rainfall-runoff modeling using lstm-based multi-state-vector sequence- and do not necessarily represent those of their afﬁliated organizations, or those of to-sequence model."
+16,hydrol.
+16,"598. doi:10.1016/j.jhydrol.2021.126378 the publisher, the editors, and the reviewers."
+16,"any product that may be evaluated in yin, z."
+16,"j., xu, y."
+16,"y., zhu, x."
+16,"y., zhao, j."
+16,"w., yang, y."
+16,"p., and li, j."
+16,(2021).
+16,"’variations this article, or claim that may be made by its manufacturer, is not guaranteed or of groundwater storage in different basins of china over recent decades. endorsed by the publisher."
+16,hydrol.
+16,"598. doi:10.1016/j.jhydrol.2021.126282 yuan, r."
+16,"f., cai, s."
+16,"y., liao, w."
+16,"h., lei, x."
+16,"h., zhang, y."
+16,"h., yin, z."
+16,"k., et al."
+16,(2021).
+16,"copyright © 2022 xu, wang, fu and yang."
+16,this is an open-access article ’daily runoff forecasting using ensemble empirical mode decomposition and distributed under the terms of the creative commons attribution license (cc long short-term memory.
+16,front.
+16,earth sci.
+16,9. doi:10.3389/feart.2021.621780 by).
+16,"the use, distribution or reproduction in other forums is permitted, provided zhao, a."
+16,(2016).
+16,’effect of different soil data on hydrological process modeling in weihe the original author(s) and the copyright owner(s) are credited and that the original river basin of northwest china.
+16,arabian j.
+16,"geosciences 9. doi:10.1007/s12517-016-2695-0 publication in this journal is cited, in accordance with accepted academic practice."
+16,"zhao, r."
+16,(1992).
+16,the xinanjiang model applied in china.
+16,hydrol.
+16,"135, no use, distribution or reproduction is permitted which does not comply with 371–381. doi:10.1016/0022-1694(92)90096-e these terms."
+16,frontiers in earth science | www.frontiersin.org 16 april 2022 | volume 10 | article 875145

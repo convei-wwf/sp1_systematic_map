@@ -1,0 +1,662 @@
+page,p
+1,"www.nature.com/scientificreports open the utility of airborne hyperspectral and satellite multispectral images in identifying natura 2000 non‑forest habitats for conservation purposes anna jarocińska 1, dominik kopeć 2,3*, jan niedzielko 3, justyna wylazłowska 3, anna halladin‑dąbrowska 3, jakub charyton 3, agnieszka piernik 4 & dariusz kamiński 4 aerial hyperspectral and multispectral satellite data are the two most commonly used datasets to identify natural and semi-natural vegetation."
+1,"however, there is no documented analysis based on data from several areas concerning the difference in the classification accuracy of non-forest natura 2000 habitat with the use of aerial hyperspectral and satellite multispectral data."
+1,"also, there is no recommendation, on which habitat can be classified with sufficient accuracy using free multispectral images."
+1,"this study aimed to analyse the difference in classification accuracy of natura 2000 habitats representing: meadows, grasslands, heaths and mires between data with different spectral resolutions and the results utility for nature conservation compared to conventional maps."
+1,the analysis was conducted in five study areas in poland.
+1,the classification was performed on multispectral sentinel-2 (s2) and hyperspectral hyspex (hs) images using the random forest algorithm.
+1,"based on the results, it can be stated that the use of hs data resulted in higher classification accuracy, on average 0.14, than using s2 images, regardless of the area of the habitat."
+1,"however, the difference in accuracy was not constant, varying by area and habitat characterisation."
+1,greater differences in accuracy were observed for areas where habitats were characterised by high α-diversity or β-diversity.
+1,"the hs and s2 data make it possible to create maps that provide a great deal of new knowledge about the distribution of natura 2000 habitats, which is necessary for the management of protected areas."
+1,"the obtained results indicate that by using s2 images it is possible to identify, at a satisfactory level, alluvial meadows and grassland."
+1,"for heaths and mires, using hs data improved the results, but it is also possible to acquire general distribution of these classes, whereas hs images are obligatory for mapping salt, molinia and lowland hay meadows."
+1,"abbreviations rs remote sensing s2 sentinel-2 hs hyspex mnf minimum noise fraction si spectral indices oa overall accuracy ml machine learning mp management plan ua user accuracy 1 department of geoinformatics, cartography and remote sensing, chair of geomatics and information systems, faculty of geography and regional studies, university of warsaw, krakowskie przedmieście 26/28, 00‑927 warszawa, poland."
+1,"2department of biogeography, paleoecology and nature conservation, faculty of biology and environmental protection, university of lodz, banacha 1/3, 90‑237 łódź, poland."
+1,"3mggp aero sp. z o.o., kaczkowskiego 6, 33‑100 tarnów, poland."
+1,"4department of geobotany and landscape planning, faculty of biological and veterinary sciences, nicolaus copernicus university in toruń, lwowska 1, 87‑100 toruń, poland. *email: dominik.kopec@biol.uni.lodz.pl scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 1 vol.:(0123456789)"
+2,www.nature.com/scientificreports/ rf random forest pa producer accuracy anthropogenic environmental changes cause an increasing number of habitats to be threatened with extinc- tion every y­ ear1.
+2,"in europe, the protection of natural and semi-natural habitats was introduced throughout the european union to establish a list of protected h ­ abitats2."
+2,"in order to protect these habitats, special areas of conservation (sacs) were designated, and in 2021 the eu and united kingdom area covered 945,785 ­km2,3, which will further increase according to the eu biodiversity strategy for 2­ 0304."
+2,"at present, this can be considered one of the most important initiatives supporting biodiversity protection in the w ­ orld5."
+2,"based on the directive, each eu country is obliged to monitor the condition of its protected habitats."
+2,"the traditional methods of habi- tat monitoring based on field mapping have numerous limitations, so intensive research is carried out on the development of new technologies for habitat monitoring, e.g., remote sensing (rs)6,7."
+2,"rs techniques can be an alternative to the traditional method of acquiring information, and may also become a tool that will help solve one of the biggest problems on a national scale—the lack of information on the distribution of protected natural habitats outside the protected a­ rea8."
+2,"identification using rs techniques is based on the differences in the spectral reflectance of the objects, which are registered in the raster images."
+2,"the spectral reflectance depends on many factors, including the species ­composition9."
+2,"therefore, it is possible to identify vegetation using rs."
+2,"the significant number of natura 2000 natural habitats can be effectively mapped with the use of rs data and machine learning (ml) methods, which was proven by research conducted in recent ­years6,7."
+2,"due to limiting factors, the spectral reflectance for different types of vegetation may be ­similar10."
+2,"furthermore, natural and semi-natural vegetation are complex areas, and classification using rs techniques can be difficult and does not always meet the expected ­results11."
+2,"particular types of vegetation occurring in natural areas are usually heterogeneous, and individual units can be similar in species composition and physiognomy."
+2,"natura 2000 habitats and areas are characterised by different ∝-diversity and β-diversity, and these factors can influence the accuracy of habitat m ­ apping12."
+2,"additionally, the same habitat located in different areas may differ in these features, which makes it difficult to develop a universal identification ­method13."
+2,the diversity is the result of their floristic distinctiveness from other habitats.
+2,"the natura 2000 habitats with one characteristically dominant species (low ∝-diversity, e.g., heaths, predominantly calluna vulgaris) have a unique spectral signature and are therefore likely to classify with high accuracy using ­rs14."
+2,"the situation is different with meadows, which can be formed by numerous different species, including morphologically very diverse grasses (high β-diversity)."
+2,"for example, fresh meadows might be populated by arrhenatherum elatius, poa pratensis, and festuca rubra and thus may be more difficult to c­ lassify15."
+2,the spectral resolution and the spectral range of used images must enable the correct identification of the ­object16.
+2,"multispectral images have up to a dozen wide bands, whereas hyperspectral data are characterised by hundreds of narrow bands, which makes it easier to differentiate objects."
+2,this shows that the level of accuracy acquired in the classification of individual habitats is based on the resolution of the hyperspectral and multispectral i­ mages17.
+2,"mapping using machine learning may result in insufficient accuracy, and the accuracy affects the practical use of habitat mapping."
+2,"the accuracy of the acquired map is verified using statistical parameters such as pro- ducer accuracy (pa) related to omission error, user accuracy (ua) related to commission error, and accuracy for each class (f1-score)."
+2,it is impossible to determine acceptable and sufficient accuracy; the highest accuracy is sought in research.
+2,"one of the key elements in classification, including natura 2000 habitats mapping, is choosing the optimal ­dataset18,19."
+2,"it was performed using data obtained from the satellite ­level6,20 and aerial ­level15,21."
+2,"the most fre- quently used were satellite data (especially free-of-charge sentinel-2 or landsat 8 images), with aerial data being used less often."
+2,"multispectral images are mainly acquired on the satellite level, whereas hyperspectral are on the airborne level, but nowadays high-resolution satellite sensors are also available."
+2,"the classifications performed in different studies resulted in very different accuracies, from f1 = 0 for habi- tat code ­623021 to f1 = 0.95 for mires ­714019."
+2,"it is worth mentioning that better results are obtained by using a multi-time image series compared to one date, so it can be stated that using multitemporal images improves the accuracy of c­ lassification15."
+2,"among the classifiers, one of the most effective was the random forest (rf) machine learning ­algorithm19."
+2,"however, no proven comparisons are done under experimental conditions of the classification of natura 2000 habitats using the hyperspectral and multispectral data."
+2,"according to the literature review, the difference in the accuracy of the natura 2000 habitat classification based on two types of data cannot be stated."
+2,the research was conducted in various areas using different reference datasets.
+2,"as a result, it is impossible to compare the quality of the hyperspectral and multispectral data, or to compare different case studies."
+2,"for example, heaths were clas- sified using hyperspectral data in five different publications, resulting in an f1 accuracy ranging from 0.2821 to 0.9022."
+2,"based on three different publications, where multispectral data were used, the f1 accuracy varied from 0.4423 to 0.9324."
+2,"considering the accuracies of habitat identification acquired in different studies, it is impossible to determine which data is better and the differences between hyperspectral and multispectral images."
+2,"existing maps, acquired using conventional methods, are used in the management of protected areas."
+2,"their flaws include not only the lack of verification, but also the way they are acquired, mainly by field measurements."
+2,such maps are obtained using traditional methods and are rarely compared with machine learning results based on rs.
+2,"at the same time, such a comparison is not easy due to different techniques of ­acquisition25,26."
+2,machine learning results using remote sensing images are more detailed than conventional m ­ apping27.
+2,"therefore, within this analysis, three research questions were formulated: scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 2 vol:.("
+2,1234567890)
+3,"www.nature.com/scientificreports/ natura 2000 codes habitat type type of ecosystem ∝-diversity β-diversity 1340a inland salt meadows meadows high high 4030 european dry heaths heaths low low a species-rich nardus grasslands, on siliceous substrates in mountain areas (and submountain areas, in na1—low na1—low 6230 grasslands continental europe kr1—high kr1—high 6410 molinia meadows on calcareous, peaty, or clayey, silt-laden soils (molinion caeruleae) meadows high high 6440 alluvial meadows of river valleys of the cnidion dubii meadows high low 6510 lowland hay meadows (alopecurus pratensis, sanguisorba officinalis) meadows high high 7140 transition mires and quaking bogs mires low high table 1."
+3,analysed natura 2000 habitats. a priority natura 2000 habitat.
+3,what is the difference in the classification accuracy of individual natura 2000 habitats using hyperspectral and multispectral images based on hyspex and sentinel-2 images?
+3,do maps acquired with the use of ml provide knowledge useful for the management of protected areas?
+3,is the utility in nature conservation the same for maps acquired using hs and s2 data?
+3,"in this analysis, the hyspex hyperspectral images and sentinel-2 images were used to identify natura 2000 habitats."
+3,"differences in classification accuracy were determined for: heaths (natura 2000 code—4030), meadows (1340, 6410, 6440, 6510), grasslands (6230) and mires (7140)."
+3,"to identify the factors influencing the accuracy of classification, the hs data were resampled to a spatial resolution of 10 m which resulted in two different datasets: s2 10 m and hs 10 m."
+3,"for the hs data, minimum noise fraction (mnf) and spectral indices (si) were used for classification using ml techniques—the rf algorithm."
+3,"for the s2 data, multitemporal datasets from one vegetation season (spectral bands, mnf, and si) were tested."
+3,"moreover, an additional aim of the analysis was to map the natura 2000 habitat distribution using acquired rf models for hs and s2 data."
+3,the maps have been compared with natura 2000 habitat maps from the conservation plan in terms of utility.
+3,data and methods study area and object of the study.
+3,"surveys were performed for seven natura 2000 habitats (table 1, fig."
+3,these are the most common non-forest natura 2000 habitats in poland’s agricultural space.
+3,"they differ from each other in several features, but they also show s­ imilarities17."
+3,"the selected habitats represent 4 different ecosystems: meadows, grasslands, heaths, and mires."
+3,"analysed habitats are characterised by different ∝-diversity and β-diversity, as shown (table 1) descriptively on the basis of the species composition of references polygons and literature data."
+3,"according to whitaker’s idea ∝-diversity refers to internal floristic richness within a habitat patch, β-diversity describes the floristic richness between p­ atches28,29."
+3,general description of the natura 2000 habitats can be found in the interpretation manual of european union habitats—eur2830.
+3,two of the surveyed habitats are among the priority ones.
+3,"detailed information on the analysed habitats, including their floristic diversity within and between the patches, is described in publications of natura 2000 habitats in p ­ oland31–34."
+3,"the research was carried out in five study sites located within five special areas of conservation (sac): ostoja nadwarciańska (area code plh300009), dolina krasnej (area code plh260001), uroczysko pięty (area code plh260012), uroczyska lasów janowskich (area code plh060031) and dolina dolnego sanu (area code plh180020) (fig."
+3,"2, table 2)."
+3,figure 1.
+3,the images of analysed natura 2000 habitats.
+3,the full names of the habitats are given in table 1.
+3,figure created by the authors using inkscape (https://​inksc​ape.​org).
+3,pictures of the habitats were taken by the authors of the article.
+3,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 3 vol.:(0123456789)
+4,www.nature.com/scientificreports/ figure 2.
+4,study sites: kr1—plh260001 dolina krasnej and plh260012 uroczysko pięty; na1 and na2— plh300009 ostoja nadwarciańska; lj3—plh060031 uroczyska lasów janowskich; sa1—plh180020 dolina dolnego sanu.
+4,"orange squares highlight the areas presented as maps in the results section, background images are sentinel-2 rgb compositions."
+4,figure created by the authors using arcmap 10.6.1 software (https://​suppo​rt.​ esri.​com/​en/​produ​cts/​deskt​op/​arcgis-​deskt​op/​arcmap).
+4,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 4 vol:.(
+4,1234567890)
+5,www.nature.com/scientificreports/ number of polygons acquired during field measurements area data acquisition 1340 4030 6230 6410 6440 6510 7140 background sum kr1 08.06–14.06 10 13 53 189 265 lj3 05.06–07.06 34 32 142 208 na1 23.05–28.05 19 27 166 212 na2 20.05–25.05 17 50 154 221 sa1 05.06–07.06 22 13 114 149 sum 19 44 30 80 72 13 32 765 1055 table 2.
+5,the number and date of acquired polygons in 2017.
+5,ostoja nadwarciańska (area code plh300009) is one of the best-preserved landscapes of a typical lowland river.
+5,two study sites have been established in this location: na1 (10 ­km2) and na2 (17 ­km2).
+5,"site na1 has a complex of meadows and rushes surrounded by forests, where habitats with codes 1340 and 6410 occur together: 1340 on local depressions and 6410 on local elevations."
+5,"despite the significant floristic distinctiveness of the studied habitats, some of the patches have indicator species of both habitats."
+5,the relief of na2 area is quite varied and rich in fluvial forms.
+5,"the non-forest communities are predominantly rushes, meadows, and pastures, as well as dry grasslands."
+5,"habitats 6440 and 6230 are not adjacent to each other; moreover, they are characterised by a lack of similarity in physiognomy and species composition."
+5,the next research area covers two special areas of conservation: dolina krasnej (area code plh260001) and uroczysko pięty (plh260012).
+5,it has been denoted as kr1 (44 ­km2) and is located in the highland.
+5,"it is partially located in a natural depression between two ranges of hills, partially in the valley of the krasna river and its tributaries."
+5,"the area is significantly diversified in terms of geomorphological, soil, and moisture conditions, which results in an extremely wide variety of vegetation."
+5,"there are very diverse types of plant communities, both forest and non-forest."
+5,"in this area, three natura 2000 habitats with codes 4030, 6230, and 6410 were analysed."
+5,"patches of habitats 4030 and 6230 usually adjoin each other, forming mosaic and transitional forms."
+5,"in many cases, this results in a clear similarity of species composition and physiognomy."
+5,"on the contrary, the patches of habitat 6410 are partially found in separate locations, and sometimes they are adjacent to habitat 6230 with common indicator species."
+5,the research site labelled as lj3 is located in the eastern part of uroczyska lasów janowskich special area of conservation (area code plh060031) and covers an area of 41 ­km2.
+5,the lj3 study site is in a lowland area.
+5,"this is a sandy plain, varied with dune hills and areas with no outflow, dominated by less diverse forest communities."
+5,the non-forest area is dominated by moors and patches of dry grasslands.
+5,"a small area is occupied by semi- natural communities, meadows, and pastures."
+5,there is also a complex of peat bogs in the eastern part of the area.
+5,two natura 2000 habitats were analysed in the lj3 study site: 4030 and 7140.
+5,habitat 7140 was characterised by species composition and physiognomy distinct from other habitats.
+5,"moreover, it was present only in the eastern part of the study area, where patches of habitat 4030 were not recorded."
+5,patches of habitats 4030 occurred only in the western part of the area and were directly adjacent to each other.
+5,"the dolina dolnego sanu special area of conservation (area code plh180020), designated the sa1 study site, is located in the valley of the lower san river at the estuary section to the vistula river."
+5,"the terrain is typical of large rivers and includes elements such as the valley floor, terraces, and oxbow lakes."
+5,"the agricultural landscape dominates on the surface and is a mosaic of meadows, pastures, and farmlands."
+5,forest communities are less common.
+5,the natura 2000 habitats 6440 and 6510 were analysed in this area.
+5,most of the patches occur in other locations and are not adjacent to each other.
+5,some similarities can be found when comparing the physiognomy and species composition of both habitats.
+5,on‑ground reference data.
+5,"synchronous with the acquisition of aerial hyperspectral data, on-ground reference data were collected on the distribution of individual natura 2000 habitats and other vegetation types and land cover forms."
+5,"a total of 1055 ground reference polygons were collected, 290 for habitats and 765 for background (table 2)."
+5,"in each reference polygon, information about the habitat code and plant composition was recorded."
+5,the number of polygons distributed within the classes is related to the proportion between the classes in each study area.
+5,the reference polygons were squares with side 10 m.
+5,"a sentinel-2 data spatial grid was used to locate the s2 pixels, and the reference square was located in this grid."
+5,"the square centre coordinates were recorded in the field using a gnss mobilemapper 120 (with real-time differential correction), obtaining a measurement accuracy of 0.2–0.5 m."
+5,the polygons were set up so that they were distributed as evenly as possible within the study area and at the same time were representative of the variability of the analysed habitats and area.
+5,maps of management plan.
+5,for two examined natura 2000 sites—dolina dolnego sanu (plh180020) and ostoja nadwarciańska (plh300009)—current and official maps presenting the distribution of natura 2000 habitats were available.
+5,the maps were provided by the regional directorates for environmental protection and were made independently as part of ongoing inventories or work on their conservation plan.
+5,the maps were obtained using traditional field mapping.
+5,it should be assumed that these maps present an average level of detail and accuracy in determining the range of natura 2000 habitats at the disposal of state level authorities manag- scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 5 vol.:(0123456789)
+6,"www.nature.com/scientificreports/ acquisition date (number of the day in month) area [km2] no. of images type of data may june july aug sep oct 10 s2 18, 28 – – 08, 11, 16, 31 27, 30 2, 17 kr1 44 1 hs – 1 – – – – 7 s2 – 1 3, 30 9, 29 2, 17 lj3 41 1 hs – 2 – – – – 9 s2 15 1, 21 – 3, 30 9, 29 2, 17 na1 35 1 hs – 2 – – – – 7 s2 18, 28 – 30 11 28, 30 18 na2 10 1 hs 19 – – – – – 8 s2 18, 28 20 30 11 28, 30 19 sa1 17 1 hs 19 – – – – – table 3."
+6,the number and date of acquired images in 2017. ing the individual areas.
+6,"for these two sites, a comparative analysis of the maps was acquired using hyspex, sentinel-2 images and management plan (mp) (fig."
+6,"in this way, classification methods were compared with traditional field mapping."
+6,airborne and satellite data.
+6,"for sites studied in may and june 2017, hyperspectral images were acquired with 1 m special resolution using two hyspex scanners: vnir-1800 and swir-384 (table 3)."
+6,"the details of the overflights and radiometric, geometric, and atmospheric correction can be found in previous s­ tudies17,35."
+6,the time in vegetation season was chosen based on previous analyzes and ­literature18.
+6,multispectral s2 images were acquired from vegetation season 2017 (may–november) (table 3) using sentinel data hub.
+6,"multitemporal images were used due to higher accuracy possible to achieve compared to single image ­analysis15,24."
+6,"images for three different granules were used: t33uxt (for na1 and na2 areas; eight scenes), t34udb (lj3 and sa1 areas; thirteen scenes), and t34udb (kr1 area; ten scenes)."
+6,all scenes have cloud cover of less than 90%.
+6,"some of the images were acquired as surface reflectance (2ap processing level), and the rest were reflectance on the top of the atmosphere (1c level)."
+6,"in this case, it was necessary to perform atmospheric correction, which was done using the sen2cor module in esa snap software."
+6,"as a result, 31 sentinel-2 images were chosen for further analysis (table 3)."
+6,raster data processing.
+6,"for the classification, two different datasets were prepared: multitemporal s2 images and hs airborne data."
+6,the data was in 10 m resolutions to analyse how spectral resolution influences the classification accuracy regardless of spatial resolution.
+6,"for both sensors, similar types of data were compared."
+6,"these datasets were chosen based on previous studies conducted on natura 2000 habitats i­dentification15,19 and data dimensionality reduction for ­classification36,37."
+6,each band of sentinel-2 scenes were resampled in esa snap software to 10 m spatial resolution using the nearest neighbour kernel.
+6,the s2 bands were combined in multispectral images and imported into the envi 5.3 ­software38.
+6,"all scenes were resized to the extent of five research areas (na1, na2, kr1, lj3, and sa1) based on the extent of the hs data."
+6,no clouds were noticed except in the scene for kr1 on 28/05/2017—cumulus clouds were above the forests.
+6,"this type of land cover was masked during the analysis, to ensure each image was pro- cessed the same as others."
+6,"to produce multitemporal s2 datasets, all images (spectral bands and si) for each area were stacked, resulting in a multiband image, from 77 bands for na1 and lj3 to 110 spectral bands for kr1."
+6,"to remove noise and add other information, mnf transformation was performed the same as for hs images."
+6,the 30 mnf bands were chosen for each study site based on the eigenvalues.
+6,"with the use of the spectral indices tool in envi 5.3, 37 sis were calculated for the multitemporal s2 ­datasets39."
+6,"to analyse data in the same spatial resolution, the hs data were resized to fit s2 pixels: 1 m hs images were resampled to 10 m spatial resolution using the s2 pixels’ extent—s2 spatial grid."
+6,"the resampling was performed in envi 5.3 software using resize data tool, where the size of the output pixel was defined as 10 m."
+6,the images were calculated using nearest neighbour resampling.
+6,"for the 10 m hs images, mnf transformation was per- formed and 30 first bands were chosen based on the eigenvalues, visual analysis, and previous s­ tudies15,19."
+6,"next, 65 indices (si) were calculated in envi 5.3 using the spectral indices t­ ool39."
+6,natura 2000 habitats classification.
+6,the classification was performed on both datasets using a rf ­classifier40.
+6,"an iterative approach was used to divide the reference dataset into training and validation sets, fit the model, assess its accuracy, and acquire the maps."
+6,"the procedure for acquiring the result was based on the average f1 value, because by using this parameter each class was equally important regardless of the class coverage."
+6,"for hs images, 30 mnf bands and si were combined."
+6,"for multitemporal s2 spectral bands, 30 mnf bands and si were stacked, and classification was performed on each study area for two different datasets: hs and s2 (fig."
+6,the classification was performed using the scikit-learn python library rf c­ lassifier41.
+6,"although all the pro- cessing was designed on a pixel basis, the reference dataset was prepared in the vector format of polygons."
+6,they were divided into 50% training and 50% validation sets using the stratified random draw method (used e.g.
+6,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 6 vol:.(
+6,1234567890)
+7,www.nature.com/scientificreports/ figure 3.
+7,the procedure comparing hs and s2 data.
+7,figure created by the authors using inkscape (https://​inksc​ ape.​org).
+7,figure 4.
+7,map production process.
+7,figure created by the authors using inkscape (https://​inksc​ape.​org). train_test_split from scikit-learn).
+7,the polygons were rasterised (used gdal) and processed on a pixel basis.
+7,the rf classifier was applied to a training dataset using the following parameters: the number of trees in rf: 100; the minimum number of samples per split: 2; the minimum number of samples at leaf node: (1) the trained model was then applied to all the pixels contained by the validation polygons (used gdal).
+7,the confusion matrix was built from the reference and predicted classes of all validation pixels (used scikit-learn).
+7,"from the confusion matrix, the accuracy measures were calculated: overall accuracy (oa) and f1 score for each class."
+7,"the process of random sampling, rasterization, model fitting, prediction and accuracy assessment was iterated fifty times."
+7,statistical analysis.
+7,the objective of the first part of the statistical analysis was to define the effectiveness of each natura 2000 habitat classification depending on the image spectral resolution.
+7,the analysis was dedicated to answering the first research question: what is the difference in the classification accuracy of individual natura 2000 habitats using hyperspectral and multispectral images based on hs and s2 images?
+7,the average f1 values for each natura 2000 habitat on the five study sites were analysed by comparing their distribution from fifty classification iterations for the s2 and hs data.
+7,the calculations were performed in statistica 14.0.0.1542.
+7,it was checked whether the mean f1 values for hs were greater than those for s2.
+7,the non-parametric mann–whitney u test was used to analyse whether the differences were statistically significant.
+7,the non-parametric test was used because not all f1 values datasets for areas have a normal distribution.
+7,"for both datasets, the habitat prediction map was generated."
+7,"to produce the map of all fifty, fitted models were predicted on the whole study site (fig."
+7,"then fifty maps were stacked, and the final class was assigned to each pixel by the majority voting."
+7,the obtained classification results were compared with the range of natura 2000 habitats indicated in the management plan of the two areas na1 and sa1.
+7,it should be mentioned that the study areas analysed in this study cover only part of the special areas of conservation (fig.
+7,"for each map, the number of patches and the area occupied by natura 2000 habitat was determined: 1340 and 6410 in the na1 area and 6440 and 6510 in sa1."
+7,"difference maps were then made for the mp-hs, mp-s2 and hs-s2 combinations."
+7,these difference maps have been generalised by removing polygons smaller than two scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 7 vol.:(0123456789)
+8,www.nature.com/scientificreports/ figure 5.
+8,"the region covered by special areas of conservation natura 2000 area, and study areas na1 and sa1 chosen for visualisation."
+8,figure created by the authors using arcmap 10.6.1 software (https://​suppo​rt.​esri.​com/​ en/​produ​cts/​deskt​op/​arcgis-​deskt​op/​arcmap).
+8,figure 6.
+8,the distribution of f1 accuracy values for each natura 2000 habitat.
+8,the f1 value was acquired from confusion matrices calculated based on fifty cal/val polygons stratified random sampling (table 2).
+8,figure created by the authors using rawgraphs 2.0 beta (https://​app.​rawgr​aphs.​io/).
+8,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 8 vol:.(
+8,1234567890)
+9,www.nature.com/scientificreports/ pixels.
+9,the sankey flow diagrams were then developed to show changes between habitat areas on three types of data.
+9,the diagrams show changes in the area for pixels that have been indicated as a natura 2000 habitat on at least one of the maps.
+9,the sankey diagram is a data visualisation technique dating from ­189843 commonly used in physics and engineering to display energy flow and have a limited presence in remote sensing literature.
+9,results the differences in the classification accuracy of individual natura 2000 habitats using hyper‑ spectral and multispectral images.
+9,a comparative analysis of the accuracy of individual natura 2000 habitats indicates that the classification accuracy differs between hs and s2.
+9,the accuracy based on hs data is always higher than s2 data—the average difference is around 0.14.
+9,"in most cases, the difference is statistically sig- nificant (fig."
+9,"the f1 score acquired for natura 2000 habitats for each area was higher for hs data compared to s2 images, but the value of the differences is not constant—the highest difference (0.32) was noticed for habitat 6510 in area sa1."
+9,"the differences were statistically significant except for habitat 6230 in the na2 area, which was also the smallest (0.009)."
+9,"it should also be noted that, in almost every case, the pa was lower compared to the ua, so the habitat classes are rather underestimated than overestimated (see supplementary material)."
+9,the highest values of f1 accuracy for hs were obtained for mires (code 7140) on area lj3 (f1 = 0.95).
+9,"a slightly lower f1 score was obtained for both areas of heaths (code 4030, f1 = 0.90) and alluvial meadows (code 6440, f1 between 0.87 and 0.90)."
+9,"the lowest accuracy was acquired for grassland (code 6230) on the kr1 area (f1 = 0.57) and salt meadows on na1 (code 1340, f1 = 0.61)."
+9,"the most stable results f1 values calculated for 50 iterations were obtained in the case of mires (code 7140), where the f1 values varied from 0.89 to 1."
+9,the biggest difference in f1 values occurred in the case of grasslands (code 6230) in the kr1 area.
+9,"for four habitats that were analysed in two different areas, it was possible to compare the accuracy between the study sites and check the stability of the results."
+9,"similar f1 values were noticed in the case of heaths (code 4030), and alluvial meadows (code 6440); the difference in mean f1 accuracy between the two areas was less than 0.03."
+9,the results for grasslands (code 6230) were the least stable; the difference in the average accuracy of f1 between kr1 and na2 was equal to 0.20.
+9,"in the case of s2 data, the highest accuracy was achieved in four cases: alluvial meadows (code 6440) for both areas (f1 = 0.82 for na2 and f1 = 0.83 for sa1), mires (code 7140, f1 = 0.82), and in one of the heathland areas (code 4030, f1 = 0.80)."
+9,the lowest accuracies were noticed for meadows 6510 (f1 = 0.39) and 1340 (f1 = 0.42).
+9,for lowland hay meadows (code 6510) the f1 values are also very diverse.
+9,"high accuracy stability within habitats mapped on two areas was achieved for two types of meadows: alluvial meadows (code 6440), where the differ- ence of f1 was less than 0.01, and molinia meadows (code 6410), where the difference was just over 0.01."
+9,"in the case of heathlands (4030) and grasslands (6230), the results should be considered unstable; the differences in f1 between areas were equal to 0.16 and 0.29, respectively."
+9,"generally, results for hs were better than for s2, however there were noticeable differences in the decrease in the f1 score between s2 and hs."
+9,"regardless of the area, a relatively small decrease in accuracy was noticed for alluvial meadows (code 6440)."
+9,the average decrease in f1 value was equal to 0.07 for both areas.
+9,the highest f1 decrease (0.32) was noticed for lowland hay meadows (code 6510).
+9,"also, for this habitat, a substantial dif- ference in producer accuracies was found (0.63 for hs and 0.27 for s2) (see supplementary material)."
+9,it can be stated that this habitat is underestimated based on s2 images.
+9,diverse results dependent on the study area were achieved for grasslands (code 6230).
+9,for na2 the difference was very small (0.01) and statistically not significant.
+9,for kr1 the difference was equal to 0.1—molinia meadows (code 6440) and heaths (code 4030).
+9,"for these three habitats, at least in one area, the decrease of f1 accuracy was around 0.1, which may indicate the possibility of achieving similar classification results using both sensors."
+9,"however, the results strongly depend on the study area."
+9,comparison of natura 2000 habitat maps created by hs and s2 data classification with maps from management plans.
+9,"a comparison of the natura 2000 habitat distribution maps resulting from the classification of hs and s2 data, with those derived from mp, shows very large differences between them in both the na1 and sa1 areas."
+9,"these discrepancies concern both the number of patches, their size, and their total area."
+9,"within the sa1 site of the 90.6 hectares of 6440 habitat patches indicated in the mp, only 15.80 ha were confirmed as a result of hs data classification, and 17.10 ha from s2 data (fig."
+9,"additionally, 6.76 ha of new patches were shown on the hs data and 20.11 ha on the s2 data."
+9,even greater differences between the maps can be seen when analysing the distribution of habitat 6510.
+9,"of the 207.0 hectares of habitat shown in mp, the hs classification results confirmed only 22.95 hectares and indicated 9.61 hectares of new habitat patches."
+9,"in the case of s2 classification results, only 6.50 hectares were confirmed, and 0.62 hectares of new habitat patches were previously unregistered."
+9,"the concordance of the mp maps with hs, calculated as the percentage of confirmed habitat area with mp on the hs map, can therefore be estimated at 13.06%, while the mp maps against s2 are estimated at 7.93%."
+9,"the significant difference between the mp, s2 and hs maps also relates to the number of patches and their fragmentation, e.g., the extent of habitat 6440 in the maps from the mp was mapped as 16 patches while 241 patches were identified in the hs maps and 133 patches in the s2 data."
+9,the differences between the maps created by classifying hs and s2 data are large and apply to both 6510 and 6440 habitats.
+9,"as a result of the classification of s2 data, a significantly larger total area of habitat 6440 is visible (an increase mainly at the expense of background patches)."
+9,the opposite trend was observed for habitat 6510.
+9,a significant part of the areas classified on the hs data was assigned to the background class on the s2 data.
+9,the concordance of the distribution map of the two studied habitats resulting from the s2 data classification against the hs map can be assessed as average.
+9,"in the case of habitat 6440, 14.20 ha is the area jointly shown as habitat on hs and s2 data to the total area of patches on hs data = 21.3 ha and s2 = 35.3 ha."
+9,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 9 vol.:(0123456789)
+10,www.nature.com/scientificreports/ figure 7.
+10,the classification results in the sa1 area based on hs and s2 images compared with mp maps.
+10,on the left are presented sankey graphs showing the are difference for each map.
+10,the aerial photos used in the map background are cir-composition quick look taken from hyspex data acquired for this study as part of the habitars project.
+10,figure created by the authors using arcmap 10.6.1 software (https://​suppo​rt.​esri.​com/​en/​ produ​cts/​deskt​op/​arcgis-​deskt​op/​arcmap) and sankeymatic (https://​sanke​ymatic.​com).
+10,"in the case of the na1 area, of the 13.92 ha of 1340 habitat patches identified according to the mp, only 3.62 ha were confirmed using hs data and 2.38 ha using s2 data (fig."
+10,"in addition, new habitat patches were found using classification; 0.27 ha using hs data classification and 0.16 ha with s2 data."
+10,the differences between the distribution maps of habitat 1340 on the mp data and the classification results can be considered very large.
+10,"according to the mentioned calculation, the classification results indicate a significantly smaller area of habitat 1340 in the inventoried area."
+10,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 10 vol:.(
+10,1234567890)
+11,www.nature.com/scientificreports/ figure 8.
+11,the classification results in the na1 area based on hs and s2 images compared with mp maps.
+11,on the left are presented sankey graphs showing the area difference for each map.
+11,the aerial photos used in the map background are cir-composition quick look taken from hyspex data acquired for this study as part of the habitars project.
+11,figure created by the authors using arcmap 10.6.1 software (https://​suppo​rt.​esri.​com/​en/​ produ​cts/​deskt​op/​arcgis-​deskt​op/​arcmap) and sankeymatic (https://​sanke​ymatic.​com).
+11,"for habitat 6410, the differences in the maps are even greater."
+11,"of the 9.53 ha of habitat patches present on the mp maps, only 1.33 ha were confirmed using the hs data and 0.90 using the s2 data."
+11,"at the same time, classifica- tion of hs data indicates the presence of 13.11 ha of habitat patches (hs data classification) and 5.54 ha for s2 results in places outside the habitat range on the mp data."
+11,"the concordance of the mp maps with hs, calculated as a percentage of confirmed habitat area with mp on the hs map, can thus be estimated at 21.11%, while the mp maps against s2 are estimated at 13.98%."
+11,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 11 vol.:(0123456789)
+12,www.nature.com/scientificreports/ code natura 2000 rs data f1 score from this study f1 score from literature source hyper 0.61 no data no data meadows (1340) multi 0.42 no data no data 44 hyper 0.69; 0.79 0.73 45 0.85 meadows (6410) 46 multi 0.58; 0.59 0.74–0.85 47 0.74 20 hyper 0.87; 0.90 0.83 meadows (6440) multi 0.82; 0.83 no data no data 48 0.72 hyper 0.71 18 0.85 meadows (6510) 49 0.89 multi 0.39 46 0.77–0.90 22 0.92 hyper 0.57; 0.77 21 0.00 grassland (6230) 46 0.73 multi 0.48; 0.76 24 0.74 50 0.70 hyper 0.90; 0.90 21 heaths (4030) 0.40 51 multi 0.64; 0.80 0.94–0.97 22 0.80 44 hyper 0.95 0.63 19 0.92–0.95 mires (7140) 45 0.85 24 multi 0.82 0.71 47 0.34 table 4.
+12,the overview of the accuracies for individual natura 2000 habitats acquired in this study and from the literature review.
+12,the table includes only the results of studies using hyperspectral data (hyper) or multispectral data (multi) and the sources of accuracies for classes of natura 2000 habitats.
+12,the differences between the mp maps and those produced by the classification process relate to the size of the patches.
+12,"as in the case of the sa1 area, the results of hs and s2 are characterised by much greater fragmen- tation of the patches."
+12,the concordance between the two classification results should also be assessed as average for both habitats.
+12,"for habitat 1340, 2.18 hectares is the area jointly indicated as surveyed habitat on the hs and s2 data, while for habitat 6410, 4.35 hectares is the area of habitat indication which is consistent with both clas- sification results."
+12,discussion the differences in mapping accuracy between hyperspectral and multispectral data.
+12,no stud- ies so far have been conducted comparing the accuracy of the identification of different types of natura 2000 non-forest habitats based on hyperspectral and multispectral data.
+12,classification accuracy comparisons have only been possible by comparing the results of different studies (table 4).
+12,based on this it is not possible to con- clude that one data type is more useful for habitat mapping than the other.
+12,"the main reason for this is the lack of comparability of results (i.e., the inability to eliminate the influence of factors other than spectral resolution)."
+12,"individual publications differ not only in terms of the datasets but also, for example, in the processing used, the date of data acquisition, the diversity of areas, and the amount of reference data."
+12,"in our earlier research, it was proven that hs data have better differentiation capabilities compared to s2 d ­ ata17."
+12,"the problem of comparing the utility of hyperspectral and multispectral images to vegetation mapping was analysed in terms of classification of other vegetation classes, such as plant communities."
+12,"for example, the accu- racies for hs and s2 were comparable when classifying plant communities in the tatra mountains; f1 varied from 0.76 to 0.90 depending on the d ­ ataset52."
+12,similar accuracies for hyperspectral and multispectral data (0.90 and 0.93 respectively) were acquired in habitat mapping in parts of north west e ­ ngland53.
+12,"on the other hand, the classification oa was higher (0.78) for the hyperspectral casi data compared to the s2 (oa = 0.69 in the classification of natural vegetated coastal areas on the pakri i­ slands54."
+12,"this implies that classification at a finer spectral resolution can improve vegetation classification, which was also proven by other s­ tudies10,55."
+12,"based on performed analysis and results of statistical tests it can be stated that the accuracy based on hs data is always higher than for s2 data, but the difference is not constant—the average difference was equal to 0.14."
+12,the differ- ence between the f1 accuracy varies depending on the habitat and area.
+12,"in this study of three types of meadows—salt meadows (1340), molinia meadows (6410) and lowland hay meadows (6510)—the f1 accuracy was higher for hs data than for s2 images."
+12,"generally, accuracies were from 0.61 to 0.79 for hs and from 0.39 to 0.59 in the case of s2 (fig."
+12,"therefore, using hyperspectral data could be scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 12 vol:.("
+12,1234567890)
+13,www.nature.com/scientificreports/ essential for recognising the habitat.
+13,the biggest differences (above 0.32) were noticed for lowland hay meadows 6510.
+13,"these habitats are characterised by very high ∝-diversity and β-diversity which requires using high spec- tral ­resolution18,46."
+13,"individual patches of 6410 habitat have high β-diversity and may be dominated by different species, such as molinia caerulea, betonica officinalis, selinum carvifolia, succisa pratensis or serratula tinctoria."
+13,"generally, meadows are characterised by the dominance of grasses and very high species richness, which can cause difficulty in remote sensing a­ nalysis10."
+13,"the species composition in natura 2000 habitats can be similar to the neighbouring plant communities, but can also differ, for example, by only a few species."
+13,"therefore, hyperspectral data should be used to identify these meadow habitats."
+13,a relatively small decrease in accuracy between using hs and s2 data was noticed for alluvial meadows (code 6440); the average decrease in f1 value was equal to 0.07 for both areas (fig.
+13,"also, average accuracies for both sensors are quite high, with values above 0.82."
+13,good results can be related to the fact that the habitat is characterised by low ∝-diversity and β-diversity with the dominance of one species on each site—cnidium dubium on na1 and allium angulusum on sa1.
+13,these are characteristic of this habitat and do not occur in the background class.
+13,the relatively small difference in accuracy between hs and s2 data is probably due to the fact that using multitemporal s2 images makes it possible to utilise the phenological changes in alluvial meadows.
+13,"in the previously conducted research on meadow habitats, it was proved that the use of multitemporal images increases the accuracy of the results by about 6%24, so very low spectral resolution of s2 in relation to hs can be significantly compensated by the use of multitemporal data."
+13,"in the case of this habitat, using multitemporal s2 images is sufficient for the correct mapping."
+13,"quite different results were noticed for naruds stricta grasslands (6230), where in the na1 area the difference in accuracies for hs and s2 is irrelevant (0.009) and the accuracies were around 0.76 (fig."
+13,"in the kr1 area, the differences in accuracies for hs and s2 are bigger, but still less than 0.1."
+13,small differences can be related to low ∝-diversity and β-diversity.
+13,"in this case, multispectral images are sufficient for identification."
+13,"good results were noticed in the case of heaths, which has low ∝-diversity and β-diversity."
+13,the results for the lj3 area showed that the differences in f1 between hs and s2 were around 0.1 and the accuracies were high—0.90 for hs and 0.80 for s2 (fig.
+13,"on the other hand, accuracy was dependent on the study area: the differences in accuracy between hs and s2 for kr1 were very high—above 0.26."
+13,"in the case of this habitat, the results for hs images are repeatable, so by using hs images it is possible to properly identify habitats."
+13,"these results are different compared to the l­iterature21,50,51."
+13,"the differences between kr1 and lj3 areas can be explained by dif- ferences in reference data—a smaller number of polygons were used on kr1, and classes with a smaller number of reference polygons can produce underestimated classes, which were proven in the previous s­ tudy56."
+13,"also, the lower accuracy on kr1 can be caused by the low occurrence of species calluna vulgaris in the background class."
+13,"similar results were noticed for mires habitat (code 7140); the accuracies were quite high (above 0.82 for hs and s2 data) and the differences slightly exceeded 0.1 (fig. 6), but the results were acquired in one study area."
+13,"similar accuracies and their differences for hyperspectral and multispectral images were achieved earlier—the accuracies for hyperspectral are higher compared to multispectral, but the differences are not high (table 4)."
+13,the relatively good results can be explained by the low ∝-diversity individual patches.
+13,"this habitat is possible to map using images with both spectral resolutions, but results for hyperspectral data are slightly better compared to multispectral images."
+13,"in general, it can be stated that the accuracies for hs compared to s2 are higher."
+13,"based on the research, it can be concluded that hyperspectral data are obligatory for meadows 1340, 6410, and 6510, recommended for heaths 4030 and mires 7140, and unnecessary in the case of meadows 6440 and grasslands 6230."
+13,"unfortunately, the acquisition of airborne hyperspectral data is not free unlike satellite data, which limits the utility of data."
+13,satellite hyperspectral data may be a solution to the problem.
+13,"two satellite hyperspectral sensors such as prisma and hymap are now ­available57,58."
+13,"both sensors have 30-m spatial resolution, around 250 bands, and cover spectrum from visible to shortwave infrared."
+13,"also, simulated enmap data were previously successfully used for monitoring vegetation ­communities59."
+13,"in parallel, it is necessary to develop multitemporal analyses."
+13,applicability of obtained results.
+13,"the use of remote sensing to monitor protected natura 2000 habitats is widely d­ escribed6,7."
+13,"the use of remote sensing for mapping valuable habitats was already analysed at the beginning of the twenty-first c­ entury25,27."
+13,"in this case, the greater detail of maps acquired using rs techniques in relation to traditional maps was emphasised, despite having poorer sensors and simpler algorithms than ml."
+13,the analyses conducted in this study for two special areas of conservation (plh300009 ostoja nadwarciańska and plh180020 dolina dolny sanu) indicate very large differences between the maps of habitat distribution acquired using rs techniques and conventional maps used by regional nature protection services (figs.
+13,"7, 8)."
+13,maps created using rs provide new knowledge concerning the protected habitats distribution.
+13,"as it has been proven, using ml and both the hs and s2 images allowed for the identification of new patches of natura 2000 habitats (figs. 7, 8) and more accurate delineation of the border of previously determined patches."
+13,it also did not confirm the existence of the previously shown patches.
+13,"it can therefore be concluded that the use of rs pro- vides new knowledge about the distribution of habitats, which also allows better monitoring of habitats outside protected areas; a common problem ­today8."
+13,"the lack of, or limited, knowledge of the distribution of valuable habitats is still one of the main concerns of eu ­countries60."
+13,remote sensing provides solutions that can help solve this problem on a regional or national scale.
+13,"however, the accuracy assessment of the hyperspectral and multispectral data classification indicated under- estimation and overestimation of the habitat area (see supplementary material)."
+13,the relatively large differences in accuracy between hyperspectral and multispectral images affect their utility.
+13,"although both types of data provide new knowledge valuable in the context of monitoring, the mapping results based on the s2 images were characterised by a significantly lower pa value compared to hs or its lower stability between areas (see scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 13 vol.:(0123456789)"
+14,www.nature.com/scientificreports/ supplementary material).
+14,"therefore, it should be assumed that the s2 data are characterised by the lower utility for natura 2000 habitats monitoring because it is not possible to identify a significant part of the patches."
+14,"this is particularly true for habitats 1340, 6410 and 6510."
+14,"for some of the habitats (6440), no significant difference can be observed in the habitat maps made using hs and s2."
+14,"based on obtained results, it can be stated that the monitoring of natura 2000 habitats should be developed based on rs data, in particular using hyperspectral images, which are more universal."
+14,"this is because it was possible to acquire satisfactory results for all the studied habitats with rs data, while s2 data only showed results for some of the habitats."
+14,"conclusions based on conducted classifications using hyperspectral and sentinel-2 data in five natura 2000 sites and seven natura 2000 habitats, it can be concluded that: 1."
+14,the accuracy of natura 2000 habitat classification using hs data is always higher than using s2 data.
+14,"on average, the difference in f1 accuracy for habitat classes is 0.14."
+14,the differences in accuracy between hyperspectral and multispectral data are high for habitats character- ised by very high ∝-diversity and β-diversity (like lowland hay meadows 6510) and low for habitats with low ∝-diversity and β-diversity (like heaths 4030).
+14,using s2 multitemporal images it is possible to identify meadows 6440 and grassland 6230.
+14,"for heaths 4030 and mires 7140, using hs data improved the results, but it is also possible to acquire general distribution of these classes, whereas hs images are obligatory for mapping meadows 1340, 6410 and 6510."
+14,"based on a comparison of the maps produced by the classification of hyperspectral and sentinel-2 data for the two protected areas, with the traditional maps produced for the conservation plans, it can be concluded that: 1."
+14,"the hs and s2 data make it possible to create maps that provide a great deal of new knowledge about the distribution of natura 2000 habitats, which is necessary for the management of protected areas."
+14,"maps created using hs provide, for most of the studied habitats, data of higher utility for management in conser- vation."
+14,the main difference between hs and s2 maps is a significantly higher omission error for s2 data.
+14,remote sensing today provides the tools to effectively monitor the distribution of non-forest natura 2000 habitats.
+14,data availability the datasets generated during and/or analysed during the current study are available from the corresponding author on reasonable request.
+14,received: 22 january 2023; accepted: 16 march 2023 references 1.
+14,"janssen, j."
+14,m. et al.
+14,european red list of habitats.
+14,"part 2, terrestrial and freshwater habitats."
+14,"(publications office, 2016)."
+14,council directive 92/43/eec of 21 may 1992 on the conservation of natural habitats and of wild fauna and flora.
+14,oj l vol.
+14,206 (1992).
+14,area of natura 2000 sites designated under the habitats and birds directives in the eu—european environment agency. https://​ www.​eea.​europa.​eu/​data-​and-​maps/​daviz/​trend-​of-​sites-​desig​nated-​under-4#​tab-​chart_​3)%​20whi​ch%​20will%​20%​20fur​ther%​ 20inc​rease.
+14,biodiversity strategy for 2030. https://​envir​onment.​ec.​europa.​eu/​strat​egy/​biodi​versi​ty-​strat​egy-​2030_​en.
+14,natura 2000 barometer—environment—european commission. https://​ec.​europa.​eu/​envir​onment/​nature/​natur​a2000/​barom​ eter/​index_​en.​htm (2016).
+14,"corbane, c., alleaume, s."
+14,"& deshayes, m."
+14,mapping natural habitats using remote sensing and sparse partial least square discri- minant analysis.
+14,remote sens.
+14,"34, 7625–7647 (2013)."
+14,"vanden borre, j. et al."
+14,integrating remote sensing in natura 2000 habitat monitoring: prospects on the way forward.
+14,conserv.
+14,"19, 116–125 (2011)."
+14,"friedrichs, m., hermoso, v., bremerich, v."
+14,"& langhans, s."
+14,evaluation of habitat protection under the european natura 2000 conservation network—the example for germany.
+14,"plos one 13, e0208264 (2018)."
+14,"jensen, j."
+14,biophysical remote sensing.
+14,assoc.
+14,geogr.
+14,"73, 111–132 (1983)."
+14,"adam, e., mutanga, o."
+14,"& rugege, d."
+14,multispectral and hyperspectral remote sensing for identification and mapping of wetland vegetation: a review.
+14,wetlands ecol manag.
+14,"18, 281–296 (2010)."
+14,"díaz varela, r."
+14,"a., ramil rego, p., calvo iglesias, s."
+14,"& muñoz sobrino, c."
+14,automatic habitat classification methods based on satel- lite images: a practical assessment in the nw iberia coastal mountains.
+14,environ.
+14,monit.
+14,assess.
+14,"144, 229–250 (2008)."
+14,"feilhauer, h."
+14,"& schmidtlein, s."
+14,mapping continuous fields of forest alpha and beta diversity.
+14,"12, 429–439 (2009)."
+14,"chiarucci, a., bacaro, g."
+14,"& rocchini, d."
+14,quantifying plant species diversity in a natura 2000 network: old ideas and new propos- als.
+14,conserv.
+14,"141, 2608–2618 (2008)."
+14,"álvarez-martínez, j."
+14,m. et al.
+14,modelling the area of occupancy of habitat types with remote sensing.
+14,methods ecol.
+14,"9, 580–593 (2018)."
+14,"marcinkowska-ochtyra, a. et al."
+14,multitemporal hyperspectral data fusion with topographic indices—improving classification of natura 2000 grassland habitats.
+14,remote sens.
+14,"11, 2264 (2019)."
+14,"govender, m., chetty, k."
+14,"& bulcock, h."
+14,a review of hyperspectral remote sensing and its application in vegetation and water resource studies.
+14,"water sa 33, (2007)."
+14,"jarocińska, a., kopeć, d., kycko, m., piórkowski, h."
+14,"& błońska, a."
+14,hyperspectral vs. multispectral data: comparison of the spectral differentiation capabilities of natura 2000 non-forest habitats.
+14,isprs j.
+14,photogramm.
+14,remote sens.
+14,"184, 148–164 (2022)."
+14,"demarchi, l. et al."
+14,recursive feature elimination and random forest classification of natura 2000 grasslands in lowland river valleys of poland based on airborne hyperspectral and lidar data fusion.
+14,remote sens.
+14,"12, 1842 (2020)."
+14,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 14 vol:.(
+14,1234567890)
+15,www.nature.com/scientificreports/ 19.
+15,"szporak-wasilewska, s. et al."
+15,"mapping alkaline fens, transition mires and quaking bogs using airborne hyperspectral and laser scanning data."
+15,remote sens.
+15,"13, 1504 (2021)."
+15,"rapinel, s. et al."
+15,contribution of free satellite time-series images to mapping plant communities in the mediterranean natura 2000 site: the example of biguglia pond in corse (france).
+15,mediterr.
+15,"41, 181–191 (2020)."
+15,"haest, b. et al."
+15,an object-based approach to quantity and quality assessment of heathland habitats in the framework of natura 2000 using hyperspectral airborne ahs images.
+15,photogramm.
+15,remote sens.
+15,isprs arch.
+15,"38, (2010)."
+15,"marcinkowska-ochtyra, a., jarocińska, a., bzdęga, k."
+15,"& tokarska-guzik, b."
+15,classification of expansive grassland species in dif- ferent growth stages based on hyperspectral and lidar data.
+15,remote sens.
+15,"10, (2018)."
+15,"díaz-varela, r."
+15,"a., calvo iglesias, s., cillero castro, c."
+15,"& díaz varela, e."
+15,sub-metric analisis of vegetation structure in bog- heathland mosaics using very high resolution rpas imagery.
+15,indic.
+15,"89, 861–873 (2018)."
+15,"wakulińska, m."
+15,"& marcinkowska-ochtyra, a."
+15,multi-temporal sentinel-2 data in classification of mountain vegetation.
+15,remote sens.
+15,"12, 2696 (2020)."
+15,"naidoo, r."
+15,"& hill, k."
+15,emergence of indigenous vegetation classifications through integration of traditional ecological knowledge and remote sensing analyses.
+15,environ.
+15,manag.
+15,"38, 377–387 (2006)."
+15,"roy, p."
+15,s. et al.
+15,new vegetation type map of india prepared using satellite remote sensing: comparison with global vegetation maps and utilities.
+15,earth obs.
+15,geoinf.
+15,"39, 142–159 (2015)."
+15,"bock, m."
+15,remote sensing and gis-based techniques for the classification and monitoring of biotopes.
+15,conserv.
+15,"11, 145–155 (2003)."
+15,"whittaker, r."
+15,evolution and measurement of species diversity.
+15,"taxon 21, 213–251 (1972)."
+15,"whittaker, r."
+15,"vegetation of the siskiyou mountains, oregon and california."
+15,monogr.
+15,"30, 279–338 (1960)."
+15,interpretation manual of european union habitats—eur28.
+15,(2013).
+15,"mróz, w. (eds)."
+15,monitoring of natural habitats.
+15,methodological guide. https://​siedl​iska.​gios.​gov.​pl/​images/​pliki_​pdf/​publi​kacje/​ monit​oring-​siedl​isk-​przyr​odnic​zych.-​przew​odnik-​metod​yczny.-​cz-​ii.​pdf (2012).
+15,"mróz, w. (eds)."
+15,monitoring of natural habitats.
+15,methodological guide. https://​siedl​iska.​gios.​gov.​pl/​images/​pliki_​pdf/​publi​kacje/​ monit​oring-​siedl​isk-​przyr​odnic​zych.-​przew​odnik-​metod​yczny.-​cz-​iii.​pdf (2012).
+15,"mróz, w. (eds)."
+15,monitoring of natural habitats.
+15,methodological guide. https://​siedl​iska.​gios.​gov.​pl/​images/​pliki_​pdf/​publi​kacje/​ monit​oring-​siedl​isk-​przyr​odnic​zych.-​przew​odnik-​metod​yczny.-​cz-i.​pdf (2010).
+15,podręczniki metodyczne—wytyczne i poradniki—dokumenty/publikacje. https://​natur​a2000.​gdos.​gov.​pl/​podre​czniki-​metod​ yczna.
+15,"sławik, ł, niedzielko, j., kania, a., piórkowski, h."
+15,"& kopeć, d."
+15,multiple flights or single flight instrument fusion of hyperspectral and als data?
+15,a comparison of their performance for vegetation mapping.
+15,remote sens.
+15,"11, 970 (2019)."
+15,"gimenez, r. et al."
+15,exploitation of spectral and temporal information for mapping plant species in a former industrial site.
+15,photogramm.
+15,remote sens.
+15,"2021, 559–566 (2021)."
+15,"pluto-kossakowska, j., pilarska, m."
+15,"& bartkowiak, p."
+15,automatic detection of dominant crop types in poland based on satellite images.
+15,artif.
+15,satell.
+15,"55, 185–208 (2020)."
+15,image processing & analysis software | geospatial image analysis software | e ­ nvi®. https://​www.​l3har​risge​ospat​ial.​com/​softw​ are-​techn​ology/​envi.
+15,spectral indices. https://​www.​l3har​risge​ospat​ial.​com/​docs/​spect​ralin​dices.​html (2022).
+15,"breiman, l."
+15,random forests.
+15,"machine learning 45, 5–32 (2001)."
+15,"pedregosa, f. et al."
+15,scikit-learn: machine learning in python.
+15,learn.
+15,"12, 2825–2830 (2011)."
+15,statistica.com by statsoft (europe) gmbh: tibco data science/statisticatm. https://​www.​stati​stica.​com/​en/​softw​are/​tibco-​data-​ scien​ce-/-​tibco-​stati​stica.
+15,"kennedy, a."
+15,"& sankey, h."
+15,the thermal efficiency of steam engines.
+15,"134, 278–312 (1898)."
+15,"feilhauer, h. et al."
+15,mapping the local variability of natura 2000 habitats with remote sensing.
+15,"17, 765–779 (2014)."
+15,"mack, b. et al."
+15,mapping raised bogs with an iterative one-class classification approach.
+15,isprs j.
+15,photogramm.
+15,remote.
+15,"120, 53–64 (2016)."
+15,"raab, c. et al."
+15,mapping semi-natural grassland communities using multi-temporal rapideye remote sensing data.
+15,remote sens.
+15,"39, 5638–5659 (2018)."
+15,"stenzel, s., feilhauer, h., mack, b., metz, a."
+15,"& schmidtlein, s."
+15,remote sensing of scattered natura 2000 habitats using a one-class classifier.
+15,earth obs.
+15,geoinf.
+15,"33, 211–217 (2014)."
+15,"zieliński, h."
+15,"& jarocińska, a."
+15,the application of aisa hyperspectral images to the classification of vegetation communities and natura 2000 habitats of lower narew valley.
+15,11581 (2020).
+15,"hubert-moy, l., fabre, e."
+15,"& rapinel, s."
+15,contribution of spot-7 multi-temporal imagery for mapping wetland vegetation.
+15,remote sens.
+15,"53, 201–210 (2020)."
+15,"haest, b. et al."
+15,habitat mapping and quality assessment of natura 2000 heathland using airborne imaging spectroscopy.
+15,remote sens.
+15,"9, 266 (2017)."
+15,"förster, m., frick, a., walentowski, h."
+15,"& kleinschmit, b."
+15,approaches to utilising quickbird data for the monitoring of natura 2000 habitats.
+15,community ecol.
+15,"9, 155–168 (2008)."
+15,"kluczek, m., zagajewski, b."
+15,"& kycko, m."
+15,airborne hyspex hyperspectral versus multitemporal sentinel-2 images for mountain plant communities mapping.
+15,remote sens.
+15,"14, 1209 (2022)."
+15,"onojeghuo, a."
+15,"& onojeghuo, a."
+15,object-based habitat mapping using very high spatial resolution multispectral and hyper- spectral imagery with lidar data.
+15,earth obs.
+15,geoinf.
+15,"59, 79–91 (2017)."
+15,"vahtmäe, e., kotta, j., lõugas, l."
+15,"& kutser, t."
+15,"mapping spatial distribution, percent cover and biomass of benthic vegetation in optically complex coastal waters using hyperspectral casi and multispectral sentinel-2 sensors."
+15,earth obs.
+15,geoinf.
+15,"102, 102444 (2021)."
+15,"transon, j., d’andrimont, r., maugnard, a."
+15,"& defourny, p."
+15,survey of hyperspectral earth observation applications from space in the sentinel-2 context.
+15,remote sens.
+15,"10, 157 (2018)."
+15,"evans, j."
+15,"& cushman, s."
+15,gradient modeling of conifer species using random forests.
+15,landsc.
+15,"24, 673–683 (2009)."
+15,enmap. https://​www.​enmap.​org/.
+15,prisma (hyperspectral). https://​www.​eopor​tal.​org/​satel​lite-​missi​ons/​prisma-​hyper​spect​ral.
+15,"marcinkowska-ochtyra, a. et al."
+15,subalpine and alpine vegetation classification based on hyperspectral apex and simulated enmap images.
+15,remote sens.
+15,"38, 1839–1864 (2017)."
+15,mapping and assessing the condition of europe’s ecosystems: progress and challenges.
+15,eea contribution to the implementation of the eu biodiversity strategy to 2020. https://​www.​eea.​europa.​eu/​publi​catio​ns/​mappi​ng-​europ​es-​ecosy​stems (2016).
+15,acknowledgements the authors thank julian olszewski for the helpful comments and english proofreading.
+15,scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 15 vol.:(0123456789)
+16,"www.nature.com/scientificreports/ author contributions a.j.: conceptualization, investigation, methodology, data curation, writing original draft, visualization, valida- tion, d.k.: conceptualization, investigation, field survey, methodology, writing original draft, validation, super- vision, j.n.: methodology, software, validation, writing original draft, j.w.: field survey, writing original draft, a.h.: field survey, writing original draft, j.ch.: software, a.p.: field survey, d.ka.: field survey."
+16,"funding the study was co-financed by the polish national centre for research and development (ncbr) and mggp aero under the programme “natural environment, agriculture and forestry” biostrateg ii.: the innovative approach supporting monitoring of non-forest natura 2000 habitats, using remote sensing methods (habitars), project number: biostrateg2/297915/3/ncbr/2016."
+16,the consortium leader is mggp aero.
+16,"the project partners include the university of lodz, the university of warsaw, warsaw university of life sciences, the insti- tute of technology and life sciences, the university of silesia in katowice, warsaw university of technology."
+16,competing interests the authors declare no competing interests.
+16,additional information supplementary information the online version contains supplementary material available at https://​doi.​org/​ 10.​1038/​s41598-​023-​31705-6.
+16,correspondence and requests for materials should be addressed to d.k.
+16,reprints and permissions information is available at www.nature.com/reprints.
+16,publisher’s note springer nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+16,"open access this article is licensed under a creative commons attribution 4.0 international license, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the creative commons licence, and indicate if changes were made."
+16,"the images or other third party material in this article are included in the article’s creative commons licence, unless indicated otherwise in a credit line to the material."
+16,"if material is not included in the article’s creative commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder."
+16,"to view a copy of this licence, visit http://​creat​iveco​mmons.​org/​licen​ses/​by/4.​0/."
+16,© the author(s) 2023 scientific reports | (2023) 13:4549 | https://doi.org/10.1038/s41598-023-31705-6 16 vol:.(
+16,1234567890)

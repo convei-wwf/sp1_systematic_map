@@ -1,0 +1,959 @@
+page,p
+1,"agronomy article economic comparison of satellite, plane and uav-acquired ndvi images for site-specific nitrogen application: observations from italy marco sozzi 1, * , ahmed kayad 1 , stefano gobbo 2 , alessia cogato 1 , luigi sartori 1 and francesco marinello 1 1 department of land environment agriculture and forestry, university of padova, 35020 legnaro, italy; ahmed.kayad@phd.unipd.it (a.k.); alessia.cogato.1@phd.unipd.it (a.c.); luigi.sartori@unipd.it (l.s.); francesco.marinello@unipd.it (f.m.)"
+1,"2 department of agronomy, food, natural resources, animals, and environment, university of padova, 35020 legnaro, italy; stefano.gobbo.5@phd.unipd.it * correspondence: marco.sozzi@unipd.it abstract: defining the most profitable remote sensing platforms is a difficult decision-making pro- cess, as it requires agronomic and economic considerations."
+1,"in this paper, the price and profitability of three levels of remote sensing platforms were evaluated to define a decision-making process."
+1,"prices of satellite, plane and uav-acquired vegetation indices were collected in italy during 2020 and  compared to the economic benefits resulting from variable rate nitrogen application, according to a  bibliographic meta-analysis performed on grains."
+1,"the quality comparison of these three technologies citation: sozzi, m."
+1,"; kayad, a.; was performed considering the error propagation in the ndvi formula."
+1,"the errors of the single bands gobbo, s."
+1,"; cogato, a."
+1,"; sartori, l.; were used to assess the optical properties of the sensors."
+1,"results showed that medium-resolution marinello, f."
+1,"economic comparison satellite data with good optical properties could be profitably used for variable rate nitrogen ap- of satellite, plane and uav-acquired plications starting from 2.5 hectares, in case of medium resolution with good optical properties."
+1,"ndvi images for site-specific high-resolution satellites with lower optical quality were profitable starting from 13.2 hectares, while nitrogen application: observations very high-resolution satellites with good optical properties could be profitably used starting from from italy."
+1,"agronomy 2021, 11, 2098."
+1,76.8 hectares.
+1,"plane-acquired images, which have good optical properties, were profitable starting https://doi.org/10.3390/agronomy from 66.4 hectares."
+1,"additionally, a reference model for satellite image price is proposed."
+1,11112098 academic editors: vijay singh and keywords: variable rate nitrogen; site-specific management; drones; profitability; sensors; snr; yanbo huang landsat 9; pleiades-neo; prediction models received: 25 august 2021 accepted: 18 october 2021 published: 20 october 2021 1.
+1,introduction site-specific management is one of the main drivers of precision agriculture (pa).
+1,"publisher’s note: mdpi stays neutral spatial and temporal variability can be deployed to support management decisions and with regard to jurisdictional claims in improve the profitability and sustainability of agricultural production, taking advantage published maps and institutional affil- of information and communications technologies [1]."
+1,"soil properties, vegetation or yield iations. features can be used to delineate homogeneous management zones in order to apply site- specific management [2]."
+1,the identification of within-field variability is not a trivial task and can be supported by different technologies.
+1,"although homogeneous management zones are usually identified based on farmers’ knowledge [3], it is common practice to take copyright: © 2021 by the authors. advantage of proximal or remote sensors [4], taking into consideration standardized and licensee mdpi, basel, switzerland. consistent data."
+1,"this article is an open access article proximal sensors collect data from a distance less than 2 m from the target (e.g., soil distributed under the terms and or canopy) [5]."
+1,"the most widely used proximal sensors in pa are yield monitors, weather conditions of the creative commons stations [6], soil apparent electrical conductivity sensors [7] and vegetation spectroradiome- attribution (cc by) license (https:// ters [8]."
+1,"proximal data provided by tractor-embedded sensors can be used to detect indirect creativecommons.org/licenses/by/ suitable information to manage field variability (e.g., speed, engine power supplied, fuel 4.0/)."
+1,"agronomy 2021, 11, 2098. https://doi.org/10.3390/agronomy11112098 https://www.mdpi.com/journal/agronomy"
+2,"agronomy 2021, 11, 2098 2 of 20 consumption)."
+2,proximal sensors can collect high-resolution data (high number of samples per hectare).
+2,"however, they require field surveys, which may be time-consuming and tricky to perform (e.g., after the emergence of arable crops)."
+2,"conversely, remote sensors collect data from a distance greater than 2 m [9]."
+2,"at such distances, sensors commonly use electromagnetic radiation."
+2,"different platforms equipped with remote sensors can collect a large amount of data in a short time, ensuring fast data acquisition over large areas."
+2,remote sensors can be classified according to four main characteristics.
+2,"the first is the spatial resolution, which identifies the minimum surface detectable by the sensors (in m or m2 pixel−1 )."
+2,spatial resolution directly affects the mini- mum area manageable with site-specific management.
+2,"the second feature is the spectral resolution, which identifies the wavelength region to which the sensors are sensitive and the relative bandwidth (nanometers)."
+2,"the third characteristic is the radiometric resolution, which represents the number of values assumed by the reflectance when it is converted to an electrical signal by the sensors (in bits pixel−1 )."
+2,"the last feature of remote sensors is the temporal resolution, or revisit time, which represents the number of images pro- vided per unit of time."
+2,the temporal resolution of a remote sensor defines the frequency of agricultural field monitoring.
+2,"spectral resolution plays a key role in remote sensing applications in agriculture, since healthy vegetation’s spectral signature is characterized by a specific reflectance peak in the near-infrared (800–900 nm) and lower reflectance values in the red region (650–750 nm)."
+2,"the majority of the vegetation indices (vis) are based on these two wavelengths, thus vis are usually retrieved from passive optical sensors, even if some application of active radar sensors exists [10]."
+2,the most commonly used vi for crop monitoring is the ndvi [11].
+2,vis are widely used in pa because of their correlation with biomass and leaf area index [12].
+2,"moreover, remote sensors and vis have been profitably used for variable nitrogen management [13], identification of mechanization level [14], support of common agricultural policy [15], crop stress detection [16], and field variability detection [17]."
+2,"remote sensors take advantage of different platforms, among which the most used in agriculture are satellites, planes, and unmanned aerial vehicles (uavs)."
+2,"vis have been used to manage variable rate nitrogen application since the end of the 1990s, with the first application using active proximal sensors [18]."
+2,"in 1999 the yara’s research and development center developed a sensor (n-sensor, yara international asa, oslo-norway) to determine crop nitrogen demand."
+2,this sensor uses a proprietary algo- rithm based on empirical experimentation on multiple crops.
+2,raun et a. [19] developed a new methodology based on a site-specific calibration.
+2,"this methodology (oklahoma state university algorithm, osu) takes advantage of the greenseeker (trimble inc., sunnydale, ca, usa) sensor."
+2,"the amount of nitrogen to apply was decided according to the crop variability detected by the sensor, and it was calibrated on an area with no nitrogen limita- tions (n-rich strip) [20]."
+2,thomason et al. [21] improved the accuracy of the osu algorithm by using zero nitrogen strips combined with a n-rich strip to calibrate the sensor.
+2,"in the very beginning, these sensors were used primarily for staple crops such as wheat, corn, canola, and potato, but in the last decade, they have been applied to other crops [22,23]."
+2,"similarly, passive optical remote sensors have been used for vis estimation."
+2,"blondlot et al. [24] proposed a methodology to manage nitrogen fertilization using a spot satellite, based on the relationship between ndvi, lai and chlorophyll content."
+2,"shou et al. [25] used high-resolution satellites to evaluate the nitrogen status in winter wheat, finding a good correlation between chlorophyll and nitrogen content."
+2,"huang et al. [26] improved the nitrogen status monitoring using a combination of mid-resolution and high-resolution satellites (rapideye, formosat, and worldview-2)."
+2,rapideye images were also used by magney et al. [27] to calculate the normalized difference red edge index (ndre) and map wheat nitrogen uptake.
+2,"the correlation between remotely sensed ndvi and nitrogen up- take is used by several decision support systems for precision farming currently available (cropsat, agrosat, agrisat, etc) to provide nitrogen recommendations for farmers and final users [28]."
+2,"more practically, satellite images can be used to delineate stable homogeneous zones when yield data are insufficient."
+2,georgi et al. [29] proposed an algorithm to delineate
+3,"agronomy 2021, 11, 2098 3 of 20 stable management zones for precision agricultural use, based on automatic segmentation of rapideye images."
+3,"variable rate nitrogen application can provide environmental and economic benefits, such as an increment in energy use efficiency and in the net return on nitrogen application [30]."
+3,"according to kayad et al. [31], variable rate nitrogen application led to an improvement in corn yield by 31% over ten years while quantity of nitrogen applied was reduced by 23%."
+3,"satellite satellite application for remote sensing is a consolidated technology which has been used for civil purposes since 1972, when landsat 1 was launched."
+3,"several implementations occurred over the years, increasing satellite capability and accuracy of data provided."
+3,"nowadays, several constellations of earth observation satellites have been implemented, which collect data in the radio (~2.5–100 cm), thermal (~8–14 µm), and visible/near-infrared (~400–900 nm) wavelengths."
+3,"earth observation satellites with a spectral resolution ranging from 400 to 900 nm are the most used in agriculture, as they allow for the calculation of tens of different vis."
+3,satellites with spectral resolution suitable for agriculture uses can be managed either by a governmental agency (usually free of charge) or a private company (usually for sale).
+3,"several constellations of satellites acquire data continuously (sentinel, landsat, rapideye, planetscope, spot, etc.)."
+3,"other constellations acquire data according to an acquisition plan or on demand (worldview, quickbird)."
+3,both data sources have been used for index-based variable rate nitrogen application [27].
+3,"due to the observation distance (400–800 km, depending on the orbit), satellite-acquired images are affected by distortions and noise, making geometric and radiometric correction necessary."
+3,"in addition, atmospheric disturbance during satellite acquisition requires specific atmospheric correction, which is impossible in some conditions (e.g., clouds, smog)."
+3,"recently, a new approach to satellite earth observation was proposed, based on the constellation of hundreds of nanosatellites characterized by limited observation width, instead of constellations of 2–5 satellites with a wide observation width [32]."
+3,this new approach was made possible by the decrease in low orbit launching costs.
+3,"figure 1 shows the evolution of data volume provided by several constellations over the years starting from 1972 (landsat 1 placed in orbit) up to 2020, based on marinello et al. in 2019 [33]."
+3,"data volume per hectare per year summarizes information on spatial, spectral, radiometric and temporal resolutions."
+3,"over 50 years, data volume per hectare per year showed an exponential increase from 100 b*(ha year)−1 up to 100 mb*(ha year)−1 ."
+3,the large amount of data provided rapidly and continuously is a strength of satellite remote sensing in agriculture.
+3,planes airborne sensors are widely used for land monitoring.
+3,"as in the case of satellite sensors, this technology was originally developed for non-civil uses."
+3,"nowadays, planes can carry spectral sensors able to analyze geomorphology, land coverage, or vegetation features."
+3,"although airborne surveys are usually based on specific sensors, such as light detection and ranging or laser imaging detection and ranging (lidar) or hyperspectral cameras [34,35], tailored multispectral cameras, suitable for agricultural applications, are sometimes used [36,37]."
+3,images acquired by plane-mounted sensors require photogram- metric and mosaicization processes to stitch images together.
+3,the stitching process requires a partial image overlap (~80%) to provide suitable blended images.
+3,plane earth observation requires specific setting of the flight plans and large areas for take-off and landing.
+3,this latter condition decreases the scalability of these techniques and increases the costs.
+4,"agronomy 2021, 11, 2098 4 of 20 agronomy 2021, 11, 2098 4 of 20 worldview-3 pléiades-neo 1/2 100 mb worldview-2 r2 = 0.576 worldview-4 p-value = <0.001 pleiades-1apleiades-1b geoeye-1 kompsat-3a 10 mb worldview-1 kompsat-3 triplesat quickbird deimos-2superview-1 ikonos dove (planet) kazeosat-1/2 kompsat-2 spot 6 gaofen-2 1 mb formosat-2 spot 7 rapideye spot 5 byte * (hectare * year)-1 100 kb sentinel 2 spot 4 spot 1 spot 2 spot 3 10 kb aster landsat 8 landsat 9 landsat 6 landsat 7 1 kb landsat landsat 4 5 landsat 3 terra/aqua modis 100 b landsat 2 landsat 1 1970 1975 1980 1985 1990 1995 2000 2005 2010 2015 2020 year figure datavolume evolutionofofdata figure1.1."
+4,evolution volumeper hectareprovided perhectare providedby bydifferent different constellations of satellites. constellations of satellites.
+4,"since the first since the civil satellite first civil satel- forfor lite earth earth observation observation waswas launched launched (landsat (landsat 1), the 1), the amount amount of data of data provided provided per hectare per hectare has increased has increased from from 100 100100 b to b to mb 100 mb (pleiades-neo)."
+4,(pleiades-neo).
+4,planes 1.3.
+4,unmanned aerial vehicles (uav) uavs orsensors airborne unmanned are widely aerial used for (uass) systems land monitoring.
+4,"as innew are a relatively the technology case of satellite in pa sensors, which has technology this spread among was originally users agricultural developed for non-civil after 2000. uses."
+4,"nowadays, agricultural uavs can carry planes sev- can carry eral suchsensors spectral sensors, able to analyze as hyperspectral, geomorphology, multispectral land coverage,or (visible/near-infrared) orthermal vegetation cam- features."
+4,"although eras [38,39]."
+4,"imagesairborne acquiredsurveys by uavs are usually require based on specific sensors, photogrammetry such as light and mosaicization pro- detection and ranging or laser imaging detection and ranging (lidar) or hyperspec- cesses to merge multiple images acquired by the sensors."
+4,"similarly to airborne sensors, a specific tral camerascalibration is needed to cameras, sensormultispectral [34,35], tailored correct the incident suitable forlight during the agricultural acquisition applications, time and obtain the correct reflectance value [40]."
+4,"the spatial are sometimes used [36,37]."
+4,images acquired by plane-mounted sensors require photo- resolution of uav-acquired images is primarily grammetric affected by and mosaicization the flight processes toaltitude.
+4,"the higher stitch images together.the the altitude, the lower stitching the process spatial aresolution requires derived(~80%) of theoverlap partial image images. touavs provide used for agricultural suitable purposes blended images. are mainly plane earth ascribable to two main classes: fixed wings and multi-copters. observation requires specific setting of the flight plans and large areas for take-off and landing.satellite, plane, this latter and uav-based condition decreases vis can the be used to scalability ofmap thesein-field variability techniques and drive and increases variable the costs. rate management of the inputs."
+4,"nevertheless, the choice of the most appropriate sensors is not always an easy task, as it involves economic and agronomic constraints."
+4,"moreover, 1.3."
+4,"unmanned actualvehicles theaerial prices of these different technologies sometimes do not include some (uav) costs (minimum order area, take-off, elaboration, etc.), leading to difficult and blinded uavs choices unmannedand forortechnicians farmsystems aerial managers (uass) [41]. are a relatively new technology in pa which in hasthespread among current agricultural study, uav-, plane- usersandaftersatellite-acquired 2000."
+4,"agricultural uavs were images can carry sev- compared eral sensors, such as hyperspectral, multispectral (visible/near-infrared) according to sensor quality, price, and profitability for variable rate nitrogen management. or thermal cam- eras [38,39]."
+4,"these images sensors’ acquired varied by uavs data could require photogrammetry be profitably used for severaland mosaicization applicationspro- other (e.g., cesses to merge multiple images acquired by the sensors."
+4,"similarly variable rate irrigation, stress and disease detection, yield estimation)."
+4,"however, to airborne sensors, a variable specific calibration sensor is needed to correct the incident light during rate nitrogen management was chosen as a standard technology because its use is validated the acquisition time and obtain by several the correct scientific works involvingvalue reflectance remote[40]."
+4,the spatial sensors.
+4,"this resolution work analyzes of uav-acquired the economic images benefitsis primarily provided affected by variable rateflight by the altitude. nitrogen the higher application theinto taking altitude, accountthe the lower theof price"
+5,"agronomy 2021, 11, 2098 5 of 20 different remote sensing platforms to define the profitability of these technologies by estimating the final cost of images provided."
+5,materials and methods 2.1.
+5,"dataset composition the dataset was comprised of the prices collected through a survey among multispec- tral image (from satellite, plane, and uav) providers."
+5,"the surveys were performed in 2017 and 2020 for uav companies, while for plane and satellite image providers, prices were collected in 2020."
+5,satellite price collection involved nine satellite image providers for a total of 62 prices for 17 different constellations of satellites.
+5,"this dataset involved constellations of satellites whose spectral resolution was reasonable for ndvi calculation (from 600 to 900 nm), spatial resolution suitable for pa (set at 30 × 30 m pixel size or less), and revisit time shorter than 20 days, to allow field monitoring even in cloudy environments."
+5,the spatial resolution value refers to panchromatic resolution.
+5,the panchromatic resolution is obtained from the pan sharpening process by using a wider spectral resolution band with a better spatial resolution to increase the spatial resolution of a band with a narrower spectral resolution.
+5,"all information about sensor properties was retrieved from the manufacturers’ websites (table 1) and the european space agency (esa) satellite mission database (https: //directory.eoportal.org/web/eoportal/satellite-missions, accessed on 30 april 2020)."
+5,"usually, companies provide two types of products: archive data and new acquisition."
+5,"indeed, some constellations of satellites (especially high spatial resolution satellites) acquire images on-demand, according to the received inquiries."
+5,"on-demand products rely on new acquisition, while images already acquired are archived."
+5,"the current study considered the minimum price difference between new acquisition and archived images not older than 90 days (fresh archive), since spatial field variability monitoring may rely on relatively outdated surveys, which are less expensive."
+5,satellite constellations and their main features are reported in table 1.
+5,"all prices collected refer to a minimum order area ranging from 2500 ha to 10,000 ha."
+5,minimum order area represents the minimum surface commercialized by the image providers.
+5,"this area is usually far from the final user needs, which would use only a part of the total surface."
+5,"this point was considered in the minimum price calculation, multiplying price per hectare by the minimum order area."
+5,"for open-source satellites, such as sentinel-2 or landsat-8, the tile dimension was considered as “minimum order area”."
+5,"the amount of data per hectare (kb ha−1 ) was extracted starting from radiometric resolution (bits pixel−1 ), spatial resolution (m2 pixel−1 ) and the number of spectral bands, according to the following equation: −1 10000 bits pixel ∗ ∗ number o f bands m2 pixel−1 8 kb ha−1 = (1) 1000 airborne image prices were collected via a survey of four italian companies, which provided six prices for different acquisition conditions."
+5,uav data were collected in 2017 and 2020 to highlight the evolution of this technology within the italian market.
+5,"the uav dataset was comprised of 44 prices for 2017 and 22 prices for 2020, divided into arable and specialized crops, based on the company’s pricelist classes."
+5,"specialized crops were defined according to the usda definition [42], which includes fruits, vegetables, tree nuts, dried fruits, horticulture, nursery crops and floriculture."
+5,"on the other hand, arable crops include wheat, corn, soybeans and the majority of commodity crops."
+5,this differentiation was necessary since the average income obtained with specialized crops is higher than the average income obtained with arable crops.
+5,this study considered only services provided by professionals in pa in italy.
+5,"due to the high number of sensors available among uavs and planes, two reference sensors were chosen for uav and plane datasets to ease the process and to obtain spectral and radiometric features usable for comparison and benchmarking."
+5,tetracam micro-
+6,"agronomy 2021, 11, 2098 6 of 20 mca snap 6 (tetracam inc., chatsworth, ca, usa) was used as the reference sensor for uavs [43], while leica dmc iii [44] was the reference sensor for plane platforms."
+6,"although more commonly used cameras for uavs exist, the tetracam micro-mca snap 6 was chosen since, in terms of number of bands (six), it is in between professional cameras for uavs and those used for research and development, which usually have 4–5 and 10–11 bands, respectively."
+6,the sample flights considered for this study were 2500 m and 100 m above ground level for planes and uavs respectively.
+6,table 1.
+6,sensor features and data sources.
+6,"additional data were retrieved from the esa satellite mission database (https://directory.eoportal.org/web/eoportal/satellite-missions, accessed on 20 february 2019). * data represent the panchromatic resolution ** data obtained from survey *** data obtained from equation (1)."
+6,"minimum price per data volume spatial radiometic revisit platform data area hectare per hectare resolution * resolution time name source ha min eur ha−1 ** kb ha−1 *** m bits pixel−1 days www.elecnor- deimos.com, deimos-2 10,000 0.055 12.7 0.75 10 2 accessed on 20 february 2019 www.planet. com, accessed dove (planet) 10,000 0.011 8.89 3 16 1 on 20 february 2019 www.nspo.narl. org.tw, accessed formosat-2 14,400 0.028 3.13 2 8 1 on 20 february 2019 www.cast.cn, gaofen-2 2500 0.041 34.2 0.8 14 5 accessed on 20 february 2019 www.maxar."
+6,"geoeye-1 10.000 0.250 102 0.5 11 3 com, accessed on 5 july 2020 www.airbus."
+6,"kazeosat-1 2500 0.057 6.25 3 12 1 com, accessed on 5 july 2020 www.kari.re.kr, kompsat-2 2500 0.050 21.9 1 14 6 accessed on 20 february 2019 www.kari.re.kr, kompsat-3 2500 0.100 44.6 0.7 14 3 accessed on 20 february 2019 www.kari.re.kr, kompsat-3a 2500 0.145 72.3 0.55 14 3 accessed on 20 february 2019 www.nasa.gov, landsat-7/8 3,700,000 − 0.203 15 12 8 accessed on 20 february 2019 www.airbus. com, accessed pleiades-1 10,000 0.193 75.0 0.5 12 1 on 20 february 2019 www.planet. com, accessed rapideye 10,000 0.011 3.00 5 12 5.5 on 20 february 2019"
+7,"agronomy 2021, 11, 2098 7 of 20 table 1."
+7,"minimum price per data volume spatial radiometic revisit platform data area hectare per hectare resolution * resolution time name source ha min eur ha−1 ** kb ha−1 *** m bits pixel−1 days www.esa.int, sentinel-2 1,200,000 − 0.838 10 16 5 accessed on www.airbus.com, spot-6/7 10,000 0.041 8.33 1.5 12 1 accessed on 20 february 2019 www.spaceview."
+7,"superview-1 10,000 0.227 68.8 0.5 11 4 com, accessed on 20 february 2019 www.earthi."
+7,"triplesat 2500 0.073 24.4 0.8 10 1 space, accessed on 20 february 2019 www.maxar.com, worldview-3/4 10,000 0.250 179 0.3 11 1 accessed on 20 february 2019 www.leica- plane geosystems.com, − 1.68 9000 0.1 12 − (leica dmc iii) accessed on 14 april 2020 www.tetracam."
+7,"uav − 43.4 25,000 0.05 10 − com, accessed on (tetracam µ-mca) 14 april 2020 2.2."
+7,spectral accuracy of ndvi and quality comparison ndvi was chosen as the reference vi as it is widely used for spatial pattern delineation of crop biomass [45].
+7,"ndvi can be used to manage variable rate nitrogen applications from both proximal and remote sensors [8,21,27]."
+7,silicon sensors can convert photons to an electrical signal proportional to the number of photons that reach the sensors.
+7,"on the other hand, silicon sensors are affected by electrical noise, due to the electronic component and the composition of the sensor."
+7,the magnitude of the sensor noise is commonly summarized using the signal-to-noise ratio (snr).
+7,the snr of a sensor is the ratio between the signal induced by the photons received divided by the signal from the source and electronics onboard.
+7,"noise affects the signal produced by the number of photons, leading to less precise measurements."
+7,"vis augment this noise, due to the error propagation of each band used for their calculation."
+7,"taking advantage of snr data provided for each sensor by the manufacturers, error propagation in the ndvi formula was assessed with 1500 iterations obtained from a monte carlo simulation [46]."
+7,the coefficient of variation (cv) of ndvi simulation was used as quality parameter for sensor comparisons.
+7,"price composition, modelization and profitability analysis comparison among the different platforms and sensors was carried out by dividing satellite sensors into groups using k-means unsupervised classification algorithm [47] based on sensors features (table 1)."
+7,"this classification algorithm is frequently used for price discretization [48,49]."
+7,the elbow method was used to identify the optimal number of groups.
+7,"these three groups obtained by k-mean classification can be summarized as very high resolution (vhr; spatial resolution <1 m), high resolution (hr; spatial resolution from 1 to 5 m) and medium resolution satellites (mr; spatial resolution >10 m)."
+7,a principal component analysis (pca) was performed using the satellite features dataset to investigate
+8,"agronomy 2021, 11, 2098 8 of 20 the main features affecting satellite price per hectare."
+8,a regression model was fitted to estimate the price of satellite images.
+8,"to evaluate the download costs of images provided by different satellite constellations, the amount of data per hectare was multiplied by the average cost of mobile broadband connection in the european union-28 (0.93 eur gb−1 in 2019) [50]."
+8,"although nowadays broadband connection costs are relatively low and could be ignored, download cost was considered in this analysis in order to estimate the cost of the amount of data per hectare, which otherwise would not be considered."
+8,"although images are geometrically and radiometrically corrected, atmospheric correc- tion at the bottom of the atmosphere (boa) is not always performed."
+8,"in the price analysis of the satellite images, a correction cost quota proportional to the spatial resolution was included."
+8,"the correction cost was estimated according to the labor cost of the geospatial analysis, which is strongly influenced by the spatial resolution."
+8,"accordingly, correction cost was 150 eur for vhr, 100 eur for hr, and 50 eur for mr satellites."
+8,the correction cost was applied once per image and was not related to the overall area elaborated.
+8,"these three quotas were estimated considering the average labor cost in the euro-area, which is 49.2eur*h−1 for service employees [51]."
+8,"an additional quota was added to the final price to take into account the analysis costs from professional users to define the management zones, produce prescription maps, and produce agronomic advice."
+8,"although management zone delineation and prescription map definition are complex tasks and require knowledgeable professionals, automatic and unsu- pervised algorithms can nowadays provide meaningful and effective services."
+8,"according to this latter consideration, processing costs were established as follows: 75 eur for vhr, 50 eur for hr and 25 eur for mr satellites, thus considering the major processing time for higher-resolution images."
+8,this processing cost was applied once per image and was not related to the overall area elaborated.
+8,"the prices of airborne platforms were composed of the price per hectare obtained from quotes, added to a fixed cost for take-off."
+8,the take-off quota was retrieved from the average cost provided by the companies (2000 eur per flight).
+8,the uav companies involved in the survey did not declare a minimum flight surface and a take-off cost.
+8,"uav and plane companies provided prices of ndvi images already elaborated (geo- referenced, mosaicized and radiometrically corrected)."
+8,"for this reason, estimation of the elaboration costs was not performed."
+8,"as for vhr satellite data, the processing cost (man- agement zone definition and agronomic advice) for uav and plane images was established as 75 eur."
+8,"the resolution of uav and plane images was, indeed, comparable to that of vhr satellites."
+8,table 2 summarizes the final prices of each platform.
+8,table 2.
+8,"description of final prices composition: dataset was populated with prices detected from different providers of uav, plane and satellite acquired images."
+8,uav plane satellite 44 prices from 22 companies in 2017 six prices from four 62 prices from 17 constellation of dataset 22 prices companies satellites from 11 companies in 2020 -price per hectare(eur ha−1 ) sensor properties used: -price per hectare(€ ha−1 ) price and sensors -take off cost -price per hectare(eur ha−1 ) reference sensor: features reference sensor: -minimum area (ha) tetracam micro-mca [43] leica dmc iii [44] -data volume per hectare (kb ha−1 ) download cost: -data volume per hectare (kb ha−1 ) ndvi included in price per included in price -price per data volume (eur kb−1 ) [50] elaboration hectare per hectare correction cost: 150 (vhr)-100(hr)–50 (mr) eur processing cost 75 eur 75 eur 75 (vhr)/50(hr)/25(mr) eur
+9,"agronomy 2021, 11, 2098 9 of 20 the final prices of each platform were compared to the economic benefits of variable rate nitrogen application, which is one of the most common applications of remotely sensed images in pa."
+9,"since variable rate nitrogen application does not require multiple images, this study considered the price of one image per hectare."
+9,"the economic benefits provided by variable rate nitrogen application were obtained from the meta-analysis of colaço and bramley [52], which quantified the impact of sensor-based variable rate nitrogen application of 58 studies and farmers’ profitability."
+9,"statistical analysis was performed using python 3.6 (pandas, scipy, and seaborn libraries) and jmp® , version 14 (sas institute inc., cary, nc, usa)."
+9,"remote sensing image price was compared using a one-way anova, while comparisons between economic benefits provided by variable nitrogen applications and prices of each platform were calculated using linear regression."
+9,results and discussion 3.1.
+9,"uav prices analysis a preliminary price analysis was carried out considering the raw image price per hectare, without fixed, elaboration, and processing costs."
+9,"this analysis involved prices in 2017 and 2020 for uav data, while for satellite and plane data the comparison was performed only for 2020."
+9,figure 2 reports the frequency distribution of all prices detected in 2017 and 2020 for uav-derived ndvi images for arable and specialized crops.
+9,"the average price of an ndvi image for arable crops was 72.5 eur/ha in 2017, while in 2020 it was 43.36 eur/ha, showing a price decrease of 40.2%."
+9,"similarly, the cost of ndvi images for specialized crops was 95.00 eur/ha in 2017 and 79.00 eur/ha in 2020, showing a decrease of 16.8% (figure 2a,b)."
+9,"on the one hand, uav prices for arable crops in 2020 showed a lower standard deviation (std = 11.60) compared to data collected in 2017 (std = 25.45)."
+9,"on the other hand, differences in the standard deviation of price distribution between 2017 and 2020 were not significant for specialized crops."
+9,the price of ndvi images for arable crops in 2017 was 23.7% lower than the one for specialized crops.
+9,in 2020 the price difference between images for arable and specialized crops increased: the cost for arable crops was 45.1% lower than that for specialized crops.
+9,"(figure 2c,d)."
+9,the price reduction between 2017 and 2020 can be justified by the high number of companies that were on the market in 2017.
+9,some of the companies with less competitive prices quit their business by 2020 (five companies from a sample of 22).
+9,"the smaller price reduction for specialized crops over the same period can be justified by the specific skills (e.g., different camera orientation, computer vision techniques, more ground sampling points) required for uav flights over specialized crops (e.g., vineyards and orchards)."
+9,"more- over, to achieve the high-spatial resolution necessary to manage the inputs in these crops, additional time is required."
+9,"experienced know-how is demanded to provide ndvi images for specialized crops, thus leading to less competition on the market."
+9,"differences between average prices for ndvi images of arable (figure 2c) and specialized (figure 2d) crops increased in the 2020 survey, showing a segmentation of the market which better matched arable (low income per hectare) and specialized (high income per hectare) crop needs."
+9,"although results were obtained considering only the italian uav market, they sug- gested that uav acquired images are more suitable for variable rate application where high spatial and spectral resolution is required and fully exploited (e.g., precision weed control)."
+9,"moreover, the uav imaging cost analysis showed that prices decreased between 2017 and 2020 by 28.5%, having two different prices for arable crops (e.g., wheat, corn, soybeans) and specialized ones (e.g., vineyards, vegetables, nursery crops)."
+10,"2021,11, agronomy2021, agronomy 2098 11,2098 10 of 10 20 of 20 a b c d figure comparison of 2."
+10,comparison figure 2. of uav-acquired uav-acquiredvi pricesin viprices italybetween initaly between2017 and2020 2017and 2020for for arable arable and specialized crops. and specialized (a) and crops.
+10,(a) and (b) shows the price for arable and specialized in 2017 and 2020.
+10,(c) and (d) shows the price in 2017 and 2020 for arable (b) shows the price for arable and specialized in 2017 and 2020.
+10,(c) and (d) shows the price in 2017 and 2020 for arable and and specialized specialized crops. crops.
+10,the average the average priceprice of map of a vi a vi map acquired acquired by uavs by uavs decreased decreased by 28.5% by 28.5% between between 20172020. and 2020. 2017 and price price the image 3.2.
+10,"raw reduction between per hectare 2017 and 2020 can be justified by the high number of comparison companies that were raw image priceon market the to refers in 2017. raw image costsome of the companies regardless of minimum with lessarea, competitive order take-off pricesand costs, their quitall business further image byanalysis 2020 (five companies processes."
+10,raw from a sample image price perof 22).
+10,"the is hectare smaller price sometimes reduction used for specialized to compare crops sensor costs. oversatellite, thus, the same period plane, andcan be justified uav raw image byprices the specific skills per hectare (e.g., analyzed were different camera their range.computer to studyorientation, shows techniques, figure 3 vision the results of the ground more price persampling hectare points) required comparison for uav, planeflights for uav over specialized and satellite raw images, crops based(e.g., vineyards on the and orchards). 2020 survey."
+10,"average moreover, prices ranged achieve to from theeur 43.36 high-spatial resolution ha−1 for uavs, necessary to 1.68 eur ha−to1 for manage planes,thetoinputs 0.09 eurin these ha−1 crops, for additional satellites. required. time isuav although experienced and plane prices did know-how not showishigh demanded to provide satellitendvi variability, price images for specialized distribution crops,heterogeneity. showed higher thus leading tofor less reason, theonfollowing competition this the market."
+10,"differences analyses were betweenout carried average grouping prices for ndvi satellite images data into threeofclusters. arable (figure a k-means 2c) unsupervised and specialized (figure algorithm 2d) crops increased in the 2020 survey, showing a segmentation of the market which based on (i) minimum price per hectare, (ii) data per hectare, (iii) spatial resolution, (iv) better matched arable (low income per hectare) and specialized (high income per hectare) radiometric resolution, (v) revisit time, and (vi) error propagation in the ndvi formula needs. cropused was for clustering."
+10,the average cluster value for each feature is reported in table 3.
+10,"although results were obtained considering only the italian uav market, they suggested that uav acquired images are more suitable for variable rate application where high spatial and spectral resolution is required and fully exploited (e.g., precision weed control)."
+10,"moreover, the uav imaging cost analysis showed that prices decreased between 2017 and 2020 by 28.5%, having two different prices for arable crops (e.g., wheat, corn, soybeans) and specialized ones (e.g., vineyards, vegetables, nursery crops)."
+11,to 0.09 eur ha for satellites.
+11,"although uav and plane prices did not show high varia- bility, satellite price distribution showed higher heterogeneity."
+11,"for this reason, the fol- lowing analyses were carried out grouping satellite data into three clusters."
+11,"a k-means unsupervised algorithm based on (i) minimum price per hectare, (ii) data per hectare, (iii) spatial resolution, (iv) radiometric resolution, (v) revisit time, and (vi) error propagation agronomy 2021, 11, 2098 in the ndvi formula was used for clustering."
+11,the average cluster value for each feature is 11 of 20 reported in table 3.
+11,figure 3.
+11,figure comparison of 3.
+11,"comparison different platforms of different platforms for for image image acquisition considering only acquisition considering the price only the price per per hectare in hectare 2020 (without in 2020 fixed costs (without fixed costs for for take-off, minimum order take-off, minimum elaboration, and area, elaboration, order area, processing and processing costs). costs)."
+11,table 3.
+11,average table 3. cluster features. satellite cluster average satellite features.
+11,"price data perper data spatial res-radiometic volume spatial revisit radiometic revisit price volume cvofof hectare hectare per hectare per hectare olution resolution resolution resolution time time cv ndvi ndvi eur eur min min ha−ha kbkb 1 −1 m m bitsbits pixelpixel −1 −1 days days mr mr 76.1 76.1 0.52 0.52 12.5 12.5 14.0 14.0 6.50 6.50 0.501% 0.501% hr 434 21.8 1.55 12.4 3.14 0.737% hr 434 21.8 1.55 12.4 3.14 0.737% vhr 2527 106 0.45 11.3 2.25 0.579% vhr 2527 106 0.45 11.3 2.25 0.579% considering that the european average utilized agricultural area per holdings is 16.1 medium resolution ha, a considering that thesatellite, europeansuch utilizedcould as sentinel-2, average area perasholdings be considered agricultural a dissemi-is 16.1 ha,driver nation of variable a medium ratesatellite, resolution application nitrogensuch in europe. as sentinel-2, could the application be considered asof satellite a dissemi- imagery of variablefarming in smallholder nation driver shouldapplication rate nitrogen take into consideration theapplication in europe."
+11,the reduced capability of of satellite imagery resolution medium satellites in smallholder (above farming of spatial 10 mtake should resolution) to into consideration thedetect fieldcapability variability. reduced of medium resolution satellites (above 10 m of spatial resolution) to detect field variability.
+11,"in that case, higher spatial resolution satellites showed higher consistency [53]; however, the economic sustainability of such sources of information was reduced."
+11,"although crop monitoring may not be profitable using the presented satellite constellation to detect field variability below a defined field size, new application and data processing protocols, such as biotic stress monitoring [54] and evapotranspiration assessment [55], may be performed and may contribute to the profitability of such technologies."
+11,sensors quality evaluation the cv of ndvi simulation was combined with snr as an evaluation parameter for sensor quality.
+11,snr values ranged from 267 for red and 293 for near-infrared bands of spot 6/7 to 50 for red and 50 for near-infrared bands of dove satellites.
+11,this variability in snr values led to important differences in cv of ndvi simulation.
+11,"the cv of ndvi was 0.32% for spot 6/7 and 1.85% for dove, which represented the lowest and the highest values respectively."
+11,free of charge satellites showed a low cv: 0.44% for landsat 7/8 and 0.59% for sentinel-2.
+11,the reference sensors for uavs (tetracam micro-mca) and planes
+12,"third group included only the dove satellite constellation, which showed a cv of ndvi simulation of 1.85%."
+12,the presence of free of charge satellites in the first group proves the high quality of the optics installed in the non-commercial satellites.
+12,"on the other hand, the dove nano-satellites constellation prioritized reduced size of satellite over optical agronomy 2021, 11, 2098 quality."
+12,"reference sensors for uavs and planes showed a low cv of ndvi simulation, 12 of 20 demonstrating the optical consistency of these sensors."
+12,"the relatively high value of cv of ndvi simulation of the dove satellites may be caused by the postprocessing applied by planetscope (e.g., orthorectification), as highlighted by anger et al."
+12,"the comparable (leica dmc iii) showed a cv of ndvi simulation of 0.43% and 0.63%, respectively."
+12,"data value of cv of ndvi between sentinel 2, uav and plane images confirms a previous reported in figure 4 shows the snr of each sensor and the relative cv of ndvi simulation. study [57] which highlighted the consistency of these sources of data for crop monitoring."
+12,500 2.0% 400 1.6% (cv of ndvi simulation) errors estimation 300 1.2% snr 200 0.8% no data no data 100 0.4% 0 0.0% kompsat 3a dove (planet) kompsat 3 kompsat 2 geoeye-1 pleiades 1 formosat-2 spot 6/7 sentinel 2 gaofen-2 superview deimos tetracam µ-mca landsat 7/8 worldview-2 rapideye kazeosat-1 triplesat leica dmc iii red nir cv of ndvi simulation figure 4.
+12,signal-to-noise ratio of sensors and cv of ndvi simulation as error estimation.
+12,figure 4.
+12,signal-to-noise ratio of sensors and cv of ndvi simulation as error estimation.
+12,the cv of ndvi simulation was used to classify sensors into three groups.
+12,"the first group had a cv up to 0.5%, and included uav and plane reference sensors, some of the most recent on demand satellites, and free of charge satellites."
+12,"the second group included a group of satellites less recently launched, which had cv of ndvi up to 1%."
+12,"the third group included only the dove satellite constellation, which showed a cv of ndvi simulation of 1.85%."
+12,the presence of free of charge satellites in the first group proves the high quality of the optics installed in the non-commercial satellites.
+12,"on the other hand, the dove nano- satellites constellation prioritized reduced size of satellite over optical quality."
+12,"reference sensors for uavs and planes showed a low cv of ndvi simulation, demonstrating the optical consistency of these sensors."
+12,"the relatively high value of cv of ndvi simulation of the dove satellites may be caused by the postprocessing applied by planetscope (e.g., orthorectification), as highlighted by anger et al."
+12,"the comparable value of cv of ndvi between sentinel 2, uav and plane images confirms a previous study [57] which highlighted the consistency of these sources of data for crop monitoring."
+12,"satellite image price modeling the satellite features dataset was analyzed considering price per hectare, data volume per hectare, minimum order area, revisit time, spatial resolution, radiometric resolution, raw image price, and cv of ndvi simulation using a pca."
+12,figure 5 shows the first and the second principal components obtained from the pca.
+12,"according to this analysis, price per hectare and data volume per hectare had similar loadings on the first and the second principal components."
+12,the cv of ndvi simulation had a large positive impact on the first principal component analysis.
+13,"the satellite features dataset was analyzed considering price per hectare, data satelliteper 3.4.volume image price modeling hectare, minimum order area, revisit time, spatial resolution, radiometric the satellite resolution, features raw image dataset price, was and cv of analyzed considering ndvi simulation usingprice per a pca. hectare, figure datathe 5 shows volume per the first and hectare, second principalorder minimum area, revisit components time, from obtained spatial theresolution, radiometric pca."
+13,"according to this agronomy 2021, 11, 2098 analysis,raw resolution, image price andcv price, and per hectare of ndvi data volume simulation using hadasimilar per hectare pca."
+13,figure 5 shows loadings on thethe first 13 of 20 first andandthethe second second principal principal components components.
+13,theobtained from simulation cv of ndvi had a largetopositive the pca.
+13,"according this impactprice analysis, per on the hectare first and component principal data volumeanalysis. per hectare had similar loadings on the first and the second principal components."
+13,the cv of ndvi simulation had a large positive impact on the first principal component analysis.
+13,figure 5.
+13,loading figure 5.
+13,loading plot thefirst plotofofthe first and and thethe second second principal principal components components of satellites of satellites features features ob- obtained tained from pca. from pca.
+13,figure 5.
+13,"loading plot of the first and the second principal components of satellites features ob- stepwise regression stepwise was performed estimating the price per hectare of satellite imagery tained from pca. regression was performed estimating the price per hectare of satellite im- considering agery data volume considering per hectare, data volume minimum per hectare, order area, minimum revisit order time, area, spatial revisit resolution, time, spatial radiometric resolution, resolution, regression was stepwise radiometric raw image performed resolution, price, and rawestimating cv of ndvi the price image price, and cv simulation. perofhectare although ndviofsimulation. satellite im- the alt- result agery of the consideringstepwise regression with the optimization of the akaike information criterion hough the resultdata volume of the per regression stepwise hectare, minimum with the order area, revisit optimization of thetime, spatial akaike infor- (aic) returned a multiple linear regression model based on data volume per hectare and resolution, radiometric mation criterion (aic)resolution, returned araw image multiple price, linear and cv model regression of ndvi simulation. based alt- on data volume cv of ndvi simulation, the effect of the cv of ndvi simulation was not significant hough the result per hectare andofcv of stepwise the regressionthe ndvi simulation, with theofoptimization effect the cv of ndvi of the akaike infor- simulation was not (p-value > 0.05)."
+13,"based on this, a linear model was fitted plotting price and data volume mation criterion significant (aic) returned (p-value a multiple > 0.05)."
+13,"based linear on this, regression a linear model model based plotting was fitted on data volume price and (figure 6), returning the function showed in equation (2). hectare perdata cv of ndvi and (figure volume simulation, 6), returning the effectshowed the function of the cv of ndvi simulation in equation (2). was not significant (p-value > 0.05)."
+13,"based €on −1 a linear model = 0.0019 kb ha−1was fitted plotting price and(2) hathis, 0.40 (figure 6), returning the function showed in equation (2). data volume price per hectare (€*ha-1) 0.40 0.30 price per hectare (€*ha-1) 0.30 0.20 0.20 0.10 r² = 0.89 0.10 p-value<0.001 0.00 0 25 50 75 100 125 150r² = 0.89 175 200 p-value<0.001 0.00 data volume per hectare (kb*ha-1) 0 25 50 75 100 125 150 175 200 figure 6."
+13,linear model of price per hectare based on data volume per hectare.
+13,data volume per hectare (kb*ha-1) figure 6.
+13,linear figure model 6.
+13,linear of price model perper of price hectare based hectare on on based data volume data volume hectare. perper hectare.
+13,the definition of a price model to estimate agricultural tools is widely applied to estimate the profitability of agricultural practices [58].
+13,"according to the pca and regression analysis results, the raw satellite price per hectare was primarily influenced by data volume per hectare, calculated according to equation (1)."
+13,"variable rate nitrogen application profitability relative prices of the ndvi images were compared to the economic benefits delivered by variable rate nitrogen application, which is a well-known and relatively widespread"
+14,estimate the profitability of agricultural practices [58].
+14,"according to the pca and regres- sion analysis results, the raw satellite price per hectare was primarily influenced by data volume per hectare, calculated according to equation (1)."
+14,"agronomy 2021, 11, 2098 3.5."
+14,"variable rate nitrogen application profitability 14 of 20 relative prices of the ndvi images were compared to the economic benefits deliv- ered by variable rate nitrogen application, which is a well-known and relatively wide- spread practice."
+14,final prices of the ndvi images were composed of prices per hectare practice.
+14,"finalminimum (considering prices of the ndvi order images area were composed and take-off of prices per cost), processing, andhectare (considering elaboration costs. minimum order area and take-off cost), the price of a single ndvi image was then compared to the economic benefits price processing, and elaboration costs."
+14,"the of a provided single ndvi image was then compared to the economic benefits provided by variable rate by variable rate nitrogen application, as one ndvi image is the minimum required for nitrogen application, as one ndvi image is the minimum required for nitrogen application nitrogen application spatial management."
+14,the economic benefits of the variable rate ap- spatial management.
+14,"the economic benefits of the variable rate application were extracted plication were extracted from a recent meta-analysis [52], considering all items of the from a recent meta-analysis [52], considering all items of the meta-analysis."
+14,this meta- meta-analysis.
+14,this meta-analysis analyzed 58 studies applying a n-rich strip approach analysis analyzed 58 studies applying a n-rich strip approach and sensor-based site-specific and sensor-based site-specific n management in grains.
+14,figure 7 shows price trends n management in grains.
+14,"figure 7 shows price trends concerning area variation for uavs, concerning area variation for uavs, planes, and vhr, hr and mr satellites."
+14,"in the same planes, and vhr, hr and mr satellites."
+14,"in the same graph, the variation in precision graph, the variation in precision nitrogen management profitability according to area nitrogen management profitability according to area variation is plotted."
+14,the intersection variation is plotted.
+14,the intersection between the price trend and the variation in profit- between the price trend and the variation in profitability represents the break-even point ability represents the break-even point of this technology.
+14,areas greater than the of this technology.
+14,areas greater than the break-even point represent a profitable use break-even point represent a profitable use of the specific technology for variable rate of the specific technology for variable rate nitrogen application.
+14,"on the other hand, on nitrogen areas lowerapplication."
+14,"on the other than the break-even hand, point, on areas variable ratelower than nitrogen the break-even application point, may not vari- generate able rate nitrogen economic lines aremay application advantages. not generate plotted with haloseconomic advantages. which represent data lines are plotted distribution with with halos which represent data distribution with a confidence interval a confidence interval of 95%."
+14,the equation results from the regression are reported of 95%.
+14,the in table 4. results from the regression are reported in table 4. equation nitrogen application figure 7.
+14,break-even point of different sensor platforms used for site-specific nitrogen application (halo represents (halo data distribution represents data distribution with confidence interval with aa confidence interval of 95%; data of 95%; data are in logarithmic are in scale). logarithmicscale).
+14,table 4.
+14,equation of value of service according to hectare variation.
+14,services equations uav value€ = 43.6 × ha + 75 plane value€ = 1.75 × ha + 2075 vhr value€ = −6 × 10−16 × ha + 2536 hr value€ = −8 × 10−17 × ha + 434 mr value€ = −2 × 10−17 × ha + 83.1 profitability value€ = 33 × ha
+15,"agronomy 2021, 11, 2098 15 of 20 table 5 shows that medium-resolution satellites (free of charge satellites) are prof- itable in fields whose minimum size is 2.52 hectares."
+15,"for high-resolution satellites, the profitability starts from 13.2 hectares, while very-high-resolution satellite profitability starts from 76.8 hectares."
+15,plane acquired ndvi is profitable on blocks larger than 66.4 hectares (table 5).
+15,table 5.
+15,break-even point in hectare and eur for each sensor.
+15,break-even points sensors hectares eur mr 2.52 83.1 hr 13.2 434 plane 66.4 2191 vhr 76.8 2536 uav n/a n/a the analysis allowed us to assess that the average price of uav-acquired ndvi images was 43.36 eur/ha.
+15,the average economic benefit provided by variable nitrogen application was 33 eur/ha.
+15,"as such, uav ndvi images were not affordable for variable rate nitrogen application."
+15,"nevertheless, figure 7 shows an overlap of price line halos within the 95% confidence intervals."
+15,this result means that some uav image providers can offer profitable data for variable rate nitrogen application when this technique supplies above-average benefits.
+15,values of profitability obtained considering the 95% confidence interval take into account the varying profitability of variable rate nitrogen application on fields with different spatial variability.
+15,"besides, high-resolution uav images provide over-resolved data which are not necessary for fertilization, as the working width of conventional spreaders is usually larger than 6 m."
+15,"the use of uavs can remain beneficial when high spatial resolution is required (e.g., leaf disease identification, estimation of wind damage) and if the mapping area is smaller than 77 hectares."
+15,"these results were obtained considering an average advantage provided by variable rate nitrogen application on grains according to the meta-analysis of colaço and bramley (2018); however, a different result may be obtained considering a lower or higher prof- itability from variable rate nitrogen application [59]."
+15,"site-specific management may also be applied to herbicide application [60], irrigation [61] and harvest management [62]."
+15,"these strategies may have a significant impact on economic analysis of site-specific management, but were not considered in this study, since their implementation in commercial farms is lower than variable rate nitrogen application."
+15,a similar study by matese et al. [63] found the break-even point between satellite and uav acquired images at five hectares using rapideye satellite images as reference.
+15,"according to the result found in this manuscript, the break-even point between high-resolution satellites (such as rapideye) and uav ac- quired images was 13 hectares."
+15,"although a difference of seven hectares may be considered non-significant, this displacement may have the following reasons: (i) the economic analy- sis of matese et al. was performed on a limited number of price samples and field sizes (five and 50 hectares); (ii) that study was focused on comparison in terms of variability between sensors, and the economic analysis represented only a small part; (iii) that study was carried out on vineyards, while the current study is focused on grains."
+15,"although the aim of this study is to analyzed the economic benefits provided by remote sensing platforms for variable rate nitrogen application, such techniques can take advantage of proximal sensors [64]."
+15,"in this latter case, sensors are located close to the vegetation and are often active."
+15,"as a result, spatial resolution and snr slightly affect the vi reading."
+15,the evaluation of the net returns for variable rate nitrogen application is strongly affected by within-field variability which may increase or reduce the variation in yield
+16,"agronomy 2021, 11, 2098 16 of 20 and nitrogen requirement with variable rate management [65]."
+16,the reference value for profitability was extracted from a deep meta-analysis [52] which included studies with negative net return from variable rate nitrogen application.
+16,"in these latter cases within-field variability may not be sufficient to be exploited by variable rate management, leading to a negative net return."
+16,"moreover, within-field variability and soil type may increase or decrease the potential benefits from nitrogen losses and the related subsidies from environmental policy [66]."
+16,the implementation of variable rate nitrogen application and the related net return should take into account the specificities of each field.
+16,"indeed, the placement of fields in nitrate vulnerable zones may increase the potential benefits of this practice [67]."
+16,"conclusions in this study, three different types of remote sensors were evaluated for their optical quality and profitability for variable rate nitrogen application."
+16,a first comparison analyzed the price trend of uav-derived ndvi image providers in italy between 2017 and 2020 for arable and specialized crops.
+16,"in both years arable crops showed lower prices than specialized crops, suggesting differences in survey costs and higher value added to uav images for specialized crops."
+16,a decrease in the average price was observed between 2017 and 2020 for the analyzed service providers.
+16,the number of uav service providers in italy increased starting from 2015 due to the high interest in this technology by farmers.
+16,"due to this latter point, the selection of market operators occurred in the following years."
+16,"in addition, other sources of multispectral images, such as planes and satellites, compete with uav image providers."
+16,"the comparison between uav, plane and satellite prices per hectare (without taking into account minimum order area, take-off and processing costs) showed that uav prices were the highest, followed by those of planes and satellites."
+16,the optical quality comparison was carried out considering the cv of ndvi simulation and taking advantage of the snr provided by the manufacturers.
+16,images acquired by high-cost satellite sensors showed optical quality similar to the reference sensors chosen for uav (tetracam micro-mca) and plane images (leica dmc iii).
+16,"conversely, satellite images with lower prices per hectare showed lower optical quality."
+16,these findings highlighted that the prices of satellite images were influenced not only by data volume per hectare but in some cases also by optical quality.
+16,free of charge satellites showed different trends.
+16,"although the images were free-of-charge, their optical quality was comparable to the referenced sensors for uavs and planes, demonstrating the consistency of their data."
+16,"however, the generalized model for satellite image prices was based only on data volume per hectare, as the optical quality influenced the price of only a limited number of satellites."
+16,the comparison between the cost of remote sensors and the economic benefits pro- vided by variable rate nitrogen application could be useful for farm managers who need to implement the methodology and tools to detect field variability.
+16,medium-resolution satel- lites proved to be profitable for variable rate nitrogen applications for blocks bigger than 2.52 hectares.
+16,medium-resolution satellites with spatial resolution between 10 and 15 m are accurate enough for managing variable rate fertilization with commonly used sprayers.
+16,"in case higher resolution is needed, high-resolution satellites were profitable starting from 13.2 hectares, while very high-resolution ones were profitable starting from 76.8 hectares."
+16,"the choice between high- and very-high-resolution should be made according to the optical quality of the sensors, which was higher in very high-resolution satellites."
+16,"plane-acquired ndvi images proved to be profitable in blocks bigger than 66.4 hectares, thus being suitable for large farms or consortiums which require high spatial resolution images."
+16,"despite the widespread growth in uav ndvi image providers in the last few years, uav-acquired images did not prove to be profitable for variable rate nitrogen fertilization in grains, as the average price per hectare was higher than the average economic benefits resulting from their use."
+16,"however, uavs provide very high-resolution images with suitable optical quality, and, compared to satellites, they are not influenced by cloud cover."
+16,"for this reason,"
+17,"agronomy 2021, 11, 2098 17 of 20 uav images could be profitably used for high added value applications that could justify their cost (e.g., variability detection for precision herbicide spraying or foliar fertilizer) or for applications in crops other than grains."
+17,"in conclusion, the advantages and disadvantages of satellite, plane and uav remote sensing for variable rate nitrogen application can be highlighted."
+17,"on the one hand, satellite remote sensing was characterized by a lower break-even point in hectares, especially considering low-resolution satellites."
+17,"on the other hand, medium- and high-resolution satellite image prices were affected by a minimum required area for purchase, which made these sources of data less suitable for small fields compared to wide field and regional scale applications."
+17,"in terms of spatial resolution, satellite images were characterized by a wide range of values, making their application suitable for different variable rate applications."
+17,"satellite image quality, assessed as cv of ndvi simulation, showed the consistency of satellite data with the reference sensors (uav and plane)."
+17,"however, low resolution satellite data were characterized by a coarse spatial resolution, making it challenging to identify specific spatial features and often requiring eliminating border pixels [57]."
+17,"conversely, plane and uav images allowed the identification of specific spatial features, thanks to their spatial resolution and optical quality."
+17,"the main disadvantages of these latter platforms consist of the price per hectare, making them profitable for variable rate nitrogen application on grains only with a wide surface (plane) or in case of high spatial variability (uav), increasing the potential benefits provided by variable rate nitrogen application."
+17,"a parallel economic profitability of variable rate nitrogen application may be performed considering active proximal sensors (e.g., greenseeker, yara n-sensor, optrx) as providers of vis, since these sensors are widely used in some areas (e.g., usa, australia)."
+17,in this case the economic analysis should take into account the rates of deterioration of sensors and navigation satellite systems required for their use.
+17,"author contributions: conceptualization, m.s.; formal analysis, m.s.; data curation, m.s. and f.m.; writing, m.s.; review and editing, a.k., s.g., a.c. and f.m.; supervision, l.s. and f.m."
+17,all authors have read and agreed to the published version of the manuscript.
+17,"funding: this research was financially supported by the project financed with bird 2020 funds, dept."
+17,"tesaf, university of padova—italy and by the land environment resources and health (l.e.r.h.) doctoral course."
+17,data availability statement: price and quotation are not available due to privacy policy.
+17,"acknowledgments: the authors wish to thank the satellite, plane, and uav providers who partici- pated in the survey."
+17,conflicts of interest: the authors declare no conflict of interest.
+17,references 1.
+17,"fountas, s."
+17,"; aggelopoulou, k."
+17,"; gemtos, t.a."
+17,precision agriculture.
+17,"in supply chain management for sustainable food networks; john wiley & sons, ltd.: chichester, uk, 2016; pp."
+17,41–65.
+17,isbn 9781118937495.
+17,"shaddad, s.m."
+17,"; madrau, s."
+17,"; castrignanò, a."
+17,"; mouazen, a.m."
+17,data fusion techniques for delineation of site-specific management zones in a field in uk.
+17,precis.
+17,agric.
+17,"2016, 17, 200–217."
+17,[crossref] 3.
+17,"martínez-casasnovas, j."
+17,"; escolà, a."
+17,"; arnó, j."
+17,use of farmer knowledge in the delineation of potential management zones in precision agriculture: a case study in maize (zea mays l.).
+17,"agriculture 2018, 8, 84."
+17,[crossref] 4.
+17,"de benedetto, d."
+17,"; castrignano, a."
+17,"; diacono, m."
+17,"; rinaldi, m."
+17,"; ruggieri, s."
+17,"; tamborrino, r."
+17,field partition by proximal and remote sensing data fusion.
+17,biosyst.
+17,"2013, 114, 372–383."
+17,[crossref] 5.
+17,"viscarra rossel, r.a."
+17,"; adamchuk, v.i."
+17,proximal soil sensing.
+17,vadose zo.
+17,"2011, 10, 1340."
+17,"madugundu, r."
+17,"; al-gaadi, k.a."
+17,"; tola, e."
+17,"; kayad, a.g."
+17,"; hassaballa, a.a."
+17,"; patil, v.c."
+17,seasonal dynamics of surface energy fluxes over a center-pivot irrigated cropland in saudi arabia.
+17,environ.
+17,"2017, 38, 743–751."
+17,[crossref] 7.
+17,"cillis, d."
+17,"; maestrini, b."
+17,"; pezzuolo, a."
+17,"; marinello, f."
+17,"; sartori, l."
+17,modeling soil organic carbon and carbon dioxide emissions in different tillage systems supported by precision agriculture technologies under current climatic conditions.
+17,soil tillage res.
+17,"2018, 183, 51–59."
+17,[crossref] 8.
+17,"padilla, f.m."
+17,"; gallardo, m."
+17,"; peña-fleitas, m.t.; de souza, r."
+17,"; thompson, r.b."
+17,proximal optical sensors for nitrogen management of vegetable crops: a review.
+17,"sensors 2018, 18, 2083."
+17,[crossref] [pubmed] 9.
+17,"viscarra rossel, r.a."
+17,"; mcbratney, a.b."
+17,"; minasny, b."
+17,"proximal soil sensing; springer: new york, ny, usa, 2010; isbn 9048188598."
+18,"agronomy 2021, 11, 2098 18 of 20 10."
+18,"jin, x."
+18,"; li, z."
+18,"; yang, g."
+18,"; yang, h."
+18,"; feng, h."
+18,"; xu, x."
+18,"; wang, j."
+18,"; li, x."
+18,"; luo, j."
+18,winter wheat yield estimation based on multi-source medium resolution optical and radar imaging data and the aquacrop model using the particle swarm optimization algorithm.
+18,isprs j.
+18,photogramm.
+18,remote sens.
+18,"2017, 126, 24–37."
+18,[crossref] 11.
+18,"rouse, j.w."
+18,"; hass, r.h."
+18,"; schell, j.a."
+18,"; deering, d.w."
+18,monitoring vegetation systems in the great plains with erts.
+18,"in third earth resources technology satellite-1 symposium: the proceedings of a symposium held by goddard space flight center at washington, dc on 10–14 december 1973: prepared at goddard space flight center (vol."
+18,"351); scientific and technical information office, national aeronautics and space administration.: washington, dc, usa, 1974; volume 1, pp."
+18,309–317.
+18,"novelli, f."
+18,"; spiegel, h."
+18,"; sandén, t."
+18,"; vuolo, f."
+18,"; novelli, f."
+18,"; spiegel, h."
+18,"; sandén, t."
+18,"; vuolo, f."
+18,assimilation of sentinel-2 leaf area index data into a physically-based crop growth model for yield estimation.
+18,"agronomy 2019, 9, 255."
+18,[crossref] 13.
+18,"kayad, a."
+18,"; sozzi, m."
+18,"; gatto, s."
+18,"; whelan, b."
+18,"; sartori, l."
+18,"; marinello, f."
+18,ten years of corn yield dynamics at field scale under digital agriculture solutions: a case study from north italy.
+18,comput.
+18,electron.
+18,agric.
+18,"2021, 185, 106126."
+18,[crossref] 14.
+18,"cogato, a."
+18,"; pezzuolo, a."
+18,"; sørensen, c.g."
+18,"; de bei, r."
+18,"; sozzi, m."
+18,"; marinello, f."
+18,a gis-based multicriteria index to evaluate the mechanisability potential of italian vineyard area.
+18,"land 2020, 9, 469."
+18,[crossref] 15.
+18,"sarvia, f."
+18,"; xausa, e."
+18,"; petris, s.d."
+18,"; cantamessa, g."
+18,"; borgogno-mondino, e."
+18,a possible role of copernicus sentinel-2 data to support common agricultural policy controls in agriculture.
+18,"agronomy 2021, 11, 110."
+18,[crossref] 16.
+18,"cogato, a."
+18,"; meggio, f."
+18,"; collins, c."
+18,"; marinello, f."
+18,medium-resolution multispectral data from sentinel-2 to assess the damage and the recovery time of late frost on vineyards.
+18,remote sens.
+18,"2020, 12, 1896."
+18,[crossref] 17.
+18,"sozzi, m."
+18,"; kayad, a."
+18,"; tomasi, d."
+18,"; lovat, l."
+18,"; marinello, f."
+18,"; sartori, l."
+18,assessment of grapevine yield and quality using a canopy spectral index in white grape variety.
+18,"in proceedings of the precision agriculture 2019—papers presented at the 12th european conference on precision agriculture, ecpa 2019, montpellier, france, 8–11 july 2019; pp."
+18,181–186.
+18,"ma, b.l."
+18,"; morrison, m.j."
+18,"; dwyer, l.m."
+18,canopy light reflectance and field greenness to assess nitrogen fertilization and yield of maize.
+18,agron.
+18,"1996, 88, 915–920."
+18,[crossref] 19.
+18,"raun, w.r."
+18,"; solie, j.b."
+18,"; johnson, g.v."
+18,"; stone, m.l."
+18,"; lukina, e.v."
+18,"; thomason, w.e."
+18,"; schepers, j.s."
+18,in-season prediction of potential grain yield in winter wheat using canopy reflectance.
+18,agron.
+18,"2001, 93, 131."
+18,[crossref] 20.
+18,"raun, w.r."
+18,"; solie, j.b."
+18,"; stone, m.l."
+18,"; martin, k.l."
+18,"; freeman, k.w."
+18,"; mullen, r.w."
+18,"; zhang, h."
+18,"; schepers, j.s."
+18,"; johnson, g.v."
+18,optical sensor-based algorithm for crop nitrogen fertilization.
+18,commun.
+18,soil sci.
+18,plant anal.
+18,"2005, 36, 2759–2781."
+18,[crossref] 21.
+18,"thomason, w.e."
+18,"; phillips, s.b."
+18,"; davis, p.h."
+18,"; warren, j.g."
+18,"; alley, m.m."
+18,"; reiter, m.s."
+18,variable nitrogen rate determination from plant spectral reflectance in soft red winter wheat.
+18,precis.
+18,agric.
+18,"2011, 12, 666–681."
+18,[crossref] 22.
+18,"portz, g."
+18,"; molin, j.p."
+18,"; jasper, j."
+18,active crop sensor to detect variability of nitrogen supply and biomass on sugarcane fields.
+18,precis.
+18,agric.
+18,"2012, 13, 33–44."
+18,[crossref] 23.
+18,"arnall, d.b."
+18,"; abit, m.j.m."
+18,"; taylor, r.k."
+18,"; raun, w.r."
+18,development of an ndvi-based nitrogen rate calculator for cotton.
+18,crop sci.
+18,"2016, 56, 3263."
+18,[crossref] 24.
+18,"blondlot, a."
+18,"; gate, p."
+18,"; poilvé, h."
+18,providing operational nitrogen recommendations to farmers using satellite imagery.
+18,"in proceedings of the precision agriculture 2005, ecpa 2005, uppsala, sweden, 9–12 june 2005; volume 123, pp."
+18,345–352.
+18,"shou, l."
+18,"; jia, l."
+18,"; cui, z."
+18,"; chen, x."
+18,"; zhang, f."
+18,using high-resolution satellite imaging to evaluate nitrogen status of winter wheat.
+18,plant nutr.
+18,"2007, 30, 1669–1680."
+18,[crossref] 26.
+18,"huang, s."
+18,"; miao, y."
+18,"; yuan, f."
+18,"; gnyp, m."
+18,"; yao, y."
+18,"; cao, q."
+18,"; wang, h."
+18,"; lenz-wiedemann, v."
+18,"; bareth, g."
+18,"; huang, s.; et al."
+18,potential of rapideye and worldview-2 satellite data for improving rice nitrogen status monitoring at different growth stages.
+18,remote sens.
+18,"2017, 9, 227."
+18,[crossref] 27.
+18,"magney, t.s."
+18,"; eitel, j.u.h."
+18,"; vierling, l.a."
+18,mapping wheat nitrogen uptake from rapideye vegetation indices.
+18,precis.
+18,agric.
+18,"2017, 18, 429–451."
+18,[crossref] 28.
+18,"lundström, c."
+18,"; lindblom, j."
+18,considering farmers’ situated knowledge of using agricultural decision support systems (agridss) to foster farming practices: the case of cropsat.
+18,agric.
+18,"2018, 159, 9–20."
+18,[crossref] 29.
+18,"georgi, c."
+18,"; spengler, d."
+18,"; itzerott, s."
+18,"; kleinschmit, b."
+18,automatic delineation algorithm for site-specific management zones based on satellite remote sensing data.
+18,precis.
+18,agric.
+18,"2018, 19, 684–707."
+18,[crossref] 30.
+18,"stamatiadis, s."
+18,"; schepers, j.s."
+18,"; evangelou, e."
+18,"; glampedakis, a."
+18,"; glampedakis, m."
+18,"; dercas, n."
+18,"; tsadilas, c."
+18,"; tserlikakis, n."
+18,"; tsadila, e."
+18,variable-rate application of high spatial resolution can improve cotton n-use efficiency and profitability.
+18,precis.
+18,agric.
+18,"2019, 21, 695–712."
+18,[crossref] 31.
+18,"yuan, l."
+18,"; pu, r."
+18,"; zhang, j."
+18,"; wang, j."
+18,"; yang, h."
+18,using high spatial resolution satellite imagery for mapping powdery mildew at a regional scale.
+18,precis.
+18,agric.
+18,"2016, 17, 332–348."
+18,[crossref] 32.
+18,"houborg, r."
+18,"; mccabe, m."
+18,"; houborg, r."
+18,"; mccabe, m.f."
+18,high-resolution ndvi from planet’s constellation of earth observing nano-satellites: a new data source for precision agriculture.
+18,remote sens.
+18,"2016, 8, 768."
+18,[crossref] 33.
+18,"marinello, f."
+18,"; bramley, r.g.v."
+18,"; cohen, y."
+18,"; fountas, s."
+18,"; guo, h."
+18,"; karkee, m."
+18,"; martínez-casasnovas, j.a."
+18,"; paraforos, d.s."
+18,"; sartori, l."
+18,"; sorensen, c.g.; et al."
+18,agriculture and digital sustainability: a digitization footprint.
+18,"in proceedings of the precision agriculture ’19, montpellier, france, 8–11 july 2019; wageningen academic publishers: wageningen, the netherlands, 2019; pp."
+18,83–89.
+18,"ryu, c."
+18,"; suguri, m."
+18,"; umeda, m."
+18,model for predicting the nitrogen content of rice at panicle initiation stage using data from airborne hyperspectral remote sensing.
+18,biosyst.
+18,"2009, 104, 465–475."
+18,[crossref]
+19,"agronomy 2021, 11, 2098 19 of 20 35."
+19,"camino, c."
+19,"; gonzález-dugo, v."
+19,"; hernández, p."
+19,"; sillero, j.c."
+19,"; zarco-tejada, p.j."
+19,improved nitrogen retrievals with airborne-derived fluorescence and plant traits quantified from vnir-swir hyperspectral imagery in the context of precision agriculture.
+19,earth obs.
+19,geoinf.
+19,"2018, 70, 105–117."
+19,[crossref] 36.
+19,"yang, c."
+19,"; everitt, j.h."
+19,"; bradford, j.m."
+19,"; escobar, d.e."
+19,mapping grain sorghum growth and yield variations using airborne multispectral digital imagery.
+19,trans.
+19,agric.
+19,"2000, 43, 1927–1938."
+19,[crossref] 37.
+19,"yang, c."
+19,"; everitt, j.h."
+19,"; bradford, j.m."
+19,comparison of quickbird satellite imagery and airborne imagery for mapping grain sorghum yield patterns.
+19,precis.
+19,agric.
+19,"2006, 7, 33–44."
+19,[crossref] 38.
+19,"mogili, u.r."
+19,"; deepak, b.b.v.l."
+19,review on application of drone systems in precision agriculture.
+19,"in procedia computer science; elsevier: amsterdam, the netherlands, 2018; volume 133, pp."
+19,502–509.
+19,"daponte, p."
+19,"; de vito, l."
+19,"; glielmo, l."
+19,"; iannelli, l."
+19,"; liuzza, d."
+19,"; picariello, f."
+19,"; silano, g."
+19,a review on the use of drones for precision agriculture.
+19,"in iop conference series: earth and environmental science; iopscience: bristol, uk, 2019; volume 275, p."
+19,012022.
+19,"dubbini, m."
+19,"; pezzuolo, a."
+19,"; de giglio, m."
+19,"; gattelli, m."
+19,"; curzio, l."
+19,"; covi, d."
+19,"; yezekyan, t."
+19,"; marinello, f."
+19,last generation instrument for agriculture multispectral data collection.
+19,agric.
+19,cigr j.
+19,"2017, 19, 87–93."
+19,"sozzi, m."
+19,"; kayad, a."
+19,"; giora, d."
+19,"; sartori, l."
+19,"; marinello, f."
+19,cost-effectiveness and performance of optical satellites constellation for precision agriculture.
+19,"in proceedings of the precision agriculture ’19, montpellier, france, 8–11 july 2019; wageningen academic publishers: wageningen, the netherlands, 2019; pp."
+19,501–507.
+19,"usda definition of specialty crop; usda: washington, dc, usa, 2016."
+19,"minařík, r."
+19,"; langhammer, j."
+19,rapid radiometric calibration of multiple camera array using insitu data for uav multispectral photogrammetry.
+19,"in international archives of the photogrammetry, remote sensing and spatial information sciences—isprs archives; isprs: hannover, germany, 2019; volume 42, pp."
+19,209–215.
+19,leica geosystems ag.
+19,"leica dmc iii product specifications; leica geosystems: heerbrugg, switzerland, 2017."
+19,"mulla, d.j."
+19,twenty five years of remote sensing in precision agriculture: key advances and remaining knowledge gaps.
+19,biosyst.
+19,"2013, 114, 358–371."
+19,[crossref] 46.
+19,"anderson, g.m."
+19,error propagation by the monte carlo method in geochemical calculations.
+19,geochim.
+19,cosmochim.
+19,"acta 1976, 40, 1533–1538."
+19,[crossref] 47.
+19,"hartigan, j.a."
+19,"; wong, m.a."
+19,algorithm as 136: a k-means clustering algorithm.
+19,"1979, 28, 100."
+19,[crossref] 48.
+19,"martínez-álvarez, f."
+19,"; troncoso, a."
+19,"; riquelme, j.c."
+19,"; riquelme, j.m."
+19,partitioning-clustering techniques applied to the electricity price time series.
+19,notes comput.
+19,"2007, 4881, 990–999."
+19,[crossref] 49.
+19,"ma, c."
+19,"; liu, z."
+19,"; cao, z."
+19,"; song, w."
+19,"; zhang, j."
+19,"; zeng, w."
+19,cost-sensitive deep forest for price prediction.
+19,pattern recognit.
+19,"2020, 107, 107499."
+19,[crossref] 50.
+19,empirica gesellschaft für kommunikations-und technologieforschung mbh; tüv rheinland.
+19,"mobile broadband prices in europe; publications office of the european union: luxembourg, 2019."
+19,eurostat.
+19,"labour cost, wages and salaries, direct remuneration (excluding apprentices) by nace rev."
+19,"2 activity)—lcs surveys 2008, 2012 and 2016; eurostat: luxembourg, 2016."
+19,"colaço, a.f."
+19,"; bramley, r.g.v."
+19,do crop sensors promote improved nitrogen management in grain crops?
+19,field crops res.
+19,"2018, 218, 126–140."
+19,[crossref] 53.
+19,"breunig, f.m."
+19,"; galvão, l.s."
+19,"; dalagnol, r."
+19,"; santi, a.l."
+19,"; della flora, d.p."
+19,"; chen, s."
+19,assessing the effect of spatial resolution on the delineation of management zones for smallholder farming in southern brazil.
+19,remote sens.
+19,environ.
+19,"2020, 19."
+19,[crossref] 54.
+19,"wu, m."
+19,"; yang, c."
+19,"; song, x."
+19,"; hoffmann, w.c."
+19,"; huang, w."
+19,"; niu, z."
+19,"; wang, c."
+19,"; li, w."
+19,"; yu, b."
+19,monitoring cotton root rot by synthetic sentinel-2 ndvi time series using improved spatial and temporal data fusion.
+19,"2018, 8, 2016."
+19,[crossref] [pubmed] 55.
+19,"guzinski, r."
+19,"; nieto, h."
+19,"; sandholt, i."
+19,"; karamitilios, g."
+19,modelling high-resolution actual evapotranspiration through sentinel-2 and sentinel-3 data fusion.
+19,remote sens.
+19,"2020, 12, 1433."
+19,[crossref] 56.
+19,"anger, j.; de franchis, c."
+19,"; facciolo, g."
+19,assessing the sharpness of satellite images: study of the planetscope constellation.
+19,"in proceedings of the igarss 2019—2019 ieee international geoscience and remote sensing symposium, yokohama, japan, 28 july–2 august 2019; pp."
+19,389–392.
+19,[crossref] 57.
+19,"sozzi, m."
+19,"; kayad, a."
+19,"; marinello, f."
+19,"; taylor, j."
+19,"; tisseyre, b."
+19,comparing vineyard imagery acquired from sentinel-2 and unmanned aerial vehicle (uav) platform.
+19,"oeno one 2020, 54, 189–197."
+19,[crossref] 58.
+19,"yezekyan, t."
+19,"; benetti, m."
+19,"; armentano, g."
+19,"; trestini, s."
+19,"; sartori, l."
+19,"; marinello, f."
+19,"definition of reference models for power, mass, working width, and price for tillage implements."
+19,"agriculture 2021, 11, 197."
+19,[crossref] 59.
+19,"stamatiadis, s."
+19,"; schepers, j.s."
+19,"; evangelou, e."
+19,"; tsadilas, c."
+19,"; glampedakis, a."
+19,"; glampedakis, m."
+19,"; dercas, n."
+19,"; spyropoulos, n."
+19,"; dalezios, n.r."
+19,"; eskridge, k."
+19,variable-rate nitrogen fertilization of winter wheat under high spatial resolution.
+19,precis.
+19,agric.
+19,"2018, 19, 570–587."
+19,[crossref] 60.
+19,"ørum, j.e."
+19,"; kudsk, p."
+19,"; jensen, p.k."
+19,"economics of site-specific and variable-dose herbicide application; springer: cham, switzerland, 2017; pp."
+19,93–110.
+19,"farquharson, r."
+19,"; welsh, j."
+19,"the economics and perspectives of site specific irrigation management in australia; springer: cham, switzerland, 2017; pp."
+19,111–127.
+19,"gandorfer, m."
+19,"; meyer-aurich, a."
+19,"economic potential of site-specific fertiliser application and harvest management; springer: cham, switzerland, 2017; pp."
+19,79–92.
+20,"agronomy 2021, 11, 2098 20 of 20 63."
+20,"matese, a."
+20,"; toscano, p."
+20,"; di gennaro, s."
+20,"; genesio, l."
+20,"; vaccari, f."
+20,"; primicerio, j."
+20,"; belli, c."
+20,"; zaldei, a."
+20,"; bianconi, r."
+20,"; gioli, b."
+20,"intercomparison of uav, aircraft and satellite remote sensing platforms for precision viticulture."
+20,remote sens.
+20,"2015, 7, 2971–2990."
+20,[crossref] 64.
+20,"sozzi, m."
+20,"; bernardi, e."
+20,"; kayad, a."
+20,"; marinello, f."
+20,"; boscaro, d."
+20,"; cogato, a."
+20,"; gasparini, f."
+20,"; tomasi, d."
+20,on-the-go variable rate fertilizer application on vineyard using a proximal spectral sensor.
+20,"in proceedings of the 2020 ieee international workshop on metrology for agriculture and forestry (metroagrifor), trento, italy, 4–6 november 2020; pp."
+20,343–347.
+20,[crossref] 65.
+20,"roberts, r.k."
+20,"; english, b.c."
+20,"; mahajanashetti, s.b."
+20,evaluating the returns to variable rate nitrogen application.
+20,agric.
+20,"2000, 32, 133–143."
+20,[crossref] 66.
+20,"roberts, r.k."
+20,"; mahajanashetti, s.b."
+20,"; english, b.c."
+20,"; larson, j.a."
+20,"; tyler, d.d."
+20,variable rate nitrogen application on corn fields: the role of spatial variability and weather.
+20,agric.
+20,"2002, 34, 111–129."
+20,[crossref] 67.
+20,"basso, b."
+20,"; dumont, b."
+20,"; cammarano, d."
+20,"; pezzuolo, a."
+20,"; marinello, f."
+20,"; sartori, l."
+20,environmental and economic benefits of variable rate nitrogen fertilization in a nitrate vulnerable zone.
+20,total environ.
+20,"2016, 545–546, 227–235."
+20,[crossref]

@@ -1,0 +1,1112 @@
+page,p
+1,"surveys in geophysics (2020) 41:1391–1435 https://doi.org/10.1007/s10712-020-09609-1 remote sensing for assessing landslides and associated hazards candide lissak1 · annett bartsch2,3 · marcello de michele4 · christopher gomez5,6 · olivier maquaire1 · daniel raucoules4 · thomas roulland1 received: 6 december 2019 / accepted: 6 august 2020 / published online: 3 september 2020 © springer nature b.v."
+1,"2020 abstract multi-platform remote sensing using space-, airborne and ground-based sensors has become essential tools for landslide assessment and disaster-risk prevention."
+1,"over the last 30 years, the multiplicity of earth observation satellites mission ensures uninterrupted optical and radar imagery archives."
+1,"with the popularization of unmanned aerial vehicles, free optical and radar imagery with high revisiting time, ground and aerial possibilities to perform high-resolution 3d point clouds and derived digital elevation models, it can make it difficult to choose the appropriate method for risk assessment."
+1,"the aim of this paper is to review the mainstream remote-sensing methods commonly employed for land- slide assessment, as well as processing."
+1,the purpose is to understand how remote-sensing techniques can be useful for landslide hazard detection and monitoring taking into consid- eration several constraints such as field location or costs of surveys.
+1,"first we focus on the suitability of terrestrial, aerial and spaceborne systems that have been widely used for land- slide assessment to underline their benefits and drawbacks for data acquisition, processing and interpretation."
+1,"several examples of application are presented such as interferometry synthetic aperture radar (insar), lasergrammetry, terrestrial optical photogrammetry."
+1,"some of these techniques are unsuitable for slow moving landslides, others limited to large areas and others to local investigations."
+1,it can be complicated to select the most appropri- ate system.
+1,"today, the key for understanding landslides is the complementarity of methods and the automation of the data processing."
+1,"all the mentioned approaches can be coupled (from field monitoring to satellite images analysis) to improve risk management, and the real challenge is to improve automatic solution for landslide recognition and monitoring for the implementation of near real-time emergency systems."
+1,keywords landslide · remote sensing · machine learning · monitoring · inventory * candide lissak candide.lissak@unicaen.fr extended author information available on the last page of the article 13 vol.:(0123456789)
+2,"1392 surveys in geophysics (2020) 41:1391–1435 1 introduction despite several decades of research, landslide detection is still a challenging task due to the wide variety of sizes, shapes and morphologies that those events can take and due to the variability of the area they trigger."
+2,"consequently, a broad array of methods has been tested in remote-sensing with lately combinations of those at different-scales using multi-plat- form methodologies."
+2,"for decades, remote-sensing techniques are thus widely employed for landslides studies (e.g., petley et al."
+2,2002; delacourt et al.
+2,2007; jaboyedoff et al.
+2,"2012, 2019; tofani et al."
+2,2013; casagli et al.
+2,2017; huang and zhao 2018).
+2,"the appeal of multi- platform remote-sensing—from space, airborne- to ground-based sensors—originates in the possibility to cater for the difficulties of various contexts (coastal landslides, moun- tain debris flows, rockfalls and mudflows in periglacial environments…)."
+2,"furthermore, the possibility of complementary techniques for data acquisition in various environments is a major asset for landslide studies with real-time and near real-time data acquisition for virtually any place in the world, especially with the growing demand for detailed and accu- rate landslide maps and inventories around the globe (ghorbanzadeh et al."
+2,2019).
+2,"among all available methods and data, however, it can be difficult to select the most appropriate approach for a given study."
+2,"and the choice of the most appropriate approach can depend on the accessibility of study areas, its geographical context, orientation (especially for the satellites), the vegetation cover, the landslide velocity, its size, and other morphological and geographic parameters."
+2,"from those technological and methodological developments, the question of how to choose the most effective method then arises."
+2,the objective of the present paper is there- fore to define different ways of studying landslides with two main objectives: hazard inven- tory/mapping and the quantification of surface deformations using a combination of several remote-sensing methods.
+2,"inherited from the era of landslide inventories construction, the definition of the geometry of landslides and their change over time still dominates one of the foci of remote sensing applied for landslides (jaboyedoff et al."
+2,2012; wasowski and bovenga 2014; telling et al.
+2,2017; huang and zhao 2018).
+2,"as a contribution to this tradi- tion, this paper is focused on the main spaceborne, aerial and terrestrial remote-sensing methods currently used for mass movement surveys in various geographical contexts and scales, for landslides that have already occurred."
+2,"within this field of research, the authors investigated the multiple platforms that come with multiple sensors—optical imagery (3 bands), multispectral imagery (4–12 bands) or lidar and radar imagery, each providing different yet complementary data."
+2,"2 the range of remote‑sensing platforms for landslide detection 2.1 suitable systems for numerous scientific purposes the main asset of remote-sensing techniques is the variety of applications, and so in the various contexts of landslide observations."
+2,remote sensing is applicable from steep-slopes landslides to sub-horizontal deformation; from extremely rapid to slow movements; in saturated and unsaturated materials; in confined steep-channel to open-slope landslides (hungr et al.
+2,2014).
+2,another source of variability originates from the environment land- slides and the related hazards occur.
+2,"among the case studies presented in this contribution, we can find landslides in periglacial environments, which are characterized by moderate 13"
+3,"surveys in geophysics (2020) 41:1391–1435 1393 slope terrain in morainal material where landslides are associated to the presence of ground ice, permafrost conditioned by freeze/thaw cycling (lewkowicz 2007; jorgenson and grosse 2016; lewkowicz and way 2019)."
+3,"in such context, unconsolidated sediments cur- rently frozen can be easily mobilized under exceptionally warm conditions, when the depth of the seasonal thaw layer exceeds normal conditions in such years (bartsch et al."
+3,2019).
+3,"the analysis of such landslides in permafrost notably is of particular importance in the arctic, as landslides are proxies to understand the carbon cycle, as it has been demon- strated that carbon-rich landslides can even contribute to ocean acidification (zolkos et al."
+3,2019).
+3,"other examples have been given in subtropical areas where rainstorm disasters, cyclone and earthquake, or the combination of triggering factors (chigira et al."
+3,"2004, 2010; ingles et al."
+3,2006; yin et al.
+3,2009; xu 2015; shafique et al.
+3,2016; marc et al.
+3,2017; ko and lo 2018) can induce the concomitant reduction of effective shear-strength and trigger hundreds or thousands of simultaneous landslide (chigira et al.
+3,2004; huang and li 2009; yin et al.
+3,2009).
+3,this kind of event disturbs the sediment budget with transfer of thousands of cubic meters of sediment into highly urbanized watersheds.
+3,"finally, coastal landslides have a particular significance in the light of climate change, rapid source-to-sink concepts and related hazards."
+3,"it is therefore essential to quantify the regressive dynamics of coastal cliffs and slopes induced by the sea erosion as a predominant parameter of slope stability (letortu et al. 2015a, b) notably in association with groundwater flows (lissak et al."
+3,2014).
+3,"one of the main drivers of landslide observation is hazard and disaster-risk assessment and management, for which it is essential to define the spatial and temporal evolution of landslides, especially when instabilities occur close to settlements and infrastructures (e.g., roads, bridges…) and disrupting ecosystems."
+3,"also, a single remote-sensing approach can be effective to answer several scientific questions (e.g., the use of laser scanner in lissak et al. 2014 or letortu et al. 2019 to investigate landslide morphology, hazard mapping, deformations measurement or multitemporal satellite images for landslide detection and deformation monitoring)."
+3,"remote-sensing techniques for landslide assessment can be classified according to the scale of observation, ranging from spaceborne platforms—single or swarms of satellites—, airborne platforms—airplanes and drones—, to ground-based and close-range platforms— terrestrial laser-scanners hand-held cameras."
+3,"the plurality of systems for earth observation (ground, aerial and satellite-based) is now so widely developed that it is possible to assess landslide virtually anywhere in the world, at any frequency, to quantify the seasonality of the kinematics (delacourt et al. 2007) as well as the long-term patterns of surface motion with image correlation techniques."
+3,researchers and practitioners have thus immediate access to imagery after a disaster for instance (proy et al.
+3,2013).
+3,"2.2 satellite systems over the last 30 years, the multiplicity of earth observation (eo) satellites mission ensures uninterrupted optical imagery archives (e.g., landsat 1–8 ~ 1972, spot 1–7 ~ 1986, ikonos 1999/2015, rapideye ~ 2008, sentinel ~ 2014), and radar images acquisition (e.g., ers 1991/2001, jers 1992/1998, envisat 2002/2012, terrasar-x ~ 2008, sentinel-1 ~ 2014)."
+3,earth observation satellites (table 1) are largely used for crisis management (voigt et al.
+3,"2016; lang et al. 2018) and especially for landslide investigation and related issues (e.g., hazard identification, spatial extension delineation, volume estimation, displacement meas- urement in table 1)."
+3,the interest for satellite imagery can be explained by the availability of many open-source data with high-resolution images and regular information updates.
+4,"table 1 non-exhaustive list of various study cases of landslide assessment and satellite systems employed 1394 satellite bands radar spectral (p/ms) launch date revisiting time displacement land use or landslide inventory spatial (m) resolu- (days) field cover/band ratio 13 tion for landslide susceptibility or detection alos 1 p/4 ms/sar- l x p 2,5/ms 10/100 2006–2011 46 de michele et al."
+4,xu et al.
+4,"(2014), (2010) casagli et al."
+4,"(2016) alos-2 1 p/4 ms/sar- l x p 2,5/ms 10/100 ~ 2014 14 fan et al."
+4,(2017) envisat x 35 casagli et al.
+4,"(2016), single- ton et al. (2014), de michele et al."
+4,(2010) ers 1/2 x 35 michel et al.
+4,roessner et al.
+4,"(1999), casagli (2001) et al."
+4,"(2016) geoeye-1 1 p/4 ms p 0,46/ms 1,84 ~ 2008 <3 stumpf and kerle (2011a, b), casa- gli et al."
+4,"(2016), moosavi et al."
+4,(2014) jers x 18 1992–1998 44 delacourt et al.
+4,(2009) surveys in geophysics (2020) 41:1391–1435
+5,"table 1 (continued) satellite bands radar spectral (p/ms) launch date revisiting time displacement land use or landslide inventory spatial (m) resolu- (days) field cover/band ratio tion for landslide susceptibility or detection ikonos 1 p/4 ms p 0,82/ms 3,28 1999–2015 3 petley et al."
+5,"(2002), nichol and wong (2005a, b), stumpf and kerle (2011a, b), xu et al."
+5,"(2014), surveys in geophysics (2020) 41:1391–1435 casagli et al."
+5,"(2016) landsat 5 p 1/ms 7 ~ 1984 16 yang and chen (2010), lewko- wicz and way (2019) landsat 7 1 p/7 ms p 15/ms 30 ~ 1999 16 hong et al."
+5,petley et al.
+5,"(2002), (2016), moham- lewkowicz and mady et al."
+5,"way (2019) (2019), fang et al."
+5,"(2020), landsat 8 8 p/11 ms p 15/ms 30 ~ 2013 16 lacroix et al."
+5,kalantar et al.
+5,"huang and zhao (2019) (2018), ara- (2018), huang bameri et al. et al."
+5,"(2020), (2019), bui lewkowicz and et al."
+5,"(2019, way (2019) 2020), achour and pourgha- semi (2019), hu et al."
+5,"(2020), 1395 13"
+6,"table 1 (continued) 1396 satellite bands radar spectral (p/ms) launch date revisiting time displacement land use or landslide inventory spatial (m) resolu- (days) field cover/band ratio 13 tion for landslide susceptibility or detection pléiades 1a/1b 1 p/4 ms p 0,5/ms 2 ~ 2011/~ 2012 1 lacroix et al."
+6,fan et al.
+6,"(2018), (2015), stumpf zhou et al. (2018) et al."
+6,"(2017) quickbird-2 1 p/4 ms p 0,65/ms 2,62 2001–2015 1–3.5 jiang et al."
+6,(2016) zhang et al.
+6,"(2014), ciampalini et al."
+6,(2015) radarsat1/2/ x 1995/2007/2016/2017 12 delacourt et al.
+6,"rmc (2009), casagli et al."
+6,"(2016), paquette et al."
+6,(2020) rapideeye 1 p/4 ms 5–6.5 m ~ 2008 5.5 ghorbanzadeh behling et al. et al.
+6,"(2019) (2014), kurtz et al."
+6,(2014) sentinel 1a/1b sar- c x ~ 2014/~ 2016 12–6 dai et al.
+6,"(2016), fan et al."
+6,"(2017), carlà et al."
+6,(2019) sentinel 2a/2b 13 ms ms 10–60 ~ 2015/~ 2016 10–5 lacroix et al.
+6,svennevig (2019) (2018) surveys in geophysics (2020) 41:1391–1435
+7,"table 1 (continued) satellite bands radar spectral (p/ms) launch date revisiting time displacement land use or landslide inventory spatial (m) resolu- (days) field cover/band ratio tion for landslide susceptibility or detection spot 1 to spot 1 p/3ms p 10/ms 20 1986–2003 / 1990– 1–4 off nadir/26 crippen 3 2009 / 1983–1996 repeat cycle (1992), van puymbroeck et al."
+7,"(2000), yamaguchi et al."
+7,"(2003), surveys in geophysics (2020) 41:1391–1435 delacourt et al."
+7,"(2004), nichol and wong (2005a, b) spot 4 p 10/ms 20 1998–2013 5 klinger et al."
+7,(2006) spot 5 p 5/ms 10 ~ 2002 2–3 le bivic et al.
+7,yang et al.
+7,"(2013) sato and harp (2017) (2009), yang et al."
+7,"(2013), xu et al."
+7,"(2014), casagli et al."
+7,"(2016), fan et al."
+7,"(2018) spot 6 1 p/4 ms p 1,5/ms 6 ~ 2012 1 fan et al."
+7,(2018) terra (eos 14 ms ms vnir 15 ~ 1999 16 yang et al.
+7,"(2013) yang and chen am-1) swir 30 tir (2010), yang 90 et al."
+7,"(2013), xu et al."
+7,(2014) 1397 13
+8,"table 1 (continued) 1398 satellite bands radar spectral (p/ms) launch date revisiting time displacement land use or landslide inventory spatial (m) resolu- (days) field cover/band ratio 13 tion for landslide susceptibility or detection terrasar-x x ~ 2007 2,5–11 li et al."
+8,"(2011), stettner et al."
+8,raucoules (2018) et al.
+8,"(2013), singleton et al."
+8,"(2014), casagli et al."
+8,"(2016), zwieback et al."
+8,"(2018) worldview-2 1 p/8 ms p 0,46/ms 2,4 ~ 2009 1 jiang et al."
+8,(2016) zhang et al.
+8,"(2014), fan et al."
+8,(2018) surveys in geophysics (2020) 41:1391–1435
+9,surveys in geophysics (2020) 41:1391–1435 1399 recent programs such as copernicus sentinel missions or usgs/nasa landsat program provide free optical and radar imagery with high revisit time (table 1).
+9,"among all existing satellite systems, many are those which propose daily revisit capability."
+9,"but in a context of risk management and emergency response, it is also essential that some systems (such as pleiades systems) allow last-minute request for images acquisition in order to precision mapping and intervention."
+9,"spatial and spectral resolutions of satellite systems are various (e.g., sentinel 2 provides 13 spectral bands including 3 bands for atmospheric correction, and a spatial resolution from 10 to 60 m, table 1)."
+9,"consequently, the selection of the most suitable system for landslide assessment will highly depend on the scientific purpose and the required scale analysis."
+9,"for example, for inventory and landslide detection it is more suitable to use very high-resolution (vhr, 0–5 m) and high-resolution (5–20 m) optical data (table 1) with the possibility of pan-sharpening (nichol and wong 2005b) or to improve historical and recent satellite images with the use of super-resolution algorithms (lanaras et al. 2018) and vhr orthoimages."
+9,"but, for an exhaustive inventory, it is sometimes necessary to combine sources of images because of the incomplete spatial coverage (shafique et al. 2016), multi- temporal images (fan et al. 2018) and historical inventories (catani et al."
+9,2005; ardizzone et al.
+9,2007; arabameri et al.
+9,2019; pánek et al.
+9,2019).
+9,the interest of satellite images time series is to detect examples of past landslides which may be remodelled by anthropogenic action or progressively hidden by vegetation.
+9,"numerous archives are available, and sev- eral computing online platforms such as google earth engine (https​://earth​engin​e.googl​ e.com/), google earth, eos platform for earth observation imagery (https​://eos.com/ platf​orm/) or sentinel hub (https​://www.senti​nel-hub.com) are free to use for the visuali- zation and running simple radiometric analyses of various remote-sensing data (sato and harp 2009; yang and chen 2010; pham et al."
+9,2019; fang et al.
+9,2020; hu et al.
+9,2020).
+9,radar images are also viewable on these platforms and widely used for landslide monitor- ing.
+9,"indeed, to detect and quantify surface deformation, synthetic aperture radar (sar) with an interferometric approach (i.e., spaceborne insar and ground-based insar, gb- insar), or a non-interferometric approach with image matching (gbsar), are more use- ful than an analysis of optical images with 3 bands, or multispectral images from 4 to 12 bands."
+9,but the feasibility of this depends highly on the orientation and size of the landslide.
+9,"in complement, offsets by correlation of both panchromatic and radar-amplitude images are also commonly used technique for the measurement of surface deformation (crippen 1992; michel et al."
+9,1999; van puymbroeck et al. 2000) complementary to insar (klinger et al. 2006; de michele and briole 2007; de michele et al.
+9,2010).
+9,2.3 airborne systems airborne systems can complement spaceborne techniques.
+9,"they can be based on a range of platforms and sensors (red–green–blue, multispectral sensors, radar, thermal…)."
+9,"the most affordable and flexible ones are balloons, blimps balloon and small unmanned aerial vehicles (uavs)."
+9,uavs are widely used for landslide studies (rau et al.
+9,"2011, nietham- mer et al."
+9,2012).
+9,"if we combine the two key words (‘uav’ and ‘landslide’) in google scholar, more than 5000 items are identified since 2016."
+9,"less expensive than manned air- craft (ultralight trikes, helicopters, planes), these techniques provide high-resolution meas- urements of landslides."
+9,two types of data from airborne surveys are frequently used for landslide assessment: 13
+10,1400 surveys in geophysics (2020) 41:1391–1435 (1) aerial photographs and orthoimages in the visible domain (rgb).
+10,these are essential for landslide detection especially for a historical reconstruction of the slope deforma- tion using aerial images time series.
+10,"the detection of landslides is based on the poten- tial visibility of specific morphological features where the vegetation cover is sparse (e.g., major and minor scarps, hummocks…), (2) 3d models with point clouds, 3d meshes, digital elevation models (dem)/digital ter- rain model (dtm) and digital surface model (dsm)."
+10,dems (the generic term dem will be retained for the paper) are exploited quasi-systematically for morphological and topographical analysis.
+10,"dems are essential for morphological analyses, landslides detection (van westen et al. 2008) and deformation quantification (casson et al."
+10,2005).
+10,especially if we consider that landslide distribution varies considerably with the slope aspect and value (chen et al.
+10,2014).
+10,"airborne-based lidar (light detection and ranging), also mentioned airborne laser scanning (als), provides very high-resolution data with several million georefer- enced 3d point clouds and high-resolution dem reconstruction (centimetric/decimetric)."
+10,"for almost 20 years, airborne lidar technology offers several application possibilities for landslide investigation presented in jaboyedoff et al."
+10,(2012).
+10,"today, there are more than 10 000 references in google scholar since 2016."
+10,"this technology provides major information on topography, especially with the full-waveform laser scanning systems that are able to record the entire emitted and backscattered signal of each laser pulse even for vegetated areas with a high-point density possibility throughout vegetation."
+10,the theoretical principles of full-waveform lidar are presented in mallet and bretar (2009).
+10,"this technology has highly advanced the accuracy of landslide inventory maps (schulz 2004; ardizzone et al. 2007), the monitoring of surface displacement, and provides essential data for landslide susceptibility (i.e., dem derivatives with slope, surface roughness, curvature calculation in van den eeckhaut et al."
+10,2012).
+10,the gain of information by lidar also concerns detailed morphological features investigation at the sub-meter scale (lissak et al.
+10,2014; bunn et al.
+10,2019).
+10,but exploration of this kind of very high-resolution (vhr) data can be limited by the cost of surveys.
+10,"consequently, uavs can be an alternative to acquire high-resolution data (3d point cloud, dem and orthophotos)."
+10,"but once again, it depends on the parameter studied that can be too large to be overflown by uav and by boat-based mobile laser scan- ning (michoud et al."
+10,2014).
+10,2.4 ground systems ground techniques can be complementary to other techniques (stumpf et al.
+10,2015; wilkin- son et al. 2016) mentioned above.
+10,"because airborne data acquisition depends on flying conditions, and/or can be expensive, spaceborne data availability depends on slope orienta- tion and on the temporal/spatial resolution."
+10,"three main categories of ground-based remote- sensing techniques are used in landslide monitoring: 1) terrestrial optical photogram- metry (top), 2) terrestrial laser scanning (tls), 3) ground-based synthetic aperture radar interferometry (gb-insar)."
+10,"2.4.1 terrestrial optical photogrammetry (top) technique this technique is reputed in geoscience for the 3d-textured restitution, but also for the con- struction of high-resolution dems at high spatial and temporal resolution (centimeter to 13"
+11,surveys in geophysics (2020) 41:1391–1435 1401 sub-decimetric accuracy).
+11,"due to the fact this technique is simple to use and can be easily repeated close in time, top with sfm (structure from motion) technique has been increas- ingly used in recent years (abellan et al."
+11,2016; james et al.
+11,2019).
+11,"sfm photogrammetry is based on an improved principle of stereoscopy, i.e., the reproduction of a relief perception from two flat images in the same way as human vision."
+11,"the objective is to model a real object or environment in 3d from a multitude of 2d images using algorithms that have ability to detect and identify similar elements between two pictures (i.e., “scale invariant feature transform” in lowe 1999, 2004)."
+11,"through a number of photographs, algorithms will use common pixels of each picture to reconstruct the geometry of the object which must be modelled."
+11,several publications highlight the application of this technique to study the soil erosion (gudino-elizondo et al.
+11,2018; heindel et al.
+11,"2018; di stefano et al. 2019), volcano hazard (carr et al."
+11,"2018; gomez and kennedy 2018; biass et al. 2019), glacier or ice sheet evolu- tion (brun et al."
+11,2016; rossini et al.
+11,"2018; groos et al. 2019), rivers geometry and their dynamics (marteau et al."
+11,2016; jugie et al.
+11,2018; rusnák et al.
+11,2018).
+11,"although analogue photogrammetry has existed since the second part of the 19th century (aimé laussedat in 1849, albrecht meydenbauer who first defined the concept in 1867), the progress in the field of computing and the democratization of computers over time have allowed the digital development of this technique."
+11,"it is a fast, inexpensive and universally accessible mod- elling technique that is currently used in a wide range of scientific fields (westoby et al."
+11,2012; jaud et al.
+11,2019; valkaniotis et al.
+11,2018).
+11,"for landslide studies, top can be applied for permanent monitoring with a fixed digital automatic camera in front of the landslide to assess displacement rates (in pixels.day−1 in travelletti et al."
+11,2012; gance et al. 2014) or by multitemporal data acquisition for the 3d geometry reconstruction (rossi et al.
+11,"2018; ma et al. 2019), characterization of the kinematics (chanut et al."
+11,2017; warrick et al.
+11,2019).
+11,2.4.2 multitemporal terrestrial laser scanning (tls) tls is the second ground-based remote-sensing technique widely used for landslide assess- ment (bitelli et al. 2004) with more than 4000 references in google scholar since 2016.
+11,"the measurement principles are presented in petrie and toth (2008), shan and toth (2018) and jaboyedoff et al. (2012) prepared a review of laser scanner (airborne and terrestrial) applica- tions for landslide studies."
+11,the tls is a measuring instrument based on laser technology that can measure distance to a high degree of accuracy between the instrument and an object to be measured.
+11,it is based on a point cloud using distance measurement by the delay between the sending of an infrared laser pulse and the return of the reflected pulse (slob and hack 2004; teza et al.
+11,2007).
+11,"the laser instrument is able to measure the precise time interval between the pulse emitted by the laser beam located at point a and its return after reflection from the object to be measured (e.g., slope, river bank…) located at point b (petrie and toth 2008)."
+11,"compared to terrestrial photogrammetry, this instrument provides a high density point cloud (per ­m2) measuring all elements of the landscape."
+11,"consequently, the reflected pulse can be processed to distinguish the vegetation from the soil to extract it."
+11,"however, tls is more expensive from a financial point of view than top."
+11,it also requires more operators on the field.
+11,campaign measurement can be laborious for difficult to access locations such as mountains or coastal areas with high tides (medjkane et al.
+11,2018).
+11,"because tls has been developed for precision surveying applications, combined with field measurement, this instrument is now commonly employed to produce highly detailed 3d point clouds in geoscience (telling et al."
+11,2017; piégay et al.
+11,2020).
+11,"over the last two decades, tls has proven to be an increasingly 13"
+12,1402 surveys in geophysics (2020) 41:1391–1435 practical option for landslide assessment (delacourt et al.
+12,2007; jaboyedoff et al.
+12,2012).
+12,"this technique is employed at various scales ranging from a fixed sector (i.e., a specific part of the landslide such as landslide toe), to large scale (i.e., entire landslide area, tyszkowski and cebulski 2019) and for largest areas, tls with mobile platforms can be used for coverage of several kilometres (michoud et al."
+12,2014).
+12,application of tls for the characterization of the landslide kinematics or for the reconstruction of 3d geometric models is significant.
+12,"2.4.3 ground‑based radar for sar interferometry ground-based sar (gbsar, tarchi et al."
+12,2003; corsini et al.
+12,"2006, 2013; herrera et al."
+12,2009; barla et al.
+12,2010; monserrat et al. 2014) uses a radar sensor (in most cases working in ku band) in a moving configuration for enabling synthetic aperture processing in a similar way as for spaceborne imagery.
+12,"currently, two concepts are most used to control the motion of such a sensor."
+12,"the first, known as linear sar, is to install the radar on a rail (typically 2–3 m long) allowing a translation motion (e.g., tarchi et al."
+12,2003).
+12,"on the second, the radar is on a tripod with a mechanism allowing a rotation motion of the tool (e.g., werner et al."
+12,2008).
+12,the choice between both configurations depends on the context of the motion to be observed.
+12,"in particular, for given sensor’s characteristics, the configurations are not equivalent in terms of range and swath—use of rail is generally better for longer ranges but has a reduced swath compared to the tripod—and ease of installation—installed on a tripod is generally a more portable device."
+12,"for slope instabilities (notably landslides, but such gbsar systems are also widely used for monitoring active open pit mines) monitoring, gbsar is used in an interferometric con- figuration."
+12,the tool can be installed in front of the slope to be monitored and acquires data with a repeat cycle up to about one minute.
+12,"typically, the tool is adapted to monitor slopes in a range between about 100 m and few kilometers with a resolution of the order of 0.1 m— depending on the distance to the sensor."
+12,"it therefore allows to monitor a wide spectrum of landslides, in terms of size and kinematics, to be monitored."
+12,"with respect to spaceborne inter- ferometric techniques, gbsar is suitable to monitor slopes with previously known motion or high estimated susceptibility and having a specific interest in terms of risk management (e.g., that could represent a threat for identified assets/persons)."
+12,if spaceborne interferometric techniques cover wider areas and give information on past motions they cannot—with the cur- rent missions—provide a high temporal resolution comparable with gbsar.
+12,both techniques having different domains of application can therefore be used in a complementary way.
+12,"in addition, due to their characteristics, gbsar tools with adapted communications systems can be used in early warning systems."
+12,"finally, noteworthy is the fact that—in a similar way as for spaceborne sar imagery— offset tracking techniques on the amplitude measurements can be applied to gbsar data as a complement to interferometric processing (crosetto et al."
+12,2014).
+12,this non-interferometric approach to estimate slope deformation can be useful for monitoring very fast motions (sev- eral m ­day−1) where gb-insar is not reliable.
+13,"surveys in geophysics (2020) 41:1391–1435 1403 3 earth observation data and methods for landslide detection and inventory in risk assessment, there are two main issues: (1) hazard identification and (2) mapping."
+13,both are essential to avoid the exposure of goods and people to hazard.
+13,"in a context of crisis management, it is often time pressure to detect landslides in specific areas in order to assist people and lead rescue operations."
+13,inventory maps are useful tools for authorities for risk management and to gain knowledge on hazard extension.
+13,but most of the time they are only available for limited areas (guzzetti et al.
+13,2012).
+13,"moreover, inventories should be regularly updated, complemented by historical databases to consider the geographical dis- tribution of past (svennevig 2019) and recent landslides in different time periods (location of the hazard initiation and extension, age…)."
+13,the regular updating of inventories is also complicated and requires large effort (bell et al.
+13,2012; burns and madin 2009; burns et al.
+13,2012; galli et al.
+13,2008; guzzetti et al. 2012) especially for inaccessible high altitude areas (du et al.
+13,2020).
+13,but they are essential for landslide susceptibility mapping (lsm) for risk mitigation and planning; the accurate detection of landslide locations highly influence the landslide susceptibility analysis (galli et al.
+13,"2008, song et al."
+13,2012).
+13,"traditionally, for event-based inventories, field reconnaissance approaches by scien- tists can be conducted (brunsden 1993)."
+13,"the aim is to identify and delineate landslides, but field-based approaches are time-consuming and can be laborious and tedious for large areas (yu and chen 2017) and especially when the area is inaccessible or covered by dense vegetation (ardizzone et al."
+13,2007).
+13,"furthermore, for regularly updating inventories, field reconnaissance approaches are almost impossible, especially after high intensity hazard occurrence, when multiple instabilities trigger simultaneously (xu et al."
+13,2019).
+13,"thus, aerial and space borne data analysis are good alternatives for landslide investigation, especially over large areas (> 200 km2)."
+13,"with remotely sensed data, temporal sequences of images can accurately indicate spectral changes based on surface physical condition variations and induced by landslide triggering."
+13,"in this way, the use of airborne and spaceborne data has gradually complemented field surveys with a simplified acquisition of multi-resolution images (multispectral or panchromatic, radar), and models (digital terrain model dtm, digital elevation model dem, digital surface model dsm) with increasing resolution degrees."
+13,"in this way, various types of remotely sensed data exist and their choice in their use depends on the study site properties and funding."
+13,3.1 data preprocessing data preparation consists of extraction of metrics from satellite and aerial images and from dems.
+13,"the preprocessing data will be useful for (1) landslide identification, inventory based on visual interpretation of images or based on image classification, (2) for landslide susceptibility mapping (lsm) with the production of geospatial data to define the condi- tioning factors of landslide triggering, (3) for image comparison for the characterization of the landslide kinematics."
+13,two different types of preprocessing are highlighted.
+13,"one, focused on radiometric information to create additional geospatial raster layers, is mainly based on optical satellite images."
+13,the other considers the spatial relationship of pixels and is focused on the radiometric information to create additional geospatial raster layers.
+13,this analysis is mainly based on optical satellite images.
+13,the second type of preprocessing con- siders the spatial relationship of pixels and is mainly based on dem analysis.
+14,1404 surveys in geophysics (2020) 41:1391–1435 fig.
+14,"1 examples of radiometric, spatial and textural indicators calculated with r libraries for landslide ▸ analysis from uav derived-dsm (flight on 31 july 2017, images provided by kobe university) and mul- tispectral image (pléiades image, 30 september 2017) above kyushu island (japan). a rgb drone image, b true colour pleiades image (2 m), c true colour pan-sharpened pleiades image (0.5 m), d ndvi index, e atsavi index, f savi index, g local relief model by low-pass filter in lrm toolbox arcgis ® (novák 2014), h curvature, i openness 3.1.1 radiometric analysis in the selected papers for this review, the radiometric analysis of optical images mainly consists of index calculations to discriminate areas covered by vegetation from exposed bare soils (du et al. 2020) and to detect anomalies in vegetation cover (fig."
+14,to facilitate the distinction between vegetation and bare soil several spectral indices can be calculated using red green blue (rgb) bands of orthophotos (comert et al. 2019) in eq.
+14,(1)–(5).
+14,"but for landslide modelling or detection, most studies considering radiometric analysis rely on satellite images to calculate the normalized difference vegetation index (ndvi) with near-infrared (nir) and red bands in eq."
+14,(6) (yang and chen 2010; song et al.
+14,2012; yang et al.
+14,2013; behling et al.
+14,2014; moosavi et al.
+14,2014; achour and pourghasemi 2019; arabameri et al.
+14,2019; ghorbanzadeh et al.
+14,2019; wang et al.
+14,2019; bui et al.
+14,2020; du et al.
+14,2020; fang et al.
+14,2020; hong et al.
+14,2015; hu et al.
+14,2020; huang et al.
+14,2020).
+14,normalized green blue difference band index (ngbdi) ∶ (g − b)∕(g + b) (1) red band ratio (rbr) ∶ r∕(r + g + b) (2) green band ratio (gbr) ∶ g∕(r + g + b) (3) excess greenness index (egi) ∶ 2 ∗ g − r − b (4) green-red vegetation index (grvi) (rau et al.
+14,"2011) ∶ (g − r)∕(g + r) (5) normalized difference vegetation index (ndvi) ∶ (nir − r)∕(nir + r) (6) soil-adjusted vegetation index (savi) ∶ (1 + l)(nir − r)∕(nir + r + l) (7) normalized difference blue-red band index (ndbrbi) ∶ (b − r)∕(b + r) (8) but other metrics can be calculated to distinguish specific features related to landslides (e.g., normalized difference blue–red band index (ndbrbi) in eq. (8) in comert et al. 2019 was considered as effective for extracting the shadow areas on orthophotos)."
+14,bright- ness for rgb images is also significant to distinguish landslides (rau et al. 2011) because landslide areas have higher intensity than the other image objects.
+14,"3.1.2 spatial analysis the spatial analysis of images (fig. 1) consists here to study the spatial relationship of pixels in the image to gain knowledge on (1) topographic and morphometric features, (2) 13"
+15,surveys in geophysics (2020) 41:1391–1435 1405 13
+16,"1406 surveys in geophysics (2020) 41:1391–1435 hydrological environment, and (3) texture and roughness of the terrain."
+16,several metrics and derivatives based on statistical methods and filtering are usually calculated to gain knowledge on geographical context of the study area.
+16,"among all existing dem derivatives some conventional ones are almost systematically calculated such as slope, altitude, curva- ture."
+16,"pawluszek and borkowski (2016), and van den eeckhaut et al. (2012) summarize the main dem derivatives information used for landslide detection with topographic metrics (e.g., openness, roughness, morphological gradient, curvature..), and hydromorphological metrics (e.g., stream power index spi to measure the erosion power of the stream, topo- graphic wetness index—twi to measure the degree of accumulation of water at a site and thus influences the occurrence of landslides in catani et al."
+16,(2013).
+16,the sky view factor (svf) is another relief visualization technique that represents the ratio between the visible sky and a hemisphere centred over the study area in a given point.
+16,this technique is based on the direct illumination of relief to intuitively recognize features (kokalj et al.
+16,2016).
+16,statistical methods focused on texture analysis can be also exploited to consider the spa- tial relationship of pixels and emphase the relief features.
+16,"in mezaal et al. (2018) the grey- level co-occurrence matrix (glcm) texture features were calculated on airborne laser scanning data with ecognition software, and in comert et al. (2019) on the red band image to highlight specific patterns features for detecting and differentiating landslides."
+16,"the glcm function (package ‘glcm’ in r software) is used to characterize the texture images by calculating how often pairs of pixels with specific values and in a specified spatial rela- tionship occur in an image, to create a matrix."
+16,"dem filtering combined with conventional derivatives is also a useful technique to detect features associated with landslide, such as convolution filtering, low-pass filtering in chen et al."
+16,(2014).
+16,3.2 data interpretation interpretation of aerial photos or satellite images are approaches commonly used to identify past and recent mass movements (chigira et al.
+16,2004; catani et al.
+16,2005; ardizzone et al.
+16,2007; galli et al.
+16,2008; yang and chen 2010; song et al.
+16,2012; chen et al.
+16,2014; xu et al.
+16,2014; zhang et al.
+16,2014; ciampalini et al.
+16,2015; fressard et al.
+16,2016; fan et al.
+16,"2017, 2018; roulland et al."
+16,2019; bui et al.
+16,2019; görüm 2019; lewkowicz and way 2019; pánek et al.
+16,2019; pham et al.
+16,2019; wang et al.
+16,2019; du et al.
+16,2020).
+16,"based on morphological fea- tures of the landscape and visible ‘anomalies’, visual interpretation of images can be faster than the ground survey approach to identify mass movement."
+16,"nevertheless, ground inves- tigation is meaningful in a second step of the inventory process to validate interpretations."
+16,"nevertheless, the quality of the visual interpretation highly depends on the complexity of the terrain, the vegetation cover, and on the acquisition procedures."
+16,"for areas of dense veg- etation, the use of a lidar-derived elevation model (3d models: pointcloud, 3d meshes, dems) helps to identify undercovered features (chigira et al."
+16,2004; mckean and roer- ing 2004; ardizzone et al.
+16,2007; van den eeckhaut et al.
+16,2012; razak et al.
+16,2013; lissak et al.
+16,2014; pawluszek and borkowski 2016; bunn et al.
+16,2019; görüm 2019).
+16,"dem deriva- tives such as slope values, aspect, roughness, orientation, openness, and sky view factor indicators can be calculated to highlight morphological features induced by landslides and extract hazard boundaries."
+16,"thus, statistical differences between field-based inventory and image/models interpretation can exist."
+16,"for example, the size of landslide mapped by field recognition can be larger than landslide mapped using lidar-derived dem (ardizzone et al."
+16,2007).
+16,it can easily be explained by the accessibility and visibility of the study area.
+17,"surveys in geophysics (2020) 41:1391–1435 1407 3.3 normalized difference vegetation index (ndvi) in some specific contexts, morphological changes induced by landslide triggering can be linked to land cover changes."
+17,"according to the postulate that a region is character- ized by a relatively consistent vegetation cover between 2 years, a multitemporal optical remote-sensing approach based on radiometric analysis with ndvi values can be a solu- tion to detect landslide occurrence (lin et al."
+17,2004).
+17,"for large areas inventories, most studies are based on post-failure images because major changes in the reflectance char- acteristics are linked to landslide surface (yang et al."
+17,2013).
+17,"for systematic spatiotem- poral mapping of landslides, an approach based on ndvi trajectory over time seems to be efficient (behling et al."
+17,2014).
+17,"ndvi index can be generated at various temporal intervals (several days, during one year, or bitemporal) to identify post-event landslides or to define evolution patterns of reactivated one."
+17,"ndvi times series are analysed in yang et al. 2013, considering the potential disturbance induced by cloud or atmosphere to compare ndvi value before co-seismic landslide event and after 2008 wenchuan earthquake."
+17,but variation in phenology states due to seasonal vegetation cover evolution should also be considered before associating ndvi values and landsliding.
+17,ndvi values can be a useful indicator to detect landslides in various environments.
+17,"for example, tundra is in most parts of the arctic characterized by vegetation cover- age."
+17,any environmental disturbance results in removal of vegetation and soils are then exposed.
+17,"mass movements are abundant in these areas, more common than in other regions around the world (several tens of thousand have been documented)."
+17,their occur- rence is conditioned by permafrost and thus they are sensitive to temperature changes.
+17,progressive rise in mean summer air temperature due to climate change is therefore expected to trigger specifically retrogressive thaw slumps according to lewkowicz and way (2019).
+17,approximately 22% of the northern hemisphere are underlain by perma- frost based on a recent account (obu et al.
+17,2019).
+17,such mass movements are a promi- nent example for the need of automatic mapping procedures.
+17,a major role is played by deposits of former glaciations and marine terraces specifically the presence of ground ice (lewkowicz and way 2019; leibman et al.
+17,2015).
+17,ice melt causes thermokarst (top- ographic depression generated by thawing ground ice) which results in various specific surface features including landslides.
+17,unconsolidated sediments are currently frozen but can be mobilized under exceptionally warm conditions.
+17,the depth of the seasonal thaw layer (active layer thickness—alt) exceeds normal conditions in exceptionally warm years (bartsch et al.
+17,2019).
+17,"ice lenses at the base of the active layer melt leading to high porewater pressures, a reduction in effective shear strength, and eventually slope failure."
+17,retrogressive thaw slumps (rts) are a common type of cryogenic landslides which are caused by this mechanism (lantz et al.
+17,2009).
+17,they are therefore more likely to be initiated under unusually warm conditions.
+17,this has been described for sites in canada (lewkowicz and way 2019; jones et al. 2019) and in russia (babkina et al.
+17,2019).
+17,"as an example, more than 4000 thaw slumps have been initiated since 1984 over an area of 70,000 km2 (lewkowicz and way 2019), covering an area of 64 km2."
+17,clusters of rts have been reported for different regions representing a range of climate conditions span- ning from − 19.7 °c to − 7° mean annual air temperature (jones et al.
+17,2019; babkina et al.
+17,2019).
+17,"headwall retreat after initiation is depending more on local conditions, especially terrain factors (jones et al. 2019) but reactivation is also triggered by high temperatures (babkina et al."
+17,2019).
+17,retrogressive thaw slumps continue to grow over several years until they stabilize.
+17,the lifespan of a rts is determined by the ratio of the 13
+18,1408 surveys in geophysics (2020) 41:1391–1435 slope of the slump floor compared to (and running parallel to) the slope of undisturbed terrain (jones et al.
+18,2019).
+18,it can be up to 50 years in extreme cases (french and wil- liams 2017).
+18,rts enlarge by retrogression at typical rates of 5–27 m yr−1 (lewkowicz and way 2019; jones et al.
+18,2019).
+18,"extension is limited to temperatures above 0 °c, so growth is taking place within a few months per year only."
+18,"they are on average smaller than 2 ha, but can be larger."
+18,mega slumps are defined as features larger than 20 ha.
+18,further features in this context are active layer detachment slides (lewkowicz 2007; rudy et al.
+18,2016).
+18,they are in general smaller than thaw slumps.
+18,they can occur on slopes as low as 3° (french and williams 2017).
+18,"active layer detachment slides result in the formation of bare mineral scar (to of frozen ground) and depositional areas, where an earth mass shifts with vegetation."
+18,"to detect the occurrence of thaw slumps and detachment slides and their changes automatically, multispectral images such as available from landsat are usually applied for analyses of trends (nitze 2018; lewkowicz and way 2019; jones et al. 2019), espe- cially to quantify changes of vegetation indices such as ndvi in areas which have been mapped as thaw slumps leading to thermocirques (amphitheatrical hollows in fig."
+18,"nevertheless, a major constraint in this case is spatial resolution, as features are com- parably small and multispectral regular acquisitions which go back to the 1990s are of comparably coarse spatial resolution."
+18,landsat resolution (30 m) prevents the identifica- tion of thaw slump areas in many cases as they have a width of few pixels only (exam- ple of two-pixel width in fig.
+18,lewkowicz and way (2019) therefore could not fully apply automatic detection and eventually relied on large scale manual post-processing utilizing crowdsourcing.
+18,"in this context, sentinel-2 with its 10 m resolution provides an important step forward in monitoring of retrogressive thaw slumps."
+18,"consequently, recent features can be mapped with sentinel-2, also revealing changes within the season and the re-establishment of vegetation starting in the lower part."
+18,"2 thaw slump vegetation properties from landsat and sentinel-2 for two sites located on the yamal peninsula, russia. a from left to right: ndvi trends from landsat (nitze et al."
+18,"2018), ndvi from two sentinel-2 acquisitions in 2016 for feature #1 (top) and #2 (bottom)."
+18,"lines and dots represent outlines based on gps surveys. b photograph of feature #2 (thermocirque, viewing direction from ne to sw) (picture: bartsch 26 august 2015) 13"
+19,surveys in geophysics (2020) 41:1391–1435 1409 3.4 landslide identification using machine learning approaches the identification of landslides for risk assessment and management is possible through a visual interpretation of multi-source data.
+19,"although effective, this technique is time-con- suming (especially for large areas) and very difficult to apply for diachronic studies."
+19,"con- sequently, many studies aim to automate or semi-automate detection methods."
+19,"for this pur- pose, machine learning (ml) and deep learning (dl) approaches can be useful."
+19,"whereas these approaches were few employed for landslide assessment until the early 2000s (bui et al. 2019), today they are developed for various applications: landslide triggering predic- tion (farahmand and aghakouchak 2013), landslide displacement prediction (lian et al."
+19,"2013; zhao and du 2016), landslide detection (stumpf and kerle 2011a, b; chen et al."
+19,2014; moosavi et al.
+19,2014; bunn et al.
+19,2019; ghorbanzadeh et al.
+19,2019).
+19,"3.4.1 pixel/object‑based techniques for landslide detection, two groups of techniques can be suggested."
+19,"the first technique, and the most frequent, is the pixel-based image analysis (pbia)."
+19,this technique consid- ers image pixels as fundamental units of analysis.
+19,the second is the object-based image analysis (obia).
+19,"this technique is based on the creation of image objects, or segments used for image analysis."
+19,"in pixel-based approaches, each pixel is classified without considering neighbouring pixels and all pixels are considered as spatially independent from each other."
+19,"consequently, pixel-based approaches can be sensitive to noise (van den eeckhaut et al. 2012), especially with very high-resolution (vhr) images that provide numerous information with high spatial resolution but low spectral domain (lv et al."
+19,2020).
+19,"object-based approach is a good alternative to detect landslides (stumpf and kerle 2011a, b; kurtz et al."
+19,2014; moosavi et al.
+19,2014; li et al.
+19,2015; casagli et al.
+19,"2016, 2017; bunn et al. 2019) from various data sources (as well as very high-resolution optical data than lidar-derived dem)."
+19,this technique is based on 2 steps: the image segmentation and the image classification.
+19,"the image segmentation relies on various pixels in groups into homogeneous objects or regions, considering their similarities between neighbours (fig."
+19,several algorithms of segmentation exist.
+19,"in ­ecognition® software, the most com- monly used algorithm is “multi-resolution segmentation” (mrs)."
+19,this method is based on the pairwise region-merging technique and provides good results for landslide invento- ries (moosavi et al.
+19,2014; mezaal et al.
+19,2018).
+19,"but for an optimal segmentation, the struc- ture of the segmentation into several levels of segmentation must be a possibility to cluster image pixels according to their homogeneity in spectral, spatial and textural characteristics (anders et al."
+19,2011).
+19,"objects are merged or distinguished according to three parameters: colour, scale, and shape (fig."
+19,"for better segmentation, an a priori topographic information can be integrated in the process (e.g., landslide morphology from dem analysis with location of main scarp, deposits, secondary scarps…)."
+19,it can considerably influence the result of segmentation (van den eeckhaut et al.
+19,2012; li et al.
+19,2015).
+19,spectral bands of orthophotos or multi- spectral images can be used as input layers to create image objects.
+19,but various studies employed other layers for segmentation (rau et al.
+19,2011; stumpf and kerle 2011a; chen et al.
+19,2014).
+19,"van den eeckhaut et al. (2012) use 45 segmentation layers of lidar deriva- tive maps (e.g., altitude, slope, aspect, curvature, sky view factor)."
+20,1410 surveys in geophysics (2020) 41:1391–1435 fig.
+20,3 rgb drone image segmentation using ecognition software ®.
+20,"at this step, the segmentation param- eters are focused on the shape of objects."
+20,"several parameters are tested here for a better pixel merging: com- pactness value (0.5) and shape value a)0.1, b)0.3, d) 0.5, c) 0.9 3.4.2 from conventional classification algorithms to artificial neural network machine learning (ml) methods are effective for image classification and landslide detec- tion based on various ml methods and classifiers using supervised and unsupervised algorithms."
+20,"automatic landslide detection by ml depends on the algorithm used, train- ing samples (for the supervised classification) and validation data."
+20,"while in pixel-based approaches a class is attributed for each pixel according to spectral information; in object- based approaches each segment or object is classified according to spectral, geometric, contextual, and textural information of the image object."
+20,all mentioned classification presented below can be applied for supervised pixel-based or object-based classification.
+20,"but regarding several references, landslide detection and inventory using object-based approach seems to provide better results than a pixel-based approach (comert et al."
+20,2019).
+20,"for example, in bunn et al. (2019) the recognition of landslide features is 70% accurate."
+20,"but with obia, the result of the classification highly depends on the segmentation qual- ity which one also depends on (1) the image resolution (stumpf and kerle 2011a; kurtz et al. 2014), (2) the number of available bands, (3) the segmentation scale (under or over segment images in moosavi et al. 2014), and/or the training sample quality for supervised methods."
+20,training samples can be expert-based (van den eeckhaut et al. 2012) or ran- dom-based (chen et al.
+20,2014; pawluszek and borkowski 2016).
+20,"despite the good results with object-based approaches, pixel-based approaches are still the predominant methods (casagli et al."
+20,2016).
+20,"pixel-based approaches can provide results with several misclassified pixels, especially with high spectral variance data in high-resolution images, and if clas- sification is only focused on spectral characteristics (moosavi et al. 2014) with threshold- based approaches and classification (li et al."
+20,2016).
+20,"regardless of the technique (pixel/object-based), several classification algorithms exist and can be applied separately or jointly (e.g., support vector machine algorithm— svm in van den eeckhaut et al."
+20,"2012; random forest—rf algorithm in stumpf and kerle 2011a, both in li et al."
+20,2015).
+20,both techniques have been used in a wide range of remote-sensing applications including landslide detection and susceptibility mapping (ballabio and sterlacchini 2012; catani et al.
+20,2013; achour and pourghasemi 2019; arabameri et al.
+20,2019; bui et al.
+20,2020; fang et al.
+20,2020).
+20,for a good integration of the 13
+21,surveys in geophysics (2020) 41:1391–1435 1411 spectral and spatial information several classification algorithms (chunhui et al. 2018) and processes (fig. 4) can be useful to detect landslides (comert et al.
+21,2019).
+21,"concerning the support data, classification processes to detect landslides are mainly based on spectral information from orthophotos or multispectral images (ghorbanzadeh et al."
+21,2019).
+21,but additional information from dem (kurtz et al.
+21,"2014), dem derivatives (van den eeckhaut et al. 2012), or radiometric analysis (ndvi) can be used to improve the classification accuracy (comert et al."
+21,2019; fang et al.
+21,2020).
+21,random forest (rf) and support vector machine (svm) algorithms are popular powerful supervised learning techniques (cortes and vapnik 1995; pal 2005) based on a set of training samples for image classification and regression analysis.
+21,"huang and zhao 2018 underline the interest of these modelling techniques, especially the svm method which seems to be more effective than other methods (moosavi et al."
+21,2014).
+21,the rf technique is based on multiple decision trees to train and predict samples (breiman 2001).
+21,rf is considered as less sensitive to the over-fitting problem caused by complex datasets than other decision trees.
+21,this technique can be considered as the most effective non-parametric ensemble learning methods (ghorbanzadeh et al.
+21,2019).
+21,"but both methods (svm and rf) are generally used simultaneously (table 2, fig."
+21,the advantage of the svm method is the possibility to classify each pixel according to a hyperplane and separate classes that cannot be split with a linear classifier.
+21,"thus, different kernel functions can be specified (hong et al. 2016) to perform the svm clas- sification (e.g., polynomial, sigmoid, and radial basis function—rbf)."
+21,"some authors have proposed to merge classifications to improve results using fusion techniques (i.e., dempster–shafer theory—dst and variants) on results issued from various classifiers such as svm, k-nearest neighbour (knn) and rf in mezaal et al."
+21,(2018).
+21,the optimi- zation of the both methods is also possible.
+21,"to illustrate, in bui et al. (2019) the least squares support vector machine (lssvm) technique has been employed to label pixels to be either “non landslide” (negative class) or “landslide” (positive class) for landslide prediction modelling."
+21,the optimization of classifiers can be performed by using boost- ing algorithms like adaboost (li et al.
+21,2008; kadavi et al.
+21,"2018), logitboost, multi- class classifier, bagging models (bui et al. 2019), and multi-boost models (pham et al."
+21,2019).
+21,adaboost (freund and schapire 1995) is one of the most used machine learn- ing ensemble algorithms to create a series of individual classifiers to classify training data.
+21,the interest of the method is that adaboost is based on an adaptive resampling fig.
+21,4 flowchart of the various methods and data used for landslide detection 13
+22,1412 13 table 2 listing of various remote sensing methods used for landslide identification and associated references approach method study cases manual visual interpretation catani et al.
+22,"(2005), ardizzone et al."
+22,"(2007), galli et al."
+22,"(2008), yang and chen (2010), song et al."
+22,"(2012), chen et al."
+22,"(2014), xu et al."
+22,"(2014), ciampalini et al."
+22,"(2015), li et al."
+22,"(2015), fan et al."
+22,"(2018), huang and zhao (2018), zhou et al."
+22,"(2018), bui et al."
+22,"(2019), görüm (2019), lewkowicz and way (2019), pánek et al."
+22,"(2019), pham et al."
+22,"(2019) semi-automated thresholding, filtering lin et al."
+22,"(2004), mckean and roering (2004), yang et al."
+22,"(2013), behling et al."
+22,"(2014), li et al."
+22,(2016) machine learning naïve bayes (nb) model hu et al.
+22,"(2020) support vector machine (svm) ballabio and sterlacchini (2012), van den eeckhaut et al."
+22,"(2012), moosavi et al."
+22,"(2014), li et al."
+22,"(2015), hong et al."
+22,"(2016), pawluszek and borkowski (2016), chen et al."
+22,"(2017), huang and zhao (2018), kalantar et al."
+22,"(2018), mezaal et al."
+22,"(2018), zhou et al."
+22,"(2018), achour and pourghasemi (2019), bui et al."
+22,"(2019, 2020), ghorbanzadeh et al."
+22,"(2019), fang et al."
+22,"(2020), huang et al."
+22,"(2020) random forest (rf) stumpf and kerle (2011a, b), catani et al."
+22,"(2013), chen et al."
+22,"(2014), aditian et al."
+22,"(2018), huang and zhao (2018), mezaal et al."
+22,"(2018), achour and pourghasemi (2019), ghorbanzadeh et al."
+22,"(2019), mohammady et al."
+22,"(2019), bui et al."
+22,"(2020), fang et al."
+22,"(2020), hu et al."
+22,"(2020), huang et al."
+22,(2020) boosting algorithm kadavi et al.
+22,"(2018), pham et al."
+22,"(2019) logistic regression (lr) huang and zhao (2018), kalantar et al."
+22,"(2018), zhou et al."
+22,"(2018), du et al."
+22,"(2020), huang et al."
+22,(2020) artificial neural network (ann) song et al.
+22,"(2012), moosavi et al."
+22,"(2014), aditian et al."
+22,"(2018), huang and zhao (2018), kalantar et al."
+22,"(2018), zhou et al."
+22,"(2018), ghorbanzadeh et al."
+22,"(2019), du et al."
+22,"(2020), huang et al."
+22,(2020) deep learning (dl) gong et al.
+22,"(2015), ghorbanzadeh et al."
+22,"(2019), lei et al. (2019a, b), wang et al."
+22,"(2019), bui et al."
+22,"(2020), du et al."
+22,"(2020), fang et al."
+22,"(2020), lv et al."
+22,(2020) surveys in geophysics (2020) 41:1391–1435
+23,surveys in geophysics (2020) 41:1391–1435 1413 fig.
+23,5 extract of landslide inventory map on kyushu island after 2017 landslide event.
+23,"multi-algorithms were tested with a k-means classification, b object-based classification, c support vector machine classifi- cation (svm), d random forest (rf) classification technique for which classifiers can be progressively adjusted according to misclassified dataset."
+23,"to illustrate, several classifiers have been performed (fig. 5) with two supervised (rf, svm) and one unsupervised method (k-means) for pixel-based and object-based approaches (fig. 5b)."
+23,"the obia approach has been tested in ecognition ­software® for uav images because of their low spectral resolution (with slope, local relief model, r-g-b bands, vegetation index grvi (eq. 4) and egi (eq."
+23,"the pixel-based approach was performed on pléiades image with ‘caret’ library in r software (with ndvi, atsavi, slope, curvature, sky view factor, r-g-b-nir bands)."
+23,several datasets have been tested (fig. 1) to define the most relevant layers.
+23,"evidently, an important preprocessing work is necessary with radiometric analysis [several indexes tested potentially redundant (eq."
+23,"(1)–(8))], dem derivatives calculation (see below: lrm, svf, various slope classifi- cations…)."
+23,"some layers are a priori considered as essential for landslide assessment (e.g., the topographic layer, soil-adjusted vegetation index (savi) values to consider the soil on brightness influence, openness…)."
+23,"regarding the results in ghorbanzadeh et al. 2019, despite the removal of the topographic layers in their datasets no difference has been seen in the classification (rf and svm)."
+23,the pixel approach with very high-resolution data seems to be sensitive to noise and consequently post-processing operations are necessary to improve the results (data filtering).
+23,"in our study, obia approach has provided good results with 70% of landslide detection and less influenced by image noise."
+23,the performance of rf is better than svm in several studies mentioned in huang and zhao (2018).
+23,4 artificial neural network (ann) and deep learning (dl) algorithms for landslide identification another family of classification algorithms exploits artificial neural networks (ann).
+23,"over the past 10 years, performances of related approaches generally systematically out- perform conventional classification methods (pakhale and gupta 2010)."
+23,the interest lies in the possibility of ann with deep layers to automatically compute efficient spatial features and classify them in a single framework.
+23,artificial neural networks can consist of deep structure and refer to ‘deep learning’ technique (table 2).
+23,"among anns, deep learning 13"
+24,1414 surveys in geophysics (2020) 41:1391–1435 architecture provides an opportunity to jointly optimize several related tasks together con- siders multi-layers processing in the model (to get more information on deep neural net- works refer to lecun et al.
+24,2015; schmidhuber 2015).
+24,"deep neural network approaches using earth observation have been particularly used over the early years, mainly thanks to the power of convolutional neural networks—cnns (zhu et al."
+24,2017; ma et al.
+24,2019).
+24,zhao et al. (2019) present a review of deep learning-based object detection frameworks with a specific presentation of cnns and their applications in landslide studies.
+24,cnn is a biologically-inspired dl technique that has shown powerful capabilities in feature extrac- tion (girshick 2015).
+24,"this type of network is considered as the most popular model of dl, even in the field of landslide researches (table 2)."
+24,"the main idea is to apply, in each layer of a deep neural network, spatial convolutions where the weights are learned by the model during the training stage."
+24,in each layer only a subset of the information embedded in it is kept (pooling).
+24,it results in images of decreasing sizes but with more and more features since many convolutions are applied.
+24,"this enables to automatically compute many spatial features adapted to the observed data (see, for example, zhao et al."
+24,(2019)).
+24,"dl with cnn already have been applied for landslide detection with multispectral, aerial or sar images (gong et al."
+24,"2015; lei et al. 2019a, b; lv et al. 2020) and can be employed for features extraction and then combined with another classifier (i.e., cnn + svm, cnn + rf, … in fang et al."
+24,2020).
+24,"as a matter of fact, the deep architecture of cnn provides an exponentially increased expressive capability for object detection such as landslides (table 2)."
+24,"regarding the bib- liography, the results of the image classification, and consequently the landslide detection, will depend on image accuracy, input data selected, chosen algorithm and cnn architec- ture."
+24,"initially the cnn approaches aimed to compute features and then to classify entire images (i.e., one label per image)."
+24,"based on the idea of cnn, several extensions have been proposed with deconvolution layers able to spatially relocalize the extracted features."
+24,"for example, objects can be detected with bounding boxes (r-cnn) or each pixel of the image can be classified (semantic segmentation, fcn and variants) based on numerous input datasets (multispectral images, various radiometrics indice layers, dem derivatives lay- ers… and also training samples for supervised methods)."
+24,"deep learning techniques with cnn, r-cnn or fcn provide great potential in the feature extraction process (chen et al."
+24,"2017; zhao and du 2016; lei et al. 2019a, b; fang et al. 2020) for landslide detection."
+24,these approaches are briefly described below.
+24,(1) region-based convolutional network (r-cnn) and fast r-cnn (girshick 2015) are region-based methods able to extract several bounding boxes in images.
+24,"these tech- niques do not seem to be the most adequate for risk assessment, because one of the main challenges in risk assessment is to define with accuracy the limits of landslides in landscape."
+24,a region-based approach is consequently not sufficient for hazard assess- ment.
+24,(2) fully convolutional networks (fcn) techniques and their extensions predict a class for each pixel of the input image instead of classify region (long et al.
+24,2015).
+24,"numerous recent work has shown the effectiveness of fcn principles for semantic segmentation (fcn-fast-fcn, u-net, res-net, etc.)."
+24,"although considered to be a robust approach, ghorbanzadeh et al. 2019 consider cnn methods to be as effective (if not less) as conventional learning algorithms (e.g., rf, svm, ann)."
+24,particularly when modelling is based on spectral information only and training samples for supervised methods ran- domly selected.
+24,"however, other studies (lei et al. 2019a, b; liu et al. 2020) highlight 13"
+25,surveys in geophysics (2020) 41:1391–1435 1415 the performance of fcn to learn better image features to improve landslide inventory and landslide susceptibility mapping (zhao and du 2016; fang et al.
+25,2020).
+25,"5 mass movement and change detection by remote sensing to characterize and quantify accurately surface and depth deformation several monitor- ing techniques are possible (gnss receiver, benchmark, extensometers, inclinometers…, lópez-davalillo et al."
+25,2014; jiang et al.
+25,2016; carlà et al.
+25,2019).
+25,numerous field moni- toring techniques can provide admittedly high accuracy 3d data of slope dynamics but with a limited spatial coverage.
+25,field investigation over large landslides is highly depend- ent on field accessibility and costs.
+25,"consequently, a dense multi-sensors coverage is hardly conceivable."
+25,"in this context, remote-sensed techniques can be employed as additional support to field monitoring based on sensors to increase the size of investigated areas and the spatial resolution of data."
+25,"the choice of the appropriate method mainly depends on (1) landslide velocity, (2) size, (3) location orientation, or its morphostructural con- text (high coastal mountain north–south orientation…), (4) and vegetation cover."
+25,"thus, three approaches frequently emerge."
+25,"while for large landslides undercovered by vegeta- tion, radar imaging (crosetto et al. 2016) will be favoured, lasergrammetry or photogram- metry, image correlation (casson et al."
+25,2003; ayoub et al.
+25,2009; travelletti et al. 2012) will be privileged in poorly vegetated and accessible areas.
+25,for large landslide detection and displacement measurement (berardino et al.
+25,2002; colesanti and wasowski 2006) the most widely used method is synthetic aperture radar interferometry (insar) based on scattering properties of earth surface (bamler and hartl 1998).
+25,"this technique meas- ures the phase and the amplitudes of the backscattered microwaves signals, comparing the phase information between signals acquired at different epochs, phase differences being proportional to ground motion."
+25,"persistent scatterer interferometry (ps-insar, crosetto et al."
+25,"2016), differential sar interferometry (dinsar, rudy et al. 2018), and small base- line interferometry (sbas) are some examples of how the use of sar has evolved with improved precision."
+25,"these methods make it possible to detect and quantify surface defor- mations (landslides including thaw slumps and active layer detachment slides, rock gla- cier, solifluction detection (barboux et al."
+25,"2013, 2014; echelard et al."
+25,2013; zwieback et al.
+25,2018; rouyet et al.
+25,"2019, paquette et al. 2020) with repeat pass insar, by measuring, field for example, the phase difference between two radar images acquired in a satellite, airborne or terrestrial context."
+25,"5.1 sar and optical cross‑correlation for measuring landslide kinematics to quantify surface deformation, radar-amplitude images are frequently combined with optical images (crippen 1992; michel et al."
+25,1999; van puymbroeck et al.
+25,2000).
+25,it has been proven complementary to insar in a number of geophysical studies (klinger et al. 2006; de michele and briole 2007; de michele et al.
+25,2010).
+25,the use of cross-correlation of optical spaceborne imagery to measure displacement fields of the earth surface was first conceptualized by robert crippen (1992) and applied to landslide motion measurement from spot data.
+25,"the method relies on the fact that spaceborne images, acquired at dif- ferent times, can be resampled to the same geometry with the use of a dem and a robust camera model."
+25,residual offsets that remain within the resampled images might then be due to terrain motion within the footprint of the images.
+25,"surely, other (non-geophysical) 13"
+26,1416 surveys in geophysics (2020) 41:1391–1435 residual distortions can exist within the offset field.
+26,"these can be due to ccd misalign- ment, the jitter of the satellite, roll, pitch and yaw motion of the sensor."
+26,"in theory, these lat- ter distortions can be modelled and removed."
+26,"offsets are commonly calculated by differen- tiating the phase of the fourier transform calculated on a subset of the images, by means of a moving window."
+26,the correlation peak is then interpolated to achieve sub-pixel precision.
+26,it is generally proven that this methodology can be as precise as 1/10th of the pixel size.
+26,the method has been applied to aerial photos and to satellite optical data (delacourt et al.
+26,"2004, 2009; stumpf et al."
+26,2014; le bivic et al.
+26,2017; lacroix et al.
+26,2019).
+26,in the optical domain the offset fields measured by cross-correlation is in two directions: lines and col- umns of the image matrix.
+26,these fields are commonly regarded as horizontal displacement fields.
+26,"sometimes this approximation is incorrect; the measured offset field is the apparent horizontal offset, which is the projection of the downslope motion induced by the gravita- tional movements, on the image plane."
+26,"in the radar domain, synthetic aperture radar (sar) data can be used, along with the sub-pixel offset method (fig. 6), to measure displacements fields of the earth surface due to gravitational movements."
+26,"the sar sub-pixel correlation method, today called “offset tracking”, has been developed for earthquake studies by michel et al."
+26,(1999).
+26,it demon- strated useful for landslides motion detection in a number of studies (debella-gilo and kääb 2011; li et al.
+26,2011; raucoules et al.
+26,2013; singleton et al.
+26,2014; wang et al.
+26,2016).
+26,this technique exploits the amplitude channel of the sar system.
+26,"it can be applied in the observation of fast landslides movements—as opposed to insar, since insar signal decorrelates if the ground motion gradient is higher than half an interferometric fringe per pixel—even in scarcely temporally coherent areas."
+26,"the sar instrument records the sar echoes in two directions, the line of sight (los) and the azimuth directions (i.e., the orbit direction)."
+26,the los direction has an angle with respect to the vertical.
+26,"therefore, by combining ascending and descending correlograms, one can retrieve the 3d vectors of the landslide displacement field over time, yielding a spatiotemporal distribution of landslides kinematics as described in raucoules et al."
+26,"today, new generations of optical and radar satellites, with improved repeat frequency, can be used along with the sub-pixel offset fig."
+26,6 3d surface displacement field of la valette landslide (france) from sub-pixel offset of terra-sar x data 13
+27,surveys in geophysics (2020) 41:1391–1435 1417 method to extract landslide velocity fields from space and create time series.
+27,"for instance, li et al. (2011) and sun and muller (2016) used multitemporal terra-sarx data to derive landslide motion rate at a sub-pixel level."
+27,"valkaniotis et al. (2018) used multiple sensors, sar and optical, to study a co-seismic landslide in iran; lacroix et al. (2019) estimated the ground displacement from time series analysis of landsat 8 images, spanning a 5.7-year period."
+27,they show systematic patterns that correlate with topography and seasonal varia- tions.
+27,they finally show complex nonlinear interannual displacement patterns.
+27,"a special case in this context are arctic coasts, which are highly affected by erosion, up to 10 m per year (lantuit et al."
+27,2012).
+27,coastal retrogressive thaw slumps will for example cause the loss of about 50% of cultural sites for 2100 along the beaufort sea coast (canada; irrgang et al.
+27,2019).
+27,many sites have been lost every year since the 1950s.
+27,"usually, aerial photos, sporadic high-resolution satellite data and, in some extreme cases, landsat data can be used to manually digitize coastlines and quantify their change over time."
+27,"in general, this technique allows only the detection of year to year changes or over several decades and the monitoring of seasonal behaviour is impeded by frequent cloud cover across the arctic."
+27,"in this context, sar data could be a solution to overcome these constraints but the spatial resolution of sar data is insufficient in case of most available sensors."
+27,"however, stettner et al. (2018) demonstrated the utility of x-band sar (2.35 m nominal resolution) for retro- gressive thaw slumps in association with river bank erosion (lena delta, russia)."
+27,the rate of about 2.5 m over three weeks barely matches the resolution of the sensors and can only be retrieved by analysing the progression over the whole season.
+27,"stettner et al. (2018) pro- posed a method which is, however, only applicable for slopes facing directly towards the sensor as the detection principle relies on the foreshortening effect of radar data."
+27,in such cases slopes appear brighter and can be therefore easily distinguished from surrounding tundra and river banks.
+27,the usually wet (and vegetation free) surfaces add to the magni- tude of backscatter as the response is conditioned by dielectric properties.
+27,"a further dis- advantage is, however, that actual positioning of the cliff-top requires the existence of an elevation model valid for the time of acquisition."
+27,rates are therefore relative but can give nevertheless valuable insight into seasonality and enable to identify the driving factors in these environments.
+27,"further developments are needed to extend the use of high-resolution sar data to further coastlines, also not facing the sensor."
+27,"5.2 terrestrial laser scanner (repeated surveys) common landslide monitoring techniques with inclinometers, gnss receivers, or insar can be difficult to apply with adequate spatial or temporal resolution; specifically, in for- ested and steep slope environments."
+27,"in various geographical contexts, such as coastal (conner and olsen 2014; costa et al. 2019), volcanic (pesci et al. 2011), or mountainous areas (travelletti et al."
+27,"2012, 2014; kenner et al. 2014), repeated campaigns of terrestrial laser scanner (tls) have proven to be an effective way to analyse patterns of mass move- ment displacements (jaboyedoff et al."
+27,2012; telling et al.
+27,2017).
+27,"indeed, application of tls for displacements measurement can be advantaged for very fast and very slow moving landslides."
+27,these techniques provide high-resolution 3d points clouds and infra-centimet- ric resolution models.
+27,"in some cases, multitemporal point clouds from tls can be com- bined with als surveys to assess vertical/horizontal displacement fields at various scales, to maximize spatial coverage and point density (fig."
+27,"but according to the study area application of tls can be spatially limited because of the field accessibility, vegetation 13"
+28,1418 surveys in geophysics (2020) 41:1391–1435 fig.
+28,7 tls combined with als survey and ground control points (gcps) for velocity measurement in coastal landslide in france cover and laser range (niethammer et al.
+28,2012).
+28,"in this context, the characterization of the landslide kinematics is challenging and requires the combination of tools."
+28,normandy (france) coastal landslides (costa et al. 2019) can easily illustrate the necessity and the difficulties to combine different sources of data to reduce measurement uncertainties inherent to the geographical context of the study area.
+28,villerville landslide is affected by slow and complex kinematics for which monitoring has been performed by conventional techniques (inclinometers) and gnss surveys since the 1980s.
+28,"villerville landslide is affected by complex movement patterns with deformations ranging from a few millimetres, to several centimetres per year."
+28,these displacement values are often close to 13
+29,surveys in geophysics (2020) 41:1391–1435 1419 the detection limit of conventional monitoring equipment.
+29,"due to the complex nature of its dynamics, and for early warning strategies, various techniques of investigation have been implemented with discrete measurements and continuous monitoring."
+29,a network of two permanent gnss stations and 17 gnss stations for campaign measurements was deployed on the landslide.
+29,"because of a dense vegetation cover and the landslide dimen- sion, surveys are limited (mainly because of accessibility, logistical and economic con- straints)."
+29,"in 2011, to detect failures under vegetation cover a first airborne full-waveform lidar was performed (fig."
+29,another lidar survey was performed by ign in 2015 ­(litto3d®) and used to study the deformation pattern of the landslide between 2010 and 2015.
+29,"although airborne lidar modelling accuracy can reach few decimetres, the result of lidar-derived dem differencing (dod) between 2010 and 2015 was not sufficient (i.e., the displacement field was below the laser model accuracy."
+29,"to address this issue, tls was deployed since 2018 for yearly campaigns at the foot of the landslide to generate very high-resolution model of this part of the landslide."
+29,data were taken by a riegl vz-400 instrument equipped with 1550 nm laser wavelength and unique echo digitization (riegl laser measurement systems 2014).
+29,for the best reconstruction of the surface geometry and avoiding occlusion the tls station must be located in the most appropriate positions (especially in complex geometry areas) involving multi-scan approach.
+29,"but a multi-scan, a multi-station approach can induce several sources of error affecting the 3d modelling and as a result the estimation of displacement values (barbarella et al."
+29,2017).
+29,the surveys of the landslide toe were carried out where the vegetation cover is sparse.
+29,"but the study area is located in a coastal environment, consequently the field of view is limited by the sea."
+29,the generation of accurate multitemporal models of the landslide deformation is now carried out with both airborne laser scanning for the largest and undercovered area and terrestrial laser scanning modelling with very high resolution (< cm) for the landslide toe.
+29,"besides, the protocol to be implemented with tls can be difficult, especially for irregu- lar terrain and coastal areas, terrestrial optical photogrammetry (top) with structure of motion (sfm) has recently emerged as an alternative and competing technology to provide high-resolution 3d point clouds and hr models for landslide studies."
+29,"5.3 terrestrial optical photogrammetry (repeated survey) for landslide assessment, terrestrial optical photogrammetry (top) provides a low- cost system for high-resolution monitoring in various environment: continental areas (gance et al."
+29,2014; stumpf et al.
+29,2015; fernández et al.
+29,2016; kromer et al. 2019) and coastal areas (francioni et al.
+29,2018; westoby et al.
+29,2018; gilham et al.
+29,2019; jaud et al.
+29,2019; warrick et al.
+29,2019).
+29,"as example, the monitoring network of the vaches noires cliffs (normandy, france) can be presented to illustrate the monitoring of land- slides using photogrammetric techniques (medjkane et al."
+29,2018; roulland et al.
+29,2019).
+29,these cliffs form a 4.5 km coastal line.
+29,"composed of marls, limestones and chalks lay- ers, they have a badland morphology that evolve under combined action of subaerial, continental and marine processes."
+29,"hydrogravity processes on these cliffs are multiple and interlock (landslides, rockfalls, mudflows, toe cliff erosion…)."
+29,"while the upper part can only be removed by ablation, the lower part (i.e., toe cliff) alternates between periods of progradation (by feeding materials from upstream) and periods of erosion (by sea erosion)."
+29,the nonlinear functioning in time and space of these coastal slopes is the result of hydrogravity processes relays that are defined and quantified on a test site of the vaches noires cliffs with the help of sfm photogrammetry.
+29,six or seven 13
+30,1420 surveys in geophysics (2020) 41:1391–1435 models are carried out each year on these cliffs to determine their seasonal activity.
+30,"the data acquisition is as follows: using a reflex camera (nikon d810, 35 mm sigma lens), 450–700 shots are taken along four photographic lines located at the bottom and top of the beach, on the top of basal scarp and at the foot of the gullies."
+30,photographs must have a recovery rate of 60% between them.
+30,"in order to set all models on the same geographical reference (rgf93—lambert 93), fifteen targets are distributed over the cliff studied portion, then surveyed using a trimble differential gps that has a centi- metric accuracy in longitude, latitude and altitude."
+30,"once the acquisition in the field is completed, pictures are inserted into the agisoft photoscan ® software, then the three- dimension models are built according to the different steps."
+30,"on each 3d model produced, a dtm is extracted and then integrated into a gis soft- ware."
+30,"each dtm is compared with the one acquired previously, by subtracting the altitude values between both."
+30,this allows mapping eroded areas (represent a loss between − 0.05 and − 3 m in red) and accumulation areas (represent a deposit between + 0.05 and + 3 m in blue) (fig.
+30,"each mass movement is then identified, digitized and integrated into a database where is integrated the type of movement, its surface area and also the volume of materials mobilized."
+30,"the repeated use over time of photogrammetry sfm, as well as its centimetric accuracy, allow to improve the understanding of mass movements of the vaches noires cliffs, but also to determine the rates and rhythms of evolution in relation to marine, hydrological, and meteorological conditions."
+30,it is necessary to keep in mind that sfm photogrammetry is one of the many spatial remote-sensing tools available for mass movement analysis.
+30,it must be always supported by observations and field measurements or monitoring.
+30,"it has several advantages such as the 3d processing speed (from the field to the laboratory step) and also the possibility of quickly mobilizing the equipment on the field during major morphogenetic events (storms, floods, …)."
+30,"the centimetric accuracy obtained with quality measuring instruments (dif- ferential gps, total station) or the textured 3d model obtained that facilitates the reading and analysis of the modelled geographic objects for geomorphologists."
+30,"however, there are limits due to photographic protocol (fig."
+30,"for example, a uniform light is essential on each picture, and the camera configurations should not be changed during the photographic acquisition."
+30,"nowadays, it is also difficult to remove totally vegetation from 3d models."
+30,"hence, others 3d modelling tools such as lidar are used to counter these difficulties."
+30,several papers try a comparative analysis of the performance of these two methods (tls and sfm in salvini et al.
+30,2013; ouédraogo et al.
+30,2014).
+30,various studies underline that these two techniques provide very high-resolution topographic data with heterogeneous point spacing and density.
+30,the resolution of the data will mainly depend on the protocol of sur- vey and on the specificities of the study area.
+30,"the steeper and more vegetated the study area is, the less accurate the point cloud will be."
+30,6 discussion landslides detection is still a challenging task due to many forms and sizes landslides can take and the context of their occurrence.
+30,remotely sensed data and associated tools have become essential for landslide detection and monitoring.
+30,"in recent decades, sev- eral systems have been developed with the possibility of free of charge satellite solu- tions with high-resolution images such as copernicus sentinel-1 and sentinel-2, and low-cost airborne solutions such as uavs equipped with different types of sensors (i.e., 13"
+31,surveys in geophysics (2020) 41:1391–1435 1421 fig.
+31,"8 presentation of the photogrammetric sfm technique uses on the vaches noires cliffs (normandy, france). a data acquisition strategy on the field, b difference elevation model with pictures of actives areas multi- hyperspectral, lidar sensors)."
+31,several applications use remote sensing for land- slide mapping and monitoring (tofani et al. 2013) and these approaches can be consid- ered today as important as field surveys.
+31,"for risk assessment, the amount of data used is 13"
+32,1422 surveys in geophysics (2020) 41:1391–1435 always important.
+32,"the challenge is to define the most appropriate spatial and temporal scale of analysis and the most appropriate support (spatial, airborne, ground-based)."
+32,"with the increase of the number of remotely sensed data and their increase in reso- lution, automatic processing techniques have become more and more widespread."
+32,"the landscape change detection is usually performed automatically using algorithms devel- oped to compare 3d point clouds, dems or multispectral images."
+32,"but the manual inter- pretation of data (spaceborne, airborne, terrestrial images) is still effective."
+32,"for example, in permafrost regions, monitoring of retrogressive thaw slumps has been so far mostly based on manual interpretation, especially with landsat data."
+32,machine learning has been rarely used to date for land cover classification tasks in high latitudes (see also bartsch et al.
+32,2016).
+32,this is attributed to the size of the features (mixed pixel effect) and ambiguities in reflectance patterns in tundra landscapes.
+32,many further bare tundra surface types are existing.
+32,many thousands of landslides are initi- ated and reactivated related to air temperature fluctuations and subsequent permafrost thaw across the entire arctic.
+32,visual interpretation is therefore insufficient to obtain a complete picture for the arctic.
+32,"moreover, it is time-consuming and labour-intensive."
+32,sentinel-2 with its 10 m resolution and high revisit time provides an important step forward in monitoring of these retrogressive thaw slumps and in general landslides.
+32,"consequently, inventories can be frequently updated with recent features and seasonal changes."
+32,"obviously, automatic detection of these features based on high-resolution data will be of high value for climate change impact assessment in such regions."
+32,the application of machine learning and especially deep learning approaches with vhr images is expected to ameliorate both landslides detection and their evolution in various environments in the near future.
+32,"automation approach with convolutional neural networks (cnns), has made a series of improvement in image classification and object detection."
+32,"although conventional deep learning architectures are frequently applied (table 2) for landslide susceptibility mapping, with application of cnn or derived methods (object detection, semantic segmentation) for landslide detection are still lim- ited."
+32,"conventional machine learning techniques (e.g., svm, rf) are suitable for land- slide assessment with small dataset (huang and zhao 2018), but the distinction of land- slide type remains difficult and results highly depend on the chosen algorithm, network architecture and dataset (ghorbanzadeh et al."
+32,2019).
+32,most of the studies today are based on supervised approaches that require training samples for training the network.
+32,these methods are robust but labelling training samples is time-consuming.
+32,"today, the open challenges are: • vhr satellite images can be acquired timely after a major landslide event and/or with daily temporal resolution at nearly global coverage."
+32,"in combination with the potentiality of deep learning algorithms, one of the major challenges is to provide robust solutions for near real-time hazard detection along the lines of what is being done for flood management (e.g., european flood awareness system from coperni- cus in https​://emerg​ency.coper​nicus​.eu/)."
+32,• reduce costs in terms of data handling and processing and the technical skills for near real-time hazard detection.
+32,• combine sar offset tracking and insar analysis to improve landslides inventories on a national scale level.
+32,• foster knowledge transfer from scientific community to stakeholders and popula- tions at risk.
+33,surveys in geophysics (2020) 41:1391–1435 1423 7 conclusions numerous fatalities and thousands of deaths result from landslides each year.
+33,"in a context of global changes, numerous uncertainties concern landslide occurrence."
+33,"consequently, it is necessary to identify areas affected by landslides."
+33,"on the one hand, they caused struc- tural, physical and economic damages when they occur."
+33,"on the other hand, these processes may cause major environmental damages, as is the case in the arctic."
+33,the arctic is one of the areas which has recently gained more and more attention in the context of mass move- ments due to their abundance and relationship to climate change.
+33,they are not only a haz- ard for people and infrastructure in the arctic but are also relevant on global scale.
+33,"as soils are carbon-rich in the arctic, they also play a role for the carbon cycle."
+33,"mass movements play an important role for carbon transport into streams and the ocean, leading to acidifica- tion."
+33,it has been estimated that c­ o2 efflux in rill runoff thaw streams (runoff) within retro- gressive thaw slumps (rtss) is four times greater than in adjacent streams.
+33,"the quantifica- tion of overall transport into the oceans, by streams and coastal erosion still remains to be quantified."
+33,satellite data are expected to support such analyses by combination of marine (ocean colour) and terrestrial observations (land surface features as proxy for soil proper- ties).
+33,"a combination of multispectral, lidar and radar information together with advanced analyses techniques are needed to fully capture their occurrence and impact."
+33,"the presented examples illustrate the applicability as well as gaps of the various types of remote-sensing techniques (insar, sub-pixel correlation, photogrammetry…) and highlight the necessity of automatization of the processing especially for landslide detection, mapping and sur- face deformation assessment."
+33,"this paper presents numerous remote-sensing techniques and highlights the difficulties related to these methods, both in terms of spatial and temporal resolution and sometimes their difficulty to implement because of the specificity of the ter- rain (accessibility, vegetation cover, landslide velocity and size)."
+33,"consequently, it may be necessary to integrate data from different sources of investigations (tls associated to sfm or tls associated to als) to overcome the limitations of each remote-sensed technique and to cross-validate the result with conventional techniques."
+33,"remotely sensed data can be considered as powerful and well-established information sources for landslide mapping, monitoring and hazard analysis and a wide range of available techniques and supports can be useful depending on the size and velocity of the hazard."
+33,"acknowledgements this paper is a result of the international workshop on “natural and man-made hazards monitoring by the earth observation missions: current status and scientific gaps” held at the international space science institute (issi), bern, switzerland, on april 15–18, 2019."
+33,we thank all the authors for their contribution in this article with the result of their researches.
+33,"the repeated surveys in normandy, are sup- ported by the anr project “ricochet: multi-risk assessment on coastal territory in a global change context” funded by the french research national agency (anr-16-ce03-0008)."
+33,permafrost researches benefited from nunataryuk project (h2020 research and innovation programme under grant agreement no.
+33,"773421), esa due globpermafrost project (4000116196/15/i–nb) as well as esa climate change initiative project on permafrost (4000123681/18/i-nb)."
+33,"references abellan a, derron mh, jaboyedoff m (2016) use of 3d points clouds in geohazards."
+33,special issue: current challenges and future trends.
+33,"remote sens 8(2):130. https​://doi.org/10.3390/rs802​0130 achour y, pourghasemi hr (2019) how do machine learning techniques help in increasing accuracy of landslide susceptibility maps?"
+33,geosci front 11(3):871–883. https​://doi.org/10.1016/j.gsf.2019.10.001 13
+34,"1424 surveys in geophysics (2020) 41:1391–1435 aditian a, kubota t, shinohara y (2018) comparison of gis-based landslide susceptibility models using frequency ratio, logistic regression, and artificial neural network in a tertiary region of ambon, indo- nesia."
+34,"geomorphology 318:101–111. https​://doi.org/10.1016/j.geomo​rph.2018.06.006 anders ns, seijmonsbergen ac, bouten w (2011) segmentation optimization and stratified object-based analysis for semi-automated geomorphological mapping."
+34,"remote sens environ 115(12):2976–2985. https​://doi.org/10.1016/j.rse.2011.05.007 arabameri a, pradhan b, rezaei k, lee cw (2019) assessment of landslide susceptibility using statistical- and artificial intelligence-based fr–rf integrated model and multiresolution dems."
+34,"remote sens 11(9):999. https​://doi.org/10.3390/rs110​90999​ ardizzone f, cardinali m, galli m, guzzetti f, reichenbach p (2007) identification and mapping of recent rainfall-induced landslides using elevation data collected by airborne lidar."
+34,"nat hazards earth syst sci 7(6):637–650 ayoub f, leprince s, avouac jp (2009) co-registration and correlation of aerial photographs for ground deformation measurements."
+34,"isprs j photogramm remote sens 64(6):551–560. https​://doi. org/10.1016/j.isprs​jprs.2009.03.005 babkina ea, leibman mo, dvornikov ya, fakashchuk ny, khairullin rr, khomutov av (2019) acti- vation of cryogenic processes in central yamal as a result of regional and local change in climate and thermal state of permafrost."
+34,"russ meteorol hydrol 44(4):283–290. https​://doi.org/10.3103/s1068​ 37391​90400​83 ballabio c, sterlacchini s (2012) support vector machines for landslide susceptibility mapping: the staffora river basin case study, italy."
+34,"math geosci 44:47–70. https​://doi.org/10.1007/s1100​4-011-9379-9 bamler r, hartl p (1998) synthetic aperture radar interferometry."
+34,"inverse prob 14(4):r1 barbarella m, fiani m, lugli a (2017) uncertainty in terrestrial laser scanner surveys of landslides."
+34,"remote sens 9(2):113. https​://doi.org/10.3390/rs902​0113 barboux c, delaloye r, lambiel c, strozzi t, collet c, raetzo h (2013) surveying the activity of land- slides and rock glaciers above the tree line with insar."
+34,in: graf c (ed) mattertal-ein tal in bewe- gung.
+34,jahrestagung der schweizerischen geomorphologischen gesellschaft 29.
+34,juni–1.
+34,"juli 2011, st."
+34,"niklaus, birmensdorf, eidg."
+34,"forschungsanstalt wsl, pp 7–19 barboux c, delaloye r, lambiel c (2014) inventorying slope movements in an alpine environment using dinsar."
+34,"earth surf proc land 39(15):2087–2099. https​://doi.org/10.1002/esp.3603 barla g, antolini f, barla m, mensi e, piovano g (2010) monitoring of the beauregard landslide (aosta valley, italy) using advanced and conventional techniques."
+34,"eng geol 116(3–4):218–235. https​://doi. org/10.1016/j.engge​o.2010.09.004 bartsch a, höfler a, kroisleitner c, trofaier am (2016) land cover mapping in northern high latitude per- mafrost regions with satellite data: achievements and remaining challenges."
+34,"remote sens 8:979. https​ ://doi.org/10.3390/rs812​0979 bartsch a, leibman m, strozzi t, khomutov a, widhalm b, babkina e et al (2019) seasonal progres- sion of ground displacement identified with satellite radar interferometry and the impact of unusually warm conditions on permafrost at the yamal peninsula in 2016."
+34,"remote sens 11(16):1865. https​:// doi.org/10.3390/rs111​61865​ behling r, roessner s, kaufmann h, kleinschmit b (2014) automated spatiotemporal landslide map- ping over large areas using rapideye time series data."
+34,"remote sens 6(9):8026–8055. https​://doi. org/10.3390/rs609​8026 bell r, petschko h, röhrs m, dix a (2012) assessment of landslide age, landslide persistence and human impact using airborne laser scanning digital terrain models."
+34,"geografiska annaler ser a phys geogr 94(1):135–156. https​://doi.org/10.1111/j.1468-0459.2012.00454​.x berardino p, fornaro g, lanari r, sansosti e (2002) a new algorithm for surface deformation monitor- ing based on small baseline differential sar interferograms."
+34,"ieee trans geosci remote sens 40(11):2375–2383. https​://doi.org/10.1109/tgrs.2002.80379​2 biass s, orr tr, houghton bf, ratrick mr, james m, turner n (2019) insights into pāhoehoe lava emplacement using visible and thermal structure-from-motion photogrammetry."
+34,"j geophys res solid earth 124(6):5678–5695. https​://doi.org/10.1029/2019j​b0174​44 bitelli g, dubbini m, zanutta a (2004) terrestrial laser scanning and digital photogrammetry techniques to monitor landslide bodies."
+34,int arch photogramm remote sens spatial inf sci 35(b5):246–251 breiman l (2001) random forests.
+34,"mach learn 45(1):5–32 brun f, buri p, miles e, wagnon p, steiner j, berthier e, ragettli s, kraaijenbrink p, immerzeel w, pel- licciotti f (2016) quantifying volume loss from ice cliffs on debris-covered glaciers using high-res- olution terrestrial and aerial photogrammetry."
+34,j glaciol 62(234):684–695. https​://doi.org/10.1017/ jog.2016.54 13
+35,surveys in geophysics (2020) 41:1391–1435 1425 brunsden d (1993) mass movement; the research frontier and beyond: a geomorphological approach.
+35,"geomorphology 7(1–3):85–128 bui dt, hoang nd, nguyen h, tran xl (2019) spatial prediction of shallow landslide using bat algo- rithm optimized machine learning approach: a case study in lang son province, vietnam."
+35,"adv eng inf 42:100978. https​://doi.org/10.1016/j.aei.2019.10097​8 bui dt, tsangaratos p, nguyen vt, van liem n, trinh pt (2020) comparing the prediction perfor- mance of a deep learning neural network model with conventional machine learning models in landslide susceptibility assessment."
+35,"catena 188:104426. https​://doi.org/10.1016/j.caten​ a.2019.10442​6 bunn md, leshchinsky ba, olsen mj, booth a (2019) a simplified, object-based framework for efficient landslide inventorying using lidar digital elevation model derivatives."
+35,"remote sens 11(3):303. https​://doi.org/10.3390/rs110​30303​ burns wj, madin i (2009) protocol for inventory mapping of landslide deposits from light detection and ranging (lidar) imagery."
+35,"oregon department of geology and mineral industries, portland, pp 1–30 burns wj, duplantis s, jones cb, english jt (2012) lidar data and landslide inventory maps of the north fork siuslaw river and big elk creek watersheds."
+35,"lane, lincoln, and benton counties, oregon carlà t, tofani v, lombardi l, raspini f, bianchini s, bertolo d et al (2019) combination of gnss, satellite insar, and gbinsar remote sensing monitoring to improve the understanding of a large landslide in high alpine environment."
+35,"geomorphology 335:62–75. https​://doi.org/10.1016/j.geomo​ rph.2019.03.014 carr bb, clarke ba, arrowsmith jr, vanderkluysen l, eko dhanu b (2018) the emplacement of the active lava flow at sinabung volcano, sumatra, indonesia, documented by structure-from-motion photo- grammetry."
+35,"j volcanol geoth res 382:164–172. https​://doi.org/10.1016/j.jvolg​eores​.2018.02.004 casagli n, cigna f, bianchini s, hölbling d, füreder p, righini g et al (2016) landslide mapping and monitoring by using radar and optical remote sensing: examples from the ec-fp7 project safer."
+35,"remote sens appl soc environ 4:92–108. https​://doi.org/10.1016/j.rsase​.2016.07.001 casagli n, frodella w, morelli s, tofani v, ciampalini a, intrieri e et al (2017) spaceborne, uav and ground-based remote sensing techniques for landslide mapping, monitoring and early warning."
+35,"geoenviron disasters 4(9):1–23. https​://doi.org/10.1186/s4067​7-017-0073-1 casson b, baratoux d, delacourt d, allemand p (2003) seventeen years of the “la clapière” landslide evolution analysed from ortho-rectified aerial photographs."
+35,"eng geol 68(1–2):123–139 casson b, delacourt c, allemand p (2005) contribution of multi-temporal remote sensing images to char- acterize landslide slip surface?"
+35,application to the la clapière landslide (france).
+35,"nhess 5:425–437 catani f, casagli n, ermini l, righini g, menduni g (2005) landslide hazard and risk mapping at catchment scale in the arno river basin."
+35,"landslides 2(4):329–342. https​://doi.org/10.1007/s1034​ 6-005-0021-0 catani f, lagomarsino d, segoni s, tofani v (2013) exploring model sensitivity issues across different scales in landslide susceptibility."
+35,"nhesd 1(2):583–623 chanut ma, kasperski j, dubois l, dauphin s, duranthon jp (2017) quantification des déplace- ments 3d par la méthode plas: application au glissement du chambon (isère)."
+35,"rev fr géotech 150(4):1–14. https​://doi.org/10.1051/geote​ch/20170​09 chen w, li x, wang y, chen g, liu s (2014) forested landslide detection using lidar data and the random forest algorithm: a case study of the three gorges, china."
+35,"remote sens environ 152:291– 301. https​://doi.org/10.1016/j.rse.2014.07.004 chen w, pourghasemi hr, kornejady a, zhang n (2017) landslide spatial modeling: introducing new ensembles of ann, maxent, and svm machine learning techniques."
+35,"geoderma 305:314–327. https​://doi.org/10.1016/j.geode​r ma.2017.06.020 chigira m, duan f, yagi h, furuya t (2004) using an airborne laser scanner for the identification of shallow landslides and susceptibility assessment in an area of ignimbrite overlain by permeable pyroclastics."
+35,"landslides 1(3):203–209. https​://doi.org/10.1007/s1034​6-004-0029-x chigira m, wu x, inokuchi t, wang g (2010) landslides induced by the 2008 wenchuan earthquake, sichuan, china."
+35,"geomorphology 118(3–4):225–238. https​://doi.org/10.1016/j.geomo​rph.2010.01.003 chunhui z, bing g, lejun z, xiaoqing w (2018) classification of hyperspectral imagery based on spectral gradient, svm and spatial random forest."
+35,"infrared phys technol 95:61–69. https​://doi. org/10.1016/j.infra​red.2018.10.012 ciampalini a, raspini f, bianchini s, frodella w, bardi f, lagomarsino d et al (2015) remote sensing as tool for development of landslide databases: the case of the messina province (italy) geodata- base."
+35,"geomorphology 249:103–118. https​://doi.org/10.1016/j.geomo​r ph.2015.01.029 colesanti c, wasowski j (2006) investigating landslides with space-borne synthetic aperture radar (sar) interferometry."
+35,eng geol 88(3–4):173–199. https​://doi.org/10.1016/j.engge​o.2006.09.013 13
+36,"1426 surveys in geophysics (2020) 41:1391–1435 comert r, avdan u, gorum t, nefeslioglu ha (2019) mapping of shallow landslides with object-based image analysis from unmanned aerial vehicle data."
+36,"eng geol 260:105264. https​://doi.org/10.1016/j. engge​o.2019.10526​4 conner jc, olsen mj (2014) automated quantification of distributed landslide movement using circular tree trunks extracted from terrestrial laser scan data."
+36,"comput geosci 67:31–39. https​://doi.org/10.1016/j. cageo​.2014.02.007 corsini a, farina p, antonello g, barbieri m, casagli n, coren f et al (2006) space-borne and ground- based sar interferometry as tools for landslide hazard management in civil protection."
+36,"int j remote sens 27(12):2351–2369. https​://doi.org/10.1080/01431​16060​05544​05 corsini a, berti m, monni a, pizziolo m, bonacini f, cervi f et al (2013) rapid assessment of land- slide activity in emilia romagna using gb-insar short surveys."
+36,"landslide sci pract. https​://doi. org/10.1007/978-3-642-31445​-2_51 cortes c, vapnik v (1995) support-vector networks."
+36,"mach learn 20(3):273–290 costa s, maquaire o, letortu p, thirard g, compain v, roulland t et al (2019) sedimentary coastal cliffs of normandy: modalities and quantification of retreat."
+36,j coast res 88(si):46–60. https​://doi. org/10.2112/si88-005.1 crippen re (1992) measurement of subresolution terrain displacements using spot panchromatic imagery.
+36,"report 15(1):56–61 crosetto m, monserrat o, luzi g, cuevas-gonzález m, devanthéry n (2014) a non interferometric pro- cedure for deformation measurement using gb-sar imagery."
+36,"ieee geosci remote sens lett 11(1):34–38. https​://doi.org/10.1109/lgrs.2013.22450​98 crosetto m, monserrat o, cuevas-gonzález m, devanthéry n, crippa b (2016) persistent scatterer inter- ferometry: a review."
+36,"isprs j photogramm remote sens 115:78–89. https​://doi.org/10.1016/j.isprs​ jprs.2015.10.011 dai k, li z, tomás r, liu g, yu b, wang x, cheng h, chen j, stockamp j (2016) monitoring activity at the daguangbao mega-landslide (china) using sentinel-1 tops time series interferometry."
+36,"remote sens environ 186:501–513. https​://doi.org/10.1016/j.rse.2016.09.009 de michele m, briole p (2007) deformation between 1989 and 1997 at piton de la fournaise volcano retrieved from correlation of panchromatic airborne images."
+36,"geophys j int 169(1):357–364. https​:// doi.org/10.1111/j.1365-246x.2006.03307​.x de michele m, raucoules d, de sigoyer j, pubellier m, chamot-rooke n (2010) three-dimensional sur- face displacement of the 2008 may 12 sichuan earthquake (china) derived from synthetic aper- ture radar: evidence for rupture on a blind thrust."
+36,"geophys j int 183(3):1097–1103. https​://doi. org/10.1111/j.1365-246x.2010.04807​.x debella-gilo m, kääb a (2011) sub-pixel precision image matching for measuring surface displacements on mass movements using normalized cross-correlation."
+36,"remote sens environ 115(1):130–142. https​ ://doi.org/10.1016/j.rse.2010.08.012 delacourt c, allemand p, casson b, vadon h (2004) velocity field of the “la clapière” landslide measured by the correlation of aerial and quickbird satellite images."
+36,"geophys res lett 31(15):1–5. https​://doi. org/10.1029/2004g​l0201​93 delacourt c, allemand p, berthier e, raucoules d, casson b, grandjean p, pambrun c, varel e (2007) remote-sensing techniques for analysing landslide kinematics: a review."
+36,"bulletin de la société géologique de france 178(2):89–100. https​://doi.org/10.2113/gssgf​bull.178.2.89 delacourt c, raucoules d, le mouélic s, carnec c, feurer d, allemand p, cruchet m (2009) observation of a large landslide on la reunion island using differential sar interferometry (jers and radarsat) and correlation of optical (spot5 and aerial) images."
+36,"sensors 9(1):616–630. https​://doi.org/10.3390/ s9010​0616 di stefano c, palmeri v, pampalone v (2019) an automatic approach for rill network extraction to meas- ure rill erosion by terrestrial and low-cost unmanned aerial vehicle photogrammetry."
+36,"hydrol process 33(13):1883–1895. https​://doi.org/10.1002/hyp.13444​ du j, glade t, woldai t, chai b, zeng b (2020) landslide susceptibility assessment based on an incom- plete landslide inventory in the jilong valley, tibet, chinese himalayas."
+36,"eng geol. https​://doi. org/10.1016/j.engge​o.2020.10557​2 echelard t, krysiecki jm, gay m, schoeneich p (2013) détection des mouvements de glaciers rocheux dans les alpes françaises par interférométrie radar différentielle (d-insar) dérivée des archives satellitaires ers (european remote sensing)."
+36,"géomorphologie relief processus environnement 19(3):231–242. https​://doi.org/10.4000/geomo​rphol​ogie.10264​ fan x, xu q, scaringi g, dai l, li w, dong x, zhu x, pei x, dai k, havenith hb (2017) failure mecha- nism and kinematics of the deadly june 24th 2017 xinmo landslide, maoxian, sichuan, china."
+36,land- slides 14(6):2129–2146. https​://doi.org/10.1007/s1034​6-017-0907-7 13
+37,"surveys in geophysics (2020) 41:1391–1435 1427 fan x, domènech g, scaringi g, huang r, xu q, hales tc et al (2018) spatio-temporal evolution of mass wasting after the 2008 mw 7.9 wenchuan earthquake revealed by a detailed multi-temporal inventory."
+37,"landslides 15(12):2325–2341. https​://doi.org/10.1007/s1034​6-018-1054-5 fang z, wang y, peng l, hong h (2020) integration of convolutional neural network and conventional machine learning classifiers for landslide susceptibility mapping."
+37,"comput geosci. https​://doi. org/10.1016/j.cageo​.2020.10447​0 farahmand a, aghakouchak a (2013) a satellite-based global landslide model."
+37,"nat hazards earth syst sci 13(5):1259–1267. https​://escho​larsh​ip.org/uc/item/0p905​918 fernández t, pérez j, cardenal j, gómez j, colomo c, delgado j (2016) analysis of landslide evolution affecting olive groves using uav and photogrammetric techniques."
+37,"remote sens 8(10):837. https​ ://doi.org/10.3390/rs810​0837 francioni m, coggan j, eyre m, stead d (2018) a combined field/remote sensing approach for char- acterizing landslide risk in coastal areas."
+37,"int j appl earth obs geoinf 67:79–95. https​://doi. org/10.1016/j.jag.2017.12.016 french hm, williams p (2017) the periglacial environment, 4th edn."
+37,"longman, london. https​://doi. org/10.1002/97811​19132​820 fressard m, maquaire o, thiery y, davidson r, lissak c (2016) multi-method characterisation of an active landslide: case study in the pays d’auge plateau (normandy, france)."
+37,"geomorphology 270:22–39. https​://doi.org/10.1016/j.geomo​r ph.2016.07.001 freund y, schapire re (1995) a desicion-theoretic generalization of on-line learning and an application to boosting."
+37,"eur conf comput learn theory. https​://doi.org/10.1007/3-540-59119​-2_166 galli m, ardizzone f, cardinali m, guzzetti f, reichenbach p (2008) comparing landslide inventory maps."
+37,"geomorphology 94(3–4):268–289. https​://doi.org/10.1016/j.geomo​r ph.2006.09.023 gance j, malet jp, dewez t, travelletti j (2014) target detection and tracking of moving objects for characterizing landslide displacements from time-lapse terrestrial optical images."
+37,"eng geol 172:26–40. https​://doi.org/10.1016/j.engge​o.2014.01.003 ghorbanzadeh o, blaschke t, gholamnia k, meena sr, tiede d, aryal j (2019) evaluation of different machine learning methods and deep-learning convolutional neural networks for landslide detec- tion."
+37,"remote sens 11(2):196. https​://doi.org/10.3390/rs110​20196​ gilham j, barlow j, moore r (2019) detection and analysis of mass wasting events in chalk sea cliffs using uav photogrammetry."
+37,eng geol 250:101–112. https​://doi.org/10.1016/j.engge​ o.2019.01.013 girshick r (2015) fast r-cnn.
+37,"proc ieee int conf comput vis. https​://doi.org/10.1109/iccv.2015.169 gomez c, kennedy b (2018) capturing volcanic plumes in 3d with uav-based photogrammetry at yasur volcano-vanuatu."
+37,"j volcanol geoth res 350:84–88. https​://doi.org/10.1016/j.jvolg​eores​.2017.12.007 gong m, zhao j, liu j, miao q, jiao l (2015) change detection in synthetic aperture radar images based on deep neural networks."
+37,ieee trans neural netw learn syst 27(1):125–138. https​://doi. org/10.1109/tnnls​.2015.24357​83 görüm t (2019) landslide recognition and mapping in a mixed forest environment from airborne lidar data.
+37,"eng geol 258:105155. https​://doi.org/10.1016/j.engge​o.2019.10515​5 groos ar, bertschinger tj, kummer cm, erlwein s, munz l, philipp a (2019) the potential of low- cost uavs and open-source photogrammetry software for high-resolution monitoring of alpine glaciers: a case study from the kanderfirn (swiss alps)."
+37,"geosciences 9(8):356. https​://doi. org/10.3390/geosc​ience​s9080​356 gudino-elizondo n, biggs tw, castillo c, bingner rl et al (2018) measuring ephemeral gully ero- sion rates and topographical thresholds in an urban watershed using unmanned aerial systems and structure from motion photogrammetric techniques."
+37,"land degrad dev 29(6):1896–1905. https​:// doi.org/10.1002/ldr.2976 guzzetti f, mondini ac, cardinali m, fiorucci f, santangelo m, chang kt (2012) landslide inventory maps: new tools for an old problem."
+37,"earth sci rev 112(1–2):42–66. https​://doi.org/10.1016/j.earsc​ irev.2012.02.001 heindel rc, chipman jw, dietrich jt, virginia ra (2018) quantifying rates of soil deflation with structure-from-motion photogrammetry in west greenland."
+37,"arct antarct alp res 50(1):s100012. https​://doi.org/10.1080/15230​430.2017.14158​52 herrera g, fernández-merodo ja, mulas j, pastor m, luzi g, monserrat o (2009) a landslide forecast- ing model using ground based sar data: the portalet case study."
+37,"eng geol 105(3–4):220–230. https​://doi.org/10.1016/j.engge​o.2009.02.009 hong h, pradhan b, xu c, bui dt (2015) spatial prediction of landslide hazard at the yihuang area (china) using two-class kernel logistic regression, alternating decision tree and support vector machines."
+37,catena 133:266–281. https​://doi.org/10.1016/j.caten​a.2015.05.019 13
+38,"1428 surveys in geophysics (2020) 41:1391–1435 hong h, pradhan b, jebur mn, bui dt, xu c, akgun a (2016) spatial prediction of landslide hazard at the luxi area (china) using support vector machines."
+38,"environ earth sci 75(1):40. https​://doi.org/10.1007/ s1266​5-015-4866-9 hu q, zhou y, wang s, wang f (2020) machine learning and fractal theory models for landslide suscep- tibility mapping: case study from the jinsha river basin."
+38,"geomorphology 351:106975. https​://doi. org/10.1016/j.geomo​rph.2019.10697​5 huang rq, li aw (2009) analysis of the geo-hazards triggered by the 12 may 2008 wenchuan earthquake, china."
+38,"bull eng geol environ 68(3):363–371. https​://doi.org/10.1007/s1006​4-009-0207-0 huang y, zhao l (2018) review on landslide susceptibility mapping using support vector machines."
+38,"cat- ena 165:520–529. https​://doi.org/10.1016/j.caten​a.2018.03.003 huang f, cao z, guo j, jiang sh, li s, guo z (2020) comparisons of heuristic, general statistical and machine learning models for landslide susceptibility prediction and mapping."
+38,"catena 191:104580. https​://doi.org/10.1016/j.caten​a.2020.10458​0 hungr o, leroueil s, picarelli l (2014) the varnes classification of landslide types, an update."
+38,"landslides 11(2):167–194. https​://doi.org/10.1007/s1034​6-013-0436-y ingles j, darrozes j, soula jc (2006) effects of the vertical component of ground shaking on earthquake- induced landslide displacements using generalized newmark analysis."
+38,"eng geol 86(2–3):134–147. https​://doi.org/10.1016/j.engge​o.2006.02.018 irrgang am, lantuit h, gordon rr, piskor a, manson gk (2019) impacts of past and future coastal changes on the yukon coast: threats for cultural sites, infrastructure, and travel routes."
+38,"arct sci 5(2):107–126. https​://doi.org/10.1139/as-2017-0041 jaboyedoff m, oppikofer t, abellán a, derron mh, loye a, metzger r, pedrazzini a (2012) use of lidar in landslide investigations: a review."
+38,"nat hazards 61(1):5–28. https​://doi.org/10.1007/s1106​ 9-010-9634-2 jaboyedoff m, del gaudio v, derron mh, grandjean g, jongmans d (2019) characterizing and monitoring landslide processes using remote sensing and geophysics."
+38,"eng geol 259:105167 james mr, chandler jh, eltner a, fraser c, miller pe, mills jp, noble t, robson s, lane sn (2019) guidelines on the use of structure-from-motion photogrammetry in geomorphic research."
+38,"earth surf process landf 44:2081–2084. https​://doi.org/10.1002/esp.4637 jaud m, letortu p, théry c, grandjean p, costa s, maquaire o, davidson r, le dantec n (2019) uav sur- vey of a coastal cliff face: selection of the best imaging angle."
+38,"measurement 139:10–20. https​://doi. org/10.1016/j.measu​remen​t.2019.02.024 jiang s, wen bp, zhao c, li rd, li zh (2016) kinematics of a giant slow-moving landslide in northwest china: constraints from high-resolution remote sensing imagery and gps monitoring."
+38,"j asian earth sci 123:34–46. https​://doi.org/10.1016/j.jseae​s.2016.03.019 jones mkw, pollard wh, jones bm (2019) rapid initialization of retrogressive thaw slumps in the cana- dian high arctic and their response to climate and terrain factors."
+38,"environ res lett 14(5):055006. https​://doi.org/10.1088/1748-9326/ab12f​d jorgenson mt, grosse g (2016) remote sensing of landscape change in permafrost regions."
+38,"permafrost periglac process 27(4):324–338. https​://doi.org/10.1002/ppp.1914 jugie m, gob f, virmoux c, brunstein d, tamisier v, le cœur c, grancher d (2018) characterizing and quantifying the discontinuous bank erosion of a small low energy river using structure-from- motion photogrammetry and erosion pins."
+38,"j hydrol 563:418–434. https​://doi.org/10.1016/j.jhydr​ ol.2018.06.019 kadavi pr, lee cw, lee s (2018) application of ensemble-based machine learning models to landslide susceptibility mapping."
+38,"remote sens 10(8):1252. https​://doi.org/10.3390/rs100​81252​ kalantar b, pradhan b, naghibi sa, motevalli a, mansor s (2018) assessment of the effects of training data selection on the landslide susceptibility mapping: a comparison between support vector machine (svm), logistic regression (lr) and artificial neural networks (ann)."
+38,"geomat nat hazards risk 9(1):49–69. https​://doi.org/10.1080/19475​705.2017.14073​68 kenner r, bühler y, delaloye r, ginzler c, phillips m (2014) monitoring of high alpine mass movements combining laser scanning with digital airborne photogrammetry."
+38,"geomorphology 206:492–504. https​ ://doi.org/10.1016/j.geomo​rph.2013.10.020 klinger y, michel r, king gcp (2006) evidence for an earthquake barrier model from mw ∼ 7.8 kokoxili (tibet) earthquake slip-distribution."
+38,"earth planet sci lett 242(3–4):354–364. https​://doi. org/10.1016/j.epsl.2005.12.003 ko fw, lo fl (2018) from landslide susceptibility to landslide frequency: a territory-wide study in hong kong."
+38,"eng geol 242:12–22. https​://doi.org/10.1016/j.engge​o.2018.05.001 kokalj ž, zakšek k, oštir k, pehani p, čotar k, somrak m et al (2016) relief visualization toolbox, ver."
+38,2.2.1 manual.
+38,remote sens 3(2):398–415 13
+39,"surveys in geophysics (2020) 41:1391–1435 1429 kromer r, walton g, gray b, lato m, group r (2019) development and optimization of an automated fixed-location time-lapse photogrammetric rock slope monitoring system."
+39,"remote sens 11:1890– 1908. https​://doi.org/10.3390/rs111​61890​ kurtz c, stumpf a, malet jp, gançarski p, puissant a, passat n (2014) hierarchical extraction of landslides from multiresolution remotely sensed optical images."
+39,"isprs j photogramm remote sens 87:122– 136. https​://doi.org/10.1016/j.isprs​jprs.2013.11.003 lacroix p, berthier e, maquerhua et (2015) earthquake-driven acceleration of slow-moving landslides in the colca valley, peru, detected from pléiades images."
+39,"remote sens environ 165:148–158. https​:// doi.org/10.1016/j.rse.2015.05.010 lacroix p, bièvre g, pathier e, kniess u, jongmans d (2018) use of sentinel-2 images for the detection of precursory motions before landslide failures."
+39,"remote sens environ 215:507–516. https​://doi. org/10.1016/j.rse.2018.03.042 lacroix p, araujo g, hollingsworth j, taipe e (2019) self-entrainment motion of a slow-moving land- slide inferred from landsat-8 time series."
+39,"j geophys res earth surf 124(5):1201–1216. https​://doi. org/10.1029/2018j​f0049​20 lanaras c, bioucas-dias j, galliani s, baltsavias e, schindler k (2018) super-resolution of sentinel-2 images: learning a globally applicable deep neural network."
+39,"isprs j photogramm remote sens 146:305–319. https​://doi.org/10.1016/j.isprs​jprs.2018.09.018 lang s, füreder p, rogenhofer e (2018) earth observation for humanitarian operations."
+39,"in: yearbook on space policy 2016, springer, cham, pp 217–229. https​://doi.org/10.1007/978-3-319-72465​-2_10 lantuit h, pollard wh, couture n, fritz m, schirrmeister l, meyer h, hubberten hw (2012) modern and late holocene retrogressive thaw slump activity on the yukon coastal plain and herschel island, yukon territory, canada."
+39,"permafr periglac process 23(1):39–51. https​://doi.org/10.1002/ppp.1731 lantz tc, kokelj sv, gergel se, henry gh (2009) relative impacts of disturbance and temperature: per- sistent changes in microenvironment and vegetation in retrogressive thaw slumps."
+39,"glob change biol 15(7):1664–1675. https​://doi.org/10.1111/j.1365-2486.2009.01917​.x le bivic r, allemand p, quiquerez a, delacourt c (2017) potential and limitation of spot-5 ortho-image correlation to investigate the cinematics of landslides: the example of “mare à poule d’eau” (réun- ion, france)."
+39,"remote sens 9(2):106. https​://doi.org/10.3390/rs902​0106 lecun y, bengio y, hinton g (2015) deep learning."
+39,"nature 521(7553):436–444. https​://doi.org/10.1038/ natur​e1453​9 lei t, zhang y, lv z, li s, liu s, nandi ak (2019a) landslide inventory mapping from bitemporal images using deep convolutional neural networks."
+39,"ieee geosci remote sens lett 16(6):982–986. https​://doi. org/10.1109/lgrs.2018.28893​07 lei t, zhang q, xue d, chen t, meng h, nandi ak (2019b) end-to-end change detection using a sym- metric fully convolutional network for landslide mapping."
+39,"in: icassp 2019-2019 ieee interna- tional conference on acoustics, speech and signal processing (icassp), pp 3027–3031. https​://doi. org/10.1109/icass​p.2019.86828​02 leibman mo, khomutov av, gubarkov aa, dvornikov ya, mullanurov dr (2015) the research station” vaskiny dachi”, central yamal, west siberia, russia–a review of 25 years of permafrost studies."
+39,"fennia-int j geogr 193(1):3–30 letortu p, costa s, cador jm, coinaud c, cantat o (2015a) statistical and empirical analyses of the trig- gers of coastal chalk cliff failure."
+39,"earth surf process landf 40:1371–1386. https​://doi.org/10.1002/ esp.3741 letortu p, costa s, maquaire o, delacourt c, augereau e, davidson r, suanez s, nabucet j (2015b) retreat rates, modalities and agents responsible for erosion along the coastal chalk cliffs of upper normandy: the contribution of terrestrial laser scanning."
+39,"geomorphology 245:3–14. https​://doi.org/10.1016/j. geomo​rph.2015.05.007 letortu p, costa s, maquaire o, davidson r (2019) marine and subaerial controls of coastal chalk cliff ero- sion in normandy (france) based on a 7-year laser scanner monitoring."
+39,"geomorphology 335:75–91. https​://doi.org/10.1016/j.geomo​rph.2019.03.005 lewkowicz ag (2007) dynamics of active-layer detachment failures, fosheim peninsula, ellesmere island, nunavut, canada."
+39,"permaf periglac process 18(1):89–103. https​://doi.org/10.1002/ppp.578 lewkowicz ag, way rg (2019) extremes of summer climate trigger thousands of thermokarst landslides in a high arctic environment."
+39,"nat commun 10(1):1329. https​://doi.org/10.1038/s4146​7-019-09314​-7 li x, wang l, sung e (2008) adaboost with svm-based component classifiers."
+39,"eng appl artif intell 21(5):785–795. https​://doi.org/10.1016/j.engap​pai.2007.07.001 li x, muller jp, fang c, zhao y (2011) measuring displacement field from terrasar-x amplitude images by subpixel correlation: an application to the landslide in shuping."
+39,three gorges area acta petro- logica sinica 27(12):3843–3850 13
+40,"1430 surveys in geophysics (2020) 41:1391–1435 li x, cheng x, chen w, chen g, liu s (2015) identification of forested landslides using lidar data, object-based image analysis, and machine learning algorithms."
+40,"remote sens 7(8):9705–9726. https​://doi.org/10.3390/rs708​09705​ li z, shi w, myint sw, lu p, wang q (2016) semi-automated landslide inventory mapping from bitem- poral aerial photographs using change detection and level set method."
+40,"remote sens environ 175:215–230. https​://doi.org/10.1016/j.rse.2016.01.003 lian c, zeng z, yao w, tang h (2013) displacement prediction model of landslide based on a modified ensemble empirical mode decomposition and extreme learning machine."
+40,"nat hazards 66(2):759– 771. https​://doi.org/10.1007/s1106​9-012-0517-6 lin cy, lo hm, chou wc, lin wt (2004) vegetation recovery assessment at the jou–jou mountain landslide area caused by the 921 earthquake in central taiwan."
+40,"ecol model 176(1–2):75–81. https​ ://doi.org/10.1016/j.ecolm​odel.2003.12.037 lissak c, maquaire o, malet jp, bitri a, samyn k, grandjean g et al (2014) airborne and ground- based data sources for characterizing the morpho-structure of a coastal landslide."
+40,"geomorphology 217:140–151. https​://doi.org/10.1016/j.geomo​r ph.2014.04.019 liu p, wei y, wang q, chen y, xie j (2020) research on post-earthquake landslide extraction algorithm based on improved u-net model."
+40,"remote sens 12(5):894. https​://doi.org/10.3390/rs120​50894​ long j, shelhamer e, darrell t (2015) fully convolutional networks for semantic segmentation."
+40,"in pro- ceedings of the ieee conference on computer vision and pattern recognition, pp 3431–3440 lópez-davalillo jg, monod b, alvarez-fernandez mi, garcia gh et al (2014) morphology and causes of landslides in portalet area (spanish pyrenees): probabilistic analysis by means of numerical modelling."
+40,eng fail anal 36:390–406. https​://doi.org/10.1016/j.engfa​ilana​l.2013.10.015 lowe d (1999) object recognition from local scale-invariant features.
+40,"in: proceedings of the interna- tional conference of computer vision, corfu, greece lowe d (2004) distinctive image features from scale-invariant keypoints."
+40,"int j comput vis 60:91–110 lv z, liu t, kong x, shi c, benediktsson ja (2020) landslide inventory mapping with bitemporal aerial remote sensing images based on the dual-path full convolutional network."
+40,"ieee j sel top appl earth observ remote sens 14(8) ma s, xu c, chao x, zhang p, liang x, tian y (2019) geometric and kinematic features of a landslide in mabian sichuan, china, derived from uav photography."
+40,"landslides 16:373–381. https​://doi. org/10.1007/s1034​6-018-1104-z mallet c, bretar f (2009) full-waveform topographic lidar: state-of-the-art."
+40,"isprs j photogramm remote sens 64(1):1–16. https​://doi.org/10.1016/j.isprs​jprs.2008.09.007 marc o, meunier p, hovius n (2017) prediction of the area affected by earthquake-induced landslid- ing based on seismological parameters."
+40,"nat hazards earth syst sci 17(7):1159–1175. https​://doi. org/10.5194/nhess​-17-1159-2017 marteau b, vericat d, gibbins c, batalla rj, green dr (2016) application of structure-from-motion photogrammetry to river restoration."
+40,"earth surf proc land 42(3):503–515. https​://doi.org/10.1002/ esp.4086 mckean j, roering j (2004) objective landslide detection and surface morphology mapping using high- resolution airborne laser altimetry."
+40,"geomorphology 57(3–4):331–351. https​://doi.org/10.1016/ s0169​-555x(03)00164​-8 medjkane m, maquaire o, costa s, roulland t, letortu p, fauchard c, antoine r, davidson r (2018) high-resolution monitoring of complex coastal morphology changes: cross-efficiency of sfm and tls-based survey (vaches noires cliffs, normandy, france)."
+40,"landslides 15(6):1097–1108. https​:// doi.org/10.1007/s1034​6-017-0942-4 mezaal mr, pradhan b, rizeei hm (2018) improving landslide detection from airborne laser scanning data using optimized dempster-shafer."
+40,"remote sens 10(7):1029. https​://doi.org/10.3390/rs100​ 71029​ michel r, avouac jp, taboury j (1999) measuring ground displacements from sar amplitude images: application to the landers earthquake."
+40,"geophys res lett 26(7):875–878. https​://doi. org/10.1029/1999g​l9001​38 michoud c, carrea d, costa s, derron mh, jaboyedoff m, davidson r, delacourt c, letortu p, maquaire o (2014) landslide detection and monitoring capability of boat-based mobile laser scan- ning along dieppe coastal cliffs normandy."
+40,"landslides 12(2):403–418. https​://doi.org/10.1007/ s1034​6-014-0542-5 mohammady m, pourghasemi hr, amiri m (2019) land subsidence susceptibility assessment using random forest machine learning algorithm."
+40,environ earth sci 78(16):503. https​://doi.org/10.1007/ s1266​5-019-8518-3 13
+41,"surveys in geophysics (2020) 41:1391–1435 1431 monserrat o, crosetto m, luzi g (2014) a review of ground-based sar interferometry for deforma- tion measurement."
+41,"isprs j photogramm remote sens 93:40–48. https​://doi.org/10.1016/j.isprs​ jprs.2014.04.001 moosavi v, talebi a, shirmohammadi b (2014) producing a landslide inventory map using pixel-based and object-oriented approaches optimized by taguchi method."
+41,"geomorphology 204:646–656. https​://doi. org/10.1016/j.geomo​rph.2013.09.012 nichol j, wong ms (2005a) detection and interpretation of landslides using satellite images."
+41,"land degrad dev 16(3):243–255. https​://doi.org/10.1002/ldr.648 nichol j, wong ms (2005b) satellite remote sensing for detailed landslide inventories using change detec- tion and image fusion."
+41,"int j remote sens 26(9):1913–1926. https​://doi.org/10.1080/01431​16051​ 23313​14047​ niethammer u, james mr, rothmund s, travelletti j, joswig m (2012) uav-based remote sensing of the super-sauze landslide: evaluation and results."
+41,"eng geol 128:2–11. https​://doi.org/10.1016/j.engge​ o.2011.03.012 nitze i (2018 trends of land surface change from landsat time-series 1999-2014, transect t4, eastern canada."
+41,"alfred wegener institute, helmholtz centre for polar and marine research, bremerhaven, pangaea. https​://doi.org/10.1594/panga​ea.88427​6 nitze i, grosse g, jones bm, romanovsky ve, boike j (2018) remote sensing quantifies widespread abun- dance of permafrost region disturbances across the arctic and subarctic."
+41,nat commun 9(1):5423. https​://doi.org/10.1038/s4146​7-018-07663​-3 novák d (2014) local relief model (lrm) toolbox for arcgis.
+41,"czech academy of science, staré město obu j, westermann s, bartsch a, berdnikov n, christiansen hh, dashtseren a et al (2019) northern hem- isphere permafrost map based on ttop modelling for 2000–2016 at 1 km2 scale."
+41,"earth sci rev 193:299–316. https​://doi.org/10.1016/j.earsc​irev.2019.04.023 ouédraogo mm, degré a, debouche c, lisein j (2014) the evaluation of unmanned aerial system-based photogrammetry and terrestrial laser scanning to generate dems of agricultural watersheds."
+41,"geomor- phology 214:339–355. https​://doi.org/10.1016/j.geomo​rph.2014.02.016 pakhale gk, gupta pk (2010) comparison of advanced pixel based (ann and svm) and object-oriented classification approaches using landsat-7 etm + data."
+41,int j eng technol 2(4):245–251 pal m (2005) random forest classifier for remote sensing classification.
+41,"int j remote sens 26(1):217–222. https​://doi.org/10.1080/01431​16041​23312​69698​ pánek t, břežný m, kapustová v, lenart j, chalupa v (2019) large landslides and deep-seated gravita- tional slope deformations in the czech flysch carpathians: new lidar-based inventory."
+41,"geomor- phology 346:106852. https​://doi.org/10.1016/j.geomo​rph.2019.10685​2 paquette m, rudy ac, fortier d, lamoureux sf (2020) multi-scale site evaluation of a relict active layer detachment in a high arctic landscape."
+41,"geomorphology 359(15):107159. https​://doi.org/10.1016/j. geomo​rph.2020.10715​9 pawłuszek k, borkowski a (2016) landslides identification using airborne laser scanning data derived top- ographic terrain attributes and support vector machine classification."
+41,"in: the international archives of the photogrammetry, remote sensing and spatial information sciences, xxiii isprs congress, vol 8 pesci a, teza g, casula g, loddo f, de martino p, dolce m, obrizzo f, pingue f (2011) multitempo- ral laser scanner-based observation of the mt."
+41,vesuvius crater: characterization of overall geometry and recognition of landslide events.
+41,"isprs j photogramm remote sens 66(3):327–336. https​://doi. org/10.1016/j.isprs​jprs.2010.12.002 petley dn, crick wdo, hart ab (2002) the use of satellite imagery in landslide studies in high mountain areas."
+41,"in: proceedings of the 23rd asian conference on remote sensing (acrs’2002), kathmandu. http://www.gisde​velop​ment.net/aars/acrs/2002/hdm/48.pdf petrie g, toth ck (2008) introduction to laser ranging, profiling, and scanning."
+41,"topographic laser ranging and scanning: principles and processing, pp 1–28 pham bt, jaafari a, prakash i, bui dt (2019) a novel hybrid intelligent model of support vector machines and the multiboost ensemble for landslide susceptibility modeling."
+41,"bull eng geol env 78(4):2865– 2886. https​://doi.org/10.1007/s1006​4-018-1281-y piégay h, arnaud f, belletti b, bertrand m, bizzi s, carbonneau p et al (2020) remotely sensed rivers in the anthropocene: state of the art and prospects."
+41,"earth surf proc land 45(1):157–188. https​://doi. org/10.1002/esp.4787 proy c, tinel c, fontannaz d (2013) pleiades in the context of the international charter “space and major disasters”."
+41,"in: 2013 ieee international geoscience and remote sensing symposium-igarss, pp 4530–4533. https​://doi.org/10.1109/igars​s.2013.67238​43 rau jy, jhan jp, lo cf, lin ys (2011) landslide mapping using imagery acquired by a fixed-wing uav."
+41,int arch photogramm remote sens spat inf sci 38(1/c22):195–200 13
+42,"1432 surveys in geophysics (2020) 41:1391–1435 raucoules d, de michele m, malet jp, ulrich p (2013) time-variable 3d ground displacements from high- resolution synthetic aperture radar (sar)."
+42,application to la valette landslide (south french alps).
+42,"remote sens environ 139:198–204. https​://doi.org/10.1016/j.rse.2013.08.006 razak ka, santangelo m, van westen cj, straatsma mw, de jong sm (2013) generating an optimal dtm from airborne laser scanning data for landslide mapping in a tropical forest environment."
+42,geomor- phology 190:112–125. https​://doi.org/10.1016/j.geomo​rph.2013.02.021 riegl laser measurement systems (2014) datasheet vz-400 (riegl laser measurement systems gmbh).
+42,"austria roessner s, wetzel hu, kaufmann h, sarnagoev a (2001) satellite remote sensing for regional assessment of landslide hazard in kyrgyzstan (central asia)."
+42,"in: proceedings of second symposium on katastro- phenvorsorge, leipzig, pp 24–25 rossi g, tanteri l, tofani v, vannocci p, moretti s, casagli n (2018) multitemporal uav surveys for landslide mapping and characterization."
+42,"landslides 15:1045–1052. https​://doi.org/10.1007/s1034​ 6-018-0978-0 rossini m, di mauro b, garzonio r, baccolo g, cavallini g, mattavelli m, de amicis m, colombo r (2018) rapid melting dynamics of an alpine glacier with repeated uav photogrammetry."
+42,"geomor- phology 304:159–172. https​://doi.org/10.1016/j.geomo​rph.2017.12.039 roulland t, maquaire o, costa s, compain v, davidson r, medjkane m (2019) dynamique des falaises des vaches noires: analyse diachronique historique et récente à l’aide de documents multi-sources (normandie, france)."
+42,"géomorphologie relief processus environnement 25(1):37–55. https​://doi. org/10.4000/geomo​rphol​ogie.12989​ rouyet l, lauknes tr, christiansen hh, strand sm, larsen y (2019) seasonal dynamics of a permafrost landscape, adventdalen, svalbard, investigated by insar."
+42,"remote sens environ 231:111236. https​:// doi.org/10.1016/j.rse.2019.11123​6 rudy ac, lamoureux sf, treitz p, ewijk kv, bonnaventure pp, budkewitsch p (2016) terrain controls and landscape-scale susceptibility modelling of active-layer detachments, sabine peninsula, melville island, nunavut."
+42,"permaf periglac process 28(1):79–91. https​://doi.org/10.1002/ppp.1900 rudy ac, lamoureux sf, treitz p, short n, brisco b (2018) seasonal and multi-year surface displace- ments measured by dinsar in a high arctic permafrost environment."
+42,"int j appl earth obs geoinf 64:51–61. https​://doi.org/10.1016/j.jag.2017.09.002 rusnák m, sládek j, pacina j, kidov a (2018) monitoring of avulsion channel evolution and river morphol- ogy changes using uav photogrammetry: case study of the gravel bed ondava river in outer western carpathians."
+42,"area 51(3):549–560. https​://doi.org/10.1111/area.12508​ salvini r, francioni m, riccucci s, bonciani f, callegari i (2013) photogrammetry and laser scanning for analyzing slope stability and rockfall runout along the domodossola-iselle railway, the italian alps."
+42,"geomorphology 185:110–122. https​://doi.org/10.1016/j.geomo​rph.2012.12.020 sato hp, harp el (2009) interpretation of earthquake-induced landslides triggered by the 12 may 2008, m7.9 wenchuan earthquake in the beichuan area, sichuan province, china using satellite imagery and google earth."
+42,landslides 2:153–159. https​://doi.org/10.1007/s1034​6-009-0147-6 schmidhuber j (2015) deep learning in neural networks: an overview.
+42,"neural netw 61:85–117. https​://doi. org/10.1016/j.neune​t.2014.09.003 schulz wh (2004) landslides mapped using lidar imagery, seattle, washington."
+42,"us geological survey open-file report, 1396(11) shafique m, van der meijde m, khan ma (2016) a review of the 2005 kashmir earthquake-induced land- slides; from a remote sensing perspective."
+42,"j asian earth sci 118:68–80. https​://doi.org/10.1016/j. jseae​s.2016.01.002 shan j, toth ck (2018) topographic laser ranging and scanning: principles and processing."
+42,"taylor & fran- cis group crc press, boca raton singleton a, li z, hoey t, muller jp (2014) evaluating sub-pixel offset techniques as an alternative to d-insar for monitoring episodic landslide movements in vegetated terrain."
+42,"remote sens environ 147:133–144. https​://doi.org/10.1016/j.rse.2014.03.003 slob s, hack r (2004) 3d terrestrial laser scanning as a new field measurement and monitoring technique."
+42,in: engineering geology for infrastructure planning in europe.
+42,"springer, berlin, heidelberg, pp 179– 189. https​://doi.org/10.1007/978-3-540-39918​-6_22 song ky, oh hj, choi j, park i, lee c, lee s (2012) prediction of landslides using aster imagery and data mining models."
+42,"adv space res 49(5):978–993. https​://doi.org/10.1016/j.asr.2011.11.035 stettner s, beamish al, bartsch heim b, grosse g, roth a, lantuit h (2018) monitoring inter-and intra- seasonal dynamics of rapidly degrading ice-rich permafrost riverbanks in the lena delta with ter- rasar-x time series."
+42,remote sens 10(1):51. https​://doi.org/10.3390/rs100​10051​ 13
+43,"surveys in geophysics (2020) 41:1391–1435 1433 stumpf a, kerle n (2011a) object-oriented mapping of landslides using random forests."
+43,"remote sens environ 115(10):2564–2577. https​://doi.org/10.1016/j.rse.2011.05.013 stumpf a, kerle n (2011b) combining random forests and object-oriented analysis for landslide map- ping from very high resolution imagery."
+43,"proc environ sci 3:123–129. https​://doi.org/10.1016/j. proen​v.2011.02.022 stumpf a, malet jp, allemand p, ulrich p (2014) surface reconstruction and landslide displacement measurements with pléiades satellite images."
+43,"isprs j photogramm remote sens 95:1–12. https​:// doi.org/10.1016/j.isprs​jprs.2014.05.008 stumpf a, malet jp, allemand a, pierrot-deseilligny m, skupinski g (2015) ground-based multi- view photogrammetry for the monitoring of landslide deformation and erosion."
+43,"geomorphology 231:130–145. https​://doi.org/10.1016/j.geomo​r ph.2014.10.039 stumpf a, malet jp, delacourt c (2017) correlation of satellite image time-series for the detection and monitoring of slow-moving landslides."
+43,"remote sens environ 189:40–55. https​://doi.org/10.1016/j. rse.2016.11.007 sun l, muller jp (2016) evaluation of the use of sub-pixel offset tracking techniques to monitor land- slides in densely vegetated steeply sloped areas."
+43,remote sens 8(8):659. https​://doi.org/10.3390/ rs808​0659 svennevig k (2019) preliminary landslide mapping in greenland.
+43,"geol surv den greenl bull. https​:// doi.org/10.34194​/geusb​-20194​3-02-07 tarchi d, casagli n, fanti r, leva dd, luzi g, pasuto a et al (2003) landslide monitoring by using ground-based sar interferometry: an example of application to the tessina landslide in italy."
+43,"eng geol 68(1–2):15–30. https​://doi.org/10.1016/s0013​-7952(02)00196​-5 telling j, lyda a, hartzell p, glennie c (2017) review of earth science research using terrestrial laser scanning."
+43,"earth sci rev 169:35–68. https​://doi.org/10.1016/j.earsc​irev.2017.04.007 teza g, galgaro a, zaltron n, genevois r (2007) terrestrial laser scanner to detect landslide displace- ment fields: a new approach."
+43,"int j remote sens 28(16):3425–3446. https​://doi.org/10.1080/01431​ 16060​10242​34 tofani v, segoni s, agostini a, catani f, casagli n (2013) use of remote sensing for landslide studies in europe."
+43,"nat hazards earth syst sci. https​://doi.org/10.5194/nhess​-13-299-2013 travelletti j, delacourt c, allemand p, malet jp, schmittbuhl j, toussaint r, bastard m (2012) correla- tion of multi-temporal ground-based optical images for landslide monitoring: application, poten- tial and limitations."
+43,"isprs j photogramm remote sens 70:39–55. https​://doi.org/10.1016/j.isprs​ jprs.2012.03.007 travelletti j, malet jp, delacourt c (2014) image-based correlation of laser scanning point cloud time series for landslide monitoring."
+43,"int j appl earth obs geoinf 32:1–18. https​://doi.org/10.1016/j. jag.2014.03.022 tyszkowski s, cebulski j (2019) practical aspects of landslides surveys using terrestrial laser scanning in diverse geomorphological terrains: case studies from polish carpathians and lower vistula valley."
+43,"zeitschrift für geomorphologie 62(2):107–124. https​://doi.org/10.1127/zfg/2019/0500 valkaniotis s, papathanassiou g, ganas a (2018) mapping an earthquake-induced landslide based on uav imagery; case study of the 2015 okeanos landslide, lefkada, greece."
+43,"eng geol 245:141– 152. https​://doi.org/10.1016/j.engge​o.2018.08.010 van den eeckhaut m, kerle n, poesen j, hervás j (2012) object-oriented identification of forested landslides with derivatives of single pulse lidar data."
+43,"geomorphology 173:30–42. https​://doi. org/10.1016/j.geomo​r ph.2012.05.024 van puymbroeck n, michel r, binet r, avouac jp, taboury j (2000) measuring earthquakes from opti- cal satellite images."
+43,"appl opt 39(20):3486–3494. https​://doi.org/10.1364/ao.39.00348​6 van westen cj, castellanos e, kuriakose sl (2008) spatial data for landslide susceptibility, hazard, and vulnerability assessment: an overview."
+43,"eng geol 102(3–4):112–131. https​://doi.org/10.1016/j. engge​o.2008.03.010 voigt s, giulio-tonolo f, lyons j, kučera j, jones b, schneiderhan t et al (2016) global trends in satellite- based emergency mapping."
+43,"science 353(6296):247–252. https​://doi.org/10.1126/scien​ce.aad87​28 wang d, jiang y, wang w, wang y (2016) bias reduction in sub-pixel image registration based on the anti- symmetric feature."
+43,"meas sci technol 27(3):035206. https​://doi.org/10.1088/0957-0233/27/3/03520​6 wang y, fang z, hong h (2019) comparison of convolutional neural networks for landslide susceptibil- ity mapping in yanshan county, china."
+43,"sci total environ 666:975–993. https​://doi.org/10.1016/j. scito​tenv.2019.02.263 warrick ja, ritchie ac, schmidt km, reid me, logan j (2019) characterizing the catastrophic 2017 mud creek landslide, california, using repeat structure-from-motion (sfm) photogrammetry."
+43,landslides 16(6):1201–1219. https​://doi.org/10.1007/s1034​6-019-01160​-4 13
+44,"1434 surveys in geophysics (2020) 41:1391–1435 wasowski j, bovenga f (2014) investigating landslides and unstable slopes with satellite multi tem- poral interferometry: current issues and future perspectives."
+44,"eng geol 174:103–138. https​://doi. org/10.1016/j.engge​o.2014.03.003 werner c, strozzi t, wiesmann a, wegmüller u (2008) gamma’s portable radar interferometer."
+44,"in: pro- ceedings of 13th fig symposium of deformation measurements and analysis, pp 1–10 westoby mj, brasington j, glasser nf, hambrey mj, reynolds jm (2012) structure-from-motion pho- togrammetry: a low-cost, effective tool for geoscience applications."
+44,"geomorphology 179:300–314. https​://doi.org/10.1016/j.geomo​rph.2012.08.021 westoby m, lim m, hogg mj, pound m, dunlop l, woodward j (2018) cost-effective erosion monitoring of coastal cliffs."
+44,"coast eng 138:152–164. https​://doi.org/10.1016/j.coast​aleng​.2018.04.008 wilkinson mw, jones rr, woods ce, gilment sr, mccaffrey kjw, kokkalas s, long jj (2016) a com- parison of terrestrial laser scanning and structure-from-motion photogrammetry as methods for digi- tal outcrop acquisition."
+44,geosphere 12(6):1865–1880. https​://doi.org/10.1130/ges01​342.1 xu c (2015) preparation of earthquake-triggered landslide inventory maps using remote sensing and gis technologies: principles and case studies.
+44,"geosci front 6(6):825–836. https​://doi.org/10.1016/j. gsf.2014.03.004 xu c, xu x, yao x, dai f (2014) three (nearly) complete inventories of landslides triggered by the may 12, 2008 wenchuan mw 7.9 earthquake of china and their spatial distribution statistical analysis."
+44,"landslides 11(3):441–461. https​://doi.org/10.1007/s1034​6-013-0404-6 xu q, ouyang c, jiang t, fan x, cheng d (2019) dfpenet-geology: a deep learning framework for high precision recognition and segmentation of co-seismic landslides. arxiv​:1908.10907​ yamaguchi ys, tanaka s, odajima t, kamai t, tsuchida s (2003) detection of a landslide movement as geometric misregistration in image matching of spot hrv data of two different dates."
+44,"int j remote sens 24(18):3523–3534. https​://doi.org/10.1080/01431​16011​01110​63 yang x, chen l (2010) using multi-temporal remote sensor imagery to detect earthquake-triggered land- slides."
+44,"int j appl earth obs geoinf 12(6):487–495. https​://doi.org/10.1016/j.jag.2010.05.006 yang w, wang m, shi p (2013) using modis ndvi time series to identify geographic patterns of land- slides in vegetated regions."
+44,"ieee geosci remote sens lett 10(4):707–710. https​://doi.org/10.1109/ lgrs.2012.22195​76 yin y, wang f, sun p (2009) landslide hazards triggered by the 2008 wenchuan earthquake, sichuan, china."
+44,"landslides 6(2):139–152. https​://doi.org/10.1007/s1034​6-009-0148-5 yu b, chen f (2017) a new technique for landslide mapping from a large-scale remote sensed image: a case study of central nepal."
+44,"comput geosci 100:115–124. https​://doi.org/10.1016/j.cageo​.2016.12.007 zhang s, zhang lm, glade t (2014) characteristics of earthquake-and rain-induced landslides near the epi- center of wenchuan earthquake."
+44,"eng geol 175:58–73. https​://doi.org/10.1016/j.engge​o.2014.03.012 zhao w, du s (2016) learning multiscale and deep representations for classifying remotely sensed imagery."
+44,"isprs j photogramm remote sens 113:155–165. https​://doi.org/10.1016/j.isprs​jprs.2016.01.004 zhao zq, zheng p, xu st, wu x (2019) object detection with deep learning: a review."
+44,"ieee trans neural netw learn syst 30(11):3212–3232. https​://doi.org/10.1109/tnnls​.2018.28768​65 zhou c, yin k, cao y, ahmed b, li y, catani f, pourghasemi hr (2018) landslide susceptibility mod- eling applying machine learning methods: a case study from longju in the three gorges reservoir area, china."
+44,"comput geosci 112:23–37. https​://doi.org/10.1016/j.cageo​.2017.11.019 zhu xx, tuia d, mou l, xia gs, zhang l, xu f, fraundorfer f (2017) deep learning in remote sensing: a comprehensive review and list of resources."
+44,"ieee geosci remote sens mag 5(4):8–36. https​://doi. org/10.1109/mgrs.2017.27623​07 zolkos s, tank se, striegl rg, kokelj sv (2019) thermokarst effects on carbon dioxide and methane fluxes in streams on the peel plateau (nwt, canada)."
+44,"j geophys res biogeosci 124(7):1781–1798. https​://doi.org/10.1029/2019j​g0050​38 zwieback s, kokelj sv, günthe f, boike j, grosse g, hajnsek i (2018) sub-seasonal thaw slump mass wasting is not consistently energy limited at the landscape scale."
+44,cryosphere 12(2):549–564. https​:// doi.org/10.3929/ethz-b-00024​4496 publisher’s note springer nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+45,"surveys in geophysics (2020) 41:1391–1435 1435 affiliations candide lissak1 · annett bartsch2,3 · marcello de michele4 · christopher gomez5,6 · olivier maquaire1 · daniel raucoules4 · thomas roulland1 1 normandie université, unicaen, cnrs, letg, esplanade de la paix, 14000, caen, france 2 b.geos, industriestrasse 1, 2100 korneuburg, austria 3 austrian polar research institute, c/o universität wien, universitätsstraße 7, 1010 vienna, austria 4 brgm, french geological survey, 3 av."
+45,"claude guillemin, 45000 orléans, france 5 graduate school of maritime sciences, laboratory of sediment hazards and disaster risk, kobe university, 5‑1‑1 fukaeminamimachi higashinadaku, kobe 658‑0022, japan 6 faculty of geography, university gadjah mada, sekip utara, bulaksumur, 55281 yogyakarta, indonesia 13"

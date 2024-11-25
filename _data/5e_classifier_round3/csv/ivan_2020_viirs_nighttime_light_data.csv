@@ -1,0 +1,706 @@
+page,p
+1,"remote sensing article viirs nighttime light data for income estimation at local level kinga ivan 1 , iulian-horia holobâcă 1 , józsef benedek 1,2, * and ibolya török 1 1 faculty of geography, babeş-bolyai university, 5-7 clinicilor street, 400006 cluj-napoca, romania; kinga.ivan@ubbcluj.ro (k.i.); iulian.holobaca@ubbcluj.ro (i.-h.h.); ibolya.torok@ubbcluj.ro (i.t.)"
+1,"2 world and regional economics department, university of miskolc, 3515 miskolc-egyetemváros, hungary * correspondence: jozsef.benedek@ubbcluj.ro  received: 19 june 2020; accepted: 9 september 2020; published: 11 september 2020  abstract: the aim of the paper is to develop a model for the real-time estimation of local level income data by combining machine learning, earth observation, and geographic information system."
+1,"more exactly, we estimated the income per capita by help of a machine learning model for 46 cities with more than 50,000 inhabitants, based on the national polar-orbiting partnership–visible infrared imaging radiometer suite (npp-viirs) nighttime satellite images from 2012–2018."
+1,"for the automation of calculation, a new modelbuilder type tool was developed within the arcgis software called eo-incity (earth observation–income city)."
+1,the sum of light (sol) data extracted by means of the eo-incity tool and the observed income data were integrated in an algorithm within the matlab software in order to calculate a transfer equation and the average error.
+1,the results achieved were subsequently reintegrated in eo-incity and used for the estimation of the income value at local level.
+1,the regression analyses highlighted a stable and strong relationship between sol and income for the analyzed cities.
+1,the eo-incity tool and the machine learning model proved to be efficient in the real-time estimation of the income at local level.
+1,"when integrated in the information systems specific for smart cities, the y can serve as a support for decision-making in order to fight poverty and reduce social inequalities."
+1,keywords: nighttime lights (ntl); local income; machine learning models; smart cities; npp/viirs 1.
+1,"introduction over the last two decades, due to rapid digitalization and technological development, the “smart city” concept has been widely used both in the scientific literature and international policies."
+1,"despite the history and popularity of the concept there is neither a unique, nor a one-size-fits-all definition for it [1]."
+1,"as cities are engines of economic growth, accounting for 80% of the global gross domestic product (gdp) [2], the y also have a significant impact on social and economic welfare, thus being considered key elements for tackling future challenges."
+1,"this is also highlighted by the fact that more than half of the global population lives in urban areas (in europe more than 75 percent), a ratio which is constantly increasing [2]."
+1,"all these lead to an increased consumption of resources in cities (mainly consumption of energy resources), placing a significant impact on the surrounding environment and on urban sustainability."
+1,"despite the fact that smart cities do have different interpretations [3–10] and have also attracted criticism [11–16], it seems that the concept has established itself by becoming embedded in the scientific literature, with ever increasing practical applications."
+1,"along the years it has become a widely used policy concept for cities, its popularity being supported by its perceived connection to the globally accepted sustainable development goals [17]."
+1,"remote sens. 2020, 12, 2950; doi:10.3390/rs12182950 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2020, 12, 2950 2 of 19 cities are constantly changing, the reby continuously presenting city managers with new challenges in order to transform urban areas into more livable spaces."
+2,"the key to successfully adapt to these changes is in the hands of local authorities, which have the responsibility to provide accurate and timely spatial information for monitoring, managing, and planning of urban areas [18,19]."
+2,"the refore, the smart city concept takes a holistic approach to utilizing information technologies combined with real-time analysis methods, paving the way towards a more sustainable economic development."
+2,"this holistic view of cities made possible by earth observation (eo) offers a useful alternative to data collection over spatial units; thus, allowing a reliable way of gathering spatial data for monitoring the rapidly changing urban areas [20,21]."
+2,"satellite-based eo data can help fill some of the gaps in the tools, but also gather useful data and knowledge we need in cities."
+2,"research overview scientific literature reveals a great variety of applications for eo data not only in analyzing the environmental changes, but also in applying it in regional science."
+2,musakwa and niekerk [22] have monitored sustainable urban development using built-up area indicators.
+2,patino and duque [23] reviewed the potential applications of satellite remote sensing to regional science research in urban settings by focusing on social problems with a spatial dimension.
+2,"application of eo can also be found in assessing social inequality and quality of life by detecting and monitoring the formation of slums [24,25], urban growth and urban sustainability [26,27], but also the estimation of population or gdp [28–30]."
+2,the se studies highlighted the big challenges of eo data in supporting sustainable urban research and policy development.
+2,the remote sensing and the geographical information system (gis) can provide new perspectives for the assessment of the economic performances both at national and at sub-national level.
+2,"over the last period, increasing attention was paid to the usage of nighttime satellite images for the extraction of the socio-economic data corresponding to a certain spatial unit, when this data is missing or has a low quality."
+2,"in terms of income per capita prediction, ebener et al. [31] developed a global model based on the dmps-ols satellite images, achieving promising results both at national and at sub-national level."
+2,"subsequently, li et al. [32], after studying the relationship between the nighttime lights (ntl) data and the economic indicators, noticed that the npp-viirs data has a better capacity for the prediction of the gross regional product (grp) than the defense meteorological satellite program—operational linescan system (dmsp-ols) data."
+2,"in the case of the present study, too, the npp-viirs data proved to be a good starting point in estimating the income at local level."
+2,"the nighttime light data captured by the satellites in order to assess the economic development is very actual and it is used in many studies lately [29,33,34]."
+2,"dai et al. [35] estimated the gdp for 31 provinces and 341 cities in the mainland china, based on the dmsp-ols and npp/viirs satellite data and on the existing statistical data."
+2,"as a result of comparing the accuracy of the results, we noticed that the dmsp-ols data can be used for the estimation of the gdp at province level exclusively, while the npp/viirs data can be used both at province and at local (cities) level."
+2,"basihos [36] estimated the gdp at sub-national level in turkey for the 2001–2013 period, based on nightlights, using the neural network algorithm and rebuilt the gdp series for the 1992–2001 period, achieving statistically significant results."
+2,the machine learning model was also used successfully by jean et al. [37] in estimating consumption expenditure for five countries in africa based on the satellite images.
+2,"määttä and lessmann [38] applied the random forest machine learning algorithm with a view to predict whether the light corresponding to a pixel in dmps-ols nightlight data is of human origin or not; thus, creating a human lights product."
+2,the machine learning algorithms (artificial neural network) were used by subash et al. [39] to predict poverty at sub-national level in india based on the dmps-ols nightlight data.
+2,"the ntl dataset is not only useful in updating the analysis of connecting nighttime lighting patterns with income inequalities, but also serves the purpose of validating the robustness of our identification and estimation strategy."
+2,our analysis is in line with this mainstream research using nighttime lights datasets (npp-viirs) and
+3,"remote sens. 2020, 12, 2950 3 of 19 machine learning model for romanian cities from 2012 to 2018 and for hungarian cities from 2014 to 2016, in order to estimate per capita income."
+3,"for this purpose, we selected 46 romanian cities and 19 hungarian cities with a population over 50,000 inhabitants."
+3,"the re is a direct and positive correlation between the size and the economic complexity of cities; that means bigger cities have more complex economic functions, related to industries and a wide variety of services, while smaller cities remote sens. 2020, 12, x for peer review 3 of 19 have a large agricultural sector or one dominant industry (for example, mining) or service function (generally tourism) cities; thatfor of [40,41]. means these bigger cities have reasons, more the re is nocomplex economic significant functions, between correlation related to industries and a output the economic wide variety of services, while smaller cities have a large agricultural sector or one dominant of smaller cities and night lights, the latter being largely generated by industries and service-related industry (for example, mining) or service function (generally tourism) [40,41]."
+3,"for these reasons, there is no functions [30]. significant correlation between the economic output of smaller cities and night lights, the latter being the analysis largely is expected generated to contribute by industries to the development and service-related of novel methods for improved eo-based functions [30]. urban servicesthe to support analysis smart and is expected sustainable to contribute to theurban development. development this study of novel methods proposeseo- for improved a new tool (abbreviated eo-incity based urban servicesin this designed study)smart to support to estimate and sustainable thedevelopment. urban income at sub-national level based this study proposes a on (abbreviated new toolsatellite the nighttime eo-incity in this study) designed to estimate the income at sub-national level images. based on the nighttime satellite images."
+3,study area and data 3.
+3,study area and data 3.1.
+3,study area 3.1.
+3,"study area romania is organized romania into eight is organized intodevelopment regions eight development (nuts-2), regions 41 counties, (nuts-2), and the 41 counties, andmunicipality the municipality of bucharest (nuts-3) and 3181 lau1 (local administrative units: communes andfor this of bucharest (nuts-3) and 3181 lau1 (local administrative units: communes and cities). research, we for cities). have research, 46 thisselected municipalities we have selected 46 municipalities and citieswith and cities (lau1) a population (lau1) with a populationof more of than more than 50,000 50,000 inhabitants inhabitants (appendix c),(appendix c), 103 of the total total 103 municipalities of themunicipalities and 216and 216 cities cities in romania in romania (figure 1)."
+3,(figure 1).
+3,"these cities are the major economic hubs of the country [42–44], especially the capital— the se cities are the major economic hubs of the country [42–44], especially the capital—the municipality the municipality of bucharest—the sixth city in the eu in terms of population (2,131,034 inhabitants of bucharest—the sixth city in the eu in terms of population (2,131,034 inhabitants in 2019), followed in 2019), followed by six regional centers with a population exceeding 300,000 inhabitants: iași by six regional centers (378,954 inhabitants), with a population timișoara exceeding 300,000 (328,186 inhabitants), inhabitants: cluj-napoca ias, i (378,954 (324,960 inhabitants), inhabitants), constanța timis, oara (328,186 (313,021 inhabitants), inhabitants), cluj-napoca galați (304,050 (324,960 inhabitants), inhabitants), and craiova (301,269 constant , a (313,021 inhabitants) [45]. inhabitants), galat, i (304,050 inhabitants), and craiova (301,269 inhabitants) [45]."
+3,figure 1.
+3,"the romanian cities with population exceeding 50,000 inhabitants."
+3,figure 1.
+3,"the romanian cities with population exceeding 50,000 inhabitants."
+3,"with an important rural population (around 48% of the total population), the major municipalities with an important rural population (around 48% of the total population), the major of romania are the leading places for innovation and smart city solutions, connecting large rural municipalities of romania are the leading places for innovation and smart city solutions, connecting hinterlands with the globalwith large rural hinterlands flowthe capital, ofglobal goods, flow information andgoods, of capital, [46,47].["
+3,"46,47]. and information"
+4,"remote sens. 2020, 12, 2950 4 of 19 3.2."
+4,data collection within this research we used the npp-viirs images [48] produced by the earth observations group (eog) at noaa/ncei (national centers for environmental information) with a 15 arc seconds (approximately 500 m) resolution for income estimation al local level in romania.
+4,"the viirs (visible infrared imaging radiometer suite) sensor of the suomi npp (national polar-orbiting partnership) satellite records the intensity of the lights and collects data in 22 different spectral bands, of which one is the dnb (day/night band) band."
+4,the suomi npp satellite was launched on the 28 october 2011.
+4,"the viirs instrument onboard the suomi npp satellite collects global observations, which span over the visible and infrared wavelengths."
+4,day/night band hosted by viirs allows for the observation of nighttime lights with a 15 arc second spatial resolutions.
+4,"using nighttime data from the viirs day/night band, a suite of average radiance composite images is produced."
+4,the se composites are available at a monthly scale for the 2012–2019 period and at an annual scale for 2015 and 2016.
+4,"in the present study, we used the monthly data."
+4,the re are two configurations of the npp-viirs monthly composites: “vcmslcfg”—where data contaminated by stray light are corrected and “vcmcfg”—where data contaminated by stray light are removed [49].
+4,we have used the “vcmslcfg” layer.
+4,"based on the satellite images available on a monthly basis, an annual average pixel brightness was calculated using the “vcmslcfg” layer, resulting in seven composite viirs nighttime light images."
+4,an image has thus been produced for each year corresponding to the 2012–2018 period.
+4,"subsequently, the sum of light (sol) calculation was conducted by means of the arcgis 10.1 software (environmental systems research institute, redlands, ca, usa) for each administrative territorial unit in romania, which was later used as an input in calculating the local income."
+4,the sum of light (sol) was extracted by summing all pixel values of the nighttime light image in each administrative territorial unit.
+4,the permanent resident population data by localities was obtained from the national institute of statistics [45] for the 2012–2018 period.
+4,"the local tax income data for each administrative territorial unit were extracted from the mrdpa (ministry of regional development and public administration) database for the 2012–2018 period [50] and are expressed in romanian leu (1 ron = 0.21 eur, june 2020)."
+4,"subsequently, the local tax income data was calculated per person."
+4,"methodology several studies highlighted a positive statistical relationship between the ntl data and gdp, both at national level and at sub-national level [33–35,51,52]."
+4,"for romania, ivan et al. [30] noticed a strong relationship between ntl and income, as well as between ntl and the gdp at county level [53]."
+4,"the ntl data was correlated best with the income, which indicated its high potential to estimate the income at sub-national level."
+4,"the research on the relationship between sol and local income for each administrative territorial unit of romania (3181) highlighted a strong relationship (pearson correlation coefficient ≥ 0.82, r2 > 0.68) between the two variables for the municipalities and cities with population exceeding 50,000 inhabitants (46 cities) (table 1)."
+4,based on these findings we used the local income estimation for the year 2018 for the 46 cities in romania using a machine learning model within the matlab software.
+4,for the automation of the calculation we proceeded to the development of a modelbuilder type tool in the arcgis software (figure 2).
+4,the tool was called eo-incity (earth observation–income city).
+4,"the model builder is a visual programing language, where geoprocessing and data processing tools can be interactively combined to create a workflow."
+4,for the creation of the model two sub-models were first developed: the first to mask the study area using the “extract by mask” tool and the second sub-model to calculate the annual average (for the images available on a monthly basis) using the “cell statistics” tool.
+4,"the “extract by mask” tool extracts the cells of a raster, which correspond to a country limit defined by the input mask, while the “cell statistics” tool calculates a per-cell statistic (mean in our case) from 12 monthly rasters."
+5,"remote sens. 2020, 12, 2950 5 of 19 remote sens. 2020, 12, x for peer review 5 of 19 table 1."
+5,pearson correlation coefficient and r-squared between sum of light and local tax income (ron/person).
+5,table 1.
+5,pearson correlation coefficient and r-squared between sum of light and local tax income (ron/person).
+5,"2012 2013 2014 population r 2012 r 2 r 2013 r 2 2014 r r2 population r r 2 r r 2 r r 2 40,000 0.791 0.625 0.810 0.656 0.789 0.622 50,000 40,000 0.867 0.791 0.7510.625 0.810 0.864 0.656 0.747 0.789 0.8390.622 0.703 60,000 50,000 0.873 0.867 0.864 0.747 0.7620.751 0.873 0.8500.703 0.722 0.762 0.839 70,000 60,000 0.881 0.873 0.873 0.762 0.7760.762 0.874 0.8560.722 0.733 0.764 0.850 80,000 70,000 0.898 0.881 0.874 0.764 0.8070.776 0.893 0.8730.733 0.761 0.798 0.856 80,000 2015 0.898 0.807 0.893 0.798 2016 0.873 0.761 2017 2015 2016 2017 population r r2 r r2 r r2 population r r2 r r2 r r2 40,000 40,000 0.767 0.7670.5890.589 0.609 0.6050.366 0.366 0.371 0.605 0.609 0.371 50,000 0.829 0.687 0.831 0.690 0.826 50,000 0.829 0.687 0.831 0.690 0.826 0.682 0.682 60,000 0.837 0.700 0.836 0.700 0.831 0.691 60,000 0.837 0.700 0.836 0.700 0.831 0.691 70,000 0.839 0.704 0.838 0.702 0.839 0.703 80,000 70,000 0.848 0.839 0.838 0.702 0.7190.704 0.854 0.8530.703 0.728 0.730 0.839 80,000 0.848 0.719 0.854 0.730 0.853 0.728 figure figure 2."
+5,flow 2.
+5,flow diagram diagram showingthe showing steps involved thesteps in estimating involved in estimatingincome incomeper percapita capita each forfor city.city. each
+6,"remote sens. 2020, 12, 2950 6 of 19 in order to calculate the sum of light (sol) for each individual administrative territorial unit, the “zonal statistics as table” tool was used."
+6,the “zonal statistics as table” tool calculates statistics (sum in our case) on the values of a raster within each administrative territorial unit.
+6,"the data preparation process involves the following processes: (1) masking the downloaded raw monthly viirs satellite images (vcmslcfg layer) using the limit of the study area (country limit in our case); (2) calculating an average annual pixel brightness for the 12 masked monthly images, resulting a single nighttime light image; and (3) summing up the pixel values of the image for each territorial administrative unit, resulting the sum of light (sol) values for each city."
+6,"in case of annual images, step (2) was skipped."
+6,"the eo-incity tool in the first part of the model masks the study area and calculate the sol, using as input data the annual or monthly viirs satellite images."
+6,in the second part of the model it uses as input parameters the calculated sol data and the equation resulting from running the algorithm within matlab for the estimation of the income.
+6,(appendix a).
+6,"in the matlab software, the calculation algorithm transposed in a script involves on the one hand the achievement of the parameters of a transfer function for the estimation of the income based on the nighttime satellite images and, on the other hand, the calculation of the average error (appendix b)."
+6,"the input comes from the eo-incity tool and it is represented by the sum of light (sol) and the per capita income corresponding to the cities that exceed a certain population threshold (for this particular study, the cities with a population over 50,000 inhabitants)."
+6,the parameters of the transfer equation are calculated integrating all the annual value sets generated from satellite images and by the processing of the income data in one-step learning algorithm.
+6,the normal equation was chosen because it is an efficient and fast calculation manner due to the analytical approach of the linear regression: θ = (xt x)−1 (xt y) (1) where θ—parameters of the linear regression; x—the matrix which contains the independent variables; and y—the matrix containing the dependent variables.
+6,the same normal equation is used for the calculation of the errors of linear regressions for each annual set of values.
+6,the errors for each year are then mediated for the entire calculation period.
+6,ej = θj xj (2) εj = ej − yj (3) pn j=1 ε j ε = (4) n where ej —the values estimated using the regression equation for year j; θj —the parameters of the linear regression for year j; xj —the independent variable for year j; yj —the dependent variable for year j; εj —the error of linear regression for year j; and ε—the average error; n—number of years.
+6,the output of the matlab script is then reintegrated in eo-incity and used for the estimation of the income values based on satellite data (sol) for the years when this data is not available for the reduction of errors.
+6,"the income data resulting from running the eo-incity tool are saved in.dbf format, which makes them easy to view and process."
+6,"we used the linear regression model in order to test the relationship between the estimated income and night time light/observed income, which is described mathematically in the form: y = β0 + β1x + ε (5) where y represents the dependent variable (in our case the estimated income); x represents the independent variable (representing the sol/observed income); β0 is the so-called intercept of the model—the expected value of y when all the x’s are zero; β1 is the coefficient (multiplier) of the variable"
+7,"remote sens. 2020, 12, 2950 7 of 19 xi; and ε is the residual variable (the mean or expected value of y for a given value of x)."
+7,the betas together with the mean and standard deviation of the y are the parameters of the model.
+7,"in order to find out the accuracy in regression models, r2 and its adjusted counterpart ar2 are highlighted, deriving from the regression equation to quantify model performance."
+7,"while the r2 shows the validity of the chosen model for explaining the variation of y (the percentage of income estimation explained by the ntl), adjusted r2 is a correction to the r2 that takes into account the number of variables used in the model."
+7,"the higher the r-squared, the better the model."
+7,the predictive ability of the model is often tested by using the relative error (re) or residuals (the difference between the observed y values and the predicted y values) and relative root mean square error (rmse).
+7,rmse measures the average error performed by the model in predicting the outcome for an observation.
+7,"as the square root of a variance, rmse can be interpreted as the standard deviation of the unexplained variance and it has the useful property of being in the same units as the response variable."
+7,rmse provides a good picture of how accurately the response is predicted by the model and it is the most important criterion for fit if prediction is the main purpose of the model.
+7,"in this sense, lower values of rmse indicate better fit."
+7,"additionally, akaike information criterion (aic) is a fined technique based on in-sample fit to estimate the likelihood of a model to predict/estimate the future values."
+7,the basic formula is defined as aic = −2(log-likelihood) + 2k (6) where k is the number of model parameters (the number of variables in the model plus the intercept) and log-likelihood is a measure of model fit.
+7,"the basic idea of aic is to penalize the inclusion of additional variables to a model which, in fact, increases the error."
+7,"the lower the aic, the better the model. {\displaystyle a,a+\delta x,a+2\,\delta x,\ldots ,a+(n-2)\,\delta x,a+(n-1)\,\delta x,b.}"
+7,results in the socio-economic calculations the income represents an important parameter for decision- making in order to fight poverty and reduce social inequalities.
+7,"on the annual scale, an offset occurs between the statistically reported data and the specific budgetary projection."
+7,our instrument offers the possibility of real-time estimation of this data at local level by means of earth observation (eo).
+7,"as a result of running the eo-incity tool for the cities with more than 50,000 inhabitants in romania, we achieved an estimation of the income for the year 2018."
+7,"after comparing the estimated results, we achieved a regression coefficient of 0.86 that explains 75% of the total variation and a root square mean error (rmse) of 247."
+7,"taking into consideration the values of the regression values, the highest negative differences (overestimation) are noticed for the cities in the east of romania (figure 3)."
+7,"the possible source of error is the overestimation of the population due to the practice of the citizens in the republic of moldova to declare their presence in these cities (vaslui, bârlad, ias, i) to obtain romanian citizenship [54–56]."
+7,"as for the positive difference (underestimation), the largest differences were noticed in slatina, where there is a big electricity consumer, the largest aluminum producer in europe, alro sa, which also generates higher sol values."
+7,"in the case of the cities of sibiu, deva, cluj-napoca, and sfântu gheorghe, a possible explanation would be the underestimation of the resident population or/and informal economy (see for this subject ghosh et al."
+7,[33]).
+7,"in the case of cluj-napoca—one of the most important academic centers in romania—another explanation would be the large number of students present, but registered as residents elsewhere."
+7,the positive difference in cluj-napoca and other cities like sibiu and brasov may also be explained by tourism.
+7,"bluhm and klaus [57] pointed out that stable lights may underestimate income in high-density places, the refore they recommend using top-coding correction."
+7,"in our analysis we have found several cities of similar size (e.g., cluj and iasi; braila and sibiu) where over- and underestimation of income per capita was related to the specific characteristics of romanian cities mentioned above and not necessarily to the high density of the population."
+7,this is also backed by
+8,"remote sens. 2020, 12, 2950 8 of 19 the fact that in the largest agglomeration area (the capital city, bucharest with 1.9 million inhabitant), sens. 2020, 12, was underestimation remote x fornot that peer significant."
+8,review 8 of 19 figure 3.
+8,figure regression error the regression 3.
+8,the values for error values the year for the 2018. year 2018. linear regression the linear the parametersbetween regressionparameters between thetheestimated estimatedincome incomeandand observed the the observedincome for each income for year during the 2012–2018 period remained close to the values in 2018 (figure each year during the 2012–2018 period remained close to the values in 2018 (figure 4).
+8,"thus, the value4)."
+8,"thus, the value of r2 r2 thethe of coefficient waswas coefficient located between located 0.68 in between 2017 0.68 in and 20170.76 2013, andin0.76 2013, illustrates inwhich a stable arelation which illustrates stable in time between relation in time between the two variables (sol and income)."
+8,in the context of thesewe the two variables (sol and income).
+8,"in the context of these findings, proceeded findings, we to errorin to error reduction proceeded order to in reduction improve order to the prediction. improve a good strategy the prediction."
+8,a good forstrategy improving the prediction for improving the is to minimize prediction the term εthe is to minimize equation in term (5) as much ε in equation as much (5) as possible [58].
+8,we[58]. as possible intend we to use error-related intend to use error- information for the common period with satellite and revenue data to related information for the common period with satellite and revenue data to characterizecharacterize the theerror specific for specific each particular case (city).
+8,the mean error achieved by the mediation of the regression error for each particular case (city).
+8,the mean error achieved by the mediation of the regression errors errors each year year istoapplied is applied each the values estimated to the for the year values estimated for2018. the year 2018.
+8,"table 2 shows a significant improvement table 2 shows a significant improvement ofof correlation thethe correlationcoefficient coefficientbetween betweenthe estimated and the estimated the observed and the observedvalues, in thisin whichwhich values, case exceeds this the value case exceeds theofvalue 0.93, while thewhile total explained of 0.93, the total variability explained increases from 75 to 87%."
+8,rmse is significantly reduced from 247 variability increases from 75 to 87%.
+8,rmse is significantly reduced from 247 to 181. to 181.
+8,table 2.
+8,the regression parameters before and after error reduction.
+8,table 2.
+8,the regression parameters before and after error reduction.
+8,"error reduction before error before reduction errorreduction aftererror after reduction r r 0.86 0.86 rr 0.93 0.93 r2r² 0.75 0.75 r r² 2 0.87 0.87 rmse 1 1 247 rmse 181 rmse 247 rmse 181 aic 1 404 aic 368 aic 1 404 aic 368 1 abbreviations: rmse, root square mean error; aic, akaike information criterion."
+8,"1 abbreviations: rmse, root square mean error; aic, akaike information criterion."
+8,"as a result of the european union’s efforts to reduce electricity consumption by 80%, both romania and hungary are in full transition to led lighting."
+8,the use of this technology implies a decrease in dnb radiance.
+8,this decrease is most often outweighed by the increase in radiance in areas around cities due to urban sprawl or the “skyglow” effect (the clear sky predominantly scatters short-wavelength light) [59].
+8,an increase of more than three times of the scotopic illuminance outside the city was also observed in hungary when using led technology [60].
+8,this study uses a radiative transfer model
+9,"remote sens. 2020, 12, x for peer review 9 of 19 based on monte carlo simulation to make a comparison between different indicators used to qualify remote sens. 2020, 12, 2950 9 of 19 and predict the change in radiance in case of different scenarios related to transitions to led lighting."
+9,figure 4.
+9,figure linearregression 4.
+9,linear regression model model between between observed observed and estimated income and estimated income (ron/person).
+9,(ron/person).
+9,"as a result the impactof of european thethe union’s decrease efforts to reduce in radiance—due toelectricity consumptionthe led transition—on by 80%, both romania relationship with and hungary personal are can income be transition in full limited bytoour lighting."
+9,the use ledmethodological of this technology the use ofimplies approach. a decreasethe sol attenuates in dnb radiance.
+10,"remote sens. 2020, 12, 2950 10 of 19 this decrease is most often outweighed by the increase in radiance in areas around cities due to urban sprawl or the “skyglow” effect (the clear sky predominantly scatters short-wavelength light) [59]."
+10,an increase of more than three times of the scotopic illuminance outside the city was also observed in hungary when using led technology [60].
+10,this study uses a radiative transfer model based on monte carlo simulation to make a comparison between different indicators used to qualify and predict the change in radiance in case of different scenarios related to transitions to led lighting.
+10,"sens.impact remotethe fordecrease 2020, 12,ofx the peer review 10 of 19 in radiance—due to led transition—on the relationship with personal income can be limited by our methodological approach."
+10,the use of sol attenuates the decrease in decrease in radiance radianceinobserved observed downtownin downtown another advantage areas.advantage areas.
+10,another ofthe is the use is machine that use of learning machine learning can that can adapt to adapt to such a change.such a change.
+10,"validation 6. the results of the validation of and discussions results and discussions in order in order to validatethe tovalidate eo-incitytool theeo-incity toolwe we used used thethe similar similar methodology, methodology, the the for for estimation estimation of of the the income income value value at local at local level level forfor hungarian hungarian cities. cities."
+10,thethepopulation populationand localtax andlocal incomeannual taxincome annual data data were extracted were extractedfromfrom thethe hungarian hungarian central central statistical statistical [61] for[61] the for officeoffice the 2014–2016 2014–2016 period forperiod for hungary.
+10,hungary.
+10,"the income the data income data are in are expressed expressed hungarian in hungarian forint (1 huf = 0.0029 forint (1 huf = 0.0029 eur, june eur, 2020) june 2020)been and have and have been reported reported per person. per person."
+10,"hungary is hungary is divided dividedinto eightregions intoeight regions(nuts-2), (nuts-2),19 countiesand 19counties andcapital city—budapest capitalcity—budapest (nuts- (nuts-3) 3) and and 31553155 lau2 lau2 (local (local administrative administrative units:settlements). units: settlements)."
+10,"ininthe present study, thepresent study,we have selected we have selected 1919 municipalities and cities with a population of more than 50,000 inhabitants (figure municipalities and cities with a population of more than 50,000 inhabitants (figure 5 and appendix c). 5 and appendix c)."
+10,"the the largest largest citiescities fromfrom hungary hungary with with a populationexceeding a population 100,000inhabitants exceeding100,000 inhabitantsare the capital are the capital (1,693,051 inhabitants), city—budapest (1,693,051 city—budapest debrecen (203,493 inhabitants), debrecen inhabitants), szeged (203,493 inhabitants), szeged (163,763 (163,763 inhabitants), inhabitants), miskolc (160,325 miskolc (160,325 inhabitants), pécs (149,030 inhabitants), pécs (149,030 inhabitants), győr (124,743 (124,743 inhabitants), inhabitants), győr nyiregyháza inhabitants), nyiregyháza inhabitants), and (120,086 inhabitants), (120,086 kecskemét (110,974 and kecskemét inhabitants) [61]. (110,974 inhabitants) [61]."
+10,figure 5.
+10,"the hungarian cities with population exceeding 50,000 inhabitants."
+10,figure 5.
+10,"the hungarian cities with population exceeding 50,000 inhabitants."
+10,"income inequalities have a clear spatial distribution in hungary: apart from the capital city, the re income is a strong inequalities decrease have in the a clear income spatial from westdistribution to east."
+10,"theinmost hungary: apart from developed areasthe cancapital city,in be found there the is a strong decrease in the income from west to east."
+10,"the most developed areas can be found in the central and north-western parts of the country, with a strong peripheralization in the eastern parts."
+10,"the economic spatial structure of the country has also put its mark on the cities, influencing the adoption of the “smart city” concept, which appeared mostly in the largest urban areas."
+10,the need to apply the smart city concept in urban development appeared in 2015 when a government resolution established the state regulatory and oversight responsibilities for smart city developments [62].
+11,"remote sens. 2020, 12, 2950 11 of 19 central and north-western parts of the country, with a strong peripheralization in the eastern parts."
+11,"the economic spatial structure of the country has also put its mark on the cities, influencing the adoption of the “smart city” concept, which appeared mostly in the largest urban areas."
+11,the need to apply the smart city concept in urban development appeared in 2015 when a government resolution established the state regulatory and oversight responsibilities for smart city developments [62].
+11,"since then, the spread of the smart city model has accelerated significantly in hungary especially in the larger areas: urbansens."
+11,"remote the 2020, 12, smart budapest initiative has been running in the capital since 2014, debrecen city review x for peer 11 of 19 and szeged have had a smart city vision and concept since 2016."
+11,"miskolc, while kaposvár and szolnok concept joined thehasopen a strongandconnection agile smart with sustainable cities development, organization hungary in 2016 [63]."
+11,"as thehassmart also committed city concept itself hastoa strongaconnection adopt series of sustainable development with sustainable goals (sdg). development, hungary in has this also context, of earth the useitself committed observation to adopt a series solutions improved monitoring for andevelopment of sustainable goals (sdg). of the implementation sdgcontext, in this the use ofprogress has also become earth observation a subject solutions for an for discussion. improved monitoring of the sdg implementation progress has also become a subject for discussion. havechosen we have hungary chosenhungary forfor validating validating our results our results for two two reasons: forreasons: on one on hand,onefromhand, from a a historical historical pointas point of view, view, ofthe as the northern northern part of romania part of romania belonged belonged to hungary to hungary between between the two theworld two world wars, wars, showingshowing a strong a strong ethnicethnic and cultural and cultural connection connection withwith the neighboring the neighboring country. country."
+11,"secondly, secondly, from from an an economic economic point point of of as as view, view, romania romania andhungary and hungaryhave strongeconomic havea astrong economiccollaboration: collaboration: a large number of hungarian smes (small and medium size enterprises) have been established in romania vice-versaininthe and vice-versa the last last years, years, facilitating facilitating a strong a strong cooperation cooperation between the twothe between two countries, countries, in addition in addition to the to the several several cross border cross border cooperation cooperation projects implemented projects implemented on both sides onofboth sides offurthermore, the border. the border."
+11,"furthermore, even though the even thoughprofile economic and sizeprofile the economic size of the and countries of the two two countries greatly, indiffers differs the lastgreatly, years thein two the last years the two countries have shown one of the highest rates of economic countries have shown one of the highest rates of economic growth among eu member states (4.6% in growth among eu member the case ofstates (4.6%and hungary in the inof case 4.2% hungary case and 4.2% of romania in case in 2019 of romania in 2019 q4) [64]."
+11,q4) [64].
+11,"in the case of the hungarian cities, the hungarian cities, the the regression regression analyses analyses highlighted stable and highlighted aa stable and strong relationship between the observed income and the estimated income the estimated income (r (r > 2 2 0.95) for > 0.95) each year during for each the 2014–2016 period (figure 6 and table 3)."
+11,table 3).
+11,figure 6.
+11,figure linear regression 6.
+11,linear model between regression model between observed and estimated income (hungary).
+11,table 3.
+11,the regression parameters after error reduction (hungary). 2014 2015 2016 r r2 rmse r r2 rmse r r2 rmse 0.975 0.950 19066 0.995 0.991 6678 0.992 0.985 12591
+12,"remote sens. 2020, 12, 2950 12 of 19 table 3."
+12,"the regression parameters after error reduction (hungary). 2014 2015 2016 r r2 rmse r r2 rmse r r2 rmse 0.975 0.950 19066 0.995 0.991 6678 0.992 0.985 12591 abbreviations: rmse, root square mean error."
+12,"the results illustrate the validation of the methodology described in the present paper for hungarian cities over 50,000 inhabitants."
+12,the eo-incity tool can be used on a regional scale (being validated in hungary as well) in filling in data gaps or collecting new data at city level.
+12,"this tool created to estimate the income at local level based on the viirs nighttime satellite images enables fast, automated, and real-time estimation of the income."
+12,a better spatial resolution of nighttime light data would bring improvements to small-scale income estimation.
+12,luojia1-01 nighttime light satellite images with a spatial resolution of 130 m compared to npp/viirs (500 m spatial resolution) contain more information and spatial details compared to dmsp-ols/npp-viirs nighttime light data and can provide more satisfactory results on a small scale [65].
+12,"in the future, we propose to estimate the income at local level using data from the luojia1-01 satellite, as opposed to the data obtained from the npp-viirs satellite."
+12,"luojia1-01 was launched in june 2018, so the main limitation of these images compared to npp/viirs is the lack of multi-temporal images, which limits their use in the analysis of time series."
+12,"in addition, other valuable sources of nightlights data are represented by nighttime photographs from the international space station with a moderate spatial resolution (between 5 and 200 m), as well as maps of urban nighttime lights at fine spatial resolutions obtained from airborne sensors for studying socio-economic properties of cities [66]."
+12,the income estimation tool developed in the paper (eo-incity) has not provided any evidence for a hypothetical correlation with the functional typology of the cities.
+12,"however, the theoretical positive correlation between city size and the functional complexity of cities highlights the importance of overestimations in the population for cities located close to the eastern borders of romania and for those cities with important educational functions (cluj-napoca and ias, i)."
+12,"limitations even if the correlations between income and night images are statistically representative and the explanation of the total variability are very good, currently, the extension of the estimation method on a regional scale is limited by the short period with common income data and satellite images (2014 to date)."
+12,another limitation is the spatial inhomogeneity of cities caused by different urban development strategies from one country to another.
+12,"however, we must not forget about the different methodology of reporting income data and the problems related to data reliability."
+12,we must notice also the extern causes like new lighting technologies or underestimation of income in high-density places.
+12,"the third limitation of the study is related to the resolution of npp-viirs satellite images with a resolution of 500 m, compared to the resolution of luojia1-01 images of 130 m, which do not offer a very high accuracy at the scale of urban areas."
+12,it is also necessary to compare nighttime satellite images in estimating income in high-density places before and after using top-coding correction.
+12,a successful strategy for reducing constraints would be to introduce more cities in machine learning processing and to develop a methodology for calculating the transfer function at the regional level instead at national one.
+12,conclusions eo-incity proved to be an efficient tool in estimating the real-time income at local level.
+12,"the results have a high potential of being integrated in the information systems specific to smart cities, as a support for decisions on the more efficient allocation of the financial resources to fight poverty and reduce inequalities."
+12,"in this way, the y may have an important contribution to the improvement of the city"
+13,"remote sens. 2020, 12, 2950 13 of 19 management and planning, and, indirectly, to the improvement of the quality of life in cities adopting smart solutions."
+13,"the regression analyses illustrated a very powerful relationship between sol and income for the cities with more than 50,000 inhabitants."
+13,"this finding is in line with our previous research [30], and it underlines the direct relationship between city size, the economic complexity of cities on one side, and the intensity of nightlights, on the other side."
+13,"the combination of the machine learning model with the eo-incity tool, combined with a strategy for error reduction enabled an efficient and real-time estimation of the income, which explained 87% of the total variability."
+13,"on the horizon, we wish to implement the methodology and the tool in other countries too, both in europe and in other continents."
+13,"moreover, we intend to conduct the reconstruction of income based on this tool in the countries where the statistical reporting is not available or reliable."
+13,"author contributions: conceptualization, i.t."
+13,"; data curation, k.i."
+13,"; formal analysis, j.b."
+13,"; investigation, j.b."
+13,"; methodology, k.i., i.-h.h. and i.t."
+13,"; software, i.-h.h."
+13,"; writing—original draft, k.i., i.-h.h. and i.t."
+13,"; writing—review & editing, j.b."
+13,all authors contributed equally to the research presented in this paper and to the preparation of the final manuscript.
+13,all authors have read and agreed to the published version of the manuscript.
+13,"funding: this work was supported by a grant of ministry of research and innovation, cncs-uefiscdi, project number pn-iii-p4-id-pccf-2016-0084, within pncdi iii."
+13,acknowledgments: thanks for the funding support.
+13,conflicts of interest: the authors declare no conflict of interest.
+14,"remote sens. 2020, 12, 2950 14 of 19 remote sens. 2020, 12, x for peer review 14 of 19 appendix a appendix bb appendix https://github.com/kinga-11/income-from-ntl. https://github.com/kinga-11/income-from-ntl."
+14,"appendix c romania city population 1 bucurești 2,112,483 2 iași 373,507"
+15,"remote sens. 2020, 12, 2950 15 of 19 appendix c romania city population 1 bucures, ti 2,112,483 2 ias, i 373,507 3 timis, oara 330,014 4 cluj-napoca 323,484 5 constant, a 314,816 6 galat, i 303,069 7 craiova 302,783 8 bras, ov 289,878 9 ploies, ti 229,641 10 oradea 221,796 11 brăila 205,172 12 bacău 197,285 13 arad 177,464 14 pites, ti 175,047 15 sibiu 169,177 16 târgu mures, 148,490 17 baia mare 146,241 18 buzău 133,376 19 suceava 122,231 20 botos, ani 120,902 21 satu mare 120,736 22 râmnicu vâlcea 118,111 23 piatra neamt, 113,396 24 vaslui 113,272 25 drobeta turnu severin 107,614 26 târgu jiu 95,869 27 bistrit, a 93,950 28 focs, ani 92,936 29 târgovis, te 92,090 30 tulcea 87,698 31 res, it, a 86,554 32 slatina 83,389 33 călăras, i 76,380 34 alba iulia 74,574 35 hunedoara 72,971 36 bârlad 71,431 37 deva 69,527 38 zalău 69,518 39 roman 69,479 40 giurgiu 67,721 41 sfântu gheorghe 64,428 42 medias, 57,701 43 turda 56,146 44 slobozia 51,999 45 ones, ti 51,580 46 alexandria 50,832"
+16,"remote sens. 2020, 12, 2950 16 of 19 hungary city population 1 budapest 169,3051 2 debrecen 203,493 3 szeged 163,763 4 miskolc 160,325 5 pécs 149,030 6 győr 124,743 7 nyiregyháza 120,086 8 kecskemét 110,974 9 székesfehérvár 97,190 10 szombathely 76,528 11 szolnok 71,084 12 tatabánya 69,092 13 érd 68,039 14 kaposvár 63,778 15 békéscsaba 60,137 16 sopron 58,458 17 zalaegerszeg 57,914 18 veszprém 56,361 19 eger 53,091 references 1."
+16,"o’grady, m."
+16,"; o’hare, g."
+16,how smart is your city?
+16,"science 2012, 335, 1581–1582."
+16,[crossref] [pubmed] 2.
+16,united nations.
+16,world urbanization prospects: the 2018 revision.
+16,available online: https://population.un. org/wup/publications/files/wup2018-report.pdf. (accessed on 13 february 2020).
+16,"caragliu, a."
+16,"; del bo, c."
+16,"; nijkamp, p."
+16,smart cities in europe.
+16,urban technol.
+16,"2011, 18, 65–82."
+16,[crossref] 4.
+16,"schaffers, h."
+16,"; ratti, c."
+16,"; komninos, n."
+16,special issue on smart applications for smart cities: new approaches to innovation: guest editors’ introduction.
+16,the or.
+16,electron.
+16,commer.
+16,"2012, 7, 2–5."
+16,[crossref] 5.
+16,"turcu, c."
+16,re-thinking sustainability indicators: local perspectives of urban sustainability.
+16,environ.
+16,manag.
+16,"2013, 56, 695–719."
+16,[crossref] 6.
+16,"berardi, u."
+16,sustainability assessments of urban communities through rating systems.
+16,environ.
+16,sustain.
+16,"2013, 15, 1573–1591."
+16,[crossref] 7.
+16,"zhuhadar, l."
+16,"; thrasher, e."
+16,"; marklin, s.; de pablos, p.o."
+16,the next wave of innovation—review of smart cities intelligent operation systems.
+16,comput.
+16,behav.
+16,"2017, 66, 273–281."
+16,[crossref] 8.
+16,"peng, g."
+16,"; nunes, m."
+16,"; zheng, l."
+16,impacts of low citizen awareness and usage in smart city services: the case of london’s smart parking system.
+16,syst. e-bus.
+16,manag.
+16,"2017, 15, 845–876."
+16,[crossref] 9.
+16,"guo, j."
+16,"; ma, j."
+16,"; li, x."
+16,"; zhang, j."
+16,"; zhang, t."
+16,an attribute-based trust negotiation protocol for d2d communication in smart city balancing trust and privacy.
+16,"2017, 33, 1007–1023."
+16,[crossref] 10.
+16,"chong, m."
+16,"; habib, a."
+16,"; evangelopoulos, n."
+16,"; park, h.w."
+16,dynamic capabilities of a smart city: an innovative approach to discovering urban problems and solutions.
+16,"2018, 35, 682–692."
+16,[crossref] 11.
+16,"hollands, r.g."
+16,critical interventions into the corporate smart city.
+16,"2015, 8, 61–77."
+16,[crossref] 12.
+16,"colding, j."
+16,"; barthel, s."
+16,an urban ecology critique on the “smart city” model.
+16,clean.
+16,"2017, 164, 95–101."
+16,[crossref] 13.
+16,"marsal-llacuna, m.l."
+16,"; segal, m.e."
+16,the intelligenter method (ii) for “smarter” urban policy-making and regulation drafting.
+16,"cities 2017, 61, 83–95."
+16,[crossref] 14.
+16,"mora, l."
+16,"; bolici, r."
+16,"; deakin, m."
+16,the first two decades of smart-city research: a bibliometric analysis.
+16,urban technol.
+16,"2017, 24, 3–27."
+16,[crossref] 15.
+16,"allam, z."
+16,"; newman, p."
+16,"redefining the smart city: culture, metabolism & governance."
+16,"smart cities 2018, 1, 4–25."
+16,[crossref]
+17,"remote sens. 2020, 12, 2950 17 of 19 16."
+17,"yigitcanlar, t."
+17,"; kamruzzaman, m."
+17,"; foth, m."
+17,"; sabatini-marques, j."
+17,"; costa, e."
+17,"; ioppolo, g."
+17,can cities become smart without being sustainable?
+17,a systematic review of the literature.
+17,sustain.
+17,cities soc.
+17,"2019, 45, 348–365."
+17,[crossref] 17.
+17,"huovila, a."
+17,"; bosch, p."
+17,"; airaksinen, m."
+17,comparative analysis of standardized indicators for smart sustainable cities: what indicators and standards to use and when?
+17,"cities 2019, 89, 141–153."
+17,[crossref] 18.
+17,"nichol, j."
+17,"; king, b."
+17,"; quattrochi, d."
+17,"; dowman, i."
+17,"; ehlers, m."
+17,"; ding, x."
+17,earth observation for urban planning and management: state of the art and recommendations for application of earth observation in urban planning.
+17,photogramm.
+17,remote sens.
+17,"2007, 73, 973–979."
+17,[crossref] 19.
+17,"musakwa, w.; van niekerk, a."
+17,"earth observation for sustainable urban planning in developing countries: needs, trends, and future directions."
+17,"2015, 30, 149–160."
+17,[crossref] 20.
+17,"hall, o."
+17,remote sensing in social science research.
+17,open remote sens.
+17,"2010, 3, 1–16."
+17,[crossref] 21.
+17,"santos, t."
+17,"; freire, s."
+17,"; tenedório, j.a."
+17,"; fonseca, a."
+17,"; afonso, n."
+17,"; navarro, a."
+17,"; soares, f."
+17,the geosat project: using remote sensing to keep pace with urban dynamics.
+17,ieee earthzine.
+17,available online: http://www.earthzine.org/themes-page/urban-monitoring/ (accessed on 24 february 2020).
+17,"musakwa, w.; van niekerk, a."
+17,"monitoring sustainable urban development using built-up area indicators: a case study of stellenbosch, south africa."
+17,environ.
+17,sustain.
+17,"2015, 17, 547–566."
+17,[crossref] 23.
+17,"patino, j.e."
+17,"; duque, j.c."
+17,a review of regional science applications of satellite remote sensing in urban settings.
+17,comput.
+17,environ.
+17,urban syst.
+17,"2013, 37, 1–17."
+17,[crossref] 24.
+17,"kohli, d."
+17,"; sliuzas, r."
+17,"; kerle, n."
+17,"; stein, a."
+17,an ontology of slums for image based classification.
+17,comput.
+17,environ.
+17,urban syst.
+17,"2012, 36, 154–163."
+17,[crossref] 25.
+17,"novack, t."
+17,"; kux, h.j.h."
+17,urban land cover and land use classification of an informal settlement area using the open-source knowledge-based system interimage.
+17,"2010, 55, 23–41."
+17,[crossref] 26.
+17,"kadhim, n."
+17,"; mourshed, m."
+17,"; bray, m."
+17,advances in remote sensing applications for urban sustainability.
+17,euro-mediterr.
+17,environ.
+17,in tegr.
+17,"2016, 1, 1–22."
+17,[crossref] 27.
+17,"hillson, r."
+17,"; coates, a."
+17,"; alejandre, j.d."
+17,"; jacobsen, k.h."
+17,"; ansumana, r."
+17,"; bockarie, a.s."
+17,"; bangura, u."
+17,"; lamin, j.m."
+17,"; stenger, d.a."
+17,"estimating the size of urban populations using landsat images: a case study of bo, sierra leone."
+17,west africa.
+17,health geogr.
+17,"2019, 18, 16."
+17,[crossref] 28.
+17,"weng, q.h."
+17,"remote sensing of impervious surfaces in the urban areas: requirements, methods, and trends."
+17,remote sens.
+17,environ.
+17,"2012, 117, 34–49."
+17,[crossref] 29.
+17,"chen, x."
+17,"; nordhaus william, d."
+17,viirs nighttime lights in the estimation of cross-sectional and time-series gdp.
+17,remote sens.
+17,"2019, 11, 1057."
+17,[crossref] 30.
+17,"ivan, k."
+17,"; holobâcă, i.-h."
+17,"; benedek, j."
+17,"; török, i."
+17,potential of night-time lights to measure regional inequality.
+17,remote sens.
+17,"2020, 12, 33."
+17,[crossref] 31.
+17,"ebener, s."
+17,"; murray, c."
+17,"; tandon, a."
+17,"; elvidge, c."
+17,from wealth to health: modeling the distribution of income per capita at the sub-national level using nighttime lights imagery.
+17,health geogr.
+17,"2005, 4, 5–11."
+17,[crossref] 32.
+17,"li, x."
+17,"; ge, l.l."
+17,"; chen, x.l."
+17,detecting zimbabwe’s decadal economic decline using nighttime light imagery.
+17,remote sens.
+17,"2013, 5, 4551–4570."
+17,[crossref] 33.
+17,"ghosh, t."
+17,"; powell, r.l."
+17,"; elvidge, c.d."
+17,"; baugh, k.e."
+17,"; sutton, p.c."
+17,"; anderson, s."
+17,shedding light on the global distribution of economic activity.
+17,open geogr.
+17,"2010, 3, 148–161."
+17,[crossref] 34.
+17,"bhandari, l."
+17,"; roychowdhury, k."
+17,night lights and economic activity in india: a study using dmsp-ols night time images.
+17,asia pac.
+17,"2011, 32, 218–236."
+17,[crossref] 35.
+17,"dai, z."
+17,"; hu, y."
+17,"; zhao, g."
+17,the suitability of different nighttime light data for gdp estimation at different spatial scales and regional levels.
+17,"sustainability 2017, 9, 305."
+17,[crossref] 36.
+17,"basihos, s."
+17,nightlights as a development indicator: the estimation of gross provincial product (gpp) in turkey (5 may 2016).
+17,available online: https://ssrn.com/abstract=2885518 (accessed on 15 january 2020).
+17,"jean, n."
+17,"; burke, m."
+17,"; xie, m."
+17,"; davis, w.m."
+17,"; lobell, d.b."
+17,"; ermon, s."
+17,combining satellite imagery and machine learning to predict poverty.
+17,"science 2016, 353, 790–794."
+17,[crossref] [pubmed] 38.
+17,"määttä, i."
+17,"; lessmann, c."
+17,human lights.
+17,remote sens.
+17,"2019, 11, 2194."
+17,[crossref] 39.
+17,"subash, s.p."
+17,"; kumar, r.r."
+17,"; aditya, k.s."
+17,satellite data and machine learning tools for predicting poverty in rural india.
+17,agric.
+17,"2018, 31, 231–240."
+17,[crossref] 40.
+17,"benedek, j."
+17,urban policy and urbanisation in the transititon romania.
+17,"2006, 1, 51–64."
+18,"remote sens. 2020, 12, 2950 18 of 19 41."
+18,"benedek, j."
+18,the role of urban growth poles in regional policy: the romanian case.
+18,special issue.
+18,"in 2nd international symposium on new metropolitan perspectives–strategic planning, spatial planning, economic programs and decision support tools, through the implementation of horizon/europe2020."
+18,"isth2020, reggio calabria, italy, 18–20 may 2016; calabró, f., della spina, l., eds."
+18,"; springer: amsterdam, the netherlands, 2016; volume 223, pp."
+18,285–290.
+18,[crossref] 42.
+18,"benedek, j."
+18,spatial differentiation and core-periphery structures in romania.
+18,"2015, 6, 49–61."
+18,"benedek, j."
+18,"; lembcke, a.c."
+18,characteristics of recovery and resilience in the romanian regions.
+18,"2017, 8, 95–126."
+18,"ivan, k."
+18,"; benedek, j."
+18,"; ciobanu, s.m."
+18,school-aged pedestrian–vehicle crash vulnerability.
+18,"sustainability 2019, 11, 1214."
+18,[crossref] 45.
+18,national institute of statistics.
+18,"bucharest, romania."
+18,available online: http://www.insse.ro (accessed on 12 february 2020).
+18,"török, i."
+18,"; benedek, j."
+18,spatial patterns of local income inequalities.
+18,settl.
+18,"2018, 2, 77–91."
+18,[crossref] 47.
+18,"benedek, j."
+18,"; varvari, s, ."
+18,"; litan, c."
+18,urban growth pole policy and regional development: old vine in new bottles.
+18,in regional and local development in times of polarization.
+18,"re-thinking spatial policies in europe; lang, t., görmar, f., eds."
+18,"; palgrave/macmillan: basingstoke, uk, 2019; pp."
+18,173–196.
+18,[crossref] 48.
+18,version 1 viirs day/night band nighttime lights.
+18,the earth observations group (eog).
+18,available online: https://eogdata.mines.edu/download_dnb_composites.html (accessed on 8 january 2020).
+18,"wu, r."
+18,"; yang, d."
+18,"; dong, j."
+18,"; zhang, l."
+18,"; xia, f."
+18,regional inequality in china based on npp-viirs night-time light imagery.
+18,remote sens.
+18,"2018, 10, 240."
+18,[crossref] 50.
+18,ministry of regional development and public administration (mrdpa).
+18,"bucharest, romania."
+18,available online: https://www.mdrap.ro/en/ (accessed on 12 january 2020).
+18,"pinkovskiy, m."
+18,"; sala-i-martin, x."
+18,"lights, camera income!"
+18,illuminating the national accounts-household surveys debate.
+18,"2016, 131, 579–631."
+18,[crossref] 52.
+18,"mellander, c."
+18,"; lobo, j."
+18,"; stolarick, k."
+18,"; matheson, z."
+18,night-time light data: a good proxy measure for economic activity?
+18,"plos one 2015, 10, e0139779."
+18,[crossref] 53.
+18,"benedek, j."
+18,"; ivan, k."
+18,remote sensing based assessment of variation of spatial disparities.
+18,geogr.
+18,"2018, 13, 1–9."
+18,[crossref] 54.
+18,"angelescu, i."
+18,new eastern perspectives?
+18,"a critical analysis of romania’s relations with moldova, ukraine and the black sea region."
+18,"perspectives 2011, 19, 123–142."
+18,"cristea, m."
+18,"; mare, c."
+18,"; moldovan, c."
+18,"; china, a."
+18,"; farole, t."
+18,"; vint, an, a."
+18,"; park, j."
+18,"; garrett, k.p."
+18,"; ionescu-heroiu, m."
+18,"magnet cities: migration and commuting in romania; world bank group: washington, dc, usa, 2017."
+18,"dospinescu, a."
+18,"; russo, g."
+18,romania systematic country diagnostic.
+18,background notes.
+18,migration.
+18,available online: https://www.worldbank.org/en/country/romania/publication/romania-systematic-country- diagnostic (accessed on 16 march 2020).
+18,"bluhm, r."
+18,"; krause, m."
+18,top lights—bright cities and their contribution to economic development.
+18,"cesifo 2018, 7411."
+18,available online: https://papers.ssrn.com/sol3/papers.cfm?
+18,abstract_id=3338765 (accessed on 16 june 2020).
+18,"godfrey, k."
+18,simple linear regression in medical research.
+18,new engl.
+18,"1985, 313, 1629–1636."
+18,[crossref] 59.
+18,"kyba, c.c.m."
+18,"; küster, t."
+18,"; de miguel, a.s."
+18,"; baugh, k."
+18,"; jechow, a."
+18,"; hölker, f."
+18,"; bennie, j."
+18,"; elvidge, c.d."
+18,"; gaston, k.j."
+18,"; guanter, l."
+18,artificially lit surface of earth at night increasing in radiance and extent.
+18,"adv. 2017, 3, e1701528."
+18,[crossref] 60.
+18,"kolláth, z."
+18,"; dömény, a."
+18,"; kolláth, k."
+18,"; nagy, b."
+18,qualifying lighting remodelling in a hungarian city based on light pollution effects.
+18,quant.
+18,spectrosc.
+18,radiat.
+18,transf.
+18,"2016, 181, 46–51."
+18,[crossref] 61.
+18,hungarian central statistical office.
+18,"budapest, hungary."
+18,available online: https://www.ksh.hu/engstadat (accessed on 29 march 2020).
+18,"rab, j."
+18,"; szemerey, s."
+18,about the smart city development model.
+18,tarsad.
+18,"2016, 3, 146–156."
+18,[crossref] 63.
+18,"egedy, t."
+18,urban development paradigms in the new millennium—the creative city and the smart city.
+18,geogr.
+18,"2017, 3, 254–262."
+18,european statistics (eurostat).
+18,available online: https://www.ec.europa.eu/eurostat (accessed on 3 april 2020).
+19,"remote sens. 2020, 12, 2950 19 of 19 65."
+19,"li, c."
+19,"; zou, l."
+19,"; wu, y."
+19,"; xu, h."
+19,"potentiality of using luojia1-01 night-time light imagery to estimate urban community housing price-a case study in wuhan, china."
+19,"sensors 2019, 19, 3167."
+19,[crossref] [pubmed] 66.
+19,"levin, n."
+19,"; kyba, c.c."
+19,"; zhang, q."
+19,"; de miguel, a.s."
+19,"; román, m.o."
+19,"; li, x."
+19,"; portnov, b.a."
+19,"; molthan, a.l."
+19,"; jechow, a."
+19,"; miller, s.d.; et al."
+19,remote sensing of night lights: a review and an outlook for the future.
+19,remote.
+19,environ.
+19,"2020, 237, 111443."
+19,[crossref] © 2020 by the authors.
+19,"licensee mdpi, basel, switzerland."
+19,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).

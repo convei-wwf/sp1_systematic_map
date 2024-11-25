@@ -1,0 +1,465 @@
+page,p
+1,remote sensing article development of a multi-spatial resolution approach to the surveillance of active fire lines using himawari-8 chathura h.
+1,"wickramasinghe 1,2, *, simon jones 1,2 , karin reinke 1,2 and luke wallace 1,2 1 school of science, rmit university, melbourne vic 3001, australia; simon.jones@rmit.edu.au (s.j.); karin.reinke@rmit.edu.au (k.r.); luke.wallace2@rmit.edu.au (l.w.)"
+1,"2 bushfire and natural hazards cooperative research centre, melbourne vic 3002, australia * correspondence: chathura.hasanka@gmail.com; tel.: +61-469-948-351 academic editors: diofantos hadjimitsis, ioannis gitas, luigi boschetti, kyriacos themistocleous, randolph h."
+1,wynne and prasad s.
+1,"thenkabail received: 24 august 2016; accepted: 3 november 2016; published: 9 november 2016 abstract: satellite remote sensing is regularly used for wildfire detection, fire severity mapping and burnt area mapping."
+1,applications in the surveillance of wildfire using geostationary-based sensors have been limited by low spatial resolutions.
+1,"with the launch in 2015 of the ahi (advanced himawari imaginer) sensor on board himawari-8, ten-minute interval imagery is available covering an entire earth hemisphere across east asia and australasia."
+1,existing active fire detection algorithms depend on middle infrared (mir) and thermal infrared (tir) channels to detect fire.
+1,"even though sub-pixel fire detection algorithms can detect much smaller fires, the location of the fire within the ahi 2 × 2 km (400 ha) mir/tir pixel is unknown."
+1,this limits the application of ahi as a wildfire surveillance and tracking sensor.
+1,a new multi-spatial resolution approach is presented in this paper that utilizes the available medium resolution channels in ahi.
+1,the proposed algorithm is able to map firelines at a 500 m resolution.
+1,this is achieved using near infrared (nir) (1 km) and red (500 m) data to detect burnt area and smoke within the flagged mir (2 km) pixel.
+1,initial results based on three case studies carried out in western australia shows that the algorithm was able to continuously track fires during the day at 500 m resolution.
+1,the results also demonstrate the utility for wildfire management activities.
+1,keywords: himawari-8; ahi; fire; monitoring 1.
+1,introduction wildfire is an important environmental driver influencing ecosystem processes including the regeneration and diversification of plants and habitat.
+1,"however, wildfires near semi-urban areas pose a significant risk to both life and property."
+1,effective wildfire management and early warning systems are of key importance in saving lives and property.
+1,wildfires are highly unpredictable making them difficult to predict and control.
+1,firefighters depend on fire behaviour information to plan and carry out control measures.
+1,"for example, fire front velocity is key when planning firebreaks, which typically involves clearing strips of vegetation in front of the fire to prevent the fire spreading."
+1,fire surveillance data can provide the necessary information such as fire front speed and direction.
+1,"several techniques are routinely used for wildfire surveillance such as ground sensor networks, aerial line-scans and satellite remote sensing [1,2]."
+1,"ground based sensors are often deployed in small-localized high-risk areas, but are costly to install and maintain."
+1,"aerial imagery provides more flexibility in terms of coverage, with a high initial investment."
+1,satellite based remote sensing provides an ideal platform for wildfire surveillance in terms of both cost and coverage.
+1,"satellite based sensors remote sens. 2016, 8, 932; doi:10.3390/rs8110932 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2016, 8, 932 2 of 13 can provide large area coverage, capturing a complete and comprehensive view of the fire."
+2,"depending on the sensor platform, observations range from once or twice daily observations to every 10 min."
+2,moderate resolution imaging spectroradiometer (modis) and visible infrared imaging radiometer suite (viirs) are two widely used fire detection sensors.
+2,"these polar orbiting sensors provide 1 km and 375 m spatial resolution detection capabilities, respectively, with four time daily and two time daily observations [3–8]."
+2,"geo-stationary sensors, on the other hand, can provide observations every 10–30 min, making them ideal for near real-time fire surveillance."
+2,the main drawback of these sensors is that they are designed as weather satellites with coarse spatial resolutions of around 2–4 km2 .
+2,himawari-8 is a new geo-stationary weather satellite launched in october 2015 by japan meteorological agency (jma).
+2,"on board is the advance himawari imager (ahi) (mitsubishi electric for jma, tokyo, japan) 16 channel mutli-spectral sensor with a 500 m red channel, 1 km green, blue and nir (near infrared) channels."
+2,the remaining 12 channels are in the mir (middle infrared) and tir (thermal infrared) region ranging from 1.6–13.3 µm with a 2 km spatial resolution.
+2,"in terms of coverage, ahi currently captures an entire hemisphere every 10 min covering the east asia region [9]."
+2,this paper investigates the use of the ahi sensor for near real-time wildfire surveillance.
+2,"a new algorithm, ahi fire surveillance algorithm (ahi-fsa), is proposed to map fire lines at 500 m spatial resolutions every 10 min."
+2,"the algorithm is based on utilizing three different spatial resolutions provided by the mir, nir and red channels."
+2,"initial case studies of three fires shows the algorithm can effectively and accurately track the fire line at 500 m resolution, demonstrating the viable applications of ahi-fsa algorithm for near-real time wildfire surveillance."
+2,"the algorithm also shows potential for detecting small, low intensity fire compared to existing modis thermal anomalies data products."
+2,remote sensing fire detection the concept of assessment of fire at sub-pixel level for sensors with more than one channel in the thermal infrared region was originally introduced by dozier [10].
+2,"this bi-spectral method is based on the idea that “if one part of a pixel is much warmer than the remainder, for example, that warm part will contribute proportionally more radiance to the signal in shorter wavelengths in the thermal infrared than in longer wavelengths” [10]."
+2,"taking forward the bi-spectral sub-pixel assessment technique kaufman et al. [11] introduced a contextual threshold based detection algorithm, which is currently used in the modis active fire algorithm [3]."
+2,contextual thresholds enable the algorithm to more effectively distinguish thermal variation due to fire from the background pixels that are non-fire or smoldering [4–6].
+2,the current modis active fire algorithm “version 4” [12] is the latest version of the initial algorithm with improvements made to detect smaller fires and reduce false detection.
+2,"the automated biomass burning algorithm (abba) is another algorithm derived from the same bi-spectral, sub-pixel detection technique."
+2,this algorithm was primarily developed for geostationary environmental operational satellite (geos) sensors [13].
+2,"the algorithm uses visible channels to correct for surface albedo value, which aids in reducing the effects of solar contamination in the thermal channels."
+2,it has been demonstrated that the geos sensor with 4 km thermal channels can detect fires as small as 0.5 ha at 759 k (kelvin) near the equator using abba algorithm [13].
+2,several authors [13–15] have further demonstrated the use of abba with the spinning enhanced visible and infrared imager (seviri) on board european meteosat second generation (msg) with 3 km thermal channels.
+2,showing the possibility to detect fires as small as 0.2 ha at 750 k near the equator using abba.
+2,"even though the discussed techniques have improved sub-pixel level fire detection, the reliability of the minimum fire size and intensity limits the use of geostationary sensor for fire monitoring [7]."
+2,"based on the literature, it is assumed that by using existing sub-pixel thermal detection algorithms with the ahi sensor, fires as small as 0.5–0.2 ha could potentially be detected."
+2,"even though it is possible to detect much smaller fires at the sub-pixel level, the detection result can only point to the area of a 2 × 2 km pixel (400 ha), which is not ideal for active fire surveillance operations."
+2,"to effectively utilize the sensor for wildfire surveillance, it is vital that the location of the actual fire within the 2 km thermal"
+3,"remote sens. 2016, 8, 932 3 of 13 channel be mapped at higher resolution."
+3,"thus, the new algorithm, ahi-fsa, introduced in this paper adopts a multi-spatial resolution approach to map the fire line at 500 m resolution."
+3,this is achieved via the 1 km nir channels to detect burnt and unburnt vegetation and the 500 m red channel to detect the edge between smoke and non-smoke areas.
+3,"algorithm development the ahi-fsa algorithm takes advantage of the multi-spatial resolution data available via the ahi to map a burning fire line i.e., fire front at a 500 m resolution every 10 min."
+3,a condition of the algorithm is that wind is present throughout the duration of the fire.
+3,"this implies that the fire line is also moving in the direction of the wind, thus, there is minimal or no smoke over the burnt area and dense smoke can be observed at the leading edge of the fire due to smoldering and burning."
+3,"the algorithm also requires cloud free imagery, and also the dependence on nir and red channels to limit the algorithm to daytime surveillance only."
+3,the algorithm is implemented using a four-step process.
+3,the first step is for the algorithm to reference the mir channel to detect thermal anomalies at a sub-pixel level.
+3,"a contextual filter is applied to mir radiance difference between fire and non-fire imagery to identify anomalous pixels, and this is discussed in more detail in section 2.3."
+3,this will bound the fire to within a 2 × 2 km (400 ha) area.
+3,"the second step utilises the nir channel to distinguish between the burnt/partially-burnt and unburnt vegetation within the detected mir pixel, improving the resolution to 1 km2 ."
+3,"once burning and partially burning areas have been identified, the red channel is used in the third step to detect the edge between high smoke density and non-smoking pixels."
+3,"the final step is to flag edge pixels as non fire pixels, possible active fire line pixels and fire line pixels."
+3,this improves the spatial resolution of active fire mapping from 400 ha to 25 ha.
+3,figure 1 shows a flow diagram of the algorithm and table 1 summarizes the ahi channels used.
+3,the algorithm is discussed in more detail in the following sections of this paper.
+3,"in section 2.1, the daily behavior of the radiance/reflectance in mir, nir and red channels is presented."
+3,"in section 2.2, input data for the algorithm are discussed."
+3,sections 2.3–2.5 describe the threshold conditions used in the algorithm.
+3,figure 1.
+3,ahi-fsa algorithm flow diagram.
+4,"remote sens. 2016, 8, 932 4 of 13 table 1."
+4,ahi channels used in the ahi-fsa algorithm and application.
+4,"channel wavelength (µm) resolution (km) purpose mir 3.8853 2 thermal differences nir 0.85670 1 vegetation cover changes red 0.63914 0.5 smoke density ahi: advance himawari imager, ahi-fsa: ahi-fire surveillance algorithm, mir: middle infrared, nir: near infrared."
+4,ahi data it is important to understand the diurnal cycle of land surface temperature observed by the ahi mir channel to eliminate false detection of thermal anomalies.
+4,"during a typical day, the earth’s surface temperature rises reaching a maximum around mid-day, before falling in the afternoon."
+4,monitoring mir radiance observations demonstrates this behavior.
+4,"this is also true for nir and red channels, where increasing and decreasing illumination conditions during the day result in variation in the reflectance observed by the sensor."
+4,variations between observations taken at the same time in two consecutive days may also be observed due to changes in atmospheric conditions.
+4,much larger variation can be observed when looking at monthly/annual variations in the data.
+4,"to illustrate this, table 2 shows the variation in differences in sensor observed mir radiance and red and nir reflectance for five different landcover types urban, vegetation, grassland, bare earth and burnt areas."
+4,"these values were calculated using data from 5 to 11 september 2015, for case study areas in western australia."
+4,"the reflectance/radiance difference between two days from 9:00 a.m. to 4.00 p.m. (every 10 min) is calculated and averaged based on equation (1) to derive the daily variation, where ρr is the daily average in reflectance/radiance between the selected di and d j days, t is the time and n is the number of observations for the particular day."
+4,"the gap between the two days, di and d j is increased sequentially from one to six days."
+4,"land cover based daily averages ρr are calculated for one week of data, and weekly average and standard deviation values are calculated as shown in table 2: t +1 ρr = 1/n( ∑ (di − d j )). (1) t table 2."
+4,"weekly mean radiance/reflectance differences between two non-fire images for mir, nir and red channels across five generic land-cover types."
+4,the maximum difference between two images was six days.
+4,"radiance/reflectance differences mean value standard deviation land cover mir nir red mir nir red urban 3.524 0.013 0.011 0.021 0.008 0.008 vegetation 2.899 0.009 0.015 0.027 0.006 0.005 grassland 3.076 0.007 0.007 0.089 0.006 0.005 bare earth 4.531 0.009 0.010 0.027 0.006 0.005 burnt area 10.961 –0.068 –0.017 0.041 0.010 0.007 mir: middle infrared, nir: near infrared."
+4,"the results show considerable variation in surface reflectance and radiance within the same land cover, due to the daily variation in surface temperature and reflectance during the day."
+4,"however, variation between land cover classes were small except when comparing burnt area to all other land covers."
+4,"thus, for the area under investigation, when determining reflectance/radiance differences, there appears to be little influence due to land cover."
+4,"as shown in table 2, the maximum nir reflectance difference between two land cover classes was 0.013 between urban and grass land"
+5,"remote sens. 2016, 8, 932 5 of 13 (where burnt area is ignored), which is below the value for normal daily variation within a land cover type."
+5,large drops in nir and red reflectance are observed due to removal/modification of the top vegetation layer in the burnt area.
+5,"an increase in the difference of mir radiance is observed, and this could be due smoldering or blackish surface heating up unevenly during the day."
+5,data preparation the input data for the algorithm include radiance/reflectance difference images computed using fire and non-fire day imagery with the same time stamp.
+5,"to remove the impact of cloud cover, the non-fire day image is derived as an eight-day composite image."
+5,"existing cloud free procedures, such as the modis eight-day composite, have been shown to produce cloud free images using less than eight days of observation [16]."
+5,"when available, himawari-8 cloud mask data products may be used to remove clouds from the fire day image [17]."
+5,"however, the current implementation of the algorithm requires the manual identification of cloud due to inaccuracy of the himawari-8 cloud mask product as observed during the case study."
+5,the algorithm limits non-fire day imagery to be not earlier than eight days before the fire.
+5,this time constraint on the non-fire day imagery is to avoid the influence of seasonal changes that may affect the threshold conditions in the algorithm.
+5,"for example, mir radiance will be lower in winter compared to summer."
+5,"mir condition the mir 3 µm channel is close to the spectral maximum for radiative emissions observed for objects radiating at temperatures found in fires, and in regions of low solar and terrestrial radiation [18,19]."
+5,"wooster et al. [19] demonstrated that mir can be used to estimate the entire radiant energy from fire, while calle et al. [20] showed that a multi-temporal fire radiant energy calculation based on mir radiance can be used to detect fires at sub-pixel level."
+5,"based on the above, the proposed algorithm depends only on the mir channel to detect thermal anomalies."
+5,"the proposed algorithm uses the mir radiance difference image, produced from fire and non-fire day imagery to detect the fire."
+5,"to increase the chances of detection of a small fire, a contextual threshold approach is adopted."
+5,"initially, a 3 × 3 pixel kernel is used, which is incrementally expanded up to a 15 × 15 pixel kernel stopping when 65% of pixels are classified as background pixels."
+5,background pixels are then used to calculate the background mean and standard deviation using the radiance differences image computed from fire and non-fire day images.
+5,"once background pixel statistics are computed, equation (2) is applied to derive a contextual-based value ( f ) for each pixel."
+5,"based on this ( f ) value, the pixels are then classified as non-fire, possible-fire and fire as shown below."
+5,background pixel 1.
+5,non-cloud or water pixels plus the eight adjoining pixels (queen’s case).
+5,"pixel should also satisfy the non-fire day condition to avoid fire pixels, bare soil and rock surfaces."
+5,non-fire day pixels should be within two standard deviations for the similar region on a non-fire day.
+5,"this condition is only required for non-fire day images: f i = ∆mi − (µ∆mbp + 0.5 × σ∆mbp ), (2) where ∆mi is the mir radiance differences of the target pixel between fire day and non fire day pixels with similar time stamp for the target pixel, µ∆mbp and σ∆mbp are the mean and standard deviation of the mir radiance difference of all background pixels in the kernel: f f = f > 5 : firepixel, f p f = 1 < f ≤ 5 : possible f irepixel, (3) f n f = f ≤ 1 : non f irepixel."
+6,"remote sens. 2016, 8, 932 6 of 13 2.4."
+6,nir conditions the nir is used by the algorithm to look at changes in vegetation cover in order to identify the burning edge at an improved spatial resolution of 1 km.
+6,"there are a number of techniques that have been developed to identify changes in vegetation from remotely sensed imagery [21–23], most of which depend on using vegetation indices such as ndvi (normalized difference vegetation index)."
+6,ahi can also be used to calculate ndvi at 1 km by resampling the red channel to this resolution.
+6,"however, the proposed algorithm takes an alternative approach and does not use ndvi for vegetation change mapping for two reasons."
+6,"firstly, ndvi is sensitive to aerosols mainly due to high sensitivity of red channel to aerosols [24]."
+6,"secondly, the algorithm is not looking to quantify the vegetation changes but rather to identify the edge between burning and unburnt areas."
+6,"the nir channel has a relatively higher reflectance over vegetation in comparison to the red, green and blue channels."
+6,this suggests that a greater reduction in reflectance will be observed as a result of the burning of vegetation.
+6,the nir also has the lowest influence of smoke out of the four channels [25].
+6,the algorithm calculates the gradient of change (expressed as a percentage) [26] using the reflectance difference image from fire and non-fire day.
+6,"by taking the slope, changes in the neighbouring pixels are also taken into account."
+6,high slope value means a higher drop in nir compared to neighbouring pixels.
+6,the importance of calculating slope is that there is a positive and negative slope.
+6,"a positive slope can be caused by smoke and a negative slope can only happen when vegetation cover is removed, in this case due to fire."
+6,"based on the three case studies, we have identified a slope value of –1% or lower as the threshold condition to flag nir pixels as burning."
+6,"this slope value is subject to change based on landcover type: sn = slope(∆ni ) ≤ −1, % (4) where (∆ni ) is difference nir reflectance between fire and non-fire day imagery."
+6,"red conditions in this step, the algorithm takes advantage of the red channel to detect the edge of smoke affected areas within burning nir pixels flagged using the nir threshold condition."
+6,the red channel is chosen because of its enhanced spatial (500 m) resolution and sensitivity to smoke.
+6,the red channel typically shows higher reflectance over smoke [25].
+6,"to further increase the detection of reflectance differences, a 3 × 3 high pass filter is applied to the red reflectance difference (∆ri ) image [27]."
+6,"when considering only a fire event, observed red reflectance will change due to smoke in the pixels or when pixels are burnt or are burning."
+6,it is easier to identify the boundary of these changes using an edge detection technique compared to using a threshold value to identify the edge of smoking pixels.
+6,these boundaries or edges can fall into one of three types: (a) smoke/burnt; (b) smoke/unburnt; and (c) burnt/unburnt.
+6,"the results for all three types of edges are carried over to the final fire line classification stage, where (c) will be eliminated using mir flagged fire pixels and (b) will be eliminated using nir and mir flagged pixels: ∆rhp = high_pass_ f ilter (∆ri ), (5) redge = edge(∆rhp )."
+6,"fire line and hotspot classification the fire line or hotspot pixels (that is, pixels identified as fire boundaries) are identified by eliminating (b) and (c) type edges detected in the red condition."
+6,"simple intersection is applied as shown in equation (6) to eliminate (b) and (c) edges; only flagged red pixels that falls inside a flagged mir and flagged nir pixels will be identified as a fire line pixel, which leaves only the ‘smoke-burnt’ edges that can satisfy all three conditions."
+6,"based on the two confidence levels in mir pixel, final fire line and hotspots are classified as either ‘fire’ or ‘possible fire’:"
+7,"remote sens. 2016, 8, 932 7 of 13 f m ∩ f n ∩ redge : firelinehotspots, (6) f pm ∩ f n ∩ redge : possible f irelinehotspots."
+7,case study method 3.1.
+7,case study fires three fires were chosen for preliminary evaluation of the ahi-fsa algorithm.
+7,"these fires were near camballin, fitzroy crossing and broome in west australia occurring on 9 to 14, 9 to 17 and 7 to 11 september 2015, respectively."
+7,"the case study area figure 2, in which all fires occurred, are covered with sparse hummock grasses and saltbush."
+7,a single fire day was chosen for detailed investigation.
+7,the study fire day was picked as 10 september to avoid cloud throughout the day.
+7,"non-fire, cloud-free images were generated by creating a composite image for every 10 min time stamp using imagery from 1 to 8 september 2015."
+7,"the ahi-fsa was run from 01:00 to 06:30 utc (universal time coordinated), which also covers the two modis day time passes over the fires."
+7,figure 2.
+7,study area map.
+7,"cross-comparison evaluation method the ahi-fsa algorithm results are compared with modis active fire products, which provides thermal anomalies at 1 km ground resolution."
+7,modis on board terra and aqua provides twice daily observations four hours apart.
+7,"in this case, terra observes at 01:40 utc and aqua at 06:00 utc."
+7,"modis active fire products provide the location of thermal anomalies typically associated with fires, including burning and smouldering/cooling-down areas."
+7,"ahi-fsa, on the other hand, provides a detailed spatial definition of the burning edge or line of the fire."
+7,"thus, a direct comparison of the two different products is not possible."
+7,"however, a visual inspection can be carried out by comparing the location of the fire line hotspots from the algorithm and the modis thermal anomalies."
+7,comparison to the burnt area from 01:40 to 06:00 utc (260 min) allows errors of commission to be determined.
+7,"in this case, we considered any fire line pixels in the entire period, which occurred within the burnt area boundary to"
+8,"remote sens. 2016, 8, 932 8 of 13 be true detections, and those outside of the boundary to be errors of commission."
+8,errors of omission could not be determined using this method as the burnt area includes the area burnt outside of the case study time period.
+8,"the burnt area was digitized, via visual inspection of changes in modis 7-2-1 false colour images from terra and aqua."
+8,ahi-fsa fire line hotspots results from 01:40–06:00 utc were stacked to create a composite burnt area from ahi-fsa results.
+8,visual inspection was also carried out based on landsat-8 post fire image.
+8,landsat-8 imagery was not used to calculate the commission error as landsat image was observed eight days after the fire day.
+8,results time sequences of fire line hotspots derived from the algorithm for the 10 september 2015 for the camballin fire are shown in figure 3.
+8,the sequential progression of the fire is clearly visible from the algorithm results.
+8,"from the sequence of images, it is clearly visible that the main fire front is progressing in a north-westerly direction, with a smaller fire to the east progressing in an easterly direction."
+8,"at 01:40 utc, the modis data shows a single fire, however, at 06:00 utc, and two fire fronts are visible in the modis product."
+8,this strongly supports the algorithm results during the modis observation gap to be accurate.
+8,similar findings can be shown for other case study fires.
+8,two separate fires at fitzroy crossing and broome on the same day are shown in figure 4.
+8,both show early detection and fire progression by the ahi-fsa algorithm.
+8,"in particular, figure 4 image c-1 shows that the broome fire was detected only by the ahi-fsa at 01:40 utc."
+8,visual inspection with the background landsat-8 post fire image shows most of the detected pixels fall within the actual burnt area.
+8,this indicates that the agreement between ahi-fsa fire lines and final burnt area.
+8,"in comparison with modis data on figure 4, images a-1 and a-2, it is clear that around 01:40 utc, the fire was moving in a south-westerly direction but had changed direction by almost 90 degrees by 06:00 utc."
+8,"the algorithm was able to show the fire line in the northern section of the fire beginning to burn with the changing wind direction, taking the fire in a north westerly direction."
+8,demonstrating the importance of the high temporal information that is provided through the algorithm.
+8,results of the cross-comparison evaluation are reported in table 3.
+8,"overall, the algorithm showed less than 20% commission error for the three case study fires."
+8,table 3.
+8,"total burnt area during the 10 september 2015 case study fires, mapped using modis terra and aqua 7-2-1 channel false colour imagery."
+8,"the ahi-fsa detections from 01:40 to 06:00 utc are combined to calculate the total burnt area as in figure 4 images a-3, b-3 and c-3."
+8,commission error values are calculated based on the area detected using the ahi-fsa outside of the burnt area.
+8,digitized total area area detected commission burnt area detected within burnt area error (km2 ) (km2 ) (km2 ) (%) fitzroy crossing 426.4 185.2 153.8 16.9 camballin 97.1 49.2 37.6 23.6 broome 60.6 43.2 32.45 24.8 total 594.1 277.6 223.9 19.3
+9,"remote sens. 2016, 8, 932 9 of 13 figure 3."
+9,compares the algorithm results with modis thermal anomalies hotspot products for camballin fire on 10 september 2015.
+9,the sequence of images are from 01:30 utc ten minutes before terra a.m.
+9,"(01:40 utc) observation, followed by 01:40 utc, and there after 03:00, 04:00, 05:00, 05:30 and again ten minutes before aqua a.m. observation (05:50), followed by 06:00 and finally at 06:10 utc."
+9,"modis thermal anomaly product, which are at 1 km spatial resolution, are overlaid as pixel boundary in red."
+9,algorithm results are overlaid in yellow which includes ‘fire line’ as well as ‘possible fire line’ pixels.
+9,the background image is a landsat-8 post fire image acquired on 24 september.
+10,"remote sens. 2016, 8, 932 10 of 13 figure 4."
+10,"three fires in western australia on the 10 september 2015, the fitzroy crossing fire (on the left (a)), the camballin fire (on the middle (b)) and the broome fire (on the right (c))."
+10,"the first two rows of images (1,2) shows fire detection at 01:40 and 06:00 utc, respectively, from the algorithm (yellow) and modis thermal anomaly hotspots (red pixel boundary) with the landsat-8 post fire image as the background; the last row (3) is a composite of all detected pixels from the algorithm 01:40 to 06:00 utc, between modis terra and aqua observations."
+10,"discussion wildfire surveillance is an important aspect of fire management, as such near real-time satellite monitoring systems will provide great benefits to fire agencies for wildfire management and response."
+10,the current modis thermal anomalies product provides a very low temporal resolution in terms of wildfire monitoring.
+10,"in contrast, himawari-8 ahi provides high temporal resolution (10 min) imagery, making it ideal for wildfire surveillance."
+10,"additionaly, 2 km spatial resolution in the mir and tir channels limits the use of existing fire detection algorithms, such as the modis active fire algorithm and wfabba (wildfire automated biomass burning algorithm), due to coarse resolution in these channels."
+10,"in terms of wildfire monitoring applications, a 2 km resolution will not be sufficient to map the spatial detail of the fire, thus limiting the usability of ahi as a wildfire surveillance sensor."
+10,"to address this challenge, the new ahi-fsa adopted the 1 km nir and 500 m red channel to improve the detection of fire line to 500 m."
+10,ahi-fsa tracks the boundary of the burning fire line at the time of observation.
+10,"thus, at a single time stamp, the algorithm captures only the edge fire pixels that fall in the direction of the spreading fire."
+10,"the frequent mapping of fire edge detections can provide useful information relating to the behaviour of the fire, such as the speed and direction of travel at temporal and spatial resolution that improves upon current satellite based systems."
+10,the validation method adopted herein provides cross validation with modis active fire products.
+10,algorithm fire line detections are modis active fire products that are compared at similar time stamps
+11,"remote sens. 2016, 8, 932 11 of 13 and over all performances of the algorithm during four hours of observation, which are also validated."
+11,initial results suggest ahi-fsa is able to track wildfire at 500 m resolution.
+11,"the algorithm is shown to continuously track the case study fires, which occurred in scrub/grass land cover."
+11,"in the study, ahi-fsa was also able to detect sudden changes in the fire with changing weather conditions, as shown in the fitzroy crossing fire."
+11,ahi-fsa detected a small fire line to the north of the modis hot spot at 01:40 utc (figure 4 image a-1) and tracked the gradual progression of the fire in the north-west direction; this was confirmed by the 06:00 utc hot spots detected by modis aqua observation.
+11,"during the case studies, ahi-fsa was able to track the fire with less than 20% commission error, sufficient for fire surveillance activities."
+11,results also demonstrate the effectiveness of the mir threshold condition to identify thermal variation comparable to modis even though modis mir pixels are four times smaller than the ahi pixels.
+11,"for example, figure 4(c-1) shows only ahi-fsa detected the fire at 01:40, which is later confirmed by the modis aqua hotspots."
+11,"this could be due to the fact that the ahi-fsa is looking at radiance difference between fire and non-fire day images, compared to modis active fire products using only the fire day image."
+11,further studies are needed to identify the minimum changes in fire temperature that could be detected by the mir contextual threshold method presented in this paper.
+11,the red channel based edge detection was also showed to be effective in mapping the edge between the smoking and burnt area.
+11,"however, the dependence on wind to blow the smoke away from the burnt area means that low wind condition could affect the performance of the algorithm."
+11,"the algorithm could also be affected by the burning material itself—for example, forests with thick undergrowth and dense canopies that can burn and smoulder continuously for a considerable length of time, thereby producing smoke long after the actual fire front has passed through, which could effect the edge detection."
+11,"thus, further studies must be carried out to test the performance of the algorithm in such different conditions."
+11,"to our knowledge, this is the first time three channels mir, nir and red have been used in a fire surveillance algorithm."
+11,the algorithm has the potential to be used with other high temporal sensors such as geostationary operational environmental satellite (geos) with 1 km visible bands and 4 km thermal bands.
+11,"furthermore, the algorithm can easily be adopted to pick up continuously smouldering pixels by tracking non-moving pixels."
+11,"fire duration data can also be used in fire severity mapping, where fire intensity as well as duration is of importance."
+11,conclusions this paper proposes a new algorithm that takes advantage of high temporal imagery provided by ahi for near real-time fire surveillance.
+11,the ahi-fsa algorithm overcomes the limitations of course resolution thermal channels in ahi by adopting a multi-spatial resolution approach.
+11,the ahi-fsa performed well in the western australian case study fires.
+11,"results showed the fire line continuously tracked at a 500 m resolution for the duration of the study period for all three case study fires, filling in the gap between modis terra and modis aqua observations and showing the progression of the fire quite accurately."
+11,"over 80% accurate detection was achieved in the case study application, indicating that the multi-resolution approach has been effective in bringing the initial 2 × 2 km detection in thermal band to 500 m."
+11,"due to the high temporal resolution, it is possible to improve the timeliness and spatial accuracy of fire behavioral data, such as speed and direction of the fire, every 10 min."
+11,initial validation shows that the algorithm can perform well in tracking fire using the multi resolution approach.
+11,"however, further detailed validation must be carried out comparing with more modis active fire products and other remote sensing data."
+11,"tests must also be carried out to identify ahi mir and red channel sensitivity to thermal anomalies and smoke, respectively."
+11,ahi-fsa must also be validated in different land-cover conditions.
+11,further development in terms of the algorithm would be to add temporal contextual awareness to the algorithm such as the state of the pixel in the previous time stamp.
+11,"this would enable the algorithm to track status of the pixels such as non-fire, fire, and burnt area, and could reduce the false detection in the already burnt area."
+12,"remote sens. 2016, 8, 932 12 of 13 acknowledgments: international postgraduate research scholarships (iprs), an australian government scholarship program, is gratefully acknowledged for providing the study opportunity."
+12,"the authors would also like to acknowledge the support of the commonwealth of australia through the bushfire and natural hazards cooperative research centre program, the australian bureau of meteorology, geoscience australia, and the japanese meteorological agency for use of ahi imagery associated with this research, along with the australian national computational infrastructure for their advice and support with data access and services."
+12,author contributions: wickramasinghe conceived the initial algorithm concept.
+12,"wickramasinghe, jones, reinke and wallace contributed to the development of the algorithm wickramasinghe analyzed the case study fire results."
+12,wickramasinghe prepared the manuscript.
+12,all authors provided editorial advice.
+12,conflicts of interest: the authors declare no conflict of interest.
+12,abbreviations the following abbreviatfmanuions are used in this manuscript: modis moderate resolution imaging spectroradiometer ahi advanced himawari imaginer ahi-fsa ahi-fire surveillance algorithm abba automated biomass burning algorithm mir middle infrared nir near infrared jma japan meteorological agency ndvi normalized difference vegetation index utc universal time coordinated seviri spinning enhanced visible and infrared imager references 1.
+12,"mengod, p.c."
+12,the influence of external factors on false alarms in an infrared fire detection system.
+12,"wildland fire 2015, 24, 261–266."
+12,"san-miguel-ayanz, j."
+12,"; ravail, n."
+12,"; kelha, v."
+12,"; ollero, a."
+12,active fire detection for fire emergency management: potential and limitations for the operational use of remote sensing.
+12,hazard.
+12,"2005, 35, 361–376."
+12,"giglio, l."
+12,"; descloitres, j."
+12,"; justice, c.o."
+12,"; kaufman, y.j."
+12,an enhanced contextual fire detection algorithm for modis.
+12,remote sens.
+12,environ.
+12,"2003, 87, 273–282."
+12,"justice, c.o."
+12,"; giglio, l."
+12,"; korontzi, s."
+12,"; owens, j."
+12,"; morisette, j.t."
+12,"; roy, d."
+12,"; descloitres, j."
+12,"; alleaume, s."
+12,"; petitcolin, f."
+12,"; kaufman, y."
+12,the modis fire products.
+12,remote sens.
+12,environ.
+12,"2002, 83, 244–262."
+12,"morgan, p."
+12,"; hardy, c.c."
+12,"; swetnam, t.w."
+12,"; rollins, m.g."
+12,"; long, d.g."
+12,mapping fire regimes across time and space: understanding coarse and fine-scale fire patterns.
+12,"wildland fire 2001, 10, 329–342."
+12,"roberts, g.g.j."
+12,"; wooster, m.m.j."
+12,fire detection and fire characterization over africa using meteosat seviri.
+12,ieee trans.
+12,geosci.
+12,remote sens.
+12,"2008, 46, 1200–1218."
+12,"laneve, g."
+12,"; castronuovo, m."
+12,"; cadau, e."
+12,assessment of the fire detection limit using seviri/msg sensor.
+12,"in proceedings of the 2006 ieee international symposium on geoscience and remote sensing, denver, co, usa, 31 july–4 august 2006; pp."
+12,4157–4160.
+12,"schroeder, w."
+12,"; oliva, p."
+12,"; giglio, l."
+12,"; csiszar, i.a."
+12,the new viirs 375m active fire detection data product: algorithm description and initial assessment.
+12,remote sens.
+12,environ.
+12,"2014, 143, 85–96."
+12,"da, c."
+12,preliminary assessment of the advanced himawari imager (ahi) measurement onboard himawari-8 geostationary satellite.
+12,remote sens.
+12,"2015, 6, 637–646."
+12,"dozier, j."
+12,a method for satellite identification of surface temperature fields of subpixel resolution.
+12,remote sens.
+12,environ.
+12,"1981, 11, 221–229."
+12,"kaufman, y.j."
+12,"; justice, c.o."
+12,"; flynn, l.p."
+12,"; kendall, j.d."
+12,"; prins, e.m."
+12,"; giglio, l."
+12,"; ward, d.e."
+12,"; menzel, w.p."
+12,"; setzer, a.w."
+12,potential global fire monitoring from eos-modis.
+12,geophys.
+12,atmos.
+12,"1998, 103, 32215–32238."
+12,"giglio, l."
+12,"; csiszar, i."
+12,"; restás, á."
+12,"; morisette, j.t."
+12,"; schroeder, w."
+12,"; morton, d."
+12,"; justice, c.o."
+12,active fire detection and characterization with the advanced spaceborne thermal emission and reflection radiometer (aster).
+12,remote sens.
+12,environ.
+12,"2008, 112, 3055–3063."
+13,"remote sens. 2016, 8, 932 13 of 13 13."
+13,"prins, e.m."
+13,"; feltz, j.m."
+13,"; menzel, w.p."
+13,"; ward, d.e."
+13,an overview of goes-8 diurnal fire and smoke results for scar-b and 1995 fire season in south america.
+13,geophys.
+13,atmos.
+13,"1998, 103, 31821–31835."
+13,"koltunov, a."
+13,"; ustin, s.l."
+13,"; prins, e.m."
+13,on timeliness and accuracy of wildfire detection by the goes wf-abba algorithm over california during the 2006 fire season.
+13,remote sens.
+13,environ.
+13,"2012, 127, 194–209."
+13,"prins, e.m."
+13,"; schmetz, j."
+13,"; flynn, l."
+13,"; hillger, d."
+13,"; feltz, j."
+13,an overview of diurnal active fire monitoring using a suite of international geostationary satellites.
+13,"in global and regional vegetation monitoring from space: planning a coordinated international effort; spb academic publishing bv: the hague, the netherlands, 2001; pp."
+13,145–170.
+13,"roy, d."
+13,"; lewis, p."
+13,"; schaaf, c."
+13,"; devadiga, s."
+13,"; boschetti, l."
+13,the global impact of clouds on the production of modis bidirectional reflectance model-based composites for terrestrial monitoring.
+13,ieee geosci.
+13,remote sens.
+13,"2006, 3, 452–456."
+13,"imai, t."
+13,"; yoshida, r."
+13,algorithm theoretical basis for himawari-8 cloud mask product.
+13,meteorol.
+13,satell.
+13,center tech.
+13,"note 2016, 61, 1–17."
+13,"robinson, j.m."
+13,fire from space: global fire evaluation using infrared remote sensing.
+13,remote sens.
+13,"1991, 12, 3–24."
+13,"wooster, m.j."
+13,"; zhukov, b."
+13,"; oertel, d."
+13,fire radiative energy for quantitative study of biomass burning: derivation from the bird experimental satellite and comparison to modis fire products.
+13,remote sens.
+13,environ.
+13,"2003, 86, 83–107."
+13,"calle, a."
+13,"; casanova, j.l."
+13,"; moclan, c."
+13,"; romo, a.j."
+13,"; cisbani, e."
+13,"; costantini, m."
+13,"; zavagli, m."
+13,"; greco, b."
+13,latest algorithms and cientific developments for forest fire detection and monitoring using msg/seviri and modis sensors.
+13,"in proceedings of the 2nd international conference on recent advances in space technologies, rast 2005, istanbul, turkey, 9–11 june 2005; pp."
+13,118–123.
+13,"hayes, d.j."
+13,"; sader, s.a."
+13,comparison of change detection techniques for monitoring tropical forest clearing and vegetation regrowth in a time series.
+13,photogramm.
+13,remote sens.
+13,"2001, 67, 1067–1075."
+13,"lyon, j.g."
+13,"; yuan, d."
+13,"; lunetta, r.s."
+13,"; elvidge, c.d."
+13,a change detection experiment using vegetation indices.
+13,photogramm.
+13,remote sens.
+13,"1998, 64, 143–150."
+13,"colditz, r.r."
+13,"; llamas, r.m."
+13,"; gebhardt, s."
+13,"; wehrmann, t."
+13,"; equihua, j."
+13,comparison of change detection techniques for the yucatan peninsula using landsat image time series.
+13,"in proceedings of the 2015 ieee international geoscience and remote sensing symposium (igarss), milan, italy, 26–31 july 2015; pp."
+13,1650–1653.
+13,"kaufman, y.j."
+13,"; remer, l.a."
+13,detection of forests using mid-ir reflectance: an application for aerosol studies.
+13,ieee trans.
+13,geosci.
+13,remote sens.
+13,"1994, 32, 672–683."
+13,"kaufman, y.j."
+13,"; tanré, d."
+13,"; remer, l.a."
+13,"; vermote, e.f."
+13,"; chu, a."
+13,"; holben, b.n."
+13,operational remote sensing of tropospheric aerosol over land from eos moderate resolution imaging spectroradiometer.
+13,geophys.
+13,"1997, 102, 17051–17067."
+13,"longley, p."
+13,"; maguire, d.j."
+13,"; rhind, d.w."
+13,"geographical information systems and science, 2nd ed."
+13,"; wiley: hoboken, nj, usa, 2005; p."
+13,"liu, j.g."
+13,"; mason, p.j."
+13,"essential image processing and gis for remote sensing, 1st ed."
+13,"; wiley-blackwell: hoboken, nj, usa, 2009; p."
+13,"44. c 2016 by the authors; licensee mdpi, basel, switzerland."
+13,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc-by) license (http://creativecommons.org/licenses/by/4.0/).

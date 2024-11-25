@@ -1,0 +1,992 @@
+page,p
+1,"article mapping of potential fuel regions using uncrewed aerial vehicles for wildfire prevention maria eduarda andrada 1,2, *,† , david russell 2,† , tito arevalo-ramirez 3 , winnie kuang 2 , george kantor 2 and francisco yandun 2 1 institute of systems and robotics, university of coimbra, 3030-290 coimbra, portugal 2 robotics institute, carnegie mellon university, pittsburgh, pa 15213, usa; davidrus@andrew.cmu.edu (d.r.); wkuang@andrew.cmu.edu (w.k.); gkantor@andrew.cmu.edu (g.k.); fyandun@andrew.cmu.edu (f.y.)"
+1,"3 department of mechanical and metallurgical engineering, department of electrical engineering, pontificia universidad católica de chile, santiago 8331150, chile; tito.arevalo@uc.cl * correspondence: duda.andrada@isr.uc.pt † these authors contributed equally to this work."
+1,"abstract: this paper presents a comprehensive forest mapping system using a customized drone payload equipped with light detection and ranging (lidar), cameras, a global navigation satellite system (gnss), and inertial measurement unit (imu) sensors."
+1,the goal is to develop an efficient so- lution for collecting accurate forest data in dynamic environments and to highlight potential wildfire regions of interest to support precise forest management and conservation on the ground.
+1,"our paper provides a detailed description of the hardware and software components of the system, covering sensor synchronization, data acquisition, and processing."
+1,"the overall system implements simultane- ous localization and mapping (slam) techniques, particularly fast lidar inertial odometry with scan context (fastlio-sc), and lidar inertial odometry smoothing and mapping (liosam), for accurate odometry estimation and map generation."
+1,"we also integrate a fuel mapping representation based on one of the models, used by the united states secretary of agriculture (usda) to classify fire behavior, into the system using semantic segmentation, lidar camera registration, and odometry as inputs."
+1,real-time representation of fuel properties is achieved through a lightweight map data structure at 4 hz.
+1,"the research results demonstrate the effectiveness and reliability of the proposed citation: andrada, m.e."
+1,"; russell, d.; system and show that it can provide accurate forest data collection, accurate pose estimation, and arevalo-ramirez, t."
+1,"; kuang, w.; comprehensive fuel mapping with precision values for the main segmented classes above 85%."
+1,"qual- kantor, g."
+1,"; yandun, f."
+1,mapping of potential fuel regions using itative evaluations suggest the system’s capabilities and highlight its potential to improve forest uncrewed aerial vehicles for management and conservation efforts.
+1,"in summary, this study presents a versatile forest mapping wildfire prevention."
+1,"forests 2023, 14, system that provides accurate forest data for effective management."
+1,1601. https://doi.org/10.3390/ f14081601 keywords: semantic mapping; simultaneous localization and mapping (slam); lidar; forest inventory; autonomous drones; forest monitoring; remote sensing; flammable material detection; academic editor: chong xu vegetation classification received: 16 june 2023 revised: 19 july 2023 accepted: 3 august 2023 published: 8 august 2023 1.
+1,"introduction the number of uncontrolled wildfires around the globe is increasing due to a rise in global temperature and extreme weather brought on by climate changes in recent copyright: © 2023 by the authors. years [1,2]."
+1,"longer periods of high temperatures lead to drier seasons and the accumulation licensee mdpi, basel, switzerland. of combustible material in the forests."
+1,these conditions yield an increase in uncontrolled this article is an open access article and harmful wildfires which can be worsened by strong winds or thunderstorms.
+1,"without distributed under the terms and active and stringent measures to monitor and manage forest regions, it can be difficult to conditions of the creative commons prevent and contain uncontrolled wildfires and the resulting irreversible damage."
+1,"this is attribution (cc by) license (https:// an especially challenging undertaking due to the vast size of typical forests, the danger creativecommons.org/licenses/by/ posed, and the demand for highly intensive labor to fight fires or execute preventive 4.0/). maintenance actions."
+1,"forests 2023, 14, 1601. https://doi.org/10.3390/f14081601 https://www.mdpi.com/journal/forests"
+2,"forests 2023, 14, 1601 2 of 20 information collected using remote sensing methods (e.g., satellites or aircraft) can accurately monitor forestry environments while reducing labor and operational costs [3,4]."
+2,"in particular, uncrewed aerial vehicles (uavs) have gained attention in forestry research and operations (among other industrial applications) since they are easily deployable, provide a time-flexible operation, and can produce excellent spatial resolution measurements with different sensing modalities (e.g., visual, thermal, spectral or laser range) [5]."
+2,"uavs have garnered interest as a promising remote sensing modality due to their accessibility, rapid maneuverability, operational range, low operational costs, and ability to provide high- resolution data."
+2,"environmental reconstruction of sensor data collected from uavs can help create higher fidelity virtual copies of the environment (digital twins), holding the information that may be beneficial for inventorying and mapping purposes."
+2,uavs are also especially suitable for assisting humans when working in large dangerous areas where access is limited.
+2,"these characteristics have made researchers put significant effort towards using uav-based solutions to aid in fire fighting tasks [6,7], scout of fire detection [5,8] or fire behavior analysis and prediction [9]."
+2,"a promising approach is to mitigate wildfires by reducing the accumulation of highly combustible biomass ranging from smaller biomass, such as dried pine needles, grasses, and small twigs, to larger wood pieces."
+2,"robotic forestry maintenance can play a key role in prevention tasks, especially when teaming aerial and ground vehicles."
+2,"recently, researchers have proposed and investigated a collaborative system in which a uav will be used to survey the environment to generate a multi-layer map."
+2,this map comprises information including traversability and areas with an accumulation of combustible material.
+2,an uncrewed ground vehicle (ugv) will receive this information and remove the highly combustible material from the forest [10].
+2,the integration of fuel mapping plays a vital role in ensuring the quality of forest management and the conservation of local flora and fauna.
+2,"by accurately identifying and categorizing flammable materials based on the united states department of agri- culture (usda)’s fire behavior fuel model [11] (the anderson model), we can improve the precision of heavy-duty machines used for mulching and minimize the risk of false positives [12]."
+2,"this comprehensive approach, encompassing geometry, semantics, and temporal information, allows us to create a global map that captures the different fuel models of grasslands, shrublands, timber, and slash areas."
+2,"with this valuable knowledge, we can implement targeted strategies and conservation to protect our forests and promote sustainable practices."
+2,"this study seeks to expand on previous works [13,14] by developing a perception system for uavs in wildfire prevention efforts."
+2,"to enable the implementation of such a system, we have designed a custom payload that contains different sensing modalities and a framework that includes simultaneous localization and mapping (slam), semantic segmentation, and fuel mapping."
+2,"in our work, we have extensively tested our system on two study sites and validated our slam implementations and semantic mapping with qualitative and quantitative results."
+2,"related work developments in remote sensing technology allow conditions and changes over large geographic areas to be monitored and analyzed, at a given time or period."
+2,remote sensing has been useful for forest wildfire applications and has been extensively studied.
+2,"previous efforts have successfully applied remote sensing, in the form of satellite imagery, in all stages of forest fire efforts, such as mapping efforts for fuel type [15–17], burned area [18,19], vegetation recovery [20], assessments of fire risk [21,22] and fire/burn severity [23,24], and detection of fires [25,26]."
+2,"in the agricultural domain, uavs have been used to map diseases [27,28], and im- plement precision agriculture tasks [29]."
+2,"when applied in the forestry domain, uavs are especially appealing since they allow regular, frequent, and on-demand data acquisition, can host a diverse range of sensors according to the application, and can be used in real-time"
+3,"forests 2023, 14, 1601 3 of 20 operations [30]."
+3,"since forest environments are dynamic environments, data acquisition must be accurate and up-to-date."
+3,"uavs provide a significant advantage over traditional remote sensing techniques such as satellite imagery, notably in this area."
+3,works in applying uavs for forestry applications have gained traction over the years.
+3,"one author hyyppä et al. [31] explored the use of uavs and a slam system to collect information using a light detection and ranging (lidar) sensor, including stems of individual trees, stem curves, and the diameters at breast height (dbh)."
+3,another author corte et al. [32] employed machine learning techniques to design accurate predictive models from the lidar data collected using the uav to conduct forest inventories.
+3,"previous works have also used low-altitude aerial images and lidar data to construct a local scale model of the forest canopy surface, with information about the elevation of vegetation, through photogrammetry and structure from motion approaches [33]."
+3,"researchers have also examined using uavs to monitor fire and its effects [34,35], identify spatial gaps [36], and assess soil disturbances [37]."
+3,"due to the large scale of forest environments, past research which used uav data for forest inventory applications opted for using uav data on small areas [31,33,38,39]."
+3,results from these works have demonstrated the promising potential of using uavs to map and estimate forest resources.
+3,"further, [40] have investigated integrating partial- coverage uav data with field plots to estimate forest resource parameters (i.e., volume, biomass, etc.) as a means to address the issue of mapping large-scale environments."
+3,fusing semantic information is especially important for forest fire mitigation efforts as it allows a 3d representation containing classification information such as the location of flammable vegetation and other classes for a globally-registered map of the forest environment.
+3,"while semantic mapping has gained traction over the recent years and has been applied in areas such as autonomous driving [41,42] or assistive robotics [43,44], implementing semantic mapping directly into the forest domain is still a work in progress, to the best of our knowledge."
+3,"past research in this area has investigated using high-resolution rgb images acquired by uavs to classify shrubs [45], and tree species [46] in a heterogeneous forest environment."
+3,"more recently, researchers have used classification approaches to target the forest wildfire issue."
+3,automating survey methods that involve deploying autonomous robotic systems to navigate in the field requires the robots to have a robust simultaneous localization and mapping (slam) system to estimate their state in 3d space.
+3,"over the years, slam research has matured with the development of different systems based on various combinations of sensor modalities [47]."
+3,lidar odometry and mapping (loam) [48] is a state-of- the-art loosely-coupled lidar and inertial-based slam algorithm.
+3,"in tightly-coupled sensor fusion frameworks, sensor data from different modalities are jointly processed and combined at a lower level, usually through a filtering or optimization framework, to estimate the robot’s pose and update the map."
+3,"however, tightly-coupled frameworks require more complex algorithms and computational resources to achieve joint estimation and optimization."
+3,the lidar odometry via smoothing and mapping (lio-sam) [49] is a tightly-coupled lidar and inertial-based slam algorithm which expands on the loam framework by including loop closure methods and feedback from absolute measurements such as the global positioning system (gnss) and compass heading.
+3,"works have also looked into fusing lidar, visual, and inertial modalities, such as [50] which featured visual- inertial odometry (vio) system and a lidar odometry (lo) system."
+3,the vio subsystem is tightly-coupled and serves as a motion model for the lidar mapping which dewarps lidar points and registers the scans to the global map.
+3,"various works have implemented slam systems, primarily lidar and inertial-based, in the forest environment, for tree detection and tree trunk estimation [51], and 3d forestry inventory mapping [52,53]."
+3,materials and methods the design and development of the complete system included customized hardware and software components.
+3,the hardware includes a payload designed to allow easy
+4,"forests 2023, 14, 1601 4 of 20 mounting on diverse types of drones."
+4,"it also contains different types of sensors that provide spectral, visual, and range information."
+4,"the software stack includes synchronization of the sensor data acquisition, data logging, and processing."
+4,details of the individual components are discussed in the following sections.
+4,"sensing payload we designed and deployed a sensing payload with different types of components that include an inertial measurement unit imu (vn-200 rugged gnss/ins), a three- dimensional light detection and ranging scanner (lidar) with 32 channels (velodyne vlp-32), a 20.2 megapixel stereo camera with 8.5 mm focal length lenses (allied vision alvium 1800u-2040c), a multispectral camera (mapir survey3w, red+green+near-infrared channels), and two onboard computers (nvidia jetson xavier development kit and the intel core i7 nuc)."
+4,"given the highly unstructured, dynamic, and changing forest environment, this sensing payload was designed to have robust sensing capabilities and is lightweight while also taking into account future research work."
+4,"due to the lack of perception work in forestry, the sensors chosen allow for future work and ablation studies regarding the best sensory combination for important decision-making modules such as semantic mapping, navigation, and slam."
+4,"the lidar, stereo cameras, and imu are chosen to have different sensing modalities on board with different fields of view and spectral characteristics."
+4,this helps to account for conditions that may render either of the sensors susceptible to poor performance.
+4,"for instance, the stereo cameras have a horizontal and vertical field of view of 60.4◦ and 44.9◦ , respectively."
+4,"the lidar has a horizontal and vertical field of view of 360◦ and 40◦ , respectively."
+4,we also opted for two onboard computers to divide the computing load for recording and processing the data.
+4,"the xavier board is intended to run machine learning models, while the nuc computer handles all the heavy cpu calculations (e.g., slam processing)."
+4,figure 1 shows a 3d rendering of the payload and the mounting of its different components.
+4,nvidia jetson xavier development kit power distribution board time synchronization board power supply converter multispectral camera intel core i7 nuc ethernet switch rgb cameras imu lidar figure 1.
+4,sensing payload.
+4,the sensing payload was designed for easy mounting on any aerial platform and can be tilted at different viewpoints ranging from horizon to nadir.
+4,"furthermore, the components are mounted in a modular way, allowing easy integration and removal of each one, if necessary, for operational constraints (e.g., limited weight capacity)."
+4,"in order to minimize weight, the sensing payload is configured to be powered using the uav’s batteries."
+4,"hence, a power distribution board was used to distribute the appropriate voltages to each component."
+4,table 1 shows all the sensors in the payload and their operational frequency.
+4,"the total weight of the payload is 3.832 kg, without factoring in the weight of the landing gears and the mounting plate."
+4,"altogether, the electrical and mechanical"
+5,"forests 2023, 14, 1601 5 of 20 properties of the payload allowed for an operation of 18–20 min when mounted on a dji matrice 600 (using six tb47s batteries, each with 4500 mah) and 30–35 min when mounted on an alta x (using two 16,000 mah batteries)."
+5,table 1.
+5,sensors and operation frequency.
+5,frequency voltage sensor name sensor type (hz) (v) vn-200 rugged gnss/ins imu 400 3.2–5.5 velodyne vlp-32c lidar 10 10.5–18.0 allied vision alvium 1800 u-2040c rgb camera 10 5.0 mapir survey 3 multispectral camera 15 5.0 3.2.
+5,"simultaneous localization and mapping we used the lidar, imu, and global navigation satellite system (gnss) measure- ments to estimate the uav’s 6 degrees of freedom pose (odometry) during the flight."
+5,"thus, the estimated state of the robot is represented as a 6-dimensional vector corresponding to the drone’s position and its orientation in space."
+5,we employed the estimated odometry to incrementally build a three-dimensional (3d) environment map in the form of a point cloud.
+5,accurate pose estimation is crucial for a global map such as fuel mapping implemented in section 3.3.
+5,"in this work, we used fast lidar inertial odometry with scan context, fastlio- sc, [54,55] and lidar inertial odometry smoothing and mapping, liosam, [49], which are two state of the art slam implementations that fuse the sensors measurements using a tightly coupled approach."
+5,we decided to focus on lidar inertial-based slam systems be- cause cameras are greatly affected by lighting conditions and motion blur.
+5,results from [14] have also reported that the visual odometry had higher rmse compared with the lidar odometry.
+5,liosam performs state smoothing and mapping scan matching using a factor graph that introduces relative and absolute measurements as factors [49].
+5,"relative measure- ments, such as imu and lidar data, are fused to optimize the calculation of the odometry, further improved by gnss absolute positioning (when available)."
+5,"in particular, the imu information allows liosam to estimate an initial guess of the lidar’s position, velocity, and orientation by a preintegration stage, which integrates imu measurements over the lidar scan rate."
+5,liosam uses this lidar pose initial guess for de-skewing lidar point clouds and computing the optimized odometry.
+5,odometry prior optimization is obtained by performing a local scan matching between consecutive lidar scans using corner and surface features.
+5,the gnss measurements are included in the lidar optimization stage for enhancing pose estimation.
+5,"finally, the optimized pose is used as feedback to the preintegration stage for determining the imu bias (providing the tight coupling)."
+5,"conversely, fastlio-sc fuses lidar and imu measurements by a tightly-couple- iterated extended kalman filter, which enables robust navigation in fast motion, noisy or occluded environments [54]."
+5,"specifically, the iterated extended kalman filter is imple- mented using the iterated kalman filters on manifold’s toolkit, based on the premise that the robotic system evolves on a so(3) manifold [56]."
+5,"thus, fastlio-sc proposes a new formula to compute the kalman gain that depends on the system state instead of the dimension of the measurement."
+5,"in this context, the iterative extended kalman filter uses lidar and imu measurements as input for estimating lidar odometry."
+5,"next, the lidar odometry is improved by gnss measurements and movement restriction imposed by a scan context approach [55]."
+5,this information is fused using a factor graph strategy which outputs an optimized lidar odometry.
+5,"in contrast to liosam, the optimized lidar odometry is not used as feedback for estimating imu bias."
+5,a visual representation of the architecture of these two approaches is depicted in figure 2.
+5,time synchronization among the sensors and computers is a critical issue and signifi- cantly impacts the quality of the slam system.
+5,"we designed a custom time synchronization board featuring a teensy microcontroller that synchronized the computers, the lidar, the"
+6,"forests 2023, 14, 1601 6 of 20 imu, and the cameras by generating pps signals that simulate the ones obtained from a gnss."
+6,"these signals comprise squared signals used to trigger the cameras, lidar, and are encoded using the national marine electronics association (nmea) strings protocol for serial communication."
+6,having the microcontroller mimic gnss signals is desirable in this application since forest environments can contain certain areas which would cause unreliable gnss readings (and thus its pps signals).
+6,figure 2.
+6,general scheme of the implemented localization and mapping approaches.
+6,note that liosam and fastlio-sc outputs are odometry and a 3d map in the form of a point cloud.
+6,3.2.1.
+6,photogrammetry photogrammetry is a technique in computer vision used to estimate the structure of a scene from a collection of images with optional gnss information.
+6,"most modern approaches do not require any prior sensor calibration, which makes the tools robust and easy to deploy."
+6,"over the last decade, both industry and academia have developed easy-to- use software which enables wide-scale adoption of this technology to perform surveys in diverse domains such as agriculture, construction, or forestry."
+6,"an important characteristic of photogrammetry is that it is solely an offline process, which requires all the images to be available before computation begins."
+6,we use photogrammetry as a benchmark to evaluate the performance of the online methods we developed in this work.
+6,"in this work, we used agisoft metashape [57] 2.0.2, a common commercial structure from motion software."
+6,we downsampled our images temporally so that they were at least a half second apart because they would be highly redundant otherwise.
+6,"for our collection in the most representative site (see section 4.1), this resulted in 886 images."
+6,each image was tagged with the rtk gnss position which most closely matched the image timestamp.
+6,"for the initial step of estimating the camera parameters and computing the sparse geometry, we use the parameters which were optimized for forestry as found by [58]."
+6,then we performed meshing using the “high” quality and “high” face count settings.
+6,"the pose estimation took 10 min and the meshing process took 32 min on a cloud server with a cpu amd epyc-milan processor, 60 gb ram, and a grid a100x-20c gpu."
+6,"fuel mapping in this work, fuel mapping involves three tightly coupled modules: semantic seg- mentation, lidar camera registration and odometry, and global map representation."
+6,"to achieve accurate semantic segmentation, we employ the segnext network, a transformer architecture was specifically chosen for its state-of-the-art performance on popular bench- mark datasets and excellent generalization capabilities, which is particularly beneficial given our limited real-world training images [59]."
+6,this network identifies the predicted
+7,"forests 2023, 14, 1601 7 of 20 class for each pixel in the image, providing a semantically labeled image for three com- pressed classes, fuel, canopies, and background."
+7,we trained this neural network (nn) with pre-trained weights from the cityscapes dataset [60] and 40 rgb images collected in our deployments.
+7,"while 40 images were used for training, the actual number of instances is higher, since a class can appear multiple times in a single image."
+7,the rgb images have a higher resolution than our multispectral and it allows for pre-weight transfer learning from other datasets.
+7,"while there is current research on using grn (green, red, near infrared) images with pre-weights from rgb datasets, due to the the lack of state-of-the-art research and the scope of this paper, we decided to use rgb images instead."
+7,"as mentioned in section 1, we used the anderson fuel model [11], which is comprised of 15 classes as included in table 2 to train our semantic segmentation model, which is publicly available (all models are available at https://github.com/kantor-lab/safeforest_ cmu_data_dvc/tree/public_models (accessed on 15 june 2023))."
+7,"however, the classes were aggregated into three compressed classes at the post-processing steps given we did not observe all of them in the testing sites and fine-grained training has shown to improve convolutional neural network’s performance [61]."
+7,"additionally, aggregated classes allowed simplifying the validation mapping labeling for the qualitative comparison."
+7,"we chose these three classes based on easier visual inspection for fuel regions, as the site’s bare earth paths and a cluster of canopies allow for clearer boundaries between the chosen classes."
+7,"moreover, the other non-forest related classes were aggregated as background as it falls outside the scope of our current proposed system."
+7,table 2.
+7,classes used in semantic segmentation.
+7,these are inspired by relevant classes from the anderson fuel model [11] and also include additional classes relevant to our application.
+7,"fine-grained class coarse-grained classes dry grass fuel green grass fuel dry shrubs fuel wood pieces fuel litterfall fuel timber litter fuel green shrubs canopy canopy canopy live trunks canopy bare earth background people background sky background blurry background drone background obstacle background subsequently, to transform the semantic image into a global map, we integrated lidar and camera data."
+7,this step is essential to ensure that the map projection of the semantic classes is accurate for the ground robot to mulch all potential flammable materials as our main goal is to prevent harmful wildfires.
+7,"through lidar camera registration and odometry, we determined which lidar points correspond to the camera’s field of view, enabling the registration of image pixels into the global coordinate system."
+7,"by leveraging the extrinsic of the lidar relative to the camera, we transform lidar measurements into the camera’s coordinate frame."
+7,"using the calibrated camera intrinsic parameters, we project each lidar point onto the image plane."
+7,points falling within the camera’s field of view are assigned classification labels from the corresponding pixels in the semantic model.
+7,the resulting semantically-textured point cloud is then transformed into the inertial reference frame using the drone’s current pose estimated by our slam system.
+7,"this integration of lidar, camera, and slam data allows us to create a comprehensive global representation that captures the fuel characteristics in the environment."
+8,"forests 2023, 14, 1601 8 of 20 to ensure the efficient creation of a large-scale global map in real-time, it is necessary to utilize lightweight map data structures that can handle the voluminous information generated."
+8,"various methods such as octree [62], truncated signed distance function (tsdf) [63], and openvdb [64] were considered for our research."
+8,"after a careful cost- benefit analysis considering factors such as map resolution, semantic information, and computational efficiency, we identified two methods as the most suitable for our scenario: semantic octomap [65,66] and unknown free occupied map (ufomap) [67]."
+8,"among them, ufomap emerged as the preferred choice due to its significant speed advantage over octomap, being 26 times faster and reducing memory consumption by 38% [67]."
+8,"both methods use the octree data structure, which offers a significant reduction in mem- ory requirements compared to point clouds while maintaining high map quality."
+8,"they convert the point cloud into voxels with a resolution of 0.1 m, while preserving valuable information about the predicted classifications."
+8,the global octree is continuously updated by incorporating newly generated semantic point clouds.
+8,"by leveraging the lightweight octree map data structure from ufomap, we can create a comprehensive semantic global representation of the environment in real time."
+8,"results in order to evaluate our localization and mapping methods, we conducted two data collection campaigns in semi-urban and rural sites (figure 3)."
+8,"the semi-urban site is located in coimbra, portugal (40◦ 110 05.900 n 8◦ 240 50.500 w)."
+8,"the rural site is located in pittsburgh, united states (40◦ 270 24.600 n 79◦ 470 22.100 w)."
+8,we choose these two locations in order to test the quality of the generated maps in scenarios with relatively low and high complexities see figure 3.
+8,"as the coimbra test site is a semi-urban environment, it contains more structured- like landscapes making it a low-complexity scenario for our application."
+8,"in contrast, the rural test site is unstructured and wild, posing a more challenging condition for the feature extraction and subsequent scan matching of the employed slam approaches."
+8,the flight plan of the surveys performed at the coimbra test site was controlled by an experienced uav pilot.
+8,"on the other hand, for the rural test site, which covers a larger area, we decided to use the uav’s autopilot."
+8,"for each survey the altitude, ground speed, and lateral distance were about 30 m, 3.0 ms−1 , and 20 m, respectively."
+8,figure 3.
+8,"the study sites are located in coimbra, portugal, and pittsburgh, united states."
+8,the magenta line depicts the path followed by the uav.
+8,it is important to highlight that the uav was operated remotely by a human expert during the aerial surveys conducted at the coimbra study site.
+8,"in contrast, for the pittsburgh study site, the uav flights were carried out using the uav autopilot system."
+8,"simultaneous localization and mapping (slam) in order to evaluate the quality and suitability of the slam approaches for mapping forest regions, we separated the localization and mapping results."
+8,the system localization
+9,"forests 2023, 14, 1601 9 of 20 was evaluated by comparing the pose estimations given by liosam and fastlio-sc with position measurements from a centimeter-level accuracy real-time kinematics (rtk) device."
+9,the main metric employed in this case is the root mean squared error (rmse) calculated over a complete trajectory.
+9,"in all the surveys, it was found that liosam outputs lower rmse than fastlio-sc, as table 3 shows."
+9,"regarding translational rmses, liosam outperforms fastlio-sc, showing errors between 0.28 m to 1.92 m."
+9,a lower rmse indicates that the implemented algorithm can estimate the vehicle’s odometry closer to the current trajectory.
+9,"consequently, the drift between the vehicle’s current position and the estimated position by liosam is lower than that achieved by fastlio-sc."
+9,"specifically, from figure 4 one can observe that liosam produces optimized odometry that closely aligns with the gnss measurements."
+9,"conversely, fastlio-sc’s odometry significantly differs from the actual ground truth measurements at the beginning of each survey."
+9,"this initial deviation is attributed to the heading initialization utilized by fastlio-sc, which differs from the true yaw orientation of the platform."
+9,"as a result, the rmse of fastlio-sc increases, leading to comparatively lower performance when compared to liosam, as shown in table 3."
+9,table 3.
+9,quantitative odometry results of liosam and fastlio-sc approaches on forested regions.
+9,bold values denote the lowest rmse.
+9,the last row shows the average rmse as a percentage of the flight distance for each survey.
+9,study sites coimbra pittsburgh survey 1 survey 2 survey 1 survey 2 survey 3 flight 175.2 424.4 1535.5 2421.1 1188.6 distance m liosam fastlio-sc liosam fastlio-sc liosam fastlio-sc liosam fastlio-sc liosam fastlio-sc xm 0.26 1.79 0.67 42.51 1.33 2.67 0.73 0.750 0.72 1.80 ym 0.24 3.49 0.90 27.50 0.79 5.39 1.51 5.70 0.40 6.02 zm 0.33 4.13 0.63 7.88 1.60 4.64 3.53 3.00 1.91 5.88 average m 0.28 3.14 0.73 25.96 1.24 4.23 1.92 3.15 1.01 4.57 % 0.16 1.79 0.30 10.70 0.08 0.28 0.08 0.13 0.08 0.38 (a) (b) figure 4.
+9,qualitative odometry results of liosam and fastlio−sc approaches.
+9,"to avoid figure over−stacking, two representative cases of the study sites are shown. (a,b) shows the odometry of survey 2 for the semi-urban area and survey 2 for the rural area, respectively."
+9,"the black solid line represents the rtk measurements, the cyan dotted line is the liosam odometry, and the magenta dashed line depicts the fastlio−sc odometry."
+9,yellow arrows depict the odometry direction estimated by fastlio−sc.
+10,"forests 2023, 14, 1601 10 of 20 based on the before mentioned, noting that previous works have reported that in forested regions, one could anticipate rmse values ranging from 0.32 m to 2.90 m [68], and considering that the rmses yield by lisoam in both study sites account for less than the 0.3% of the overall trajectory, we decided to assess the liosam’s mapping outcomes further."
+10,"specifically, liosam was tested using data collected from study site 2, a rural environment that closely resembles a forested area due to its predominant composition of low and high vegetation."
+10,"at this point, we employed the mesh generated by the agisoft photogrammetry software as the baseline, as mentioned in section 3.2.1."
+10,"in order to have a strong indication of the quality of the generated map regarding its morphological, visual, and geometry aspects, two approaches were used: (i) using a cloud-to-cloud comparison with the photogrammetry output and (ii) measuring geometric variables (i.e., distances and areas) in different maps."
+10,the cloud-to-cloud evaluation is mainly quantitative and consisted in first converting the mesh into a point cloud (i.e. reference cloud ).
+10,"subsequently, the point cloud generated with liosam was translated and rotated so both of them were spatially aligned."
+10,"finally, we measured the geometric difference between them using a nearest neighbor criteria similar to the hausdorff metric [69]."
+10,"the key difference is that to improve accuracy, a local model around the closest point in the reference cloud is computed to approximate its surface and thus have a more accurate estimation of the distance."
+10,this calculation was done using the cloud compare software [70].
+10,"figure 5 shows the reference cloud (top left), and the raw slam cloud in two formats: colorized according to its height (top right) and colorized according to its distance to the reference (bottom)."
+10,"in general, it can be seen that various parts of the generated map are similar to the reference under this metric (blue-colored points), but the distance increases on some of the treetops."
+10,"furthermore, the boxplot shows a median of 1.51 m, with outliers for errors above 5.54 m."
+10,these outcomes indicate that height in the maps is one of the main uncertain variables to measure in these maps.
+10,this outcome is somehow expected since the treetops in the liosam point cloud are less dense and more noisy.
+10,"also, the height estimation derived from photogrammetry can be subject to large errors, which makes vertical distances in higher structures (like trees) more uncertain [71]."
+10,"for this reason, we consider this evaluation qualitative."
+10,an important thing to note in figure 5 is the size of the maps.
+10,"since the baseline uses only the left camera images, the map is limited by their field of view."
+10,"in contrast, the slam map spans a larger region since the lidar has a range of up to 200 m (in this work we limited the lidar range to 100 m) with a wider field of view."
+10,"given that the previous evaluation is mostly qualitative, the second evaluation of the maps consisted of measuring two main geometric variables: the area of characteristic regions and the length between two landmarks."
+10,"since the photogrammetry map is prone to errors given by the feature matching and geolocalization (see section 3.2.1), we considered measure- ments taken in google earth software [72] as the main baseline."
+10,"its satellite imagery provides a resolution of 0.15 m, which is accurate enough considering the total testing area covers around 3.000 m2 ."
+10,"on the other hand, the reference and slam maps have a resolution of 1 cm and 30 cm, respectively."
+10,"considering that the baseline and the slam maps span a different area, we chose regions and landmarks that appear in both, as figure 6 shows."
+10,"the results of this evaluation show that in general, the measurements obtained using the liosam map are closer to the ground truth, as table 4 summarizes."
+10,"this outcome, along with the qualitative evaluation and the assessment of the odometry estimation, allows us to infer that the geometry and scale of the liosam algorithm are suitable for generating accurate 3d models of forest regions online."
+10,"in our tests, we also observed that using the gnss signal as an additional observation in the estimation scheme of liosam greatly improves its odometry estimations and, consequently the map generated."
+10,"finally, it is also noteworthy that having larger errors using the photogrammetry map does not imply that it is unsuitable for this application."
+10,some practical strategies can be used to improve the accuracy of such maps.
+10,"for example, having geo-referenced landmarks in the form of"
+11,"forests 2023, 14, 1601 11 of 20 ground control points greatly helps to improve the optimization process during the feature matching and reprojection stages. (a) (b) (c) (d) figure 5."
+11,"point cloud maps of the (a) photogrammetry baseline, (b) slam outcome."
+11,"the two maps were compared using the hausdorff distance, whose result is visualized as (c) the slam map colored according to this metric and (d) a boxplot showing the error distribution."
+11,"note that the baseline and the slam clouds colormaps correspond to rgb and height values, respectively. (a) (b) figure 6."
+11,landmarks and regions used to validate the spatial correctness of the slam map.
+11,"given the photogrammetry baseline and the slam map span different areas, we chose regions that appear in both. (a) shows the specific areas we used to validate the slam map which in intersect between baseline and slam, (b) shows the specific segments or landmarks for detailed comparison"
+12,"forests 2023, 14, 1601 12 of 20 table 4."
+12,quantitative evaluation of the map resulting from our slam implementation.
+12,all of the area regions are measured in m2 and length segments are measured in m.
+12,measurement type google earth photogrammetry absolute error liosam map absolute error area region 1 308.81 489.24 180.43 322.00 13.19 area region 2 3021.28 3144.47 123.19 3116.16 94.88 area region 3 4561.49 4742.12 180.63 4591.95 30.46 area region 4 6293.18 6216.12 77.06 6268.21 24.97 area region 5 1156.96 1161.97 5.01 1201.53 44.57 length segment 1 78.09 91.22 13.13 77.29 0.8 lenght segment 2 31.36 37.78 6.42 32.59 1.23 length segment 3 78.83 92.07 13.24 79.03 0.2 lenght segment 4 154.97 182.03 27.06 154.96 0.01 length segment 5 86.49 99.66 13.17 88.84 2.35 4.2.
+12,"fuel mapping in this section, we detail how we evaluate the critical individual modules necessary for the final map, specifically semantic segmentation and fuel mapping."
+12,"we address the current drawbacks of each technique, our setting limitations, and our solutions to overcome them."
+12,"in our evaluation of the semantic segmentation model, we utilize a small annotated test set derived from the semantic mapping mission in the rural test site, which was not used for training."
+12,"for this purpose, we annotated 17 images using the same strategy employed during training, but these images were not included in the training dataset."
+12,"to ensure flora safety, we have used a conservative approach when labeling fuel where we would underestimate fuel to avoid future issues where the ground vehicle would mulch canopies."
+12,"similarly, for the training case, it is worth noting that despite having 17 images, the actual instances used for testing are higher."
+12,this is because some classes can appear more than once in a single image.
+12,"we conducted an analysis of the semantic segmentation using precision, recall, and intersection over union (iou) metrics to assess the fuel classification in our system."
+12,these metrics were chosen because of their importance for addressing false positive/negative results while iou estimates the general quality of the segmentation.
+12,"we decided to mainly focus on precision for our results because it avoids false positives, ideal for fuel classification to avoid mulching green vegetation and other important dynamic classes such as humans and animals."
+12,"it is worth noting that certain classes which were included in the original 15 classes, are absent from the evaluation table 5."
+12,"this is because these classes were not present in the test set, as seen in figure 7."
+12,"consequently, these classes were excluded from the results."
+12,we also took into account the lack of training instances by adding class weights to rarely occurred classes in our training model to lower dataset shift issues.
+12,"even with the aforementioned techniques used, there is a noticeable shift in performance between the common classes and the rare classes, which could stem from our lack of expert annotators to ensure consistency for each subclass, the need for more class imbalances techniques, or the addition of more training instances."
+12,"however, considering a ground vehicle can do further exploring and the high precision in the known fuel classes, we can conclude that the current results are above our needed threshold to find fuel regions for further inspection."
+12,"to provide further insight into the model performance, we show qualitative predic- tions on the test set, as seen in figure 8."
+12,"finally, we present the results of the semantic mapping experiment conducted at the most representative test site (the rural location in pittsburgh, united states)."
+12,"due to the lack of ground truth information for the geometric and semantic information in the test sites, quantitative metrics for semantic mapping in large-scale forestry environments were not available."
+12,"for quantitative results, a high-precision laser scanner such as the leica nova ms50 or blk360 [73] or adding ground control points for photogrammetry is necessary to quantify the results."
+12,"therefore, we devised a qualitative test to evaluate our full framework"
+13,"forests 2023, 14, 1601 13 of 20 by comparing the generated ufomap with a manually labeled semantic mesh from an orthomosaic to evaluate the accuracy of our global map. (a) (b) figure 7."
+13,this shows the fraction of pixels per class for (a) the train set and (b) the test set.
+13,"note that the three dominant classes canopy, bare earth, and dry grass are common across both collections but the comparative frequencies are somewhat different."
+13,"these correspond to our aggregate vegetation, background, and fuel classes, respectively."
+13,"the fractions of other classes are fairly small, and some from the training set are entirely absent in the test set."
+13,figure 8.
+13,qualitative semantic mapping results from the test set.
+13,"the results are shown both for the predicted classes and the aggregated ones, with colors visualized in the top rows."
+13,white regions in the ground truth (gt) represent areas that were ambiguous to the human annotator.
+13,overall the predictions match the ground truth well and boundaries are well-defined.
+13,"note that many regions of confusion, such as canopy-to-trunk and green shrub-to-canopy, fall within the same coarse classes for our mapping purposes."
+14,"forests 2023, 14, 1601 14 of 20 table 5."
+14,evaluation results of the segnext network with the anderson fuel model as a base for semantic segmentation in a forestry environment.
+14,"class iou precision recall canopy 70.05 84.77 80.13 dry grass 79.7 93.75 84.17 bare earth 78.53 88.12 87.83 green shrubs 3.27 21.72 3.71 green grass 0.0 0.0 0.0 dry shrubs 0.0 0.0 0.0 live trunks 0.05 0.05 84.09 figure 9 showcases the semantic ufomap results, including the orthomosaic ground truth labels for the compressed classes (fuel in red, canopy in green, and background in black), along with the rgb ufomap representing the terrain baseline."
+14,"additionally, figure 10 shows a close-up for both image and segmentation for a clearer comparison between semantic classes and the original rgb image. (a) (b) (c) figure 9."
+14,"ufomaps of the (a) colored image baseline, (b) ufomap semantic outcome using red as the fuel classes, green as the canopy classes, and black as the background classes (c) the hand-labeled orthomosaic ground truth for the semantic classes."
+15,"forests 2023, 14, 1601 15 of 20 (a) (b) figure 10."
+15,"ufomaps from a closer view of the (a) colored image baseline, (b) ufomap semantic outcome using red as the fuel classes, green as the canopy classes, and black as the background classes."
+15,"discussion in the two test sites surveyed in this work, liosam demonstrates superior perfor- mance in terms of rmse compared to fastlio-scon the study sites reported in this work."
+15,"specifically, we noticed that liosam might outperform fastlio-sc in two key aspects: imu heading initialization and efficient odometry updates facilitate the integration of gnss measurements within the optimization loop."
+15,the positive impact of heading initialization and odometry updates can be observed in the quantitative and qualitative results depicted in table 3 and figure 4.
+15,"although the experiments addressed in the current work show that liosam achieves better odometry and mapping outcomes, it should be noted that for the pittsburgh study site, the average rmse is higher than the coimbra study site."
+15,"although the flights in the two testing sites were different (autonomous in pittsburgh, manual pilot in coimbra), the main factor that advocates the higher errors in the pittsburgh surveys might be related to the need for more reliable features for determining a closer lidar odometry to the actual trajectory."
+15,"specifically, liosam extracts corner and surface features from lidar scans to perform scan matching between point clouds and retrieve lidar odometry."
+15,"thus, such features might not be reliable enough to yield accurate lidar odometry."
+15,"note that in the semi-urban environment, the coimbra study site, where corner features are more abundant than in a rural area, the average rmse is below 1 m, which is acceptable considering the size of the surveyed area and the distance flown."
+15,"while the two flights regarding fastlio-sc, it performs direct registration of lidar scans; thus, it does not need computing corner of surface features."
+15,"however, the experi- ments performed in both study sites show that its main drawback might be related to the initial yaw orientation."
+15,"in particular, the fastlio-sc yaw angle does not align with the actual imu heading angle."
+15,this mistrust alignment severely affects the estimated odometry because it starts deviating from the current location of the platform; see figure 4.
+15,"for instance, one of the worst deviations occurs on the coimbra study site, where the rmse on the x axis rises to 42.51 m."
+15,"based on the aforementioned, liosam might be more suitable than fastlio-sc for performing localization and mapping tasks in semi-urban and rural areas."
+15,"nevertheless, it is suggested to continue evaluating the limitations and advantages of both slam approaches on rural and forest environments in future works."
+15,further assessment of these algorithms might yield insights about a new robust slam strategy for these environments.
+15,our semantic segmentation experiments show that a small number of labeled images from a similar region can result in relatively accurate predictions for that region.
+15,"overall, the predictions in figure 8 show fairly good agreement with the ground truth."
+15,"the errors often occurred when the textures were indicative of the predicted class, suggesting that the model struggles with more global reasoning."
+15,"this could be further improved with a comparison study between rgb and multispectral cameras to see which factors more in the quality of the segmentation, the channel choices or the higher resolution."
+15,this was not possible for this paper as we did not have enough annotators for both sensors.
+15,"by observing both the raw classes and the classes aggregated by the rules defined in table 2, we see that many of the prediction errors fall within the same aggregate class."
+15,"given the variability of vegetation by geographic area and different objectives of mapping, it seems"
+16,"forests 2023, 14, 1601 16 of 20 that training many site-specific models may be easier than expecting one fixed model to generalize worldwide."
+16,"this observation agrees with the result of our previous work [14], where it was shown that increasing the number of training samples, marginally increased the segmentation accuracy."
+16,"in the fuel mapping results, we observed that capturing the map from a higher altitude, specifically between 30 m and 40 m above the ground, with resolutions below 0.1 m did not yield a cohesive and dense map due to limitations in the lidar density."
+16,"furthermore, the mapping process faced challenges related to odometry dropouts as the map expanded and the computational load required for neural network operations."
+16,"however, despite these challenges, a high map density was achieved by collecting data points at a frequency of approximately 4 hz, ensuring a sufficient representation of the environment as seen in figure 9."
+16,"visual comparison from figure 9b,c (between the semantic ufomap and the ground truth map) revealed a general alignment."
+16,"nonetheless, specific issues were identified, particularly in localized areas such as thin layers of background misidentified as canopies."
+16,"these issues could be attributed to factors such as pose drift, abrupt jumps resulting from the lack of loop closure updates in the odometry messages employed, and semantic mapping."
+16,"additionally, utilizing detection without tracking had a negative impact on the segmentation quality of the map."
+16,"incorporating tracking mechanisms would enhance the robustness and accuracy of the mapping process, thereby contributing to a more reliable global representation system."
+16,"importantly, despite room for improvement, the generated global map demonstrated a conservative approach to fuel classification, prioritizing the preservation of tree cover and minimizing the risk of erroneously identifying and removing trees."
+16,this approach aligns with the objective of accurately identifying fuel regions for wildfire prevention.
+16,these observations provide valuable insights into the challenges associated with semantic mapping.
+16,"however, they underscore the significance of addressing loop closure limita- tions, improving tracking mechanisms, and optimizing resolution parameters to achieve a cohesive and detailed global map representation."
+16,conclusions this paper presents a comprehensive system for monitoring forests using uavs.
+16,"the system includes a custom sensor payload with lidar, stereo cameras, imu, and a multispectral camera mounted on a drone to collect reliable data in challenging forest environments."
+16,"the payload is designed to be lightweight and adaptable to different drones, providing flexibility."
+16,"the study implements two slam algorithms, liosam and fastlio-sc, for accurate localization and mapping using lidar, gnss, and imu data."
+16,photogrammetry is used as a benchmark to evaluate the performance of the developed online methods.
+16,"the integration of fuel mapping, which includes semantic segmentation, lidar camera registration, and odometry, is discussed, as well as the adaptation of the global map representation."
+16,the paper concludes by highlighting qualitative tests and a comparison of the generated semantic maps with manually labeled data.
+16,"overall, this system provides a comprehensive solution for forest monitoring with drones, enabling accurate data collection and mapping for effective forest management and conservation."
+16,future work needs to address the limitations identified in our current framework.
+16,alternative initialization strategies should be explored to improve odometry performance from fastlio-sc.
+16,"improving the alignment accuracy between the slam map and the reference cloud, especially with respect to tree canopy, is essential for a more accurate representation of forested areas."
+16,"the accuracy of photogrammetry maps can be improved by including ground control points, which will be also used to improve the evaluation of the mapping results."
+16,"in this context, the collection of geometric variables like distances and areas in situ will provide ground truth for mapping evaluation."
+16,"the fuel mapping experiment faced challenges related to map coherence, odometry dropouts, and semantic segmentation results."
+16,"future research should focus on improving semantic mapping loop closure, implementing tracking for the semantic voxels, adding the multispectral camera for"
+17,"forests 2023, 14, 1601 17 of 20 detection, and optimizing resolution parameters to overcome these challenges."
+17,"advances in the performance of slam, map alignment accuracy, geometric measurements, semantic segmentation, and fuel classification are critical to developing a robust and accurate forest mapping system that facilitates effective forest management and conservation efforts."
+17,"author contributions: conceptualization f.y. and g.k.; data curation, m.e.a., d.r., w.k., t.a.-r. and f.y.; formal analysis, m.e.a., d.r. and t.a.-r.; investigation, m.e.a., d.r., w.k., t.a.-r. and f.y.; methodology, all authors; project administration, g.k. and f.y."
+17,"; resources, g.k. and f.y.; software, m.e.a., d.r., w.k., t.a.-r. and f.y.; supervision, g.k. and f.y., validation, m.e.a., d.r., t.a.-r. and f.y.; visualization, m.e.a., d.r., w.k., t.a.-r. and f.y.; writing—original draft, all authors; writing—review & editing, m.e.a., t.a.-r. and f.y."
+17,all authors have read and agreed to the published version of the manuscript.
+17,funding: this work has been supported by a cmu portugal affiliated ph.d. grant (ref.
+17,"prt/bd/ 152194/2021) from the portuguese foundation for science and technology (fct) and the project of the central portugal region and cofunded by the program portugal 2020, under the reference centro-01-0247-feder-045931."
+17,"data availability statement: data that support the findings of this study are available on request to the corresponding author, m.e.a."
+17,the data are not publicly available on request due to permission necessary to share data from certain locations.
+17,"acknowledgments: we extend our sincere gratitude to my ph.d. supervisors, david portugal, joao filipe ferreira, and paulo peixoto, for their invaluable guidance, support, and expertise throughout this research project."
+17,their unwavering commitment to excellence and their dedication to my academic growth have been instrumental in the successful completion of this scientific journal paper.
+17,we also thank babak b.
+17,chehreh for their invaluable help piloting the uav for acquiring our datasets in portugal.
+17,conflicts of interest: the authors declare no conflict of interest.
+17,"abbreviations the following abbreviations are used in this manuscript: mdpi multidisciplinary digital publishing institute doaj directory of open access journals tla three letter acronym ld linear dichroism uav uncrewed aerial vehicle gnss global navigation satellite system imu inertial measurement unit lidar light detection and ranging rgb red, green, blue gpu graphics processing unit slam simultaneous localization and mapping cpu central processing unit pps pulse per second gnss global positioning system nmea national marine electronics association nn neural network tsdf truncated signed distance function ufomap unknown free occupied map iou intersection over union rtk real time kinematics rmse root mean squared error liosam lidar inertial odometry via smoothing and mapping faslio-sc fast lidar inertial odometry with scan context"
+18,"forests 2023, 14, 1601 18 of 20 references 1."
+18,"jain, p."
+18,"; castellanos-acuna, d."
+18,"; coogan, s.c."
+18,"; abatzoglou, j.t."
+18,"; flannigan, m.d."
+18,observed increases in extreme fire weather driven by atmospheric humidity and temperature.
+18,chang.
+18,"2022, 12, 63–70."
+18,[crossref] 2.
+18,"jolly, w.m."
+18,"; cochrane, m.a."
+18,"; freeborn, p.h."
+18,"; holden, z.a."
+18,"; brown, t.j."
+18,"; williamson, g.j."
+18,"; bowman, d.m.j.s."
+18,climate-induced variations in global wildfire danger from 1979 to 2013.
+18,commun.
+18,"2015, 6, 7537."
+18,[crossref] [pubmed] 3.
+18,"he, y."
+18,"; chen, g."
+18,"; potter, c."
+18,"; meentemeyer, r.k."
+18,integrating multi-sensor remote sensing and species distribution modeling to map the spread of emerging forest disease and tree mortality.
+18,remote sens.
+18,environ.
+18,"2019, 231, 111238."
+18,[crossref] 4.
+18,"bright, b.c."
+18,"; hudak, a.t."
+18,"; mccarley, t.r."
+18,"; spannuth, a."
+18,"; sánchez-lópez, n."
+18,"; ottmar, r.d."
+18,"; soja, a.j."
+18,multitemporal lidar captures heterogeneity in fuel loads and consumption on the kaibab plateau.
+18,fire ecol.
+18,"2022, 18, 18."
+18,[crossref] [pubmed] 5.
+18,"yuan, c."
+18,"; liu, z."
+18,"; zhang, y."
+18,uav-based forest fire detection and tracking using image processing techniques.
+18,"in proceedings of the 2015 international conference on unmanned aircraft systems (icuas), denver, co, usa, 9–12 june 2015; pp."
+18,639–643.
+18,[crossref] 6.
+18,"roldán-gómez, j.j."
+18,"; gonzález-gironda, e."
+18,"; barrientos, a."
+18,a survey on robotic technologies for forest firefighting: applying drone swarms to improve firefighters’ efficiency and safety.
+18,"2021, 11, 363."
+18,[crossref] 7.
+18,"viegas, c."
+18,"; chehreh, b."
+18,"; andrade, j."
+18,"; lourenço, j."
+18,tethered uav with combined multi-rotor and water jet propulsion for forest fire fighting.
+18,intell.
+18,robot.
+18,"2022, 104, 21."
+18,[crossref] 8.
+18,"chen, y."
+18,"; zhang, y."
+18,"; xin, j."
+18,"; yi, y."
+18,"; liu, d."
+18,"; liu, h."
+18,a uav-based forest fire detection algorithm using convolutional neural network.
+18,"in proceedings of the 2018 37th chinese control conference (ccc), wuhan, china, 25–27 july 2018; pp."
+18,10305–10310.
+18,[crossref] 9.
+18,"toulouse, t."
+18,"; rossi, l."
+18,"; campana, a."
+18,"; celik, t."
+18,"; akhloufi, m.a."
+18,computer vision for wildfire research: an evolving image dataset for processing and analysis.
+18,fire saf.
+18,"2017, 92, 188–194."
+18,[crossref] 10.
+18,"couceiro, m.s."
+18,"; portugal, d."
+18,"; ferreira, j.f."
+18,"; rocha, r.p."
+18,semfire: towards a new generation of forestry maintenance multi- robot systems.
+18,"in proceedings of the 2019 ieee/sice international symposium on system integration (sii), paris, france, 14–16 january 2019; pp."
+18,270–276.
+18,[crossref] 11.
+18,"anderson, h.e."
+18,aids to determining fuel models for estimating fire behavior; u.s.
+18,"department of agriculture, forest service, intermountain forest and range experiment station: washington, dc, usa, 1981."
+18,"andrada, m.e."
+18,"; ferreira, j."
+18,"; portugal, d."
+18,"; couceiro, m."
+18,testing different cnn architectures for semantic segmentation for landscaping with forestry robotics.
+18,"in proceedings of the workshop on perception, planning and mobility in forestry robotics, online, 29 october 2020."
+18,"andrada, m.e."
+18,"; ferreira, j.f."
+18,"; portugal, d."
+18,"; couceiro, m.s."
+18,integration of an artificial perception system for identification of live flammable material in forestry robotics.
+18,"in proceedings of the 2022 ieee/sice international symposium on system integration (sii), narvik, norway, 9–12 january 2022; pp."
+18,103–108.
+18,[crossref] 14.
+18,"russell, d.j."
+18,"; arevalo-ramirez, t."
+18,"; garg, c."
+18,"; kuang, w."
+18,"; yandun, f."
+18,"; wettergreen, d."
+18,"; kantor, g."
+18,uav mapping with semantic and traversability metrics for forest fire mitigation.
+18,"in proceedings of the icra 2022 workshop in innovation in forestry robotics: research and industry adoption, philadelphia, pa, usa, 23 may 2022."
+18,"marino, e."
+18,"; ranz, p."
+18,"; tomé, j.l."
+18,"; ángel noriega, m."
+18,"; esteban, j."
+18,"; madrigal, j."
+18,generation of high-resolution fuel model maps from discrete airborne laser scanner and landsat-8 oli: a low-cost and highly updated methodology for large areas.
+18,remote sens.
+18,environ.
+18,"2016, 187, 267–280."
+18,[crossref] 16.
+18,"mitri, g.h."
+18,"; gitas, i.z."
+18,fire type mapping using object-based classification of ikonos imagery.
+18,"wildland fire 2006, 15, 457–462."
+18,[crossref] 17.
+18,"peterson, s.h."
+18,"; franklin, j."
+18,"; roberts, d.a.; van wagtendonk, j.w."
+18,mapping fuels in yosemite national park.
+18,"2013, 43, 7–17."
+18,[crossref] 18.
+18,"katagis, t."
+18,"; gitas, i.z."
+18,"; toukiloglou, p."
+18,"; veraverbeke, s."
+18,"; goossens, r."
+18,trend analysis of medium- and coarse-resolution time series image data for burned area mapping in a mediterranean ecosystem.
+18,"wildland fire 2014, 23, 668 – 677."
+18,[crossref] 19.
+18,"chuvieco, e."
+18,"; mouillot, f.; van der werf, g.r."
+18,"; san miguel, j."
+18,"; tanase, m."
+18,"; koutsias, n."
+18,"; garcía, m."
+18,"; yebra, m."
+18,"; padilla, m."
+18,"; gitas, i.; et al."
+18,historical background and current developments for mapping burned area from satellite earth observation.
+18,remote sens.
+18,environ.
+18,"2019, 225, 45–64."
+18,[crossref] 20.
+18,"pérez-cabello, f."
+18,"; montorio, r."
+18,"; alves, d.b."
+18,remote sensing techniques to assess post-fire vegetation recovery.
+18,environ.
+18,"health 2021, 21, 100251."
+18,[crossref] 21.
+18,"chuvieco, e."
+18,"; aguado, i."
+18,"; yebra, m."
+18,"; nieto, h."
+18,"; salas, j."
+18,"; martín, m.p."
+18,"; vilar, l."
+18,"; martínez, j."
+18,"; martín, s."
+18,"; ibarra, p.; et al."
+18,development of a framework for fire risk assessment using remote sensing and geographic information system technologies.
+18,model.
+18,"2010, 221, 46–58."
+18,[crossref] 22.
+18,"ozenen kavlak, m."
+18,"; cabuk, s.n."
+18,"; cetin, m."
+18,development of forest fire risk map using geographical information systems and remote sensing capabilities: ören case.
+18,environ.
+18,pollut.
+18,"2021, 28, 33265–33291."
+18,[crossref] 23.
+18,"kurbanov, e."
+18,"; vorobev, o."
+18,"; lezhnin, s."
+18,"; sha, j."
+18,"; wang, j."
+18,"; li, x."
+18,"; cole, j."
+18,"; dergunov, d."
+18,"; wang, y."
+18,"remote sensing of forest burnt area, burn severity, and post-fire recovery: a review."
+18,remote sens.
+18,"2022, 14, 4714."
+18,[crossref] 24.
+18,"morgan, p."
+18,"; keane, r.e."
+18,"; dillon, g.k."
+18,"; jain, t.b."
+18,"; hudak, a.t."
+18,"; karau, e.c."
+18,"; sikkink, p.g."
+18,"; holden, z.a."
+18,"; strand, e.k."
+18,"challenges of assessing fire and burn severity using field measures, remote sensing and modelling."
+18,"wildland fire 2014, 23, 1045–1060."
+18,[crossref]
+19,"forests 2023, 14, 1601 19 of 20 25."
+19,"wooster, m.j."
+19,"; roberts, g.j."
+19,"; giglio, l."
+19,"; roy, d.p."
+19,"; freeborn, p.h."
+19,"; boschetti, l."
+19,"; justice, c."
+19,"; ichoku, c."
+19,"; schroeder, w."
+19,"; davies, d.; et al."
+19,"satellite remote sensing of active fires: history and current status, applications and future requirements."
+19,remote sens.
+19,environ.
+19,"2021, 267, 112694."
+19,[crossref] 26.
+19,"barmpoutis, p."
+19,"; papaioannou, p."
+19,"; dimitropoulos, k."
+19,"; grammalidis, n."
+19,a review on early forest fire detection systems using optical remote sensing.
+19,"sensors 2020, 20, 6442."
+19,[crossref] [pubmed] 27.
+19,"vivaldini, k.c."
+19,"; martinelli, t.h."
+19,"; guizilini, v.c."
+19,"; souza, j.r."
+19,"; oliveira, m.d."
+19,"; ramos, f.t."
+19,"; wolf, d.f."
+19,uav route planning for active disease classification.
+19,auton.
+19,robot.
+19,"2019, 43, 1137–1153."
+19,[crossref] 28.
+19,"vasavi, p."
+19,"; punitha, a."
+19,"; rao, t.v.n."
+19,crop leaf disease detection and classification using machine learning and deep learning algorithms by visual symptoms: a review.
+19,electr.
+19,comput.
+19,"2022, 12, 2079."
+19,[crossref] 29.
+19,"shamshiri, r.r."
+19,"; hameed, i.a."
+19,"; balasundram, s.k."
+19,"; ahmad, d."
+19,"; weltzien, c."
+19,"; yamin, m."
+19,fundamental research on unmanned aerial vehicles to support precision agriculture in oil palm plantations.
+19,"in agricultural robots—fundamentals and applications; intechopen: london, uk, 2018; pp."
+19,91–116.
+19,[crossref] 30.
+19,"guimarães, n."
+19,"; pádua, l."
+19,"; marques, p."
+19,"; silva, n."
+19,"; peres, e."
+19,"; sousa, j.j."
+19,"forestry remote sensing from unmanned aerial vehicles: a review focusing on the data, processing and potentialities."
+19,remote sens.
+19,"2020, 12, 1046."
+19,[crossref] 31.
+19,"hyyppä, e."
+19,"; hyyppä, j."
+19,"; hakala, t."
+19,"; kukko, a."
+19,"; wulder, m.a."
+19,"; white, j.c."
+19,"; pyörälä, j."
+19,"; yu, x."
+19,"; wang, y."
+19,"; virtanen, j.p.; et al."
+19,under-canopy uav laser scanning for accurate forest field measurements.
+19,isprs j.
+19,photogramm.
+19,remote sens.
+19,"2020, 164, 41–60."
+19,[crossref] 32.
+19,"corte, a.p.d."
+19,"; souza, d.v."
+19,"; rex, f.e."
+19,"; sanquetta, c.r."
+19,"; mohan, m."
+19,"; silva, c.a."
+19,"; zambrano, a.m.a."
+19,"; prata, g."
+19,"; alves de almeida, d.r."
+19,"; trautenmüller, j.w.; et al."
+19,forest inventory with high-density uav-lidar: machine learning approaches for predicting individual tree attributes.
+19,comput.
+19,electron.
+19,agric.
+19,"2020, 179, 105815."
+19,[crossref] 33.
+19,"dandois, j.p."
+19,"; ellis, e.c."
+19,high spatial resolution three-dimensional mapping of vegetation spectral dynamics using computer vision.
+19,remote sens.
+19,environ.
+19,"2013, 136, 259–276."
+19,[crossref] 34.
+19,"casbeer, d."
+19,"; beard, r."
+19,"; mclain, t."
+19,"; li, s.m."
+19,"; mehra, r."
+19,forest fire monitoring with multiple small uavs.
+19,"in proceedings of the 2005 american control conference, portland, or, usa, 8–10 june 2005; volume 5, pp."
+19,3530–3535.
+19,[crossref] 35.
+19,"skorput, p."
+19,"; mandzuka, s."
+19,"; vojvodic, h."
+19,the use of unmanned aerial vehicles for forest fire monitoring.
+19,"in proceedings of the 2016 international symposium elmar, zadar, croatia, 12–14 september 2016; pp."
+19,93–96.
+19,[crossref] 36.
+19,"getzin, s."
+19,"; nuske, r.s."
+19,"; wiegand, k."
+19,using unmanned aerial vehicles (uav) to quantify spatial gap patterns in forests.
+19,remote sens.
+19,"2014, 6, 6988–7004."
+19,[crossref] 37.
+19,"talbot, b."
+19,"; rahlf, j."
+19,"; astrup, r."
+19,an operational uav-based approach for stand-level assessment of soil disturbance after forest harvesting.
+19,scand.
+19,"2018, 33, 387–396."
+19,[crossref] 38.
+19,"lisein, j."
+19,"; pierrot-deseilligny, m."
+19,"; bonnet, s."
+19,"; lejeune, p."
+19,a photogrammetric workflow for the creation of a forest canopy height model from small unmanned aerial system imagery.
+19,"forests 2013, 4, 922–944."
+19,[crossref] 39.
+19,"puliti, s."
+19,"; ørka, h.o."
+19,"; gobakken, t."
+19,"; næsset, e."
+19,inventory of small forest areas using an unmanned aerial system.
+19,remote sens.
+19,"2015, 7, 9632–9654."
+19,[crossref] 40.
+19,"puliti, s."
+19,"; ene, l.t."
+19,"; gobakken, t."
+19,"; næsset, e."
+19,use of partial-coverage uav data in sampling for large scale forest inventories.
+19,remote sens.
+19,environ.
+19,"2017, 194, 115–126."
+19,[crossref] 41.
+19,"paz, d."
+19,"; zhang, h."
+19,"; li, q."
+19,"; xiang, h."
+19,"; christensen, h.i."
+19,probabilistic semantic mapping for urban autonomous driving applications.
+19,"in proceedings of the 2020 ieee/rsj international conference on intelligent robots and systems (iros), las vegas, nv, usa, 24 october 2020–24 january 2021; pp."
+19,2059–2064.
+19,[crossref] 42.
+19,"cheng, q."
+19,"; zeller, n."
+19,"; cremers, d."
+19,vision-based large-scale 3d semantic mapping for autonomous driving applications.
+19,"in proceedings of the 2022 international conference on robotics and automation (icra), philadelphia, pa, usa, 23–27 may 2022; pp."
+19,9235–9242.
+19,[crossref] 43.
+19,"kostavelis, i."
+19,"; gasteratos, a."
+19,semantic mapping for mobile robotics tasks: a survey.
+19,robot.
+19,auton.
+19,"2015, 66, 86–103."
+19,[crossref] 44.
+19,"luo, r.c."
+19,"; chiou, m."
+19,hierarchical semantic mapping using convolutional neural networks for intelligent service robotics.
+19,"ieee access 2018, 6, 61287–61294."
+19,[crossref] 45.
+19,"trenčanová, b."
+19,"; proença, v."
+19,"; bernardino, a."
+19,development of semantic maps of vegetation cover from uav images to support planning and management in fine-grained fire-prone landscapes.
+19,remote sens.
+19,"2022, 14, 1262."
+19,[crossref] 46.
+19,"schiefer, f."
+19,"; kattenborn, t."
+19,"; frick, a."
+19,"; frey, j."
+19,"; schall, p."
+19,"; koch, b."
+19,"; schmidtlein, s."
+19,mapping forest tree species in high resolution uav-based rgb-imagery by means of convolutional neural networks.
+19,isprs j.
+19,photogramm.
+19,remote.
+19,"2020, 170, 205–215."
+19,[crossref] 47.
+19,"debeunne, c."
+19,"; vivet, d."
+19,a review of visual-lidar fusion based simultaneous localization and mapping.
+19,"sensors 2020, 20, 2068."
+19,[crossref] [pubmed] 48.
+19,"zhang, j."
+19,"; singh, s."
+19,loam: lidar odometry and mapping in real-time.
+19,"in proceedings of the robotics: science and systems, berkeley, ca, usa, 12–16 july 2014; volume 2, pp."
+19,[crossref] 49.
+19,"shan, t."
+19,"; englot, b."
+19,"; meyers, d."
+19,"; wang, w."
+19,"; ratti, c."
+19,"; daniela, r."
+19,lio-sam: tightly-coupled lidar inertial odometry via smoothing and mapping.
+19,"in proceedings of the ieee/rsj international conference on intelligent robots and systems (iros), las vegas, nv, usa, 24 october 2020–24 january 2021; ieee: piscatway, nj, usa, 2020; pp."
+19,5135–5142.
+19,[crossref]
+20,"forests 2023, 14, 1601 20 of 20 50."
+20,"shao, w."
+20,"; vijayarangan, s."
+20,"; li, c."
+20,"; kantor, g."
+20,stereo visual inertial lidar simultaneous localization and mapping.
+20,"in proceedings of the 2019 ieee/rsj international conference on intelligent robots and systems (iros), macau, china, 3–8 november 2016; ieee: piscatway, nj, usa, 2019; pp."
+20,370–377.
+20,[crossref] 51.
+20,"ringdahl, o."
+20,"; hohnloser, p."
+20,"; hellström, t."
+20,"; holmgren, j."
+20,"; lindroos, o."
+20,enhanced algorithms for estimating tree trunk diameter using 2d laser scanner.
+20,remote sens.
+20,"2013, 5, 4839–4856."
+20,[crossref] 52.
+20,"shao, j."
+20,"; zhang, w."
+20,"; mellado, n."
+20,"; wang, n."
+20,"; jin, s."
+20,"; cai, s."
+20,"; luo, l."
+20,"; lejemble, t."
+20,"; yan, g."
+20,slam-aided forest plot mapping combining terrestrial and mobile laser scanning.
+20,isprs j.
+20,photogramm.
+20,remote.
+20,"2020, 163, 214–230."
+20,[crossref] 53.
+20,"qian, c."
+20,"; liu, h."
+20,"; tang, j."
+20,"; chen, y."
+20,"; kaartinen, h."
+20,"; kukko, a."
+20,"; zhu, l."
+20,"; liang, x."
+20,"; chen, l."
+20,"; hyyppä, j."
+20,an integrated gnss/ins/lidar-slam positioning method for highly accurate forest stem mapping.
+20,remote sens.
+20,"2017, 9, 3."
+20,[crossref] 54.
+20,"xu, w."
+20,"; cai, y."
+20,"; he, d."
+20,"; lin, j."
+20,"; zhang, f."
+20,fast-lio2: fast direct lidar-inertial odometry.
+20,ieee trans.
+20,robot.
+20,"2022, 38, 2053–2073."
+20,[crossref] 55.
+20,"kim, g."
+20,"; kim, a."
+20,scan context: egocentric spatial descriptor for place recognition within 3d point cloud map.
+20,"in proceedings of the 2018 ieee/rsj international conference on intelligent robots and systems (iros), madrid, spain, 1–5 october 2018; ieee: piscatway, nj, usa, 2018; pp."
+20,4802–4809.
+20,[crossref] 56.
+20,"he, d."
+20,"; xu, w."
+20,"; zhang, f."
+20,"kalman filters on differentiable manifolds. arxiv 2021, arxiv:2102.03804 57."
+20,agisoft.
+20,agisoft metashape.
+20,available online: https://www.agisoft.com/ (accessed on 5 july 2023 ).
+20,"young, d.j."
+20,"; koontz, m.j."
+20,"; weeks, j.m."
+20,optimizing aerial imagery collection and processing parameters for drone-based individual tree mapping in structurally complex conifer forests.
+20,methods ecol.
+20,"2022, 13, 1447–1463."
+20,[crossref] 59.
+20,"guo, m.h."
+20,"; lu, c.z."
+20,"; hou, q."
+20,"; liu, z."
+20,"; cheng, m.m."
+20,"; hu, s.m."
+20,"segnext: rethinking convolutional attention design for semantic segmentation. arxiv 2022, arxiv:2209.08575."
+20,"cordts, m."
+20,"; omran, m."
+20,"; ramos, s."
+20,"; rehfeld, t."
+20,"; enzweiler, m."
+20,"; benenson, r."
+20,"; franke, u."
+20,"; roth, s."
+20,"; schiele, b."
+20,the cityscapes dataset for semantic urban scene understanding.
+20,"in proceedings of the ieee conference on computer vision and pattern recognition (cvpr), las vegas, nv, usa, 27–30 june 2016."
+20,"chen, z."
+20,"; ding, r."
+20,"; chin, t."
+20,"; marculescu, d."
+20,"understanding the impact of label granularity on cnn-based image classification. arxiv 2019, arxiv:1901.07012."
+20,"meagher, d."
+20,geometric modeling using octree encoding.
+20,comput.
+20,graph.
+20,image process.
+20,"1982, 19, 129–147."
+20,[crossref] 63.
+20,"newcombe, r.a."
+20,"; fitzgibbon, a."
+20,"; izadi, s."
+20,"; hilliges, o."
+20,"; molyneaux, d."
+20,"; kim, d."
+20,"; davison, a.j."
+20,"; kohi, p."
+20,"; shotton, j."
+20,"; hodges, s."
+20,kinectfusion: real-time dense surface mapping and tracking.
+20,"in proceedings of the 2011 10th ieee international symposium on mixed and augmented reality, basel, switzerland, 26–29 october 2011; pp."
+20,127–136.
+20,[crossref] 64.
+20,"museth, k."
+20,"; lait, j."
+20,"; johanson, j."
+20,"; budsberg, j."
+20,"; henderson, r."
+20,"; alden, m."
+20,"; cucka, p."
+20,"; hill, d."
+20,"; pearce, a."
+20,openvdb: an open-source data structure and toolkit for high-resolution volumes.
+20,"in proceedings of the acm siggraph 2013 courses—siggraph ’13, new york, ny, usa, 21–25 july 2013; p."
+20,[crossref] 65.
+20,"xuan, z."
+20,"; david, f."
+20,real-time voxel based 3d semantic mapping with a hand held rgb-d camera.
+20,available online: https://github.com/floatlazer/semantic_slam (accessed on 10 july 2023).
+20,"hornung, a."
+20,"; wurm, k.m."
+20,"; bennewitz, m."
+20,"; stachniss, c."
+20,"; burgard, w."
+20,octomap: an efficient probabilistic 3d mapping framework based on octrees.
+20,auton.
+20,robot.
+20,"2013, 34, 189–206."
+20,[crossref] 67.
+20,"duberg, d."
+20,"; jensfelt, p."
+20,ufomap: an efficient probabilistic 3d mapping framework that embraces the unknown.
+20,ieee robot.
+20,autom.
+20,"2020, 5, 6411–6418. ."
+20,[crossref] 68.
+20,"pierzchała, m."
+20,"; giguère, p."
+20,"; astrup, r."
+20,mapping forests using an unmanned ground vehicle with 3d lidar and graph-slam.
+20,comput.
+20,electron.
+20,agric.
+20,"2018, 145, 217–225."
+20,[crossref] 69.
+20,"taha, a.a."
+20,"; hanbury, a."
+20,an efficient algorithm for calculating the exact hausdorff distance.
+20,ieee trans.
+20,pattern anal.
+20,intell.
+20,"2015, 37, 2153–2163."
+20,[crossref] 70.
+20,cloudcompare: 3d point cloud and mesh processing software home page.
+20,available online: https://www.cloudcompare.org/ (accessed on 15 june 2023) 71.
+20,"ali-sisto, d."
+20,"; gopalakrishnan, r."
+20,"; kukkonen, m."
+20,"; savolainen, p."
+20,"; packalen, p."
+20,a method for vertical adjustment of digital aerial photogrammetry data by using a high-quality digital terrain model.
+20,earth obs.
+20,geoinf.
+20,"2020, 84, 101954."
+20,[crossref] 72.
+20,google earth.
+20,available online: https://earth.google.com (accessed on 5 july 2023) 73.
+20,"jiao, j."
+20,"; wei, h."
+20,"; hu, t."
+20,"; hu, x."
+20,"; zhu, y."
+20,"; he, z."
+20,"; wu, j."
+20,"; yu, j."
+20,"; xie, x."
+20,"; huang, h.; et al."
+20,"fusionportable: a multi-sensor campus-scene dataset for evaluation of localization and mapping accuracy on diverse platforms. arxiv 2022, arxiv:2208.11865."
+20,"disclaimer/publisher’s note: the statements, opinions and data contained in all publications are solely those of the individual author(s) and contributor(s) and not of mdpi and/or the editor(s)."
+20,"mdpi and/or the editor(s) disclaim responsibility for any injury to people or property resulting from any ideas, methods, instructions or products referred to in the content."

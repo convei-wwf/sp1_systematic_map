@@ -1,0 +1,836 @@
+page,p
+1,hydrol.
+1,earth syst.
+1,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020 © author(s) 2020."
+1,this work is distributed under the creative commons attribution 4.0 license.
+1,"a daily 25 km short-latency rainfall product for data-scarce regions based on the integration of the global precipitation measurement mission rainfall and multiple-satellite soil moisture products christian massari1 , luca brocca1 , thierry pellarin2 , gab abramowitz3 , paolo filippucci1 , luca ciabatta1 , viviana maggioni4 , yann kerr5 , and diego fernandez prieto6 1 research institute for geo-hydrological protection (irpi), national research council (cnr), perugia, italy 2 institut des géosciences de l’environnement (ige), research unit of cnrs, grenoble inp, ird and université grenoble alpes, grenoble 38000, france 3 arc centre of excellence for climate extremes, university of new south wales (unsw), sydney, australia 4 sid and reva dewberry department of civil, environmental, and infrastructure engineering, george mason university, fairfax, va, usa 5 centre d’etudes spatiales de la biosphère (cesbio), université toulouse 3,cnes, cnrs, ird, toulouse 31401, france 6 european space agency (esa), frascati, italy correspondence: christian massari (christian.massari@irpi.cnr.it) received: 25 july 2019 – discussion started: 14 august 2019 revised: 28 january 2020 – accepted: 20 march 2020 – published: 26 may 2020 abstract."
+1,rain gauges are unevenly spaced around the world rope) and over data-scarce regions in africa and south amer- with extremely low gauge density over developing countries. ica by using triple-collocation (tc) analysis.
+1,"we found that for instance, in some regions in africa the gauge density is the integration of satellite sm observations with in situ rain- often less than one station per 10 000 km2 ."
+1,"the availability fall observations is very beneficial with improvements of of rainfall data provided by gauges is also not always guaran- imerg-er up to 20 % and 40 % in terms of correlation teed in near real time or with a timeliness suited for agricul- and error, respectively, and a generalized enhancement in tural and water resource management applications, as gauges terms of categorical scores with the integrated product of- are also subject to malfunctions and regulations imposed by ten outperforming reanalysis and ground-based long-latency national authorities."
+1,a potential alternative is satellite-based datasets.
+1,"we also found a relevant overestimation of the rain- rainfall estimates, yet comparisons with in situ data suggest fall variability of gpm-based products (up to twice the ref- they are often not optimal. erence value), which was significantly reduced after the inte- in this study, we developed a short-latency (i.e. 2–3 d) gration with satellite soil-moisture-based rainfall estimates. rainfall product derived from the combination of the inte- given the importance of a reliable and readily available grated multi-satellite retrievals for gpm (global precipita- rainfall product for water resource management and agri- tion measurement) early run (imerg-er) with multiple- cultural applications over data-scarce regions, the developed satellite soil-moisture-based rainfall products derived from product can provide a valuable and unique source of rainfall ascat (advanced scatterometer), smos (soil moisture information for these regions. and ocean salinity) and smap (soil moisture active and passive) l3 (level 3) satellite soil moisture (sm) retrievals."
+1,"we tested the performance of this product over four regions characterized by high-quality ground-based rainfall datasets (india, the conterminous united states, australia and eu- published by copernicus publications on behalf of the european geosciences union."
+2,2688 c.
+2,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 1 introduction cipitation estimates on a 0.1◦ regular grid over the 60◦ n–s domain through the integrated multi-satellite retrievals for rainfall is the main driver of the hydrological cycle (oki gpm (imerg; huffman et al., 2018)."
+2,"the mission provides and kanae, 2006) and plays an essential role in water re- three l3 (level 3) products which are based on different level source management and agricultural applications (vintrou of timeliness and calibration configurations (the early run – et al., 2014; gibon et al., 2018), drought monitoring (gar- imerg-er, the late run – imerg-lr – and the final run reaud et al., 2017) and flood forecasting (maggioni and mas- – imerg-fr; see sect."
+2,"2.1.2 for further details). sari, 2018)."
+2,"although extremely useful, one of the problems with sre ground networks of rain gauges are considered the most is the instantaneous nature of the measurement, which, along accurate (and as a reflection the most used) rainfall observa- with the intermittent character of the rainfall, make sre tions across many regions of the world."
+2,"however, the diffi- prone to errors (kucera et al., 2013)."
+2,"for example, precip- culty and the costs associated with their maintenance along itation type and rate (behrangi and wen, 2017) along with with the timeliness of their data availability are critical ob- satellite orbit and swath width (and thus the number of satel- stacles for their use in real-time and seasonal applications. lite snapshots available) all play an important role in de- moreover, while in developed regions the rain gauge distri- termining the sampling error magnitude (nijssen and let- bution is sufficiently dense and supported by well-organized tenmaier, 2004; ciabatta et al., 2017b; gebremichael and and well-funded organizations, in developing countries the krajewski, 2004)."
+2,"other problems are associated with sea- data coverage is extremely poor. sonally dependent biases, light rainfall estimation, and de- the number of gauges around the world has been esti- tection over snow- and ice-covered surfaces (ferraro et al., mated to range between 150 000 and 250 000, but their dis- 1994; ebert et al., 2007; kidd and levizzani, 2011; tian tribution is far from being homogeneous (kidd et al., 2017). et al., 2007; gottschalck et al., 2005)."
+2,"although these prob- for instance, in regions like africa, south america and cen- lems have been reduced with the advent of the gpm mis- tral asia the gauge density is often less than one station sion thanks to the new dual-frequency precipitation radar per 10 000 km2 , which results in large interpolation errors of (dpr), recent works show that there is still room for im- gauge-based gridded rainfall products."
+2,"this is an interesting provement (tan et al., 2016; o et al., 2017; gebregiorgis paradox, since gauges are insufficient exactly where they are et al., 2018b). more needed."
+2,"in these areas the only source of “observed” model reanalysis datasets, such as the european cen- rainfall with a timeliness suited for applications is derived tre for medium weather forecast (ecmwf) interim re- from satellite rainfall estimates (sres) and meteorological analysis (era-interim; extensively described in dee et al., models. 2011) and the new era5 (european centre for medium- sres are normally derived from sensors on board low- range weather forecasts, 2017), are the obvious alternative earth-orbiting (leo) and geostationary satellites (kidd and to ground- and satellite-based rainfall products."
+2,"although huffman, 2011; serrat-capdevila et al., 2014)."
+2,"while geo- they offer good performance in simulating synoptic weather stationary satellites use visible and infrared sensors to re- systems, they often misrepresent the variability of convective trieve the precipitation signal with high spatial and tem- systems, mainly due to their relatively low resolution and poral resolutions (e.g. 1–3 km and 15–30 min), low-earth- deficiencies in the parameterization of sub-grid processes orbiting satellites use passive microwave observations to pro- (roads, 2003; ebert et al., 2007; kidd et al., 2013; beck vide global precipitation measurements with a frequency of et al., 2017)."
+2,"although reanalysis datasets perform relatively about two observations per day with a spatial resolutions typ- well globally (massari et al., 2017a) and provide consistent ically larger than 25 km."
+2,"the latter are normally more accu- long-term precipitation estimation (which is paramount in rate as they provide a more direct measurement of precip- many research fields), they are normally released with a la- itation."
+2,"a large number of techniques have been developed tency that does not suit water resource and agricultural appli- that exploit the synergy between polar-orbiting retrievals and cations. geostationary observations (huffman et al., 2007; hsu et al., despite these inherent limitations, sre and reanalysis 1997; joyce et al., 2004; kubota et al., 2007). products are still the only valuable alternative to gauge- the long history of research in the area led in 2014 based observations within gauge-scarce regions, and the ef- to the global precipitation measurement (gpm) mission forts to improve these datasets by merging procedures or (hou et al., 2014), launched by nasa and jaxa (japan by including other ancillary information has been signifi- aerospace exploration agency) in coordination with the cantly increasing in the last decade."
+2,"for instance, beck et al."
+2,goddard earth sciences data and information services cen- (2017) released multi-source weighted-ensemble precipita- ter (ges disc).
+2,"the mission introduced a new concept for tion (mswep), a dataset with a 3-hourly temporal resolution rainfall retrieval based on a multi-sensor integration."
+2,within that covers the period 1979 to the near present.
+2,"mswep is a gpm, multiple observations from different instruments are unique product, as it exploits the complementary strengths of intercalibrated, merged and interpolated with the gpm com- gauge-, satellite- and reanalysis-based data to provide rain- bined core instrument product to produce half-hourly pre- fall estimates over the entire globe."
+2,other notable exam- hydrol.
+2,earth syst.
+2,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+3,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2689 ples are the chirps (climate hazards group infrared pre- transmission issues in inaccessible areas, undercatch prob- cipitation with station data) rainfall estimates (funk et al., lems, and the cost of maintenance)."
+3,"as these problems im- 2015), which are based on a combination of gauges and in- pact the type of the sensor (active or passive) and the retrieval frared cold cloud duration (ccd) observations."
+3,"however, in different way, their combination would allow for exploit- these datasets rely upon the availability of gauge observa- ing their relative strengths for improving sre. tions, which constitute the “land” or the “bottom-up” per- in this study, we developed a short-latency (2–3 d depend- spective of the precipitation signal (i.e. the precipitation that ing on the region) rainfall product derived from the combi- effectively reaches the land surface), in contrast to satellite nation of imerg-er with multiple-satellite sm-based rain- (and reanalysis) estimates, which are more informative about fall products."
+3,the latter are obtained from the inversion of the precipitation in the atmosphere layers (i.e. by cloud and the sm retrievals derived from (1) the soil moisture active atmospheric models).
+3,"where gauges are very sparse or to- and passive (smap; entekhabi et al., 2010) mission, (2) the tally missing or their functioning is not guaranteed in near advanced scatterometer (ascat; wagner et al., 2013), and real time, the quality of sre and models can be significantly (3) the soil moisture and ocean salinity (smos; kerr et al., affected as the bottom constraint provided by gauges weak- 2001) mission via sm2rain."
+3,"the integrated product is ex- ens. plicitly designed for operational water resource management a potential solution to circumvent this problem is the use and agricultural applications over data-scarce regions where of satellite sm observations as a source of rainfall ground rainfall observations from hydrometeorological networks are information (crow et al., 2009, 2011; pellarin et al., 2008; scarce or totally absent."
+3,"brocca et al., 2013; pellarin et al., 2013; wanders et al., the integration method we adopted is the optimal lin- 2015; zhan et al., 2015; ciabatta et al., 2015; massari et al., ear combination (olc) approach (bishop and abramowitz, 2019)."
+3,"in practice, sm can be used as a trace of precipita- 2013; hobeichi et al., 2018), which is based on a tech- tion, as the sm signal after a rain event persists from a few nique that provides an analytically optimal linear combina- hours to several days."
+3,"in other words, sm contains informa- tion of rainfall products and accounts for both the perfor- tion about the amount of water stored in the soil after rainfall. mance differences and error covariance between the prod- this information can be then exploited to retrieve spatial and ucts."
+3,"we tested the performance of the product (1) over temporal characteristics of the precipitation that has effec- four key regions, namely, india (in), the conterminous tively reached the land surface."
+3,"for instance, brocca et al."
+3,"united states (conus), australia (au) and europe (eu), (2013, 2014) proposed a direct inversion of the soil water where high-quality ground-based hydrometeorological net- balance equation and used two consecutive satellite sm ob- works are available, and (2) in africa and south america servations to estimate rainfall fallen within the time interval by using a triple-collocation (tc) analysis (stoffelen, 1998). between the two satellite passes."
+3,"the underlying idea of this the validity of tc and the consistency of its results with re- method, known as sm2rain, is the use of “soil as a natu- spect to those obtained against classical validation was pre- ral rain gauge”, as the difference in the water contained in liminary tested over the four regions mentioned in point 1 the soil can be directly related to rainfall."
+3,"this information (massari et al., 2017a). was used to improve sre by ciabatta et al. (2017a) and the key strengths of this integrated product are the follow- massari et al."
+3,(2019).
+3,"other techniques that exploited sm ing: observations relied upon data assimilation approaches based on sequential filtering techniques, like kalman-filter-based 1."
+3,the simultaneous use of multiple-satellite sm observa- methods (soil moisture analysis rainfall tool – smart; tions derived from active and passive sensors.
+3,"this ex- crow et al., 2011) and particle filters (pellarin et al., 2013; ploits the advantages of each sensor in improving sre."
+3,"zhan et al., 2015; román-cascón et al., 2017)."
+3,"all of them note that ascat is on the metop (meteorological op- demonstrated a real benefit for flood forecasting applications erational) satellites, which are part of the space seg- (alvarez-garreton et al., 2016; chen et al., 2014; massari ment of the eumetsat (european organisation for et al., 2018)."
+3,"in all but two cases (chen et al., 2014; tarpan- the exploitation of meteorological satellites) polar sys- elli et al., 2017), one single sm product was combined with tem (eps) that will secure the continuation of meteoro- the sre, a possible limitation if that product does not per- logical observations from the polar orbit in the 2022– form relatively well in the area of interest. 2043 timeframe."
+3,"in general, the main advantage of using satellite sm as an 2."
+3,"the short latency (2–3 d, potentially lower in the near indirect measure of ground rainfall information is its uniform future and with level 2 – l2 – products)."
+3,"this is of temporal and spatial coverage, availability in near real time, paramount importance for operational applications like and the fact that it transcends national boundaries."
+3,"draw- flood forecasting (for medium to large catchments, i.e. backs are the low spatial resolution and the relatively low > 20 000 km2 ), water resource management, agricul- quality in mountainous areas, frozen soils and dense forests, tural planning and vector-borne disease control. which, however, is also an issue in the case of ground-based observations (due to uneven spatial distribution and data https://doi.org/10.5194/hess-24-2687-2020 hydrol."
+3,earth syst.
+3,"sci., 24, 2687–2710, 2020"
+4,2690 c.
+4,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 3.
+4,independence from rain gauge observations.
+4,"this is a the next generation weather radar (nexrad) mea- key factor for data-scarce regions like africa. surements, optimally merged with hourly gauge-based observations by using the multisensor precipitation es- the paper is divided as follows."
+4,"section 2 provides a brief timator (mpe; seo et al., 2010)."
+4,this hourly dataset has overview of the ground-based and satellite observations used a spatial resolution of approximately 4 km.
+4,the hourly in the study.
+4,section 3 describes algorithms and methods gauge observations in the ncep stage iv estimates are used as well as the integration methodology and the valida- derived from the hydrometeorological automated data tion strategy.
+4,results are presented in sect. 4 followed by the system (hads).
+4,"stage iv is characterized by a negligi- discussion and conclusions. ble amount (< 1 %) of missing data over south-eastern conus, whereas about 90 % of the data are missing 2 data over the northwest corner of conus (roughly between 43–50◦ n and 115–125◦ )."
+4,"in this study we aggregated in this section we describe the datasets used for the inte- the product by averaging all the 4 km pixels falling gration of imerg-er with sm2rain rainfall estimates, as within the 0.25◦ × 0.25◦ footprint."
+4,daily data were ob- well as the datasets used to validate the integrated product. tained by the accumulation of hourly observations.
+4,"in the accumulation procedure, if any missing hourly ob- 2.1 regional rainfall datasets servations were found for the day, the resulting daily rainfall was discarded."
+4,"different ground-based rainfall datasets were used for the four different regions to cross-validate the integrated product, 4."
+4,"the india metrological department rainfall gridded namely, the australian water availability project (awap) dataset is prepared from daily rainfall data of 6955 sta- in australia, the eca&d (european climate assessment & tions, archived at the national data centre, imd, pune, dataset) rainfall dataset e-obs (ensembles daily grid- by using the shepard method (pai et al., 2014)."
+4,"out ded observational dataset) gridded dataset in europe, the na- of these 6955 stations, 537 stations are the imd ob- tional centers for environmental prediction (ncep) stage servatory stations, 522 stations are under the hydro- iv dataset over conus and the india metrological depart- meteorology programme and 70 are agrometeorolog- ment (imd) rainfall gridded dataset over india."
+4,below we de- ical stations.
+4,remaining stations are rainfall-reporting scribe the main features of these datasets (readers interested stations maintained by state governments.
+4,the product in more details can refer to the related publications). has been released with a 0.25◦ ×0.25◦ spatial resolution 1.
+4,the australian water availability project (awap) rain- since 1856. fall product is generated via spatial analyses on the qual- 2.1.1 satellite soil moisture products ity-controlled daily rain gauge measurements from the australian bureau of meteorology daily rain gauge net- in the following we describe the main characteristics of the work.
+4,awap daily rainfall for a given day is the 24 h to- satellite sm products used in the study.
+4,they are the follow- tal rainfall from the day before at 09:00 local time to the ing: current day at 09:00.
+4,the rainfall fields are gridded on a 1.
+4,"the advanced scatterometer (ascat) on board the 0.05◦ ×0.05◦ grid and spatially resampled to the desired metop-a, metop-b and metop-c satellites is a scat- 0.25◦ grid by taking area-weighted averages."
+4,although terometer operating at the c band (5.255 ghz).
+4,"it pro- this product is characterized by a relatively high quality, vides a sm product characterized by a spatial sam- it suffers also from known shortcomings (the reader in- pling of 12.5 km and from one to two observations per terested can refer to contractor et al., 2015, for further day depending on the latitude (wagner et al., 2013). details)."
+4,"in this study, the sm product provided within the eu- 2."
+4,"the eca&d rainfall dataset e-obs gridded dataset is metsat project (http://hsaf.meteoam.it/, last access: derived through interpolation of the eca&d (european 24 april 2020) denoted as h115 was used."
+4,climate assessment & data) station data.
+4,the station 2.
+4,"the soil moisture and ocean salinity (smos) mission dataset comprises a network of 2316 stations, with the provides a sm product through a radiometer operating highest station in northern and central europe and lower at the l band (1.4 ghz) with 50 km of spatial resolution density in the mediterranean, northern scandinavia and and one observation every 2–3 d (kerr et al., 2001)."
+4,in eastern europe.
+4,"the e-obs dataset is derived through a this study, version re04 (level 3) provided by the cen- three-stage process (haylock et al., 2008), which brings tre aval de traitement des données smos (catds, it to different resolutions and grids."
+4,"in this analysis, we https://www.catds.fr/, last access: 24 april 2020) was used the 0.25◦ regular latitude–longitude grid. used."
+4,the version is gridded on the 25 km easev2 3.
+4,"the national centers for environmental prediction (equal-area scalable earth) grid and distributed in the (ncep) stage iv (lin and mitchell, 2005) is based on netcdf (network common data form) format."
+4,hydrol.
+4,earth syst.
+4,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+5,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2691 3.
+5,"for smap l3, the soil moisture active and passive 3."
+5,"the imerg algorithm, firstly released in early 2015 (smap) mission sm product is obtained by l-band ra- (huffman et al., 2018), is run at 0.1◦ × 0.1◦ spatial diometer observations (1.4 ghz) with 36 km and one or and half-hourly temporal resolutions in three modes, two observations every 3 d depending on the location based on latency and accuracy: early run (imerg- (entekhabi et al., 2010)."
+5,"in this study, the version 5 of er; latency of 4–6 h after observation), late run the level 3 sm retrievals was used."
+5,(imerg-lr; 12–18 h) and final run (imerg-fr; about 3 months).
+5,the early run and the final run are 4.
+5,"for amsr2, the advanced microwave scanning ra- differentiated by their calibration scheme and the fact diometer 2 (amsr2) on board the global change ob- that imerg-er has a climatological rain gauge adjust- servation mission for water satellite is a radiometer op- ment, whereas the imerg-fr uses a month-to-month erating in the microwave band."
+5,"soil moisture retrieval adjustment based on gpcc data. from amsr2 is obtained from the c and x bands, which allow for obtaining a spatial–temporal resolu- tion of 25 km daily (kim et al., 2015)."
+5,"in this study, 3 methods we focused on the x-band sm product obtained by the application of the land parameter retrieval model to 3.1 the sm2rain algorithm amsr2 brightness temperature data (parinussa et al., 2015)."
+5,"note that amsr2 was inverted to obtain rainfall sm2rain (brocca et al., 2014) is a method of rainfall esti- via sm2rain, but the resulting rainfall was not used in mation from sm observations."
+5,"it is based on the inversion of the integration, whereas it was used in the validation via a one-layer water balance equation with appropriate simplifi- tc as an auxiliary dataset. cations valid only for liquid precipitation."
+5,"assuming a layer characterized by a soil water capacity (soil depth times soil 2.1.2 global rainfall datasets porosity) z ∗ , the water balance equation can be written as in addition to satellite sm products, different rainfall datasets z ∗ ds(t)/dt = p(t) − r(t) − e(t) − g(t), (1) were used in the study both for cross-comparison purposes and as a part of the integration procedure."
+5,"in the following where s(t) is the relative saturation of the soil or relative sm; the main characteristics of each dataset are provided. t is the time; and p(t), r(t), e(t) and g(t) are the precipita- tion, surface runoff, evapotranspiration and drainage rates, 1."
+5,the first guess daily product provided by the global respectively.
+5,"under unsaturated soil conditions, assuming a precipitation climatology center (gpcc; schamm negligible evapotranspiration rate during rainfall and dun- et al., 2014) is a ground-based rainfall dataset, which nian runoff, solving eq. (1) yields has been available since 1 january 2009 with a spatial sampling grid of 1◦ ."
+5,this dataset is used within the pro- p(t) = z ∗ ds(t)/dt + as(t)b . (2) cessing chain of in many gauge-corrected satellite rain- fall products.
+5,"being based on gauge observations, this note that in eq. (2) the drainage rate function is of the dataset is very accurate where the station density is rel- type g = as b as in famiglietti and wood (1994), with a atively high like in europe, australia and the united and b being two fitted model parameters."
+5,"once two consec- states, whereas it suffers from serious interpolation er- utive sm observations are available and the parameters a, rors in areas uncovered by stations."
+5,"for the sake of com- b and z ∗ are known, then eq. (2) can be used to estimate parison, for gpcc we assumed the same rainfall ob- the rainfall within the time between the two observations. served at 1◦ on the 0.25◦ × 0.25◦ sub-pixels."
+5,"the sm2rain parameters a, b and z ∗ are commonly ob- tained by calibration as described in ciabatta et al."
+5,(2018).
+5,"era5 is the latest climate reanalysis produced by for further details on the calibration procedure used within ecmwf, providing hourly data on many atmospheric, this study, the reader is referred to sect."
+5,3.3. land-surface and sea-state parameters together with es- timates of uncertainty.
+5,the rainfall variable used in this 3.2 the optimal linear combination approach study is characterized by a spatial resolution of 36 km and an hourly temporal resolution.
+5,"era5 is available the optimal linear combination (olc) approach (bishop from the copernicus climate change service (https: and abramowitz, 2013; hobeichi et al., 2018) provides an //climate.copernicus.eu/climate-reanalysis, last access: analytically optimal linear combination of ensemble mem- 24 april 2020)."
+5,daily observations of rainfall were bers (rainfall estimates in this case) that minimizes the mean computed as the difference between total precipitation square error when compared to a dataset that is assumed to and snowfall.
+5,era5 was regridded to the ascat grid be accurate enough to be considered as a calibration dataset (25 km) through the nearest-neighbour method to have y ref and thus accounts for both the performance differences consistent spatial observations with the satellite sm and error covariance between the rainfall products.
+5,the opti- datasets (see sect.
+5,3.3). mal linear combination is therefore insensitive to the addition https://doi.org/10.5194/hess-24-2687-2020 hydrol.
+5,earth syst.
+5,"sci., 24, 2687–2710, 2020"
+6,2692 c.
+6,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions of redundant information.
+6,"this weighting approach has two 3.3 integration strategy key advantages: (1) it provides an optimal solution for inte- grating different rainfall datasets, and (2) it accounts for the this section describes the four steps necessary for obtaining error covariance between the different datasets (caused by the integrated product pr+sm (fig."
+6,"this involves the fol- the fact that single datasets may share a similar information); lowing: that is, they may not provide independent estimates."
+6,given a. pre-processing of the soil moisture and rainfall products an ensemble of n + 1 rainfall estimates and a corresponding used in the integration (sect.
+6,"3.3.1) calibration dataset y ref , the weighting builds a linear com- bination of the n + 1 ensemble members that minimizes the b. selection of the parameters of sm2rain (sect."
+6,3.3.2) mean square difference with respect to y ref such that c. selection of the multiplication factors (sect.
+6,3.3.2) n x (y ref − w t y prod )2 (3) d. calculation of the coefficients of olc via eq. (5) j =1 (sect.
+6,"3.3.3). is minimized, where note that a unique calibration dataset, y ref will be used to y prod = [yimerg , ysm2rain1 , ysm2rain2 , . . ., ysm2rainn ] (4) perform steps (b)–(d)."
+6,"as y ref must be characterized by a relatively high accuracy, we performed a preliminary analy- represents the different sm2rain products plus the sis for its proper selection that is described ahead in sect."
+6,imerg-er product.
+6,"the vector of coefficients w is calcu- once y ref is selected, it can be used to obtain the coeffi- lated using cients and parameters described in points (b)–(d) (i.e. cali- a−1 bration phase of 2015–2017), which can produce integrated w= , (5) rainfall estimates for an independent time period (e.g."
+6,"2018 1t a−1 1 onward) with a latency of 2–3 d. where a is the (n + 1) × (n + 1) error covariance matrix of y prod with respect to y ref and 1t = [1, 1, 1, . . ., 1] a vector 3.3.1 step 0: soil moisture and rainfall pre-processing of n + 1 elements."
+6,the integrated product is then calculated as global sm and rainfall products come with different resolu- tions and grids.
+6,"moreover, the application of the sm2rain p r+sm = wt y prod . (6) algorithm to sm observations requires preliminary process- note that for the olc method to be analytically optimal, ing."
+6,"in step 0, we resampled all the datasets to the same a bias correction of the ensemble members in y prod (i.e."
+6,"0.25◦ × 0.25◦ grid over land between ±60◦ by using nearest- yimerg , ysm2rain1 , ysm2rain2 , . . . , ysm2rainn ) in eq. (4) neighbour interpolation on the ascat grid (25 km)."
+6,"in par- with the y ref (i.e. the temporal mean of each member of ticular, the imerg products, characterized by a resolution y prod and the mean of y ref must be equal) is required."
+6,"in of 0.1◦ , were upscaled to 0.25◦ using a box-shaped kernel bishop and abramowitz (2013) this bias correction was addi- with antialiasing, an approach that was found to outperform tive; however, for the nature of the precipitation signal (with simple spatial averaging."
+6,"rainfall accumulations were aggre- a considerable amount of null values), a multiplicative bias gated to daily scale (from 00:00 to 23:59 utc). correction is more appropriate (hobeichi et al., 2018)."
+6,"thus, as satellite sm data are not provided regularly spaced the latter requires the calculation of appropriate multiplica- in time and contain gaps (for instance we did not include tion factors (see sect."
+6,"3.3 for further details). in the analysis observations characterized by frozen soils, in addition, it is worth mentioning that the rainfall in- snow presence or radio interference contamination; by us- formation brought from different sm2rain products to ing the specific flags for each product), they were linearly in- imerg-er is potentially redundant especially when the sm terpolated at 00:00 utc to produce sm2rain daily rainfall estimates from smap, ascat and smos agree each other. from 00:00 to 23:59 utc (see step 1)."
+6,"note that we limited the olc method is particularly advantageous in this sense, the interpolation to a maximum of 2 d; beyond that we as- as it accounts for both performance differences and error co- sumed sm2rain rainfall were missing (in these cases only variance between the rainfall products and is therefore insen- imerg-er is used in the integrated product as better de- sitive to the addition of redundant information."
+6,other more scribed in sect.
+6,3.3.3).
+6,"note that the amount of missing data sophisticated methods can be also applied, although there is is generally dependent upon the location."
+6,"locations where no guarantee that such methods would lead to better results. the quality of satellite sm observations is poor are charac- for instance, brocca et al. (2016) found that simple integra- terized by a lot of missing data, and the integrated product is tion methods performed equally well and in some cases even basically close to imerg-er. better than more complex methods."
+6,"future developments will explore new and more complex integration techniques, such as the one in massari et al."
+6,(2019).
+6,hydrol.
+6,earth syst.
+6,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+7,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2693 figure 1.
+7,integration scheme used for the calculation of the integrated rainfall product pr+sm .
+7,"in step 2, sm2raincsmap , sm2raincsmos , sm2raincascat and imerg-erc refer to the sm2rain products with climatological correction (using the calibration dataset)."
+7,"3.3.2 steps 1 and 2: calibration phase produced sm2rain-asmr2* and sm2rain-ascat*, by using satellite sm observations derived from amsr2 and step 1 refers to the calibration of sm2rain for the selec- ascat with non-calibrated parameters; i.e. we used con- tion of the optimal parameters distribution pixel by pixel."
+7,all stant parameters globally derived from previous studies as the parameters described in sect.
+7,3.1 were selected by using in massari et al. (2017a).
+7,remember that these two last prod- y ref .
+7,"for that, we minimized the daily root mean squared ucts were not used within olc but will serve then only for error (rmse) between the sm2rain rainfall applied to validation purposes with tc. the specific sm product and y ref during 2015–2017."
+7,note as depicted in sect.
+7,"3.2, the application of olc re- that as rmse calibration is a variance-minimization tech- quires unbiased ensemble members."
+7,"this implies match- nique, it is subjected to conditional biases, which can po- ing the long-term temporal mean of y ref with the ones tentially determine a reduction of the temporal variability of imerg-er, sm2rain-ascat, sm2rain-smos and of the estimated precipitation and, thus, underestimate ex- sm2rain-smap by using a different (and temporally con- treme values."
+7,"to partially solve this issue, other metrics stant) multiplication factor for each member (i.e. a factor can be used, e.g. the kling–gupta efficiency (kge) in- that multiplied by the mean of the member guarantees the dex (gupta et al., 2009), which are theoretically superior matching with the mean of the calibration dataset)."
+7,how- in this respect.
+7,"however, to ensure homogeneity among all ever, applying this procedure resulted in an overall reduc- the calibration steps (see olc theory in sect."
+7,"3.2), we tion of the quality of the sm2rain members because a chose to use rmse, keeping in mind that the results ob- temporally constant multiplication factor deteriorated the tained here could be further improved."
+7,"the products so ob- quality of light rainfall (< 5 mm d−1 ) with an increase of tained are referred to as sm2rain-ascat if the satellite the false alarms (due to the noise contained in the satel- sm observations were derived from ascat, sm2rain- lite sm time series)."
+7,"to overcome this issue, we adopted smos if derived from smos and sm2rain-smap if de- a slightly different strategy which, despite not guarantee- rived from smap."
+7,"in addition to these products, we also ing a perfect matching of the long temporal means and https://doi.org/10.5194/hess-24-2687-2020 hydrol."
+7,earth syst.
+7,"sci., 24, 2687–2710, 2020"
+8,2694 c.
+8,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions thus not being theoretically optimal, limited the problem 2."
+8,the calculation of the olc coefficients in eq. (5) is not of the increase of false alarms.
+8,"in practice, for each mem- computationally demanding and uses the full calibration ber (i.e."
+8,"sm2rain-ascat, sm2rain-smos, sm2rain- time series (2015–2017)."
+8,"in particular, eq. (5) provides ascat, sm2rain-smap and imerg-er), we calculated the specific coefficients to be used in eq. (6) at each time the ratio between its mean monthly rainfall (i.e. mean of all step."
+8,"if one of the sm2rain products is not available the januaries, mean of all the februaries and so on) and the at a specific time step for the reasons described in step monthly mean of y ref (obtaining one multiplication factor 0 (see sect."
+8,"3.3.1), we linearly redistributed the coeffi- per month per pixel for a total of 12 multiplication factors cients to the products available at that time step so that for each grid point)."
+8,these factors were then used to multi- their sum is one (to ensure unbiased estimates). ply the daily rainfall observations of each member (relative to the desired month) to obtain a monthly based rescaled daily 3.
+8,"the application of olc among the sm2rain products rainfall estimate. and imerg-er was carried only when imerg-er this procedure is in principle a climatological correction values are larger than zero, taking advantage of the en- rather than a bias correction because it uses the climatology hanced rain–no-rain detection accuracy of imerg that of y ref as a reference."
+8,"it guarantees a more consistent spa- uses dpr (gebregiorgis et al., 2018a), whereas when tial pattern of rainfall among the members prior to the appli- imerg-er was zero, this value was kept in the merged cation of olc, which helps also to avoid spatial inconsisten- product."
+8,this tactic mitigates the degradation of rainfall cies when different combinations of members are used within estimates during low-rainfall time steps as demonstrated the integrated product.
+8,note that this operation does not con- by massari et al.
+8,(2019). strain the variability of the precipitation from year to year to 4.
+8,"the final product is then composed of multiple rain- the one of y ref , as it only redistributes rainfall within the fall datasets weighed according to eq."
+8,"imerg- year and guarantees all the members to be realigned to the er is always present, whereas the presence of the same climatology."
+8,"note also that a similar procedure is used three sm2rain rainfall estimates derived from as- for the production of imerg-er and imerg-lr products cat, smos and smap depends on their relative ac- (huffman et al., 2018) and can be easily implemented for its curacy (if they satisfy the threshold) and availability in use in near real time once the 12 factors for each member are time and space. known."
+8,from here onward we will refer to this procedure as a climatological correction.
+8,the success of the overall procedure described above is dependent upon the quality of y ref .
+8,"although the calibration 3.3.3 step 3: application of olc phase seems very intensive, it will be demonstrated in sect. 4 that if y ref has a relatively good accuracy, its effect on the for the application of olc (i.e. integration), we proceeded final quality of the integrated product is very low."
+8,"however, by considering these three methodological aspects: its choice is strategic in some regions, as will be shown in sect."
+8,"4.1, and thus deserves a careful investigation."
+8,"first off, we performed a quality check, by comparing the correlation coefficient of each sm2rain product 3.4 validation strategies with the calibration dataset (y ref )."
+8,"when the correla- tion was found less than 0.4 (i.e. no correlation), the for the validation of the integrated product, two different product was automatically excluded, and olc was ap- strategies were followed."
+8,"first, we selected four key re- plied on the reminder of them."
+8,"if all the sm2rain gions characterized by different climates and landscapes (i.e. products correlation fall below this threshold (for ex- conus, au, eu and in) where ground-based observations ample in dense forests or high mountainous regions), (derived from rain gauges and rain gauges plus radar) are only imerg-er was retained."
+8,the value 0.4 was set to very dense and of a high quality (see sect.
+8,"both con- exclude the poor performance of sm2rain products tinuous and categorical scores are considered, as commonly at such thresholds, which could potentially impact the used in a classical validation of global precipitation products overall quality of the integrated product."
+8,"to select this (see maggioni et al., 2016, for further details). value, we performed ad hoc experiments (not shown) next, since many areas of the world like africa, south over conus, australia, europe and india and found america and central asia have a highly variable density of 0.4 as a good compromise to exclude problematic ar- rain gauges, validation was also performed using a tc anal- eas like those impacted by high rfi (radio frequency ysis as proposed by (massari et al., 2017a; khan and mag- interference) in the smos sm product."
+8,"however, its gioni, 2019; see sect."
+8,3.4.2).
+8,"tc offers a viable way to val- overall impact on the final results was found to be very idate rainfall products in data-scarce regions by providing small and only limited to some specific regions (e.g. (theoretical) error and correlation of each product with the high rfi, dense forests and desert areas, which were “unknown” truth."
+8,note that we tested the validity of the tc already masked out by the validation mask). validation by applying it to the same key regions where the hydrol.
+8,earth syst.
+8,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+9,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2695 classical validation was carried out.
+9,"then, tc was applied to table 1."
+9,contingency table commonly used for characterizing de- africa and south america to validate the integrated product tection errors of precipitation products. and the other datasets that are part of the analysis.
+9,"the vali- dation with tc was carried out in 2018 (only 1 year), which rprod ≥ th rprod < th is independent from the calibration period (2015–2017)."
+9,rref ≥ th h m rref < th f z 3.4.1 classical validation both continuous and categorical error metrics were adopted 3.4.2 triple-collocation analysis applied to rainfall for validating daily rainfall.
+9,"the continuous scores are the observations following: in this study, tc analysis (stoffelen, 1998) was applied to 1."
+9,pearson correlation coefficient (r). estimate the correlation and the error of the rainfall estimates when a reliable reference is missing like in africa.
+9,here we 2.
+9,"root mean squared error (rmse). present a summary of the theory behind tc, while the reader 3."
+9,additive bias (bias). interested in more details can refer to massari et al. (2017a).
+9,"suppose we have three measurement systems xi , observ- 4."
+9,variability ratio (γ ).
+9,this is where γ is the ratio of the ing the true variable t characterized by an additive error standard deviation of the rainfall estimate σs and the one model of the benchmark σo .
+9,the optimal value of γ is 1.
+9,"xi = xi0 + εi = αi + βi t + εi , (7) 5."
+9,kling–gupta efficiency index.
+9,"kge is a modified ver- where the variables xi (i = 1, 2, 3) are collocated measure- sion of the classical nash–sutcliffe (ns) efficiency in- ment systems linearly related to the true underlying value t dex commonly used for evaluating discharge simulation with additive random errors εi , respectively, while αi and estimates."
+9,kge is composed of three terms: correla- βi are the ordinary least-squares intercepts and slopes.
+9,"as- tion, variability ratio and bias."
+9,kge varies from −∞ suming that the errors from the independent sources have to 1.
+9,"kge values close to 1 denote perfect model es- zero mean (e(εi ) = 0) and are uncorrelated with each other timates, whereas values of kge < −0.41 indicate that (cov(εi , εj ) = 0, with i 6 = j ) and with t (cov(εi , t) = 0), the the estimate deteriorates upon the mean rainfall bench- variance of the error of each dataset can be expressed as (mc- mark (knoben et al., 2019)."
+9,"with respect to ns, kge coll et al., 2014) gives more weight to the variability component and is  q  less impacted by conditional bias."
+9,"in this study, we used q11 − q12 q13 q23   q the version of kge proposed by beck et al."
+9,(2019).
+9,"for σ ε =  q22 − q12 q23  , (8)  q13  further details on the topic, we refer the reader to gupta  q  et al."
+9,(2009).
+9,"q33 − q12 q23 q12 in addition, three categorical scores were considered: the where qij = cov(xi , xj ) is the covariance within the vari- probability of detection pod= h / (h + m), which mea- ables xi . sures the likelihood of the rainfall estimate to detect an in addition, mccoll et al. (2014), using the definition of event when it in fact occurs; the false alarm ratio far = the correlation and covariance, demonstrated that  q q  f / (f + h ), which measures the likelihood that a precipi- 12 q q23 13 tation event does occur when a reference does not estimate 2  q11 12 q23  rtc (t,x ) =  q13 q22  , (9) rain; and the threat score (ts), which is an integrated mea- q13 q23 sure of pod and far."
+9,all these scores are based on the q12 q33 contingency table (table 1).
+9,"in the table, h represents hit where rtc2 is the squared correlation coefficient between (t,x ) cases when both the precipitation estimate and reference are t and xi (mccoll et al., 2014). greater than or equal to the rain–no-rain threshold percentile note that the error (and correlation) calculated via tc is (th); f represents false alarms, when the precipitation esti- generally lower (higher) than those calculated using the clas- mate is greater than or equal to th but when the reference sical validation, given that it does not include the reference is less than th; m represents missed events, when the refer- uncertainty. ence is greater than or equal to th but when the precipitation estimate is less than th; and z represents correct no-rain de- 3.4.3 validation mask tection, when both the precipitation estimate and reference are less than th."
+9,"n is the sample size, i.e. the total number of although the integrated product is potentially available ev- observed events and n = h + m + f + z. erywhere, we found that where the quality of satellite sm https://doi.org/10.5194/hess-24-2687-2020 hydrol."
+9,earth syst.
+9,"sci., 24, 2687–2710, 2020"
+10,2696 c.
+10,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions observations is very low like in forests, frozen soils and table 2."
+10,"triple-collocation correlation obtained by using triplet (a) mountainous areas, olc coefficients associated with the gpcc–imerg-er–sm2rain-ascat, (b) gpcc–imerg-er– sm2rain products were very small, and the integrated era5, (c) gpcc–era5–sm2rain-ascat for the period 2015– product was mainly constituted by imerg-er."
+10,"therefore, to 2018."
+10,"the numbers refer to median values. avoid any misinterpretation about the real benefit of integrat- a b c ing imerg-er with satellite sm observations, we limited the validation of the integrated product to the ascat com- gpcc 0.7079 0.7144 0.6976 mitted area (hahn, 2016)."
+10,"the area is limited to low and mod- era5 – 0.8136 0.8262 erate vegetation regimes, unfrozen and no snow cover, low to imerg-er 0.6671 0.6558 moderate topographic variations, no wetlands, no coastal ar- sm2rain-ascat 0.7032 – 0.6791 eas, and no deserts (see fig."
+10,s3 of the supplement).
+10,"outside of this area, satellite sm observations might suffer from sev- eral problems and are weighed much less by olc (although pendent upon imerg-er where rain gauge observa- we also found benefits here; see sect."
+10,4.1.1).
+10,"in addition, for tions are scarce."
+10,"for this reason, we initially excluded the sake of product distribution and use, we can ensure opti- this product from the list of potential candidates and fo- mal results only over this area, and thus we associated a flag cused only on the other two. to the pixels which fell outside it in the netcdf file included to explore the performance of era5 and gpcc, we applied in the supplement."
+10,tc as described in sect.
+10,3.4.2 during the whole period 2015– 2018.
+10,the following triplets were used (by keeping in mind 4 results the need to satisfy the assumptions of tc highlighted above): both the calibration of sm2rain and the olc implementa- 1.
+10,"gpcc, imerg-er and sm2rain-ascat* tion need a calibration dataset as described in sect."
+10,3.3 (i.e. (triplet a) y ref ).
+10,the choice of this dataset is strategic for obtaining 2.
+10,"gpcc, imerg-er and era5 (triplet b) a good-quality integrated product."
+10,section 4.1 describes the process of the selection of y ref considering different poten- 3.
+10,"gpcc, era5 and sm2rain-ascat* (triplet c). tial candidates."
+10,"section 4.1.1 and 4.1.2 describe the valida- note that sm2rain-ascat* above is not the one used tion over us, in, au and eu by using the hydrometeoro- in the integration, but it was produced using constant param- logical networks described in sect."
+10,"2.1 and the validation in eters a, b and z all over the world (i.e. it is not regionally africa and south america by using tc (sect."
+10,"3.4.2), respec- calibrated) as in massari et al. (2017a) to avoid a potential tively. violation of the tc assumptions."
+10,"on the other hand, even 4.1 calibration dataset selection using sm2rain-ascat (the calibrated dataset), similar re- sults were obtained (not shown), as we found a negligible the choice of a calibration dataset is strategic for both the effect of the calibration on tc results (in terms of tc corre- sm2rain parameters selection and the olc coefficients lations). calculation."
+10,"thus, it has to be carefully selected based on table 2 shows results for triplet a, b and c."
+10,"different con- (i) accuracy (i.e. low error and high correlation with “true” figurations of the triplets provide similar results, suggesting rainfall), (ii) homogeneous performance in time and space, that tc can be considered reliable."
+10,"in particular, era5 per- and (iii) continuous spatial and temporal coverage (as well forms the best among all, but it also suffers from significant as spatial and temporal resolution closer to the one of the uncertainty over convection-dominated systems like in west- rainfall to be estimated)."
+10,potential candidates are: ern africa and the sahel (see fig.
+10,"elsewhere, the perfor- mance is relatively good except over north-western conus 1."
+10,this has potentially high accuracy and low bi- and tropical forests of africa and indonesia.
+10,"the gpcc prod- ases where the rain gauge coverage is good but can be uct provides relatively good performance over europe, east- unreliable when the rain gauge distribution is scarce ern asia, australia and canada, but its performance are very (e.g."
+10,africa and south america).
+10,it might also suffer low over africa. from time dependence performance as a function of rain figure 2a plots the number of stations used for the gpcc gauge availability.
+10,"first guess 1.0◦ product for the years 2015–2018, whereas 2."
+10,this provides full coverage and generally homo- fig. 2b and c show the tc temporal correlation of the gpcc geneous performance all over the world. and one of era5 for the period 2015–2018.
+10,an interesting feature is that lower correlations of gpcc closely match with 3.
+10,imerg-fr.
+10,"this is a gauge-corrected satellite product areas of low station density (by comparing fig. 2a and b), and potentially highly accurate where rain gauges dis- whereas era5 shows a more homogeneous and higher cor- tribution is dense."
+10,the drawback is that it is highly de- relation over all the globe.
+10,it has also to be noted that the hydrol.
+10,earth syst.
+10,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+11,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2697 observation density and shows a more homogeneous perfor- mance pattern with respect to gpcc.
+11,"thus, era5 was se- lected as y ref ."
+11,"this selection does not guarantee optimal so- lutions, but it is the best we can do with the available datasets considering that other potential candidates can be affected from other or similar issues, which could result in a very dif- ferent global precipitation estimate (herold et al., 2016)."
+11,"the solution to this problem is not straightforward, but a possible way forward would be the integration of gpcc and era5 or the use of available integrated products (beck et al., 2017)."
+11,the advantage of relying only on a single rainfall source (as to ensure homogeneity) however will be lost in that case.
+11,"note that, except for conus where rain gauge infor- mation is ingested into era5 (lopez, 2011), the integrated product is totally independent of the rain gauge."
+11,"this allows for independently cross-validating the integrated product in eu, in, au and conus during 2015–2017 against high- quality ground-based rainfall observations (see sect."
+11,4.1.1).
+11,the latter serves to understand if the entire procedure of inte- gration described in sect.
+11,3.3 is correct and provide an over- all idea of the maximum potential performance that can be obtained by the integrated product (being performed in the same period used for calibration).
+11,4.1.1 classical validation over key regions using high-quality ground-based observations figure 3 summarizes the products used in pr+sm pixel by pixel for the different key regions.
+11,"while for in- dia and australia, sm2rain-ascat, sm2rain-smos and sm2rain-smap are present almost everywhere, over conus and europe there exist areas where sm2rain- smos was not used either because radio frequency inter- ference which was too high was found in the smos prod- uct or because of its relatively low performance (chen et al., 2018)."
+11,"in the figure, we did not superimpose the mask de- scribed in sect."
+11,3.4.3 to show that the areas in dark blue (i.e. where only imerg-er is retained) almost coincide with the ascat-committed area.
+11,"for instance the north-eastern conus region is known to be a challenging area for satellite sm products, and, as a result, here pr+sm relies on imerg- figure 2. (a) number of stations used for the gpcc first guess 1.0◦ product for the years 2015–2018. (b) tc correlation of the er alone."
+11,"similarly, the coastal areas are mostly charac- gpcc first guess 1.0◦ product in africa during 2015–2018 using terized by dark-blue pixels, which indicates no integration the triplet gpcc, era5 and sm2rain-ascat*."
+11,it can be seen with any sm2rain product.
+11,"note however that the ascat that lower correlation areas closely match with areas of low station committed area does not always match the area where only density. (c) tc correlation of the era5 reanalysis during 2015– imerg-er is present, e.g. north-eastern africa."
+11,"here, the 2018 for gpcc, era5 and sm2rain-ascat*."
+11,"ascat sm product is known to perform relatively poorly due to volume scattering (wagner et al., 2013), whereas pas- sive products perform relatively well (in orange, the presence number of stations used by gpcc in africa during this pe- of only passive sensors integrated with imerg-er can be riod is very low with areas totally uncovered, which likely seen)."
+11,although in areas like this we still have an improve- leads to significant interpolation error.
+11,"the uneven rain gauge ment of imerg-er, they could be considered part of the spatial distribution seems to significantly impact the gpcc integrated product we preferred to be conservative and guar- quality and in turn can potentially cause sub-optimal perfor- antee the product reliability only over the mask described in mance if used as a calibration dataset."
+11,era5 relies less on sect.
+11,3.4.3. https://doi.org/10.5194/hess-24-2687-2020 hydrol.
+11,earth syst.
+11,"sci., 24, 2687–2710, 2020"
+12,2698 c.
+12,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions er is particularly relevant over conus and europe, as well as for imerg-fr in europe."
+12,"on the other hand, gpcc and era5 biases over these regions and in australia are very low, which is expected due to the large amount of gauge stations shared with the references."
+12,"in terms of the variability ratio, we did not observe signif- icant conditional biases of the pr+sm product in europe and conus, although the use of rmse as a calibration score of sm2rain (see sect."
+12,3.3.2) and in the olc procedure (see sect.
+12,3.2) would systematically suggest it.
+12,"rather, we observed the ability to reduce the high variability of imerg- er bringing it to values closer to one."
+12,"only for australia is γ about 30 % lower than one, but this difference is not too far from the range of values observed for the other products (especially gpm-based products)."
+12,the reason for that can be twofold.
+12,"first, the integration was carried out only on non- zero rainfall values (thus the impact of sm2rain calibration with rmse is overall lower than expected; see sect."
+12,3.3.2).
+12,"second, the lower variability of sm2rain products is in this case beneficial as imerg-er shows variability which is too high."
+12,kge results provide an integrated measure of the scores discussed above.
+12,pr+sm kge values range around 0.6 for all the key regions.
+12,"lower performance is obtained for imerg- er with respect to pr+sm due to its high variability, except for india where the higher bias of pr+sm determines sub- optimal kge."
+12,"for long-latency products, kge measures are relatively good for gpcc, except in india where its lower correlation determines a decrease of kge."
+12,imerg-fr suf- fers from a large variability ratio in europe (in addition to figure 3.
+12,"products used in the integration over conus (a), eu- high bias) and conus, which causes relatively low kge rope (b), india (c) and australia (d)."
+12,the results refer to 2015–2017 values.
+12,era5 kge values are sub-optimal over conus period. (due to a high bias and low variability ratio) and in india (due to high bias).
+12,"figure 4 shows, for au, the increase in temporal table 3 shows r, rmse, bias and kge of the different correlation (2015–2017) with respect to imerg-er ob- rainfall products obtained by using the ground-based obser- tained by integrating the latter with one (either as- vations described in sect."
+12,2.1 as references.
+12,"the short-latency cat or smap or smos), two (either ascat+smos, products (less than 2–3 d) are shown in light blue, whereas smap+smos or ascat+smap) or three sm2rain the long-latency ones (larger than 2 months) are left white. products (ascat+smap+smos)."
+12,"the addition of mul- the integrated product pr+sm outperforms both imerg- tiple products, though beneficial, gets smaller as we ingest er (significantly) and in some cases long-latency products more sm2rain-based rainfall estimates."
+12,"this is due to the in terms of r and rmse (see for instance pr+sm correla- redundancy of information provided by sm, which causes no tions in australia, europe and india vs."
+12,era5 correlations). further improvement.
+12,"although this might suggest that using this suggests that the selection of the calibration dataset is a single sm2rain product is equivalent to using multiple not necessarily a major limiting factor in the proposed frame- products, the use of multiple products always guarantees op- work, as satellite sm contains inherent information about timal performance per pixel and is useful where one of the rainfall, as long as its quality is sufficiently high."
+12,"however, products does not perform well, as shown in fig."
+12,results this is not always true for all the scores.
+12,"for instance, in terms for the other key regions provide similar overall conclusions of bias, results are not optimal in india."
+12,"here, era5-based and are not shown here. climatological correction is probably the reason for the sub- figure 5 shows the correlation and rmse differences optimal performance of the integrated product due to the rel- in percentage obtained between the integrated product and atively high bias of era5 over india."
+12,"for other regions, re- imerg-er."
+12,"blue areas are those characterized by improve- sults are overall good in terms of bias for pr+sm , although ments, whereas red denotes deterioration."
+12,there is an overall they are slightly worse for conus.
+12,the bias for imerg- improvement for both scores over the study areas.
+12,larger im- hydrol.
+12,earth syst.
+12,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+13,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2699 table 3.
+13,"median correlation (r), root mean square error (rmse), daily bias (bias), variability ratio γ (i.e. ratio between the standard deviation of the estimated rainfall and that of the benchmark) and the kling–gupta efficiency (kge) index obtained with the comparison of the different rainfall products against gauge-based awap (australia), stage iv (conus; gauge and radar), e-obs (europe) and imd (india) during the period 2015–2017."
+13,pr+sm refers to the integrated product.
+13,"asterisks refer to short-latency products, while values in bold denote the best performing product in the region according to the specific score on the left."
+13,"australia conus europe india r (–) pr+sm ∗ 0.770 0.705 0.679 0.740 imerg-er∗ 0.704 0.604 0.563 0.703 imerg-fr 0.767 0.665 0.630 0.737 gpcc 0.878 0.696 0.898 0.595 era5 0.720 0.647 0.699 0.603 rmse (mm d−1 ) pr+sm ∗ 3.043 3.562 3.016 5.074 imerg-er∗ 4.520 6.381 5.474 6.100 imerg-fr 3.509 4.689 4.542 6.142 gpcc 2.306 3.446 1.751 6.669 era5 3.330 4.027 2.888 6.867 bias (mm d−1 ) pr+sm ∗ 0.090 0.135 −0.035 −0.238 imerg-er∗ −0.238 −0.195 −0.394 −0.067 imerg-fr −0.076 −0.008 −0.457 −0.129 gpcc 0.002 0.072 −0.118 −0.047 era5 0.087 0.129 −0.031 −0.237 variability ratio γ (–) pr+sm ∗ 0.73 1.01 1.01 0.86 imerg-er∗ 1.24 1.82 1.78 1.14 imerg-fr 1.11 1.41 1.59 1.26 gpcc 0.88 1.03 0.99 1.03 era5 0.92 1.18 1.00 1.08 kge (–) pr+sm ∗ 0.651 0.572 0.607 0.585 imerg-er∗ 0.551 0.274 0.277 0.623 imerg-fr 0.702 0.462 0.445 0.651 gpcc 0.785 0.603 0.799 0.545 era5 0.654 0.469 0.638 0.529 provements are obtained in terms of rmse, which in some plexity comes along with the ascat h115 product and is cases (i.e."
+13,conus) are larger than 40 %.
+13,"in terms of r, the computed as the normalized standard deviation of elevation improvement spans from 5 % to 15 % with larger values ob- using gtopo30 data (hahn, 2016)."
+13,it ranges between 0 % tained for europe and australia.
+13,there are also spots over for flat areas and 100 % for very complex terrain.
+13,the in- north-western conus characterized by deterioration.
+13,we tegrated product is able to improve the quality of imerg- attributed this to the low agreement between stage iv data er over flat areas better than complex terrain.
+13,"this result is and era5 data (used as calibration dataset), which can be somehow expected, as we know that the topographic com- also found in beck et al."
+13,(2019).
+13,"note this is a challenging plexity impacts the quality of the sm retrieval. area for stage iv data, as also demonstrated by tian et al."
+13,"the benefit of the integration was also computed as a func- (2007), who found significant performance differences of the tion of land cover (panels b and d in fig. 6 for conus)."
+13,"land tropical rainfall measuring mission (trmm) 3b42 rainfall cover information comes from the ecoclimap dataset (a product in north-western conus when compared either to global database of land-surface parameters at 1 km resolution the cpc (climate prediction center) unified gauge-based champeaux et al., 2005), provided at 1 km spatial resolution."
+13,"analysis of global daily precipitation (higgins et al., 2000) we have simplified the original land use classes into eight product or with the stage iv dataset. categories: bare land, rocks, urban, forest, wooded grass- to understand the benefit of integrating sm-based rainfall land, shrubland, grassland and crop."
+13,"except for urban, rock with imerg-er as a function of the topographic complex- and bare soil (with a percentage of pixels within conus of ity, fig. 6 shows the median differences, in terms of correla- less than 0.5 %), the integrated product performs better over tion (panel a) and rmse (panel c), obtained by pr+sm with shrubland, grassland and crop, whereas lower performance is respect to imerg-er for conus."
+13,the topographic com- obtained over forests.
+13,this result is also expected as the qual- https://doi.org/10.5194/hess-24-2687-2020 hydrol.
+13,earth syst.
+13,"sci., 24, 2687–2710, 2020"
+14,2700 c.
+14,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions shown by the ts score, which is generally positive, suggest- ing that the integrated product helps to improve imerg-er in terms of categorical scores especially for the 70–90th per- centiles."
+14,"4.1.2 validation over data-scarce regions using tc prior to the assessment of the rainfall products over africa and south america with tc, we run tc analysis over au, conus, eu and in, where r and rmse scores obtained with the classical validation are available."
+14,results are de- scribed in supplement sect.
+14,s1 and show that tc provides similar conclusions to a classical validation and can therefore be used as a robust validation tool over data-scarce regions.
+14,figure 8 shows the product combinations for each pixel figure 4.
+14,"correlation increments obtained by ingesting ascat, of the study areas used for obtaining pr+sm in africa and smos and smap sm2rain-based rainfall estimates into the south america."
+14,these combinations and the associated olc imerg-er product.
+14,values in bold inside the box plots refer to coefficients (including the sm2rain parameter calibration) the median increments expressed in terms of percentage.
+14,the box were obtained during the calibration period 2015–2017.
+14,"ar- plot refer to the 25th and 75th percentiles, while the whiskers refer eas where all sm2rain products are ingested match with to the minimum and maximum values."
+14,"outliers are not shown in the those characterized by a relatively good quality of satel- plot. lite sm observations, i.e. those not characterized by dense forests, desert areas and frozen soil, as well as snow-covered ity of the satellite sm product can be highly impacted by the areas."
+14,this suggests that the integration is robust and mean- presence of dense vegetation for the difficulty of the retrieval ingfully excludes low-quality sm information. in separating the effect of the soil water content from the wa- unlike the results presented in sect.
+14,"4.1.1, here we validate ter contained in leaves. the products during 2018, independent from the calibration figure 6 refers to conus, as we found highly represen- period (i.e."
+14,2015–2017).
+14,"as in africa and south america, the tative of different landscape complexity and land cover type. rain gauge distribution is scarce (see fig. 2a), with the valida- results for au, eu and in show very similar findings and tion being carried out via tc, using three triplets built among are reported in the supplement (figs."
+14,s4 and s5).
+14,"era5, sm2rain-ascat*, pr+sm , gpcc and imerg- figure 7 shows the differences in terms of pod, far and er: ts between the integrated product p r+sm and imerg-er 1."
+14,era5–gpcc–imerg-er as a function of the rainfall percentiles.
+14,as the correction of imerg-er was only carried out for positive rainfall values 2.
+14,era5–gpcc–sm2rain-ascat* and sm2rain-based rainfall lower than 1 mm was assumed 3.
+14,"era5–gpcc–pr+sm unreliable (to exclude the possibility of interpreting satellite sm noise as rainfall; zhan et al., 2015), the differences with figure 9 shows rtc 2 (left) and tc-rmse (right) over respect to imerg-er are visible only above the 50–60th africa obtained by triplets 1 (era5–gpcc–imerg-er) percentiles. and 3 (era5–gpcc–pr+sm )."
+14,"in particular, panels a-d re- after the 50–60th percentiles, a significant increment of fer to the short-latency products, while the rest of them are pod is evident for all the study regions, whereas the differ- long-latency ones (> 2 months)."
+14,"the integrated product out- ences in far denote a deterioration from the 50th to 80th performs both imerg-er and long-latency products like percentile across conus, eu and au (very small) and in gpcc and era5, as we found in sect."
+14,4.1.1.
+14,era5 is char- in (much larger).
+14,"the latter seems caused by more noisy acterized by lower performance in the sahel region as high- satellite sm observations over india, which directly impacts lighted in fig. 2b, whereas gpcc is strongly affected by the the quality of sm2rain estimates (causing higher far; see uneven rain gauge distribution, as depicted in fig. 2c."
+14,"simi- also zhan et al., 2015 and massari et al., 2019)."
+14,"this prob- lar results are obtained for south america in fig. 10, where lem could be faced by de-noising satellite sm observations the central eastern part gets greener (higher correlation) and with methods similar to the ones proposed by massari et al. whiter (lower error) after integration with sm2rain-based (2017b) and su et al. (2014, 2015) or by selecting a higher rainfall estimates."
+14,in south america the performance of rainfall threshold below which only imerg-er is retained era5 is higher than the one obtained in africa and consis- (i.e. larger than 1 mm selected above).
+14,the improvement in tently more homogeneous. terms of far becomes significant for higher rainfall accu- figure 11 summarizes the results obtained in the two re- mulations (i.e. 95th percentile).
+14,the overall improvement is gions by considering only the committed area (panels a and hydrol.
+14,earth syst.
+14,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+15,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2701 figure 5.
+15,"percentage differences in correlation (1r in percentage; panels a, b, c, d) and in root mean square error (1rmse in percentage; panels f, g, h, i) between the integrated product pr+sm and the imerg early run (imerg-er) product over conus, europe, india and australia for the period 2015–2017."
+15,grey areas represent the masked areas based on what is described in sect.
+15,3.4.3. b) and all the pixels of the analysis (non-masked by the com- ter resource management applications over data-scarce re- mitted area; panels c and d) also in terms of boxplots.
+15,"it can gions like africa, south america and central asia. be seen that in africa (panels a and c) the integrated product to merge sm2rain-based rainfall estimates with is always the best both in terms of error and correlation."
+15,"in imerg-er, we used the olc approach previously used south america (panels b and d), era5 outperforms the in- by bishop and abramowitz (2013) to combine different cli- tegrated product if no mask is used (panel d)."
+15,a reason for mate model estimates.
+15,"the procedure optimally merges mul- that is the lower skill of imerg-er over dense forests es- tiple estimates of the same variable by minimizing the er- pecially in terms of error, which impacts the overall quality ror with a calibration dataset."
+15,the choice of this calibra- of the integrated product.
+15,"in particular, relatively good per- tion dataset was discussed and analysed in detail by apply- formance is obtained in africa over the sahel region and in ing triple-collocation analysis to different candidates leading south america over eastern brazil. to the choice of the era5 reanalysis rainfall product."
+15,"in the procedure, no gauge information was directly used either in the calibration of sm2rain or in the integration of estimates via olc; therefore the developed product is totally indepen- 5 discussion and conclusions dent from ground-based observations of rainfall (except the inherent gauge information contained in imerg-er)."
+15,"in this study, we have developed a procedure to obtain a the integrated product was cross-validated with high- short-latency (less than 2–3 d), daily 25 km satellite-based quality ground-based rainfall observations in australia, in- rainfall product based on the integration of imerg-er with dia, europe and the conterminous united states and cross- sm2rain-based rainfall estimates derived from three differ- compared in the same regions against long-latency products ent satellite sm products (i.e."
+15,"smos, smap and ascat). (i.e. released with a time span of 1–2 months and thus not with this latency – potentially reduced to about 1 d via the suited for operational applications)."
+15,the validation entailed use of l2 products – the product targets agricultural and wa- different continuous and categorical scores and was carried https://doi.org/10.5194/hess-24-2687-2020 hydrol.
+15,earth syst.
+15,"sci., 24, 2687–2710, 2020"
+16,2702 c.
+16,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions figure 6.
+16,"difference in median correlation (1r ) and in median root mean square error (1rmse ) between the integrated product pr+sm and imerg-er as a function of the topographic complexity (a, c) and as a function of the land cover type (b, d) over conus."
+16,the results refer to the 2015–2017 period.
+16,the text boxes on the top show the percentage of the area occupied by the specific topographic complexity or land cover type. out for different land cover classes and as a function of the 2.
+16,the improvement of imerg-er was relevant and topographic complexity.
+16,"in this respect, we found the follow- ranged from 10 % to 15 % in terms of correlation and ing: up to 40 % in terms of rmse."
+16,a smaller impact of the integration was obtained over very dense forests and complex terrain given the inherent limitations of 1.
+16,the integrated product performed relatively well and of- satellite-based observations over these areas.
+16,"we also ten better than the long-latency products, which are de- observed deterioration in correlation in some areas of signed to obtain best performance, as they ingest many north-western conus and india which need further observations and use gauges (often the same used here analysis. for validation)."
+16,the best product in regions with high- density rain gauge observations was found to be gpcc 3.
+16,an ability to reduce the variability ratio which was (although this product is obviously correlated with the too high was observed in the imerg-er product.
+16,one ground reference).
+16,"an interesting feature was the better of the reasons for this was also related to the lower performance of the integrated product with respect to variability of sm2rain-based rainfall estimates, which the calibration dataset which highlights the high value were produced by minimizing the rmse with the cali- of information provided by sm."
+16,these results are rele- bration dataset (i.e.
+16,era5).
+16,"despite being beneficial in vant given that the integrated product can be potentially this case, this issue can be relevant and could also im- released within 2–3 d. pact the ability in the prediction of extreme values and hydrol."
+16,earth syst.
+16,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+17,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2703 figure 8.
+17,products used to integrate imerg-er with sm2rain products derived from the setup during the calibration period in south america.
+17,when low correlation was found between the refer- ence dataset (i.e.
+17,"gpcc) and the sm2rain product, the latter was excluded from the analysis, and only imerg-er was retained. uct was characterized by a higher bias and lower vari- ability, which drew kge to values lower than the ones of imerg-er."
+17,"an additional validation, totally independent from the calibration, was carried out in africa and south amer- ica."
+17,"here, due to the lack of a reliable benchmark dataset, we adopted tc analysis (after having validated it) to calculate error and correlation of the integrated product, imerg-er, gpcc and era5."
+17,results con- firm the values of those obtained via classical validation figure 7.
+17,"difference in categorical indices (probability of detection with the integrated product outperforming imerg-er. – pod, false alarm ratio – far – and threat score – ts) between moreover, in data-scarce regions, the integrated product the integrated product pr+sm and the imerg-er as a function outperforms gpcc and provides similar performance to of the rainfall classes for australia (a), conus (b), europe (c) and era5 (better in the sahel region)."
+17,india (d) for the period 2015–2017.
+17,the bars refer to median values.
+17,"despite the good performance achieved by the product, several aspects need further investigation. a modification of the true rainfall distribution."
+17,"however, a closer look at the distributions of the reference and 1."
+17,the short time records of some of the satellite- the estimated rainfall (not shown) suggests that the in- based observations used in the integration (i.e.
+17,smap tegrated product was not impacted too much form this and imerg-er) limited the length of the calibra- issue. tion period which could impact the calculation of the climatological-correction procedure and the olc coef- 4.
+17,an improvement of the kge score as a consequence ficients shown in methods.
+17,"it also shrinks the length of of the improvement of the correlation (mainly) and the the validation period, which was restricted to 2018."
+17,"the variability ratio was found in all cases except india. relatively short period of calibration has therefore po- here, despite the better correlation, the integrated prod- tential impacts on the ability of the products to repro- https://doi.org/10.5194/hess-24-2687-2020 hydrol."
+17,earth syst.
+17,"sci., 24, 2687–2710, 2020"
+18,2704 c.
+18,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2 ; panels a, d) and root mean square error (rmse ; panels f, i) in millimetres per day figure 9."
+18,"triple-collocation squared correlation (rtc tc for imerg early run (imerg-er; panels a and f), the integrated product (imerg early run and sm2rain applied to ascat, smap and smos; pr+sm ; panels b, g), the global precipitation climatology center product (gpcc; c, h) and the reanalysis product era5 (era5, d, i)."
+18,grey areas represent the committed area of ascat which we excluded from the analysis.
+18,the results refer to the validation period (i.e.
+18,2018).
+18,grey areas represent the masked areas based on what is described in sect.
+18,3.4.3. duce correct climate patterns.
+18,"thanks to the recent avail- tions like flood prediction, water resource management, ability of the imerg-er product from 2000 onwards, crop modelling and risk insurance."
+18,note that first at- this aspect will be further investigated in the future ver- tempts in using the product for flood prediction (not sions of the product. shown in this study) are providing promising results.
+18,although tc is a possible (and likely the only) alter- 3.
+18,"the integration is not possible everywhere given the native for evaluating rainfall estimates over data-scarce low quality of the satellite sm observations over dense regions, it does not provide a thorough evaluation of forests and the lack of sm information over frozen sur- the rainfall estimates, as it does not provide informa- faces."
+18,we can only have confidence in the optimal per- tion about categorical scores and bias.
+18,"therefore, over formance of the integrated product over the area de- these regions it is not guaranteed that the integrated scribed in sect."
+18,3.4.3.
+18,this of course does not exclude product performance is optimal in this respect.
+18,future the possibility that the product might work well outside work should focus on testing the product for applica- of this area.
+18,hydrol.
+18,earth syst.
+18,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+19,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2705 figure 10.
+19,as in fig. 9 but for south america.
+19,daily 25 km temporal–spatial sampling might be not ad- 5.
+19,despite 2–3 d of latency being fine for many applica- equate for small-scale applications.
+19,"future work should tions, it might not be sufficient for rainfall monitoring therefore take into account satellite sm products with in real time and flood forecasting in medium to small a higher spatial resolution (e.g."
+19,"piles et al., 2011; basins."
+19,"in this respect, imerg-er, with its 4–5 h of la- merlin et al., 2012; malbéteau et al., 2016; bauer- tency, is the only satellite product potentially providing marschallinger et al., 2018a, b; chan et al., 2018) and rainfall observations that could be used for such appli- shorter revisit times."
+19,"note that with the current constel- cations, although in that case not only the latency is lation of the metop a, b and c satellites in addition important but also the spatial resolution."
+19,"future work to the future scatterometer (sca; rostan et al., 2016) should focus on the integration of l2 satellite sm prod- or with the potential availability of geosynchronous c- ucts with imerg-er also using alternative integration band radars, we will have the opportunity to collect schemes and products with respect to those used in this multiple-satellite sm observations within the day which study. could be used to calculate sub-daily rainfall estimates from sm observations."
+19,the record length of the product is restricted to the gpm and smap eras (i.e. 2015 onward).
+19,this poten- tially limits the use of the products for drought and flood https://doi.org/10.5194/hess-24-2687-2020 hydrol.
+19,earth syst.
+19,"sci., 24, 2687–2710, 2020"
+20,2706 c.
+20,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions figure 11.
+20,box plots of triple-collocation squared correlation (rt2 ; left axis in blue) and root mean square error (rmsetc ; right axis in red) in millimetres per day obtained during validation period (i.e. 2018) in africa over the committed area mask (a) and over the whole study area (b).
+20,panels (c) and (d) refer to the same results but in south america.
+20,"the box plot refers to the 25th and 75th percentiles, while the whiskers refer to the minimum and maximum values. frequency analysis."
+20,"however, the integration procedure author contributions."
+20,"cm proposed and developed the idea of in- does not rely upon the availability of the above prod- tegration, carried out the analysis and typeset the paper."
+20,lb partici- ucts but can be applied to any other long-term rainfall pated in the discussion and setup of the study.
+20,tp participated in the and soil moisture dataset available.
+20,note that all the discussion and setup of the study.
+20,pf helped in the data preparation imerg products are now reprocessed back to the start and analysis.
+20,lc helped in the data preparation and analysis and participated in the discussion and setup of the study.
+20,"vm helped in of the trmm (tropical rainfall measuring mission) the paper revision and typesetting and in designing the study setup. era (from march 2000 to present), and sm observations ga helped in the application of the olc technique and in the type- are available back to 1978 (dorigo et al., 2017)."
+20,there- setting of the paper.
+20,"yk participated in the discussion and setup of fore, there is a large potential for developing a long-term the study."
+20,df participated in the discussion and setup of the study. integrated product specifically targeted at climate appli- cations.
+20,competing interests.
+20,the authors declare no conflicts of interest.
+20,data availability.
+20,"pr+sm is available via https://doi.org/10.5281/zenodo.3345323 (massari, 2019)."
+20,acknowledgements.
+20,this work is supported by the european space agency (esa; contract no.
+20,4000114738/15/i-sbo) project smos+rainfall land ii.
+20,gab abramowitz acknowledges the sup- supplement.
+20,the supplement related to this article is available on- port of the australian research council centre of excellence for line at: https://doi.org/10.5194/hess-24-2687-2020-supplement.
+20,climate extremes (grant no.
+20,ce170100023).
+20,hydrol.
+20,earth syst.
+20,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+21,massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2707 financial support.
+21,"this research has been supported by the euro- uldall, f., seyfried, m., bosch, d., starks, p., holifield collins, pean space agency (grant no."
+21,4000114738/15/i-sbo).
+21,"c., prueger, j., van der velde, r., asanuma, j., palecki, m., small, e."
+21,"e., zreda, m., calvet, j., crow, w."
+21,"t. and kerr, y.: development and assessment of the smap enhanced passive review statement."
+21,"this paper was edited by shraddhanand shukla soil moisture product, remote sens."
+21,"environ., 204, 931–941, and reviewed by two anonymous referees. https://doi.org/10.1016/j.rse.2017.08.025, 2018."
+21,"chen, f., crow, w."
+21,"t., and ryu, d.: dual forcing and state correc- tion via soil moisture assimilation for improved rainfall–runoff modeling, j."
+21,"hydrometeorol., 15, 1832–1848, 2014."
+21,"references chen, f., crow, w."
+21,"t., bindlish, r., colliander, a., burgin, m."
+21,"s., asanuma, j., and aida, k.: global-scale evaluation of smap, alvarez-garreton, c., ryu, d., western, a."
+21,"w., crow, w."
+21,"t., su, smos and ascat soil moisture products using triple colloca- c.-h., and robertson, d."
+21,"r.: dual assimilation of satellite soil tion, remote sens."
+21,"environ., 214, 1–13, 2018. moisture to improve streamflow prediction in data-scarce catch- ciabatta, l., brocca, l., massari, c., moramarco, t., puca, s., ri- ments, water resour."
+21,"res., 52, 5357–5375, 2016. nollo, a., gabellani, s., and wagner, w.: integration of satellite bauer-marschallinger, b., freeman, v., cao, s., paulik, c., schau- soil moisture and rainfall observations over the italian territory, fler, s., stachl, t., modanesi, s., massari, c., ciabatta, l., j."
+21,"hydrometeorol., 16, 1341–1355, 2015."
+21,"brocca, l., and wagner, w.: toward global soil moisture mon- ciabatta, l., marra, a."
+21,"c., panegrossi, g., casella, d., sanò, p., itoring with sentinel-1: harnessing assets and overcoming ob- dietrich, s., massari, c., and brocca, l.: daily precipitation es- stacles, ieee t."
+21,geosci.
+21,"remote, 10, 1–20, 2018a. timation through different microwave sensors: verification study bauer-marschallinger, b., paulik, c., hochstöger, s., mistelbauer, over italy, j."
+21,"hydrol., 545, 436–450, 2017a."
+21,"t., modanesi, s., ciabatta, l., massari, c., brocca, l., and wag- ciabatta, l., marra, a."
+21,"c., panegrossi, g., casella, d., sanò, ner, w.: soil moisture from fusion of scatterometer and sar: p., dietrich, s., massari, c., and brocca, l.: daily pre- closing the scale gap with temporal filtering, remote sensing, cipitation estimation through different microwave sensors: 10, 1030, https://doi.org/10.3390/rs10071030, 2018b."
+21,"verification study over italy, j."
+21,"hydrol., 545, 436–450, beck, h."
+21,"e., van dijk, a."
+21,"m., levizzani, v., schellekens, https://doi.org/10.1016/j.jhydrol.2016.12.057, 2017b."
+21,"j., miralles, d."
+21,"g., martens, b., and de roo, a.: mswep: 3- ciabatta, l., massari, c., brocca, l., gruber, a., reimer, c., hahn, hourly 0.25° global gridded precipitation (1979–2015) by merg- s., paulik, c., dorigo, w., kidd, r., and wagner, w.: sm2rain- ing gauge, satellite, and reanalysis data, hydrol."
+21,earth syst.
+21,"sci., cci: a new global long-term rainfall data set derived from 21, 589–615, https://doi.org/10.5194/hess-21-589-2017, 2017."
+21,"esa cci soil moisture, earth syst."
+21,"data, 10, 267–280, beck, h."
+21,"e., pan, m., roy, t., weedon, g."
+21,"p., pappenberger, f., van https://doi.org/10.5194/essd-10-267-2018, 2018."
+21,"dijk, a."
+21,"m., huffman, g."
+21,"j., adler, r."
+21,"f., and wood, e."
+21,"contractor, s., alexander, l."
+21,"v., donat, m."
+21,"g., and herold, n.: f.: daily evaluation of 26 precipitation datasets using stage-iv how well do gridded datasets of observed daily precipita- gauge-radar data for the conus, hydrol."
+21,earth syst.
+21,"sci., 23, tion compare over australia?, adv."
+21,"meteorol., 2015, 325718, 207–224, https://doi.org/10.5194/hess-23-207-2019, 2019. https://doi.org/10.1155/2015/325718, 2015."
+21,"behrangi, a. and wen, y.: on the spatial and temporal sampling crow, w., van den berg, m., huffman, g., and pellarin, errors of remotely sensed precipitation products, remote sens- t.: correcting rainfall using satellite-based surface soil ing, 9, 1127, https://doi.org/10.3390/rs9111127, 2017. moisture retrievals: the soil moisture analysis rain- bishop, c."
+21,"h. and abramowitz, g.: climate model dependence and fall tool (smart), water resour."
+21,"res., 47, w08521, the replicate earth paradigm, clim."
+21,"dynam., 41, 885–900, 2013. https://doi.org/10.1029/2011wr010576, 2011."
+21,"brocca, l., moramarco, t., melone, f., and wagner, w.: a new crow, w."
+21,"t., huffman, g."
+21,"j., bindlish, r. and jackson, t."
+21,"j.: im- method for rainfall estimation through soil moisture observa- proving satellite-based rainfall accumulation estimates using tions, geophys."
+21,"lett., 40, 853–858, 2013."
+21,"spaceborne surface soil moisture retrievals, j."
+21,"hydrometeorol., brocca, l., ciabatta, l., massari, c., moramarco, t., hahn, s., 10, 199–212, https://doi.org/10.1175/2008jhm986.1, 2009."
+21,"hasenauer, s., kidd, r., dorigo, w., wagner, w., and levizzani, dee, d."
+21,"p., uppala, s."
+21,"m., simmons, a."
+21,"j., berrisford, p., poli, v.: soil as a natural rain gauge: estimating global rainfall from p., kobayashi, s., andrae, u., balmaseda, m."
+21,"a., balsamo, g., satellite soil moisture data, j."
+21,geophys.
+21,"res.-atmos., 119, 5128– bauer, p., bechtold, p., beljaars, a."
+21,"m., van de berg, l., bid- 5141, https://doi.org/10.1002/2014jd021489, 2014. lot, j., bormann, n., delsol, c., dragani, r., fuentes, m., geer, brocca, l., pellarin, t., crow, w."
+21,"t., ciabatta, l., massari, c., ryu, a."
+21,"j., haimberger, l., healy, s."
+21,"b., hersbach, h., hólm, e."
+21,"v., d., su, c.-h., rüdiger, c., and kerr, y.: rainfall estimation by isaksen, l., kållberg, p., köhler, m., matricardi, m., mcnally, inverting smos soil moisture estimates: a comparison of differ- a."
+21,"p., monge-sanz, b."
+21,"m., morcrette, j.-j., park, b.-k., peubey, ent methods over australia, j."
+21,geophys.
+21,"res.-atmos., 121, 12– c., de rosnay, p., tavolato, c., thépaut, j.-n., and vitart, f.: the 62, 2016."
+21,"era-interim reanalysis: configuration and performance of the champeaux, j., masson, v., and chauvin, f.: ecoclimap: a data assimilation system, q."
+21,meteorol.
+21,"soc., 137, 553– global database of land surface parameters at 1 km resolution, 597, 2011."
+21,meteor.
+21,"appl., 12, 29–32, 2005."
+21,"dorigo, w., wagner, w., albergel, c., albrecht, f., balsamo, g., chan, s."
+21,"k., bindlish, r., o’neill, p., jackson, t., njoku, e., dun- brocca, l., chung, d., ertl, m., forkel, m., gruber, a., haas, e., bar, s., chaubell, j., piepmeier, j., yueh, s., entekhabi, d., col- hamer, p."
+21,"d., hirschi, m., ikonen, j., de jeu, r., kidd, r., la- liander, a., chen, f., cosh, m."
+21,"h., caldwell, t., walker, j., hoz, w., liu, y."
+21,"y., miralles, d., mistelbauer, t., nicolai-shaw, berg, a., mcnairn, h., thibeault, m., martínez-fernández, j., https://doi.org/10.5194/hess-24-2687-2020 hydrol."
+21,earth syst.
+21,"sci., 24, 2687–2710, 2020"
+22,2708 c.
+22,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions n., parinussa, r., pratola, c., reimer, c., van der schalie, r., sessment of their impact on global land data assimilation seneviratne, s."
+22,"i., smolander, t., and lecomte, p.: esa cci soil system land surface states, j."
+22,"hydrometeorol., 6, 573–598, moisture for improved earth system understanding: state-of-the https://doi.org/10.1175/jhm437.1, 2005. art and future directions, remote sens."
+22,"environ., 203, 185–215, gupta, h."
+22,"v., kling, h., yilmaz, k."
+22,"k., and martinez, g."
+22,"f.: decom- 2017. position of the mean squared error and nse performance criteria: ebert, e."
+22,"e., janowiak, j."
+22,"e., and kidd, c.: comparison of near- implications for improving hydrological modelling, j."
+22,"hydrol., real-time precipitation estimates from satellite observations 377, 80–91, 2009. and numerical models, b."
+22,meteorol.
+22,"soc., 88, 47–64, hahn, s.: product validation report (pvr) soil moisture, https://doi.org/10.1175/bams-88-1-47, 2007."
+22,"metop ascat soil moisture, tech. rep., h-saf, available entekhabi, d., njoku, e."
+22,"g., o’neill, p."
+22,"e., kellogg, k."
+22,"h., crow, at: http://hsaf.meteoam.it/documents/pvr/h25_ascat_ssm_ w."
+22,"t., edelstein, w."
+22,"n., entin, j."
+22,"k., goodman, s."
+22,"d., jackson, t."
+22,"cdr_pvr_v0.1.pdf (last access: 24 may 2020), 2016."
+22,"j., johnson, j., kimball, j., piepmeier, j."
+22,"r., koster, r."
+22,"d., mar- haylock, m., hofstra, n., klein tank, a., klok, e., jones, tin, n., mcdonald, k."
+22,"c., moghaddam, m., moran, s., reichle, p., and new, m.: a european daily high-resolution grid- r., shi, j."
+22,"c., spencer, m."
+22,"w., thurman, s."
+22,"w., tsang, l., and ded data set of surface temperature and precipitation van zyl, j.: the soil moisture active passive (smap) mission, p. for 1950–2006, j."
+22,geophys.
+22,"res.-atmos., 113, d20119, ieee, 98, 704–716, 2010. https://doi.org/10.1029/2008jd010201, 2008."
+22,"european centre for medium-range weather forecasts: era5 re- herold, n., alexander, l., donat, m., contractor, s., and becker, analysis, https://doi.org/10.5065/d6x34w69, 2017."
+22,"a.: how much does it rain over land?, geophys."
+22,"lett., 43, famiglietti, j. and wood, e."
+22,"f.: multiscale modeling of spatially 341–348, 2016. variable water and energy balance processes, water resour."
+22,"res., higgins, r."
+22,"w., shi, w., yarosh, e., and joyce, r.: improved 30, 3061–3078, 1994."
+22,"united states precipitation quality control system and analysis, ferraro, r."
+22,"r., grody, n."
+22,"c., and marks, g."
+22,"f.: ef- ncep/climate prediction center atlas, 7, 40, 2000. fects of surface conditions on rain identification us- hobeichi, s., abramowitz, g., evans, j., and ukkola, a.: derived ing the dmsp-ssm/i, remote sens."
+22,"rev., 11, 195–209, optimal linear combination evapotranspiration (dolce): a https://doi.org/10.1080/02757259409532265, 1994. global gridded synthesis et estimate, hydrol."
+22,earth syst.
+22,"funk, c., peterson, p., landsfeld, m., pedreros, d., verdin, sci., 22, 1317–1336, https://doi.org/10.5194/hess-22-1317-2018, j., shukla, s., husak, g., rowland, j., harrison, l., 2018."
+22,"hoell, a., and michaelsen, j.: the climate hazards in- hou, a."
+22,"y., kakar, r."
+22,"k., neeck, s., azarbarzin, a."
+22,"a., kum- frared precipitation with stations – a new environmental merow, c."
+22,"d., kojima, m., oki, r., nakamura, k., and iguchi, record for monitoring extremes, scientific data, 2, 150066."
+22,"t.: the global precipitation measurement mission, b."
+22,"mete- https://doi.org/10.1038/sdata.2015.66, 2015. orol."
+22,"soc., 95, 701–722, 2014."
+22,"garreaud, r."
+22,"d., alvarez-garreton, c., barichivich, j., boisier, j."
+22,"hsu, k.-l., gao, x., sorooshian, s., and gupta, h."
+22,"v.: precipita- p., christie, d., galleguillos, m., lequesne, c., mcphee, j., and tion estimation from remotely sensed information using artificial zambrano-bigiarini, m.: the 2010–2015 megadrought in central neural networks, j."
+22,"meteorol., 36, 1176–1190, 1997."
+22,"chile: impacts on regional hydroclimate and vegetation, hydrol."
+22,"huffman, g., bolvin, d., braithwaite, d., hsu, k., joyce, r., kidd, earth syst."
+22,"sci., 21, 6307–6327, https://doi.org/10.5194/hess-21- c., nelkin, e., and xie, p.: algorithm theoretical basis doc- 6307-2017, 2017. ument (atbd) version 4.5."
+22,"nasa global precipitation mea- gebregiorgis, a."
+22,"s., kirstetter, p.-e., hong, y."
+22,"e., gour- surement (gpm) integrated multi-satellite retrievals for gpm ley, j."
+22,"j., huffman, g."
+22,"j., petersen, w."
+22,"a., xue, x., and (imerg) nasa, 2018."
+22,"schwaller, m."
+22,"r.: to what extent is the day 1 gpm imerg huffman, g."
+22,"j., bolvin, d."
+22,"t., nelkin, e."
+22,"j., wolff, d."
+22,"b., adler, satellite precipitation estimate improved as compared to r."
+22,"f., gu, g., hong, y., bowman, k."
+22,"p., and stocker, e."
+22,"f.: trmm tmpa-rt?, j."
+22,geophys.
+22,"res.-atmos., 123, 1694–1707, the trmm multisatellite precipitation analysis (tmpa): quasi- https://doi.org/10.1002/2017jd027606, 2018a. global, multiyear, combined-sensor precipitation estimates at gebregiorgis, a."
+22,"s., kirstetter, p.-e., hong, y."
+22,"e., gourley, j."
+22,"j., fine scales, j."
+22,"hydrometeorol., 8, 38–55, 2007."
+22,"huffman, g."
+22,"j., petersen, w."
+22,"a., xue, x., and schwaller, m."
+22,"r.: joyce, r."
+22,"j., janowiak, j."
+22,"e., arkin, p."
+22,"a., and xie, p.: cmorph: a to what extent is the day 1 gpm imerg satellite precipita- method that produces global precipitation estimates from passive tion estimate improved as compared to trmm tmpa-rt?, j. microwave and infrared data at high spatial and temporal resolu- geophys."
+22,"res.-atmos., 123, 1694–1707, 2018b. tion, j."
+22,"hydrometeorol., 5, 487–503, 2004."
+22,"gebremichael, m. and krajewski, w."
+22,"f.: characterization of the kerr, y."
+22,"h., waldteufel, p., wigneron, j.-p., martinuzzi, j., font, temporal sampling error in space-time-averaged rainfall esti- j., and berger, m.: soil moisture retrieval from space: the soil mates from satellites, j."
+22,geophys.
+22,"res.-atmos., 109, d11110, moisture and ocean salinity (smos) mission, ieee t."
+22,"geosci. https://doi.org/10.1029/2004jd004509, 2004."
+22,"remote, 39, 1729–1735, 2001."
+22,"gibon, f., pellarin, t., román-cascón, c., alhassane, a., khan, s. and maggioni, v.: assessment of level-3 gridded global traoré, s., kerr, y., seen, d."
+22,"l., and baron, c.: mil- precipitation mission (gpm) products over oceans, remote let yield estimates in the sahel using satellite derived soil sensing, 11, 255, 2019. moisture time series, agr."
+22,"forest meteorol., 262, 100–109, kidd, c. and huffman, g.: global precipitation measurement, me- https://doi.org/10.1016/j.agrformet.2018.07.001, 2018. teorol."
+22,"appl., 18, 334–353, 2011."
+22,"gottschalck, j., meng, j., rodell, m., and houser, p.: anal- ysis of multiple precipitation products and preliminary as- hydrol."
+22,earth syst.
+22,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"
+23,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions 2709 kidd, c. and levizzani, v.: status of satellite precipita- soil moisture retrievals: an intercomparison among three differ- tion retrievals, hydrol."
+23,earth syst.
+23,"sci., 15, 1109–1116, ent techniques, remote sens."
+23,"environ., 198, 17–29, 2017b. https://doi.org/10.5194/hess-15-1109-2011, 2011."
+23,"massari, c., camici, s., ciabatta, l., and brocca, l.: exploit- kidd, c., dawkins, e., and huffman, g.: comparison of precip- ing satellite-based surface soil moisture for flood forecasting in itation derived from the ecmwf operational forecast model the mediterranean area: state update versus rainfall correction, and satellite precipitation datasets, j."
+23,"hydrometeorol., 14, 1463– remote sensing, 10, 292, https://doi.org/10.3390/rs10020292, 1482, 2013."
+23,"kidd, c., becker, a., huffman, g."
+23,"j., muller, c."
+23,"l., joe, p., massari, c., maggioni, v., barbetta, s., brocca, l., cia- skofronick-jackson, g., and kirschbaum, d."
+23,"b.: so, how much batta, l., camici, s., moramarco, t., coccia, g., and of the earth’s surface is covered by rain gauges?, b."
+23,"todini, e.: complementing near-real time satellite rainfall meteorol."
+23,"soc., 98, 69–78, https://doi.org/10.1175/bams-d-14- products with satellite soil moisture-derived rainfall through 00283.1, 2017. a bayesian inversion approach, j."
+23,"hydrol., 573, 341–351, kim, s., liu, y."
+23,"y., johnson, f."
+23,"m., parinussa, r."
+23,"m., and sharma, https://doi.org/10.1016/j.jhydrol.2019.03.038, 2019."
+23,"a.: a global comparison of alternate amsr2 soil moisture prod- mccoll, k."
+23,"a., vogelzang, j., konings, a."
+23,"g., entekhabi, d., ucts: why do they differ?, remote sens."
+23,"environ., 161, 43–62, piles, m., and stoffelen, a.: extended triple collocation: es- 2015. timating errors and correlation coefficients with respect to knoben, w."
+23,"m., freer, j."
+23,"e., and woods, r."
+23,"a.: technical note: in- an unknown target, geophys."
+23,"lett., 41, 6229–6236, herent benchmark or not?"
+23,"comparing nash–sutcliffe and kling– https://doi.org/10.1002/2014gl061322, 2014."
+23,"gupta efficiency scores, hydrol."
+23,earth syst.
+23,"sci., 23, 4323–4331, merlin, o., rudiger, c., al bitar, a., richaume, p., walker, j."
+23,"p., and https://doi.org/10.5194/hess-23-4323-2019, 2019."
+23,"kerr, y."
+23,"h.: disaggregation of smos soil moisture in southeast- kubota, t., shige, s., hashizume, h., aonashi, k., takahashi, n., ern australia, ieee t."
+23,geosci.
+23,"remote, 50, 1556–1571, 2012."
+23,"seto, s., hirose, m., takayabu, y."
+23,"n., ushio, t., nakagawa, k., nijssen, b. and lettenmaier, d."
+23,"p.: effect of precipitation iwanami, k., kachi, m., and okamoto, k.: global precipitation sampling error on simulated hydrological fluxes and map using satellite-borne microwave radiometers by the gsmap states: anticipating the global precipitation measure- project: production and validation, ieee t."
+23,geosci.
+23,"remote, 45, ment satellites, j."
+23,geophys.
+23,"res.-atmos., 109, d02103, 2259–2275, 2007. https://doi.org/10.1029/2003jd003497, 2004."
+23,"kucera, p."
+23,"a., ebert, e."
+23,"e., turk, f."
+23,"j., levizzani, v., kirschbaum, o, s., foelsche, u., kirchengast, g., fuchsberger, j., tan, j., d., tapiador, f."
+23,"j., loew, a., and borsche, m.: precipitation from and petersen, w."
+23,"a.: evaluation of gpm imerg early, late, space: advancing earth system science, b."
+23,meteorol.
+23,"soc., and final rainfall estimates using wegenernet gauge data in 94, 365–375, 2013. southeastern austria, hydrol."
+23,earth syst.
+23,"sci., 21, 6559–6572, lin, y. and mitchell, k.: the ncep stage ii/iv hourly precipitation https://doi.org/10.5194/hess-21-6559-2017, 2017. analyses: development and applications. 19th conf, hydrology, oki, t. and kanae, s.: global hydrological cycles and world water san diego, ca, amer."
+23,meteor.
+23,"soc., paper 1, 2, 2005. resources, science, 313, 1068–1072, 2006."
+23,"lopez, p.: direct 4d-var assimilation of ncep stage iv radar and pai, d., sridhar, l., rajeevan, m., sreejith, o., satbhai, n., and gauge precipitation data at ecmwf, mon."
+23,"weather rev., 139, mukhopadhyay, b.: development of a new high spatial resolu- 2098–2116, 2011. tion (0.25×0.25) long period (1901–2010) daily gridded rainfall maggioni, v. and massari, c.: on the performance of satellite pre- data set over india and its comparison with existing data sets over cipitation products in riverine flood modeling: a review, j."
+23,"hy- the region, mausam, 65, 1–18, 2014. drol., 558, 214–224, 2018."
+23,"parinussa, r."
+23,"m., holmes, t."
+23,"r., wanders, n., dorigo, w."
+23,"a., and maggioni, v., meyers, p."
+23,"c., and robinson, m."
+23,"d.: a review of de jeu, r."
+23,"a.: a preliminary study toward consistent soil mois- merged high-resolution satellite precipitation product accuracy ture from amsr2, j."
+23,"hydrometeorol., 16, 932–947, 2015. during the tropical rainfall measuring mission (trmm) era, j."
+23,"pellarin, t., ali, a., chopin, f., jobard, i., and bergès, j.-c.: us- hydrometeorol., 17, 1101–1117, 2016. ing spaceborne surface soil moisture to constrain satellite pre- malbéteau, y., merlin, o., molero, b., rüdiger, c., and bacon, s.: cipitation estimates over west africa, geophys."
+23,"lett., 35, dispatch as a tool to evaluate coarse-scale remotely sensed soil l02813, https://doi.org/10.1029/2007gl032243, 2008. moisture using localized in situ measurements: application to pellarin, t., louvet, s., gruhier, c., quantin, g., and legout, c.: smos and amsr-e data in southeastern australia, int."
+23,"a simple and effective method for correcting soil moisture and earth obs., 45, 221–234, 2016. precipitation estimates using amsr-e measurements, remote massari, c.: gpm+sm2rain (2015–2018): quasi-global sens."
+23,"environ., 136, 28–36, 2013. 25km/daily rainfall product from the integration of gpm and piles, m., camps, a., vall-llossera, m., corbella, i., panciera, r., sm2rain-based rainfall products (version 0.0.1), data set, rudiger, c., kerr, y."
+23,"h., and walker, j.: downscaling smos- zenodo, https://doi.org/10.5281/zenodo.3345323 2019. derived soil moisture using modis visible/infrared data, ieee massari, c., crow, w., and brocca, l.: an assessment of t."
+23,geosci.
+23,"remote, 49, 3156–3166, 2011. the performance of global rainfall estimates without ground- roads, j.: the ncep–ncar, ncep–doe, and trmm tropical based observations, hydrol."
+23,earth syst.
+23,"sci., 21, 4347–4361, atmosphere hydrologic cycles, j."
+23,"hydrometeorol., 4, 826–840, https://doi.org/10.5194/hess-21-4347-2017, 2017a."
+23,"massari, c., su, c.-h., brocca, l., sang, y.-f., ciabatta, l., ryu, román-cascón, c., pellarin, t., gibon, f., brocca, l., cosme, e., d., and wagner, w.: near real time de-noising of satellite-based crow, w., fernández-prieto, d., kerr, y."
+23,"h., and massari, c.: correcting satellite-based precipitation products through smos https://doi.org/10.5194/hess-24-2687-2020 hydrol."
+23,earth syst.
+23,"sci., 24, 2687–2710, 2020"
+24,2710 c.
+24,"massari et al.: a daily 25 km short-latency rainfall product for data-scarce regions soil moisture data assimilation in two land-surface models of dif- tarpanelli, a., massari, c., ciabatta, l., filippucci, p., ferent complexity: api and surfex, remote sens."
+24,"environ., amarnath, g., and brocca, l.: exploiting a constel- 200, 295–310, 2017. lation of satellite soil moisture sensors for accurate rostan, f., ulrich, d., riegger, s., and østergaard, a.: metop- rainfall estimation, adv."
+24,"water resou., 108, 249–255, sg sca wind scatterometer design and performance, in: 2016 https://doi.org/10.1016/j.advwatres.2017.08.010, 2017."
+24,"ieee international geoscience and remote sensing symposium tian, y., peters-lidard, c."
+24,"d., choudhury, b."
+24,"j., and garcia, m.: (igarss), ieee, 7366–7369, 2016."
+24,"multitemporal analysis of trmm-based satellite precipitation schamm, k., ziese, m., becker, a., finger, p., meyer-christoffer, products for land data assimilation applications, j."
+24,"hydrom- a., schneider, u., schröder, m., and stender, p.: global grid- eteorol., 8, 1165–1183, https://doi.org/10.1175/2007jhm859.1, ded precipitation over land: a description of the new gpcc 2007."
+24,"first guess daily product, earth syst."
+24,"data, 6, 49–60, vintrou, e., bégué, a., baron, c., saad, a., lo seen, d., and traoré, https://doi.org/10.5194/essd-6-49-2014, 2014."
+24,"s.: a comparative study on satellite-and model-based crop phe- seo, d.-j., seed, a., and delrieu, g.: radar and multisensor rain- nology in west africa, remote sensing, 6, 1367–1389, 2014. fall estimation for hydrologic applications, rainfall: state of the wagner, w., hahn, s., kidd, r., melzer, t., bartalis, z., hase- science, 191, 2010. nauer, s., figa-saldaña, j., de rosnay, p., jann, a., schneider, serrat-capdevila, a., valdes, j."
+24,"b., and stakhiv, e."
+24,"z.: water man- s., komma, j., kubu, g., brugger, k., aubrecht, c., züger, j., agement applications for satellite precipitation products: synthe- gangkofner, u., kienberger, s., brocca, l., wang, y., blöschl, sis and recommendations, j."
+24,water resour.
+24,"as., 50, 509– g., eitzinger, j., and steinnocher, k.: the ascat soil mois- 525, 2014. ture product: a review of its specifications, validation results, stoffelen, a.: toward the true near-surface wind speed: error mod- and emerging applications, meteorol."
+24,"z., 22, 5–33, 2013. eling and calibration using triple collocation, j."
+24,geophys.
+24,"res.- wanders, n., pan, m., and wood, e."
+24,"f.: correction of real-time oceans, 103, 7755–7766, 1998. satellite precipitation with multi-sensor satellite observations of su, c.-h., ryu, d., crow, w."
+24,"t., and western, a."
+24,"w.: stand-alone land surface variables, remote sens."
+24,"environ., 160, 206–221, error characterisation of microwave satellite soil moisture using 2015. a fourier method, remote sens."
+24,"environ., 154, 115–126, 2014."
+24,"zhan, w., pan, m., wanders, n., and wood, e."
+24,"f.: correc- su, c.-h., narsey, s."
+24,"y., gruber, a., xaver, a., chung, d., ryu, d., tion of real-time satellite precipitation with satellite soil mois- and wagner, w.: evaluation of post-retrieval de-noising of ac- ture observations, hydrol."
+24,earth syst.
+24,"sci., 19, 4275–4291, tive and passive microwave satellite soil moisture, remote sens. https://doi.org/10.5194/hess-19-4275-2015, 2015."
+24,"environ., 163, 127–139, 2015."
+24,"tan, j., petersen, w."
+24,"a., and tokay, a.: a novel approach to iden- tify sources of errors in imerg for gpm ground validation, j."
+24,"hydrometeorol., 17, 2477–2491, 2016."
+24,hydrol.
+24,earth syst.
+24,"sci., 24, 2687–2710, 2020 https://doi.org/10.5194/hess-24-2687-2020"

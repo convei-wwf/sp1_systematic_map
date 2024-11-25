@@ -1,0 +1,966 @@
+page,p
+1,"applied sciences article comparative analysis of machine learning algorithms in automatic identification and extraction of water boundaries aimin li 1, * , meng fan 2 , guangduo qin 2 , youcheng xu 2 and hailong wang 2 1 school of geo-science and technology, zhengzhou university, zhengzhou 450001, china 2 school of water conservancy engineering, zhengzhou university, zhengzhou 450001, china; fanm15755409160@163.com (m.f.); gd13223022138@163.com (g.q.); chengyouxu1998@163.com (y.x.); whl18307065356@163.com (h.w.)"
+1,* correspondence: aiminli@zzu.edu.cn abstract: monitoring open water bodies accurately is important for assessing the role of ecosystem services in the context of human survival and climate change.
+1,"there are many methods available for water body extraction based on remote sensing images, such as the normalized difference water index (ndwi), modified ndwi (mndwi), and machine learning algorithms."
+1,"based on landsat-8 remote sensing images, this study focuses on the effects of six machine learning algorithms and three threshold methods used to extract water bodies, evaluates the transfer performance of models applied to remote sensing images in different periods, and compares the differences among these models."
+1,the results are as follows.
+1,(1) various algorithms require different numbers of samples to reach their optimal consequence.
+1,the logistic regression algorithm requires a minimum of 110 samples.
+1,"as the number of samples increases, the order of the optimal model is support vector   machine, neural network, random forest, decision tree, and xgboost."
+1,(2) the accuracy evaluation performance of each machine learning on the test set cannot represent the local area performance.
+1,"citation: li, a."
+1,"; fan, m."
+1,"; qin, g."
+1,"; xu, (3) when these models are directly applied to remote sensing images in different periods, the auc y."
+1,"; wang, h."
+1,"comparative analysis of machine learning algorithms in indicators of each machine learning algorithm for three regions all show a significant decline, with a automatic identification and decrease range of 0.33–66.52%, and the differences among the different algorithm performances in extraction of water boundaries."
+1,appl. the three areas are obvious.
+1,"generally, the decision tree algorithm has good transfer performance sci."
+1,"2021, 11, 10062. https://doi.org/ among the machine learning algorithms with area under curve (auc) indexes of 0.790, 0.518, and 10.3390/app112110062 0.697 in the three areas, respectively, and the average value is 0.668."
+1,"the otsu threshold algorithm is the optimal among threshold methods, with auc indexes of 0.970, 0.617, and 0.908 in the three academic editors: dimitrios regions respectively and an average auc of 0.832."
+1,paraforos and anselme muzirafuti keywords: water extraction; modified normalized difference water index (mndwi); remote sensing; received: 31 august 2021 machine learning algorithm accepted: 25 october 2021 published: 27 october 2021 publisher’s note: mdpi stays neutral 1.
+1,"introduction with regard to jurisdictional claims in published maps and institutional affil- water is the source of life: the earth’s surface open water body accounts for about iations. 74% of the total earth area, it is an important resource for all life survival, and it is also the most important component of living organisms [1,2]."
+1,"in china, the distribution of water resources is quite uneven, and the pollution situation is serious."
+1,"so, how to identify water bodies efficiently and accurately has become a severe issue [3,4]."
+1,copyright: © 2021 by the authors.
+1,"with the rapid development of aviation and aerospace technology, remote sensing licensee mdpi, basel, switzerland. technology has provided advanced support for many fields, including resource survey, this article is an open access article environmental monitoring, mapping, and geography [5,6]. distributed under the terms and the development of remote sensing technology makes it possible to extract water conditions of the creative commons information quickly and accurately, which is substantially different from conventional field attribution (cc by) license (https:// survey methods employed in the past [7–10]. creativecommons.org/licenses/by/ monitoring open water bodies accurately is an important and basic application in 4.0/). remote sensing."
+1,various water body mapping approaches have been developed to extract appl.
+1,"2021, 11, 10062. https://doi.org/10.3390/app112110062 https://www.mdpi.com/journal/applsci"
+2,"sci. 2021, 11, 10062 2 of 20 water bodies from multispectral images [11–13]."
+2,"using remote sensing images to monitor a water body is mainly based on spectral bands and each image’s spatial feature, so the identification methods can be categorized into three types from different perspectives."
+2,"(1) water body index method: this method is based on the spectral curves of wa- ter bodies, and thresholds are utilized to effectively distinguish water bodies from the background [14]."
+2,different water indexes have already been proposed in the past few decades.
+2,"specifically, in 1996, mcfeeters [15] introduced the normalized difference water index (ndwi) model to extract water bodies."
+2,"however, this model is unable to distinguish between dark shadow and water bodies."
+2,"to overcome the shortcomings of ndwi, in 2006, xu [16] proposed the modification of normalized difference water index (mndwi) to enhance open water features in remotely sensed imagery, and this model has better results for urban water bodies extraction."
+2,"the water body index method has the characteristics of high precision and low computational cost, which has been widely used in practical applications."
+2,"in the last few decades, the mndwi of xu is one of the most widely used water indices for various fields, including surface water mapping, land use/cover change analyses, and ecological research [17–20]."
+2,"(2) machine learning methods: these methods feature pixel-based pattern recogni- tion analysis, mainly including supervised and unsupervised classification techniques."
+2,"the supervised methods mainly include neural network [21–25], support vector machine (svm) [26–28], logistic regression [29,30], and random forest [31–33], and the unsupervised classification methods mainly include k-means clustering [34] and isodata cluster- ing [35,36] methods."
+2,the machine learning algorithm has been widely used in remote sensing water extraction due to its high accuracy.
+2,"(3) object-based image analysis methods (obia): due to the limitations of pixel-based classification methods, such as the salt and pepper phenomenon in classification results, object-based classification techniques have been increasingly applied in remote sensing classification in recent years [37,38]."
+2,many successful cases of water body extraction using obia methods have been reported [39–43].
+2,"given that urban functional zones (ufzs) are composed of diverse geographic objects, du et al. [44] presented a novel object-based ufz mapping method using very-high-resolution (vhr) remote sensing images."
+2,"based on object-oriented analysis technology and multi-source data, guo et al. [45] proposed a multi-level classification scheme based on goals and rules to study the changes of glacier environments."
+2,"in addition, some studies also have used synthetic aperture radar (sar) data to monitor the surface dynamics, because these data are insensitive to clouds [14,46,47]; the area of surface water can be extracted from sar data based on textural analysis [48], change detection [49], automatic segmentation [50], and classification [51]."
+2,"at present, machine learning algorithms to extract water bodies mainly include neural networks, support vector machines, and random forest algorithms."
+2,the studies carried out in the past have identified the best performing classification algorithm by comparing different classification algorithms.
+2,"however, none of them provides a comprehensive comparative analysis of some popular classification algorithms [37,52]."
+2,there are few studies on the evaluation of the transfer performance of each machine learning algorithm applied to remote sensing images in different periods.
+2,"based on landsat- 8 images, this study uses machine learning algorithms such as decision tree, logistic regression, random forest, and neural network to extract water bodies."
+2,"first of all, the effect of each machine learning algorithm on the test set is discussed."
+2,"after that, each machine learning algorithm is applied to three different local areas, and its effect on each local area is evaluated."
+2,"at last, each machine learning algorithm is applied to remote sensing images in different periods to evaluate the model transfer performance of each machine learning algorithm, and three threshold methods are compared."
+2,the results could shed light on the future work of water body extraction based on remote sensing.
+3,"sci. 2021, 11, 10062 3 of 20 2."
+3,data and pre-processing 2.1.
+3,data landsat-8 data from the website (http://glovis.usgs.gov/ (accessed on 20 october 2021)) of the united states geological survey are used.
+3,"landsat-8, launched as a collabo- ration between the united states geologic survey (usgs) and national aeronautics and space administration (nasa) on 11 february 2013, carries onboard the oli push broom multispectral radiometer [53]."
+3,"as shown in table 1, the landsat-8 oli/tirs imagery has 11 spectral bands in total, including eight spectral bands (i.e., three visible bands, two bands for describing aerosol, water vapor, and cirrus clouds, two short-wave infrared bands (swir) and near infrared (nir)) with spatial resolution of 30 m, one panchromatic spectral band with a spatial resolution of 15 m, and two thermal spectral bands with a spatial resolution of 100 m [54]."
+3,landsat-8 remote sensing images (path 123; raw 039) of the same area acquired on 4 october 2019 and 20 october 2019 are used in our experiment.
+3,"specifically, the data on 20 october 2019 are used to establish the model and compare the effect of each algorithm, and the data on 4 october 2019 are used to examine the perfor- mance of model transfer."
+3,three different areas with different surface features are selected from remote sensing images.
+3,"as shown in figure 1, area1 has a large area of water with relatively simple surface object types, while area2 has a small water area and complex surface environment, and its water extraction is affected by numerous vegetation and mountain shadow."
+3,"area3 is located in the urban built-up area and has multiple contiguous water bodies; thus, the water extraction is affected by nearby buildings and roads."
+3,"to avoid the effects of too many clouds and aerosol, images with fewer clouds are selected here."
+3,"all original data are processed by converting the original digital number (dn) value into spectral radiance, through equation (1) [55]."
+3,the formula is given as follows: lλ = ml · qcal + a l (1) where: lλ = spectral radiance w/m2 ·sr·um ;  ml = radiance multiplicative scaling factor for the spectral band(radiance_mult_band_n from the metadata); a l = radiance additive scaling factor for the spectral band(radiance_add_band_n from the metadata); qcal = raw digital numbers (dn).
+3,table 1.
+3,spectral band spatial resolution and wavelength of the landsat-8 image.
+3,landsat-8 oli and tirs bands wavelength (um) spatial resolution (m) coastal/aerosol 0.435–0.451 30 blue 0.452–0.512 30 green 0.533–0.590 30 red 0.636–0.673 30 nir 0.851–0.879 30 swir-1 1.566–1.651 30 tir-1 10.60–11.19 100 tir-2 11.50–12.51 100 swir-2 2.107–2.294 30 pan 0.503–0.676 15 cirrus 1.363–1.384 30
+4,"sci. 2021, 11, 10062 4 of 20 appl."
+4,"sci. 2021, 11, x for peer review 4 of 20 figure 1.1."
+4,"landsat-8 figure landsat-8 remote sensing images remote sensing are displayed images are displayed in false color color in in false bands7,7,5,5,and inbands three and3.3."
+4,three local areas are extracted from this image.
+4,area1 has a large area of water distribution with local areas are extracted from this image.
+4,area1 has a large area of water distribution with a simple a simple environment and ground environment ground onlyaffected and isisonly byvegetation; affectedby vegetation;area2 area2 is affected mountain by by is affected mountain shadow shadowand vegetation; area3 is located in the urban built-up area with scattered water distribution and is af- and vegetation; area3 is located in the urban built-up area with scattered water distribution and is fected by roads and buildings. affected by roads and buildings.
+4,table 2.2.
+4,spectral band spatial resolution and wavelength of the landsat-8 image.
+4,"pre-processing by adopting landsat-8 oli and tirsband spectral bandscombinations wavelength7/5/4, 7/4/3, 6/5/4, (um) and spatial 4/3/2 combined resolution (m) with visual interpretation, a sample dataset coastal/aerosol is selected from landsat images 0.435–0.451 30 for classifica- tion; the sampleblueset contains 340 water samples and 454 non-water samples."
+4,"0.452–0.512 30 to avoid the influences of heterogeneous green categories in the subsequent 0.533–0.590 classification, the 30 ratio of other ground object samples to the water body samples remains at 1.3:1."
+4,"red 0.636–0.673 30 the characteristics of the data, such as a large correlation between multiple spectral nir 0.851–0.879 30 bands in the original images and similar information and structures between different spec- swir-1 1.566–1.651 tral bands, generally bring significant amounts of redundancy."
+4,"for this reason, 30 principal tir-1 10.60–11.19 component analysis (pca) for dimensionality reduction is applied to remove repetitive and 100 tir-2 between various spectral redundant information bands [56]."
+4,the first and 100 11.50–12.51 second principal swir-2 2.107–2.294 components in the pca with a cumulative variance contribution of 99%30are selected as pan classification characteristics.
+4,"0.503–0.676 15 based on thecirrus pca, four generally used texture features, i.e., contrast,30 1.363–1.384 autocorrelation, dissimilarity, and entropy are extracted."
+4,"the distance is set to be 1 pixel (distance of 30 m), 22.2. pixels (distance of 60 m), and 3 pixel (distance of 90 m), and 3 × 3, 5 × 5, 7 × 7, and 9 × 9 pre-processing are selected as windows ◦ , 45◦ , 90◦ , and 135◦ ."
+4,"optimal combined by adopting bandorientations spectralwith combinations of 07/5/4, 7/4/3, 6/5/4, and 4/3/2 combined with features are selected asa the visual interpretation, characteristic sample dataset isspectral selectedbands for waterimages from landsat body extraction."
+4,when for classification; the sample set contains 340 water samples and 454 non-water samples.
+4,"to avoid theget the two parameters—i.e., window size and distance—increase, the edges of the images in- fuzzy, andofthe fluences window size categories heterogeneous shows more in effects than distance. the subsequent considering classification, the the ratiofactors of of other ground objects correlation and image resolution, we set ground object samples to the water body samples remains at 1.3:1. the distance to 1 pixel and select a 3 × 3 window with four orientations of 0◦ , 45◦ , 90◦ , and 135◦ ."
+5,"sci. 2021, 11, 10062 5 of 20 after the size and window parameters are determined, j-m distance [57,58] and transformed divergence [59] (t-d) in many extracted texture features are used for studying the separability of ground objects; thus, the characteristics ultimately used for classification are determined as well."
+5,"as shown in table 2, the separability of the first component (pca1) and the second component (pca2) is compared in detail, and the separability of j-m dissimilarity in pca2 is the optimal."
+5,"therefore, in later classifications, a total of six characteristics are selected."
+5,table 2.
+5,separability of the samples.
+5,pca1 pca2 j-m t-d j-m t-d contrast 1.723 1.9991 1.825 1.0000 autocorrelation 1.404 1.6832 1.787 1.989 dissimilarity 1.562 1.9232 1.84 1.0000 entropy 1.634 1.9746 1.816 1.999 3.
+5,"research methods first of all, the performance of machine learning algorithms with a different sample number is discussed."
+5,"during this process, the optimal parameters of the models are deter- mined and the indices, such as precision and auc, are used to evaluate the performances of algorithms in the test set."
+5,"then, according to spectral characteristics, the water indices are constructed, and on this basis, thresholds are selected; thus, water bodies and other ground objects are classified and identified."
+5,"moreover, machine learning methods, such as svm, decision tree, and random forest, are used to extract water bodies."
+5,"at last, the accuracy of the test results is verified for the same area at different times."
+5,"mndwi in 2006, xu [16] presented a modification of normalized difference water index (mndwi) (equation (2)) by replacing the nir spectral band used in ndwi with the swir spectral band to reduce the influence of building information on water bodies."
+5,"by using the mndwi water index method, the mndwi image is binarized by selecting an appropriate threshold to achieve water bodies extraction."
+5,"the determination of thresholds affected the accuracy of water body extraction, and different thresholds might be made by subjective judgments of different people."
+5,"to reduce such influences, three methods for determining thresholds are used for comparison and discussion."
+5,"the three threshold methods used in this article are as follows: (1) the user-defined threshold method, which is determined according to visual effect through multiple experiments; (2) the otsu threshold method [60,61]; and (3) the adaptive threshold method, which is used to scan the image through a 3*3 window."
+5,"the mndwi is expressed as follows: green − swir mndwi = (2) green + swir where green is the radiance of the green band, which corresponds to the 3rd landsat-8 image band; swir represents the short-wave infrared band radiance, namely band 6 of the landsat-8 image."
+5,"machine learning algorithms in this research, six machine learning algorithms are selected, all of them used the same group of sample set, and the whole samples are divided into a training set and a test set by the ratio of 7:3."
+5,"furthermore, in the process of model training, the relevant parameters of the models are further trained by using 10-fold cross-validation with hierarchical sampling"
+6,"sci. 2021, 11, 10062 6 of 20 of the training set."
+6,"finally, some indices, such as accuracy, recall rate [62], and auc [63], are utilized to assess the results."
+6,3.2.1.
+6,"svm svm has a simple structure but a strong generalization ability to solve problems with high-dimensionality, small sample numbers [64,65]."
+6,"in this study, the gaussian radial basis function is selected as the kernel function."
+6,"by using the grid search method in combination with 10-fold cross-validation, the optimal parameters are determined as c = 3 and γ = 0.003."
+6,3.2.2.
+6,decision tree the decision tree determines the categories of the samples in the dataset by assigning the sample data to a certain leaf node.
+6,"there are many methods for constructing the decision tree, but all of them are based on the different purity indices selected and sample attributes for classification [66]."
+6,"the algorithms id3, c4.5, c5.0, etc. are generally used."
+6,"a classification and regression tree (cart) algorithm is used in this study, and pre-pruning is utilized to avoid the overfitting problem."
+6,"the parameters mainly include the limited depth of the decision tree, the minimum sample number of leaf nodes, and the least sample number of separable leaf nodes."
+6,"by using the grid search method and 10-fold cross-validation, the final parameters are determined as follows: the entropy is selected as the purity index and the maximum depth is 7."
+6,"the lowest sample number of separable leaf nodes is 8, and the minimum sample number of leaf nodes is 1."
+6,3.2.3.
+6,"multi-hidden-layer neural network the neural network uses specific learning algorithms to learn from data through many learning algorithms; however, the network is generally trained by iteratively modifying connection weights and deviations until the error between the output generated by the network and the expected output is smaller than some specified threshold [21]."
+6,the input characteristics are passed to the next layer of nerve cells through a non-linear activation function and then continue to be passed down after activation of the nerve cells in this layer.
+6,that process is repeated and cycled to the output layer.
+6,"the repeated superposition of these non-linear functions ensures that the neural network has sufficient non-linear fitting ability, while different activation functions can affect the output of different neural networks."
+6,"by selecting a sigmoid activation function, it is determined that the neural network structure should have four layers based on multiple tests through cross-validation."
+6,"except for input and output layers, the numbers of nerve cells in the two hidden layers are eight and six, respectively."
+6,3.2.4.
+6,"random forest the random forest is an ensemble method specially designed for a decision tree classifier, and the selection of random attributes is further added to its training process."
+6,"using similar parameters to those used for the decision tree, the random forest model is easy to implement and shows good effects [32,33]."
+6,"in this research, parameters are determined by using cross-validation and grid search methods."
+6,"the main parameters of random forest are as follows, there are 10 weak estimators in the decision tree, and the maximum depth is 4."
+6,"moreover, a gini function is selected as the purity index."
+6,3.2.5.
+6,"xgboost the core of xgboost is an ensemble algorithm based on the gradient boosting decision tree (gbdt), and it can be used for classification or regression problems."
+6,"its modelling process is as follows: a decision tree is built, and one more tree is added upon each iteration to form a strong evaluator integrating many numerical models [67,68]."
+6,"the accuracy is superior to that of a weak estimator, and its calculation speed and performance are good [69]."
+6,"the main parameters are set as follows: the maximum depth of each tree is 3,"
+7,"sci. 2021, 11, 10062 7 of 20 and a weak classification estimator with 300 decision trees is established."
+7,the learning rate is set to be 0.01.
+7,3.2.6.
+7,logistic regression algorithm the logistic regression is a type of classification model.
+7,it establishes a regression formula for samples and a sigmoid function is used for classification.
+7,"for more information, please refer to references [70,71]."
+7,experiment and analysis 4.1.
+7,"effects of the sample number on learning algorithms for each classification algorithm in machine learning, the basic requirement is that the training and test set are reliable and there are enough samples for training."
+7,"in this way, a good classifier can be trained."
+7,"it is assumed that the samples selected by visual interpretation are reliable: namely, the various classes of the sample points are assigned to correct labels."
+7,"based on this, a small sample is randomly selected from the training set and divided into a training set and a validation set in the proportion of 7:3."
+7,"by using the accuracy of the validation set of the small sample as an evaluation index, the effects of the sample number on the classification effects of each algorithm are discussed, so as to judge whether the sample number selected is sufficient to achieve the purpose of the training model."
+7,"as demonstrated in figure 2, the accuracies of the classification algorithms in the validation set of the experiment all tend to increase with the sample number, and they show a smaller error relative to the accuracy in the training set."
+7,"moreover, the accuracies gradually tend to be equal."
+7,"this indicates that there is almost no underfitting of the samples, and the parameters of each algorithm are well adjusted."
+7,"the accuracy of the logistic regression algorithm is improved rapidly, approximating to the accuracy in the training set when the sample number is small, suggesting that there is almost no overfitting."
+7,"as the sample number increases, the accuracy stabilizes; however, other classification algorithms need larger samples to achieve this stability, and the accuracy fluctuates (albeit within a small range), therefore, the number of training samples selected in the experiment can meet the needs of model training."
+7,"analysis of performance indices of machine learning algorithms after testing the performance of the models when using each algorithm on sets of different sample numbers, the effect of each model in the same test set is further evaluated, so as to reflect the predictive abilities of the models to some extent and judge the general- ization abilities of the algorithms."
+7,"as shown in table 3, the value of the accuracy index and recall index of each model in classifying water bodies and other ground objects are high, the accuracy index is in the range of 0.945–1, and the recall index is in the range of 0.911–1."
+7,"however, the auc index can better represent the comprehensive performances of the models and the higher the value, the better the performance [63]."
+7,"there is little difference in the effect of each machine learning algorithm on the test set, and the auc index ranges from 0.956 to 0.987; by analyzing auc data, the logistic regression and xgboost algorithm are found to perform best on the test set, followed by the svm, the neural network, then the random forest, while the decision tree has (in general) the worst performance."
+7,whether the evaluation of these algorithms in the test set can accurately represent the generalization abilities of the algorithms for classifying water bodies in the remote sensing images needs to be discussed and studied using remote sensing images acquired under different conditions.
+8,"2021, appl."
+8,"appl. 11, x10062 2021, 11, for peer review 88 of of 20 20 figure2."
+8,figure ofthe effectsof 2.
+8,effects samplenumber thesample on performance numberon performance of of each each algorithm. algorithm.
+8,table 4.2.
+8,"analysis analysis of performance of performance indices indices of each algorithm. of machine learning algorithms after testing the performance of the models accuracy each algorithm on when using recall auc sets of different sample numbers, the effect of each model in the same test set is further evaluated, water 1.000 0.949 svm the predictive abilities of the models to some extent and judge the0.983 so as to reflect general- other 0.968 1.000 ization abilities of the algorithms."
+8,"water as shown in table 0.975 3, the value 0.975of the accuracy index random forest and recall index of each model 0.979 water bodies and 0.983 otherin classifying 0.983 other ground objects are high, the accuracy index is in 1.000 and the recall the range of 0.945–1, water index is in the range of 0.911 decision tree 0.956 0.911–1."
+8,"however, the aucother 0.945 index can better represent 1.000 the comprehensive performances of the models neural and the higherwater network 1.000the performance the value, the better 0.962 little dif- [63]."
+8,"there is0.981 other 0.976 1.000 ference in the effect of each machine water learning algorithm 1.000 on the test set, 0.975 and the auc index logistic regression ranges from 0.956 to 0.987; by analyzing auc0.984 data, the logistic1.000 0.987 regression and xgboost other algorithm are found to perform waterbest on the test the svm, the neural net- set, followed by0.975 1.000 xgboost 0.987 work, then the random forest, 0.984 tree has (in general) while the decision other 1.000 the worst perfor- mance."
+8,whether the evaluation of these algorithms in the test set can accurately represent 4.3.generalization the abilities comparative analysis and machinefor of the algorithms of ndwi classifying learning water bodies in the remote algorithms sensing images needs to be discussed and studied using the model established by 2019/10/20 training data is used remote sensing images for water acquired extraction in under different conditions. three areas of 2019/10/20.
+8,"statistical results of auc indicators of each algorithm are shown in figure 3 (for more details, see tables a1–a4 in the appendix a)."
+8,"in general, the xgboost algorithm has the best accuracy, with an average auc of 0.966, and the auc indicators in the three regions are 0.985, 0.972, and 0.941 respectively, which is followed by the random forest algorithm with an average auc of 0.964, and the auc indicators in the three regions are 0.985, 0.973, and 0.935; the svm algorithm has the worst accuracy, the average auc is 0.898 and the auc indicators in the three regions are 0.982, 0.789, and"
+9,"sci. 2021, 11, 10062 9 of 20 0.923, respectively."
+9,"when each machine learning algorithm is applied to three different local regions, the average range of auc index is 0.898–0.966 (for more details, see table a1 in appendix a), and the descending order of each machine learning algorithm is xgboost, random forest, decision tree, logistic regression, neural network, and svm according to the value of the auc index."
+9,"however, this is inconsistent with the conclusion of section 4.2."
+9,"in section 4.2, there is little difference in the accuracy of each machine learning algorithm on the test set, and the auc index ranges from 0.956 to 0.987."
+9,"the machine learning algorithms are xgboost, lr, svm, nn, rf, and dt in descending order according to the value of the auc index."
+9,it further explains that the evaluation on the test set cannot represent the effect of each algorithm applied in a local area.
+9,"among the threshold classification methods, the otsu threshold algorithm is the best, with an average auc of 0.957, and the auc indicators in the three regions are 0.985, 0.922, and 0.964, respectively, followed by the appl."
+9,"sci. 2021, 11, x for peer review custom threshold algorithm, and the worst performance among all algorithms is adaptive 10 of 20 threshold algorithm: the average auc is only 0.764."
+9,figure 3.
+9,figure 3.
+9,statistics of the statistics of auc index the auc of each index of algorithm applied applied in each algorithm the three in the regions. threeregions.
+9,the imagetest 4.4.
+9,"reliability water extraction results of each algorithm were placed in the supplementary materials, as shown in figure to discuss the effects of thes1: classificationalgorithms aforementioned each results of in algorithm water in area1from body extraction on october 20; figure s2: classification results of each algorithm in area2 remote sensing images in different periods, a remote sensing image captured on 4 octoberon october 20; figure s3: classification results of each algorithm in area3 on october 20."
+9,as can 2019 in the same region is selected.
+9,"based on this, the water bodies are classified using the be seen samethe from results graph, algorithms compared with and parameters. otherisalgorithms, the aim the saltthe to verify whether and pepper phenomenon experimental results of for the adaptive threshold and custom threshold is very serious, there is a large each algorithm under different image conditions are reliable and decide whether the mod- number of non-water body els are universal. “noise”, other algorithms basically have the same visual interpretation andmodel effect,the is no obvious there established bydifference, the data ofbut the edgeispart 2019/10/20 slightly is in used different the data due to the of 2019/10/04 for influence of adjacent features. water body extraction."
+9,the statistical results of the auc indicators of each algorithm are shown 4.4.
+9,"test4 (for more details, see tables a5–a8 in appendix a)."
+9,"as shown in table in figure reliability 4, the auc indicators of each machine learning algorithm for three regions all show a to discuss the effects of the aforementioned algorithms in water body extraction from significant decline, with a decreased range of 0.33–66.52% as shown in figure 4, the dif- remote sensing images in different periods, a remote sensing image captured on 4 october ferences among the different algorithm performances in the three areas are obvious."
+9,in the 2019 in the same region is selected.
+9,"based on this, the water bodies are classified using the surface complex area2, the auc index of the machine learning algorithms is near 0.5, which means it is difficult to extract water bodies accurately."
+9,"in area1 with a simple sur- face environment, although the accuracy of all machine learning algorithms decreases, the errors are still within an acceptable range."
+9,"in general, the decision tree algorithm has better transfer performance, with an average auc of 0.668, and the auc indexes of the three"
+10,"sci. 2021, 11, 10062 10 of 20 same algorithms and parameters."
+10,the aim is to verify whether the experimental results of each algorithm under different image conditions are reliable and decide whether the models are universal.
+10,the model established by the data of 2019/10/20 is used in the data of 2019/10/04 for water body extraction.
+10,"the statistical results of the auc indicators of each algorithm are shown in figure 4 (for more details, see tables a5–a8 in appendix a)."
+10,"as shown in table 4, the auc indicators of each machine learning algorithm for three regions all show a significant decline, with a decreased range of 0.33–66.52% as shown in figure 4, the differences among the different algorithm performances in the three areas are obvious."
+10,"in the surface complex area2, the auc index of the machine learning algorithms is near 0.5, which means it is difficult to extract water bodies accurately."
+10,"in area1 with a simple surface environment, although the accuracy of all machine learning algorithms decreases, the errors are still within an acceptable range."
+10,"in general, the decision tree algorithm has better transfer performance, with an average auc of 0.668, and the auc indexes of the three regions are 0.790, 0.518, and 0.697 respectively."
+10,"the xgboost algorithm has an average auc of 0.631, and its auc index in the three regions is 0.718, 0.512, and 0.665, respectively."
+10,"the logistic regression algorithm has the worst accuracy, with an average auc of 0.392, the auc index in the three regions is 0.329, 0.489, and 0.357, respectively, which is inconsistent with the conclusion in sections 4.2 and 4.3."
+10,"when the model is directly transferred to remote sensing images of different periods for water extraction, the generalization ability of each machine learning algorithm is different."
+10,"among the threshold classification methods, the otsu threshold algorithm is optimal, and its average auc is 0.832."
+10,"the auc indexes in the three regions are 0.970, 0.617, and 0.908, respectively, which exceed the accuracy of the other machine learning algorithms."
+10,"for the other two threshold algorithm, custom threshold, whose average auc is 0.700, and the auc indexes in the three regions are 0.842, 0.549, and 0.708 respectively."
+10,"the adaptive threshold algorithm has an average auc of 0.611, and its auc indicators in the three regions are 0.703, 0.506, and 0.623 respectively."
+10,"all in all, for different periods of remote sensing images, the threshold method is better than most of the machine learning algorithms, because the sensor imaging is affected by clouds, sun angles, and sensors."
+10,"due to the influence of the angle and other factors, the characteristics of remote sensing images will be very different during the adjacent imaging time."
+10,"even if there is no major change in the surface features, the pixel value of the remote sensing image could also change significantly."
+10,"therefore, the machine learning models trained on the data of 2019/10/20 may not be suitable for different periods."
+10,table 4.
+10,auc index changes statistics of each machine learning algorithm.
+10,the method name area1 area2 area3 average custom threshold −8.41% −12.27% −5.37% −8.68% threshold method otsu threshold −1.49% −33.10% −5.78% −13.46% adaptive threshold −0.92% −0.16% −0.33% −0.47% logistic regression −66.52% −47.37% −61.74% −58.54% svm −66.25% −32.20% −60.49% −52.98% random forest −30.12% −49.73% −62.68% −47.51% machine learning method xgboost −27.16% −47.32% −29.35% −34.61% neural network −30.13% −42.96% −62.13% −45.07% decision tree −19.60% −46.28% −25.40% −30.43%
+11,"the water extraction results of each algorithm were placed in the supplementary ma- terials, as shown in figure s4: classification results of each algorithm in area1 on october 4; figure s5: classification results of each algorithm in area2 on october 4; figure s6: classification results of each algorithm in area3 on october 4."
+11,it can be seen from the appl.
+11,"sci. 2021, 11, 10062 classification result diagrams that most of the machine learning pepper and salt phenom- 11 of 20 enon is very serious, and there is a large number of non-water “noise”."
+11,the visual effects of various algorithms are also significantly different.
+11,figure4.4.
+11,the figure theauc indexesof aucindexes thethree ofthe threeregions indifferent differentperiods regionsin foreach periodsfor algorithm. eachalgorithm.
+11,"however, the water extraction effect of the threshold method is related to the remote sensing image data, and the water extraction effects of remote sensing images from different periods do not affect each other."
+11,"the water extraction results of each algorithm were placed in the supplementary materials, as shown in figure s4: classification results of each algorithm in area1 on october 4; figure s5: classification results of each algorithm in area2 on october 4; figure s6: classification results of each algorithm in area3 on october 4."
+11,"it can be seen from the classification result diagrams that most of the machine learning pepper and salt phenomenon is very serious, and there is a large number of non-water “noise”."
+11,the visual effects of various algorithms are also significantly different.
+11,"discussion this study mainly selects neural network, support vector machine (svm), logistic regression, random forest, decision tree, and xgboost from machine learning algorithms, and it selects the mndwi water index combined with three threshold methods to extract the water bodies."
+11,"michael schmitt [72] pointed out that for a simple surface environ- ment, only the threshold method can achieve satisfactory results, and when the surface environment is slightly more complicated, a supervised classification method, such as svm, needs to be introduced."
+11,"however, for the supervised classification method, how to choose the appropriate number of samples is a problem worthy of research."
+11,"for example, deepakrishna somasundaram et al. [73] selected 3765 water samples and 2685 non-water samples from the four-view landsat-8 oli image; wei jiang et al. [74] selected more than 10,000 water samples and non-water samples in each study area."
+11,the choice of these large numbers of training samples brings additional costs.
+11,"in order to study the influence of sample size on various algorithms, an experiment was designed in this paper, as outlined in section 4.1."
+11,"as shown in figure 2, there are great differences in the number of samples required for various algorithms to reach their optimal."
+11,"the logistic regression algorithm requires the lowest number of samples, which is close to 110."
+11,the svm algorithm has the best performance when the number of samples reaches 150.
+11,as the number of samples
+12,"sci. 2021, 11, 10062 12 of 20 increases, the order of the optimal model is neural network, random forest, decision tree, and xgboost."
+12,the primary task of water body extraction is to select a certain number of samples for the training model.
+12,the conclusion of the sample number requirements of each machine learning algorithm in this paper can be used as a reference for other similar applications to reduce the cost of sample selection.
+12,most studies only use test set samples to evaluate the optimal model and use the selected model for the final classification of images.
+12,"however, liu yang et al. [75] pointed out that in different surface environments, various types of shadows or background noises need to be considered."
+12,"for example, compared with arid areas, the influence of vege- tation on water extraction should be considered in humid areas."
+12,"in mountainous areas, the extracted water is often mixed with mountain shadow."
+12,"these types of background information have different influences on different water extraction algorithms [61,76]."
+12,"for the above reasons, it is worth discussing whether the evaluation effect on the test set can explain the actual generalization performance of the model, that is, whether the evaluation effect on the test set is consistent with the evaluation effect on the local area."
+12,"for this reason, three local areas with different ground conditions are selected."
+12,"as shown in figure 3, in general, the simpler the ground scene, the better the classification accuracy."
+12,"if the ground scene is complex, the accuracy of various algorithms has a great difference."
+12,"generally, three algorithms (decision tree, xgboost, and otsu) can perform well in various scenarios."
+12,"in the case of mountain shadow in the ground background, it is suggested to give priority to the xgboost algorithm."
+12,"in the case of roads and buildings in the ground background, besides the xgboost or decision tree algorithms, a logistic regression algorithm with a relatively simple model can also be tried."
+12,"however, when multi-stage extraction research on water bodies is needed, the original model will naturally be directly used to extract water bodies from remote sensing images in other different periods."
+12,"as shown in table 4, when various machine learning algorithms are directly used to extract water bodies from remote sensing images in different periods, the auc indicators of each machine learning algorithm for the three regions all show a significant decline, with a decrease range of 0.33–66.52%."
+12,"generally, simple ground scenes have higher accuracy, while complex ground scenes have some effects for different machine learning algorithms."
+12,"as shown in table 4, among all the machine learning algorithms, the accuracy of decision tree decreased the least in the three regions on average, and the auc index decreased 30.43% on average, followed by xgboost."
+12,"in the threshold method, although the change of adaptive threshold is small, its accuracy is always very low, while the otsu algorithm not only has a good accuracy, but also the average decline of the auc index is small, which is 13.46%."
+12,"the decision tree algorithm can still achieve better classification results, and the otsu algorithm also performs well."
+12,experiments show that it is not recommended to directly use the machine learning model to extract water from remote sensing images in different periods.
+12,"the otsu classification result can be used as a reference, so that training samples can be selected in other periods quickly and conveniently to extract water bodies using machine learning algorithms."
+12,"in summary, for water extraction from remote sensing images, although various algorithms can achieve satisfactory results under certain conditions, none of them can be applied to all remote sensing image and scenes."
+12,"the factors affecting the classification accuracy of remote sensing images mainly include the complexity of the field landscape, the availability of data, the effectiveness of the processing method, and the experience judgment of the processing personnel [5,76]."
+12,"therefore, on the basis of this study, when extracting water from remote sensing images, the water index (mndwi preferred) can be used first and combined with the otsu algorithm to classify water bodies."
+12,"this result is in agreement with the results obtained by ya’nan zhou et al. [38], who used the ndwi image to select water samples from the input image."
+12,"however, if the accuracy does not meet the requirements of the application, on the basis of its classification, researchers can further select the number of samples that meet the requirements of various machine learning algorithms (figure 2) and select the corresponding machine learning training"
+13,"sci. 2021, 11, 10062 13 of 20 model."
+13,"among the various machine learning algorithms, xgboost, decision tree, and logistic regression algorithms are preferentially recommended."
+13,"conclusions based on landsat-8 images, decision tree, logistic regression, random forest, neural network, support vector machine, and xgboost algorithms are used to extract water bodies."
+13,"firstly, the effect of each machine learning algorithm on the test set is discussed."
+13,"secondly, each machine learning algorithm is applied to three different local areas, and the consistency between the accuracy of each machine learning algorithm on the test set and the accuracy of the local area is evaluated."
+13,"finally, each machine learning algorithm is applied to remote sensing images in different periods, the model transfer performance of each machine learning algorithm is examined, and three threshold methods are compared."
+13,the following conclusions are drawn: (1) there are great differences in the numbers of samples required for various al- gorithms to reach their optimal.
+13,"the logistic regression algorithm requires a minimum number of samples, about 110."
+13,the svm algorithm has the best performance when the number of samples reaches 150.
+13,"as the number of samples increases, the optimal order of the model is neural network, random forest, decision tree, and xgboost."
+13,"(2) the accuracy evaluation effect of each machine learning on the test set cannot represent the effect on the local area, because the surface complexity is not same in the three local areas."
+13,"in area1 with a single surface type, its auc range is 0.982–0.985; in area2 with complex surface environment (numerous vegetation and mountain shadow), its auc range is 0.789–0.973; in area3 with wide water distribution, its auc range is 0.923–0.941 in an urban built-up area."
+13,"(3) when the models are directly applied to remote sensing images in different peri- ods, the model accuracy is greatly reduced, the auc indicators of each machine learning algorithm for three regions all show a significant decline, with a decreasing range of 0.33–66.52%."
+13,"in general, among the machine learning algorithms, the decision tree algo- rithm has good transfer performance, with an average auc of 0.668, and the auc indexes in the three regions are 0.790, 0.518, and 0.697 respectively."
+13,"among the threshold methods, the otsu threshold algorithm is the optimal, with an average auc of 0.832 and auc indexes in the three regions are 0.970, 0.617, and 0.908, respectively."
+13,"(4) owing to the complex distribution of ground objects and many influential factors in the remote sensing image classification, it is difficult to collect small and dispersed water bodies in this research."
+13,this limits the performances of these models in the environment with many hill shadows and complex ground objects.
+13,the accuracy of these models needs to be further improved; more samples should be collected from images over different areas and periods to train the models in the future.
+13,"supplementary materials: the following are available online at https://www.mdpi.com/article/10 .3390/app112110062/s1, detailed descriptions of figure s1: classification results of each algorithm in area1 on october 20; figure s2: classification results of each algorithm in area2 on october 20; figure s3: classification results of each algorithm in area3 on october 20; figure s4: classification results of each algorithm in area1 on october 4; figure s5: classification results of each algorithm in area2 on october 4; figure s6: classification results of each algorithm in area3 on october 4."
+13,"author contributions: supervision, a.l."
+13,"; writing—original draft, m.f."
+13,"; writing—review and editing, m.f., g.q., y.x. and h.w."
+13,all authors have read and agreed to the published version of the manuscript.
+13,funding: the work is supported by the joint funds of national natural science foundation of china (grant no.
+13,u1704125).
+13,institutional review board statement: not applicable.
+13,informed consent statement: not applicable.
+13,data availability statement: not applicable.
+14,"sci. 2021, 11, 10062 14 of 20 conflicts of interest: the authors declare no conflict of interest."
+14,appendix a table a1.
+14,statistics of the auc index of each algorithm applied in the three regions.
+14,the method name area1 area2 area3 average custom threshold 0.919 0.626 0.748 0.764 threshold method otsu threshold 0.985 0.922 0.964 0.957 adaptive threshold 0.709 0.507 0.625 0.614 logistic regression 0.984 0.929 0.933 0.949 svm 0.982 0.789 0.923 0.898 machine learning random forest 0.985 0.973 0.935 0.964 method xgboost 0.985 0.972 0.941 0.966 neural network 0.984 0.850 0.935 0.923 decision tree 0.982 0.965 0.935 0.961 table a2.
+14,statistics of various indexes of each algorithm in area1 on october 20.
+14,method category precision recall f1-score auc water 0.998 0.945 0.971 neural network 0.984 other 0.971 0.999 0.985 water 0.997 0.950 0.973 random forest 0.985 other 0.973 0.998 0.986 water 0.999 0.933 0.965 svm 0.982 other 0.964 1.000 0.982 water 0.996 0.952 0.974 xgboost 0.985 other 0.974 0.998 0.986 water 0.999 0.942 0.970 logistic regression 0.984 other 0.969 1.000 0.984 water 0.998 0.937 0.966 decision tree 0.982 other 0.966 0.999 0.982 water 0.508 0.909 0.652 adaptive threshold 0.709 other 0.911 0.515 0.658 water 0.838 0.999 0.912 custom threshold 0.919 other 0.999 0.894 0.944 water 0.979 0.983 0.981 otsu threshold 0.985 other 0.991 0.988 0.990
+15,"sci. 2021, 11, 10062 15 of 20 table a3."
+15,statistics of various indexes of each algorithm in area2 on october 20.
+15,method category precision recall f1-score auc water 0.708 0.595 0..647 neural network 0.850 other 0.992 0.995 0.993 water 0.962 0.241 0.385 random forest 0.973 other 0.984 1.000 0.992 water 0.585 0.712 0.642 svm 0.789 other 0.994 0.989 0.992 water 0.961 0.221 0.360 xgboost 0.972 other 0.984 1.000 0.992 water 0.869 0.498 0.633 logistic regression 0.929 other 0.990 0.998 0.994 water 0.948 0.144 0.250 decision tree 0.965 other 0.982 1.000 0.991 water 0.027 0.670 0.052 adaptive threshold 0.507 other 0.986 0.496 0.660 water 0.256 0.825 0.391 custom threshold 0.626 other 0.996 0.950 0.972 water 0.856 0.361 0.508 otsu threshold 0.922 other 0.987 0.999 0.993 table a4.
+15,statistics of various indexes of each algorithm in area3 on october 20.
+15,method category precision recall f1-score auc water 0.982 0.690 0.810 neural network 0.935 other 0.889 0.995 0.939 water 0.999 0.628 0.771 random forest 0.935 other 0.870 1.000 0.930 water 0.995 0.567 0.722 svm 0.923 other 0.852 0.999 0.919 water 0.998 0.671 0.802 xgboost 0.941 other 0.883 0.999 0.938 water 0.997 0.624 0.768 logistic regression 0.933 other 0.869 0.999 0.929 water 0.984 0.682 0.805 decision tree 0.935 other 0.886 0.995 0.938 water 0.405 0.747 0.525 adaptive threshold 0.625 other 0.846 0.558 0.673 water 0.497 1.000 0.664 custom threshold 0.748 other 1.000 0.593 0.745 water 0.970 0.893 0.930 otsu threshold 0.964 other 0.958 0.989 0.973 table a5.
+15,auc index statistics of each algorithm in three regions on october 4.
+15,the method name area1 area2 area3 average custom threshold 0.842 0.549 0.708 0.700 threshold method otsu threshold 0.970 0.617 0.908 0.832 adaptive threshold 0.703 0.506 0.623 0.611 logistic regression 0.329 0.489 0.357 0.392 svm 0.331 0.535 0.365 0.410 machine learning random forest 0.688 0.489 0.349 0.509 method xgboost 0.718 0.512 0.665 0.631 neural network 0.688 0.485 0.354 0.509 decision tree 0.790 0.518 0.697 0.668
+16,"sci. 2021, 11, 10062 16 of 20 table a6."
+16,statistics of various indexes of each algorithm in area1 on october 4.
+16,method category precision recall f1-score auc water 0.379 0.999 0.550 neural network 0.688 other 0.996 0.097 0.177 water 0.377 1.000 0.547 random forest 0.688 other 1.000 0.087 0.160 water 0.020 0.001 0.001 svm 0.331 other 0.643 0.994 0.781 water 0.435 1.000 0.607 xgboost 0.718 other 1.000 0.284 0.442 water 0.017 0.001 0.001 logistic regression 0.329 other 0.642 0.990 0.779 water 0.579 1.000 0.734 decision tree 0.790 other 1.000 0.599 0.749 water 0.493 0.918 0.641 adaptive threshold 0.703 other 0.913 0.478 0.628 water 0.685 0.998 0.812 custom threshold 0.842 other 0.998 0.746 0.854 water 0.949 0.985 0.967 otsu threshold 0.970 other 0.992 0.971 0.981 table a7.
+16,statistics of various indexes of each algorithm in area2 on october 4.
+16,method category precision recall f1-score auc water 0.028 0.999 0.055 neural network 0.485 other 1.000 0.283 0.441 water 0.022 1.000 0.042 random forest 0.489 other 1.000 0.050 0.095 water 0.090 0.039 0.054 svm 0.535 other 0.980 0.992 0.986 water 0.024 1.000 0.048 xgboost 0.512 other 1.000 0.165 0.283 water 0.001 0.001 0.001 logistic regression 0.489 other 0.978 0.937 0.957 water 0.037 0.992 0.072 decision tree 0.518 other 1.000 0.463 0.633 water 0.026 0.692 0.050 adaptive threshold 0.506 other 0.986 0.451 0.619 water 0.100 0.925 0.181 custom threshold 0.549 other 0.998 0.826 0.904 water 0.248 0.314 0.277 otsu threshold 0.617 other 0.986 0.980 0.983
+17,"sci. 2021, 11, 10062 17 of 20 table a8."
+17,statistics of various indexes of each algorithm in area3 on october 4.
+17,method category precision recall f1-score auc water 0.007 0.001 0.001 neural network 0.354 other 0.702 0.944 0.805 water 0.001 0.002 0.001 random forest 0.349 other 0.697 0.924 0.794 water 0.020 0.001 0.002 svm 0.365 other 0.709 0.978 0.822 water 0.329 1.000 0.496 xgboost 0.665 other 1.000 0.183 0.309 water 0.002 0.001 0.001 logistic regression 0.357 other 0.712 0.994 0.830 water 0.395 1.000 0.567 decision tree 0.697 other 1.000 0.386 0.557 water 0.399 0.756 0.523 adaptive threshold 0.623 other 0.847 0.543 0.662 water 0.419 0.997 0.590 custom threshold 0.708 other 0.997 0.444 0.615 water 0.828 0.973 0.895 otsu threshold 0.908 other 0.988 0.919 0.952 references 1.
+17,"fletcher, t.d."
+17,"; andrieu, h."
+17,"; hamel, p."
+17,"understanding, management and modelling of urban hydrology and its consequences for receiving waters: a state of the art."
+17,water resour.
+17,"2013, 51, 261–279."
+17,[crossref] 2.
+17,"papa, f."
+17,"; prigent, c."
+17,"; rossow, w.b."
+17,monitoring flood and discharge variations in the large siberian rivers from a multi-satellite technique.
+17,geophys.
+17,"2008, 29, 297–317."
+17,[crossref] 3.
+17,"chen, c."
+17,"; he, x.y."
+17,"; lu, y."
+17,"; chu, y.l."
+17,"application of landsat time-series data in island ecological environment monitoring: a case study of zhoushan islands, china."
+17,coast.
+17,"2020, 108, 193–199."
+17,[crossref] 4.
+17,"yang, y."
+17,"; yang, y."
+17,"; liu, d."
+17,"; nordblom, t."
+17,"; wu, b."
+17,"; yan, n."
+17,"regional water balance based on remotely sensed evapotranspiration and irrigation: an assessment of the haihe plain, china."
+17,remote sens.
+17,"2014, 6, 2514–2533."
+17,[crossref] 5.
+17,"wang, y.n."
+17,"; huang, f."
+17,"; wei, y.c."
+17,water body extraction from landsat etm plus image using mndwi and k-t transformation.
+17,"in proceedings of the 2013 21st international conference geoinformatics, kaifeng, china, 20–22 june 2013."
+17,"yang, x."
+17,"; zhao, s."
+17,"; qin, x."
+17,"; zhao, n."
+17,"; liang, l."
+17,mapping of urban surface water bodies from sentinel-2 msi imagery at 10 m resolution via ndwi-based image sharpening.
+17,remote sens.
+17,"2017, 9, 596."
+17,[crossref] 7.
+17,"durand, m."
+17,"; gleason, c.j."
+17,"; garambois, p.a."
+17,"; bjerklie, d."
+17,"; smith, l.c."
+17,"; roux, h."
+17,"; rodriguez, e."
+17,"; bates, p.d."
+17,"; pavelsky, t.m."
+17,"; monnier, j.; et al."
+17,"an intercomparison of remote sensing river discharge estimation algorithms from measurements of river height, width, and slope."
+17,water resour.
+17,"2016, 52, 4527–4549."
+17,[crossref] 8.
+17,"yang, x."
+17,"; qin, q."
+17,"; grussenmeyer, p."
+17,"; koehl, m."
+17,urban surface water body detection with suppressed built-up noise based on water indices from sentinel-2 msi imagery.
+17,remote sens.
+17,environ.
+17,"2018, 219, 259–270."
+17,[crossref] 9.
+17,"cui, x."
+17,"; guo, x."
+17,"; wang, y."
+17,"; wang, x."
+17,"; zhu, w."
+17,"; shi, j."
+17,"; lin, c."
+17,"; gao, x."
+17,application of remote sensing to water environmental processes under a changing climate.
+17,hydrol.
+17,"2019, 574, 892–902."
+17,[crossref] 10.
+17,"li, d."
+17,"; wang, g."
+17,"; qin, c."
+17,"; wu, b."
+17,river extraction under bankfull discharge conditions based on sentinel-2 imagery and dem data.
+17,remote sens.
+17,"2021, 13, 2650."
+17,[crossref] 11.
+17,"du, y."
+17,"; zhang, y.h."
+17,"; ling, f."
+17,"; wang, q.m."
+17,"; li, w.b."
+17,"; li, x.d."
+17,water bodies’ mapping from sentinel-2 imagery with modified normalized difference water index at 10-m spatial resolution produced by sharpening the swir band.
+17,remote sens.
+17,"2016, 8, 354."
+17,[crossref] 12.
+17,"donchyts, g."
+17,"; baart, f."
+17,"; winsemius, h."
+17,"; gorelick, n."
+17,"; kwadijk, j.; van de giesen, n."
+17,earth’s surface water change over the past 30 years.
+17,chang.
+17,"2016, 6, 810–813."
+17,[crossref] 13.
+17,"yang, k."
+17,"; yao, f."
+17,"; wang, j."
+17,"; luo, j."
+17,"; shen, z."
+17,"; wang, c."
+17,"; song, c."
+17,recent dynamics of alpine lakes on the endorheic changtang plateau from multi-mission satellite data.
+17,hydrol.
+17,"2017, 552, 633–645."
+17,[crossref] 14.
+17,"cao, m."
+17,"; mao, k."
+17,"; shen, x."
+17,"; xu, t."
+17,"; yan, y."
+17,"; yuan, z."
+17,monitoring the spatial and temporal variations in the water surface and floating algal bloom areas in dongting lake using a long-term modis image time series.
+17,remote sens.
+17,"2020, 12, 3622."
+17,[crossref] 15.
+17,"mcfeeters, s.k."
+17,the use of the normalized difference water index (ndwi) in the delineation of open water features.
+17,remote sens.
+17,"1996, 17, 1425–1432."
+17,[crossref] 16.
+17,"xu, h."
+17,modification of normalised difference water index (ndwi) to enhance open water features in remotely sensed imagery.
+17,remote sens.
+17,"2006, 27, 3025–3033."
+17,[crossref]
+18,"sci. 2021, 11, 10062 18 of 20 17."
+18,"feyisa, g.l."
+18,"; meilby, h."
+18,"; fensholt, r."
+18,"; proud, s.r."
+18,automated water extraction index: a new technique for surface water mapping using landsat imagery.
+18,remote sens.
+18,environ.
+18,"2014, 140, 23–35."
+18,[crossref] 18.
+18,"du, z."
+18,"; li, w."
+18,"; zhou, d."
+18,"; tian, l."
+18,"; ling, f."
+18,"; wang, h."
+18,"; gui, y."
+18,"; sun, b."
+18,analysis of landsat-8 oli imagery for land surface water mapping.
+18,remote sens.
+18,"2014, 5, 672–681."
+18,[crossref] 19.
+18,"singh, k.v."
+18,"; setia, r."
+18,"; sahoo, s."
+18,"; prasad, a."
+18,"; pateriya, b."
+18,evaluation of ndwi and mndwi for assessment of waterlogging by integrating digital elevation model and groundwater level.
+18,geocarto int.
+18,"2015, 30, 650–661."
+18,[crossref] 20.
+18,"duan, z."
+18,"; bastiaanssen, w.g.m."
+18,estimating water volume variations in lakes and reservoirs from four operational satellite altimetry databases and satellite imagery data.
+18,remote sens.
+18,environ.
+18,"2013, 134, 403–416."
+18,[crossref] 21.
+18,"zhang, l."
+18,"; wang, j.s."
+18,"; an, z.y."
+18,classification method of co2 hyperspectral remote sensing data based on neural network.
+18,comput.
+18,commun.
+18,"2020, 156, 124–130."
+18,[crossref] 22.
+18,"li, y.f."
+18,"; liu, c.c."
+18,"; zhao, w.p."
+18,"; huang, y.f."
+18,multi-spectral remote sensing images feature coverage classification based on improved convolutional neural network.
+18,biosci.
+18,"2020, 17, 4443–4456."
+18,[crossref] 23.
+18,"cui, w."
+18,"; zhou, q."
+18,"; zheng, z.d."
+18,application of a hybrid model based on a convolutional auto-encoder and convolutional neural network in object-oriented remote sensing classification.
+18,"algorithms 2018, 11, 9."
+18,[crossref] 24.
+18,"tian, y."
+18,"; jia, r.s."
+18,"; xu, s.h."
+18,"; hua, r."
+18,"; deng, m.d."
+18,super-resolution reconstruction of remote sensing images based on convolutional neural network.
+18,remote sens.
+18,"2019, 13, 13."
+18,[crossref] 25.
+18,"chen, y."
+18,"; fan, r."
+18,"; yang, x."
+18,"; wang, j."
+18,"; latif, a."
+18,extraction of urban water bodies from high-resolution remote-sensing imagery using deep learning.
+18,"water 2018, 10, 585."
+18,[crossref] 26.
+18,"qi, h.n."
+18,"; huang, m.l."
+18,research on svm ensemble and its application to remote sensing classification.
+18,"in proceedings of the international conference on intelligent systems and knowledge engineering (iske 2007), chengdu, china, 15–16 october 2007."
+18,"alimjan, g."
+18,"; sun, t.l."
+18,"; jumahun, h."
+18,"; guan, y."
+18,"; zhou, w.t."
+18,"; sun, h.g."
+18,a hybrid classification approach based on support vector machine and k-nearest neighbor for remote sensing data.
+18,pattern recognit.
+18,artif.
+18,intell.
+18,"2017, 31, 1750034."
+18,[crossref] 28.
+18,"razaque, a."
+18,"; frej, m.b."
+18,"; almi’ani, m."
+18,"; alotaibi, m."
+18,"; alotaibi, b."
+18,improved support vector machine enabled radial basis function and linear variants for remote sensing image classification.
+18,"sensors 2021, 21, 4431."
+18,[crossref] [pubmed] 29.
+18,"cheng, q."
+18,"; varshney, p.k."
+18,"; arora, m.k."
+18,logistic regression for feature selection and soft classification of remote sensing data.
+18,ieee geosci.
+18,remote sens.
+18,"2006, 3, 491–494."
+18,[crossref] 30.
+18,"hogland, j."
+18,"; billor, n."
+18,"; anderson, n."
+18,comparison of standard maximum likelihood classification and polytomous logistic regression used in remote sensing.
+18,remote sens.
+18,"2013, 46, 623–640."
+18,[crossref] 31.
+18,"veerabhadraswamy, n."
+18,"; devagiri, g.m."
+18,"; khaple, a.k."
+18,fusion of complementary information of sar and optical data for forest cover mapping using random forest algorithm.
+18,"2021, 120, 193–199."
+18,[crossref] 32.
+18,"li, l.h."
+18,"; jing, w.p."
+18,"; wang, h.h."
+18,extracting the forest type from remote sensing images by random forest.
+18,ieee sens.
+18,"2021, 21, 17447–17454."
+18,[crossref] 33.
+18,"shetty, s."
+18,"; gupta, p.k."
+18,"; belgiu, m."
+18,"; srivastav, s.k."
+18,assessing the effect of training sampling design on the performance of machine learning classifiers for land cover mapping using multi-temporal remote sensing data and google earth engine.
+18,remote sens.
+18,"2021, 13, 1433."
+18,[crossref] 34.
+18,"liang, g."
+18,"; zhao, x.l."
+18,"; zhao, j.h."
+18,"; zhou, f.n."
+18,feature selection and mislabeled waveform correction for water-land discrimination using airborne infrared laser.
+18,remote sens.
+18,"2021, 13, 3628."
+18,[crossref] 35.
+18,"memarsadeghi, n."
+18,"; mount, d.m."
+18,"; netanyahu, n.s."
+18,"; le moigne, j."
+18,a fast implementation of the isodata clustering algorithm.
+18,comput.
+18,"2007, 17, 71–103."
+18,[crossref] 36.
+18,"mahboob, m."
+18,"; genc, b."
+18,evaluation of isodata clustering algorithm for surface gold mining using satellite data.
+18,"in proceedings of the 2019 international conference on electrical, communication, and computer engineering (icecce), swat, pakistan, 24–25 july 2019."
+18,"balha, a."
+18,"; mallick, j."
+18,"; pandey, s."
+18,"; gupta, s."
+18,"; singh, c.k."
+18,a comparative analysis of different pixel and object-based classification algorithms using multi-source high spatial resolution satellite data for lulc mapping.
+18,earth sci.
+18,inform.
+18,"2021, 1–17."
+18,[crossref] 38.
+18,"zhou, y."
+18,"; luo, j."
+18,"; shen, z."
+18,"; hu, x."
+18,"; yang, h."
+18,multiscale water body extraction in urban environments from satellite images.
+18,ieee j.
+18,earth obs.
+18,remote sens.
+18,"2014, 7, 4301–4312."
+18,[crossref] 39.
+18,"janowski, l."
+18,"; wroblewski, r."
+18,"; dworniczak, j."
+18,"; kolakowski, m."
+18,"; rogowska, k."
+18,"; wojcik, m."
+18,"; gajewski, j."
+18,offshore benthic habitat mapping based on object-based image analysis and geomorphometric approach.
+18,"a case study from the slupsk bank, southern baltic sea."
+18,total environ.
+18,"2021, 801, 149712."
+18,[crossref] [pubmed] 40.
+18,"granger, j.e."
+18,"; mahdianpari, m."
+18,"; puestow, t."
+18,"; warren, s."
+18,"; mohammadimanesh, f."
+18,"; salehi, b."
+18,"; brisco, b."
+18,"object-based random forest wetland mapping in conne river, newfoundland, canada."
+18,remote sens.
+18,"2021, 15, 038506."
+18,[crossref] 41.
+18,"zhao, b."
+18,"; gou, p."
+18,"; yang, f."
+18,"; tang, p.p."
+18,improving object-oriented land use/cover classification from high resolution imagery by spectral similarity-based post-classification.
+18,geocarto int.
+18,"2021, 1–24."
+18,[crossref] 42.
+18,"aahlaad, m."
+18,"; mozumder, c."
+18,"; tripathi, n."
+18,"; pal, i."
+18,an object-based image analysis of worldview-3 image for urban flood vulnerability assessment and dissemination through esri story maps.
+18,indian soc.
+18,remote sens.
+18,"2021, 1–16."
+18,[crossref] 43.
+18,"ma, l."
+18,"; zhu, x.x."
+18,"; qiu, c.p."
+18,"; blaschke, t."
+18,"; li, m.c."
+18,advances of local climate zone mapping and its practice using object-based image analysis.
+18,"atmosphere 2021, 12, 1146."
+18,[crossref] 44.
+18,"du, s.h."
+18,"; du, s.h."
+18,"; liu, b."
+18,"; zhang, x.y."
+18,mapping large-scale and fine-grained urban functional zones from vhr images using a multi-scale semantic segmentation network and object based approach.
+18,remote sens.
+18,environ.
+18,"2021, 261, 112480."
+18,[crossref]
+19,"sci. 2021, 11, 10062 19 of 20 45."
+19,"guo, s.c."
+19,"; du, p.j."
+19,"; xia, j.s."
+19,"; tang, p.f."
+19,"; wang, x."
+19,"; meng, y.p."
+19,"; wang, h."
+19,spatiotemporal changes of glacier and seasonal snow fluctuations over the namcha barwa-gyala peri massif using object-based classification from landsat time series.
+19,isprs j.
+19,photogramm.
+19,remote sens.
+19,"2021, 177, 21–37."
+19,[crossref] 46.
+19,"liu, x."
+19,"; zhang, y."
+19,"; ling, x."
+19,"; huang, x."
+19,automatic and unsupervised water body extraction based on spectral-spatial features using gf-1 satellite imagery.
+19,ieee geosci.
+19,remote sens.
+19,"2018, 16, 927–931."
+19,[crossref] 47.
+19,"bao, l."
+19,"; lv, x."
+19,"; yao, j."
+19,water extraction in sar images using features analysis and dual-threshold graph cut model.
+19,remote sens.
+19,"2021, 13, 3465."
+19,[crossref] 48.
+19,"di baldassarre, g."
+19,"; schumann, g."
+19,"; brandimarte, l."
+19,"; bates, p."
+19,timely low resolution sar imagery to support floodplain modelling: a case study review.
+19,geophys.
+19,"2011, 32, 255–269."
+19,[crossref] 49.
+19,"long, s."
+19,"; fatoyinbo, t.e."
+19,"; policelli, f."
+19,flood extent mapping for namibia using change detection and thresholding with sar.
+19,environ.
+19,"2014, 9, 35002."
+19,[crossref] 50.
+19,"pulvirenti, l."
+19,"; chini, m."
+19,"; pierdicca, n."
+19,"; guerriero, l."
+19,"; ferrazzoli, p."
+19,flood monitoring using multi-temporal cosmo-skymed data: image segmentation and signature interpretation.
+19,remote sens.
+19,environ.
+19,"2011, 115, 990–1002."
+19,[crossref] 51.
+19,"zhao, l."
+19,"; yang, j."
+19,"; li, p."
+19,"; zhang, l."
+19,seasonal inundation monitoring and vegetation pattern mapping of the erguna floodplain by means of a radarsat-2 fully polarimetric time series.
+19,remote sens.
+19,environ.
+19,"2014, 152, 426–440."
+19,[crossref] 52.
+19,"srivastava, p.k."
+19,"; han, d."
+19,"; rico-ramirez, m.a."
+19,"; bray, m."
+19,"; islam, t."
+19,selection of classification techniques for land use/land cover change investigation.
+19,"2012, 50, 1250–1265."
+19,[crossref] 53.
+19,"kuhn, c.; de matos valerio, a."
+19,"; ward, n."
+19,"; loken, l."
+19,"; sawakuchi, h.o."
+19,"; kampel, m."
+19,"; richey, j."
+19,"; stadler, p."
+19,"; crawford, j."
+19,"; striegl, r.; et al."
+19,performance of landsat-8 and sentinel-2 surface reflectance products for river remote sensing retrievals of chlorophyll-a and turbidity.
+19,remote sens.
+19,environ.
+19,"2019, 224, 104–118."
+19,[crossref] 54.
+19,"garcía-llamas, p."
+19,"; suárez-seoane, s."
+19,"; fernández-guisuraga, j.m."
+19,"; fernández-garcía, v."
+19,"; fernández-manso, a."
+19,"; quintano, c."
+19,"; taboada, a."
+19,"; marcos, e."
+19,"; calvo, l."
+19,"evaluation and comparison of landsat 8, sentinel-2 and deimos-1 remote sensing indices for assessing burn severity in mediterranean fire-prone ecosystems."
+19,earth obs.
+19,geoinf.
+19,"2019, 80, 137–144."
+19,[crossref] 55.
+19,geological survey.
+19,landsat 8 data users handbook.
+19,"nasa 2016, 8, 97."
+19,"zhao, g."
+19,"; maclean, a.l."
+19,a comparison of canonical discriminant analysis and principal component analysis for spectral transformation.
+19,photogramm.
+19,remote sens.
+19,"2000, 66, 841–847."
+19,"mohajane, m."
+19,"; essahlaoui, a."
+19,"; oudija, f."
+19,"; hafyani, m.e."
+19,"; hmaidi, a.e."
+19,"; ouali, a.e."
+19,"; randazzo, g."
+19,"; teodoro, a.c."
+19,"land use/land cover (lulc) using landsat data series (mss, tm, etm+ and oli) in azrou forest, in the central middle atlas of morocco."
+19,environ.
+19,"2018, 5, 131."
+19,[crossref] 58.
+19,"randazzo, g."
+19,"; cascio, m."
+19,"; fontana, m."
+19,"; gregorio, f."
+19,"; lanza, s."
+19,"; muzirafuti, a."
+19,mapping of sicilian pocket beaches land use/land cover with sentinel-2 imagery: a case study of messina province.
+19,"land 2021, 10, 678."
+19,[crossref] 59.
+19,"forestier, g."
+19,"; inglada, j."
+19,"; wemmert, c."
+19,"; gancarski, p."
+19,comparison of optical sensors discrimination ability using spectral libraries.
+19,remote sens.
+19,"2013, 34, 2327–2349."
+19,[crossref] 60.
+19,"otsu, n."
+19,a threshold selection method from gray-level histograms.
+19,ieee trans.
+19,cybern.
+19,"1979, 9, 62–66."
+19,[crossref] 61.
+19,"ji, l."
+19,"; zhang, l."
+19,"; wylie, b."
+19,analysis of dynamic thresholds for the normalized difference water index.
+19,photogramm.
+19,remote sens.
+19,"2009, 75, 1307–1317."
+19,[crossref] 62.
+19,"xie, h."
+19,"; zhang, y."
+19,"; he, y."
+19,"; you, k."
+19,"; fan, b."
+19,"; yu, d."
+19,"; li, m."
+19,automatic and fast recognition of on-road high-emitting vehicles using an optical remote sensing system.
+19,"2019, 19, 3540."
+19,[crossref] [pubmed] 63.
+19,"huo, j."
+19,"; gao, y."
+19,"; shi, y."
+19,"; yin, h."
+19,cross-modal metric learning for auc optimization.
+19,ieee trans.
+19,neural netw.
+19,learn.
+19,"2018, 29, 4844–4856."
+19,[crossref] 64.
+19,"pal, m."
+19,"; mather, p.m."
+19,support vector machines for classification in remote sensing.
+19,remote sens.
+19,"2005, 26, 1007–1011."
+19,[crossref] 65.
+19,"min, j.h."
+19,"; lee, y.-c."
+19,bankruptcy prediction using support vector machine with optimal choice of kernel function parameters.
+19,expert syst.
+19,"2005, 28, 603–614."
+19,[crossref] 66.
+19,"zhang, l."
+19,management of offshore oil pollution and logistics transportation based on decision tree.
+19,geosci.
+19,"2021, 14, 1655."
+19,[crossref] 67.
+19,"ma, m.h."
+19,"; zhao, g."
+19,"; he, b.s."
+19,"; li, q."
+19,"; dong, h.y."
+19,"; wang, s.g."
+19,"; wang, z.l."
+19,xgboost-based method for flash flood risk assessment.
+19,hydrol.
+19,"2021, 598, 126382."
+19,[crossref] 68.
+19,"buthelezi, m.n.m."
+19,"; lottering, r.t."
+19,"; hlatshwayo, s.t."
+19,"; peerbhay, k."
+19,comparing rotation forests and extreme gradient boosting for monitoring drought damage on kwazulu-natal commercial forests.
+19,geocarto int.
+19,"2020, 1–24."
+19,[crossref] 69.
+19,"samat, a."
+19,"; li, e.z."
+19,"; wang, w."
+19,"; liu, s.c."
+19,"; lin, c."
+19,"; abuduwaili, j."
+19,meta-xgboost for hyperspectral image classification using extended mser-guided morphological profiles.
+19,remote sens.
+19,"2020, 12, 1973."
+19,[crossref] 70.
+19,"peng, j."
+19,"; lee, k."
+19,"; ingersoll, g."
+19,an introduction to logistic regression analysis and reporting.
+19,"2002, 96, 3–14."
+19,[crossref] 71.
+19,"mishra, v.n."
+19,"; kumar, v."
+19,"; prasad, r."
+19,"; punia, m."
+19,geographically weighted method integrated with logistic regression for analyzing spatially varying accuracy measures of remote sensing image classification.
+19,indian soc.
+19,remote sens.
+19,"2021, 49, 1189–1199."
+19,[crossref] 72.
+19,"schmitt, m."
+19,potential of large-scale inland water body mapping from sentinel-1/2 data on the example of bavaria’s lakes and rivers.
+19,pfg–j.
+19,photogramm.
+19,remote sens.
+19,geoinf.
+19,"2020, 88, 271–289."
+19,[crossref]
+20,"sci. 2021, 11, 10062 20 of 20 73."
+20,"somasundaram, d."
+20,"; zhang, f."
+20,"; wang, s."
+20,"; ye, h."
+20,"; zhang, z."
+20,learning vector quantization neural network for surface water extraction from landsat oli images.
+20,remote sens.
+20,"2020, 14, 032605."
+20,[crossref] 74.
+20,"jiang, w."
+20,"; he, g."
+20,"; long, t."
+20,"; ni, y."
+20,"; liu, h."
+20,"; peng, y."
+20,"; wang guizhou, w. guizhou multilayer perceptron neural network for surface water extraction in landsat 8 oli satellite images."
+20,remote sens.
+20,"2018, 10, 755."
+20,[crossref] 75.
+20,"yang, l."
+20,"; tian, s.w."
+20,"; yu, l."
+20,"; ye, f.y."
+20,"; qian, j."
+20,"; qian, y.r."
+20,deep learning for extracting water body from landsat imagery.
+20,innov.
+20,comput.
+20,"control 2015, 11, 1913–1929."
+20,"roli, f."
+20,"; giacinto, g."
+20,"; vernazza, g."
+20,comparison and combination of statistical and neural network algorithms for remote- sensing image classification.
+20,"in neurocomputation in remote sensing data analysis; kanellopoulos, i., wilkinson, g.g., roli, f., austin, j., eds."
+20,"; springer: berlin/heidelberg, germany, 1997; pp."
+20,117–124.

@@ -1,0 +1,389 @@
+page,p
+1,"chapter 17 advances in remote sensing of coastal wetlands: lidar, sar, and object- oriented case studies from north carolina thomas r."
+1,"allen abstract coastal wetlands provide crucial ecosystem services to society including pollution filtration, fish and wildlife nursery and habitat, storm surge mitigation, and sinks for atmospheric carbon."
+1,uncertainty of wetland responses to sea-level rise is a pervasive concern in coastal science and management.
+1,"advances in light detection and ranging (lidar), space-borne synthetic aperture radar (sar), and multi-sensor and object-oriented image analysis techniques are poised to aid the inventorying, monitoring and management of wetlands to an even greater extent."
+1,this chapter reviews developments and coastal wetland applications of these state of the art remote sensing data and techniques and evaluates the utility of these products for management of coastal reserves in case studies.
+1,"following concise review of the literature on remote sensing technological and image processing advances, case studies from north carolina coastal wetlands are presented: (1) multidate sar and lidar imagery for regional salt marsh mapping in cedar island national wildlife refuge, (2) object-based image analysis (obia) for transitional marshes and phragmites australis inventory in alligator river national wildlife refuge, and (3) very fine resolution barrier island mapping using multisensor and multidate imagery and obia techniques in the rachel carson coastal reserve."
+1,"drawing upon these developments and case studies, insights for practical applications are evaluated to further even wider application to coastal management."
+1,"allen (*) department of geography, planning, & environment, east carolina university, greenville, nc 27858, usa e-mail: allenth@ecu.edu c.w."
+1,finkl and c.
+1,"makowski (eds.), remote sensing and modeling: 405 advances in coastal and marine resources, coastal research library 9, doi 10.1007/978-3-319-06326-3_17, © springer international publishing switzerland 2014"
+2,406 t.r.
+2,allen 17.1 introduction remote sensing technology continues its rapid advances in applications to coastal ecosystems research and management.
+2,"over the last decade the diversity of sensors and their applications has expanded notably, with new utility and operational uses ranging from disasters to environmental restoration."
+2,a number of reviews and books have inventoried these myriad developments.
+2,"klemas (2009) inventories the wide breadth of state-of-the-art remote sensing applications for coastal waters, watersheds, and ecosystems."
+2,"in particular, the variety of sensors and technologies have continued their expansion in the field, ranging from space-borne to aerial platforms, uavs, and improving thermal infrared (tir) and light detection and ranging (lidar) sensors."
+2,klemas (2013a) reviews several technical advances for remote sensing of wetland biomass and environmental change detection.
+2,"notable research progress includes the integration of multi-sensor data, regional applica- tions and the continuity of landsat, spectral mixture methods, and increasing capabilities for mapping mangroves, submerged aquatic vegetation (sav) and marshes."
+2,"canopy height and volume, in particular, are now achievable measures that encourage applications requiring above ground biomass (abg) and its dynam- ics (klemas 2013b.)"
+2,"monitoring wetland changes, whether biomass or areal habitat coverage, is important for management, yet comparisons of wetland losses and gains have been shown to be disparate between airborne surveys and satellite data (carle 2011)."
+2,ramsey et al. (2012) also highlight the capabilities and limitations of l- and c-band sar and landsat thematic mapper (tm) for monitoring coastal wetlands impacted by flooding.
+2,their findings note a sensitivity of the sar backscatter to damage after storms yet also potential confounding factors such as look angle and wind roughening that may be overcome with more frequent obser- vations.
+2,increasing observations and standardized monitoring strategies could improve our understanding of the causes of marsh dieback related to water-logging and salinity.
+2,"isolating environmental variability in remotely sensed water level monitoring could also improve the use of remote sensing for a variety of process studies, such as storm surges, riverine flooding, and sediment transport (allen et al. 2011) and tidal inundation (kearney et al."
+2,2009).
+2,17.1.1 coastal wetland biomass and topography coastal marshes are among the most productive as well as vulnerable ecosystems.
+2,studies in vulnerable deltaic and trailing edge continental margins are now relating their biomass derived to spectral indices such as the normalized difference veg- etation index (ndvi) in order to predict responses to sea-level rise point and reveal thresholds in their inundation depth and frequency (couvillion and beck 2013; couvillion et al.
+2,2013).
+2,"wetland elevation also can be a functionally useful addition to broad-scale mapping efforts, such as the use of digital elevation models (dems)"
+3,17 advances in remote sensing of coastal wetlands. . . 407 and topographic derivatives to differentiate and classify forested wetlands and improve the accuracy and efficiency of their monitoring (lang et al.
+3,2013).
+3,"in addition, although coastal marshes are prone to a large relative error for their low-lying location even with lidar (schmid et al. 2011), the potential to apply post-process corrections can improve their accuracy (hladik and alber 2012) and aid confidence in model forecasting of marsh responses to tidal inundation and future sea-level rise (kearney and rogers 2010)."
+3,"elevation data in coastal wetlands is crucial for accurate mapping of species patterns and zonal delineation, especially for forecasting salt marsh responses to sea level rise."
+3,"noting that classification based on optical imagery alone fail to accu- rately discriminate between salt-marsh vegetation species, dehouck et al. (2012) explored the use of both high-resolution sar data and high resolution optical imagery for mapping intertidal coastal areas."
+3,results showed little improvement in the detection of salt marsh vegetation.
+3,"furthermore, the radiometric variability inherent to sar data (speckle) introduced noise in the classification results (dehouck et al."
+3,2012).
+3,"accurate elevation mapping is also essential, as elevation is an important determinant of the extent of tidal flooding and, consequently, species distribution and patterns in marshes (hladik and alber 2012)."
+3,the elevation distribution of spartina alterniflora in relation to mean sea level is a key indicator of marsh stability (morris et al.
+3,2002).
+3,"due to the relatively flat topography of salt marshes, elevation differences of less than 10 cm can affect overall marsh extent and species patterns (hladik and alber 2012)."
+3,"thus, there is a need for accurate elevation mapping in salt marshes to identify vulnerable habitat and predict how marshes will respond to perturbations that might alter plant distributions, such as sea level rise (hladik and alber 2012)."
+3,"in recent years, lidar has been used to ascertain ground elevation and vegetation structure for developing digital elevation models (dems)."
+3,lidar has been used to determine elevation in tidal areas with vertical resolution as fine as 16 cm in north carolina (poulter and halpin 2008).
+3,"however, an accuracy assessment of lidar models in salt marshes showed that they overestimate marsh ground elevations, with mean errors increasing with increased vegetation density and plant height (hladik and alber 2012)."
+3,"these errors may result from inadequate horizontal and vertical sensor resolution that, given the small topographic variability in salt marshes, makes it difficult to detect meaningful differences in elevation."
+3,"another source of error may be the inability of lidar to differentiate between vegetation types with heights less than 2 m, which describes much of salt marsh vegetation (hladik and alber 2012)."
+3,17.1.2 sar and lidar data hydrologic dynamics of wetlands compound the difficulties faced in their mapping and monitoring.
+3,"temporal complexity of wetlands is evidenced in both optical signatures and sub-canopy structure (e.g., kasischke and borgeau-chavez 1997)."
+3,"spurred by operational needs for monitoring, the research community has"
+4,408 t.r.
+4,"allen increasingly been challenged to develop algorithms that are robust and portable, especially for areas of study that are vast or difficult to access."
+4,"some approaches have sought to reduce the problems of classification, such as incorporating hydrol- ogy directly into the classification products in hydrogeomorphic classification (hamilton et al."
+4,2007).
+4,"advanced image classification techniques such as spectral unmixing to discern fractional composition of wetlands undergoing change (e.g., rogers and kearney 2004) and hydrologic simulation modeling have also provided additional input data for classification."
+4,"for instance, floodplain inundation models have been incorporated into classification (townsend and walsh 1998; wang 2004) and such data integration has an analogous history of success at improving forest classification in complex montane environments (c.f., franklin 1991)."
+4,synthetic aperture radar (sar) and light detection and ranging (lidar) sensors have rapidly developed and found application for coastal mapping and monitoring.
+4,c-band sar imagery such as ers-1 has been applied in the florida everglades for detecting hydroperiod changes across a region (borgeau-chavez et al.
+4,2005).
+4,historic problems with signal-to-noise and speckle have found solutions with improved engineering or post-processing filters.
+4,"kushwaha et al. (2000), for instance, found several filters could reduce noise and speckle reduction in time series ers-1 sar imagery."
+4,"multispectral processing, such as intensity-hue-saturation (his) analysis has also been applied to sar imagery over time, including ers-1 improvements for wetland discrimination when combined with indian remote sensing satellite (irss)."
+4,"forested wetlands, a challenging vegetation assemblage for multi-spectral or single-source remote sensing imagery, have also been examined and found to be improved in image classifications with sar imagery."
+4,"a multi- temporal analysis of ers-2, envisat/asar, and landsat enhanced thematic mapper plus (etm+) data by lang et al. (2008) found principal components analysis (pca) could delineate hydroperiod-related classes of forested wetlands in the mid-atlantic, usa."
+4,"time series remote sensing and change detection have also been advancing, with seasonal, inter-annual, and phenologic changes of terrestrial land cover explored in multi-date imagery (lunetta and evlidge 1988)."
+4,"for example, multisensor sar imagery over a decadal timespan could detect coastal wetland shoreline change between jers-1 and advanced land observation satellite (alos) phased-array l-band sar (palsar) imagery in the pamlico sound, north carolina (nc), usa (wang and allen 2008)."
+4,"17.1.3 fine spatial resolution and object-based image analysis with increasing spatial resolutions, alternatives to pixel-based classification are being developed."
+4,a major drawback of pixel-based classification is that a pixel’s spatial extent may not match the extent of the land cover feature of interest (aplin and smith 2008).
+4,"this results in mixed pixels, whereby a pixel represents more than"
+5,17 advances in remote sensing of coastal wetlands. . . 409 a single type of land cover.
+5,high resolution images support several scales within their images.
+5,"object-based image analysis (obia), on the other hand, uses spatially explicit information to derive objects that are made up of several pixels."
+5,"obia builds on older segmentation, edge-detection, feature extraction and classification concepts that have been used in remote sensing image analysis for decades, but were not used extensively in geospatial applications until the past decade (blaschke 2010)."
+5,segments are regions which are generated by one or more criteria of homogeneity in one or more dimensions of a feature space (blaschke 2010).
+5,"segments have more spectral information than single pixels; more importantly, they have more spatial information (e.g., distances, neighborhood, topology) that is crucial to obia methods."
+5,"grouping pixels into image objects mitigates the “salt and pepper effect” that occurs with misclassification of pixels caused by shadow, mixed species, and differences in reflectance values (kelly et al."
+5,2011).
+5,some object-based image classification techniques attempt to replicate traditional pixel- based classification techniques using the spatial scale of the object instead of the pixel.
+5,"for instance, the maximum likelihood classification algorithm has been used for object-based classification, either (i) by classifying objects directly (e.g., by comparing each object’s group of pixels as a whole against the training classes, or (ii) by first classifying pixels individually and then grouping these to populate each object (aplin and smith 2008)."
+5,the efficacy of obia techniques has been demonstrated in several studies.
+5,"platt and rapoza (2008) compared results from a maximum likelihood classification with results from obia and found that the combination of segmentation into image objects, use of the nearest neighbor classifier, and the integration of expert knowl- edge yielded substantially improved classification accuracy compared to a per-pixel method."
+5,"kamal and phinn (2011) compared pixel-based and object-based mapping techniques using spectral angle mapper (sam) and linear spectral unmixing (lsu) for the pixel-based approaches, and multi-scale segmentation for the obia approach."
+5,"they found that obia mapping produced the most accurate results (overall accuracy 76 %, kappa 0.67)."
+5,"weih and riggan (2010) obtained similar results comparing three methodologies (object-based, and supervised and unsupervised pixel-based classifications) to determine if an object-based analysis of remotely sensed imagery would produce a statistically more accurate lulc classification than a pixel-based analysis applied to the same imagery."
+5,"results showed that when merging high-spatial resolution aerial imagery with medium- spatial resolution satellite imagery, the object-based classification outperformed both supervised and unsupervised pixel-based methods."
+5,"obia has also illustrated robustness for multi-scale mapping, expanding beyond its initial focus on ultra-high resolution imagery to extend to landscape mapping."
+5,"phinn et al. (2012) demonstrate the multi-scale mapping for coral reef benthic habitats and geomorphology, highlighting the value of hierarchical classification."
+5,"using high-resolution color- and near-infrared imagery, kelly et al. (2011) note that care should be taken in multi-scale analyses for marsh vegetation undergoing restoration, as pattern metrics such as patch statistics can be sensitive to scale."
+5,kim et al. (2011) also find that multi-scale obia classification produces higher
+6,410 t.r.
+6,allen map accuracies in marshes.
+6,"nonetheless, some coastal ecosystem zones, such as fringing mangroves, may present a challenge to even ultra-high resolution imagery."
+6,heumann (2011) achieved accuracy exceeding 94 % for mangroves in the galapagos but describes limitations for obia and worldview-2 imagery of mixed zonation or sparse vegetation.
+6,"timm and mcgarigal (2012) document the classification of 1 m resolution coastal dune and marsh vegetation at cape cod, crediting success to a supervised random forest classification algorithm."
+6,"these studies collectively affirm that very fine spatial resolution coastal marshes are able to be accurately mapped, and moreover that advanced image segmentation and classification algorithms are able to efficiently handle landscape extents."
+6,"a prevailing challenge cited remains the standardization of imagery, acquisition and environmental factors, and the portability of obia parameters, rule sets, and resulting variation in accuracy."
+6,"17.1.4 rapid coastal response in addition to further disentangling water level effects on the spectral and derived structure characteristics of wetlands, greater attention is being given to measure- ment of climate change and natural as well as technological hazards and actual disasters."
+6,"chambers et al. (2007) using spectral mixture analysis and modis data to assess carbon stocks in coastal ecosystems, noting the effect of hurricane katrina in forest damage."
+6,wang et al. (2010) also evaluate damage data from hurricane katrina in coastal forests.
+6,"in a study comparing landsat and modis, chen et al. (2013) observe that modis 8-day composite imagery offer a feasible surrogate for daily observing of flood inundation."
+6,"with careful attention to lidar dem error and inundation modeling, yoon and shim (2013) have demon- strated an operational storm surge hazard mapping in south korea that combines hydrodynamic models corroborated by field observations of inundation."
+6,dresback et al. (2013) further assessed the quality of coupled hydrologic and hydrodynamic models for coastal terrain in north carolina mapped primarily from lidar.
+6,"demonstrating remote sensing’s relevance to emergency management to coastal disasters, ramsey et al. (2011) assess the utility of unmanned aerial vehicle sar (uavsar) for mapping oil spill in marshes from the deepwater horizon disaster in the gulf of mexico and environmental response to hurricane storm surges (ramsey et al."
+6,2012).
+6,rodrigues and souza-filho (2013) underscore the utility of landsat for regional environmental sensitivity to oil spills in a study on the amazonian coastal plain.
+6,"among these case studies, there is a shared commonality rapid and systematic acquisition for highly time-dependent environmental response, factors are critical to time-dependent emergency management."
+6,"coastal remote sensing thus offers valuable information at multiple spatial and temporal scales to augment modeling and forecasting systems, a complementarity that is gaining traction in the field of emergency management and visualization of coastal impacts and situational awareness (akbar et al."
+6,2013).
+7,17 advances in remote sensing of coastal wetlands. . .
+7,"411 17.2 coastal ecosystem classification and change 17.2.1 wetland hydrogeomorphic classification remote sensing, field, and environmental modeling data stored and analyzed within the geographic information system (gis) have played a strong and increasing role in wetland mapping, such as the provision of floodplain boundaries and frequency of inundation simulations (coe 2000; wang et al."
+7,2002).
+7,"hydrogeomorphic condi- tions dominate the environmental gradients of riverine and coastal wetlands, affect- ing their biodiversity patterns (hupp 1988) and zonation that can be discerned via remote sensing and environmental simulations of hydrology."
+7,"digital shoreline data, mapped via field, boat, or aerial imagery, are frequently used to mask aquatic and terrestrial zones for simplification of coastal remote sensing problems."
+7,"multi-sensor data can also be valuable, such as the utilization of imagery with near infrared reflectance data to rapidly map shorelines and develop mask layers for land-water separation."
+7,"in addition, lidar has emerged to provide water levels useful to hydrogeomorphic classes (hofel et al."
+7,2009).
+7,"several comprehensive remote sens- ing products have demonstrated useful insights from well-thought feasibility, prototyping, and accuracy assessments, including the noaa coastal change analysis program (c-cap) (jensen et al."
+7,"1993), coastwatch (dobson and bright 1991; klemas et al. 1993), and usgs north american landscape characterization (nalc) archive (loveland et al."
+7,1991).
+7,"assessment of the value of potential data combinations, fusion, multi-date and alternative classification algorithms has a pronounced research agenda in remote sensing that furthers thematic detail and hydrgeomorphic characterization."
+7,evaluating alternative combinations of data is given substantial methodological attention.
+7,"south et al. (2004), for example, analyzed several supervised classification methods to ascertain their performance for classifying agriculture tillage practices."
+7,"in addition, the use of multiple classifiers in ensemble approach has shown promise by compar- ative accuracy assessments (dai and liu 2010)."
+7,"multi-sensor or comparative results of classifications by individual sensors have also been rigorously scrutinized, such as individual sar versus optical landsat tm forested wetland change mapping in the roanoke river basin, north carolina (townsend and walsh 1998)."
+7,these studies further prompt the current investigation to compare what possible accuracy could be efficiently achieved by a robust technique combining multi-date sar imagery with increasingly available lidar bare earth digital elevation models (dems) and surface height of vegetation canopy.
+7,"given a profusion of methodological papers on accuracy assessment, there is some pause or concern for cross-comparisons."
+7,"kappa statistics, in particular, have become a nearly ubiquitous measurement for quantitatively compar- ing alternative methods of classification."
+7,"however, some new critical work has revealed the limitations of this family of indices (pontius and millones 2011)."
+7,"nonetheless, wetland mapping at the landscape scale using remotely sensed data has been deemed efficient and accurate with proven and evolving classification methods."
+7,traditional wetland mapping methods often rely on optical imagery and manual photo interpretation or classification.
+7,the integration of multi-platform and
+8,412 t.r.
+8,allen multi frequency remotely sensed data can provide superior data for mapping wetlands.
+8,"data from multiple sources has the capacity to capture greater variation in surface features, such as elevation and vegetation structure (corcoran et al. 2013), and thus has the potential to increase both classification accuracy and confidence."
+8,"given the wealth of remotely sensed and ancillary data, a robust wetland classification method applied to large geographic areas needs to be com- putationally fast, require no assumptions about data distribution, handle nonlinearity in relations between input variables, and be capable of using numeric and categorical data."
+8,"in addition, the assessment of results will be improved if the classification method identifies outliers in the training data, provides rankings of the importance of the input variables, and produces internal estimates of error and confidence of the output classification."
+8,"decision tree classifiers that have been used in land cover mapping for years meet most of these requirements (pal and mather 2003), including the see5 classifier (rulequest research)."
+8,these approaches at a regional or national scale have yet to find a secure place in federal coastal resource management and monitoring programs.
+8,"in lieu of this, landscape scale, synoptic remote sensing for wider land use/land cover mapping with sensors such as landsat in ccap or orthophoto inventories and field mapping (e.g., nwi) are likely to continue."
+8,"the improved multispectral and radiometric resolution of landsat 8 may itself play a stronger role in monitoring and invite the integration of previously noted lidar, sar, and obia techniques, at least at the fine-scale."
+8,"17.2.2 salt marsh zonation and classification salt marshes are among the most productive ecosystems on earth, providing benefits to coastal communities by filtering pollutants from surface waters, buffer- ing storm energies, and providing nursery and habitat for coastal wildlife and fisheries."
+8,these functions also provide economic benefits to coastal communities that provide services and supplies for recreational hunting and fishing.
+8,"salt marshes also provide highly effective sinks for atmospheric carbon dioxide, and efforts are emerging to use salt marsh preservation or restoration in carbon offset programs (chmura 2013)."
+8,salt marshes are threatened by increasing rates of sea level rise.
+8,"in many areas, the vegetation responsible for marsh soil accretion may not survive increased flooding periods, resulting in submergence of the marsh in its present location or inability to restore a marsh at its previous elevation."
+8,"the distribution of salt marsh communities is governed by the magnitude, fre- quency, and duration of tidal inundation (donelly and bertness 2001)."
+8,"salt marshes in southeastern north carolina typically comprise three parts – high marsh, low marsh, and creekbank marsh."
+8,creekbank marsh and low marsh are flooded twice a day.
+8,high marsh forms where trapped sediment has built up over time; while flooded periodi- cally it may be dry for several days at a time.
+8,"different species of vegetation, each important to the provision of ecosystem services, inhabit the different zones."
+8,low marsh and creekbank marsh are dominated by smooth cordgrass (spartina
+9,"17 advances in remote sensing of coastal wetlands. . . 413 alterniflora), an important producer in the estuarine food web."
+9,"high marsh plants include spikegrass (distichlis spicata), black needlerush (juncus roemerianus), salt meadow cordgrass (spartina patens), sea ox-eye and glasswort (salicornia species) (hladik and alber 2012)."
+9,vegetation at this level provides much of the pollutant filtering and storm surge protection services.
+9,"in addition, salt marsh ecosystems have relatively high rates of carbon sequestration."
+9,"carbon burial rates within a salt marsh may be affected by variability in hydroperiod, salinity, and suspended sediment supply (mcleod et al."
+9,2011).
+9,the alteration of the demarcations among species is an indicator of sea level and environmental changes within a salt marsh (lee et al.
+9,2012).
+9,"changes in distribution patterns can alter erosion and accretion rates in marshes, increasing their vulnerability to sea level rise."
+9,"therefore, conservation of marsh communities at each level is critical to the continued provision of ecosystem services."
+9,"17.2.3 invasive phragmites on the eastern seaboard of the usa, phragmites australis is often considered an invasive marsh grass, encroaching along estuarine shorelines and creeks in colonies, but this claim is contested and not yet thoroughly proven (saltonstall 2002)."
+9,"regard- less of phragmites australis region of exotic versus indigenous origin, it is frequently treated as invasive due to its robust colonial growth – growing up to six meters tall."
+9,"with a dearth of herbivores to naturally control the spread, the plants are prone to contagiously spread along shorelines, tributaries, and along ditches in ruderal corri- dors."
+9,"efforts to monitor its distribution and manage, even eradicate it locally, are fraught with sparse management resources spread across extensive geography, espe- cially in eastern north carolina."
+9,"dedicated aerial campaigns to inventory and monitor its spread are thus limited, and alternatives to map and track the spread are sought using more efficient satellite-based data."
+9,"for instance, phragmites is known to exhibit differential morphologies (basal area, height, and density) along riverine to estuarine gradients (zhang et al. 2003) and biogeographic setting (meyerson et al."
+9,2009).
+9,"classification accuracy results may thus depend on regional stratification of morphol- ogy (salt water, riverine, or brackish) or latitudinal phenology and require adaptation of the techniques."
+9,"sar, lidar, and multispectral imagery, including landsat 8, hold strong promise for satellite-based monitoring of phragmites."
+9,17.3 case studies 17.3.1 case study: multi-sensor and multi-date sar for emergent marsh mapping in cedar island nwr a principal challenge to operational wetland monitoring is maintaining the currency of maps for a landscape ecosystems that are spatially dynamic.
+10,414 t.r.
+10,"allen marshes in low-lying tidal locations such as cedar island national wildlife refuge (nwr), north carolina, are disposed to dynamics from persistent as well as episodic storm erosion, dieback from long-term sea-level rise and associ- ated tidal inundation, anthropogenic change such as diking, dredging or filling, and invasion from phragmites australis."
+10,some estuarine marshes in north caro- lina have erosion rates exceeding 10 m per year (wang and allen 2008.)
+10,"traditional aerial photointerpretation, such as the us fish and wildlife service national wetland inventory (nwi) utilizes protocols that could be enhanced with the sensors and technological advances previously noted."
+10,cedar island national wildlife refuge is an exemplary location for pilot testing methods for rapid and regional wetland inventorying at a screening or root-level of the nwi hierarchy.
+10,"classification of estuarine emergent marshes, shrub-scrub, forested wetlands and phragmites on an extensive and efficient basis could save the nwi program time and guide decisions for map updates."
+10,"a pilot study was undertaken to apply image classification of a multi-date, multi-sensor image stack to inventory marshes and identify phragmites (if present.)"
+10,the area includes an estuarine barrier island and pine forest hammocks amidst dune ridges adjoining extensive juncus marshes and fringing spartina alterniflora.
+10,the marshes are situated very low in the tidal frame and undergoing transition and dieback from increasing inundation in the area of the thorofare and core sound.
+10,"four alos palsar images (hh and hv polarization) were obtained, transformed to db power, and geometrically co-registered for april 30, june 15 and september 15, 2010."
+10,these images were initially masked using a water mask digitized from orthophotos.
+10,a 6 m resolution lidar dem was integrated within the data stack for unsupervised classification.
+10,details of the classification method are described in allen et al. (2013) in a parallel study of the alligator river national wildlife refuge.
+10,"figure 17.1 depicts the multidate palsar hh bands and the stark visual contrast in backscatter between extensive juncus sp., fringing spartina sp. and wrack, and the stronger backscatter of shrub-scrub and forest vegetation."
+10,the classified image (fig.
+10,"17.2) easily differentiates these among four basic classes in a rapid, albeit traditional isodata cluster analysis."
+10,twelve clusters were aggre- gated to produce these four basic information classes.
+10,"unfortunately, the pilot study was unable to evaluate the potential to map phragmites sp. at cedar island, which was only found outside the refuge."
+10,"a subsequent study in alligator river, however, more rigorously evaluated the classification potential for phragmites, also using an obia approach."
+10,"nonetheless, this demonstration of a simple image classification requiring minimal pre-processing (limited to image acquisition and georectification checks) and an elementary classifier provides land managers accurate, timely, and cost-effective information on major ecosystem states across an extensive area."
+11,17 advances in remote sensing of coastal wetlands. . .
+11,415 fig.
+11,"17.1 alos palsar multi-date composite image of cedar island nwr, north carolina, showing rgb composite hh polarization on april 30, june 15, and september 15, 2010, respectively 17.3.2 case study: obia for transitional marshes and phragmites in spencer creek, alligator river nwr a second case study sought to further explore the potential to map multiple marsh communities, including expansive areas of phragmites australis."
+11,"the latter com- munity has been apt to establish along estuarine fringes and in expanding, patchy colonies throughout the pamlico and currituck sounds."
+11,"within the alligator river national wildlife refuge and others in the northern outer banks area, phragmites"
+12,416 t.r.
+12,allen fig.
+12,"17.2 classified alos palsar of cedar island national wildlife refuge, nc has displaced low marshes and threatened the habitats of associated migratory birds and other endemic species, requiring refuge staff and fws personnel to exert management and control to mitigate its spread."
+12,"one area in particular, from point peter road north to spencer creek on the outer pamlico peninsula has witness rapid estuarine hotspot erosion and phragmites colonization."
+12,strong interest there by the fws and ngos such as the nature conservancy could be served by remotely sensed monitoring and inventory.
+12,"similar to the cedar island nwr case study, alos palsar were acquired and stacked for image classification."
+12,"in addition, a lidar dem was obtained, includ- ing bare earth and vegetation canopy height layers."
+12,"for classification, erdas objective software was used to iteratively segment then classify vector"
+13,17 advances in remote sensing of coastal wetlands. . .
+13,417 fig.
+13,"17.3 pixel spectral feature probability values derived from multidate alos palsar for selected coastal vegetation of spencer creek, alligator river national wildlife refuge, nc. (a) water, (b) phragmites, (c) shrub-scrub, (d) marsh polygons of homogeneous spectral and topographic conditions in the area."
+13,"fig- ure 17.3 depicts the results from one step of the process, the derivation of pixel spectral feature probabilities based on training sites for marsh, phragmites, open water, and shrub-scrub."
+13,"one of three intensive study areas explored by allen et al. (2011) and assessed in detailed in allen et al. (2013), the resulting image classification (fig."
+13,17.4) achieved class accuracies exceeding 85 %.
+13,"in comparison, accuracies for wetlands ranged from 80 to 82 % with per pixel classification (allen et al."
+13,2013).
+13,the map illustrates a process of rapidly expanding phragmites along the shoreline and within the spencer creek drainage that presents a severe management challenge for native habitats.
+13,"one pitfall of discrete, state-based wetland classification in such a dynamic estuarine system is the inability of capture gradual shifts in ecosystem state and health."
+13,"towards this, the normalized differences (ndx) composites and spectral mixture analysis techniques proposed by rogers and kearney (2004) composed of normalized difference vegetation index (ndvi), normalized difference water index (ndwi), and the normalized difference soil index (ndsi)."
+14,418 t.r.
+14,allen fig.
+14,"17.4 classified segments from multidate alos palsar for spencer creek, alligator river nwr, nc multispectral normalized differences afford the potential to compare and track changes across fixed indices through time (as compared to scene-dependent data compression approaches such as pca) and also to fix axes for spectral unmixing (e.g., fractional pixel components of soil, water, and marsh vegetation)."
+14,figure 17.5 illustrates an exploratory application of the ndx composite indices for the alligator river nwr and adjoining roanoke island and outer banks.
+14,"the indices in composite rgb display strongly differentiate the phragmites, emergent salt marsh, shrub-scrub, and swamp forests in the alligator nwr as well as the southern marshes of roanoke island (near wanchese), emergent post-fire marshes near stumpy point, and recovering atlantic white cedar peatland swamp forests in the buckridge coastal reserve."
+14,"although exploratory in our case study, future work using the ndx image composites might also investigate the sensitivity of the multi-date sar and lidar to biophysical and seasonal parameters pertinent to wetland monitoring, including classification, migration, colonization, punctuated events (e.g., storm ero- sion and marsh wrack deposition) and phragmites condition."
+14,"with the advantage of temporal stability of the indices, there is also a strong multitemporal change detection application, such as has found a rich body of literature exploiting the tasseled cap transformation (crist and cicone 1984) and the inclusion of multi-date imagery for improved wetland classification accuracy (allen et al."
+14,2012).
+15,17 advances in remote sensing of coastal wetlands. . .
+15,419 fig.
+15,"17.5 landsat 8 oli normalized difference transformation (ndx) soil-water-vegetation composite for the northern pamlico, croatan, and roanoke sound, north carolina."
+15,"321 rgb composite (ndsi, ndvi, ndwi, respectively) 17.3.3 barrier island vegetation mapping with obia techniques, rachel carson coastal reserve the goal of this case study was to develop remote sensing protocols for mapping a dynamic saltmarsh and associated communities using a combination of lidar, aerial digital orthophotography, and satellite imagery and obia classification methods."
+15,the resulting ecogeomorphic map would incorporate predominantly vegetative or geomorphic units previously mapped and monitored by the nc coastal reserve and nc division of coastal management (nc department of environment and natural resources.)
+15,"this scheme required utilizing an ultra- high spatial resolution (previous work has traditionally used orthophoto digitization and high-resolution field-based gps surveys) as well as including the wide range of classes from terrestrial maritime forests and shrub-scrub through wetlands (supratidal to intertidal) as well as subtidal flats and water courses dynamically changing in the bird shoal area of the reserve near beaufort inlet and shackelford banks, an oceanfront barrier island."
+15,this research could further the contribution of remote sensing for scientific research and resource management.
+15,a systematic image processing-based approach and new sensor technology have the potential to reduce mapping error owing to misinterpretation and map generalization.
+15,this research uses recent technological advances to design a methodology aimed at producing highly
+16,420 t.r.
+16,allen fig.
+16,"17.6 carrot island study area within the rachel carson reserve, nc coastal reserve, north carolina, april 2010 color orthophoto accurate, cost-effective classification and elevation maps and for resource man- agers, academics, and researchers."
+16,accurate classification and elevation informa- tion is essential to informed policy- and decision-making with respect to coastal wetland vulnerability.
+16,"the rachel carson component of the ncnerr is located near the mouth of the newport river in southern carteret county, north carolina, directly across taylor’s creek from the historic town of beaufort (fig."
+16,17.6).
+16,"the site is approx- imately 10.6 km2 and comprises several small islands (carrot, town marsh, bird shoal, horse island, and middle marshes)."
+16,the state port at morehead city is located three miles to the west.
+16,"rachel carson is bounded to the north by taylor’s creek and the city of beaufort, to the east by back sound, to the south by the cape lookout national seashore, and to the west by piver’s and radio islands (site profile)."
+16,the site is approximately 10.6 km2 and comprises several small islands (fig.
+16,17.7).
+16,"the middle marshes were not included in the mapping project, as adequate lidar data was not available for that portion of the reserve."
+16,the 2010 true-color orthophoto (fig.
+16,"17.7a) depicts the diversity of terrestrial wetlands, highly modified dune and sand flats, and intertidal marshes spread across the reserve."
+16,"in addition, broad expanses of subtidal flats and sporadic submerged aquatic vegetation (sav) may sometimes be found."
+16,"the variable depth and surface roughness owing to wave fetch are evident, as are numerous sand bars and shoals."
+16,the historic town of beaufort and adjoining developed land are excluded from the mapping.
+17,17 advances in remote sensing of coastal wetlands. . .
+17,421 fig.
+17,"17.7 rachel carson reserve true color orthophoto mosaic (a) and color-infrared mosaic (b) excluding middle marsh march 2010 as with the multisensory stack in case studies at cedar island and alligator river nwr, a multidate stack of alos palsar imagery were acquired and preprocessed for rachel carson reserve."
+17,the multiple images visually depict subtle changes in cover type cover and structure over the year 2010 (fig.
+17,17.8).
+17,these data were stacked with bare earth dems and the four-band cir composite (fig.
+17,17.7) and input to erdas objective module for segmentation.
+17,"derivative statistics for each layer included up to 76 different variables for each spectral and topographic characteristic, in addition to patch shape and areal indices."
+17,a sample of segments were used for training a classification and regression tree (cart) (see5 software) to generate a pruned and winnowed set of classification rules.
+17,twenty parsimonious rules were generated from the cart analysis and used to classify the segments in an arcgis python script.
+17,"more than 900 segments of the 36,000 generated were randomly selected for accuracy assessment."
+17,initial results
+18,422 t.r.
+18,allen fig.
+18,"17.8 multi-date alos palsar 2010 imagery subset and masked for rachel carson reserve, north carolina estuarine research reserve indicate a very high classification accuracy with overall sample accuracy of 88 % for eleven classes."
+18,"if the shrub-scrub classes and sandy beach/sandy dune classes are aggregated to create a smaller set of nine classes, then the accuracy increases to 95 % overall."
+18,this level of accuracy presents a strong case for expanded application of obia and multi-sensor high resolution mapping of coastal environments (fig.
+18,17.9).
+18,"17.3.4 case study synthesis the overall results from the case studies presented highlights the robustness of remote sensing across a diversity of multi-sensor, multi-date, and alternative classification algorithms for coastal wetlands."
+18,two general insights are notewor- thy.
+18,"first, it is increasingly feasible to classify finer thematic detail and spatial resolution of coastal wetlands with improved data and algorithms."
+18,"the potential to map discrete classes of coastal wetlands has been long-established, although now it is possible to accurately identify and classify wetland communities that have historically been challenging."
+18,"in these case studies, those difficult to map and monitor classes include forested wetlands and phragmites."
+18,"secondly, there is"
+19,17 advances in remote sensing of coastal wetlands. . .
+19,423 fig.
+19,"17.9 resulting image classification for 11 island vegetative and surficial categories expanding opportunities to incorporate lidar and sar imagery for their capa- bilities to characterize structural and continuous variation of wetland character- istics, such as biomass, elevation, density, and canopy structure."
+19,lidar data in the case studies often disentangled marshes that are spectrally similar but isolated elevationally.
+19,"similarly, sar imagery captured the differential and seasonal changes of wetland canopies, particularly shrub-scrub, forests, and phragmites in the fine-scale study of carrot island, both lidar and sar variables formed the majority of the cart rule sets, despite the ultra-high resolution and cir bands in the orthophotography."
+19,"finally, landsat 8 is illustrated in the ndx composites for the alligator nwr case study."
+19,"although significantly coarser than the other remotely sensed data applied in this chapter, landsat 8 offers extremely improved radiometric and spectral characteristics."
+19,"in conjunction with its systematic and low-cost image acquisition and the continuity of preceding landsat sensors, the potential for monitoring and change detection with landsat is robust, indeed."
+19,"as an assemblage of remote sensing systems, these data offer new opportunities for screening-level inventorying, hotspot and anomaly detection (e.g., erosion events, phragmites colonization, land use/cover change or loss), and investigation of coastal ecological processes as never before (e.g., marsh dieback, ecotone switching, and biological invasions.)"
+20,424 t.r.
+20,allen 17.4 conclusions this chapter sought to assess developments in the state of the art of remote sensing of coastal wetlands through the lens of selected case studies.
+20,"throughout the investigations described, the incorporation of exotic or novel imagery was often deemed experimental or risky among cooperating coastal resource managers."
+20,"the familiarity of traditional optical imagery, albeit digital and perhaps multispectral, was a comfort zone that end-users of remote sensing products were favorable toward, yet they also recognized the potential efficiency, scalability, and repeatability of satellite sensors."
+20,"king and green (2009) remark on the continuing, automatic assumption by managers and non-remote sensing specialists that aerial photography is the natural and most desirable form of remotely sensed information for dynamic coasts."
+20,they cite the need for better education and awareness and applied research that matches the pertinent issue to the scale of imagery prescribed.
+20,"while there are applications and especially ultra-fine resolution that aerial or even uav drones may be the only solution, since humans to a great degree can intuitively interpret aerial photography, efforts to educate sectors of end-users on the wider variety of data available should demonstrate, guide, and evaluate the degree to which users can incorporate evolving data into their products and workflows."
+20,"one possibility, organizing imagery and derivative map products hierarchically, could allow variable resolution and “drilling down” to the appropriate detail and accuracy desirable for a given application."
+20,the structure of such a hierarchy can be quite readily developed with modern gis and decision support systems.
+20,"indeed, a variety of coastal web atlases have begun doing that, such as the noaa digital coast (noaa 2014)."
+20,"while both satellite and airborne remote sensing are essential for coastal applications, the increasing resolution and volume of data calls for more automation and object-based techniques (kelly and tuxen 2009) and exploitation of innovative multi-temporal and multi-sensor data."
+20,"references akbar m, aliabadi s, patel r, watts m (2013) a fully automated and integrated multi-scale forecasting scheme for emergency preparedness."
+20,"environ model software 39:24–38 allen tr, wang y, gore b, swords j, newcomb d (2011) coastal wetland mapping using time series sar imagery and lidar: alligator river national wildlife refuge, north carolina."
+20,"in: proceedings, pecora 18 symposium, herndon, virginia, 14–17 november allen yc, couvillion br, barras ja (2012) using multitemporal remote sensing imagery and inundation measures to improve land change estimates in coastal wetlands."
+20,"estuar coasts 35:190–200 allen tr, wang y, gore b (2013) coastal wetland mapping combining multi-date sar and lidar in north carolina."
+20,"geocarto int 28(7):616–631 aplin p, smith gm (2008) advances in object-based image classification."
+20,"int arch photogramm remote sens spat inf sci vol xxxvii(b7):725–728, beijing blaschke t (2010) object based image analysis for remote sensing."
+20,isprs j photogramm remote sens 65:2–16. doi:10.1016/j.isprsjprs.2009.06.004
+21,17 advances in remote sensing of coastal wetlands. . .
+21,"425 borgeau-chavez ll, smith kb, brunzell sm, kasischke es, romanowicz ea, richardson cj (2005) remote sensing of regional inundation patterns and hydroperiod in the greater ever- glades using synthetic aperture radar."
+21,wetlands 25(1):176–191 carle mv (2011) estimating wetland losses and gains in coastal north carolina: 1994–2001.
+21,"wetlands 31:1275–1285 chambers jq, fisher ji, zeng h, chapman el, baker db, hurtt gc (2007) hurricane katrina’s carbon footprint on u.s."
+21,gulf coast forests.
+21,science 318(5853):1107. doi:10.1126/science.
+21,"1148913, 16 chen y, huang c, ticehurst c, merrin l, thew p (2013) an evaluation of modis daily and 8-day composite products for floodplain and wetland inundation mapping."
+21,wetlands 33:823–835 chmura gl (2013) what do we need to assess the sustainability of the tidal salt marsh carbon sink?
+21,oceans coast manag 83:25–31. doi:10.1016/j.ocecoaman.2011.09.006 coe mt (2000) modeling terrestrial hydrologic systems at the continental scale: testing the accuracy of an atmospheric gcm.
+21,"j climate 13:686–704 corcoran jm, knight jf, gallant al (2013) influence of multi-source and multi-temporal remotely sensed and ancillary data on the accuracy of random forest classification of wetlands in northern minnesota."
+21,"remote sens 2013(5):3212–3238. doi:10.3390/rs5073212 couvillion br, beck h (2013) marsh collapse thresholds for coastal louisiana estimated using elevation and vegetation index data."
+21,"j coast res 63:58–67 couvillion br, steyer gd, wang h, beck hj, rybczyk jm (2013) forecasting the effects of coastal protection and restoration projects on wetland morphology in coastal louisiana under multiple environmental uncertainty scenarios."
+21,"j coast res 67:29–50 crist ep, cicone rc (1984) a physically-based transformation of thematic mapper data – the tm tasseled cap."
+21,"ieee trans geosci remote sens ge-22:256–263 dai l, liu c (2010) multiple classifier combination for land cover classification of remote sensing image."
+21,"in: proceedings, 2nd international conference on information science and engineering (icise), beijing, institute of geographic sciences and natural resources research, pp 3835–3839 dehouck a, lafon v, baghdadi n, marieu v (2012) use of optical and radar data in synergy for mapping intertidal flats and coastal salt-marshes (arcachon lagoon, france)."
+21,"geosci remote sens symp (igarss) 2011, ieee international."
+21,available http://www.halcyon.com/pub/ journals/21ps03-vidmar.
+21,"last accessed 1 may 2011 dobson jd, bright ea (1991) coastwatch – detecting change in coastal wetlands."
+21,"geo info syst 1:36–40 donelly jp, bertness md (2001) rapid shoreward encroachment of salt marsh cordgrass in response to accelerated sea-level rise."
+21,"proc natl acad sci 98(25):14218–14223. doi:10.1073/ pnas.251209298 dresback km, fleming jg, blanton bo, kaiser c, gourley jj, tromble em, luettich ra jr, kolar rl, hong y, van cooten a, vergara hj, flamig zl, lander hm, kelleher ke, nemunaitis-monroe kl (2013) skill assessment of a real-time forecast system utilizing a coupled hydrologic and coastal hydrodynamic model during hurricane irene (2011)."
+21,cont shelf res 71:78–94 franklin se (1991) satellite remote sensing of mountain geomorphic surfaces.
+21,"can j remote sens 17(3):218–229 hamilton sk, kellndorfer j, lehner b, tobler m (2007) remote sensing of floodplain geomor- phology as a surrogate for biodiversity in a tropical river system (madre de dios, peru)."
+21,geomorphology 89:23–38 heumann bw (2011) an object-based classification of mangroves using a hybrid decision tree – support vector machine approach.
+21,"remote sens 3:2440–2460 hladik c, alber m (2012) accuracy assessment and correction of a lidar-derived salt marsh digital elevation model."
+21,remote sens environ 121:224–235
+22,426 t.r.
+22,"allen hofel b, vetter m, pfeiffer n, mandlburger g, stotter j (2009) water surface mapping from airborne laser scanning using signal intensity and elevation data."
+22,earth surf proc land 34 (12):1635–1649 hupp cr (1988) plant ecological aspects of flood geomorphology and paleoflood history.
+22,"in: baker vr, kochel rc, patton pc (eds) flood geomorphology."
+22,"wiley, new york, pp 335–356 jensen jr, cowen d, althausen jd, narumalani s, weatherbee o (1993) an evaluation of coastwatch change detection protocol in south carolina."
+22,"photogramm eng remote sens 59 (6):1039–1046 kamal m, phinn s (2011) hyperspectral data for mangrove species mapping: a comparison of pixel-based and object-based approach."
+22,"remote sens 3:2222–2242. doi:10.3390/rs3102222 kasischke es, bourgeau-chavez ll (1997) monitoring south florida wetlands using ers-1 sar imagery."
+22,"photogramm eng remote sens 33:281–291 kearney ms, rogers as (2010) forecasting sites of future coastal marsh loss using topographical relationships and logistic regression."
+22,"wetlands ecol manag 18(4):449–461 kearney ms, stutzer d, turpie k, stevenson jc (2009) the effects of tidal inundation on the reflectance characteristics of coastal marsh vegetation."
+22,"j coast res 25(6):1177–1186 kelly m, tuxen ka (2009) remote sensing support for tidal wetland vegetation research and management."
+22,in: yang x (ed) remote sensing and geospatial technologies for coastal ecosys- tem assessment and management.
+22,lecture notes in geoinformation and cartography.
+22,"springer, heidelberg, pp 341–363 kelly m, tuxen ka, stralberg d (2011) mapping changes to vegetation pattern in a restoring wetland: finding pattern metrics that are consistent across spatial scale and time."
+22,"ecol indic 11:263–273. doi:10.1016/j.ecolind.2010.05.003 kim m, warner ta, madden m, atkinson ds (2011) multi-scale geobia with very high resolution digital aerial imagery: scale, texture and image objects."
+22,"int j remote sens 32(10):2825–2850 king sd, green dr (2009) matching issue to utility: an hierarchical store of remotely sensed imagery for coastal zone management."
+22,"in: green dr, king sd (eds) coastal and marine geo-information systems."
+22,coastal systems and continental margins.
+22,"kluwer, dordrecht, pp 474–486 klemas v (2009) sensors and techniques for observing coastal systems."
+22,in: yang x (ed) remote sensing and geospatial technologies for coastal ecosystem assessment and management.
+22,lecture notes in geoinformation and cartography.
+22,"springer, heidelberg, pp 17–43 klemas v (2013a) remote sensing of coastal wetland biomass: an overview."
+22,j coast res 29(5):1016–1028 klemas v (2013b) remote sensing of emergent and submerged wetlands: an overview.
+22,"int j remote sens 34(18):6286–6320 klemas vv, dobson je, ferguson rl, haddad kd (1993) a coastal land cover classification system for the noaa coastwatch change analysis project."
+22,"j coast res 9(3):862–872 kushwaha sps, dwivedi rs, rao brm (2000) evaluation of various digital image processing techniques for detection of coastal wetlands using ers-1 sar data."
+22,"int j remote sens 21(3):565–579 lang mw, kasischke es, prince sd, pittman kw (2008) assessment of c-band synthetic aperture radar for mapping and monitoring coastal plain forested wetlands in the mid-atlantic region, u.s.a."
+22,"remote sens environ 112:4120–4130 lang m, mccarty g, oesterling r, yeo i (2013) topographic metrics for improved mapping of forested wetlands."
+22,"wetlands 33:141–155 lee y, park j, choi j, oh y, choi j, oh hy, won j (2012) potential uses of terrasar-x for mapping herbaceous halophytes over salt marsh and tidal flats."
+22,"estuar coast shelf sci 115:366–376 loveland tr, merchant jw, ohlen do, brown jf (1991) development of a land-cover charac- teristics database for the conterminous u.s."
+22,photogramm eng remote sens 57(11):1453–1463
+23,17 advances in remote sensing of coastal wetlands. . .
+23,"427 lunetta rs, evlidge cd (eds) (1988) remote sensing change detection: environmental monitoring methods and applications."
+23,"taylor and francis, london mcleod e, chmura gl, bouillon s, salm r, bjor m, duarte cm, lovelock cf, schlesinger wh, silliman br (2011) a blueprint for blue carbon: toward an improved understanding of the role of vegetated coastal habitats in sequestering co2."
+23,front ecol environ 9(10):552–560. doi:10.
+23,"1890/110004 meyerson la, saltonstall k, chambers rm (2009) phragmites australis in eastern north america: a historical and ecological perspective."
+23,"in: silliman bre, grosholz m, bertness d (eds) salt marshes under global siege."
+23,"university of california press, berkley, pp 57–82 morris jt, sundareshwar pv, nietch ct, kjerfve b, cahoon dr (2002) responses of coastal wetlands to rising sea level."
+23,"ecology 83:2869–2877 pal m, mather p (2003) an assessment of the effectiveness of decision tree methods for land cover classification."
+23,"remote sens environ 86:554–565 phinn sr, roelfsema cm, mumby pj (2012) multi-scale, object-based image analysis for mapping geomorphic and ecological zones on coral reefs."
+23,"int j remote sens 33(12):3768–3797 platt rv, rapoza l (2008) an evaluation of an object-oriented paradigm for land use/land cover classification."
+23,"prof geogr 60(1):87–100 pontius rg, millones m (2011) death to kappa: birth of quantity disagreement and allocation disagreement for accuracy assessment."
+23,"int j remote sens 32(15):4407–4429 poulter b, halpin pn (2008) raster modelling of coastal flooding from sea‐level rise."
+23,"int j geogr info sci 22(2):167–182. doi:10.1080/13658810701371858 ramsey e iii, rangoonwala a, suzuoki y, jones c (2011) oil detection in a coastal marsh with polarimetric synthetic aperture radar (sar)."
+23,"remote sens 3(12):2630–2662 ramsey e iii, werle d, suzuoki y, rangoonwala a, lu z (2012) limitations and potential of satellite imagery to monitor environmental response to coastal flooding."
+23,"j coast res 28 (2):457–476 rodrigues swp, souza-filho p (2013) mapping of environmental sensitivity index to oil spill from landsat tm images: a study case on the amazon coastal plain."
+23,"rev bras geofis 30 (4):533–543 rogers as, kearney ms (2004) reducing signature variability in unmixing coastal marsh thematic mapper scenes using spectral indices."
+23,"int j remote sens 25:2317–2335 saltonstall k (2002) cryptic invasion by a non-native genotype of the common reed, phragmites australis, into north america."
+23,"proc natl acad sci 99(4):2445–2449 schmid ka, hadley bc, wijekoon n (2011) vertical accuracy and use of topographic lidar data in coastal marshes."
+23,"j coast res 27(6):116–132 south s, qi j, lusch dp (2004) optimal classification methods for mapping agricultural tillage practices."
+23,"remote sens environ 91:90–97 timm bc, mcgarigal k (2012) fine-scale remotely-sensed cover mapping of coastal dune and salt marsh ecosystems at cape cod national seashore using random forests."
+23,"remote sens environ 127:106–117 townsend pa, walsh sj (1998) modeling floodplain inundation using an integrated gis with radar and optical remote sensing."
+23,geomorphology 21:295–312 wang y (2004) seasonal change in the extent of inundation on floodplains detected by jers-1 synthetic aperture radar data.
+23,"int j remote sens 25(13):2497–2508 wang y, allen tr (2008) estuarine shoreline change detection using japanese alos palsar hh and jers-1 l-hh sar data in the albemarle-pamlico sounds, north carolina, usa."
+23,"int j remote sens 29(15):4429–4442 wang y, colby jd, mulcahy ka (2002) an efficient method for mapping flood extent in a coastal floodplain using landsat tm and dem data."
+23,"int j remote sens 23(18):3681–3696 wang w, qu jj, hao x, liu y, stanturf ja (2010) post-hurricane forest damage assessment using satellite remote sensing."
+23,"agric for meteorol 150(1):122–132 weih jr rs, riggan nd (2010) object-based classification vs. pixel-based classification: com- parative [sic] importance of multi-resolution imagery."
+23,int arch photogramm remote sens spat
+24,428 t.r.
+24,"allen inf sci, vol."
+24,xxxviii-4/c7.
+24,available at http://www.isprs.org/proceedings/xxxviii/4-c7/pdf/ weih_81.pdf.
+24,"last accessed 23 apr 2013 yoon j, shim j (2013) estimation of storm surge inundation and hazard mapping for the southern coast of korea."
+24,"j coast res 65:856–861 zhang sp, wang rq, zhang z (2003) study on morphological variation of phragmites australis in the yellow river downstream wetland."
+24,chin j plant ecol 27(1):78–85

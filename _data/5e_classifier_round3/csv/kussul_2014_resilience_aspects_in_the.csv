@@ -1,0 +1,524 @@
+page,p
+1,"3826 ieee journal of selected topics in applied earth observations and remote sensing, vol."
+1,"7, no."
+1,"9, september 2014 resilience aspects in the sensor web infrastructure for natural disaster monitoring and risk assessment based on earth observation data nataliia kussul, sergii skakun, andrii yu."
+1,"shelestov, olga kussul, student member, ieee, and bohdan yailymov abstract—this paper focuses on enabling resilience of the sensor weather forecasts, and other information can help save lives."
+1,"web system for disaster monitoring and risk assessment that is therefore, an operational infrastructure to enable such function- based on the use of earth observation (eo) data."
+1,"resilience is the ality through, e.g., services is required."
+1,such services would ability of the system to maintain trustworthy service delivery in spite of changes.
+1,"resilience of the eo infrastructure becomes an extreme- include services for planning and acquiring observations, data ly important issue, especially in the disaster management domain. processing and products generation, and forecasting and model- we propose to enable resilience through: 1) the use of grid resources ing phenomena."
+1,"the global earth observation system of and services to meet high performance computing requirements; systems, or geoss, was aimed at strengthening analysis and and 2) assessment of resource reputation to select reliable resources. decision making for disaster response and risk reduction by grid services enable redundancy through integration of heteroge- neous resources administrated by geographically distributed integrating different types of disaster-related data and informa- organizations."
+1,"the same services could be provided by different tion from diverse sources [13], [14]. organizations within the infrastructure, and could be of different the sensor web approach [15], [16] envisions the coordinated levels of quality."
+1,"therefore, we propose to incorporate a utility- use of earth observation (eo) data from both international based reputation model to assess reliability of the resources."
+1,"the satellite systems and regional systems [17], [18], and their proposed approach is implemented within the namibia sensor web corresponding geospatial products and services in support of pilot project that was created as a testbed for evaluating and prototyping key technologies for rapid acquisition and distribution disaster management."
+1,"sensor web provides a set of the stan- of data products for decision support systems to monitor ﬂoods. dardized open geospatial consortium (ogc) services [19], [20] enabling sensor discovery, planning, and triggering by events, as index terms—earth observation (eo), ﬂoods, natural disasters, resilience, sensor web. well as enabling access to and description of observations."
+1,in order to enable processing of data acquired by sensors within the i.
+1,"introduction sensor web, corresponding processing services are required."
+1,"these services could be provided within, e.g., grid and cloud ver last decades, there has been an upward global infrastructures [11], [15], [21]–[24]."
+1,to provide forecasting o trend in natural disasters occurrences [1].
+1,"hydrological and meteorological disasters, such as ﬂoods and droughts, are the capabilities within disaster management domain, corresponding environmental models should be integrated into such infrastruc- main contributors to this pattern."
+1,disaster management agencies tures.
+1,"such functionality could be provided within the model as a all over the world have to adapt to an increasing number and service (maas) approach [25] that is applied within the group on severity of natural disasters [2], [3]."
+1,"in recent years, a risk-oriented earth observation (geo) model web initiative. approach for managing the risks of disasters has been adopted [4]."
+1,"the eo systems based on the above-mentioned technologies risk is a function of two arguments (hazard probability and are dynamic and constantly evolving, and quality of the provided vulnerability), and represents a mathematical expectation of the services and datasets might ﬂuctuate with the time."
+1,"much atten- vulnerability (consequences) function due to the disasters [4]–[8]. tion has been recently paid to providing geospatial data quality to assess disaster risk, aggregation of heterogeneous data acquired indicators and reliability in such eo large-scale service-oriented from multiple sources is required [9]–[12]. systems as geoss [26], [27]."
+1,"therefore, under changing con- when disasters strike, rapid and reliable access to data on ditions, the system should be able to provided trusted and local conditions, including roads, hospitals, population centers, reliable services to the users."
+1,this property of a system is known as resilience.
+1,"by resilience, we mean ability to maintain service manuscript received october 09, 2013; revised january 14, 2014; accepted delivery that can justiﬁably be trusted in spite of changes in its march 19, 2014."
+1,"date of publication august 25, 2014; date of current version internal and external contexts or in the interface between these november 04, 2014."
+1,"[28], [29]."
+1,resilience of the eo infrastructure becomes an n.
+1,"kussul, s."
+1,"skakun, and b."
+1,"yailymov are with the department of space information technologies and systems of the space research institute nas extremely important issue, especially in the disaster management ukraine and ssa ukraine, kyiv, ukraine (e-mail: inform@ikd.kiev.ua; serhiy. domain."
+1,"users, e.g., local authorities and emergency workers, skakun@ikd.kiev.ua; yailymov@gmail.com). must be conﬁdent that services they utilize can be trusted and are a."
+1,"shelestov is with the department of software engineering of the national university of life and environmental sciences of ukraine, kyiv, delivered in time with appropriate level of quality."
+1,ukraine (e-mail: andrii.shelestov@gmail.com).
+1,this paper focuses on enabling resilience of the sensor web o.
+1,kussul is with the department of information security of the national system for disaster monitoring and risk assessment.
+1,"in particular, technical university of ukraine “kyiv polytechnic institute,” kyiv, ukraine (e-mail: olgakussul@gmail.com). we will focus on delivering trusted and reliable services through digital object identiﬁer 10.1109/jstars.2014.2313573 the use of grid resources and services, and assessment of 1939-1404 © 2014 ieee."
+1,"personal use is permitted, but republication/redistribution requires ieee permission."
+1,see http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+1,authorized licensed use limited to: univ of calif santa barbara.
+1,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+1,restrictions apply.
+2,kussul et al.: resilience aspects in the sensor web infrastructure 3827 resource reputation.
+2,grid services enable redundancy through integration of heterogeneous resources administrated by geo- graphically distributed organizations.
+2,"the same service, e.g., ﬂood mapping from satellite imagery, can be provided by different organizations within the infrastructure."
+2,these services can be discovered through the geoss component and service registry [30].
+2,resources can provide different levels of quality of services (qos).
+2,"moreover, the service might exhibit ﬂuctua- tions in qos under changing conditions or system evolution."
+2,"therefore, we propose to incorporate a utility-based reputation model [31] to assess trustworthiness and reliability of the re- source."
+2,resource reputation is further incorporated into the scheduler to select appropriate services.
+2,the proposed approach is implemented within the namibia sensor web pilot project that was created as a testbed for evaluating and prototyping key fig.
+2,components of the sensor web and integration with computation technologies for rapid acquisition and distribution of data pro- capabilities and models through services. ducts for decision support systems to monitor ﬂoods [11].
+2,sensor web architecture for flood monitoring and risk assessment a.
+2,sensor web overview sensor web is an emerging paradigm for integrating hetero- geneous satellite and in situ sensors and data systems into a common informational infrastructure that produces products on demand (fig.
+2,"the basic functionality required from such an infrastructure includes sensor discovery, triggering events by observed or predicted conditions, remote data access, and pro- cessing capabilities to generate and deliver data products."
+2,"sensor web is governed by the set of standards, called sensor web enablement (swe), developed by the ogc [19], [20]."
+2,these services include the following.
+2,1) ogc observations & measurements (o&m): common terms and deﬁnitions for sensor web domain.
+2,2) sensor model language (sensorml): xml-based lan- guage for describing different kinds of sensors.
+2,3) sensor observations service (sos): an interface for pro- viding remote access to sensors data.
+2,4) sensor planning service (sps): an interface for submitting tasks to sensors.
+2,5) swe common data model: describes data models for exchanging sensor-related data between nodes.
+2,sensor web architecture for ﬂood monitoring and risk assessment.
+2,"such infrastructure usually requires computation capabilities to process data acquired by different sensors which can be and prediction case study [35], [36]."
+2,"it presents the integrated use provided by high-performance computing (hpc), grid or cloud of different ogis speciﬁcations for the sensor web."
+2,the data services.
+2,"senor web infrastructure should be integrated with the from multiple sources (numerical models, remote sensing, in situ models to enable forecasting capabilities."
+2,"that can be done, e.g., observations) are accessed through the sos."
+2,an aggregator site through services and a model web paradigm [25]. is running the sensor event service (ses) to notify interested organization about potential ﬂood event using different commu- b.
+2,sensor web for flood monitoring and risk assessment nication means.
+2,"the aggregator site is also sending orders to flood monitoring and ﬂood risk assessment require the inte- satellite receiving facilities using the sps to acquire new satellite grated analysis of data from multiple heterogeneous sources such imagery. as remote sensing satellites, in situ observations, and outputs from models [7], [11], [12], [15], [23]."
+2,flood prediction using iii.
+2,"grid infrastructure meteorological, hydrological, and hydraulic models is adding the complexity of physical simulation to the task [11], [12], [23]."
+2,"grid infrastructure is used to provide computational resources fig. 2 shows the sensor web architecture for ﬂood monitoring for processing data acquired by the sensors of the sensor web, authorized licensed use limited to: univ of calif santa barbara."
+2,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+2,restrictions apply.
+3,"3828 ieee journal of selected topics in applied earth observations and remote sensing, vol."
+3,"7, no."
+3,"9, september 2014 to enable automation and management of the workﬂow for iv."
+3,"enabling resilience in sensor web system for satellite data processing, and to provide redundancy to ensure natural disaster monitoring and risk assessment resilience."
+3,"based on eo data in order to enable fast acquisition, processing, and delivery a."
+3,introduction of geoinformation products in case of emergency correspond- ing services were developed within the infrastructure.
+3,"service-oriented systems, such as sensor webs, are composed high-level services include [37]: security subsystem services of large number of services administrated by different domains. including reputation management services; data catalog these services differ in design, functionality, and implementa- services; metadata services; services for automatic workﬂow tion (see fig."
+3,"for example, sps provides application pro- generation; and services for data aggregation, selection, and gramming interfaces (apis) for scheduling data acquisitions visualization. from in situ or remote sensors, sos provides raw data after high-level services that require high-performance computa- acquisition being made, wcs offer the coverage data, etc."
+3,what tions interact with low-level grid services [37]. they have in common from user perspective is capability to 1) grid security infrastructure (gsi).
+3,to enable security trust deliver a speciﬁc function(s) with some qos.
+3,"at a high level, between different par-ties in the grid system, a public key users are interested in exploiting services that meet their require- infrastructure (pki) is traditionally applied."
+3,x.509 is the ments.
+3,this leads to the speciﬁcation of the service level agree- most widely used format which is supported by most of the ment (sla) between the user and service provider.
+3,"in the domain existing software. of disaster monitoring and risk assessment, the following sla 2) data transfer protocols within grid (gridftp)."
+3,the elements are important: time of products delivery; geospatial gridftp protocol was chosen to provide data transfer resolution and geographical extent of the products; accuracy between the grid systems.
+3,"gridftp is an extension of the (e.g., classiﬁcation accuracy, geolocation precision); types of standard file transfer protocol (ftp) with the following products; and costs."
+3,service and resource selection can be done at additional capabilities: integration with the gsi enabling two levels: local scheduling and global scheduling.
+3,global the support of various security mechanisms; improved scheduling deals with distribution of user requests between performance of data transfer by using parallel streams to service providers.
+3,while local scheduling deals with distributing minimize bottlenecks; multicasting by doing one-source- tasks needed to deliver the particular service among local re- to-many-destinations transfers. sources of the service provider.
+3,"for example, at global level, the 3) global resource allocation manager (gram)."
+3,the grid user might be offered to select different ﬂood mapping services resource allocation and management (gram) service from satellite imagery.
+3,"upon selection of the service, a workﬂow was used to execute jobs on the grid resources. is generated for data processing and tasks are distributed among 4) credential management service (myproxy)."
+3,"an open- resources of the service provider [11], [15], [21], [37]. source software myproxy was used to delegate credentials it should be noted that qos from different providers might to services acting on behalf of the users. vary, and evolves with the time."
+3,in order to select trusted 5) replica location service (rls).
+3,"rls of the gt is used to resources and consequently enable resilience, corresponding provide data replication management in grids."
+3,the rlss metrics should be used to quantify the trust.
+3,reputation is one provide further abstraction layer for dealing with data by of such metrics.
+3,"in this paper, reputation is estimated according to mapping information from logical names for data items to the qos provided by the service provider (see section iv-b for target names. a detailed description)."
+3,"the main advantage of this approach 6) open grid services architecture—database access and is that it is high level and quite generic, and does not rely on integration (ogsa-dai) services."
+3,this framework pro- the speciﬁcs of service functionality and implementation.
+3,it is vides uniform interfaces to access heterogeneous data. especially important for large-scale service-oriented systems the use of standardized interfaces and compatible compo- such as geoss.
+3,"therefore, we concentrate on enabling trust nents at the different levels provides scalability and controlla- and resilience at the level of services. bility of the system."
+3,"in particular, a brokering approach [13] is utilized to integrate sensor web and grid services."
+3,as the user b.
+3,"resource reputation assessment in service-oriented makes a request for a service for a particular region (e.g., ﬂood systems mapping service), a request to the sps is made by the broker for we use a utility-based reputation model for estimating re- data acquisition."
+3,"after data are acquired, the broker generates a sources reputation [31]–[34]."
+3,the model is based on the utility workﬂow in a grid environment.
+3,"the data from the sensor web function that measures the level of satisfaction of a user in are provided using the sos, and, if necessary, large volumes of relation to a service provider."
+3,"in order to deﬁne a utility function, data (e.g., satellite images) are transferred onto local resources an auxiliary function that indicates the sla accorded between a of the grid using gridftp."
+3,the tasks of the workﬂow are user and a resource provider is implemented.
+3,a penalty function distributed by the gram service onto the working nodes that is imposed on a resource provider if the agreed sla is not met. make calculations.
+3,"the results provided by different nodes are in particular, a utility function is deﬁned as [31] aggregated and visualized by corresponding services."
+3,"the re- sults of the data processing are provided via ftp to download the geotiff ﬁles or coverage wcs, or through mapping services (wms)."
+3,authorized licensed use limited to: univ of calif santa barbara.
+3,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+3,restrictions apply.
+4,kussul et al.: resilience aspects in the sensor web infrastructure 3829 fig.
+4,"uml sequence diagram showing resource selection process with reputation. where is the agreed sla value between the user and minimize the value associated with the scheduler while resource provider, is the obtained value of the qos metric selecting a service from a resource with maximum reputation while delivering service during transaction , ( , ) ."
+4,"for this, we utilized a nonlinear tradeoff scheme according is a penalty function imposed on a resource provider if the agreed to which normalized partial criteria are integrated using the sla is not met. following equation: in other words, if the service provider respects the agreed sla, its utility is equal to 1."
+4,"if the service provider fails to respect the agreed sla, then its utility will be < ."
+4,the form of a penalty function depends on the qos in place.
+4,"for example, for time metrics which usually need to be mini- where are parameters and is the normalized value of mized a penalty function can be represented by the criterion associated with the scheduler."
+4,"the service is assigned from the resource which minimizes the value given in (4), i.e., > for example, consider the provider that agreed to deliver ﬂood mapping services within 24 h after the request is made the advantage of using such a scheme is that it provides a ( )."
+4,if the provider delivers the service within 12 h pareto-optimal solution partially satisfying criteria with corre- then the utility is equal to 1; in case of delivering the service sponding weights.
+4,"the experiments showed that the scheduler within 30 h, the penalty will be imposed and the utility will be with knowledge of reputation using a nonlinear tradeoff scheme equal to . outperformed a scheduler without knowledge of reputation on reputation is mathematical expectation of the utility function average 45% for all performance metrics used in the study [31]: (1) and can be approximated using a sample mean [31] makespan, average task execution time, average task queue waiting time, average task access time, number of times sla was not met, average utility, and resource utilization."
+4,incorporation of reputation into service-oriented systems the proposed model is incorporated into the service-oriented where is the reputation value of resource provider at system architecture to enable resilience.
+4,the generic architecture time . is shown in fig.
+4,"the functionality of the main components is as therefore, reputation is the expected utility, and is the measure follows. of service reliability in terms of delivering services with the 1) users exploit services."
+4,"the user can be a human being that agreed sla. gets access to services through, e.g., a geoportal or a system that get access through apis."
+4,service selection based on resource reputation value 2) resource provides services to the users.
+4,we used the proposed reputation model for selecting service 3) virtual organization (vo) is a set of individuals and/or providers based on resource reputation (fig.
+4,"we considered a institutions deﬁned by coordinated resource sharing rules problem of online scheduling onto resources, and presented a for reaching common goals. general procedure for integrating reputation into the scheduler 4) voms is the virtual organization management server. using a nonlinear tradeoff scheme [31]."
+4,5) service is a speciﬁed functionality delivered by a resource let denotes reputation value of resource estimated using provider or a component.
+4,"when incorporating a reputation into a job scheduler, the 6) service catalog contains metadata on the registered following multi-criteria optimization problem arises: we want to services."
+4,authorized licensed use limited to: univ of calif santa barbara.
+4,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+4,restrictions apply.
+5,"3830 ieee journal of selected topics in applied earth observations and remote sensing, vol."
+5,"7, no."
+5,"9, september 2014 fig."
+5,selection percentage of untrustworthy service providers depending on the fig.
+5,integration of reputation components that enable resilience into service- number of untrustworthy resources. oriented systems.
+5,"7) resource management system (broker) processes requests from users, discovers services that meet user requirements in the catalog, and selects appropriate services according to (5)."
+5,resource reputation is obtained from reputation management system.
+5,8) reputation management system implements the proposed approach and estimates and updates reputation of re- sources.
+5,it interacts with the monitoring system to obtain qos metrics for estimating the utility function and conse- quently reputation.
+5,"9) monitoring system collects data on service performance metrics (in particular, qos and sla)."
+5,selection percentage of untrustworthy service providers depending on v.
+5,performance analysis resource trustworthiness rate.
+5,"this section provides results of experiments to validate the within the ﬁrst set of experiments, we varied a number of proposed approach."
+5,"first, we describe experiments on simulated untrustworthy service providers that always provide bad ser- data and then real data. vices."
+5,"here, by “good” (trustworthy) and “bad” (untrustworthy) services, we mean situations when a resource provider respects a."
+5,"enabling resilience through reputation model the agreed sla, and when the agreed sla is violated by a resilience is ability of the system to maintain trustworthy resource provider, respectively."
+5,fig. 5 shows the selection service delivery in spite of changes.
+5,"these changes can be of percentage of untrustworthy service providers (spusp) depend- different nature [29], e.g., variations in system workload or ing on the number of untrustworthy resources."
+5,the spusp value number of reliable resources.
+5,"an important property of the was below 15%, when the number of untrustworthy resources developed scheduler is that it maximizes selection and utiliza- was 60%, and was below 30%, in case of 70% of untrustworthy tion of trustworthy (reliable) service providers when the number resources."
+5,the proposed scheduler started to select services from of untrustworthy (unreliable) resources is high.
+5,we run two sets untrustworthy resources only when the number of untrustworthy of experiments to assess efﬁciency of using the utility-based resources was 50% of the total number of resources in the system. reputation model for enabling resilience in the sensor web.
+5,"all within the second set of experiments, we varied the resource experiments were run for a sensor web system with 20 service trustworthiness rate for the untrustworthy resource providers."
+5,if providers.
+5,"the request arrival rate was modeled from real resource trustworthiness rate is equal to 0.6, then it meets the systems, while other parameters such as sla, qos, and service agreed sla on average in 60% of cases."
+5,we allowed 20% of the capacity were simulated.
+5,"since in our simulations random resources to be untrustworthy but with different degrees of values are generated, it is important to analyze performance trustworthiness."
+5,"when using the proposed scheduler, no services for multiple simulation runs to be able to generalize obtained were selected until resource reputation became high, in our cases simulation results."
+5,"in order to accomplish this, simulations until average resource trustworthiness rate was more than 0.5 were run for different seed values to generate random values."
+5,"when untrustworthy resources became reliable (average the obtained values for multiple runs were averaged across trustworthiness rate was equal 1), then both schedulers selected multiple runs. about 25% of these resources."
+5,authorized licensed use limited to: univ of calif santa barbara.
+5,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+5,restrictions apply.
+6,kussul et al.: resilience aspects in the sensor web infrastructure 3831 for rapid ﬂood mapping.
+6,the use of reputation allowed us to select reliable services that reduced the overall time required for delivering ﬂood services to the end users.
+6,"conclusion in this paper, we focused on enabling resilience of the sensor web system for disaster monitoring and risk assessment through the use of grid resources and services, and assessment of resource reputation."
+6,"resilience of the eo infrastructure becomes an extremely important issue, especially in the disaster manage- ment domain."
+6,users utilizing eo services must be conﬁdent that services they utilize can be trusted and are delivered in time with appropriate level of quality.
+6,resilience is enabled through the use of grid services that provide redundancy through integration of heterogeneous resources administrated by geographically distributed organiza- tions.
+6,"the same services could be provided by different orga- nizations within the infrastructure, and could be of different level of quality."
+6,"therefore, we incorporated a utility-based reputation model to assess reliability of the resources."
+6,reputation is further integrated into the scheduler that selects service providers.
+6,the use of scheduler with reputation allowed us to exclude or limit the use of unreliable and untrustworthy service providers.
+6,"in partic- ular, results of simulations showed that selection percentage of untrustworthy service providers was below 15% when the number of untrustworthy resources in the system was 60%, and was below 30%, in case of 70% of untrustworthy resources."
+6,"also, when varying the resource trustworthiness rate, the proposed scheduler did not select a service provider when its reputation became 0.5."
+6,the proposed approach was tested within the fig.
+6,resource selection (with and without reputation) for the ﬂood mapping namibia sensor web pilot project.
+6,"with enabled computational service. and storage services provided by grid infrastructure and reputation-based service selection, it was possible to generate therefore, utilization of resource reputation for selecting ﬂood maps within 12 h after data acquisition. services allows us to exclude or limit the use of unreliable and untrustworthy service providers in the heterogeneous infrastruc- references ture."
+6,"under changing conditions (system workload, number of unreliable resources), the system is able to maintain delivery of [1] d."
+6,"guha-sapir, f."
+6,"vos, r."
+6,"below, and s."
+6,"ponserre, annual disaster statistical review 2011: the numbers and trends."
+6,"brussels, belgium: reliable services that conform to the agreed sla with the users, centre for research on the epidemiology of disasters (cred), 2012. thus enable resilience of the whole system."
+6,[2] t.
+6,stryker and b.
+6,"jones, “disaster response and the international charter program,” photogramm."
+6,"remote sens., vol. 75, no. 12, pp."
+6,"1342–1344, 2009."
+6,case study: namibia sensor web pilot project [3] g.
+6,"percivall, n."
+6,"alameh, h."
+6,"caumont, k."
+6,"moe, and j."
+6,"evans, the approach described in the section iv is being implemen- “improving disaster management using earth observations—geoss and ceos activities,” ieee j."
+6,topics appl.
+6,earth observ.
+6,"remote sens., ted within the namibia sensor web pilot project [11]."
+6,"the vol. 6, no. 3, pp."
+6,"1368–1375, jun."
+6,2013. project was created as a testbed for evaluating and prototyping [4] e.
+6,mostert and s.
+6,"junier, “the european ﬂood risk directive: challenges key technologies for rapid acquisition and distribution of for research,” earth syst."
+6,"discuss., vol. 6, no. 4, pp."
+6,"4961–4988, 2009."
+6,[5] s.
+6,"jonkman, p."
+6,"m. van gelder, and j."
+6,"vrijling, “an overview data products for decision support systems to monitor ﬂoods of quantitative risk measures for loss of life and economic damage,” and enable ﬂood risk assessment."
+6,one of services currently j.
+6,hazard.
+6,"mater., vol."
+6,"a99, pp."
+6,"1–30, 2003. available through the sensor web infrastructure is a ﬂood [6] n."
+6,"kussul, b."
+6,"sokolov, y."
+6,"zyelyk, v."
+6,"zelentsov, s."
+6,"skakun, and a."
+6,"shelestov, “disaster risk assessment based on heterogeneous geospatial mapping service provided by space research institute nas information,” j."
+6,autom.
+6,"sci., vol. 42, no. 12, pp."
+6,"32–45, 2010."
+6,ukraine and ssa ukraine (sri).
+6,the service provides ﬂood [7] g.
+6,schumann and g.
+6,"di baldassarre, “the direct use of radar satellites for extent maps derived from synthetic-aperture radar instruments event-speciﬁc ﬂood risk mapping,” remote sens."
+6,"lett., vol. 1, no. 2, pp."
+6,"75–84, 2010. onboard envisat/asar and radarsat-2 satellites [39]–[41]."
+6,the [8] s.
+6,"skakun, n."
+6,"kussul, a."
+6,"shelestov, and o."
+6,"kussul, “flood hazard and ﬂood maps are provided on demand and delivered within 12 h after risk assessment using a time series of satellite images: a case study in image acquisition."
+6,"the services are run within the grid infra- namibia,” risk anal., 2013, doi: 10.1111/risa.12156."
+6,[9] s.
+6,"voigt, t."
+6,"kemper, t."
+6,"riedlinger, r."
+6,"kieﬂ, k."
+6,"scholte, and h."
+6,"mehl, structure developed at sri."
+6,"fig. 7 shows the inﬂuence of using “satellite image analysis for disaster and crisis management support,” ieee reputation for services selection within satellite data processing trans."
+6,geosci.
+6,"remote sens., vol. 45, no. 6, pp."
+6,"1520–1528, jun."
+6,authorized licensed use limited to: univ of calif santa barbara.
+6,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+6,restrictions apply.
+7,"3832 ieee journal of selected topics in applied earth observations and remote sensing, vol."
+7,"7, no."
+7,"9, september 2014 [10] h."
+7,"guo, “understanding global natural disasters and the role of earth [31] o."
+7,"kussul, n."
+7,"kussul, and s."
+7,"skakun, “assessing security threat scenarios observation,” int."
+7,digit.
+7,"earth, vol. 3, no. 3, pp."
+7,"221–230, 2010. for utility-based reputation model in grids,” comput."
+7,"secur., vol."
+7,"34, [11] n."
+7,"kussul, d."
+7,"mandl, k."
+7,"moe, j.-p."
+7,"mund, j."
+7,"post, a."
+7,"shelestov et al., pp."
+7,"1–15, 2013."
+7,"“interoperable infrastructure for ﬂood monitoring: sensorweb, grid and [32] g."
+7,bakan and n.
+7,"kussul, “fuzzy ellipsoidal ﬁltering algorithm of cloud,” ieee j."
+7,topics appl.
+7,earth observ.
+7,"remote sens., vol. 5, no. 6, static object state,” probl."
+7,upravleniya i inf.
+7,"(avtomatika), vol. 5, pp."
+7,"1740–1745, dec."
+7,2012. pp.
+7,"77–92, 1996."
+7,[12] p.
+7,"bates, m."
+7,"horritt, c."
+7,"smith, and d."
+7,"mason, “integrating [33] n."
+7,"kussul, “neural networks learning using method of fuzzy ellipsoidal remote sensing observations of ﬂood hydrology and hydraulic modeling,” estimates,” j."
+7,autom.
+7,"sci., vol. 33, no. 3, pp."
+7,"52–57, 2001."
+7,hydrol.
+7,"processes, vol. 11, pp."
+7,"1777–1795, 1997."
+7,[34] a.
+7,shelestov and n.
+7,"kussul, “using the fuzzy-ellipsoid method for robust [13] s."
+7,"nativi, m."
+7,"craglia, and j."
+7,"pearlman, “earth science infrastructures estimation of the state of a grid system node,” cybern."
+7,"anal., vol. 44, interoperability: the brokering approach,” ieee j."
+7,topics appl.
+7,"earth no. 6, pp."
+7,"847–854, 2008."
+7,observ.
+7,"remote sens., vol. 6, no. 3, pp."
+7,"1118–1129, jun."
+7,[35] n.
+7,"kussul, a."
+7,"shelestov, s."
+7,"skakun, o."
+7,"kravchenko, y."
+7,"gripich, l."
+7,"hluchý, [14] y."
+7,"bai, l."
+7,"di, d."
+7,"nebert, a."
+7,"chen, y."
+7,"wei, x."
+7,"cheng et al., “geoss p."
+7,"kopp, and e."
+7,"lupian, “the data fusion grid infrastructure: project component and service registry: design, implementation and lessons objectives and achievements,” comput."
+7,"inf., vol. 29, no. 2, learned,” ieee j."
+7,topics appl.
+7,earth observ.
+7,"remote sens., vol. 5, pp."
+7,"319–334, 2010. no. 6, pp."
+7,"1678–1686, dec."
+7,[36] n.
+7,"kussul, s."
+7,"skakun, a."
+7,"shelestov, and o."
+7,"kussul, “sensor web approach [15] n."
+7,"kussul, a."
+7,"shelestov, and s."
+7,"skakun, “grid and sensor web technologies to ﬂood monitoring and risk assessment,” in proc."
+7,ieee int.
+7,geosci.
+7,"remote for environmental monitoring,” earth sci."
+7,"inf., vol. 2, no."
+7,"1–2, sens."
+7,"(igarss’13), melbourne, australia, jul. 21–25, 2013, pp."
+7,"37–51, 2009. pp."
+7,815–818.
+7,[16] d.
+7,"liping, k."
+7,"moe, and t."
+7,"l. van zyl, “earth observation sensor web: an [37] n."
+7,"kussul, a."
+7,"shelestov, s."
+7,"skakun, g."
+7,"li, o."
+7,"kussul, and j."
+7,"xie, “service- overview,” ieee j."
+7,topics appl.
+7,earth observ.
+7,"remote sens., vol. 3, oriented infrastructure for ﬂood mapping using optical and sar satellite no. 4, pp."
+7,"415–417, dec."
+7,"2010. data,” int."
+7,digit.
+7,"earth,vol. 7, no. 10, pp. 829–845, 2014, doi: 10.1080/ [17] a."
+7,"kravchenko, n."
+7,"kussul, e."
+7,"lupian, v."
+7,"savorsky, l."
+7,"hluchy, 17538947.2013.781242. and a."
+7,"shelestov, “water resource quality monitoring using heteroge- [38] a."
+7,"arenas, b."
+7,"aziz, and g."
+7,"silaghi, “reputation management in neous data and high-performance computations,” cybern."
+7,"anal., collaborative computing systems,” secur."
+7,commun.
+7,"netw., vol. 3, no. 6, vol. 44, no. 4, pp."
+7,"616–624, 2008. pp."
+7,"546–564, 2010."
+7,[18] j.
+7,"gallego, a."
+7,"kravchenko, n."
+7,"kussul, s."
+7,"skakun, a."
+7,[39] n.
+7,"kussul, a."
+7,"shelestov, and s."
+7,"skakun, “flood monitoring from sar yu."
+7,"shelestov, and y."
+7,"grypych, “efﬁciency assessment of different data,” in use of satellite and in-situ data to improve sustainability (nato approaches to crop classiﬁcation based on satellite and ground observa- science for peace and security series c: environmental security), tions,” j."
+7,autom.
+7,"sci., vol. 44, no. 5, pp."
+7,"67–80, 2012."
+7,"kogan, a."
+7,"powell, and o."
+7,"fedorov, eds., dordrecht, the netherlands: [19] g."
+7,"percivall, “the application of open standards to enhance the interopera- springer, 2011, pp."
+7,"19–29. bility of geoscience information,” int."
+7,digit.
+7,"earth, vol. 3, no."
+7,"1, [40] s."
+7,"skakun, “a neural network approach to ﬂood mapping using satellite pp."
+7,"14–30, 2010. imagery,” comput."
+7,"inf., vol. 29, no. 6, pp."
+7,"1013–1024, 2010."
+7,[20] g.
+7,"percivall, (2013, sep."
+7,ogc® swe implementation maturity [41] n.
+7,"kussul, e."
+7,"lupian, a."
+7,"shelestov, s."
+7,"skakun, engineering report, ogc document 13-032 [online]."
+7,available: http:// y.
+7,"tishchenko, and l."
+7,"hluchy, “determination of inundated territories portal.opengeospatial.org/ﬁles/?"
+7,"artifact_id=53823. on the basis of integration of heterogeneous data,” j."
+7,autom.
+7,"sci., [21] n."
+7,"kussul, a."
+7,"shelestov, s."
+7,"skakun, g."
+7,"li, and o."
+7,"kussul, “the wide area vol. 39, no. 12, pp."
+7,"42–51, 2007. grid testbed for ﬂood monitoring using earth observation data,” ieee j."
+7,topics appl.
+7,earth observ.
+7,"remote sens., vol. 5, no. 6, pp."
+7,"1746–1751, dec."
+7,nataliia kussul is a deputy director and head of the department of space [22] n.
+7,"dube, r."
+7,"ramakrishnan, and k."
+7,"dasgupta, “geoid: grid services information technologies and systems, space research institute (sri) nasu- for earth observation image data processing,” int."
+7,digit.
+7,"earth, vol."
+7,"6, ssau, kyiv, ukraine, and a professor with the national technical university of no. 2, pp."
+7,"185–195, 2013."
+7,"ukraine “kyiv polytechnic institute,” kyiv, ukraine."
+7,[23] g.
+7,"lecca, m."
+7,"petitdidier, l."
+7,"hluchy, m."
+7,"ivanovic, n."
+7,"kussul, n."
+7,"ray, and v."
+7,"thieron, “grid computing technology for hydrological applications,” j."
+7,"hydrol., vol. 403, no. 1–2, pp."
+7,"186–199, 2011."
+7,[24] z.
+7,"chen, n."
+7,"chen, c."
+7,"yang, and l."
+7,"di, “cloud computing enabled web processing service for earth observation data processing,” ieee j."
+7,sergii skakun is a senior scientist with the space research institute (sri) topics appl.
+7,"earth observ., vol. 5, no. 6, pp."
+7,"1637–1649, dec."
+7,"nasu-ssau, kyiv, ukraine, and an associate professor with the national [25] s."
+7,"nativi, p."
+7,"mazzetti, and g."
+7,"geller, “environmental model access and technical university of ukraine “kyiv polytechnic institute,” kyiv, ukraine. interoperability: the geo model web initiative,” environ."
+7,model.
+7,"softw., vol. 39, pp."
+7,"214–228, 2013."
+7,[26] a.
+7,"zabala, a."
+7,"riverola, i."
+7,"serral, p."
+7,"diaz, v."
+7,"lush, j."
+7,"maso et al., “rubric-q: adding quality-related elements to the geoss clearinghouse datasets,” andrii yu."
+7,shelestov is a leading scientist with the space research institute ieee j.
+7,topics appl.
+7,earth observ.
+7,"remote sens., vol. 6, no."
+7,"3, (sri) nasu-ssau, kyiv, ukraine, a professor with the national technical pp."
+7,"1676–1687, jun."
+7,"university of ukraine “kyiv polytechnic institute,” kyiv, ukraine, and the head [27] y."
+7,"tian, j."
+7,"geiger, h."
+7,"su, s."
+7,"kumar, and p."
+7,"houser, “middleware- of the department of software engineering, national university of life and based sensor web integration,” ieee j."
+7,topics appl.
+7,earth observ.
+7,"environmental sciences of ukraine, kyiv, ukraine."
+7,"remote sens., vol. 3, no. 4, pp."
+7,"467–472, dec."
+7,[28] j.-c.
+7,"laprie, “from dependability to resilience,” in proc."
+7,ieee int.
+7,depend.
+7,"(dsn’08), anchorage, ak, usa, 2008, pp."
+7,g8–g9.
+7,[29] r.
+7,almeida and m.
+7,"vieira, “benchmarking the resilience of self-adaptive software systems: perspectives and challenges,” in proc. 6th int."
+7,olga kussul is an assistant professor with the national technical university of softw.
+7,adapt.
+7,self-manag.
+7,"syst., honolulu, hi, usa, 2011, ukraine “kyiv polytechnic institute,” kyiv, ukraine. pp."
+7,190–195.
+7,[30] y.
+7,"bai, l."
+7,"di, d."
+7,"nebert, a."
+7,"chen, y."
+7,"wei, x."
+7,"cheng et al., “geoss component and service registry: design, implementation and lessons learned,” ieee j."
+7,topics appl.
+7,earth observ.
+7,"remote sens., vol."
+7,"5, bohdan yailymov is pursuing the ph.d. degree at the space research institute no. 6, pp."
+7,"1678–1686, dec."
+7,"(sri) nasu-ssau, kyiv, ukraine."
+7,authorized licensed use limited to: univ of calif santa barbara.
+7,"downloaded on november 23,2024 at 18:50:43 utc from ieee xplore."
+7,restrictions apply.

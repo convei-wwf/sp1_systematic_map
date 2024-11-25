@@ -1,0 +1,487 @@
+page,p
+1,article optimizing observing systems using aspen: an analysis tool to assess the benefit and cost effectiveness of observations to earth system applications sid-ahmed boukabara and ross n.
+1,"hoffman abstract: the advanced systems performance evaluation tool for noaa (aspen) is developed to help support designing and evaluating existing and planned observing systems in terms of comparative assessment, trade-offs analysis, and design optimization studies."
+1,"aspen is a dynamic tool that rapidly assesses the benefit and cost effectiveness of environmental data obtained from any set of observing systems, whether ground-based or space-based, whether an individual sensor or a collection of sensors."
+1,"the aspen assessed cost effectiveness accounts for the level of ability to measure the environment, the cost(s) associated with acquiring these measurements, and the degree of usefulness of these measurements to users and applications."
+1,"it computes both the use benefit, measured as a requirements-satisfaction metric, and the cost effectiveness (equal to the benefit-to-cost ratio)."
+1,aspen provides a uniform interface to compare the performance of different observing systems and to capture the requirements and priorities of applications.
+1,this interface describes the environment in terms of geophysical observables and their attributes.
+1,a prototype implementation of aspen is described and demonstrated in this study to assess the benefits of several observing systems for a range of applications.
+1,"aspen could be extended to other types of studies, such as assessing the cost effectiveness of commercial data to applications in all the noaa mission service areas, and ultimately to societal application areas, and thereby become a valuable addition to the observing systems assessment toolbox."
+1,"keywords: remote sensing; satellite observations; sensitivity studies; decision support https://doi.org/10.1175/bams-d-22-0004.1 corresponding author: sid-ahmed boukabara, sid.boukabara@noaa.gov in final form 7 july 2022 ©2022 american meteorological society for information regarding reuse of this content and general copyright information, consult the ams copyright policy."
+1,american meteorological society o unauthenticated 2 e241711/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+2,"affiliations: boukabara—noaa/nesdis/office of systems architecture and advanced planning, silver spring, maryland; hoffman—noaa/nesdis/center for satellite applications and research (star), and cooperative institute for satellite earth system studies, university of maryland, college park, college park, maryland t he earth-observing satellite constellation (eosc), which includes all space-based components of the global observing system, currently includes platforms operating in both geostationary earth orbits (geo) and low-earth orbits (leo) at various inclinations."
+2,"a number of these sensors are radiometers that measure the microwave, infrared, ultraviolet, and visible spectra."
+2,"other instruments include radio occultation sensors, scatterometers, lightning mappers, radars, altimeters, and space weather sensors."
+2,"space and solar sensors operate in these leo and geo orbits, sometimes hitching a ride on eosc satellites as well as being stationed at the much more distant, gravitationally stable, earth–sun lagrange points."
+2,"together, these observing systems provide for a global environmental monitoring system that covers the atmosphere, biosphere, hydrosphere, oceans, cryosphere, near-space environment, and the sun (boukabara et al."
+2,2021).
+2,"products are derived on a variety of temporal and geographic scales that are used for a wide range of short- and medium-term warnings, long- term forecasting, and other climate, space weather, ocean, terrestrial weather, and water cycle applications that are critical to the earth system user community and society in general."
+2,"space agencies around the globe have well-established plans to deploy and exploit earth- observing satellites for the next two decades (e.g., simmons et al."
+2,2016).
+2,"in parallel to these plans, and because of the lengthy processes that often require 15–20 years to design, build, and deploy new earth-observing satellite systems, some space agencies, including noaa, have also started formulating the space architecture of the 2030s and beyond."
+2,"for example, the geostationary extended observations 1 (geoxo) program1—with an initial planned launch in 2032— https://www.nesdis.noaa.gov/next-generation/ geostationary-extended-observations-geoxo has the responsibility for the evolution of the geostationary component of the noaa space program in the next-generation architecture."
+2,"approaches taken to optimize the architecture range from requirements analysis (e.g., anthes et al. 2019) to detailed simulation experiments (e.g., boukabara et al. 2016b)."
+2,"while, in the past, the evolution of the eosc was gradual and technology driven, there are currently additional driving factors that add significant complexity to planning and design- ing the next-generation eosc."
+2,"besides the rapid advances in sensor technology in the recent past, these factors include 1) the expected revolution of medium to very small size satellites that will provide slightly degraded, similar, or even better performance for a fraction of the cost of traditional platforms; 2) the large array of environmental applications, all vying for even more and better environmental data; 3) the diversification of observing methods and technologies that have varying error characteristics and resolutions; 4) the emergence of the private sector as a viable source of environmental data; and 5) the increasing number of new space-faring nations with ambitious space programs that have significant potential to enhance the eosc."
+2,"it should be noted that the effective use of very small satellites, including cubesats, requires overcoming some challenges to data quality (calibration, geolocation, stability) to take advantage of the very positive qualities of these platforms (rapid sensor refresh, low cost, use of open source technology, fast temporal refresh due to multiple numbers, resilience)."
+2,american meteorological society o unauthenticated 2 e241811/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+3,"missions, such as the temporal experiment for storms and tropical systems (tempest) and the time-resolved observations of precipitation structure and storm intensity with a constellation of smallsats (tropics) (blackwell et al. 2019), should allow us to learn how to best exploit these technologies."
+3,"comparisons of such systems to legacy sensors using the methodology described in this paper can account for data quality and geographic and temporal coverage attributes as well as costs, but other considerations, such as risk, launch cadence, develop- ment cycle time, and reliability of the sensor manufacturer must also be considered."
+3,the purpose of this paper is to present the advanced systems performance evaluation tool for noaa (aspen) as an answer to the pressing need to assess and optimize the planning and design of an observing system (including the processing and distribution of observa- tions) given the considerations outlined above.
+3,"in the sidebar “aspen design challenges,” we discuss the three critical challenges that the design of a new assessment tool would have to overcome, namely, 1) the need for a solution-agnostic metric when optimizing observing systems, 2) the need for a comprehensive and inclusive assessment using an earth system approach, and 3) the need for granularity in such assessments in order to capture the influ- ence of the technical details of the observing systems characteristics."
+3,aspen is designed to measure the degree to which one or more observing systems are able to satisfy the needs of one or more environmental applications.
+3,"in essence, aspen is a perfor- mance/gap analysis tool that measures how much an observing system fulfills the (prioritized) requirements ranges of the applications."
+3,"the higher this degree of satisfaction, the more the observing system is considered beneficial."
+3,"aspen relies on a “universal” representation of the earth system as a whole and recognizes that 1) an observing system will measure a portion of that earth system environment and 2) an application expects (i.e., requires and prioritizes) a certain level of knowledge of the same earth system environment to properly operate."
+3,it is the comparison between the application requirements for knowledge of the earth system environment and the actual observing system performance to deliver that knowledge—both rigorously captured in the observing system performance table and the application require- ment ranges table—that allows aspen to associate application-relative scores to the observing systems being assessed.
+3,the combination of the prioritized scores gives the aspen benefit metric.
+3,"for an observing system, performance can be either planned (i.e., during the design phase) or realized (i.e., during the calibration/validation phase)."
+3,"in some cases the real- ized performance exceeds the planned performance, and in some cases the reverse holds."
+3,care must be taken when interpreting a comparison of a proposed observing system to an existing one depending on whether the existing observing system performance is planned or realized.
+3,"aspen is designed to be solution agnostic, comparing observing systems’ geophysical performance to the geophysical requirements of applications and weighing the resulting normalized scores by appropriate priorities."
+3,aspen is therefore heavily dependent on its input information.
+3,"specifically, aspen consider two types of inputs: 1) observational requirements and priorities coming from applications and users of the observations, and 2) observational performance coming from observing systems (whether sensors, networks, constellations, or other combinations)."
+3,"these inputs—requirements and associated priorities, as well as the observing systems performance—are captured in tables and expressed in terms of geophysi- cal variables (needed by applications and/or provided by observing systems) and their cor- responding attributes (such as spatial coverage, temporal refresh, and uncertainty)."
+3,"once the performance of any observing system is put in the right format, aspen treats these the exact same way, rigorously."
+3,"the observing system could be satellite-based, ground-based, or airborne, or even from citizen scientist networks."
+3,all that matters is the observing system performance (in the correct format and units).
+3,this is demonstrated for radiosondes and several satellite sensors in this paper.
+3,"thus, although we show only a few simple example calculations american meteorological society o unauthenticated 2 e241911/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+4,aspen design challenges the need for a solution-agnostic metric when optimizing the observing systems network achieving a fair comparison between different observing systems solutions requires truly solution-agnostic metrics.
+4,"this will allow a fair comparison and assessment of the complementarity of different observing approaches that provide, for example, temperature sounding (with a certain precision, resolution, spatial coverage, and temporal refresh) from one or more microwave, infrared, and radio occultation sensors."
+4,"in aspen, the observing system benefit assessment is done by comparing the observing system performance defined in terms of geophysical variables and their attributes against the application requirement ranges."
+4,"this opens the door to the democratization of observing systems assessment, allowing potentially novel, multiuse, and cost-effective solutions."
+4,"the need for a comprehensive and inclusive assessment using an earth system approach national hydrological and meteorological services require research and operational components to observe the earth system from a variety of observing systems; to collect, archive, and disseminate these observations and use them in numerous models; to characterize and predict the earth system and its environmental components; and to use these analyses and forecasts to provide a variety of services to individuals, businesses, and government agencies."
+4,"such complex missions demand a comprehensive, earth system– oriented, assessment approach for planning next-generation observing system architectures."
+4,this approach should consider all user needs and all technology options.
+4,"also in this process, programmatic and strategic metrics such as system costs, launch cadence, technology availability and technology maturity, and overall risk and reliability must be compared to the agency desired postures for these factors."
+4,aspen is designed to provide critical support to such a process.
+4,"once the inputs have been prepared, aspen is dynamic and nearly instantaneous to execute, and allows side-by-side comparisons of the benefit and cost effectiveness of multiple design options of observing systems to a comprehensive set of applications, representative of the meteorology, oceanography, land/hydrology, and space weather environmental domains."
+4,"aspen therefore offers a path to a second democratization, this time by opening the assessment to include all uses of the observations."
+4,"the need for granularity in an assessment approach assessing observing systems accurately and capturing the fine details of their differences requires that the assessment approach be sensitive to a degree of granularity that will allow the distinction of performance differences due to differences in the antennas sizes, or noise levels, or scanning geometry, etc."
+4,"aspen was developed to simultaneously account for all the technical factors above by projecting observing system characteristics into geophysical space performance (as described in the “aspen methodology” section) and assessing the geophysical performance against set requirements, also in geophysical space."
+4,"it provides numerical metrics of the benefits of existing and proposed observing systems—benefits to a single applica- tion, a group of similar applications, or a collection of applications, representative of all mission applications."
+4,"in addition to the benefit due to technical factors, aspen also quantifies cost effectiveness as the ratio of benefit to cost."
+4,"because the assessment is sensitive to very fine details of the observing systems (including precision/accuracy, spatial and vertical resolution, temporal refresh, and spatial coverage), it can be used for many purposes (see table 6). here for illustration, aspen is capable of comparing the relative benefits of satellite sensors, ground-based remote sensing systems, and in situ networks of sensors."
+4,"the benefits computed by aspen could be the benefit to a single application, to groups of applications, or to all the noaa mission service areas, therefore making it pos- sible to account for the entire earth system when performing these benefits assessments."
+4,"in future studies, aspen is intended to be used to assess the complementarity of space-based and ground-based observing systems."
+4,"in the conclusions we describe both the limitations and potential of aspen, including potential enhancements to extend aspen for trade studies, applications to all the noaa mission service areas, and ultimately to societal ap- plication areas."
+4,american meteorological society o unauthenticated 2 e242011/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+5,the aspen concept and metrics aspen methodology.
+5,"aspen provides rapid computations of relative benefits (hereafter benefits), based on the scoring (or normalization) and prioritization (or weighting) described below, of observing systems’ performance by the application requirement ranges and pri- orities."
+5,"to accomplish this, the computational flow in aspen follows fig."
+5,"the observing systems performance and the application requirement ranges and priorities are all input tables (second column of fig. 1) derived from expert elicitation or from calculations con- ducted for maturity reviews of existing sensors, simulation studies, or sensitivity experiments (first column of fig."
+5,"this approach allows us to compare benefits across many possible observing systems, including, for example, multiple permutations of constellations of earth- observing satellites."
+5,"given costs (or relative costs) of the observing systems that are compared, aspen also calculates cost effectiveness as the ratio of benefit to cost."
+5,aspen calculates these metrics (benefit and cost effectiveness) over a wide range of granularity.
+5,"as described in detail in what follows, benefits at one level of granularity are combined (rolled-up) to the next (less granular) level by means of weighted averages."
+5,"(please note that in this discussion, unless otherwise stated, mentions of observations and applications refer to geophysical or ecological observations or applications.)"
+5,the aspen concept is underpinned by a description of the earth system environment that is independent of both observing systems and applications.
+5,this solution-agnostic and inde- pendent frame of reference is critical in achieving a fair assessment and in allowing a single description of application requirements to be compared against many different observing systems.
+5,the aspen “universal” interface represents the earth environment components in terms of geophysical variables and attributes of those variables.
+5,"as such, the aspen interface is independent of how sensors or applications work in practice."
+5,"for example, even though numerical weather prediction (nwp) applications may assimilate radiances directly, for aspen, fig."
+5,"the flow of information in aspen is illustrated, showing from left to right the sources of the independent information (smes indicate subject matter experts), the independent informa- tion (the aspen inputs), and the derived information (the aspen outputs)."
+5,"operators in gray circles include normalization (\), weighted average (σ), and division (/)."
+5,"nesdis is the national environmental satellite, data, and information service."
+5,gao is the government accountability office.
+5,refer to the text for a full description.
+5,american meteorological society o unauthenticated 2 e242111/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+6,the nwp requirements are specified in terms of temperature and humidity since the radiances measured (and assimilated) are tuned to provide temperature and humidity information.
+6,"similarly, the performance of a microwave sounder, for example, should also be specified in terms of temperature and humidity since its radiometric measurements (of radiances) are designed to contain temperature and humidity information."
+6,"thus, sensor performance in terms of radiances must be converted into geophysical space using a science-based remote sensing approach, such as applying a retrieval algorithm (e.g., boukabara et al."
+6,2011; maddy and boukabara 2021) to a large database of atmospheric profiles.
+6,"ideally, the same or similar retrieval algorithm is used for similar sensors so that the relative performances are accurately quantified."
+6,"thus, the aspen approach assumes the radiances or the brightness temperatures and related geophysical variables (either provided by the observing systems or required by the applications) are projections of each other through the retrieval algorithm or its associated forward problem."
+6,"however, it should be noted that the retrieval algorithm and its associated forward problem are nonlinear and sometimes require additional a priori information."
+6,the primary aspen calculation is to determine the benefit to an application of an observing system.
+6,note that observing system here really refers to observations and/or products emanating from them.
+6,"in this way, aspen is applicable to assessing and prioritizing data and products that are acquired commercially and/or to assessing and prioritizing products generated by federal programs."
+6,this is in addition to its main purpose of assessing and optimizing observing systems designs.
+6,we will refer to the benefit to an application of an observing system simply as the appli- cation benefit.
+6,"for this calculation, the observing system performance (osp) in terms of various attributes for different variables is tabulated to capture how well the geophysical variables are observed (first row of fig. 1) and application requirements ranges (arr) are formulated as tables of ranges of minimally to maximally useful attributes for each required variable (second row of fig."
+6,examples of these tables will be given in the “aspen interfaces” section.
+6,"given tables of osp and arr, aspen scores (i.e., normalizes) the observing system perfor- mances in terms of variables and attributes by the application requirement ranges (second row of fig."
+6,"considering a single geophysical variable and a single attribute, if the observing system performance is x, and the application requirement range is given as a triplet of the form [xmin, xmid, xmax], where xmin is the minimally useful value, xmid is an intermediate value (not used in the aspen prototype), and xmax is the maximally useful value."
+6,then the performance score y is given by the normalization ( y = x − x min ) (x max ) − x min .
+6,"(1) the result y in (1) is truncated to the range [0, 1]."
+6,"this truncation is required because aspen measures how well an observing system satisfies the requirements of an application, and this benefit must be bounded between zero and one."
+6,"in terms of aspen supporting the design of observing systems to satisfy the users/applications requirements, the observing system should be neither under- nor overengineered."
+6,"with the [0, 1] truncation applied, there is no bonus given to an observing system that exceeds the maximum performance levels required by the applications."
+6,"one important attribute that cannot be usefully normalized by (1) is geographic coverage, for which the performance score is the fraction of the application geographic cover- age that is overlapped by the sensor geographic coverage."
+6,the geographic regions used in the aspen prototype and their overlaps are given in table 1.
+6,"this table lists just a few of aspen’s large collection of regions, which range from “polar regions” to the “u.s."
+6,economic exclusion zone” and which could be extended.
+6,"in designing sensors and observing systems, we have to not only be aware of the require- ments for different observables and their attributes, but also of their relative importance."
+6,"this helps drive the sensor design in terms of characteristics like antenna size, number of american meteorological society o unauthenticated 2 e242211/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+7,table 1.
+7,geographic regions and overlaps used in the aspen prototype.
+7,the regions in the rows overlap the regions in the columns by the percentages given in the table.
+7,conus is the continental united states.
+7,meso refers to the moveable goes mesoscale scan sector.
+7,"region area (1,000 km)2 global (%) tropics (%) conus (%) meso (%) full disk (%) global 511 100 100 100 100 100 tropics 254 49.72 100 37.76 100 52.91 conus 25 4.95 3.76 100 100 11.75 meso 1 0.20 0.39 3.95 100 0.47 full disk 215 42.07 44.76 99.81 100 100 channels, and noise levels."
+7,"in aspen, we therefore have to account for the fact that for any given application, some variables are more important than others and for a given variable, some attributes are more important than others."
+7,these relative importances are termed appli- cation-dependent technical priorities (atp).
+7,then the application benefit (from an observing system) b is determined (third row of fig. 1) as b = ∑wi yi . (2) i in (2) the sum is over all variables and attributes and the weights w are the priorities rescaled so that the sum of the w is one.
+7,"for attributes denoted as fundamental (defined as attributes for which if the requirements are not minimally met, all other attributes do not matter), if the performance score is zero then all other performance scores for that variable are also set to zero during the application benefit calculation."
+7,"in aspen currently only the geographic coverage attribute is considered fundamental since, if no observations fall in the required region, it does not matter how accurate or timely those observations are."
+7,"(since all the overlaps in the aspen prototype are greater than zero, fundamental attribute processing is not active in the sample calculations shown in this paper.)"
+7,the individual application-specific benefits for an observing system are combined in a weighted average as in (2) using strategic priorities into benefits for entire categories of applications or for all categories of applications (fourth and fifth rows of fig.
+7,"these strategic priorities are termed the category-specific priorities and mission priorities, respectively, and these summary benefits are termed the category benefits and the mission benefits, respectively."
+7,"users of aspen therefore have the ability to assess the relative value of observing systems at the application level, at the category of applications level or at the entire mission level."
+7,"aspen estimates the cost effectiveness of an observing system to an application, category of applications, or all applications by dividing the corresponding benefit by the observing system cost."
+7,"this is shown only for the mission cost effectiveness in fig. 1 (sixth row), but the same calculation is also done to determine the application cost effectiveness and the category cost effectiveness."
+7,"based on the above calculations, aspen generates a number of outputs, including 1) side-by-side stratified and combined assessments of the benefit and cost effectiveness of various observing systems candidates, 2) intermediate result matrices to provide the trace- ability and interpretability linkages between the aspen metrics (or scores) and the different inputs (next subsection), and 3) efficient frontier plots displaying the benefits from a set of observing systems being assessed, against their costs, to allow us to better select and optimize the most highly cost-effective candidates among them."
+7,"sensitivity, traceability, and interpretability of aspen results."
+7,aspen provides various ways to aid the decision-making process when designing an observing system and in general american meteorological society o unauthenticated 2 e242311/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+8,to interpret the aspen results.
+8,"these analyses are based on the transparency that is built into the aspen design and include 1) simple sensitivity studies, 2) the ability to trace the resulting scores (i.e., particular values of metrics) back to the various inputs, and 3) inter- pretability analyses, which link aspen results directly to observing system design decisions."
+8,"these tools apply to all aspen metrics, including benefit metrics that measure the degree of satisfaction of the application requirements accounting for the (application, category, and mission) priorities and cost-effectiveness metrics that are simply the benefit metrics divided by observing system costs."
+8,we briefly describe the three analysis methods in the following paragraphs.
+8,sensitivity analysis.
+8,aspen offers the opportunity to easily perform “what if” exercises.
+8,"it is easy to modify one or more aspen inputs (the geophysical characteristics of a specific observing system, as well as the requirements ranges and prioritizations imposed by the applications), redo the calculations, and then examine the sensitivity of any of the aspen results to those inputs."
+8,this allows the analyst to identify the most influential parameters and to quantify their impact on the aspen scores.
+8,this facilitates the decision-making process to concentrate efforts and resources in the most optimal way.
+8,traceability analysis.
+8,all of aspen scores are easily traceable to the aspen inputs because all aspen intermediate results are readily available and easy to query.
+8,the key intermediate re- sults are the performance scores calculated from eq. (1) and the performance scores multi- plied by appropriate weights.
+8,this follows since all the aspen metrics can be put in the form of a weighted sum of the performance scores.
+8,"all the weights can be specified in terms of the (application, category, and mission) priorities and the observing system costs."
+8,it is only a mat- ter of bookkeeping to determine the weights for each performance score for any metric.
+8,"all these intermediate results are clearly related to the aspen inputs, so we can either track how an input propagates forward through aspen or trace back how an output is determined by aspen."
+8,this allows the analyst 1) to understand the logic of why the scores are what they are and 2) to justify or explain any potential decision made based on aspen and link it to actual predetermined requirements and prioritization as well as to observing systems performance.
+8,interpretability analysis.
+8,this analysis allows us to link aspen scores to decision-making.
+8,"it answers the question: given the scores obtained by aspen, how could these influence the design of an observing system?"
+8,the individual terms in the weighted sums that add up to an aspen metric are the most granular contributions to that metric.
+8,we can sum these con- tributions for any subset of interest to determine a less granular contribution.
+8,"for example, if we sum over all attributes for a geophysical variable, we obtain the contribution to the metric due to that variable (for a given application and sensor)."
+8,"after doing this for each variable, we can create plots showing the contributions to the metric due to the different variables."
+8,(an example is shown later in fig.
+8,"if we first divide the contributions by the metric itself, the result is the fractional contribution to the metric, which may likewise be summed over any subset contributing to that metric."
+8,fractional benefit contributions and fractional cost-effectiveness contributions are identical since the divisions by cost cancels out in calculating the fractional cost-effectiveness contributions.
+8,"at the top level, the aspen metrics inform us about the degree to which the observing systems being assessed meet application requirements."
+8,"the interpretability analysis, by ranking the internal contributions to the metrics from different variables and attributes for different applications, allows us to easily point to which variables and attributes one should invest in to further increase the observing system performance to meet an even higher percentage of the requirements, thereby helping us optimize the design of these systems."
+8,american meteorological society o unauthenticated 2 e242411/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+9,"aspen interfaces in aspen, the earth system environmental variables are divided into the following earth sys- tem domains: (i) atmosphere, (ii) biosphere, (iii) ocean, (iv) hydrosphere, (v) cryosphere, and (vi) space."
+9,"since an individual sensor might contribute information about several earth system domains and an application might require information from several earth system domains, this division of variables into environmental domains is primarily a convenience."
+9,note that the environmental domains listed here are separate from the application categories defined later in this section.
+9,"for each environmental domain, the aspen tool has several (dozens of) variables to represent that domain."
+9,"for simplicity, we chose to use five key geophysical vari- ables per domain for the purpose of this paper."
+9,these are identified with asterisks in table 2.
+9,"the attributes of the geophysical variables are related to their geographic, vertical, and temporal coverages; their horizontal and vertical resolutions; their precision/accuracy; and their availability (e.g., timeliness)."
+9,"the choice of attributes must be equally valid for descrip- tions of the environment derived from observing systems, as well as for descriptions used in models and other applications."
+9,the principal attributes are discussed by boukabara et al.
+9,(2021).
+9,the attributes included in aspen are defined in table 3.
+9,"observational uncertainty is taken to be a composite standard deviation of the error over the appropriate subsets or dimen- sions such as over the vertical domain, over clear and cloudy conditions, and over different surface backgrounds."
+9,vertical resolution is taken to be the number of independent pieces of information (the degrees of freedom or d.o.f.) in the vertical at one horizontal location.
+9,the attribute “images” indicates whether the observations are taken or used as imagery.
+9,note that imagery will generally have faster refresh and higher horizontal resolution than other data sources.
+9,"aspen is driven by data elicited from subject matter experts (smes) and strategic users, from simulations, and, in the case of strategic priorities, from agency leadership (see fig. 1 for a breakdown)."
+9,"as part of its development, aspen centrally captures information from existing sets of performances and requirements."
+9,the performance and requirements sources include those from the space platform requirements working group (sprwg) (sprwg 2018; anthes et al.
+9,"2019; maier et al. 2021), the consolidated observing user requirements list (courl) (murray et al. 2008), the wmo observing systems capability analysis and review (oscar) database (wmo 2019), the geoxo requirements working group (xorwg), and the noaa observing system integrated analysis (nosia) (helms et al."
+9,2016; st.
+9,germain 2018).
+9,"in some cases, these performances and requirements are the subject of regular updates and refinements."
+9,"in particular, over a 2-yr period beginning in 2015, the sprwg panel of subject-matter experts carried out an analysis and prioritization of different space-based observations supporting noaa’s operational services in the areas of weather, oceans, and space weather."
+9,"noaa leadership used the sprwg analysis of space-based observational priorities in different mission service areas, among other inputs, to inform the multi-attribute utility theory (maut)- based value model and the noaa satellite observing systems architecture (nsosa) study."
+9,the goal of the nsosa study was to develop candidate satellite architectures for the era begin- ning in approximately 2030.
+9,the sprwg analysis included a prioritized list of observational objectives together with the quantitative attributes of each objective.
+9,these results helped inform noaa’s assessment of many potential architectures for its future observing system within the nsosa study.
+9,"this has led, for example, to some high-level recommendations regarding the noaa future architecture, including recommendations for a disaggregated approach for the leo architecture and the exploration of smallsats to possibly support that approach."
+9,"in a sense, the sprwg goals and studies anticipated and motivated the development of the aspen tool."
+9,one of the goals of the aspen development is to have a generic enough and american meteorological society o unauthenticated 2 e242511/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+10,table 2.
+10,selected geophysical variables describing the earth environment.
+10,an asterisk indicates the variable is included in the sample calculations presented below.
+10,only selected variables are listed here.
+10,"geophysical variable symbol units aerosol concentration na m−3 * air temperature: profiles t(z) k atmosphere carbon dioxide/co2 ac_co2 ppm incoming shortwave radiation: surface isr w m−2 * relative humidity rh % * total lightning tl % * wind speed profile: eastward u m s−1 * wind speed profile: northward v m s−1 * fire radiative power frp mw km−2 * fire size and location fire_size km * flood standing water: extent fi % biosphere land surface albedo lsa — land surface temperature lst k * normalized difference vegetation index ndvi — * soil moisture: surface wetness w m3 m−3 surface type st — ice surface temperature ist k * sea ice age sia years * sea ice concentration sic % cryosphere * sea ice motion, local sim_local m s−1 * snow cover sc % snow depth sd m snow grain size sgs mm * snow water equivalent swe cm cloud-base height cbh km * cloud cover cc fraction cloud drop size (at cloud top) cps μm hydrosphere * cloud liquid water path lwc g m−2 * cloud-top temperature ctt k precipitation rate/snowfall rate sfr mm h−1 * rain rate rr mm h−1 * total precipitable water tpw mm bathymetry b m * global sea surface wind direction sswd ° * global sea surface wind speed ssws m s−1 ocean color: chlorophyll-a concentration chl mg m−3 ocean salinity s psu * sea surface height η cm * sea surface temperature sst k * wave height h m geomagnetic field: meo mag_meo nt interplanetary solar wind part_low (cm2 s sr kev) −1 multispectral auroral imaging aurora_image w m−2 solar flux: euv sun_flux_euv w m−2 space solar flux: x-ray irradiance sun_flux_xray w m−2 solar imagery: corona sun_corona w m−2 solar imagery: magnetogram sol_im_mag nm solar imagery: whitelight sol_im_white w m−2 american meteorological society o unauthenticated 2 e242611/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+11,table 3.
+11,attributes of a description of the earth environment.
+11,an asterisk indicates the attribute is included in the sample calculations presented below.
+11,attribute symbol units definition images i logical this parameter is represented by imagery * geographic coverage d — geographic region observed * horizontal density na (100 km) −2 number of observations within swath per 100 km square region.
+11,"* horizontal resolution δx km gifov or ground-projected instantaneous field of view * temporal refresh tr h time between observations at a location vertical extent bottom eb km bottom of vertical region observed vertical extent top et km top of vertical region observed * vertical resolution nυ d.o.f independent pieces of information in one gifov * error standard deviation s.d. units estimated standard deviation of the errors validity range low vl units low value that can be observed validity range high vh units high value that can be observed robustness ns — number of sources making this observation continuity tc years time for which the observations can be intercalibrated * data latency tl h time from “image taken” to full relay of data to a ground station solution-agnostic approach so we can fairly optimize the overall constellation, but with a repeatable, flexible tool where we can easily test “what if” scenarios."
+11,"the observing sys- tems assessed by aspen could be of any type—ground-based or space-based, passive or active, microwave, infrared, or ultraviolet, in geostationary or low-earth orbit, from sensors acquired and deployed or from commercially acquired datasets—as long as we can develop an appropriate observing system performance table."
+11,"for the purpose of illustration, only a restricted set of observing systems, mostly space- based sensors, are included in the examples presented."
+11,the sensors used were chosen to be representative and are listed in table 4.
+11,"costs must be associated with each sensor and could include launch costs, ground system costs, and other costs in addition to the contract costs, and the interpretation of the cost effectiveness determined by aspen should account for which costs were included in the calculation."
+11,the observing system costs in table 4 are the annualized costs for a single sensor based on public information along with some reasonable assumptions (described in the figure caption).
+11,"these are not definitive, but are reasonable and used here only to demonstrate the calculation of aspen cost-effectiveness metrics."
+11,they should not be taken at face value as the true costs of these sensors.
+11,"as described in the section “the aspen concept and metrics,” the aspen interface documents the performance of an observing system to provide information about different geophysical variables (table 2) in terms of a set of observation attributes (table 3) in an observing system performance table."
+11,this table has entries describing the performance of the observing system for all relevant geophysical variable (rows in the table) and attributes (columns in the table).
+11,figure 2a displays the advanced temperature and moisture sounder (atms) performance table that is used in the sample calculations.
+11,in fig. 2 only the symbols are used to label the rows and columns.
+11,please refer to tables 2 and 3 for the definitions of the symbols used here and in the figures that follow.
+11,"for example, in this figure, row 1 for temperature and row 2 for relative humidity indicate that atms retrievals of these quantities have error standard deviations of 2 k and 20%, respectively, and 8 and 5 degrees of freedom in the vertical, respectively."
+11,"the confidence in the observing system performance table entries, e.g., for the observation error standard deviation or degrees of freedom in the vertical, is also collected by aspen in american meteorological society o unauthenticated 2 e242711/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+12,table 4.
+12,sample sensors.
+12,"to determine the observing system costs (million u.s. dollars), the total program costs [$18.8 billion for the joint polar satellite system (jpss), https://www.jpss.noaa.gov/ faq.html, and $10.8 billion for goes-r, https://www.goes-r.gov/resources/faqs.html] are simply divided (i) by the number of satellites (5 for jpss and 4 for goes-r), (ii) by 5 assuming each satellite is active for 5 years (although in fact the goes-r operational design lifetime is 10 years), and (iii) proportionally by the sensor contract costs (assessed from public sources) and for the jpss sequence—sumoi npp through jpss-4—reported by https://www.jpss.noaa.gov/news.html)."
+12,costs for radiosondes are for twice daily launches of a global network of 800 radiosondes (locations) available in near–real time (https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive) at $200 per launch (https://www.weather.gov/media/key/weather-balloons.pdf).
+12,these costs are very rough estimates and are only meant to be used for illustration purposes.
+12,sensor sensor type program orbit cost * abi imager goes-r geo 314 exis euv x-ray sensor 32 * glm lighting mapper 92 mag magnetometer 7 seiss in situ particle flux sensor 30 suvi solar uv imager 65 * atms mw jpss leo 111 * cris ir 199 omps uv 120 * viirs imager 322 * raob radiosondes global 117 raob radiosondes nws 13 the form of uncertainty and then used in monte carlo calculations to map the uncertainty in the aspen inputs to the uncertainty in the aspen outputs.
+12,"this, in theory, should give us a sense of the reliability of the aspen output."
+12,this applies to uncertainties of inputs both for observing systems and for applications.
+12,"the uncertainties can come from various informa- tion sources, including from the confidence of individual smes, from the dispersion of the estimates from multiple smes, and from the uncertainties derived from sensor simulation studies."
+12,"since aspen is computationally efficient, the size of the monte carlo ensemble used is large enough to provide robust uncertainty estimates for all of the aspen metrics."
+12,"it is, however, recognized that capturing representative uncertainties and their correlations for all aspen inputs is quite challenging and remains only partially met."
+12,"as mentioned previously, each application has different requirements and priorities for what variables are needed and for each variable and each attribute a range of useful values."
+12,"for this purpose, aspen collects application requirement ranges and application priorities in tables that are similar in shape to the observing system performance tables."
+12,"the applications are grouped into five application categories—earth system, meteorology, oceanography (including fisheries and coastal applications), land (including hydrology and ecology), and space weather."
+12,"for each application category, for simplicity in this study only a few representative application areas are listed in table 5."
+12,"there are three types of applications: 1) models, such as atmospheric global and regional prediction models; 2) forecast analyst support systems that aid the operational forecaster to visualize and analyze environmental data; and 3) mission service areas, which are major topical/application areas corresponding to a core agency function, each of which is supported by multiple models and forecast analyst support systems."
+12,"aspen is applicable to all three types of applications so long as accurate and consistent application requirement ranges and application priorities (e.g., figs. 2b and 3a) are provided."
+12,the list of aspen applications and application categories will be gradually expanded in the future.
+12,the current list is sufficient to estimate useful noaa mission benefits because american meteorological society o unauthenticated 2 e242811/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+13,aspen (a) atms performance table and (b) global nwp requirement range table used in the sample calculations.
+13,"when an observable (or attribute) is not relevant, na (i.e., not available) is entered and aspen will ignore this cell during computations."
+13,"in the figure, the row labels are the variable symbols from table 2 for those variables marked by an asterisk in table 2, and the column labels are the attribute symbols from table 3 for those attributes marked by an asterisk in table 3. the prototype list includes the mission service areas which indirectly include all relevant noaa applications."
+13,figure 2b shows a typical application requirements range table that is used in the sample calculations.
+13,"for example, the third column (horizontal resolution) shows that for all variables needed by global nwp the minimally useful resolution is 50 km and the maximally useful resolution is 2 km."
+13,application requirements are based on sme inputs and have an element of technically informed subjectivity for current applications.
+13,"aspen can also be used to estimate benefits of observing systems to planned upgrades of current applications as well as entirely new applica- tions, provided corresponding upgraded or new application requirement ranges and priority tables are created."
+13,"in these cases, the sme inputs will be even more subjective."
+13,"however, for current applications and possibly for applications upgrades currently being tested and american meteorological society o unauthenticated 2 e242911/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+14,"evaluated, the degree of subjectivity could be alleviated in part by using observing system simulation ex- periments (osses), observing sys- tem experiments (oses), and other techniques such as forecast sen- sitivity observation impact (fsoi) (e.g., boukabara et al. 2016a,b; joo et al."
+14,2013; eyre 2021) in order to assess the true application sensitiv- ity and thereby refine the aspen application inputs.
+14,(see the sidebar “aspen validation” for an example of comparing aspen to fsoi results.)
+14,"subjective elements will always remain, however, for the require- ments and priorities of applications that do not exist in a form that allows objective testing."
+14,in this way aspen can help to plan observing systems consistent with future upgrades and future new applications while accounting for uncertainty.
+14,"as an example of the applica- tion priorities, fig. 3a displays the global nwp priority table."
+14,"the priorities do not have to sum to 1, but do in fig. 3a."
+14,"in any case, dur- ing the calculations the priorities are rescaled into weights that do fig."
+14,the (a) global nwp priority table used in the sum to 1.
+14,"note that the global nwp sample calculations and (b) the calculated performance scores by variable and attribute of the atms perfor- requirement ranges table of fig. 2b mances scored by the global nwp requirements ranges. and the global nwp priority table for display, the values are multiplied by 1,000 in (a) and of fig. 3a are conformable."
+14,the by 100 in (b).
+14,see the color scale at the bottom.
+14,gray highest global nwp priorities are indicates na.
+14,row and column labels are as in fig.
+14,"in given to temperature and then (a), since the original values sum to 1, the sum of all the values in the figure sum to 1,000."
+14,"note that the sum of wind components and relative hu- the product of the two panels is the application benefit midity and to geographic coverage, giving the total benefit of atms for global nwp. error standard deviation, and verti- cal resolution."
+14,figure 4 compares the application priority tables for the 10 applications considered in our sample calculations.
+14,the global nwp priorities from fig. 3a are repeated just left of the center of fig.
+14,"subtle differences are apparent when comparing the meteorology applications, but the importance of key variables for certain applications stand out, including normalized difference veg- etation index (ndvi) for land surface, sea ice cover for sea ice, and wave height for waves."
+14,"for the purpose of sensor design and trade studies, within an aspen application category (e.g., within all meteorology applications), not all applications are equal."
+14,"that is, some applica- tions are foundational, such as global nwp, and others are secondary and/or downstream and dependent on the foundational application(s)."
+14,"similarly, the different application categories all support the noaa mission but to different degrees."
+14,"the category and mission priorities, american meteorological society o unauthenticated 2 e243011/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+15,aspen validation in fig.
+15,"sb1, aspen benefits to global nwp are compared to fsoi metrics (langland and baker 2004) from four global nwp centers—noaa’s environmental model center (labeled emc), nasa’s global modeling and assimilation office (gmao), the naval research laboratory (nrl), and the united kingdom’s meteorological office (met office)."
+15,there is quite a lot of variability among the fsois from center to center.
+15,"note that since radiosonde ranks first in all cases, the figure panels are effectively normalized by the radiosonde score."
+15,"each of the other three sensors ranks second in at least one case, but cris ranks second for nrl, met office, and aspen."
+15,"figure sb1 serves as a preliminary validation of aspen, showing that aspen’s relative benefits for global nwp fit in with an ensemble of fsoi results from different global nwp centers."
+15,other activities aiming at validating aspen results are the subject of ongoing and future work.
+15,radiosonde radiosonde gpsro atms atms gpsro cris cris emc gmao 0.0 0.2 0.4 0.6 0.8 0.00 0.10 0.20 radiosonde radiosonde cris cris gpsro gpsro atms atms nrl met office 0.0 0.1 0.2 0.3 0.4 0.00 0.10 0.20 0.30 radiosonde cris atms gpsro aspen 0.0 0.1 0.2 0.3 0.4 0.5 fig.
+15,"aspen benefits to global nwp compared to fsoi metrics from four global nwp centers labeled emc, gmao, nrl, and met office."
+15,"for consistency with the aspen ben- efits, the absolute value of the fsoi metrics (j kg−1) are plotted."
+15,aspen benefits are from the aspen implementation running 7 sep 2021.
+15,"fsoi metrics are for 0000 utc cycles in january 2015 from the joint center for satellite data assimilation impact of observing sys- tems fsoi intercomparison exercise (ios.jcsda.org). given in table 5, which are used in the sample calculations, were chosen subjectively for demonstration purposes."
+15,"aspen prototype results the examples presented in this section use the full aspen functionality but restricted to the 25-variable, 7-attribute, 6-sensor, 10-application subset that are selected (indicated by asterisks) in tables 2–5, respectively."
+15,a sample table of performance scores is presented in fig. 3b.
+15,"note that the weights (i.e., rescaled priorities) and the performance scores are matrices of the same shape (see fig. 3) as the observing system performance table."
+15,there is one scaled performance matrix for each pair of observing system and application.
+15,in the figure a value of zero (yellow cell) american meteorological society o unauthenticated 2 e243111/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+16,table 5.
+16,aspen prototype applications and application categories.
+16,an asterisk indicates the application is included in the sample calculations presented below.
+16,"types are model, forecast analyst support (fas), and mission service area (msa)."
+16,"the columns labeled csp and msp contain category and mission strategic priorities, respectively."
+16,note that the category and mission priorities given here are for illustration purposes only and for prototyping aspen.
+16,actual weights to be used for real evaluation of observing systems are the subject of an ongoing vetting process.
+16,"category application type csp msp earth system assessments of climate changes and its impacts (cli-acc) msa 0.5 climate mitigation and adaptation strategies (cli-cma) msa 0.8 climate prediction and projections (cli-cpp) msa 1 0.5 climate science and improved understanding (cli-siu) msa 0.5 science and services and stewardship advanced (wrn-sss) msa 0.3 * unified forecast system (ufs) model 1 meteorology aviation weather and volcanic ash (wrn-awx) msa 0.3 * global nwp model 1 * hurricane prediction model 0.7 hurricane/tropical storms (wrn-hur) msa 0.7 marine weather and coastal events (wrn-mwx) msa 0.7 1 public weather (wrn-pwx) msa 0.5 regional nwp, nowcasting/short-term forecasting fas 0.4 * severe storms, monitoring and forecasting fas 0.5 severe weather (wrn-sev) msa 0.5 winter weather (wrn-wwx) msa 0.4 land/hydrology * fire monitoring fas 0.5 fire weather (wrn-fwx) msa 0.5 * flood forecasting fas 1 0.4 integrated water and prediction information (wrn-iwpi) msa 1 * land surface assimilation and modeling model 0.5 oceanography coastal water quality (rc-cwq) msa 0.8 ecosystem monitoring assessment and forecast (ho-eco) msa 0.6 fisheries monitoring assessment and forecast (ho-fma) msa 1.0 habitat monitoring and assessment (ho-hab) msa 0.6 healthy ocean science services and stewardship advances msa 0.8 marine transportation (rc-mts) msa 0.8 planning and management (rc-pam) msa 0.4 0.6 protected species monitoring (ho-psm) msa 0.5 resilient coasts science services and stewardship advances msa 0.6 resilience to coastal hazards and climate change (rc-rcc) msa 0.8 * global ocean forecasting model 0.8 * sea ice monitoring fas 0.8 * wave forecasting model 0.8 indicates there is an unmet requirement, while an na (blank gray cell) indicates there is no requirement."
+16,"here we see that atms satisfies or nearly satisfies the needs of global nwp for geographic coverage, data density, and latency for those variables observed by atms, but only partially for other attributes, notably vertical resolution and error standard deviation."
+16,the primary results of aspen are the application benefits to the different applications due to the different observing systems.
+16,the benefits may be displayed to show the impor- tance of each sensor (fig. 5a).
+16,"for example, while atms provides a benefit of 0.43 for global nwp and 0.41 for the unified forecast system (ufs), its benefit for the other applications american meteorological society o unauthenticated 2 e243211/23/24 06:04 pm utc c to b e r 2 0 2| downloaded"
+17,application priorities for the 10 applications used in the sample calculations.
+17,"in each section of the figure, the row and column definitions are as in figs. 2 and 3. is much less due in part to the increased requirements on the part of the other applications for better temporal coverage for smaller-scale phenomena."
+17,"in contrast, the benefits due to abi are fairly similar from application to application (except for waves)."
+17,"abi has the great- est benefit, and glm provides the least benefit."
+17,"by dividing by the observing system costs, aspen obtains the application-relative cost effectiveness of the observing systems, which fig."
+17,the application (a) benefit and (b) cost effectiveness (benefit per billion u.s. dollars) summed over applications and sorted by the importance of each sensor.
+17,the different colors (legend) show the contribution of each application.
+17,american meteorological society o unauthenticated 2 e243311/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+18,can also be displayed in terms of importance (fig. 5b).
+18,"this shows that after radiosondes, atms has the greatest cost effectiveness, abi the next greatest cost effec- tiveness, and glm the least cost effectiveness, while viirs and cris have approximately equal cost effectiveness."
+18,"it is important to note that as glm is a relatively new sensor, increased investment in the use of glm will increase the benefits it provides and likely its ranking among other sensors."
+18,the application benefits can be fig.
+18,mission-relative cost effectiveness (benefit per rolled up by categories (applying billion u.s. dollars) sorted by the importance of each observing system. the category priorities) and then for the mission (applying the mission priorities) to obtain the category and mission benefits.
+18,dividing by costs gives the mission- relative cost effectiveness (fig.
+18,"again, atms is the most cost effective of the satellite sensors."
+18,"of course, cost effectiveness (figs. 5b and 6) depends strongly on the costs provided to aspen (see table 4 and the discussion in the “aspen interfaces” section)."
+18,"to understand and interpret the results obtained, various interpretability plots can be examined."
+18,"for example, fig. 7 shows that for atms contributing to the mission, the frac- tional contribution is greatest for temperature, then relative humidity, then sea surface temperature."
+18,figure 7 also shows the breakdown by application.
+18,"for example, sea surface temperature is very important for ufs, global nwp, global ocean, and hurricane prediction, but less so for the other applications, some of which are smaller scale and/or are focused on land areas."
+18,"also, as expected, the greatest contribution of atms to global nwp (and ufs) is due to temperature profile information."
+18,"the temperature contribution is approximately twice that of hu- midity for global nwp (and ufs), but approximately equal for hur- ricane prediction."
+18,"summary and concluding remarks aspen is designed to be a science- based and yet efficient tool for com- parative assessment of observation systems and thereby to support the decision process leading to the design, selection, and ultimately deployment of new space-based or ground-based assets or to the selec- fig."
+18,sums of the fractional contributions of atms to the tion and acquisition of commercial mission benefit sorted by the importance of each variable. data either as complement or as a the sums are over attributes and applications.
+18,the differ- baseline component of the global ent colors show the contribution for each application.
+18,american meteorological society o unauthenticated 2 e243411/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+19,table 6.
+19,applicability of aspen.
+19,"use description observing system optimization aspen allows the direct optimization of the attributes of the geophysical variables observed by an observing system, a sensor or a constellation, accounting for diverse applications in the aspen application categories— meteorology, oceanography, etc.—in terms of benefit or cost effectiveness."
+19,this is useful when designing a system that caters to multiple users and/or applications with varying priorities.
+19,"sensor optimization by mapping sensor specifications to the attributes of the geophysical variables observed, aspen can support sensor design, e.g., in trade space assessments, which often must balance benefit or cost effectiveness vs design risk, such as risk associated with technological maturity or launch cadence."
+19,"payload optimization to determine the best set of sensors to host on a spacecraft or to include in a mission, aspen can be applied to all possible permutations of the potential spacecraft or mission sensor bundles."
+19,"network optimization to determine the best configuration of satellites and sensors provided by one or a set of partners, aspen can assess the benefit and cost effectiveness of the different candidate sets of contributed system resources."
+19,"complementarity study the relative benefits and cost effectiveness of the ground- and space-based observing systems determined by aspen can be used to optimize the overall global observing system, accounting for a wide range of applications."
+19,a similar approach could be used to evaluate a potential arctic weather satellite against the existing or planned suite of polar leo sensors.
+19,gap analysis aspen can be used to determine how well the overall observing system is meeting the requirements of the applications and users by considering the change in benefit and cost effectiveness when adding or removing one component of the system or when evolving or designing a new configuration.
+19,commercial data cost-effectiveness aspen can determine the relative cost effectiveness of observations from alternative providers or systems assessment knowing only the attributes of the geophysical variables provided by the different sources.
+19,data exchange assessment aspen can be applied to an existing or proposed data exchange as part of an international partnership.
+19,"forward-looking assessment the aspen application requirements and priorities tables can account for projected evolution of applications, albeit with increased uncertainty."
+19,"using such tables allows aspen to be used in all the above modes of applicability, extending an assessment based on current existing requirements and priorities to account for future requirements and priorities."
+19,observing system.
+19,the applicability of aspen is summarized in table 6.
+19,these are all areas where aspen has the potential to support decision-making.
+19,"key characteristics of aspen include the following: 1) aspen is an interactive, web-based tool that is nearly instantaneous and dynamic."
+19,"since aspen inputs are contained in tables, it is a simple matter to update these based on changes in sme knowledge or on updates to an analytical approach (e.g., to compute observing systems performance) or on reevaluation of decision-maker priorities."
+19,"2) aspen is comprehensive: although we focused on nwp in our examples, aspen is designed to account for multiple applications, environmental domains, users, and mission service areas."
+19,all that is required to apply aspen to these is a table of requirements and associated priorities in the aspen expected format.
+19,"3) aspen provides comparative (side by side) assessments of multiple solutions, which is critical when choices have to be made due to budget or other constraints."
+19,"4) aspen provides a performance and gap analysis at the detail level appropriate for design optimization (resolution, uncertainty, temporal refresh, which have sensor design impacts on antenna, channel choices, noise levels, etc.) but also at summary levels to assess at the level of satisfaction of requirements for an individual application and/or overall mission level 5) aspen is dynamically adaptable and is flexible enough to perform “what if” scenarios."
+19,"6) aspen provides traceability and transparency—all resulting metrics are traceable to the applications requirements and priorities and to the observing systems performances, thus providing a high degree of transparency connecting all inputs and results in support of decision-making."
+19,7) aspen allows for uncertainty estimation based on collecting uncertainty estimates for all inputs (as discussed in the “aspen interfaces” section).
+19,it is expandable to assessing american meteorological society o unauthenticated 2 e243511/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+20,new sensors and constellations and applies to all environmental applications as long as we can reasonably quantify their observational requirements.
+20,8) aspen is meant to be an agency-wide tool since individual observing systems contribute to many applications and products.
+20,aspen accounts for both technical and strategic priorities.
+20,aspen is designed to roll up the benefit and cost-effectiveness metrics of a sensor for individual applications across categories of applications or across the full suite of applications.
+20,assumptions and limitations of aspen.
+20,"aspen makes a number of critical assumptions, and users of aspen should be careful to consider how these affect the application of aspen to their problem."
+20,these assumptions and caveats include the following: • the aspen benefit is a measure of how well the observing system meets the application or user requirements.
+20,but the aspen benefit metrics are not necessarily synonymous with prediction skill.
+20,"specifically, for forecast applications, aspen does not assess the impact on forecasts in terms of anomaly correlation coefficients, rmse scores, or other usual measures of forecast skill."
+20,"however, based on experience with forecast impact tests (oses and osses), the more an observing system scores at the high end of the require- ments ranges, especially for high-priority measurements, the more likely the forecast impact of this observing system will be positive."
+20,"• since the observing system performances are overall values for any given variable and attribute, aspen results lack the detailed granularity and nuance that is sometimes necessary."
+20,"in reality performance can vary with region, height, synoptic conditions, and other factors."
+20,• the aspen normalization is linear.
+20,aspen currently scores performance linearly within the requirement range.
+20,"however, aspen does collect three requirement values."
+20,in the future this will allow specifying nonlinear response functions that would be shaped similar to a logistics curve.
+20,• aspen inputs are in geophysical space.
+20,whether observations are actually used in geophysi- cal or radiance space does not impact aspen since the objective is to compare performance versus requirements.
+20,"however, limitations in the transformation from radiance to geophysi- cal space, including the impact of a priori information in that process, should be considered, especially when assigning a sensor vertical resolution and error standard deviation."
+20,• the definition and determination of costs depends upon the use case.
+20,costs are an input to aspen and there are many nuances that might be included when specifying these costs.
+20,"costs definitions range from sensor costs alone to the total cost including sensor, system, and data exploitation costs."
+20,"within any application of aspen, a consistent cost approach should be applied across the observing systems being assessed."
+20,• aspen has no mechanism to directly account for risk and mitigation strategies.
+20,a first-order approach would be to adjust costs for these factors.
+20,• the reliability and applicability of aspen outputs depend obviously on the quality and consistency of the aspen inputs in the context of the user’s purpose.
+20,"in particular, sensor performance is sometimes based on remote sensing science and sometimes on smes, but estimates from different sources may not be consistent."
+20,"in general, even though smes are expert, specifying the aspen inputs will involve some degree of subjectivity and variability."
+20,potential of aspen.
+20,aspen might be used to support many types of decision-making.
+20,"a primary use of aspen might be to provide a gap analysis, at a global scale, to check if and to what extent gaps exist (or will exist in the future) in our ability to measure the earth system envi- ronment."
+20,table 6 highlights examples of some of the potential aspen use cases.
+20,in these american meteorological society o unauthenticated 2 e243611/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+21,"cases, the benefits and cost effectiveness of several observing systems would be assessed in terms of a suite of representative applications, e.g., all the mission service areas listed in table 5."
+21,"in the cases listed in table 6, the comparisons would be between observing systems or varia- tions of an observing system (observing system optimization), between a series of sensors being considered in a trade study (sensor optimization), between different potential satellite hosting manifests (payload optimization), between different proposed networks of sensors or constellations of satellites (network optimization), between space-based and ground-based observing systems (surface/space complementarity study), between comparisons of pertur- bations of a given observing system (gap analysis), between different proposed data buys (commercial data cost-effectiveness assessment), and between proposed sets of data offered during data exchange negotiations (data exchange assessment)."
+21,"in the case of forward-looking assessment, this paradigm is slightly modified to assess current and future observing systems in terms of the requirements and priorities of future enhanced and new applications."
+21,"future enhancements and extensions are planned for aspen in terms of adding appli- cations, sensors, and constellations; improving capabilities for trade studies, monte carlo uncertainty estimates, and sensitivity analysis; improved ease of use; conducting further validation and calibration; and ultimately extending aspen to societal application areas."
+21,"for example, in the current aspen prototype the observing system performance and appli- cation requirements for variables like atmospheric temperature are defined as averages for the entire column."
+21,"future versions of aspen will differentiate between atmospheric layers (e.g., by replacing the variable “temperature” with a series of variables including boundary layer temperature, free troposphere temperature, and upper troposphere–lower stratosphere temperature)."
+21,"similarly, performances are defined as averages over all conditions, and the precision (i.e., error standard deviation) varies considerable for some observing systems for cloudy versus noncloudy, land versus ocean, and day versus night."
+21,future versions of aspen will include multiple precision attributes for these different conditions.
+21,"in summary, aspen is ideal for comparative assessments of multiple observing systems accounting for performance and cost."
+21,"aspen is complementary to other impact tools (includ- ing ose, osse, and fsoi approaches, all of which could be used to calibrate aspen)."
+21,the sidebar “aspen validation” presents a first-order calibration using a comparison ranking of observing systems by aspen and fsoi.
+21,"as a result of all these characteristics, in addition to the full transparency offered by the aspen traceability mechanism, aspen can be used to discover and highlight optimal (cost-effective) solutions using a defendable and demonstrable approach to gain wide buy-in from the various stakeholders, including stakeholders from both the user community and the sensor designers."
+21,this could be done at an agency level or at the international level to optimize the global observing system.
+21,acknowledgments.
+21,we thank our many colleagues for discussions over the last several years that motivated and led up to the design of aspen.
+21,"we thank all those who participated over the last 2–3 years in developing aspen and the various inputs for aspen, including special thanks to stacy bunin, roberto montoro, roderick cardenas, monica coakley, louis cantrell, and david helms."
+21,we thank the three anonymous reviewers for very thoughtful and helpful comments that greatly improved this paper.
+21,"the scientific results and conclusions, as well as any views or opinions expressed herein, are those of the author(s) and do not necessarily reflect those of noaa or the u.s."
+21,department of commerce.
+21,data availability statement.
+21,the best way to engage in the aspen project is through the direct con- tact with the authors.
+21,we will be happy to explore ways to collaborate with members of the science community.
+21,the inputs for the sample calculations shown in this paper are available as excel files from the authors.
+21,american meteorological society o unauthenticated 2 e243711/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+22,appendix: acronyms acronyms used in the text are listed here.
+22,acronyms used only in a table are defined in the table caption.
+22,acronyms of the authors institutions are defined on the title page.
+22,"common acronyms (e.g., utc and rmse) and proper names (e.g., names of specific institutions and systems such as noaa and atms) are not expanded in the text when first used."
+22,aspen acronyms are in boldface text below.
+22,abi advanced baseline imager arr application-dependent requirement range aspen advanced systems performance evaluation tool for noaa atms advanced technology microwave sounder atp application-dependent technical priority courl consolidated observing user requirement list cris cross-track infrared sounder emc environmental modeling center (noaa/nws) eosc earth-observing satellite constellation fsoi forecast sensitivity observation impact geo geosynchronous equatorial orbit; geostationary earth orbit glm geostationary lightning mapper gmao global modeling and assimilation office goes geostationary operational environmental satellite geoxo geostationary extended observations (satellite system) leo low-earth orbit maut multi-attribute utility theory na not available nasa national aeronautics and space administration ndvi normalized difference vegetation index noaa national oceanic and atmospheric administration nosia noaa observing system integrated analysis nsosa noaa satellite observing systems architecture nrl naval research laboratory nwp numerical weather prediction osp observing system performance oscar observing systems capability analysis and review (wmo) ose observing system experiment osse observing system simulation experiment rmse root-mean-square error sme subject matter expert sprwg space platform requirements working group ufs unified forecast system utc coordinated universal time viirs visible infrared imaging radiometer suite wmo world meteorological organization (geneva) xorwg geoxo requirements working group american meteorological society o unauthenticated 2 e243811/23/24 06:04 pm utc c to b e r 2 0 2| downloaded
+23,"references anthes, r."
+23,"a., and coauthors, 2019: developing priority observational requirements joo, s., j."
+23,"eyre, and r."
+23,"marriott, 2013: the impact of metop and other satellite from space using multi-attribute utility theory."
+23,meteor.
+23,"soc., 100, data within the met office global nwp system using an adjoint-based sen- 1753–1774, https://doi.org/10.1175/bams-d-18-0180.1. sitivity method."
+23,"rev., 141, 3331–3342, https://doi.org/10.1175/ blackwell, w."
+23,"j., and coauthors, 2019: microwave atmospheric sounding cube- mwr-d-12-00232.1."
+23,"sats: from micromas-2 to tropics and beyond. 9th conf. on transition langland, r."
+23,"h., and n."
+23,"baker, 2004: estimation of observation impact using the of research to operations, phoenix, az, amer."
+23,meteor.
+23,"soc., j3.5, https:// nrl atmospheric variational data assimilation adjoint system."
+23,"tellus, 56a, ams.confex.com/ams/2019annual/meetingapp.cgi/paper/352453. 189–201, https://doi.org/10.3402/tellusa.v56i3.14413."
+23,"boukabara, s.-a., and coauthors, 2011: mirs: an all-weather 1dvar satellite maddy, e."
+23,s. and s.
+23,"boukabara, 2021: miidaps-ai: an explainable machine- data assimilation and retrieval system."
+23,ieee trans.
+23,geosci.
+23,"remote sens., 49, learning algorithm for infrared and microwave remote sensing and data as- 3249–3272, https://doi.org/10.1109/tgrs.2011.2158438. similation preprocessing - application to leo and geo sensors."
+23,ieee j.
+23,"sel. ——, k."
+23,"garrett, and v."
+23,"kumar, 2016a: potential gaps in the satellite observing top."
+23,earth obs.
+23,"remote sens., 14, 8566–8576, https://doi.org/10.1109/ system coverage: assessment of impact on noaa’s numerical weather predic- jstars.2021.3104389. tion overall skills."
+23,"rev., 144, 2547–2563, https://doi.org/10.1175/ maier, m."
+23,"w., and coauthors, 2021: architecting the future of weather satel- mwr-d-16-0013.1. lites."
+23,meteor.
+23,"soc., 102, e589–e610, https://doi.org/10.1175/ ——, and coauthors, 2016b: community global observing system simula- bams-d-19-0258.1. tion experiment (osse) package (cgop): description and usage."
+23,atmos.
+23,"murray, j., d."
+23,"helms, and c."
+23,"miner, 2008: sensor performance considerations oceanic technol., 33, 1759–1777, https://doi.org/10.1175/jtech-d- for aviation weather observations for the noaa consolidated observations 16-0012.1."
+23,requirements list (corl ct-awx).
+23,"spie, 7088, 708802, https://doi. ——, j."
+23,"eyre, r."
+23,"anthes, k."
+23,"holmlund, k."
+23,"germain, and r."
+23,"hoffman, 2021: org/10.1117/12.795233."
+23,"the earth-observing satellite constellation: a review from a meteorological simmons, a., and coauthors, 2016: observation and integrated earth-system perspective of a complex, interconnected global system with extensive science: a roadmap for 2016–2025."
+23,"space res., 57, 2037–2103, https:// applications."
+23,ieee geosci.
+23,remote sens.
+23,"mag., 9, 26–42, https://doi.org/10.1109/ doi.org/10.1016/j.asr.2016.03.008."
+23,mgrs.2021.3070248.
+23,"sprwg, 2018: noaa space platform requirements working group (sprwg) eyre, j."
+23,"r., 2021: observation impact metrics in nwp: a theoretical study."
+23,part i: final (cycle 2b) report.
+23,noaa/nesdis tech.
+23,"rep., 177 pp., https://nesdis-prod."
+23,optimal systems.
+23,quart.
+23,meteor.
+23,"soc., 147, 3180–3200, https:// s3.amazonaws.com/2021-09/sprwg18.pdf. doi.org/10.1002/qj.4123."
+23,"germain, k., 2018: overview of the noaa satellite observing systems helms, d., m."
+23,"austin, l."
+23,"mccullouch, r."
+23,"reining, a."
+23,"pratt, r."
+23,"mairs, l."
+23,"o’connor, and architecture (nsosa)."
+23,noaa tech.
+23,"rep., 14 pp., https://www.space.com- s."
+23,"taijeron, 2016: noaa observing system integrated analysis (nosia-ii) meth- merce.gov/wp-content/uploads/2018-06-nsosa.pdf. odology report."
+23,noaa tech.
+23,"nesdis 147, 86 pp., https://doi.org/10.7289/ wmo, 2019: space-based capabilities (oscar/space)."
+23,world meteorological v52v2d1h.
+23,"organization, https://www.wmo-sat.info/oscar/spacecapabilities/."
+23,american meteorological society o unauthenticated 2 e243911/23/24 06:04 pm utc c to b e r 2 0 2| downloaded

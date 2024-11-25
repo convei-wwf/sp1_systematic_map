@@ -1,0 +1,938 @@
+page,p
+1,"remote sensing article managing agricultural water considering water allocation priority based on remote sensing data biao luo 1 , fan zhang 2 , xiao liu 3 , qi pan 1 and ping guo 1, * 1 center for agricultural water research in china, china agricultural university, beijing 100083, china; s20193091577@cau.edu.cn (b.l.); s20193091578@cau.edu.cn (q.p.)"
+1,"2 state key laboratory of water environment simulation, school of environment, beijing normal university, beijing 100875, china; zhang_fan@bnu.edu.cn 3 state key laboratory of hydroscience and engineering, department of hydraulic engineering, tsinghua university, beijing 100084, china; liuxiao1990@mail.tsinghua.edu.cn * correspondence: guop@cau.edu.cn abstract: to fairly distribute limited irrigation water resources in arid regions, a water allocation priority evaluation method based on remote sensing data was proposed and integrated with an optimization model."
+1,"first, the water supply response unit was divided according to canal system conditions."
+1,"then, a spatialization method was used for generating spatial agricultural output value (income from planting industry) and grain yield (yield of food crops) with the help of ndvi and the potential yield of farmland."
+1,"third, the ahp-topsis method was employed to calculate the water allocation priority based on the above information."
+1,"finally, the evaluation results were integrated with a nonlinear multiobjective model to optimally allocate agricultural land and water resources,   considering the combined objective of minimum envy and proportional fairness."
+1,"the method was applied to hetao irrigation area, an arid agriculture-dominant region in northwest china."
+1,"after citation: luo, b."
+1,"; zhang, f."
+1,"; liu, x.; solving the model, optimization alternatives were obtained, which indicate that: (1) the spatial pan, q."
+1,"; guo, p."
+1,"managing agricultural water considering method of agricultural output value can improve the accuracy by around 16% compared with the water allocation priority based on traditional method, and the spatial method of grain yield also have good accuracy (mape = 14.66%); remote sensing data."
+1,"remote sens. (2) the rank of water allocation priority can reflect more spatial information, and provide practical 2021, 13, 1536. https://doi.org/ decision support for the distribution of water resources; (3) the envy index can better improve the 10.3390/rs13081536 efficiency of an allocation system compared to the gini coefficient method."
+1,academic editor: emilio keywords: spatialization methods; statistical data; remote sensing; ahp-topsis; multiobjective rodriguez caballero programming; arid regions in china received: 10 march 2021 accepted: 14 april 2021 published: 15 april 2021 1.
+1,introduction fresh water is an essential resource.
+1,"it not only helps to maintain ecological health, but publisher’s note: mdpi stays neutral with regard to jurisdictional claims in also promotes social development [1]."
+1,"agriculture is the largest water use sector, accounting published maps and institutional affil- for approximately 70% of freshwater use globally per year [2]."
+1,"the ever-increasing food iations. demand and decreased availability of water agriculture, calls for effective agricultural water management [3]."
+1,"especially in arid irrigation districts, when water scarcity occurs, water managers are required to make difficult decisions about what land has higher priority and how to effectively allocate limited water resources [4]."
+1,"priority ranking among different water users has been proven to be a useful way copyright: © 2021 by the authors. to help water managers identify the importance of water users [4,5]."
+1,"a series of priority licensee mdpi, basel, switzerland."
+1,"this article is an open access article evaluation models for different water use sectors such as agriculture and industry, consid- distributed under the terms and ering various factors such as social economy, ecological environment, and policies, have conditions of the creative commons been developed [6–8]."
+1,"for example, razavitoosi and samani presented an assessment attribution (cc by) license (https:// model including social, economic, managerial and environmental clusters to evaluate the creativecommons.org/licenses/by/ priority of five watersheds in iran [9]."
+1,"gómez-limón et al. investigated the priority of 4.0/). agricultural water resources allocation in different watersheds under drought conditions, remote sens."
+1,"2021, 13, 1536. https://doi.org/10.3390/rs13081536 https://www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2021, 13, 1536 2 of 28 and indicated that the priority can effectively improve water use efficiency [10]."
+2,"in addition, similar studies were carried out on the administrative unit and irrigation district scale."
+2,"for example, li et at. determined the water allocation priority among different cities consid- ering different socioeconomic development levels and national or regional policies [11]."
+2,"zhang et al. evaluated the priorities of 17 irrigation districts based on fairness, production efficiency and economic benefits, and then input them into a water resource optimization model to obtain a water resource allocation strategy [12]."
+2,"however, the priority assessment system contains many spatial variability indicators, such as population, crop yield, etc."
+2,"in addition, due to the limitations of data collection, it is difficult for current studies to consider smaller scales than administrative units and irrigation areas, which ignores the spatial variability of the system."
+2,"with the development of “3s” technology (i.e., remote sensing, global position system, and geographic information systems), more spatial information can be collected [13]."
+2,"some remote sensing data such as precipitation, evapotranspiration, and land use can be directly used in water resources management practices [14,15]."
+2,"for example, remote sensing data have been utilized to evaluate the efficiency of water resources utilization, and to help optimize water resources allocation [14,16]."
+2,"moreover, some socioeconomic statistics can be estimated by appropriate methods and remote sensing data, which are helpful for water resources management [17]."
+2,the spatial unit of the collection boundary for socio-economic statistics is usually the administrative unit boundary.
+2,"there are several limitations in spatial analysis and interdisciplinary application, including low spatial resolution and a mismatch between administrative regions and geographical units."
+2,"compared with traditional socio-economic data, the spatialization of statistical data has the following advantages: (1) reflecting the spatial distribution characteristics of socio-economic data within the statistical region; (2) facilitating spatial analysis through grid-based socio- economic data; and (3) breaking the limitations of administrative boundary."
+2,"liang et al. used night-time light and land use data to spatialize the gdp of a chinese city via a linear regression model, which can provide a reference for future urban planning and social and economic development [18]."
+2,zhao et al. utilized different regression models to spatialize the gdp of south china and analyzed the performance of different models [19].
+2,sutton used night-time light data to map urban population density distribution and analyzed the trend of urban population density in the united states [20].
+2,"however, most relevant studies focused to gather the spatialization of gdp and population statistical data, few attempts have been made on agricultural economic statistical data, such as grain yield and agricultural output value [21]."
+2,"moreover, there are few reports on the application of statistical data spatialization methods in agricultural water management."
+2,"therefore, this research attempts to construct a spatialization method of agricultural output value and grain yield."
+2,"after using the obtained spatialized statistical data and remote sensing data, we can ensure that the priority evaluated on a smaller scale contains more spatial information."
+2,"to formulate specific planning schemes, the priority of water users was integrated with optimization models."
+2,"generally, there are conflicting allocation objectives among different users including economic, social, and environmental impacts [3]."
+2,"thus, multiobjective models were developed for tackling multilateral interests from decision-makers [22–24]."
+2,"in practical water-allocation problems, economic benefits, crop yield, and environmental impacts were the most common objectives, while fairness in water allocation was attracting more and more attention [25,26]."
+2,zhang et al. used the gini coefficient in water distribution to quantify the fairness among different water use sectors [23].
+2,li et al. measured the fairness of water distribution by the minimum difference of water use per unit area [3].
+2,"these indicators were presented as a function describing the absolute individual differences, such that penalties were incurred for any differences in individual distribution results (whether a customer is worse off or better off) [27]."
+2,"through such methods, interactions between allocation individuals, such as jealousy and comparison, can be hardly considered and reflected, which may reduce the resource allocation efficiency [28]."
+2,envy is a measure that considers the differences in service quality between all possible pairs of customers [29].
+3,"remote sens. 2021, 13, 1536 3 of 28 this fairness index, based on the jealousy value, not only considers the psychology of comparison among the allocation objects, but also effectively avoids the loss of allocation efficiency."
+3,"therefore, this indicator is applied to the allocation of limited resources to consider the envy among the allocation objects in the allocation process."
+3,"in order to effectively manage agricultural water resources, an evaluation-optimization framework has been developed."
+3,"first, a water allocation priority evaluation system is constructed, and remote sensing data is involved."
+3,"after applying this evaluation model at the canal scale, both the accuracy and spatial variability can be guaranteed in the evaluation results."
+3,"then a nonlinear multi-objective optimal allocation model of agricultural land and water resources (nmolw), considering allocation efficiency and equity, was established."
+3,the presented method improves the existing statistical data spatialization method and is applied to the constructed water allocation priority evaluation system.
+3,"then we input the priority evaluation results into the nmolw model, and obtained the agricultural water and land resource allocation of irrigation area plan by solving the model."
+3,"this can: (1) obtain the water allocation priority through considerations of the social, economic, and environmental factors at the canal scale; (2) improve the spatialization method of agricultural output value (specifically referring to the income from the planting industry) and grain yield statistical data by introduce normalized difference vegetation index (ndvi) and remote sensing data on potential yield."
+3,"potential yield of farmland refers to the farmland production potential estimated by the gaez (global agro ecological zones) model, considering soil, weather, the environment, and other factors [30]; and (3) illustrate the tradeoff between conflicting objectives, such as economic benefits, water supply priority, grain yield, and minimum envy."
+3,the method is applied to a practical case of an irrigation district in northwest china and the optimization results can provide decision-making support for managers.
+3,development of methodology 2.1.
+3,"overview of the problem in agricultural production, under the constraints of limited agricultural land and water resources, formulating more effective resource utilization strategies requires us to determine the water supply priority of competing water sectors."
+3,"however, the current research on the priority of water supply cannot meet the requirements of precise management of water supply in practice."
+3,"for example, most previous evaluation programs were carried out on administrative units and irrigation districts, which could not take into account the actual distribution of the canal system; the previous evaluation system does not consider the spatiality of the evaluation index, which has also limited the accuracy of the evaluation plan."
+3,"moreover, when allocating limited agricultural water resources, blindly pursuing distribution efficiency, such as economic benefits and grain output, will lead to an unfair distribution of water resources."
+3,"thus, to use land and water resources in a more efficient and sustainable way, decision makers are faced with the following issues: (1) how to evaluate the priority of water distribution on a smaller scale according to actual needs?"
+3,(2) how to resolve the conflict between the boundary of statistical data and the boundary of the new evaluation unit?
+3,(3) how to balance distribution efficiency and distribution fairness in water resource distribution?
+3,"especially in the case of water scarcity, managers should not only consider food production and economic benefits, but also consider the fairness of distribution and user satisfaction with the water supply."
+3,"therefore, the framework developed in this study (figure 1) attempts to solve the above problems, and can be divided into three parts: (1) spatialize the statistics of agri- cultural output value and grain yield; (2) construct a water allocation priority evaluation system on the canal scale; and (3) formulate a nmlow model to obtain the irrigation water allocation."
+4,remote sens.
+4,"remote 2021, 13, sens. 2021, 13, 1536 1536 of 29 44of 28 figure 1."
+4,study framework.
+4,water 2.2.
+4,allocation priority water allocation priority evaluation evaluation of statistical spatialization of 2.2.1.
+4,"spatialization statistical data sensing data remote sensing remote preparation data preparation the potential the potential yield of farmland yield of farmland andand land use (based land use (based onon landsat remote sensing landsat 88 remote sensing image, generated by human visual interpretation) remote sensing image, generated by human visual interpretation) remote sensing data were data were obtained from obtained in the resource and environmental science and data center of the from in the resource and environmental science and data center of the chinese acad-chinese academy of sciences emy (http://www.resdc.cn/, of sciences accessed (http://www.resdc.cn/, on 20 on accessed may20 2020) at a 1 at may 2020) km a 1resolution."
+4,we used km resolution.
+4,"we projection transformation tool to process the used projection transformation tool to process the potential yield of farmland and data, potential yield of farmland and land use land removed anddata, use invalid values and removed invalidto values obtain these with data datathese to obtain withresolution a spatial of 1 km inof a spatial resolution the 1 wgs-1984 coordinate system."
+4,this study only focuses on agricultural output km in the wgs-1984 coordinate system.
+4,"this study only focuses on agricultural output value (income from planting value (income industry) and grain from planting yieldand industry) (yield yieldcrops). of food grain (yield the fact crops). of food thewill that there factbethat no grain yield and agricultural output value without cultivated land needs to be stressed [17]. there will be no grain yield and agricultural output value without cultivated land needs therefore, the extracting tool in arcgis 10.2 (environmental systems research institute to be stressed [17]."
+4,"therefore, the extracting tool in arcgis 10.2 (environmental systems inc., redlands, ca, usa) was used to extract cultivated land, and we used the same tool to research institute inc., redlands, ca, usa) was used to extract cultivated land, and we generate the potential yield of cultivated land. used the same tool to generate the potential yield of cultivated land."
+4,"global 10 days synthesis of spot vegetation images (vgt-s10) product was global 10 days synthesis of spot vegetation images (vgt-s10) product was accessed via the flemish institute for technology research (vito, https://www.vito- accessed via the flemish institute for technology research (vito, https://www.vito-eo- eodata.be, accessed on 11 june 2020) at a 1 km resolution."
+4,"the time resolution of this product data.be, accessed on 11 june 2020) at a 1 km resolution."
+4,"the time resolution of this product is 10 days, and we obtained 36 images in 2017."
+4,"first, we did a projection transformation is 10 days, and we obtained 36 images in 2017."
+4,"first, we did a projection transformation with the projection conversion tool."
+4,"then, the invalid value (negative value caused by the with the projection conversion tool."
+4,"then, the invalid value (negative value caused by the influence of clouds, water, ice and snow) was removed to obtain 36 periods of ndvi data influence of clouds, water, ice and snow) was removed to obtain 36 periods of ndvi data within one year."
+4,"annual maximum ndvi generally represents ndvi at the height of the within growing one annual year. and season, maximum reflects ndvi the growth generally of crops [31]. represents ndvi at the36height through synthesizing images ofinto the growing season, and reflects the growth of crops [31]."
+4,"through the annual maximum ndvi map with the maximum value composites (mvc) method, an synthesizing 36 images into annual annual maximum themaximum ndvi dataset ndvifor map with land cultivated the maximum value composites (mvc) was generated. method, an annual maximum ndvi dataset for cultivated land was generated."
+4,"regression models the multiple the multiple linear regression model linear regression model isis aa very popular statistical statistical regression very popular model, regression model, that has that has been widely used been widely usedin thespatialization inthe gdp,grain spatializationofofgdp, grainyield yieldand andother remote other remote sensing sens- applications [18,21,32,33]."
+4,"however, in the spatialization of socio-economic data, ing applications [18,21,32,33]."
+4,"however, in the spatialization of socio-economic data, a sin- a single regression gle model regression usually model cannot usually accurately cannot accuratelydescribe administrative describe administrative units [19].["
+4,"19]. units therefore, there- more regression models such as quadratic polynomial models, power function fore, more regression models such as quadratic polynomial models, power function mod- models and exponential models have been introduced into remote sensing applications els and exponential models have been introduced into remote sensing applications [34– [34–36]."
+4,"to examine the applicability of these models, we used them for measuring the 36]."
+4,"to examine the applicability of these models, we used them for measuring the quan- quantitative relationships among the annual maximum ndvi, potential yield of farmland, statistical"
+5,"remote sens. 2021, 13, 1536 5 of 28 data of grain yield, and agricultural output value at the city level."
+5,"the regression model performance was evaluated by goodness of fit value (r2 ) and the significance test value f [19,36,37]."
+5,"modification model the above models were established with the statistical data of city-level units, so when estimating the statistical data of each grid, there will be a large deviation [19]."
+5,"to solve this problem, it is necessary to make amendments to the simulated data for each grid in the administrative unit [19,38,39]."
+5,"therefore, taking into account regional differences, city-level statistics are used for calculating the correction coefficient."
+5,"the modified model is shown as follows: apt app = api × (1) aps yt yp = yi × (2) ys a list of the nomenclatures for variables and parameters is provided in table 1, which will be true for all equations."
+5,model validation the grain yield and agricultural output value of each administrative unit are calculated through arcgis based on the above model.
+5,"the error between the simulation results and the statistical data is analyzed using county-level statistical data, and the performance of the model can be tested."
+5,the model’s accuracy was tested by mean absolute percent error (mape) and root mean square error (rmse) [18]: 1 g og − sg g∑ mape = (3) g og v u g u1 rmse = t ∑ og − sg 2 (4) g g table 1.
+5,nomenclature for variables and parameters.
+5,"parameters definition i index of response unit (i = 1, 2, 3 . . ."
+5,"i) c index of crop type (c = 1, 2, 3 . . ."
+5,"c) t index of month, from march to october (t = 1, 2, 3 . . ."
+5,"t) app the revised grid agricultural output value, cny apr the grid agricultural output value estimated by regression model, cny apt the agricultural output value counted by city units, cny the sum of grid agricultural output value estimated by regression model aps within the scope of city unit, cny gyp the revised grid grain yield, kg gyr the grid grain yield estimated by regression model, kg gyt the grain yield counted by administrative units, kg the sum of grid grain yield estimated by regression model within the scope gys of each city unit, kg measured value of the county g (provinces govern cities and cities og govern counties) sg simulation value of the county g et0 reference evapotranspiration, mm ∆ slope of the saturated vapor pressure and air temperature curve, kpa/◦ c"
+6,"remote sens. 2021, 13, 1536 6 of 28 table 1."
+6,"parameters definition rn net radiation, mj/(m2 ·d) g soil heat flux, mj/(m2 ·d) γ hygrometer constant, kpa/◦ c t average air temperature, ◦ c u2 wind speed at a height of 2 m above the ground, m/s es air saturated vapor pressure, kpa ea actual vapor pressure, kpa kc crop coefficient etict actual evapotranspiration of crop c in the t month of response unit i, mm etmct maximum evapotranspiration of crop c in the t month, mm; λict water sensitivity parameters of crop c in the t month of response unit i aic irrigated area of crop c in response unit i, ha bc the unit price of crop c, cny gpmic maximum yield per unit area of crop c in response unit i, kg/ha mai actual water consumption of response unit i, m3 maei the amount of water required by response unit i, m3 mak actual water consumption of response unit k, m3 mek the amount of water required by response unit k, m3 hict available water in root zone of crop c in the month t of response unit i, mm mict irrigation water of crop c in the month t of response unit i pt effective precipitation of month t, mm geict groundwater recharge of crop c in the month t of response unit i hm maximum available water in root zone, mm qt available water in month t, m3 η irrigation water utilization coefficient maximum and minimum irrigation area, respectively, of crop c in response amaxic , aminic unit i, ha."
+6,"zyminc minimum yield of crop c, kg ge total groundwater recharge, m3 p total effective precipitation, m3 α, σ proportional fairness coefficient, the degree of proportional fairness x1 , x2 potential yield of farmland, kg/ha, ndvi 2.2.2."
+6,"evaluation index to pursue fair and efficient water allocation among competing users, it is necessary to give attention to systems thinking and the integration of hydrologic, environmental, soci- etal, and economic considerations [9]."
+6,"nevertheless, for agricultural water allocation, this issue is more specific, because agricultural water resources are mainly used for agricultural production."
+6,"with the aim of being conducive to agricultural production, based on previous studies [9,10,12], the evaluation indices can be classified into three types: (1) agricultural production conditions, such as land conditions, infrastructure construction, and regional policies; (2) economic benefits, such as agricultural output value and grain yield; and (3) equity, such as population and regional development level."
+6,2.2.3.
+6,"evaluation method division of water supply response unit canal systems are vital facilities in irrigation water distribution and, thus, it is more reasonable to divide water supply response units according to the canal system."
+6,existing applications show that agricultural water management at the canal system scale can effectively improve management accuracy [40].
+6,"thus, this research attempts to divide the water supply response unit by considering the distribution of the canal system and the current situation of land use and management."
+7,"canal systems are vital facilities in irrigation water distribution and, thus, it is more reasonable to divide water supply response units according to the canal system."
+7,existing applications show that agricultural water management at the canal system scale can effec- tively improve management accuracy [40].
+7,"thus, this research attempts to divide the wa- ter supply response unit by considering the distribution of the canal system and the cur- remote sens. 2021, 13, 1536 7 of 28 rent situation of land use and management."
+7,"the ahp-topsis evaluation approach the ahp-topsis 2, theapproach evaluation as shown in figure analytic hierarchy process (ahp) has a hierarchical struc- ture that decision-making adaptsintofigure as shown 2, the analyticproblems, it has been hierarchysoprocess (ahp) has a used widely in multi-criteria hierarchical structure decision-making. that using the experience adapts to decision-making problems, and so knowledge of localused it has been widely managers and ahp in multi-criteria method can allowusing decision-making. us make judgments qualitative and the experience on different knowledge objectives, of local managers and and the method specific ahp allowcan method can us be found make in [41]."
+7,"topsis qualitative judgmentsis aonmethod to determine different andclosest objectives, the positive the specific ideal method solution can andinthe be found farthest [41]."
+7,topsis negative idealtosolution is a method determine multidimensional in the computing closest positive ideal solutionspace and the farthest negative ideal solution in multidimensional computing space [42].
+7,combining the ahp and topsis methods can effectively measure the qualitative [42].
+7,combining andahp the and topsis quantitative methods problems in thecan effectively evaluation andmeasure help us totheobtain qualitative and quantitative the ranking of different programs.inthe problems thespecific evaluation stepsandof help us to obtain the the ahp-topsis ranking method canof found inprograms. bedifferent the appendixthe specific a. steps of the ahp-topsis method can be found in the appendix a.
+7,ahp figure 2.
+7,figure method.
+7,ahp method.
+7,multi-objective optimization nonlinear multi-objective 2.3.
+7,nonlinear model of optimization model agricultural land of agricultural land and and water water 2.3.1.
+7,crop water requirements 2.3.1.
+7,crop water requirements crop water crop requirementsareare waterrequirements thethe main reference main when reference formulating when optimization formulating mod- optimization els to guide water allocation [14].
+7,the fao56 pm equation recommended by the food and models to guide water allocation [14].
+7,"the fao56 pm equation recommended by the food agriculture organization of the united nations (fao) is the most commonly used method and agriculture organization of the united nations (fao) is the most commonly used of traditional ground monitoring of et0 and kc, and the maximum evapotranspiration method of traditional ground monitoring of et0 and kc, and the maximum evapotranspi- of crops can be calculated according to the crop coefficient method recommended by the ration of crops can be calculated according to the crop coefficient method recommended fao [43]: by the fao [43]: 0.408 ∆(r n − g)+γ t + 900  273 u2 (e s − ea et0 = (5) 900 ∆ + γ(1 + 0.34u 2) 0 .408 δ(r n − g)+γ u2 (e s − e a ) et0 = t0 + 273 etm = kc × et (5) (6) δ +γ (1 + 0.34u2 ) 2.3.2."
+7,"objectives (1) economic benefit etm = kc × et0 (6) the jensen model is a multiplicative crop water production function that can predict crop yield, and reflect the impact of water shortage on crop yield at various growth stages [44]."
+7,"therefore, this study uses this model to determine crop irrigation schemes."
+7,i c t λict etict max = ∑ ∑ ∑ ∏ ( ) × aic × gpmic × bc (7) i c t etmct (2) grain yield irrigation districts often undertake the task of grain production.
+7,"while pursuing economic benefits, grain yield should also be guaranteed."
+7,i c −1 t λict etict max = ∑ ∑ ∑ ∏ ( ) × aic × gpmic (8) i c t etmct
+8,"remote sens. 2021, 13, 1536 8 of 28 (3) water allocation priority satisfaction when water resources are limited, managers need to decide the water supply priorities of different water-using departments and direct the water supply under the guidance of this priority."
+8,"m max = wi × ai (9) mei (4) equity in agricultural water allocation, fairness is seldom considered from the perspective of farmers’ psychological affect."
+8,envy is a feeling of wanting what others have.
+8,"in the model, it is defined as a user feeling unsatisfied compared with other users."
+8,"when other users are less dissatisfied r, jealousy occurs [27]."
+8,"based on sunarin’s research into the envy fairness index, this paper introduces the minimum envy fairness [27]."
+8,"envy value specifically refers to the difference between the unsatisfied water supply of the response unit i and that of the response unit k, namely: i k min = ∑ ∑ max{0, ( mei − mai ) − ( mek − mak )} (10) i k 2.3.3."
+8,constraints (1) soil water balance constraint the crop evapotranspiration is directly determined by the soil water content in the root zone.
+8,"the soil water balance in the root zone can be simplified as follows [45]: hict+1 = hict + mict + pt + geict − etict (11) hict ≤ hm (12) (2) evapotranspiration constraint in practice, crop evapotranspiration cannot exceed the maximum evapotranspiration, nor can it be lower than the minimum evapotranspiration that satisfies crop growth [15]."
+8,0.6etmct ≤ etict ≤ etmct (13) (3) available water constraint irrigation water consumption cannot exceed the water available in the area.
+8,"i c ∑ ∑ aict × mict ≤qt × η (14) i c (4) irrigation area constraint the irrigated area cannot exceed the planting area, nor can it fall below the lower limit given by the manager."
+8,"aminic ≤ aic ≤ amaxic (15) (5) crop yield constraint in order to meet the development requirements of the irrigation area, managers often set the output requirements of different crops in the irrigation area based on the production situation in previous years."
+8,i t λict etict ∑∑∏( etmct ) × aic × gpmic ≥ zyminc (16) i t (6) proportional equity constraint
+9,"remote sens. 2021, 13, 1536 9 of 28 in resource allocation, if the pursuit of minimum envy fairness is one-side, it will inevitably lead to neglect of users with less demand."
+9,"to solve it, this study learns from the idea of proportional equity [46], giving each user the minimum requirement satisfaction."
+9,mei ≥α (17) mai c t mei = ∑ ∑ etmct × aic (18) c t c t mai = ∑ ∑ etict × aic (19) c t q + p + ge α = σ× (20) me 2.3.4.
+9,"solution method the weighted minimum deviation method is used for transforming the multi-objective model into a single objective model, and then a solution can be generated."
+9,the essence of this method is to transform multi-objective programming into single objective pro- gramming by normalizing each objective and eliminating the scale impact of an objective function value [22].
+9,"the specific calculation method can be found in [22,47], and managers’ preference for different objectives are obtained by ahp."
+9,application 3.1.
+9,"study area hetao irrigation district (hid) is located in bayannur city, inner mongolia au- tonomous region, china (40◦ 190 –41◦ 180 n, 106◦ 200 –109◦ 190 e, altitude 1039 m), and its geolocation is shown in figure 3."
+9,hid is an important commodity grain production base in china.
+9,"corn, sunflower, and wheat are the main crops in hid, accounting for 85% of the total sown area."
+9,there is little precipitation with an average annual precipitation of 130–220 mm and high annual evaporation of more than 2000 mm [48].
+9,"the irrigation and drainage canal system in hid is well constructed, with 13 main canals and 12 main ditches, and the total length of the canal system is more than 16,800 km."
+9,"this study focuses on 12 canals, which are the most important canals in the irrigation area and are located in the core of the irrigation area."
+9,approximately 90% of the irrigation water of the hid comes from the yellow river.
+9,"according to the statistics, the average annual irrigation water from the yellow river is about 4.84 × 109 m3 ."
+9,"however, due to the decrease in annual runoff of the yellow river, the water distribution of hid is reduced, and the gap between supply and demand of irrigation water is widened [49]."
+9,water resources have become the main factor restricting the development of irrigation area.
+9,the challenges of the irrigation area are (1) how to manage water use on a canal system scale; (2) how to determine a reasonable priority for water distribution; and (3) how to allocate water resources in consideration of allocation efficiency and fairness.
+10,yellow river is about 4.84 × 10 m .
+10,"however, due to the decrease in annual runoff of the yellow river, the water distribution of hid is reduced, and the gap between supply and demand of irrigation water is widened [49]."
+10,water resources have become the main factor restricting the development of irrigation area.
+10,"the challenges of the irrigation area are (1) how to manage water use on a canal system scale; (2) how to determine a reasonable pri- remote sens. 2021, 13, 1536 10 of 28 ority for water distribution; and (3) how to allocate water resources in consideration of allocation efficiency and fairness."
+10,figure 3.
+10,study area location.
+10,evaluation 3.2.
+10,"index selection evaluation index selection based on based section 2.2.2 on section and combined 2.2.2 and combined with with the the actual situation of actual situation of the irrigation area the irrigation area and data collection, seven evaluation indexes were selected in this study: main canal and data collection, seven evaluation indexes were selected in this study: main canal length, length, canal design canal design flow, number flow, number of branch of branch canals, population, canals, population, sowingsowing area, agricultural area, agricultural output output value, and grain value, and grain yield. yield."
+10,data 3.3.
+10,data 3.3. studyselected this study this selected20172017asas thethe current current year. year.
+10,"the the population, population, potential potential yield ofyield farm-of farmland, and land use data from 2017 (spatial resolution: 1 km) land, and land use data from 2017 (spatial resolution: 1 km) were downloaded from the were downloaded from the resource resource andand environmentdata environment data center ofofthe thechinese chinese academy academy of sciences (http: of sciences //www.resdc.cn, (http://www.resdc.cn, accessed on 20onmay accessed 2020), 20 may and and 2020), are shown are shownin figure 4."
+10,the in figure 4. synthesized the synthe- 2017 maximum sized 2017 maximum is shown ndvi ndvi in figure is shown in 4b.
+10,the4b.
+10,figure statistical data of agricultural the statistical output value data of agricultural out- and grain output of 12 cities in inner mongolia in 2017 are from the put value and grain output of 12 cities in inner mongolia in 2017 are from the inner mon-inner mongolia statistical yearbook golia of 2017 statistical the(figure (figureof5).2017 yearbook study area canstudy 5).
+10,"the be divided area can intobe 12 regions divided according into 12 regionsto the main canal conditions: yigan (yg, i = 1),wulahe (wlh, i = 2), according to the main canal conditions: yigan (yg, i = 1),wulahe (wlh, i = 2), yangjiahe yangjiahe (yjh, i = 3), huangji (yjh, i = 4), yongji (hj,huangji i = 3), 4), iyongji (hj, i =(yj, 5),i fengji = 5), fengji (yj, i =(fj, (fj, i =(zh, = 6), zaohe i = 7), (zh, 6), zaohe shahe i =(sh, i = 8), 7), shahe yihe (yh, i = 9), tongji (tj, i = 10), changji (cj, i = 11), tabu (tb, i = 12)."
+10,"the meteorological data required by the fao56 pm equation are all from the china meteorological science data sharing service network (http://data.cma.cn, accessed on 10 may 2020)."
+10,"the canal system data of the 12 main canals (table 2), the main crop planting structure (figure 6), effective precipitation (table 3), and available water (table 3) are all from the hetao irrigation district management bureau."
+10,the crop etm data calculated based on the meteorological data are shown in table 3.
+10,the crop yield and price data (table 4) are from the inner mongolia statistical yearbook of 2017.
+10,the statistical data of agricultural output value and grain yield of the five counties used for model accuracy verification are from the bayannur city statistical yearbook of 2017.
+11,2020).
+11,"the canal system data of the 12 main canals (table 2), the main crop planting struc- ture (figure 6), effective precipitation (table 3), and available water (table 3) are all from the hetao irrigation district management bureau."
+11,the crop etm data calculated based on the meteorological data are shown in table 3.
+11,"the crop yield and price data (table 4) are remote sens. 2021, 13, 1536 from the inner mongolia statistical yearbook of 2017."
+11,the statistical data of agricultural out- 11 of 28 put value and grain yield of the five counties used for model accuracy verification are from the bayannur city statistical yearbook of 2017.
+11,"remote sens. 2021, 13, 1536 12 of 29 figure 4."
+11,figure some basic 4.
+11,some basic data data of of the study area. the study area. (a) (a) cultivated cultivated land land data of inner data of mongolia; (b) inner mongolia; (b) ndvi ndvi data data of inner mongolia; of inner mongolia; (c) potential productivity (c) potential productivity of farmland data of farmland of inner data of mongolia; and inner mongolia; (d) population population spatial and (d) distribution data spatial distribution data of hid. of hid.
+11,"8,000,000 agricultural output value 3,000,000 agricultural output value (104cny) 7,000,000 grain yield 2,500,000 6,000,000 grain yield (t) 2,000,000 5,000,000 4,000,000 1,500,000 3,000,000 1,000,000 2,000,000 500,000 1,000,000 0 0 cities of inner mongolia figure 5."
+11,figure output value agricultural output 5.
+11,agricultural and grain value and yield of grain yield of inner mongolia.
+11,inner mongolia.
+11,table 2.
+11,canal system data of hetao irrigation district.
+11,length of main canal design discharge of number of branch irrigation districts (km) canal (m3/s) canals yg 17 65 17 wlh 53.4 27.4 15 yjh 58.5 53 25 hj 81.4 58 34 yj 49.4 106 39 fj 105 60 36 zh 52 29.2 23 sh 80 31.4 20 yh 83 33 24
+12,"remote sens. 2021, 13, 1536 12 of 28 table 2."
+12,canal system data of hetao irrigation district.
+12,length of main design discharge of number of branch irrigation districts canal (km) canal (m3 /s) canals yg 17 65 17 wlh 53.4 27.4 15 yjh 58.5 53 25 hj 81.4 58 34 yj 49.4 106 39 fj 105 60 36 zh 52 29.2 23 sh 80 31.4 20 yh 83 33 24 tj 67.9 31 24 cj 53.5 24 20 tb 44.5 22 21 table 3.
+12,meteorological and hydrological data of hetao irrigation district.
+12,etm (mm) effective available month wheat corn sunflower precipitation (mm) water (108 m3 ) 3 35.99 0 0 0 0 4 103.55 0 0 0 2.16 5 199.95 114.70 0 0 10.67 6 112.00 147.20 155.20 7.65 4.17 7 0 179.30 151.59 4.59 5.37 8 0 90.35 68.11 17.13 2.02 9 0 0 48.48 0 1.46 table 4.
+12,local price and minimum yield of crop.
+12,"crop local crop prices (cny/kg) crop minimum yield (104 kg) wheat 3.00 28,862.22 corn 1.70 98,154.24 sunflower 6.30 42,126.28 60,000 14,000 crop yield per unit area（kg/ha） 50,000 12,000 planting area（ha） 10,000 40,000 8,000 30,000 6,000 20,000 4,000 10,000 2,000 0 0 yield per unit area of wheat yield per unit area of corn yield per unit area of sunflower planting area of wheat planting area of corn planting area of sunflower figure figure areaarea 6."
+12,planting 6.
+12,planting and maximum and maximum yield yield data ofdata hid. in hid. cropsofincrops
+13,"remote sens. 2021, 13, 1536 13 of 28 4."
+13,results and discussion 4.1.
+13,spatial results of statistical data 4.1.1.
+13,"statistical regression model when establishing the regression model of agricultural output value and grain yield, we used 12 cities in inner mongolia as the research objects (figure 5)."
+13,then the correlation between remote sensing impact factors and statistical data can be analyzed.
+13,the results of the correlation analysis are shown in table 5.
+13,table 5.
+13,correlation analysis results between remote sensing impact factors and statistical data.
+13,statistical data cultivated land area ndvi potential yield impact factors of farmland agricultural output value 0.93 ** 0.78 ** 0.65 * grain yield 0.87 ** 0.86 ** 0.73 ** note: ** p < 0.05; * p < 0.1.
+13,"as shown in table 5, there are a strong correlation among the three factors and agricultural output value, grain yield."
+13,all of them have passed the significance test.
+13,"among them, the cultivated land area has a best correlation with agricultural output value and grain yield."
+13,this reflects the principle that there is no agricultural output value and grain output without arable land is reasonable.
+13,"in addition, the ndvi and potential yield of farmland have a good correlation with agricultural output value and grain yield, so these two factors can be used for predicting the statistical data."
+13,"existing studies have shown that, in the application of remote sensing, both the single-factor nonlinear model and the multi-factor multiple linear regression model have been applied well and achieved good estimation accuracy [18,19,21]."
+13,"this study not only established a single factor model with ndvi and potential yield of farmland as variables, but also a multiple regression model including these two variables."
+13,then a more suitable regression model can be selected by comparing the performance.
+13,"for comparison, the fitting results of all algorithms are shown in table 6."
+13,statistical regression results of agricultural output value show that the model established by ndvi is better than the potential yield of farmland.
+13,"among the four regression models, the power function model established by ndvi has the best fitting performance (r2 = 0.7177, f = 25.42)."
+13,statistical regression results of grain yield also show that the model established by ndvi is better.
+13,"among these models, the quadratic function model and the power function model established by ndvi have better fitting results."
+13,"in real cases, the agricultural output value and grain yield are not supposed to be negative."
+13,"however, the linear and quadratic function models are prone to negative values, while the exponential function and power function algorithm would not be negative."
+13,"therefore, although the established linear model between ndvi and grain yield has a good fitting effect, we cannot select it due to the existence of negative values."
+13,"in addition, considering the combined effects of ndvi and potential yield of farmland a multiple linear regression model is proposed."
+13,"for preventing negative values, this study set the intercept of regression model to zero."
+13,"then, a power function model of ndvi and agricultural output value, a power function model of ndvi and grain yield, a quadratic function model of ndvi and grain yield, and a multiple linear regression model were selected according to the comparison."
+14,"remote sens. 2021, 13, 1536 14 of 28 table 6."
+14,the fitting performance of different algorithms.
+14,agricultural output value grain yield factor algorithm r2 f r2 f linear algorithm 0.61 15.37 0.74 28.203 quadratic polynomial algorithm 0.61 6.92 0.8 18.56 ndvi exponential algorithm 0.65 18.23 0.73 27.10 power function algorithm 0.72 25.42 0.77 33.124 linear algorithm 0.42 7.223 0.53 11.18 quadratic polynomial algorithm 0.44 3.619 0.73 12.22 potential yield of farmland exponential algorithm 0.56 12.64 0.61 15.41 power function algorithm 0.63 16.87 0.56 12.56 multiple linear regression 0.81 20.86 0.74 13.94 4.1.2.
+14,"spatialization results five county-level administrative regions (dengkou, hangjin houqi, linhe, wuyuan, and urat qianqi) in the study area were used as verification objects (figure 3)."
+14,the relationship between the spatial statistical results and the actual statistical results was analyzed to verify the accuracy.
+14,the results are shown in table 7.
+14,table 7.
+14,simulation performance of regression models.
+14,"factor algorithm mape rmse area weighted algorithm 28.37% 60,183 agricultural output ndvi power function algorithm 12.18% 40,283 value (104 cny) multiple linear regression 25.54% 48,252 ndvi power function algorithm 16.69% 62,953 grain yield (kg) ndvi quadratic polynomial algorithm 14.92% 61,161 multiple linear regression 14.66% 60,101 in order to demonstrate the superiority of the new model, the traditional area weighted algorithm is also used for agricultural output value spatialization (table 7)."
+14,"among the spatial models of agricultural output value, the precision of multiple linear regression and ndvi power function model are better than the area weighted algorithm."
+14,"the ndvi power function model has the highest accuracy, and compared with the traditional method, the accuracy of this method is improved by 16%."
+14,this demonstrates that introducing impact factors can improve the simulation accuracy of the spatial model compared with the traditional algorithm.
+14,the error of the agricultural output value spatialization result obtained by the multiple linear regression algorithm is larger than that of the previous research [17].
+14,"however, previous studies included constants in the area where multiple regression models were established, which is contrary to the understanding that there is no agricultural output value without cultivated land."
+14,"as for the spatialization of grain yield, previous studies established relationships between population density, land, and grain yield [50]."
+14,"however, in fact, the correlation between population density and food pro- duction is not strong, which restricts the improvement of spatialization accuracy."
+14,"among the spatial models of grain yield, the multiple linear regression algorithm has the highest accuracy."
+14,"according to the simulation results of grain yield, an algorithm having good fitting results does not necessarily mean high simulation accuracy."
+14,this also illustrates the necessity of choosing different regression models instead of a single regression model.
+14,"based on the analysis, the ndvi power function algorithm was chosen for agricul- tural output value spatialization (equation (21)), and the multiple linear regression was chosen for grain yield spatialization (equation (22))."
+14,"through calculations, the statistical spatialization data was obtained."
+14,"as shown in figure 7, areas with higher agricultural output value are concentrated in the central region of the hid, including hangjin houqi,"
+15,"remote sens. 2021, 13, 1536 15 of 28 linhe, and wuyuan (figure 7a)."
+15,"the areas with higher grain yield are hangjin houqi, and linhe (figure 7b)."
+15,"this information is consistent with the actual data, which also shows the validity of the simulation results. y = 645.17x14.0692 (21) y = 0.112x1 + 59.307x2 (22) (a) (b) figure 7."
+15,spatial data of agricultural output value and grain yield in hid: (a) agricultural output value; (b) grain yield.
+15,"water allocation priority according to the canal system distribution and control area, the whole irrigation area can be divided into 12 water supply response units."
+15,the division results are shown in figure 8a.
+15,the water allocation priority of water supply response unit is evaluated by the ahp-topsis method.
+15,the ranking results are displayed in figure 8b.
+15,the darker color
+16,figure 7.
+16,spatial data of agricultural output value and grain yield in hid: (a) agricultural output value; (b) grain yield.
+16,"water allocation priority according to the canal system distribution and control area, the whole irrigation area remote sens. 2021, 13, 1536 16 of 28 can be divided into 12 water supply response units."
+16,the division results are shown in figure 8a.
+16,the water allocation priority of water supply response unit is evaluated by the ahp-topsis method.
+16,the ranking results are displayed in figure 8b.
+16,the darker color denotesthe denotes higherpriority thehigher priority water ofof watersupply. supply.
+16,"the thepriority priorityof of thethe central irrigation central areaarea irrigation is is significantly higher (especially in yj, hj and fj response units) than others, significantly higher (especially in yj, hj and fj response units) than others, reminding reminding managerstotopay managers moreattention paymore attentiontoto the interests the of of thethe interests central area central of hid. area thethe of hid. agricultural agricultural output value and grain yield can be found in section 4.1."
+16,"finally, output value and grain yield can be found in section 4.1."
+16,"finally, the proximitythe proximity of each of each responseunit response calculatedand unitisiscalculated andthe water the allocation water priority allocation was priority wasobtained."
+16,thethe calculation obtained. calculation resultsofofproximity results proximityare showninin areshown figure figure9.
+16,"remote sens. 2021, 13, 1536 17 of 29 (a) (b) figure8.8."
+16,figure evaluation results: evaluation (a)(a) results: water supply water response supply unit; response (b) (b) unit; water allocation water priority. allocation priority.
+16,tb cj water supply response unit tj yh sh zh fj yj hj yjh wlh yg 0 0.2 0.4 0.6 0.8 1 proximity figure 9.
+16,calculation results of proximity.
+16,"for verifying the rationality of this priority evaluation, the average water diversion"
+17,"remote sens. 2021, 13, 1536 (b) 17 of 28 figure 8."
+17,evaluation results: (a) water supply response unit; (b) water allocation priority.
+17,tb cj water supply response unit tj yh sh zh fj yj hj yjh wlh yg 0 0.2 0.4 0.6 0.8 1 proximity figure 9.
+17,calculation results of proximity.
+17,figure 9.
+17,calculation results of proximity.
+17,"for verifying the rationality of this priority evaluation, the average water diversion for verifying values of the main thecanals rationality of this priority are compared evaluation, with the evaluation averagethe theresults. water topdiversion five, yj, hj, fj, values yh, andof theyjh arecanals main are and selected, compared with the the average evaluation water diversion results. volume theoftop themfive, in yj, hj, years recent fj,isyh, and yjh are selected, and the average water diversion volume calculated."
+17,"the statistical result of water amounts shows that yj > hj > fj > yjh > yh, of them in recent years which is roughlythe is calculated. statisticalwith consistent resulttheof evaluation water amounts shows results."
+17,"hj >situation that yj > the however, fj > yjh in > yjh yh, which is roughly consistent with the evaluation results."
+17,"however, and yh is somewhat different."
+17,"this may be due to yjh’s larger grain planting area, and the situation in yjhitsand wateryhdemand is somewhatbeing different."
+17,this may higher than that be due to of yh.
+17,"fromyjh’s larger9,grain figure it canplanting be noted area, that the and its water demand being higher than that of yh."
+17,"from figure proximity between yjh and yh is extremely close (yh = 0.522, yjh = 0.519)."
+17,"according 9, it can be noted that to proximity thethe between yjh actual situation, thereand yh isdifference is little extremelybetween close (yh 0.522,response the= two yjh = 0.519). units.accord- on the basis theevaluation ingoftothe actual situation, there is little and analysis, difference this study between assumes thattheyjhtwoand response yh should units."
+17,"on the have the same basis of the evaluation water allocation rights. and analysis, this study assumes that yjh and yh should have the same water allocation rights."
+17,optimization results analysis 4.3.
+17,"optimization results analysis the weight of each objective was obtained by ahp, and the results are shown in whenofapplying the 8.weight table each objective was obtained this method, by ahp, and the consistency ratiothe results is 0.04 arethan shown (less 0.1),inwhich table 8."
+17,"when applying this method, the consistency ratio is 0.04 indicates that the judgment matrix is a consistency matrix."
+17,"the necessary data are input(less than 0.1), which indicates into nmolw. judgment that the using matrix solution the model is a consistency matrix. in section 2.3.4,the necessary the optimal data areofinput schemes water and into nmolw."
+17,"using the model land resources in hid were obtained. solution in section 2.3.4, the optimal schemes of water and land resources in hid were obtained."
+17,table 8.
+17,weight of each objective.
+17,"objective weight cr economic benefit 0.18 water allocation priority satisfaction 0.24 0.04 grain yield 0.37 equity 0.21 figure 10 shows the difference between irrigated area and planting area, indicating that corn planting areas can be well irrigated (figure 10b) while some planting areas of wheat and sunflower are not able to be irrigated (figure 10a,c, respectively), and the irrigation water for most sunflower area cannot be ensured."
+17,existing crop irrigation water allocation schemes indicate that corn always gets more irrigation water under different available water conditions [51].
+17,"corn has a greater planting advantage in hid, because corn yield and economic benefit are higher than those of wheat."
+17,"sunflowers have more non-irrigated areas than wheat, because managers pay more attention to food production."
+17,"however, the reduction of guaranteed sunflower irrigation area will decrease farmers’ economic income."
+17,"therefore, when the irrigation area requires to ensure the grain yield under water shortage, it is needed to compensate farmers’ economic losses."
+17,"moreover,"
+18,"remote sens. 2021, 13, 1536 18 of 28 other water sources such as groundwater can be used temporarily for irrigation."
+18,"moreover, it can be found that hid currently has a large sunflower planting ratio, but the existing water resources cannot guarantee irrigation in so many areas."
+18,"therefore, in order to meet the needs of food production, this study suggests that hid should appropriately reduce the proportion of sunflower planting. 18,000 16,000 (a) irrigated area of wheat planting area of wheat 14,000 12,000 area(ha) 10,000 8,000 6,000 4,000 2,000 0 50,000 (b) irrigated area of corn planting area of corn 40,000 30,000 area(ha) 20,000 10,000 0 60,000 (c) irrigated area of sunflower 50,000 planting area of sunflower 40,000 area(ha) 30,000 20,000 10,000 0 figure 10."
+18,optimization results of irrigated area: (a) wheat; (b) corn; (c) sunflower.
+18,"figure 11 shows the changes in irrigation quota before and after optimization, indicat- ing that the irrigation quotas for corn and sunflower have increased while the irrigation figure 10."
+18,optimization results of irrigated area: (a) wheat; (b) corn; (c) sunfl quotas for wheat have decreased.
+18,this proves that wheat planting is indeed inferior to
+19,"remote sens. 2021, 13, 1536 19 of 28 corn and sunflower."
+19,"in all regions, wlh’s and yjh’s irrigation quotas have the highest level of improvement."
+19,"in fact, these two areas are located in very important areas in the hid [40], and the current low irrigation quota cannot give full play to the local production potential."
+19,"unlike in other regions, the irrigation quota of all crops in fj has been reduced, which shows that the irrigation quota in this area can be reduced under the premise of remote sens. 2021, 13, 1536 of 29the ensuring agricultural production."
+19,"in addition, yj and hj with the highest priority20have lowest increase in irrigation quota levels."
+19,"this shows that these two areas have received attention already, so it is enough to maintain the current level of irrigation."
+19,500 0 irrigation quota/optimization(mm) irrigation quota/actual (mm) 450 50 400 100 350 150 300 200 250 250 200 300 150 350 100 400 50 450 0 500 yg wlh yjh hj yj fj zh sh yh tj cj tb optimization/wheat optimization/corn optimization/sunflower actual/wheat actual/corn actual/sunflower figure 11.
+19,results of water resources allocation in hid.
+19,figure 11.
+19,results of water resources allocation in hid.
+19,"when the weighted minimum deviation method is applied to solve the multi-objective whenthe model, weighted thefinal weighted minimum deviation coordination method isof satisfaction applied to solve the each objective multi-objec- is 0.82 (the closer tomodel, tive the final 1, the better theweighted coordination coordination satisfaction results between of each objective the objectives), is 0.82that indicating (thetradeoffs closer 1, the to are wellbetter the coordination addressed."
+19,"comparing results between the objectives), the optimization results withindicating the resultsthatfrom tradeoffs 2017, the well yield aregrain addressed."
+19,"comparing and economic the optimization benefits after optimizationresultshave withbeenthe results improved from by2017, 19.8%the and 4%, respectively."
+19,"this indicates that the optimal allocation of agricultural water andand grain yield and economic benefits after optimization have been improved by 19.8% land respectively. 4%,resources this to is helpful indicates that the agricultural optimal allocation production."
+19,"in fact, hid of has increasedwater agricultural grain and land production capacityisinhelpful resources recent to agricultural years to complete production."
+19,"in fact, hid grain production hasbut tasks, increased grain produc- the optimization results tion capacity prove in recent that there years is still room to complete grain production for improvement tasks, but the in grain production optimization capacity."
+19,"therefore,re- to sults prove reduce thethat there on pressure foodroom is still for improvement production, managers can in grain furtherproduction capacity."
+19,"there- increase production capacity fore, on thethe to reduce based food production, managers can further increase production pressure onresults. optimization capacity based on the optimization results."
+19,discussion 4.4.
+19,"discussion although the introduction of ndvi and farmland production potential data improved accuracy the thealthough introductionoutput of agricultural of ndvi valueandand grain yield farmland estimation, production the results data of potential im-spa- tialized data still contained some uncertainties, caused by the proved the accuracy of agricultural output value and grain yield estimation, the results of following factors."
+19,"firstly, the reliability spatialized of the data still statistical contained datauncertainties, some directly affects the accuracy caused of regression by the following factors.models and firstly, spatialized results since the statistical data are the basis for the the reliability of the statistical data directly affects the accuracy of regression models and regression analysis [19]. despite secondly,results spatialized preprocessing the the since statistical dataprocedures used for are the basis in ndvi potential[19]. and the analysis the regression yield of farmland data to reduce background noise, the corrected secondly, despite the preprocessing procedures used in ndvi and the potential yield of data may still contain some noise, which farmland data to affect the canreduce statistical noise, background data estimation. the corrected thirdly, data using ndvi may still and farmland contain some production potential data only, it is difficult to fully and accurately noise, which can affect the statistical data estimation."
+19,"thirdly, using ndvi and farmland express the spatial heterogeneity production of agricultural potential data only,output value and it is difficult grain and to fully distribution, yieldaccurately whichthe express may lead to spatial overestimation or underestimation at the local area."
+19,"table 9 heterogeneity of agricultural output value and grain yield distribution, which may leadshows the accuracy verification to results of the fiveorcounties. overestimation at thethat it can be seen underestimation local mape thearea. in most table 9 shows is less areasthe than 20%, accuracy and verifi- the simulation cation results of the accuracy can be accepted. five counties."
+19,"however, it can be seen that the simulation themape results in most areas in iswuyuan less than and dengkou have large errors, which may have been caused 20%, and the simulation accuracy can be accepted."
+19,"however, the simulation results in by the impact of the planting structure."
+19,"for areas where the proportion of food crops is high, the agricultural output wuyuan and dengkou have large errors, which may have been caused by the impact of value will be overestimated (wuyuan)."
+19,"for areas dominated by cash crops, the grain yield the planting structure."
+19,"for areas where the proportion of food crops is high, the agricul- will be overestimated (dengkou)."
+19,"finally, many publications indicate that ndvi does have tural output value will be overestimated (wuyuan)."
+19,"for areas dominated by cash crops, the grain yield will be overestimated (dengkou)."
+19,"finally, many publications indicate that ndvi does have a close relationship with agricultural production."
+19,"however, the existing relationships are based on statistical relationships, not on the formation mechanism of crop yields [21,50]."
+19,gross primary productivity is highly correlated with biological
+20,"remote sens. 2021, 13, 1536 20 of 28 a close relationship with agricultural production."
+20,"however, the existing relationships are based on statistical relationships, not on the formation mechanism of crop yields [21,50]."
+20,gross primary productivity is highly correlated with biological productivity and com- monly used in crop yield estimations [52].
+20,"therefore, future studies should explore the use of gross primary productivity."
+20,"overall, this is likely to enhance the accuracy of the estimation by improving the availability and quality of statistical data and remote sensing data, introducing multi-source data, such as planting structure data."
+20,table 9.
+20,accuracy verification results of each county.
+20,"grain yield (103 kg) agricultural output value (104 cny) county statistical data estimation results mape (%) statistical data estimation results mape (%) linhe 557,750.00 517,682.00 7.18 346,934.50 280,051.00 19.28 wuyuan 419,200.00 494,521.00 17.96 244,794.50 298,946.00 22.12 hangjing houqi 420,180.00 417,076.00 0.74 248,715.20 225,567.00 9.31 urat qianqi 500,225.00 413,854.00 17.23 317,690.50 305,545.00 3.82 dengkou 191,000.00 248,555.00 30.13 78,170.99 83,150.00 6.37 to demonstrate the superiority of minimum envy fairness, this study used the gini coefficient as a fairness index in optimization."
+20,"single-objective models with minimum envy fairness (equation (10)) and gini coefficient (equation (23)) are established, which have the same constraints as the nmolw model."
+20,"water supply satisfaction, economic benefit, and grain yield are selected as indicators for assessing the performance of the two models."
+20,"the calculation function of water supply satisfaction is shown in equation (24): i k mai mak ∑∑ ai − a k i k mingini = (23) i 2i ∑ maai i i i mai p=∑ (24) i mei as shown in table 10, minimum envy fairness results in higher food production and economic benefits."
+20,"when the optimization results of gini coefficient are used they show that the greater the water demand, the higher the degree of dissatisfaction."
+20,"moreover, this study suggests that the minimum envy fairness should not be used alone when a significant water demand difference exist among users, but should be combined with other methods for constructing the fairness index."
+20,minimum envy fairness well reflects the comparison and jealousy among water users.
+20,"in addition, the minimum envy fairness can also be used to consider the distribution from the perspective of demand, avoiding efficiency loss."
+20,the gini coefficient cannot consider these factors in practical resources allocation problems [27].
+20,table 10.
+20,performance of two equity indices.
+20,"attribute gini minimum envy fairness p 0.39 0.47 grain yield (108 kg) 18.07 21.83 economic benefit (108 cny) 74.43 80.98 with the help of spatialized statistical data, the evaluation of water supply priority can be carried out on different scales, leading to higher accuracy than the previous evaluation."
+20,"therefore, in future research, we can extend the spatialization of statistical data to more uses such as agricultural industry analysis and agricultural regional planning."
+20,"due to the limitation of selection factors, the spatialization method of grain yield constructed in"
+21,"remote sens. 2021, 13, 1536 21 of 28 this paper is more suitable for the main grain producing areas planted as one-year crops."
+21,"therefore, how to measure the impact of different cropping systems on the spatialization of agricultural economic statistics is also a topic that we need to give attention to in the future."
+21,"in addition, the nmolw model pays more attention to socio-economic goals, but involves insufficient consideration of ecological aspects."
+21,"moreover, because of the limitations of the data collection, the factors considered in the evaluation of water allocation priority are limited, which affects the evaluation accuracy."
+21,these should be addressed in future work.
+21,"conclusions to determine the water allocation priority and manage agricultural water effectively, this study carried out the water allocation priority evaluation, and then a nmolw model was proposed for considering fairness and efficiency."
+21,the water supply response units were divided according to the practical water supply condition of the study area.
+21,"furthermore, in order to solve the boundary conflict between the response unit and the original statistical data, a spatial method of analyzing the statistical data was introduced."
+21,this study has the following advantages:(1) improving the spatial simulation accuracy agricultural output value and grain yield; (2) measuring the precise priorities including more spatial informa- tion; (3) fully considering the tradeoffs between allocation efficiency and equity; and (4) providing decision-making support for irrigation districts to formulate water use plans.
+21,"to illustrate the applicability of the proposed approach, this method has been applied to hid."
+21,the results show that: (1) the spatialization method of grain yield and agricultural production value achieved good simulation accuracy in hid; (2) we can determine the priority of water allocation at the scale of the canal system in hid; and (3) there is still room for increasing grain output in hid.
+21,the approach proposed in this study is expected to support sustainable agricultural water management in similar regions.
+21,"in fact, due to the variability of water supply response unit division and evaluating indexes, the method can be changed to suit different regions."
+21,"there are many factors affecting the spatial distribution of agricultural output value and grain yield statistics, such as the detailed planting structure."
+21,these spatialization methods can be further improved.
+21,"author contributions: conceptualization, b.l., x.l. and f.z.; methodology, b.l.; software, b.l.; validation, b.l.; formal analysis, b.l.; investigation, p.g.; resources, p.g.; data curation, q.p.; writing— original draft preparation, b.l.; writing—review and editing, f.z.; visualization, x.l.; supervision, p.g.; project administration, p.g.; funding acquisition, p.g."
+21,all authors have read and agreed to the published version of the manuscript.
+21,funding: this research was supported by the national key r and d program of china (no.
+21,"2018yfc1508705) and horqin sandy land management strategy research (2035) subproject: water, land and agricultural resources optimal allocation."
+21,institutional review board statement: not applicable.
+21,informed consent statement: not applicable.
+21,"data availability statement: the potential yield of farmland and land use remote sensing data are available from the resource and environmental science and data center of the chinese academy of sciences (http://www.resdc.cn/, accessed on 10 march 2021)."
+21,"global 10 days synthesis of spot vegetation images (vgt-s10) are available from the flemish institute for technology research (vito, https://www.vito-eodata.be, accessed on 10 march 2021)."
+21,"the meteorological data required by the fao56 pm equation are archived in the china meteorological science data sharing service network (http://data.cma.cn, accessed on 10 march 2021)."
+21,"acknowledgments: we are grateful to the anonymous reviewers and editors for their constructive feedback, which improved the quality of this paper."
+21,"we are very grateful for the software support of the institute of geographical sciences and natural resources research, cas."
+21,conflicts of interest: the authors declare no conflict of interest.
+22,"remote sens. 2021, 13, 1536 22 of 28 appendix a appendix a.1."
+22,"the ahp-topsis evaluation approach (1) according to the evaluation index, an original evaluation matrix is constructed, and then each evaluation index is standardized via equation (a1) for the income index (the bigger the better) and equation (a2) for the cost index (the smaller the better)."
+22,then the standardization matrix in equation (a3) was obtained: vij − min(vij ) rij = (a1) max(vij ) − min(vij ) max(vij ) − vij rij = (a2) max(vij ) − min(vij ) ···   r11 r12 r1n  r21 r22 ··· r2n  r= (a3)   .. .. .. ..
+22,  . . . .  rm1 rm2 ··· rmn where vij refers to the initial value of the evaluation index j of the response unit i and r is the standardized evaluation matrix.
+22,"(2) the index weight is determined by ahp, and the weighted evaluation matrix is established as follows: y11 y12 · · · r11 · w1 r12 · w2 · · · r1n · wn     y1n  y21 y22 · · · y2n   r21 · w1 r22 · w2 · · · r2n · wn    y= = (a4)  .. .. .. .. .. .. .. .."
+22,  . . . .
+22,"  . . . .  ym1 ym2 · · · ymn rm1 · w1 rm2 · w2 · · · rmn · wn where y is the weighted evaluation matrix; w is the index weight, calculated by ahp."
+22,the preference degree of different indicators was obtained by combining the actual experience of irrigation area managers.
+22,(3) determination of positive and negative ideal solutions.
+22,"y+ is the maximum value of the jth index in the evaluation data response unit i, which is the positive ideal solution; y− is the negative ideal solution, which can be calculated through the opposite method to the positive ideal solution."
+22,"the calculation method is shown as follows: y + = { max yij | j = 1, 2, · · · , n} = {y1+ , y2+ , · · · y+ n} (a5) 1≤ i ≤ m y − = { min yij | j = 1, 2, · · · , n} = {y1− , y2− , · · · y− n} (a6) 1≤ i ≤ m (4) determination of distance."
+22,the euclidean distance is selected to calculate the distance.
+22,"let di+ be the distance between the index j and y+ j of each response unit i, and di− be the distance between the index j and y− j of each response unit i: v u n d = t ∑ (y+ − yij ) + u 2 i j (a7) j =1 v u n ∑ (y−j − yij ) 2 di− = t u (a8) j =1"
+23,"2021, remote sens."
+23,"remote 13, 1536 2021, 13, 1536 23 of 24 29 of 28 (5) calculation of proximity."
+23,"according to the proximity degree, the priority weight (5) calculation of proximity."
+23,"according to the proximity degree, the priority weight of of water allocation can be judged and the priority of water allocation can be determined: water allocation can be judged and the priority of water allocation can be determined: − d wi = d− i −i (a9) wi = d + d+ d − i+ d +i (a9) i i where wi is the proximity of each response unit i, its value range is between 0 and 1, and where wi is the proximity of each response unit i, its value range is between 0 and 1, and the closer to 1, the greater the priority weight, otherwise the opposite. the closer to 1, the greater the priority weight, otherwise the opposite."
+23,appendix a.2.
+23,statistical regression model appendix a.2.
+23,statistical regression model the regression models are shown in figures a1–a4.
+23,the regression models are shown in figures a1–a4. 300 300 y = 457.53x − 161.31 y = 27.655x2 + 424.4x − 151.94 r² = 0.6058 r² = 0.6058 agricultural output value agricultural output value 250 f=15.366 250 f=6.916 200 200 (108 cny) 150 (108 cny) 150 100 100 50 50 (a) (b) 0 0 0.3 0.5 0.7 0.9 0.3 0.5 0.7 0.9 ndvi ndvi 400 350 y = 1.2465e6.7523x y = 645.17x4.0692 350 r² = 0.6461 300 r² = 0.7177 agricultural output value agricultural output value f=18.258 f=25.423 300 250 (108 cny) (108 cny) 250 200 200 150 150 100 100 50 50 (c) (d) 0 0 0.3 0.5 0.7 0.9 0.3 0.5 0.7 0.9 ndvi ndvi figure a1.
+23,statistical relationship between ndvi and agricultural output value: (a) linear algorithm; (b) quadratic polynomial algorithm;relationship figure a1.
+23,statistical (c) exponential algorithm; between ndvi(d) andpower function agricultural algorithm. output value: (a) linear algorithm; (b) quadratic poly- nomial algorithm; (c) exponential algorithm; (d) power function algorithm.
+24,remote sens.
+24,"remote 2021, 13, sens. 2021, 13, 1536 1536 2524ofof 29 28 300 300 y = 0.0597x − 25.59 y = 1e-05x2 + 0.0143x + 4.6975 250 r² = 0.4194 r² = 0.4458 agricultural output value agricultural output value f=7.223 250 f=3.619 200 200 (108 cny) (108 cny) 150 150 100 100 50 0 50 (a) (b) −50 0 0 1000 2000 3000 4000 0 1000 2000 3000 4000 potential yield of farmland potential yield of farmland (kg/ha) (kg/ha) 300 300 y = 7.2427e0.001x y = 0.0784x0.9105 r² = 0.5583 r² = 0.6279 agricultural output value agricultural output value 250 f=12.639 250 f=16.874 200 200 (108 cny) (108 cny) 150 150 100 100 50 50 (c) (d) 0 0 0 1000 2000 3000 4000 0 1000 2000 3000 4000 potential yield of farmland potential yield of farmland (kg/ha) (kg/ha) figure a2."
+24,figure relationship between statistical relationship a2.
+24,statistical between potential potential yield yield of farmland and of farmland agricultural output and agricultural output value: (a)linear value: (a) linearalgorithm; algorithm; (b) quadratic polynomial algorithm; (c) exponential algorithm; (d) power function algorithm.
+25,"2021, remote sens."
+25,"remote 13, 1536 2021, 13, 1536 25of 26 29 of 28 800 800 y = 1555.5x − 668.31 y = 3432.1x2 − 2556x + 494.51 700 r² = 0.7382 700 r² = 0.8048 600 f=18.56 600 500 grain yield grain yield (107 kg) (107 kg) 400 500 300 400 200 300 100 200 0 −100 100 (a) (b) −200 0 0.3 0.5 0.7 0.9 0.3 0.5 0.7 0.9 ndvi ndvi 800 800 y = 0.4713e9.2706x y = 2315.7x5.4367 700 r² = 0.7302 700 r² = 0.7681 600 600 grain yield 500 500 grain yield (107 kg) (107 kg) 400 400 300 300 200 200 100 100 (c) (d) 0 0 0.3 0.5 0.7 0.9 0.3 0.5 0.7 0.9 ndvi ndvi figure a3."
+25,statistical relationship between ndvi and grain yield. (a) linear algorithm; (b) quadratic polynomial algorithm; (c) exponential figure algorithm; a3.
+25,statistical (d) power relationship functionndvi between algorithm. and grain yield. (a) linear algorithm; (b) quadratic polynomial algo- rithm; (c) exponential algorithm; (d) power function algorithm.
+26,"2021, remote sens."
+26,"remote 13, 1536 2021, 13, 1536 26 of 27 29 of 28 800 800 y = 0.2061x − 214.66 y = 0.0001x2 − 0.182x + 44.152 r² = 0.5278 700 r² = 0.7309 600 f=11.176 600 f=12.219 400 500 grain yield grain yield (107 kg) (107 kg) 400 200 300 0 200 100 −200 0 (a) (b) −400 −100 0 1000 2000 3000 4000 0 1000 2000 3000 4000 potential yield of farmland potential yield of farmland (kg/ha) (kg/ha) 800 800 y = 5.6182e0.0013x y = 0.0309x1.1071 700 r² = 0.6065 700 r² = 0.5566 f=15.412 f=12.555 600 600 grain yield grain yield 500 500 (107 kg) (107 kg) 400 400 300 300 200 200 100 100 (c) (d) 0 0 0 1000 2000 3000 4000 0 1000 2000 3000 4000 potential yield of farmland potential yield of farmland (kg/ha) (kg/ha) farmland and figure a4."
+26,statistical relationship between potential yield of farmland grain yield: and grain yield: (a) linear algorithm; (b) quadratic polynomial algorithm; polynomial algorithm; (c) exponential algorithm; (c) exponential (d) power algorithm; (d) functionalgorithm. powerfunction algorithm.
+26,references references 1.
+26,"gong, x."
+26,"; zhang, h."
+26,"; ren, c."
+26,"; sun, d."
+26,"; yang, j."
+26,optimization allocation of irrigation water resources based on crop water re- 1.
+26,"gong, x."
+26,"; zhang, h."
+26,"; ren, c."
+26,"; sun, d."
+26,"; yang, j."
+26,optimization allocation of irrigation water resources based on crop water quirement under considering effective precipitation and uncertainty.
+26,agric.
+26,"water manag. 2020, 239, 106264, doi:10.1016/j.ag- requirement under considering effective precipitation and uncertainty."
+26,agric.
+26,water manag.
+26,"2020, 239, 106264."
+26,[crossref] wat.2020.106264.
+26,"saccon, p."
+26,"water for agriculture, irrigation management."
+26,soil ecol.
+26,"2018, 123, 793–796."
+26,[crossref] 2.
+26,"saccon, p."
+26,"water for agriculture, irrigation management."
+26,"soil ecol. 2018, 123, 793–796, doi:10.1016/j.apsoil.2017.10.037."
+26,"li, m."
+26,"; fu, q."
+26,"; singh, v.p."
+26,"; liu, d."
+26,"; li, t."
+26,"; zhou, y."
+26,"managing agricultural water and land resources with tradeoff between economic, 3."
+26,"li, m."
+26,"; fu, q."
+26,"; singh, v.p."
+26,"; liu, d."
+26,"; li, t."
+26,"; zhou, y."
+26,"managing agricultural water and land resources with tradeoff between environmental, and social considerations: a multi-objective non-linear optimization model under uncertainty."
+26,agric.
+26,"syst. economic, environmental, and social considerations: a multi-objective non-linear optimization model under uncertainty."
+26,agric.
+26,"2020, 178."
+26,[crossref] 4.
+26,"2020, razavitoosi, 178, doi:10.1016/j.agsy.2019.102685."
+26,"; samani, j.m.v."
+26,evaluating water management strategies in watersheds by new hybrid fuzzy analytical 4.
+26,"razavitoosi, s.l."
+26,; network process (fanp) j.m.v.
+26,"evaluating samani,methods."
+26,"hydrol. water management 2016, 534, strategies in watersheds by new hybrid fuzzy analytical net- 364–376."
+26,[crossref] 5. work process (fanp) methods.
+26,"hydrol. 2016, 534, 364–376, doi:10.1016/j.jhydrol.2016.01.006."
+26,"karnib, a."
+26,an approach to elaborate priority preorders of water resources projects based on multi-criteria evaluation and fuzzy 5.
+26,"karnib, sets a."
+26,anwater analysis. approach to elaborate resour.
+26,"manag. 2004,priority preorders 18, 13–33. of water resources projects based on multi-criteria evaluation and fuzzy [crossref] 6. sets analysis."
+26,water resour.
+26,"manag. 2004, 18, 13–33, doi:10.1023/b:warm.0000015347.87047.5b."
+26,"kundu, s."
+26,"; khare, d."
+26,"; mondal, a."
+26,landuse change impact on sub-watersheds prioritization by analytical hierarchy process (ahp).
+26,"kundu, ecol."
+26,"; khare, inform."
+26,"2017, 42,d."
+26,;100–113.
+26,"mondal,[crossref] a."
+26,landuse change impact on sub-watersheds prioritization by analytical hierarchy process 7.
+26,(ahp).
+26,inform.
+26,"2017, jaiswal, r.k."
+26,"; ghosh, n.c."
+26,"; lohani, a.k.;doi:10.1016/j.ecoinf.2017.10.007."
+26,"42, 100–113, thomas, t."
+26,fuzzy ahp based multi crteria decision support for watershed prioritization.
+26,"jaiswal, water r.k."
+26,; manag.
+26,resour.
+26,"; 29, ghosh, 2015, lohani, a.k."
+26,"; thomas, 4205–4227."
+26,[crossref]t.
+26,fuzzy ahp based multi crteria decision support for watershed prioriti- 8. zation.
+26,water resour.
+26,"manag. 2015, 29, 4205–4227, doi:10.1007/s11269-015-1054-3."
+26,"karatayev, m."
+26,"; kapsalyamova, z."
+26,"; spankulova, l."
+26,"; skakova, a."
+26,"; movkebayeva, g."
+26,"; kongyrbay, a."
+26,priorities and challenges for a 8.
+26,"karatayev, m.; sustainable kapsalyamova, management z.;resources of water spankulova, l."
+26,"; skakova,sustain. in kazakhstan."
+26,"; movkebayeva, water qual."
+26,"; kongyrbay, ecol."
+26,"2017, 9–10,a."
+26,"priorities 115–135. and challenges for [crossref] 9. a sustainable management of water razavitoosi, s.l."
+26,"; samani, j.m.v."
+26,"a fuzzy group decision making framework based on ism-fanp-ftopsis9–10, resources in kazakhstan."
+26,sustain.
+26,water qual.
+26,"ecol. 2017, 115–135, for evaluating doi:10.1016/j.swaqe.2017.09.002."
+26,watershed management strategies.
+26,water resour.
+26,manag.
+26,"2019, 33, 5169–5190."
+26,[crossref] 9.
+26,"razavitoosi, s.l."
+26,"; gómez-limón, j.a."
+26,";samani, j.m.v."
+26,"a fuzzy gutiérrez-martín, group decision c."
+26,"; montilla-lópez, making n.m."
+26,framework agricultural water based on ism-fanp-ftopsis allocation for evaluating under cyclical scarcity: the role of watershed management strategies.
+26,water resour. priority water rights.
+26,"water 2020, 12, 1835."
+26,"[crossref] manag. 2019, 33, 5169–5190, doi:10.1007/s11269-019-02423-4."
+27,"remote sens. 2021, 13, 1536 27 of 28 11."
+27,"li, s."
+27,"; he, y."
+27,"; chen, x."
+27,"; zheng, y."
+27,the improved bankruptcy method and its application in regional water resource allocation.
+27,hydro-environ.
+27,"2020, 28, 48–56."
+27,[crossref] 12.
+27,"zhang, f."
+27,"; yue, q."
+27,"; engel, b.a."
+27,"; guo, s."
+27,"; guo, p."
+27,"; li, x."
+27,a bi-level multiobjective stochastic approach for supporting environment- friendly agricultural planting strategy formulation.
+27,total environ.
+27,"2019, 693, 133593."
+27,[crossref] 13.
+27,"christakos, g."
+27,"; angulo, j.m."
+27,"; yu, h.l."
+27,"; wu, j."
+27,space-time metric determination in environmental modeling.
+27,environ.
+27,inform.
+27,"2017, 30, 29–40."
+27,[crossref] 14.
+27,"tang, y."
+27,"; zhang, f."
+27,"; engel, b.a."
+27,"; liu, x."
+27,"; yue, q."
+27,"; guo, p."
+27,grid-scale agricultural land and water management: a remote-sensing- based multiobjective approach.
+27,clean.
+27,"2020, 265, 121792."
+27,[crossref] 15.
+27,"tang, y."
+27,"; zhang, f."
+27,"; wang, s."
+27,"; zhang, x."
+27,"; guo, s."
+27,"; guo, p."
+27,a distributed interval nonlinear multiobjective programming approach for optimal irrigation water management in an arid area.
+27,agric.
+27,water manag.
+27,"2019, 220, 13–26."
+27,[crossref] 16.
+27,"tian, f."
+27,"; zhang, y."
+27,"; lu, s."
+27,"spatial-temporal dynamics of cropland ecosystem water-use efficiency and the responses to agricultural water management in the shiyang river basin, northwestern china."
+27,agric.
+27,water manag.
+27,"2020, 237, 106176."
+27,[crossref] 17.
+27,"chen, q."
+27,"; hou, x."
+27,"; zhang, x."
+27,"; ma, c."
+27,improved gdp spatialization approach by combining land-use data and night-time light data: a case study in china’s continental coastal area.
+27,remote sens.
+27,"2016, 37, 4610–4622."
+27,[crossref] 18.
+27,"liang, h."
+27,"; guo, z."
+27,"; wu, j."
+27,"; chen, z."
+27,gdp spatialization in ningbo city based on npp/viirs night-time light and auxiliary data using random forest regression.
+27,space res.
+27,"2020, 65, 481–493."
+27,[crossref] 19.
+27,"zhao, m."
+27,"; cheng, w."
+27,"; zhou, c."
+27,"; li, m."
+27,"; wang, n."
+27,"; liu, q."
+27,gdp spatialization and economic differences in south china based on npp-viirs nighttime light imagery.
+27,remote sens.
+27,"2017, 9, 673."
+27,[crossref] 20.
+27,"sutton, p."
+27,modeling population density with night-time satellite imagery and gis.
+27,comput.
+27,environ.
+27,urban syst.
+27,"1997, 21, 227–244."
+27,[crossref] 21.
+27,"xiao, g."
+27,"; zhu, x."
+27,"; hou, c."
+27,"; liu, y."
+27,"; xu, k."
+27,"a spatialization method for grain yield statistical data: a study on winter wheat of shandong province, china."
+27,agron.
+27,"2019, 111, 1892–1903."
+27,[crossref] 22.
+27,"li, m."
+27,"; fu, q."
+27,"; guo, p."
+27,"; singh, v.p."
+27,"; zhang, c."
+27,"; yang, g."
+27,stochastic multi-objective decision making for sustainable irrigation in a changing environment.
+27,clean.
+27,"2019, 223, 928–945."
+27,[crossref] 23.
+27,"zhang, y."
+27,"; zhang, f."
+27,"; zhu, h."
+27,"; guo, p."
+27,an optimization-evaluation agricultural water planning approach based on interval linear fractional bi-level programming and iahp-topsis.
+27,"water 2019, 11, 1094."
+27,[crossref] 24.
+27,"ahmad, i."
+27,"; zhang, f."
+27,"; liu, j."
+27,"; anjum, m.n."
+27,"; zaman, m."
+27,"; tayyab, m."
+27,"; waseem, m."
+27,"; farid, h.u."
+27,a linear bi-level multi-objective program for optimal allocation of water resources.
+27,"plos one 2018, 13, e192294."
+27,[crossref] 25.
+27,"zhang, c."
+27,"; engel, b.a."
+27,"; guo, p."
+27,"; zhang, f."
+27,"; guo, s."
+27,"; liu, x."
+27,"; wang, y."
+27,an inexact robust two-stage mixed-integer linear programming approach for crop area planning under uncertainty.
+27,clean.
+27,"2018, 204, 489–500."
+27,[crossref] 26.
+27,"hu, z."
+27,"; wei, c."
+27,"; yao, l."
+27,"; li, l."
+27,"; li, c."
+27,a multi-objective optimization model with conditional value-at-risk constraints for water allocation equality.
+27,hydrol.
+27,"2016, 542, 330–342."
+27,[crossref] 27.
+27,"chanta, s."
+27,"; mayorga, m.e."
+27,"; kurz, m.e."
+27,"; mclay, l.a."
+27,the minimum p-envy location problem: a new model for equitable distribution of emergency resources.
+27,iie trans.
+27,healthc.
+27,"2011, 1, 101–115."
+27,[crossref] 28.
+27,"espejo, i."
+27,"; marín, a."
+27,"; puerto, j."
+27,"; rodríguez-chía, a.m."
+27,a comparison of formulations and solution methods for the minimum-envy location problem.
+27,comput.
+27,"2009, 36, 1966–1981."
+27,[crossref] 29.
+27,"chanta, s."
+27,"; mayorga, m.e."
+27,"; mclay, l.a."
+27,the minimum p-envy location problem with requirement on minimum survival rate.
+27,comput.
+27,"2014, 74, 228–239."
+27,[crossref] 30.
+27,"liu, l."
+27,"; xu, x."
+27,"; chen, x."
+27,assessing the impact of urban expansion on potential crop yield in china during 1990–2010.
+27,food secur.
+27,"2014, 7, 33–43."
+27,[crossref] 31.
+27,"lewis, j.e."
+27,"; rowland, j."
+27,"; nadeau, a."
+27,estimating maize production in kenya using ndvi: some statistical considerations.
+27,remote sens.
+27,"1998, 19, 2609–2617."
+27,[crossref] 32.
+27,"steininger, m.k."
+27,satellite estimation of tropical secondary forest above-ground biomass: data from brazil and bolivia.
+27,remote sens.
+27,"2000, 21, 1139–1157."
+27,[crossref] 33.
+27,"zheng, d."
+27,"; rademacher, j."
+27,"; chen, j."
+27,"; crow, t."
+27,"; bresee, m."
+27,"; le moine, j."
+27,"; ryu, s.r."
+27,"estimating aboveground biomass using landsat 7 etm+ data across a managed landscape in northern wisconsin, usa."
+27,remote sens.
+27,environ.
+27,"2004, 93, 402–411."
+27,[crossref] 34.
+27,"ma, t."
+27,"; zhou, y."
+27,"; wang, y."
+27,"; zhou, c."
+27,"; haynie, s."
+27,"; xu, t."
+27,diverse relationships between suomi-npp viirs night-time light and multi-scale socioeconomic activity.
+27,remote sens.
+27,"2014, 5, 652–661."
+27,[crossref] 35.
+27,"shi, k."
+27,"; yu, b."
+27,"; hu, y."
+27,"; huang, c."
+27,"; chen, y."
+27,"; huang, y."
+27,"; chen, z."
+27,"; wu, j."
+27,modeling and mapping total freight traffic in china using npp-viirs nighttime light composite data.
+27,gisci.
+27,remote sens.
+27,"2015, 52, 274–289."
+27,[crossref] 36.
+27,"ma, t."
+27,"; zhou, c."
+27,"; pei, t."
+27,"; haynie, s."
+27,"; fan, j."
+27,responses of suomi-npp viirs-derived nighttime lights to socioeconomic activity in chinas cities.
+27,remote sens.
+27,"2014, 5, 165–174."
+27,[crossref] 37.
+27,"osten, d.w."
+27,selection of optimal regression models via cross-validation.
+27,chemom.
+27,"1988, 2, 39–48."
+27,[crossref] 38.
+27,"cao, x."
+27,"; wang, j."
+27,"; chen, j."
+27,"; shi, f."
+27,spatialization of electricity consumption of china using saturation-corrected dmsp-ols data.
+27,earth obs.
+27,geoinf.
+27,"2014, 28, 193–200."
+27,[crossref] 39.
+27,"ma, r.x."
+27,"; fu, b.l."
+27,"; he, h.c."
+27,"; fan, d.l."
+27,gdp spatialization and dynamic analysis based on dmsp/ols images: a case of henan province.
+27,"in the international archives of the photogrammetry, remote sensing and spatial information sciences, proceedings of the 2020 international conference on geomatics in the big data era (icgbd), guilin, china, 15–17 november 2019; proquest: ann arbor, mi, usa, 2020; volume xlii-3/w10, pp."
+27,783–791.
+27,[crossref]
+28,"remote sens. 2021, 13, 1536 28 of 28 40."
+28,"gao, x."
+28,"; huo, z."
+28,"; xu, x."
+28,"; qu, z."
+28,"; huang, g."
+28,"; tang, p."
+28,"; bai, y."
+28,shallow groundwater plays an important role in enhancing irrigation water productivity in an arid area: the perspective from a regional agricultural hydrology simulation.
+28,agric.
+28,water manag.
+28,"2018, 208, 43–58."
+28,[crossref] 41.
+28,"barrios, m.a.o."
+28,"; de felice, f."
+28,"; negrete, k.p."
+28,"; romero, b.a."
+28,"; arenas, a.y."
+28,"; petrillo, a."
+28,an ahp-topsis integrated model for selecting the most appropriate tomography equipment.
+28,technol.
+28,decis.
+28,"2016, 15, 861–885."
+28,[crossref] 42.
+28,"qin, x.s."
+28,"; huang, g.h."
+28,"; chakma, a."
+28,"; nie, x.h."
+28,"; lin, q.g."
+28,"a mcdm-based expert system for climate-change impact assessment and adaptation planning—a case study for the georgia basin, canada."
+28,expert syst.
+28,"2008, 34, 2164–2179."
+28,[crossref] 43.
+28,"westerhoff, r.s."
+28,using uncertainty of penman and penman–monteith methods in combined satellite and ground-based evapo- transpiration estimates.
+28,remote sens.
+28,environ.
+28,"2015, 169, 102–112."
+28,[crossref] 44.
+28,"jensen, m.e."
+28,"water deficit and plant growth; kozlowski, t., ed."
+28,"; academic press: new york, ny, usa„ 1968."
+28,"xue, j."
+28,"; huo, z."
+28,"; wang, f."
+28,"; kang, s."
+28,"; huang, g."
+28,untangling the effects of shallow groundwater and deficit irrigation on irrigation water productivity in arid region: new conceptual model.
+28,total environ.
+28,"2018, 619–620, 1170–1182."
+28,[crossref] 46.
+28,"uchida, m."
+28,"; kurose, j."
+28,an information-theoretic characterization of weighted alpha-proportional fairness.
+28,"in proceedings of the ieee infocom 2009—the 28th conference on computer communications, rio de janeiro, brazil, 19–25 april 2009; pp."
+28,1053–1061.
+28,"li, m."
+28,"; guo, p."
+28,a multi-objective optimal allocation model for irrigation water resources under multiple uncertainties.
+28,model.
+28,"2014, 38, 4897–4911."
+28,[crossref] 48.
+28,"sun, s."
+28,"; zhang, c.f."
+28,"; li, x."
+28,"; zhou, t."
+28,"; wang, y."
+28,"; wu, p."
+28,"; cai, h."
+28,"sensitivity of crop water productivity to the variation of agricultural and climatic factors: a study of hetao irrigation district, china."
+28,clean.
+28,"2017, 142, 2562–2569."
+28,[crossref] 49.
+28,"sun, s."
+28,"; wu, p."
+28,"; wang, y."
+28,"; zhao, x."
+28,"; liu, j."
+28,"; zhang, x."
+28,the impacts of interannual climate variability and agricultural inputs on water footprint of crop production in an irrigation district of china.
+28,total environ.
+28,"2013, 444, 498–507."
+28,[crossref] [pubmed] 50.
+28,"liu, z."
+28,"; li, b."
+28,spatial distribution of china grain output based on land use and population density.
+28,trans.
+28,agric.
+28,"2012, 28, 1–8."
+28,[crossref] 51.
+28,"zhang, x."
+28,"; guo, p."
+28,"; zhang, f."
+28,"; liu, x."
+28,"; yue, q."
+28,"; wang, y."
+28,optimal irrigation water allocation in hetao irrigation district considering decision makers’ preference under uncertainties.
+28,agric.
+28,water manag.
+28,"2021, 246, 106670."
+28,[crossref] 52.
+28,"he, m."
+28,"; kimball, j.s."
+28,"; maneta, m.p."
+28,"; maxwell, b.d."
+28,"; moreno, a."
+28,"; beguería, s."
+28,"; wu, x."
+28,regional crop gross primary productivity and yield estimation using fused landsat-modis data.
+28,remote sens.
+28,"2018, 10, 372."
+28,[crossref]

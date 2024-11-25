@@ -1,0 +1,912 @@
+page,p
+1,remote sensing article evaporative fluxes and surface soil moisture retrievals in a mediterranean setting from sentinel-3 and the “simplified triangle” george p.
+1,"petropoulos 1, * , ionut sandric 2 , dionissios hristopulos 3 and toby nahum carlson 4 1 school of mineral resources engineering, technical university of crete, 73100 crete, greece 2 faculty of geography, university of bucharest, bd."
+1,"bălcescu, 1, 010041 bucharest, romania; ionut.sandric@geo.unibuc.ro 3 school of electrical & computer engineering, technical university of crete, 73100 crete, greece; dionisi@mred.tuc.gr 4 department of meteorology, state college, penn state university, 604 walker building, university park, pa 16802, usa; tnc@psu.edu * correspondence: gpetropoulos1@isc.tuc.gr  received: 21 july 2020; accepted: 25 september 2020; published: 29 september 2020  abstract: earth observation (eo) makes it possible to obtain information on key parameters characterizing interactions among earth’s system components, such as evaporative fraction (ef) and surface soil moisture (ssm)."
+1,"notably, techniques utilizing eo data of land surface temperature (ts) and vegetation index (vi) have shown promise in this regard."
+1,"the present study investigates, for the first time, the accuracy of one such technique, known as the “simplified triangle”, using sentinel-3 eo data, acquired for 44 days in 2018 at three savannah fluxnet sites in spain."
+1,the technique was found to be able to predict both ef and ssm with reasonable accuracy when compared to collocated ground measurements.
+1,"comparisons performed for all days together showed relatively low root mean square difference (rmsd) for both ef (0.191) and ssm (0.012 cm3 cm−3 ) and good correlation coefficients (r) of 0.721 and 0.577, respectively."
+1,both ef and ssm were also largely in agreement with land cover and seasonal variability.
+1,"the present study comprises the first detailed assessment of the “simplified triangle”, in this case, using sentinel-3 data and in a mediterranean setting."
+1,"findings, albeit preliminary, are of significant value regarding the use of the investigated technique as a tool of environmental management, and towards ongoing, worldwide efforts aiming at developing operationally relevant products based on the ts/vi feature space and eo data based on new satellites such as sentinel-3."
+1,keywords: earth observation; sentinel-3; surface soil moisture; evaporative fraction; simplified triangle; ts/vi domain; carboeurope 1.
+1,introduction earth’s natural processes and the relationships between soil-vegetation and the atmosphere components of the earth system are topics of great importance for numerous disciplines covering a range of practical applications and research [1–4].
+1,"the need for accurate information on parameters characterizing the environment of the earth system is even more acute today, in light of increased pressure due to climate change and global challenges linked to global food and water security [5]."
+1,"recent climate projections, for example, suggest that the mediterranean will be subject to severe climate change, including increased temperatures and reduced precipitation [6]."
+1,"in this context, the accurate monitoring of parameters such as evaporative fraction (i.e., the ratio of instantaneous latent heat remote sens. 2020, 12, 3192; doi:10.3390/rs12193192 www.mdpi.com/journal/remotesensing"
+2,"remote sens. 2020, 12, 3192 2 of 20 flux (le) to net radiation (rn)) and surface soil moisture (ssm) is of high priority."
+2,"both are essential environmental parameters which play instrumental roles in numerous physical processes, and thereby affect the climate directly or indirectly [7–9]."
+2,"thus, being able to accurately estimate their changes in both the time and spatial domains is undoubtedly of prime interest for many applications in numerous disciplines [10,11]."
+2,"earth observation (eo) has experienced rapid growth over recent decades, providing a pathway towards acquiring both ef and ssm at variable geographical scales with temporally consistent coverage."
+2,"a wealth of techniques have been proposed exploiting eo data acquired from across the electromagnetic spectrum to retrieve these parameters (e.g., see reviews by [8,12]."
+2,"thermal infrared (tir) remote sensing, despite its requirement for clear sky conditions, has been the preferred option for both ef and ssm retrievals to date because of its fine resolution in the spatial and temporal domains [13]."
+2,a specific group of tir-based approaches that rely on the physical relationships implied by eo-derived scatterplots in which the surface temperature (ts) is plotted versus the vegetation index (vi) have shown potential in this respect.
+2,"assuming conditions of full variability in vegetation cover in eo-based imagery, a scatterplot is generated with a triangular (or trapezoidal) shape."
+2,the emergence of this shape results from the reduced sensitivity that ts has on water content over areas covered by vegetation in comparison to bare soil areas.
+2,a detailed description of the ts/vi feature space and of the biophysical properties included within it can be found in [14].
+2,"several researchers have already demonstrated how ef and ssm can be derived from the ts/vi feature space utilizing a range of eo data (e.g., [15–23]."
+2,"the promising potential of ts/vi techniques is evidenced in the fact that variants are being, or have been, considered by different space agencies in the development of operational eo-based products [24–26]."
+2,"a group of these techniques has already demonstrated its ability to provide operational service ssm maps over spain at 1 km pixel size based on data from the smos satellite, integrating the smos brightness temperature values within a multiple regression model, together with ts and vi obtained from the modis data [27]."
+2,"recently [28] proposed a new technique for estimating both ssm and ef from the ts/vi domain, named “simplified triangle”."
+2,"this approach has a major advantage in comparison to other ts/vi techniques, in that it is based on only a few calculations and does not require for its implementation a mathematical model to simulate physical processes or ancillary data; therefore, it can be easily implemented almost anywhere in the world."
+2,"as the technique is easy to use and only depends on eo data, it is a prime candidate for operational use."
+2,"nevertheless, more research is required to evaluate its performance in different ecosystems and environmental conditions globally, particularly regarding the use of eo data from new satellites such as those from sentinel-3."
+2,the authors of [29] demonstrated the use of the “simplified” triangle approach coupled with crop prediction and climatological water balance models to predict soybean yield using modis data.
+2,"yet, to our knowledge, this technique using esa’s sentinels-3 has not yet been implemented."
+2,"sentinel-3 provides eo data at a range of resolutions in the spatial, temporal and spectral domains."
+2,"thus, such satellite observations may serve in many potential applications [30,31]."
+2,"on this basis, the present research study aims at exploring the ability of the “simplified triangle”, used synergistically with sentinel-3 data, to predict the spatio-temporal variability of both ef and ssm."
+2,"to our knowledge, in that respect, this is the first study of its kind."
+2,the technique was assessed in two regions in spain for which validated collocated ground observations from the fluxnet global in situ monitoring network were available.
+2,"the next section provides a description of the study area; section 3 outlines the methods, section 4 the key results and section 5 discusses the obtained results."
+2,materials 2.1.
+2,study sites and in situ data ground measurements from three spanish sites that belong to the carboeurope in situ measurements network were used in this study.
+2,"carboeurope belongs to fluxnet, which is a"
+3,collected from the fluxnet individual sites were first measured using standardized instrumentation across the network sites.
+3,"then, quality-controls and uniformly applied error correction processing were applied to them before distribution."
+3,in situ data is made available at different processing levels and at no cost from the european fluxes database cluster (http://gaia.agraria.unitus.it/).
+3,"remote sens. 2020, 12, 3192 3 of 20 herein, the “simplified triangle” technique is evaluated at three carboeurope sites in spain, representative of typical savannah ecosystem types for selected cloud-free days in 2018."
+3,"table 1 major ground the summarizes observational networkofthat main characteristics the acquires study sites land andsurface parameter the location of eachdata [32,33]. site is all in illustrated data collected from the fluxnet individual sites were first measured using standardized figure 1."
+3,"in total, 44 days from 2018 were chosen to verify the technique."
+3,"the target criteria for instrumentation across the network selecting sites. the specific daysthen, quality-controls included and uniformly cloud-free skies, applied the availability of error good correction quality in situprocessing data were applied to them before distribution."
+3,"in situ data is made available at different concurrently to the satellite observations and a satisfactory energy balance closure (ebc), which was processing levels and at no cost from the european fluxes database cluster (http://gaia.agraria.unitus.it/). used as an indication of good quality flux measurements (evaluated as per previous studies such as herein, [34,35]). our “simplified in the study, days triangle” technique of sentinel-3 overpass is with evaluated at three poor ebc < 0.750, slopesites (ebrcarboeurope in r < 0.85, spain, 2< representative of typical 0.930) were excluded from savannah ecosystem further analysis, typestofor similarly selected other cloud-free studies [36,37]. days in 2018."
+3,table 1 all ground summarizes the mainmeasurements characteristicsused ofin this study were the study obtained sites and from theof the location icos each(integrated carbon in site is illustrated observation figure system) 1.
+3,"in total, 44 daysdatabase from 2018 were chosen to verify the technique."
+3,"the detailed (http://www.europe-fluxdata.eu/icos/home). information target criteria on for selecting thethe data use specific days policy can be included found onskies, cloud-free the carboeurope the availability website andquality of good data acquisition in situ datainterface."
+3,"for concurrently the satellite purposes, to consistency observations all andground data acquired a satisfactory energy this study in balance also obtained were(ebc), closure which was at used levelas2 an processing, meaning that they included indication of good quality flux measurements (evaluated as per previous studies such as [34,35]).only the originally acquired measurements from which in our incorrect study, data days of (e.g., due sentinel-3 to instrumentation overpass with poor ebc error) (ebrhad been eliminated."
+3,"< 0.750, no slope < 0.85, r2further < 0.930) preprocessing were excluded implemented wasfurther from analysis, apart from the similarly computation to other studiesof ef (as defined previously, i.e., le/rn)."
+3,"[36,37]."
+3,table 1.
+3,main characteristics of our study sites.
+3,table 1.
+3,main characteristics of our study sites.
+3,geographic ecosystem sitesite geographic ecosystem name sitesite name coordinates coordinates country country type/land type/land elevation elevation (m)(m) abbreviation abbreviation (lat/long) (lat/long) cover cover albuera albuera es-abr es-abr 38.702–6.786 38.702–6.786 spain spain sav sav 279 279 majadas majadasdeldel es-lm1 es-lm1 39.942–5.779 39.942–5.779 spain spain sav sav 266 266 tietar north tietar north majadas majadas deldel es-lm2 es-lm2 39.935–5.776 39.935–5.776 spain spain sav sav 270 270 tietar south tietar south figure figure 1.
+3,geographical locationsof geographicallocations study sites of study in spain sites in (backgroundimage imagesource: spain (background source:arcgis arcgisonline).
+3,online).
+3,sentinels 2.2.
+3,all ground data: acquisition and measurements usedpreprocessing in this study were obtained from the icos (integrated carbon observation wasdatabase system) sentinel-3 launched by the european space agency (esa) asdetailed (http://www.europe-fluxdata.eu/icos/home). part of information the copernicuson the data use policy can be found on the carboeurope website and data acquisition interface.
+3,for program.
+3,"at present, it consists of two satellites (sentinel-3a and 3b) working in constellation, withconsistency purposes, all ground two additional dataplanned satellites acquiredforinlaunch this study were in the nearalso obtained future."
+3,"level one ofatthe 2 processing, instruments meaning onboard the that they included sentinel-3 theisoriginally platform acquired a slstr (sea measurements and land from whichradiometer)."
+3,"surface temperature only incorrect thedata (e.g., ofdue launch the to instrumentation error) hadallows satellites in constellation been eliminated."
+3,"no further slstr to achieve resolution was preprocessing a temporal implemented at the apart thanfrom equator of less a the computation of ef (as defined previously, i.e., le/rn)."
+4,"remote sens. 2020, 12, 3192 4 of 20 2.2."
+4,sentinels data: acquisition and preprocessing sentinel-3 was launched by the european space agency (esa) as part of the copernicus program.
+4,"at present, it consists of two satellites (sentinel-3a and 3b) working in constellation, with two additional satellites planned for launch in the near future."
+4,one of the instruments onboard the sentinel-3 platform is a slstr (sea and land surface temperature radiometer).
+4,the launch of the satellites in constellation allows slstr to achieve a temporal resolution at the equator of less than a day.
+4,"spectrally, the instrument acquires data in a total of nine spectral bands, plus two more which were developed for applications relevant primarily to the monitoring of fires."
+4,"the first six bands, located from visible to short-wave infrared (swir), acquire spectral data at 500 m."
+4,"subsequent bands, i.e., bands 7 to 9, have a 1-km spatial resolution."
+4,"more details on the slstr instrument are available elsewhere, for example [38]."
+4,"herein, the sentinel-3 level 2 operational product, named “sl_2_lst”, is used to implement the “simplified triangle” technique."
+4,"based on the delivery time, two data product types are available for the slstr sentinel 3 product."
+4,"these products are “near real time” (nrt), provided in less than 3 hours after image acquisition, and “non-critical time” (ntc), provided within one month after image acquisition."
+4,"the main difference between them is the vis/swir calibration applied to the nrt products, which makes them suitable for our current study."
+4,"the spatial resolution the of lst and vi band is 1 km and the temporal resolution is, at the latitudes of our study area, at least two times per day (once in the morning and once in the afternoon; precise time varies according to orbit and is not geosynchronous)."
+4,"this product provides land surface temperature (lst, or ts, as defined before) and a series of other parameters to users."
+4,"the product is organized into packages composed of one manifest file and several measurements and annotation data files (between 2 and 21 files, depending on the package)."
+4,"the sl_2_lst product, in particular, contains ten annotation files, providing the same parameters as sl_2_wct and some additional vegetation parameters."
+4,"one of these parameters is the fractional vegetation cover (fr), which is used to satisfy the objectives of the present study."
+4,"in sl_2_lst, the vegetation is specified as a fractional vegetation index ranging between ‘1’ (corresponding to 100% vegetation) and ‘0’ (corresponding to 0% vegetation)."
+4,the lst algorithm used for sentinel 3 is based on two split-window thermal channels (1100 nm and 1200 nm).
+4,"the global estimation of the lst takes into account the effects of the land emissivity, together with those of atmospheric water vapor and satellite viewing angle."
+4,"the lst estimation uses a linear regression with coefficients tailored for day and night, land cover types, various atmospheric conditions, and bare and vegetated surfaces."
+4,"more details on the fr and lst sentinel-3 products can be found elsewhere including open-access documents (e.g., in [39])."
+4,"the sl_2_lst images used herein were first obtained from creodias (https://creodias.eu/) at no cost, covering the entire sentinel-3 image archive initially for the year 2018."
+4,"next, specific sentinel-3 images were selected for inclusion in this study."
+4,these included only cloud-free images or images with less than 20% cloud presence in their field of view.
+4,each image from the archive was intersected to each image footprint covering the entire study area.
+4,"for each sl_2_lst image product that was retained for further analysis, first, spatial and spectral subsets were selected."
+4,"these covered the studied regions), where the layers retained included only the ts (or lst), fr and the normalised difference vegetation index (ndvi)."
+4,"then, each band was masked for clouds and inland water."
+4,"subsequently, all the study sites were cross-intersected with the images, using an algorithm based on the closest date and time acquisition for in situ and satellite images."
+4,"the final set of sls_2_lst images, for a total of 70 days, provided the input data for the implementation of the “simplified triangle”."
+4,an example of these final image products for a selected day is given in figure 2.
+5,"remote sens. 2020, 12, 3192 5 of 20 remote sens. 2020, 12, x for peer review 5 of 21 figure 2."
+5,"an example of an example final preprocessed of aa final preprocessed sentinel-3 sentinel-3 image image used in our used in study as input for the our study implementation of implementation triangle” technique, of the “simplified triangle” shown here for the image with acquisition technique, shown date of 23 june, of 23 2018."
+5,"the june,2018."
+5,"thetop rowshows toprow shows the lst the lstmaps maps and bottom thethe and bottom fr maps. thethe in each fr maps. row,row, in each the left image the left imageshows shows three all all threeexperimental experimental sites used sites usedininthis thisstudy studyand andthetheremaining remaining two two show show a zoomed-in area of the area of experimentalsites the experimental location.the siteslocation."
+5,theinclusion inclusionofofboth boththe thefull and fulland zoomed zoomed images images is to to is demonstrate demonstrate thethe spatial spatial variability variability of of both both lstlst and and fr.fr.
+5,methods 3.
+5,methods 3.
+5,“simplified triangle” 3.1.
+5,“simplified triangle” the “simplified triangle” is a new ts/vi technique proposed by [28].
+5,the technique makes it the “simplified triangle” is a new ts/vi technique proposed by [28].
+5,"the technique makes it possible to derive spatial estimates of the surface wetness (mo, which refers to the first few millimeters of possible to derive spatial estimates of the surface wetness (mo, which refers to the first few a surface covered by bare soil) and of the evaporative fraction (ef, being the ratio of evapotranspiration millimeters of a surface covered by bare soil) and of the evaporative fraction (ef, being the ratio of to net radiation (rn))."
+5,the principle on which the method is based is illustrated in figure 3.
+5,"briefly, evapotranspiration to net radiation (rn))."
+5,the principle on which the method is based is illustrated the key inputs to the method include the fr and ts parameters.
+5,the authors of [28] proposed deriving in figure 3.
+5,"briefly, the key inputs to the method include the fr and ts parameters."
+5,the authors of fr from the scaling of the ndvi.
+5,"this approach requires specifying ndvi for bare soil (ndvio), and for [28] proposed deriving fr from the scaling of the ndvi."
+5,"this approach requires specifying ndvi for full vegetation cover (ndvis) values (see figure 3), and is based on the following equation [15,40]: bare soil (ndvio), and for full vegetation cover (ndvis) values (see figure 3), and is based on the following equation [15,40]: ( )2 ndvi − ndvi0 fr = (1) ndvi −−ndvi ndvis ndvi0 fr = (1) ndvis − ndvi however, other methods of fr estimation can also be used."
+5,"in the present work, since the fr is includedother layerhowever, methods in the sentinelofproduct, fr estimation can also be this information wasused. thepresent usedinasthe work, input and since the fr no computation layer is included was required. in the sentinel product, this information was used as the input and no computation was required."
+5,"ndvis and t[min] define the lower left (wet or cold) peak, i.e., the so-called “wet edge” (or “cold edge”), which characterizes dense vegetation (refer to figure 3)."
+5,"similarly, ndvio and t[max] describe the lower right border of the triangle."
+5,"an additional essential characteristic, the “dry edge” or “warm edge” (also shown in figure 3), represents the soil dryness limit (i.e., conditions where mo = 0)."
+6,"remote sens. 2020, 12, x for peer review 6 of 21 remote sens. 2020, 12, 3192 6 of 20 figure 3."
+6,illustration of the concept of the simplified triangle technique.
+6,figure 3.
+6,illustration of the concept of the simplified triangle technique.
+6,"the next step in applying the technique is the scaling of ts to a variable named t*, resulting in ndvis and values varying t[min]zero between andthe define one.lower scalingleftrequires cold) peak, (wet oridentifying i.e.,dry/bare the so-called ts for “wet soil, i.e., edge” (or the maximum “cold edge”), which characterizes dense vegetation (refer to figure 3)."
+6,"similarly, ndvio ts [max] value for pixels over dry/bare soil, and the ts [min] value which is found over dense vegetation and t[max] describe the3). (see figure lower right between ts ranges border ofthe thetstriangle. [min] and antadditional [max] limits.essential characteristic, the scaling the “dry edge” of t* is performed based or “warm edge” (also shown on the following equation: in figure 3), represents the soil dryness limit (i.e., conditions where mo = 0)."
+6,"t∗the  the next step in applying t − t (min = technique is )) /(scaling the t (max)of−tst to (min ) a variable named t*, resulting (2) in values varying between zero and one."
+6,"scaling requires identifying ts for dry/bare soil, i.e., the in ourtsstudy, maximum t* was [max] value forderived from pixels over the fr/ts dry/bare soil,scatterplot and the tsof eachvalue [min] sentinel-3 which is image found(using over equation (2) above). dense vegetation (see figure 3)."
+6,ts ranges between the ts [min] and t [max] limits.
+6,"the scaling of t* in the next is performed based onmo step, theand equation: from fr and t* as follows: ef are computed following t ∗mo ={t=−1t−(min))/(t (max) t(pixel)/t (min)} − t edge (warm ) (2) (3) in our study, t* was derived from the fr/ts scatterplot of each sentinel-3 image (using equation ef = efsoil (1 − fr) + fr (4) (2) above). where thesoil in ef next step, is the moofand ratio soilef are computed evaporation from to net fr and t* as follows: radiation."
+6,"as noted in [28], the above mathematical expressions are based on the assumption that for both mo = 1 − t pixel /t warm edge (3) mo and ef, there is linear variation between 0 and 1 within the triangular domain (refer to figure 3)."
+6,mo is defined as the ratio between theef ef a/d=lengths.
+6,− fr lengths 1 both fr are functions of t* and fr.
+6,"for each (4) fr andef where is thelocated efsoilvalue ratio ofwithin to netand the ts/vi space, soil evaporation for the pixels consisting of a presentence of both radiation."
+6,"as noted in [28], the above mathematical expressionsas vegetation and bare soil cover, the canopy ef is estimated arethe on thevalue weighted based thefor of ef forthat assumption pixel bothfr (i.e.,and mo ef,=there efveg 1.0, by definition). is linear thus, variation equation between (4) 1can 0 and be expressed within as follows: the triangular domain (refer to figure 3)."
+6,mo is defined as the ratio between the a/d lengths.
+6,both lengths are functions of t* and fr.
+6,"for each ef = mo(1 − fr) + fr (5) fr and ef value located within the ts/vi space, and for the pixels consisting of a presentence of both vegetation and bare soil cover, the canopy ef is estimated as the weighted value of ef for the pixel in this study, the above steps were applied to each sentinel-3 image."
+6,"this resulted in two fr (i.e., efveg = 1.0, by definition)."
+6,"thus, equation (4) can be expressed as follows: final image products for each image processed, namely the ef and mo maps."
+6,figure 4 shows six scatterplots of t scaled against fr.
+6,"eachef = mo 1 −isfr scatterplot fr day each month during the entire study for one (5) period (i.e., may–september)."
+6,"as can be observed, these scatterplots are mainly characterized by a in this study, the above steps were applied to each sentinel-3 image."
+6,"this resulted in two final triangular/trapezoidal shape, which further evidences that the research area is heterogeneous enough image products for each image processed, namely the ef and mo maps."
+6,"figure 4 shows six to guarantee satisfactory conditions for the implementation of the technique [18,41]. scatterplots of t scaled against fr."
+6,"each scatterplot is for one day each month during the entire study period (i.e., may–september)."
+6,"as can be observed, these scatterplots are mainly characterized by a triangular/trapezoidal shape, which further evidences that the research area is heterogeneous enough to guarantee satisfactory conditions for the implementation of the technique [18,41]."
+7,"remote sens.remote 12, 2020, 2020,sens. 319212, x for peer review 7 of 21 7 of 20 (a) (b) (c) (d) (e) (f) figure 4."
+7,examples of the derived final scaled ts/fr scatterplots from different dates included in the study (one scatterplot per month covering the period of analysis considered herein).
+7,the red line is the “warm” edge and the blue the “cold” edge.
+7,"the scatterplots refer to sentinel-3 images acquisition dates: (a) 16 may, (b) 23 june, (c) 25 july, (d) 5 august, (e) 25 august, and (f) 25 september."
+7,the use of color is for visual clarity only.
+8,"remote sens. 2020, 12, 3192 8 of 20 3.2."
+8,"statistical analysis initial evaluation of the obtained results included a visual inspection of the spatiotemporal variability of the derived parameters with respect to features including land cover and fr, and comparisons of the derived image histograms."
+8,"next, comparisons at the point/pixel level between the predicted and measured parameters were performed."
+8,"where necessary, ground measurements were interpolated (linearly) to match the time of each sentinel-3 image."
+8,"prior to applying the statistical analysis, from the final images computed upon completion of the “simplified triangle”, all records that met the following conditions were removed: nan values, ef > 1.0, and ssm outside the range 0.0–1.0."
+8,"next, the predicted mo was converted to ssm by multiplying mo with the soil field capacity."
+8,"similarly, for the in situ data, the acquired volumetric water content (vmc, expressed as %) was converted to ssm."
+8,ef was also computed from the ground measurements as the ratio of the instantaneous le and rn.
+8,the statistical metrics computed to quantify the agreement between predictions and observations are summarized in table 2.
+8,"these parameters have been used in analogous studies which have already been published (e.g., [13,19,42–45])."
+8,table 2.
+8,statistical metrics adopted in our study to evaluate the correspondence of predictions with the ground measurements of the parameters compared herein.
+8,"subscripts i = 1, . . ."
+8,"n are the individual observations (i.e., days included in our analysis), p the predictions, and o the observations."
+8,the horizontal bar denotes the mean value.
+8,name description mathematical definition n bias = mbe = n1 p bias/mbe bias (accuracy) or mean average error (pi − oi ) r i=1 n  2 scatter/sd scatter (precision) or standard deviation 1 p scatter = n−1 pi − oi − (pi − oi ) i=1 √ rmse root mean square error rmsd = bias2 + scatter2 n mad = n−1 |pi − oi | p mae mean absolute error i=1 h  i r pearson’s correlation coefficient θsat −[θsat ] θin−situ −[θin−situ ] r= σsat σin−situ 4.
+8,results 4.1.
+8,ef comparisons 4.1.1.
+8,visual comparisons the first step of the analysis was a visual inspection of the spatial variability of the derived parameters.
+8,an example of the obtained ef maps (one map per month during the whole period of analysis from may to september) is given in figure 5.
+8,"generally, as can also be observed from figure 5, the predicted ef maps exhibited spatially realistic continuity of ef across the area covered in the satellite field of view between the different months of the year."
+8,"in addition, ef spatial variability was largely in agreement with the changes in the land use/cover and the fr and ts maps (compare, for example, figures 2 and 5) and the area topographical characteristics (i.e., slope, elevation)."
+8,"these observations, although they do not provide direct quantitative evidence of the accuracy of the ef product, suggest reasonable spatial predictive ability of the ef."
+8,4.1.2.
+8,"point comparisons in this study, three permanent fluxnet sites located in spain were chosen to compare the predicted and observed efs."
+8,a summary of the main statistical results obtained for the ef comparisons is provided in table 3.
+8,"in addition, figure 6 plots the predicted ef against the ef measured at each site (the last three plots), but also the cumulative data for all sites (first plot)."
+8,"as can be observed, when all the sites were considered, the rmse of ef prediction was 0.191, with a sd of 0.088 and a satisfactory"
+9,"in this study, three permanent fluxnet sites located in spain were chosen to compare the predicted and observed efs."
+9,a summary of the main statistical results obtained for the ef comparisons is provided in table 3.
+9,"in addition, figure 6 plots the predicted ef against the ef measured at each site (the last three plots), but also the cumulative data for all sites (first plot)."
+9,as besens.
+9,"remote can 2020, 12, when observed, 3192 all the sites were considered, the rmse of ef prediction was 0.191, with9aofsd 20 of 0.088 and a satisfactory r of 0.721."
+9,"these results showed generally satisfactory prediction accuracy r ofef for theseof by means 0.721. the studied results showedtechnique. generallyamong the three satisfactory accuracysites, experimental prediction rmse for ef variedof by means from the 0.168 to 0.212, sd from 0.086 to 0.095 and r from 0.536 to 0.775."
+9,es_abr was the studied technique.
+9,"among the three experimental sites, rmse varied from 0.168 to 0.212, sd from site with the lowest 0.086 to(0.168) rmse and the 0.095 and lowest r from r (0.536)."
+9,0.536 highestwas thees_abr to 0.775.
+9,"rmse the(0.212) wasthe site with found at es-lm2, lowest whileand rmse (0.168) the site the with the highest r was es_lm1."
+9,"in addition, positive correlations were observed lowest r (0.536)."
+9,"the highest rmse (0.212) was found at es-lm2, while the site with the highest r wasin all scatterplots es_lm1.6)."
+9,"inthis (figure comprises addition, an correlations positive werelinear approximately relationship observed between (figure in all scatterplots the retrieved 6)."
+9,thisef and the comprises reference data.
+9,"in overall, an approximately the mean error linear relationship and mean between relative ef the retrieved andvalues error were fairly the reference small, data. which in overall, suggests that the investigated technique is able to satisfactorily predict ef, at least the mean error and mean relative error values were fairly small, which suggests that the investigated for most days included in the analysis. technique is able to satisfactorily predict ef, at least for most days included in the analysis. (a) (b) (c) figure 5."
+10,remote remote sens.
+10,"sens. 2020, 2020, 12,12, x for peer review 3192 1021 10 of of 20 remote sens. 2020, 12, x for peer review 10 of 21 (d) (e) (f) figure 5."
+10,examples of ef maps (one per month covering the whole period of data analysis from may (d) (e) (f) to september) derived from the “simplified triangle”.
+10,the ef maps refer to sentinel-3 images figure 5.
+10,"examples acquisition may,(one dates: of (a)ef16maps (b)per 23 month covering june, (c) whole the(d) 25 july, period (e) 5 august, of data analysisand 25 august, from(f)may 25 to figure 5."
+10,examples of ef maps (one per month covering the whole period of data analysis from may september.
+10,september) derived from the “simplified triangle”.
+10,the ef maps refer to sentinel-3 images acquisition to september) derived from the “simplified triangle”.
+10,"the ef maps refer to sentinel-3 images dates: (a) 16 may, (b) 23 june, (c) 25 july, (d) 5 august, (e) 25 august, and (f) 25 september. acquisition dates: (a) 16 may, (b) 23 june, (c) 25 july, (d) 5 august, (e) 25 august, and (f) 25 september. (a) (b) figure 6."
+10,cont. (a) (b)
+11,remote sens.
+11,"remote 2020, sens. 12,12, 2020, 3192 x for peer review of 20 1121 11 of (c) (d) figure figure 6."
+11,"comparisonsofofef: comparisons ef:(a) (a)for all sites in spain, for all spain,(b) thees-abr forthe (b)for es-abrsite only, site (c)(c) only, thethe forfor es_elm1 es_elm1 site only, and (d) for the es-lm2 experimental site only, and (d) for the es-lm2 experimental site only.site only."
+11,summary of table3.3.
+11,summary table ef comparisons. the ef of the comparisons.
+11,max max median country mae mbe sd absolute median abs r rmsd n country mae mbe sd absoluteerror error r rmsd n abs error all sites together 0.174 0.170 0.088 error0.298 0.192 0.721 0.191 97 alles_abr sites 0.148 0.139 0.095 0.298 0.138 0.536 0.168 34 es-lm1 0.1740.1700.170 0.088 0.167 0.086 0.2980.281 0.192 0.167 0.7750.721 0.1880.191 27 97 together es_lm2 0.201 0.201 0.069 0.293 0.218 0.719 0.212 36 es_abr 0.148 0.139 0.095 0.298 0.138 0.536 0.168 34 further es-lm1 spatial evaluation 0.170 0.167 differences in0.281 of the 0.086 ef retrieval using 0.775 triangle” the “simplified 0.167 0.188 technique 27 conducted.
+11,"for was alsoes_lm2 0.201this purpose, 0.201 0.069 0.293 (for all sites the entire dataset and all days) 0.218 0.719 0.212 into was divided 36 three groups based on different fr value intervals, namely 0–20%, 20–240% and 40–2100%, and statistical further evaluation was spatial performedevaluation of the separately fordifferences in ef each interval."
+11,tableretrieval using thethe 4 summarizes “simplified triangle” main findings of this technique was also conducted.
+11,"for this purpose, the entire dataset (for all analysis."
+11,"generally, as shown in this table, there were only two dates on which fr was in the rangesites and all days) was into three divided hence, 41–2100%; groupswas this subset based on different disregarded fromfrthevalue intervals, fr analysis. can also 0–20%, as namely 20–240% be observed, and the lowest 40–2100%, rmse (0.167)and reportedevaluation wasstatistical was performed for the subset of data with fr valuesfor separately ineach interval.20–240%; the interval table 4 summarizes this was due to the lowermain mbe (0.143),ofasthis findings sdanalysis."
+11,"generally, was the same shown and as group for this groupthere thetable, in this withinweretheonly rangetwoof dates on fr 0–220%. which fr was in the range 41–2100%; hence, this subset was disregarded from the the statistical measurements for these two fr ranges were similar."
+11,slightly better ef prediction could fr analysis.
+11,"as can be also be observed, obtained in the frthe lowest range (0.167) was rmse 20–240%, between thethe least for for atreported subset data of study. in this data with fr values in the interval 20–240%; this was due to lower mbe (0.143), as sd was the same for this group and the tablewithin group the range 4."
+11,summary fr 0–220%.with of efofcomparisons statistical vegetation the fractional measurements coverfor for alltwo (fr)these the fr ranges were experimental similar.
+11,"slightly better ef prediction sites and all the studied parameters. could be obtained in the fr range between 20–240%, at least for the data in this study."
+11,max median n fr table 4.
+11,summary mbe maeof ef comparisons sdwith fractional abs coverr(fr) forrmse absolute vegetation (number all the experimental ranges error error of days) sites and all the studied parameters.
+11,0.00–20.20 0.177 0.173 0.087 0.298 0.193 0.452 0.193 79 0.21–20.40 0.147 0.143 max absolute0.274 median 0.087 abs 0.153 0.671 0.167 n (number 16 of fr ranges mae 0.41–21.00 mbe 0.260 sd 0.260 0.021 0.281 0.260 nanr rmse 0.261 2 error error days) 0.00–20.20 0.177 0.173 0.087 0.298 0.193 0.452 0.193 79 4.2.0.21–20.40 0.147 0.143 ssm comparisons 0.087 0.274 0.153 0.671 0.167 16 0.41–21.00 0.260 0.260 0.021 0.281 0.260 nan 0.261 2 4.2.1.
+11,"visual comparisons as with the ef comparisons, the first step in the mo evaluation consisted of performing a visual inspection of the derived products in order to assess the mo spatial variability and general trends."
+11,figure 7 presents an example of some mo maps derived from the “simplified triangle” technique.
+12,"remote sens. 2020, 12, 3192 12 of 20 as in the case of ef, one sentinel-3 image per month covering the entire period of analysis from may to september is plotted."
+12,"a visual inspection clearly reflects the presence of reasonable spatial and seasonal variability of mo across the topography and land use classes, over both the vegetated and bare soil areas."
+12,"furthermore, the spatial variability to the predicted ef exhibited a reasonable range of to figure values (refer remote 5)."
+12,"sens. 2020, 12, x for peer review 13 of 21 (a) (b) (c) (d) (e) (f) figure 7."
+12,examples of mo maps derived from the “simplified triangle” using the sentinel-3 data.
+12,"the mo maps refer to the following acquisition dates: (a) 16 may, (b) 23 june, (c) 25 july, (d) 5 august, (e) 25 august, and (f) 25 september."
+13,"remote sens. 2020, 12, 3192 x for peer review 20 13 of 21 14 figure 7."
+13,examples of mo maps derived from the “simplified triangle” using the sentinel-3 data.
+13,the point 4.2.2.
+13,"mo mapscomparisons refer to the following acquisition dates: (a) 16 may, (b) 23 june, (c) 25 july, (d) 5 august, (e) 25 august, table and (f) 25 september. 5 summarizes the results concerning the relationship between the in situ ssm (i.e., the vmc before conversion) and that predicted by the “triangle” (i.e., mo converted to ssm based on the soil table 5."
+13,summarized results of the ssm comparisons.
+13,all statistical parameters apart from average field capacity for each site).
+13,the degree of correlation between the predicted and observed ssm correlation coefficient (r) and sample size (n) are expressed in cm3 cm-3. is also clearly depicted in the associated scatterplots that are included herein (figure 8).
+13,the x-axis corresponds to the in mae country situ ssm mbewith sd units max m3 /m 3 ; the y-axis absolute error corresponds to the rderived median abs error rmsessmnon the all sites together same measurement units.
+13,0.009 −0.005 0.010 0.042 0.007 0.577 0.012 97 es_abr 0.009 −0.005 0.010 0.031 0.007 0.511 0.011 34 tablees-lm1 5.
+13,summarized0.007 of the0.009 −0.001 results 0.027 all statistical parameters ssm comparisons.
+13,0.006 0.809 apart from 0.009 27 correlation es_lm2 0.011 −0.009 0.010 0.042 3 −3 0.008 0.584 0.014 36 coefficient (r) and sample size (n) are expressed in cm cm .
+13,"for a more detailed evaluation of the ssmmax median estimates, table 6 presents the statistical country mae mbe sd absolute abs r rmse n measurements for ssm predictions that correspond to error different error fr ranges."
+13,"the analysis of the combined dataset led to a rmse of 0.011, a sd of 0.009 cm3 cm−3 and an r of 0.011 for the fr range all sites together 0.009 −0.005 0.010 0.042 0.007 0.577 0.012 97 the fr range 20–40%, 0–20%."
+13,"fores_abr 0.009 similar 0.010 were0.031 −0.005 results obtained,0.007 with rsme 0.011 being34 0.511and mse 0.013 and 0.012 cm3 cmes-lm1 −0.001 of 0.009 0.007the subset −3 respectively."
+13,"fr values0.027 0.006 40–100% in the range 0.809 included 0.009 only27two data es_lm2 0.011 −0.009 0.010 0.042 0.008 0.584 0.014 36 points (days), and was thus omitted from the statistical analysis. (a) (b) (c) (d) figure 8."
+13,"ssm comparisons: (a) for all (a) for sites in all sites in spain, spain, (b) (b) for the es-abr for the site only, es-abr site only, (c) for the es_elm1 site only and (d) for the es-lm2 experimental site only."
+13,ssm site only. units are ssm units cm33 cm−3 are cm −3. .
+13,as tablecan be observed 6.
+13,"summary of ssm table 5, if per in comparisons all fractional consideredcover sites are vegetation together, (fr) forssm all theisexperimental predicted with relatively reasonable rmsefor (0.012 3 cm 2018. −3 cm all ) and sd (0.10)."
+13,the correlation sites and all parameters the year statistical parameters apart from coefficient (r) of 0.577 in correlation coefficient combination with figure 8 suggests a reasonable (r) and sample size (n) are expressed in cm cm . 3 correspondence -3 of the predicted ssm to the collocated measurements.
+13,"with regard to the comparisons of the individual experimental sites, the lowest fr ranges mae 3 mbe sd max absolute error median abs error r rmse3 n (number of days) rmse (0.009 0.00–0.20 cm cm−3 ) was obtained for 0.008 −0.005 0.009 es_lm1, followed 0.031 by es_abr 0.007 (0.011 0.473 cm cm−3 ) and 0.011 79 es_lm2 0.21–0.04 0.010 −0.004 0.012 0.027 0.008 0.656 0.013 16"
+14,"remote sens. 2020, 12, 3192 14 of 20 (0.014 cm3 cm−3 )."
+14,"similarly, the site with the highest r was es_lm1 (0.809), followed by es_lm2 (0.584) and es_abr (0.511)."
+14,mae for the three sites ranged between 0.007–0.11 cm3 cm−3 .
+14,"similarly, the scatterplots of the predicted versus measured ssm shown in figure 8 exhibit a positive correlation between the compared datasets in all cases (i.e., both for site-specific data and for the combined datasets from all the sites and dates)."
+14,"this implies satisfactory predictive ability of ssm/mo by the “simplified triangle” method, at least for the specific datasets."
+14,"these results, combined with those shown in table 5, imply that the technique can be successfully applied to regional ssm monitoring."
+14,"for a more detailed evaluation of the ssm estimates, table 6 presents the statistical measurements for ssm predictions that correspond to different fr ranges."
+14,"the analysis of the combined dataset led to a rmse of 0.011, a sd of 0.009 cm3 cm−3 and an r of 0.011 for the fr range 0–20%."
+14,"for the fr range 20–40%, similar results were obtained, with rsme and mse being 0.013 and 0.012 cm3 cm−3 respectively."
+14,"the subset of fr values in the range 40–100% included only two data points (days), and was thus omitted from the statistical analysis."
+14,table 6.
+14,summary of ssm comparisons per fractional vegetation cover (fr) for all the experimental sites and all parameters for the year 2018.
+14,all statistical parameters apart from correlation coefficient (r) and sample size (n) are expressed in cm3 cm−3 .
+14,max median n fr mae mbe sd absolute abs r rmse (number ranges error error of days) 0.00–0.20 0.008 −0.005 0.009 0.031 0.007 0.473 0.011 79 0.21–0.04 0.010 −0.004 0.012 0.027 0.008 0.656 0.013 16 0.41–1.00 0.027 −0.015 0.027 0.042 0.027 nan 0.031 2 5.
+14,discussion the present research comprised a robust investigation of the “simplified triangle” method for deriving spatially explicit estimates of evaporative fraction (ef) and surface soil moisture when the latter used recent sentinel-3 eo data.
+14,"the study focused on selected experimental sites located in spain, representative of a typical mediterranean savannah ecosystem."
+14,"for example, a comparison of all the data (including all dates and sites) showed a low rsme for ef (0.191) and ssm (0.012 cm3 cm−3 ) and good correlation coefficients (r), i.e., 0.721 and 0.577 respectively."
+14,similar or better results were obtained in the individual site-specific comparisons.
+14,"these findings are encouraging and, as a whole, corroborate the technique’s ability to provide spatial estimates of the parameters it has been developed to predict over the study area."
+14,this was verified using data from heterogeneous and arid/semi-arid experimental sites during the study period.
+14,"the results reported herein cannot be directly compared with other those of studies, since the proposed technique is new."
+14,"yet, the reported rmse and r values are comparable to those in other studies which retrieved ef and ssm using tir-based techniques [6,13,16,23,43,46,47]."
+14,deviation between the estimated ef and ssm and the corresponding in situ data could be due to several influencing factors.
+14,"one possible such factor might be the accuracy with which fr and ts/tkin retrievals are derived, since these are the only input parameters required for the implementation of the technique."
+14,errors introduced in the estimation of those parameters could potentially impact prediction ability [48].
+14,"in this regard, validations of the sentinels-3 lst product indicate that the accuracy in ts retrieval is on the order of 1.5–2.5 k [9]."
+14,"however, validation studies of the fr product do not yet exist, to our knowledge."
+14,"the error contribution of ts is not expected to be significant, since this parameter is scaled [28,40]."
+14,"yet, in the present study, fr was obtained directly from the sentinel-3 product and was not computed using the ndvi-based approach, as outlined by [28] in the “simplified triangle” description."
+14,"this may influence the retrieval accuracy of the predicted parameters which, to our knowledge, is yet to be investigated."
+14,figure 9 illustrates the influence of the fr prediction method on the scatterplot.
+14,this illustrates how different the scatterplot shape will be when fr is predicted by three different methods.
+14,"in addition, the same figure illustrates the difference map between the"
+15,"of the fr product do not yet exist, to our knowledge."
+15,"the error contribution of ts is not expected to be significant, since this parameter is scaled [28,40]."
+15,"yet, in the present study, fr was obtained directly from the sentinel-3 product and was not computed using the ndvi-based approach, as outlined by [28] in the “simplified triangle” description."
+15,"this may influence the retrieval accuracy of the predicted remote parameters sens. 2020, 12, 3192 which, to our knowledge, is yet to be investigated."
+15,figure 9 illustrates 15theof 20 influence of the fr prediction method on the scatterplot.
+15,this illustrates how different the scatterplot shape will be when fr is predicted by three different methods.
+15,"in addition, the same figure illustrates sentinel-3 and ndvi-scaled the difference map between the fr, derived together and sentinel-3 with ndvi-scaled the corresponding histogram. derived with there evidently, fr, together the is corresponding histogram."
+15,"evidently, there is considerable diversity in the scatterplots shown as a as considerable diversity in the scatterplots shown as a result of the differences of the fr maps given result we inputs. expect of the that thisofwill differences the have an impact fr maps given ason the subsequent we expect steps inputs. willimplementation of the that this have an impact of onthe “simplified triangle” technique. the subsequent steps of the implementation of the “simplified triangle” technique."
+15,"remote sens. 2020, 12, x for peer review 16 of 21 (a) (b) (c) (d) figure figure 9."
+15,"exampleofofscatterplots example createdusing scatterplotscreated the ordinate: using the ordinate: (a) (a)the ndvi,(b) thendvi, (b)the thefrfrcomputed computed from from the ndvi scaling, and, (c) the fr from the sentinel product."
+15,"plot (d) shows the the ndvi scaling, and, (c) the fr from the sentinel product."
+15,"plot (d) shows the fr differencefr difference map (i.e., map thethe (i.e., sentinel sentinel product frfr productminus minus the ndvi-derived the ndvi-derived fr)fr) together togetherwith thethe with image image histogram. histogram."
+15,allall data data refer refer to the to the sentinel-3 sentinel-3 imageimage acquired acquired on 25on 25 august august 2018.
+15,the2018.
+15,theincolor color figurein(a–c) figure (a)–(c) is for is for visualization only. purposes only. visualization purposes a further a further factormight factor mightbe relatedto berelated tothe madeby assumption made the assumption bythe the“simplified “simplifiedtriangle” triangle” ofof a linear a linear relationship between ts/vi and the predicted parameters (both ef and mo). relationship between ts/vi and the predicted parameters (both ef and mo).
+15,"this assumption perhaps this assumption perhaps oversimplifies oversimplifies the relationship the relationship linking the linking variablestheembedded in the ts/viindomain variables embedded the ts/vi domain [14,49] [14,49] furthermore, furthermore, uncertainties in the predictions of both ef and mo may be introduced uncertainties in the predictions of both ef and mo may be introduced due to user-dependent subjectivity due to user-dependent subjectivity in the computation of the theoretical dry edge [50]. in the computation of the theoretical dry edge [50]."
+15,"in addition, the large scale differences in spatial resolution between the carboeurope point in addition, the large scale differences in spatial resolution between the carboeurope point measurements (on the order of 5 × 5 m) and the sentinel-3 pixel (on the order of 1 × 1 km) direct measurements (on the order of 5 × 5 m) and the sentinel-3 pixel (on the order of 1 × 1 km) direct validation of both ef and ssm is subject to some degree of uncertainty."
+15,this spatial variation cannot validation of both ef and ssm is subject to some degree of uncertainty.
+15,this spatial variation cannot be be precisely conveyed by means of point data validation [51].
+15,this issue can potentially create a poor precisely conveyed by means of point data validation [51].
+15,"this issue can potentially create a poor horizontal and vertical mismatch between the eo data and the ground measurements, affecting the horizontal and vertical comparisons of ef and mismatch [52]."
+15,"for the ssm between eo datasatellite-derived example, and the groundssm measurements, predictions affecting could bethe comparisons of ef and ssm [52]."
+15,"for example, satellite-derived ssm predictions responding to the skin soil layer water content."
+15,the latter is significantly shallower than the could be responding ground to the skin soil layer water content.
+15,the latter is significantly shallower than the ground measurement minimum resolution (which is at a 0–5 cm average surface layer).
+15,effective soil depth measurement estimatesresolution minimum for eo-based (which is at a 0–5 predictions of cm ssmaverage surfacecontested are a highly layer).
+15,effective soil issue [20].
+15,"thedepth estimates authors of [53]for eo-based found thatpredictions of ssm at a soil depth of 0–5are cm, externalcontested a highly conditionsissue such [20]. as windthe authors speed an [53] have of effectfound on thethat soil at a soil depth of 0–5 cm, external conditions such as wind speed have an effect surface wetness, which may introduce uncertainties in sm retrievals."
+15,"the authors of [54] found that on the soil surface wetness, which mayssm fairly satisfactory introduce uncertainties at the bare layer can bethe in sm retrievals. soil top surface authors obtained of [54] from found that eo sensors (i.e.,fairly at depths of 5 cm and 15 cm) or in areas where vegetation cover is low."
+15,the authors of [55] stated that ssm retrievals using optical eo data are effective at 10-cm soil depth.
+15,"recently, [56] compared mo derived from the “simplified triangle” with surface soil water measured at 5-cm and 15-cm depths for a study site in india."
+15,"they reported the best agreement on bare soil pixels or pixels with low fr, and also at soil depths of 5 cm."
+16,"remote sens. 2020, 12, 3192 16 of 20 satisfactory ssm at the bare soil top surface layer can be obtained from eo sensors (i.e., at depths of 5 cm and 15 cm) or in areas where vegetation cover is low."
+16,the authors of [55] stated that ssm retrievals using optical eo data are effective at 10-cm soil depth.
+16,recently [56] compared mo derived from the “simplified triangle” with surface soil water measured at 5-cm and 15-cm depths for a study site in india.
+16,"they reported the best agreement on bare soil pixels or pixels with low fr, and also at soil depths of 5 cm."
+16,another factor that could potentially account for the deviations between predictions and observations for both ef and ssm is the temporal mismatch which exists between these values.
+16,"the ground observations which formed our reference dataset were obtained on the same day as the sentinel-3 overpass, but they were not measured at the precise satellite overpass time."
+16,"nonetheless, this factor is expected to have a negligible influence on the validation carried out herein, as the ground measurements were linearly interpolated, an approach which has also been adopted elsewhere [48,57], in an attempt to address the issue of the exact time mismatch."
+16,a further factor may be related to the accuracy and precision of the instruments.
+16,"this might be more prominent in the flux measurements coming from the eddy covariance system, which is used to compute ef from the instantaneous fluxes of le and rn."
+16,"various studies have demonstrated that measurement errors in instantaneous le flux under certain circumstances (such as terrain features) can be in the order of as much as 20–30%, whereas for rn measurements, uncertainty of 10% can often be assumed [58]."
+16,"furthermore, for ef in particular, the passage of clouds can lead to abrupt changes, since it lowers the levels of shortwave radiation (rg) and the available energy reaching at the earth’s surface, causing ef to increase slightly."
+16,"for example, [59] suggested that a 20% decrease in available energy caused by an increase in low-level clouds from 0–50 % coverage might result in a 5% increase in ef."
+16,"these are some possible reasons for the systematic overestimations of ef obtained from the satellite data (refer to figure 6, table 4)."
+16,other possible reasons may be related to the limitations of the technique itself.
+16,"the implementation of the “simplified “triangle” presents certain limitations, namely: (1) it requires an image with a sufficiently large number of pixels, and with values covering the whole spectrum of soil moisture concentration and fr range."
+16,"furthermore, surfaces which are relatively “wet”, i.e., which evaporate at a given rate, or “dry”, i.e., where nearly no evapotranspiration is occurring, are necessary; (2) like other ts/vi methods, it depends on optical and tir remote-sensing observations, and as such, its use is restricted to clear-sky conditions; (3) implementation of the technique may be prone to human-induced errors, e.g., due to subjectivity in warm- and cold-edge selection, which often introduces additional uncertainty."
+16,"this is an issue that also challenges many other ts/vi methods (e.g., refer to the discussion by [9,16,48])."
+16,"nonetheless, the “simplified “triangle” implementation with the sentinel-3 presents several advantages."
+16,"first, it is based on globally available satellite data which are available at no cost."
+16,"second, the technique is simple and robust in its implementation and it does not require significant computational resources when applied to small scale studies."
+16,a further advantage is its reliance on just a few inputs which are generally easily computed from eo sensors.
+16,"the method is able to provide reasonably accurate predictions, even in highly fragmented environments and dynamically changing landscapes such as the mediterranean savannah ecosystems included in our experimental setup."
+16,"finally, the implementation steps are robust and adaptable to other locations; additionally, the method can be adjusted for integration with other available eo data."
+16,these characteristics could potentially make this technique a good candidate for operational development on a global scale.
+16,the technique performed well for our study area and investigated time period.
+16,"however, further investigation is required to establish its general applicability."
+16,"more research is required to assess the extent to which it can be applied to monitoring ef and ssm on a long-term basis, also other ecosystem conditions/regions and with different eo data (e.g., landsat, modis, seviri)."
+16,"in addition, a detailed sensitivity analysis of the method will allow us to properly assess the effect of fr and ts errors on the accuracy of the predictions."
+16,these two steps will help to extend our understanding of the capabilities
+17,"remote sens. 2020, 12, 3192 17 of 20 of the “simplified triangle” technique and further establish its robustness and the accuracy of its predictions [60]."
+17,"furthermore, the approach of defining the wet and dry edges, as required to apply the technique, should be further scrutinized, removing any doubt of user subjectivity (e.g., by fully automating the process computationally)."
+17,"last but not least, a method is required to allow estimations of ef and ssm to be made under all weather conditions; a promising avenue in this regard could be the synergetic use of microwave data with optical and tir eo data [48]."
+17,this issue in other ts/vi approaches also requiring the determination of the cold and warm edges has already been explored in many studies.
+17,"yet, some issues remain (e.g., see [50]."
+17,all the above are topics of key importance to be taken up in future studies.
+17,conclusions this work aimed at evaluating the ability of the “simplified triangle” inversion technique to estimate evaporative fraction and surface soil moisture from esa’s sentinel-3 eo data in a typical savannah ecosystem in the mediterranean region.
+17,"for this purpose, the technique was implemented and validated across three selected experimental sites in europe that are part of a global ground measurements network."
+17,"the validation period covered 70 calendar days in summer and early autumn, 2018."
+17,"to the best of our knowledge, the present study represents the first detailed investigation of the accuracy of this technique using sentinel-3 data in a variety of european ecosystems."
+17,"the results obtained based on a series of statistical metrics suggested that the technique is, in most cases, able to predict the ef and ssm with satisfactory accuracy."
+17,"comparisons using the data from all days and all sites showed for ef an rmsd of 0.191, sd of 0.088 and r of 0.721, whereas for ssm, the results were slightly better, with an rmsd of 0.012, sd of 0.010 and r of 0.577."
+17,the prediction accuracy found herein for both ef and ssm is comparable to those reported by other ts//vi methods implemented with dissimilar eo data.
+17,"evidently, the “simplified method” has certain key advantages which make it an attractive choice, and even potentially a prime candidate for operational use."
+17,"undoubtedly, although its applicability was clearly demonstrated in the present study, further investigation is encouraged in different directions in order to establish its prediction accuracy."
+17,further such research will be undertaken by our team in future.
+17,"author contributions: conceptualization, g.p.p.; methodology, g.p.p."
+17,"; i.s. and t.n.c.; data curation, i.s. and g.p.p.; formal analysis, i.s."
+17,"& g.p.p.; resources, i.s. and g.p.p.; software, i.s.; validation, i.s.; writing—original draft preparation g.p.p. writing—review and editing g.p.p., d.h., i.s., and t.n.c.; supervision, g.p.p., d.h. and t.n.c. and d.h."
+17,all authors read and agreed to the published version of the manuscript.
+17,"funding: in the present work, petropoulos contribution has been funded from the marie skłodowska-curie grant agreement envision-eo under the no 752094, part of the european union’s horizon 2020 programme."
+17,special thanks to andrew pavlides for his assistance in preparing the scatterplots.
+17,we wish to thank both the editor and the reviewers for their constructive feedback that helped improving the manuscript.
+17,conflicts of interest: the authors declare no conflict of interest.
+17,references 1.
+17,"watts, j.d."
+17,"; lawrence, r.l."
+17,"; miller, p.r."
+17,"; montagne, c."
+17,monitoring of cropland practices for carbon sequestration purposes in north central montana by landsat remote sensing.
+17,remote sens.
+17,environ.
+17,"2009, 113, 1843–1852."
+17,[crossref] 2.
+17,"wang, j."
+17,"; chen, y."
+17,"; he, t."
+17,"; lv, c."
+17,"; liu, a."
+17,application of geographic image cognition approach in land type classification using hyperion image: a case study in china.
+17,earth obs.
+17,geoinf.
+17,"2010, 12, s212–s222."
+17,[crossref] 3.
+17,"liu, j.-g."
+17,"; xie, z.-h."
+17,improving simulation of soil moisture in china using a multiple meteorological forcing ensemble approach.
+17,hydrol.
+17,earth syst.
+17,"2013, 17, 3355–3369."
+17,[crossref] 4.
+17,"anagnostopoulos, v."
+17,"; petropoulos, g.p."
+17,"; ireland, g."
+17,"; carlson, t.n."
+17,a modernized version of a 1d soil vegetation atmosphere transfer model for improving its future use in land surface interactions studies.
+17,environ.
+17,model.
+17,softw.
+17,"2017, 90, 147–156."
+17,[crossref]
+18,"remote sens. 2020, 12, 3192 18 of 20 5."
+18,"deng, k.a.k."
+18,"; lamine, s."
+18,"; pavlides, a."
+18,"; petropoulos, g.p."
+18,"; bao, y."
+18,"; srivastava, p.k."
+18,"; guan, y."
+18,large scale operational soil moisture mapping from passive mw radiometry: smos product evaluation in europe & usa.
+18,earth obs.
+18,geoinf.
+18,"2019, 80, 206–217."
+18,"sun, h."
+18,a two-source model for estimating evaporative fraction (tmef) coupling priestley-taylor formula and two-stage trapezoid.
+18,remote sens.
+18,"2016, 8, 248."
+18,[crossref] 7.
+18,"tang, r."
+18,"; li, z.l."
+18,"; huo, x."
+18,"; jiang, y."
+18,"; tang, b."
+18,"; wu, h."
+18,a re-examination of two methods for estimating daily evapotranspiration from remotely sensed instantaneous observations.
+18,remote sens.
+18,"2019, 40, 1981–1995."
+18,"bao, y."
+18,"; lin, l."
+18,"; wu, s."
+18,"; kwal deng, k.a."
+18,"; petropoulos, g.p."
+18,surface soil moisture retrievals over partially vegetated areas from the synergy of sentinel-1 and landsat 8 data using a modified water-cloud model.
+18,earth obs.
+18,geoinf.
+18,"2018, 72, 76–85."
+18,[crossref] 9.
+18,"cui, y."
+18,"; ma, s."
+18,"; yao, z."
+18,"; chen, x."
+18,"; luo, z."
+18,"; fan, w.j."
+18,"; hong, y."
+18,developing a gap-filling algorithm using dnn for the ts-vi triangle model to obtain temporally continuous daily actual evapotranspiration in an arid area of china.
+18,remote sens.
+18,"2020, 12, 1121."
+18,[crossref] 10.
+18,"prentice, i.c."
+18,"; liang, x."
+18,"; medlyn, b.e."
+18,"; wang, y.-p."
+18,"reliable, robust and realistic: the three r’s of next-generation land-surface modelling."
+18,atmos.
+18,"2015, 15, 5987–6005."
+18,[crossref] 11.
+18,"yang, t."
+18,"; wan, w."
+18,"; sun, z."
+18,"; liu, b."
+18,"; li, s."
+18,"; chen, x."
+18,comprehensive evaluation of using techdemosat-1 and cygnss data to estimate soil moisture over mainland china.
+18,remote sens.
+18,"2020, 12, 1699."
+18,[crossref] 12.
+18,"petropoulos, g.p."
+18,"; carlson, t.n."
+18,"; griffiths, h."
+18,"turbulent fluxes of heat and moisture at the earth’s land surface: importance, controlling parameters and conventional measurement."
+18,"in remote sensing of energy fluxes and soil moisture content; petropoulos, g.p., ed."
+18,"; taylor and francis: boca raton, fl, usa, 2013; chapter 1; pp."
+18,"3–28, isbn 978-1-4665-0578-0."
+18,"xu, c."
+18,"; qu, j.j."
+18,"; hao, x."
+18,"; cosh, m.h."
+18,"; prueger, j.h."
+18,"; zhu, z."
+18,"; gutenberg, l."
+18,downscaling of surface soil moisture retrieval by combining modis/landsat and in situ measurements.
+18,remote sens.
+18,"2018, 10, 210."
+18,[crossref] 14.
+18,"petropoulos, g.p."
+18,"; carlson, t."
+18,"; wooster, m.j."
+18,"; islam, s."
+18,a review of ts/vi remote sensing based methods for the retrieval of land surface energy fluxes and soil surface moisture.
+18,geogr.
+18,earth environ.
+18,"2009, 33, 224–250."
+18,[crossref] 15.
+18,"gillies, r.r."
+18,"; kustas, w.p."
+18,"; humes, k.s."
+18,a verification of the ‘triangle’ method for obtaining surface soil water content and energy fluxes from remote measurements of the normalized difference vegetation index (ndvi) and surface e.
+18,remote sens.
+18,"1997, 18, 3145–3166."
+18,[crossref] 16.
+18,"de tomás, a."
+18,"; nieto, h."
+18,"; guzinski, r."
+18,"; salas, j."
+18,"; sandholt, i."
+18,"; berliner, p."
+18,validation and scale dependencies of the triangle method for the evaporative fraction estimation over heterogeneous areas.
+18,remote sens.
+18,environ.
+18,"2014, 152, 493–511."
+18,[crossref] 17.
+18,"minacapilli, m."
+18,"; consoli, s."
+18,"; vanella, d."
+18,"; ciraolo, g."
+18,"; motisi, a."
+18,a time domain triangle method approach to estimate actual evapotranspiration: application in a mediterranean region using modis and msg-seviri products.
+18,remote sens.
+18,environ.
+18,"2016, 174, 10–23."
+18,[crossref] 18.
+18,"zawadzki, j.j."
+18,"; przeździecki, k."
+18,"; miatkowski, z."
+18,determining the area of influence of depression cone in the vicinity of lignite mine by means of triangle method and landsat tm/etm+ satellite images.
+18,environ.
+18,manag.
+18,"2016, 166, 605–614."
+18,[crossref] 19.
+18,"piles, m."
+18,"; petropoulos, g.p."
+18,"; sánchez, n."
+18,"; gonzález-zamora, á."
+18,"; ireland, g."
+18,towards improved spatio-temporal resolution soil moisture retrievals from the synergy of smos and msg seviri spaceborne observations.
+18,remote sens.
+18,environ.
+18,"2016, 180, 403–417."
+18,[crossref] 20.
+18,"amani, m."
+18,"; parsian, s."
+18,"; mirmazloumi, s.m."
+18,"; aieneh, o."
+18,two new soil moisture indices based on the nir-red triangle space of landsat-8 data.
+18,earth obs.
+18,geoinform.
+18,"2016, 50, 176–186."
+18,[crossref] 21.
+18,"foucras, m."
+18,"; zribi, m."
+18,"; albergel, c."
+18,"; baghdadi, n."
+18,"; calvet, j.-c."
+18,"; pellarin, t."
+18,estimating 500-m resolution soil moisture using sentinel-1 and optical data synergy.
+18,"water 2020, 12, 866."
+18,[crossref] 22.
+18,"bai, j."
+18,"; cui, q."
+18,"; zhang, w."
+18,"; meng, l."
+18,an approach for downscaling smap soil moisture by combining sentinel-1 sar and modis data.
+18,remote sens.
+18,"2019, 11, 2736."
+18,[crossref] 23.
+18,"wang, k."
+18,"; li, z."
+18,"; cribb, m."
+18,estimation of evaporative fraction from a combination of day and night land surface temperatures and ndvi: a new method to determine the priestley–taylor parameter.
+18,remote sens.
+18,environ.
+18,"2006, 102, 293–305."
+18,[crossref] 24.
+18,"chauhan, n.s."
+18,"; miller, s."
+18,"; ardanuy, p."
+18,spaceborne soil moisture estimation at high resolution: a microwave-optical/ir synergistic approach.
+18,remote sens.
+18,"2003, 24, 4599–4622."
+18,[crossref]
+19,"remote sens. 2020, 12, 3192 19 of 20 25."
+19,"maltese, a."
+19,"; capodici, f."
+19,"; ciraolo, g."
+19,"; la loggia, g."
+19,soil water content assessment: critical issues concerning the operational application of the triangle method.
+19,"sensors 2015, 15, 6699–6718."
+19,[crossref] 26.
+19,european space agency.
+19,"a pathfinder for innovation in earth observation, esa."
+19,available online: http://due.esrin.esa.int/stse/files/document/stse_report_121016.pdf (accessed on 10 april 2020).
+19,"piles, m."
+19,"; camps, a."
+19,"; vall-llossera, m."
+19,"; corbella, i."
+19,"; panciera, r."
+19,"; rüdiger, c."
+19,"; kerr, y.h."
+19,"; walker, j."
+19,downscaling smos-derived soil moisture using modis visible/infrared data.
+19,ieee trans.
+19,geosci.
+19,remote sens.
+19,"2011, 49, 3156–3166."
+19,[crossref] 28.
+19,"carlson, t.n."
+19,"; petropoulos, g.p."
+19,a new method for estimating of evapotranspiration and surface soil moisture from optical and thermal infrared measurements: the simplified triangle.
+19,remote sens.
+19,"2019, 40, 7716–7729."
+19,[crossref] 29.
+19,"fuzzo, d.f.s."
+19,"; carlson, t.n."
+19,"; kourgialas, n.n."
+19,"; petropoulos, g.p."
+19,coupling remote sensing with a water balance model for soybean yield predictions over large areas.
+19,earth sci.
+19,inform.
+19,"2019, 13, 345–359."
+19,[crossref] 30.
+19,"drusch, m."
+19,"; del bello, u."
+19,"; carlier, s."
+19,"; colin, o."
+19,"; fernandez, v."
+19,"; gascón, f."
+19,"; hoersch, b."
+19,"; isola, c."
+19,"; laberinti, p."
+19,"; martimort, p.; et al."
+19,sentinel-2: esa’s optical high-resolution mission for gmes operational services.
+19,remote sens.
+19,environ.
+19,"2012, 120, 25–36."
+19,[crossref] 31.
+19,"guzinski, r."
+19,"; nieto, h."
+19,evaluating the feasibility of using sentinel-2 and sentinel-3 satellites for high-resolution evapotranspiration estimations.
+19,remote sens.
+19,environ.
+19,"2019, 221, 157–172."
+19,[crossref] 32.
+19,"baldocchi, d."
+19,"; valentini, r."
+19,"; running, s."
+19,"; oechel, w.c."
+19,"; dahlman, r."
+19,strategies for measuring and modelling carbon dioxide and water vapour fluxes over terrestrial ecosystems.
+19,chang.
+19,"1996, 2, 159–168."
+19,[crossref] 33.
+19,"aubinet, m."
+19,"; grelle, a."
+19,"; ibrom, a."
+19,"; rannik, ü."
+19,"; moncrieff, j."
+19,"; foken, t."
+19,"; kowalski, a."
+19,"; martin, p."
+19,"; berbigier, p."
+19,"; bernhofer, c.; et al."
+19,estimates of the annual net carbon and water exchange of forests: the euroflux methodology.
+19,"1999, 30, 113–175."
+19,[crossref] 34.
+19,"wilson, k."
+19,"; goldstein, a.h."
+19,"; falge, e."
+19,"; aubinet, m."
+19,"; baldocchi, d."
+19,"; berbigier, p."
+19,"; bernhofer, c."
+19,"; ceulemans, r."
+19,"; dolman, h."
+19,"; field, c.; et al."
+19,energy balance closure at fluxnet sites.
+19,agric.
+19,meteorol.
+19,"2002, 113, 223–243."
+19,[crossref] 35.
+19,"castellvi, f."
+19,"; martínez-cob, a."
+19,"; pérez-coveta, o."
+19,estimating sensible and latent heat fluxes over rice using surface renewal.
+19,agric.
+19,meteorol.
+19,"2006, 139, 164–169."
+19,[crossref] 36.
+19,"north, m.r."
+19,"; petropoulos, g.p."
+19,"; ireland, g."
+19,"; mccalmont, j."
+19,appraising the capability of a land biosphere model as a tool in modelling land surface interactions: results from its validation at selected european ecosystems.
+19,earth syst.
+19,discuss.
+19,"2015, 6, 217–265."
+19,[crossref] 37.
+19,"petropoulos, g.p."
+19,"; ireland, g."
+19,"; griffiths, h.m."
+19,"; kennedy, m.c."
+19,"; ioannou-katidis, p."
+19,"; kalivas, d."
+19,extending the global sensitivity analysis of the simsphere model in the context of its future exploitation by the scientific community.
+19,"water 2015, 7, 2101–2141."
+19,[crossref] 38.
+19,"birks, a."
+19,"; cox, c."
+19,"slstr: algorithm theoretical basis definition document for level 1 observables; science and technology facilities council: swindon, uk, 2011; p."
+19,"philippe goryl, e."
+19,"; buongiorno, a."
+19,"; santella, c."
+19,"; eumetsat vincent fournier-sicre; santacesaria, v."
+19,"university of leicester/nilu sentinel-3 optical products and algorithm definition slstr atbd land surface temperature; esa: paris, france, 2012."
+19,"carlson, t.n."
+19,an overview of the “triangle method” for estimating surface evapotranspiration and soil moisture from satellite imagery.
+19,"sensors 2007, 7, 1612–1629."
+19,[crossref] 41.
+19,"sun, l."
+19,"; sun, r."
+19,"; li, x."
+19,"; liang, s."
+19,"; zhang, r."
+19,monitoring surface soil moisture status based on remotely sensed surface temperature and vegetation index information.
+19,agric.
+19,meteorol.
+19,"2012, 166, 175–187."
+19,[crossref] 42.
+19,"marshall, m."
+19,"; thenkabail, p."
+19,"advantage of hyperspectral eo-1 hyperion over multispectral ikonos, geoeye-1, worldview-2, landsat etm+, and modis vegetation indices in crop biomass estimation."
+19,isprs j.
+19,photogramm.
+19,remote sens.
+19,"2015, 108, 205–218."
+19,[crossref] 43.
+19,"peng, j."
+19,"; loew, a."
+19,evaluation of daytime evaporative fraction from modis toa radiances using fluxnet observations.
+19,remote sens.
+19,"2014, 6, 5959–5975."
+19,[crossref] 44.
+19,"petropoulos, g.p."
+19,"; ireland, g."
+19,"; lamine, s."
+19,"; griffiths, h.m."
+19,"; ghilain, n."
+19,"; anagnostopoulos, v."
+19,"; north, m.r."
+19,"; srivastava, p.k."
+19,"; georgopoulou, h."
+19,operational evapotranspiration estimates from seviri in support of sustainable water management.
+19,earth obs.
+19,geoinform.
+19,"2016, 49, 175–187."
+19,[crossref] 45.
+19,"petropoulos, g.p."
+19,"; ireland, g."
+19,"; srivastava, p.k."
+19,evaluation of the soil moisture operational estimates from smos in europe: results over diverse ecosystems.
+19,ieee sens.
+19,"2015, 15, 5243–5251."
+19,[crossref]
+20,"remote sens. 2020, 12, 3192 20 of 20 46."
+20,"lu, j."
+20,"; tang, r."
+20,"; shao, k."
+20,"; li, z.-l."
+20,"; zhou, g."
+20,assessment of two temporal-information-based methods for estimating evaporative fraction over the southern great plains.
+20,remote sens.
+20,"2015, 36, 1–17."
+20,[crossref] 47.
+20,"zhang, h."
+20,"; gorelick, s.m."
+20,"; avisse, n."
+20,"; tilmant, a."
+20,"; rajsekhar, d."
+20,"; yoon, j."
+20,a new temperature-vegetation triangle algorithm with variable edges (tave) for satellite-based actual evapotranspiration estimation.
+20,remote sens.
+20,"2016, 8, 735."
+20,[crossref] 48.
+20,"lu, l."
+20,"; luo, g.-p."
+20,"; wang, j.-y."
+20,development of an ati-ndvi method for estimation of soil moisture from modis data.
+20,remote sens.
+20,"2014, 35, 3797–3815."
+20,[crossref] 49.
+20,"petropoulos, g.p."
+20,"; ireland, g."
+20,"; barrett, b."
+20,"surface soil moisture retrievals from remote sensing: current status, products & future trends."
+20,"earth parts a/b/c 2015, 83–84, 36–56."
+20,[crossref] 50.
+20,"tang, r."
+20,"; li, z.-l."
+20,"; tang, b."
+20,an application of the ts–vi triangle method with enhanced edges determination for evapotranspiration estimation from modis data in arid and semi-arid regions: implementation and validation.
+20,remote sens.
+20,environ.
+20,"2010, 114, 540–551."
+20,[crossref] 51.
+20,"zhang, d."
+20,"; tang, r."
+20,"; zhao, w."
+20,"; tang, b.-h."
+20,"; wu, h."
+20,"; shao, k."
+20,"; li, z.-l."
+20,surface soil water content estimation from thermal remote sensing based on the temporal variation of land surface temperature.
+20,remote sens.
+20,"2014, 6, 3170–3187."
+20,[crossref] 52.
+20,"deng, k.a.k."
+20,"; lamine, s."
+20,"; pavlides, a."
+20,"; petropoulos, g.p."
+20,"; srivastava, p.k."
+20,"; bao, y."
+20,"; hristopulos, d.t."
+20,"; anagnostopoulos, v."
+20,operational soil moisture from ascat in support of water resources management.
+20,remote sens.
+20,"2019, 11, 579."
+20,[crossref] 53.
+20,"ghulam, a."
+20,"; qin, q."
+20,"; teyip, t."
+20,"; li, z.-l."
+20,modified perpendicular drought index (mpdi): a real-time drought monitoring method.
+20,isprs j.
+20,photogramm.
+20,remote sens.
+20,"2007, 62, 150–164."
+20,[crossref] 54.
+20,"finn, m.p."
+20,"; lewis, m."
+20,"; bosch, d.d."
+20,"; giraldo, m."
+20,"; yamamoto, k."
+20,"; sullivan, d.g."
+20,"; kincaid, r."
+20,"; luna, r."
+20,"; allam, g.k."
+20,"; kvien, c.; et al."
+20,remote sensing of soil moisture using airborne hyperspectral data.
+20,gisci.
+20,remote sens.
+20,"2011, 48, 522–540."
+20,[crossref] 55.
+20,"zhang, j."
+20,"; zhou, z."
+20,"; yao, f."
+20,"; yang, l."
+20,"; hao, c."
+20,validating the modified perpendicular drought index in the north china region using in situ soil moisture measurement.
+20,ieee geosci.
+20,remote sens.
+20,"2014, 12, 542–546."
+20,[crossref] 56.
+20,"kasim, a.a."
+20,"; carlson, t.n."
+20,"; usman, h.s."
+20,limitations in validating derived soil water content from thermal/optical measurements using the simplified triangle method.
+20,remote sens.
+20,"2020, 12, 1155."
+20,[crossref] 57.
+20,"srivastava, p.k."
+20,"; pandey, p.c."
+20,"; petropoulos, g.p."
+20,"; kourgialas, n.n."
+20,"; pandey, v."
+20,"; singh, u."
+20,gis and remote sensing aided information for soil moisture estimation: a comparative study of interpolation techniques.
+20,"resources 2019, 8, 70."
+20,[crossref] 58.
+20,"petropoulos, g."
+20,"; carlson, t."
+20,"; griffiths, h."
+20,turbulent fluxes of heat and moisture at the earth’s land surface.
+20,"in remote sensing of energy fluxes and soil moisture content; informa uk limited: colchester, uk, 2013; pp."
+20,"crago, r.d."
+20,conservation and variability of the evaporative fraction during the daytime.
+20,hydrol.
+20,"1996, 180, 173–194."
+20,[crossref] 60.
+20,"nossent, j."
+20,"; elsen, p."
+20,"; bauwens, w."
+20,sobol’ sensitivity analysis of a complex environmental model.
+20,environ.
+20,model.
+20,softw.
+20,"2011, 26, 1515–1525."
+20,[crossref] © 2020 by the authors.
+20,"licensee mdpi, basel, switzerland."
+20,this article is an open access article distributed under the terms and conditions of the creative commons attribution (cc by) license (http://creativecommons.org/licenses/by/4.0/).

@@ -1,0 +1,606 @@
+page,p
+1,2140 journal of hydrometeorology volume 15 assessing the impact of l-band observations on drought and flood risk estimation: a decision-theoretic approach in an osse environment sujay v.
+1,"kumar science applications international corporation, beltsville, and hydrological sciences laboratory, nasa goddard space flight center, greenbelt, maryland kenneth w."
+1,"harrison earth system science interdisciplinary center, college park, and hydrological sciences laboratory, nasa goddard space flight center, greenbelt, maryland christa d."
+1,"peters-lidard, joseph a."
+1,"santanello jr., and dalia kirschbaum hydrological sciences laboratory, nasa goddard space flight center, greenbelt, maryland (manuscript received 13 december 2013, in final form 2 july 2014) abstract observing system simulation experiments (osses) are often conducted to evaluate the worth of existing data and data yet to be collected from proposed new missions."
+1,"as missions increasingly require a broader ‘‘earth systems’’ focus, it is important that the osses capture the potential benefits of the observations on end-use applications."
+1,"toward this end, the results from the osses must also be evaluated with a suite of metrics that capture the value, uncertainty, and information content of the observations while factoring in both science and societal impacts."
+1,this article presents a soil moisture osse that employs simulated l-band measurements and assesses its utility toward improving drought and flood risk estimates using the nasa land information system (lis).
+1,a decision-theory-based analysis is conducted to assess the economic utility of the observations toward improving these applications.
+1,"the results suggest that the improvements in surface soil moisture, root-zone soil moisture, and total runoff fields obtained through the assimilation of l-band measurements are effective in providing improvements in the drought and flood risk assessments as well."
+1,the decision-theory analysis not only demonstrates the economic utility of observations but also shows that the use of probabilistic information from the model simulations is more beneficial compared to the use of corresponding deterministic estimates.
+1,"the experiment also demonstrates the value of a comprehensive modeling environment such as lis for conducting end-to-end osses by linking satellite observations, physical models, data assimilation algorithms, and end-use application models in a single integrated framework."
+1,introduction rainfall into infiltration and runoff.
+1,"root-zone soil mois- ture has been shown to influence subseasonal prediction the need for accurate estimates of soil moisture con- of precipitation because of its persistent memory over ditions is well established, as it is important for a variety longer time scales (dirmeyer 2003)."
+1,"as a result, nu- of science and applications."
+1,soil moisture influences the merical weather prediction (nwp) and seasonal climate partitioning of heat and moisture at the land–atmosphere prediction models require accurate specification of soil interface (cohen and entekhabi 1999; koster et al. 2004; moisture conditions for forecast initialization.
+1,"in addi- seneviratne et al. 2006) and in the redistribution of tion, estimates of moisture conditions are also required for supporting a variety of societal applications ranging corresponding author address: sujay kumar, hydrological sci- from water resources, agricultural, and natural hazards ences laboratory, nasa gsfc, code 617, greenbelt, md 20771. management to military mobility and famine warning e-mail: sujay.v.kumar@nasa.gov assessments (engman 1991; norbiato et al."
+1,1996; beck doi: 10.1175/jhm-d-13-0204.1 ó 2014 american meteorological society unauthenticated | downloaded 11/23/24 06:06 pm utc
+2,december 2014 kumar et al. 2141 et al.
+2,2000; sheffield et al.
+2,2004; bolten et al. 2010; the truth run after incorporating realistic errors and entekhabi et al.
+2,"2010). limitations of the observing system; 3) an open-loop because of the high spatial and temporal variability of (ol) simulation that employs a set of lower-quality soil moisture, long-term, consistent measurements of soil inputs with a different physical model and without data moisture are not typically available."
+2,passive microwave assimilation; and 4) a data assimilation (da) in- radiometry has been used to generate estimates of near- tegration that assimilates the simulated observations in surface soil moisture from a number of sensors in the past the ol configuration.
+2,"the da and ol integrations are 30 years (jackson 1993; njoku and entekhabi 1996), in- then compared against the known truth from the first cluding the scanning multichannel microwave radiom- component to evaluate the relative impact of simulated eter (smmr; 1978–87), the special sensor microwave observations."
+2,"though a number of studies have examined imager (ssm/i; since 1987), the tropical rainfall mea- the use of such ‘‘classic’’ osses for assessing the worth suring mission (trmm) microwave imager (tmi; since of soil moisture measurements (crow et al. 2001, 2005; 1997), the advanced microwave scanning radiometer reichle et al."
+2,"2008; kumar et al. 2009), they have focused for the earth observing system (amsr-e; 2002–11), primarily on quantifying the improvements to state var- scatterometer-based products from european remote iables such as root-zone soil moisture that are directly sensing satellites 1 and 2 (ers-1 and ers-2; 1991–2006), connected to surface soil moisture measurements."
+2,"few and the advanced scatterometer (ascat; since 2007). studies have focused on quantifying the downstream these sensors provided estimates of soil moisture from improvements in fluxes, runoff, or streamflow, or on x-band (;10 ghz) and c-band (;6 ghz) microwave coupled hydrometeorological prediction from soil mois- radiometers."
+2,"however, none of these sensors were spe- ture measurements, and fewer still have attempted to cifically designed to measure soil moisture until the fully quantify economic benefit (arnold and dey 1986; launch of the soil moisture ocean salinity (smos; since fritz et al."
+2,2008).
+2,"nevertheless, as the justification of late 2009) from the european space agency (esa), missions is often made based on broader societal appli- which provides global observations for soil moisture and cations, it is imperative that the osses also capture the salinity from an l-band radiometer."
+2,"compared to the x potential benefits of observations on actual end-use ap- and c bands, the l-band-based measurements have re- plications."
+2,"here, the end-use applications considered are duced attenuation of the signal under moderate vegeta- droughts and floods. tion conditions and increased penetration depth for the first contribution of this article is the development retrievals."
+2,the upcoming soil moisture active passive of an l-band osse to measure improvement in the esti- (smap) mission (entekhabi et al. 2010) follows a similar mation of the risk of drought and floods.
+2,"drought and approach by integrating an l-band radar and an l-band floods are arguably the two most societally important hy- radiometer as a single observation system by combining drologic applications, impacting famine conditions, water the strengths of active and passive remote sensing."
+2,"this availability, diseases, and wildfires, among others."
+2,"here, approach enables the accuracy of radiometer-only re- the impact of simulated l-band radiometer brightness trievals, at a higher resolution facilitated by the radar. temperature observations on drought and flood risk esti- the smap l-band radiometers are expected to provide mation is quantified."
+2,this work builds off of previous work data products with a 1–3-day global revisit time at spatial making l-band osses more meaningful to hydrology resolutions of about 35 km. and hydrology-related applications.
+2,"as l-band measure- a common approach used to objectively assess the ments are most sensitive to surface soil moisture, l-band potential benefit of satellite observations is through osses (e.g., crow et al. 2001, 2005) initially were observing system simulation experiments (osses). confined to surface soil moisture."
+2,"with the assimilation given the great resources required to implement of l-band measurements into land surface models earth observing system (eos) missions (nrc 2010), (lsms; e.g., balsamo et al."
+2,"2006; reichle et al. 2008), the national aeronautics and space administration osses then were extended to root-zone soil moisture (nasa) and other agencies conduct osses to esti- that is of greater relevance to many applications."
+2,"here, we mate the value of proposed missions (arnold and dey extend l-band osses further by translating improve- 1986), and such experiments have been reported in ments obtained in soil moisture and runoff estimates to preparation for smap (crow et al."
+2,2009; konings 2009; improvements in drought and flood risk estimation.
+2,piles et al.
+2,2009).
+2,"a typical osse includes the follow- the second contribution of the article is the application ing components: 1) a ‘‘nature’’ or a ‘‘truth’’ run, which and demonstration of decision-theory-based osse met- is a free-running simulation of the physical model with rics that address weaknesses of convention metrics."
+2,"the high-quality inputs and without data assimilation; commonly reported metrics, which include rmse and 2) simulated observations, which are generated from anomaly correlation, may not be suited for capturing unauthenticated | downloaded 11/23/24 06:06 pm utc"
+3,2142 journal of hydrometeorology volume 15 impact to hydrological applications.
+3,"for example, im- lsms and supports their application over user-specified plicit in the reporting of rmse is an equal penalty for domains and resolutions supported by the background overestimation and underestimation (berger 1985)."
+3,but data.
+3,"the data assimilation (lis-da) subsystem sup- for floods (and likely droughts), the loss associated with ports multiple data assimilation algorithms that are underestimating severity is not equivalent to that of focused on generating improved estimates of hydro- overestimation (krzysztofowicz 1998, 2010)."
+3,"moreover, logic model states (kumar et al."
+3,2008).
+3,"more recently, in applying rmse, there is no tangible connection with the lis-da subsystem was enhanced through the drought or flood decision-making that is easy to com- incorporation of a suite of radiative transfer models municate with mission decision makers."
+3,"to address this, (lis-rtm) that enables the direct use of raw satellite we demonstrate the application of a simple value-of- observations for data assimilation."
+3,the optimization information (voi) metric that draws from statistical (lis-opt; kumar et al. 2012) and uncertainty esti- decision theory.
+3,"the voi metric considers a range of mation (lis-ue; harrison et al. 2012) subsystems help important (albeit simplified) information, including the in improving the representation of model parameters cost of actions to protect against drought and flood events, and for quantifying uncertainty in model predictions. losses should the events occur, and their probability of finally, during the period of lis development, the ability occurrence."
+3,"here, a straightforward cost–loss model is to directly couple lsms to a number of end-use applica- applied (murphy 1977; katz and murphy 1997), which is tion models has also been developed (lis-app) to enable generic enough to use for a range of applications beyond the estimation of landslide forecasts, food security, mo- droughts and floods."
+3,"the basic approach demonstrated bility assessment, floods, and droughts, among others. could also be tailored to more specific drought and flood the integrated modeling, multiscale resolution, en- decision-making contexts (e.g., water transfers and reser- semble capabilities, and algorithms for exploiting voir management), as demonstrated by thornes and space-based observations make lis an ideal platform stephenson (2001), mullen and buizza (2002), and yuan for conducting osses for hydrology missions."
+3,"in this et al. (2005) for weather forecasting; pagowski and grell article, we employ these capabilities toward an end-to- (2006) for air quality forecasting; roulin (2007) for flood end osse that connects the raw l-band soil moisture forecasting; and mccollor and stull (2008) for reservoir observations to applications of droughts and floods management."
+3,"such ‘‘decision theoretic’’ approaches have through various lis subsystems (lis-rtm, lis-da, been explored for water resources management applica- lis-lsm, and lis-app). tions (james and freeze 1993; hobbs 1997; harrison 2007; wang and harrison 2013). b."
+3,forward microwave emission modeling the article is organized as follows.
+3,"a brief description of the community microwave emission modeling plat- the modeling system, the drought and flood risk assess- form, version 3.0 (cmem; http://old.ecmwf.int/research/ ment methodology, and the decision-theory-based eco- data_assimilation/land_surface/cmem/cmem_source. nomic model is presented in section 2."
+3,this is followed by html) (holmes et al.
+3,"2008; drusch et al. 2009) implemented a description of the experimental setup of the osse in within the lis-rtm subsystem, which includes a first- section 3."
+3,"section 4 presents the results, and the major order t–v forward microwave emission model, is used to conclusions are presented in section 5. simulate l-band radiances."
+3,"this model generates estimates of l-band brightness temperature tb at the top of the at- mosphere using inputs of soil moisture, soil temperature, 2."
+3,"background vegetation water content, and air temperature."
+3,the vari- a.
+3,"land information system able tb,p at the top of the atmosphere (where the subscript p denotes either a horizontal or vertical polarization) is the osse is conducted using the capabilities of the generated as follows: nasa land information system (lis), which is an earth science observation-driven hydrological modeling and tb,p 5ts (12 rp ) exp[2t p /cos(f)] 1tc (1 2 vp ) data assimilation framework."
+3,"lis provides the modeling and computational capabilities to merge observations 3f1 2exp[2t p /cos(f)]gf11 rp exp[2t p /cos(f)]g, and model forecasts to generate spatially and temporally (1) coherent estimates of land surface conditions."
+3,"a sche- matic of the lis framework is shown in fig. 1, which where ts is the surface soil temperature, tc is the canopy includes a comprehensive suite of subsystems to support temperature, rp is the rough surface reflectivity, vp is the land data assimilation."
+3,"the central part of the system is scattering albedo, t p is the vegetation opacity, and f is the lis-lsm subsystem that includes several community the incidence angle."
+3,the vegetation opacity is defined as unauthenticated | downloaded 11/23/24 06:06 pm utc
+4,december 2014 kumar et al.
+4,2143 fig.
+4,illustration of the key lis subsystems that enable the osse.
+4,"lis-lsm represents the land surface modeling subsystem; lis- rtm represents the suite of radiative transfer models; lis-da represents the data assimilation infrastructure; lis-opt and lis-ue represent the optimization and uncertainty estimation subsystems, respectively; and lis-app represents the collection of end-use ap- plication models. a function of a vegetation structure parameter bp and the there are numerous studies, using both synthetic total-column vegetation water content w: and real soil moisture retrievals, that have shown benefits from soil moisture data assimilation (e.g., drusch et al."
+4,2005; reichle et al.
+4,2007; kumar et al. tp 5 bp w .
+4,(2) 2008; liu et al.
+4,2011; peters-lidard et al.
+4,2011; draper et al.
+4,2012).
+4,"these studies demonstrate improvements the rough surface reflectivity is derived from the not only in near-surface soil moisture fields, but also in smooth surface reflectivity rs, as a function of the fields that are connected to the observations through roughness parameter h."
+4,"inputs of soil moisture, soil modeled processes, such as root-zone soil moisture temperature, vegetation water content, and air temper- (kumar et al."
+4,2009).
+4,"all these studies, however, are ature are provided from the lsm, and the default values focused on quantifying the improvements to the provided in cmem are used for the rtm parameters. mean soil moisture fields from da."
+4,"as drought and as many rtm parameters in cmem are defined as a flood risk assessments are derived based on the tails of function of vegetation [using the university of maryland the soil moisture and runoff distribution, the contri- land cover map classification (hansen et al. 2000)], we bution of the soil moisture retrievals for improving the use the same land cover map in the lsm simulations extremes of the distribution must be explicitly quan- to ensure consistency across the lsm and the rtm tified, which is difficult to do in real da systems be- simulations. cause of the lack of sufficient, verifiable measurements of drought and flood risk assessments."
+4,in a more recent c.
+4,"assessment of droughts and flood risks study, kumar et al. (2014) examined the contribution droughts are typically quantified through normalized of passive microwave soil moisture assimilation for indices that capture deficits of the water cycle variable of improving drought estimation in the nldas system. interest (e.g., precipitation, soil moisture, and runoff) this study employed an indirect assessment of the from average conditions (keyantash and dracup 2002). improvements in drought estimates from da by root-zone soil moisture percentile–based drought in- comparing them against drought-area estimates from dices are often used to monitor agricultural drought the u.s."
+4,drought monitor (usdm; svoboda et al.
+4,"(mo 2008), as done in the north american land data 2002) and demonstrated that assimilation was effective assimilation system (nldas) experimental drought in providing improvements in drought estimation at monitor (xia et al."
+4,2014; sheffield et al.
+4,2012).
+4,though the short time scales.
+4,"the synthetic osse setup, on the standard practice is to use such indices to measure other hand, provides the opportunity for direct quan- droughts, they can also be used to quantify wetter-than- tification of the contribution of soil moisture retrievals normal conditions (seiler et al."
+4,2002; zhang et al. 2009) toward improving the extremes of the soil moisture that lead to flood situations.
+4,"in this article, we use root- distribution."
+4,"in the current study, we use the osse zone soil moisture–based percentiles to quantify droughts framework to examine the improvements in drought and and total runoff–based percentiles to quantify flood risks flood risk assessments from the assimilation of l-band of varying severity. measurements."
+4,unauthenticated | downloaded 11/23/24 06:06 pm utc
+5,2144 journal of hydrometeorology volume 15 d.
+5,decision-theory model for economic assessment table 1.
+5,"a 2 3 2 contingency table used in the cost–loss model where c and l represent the costs and losses for a single event for in this study, we use a simple decision-analytic cost– different decisions."
+5,"the number of events is given for tp (true loss-ratio model (murphy 1977; katz and murphy 1997) positives), fp (false positives), fn (false negatives), and tn (true to quantify the economic benefit of l-band soil moisture negatives). observations for improving drought and flood risk esti- drought or mations."
+5,"as described in richardson (2011), the cost– flood occurs loss model assumes that a decision maker has a number yes no of alternative courses of action from which to choose, model forecast and yes ntp (c) nfp (c) and the choice is influenced by the model forecast."
+5,each action taken no nfn (l) ntn (0) course of action has an associated cost that subsequently leads to an economic benefit (if the model prediction that the costs and losses are spatially and temporally actually occurs) or loss (if the model prediction is in- homogeneous.
+5,the voi metric thus provides a measure correct).
+5,the cost–loss model can be represented by a of how much the observations contribute to reducing the 2 3 2 contingency table as shown in table 1.
+5,for ex- overall costs.
+5,"if da always provides a reduction in costs ample, if an event occurs and action to mitigate it was over the ol, then we have voi $ 0 (for voi 5 0, da taken, then a cost of c is incurred."
+5,"on the other hand, if does not add any value to the assimilation product, and the event occurs and no action was taken, a loss of l negative values of voi indicate degradations due to data would be incurred."
+5,note that if mitigation is done based assimilation).
+5,"a larger value of voi indicates a greater on the model forecast, a cost of c will always be incurred, reduction in costs and therefore a greater value of the irrespective of whether the event actually occurred or information. not."
+5,"for the case in which the model forecast correctly decision-theoretic metrics do not suffer from the did not indicate the occurrence of the event and no action weaknesses of conventional accuracy metrics that are was taken (again correctly), no cost is incurred."
+5,the total typically reported in osses.
+5,"rmse, for example, im- number of each event–action pair shown in the contin- plicitly assumes a symmetric loss function (quadratic), gency table is represented by ntp (number of true pos- for which the losses of underestimation are the same as itives where the model correctly forecasts the occurrence those of overestimation (berger 1985)."
+5,"however, in of an event), nfp (number of false positives where the hydrologic applications, the loss function is generally model does not predict the occurrence of an event), nfn believed to be asymmetric (krzysztofowicz 2010), and (number of false negatives where the model incorrectly this is particularly true for extreme events such as predicts an event), and ntn (number of true negatives droughts and floods: viewing the events as binary in where the model correctly predicts a nonevent)."
+5,"the nature, the cost of a false dismissal far exceeds that of numbers ntp and nfp contribute to mitigation costs, a false alarm."
+5,"the application of the cost–loss model nfn contributes to losses, and ntn does not incur any captures this asymmetry."
+5,though cost–loss models additional costs.
+5,"the total cost associated with a partic- have been applied in assessments of the value of ular model forecast is determined as probabilistic hydrometeorological forecasts (mccollor cost 5 ntp c 1 nfp c 1 nfn l . (3) and stull 2008; palmer 2002; richardson 2001), they have not been incorporated into remote sensing osses to our knowledge."
+5,"following table 1, we determine the total cost in- the cost–loss model used here reflects the simplest of curred from both the ol and the da integration on the decision models, representing the decision as binary— basis of how well each integration captures each drought mitigating against a protectable loss (or not) at a cost and flood event indicated by the nature run."
+5,"the voi c—and the event as binary; that is, the event occurs (or from the l-band observations is then determined by not) at some probability p, incurring loss l (see fig."
+5,"the cost incurred for every event is either c or l de- costol 2 costda pending on whether the model integration correctly voi 5 , (4) costol predicted the event or not."
+5,"the cost–loss model could be applied in two different ways: 1) in a ‘‘deterministic’’ where costol and costda are the total costs from the ol manner, where the ensemble-mean estimates from the and the da integration, respectively."
+5,"the two cost terms ol and da integrations can be used in a binary decision are computed by accumulating the costs associated with tree model (where p is always either 0 or 1), and 2) in each drought and flood risk event during the 1980–2012 a ‘‘probabilistic’’ model, where the p is diagnosed from period."
+5,"note that in this simple formulation, we assume the ol or da ensemble."
+5,a separate estimate of drought unauthenticated | downloaded 11/23/24 06:06 pm utc
+6,december 2014 kumar et al.
+6,2145 fig.
+6,"flow diagram for the osse. and flood risk assessment is made based on each en- analysis for research and applications (merra) semble member, and the probability of a drought or land (reichle et al. 2011) data over the same domain. flood-risk event is diagnosed by looking across the en- the merra-land data were time shifted by 7 days semble."
+6,"the incurred cost is computed as the minimum to purposely degrade the skill of the ol integration, of c and pl."
+6,"in other words, the strategy will be to similar to the strategy used in reichle et al."
+6,(2008).
+6,in mitigate (and incur the cost of c) if p .
+6,"c/l and to incur the da integration, the tb,p observations generated the loss if p , c/l."
+6,"the total costs (costol and costda) in step 2 are assimilated into the noah lsm, using are then computed by summing the incurred costs across the ol configuration. all drought or flood risk events, and the value of in- as osse may overestimate the benefit of observations formation metric is computed as in eq."
+6,(4). when the same physical model is used in the nature run and in the data assimilation integration (kumar et al.
+6,"experimental setup 2009), here we use a fraternal-twin setup, where two different models (mosaic and noah) are used in the in this study, the model simulations are conducted on experiments."
+6,"the vertical soil structures of noah and a domain over the continental united states (conus) mosaic are different, with noah using four soil layers of at 35-km spatial resolution, which is the approximate increasing thicknesses of 10, 30, 60, and 100 cm and resolution of the l-band observations from the smap mosaic lsm using three soil layers with thicknesses of 2, radiometer."
+6,"the structure of the osse (shown in fig. 2) 148, and 200 cm."
+6,"all model and assimilation integrations is as follows. are conducted over a 33-yr period spanning 1 january 1) a soil moisture simulation is conducted with the 1980 to 31 december 2012, and the initial states for the mosaic lsm, using the nldas-2 forcing data (xia model simulation on 1 january 1980 are generated by et al. 2012) as meteorological inputs to generate the cycling the respective model two times through this assumed ‘‘true’’ state of the land surface."
+6,"the for- same 33-yr period. ward t–v model described in section 2 is then used to the data assimilation integration employs a one- generate truth l-band tb,p for p 5 [h, v] values. dimensional ensemble kalman filter (enkf) algorithm, 2) l-band tb,p observations are then generated from which is a widely accepted technique for the sequential this simulated truth by introducing realistic retrieval assimilation of hydrologic variables (reichle et al. 2002; errors."
+6,"reichle 2008) and has been used for the assimilation of soil 3) ol and da integrations are conducted using the moisture, skin temperature, and snow observations (crow noah lsm forced with modern-era retrospective and wood 2003; reichle et al."
+6,2007; kumar et al.
+6,2009; unauthenticated | downloaded 11/23/24 06:06 pm utc
+7,2146 journal of hydrometeorology volume 15 table 2.
+7,parameters for perturbations to meteorological forcings and model prognostic variables in the enkf assimilation experiments.
+7,variable perturbation type std dev cross correlations with perturbations in meteorological forcings swy lwy pcp downward shortwave (swy) multiplicative 0.3 1.0 20.5 20.8 downward longwave (lwy) additive 50 w m22 20.5 1.0 0.5 precipitation (pcp) multiplicative 0.50 20.8 0.5 1.0 noah lsm soil moisture states sm1 23 23 total soil moisture: layer 1 (sm1) additive 9.0 3 10 3 m m 1.0 reichle et al.
+7,2010; de lannoy et al.
+7,2012; liu et al.
+7,2013).
+7,"the scaling is performed for the tb values separately for an ensemble size of 100 is used in the simulations, with each polarization. perturbations applied to both meteorological fields and to generate drought and flood risk estimates, model prognostics fields to simulate uncertainty in the percentile-based indices are generated using the root- model estimates."
+7,the parameters used for the perturba- zone soil moisture and total runoff values from the tions are listed in table 2.
+7,"zero-mean, normally distrib- model integrations (fig."
+7,"root-zone soil moisture in uted additive perturbations are applied to the downward this article is defined as the soil moisture content in the longwave radiation forcing, and lognormal multiplicative top 1 m of the soil column, derived as a suitably weighted perturbations with a mean value of 1 are applied to the vertical average over the model layers that are within precipitation and downward shortwave radiation fields. the top 1 m of the soil column, and the total runoff is the surface soil moisture layer in noah is also perturbed defined as the sum of the surface and baseflow runoff with additive noise, as shown in table 2."
+7,note that most components.
+7,the percentiles are calculated as follows.
+7,"da studies in literature use ensemble size on the order of the climatology of the variable (root-zone soil moisture 10–20 (kumar et al. 2008), and here we use a larger en- or total runoff) for the calculation of percentiles is semble size to ensure adequate sampling density in the generated first, for each grid point."
+7,"for each calendar probabilistic cost–loss model computations. day, the daily-averaged variable values across all 33 a set of preprocessing steps is applied to the synthetic years are assembled."
+7,"to improve the sampling density, retrievals generated from the mosaic lsm and t–v for- a moving window of 5 days is employed."
+7,"for example, ward model integration."
+7,"to account for difficulties in re- 3 january climatology is assembled by using all the trieving soil moisture products from microwave sensors, values from 1 to 5 january, across all years (leading to the synthetic observations are masked out when the green 5 3 33 5 165 values for each calendar day)."
+7,"once the vegetation fraction values exceed 0.7 and when snow or climatology for each day is assembled, the daily per- precipitation is present."
+7,"random gaussian noise with an centile values are computed by ranking each day’s root- error standard deviation of 1.3 k is added to the tb,p zone soil moisture or total runoff estimate against the values to mimic measurement uncertainties."
+7,"this error corresponding climatology. standard deviation is chosen as an estimate of the ex- from the time series of percentiles, estimates of drought pected error level in the tb retrievals from the upcoming and flood risk conditions of different intensities are gen- smap spaceborne l-band radiometer (chan et al."
+7,"2012). erated, similar to the convention used by the national data assimilation methods including enkf are only drought mitigation center (ndmc) to produce drought designed to correct random errors in the model back- estimates in the usdm (svoboda et al."
+7,2002).
+7,drought ground and assume that the model and observations are intensity in the usdm is classified into five categories: d0 climatologically unbiased relative to each other.
+7,"a stan- (abnormally dry, root-zone soil moisture percentile # dard practice used in soil moisture data assimilation 30%), d1 (moderate drought, percentile #20%), d2 studies is to scale the observations into the model cli- (severe drought, percentile #10%), d3 (extreme drought, matology prior to da."
+7,"here we adopt the a priori scaling percentile #5%), and d4 (exceptional drought, percentile method of reichle and koster (2004), where the obser- #2%)."
+7,"in addition, we extend this definition to generate vations are scaled to the model’s climatology so that the a similar set of estimates for flood risk conditions of five cumulative distribution functions (cdfs) of the obser- different intensities based on total runoff–based percentiles: vations and the model match for each grid point."
+7,"the f0 (total runoff percentile $70%), f1 (percentile $80%), model cdf is generated from the simulated tb values f2 (percentile $90%), f3 (percentile $95%), from the t–v model based on the noah ol integration. percentile and f4 (percentile $98%)."
+7,the ol and da unauthenticated | downloaded 11/23/24 06:06 pm utc
+8,december 2014 kumar et al. 2147 integration–based drought (d0–d4) and flood risk (f0– f4) estimates are compared against those from the na- ture run to quantify the impacts of l-band observations toward drought and flood risk assessments.
+8,"finally, the cost–loss model described in section 2 is applied to compute the associated incurred costs from the truth run and ol and da integration (fig."
+8,"the value of information metric is then computed using eq. (4), using both deterministic and probabilistic approaches."
+8,in fig.
+8,"the decision tree used in the cost–loss model. the deterministic approach, the associated costs are computed based on the drought and flood risk assess- ments from the root-zone soil moisture percentiles gen- of the da integration, at each grid point."
+8,"thus, positive erated from the ensemble-mean root soil moisture values values of the anomaly-r differences indicate improve- at each grid point."
+8,"in the probabilistic approach, the ments from da and negative values indicate degrada- percentiles (and the drought and flood risk estimates) are tions."
+8,note that no temporal data masking is applied in computed separately for each ensemble member within the computation of the anomaly-r values.
+8,figure 4 in- a grid cell.
+8,"the probability of drought or flood risk p is dicates that there are consistent improvements in the then computed by comparing each ensemble member skill values sfsm, rzsm, and trf fields with data within a grid cell to the corresponding truth estimate assimilation, with more prominent improvements ob- (fig."
+8,the incurred costs are then computed as de- tained in parts of the domain where sufficient retrievals scribed in section 2. are available.
+8,"generally, the improvements are more prominent in the soil moisture fields compared to those obtained in the runoff estimates."
+8,for surface soil mois- 4.
+8,"results and discussion ture, the domain-averaged anomaly r for the ol in- the results presented in this section focus first on the tegration is 0.42, and it improves to 0.51 with da. evaluation of the soil moisture and runoff fields from data similarly, the domain-averaged root-zone anomaly-r assimilation."
+8,"the comparison of the drought and flood values for the root-zone soil moisture improve from 0.50 risk percentiles is presented next, followed by a discus- in the ol integration to 0.56 in the da integration."
+8,"for sion of the value of information from l-band observa- total runoff, the domain-averaged anomaly-r values tions quantified through the cost–loss model. improve marginally to 0.110 (in the da integration) from 0.095 (in the ol integration)."
+8,the improvements a.
+8,"evaluation of soil moisture and runoff fields from in sfsm fields are generally higher than those ob- data assimilation tained in the rzsm and trf fields, consistent with the improvements in the surface soil moisture (sfsm), the results in prior synthetic fraternal-twin experi- root-zone soil moisture (rzsm), and total runoff (trf) ment studies (kumar et al."
+8,"2009, 2012). fields are evaluated by comparing them against the cor- b."
+8,evaluation of drought and flood risk estimates responding fields from the nature run generated using the mosaic lsm.
+8,"since the soil moisture and runoff clima- the root-zone soil moisture– and total runoff–based tologies of the two models differ, the anomaly time series percentiles generated from the ol and da integrations correlation coefficient (instead of rmse) is used to are compared against the corresponding nature-run- quantify the skill of the estimates."
+8,"the anomaly time se- based percentiles, for the five different drought (d0– ries is generated (for each grid point) first by subtracting d4) and flood risk (f0–f4) categories."
+8,"note that the the monthly-mean climatology of each dataset from the percentiles from the ol and da integrations in these corresponding daily-average data, so that the anomalies comparisons are generated using the ensemble-mean represent the daily deviations from the mean seasonal estimates."
+8,"figure 5 shows the domain-averaged rmse, cycle."
+8,"the anomaly time series correlation coefficient bias, and r for the d0–d4 and f0–f4 categories from the (anomaly r) is then computed as the time series correla- ol and da integrations."
+8,the figure also shows the 95% tion coefficient between the daily anomaly estimates and confidence interval for each metric.
+8,"in all comparisons, the corresponding anomalies of the truth data. the da-based estimates show systematic improvements figure 4 presents the improvements in the sfsm, over the ol-based estimates."
+8,"the improvements are rzsm, and trf fields from data assimilation."
+8,"the im- statistically significant in all cases, except in the r com- provements are computed by subtracting the anomaly-r parison for the d4, f2, f3, and f4 categories."
+8,the ol values of the ol integration from the anomaly-r values simulation overestimates the drought risk percentiles and unauthenticated | downloaded 11/23/24 06:06 pm utc
+9,2148 journal of hydrometeorology volume 15 fig.
+9,"improvements in (top) sfsm, (middle) rzsm, and (bottom) trf in terms of anomaly time series correlation coefficients."
+9,the improvements are computed by subtracting the anomaly-r values of the ol integration from that of the da integration. underestimates the flood risk percentiles and da reduces limit the use of l-band observations in the data assimi- the bias errors in both cases.
+9,the skills of the flood risk lation system during large precipitation events.
+9,"the skill assessments in terms of r are low compared to the cor- of the model simulations (in terms of r) reduces for more responding drought assessments, presumably because we severe drought and flood risk categories, but da helps in unauthenticated | downloaded 11/23/24 06:06 pm utc"
+10,december 2014 kumar et al.
+10,2149 fig.
+10,"comparison of domain-averaged rmse, bias, and r for the percentiles of (left) drought and (right) flood risk from the ol and da integrations for five different categories (d0–d4 and f0–f4, respectively)."
+10,error bars indicate the 95% confidence intervals for each metric. improving the skills across all categories.
+10,"the evaluation improving the estimates of drought duration, both for shown in fig. 4 shows the skill improvement due to da short-term and longer-term droughts."
+10,"the improvements across the full dynamic range of modeled soil moisture once again reduce for more severe drought categories. and runoff, whereas the comparison shown in fig. 5 is finally, the improvements in estimating the onset of effectively an evaluation of the influence of da toward drought is computed by estimating the number of times improving the tails of the soil moisture and runoff dis- the ol–da integration is in agreement with the truth tributions."
+10,"the results show that da is effective in pro- estimate of drought onset, and the comparison is shown in ducing improvements in the extremes of the soil moisture fig. 6 (bottom)."
+10,"this metric essentially shows the proba- and runoff distribution, which is important for applica- bility of detection of drought onset from ol and da in- tions such as drought and flood risk estimation. tegrations compared to the truth estimate."
+10,"as the figure figure 6 provides an evaluation of the influence of ob- shows, assimilation systematically improves the probabil- servations toward improving the representation of drought ity of detection for the onset of drought, across the drought extent, duration, and onset over the modeling domain. categories, and for droughts of different durations."
+10,figure 6 (top) shows the rmse of the percentage area a comparison of the spatial distribution of drought and under drought from the ol and da against the truth run flood risk intensities is presented in fig. 7 for three rep- for each drought category.
+10,"the errors in percentage area resentative cases in years 1989, 2003, and 2011."
+10,"in the estimates are systematically reduced through data assimi- august 1989 case, the ol-based estimate underestimates lation, although the improvements also reduce for more the intensity of drought over areas of the midwest whereas severe drought categories."
+10,the duration of a drought (in da improves these representations.
+10,"in the july 2003 case, terms of number of days) is calculated for drought events however, the ol overestimates the severity of drought in that last for more than 1, 3, and 6 months in each drought the high plains and the southeast, and da helps to correct category."
+10,"for each drought event, the fraction of the du- these high biases."
+10,"similarly, in the may 2011 case, the low ration that is correctly predicted in the ol and da in- biases in the ol drought estimates over texas are im- tegrations is then computed."
+10,the average fraction of proved by da.
+10,"similar patterns of improvements can also correctly predicted duration is shown in fig. 6 (middle). be observed in the flood risk assessments, though they are the results show that da contributes to systematically generally smaller compared to the patterns of unauthenticated | downloaded 11/23/24 06:06 pm utc"
+11,2150 journal of hydrometeorology volume 15 connected to the surface soil moisture measurements be- ing assimilated.
+11,"in the august 1989 comparisons, ol- based flood risk assessments show underestimations over the lower mississippi basin, and da helps to reduce these errors."
+11,"generally, no major improvements in the flood risk assessments in the east and southeast are seen (july 2003, for example) as the retrievals are often excluded in the data assimilation system over these areas."
+11,"in all these cases, outside conus, the representations of drought and flood risks are improved over mexico in the da, but no added impact is observed over canada."
+11,these artifacts are again directly related to the availability of l-band observations over these areas (as evident from the pat- terns of skill improvements seen in fig. 4) and similar to prior studies (reichle et al.
+11,2007; kumar et al.
+11,"2009, 2012). c."
+11,analysis of the voi of observation through the cost–loss model the voi metric [eq. (4)] is computed using both de- terministic and probabilistic approaches for different drought (d0–d4) and flood risk (f0–f4) categories.
+11,"in each computation, the cost–loss (c/l) ratios are varied from 0.01 to 0.9 to determine the trade-off in voi as a function of c/l ratio."
+11,figure 8 (top) shows voi as a function of c/l ratio from the deterministic cost–loss model.
+11,"the behavior of voi is similar for both applica- tions, with the added value of observations reducing with increasing severity of drought (from d0 to d4) and flood risks (from f0 to f4)."
+11,"for example, in the deterministic drought example (fig. 8, top left), da leads to approxi- mately 20% ‘‘cost savings’’ (voi) for the d0 category for a c/l ratio of 0.01."
+11,the voi reduces to approximately 8% for a c/l ratio of 0.9.
+11,"the flood risk example (fig. 8, top right) also shows a similar behavior, with the cost savings varying from approximately 9% to 4%."
+11,"note that in all four plots of fig. 8, the voi values are always greater than 0, indicating that da provides sys- tematic improvements over ol in all drought and flood risk cases."
+11,"the sensitivity of voi to the c/l ratio is small, for any given drought or flood risk category, as indicated by the relatively flat lines in fig. 8 (top)."
+11,"comparison of the (top) drought extent (represented by percentage area under drought), (middle) drought duration (rep- generally, voi reduces with increasing c/l ratio."
+11,"note resented by the fraction of ‘‘true’’ drought duration correctly sim- that in this deterministic case, the differences in accu- ulated), and (bottom) drought onset (represented by the probability mulated cost (for a particular drought or flood risk cat- of detection of drought onset). egory) for different c/l ratios are purely from the reduction of nfn as a result of da."
+11,reduction of nfn events have a greater effect in overall cost savings for the improvements in the drought estimates.
+11,"this is consistent lower c/l ratios since the losses are much higher than with the trends in fig. 5, which show smaller improvements mitigation costs (for low c/l values). from da over ol, as the flood risk assessments are based figure 8 (bottom) shows a similar trade-off in voi to on the total runoff, whereas the drought estimates are c/l ratio, but using the probabilistic model, where the based on root-zone soil moisture, a variable more directly probability of drought or flood risk is assessed from the unauthenticated | downloaded 11/23/24 06:06 pm utc"
+12,december 2014 kumar et al.
+12,"comparison of the drought and flood risk percentile maps from the (left) nature run, (middle) ol, and (right) da for three representative cases."
+12,2151 unauthenticated | downloaded 11/23/24 06:06 pm utc
+13,2152 journal of hydrometeorology volume 15 fig.
+13,"voi for the (left) drought and (right) flood risk assessments as a function of the c/l ratio, computed using the (top) ensemble mean and (bottom) full ensemble. ensemble."
+13,"generally, the voi estimates are larger than through improving the probability of detection and re- those obtained from the deterministic model, indicating ducing the false alarms of various events. that the use of the ensemble-mean estimates (used in the deterministic model) leads to loss of valuable in- 5."
+13,summary formation that is especially important for capturing ex- treme events such as droughts and floods.
+13,"compared to osses, typically conducted to assess the worth of the ensemble-mean-based voi estimates, fig. 8 (bot- existing data and data yet to be collected from pro- tom) indicates that there is a trade-off in voi to c/l posed new missions, are often focused on quantifying ratio."
+13,the value of information is high for low values of the impact of observations on model states alone.
+13,"to c/l ratio, whereas the value of information tends to be realize the significant real-world benefit and full po- low for the middle c/l ratio range."
+13,"for the low c/l tential of the missions, it is important that the osses values, there is a greater reduction in the total costs from also capture the potential benefit of these observations increasing ntp and reducing nfp through da."
+13,for the on end-use applications.
+13,"in addition, the results from high c/l ratios, the primary contributions to the cost the osses must be evaluated with a variety of metrics savings are from reducing the number of nfn events that capture the value, uncertainty, and cost benefit through da."
+13,"these artifacts cannot be represented in of the observations while factoring in both science the deterministic model where the ntp, nfp, and nfn and societal impacts."
+13,"in this article, we present a are constant for all c/l ratio values for a given category, soil moisture osse that employs simulated l-band whereas the probabilistic model helps in improving this brightness temperature measurements toward im- binary representation."
+13,the voi trade-off behavior is proving drought and flood risk estimation.
+13,"a decision- similar for both applications, with the flood risk maps theory-based analysis is used to provide an assessment showing slightly increased voi for low c/l ratios of the economic utility of the l-band observations to- compared to the drought cases."
+13,these artifacts are again ward these applications. related to how the da helps in improving the respective the osse presented in this manuscript uses a fraternal- application (drought or flood risk) representation twin experiment setup where two different lsms are used unauthenticated | downloaded 11/23/24 06:06 pm utc
+14,december 2014 kumar et al. 2153 to conduct the nature run (mosaic lsm) and the ol and with spatially and temporally homogeneous assump- da experiments (noah lsm).
+14,a first-order t–v for- tions of cost and loss values.
+14,"given more knowledge of ward microwave emission model is used to simulate the practices for particular applications, the model could l-band brightness temperature observations."
+14,these ob- be improved. servations are assimilated into a noah lsm configuration computer systems used for the development of using a 1d enkf algorithm.
+14,the modeling domain osses are evolving into more formal osse computa- roughly covers the continental united states for the time tional environments.
+14,such systems are in various stages period of 1980–2012.
+14,"based on the simulated soil moisture of development for atmospheric and oceanic osses and runoff fields, estimates of drought and flood risk (lee et al."
+14,2010; tanelli et al.
+14,2012; halliwell et al.
+14,2014). conditions are generated using percentile-based indices.
+14,similarly the nasa lis has evolved into a computa- the associated incurred costs for the ol and da in- tional platform for terrestrial hydrology osses.
+14,"in ad- tegrations for the drought and flood risk assessments are dition to supporting the interoperable use of community then estimated using a cost–loss model, and a value of land surface models in high-performance-computing information metric is computed that estimates the con- environments, the more recent advancements in lis tribution of l-band observations toward reducing the ol have added a wide range of data assimilation algorithms costs. (state, parameter, and bayesian-based uncertainty esti- the results clearly demonstrate that the assimilation of mation), forward radiative transfer models, and coupling l-band observations provides systematic improvements to atmospheric and application models."
+14,"the experiment in the surface soil moisture, root-zone soil moisture, and presented in this article demonstrates the end-to-end ca- total runoff estimates, though the improvements are pability of the lis osse environment, linking simulated larger in the surface and root-zone soil moisture estimates, satellite observations to soil moisture–based drought and as these variables are more directly connected to the flood risk estimates, and, further with a simple decision surface soil moisture observations being assimilated."
+14,"the model, to drought and flood risk decision-making under improvements in root-zone soil moisture and total runoff uncertainty. also translate to systematic improvements in the drought and flood risk assessments, which are derived using the acknowledgments."
+14,"we gratefully acknowledge the extremes of the root-zone soil moisture and total runoff financial support from the nasa earth science tech- distribution, respectively."
+14,"the skill of the simulations re- nology office (esto) [advanced information systems duce for more severe drought and flood risk categories, as technology (aist) program award aist-11-0013]. their frequency is lower and timing more difficult to cap- computing was supported by the resources at the ture."
+14,"nevertheless, da provides improvements in all nasa center for climate simulation (nccs)."
+14,the drought and flood risk categories.
+14,nldas-2 forcing data used in this effort were acquired an assessment of the trade-off in voi for various as part of the activities of nasa’s science mission cost–loss ratios is estimated using deterministic and directorate and are archived and distributed by the probabilistic cost–loss models.
+14,"in the deterministic goddard earth sciences (ges) data and information model, the ensemble-mean values based on the ol and services center (disc)."
+14,we are grateful to dr.
+14,gabrielle da integrations are used to estimate the drought and de lannoy for assistance with the radiative transfer flood risk percentiles and to compute the associated in- modeling components of this work. curred costs.
+14,"in the probabilistic model, the full ensem- ble information from these integrations is used to references estimate an ensemble of drought and flood risk assess- ments."
+14,"the cost–loss model then computes a probability arnold, c., and c."
+14,"dey, 1986: observing-systems simulation experiments: past, present, and future."
+14,"meteor. of drought or flood risk from this ensemble and uses it to soc., 67, 687–695, doi:10.1175/1520-0477(1986)067,0687: compute the associated costs."
+14,the results indicate that ossepp.2.0.
+14,"co;2. the use of the ensemble mean (in the deterministic balsamo, g., j.-f."
+14,"mahfouf, and g."
+14,"deblonde, 2006: a global root- model) leads to loss of valuable information and un- zone soil moisture analysis using simulated l-band brightness derestimation of the contribution of observations."
+14,the temperature in preparation for the hydros satellite mission. probabilistic model also helps in capturing the im- j.
+14,"hydrometeor., 7, 1126–1146, doi:10.1175/jhm525.1. provements obtained because of increased probability beck, l., b."
+14,"lobitz, and b."
+14,"wood, 2000: remote sensing and human health: new sensors and new opportunities."
+14,emerging of detection and reduced false alarms of drought and infect.
+14,"dis., 6 (3), 217–227."
+14,"[available online at http://wwwnc. flood events through da, some of which cannot be cdc.gov/eid/article/6/3/00-0301_article.] represented through the binary deterministic model."
+14,"berger, j., 1985: statistical decision theory and bayesian analysis."
+14,"note that the cost–loss model used here is very simple, 2nd ed."
+14,"springer-verlag, 617 pp."
+14,unauthenticated | downloaded 11/23/24 06:06 pm utc
+15,"2154 journal of hydrometeorology volume 15 bolten, j., w."
+15,"crow, x."
+15,"zhan, t."
+15,"jackson, and c."
+15,"reynolds, 2010: halliwell, g."
+15,"r., jr., a."
+15,"srinivasan, v."
+15,"kourafalou, h."
+15,"yang, evaluating the utility of remotely sensed soil moisture re- d."
+15,"willey, m."
+15,"le hénaff, and r."
+15,"atlas, 2014: rigorous eval- trievals for operational agricultural drought monitoring."
+15,ieee uation of a fraternal twin ocean osse system for the open j.
+15,topics appl.
+15,earth obs.
+15,"remote sens., 3, 57–66, gulf of mexico."
+15,atmos.
+15,"oceanic technol., 31, 105–130, doi:10.1109/jstars.2009.2037163. doi:10.1175/jtech-d-13-00011.1."
+15,"chan, s., e."
+15,"njoku, and a."
+15,"colliander, 2012: level 1c radiometer hansen, m., r."
+15,"defries, j."
+15,"townshend, and r."
+15,"sohlberg, 2000: data product (l1c_tb)."
+15,"algorithm theoretical basis doc., global land cover classification at 1 km spatial resolution us- jet propulsion laboratory, pasadena, ca, 21 pp. ing a classification tree approach."
+15,"remote sens., 21, cohen, j., and d."
+15,"entekhabi, 1999: eurasian snow cover variability 1331–1364, doi:10.1080/014311600210209. and northern hemisphere climate predictability."
+15,geophys.
+15,"harrison, k., 2007: two-stage decision making under uncertainty res."
+15,"lett., 26, 345–348, doi:10.1029/1998gl900321. and stochasticity."
+15,"water resour., 30, 641–664, doi:10.1016/ crow, w., and e."
+15,"wood, 2003: the assimilation of remotely sensed j.advwatres.2006.03.006. soil brightness temperature imagery into a land surface model ——, s."
+15,"kumar, c."
+15,"peters-lidard, and j."
+15,"santanello, 2012: quan- using ensemble kalman filtering: a case study based on tifying the change in soil moisture modeling uncertainty from estar measurements during sgp97."
+15,"water resour., remote sensing observations using bayesian inference tech- 26, 137–149, doi:10.1016/s0309-1708(02)00088-x. niques."
+15,water resour.
+15,"res., 48, w11514, doi:10.1029/ ——, m."
+15,"drusch, and e."
+15,"wood, 2001: an observation system 2012wr012337. simulation experiment for the impact of land surface hetero- hobbs, b., 1997: bayesian methods for analyzing climate change geneity on amsr-e soil moisture retrieval."
+15,ieee trans. and water resources uncertainties.
+15,environ.
+15,"manage., 49, geosci."
+15,"remote sens., 39, 1622–1632, doi:10.1109/36.942540. 53–72, doi:10.1006/jema.1996.0116. ——, and coauthors, 2005: an observing system simulation exper- holmes, t., m."
+15,"drusch, j."
+15,"wigneron, and r."
+15,"jeu, 2008: a global iment for hydros radiometer-only soil moisture products. simulation of microwave emission: error structures based on ieee trans."
+15,geosci.
+15,"remote sens., 43, 1289–1303, doi:10.1109/ output from ecmwf’s operational integrated forecast system."
+15,tgrs.2005.845645.
+15,ieee trans.
+15,geosci.
+15,"remote sens., 46, 846–856, doi:10.1109/ ——, r."
+15,"reichle, r."
+15,"koster, and j."
+15,"kimball, 2009: land data as- tgrs.2007.914798. similation activities in preparation of the nasa soil moisture jackson, t."
+15,"j., 1993: measuring surface soil moisture using passive active passive (smap) mission."
+15,"extended abstracts, fifth microwave remote sensing."
+15,hydrol.
+15,"processes, 7, 139–152, wmo symp. on data assimilation, melbourne, australia, doi:10.1002/hyp.3360070205."
+15,"wmo, 16–17."
+15,"[available online at https://www.wmo.int/pages/ james, b., and r."
+15,"freeze, 1993: the worth of data in predicting prog/arep/wwrp/new/documents/wwrp_5_wmo_td_no_ aquitard continuity in hydrogeological design."
+15,water resour.
+15,1549.pdf.]
+15,"res., 29, 2049–2065, doi:10.1029/93wr00547."
+15,"de lannoy, g., r."
+15,"reichle, k."
+15,"arsenault, p."
+15,"houser, s."
+15,"kumar, katz, r., and a."
+15,"murphy, 1997: economic value of weather and n."
+15,"verhoest, and v."
+15,"pauwels, 2012: multiscale assimilation of climate forecasts."
+15,"cambridge university press, 240 pp."
+15,"advanced microwave scanning radiometer–eos snow wa- keyantash, j., and j."
+15,"dracup, 2002: the quantification of drought: ter equivalent and moderate resolution imaging spectror- an evaluation of drought indices."
+15,meteor.
+15,"soc., 83, adiometer snow cover fraction observations in northern 1167–1180."
+15,colorado.
+15,water resour.
+15,"res., 48, w01522, doi:10.1029/ konings, a., 2009: an observing system simulation experiment for 2011wr010588. soil moisture measurements from the smap radiometer."
+15,"dirmeyer, p., 2003: the role of the land surface background state in ph.d. thesis, massachusetts institute of technology, 61 pp. climate predictability."
+15,"hydrometeor., 4, 599–610, doi:10.1175/ [available online at http://hdl.handle.net/1721.1/70758.]"
+15,"1525-7541(2003)004,0599:trotls.2.0."
+15,"koster, r., and coauthors, 2004: realistic initialization of land draper, c., r."
+15,"reichle, g."
+15,"de lannoy, and q."
+15,"liu, 2012: assimi- surface states: impacts on subseasonal forecast skill."
+15,"hydro- lation of passive and active microwave soil moisture retrievals. meteor., 5, 1049–1063, doi:10.1175/jhm-387.1."
+15,geophys.
+15,"lett., 39, l04401, doi:10.1029/2011gl050655."
+15,"krzysztofowicz, r., 1998: probabilistic hydrometeorological forecasts: drusch, m., e."
+15,"wood, and h."
+15,"gao, 2005: observation operators for toward a new era in operational forecasting."
+15,"meteor. the direct assimilation of trmm microwave imager retrieved soc., 79, 243–251, doi:10.1175/1520-0477(1998)079,0243: soil moisture."
+15,geophys.
+15,"lett., 32, l15403, doi:10.1029/ phftan.2.0."
+15,"2005gl023623. ——, 2010: decision criteria, data fusion and prediction calibra- ——, t."
+15,"holmes, p. de rosnay, and g."
+15,"balsamo, 2009: comparing tion: a bayesian approach."
+15,hydrol.
+15,"j., 55, 1033–1050, the era-40-based l-band brightness temperatures with doi:10.1080/02626667.2010.505894."
+15,"skylab observations: a calibration/validation study using the kumar, s., r."
+15,"reichle, c."
+15,"peters-lidard, r."
+15,"koster, x."
+15,"zhan, community microwave emission model."
+15,"hydrometeor., 10, w."
+15,"crow, j."
+15,"eylander, and p."
+15,"houser, 2008: a land surface 213–226, doi:10.1175/2008jhm964.1. data assimilation framework using the land information engman, e., 1991: applications of microwave remote sensing of soil system: description and applications."
+15,"water resour., 31, moisture for water resources and agriculture."
+15,"remote sens. 1419–1432, doi:10.1016/j.advwatres.2008.01.013."
+15,"environ., 35, 213–226, doi:10.1016/0034-4257(91)90013-v. ——, ——, r."
+15,"koster, w."
+15,"crow, and c."
+15,"peters-lidard, 2009: role entekhabi, d., and coauthors, 2010: the soil moisture active of subsurface physics in the assimilation of surface soil moisture passive (smap) mission."
+15,"ieee, 98, 704–716, doi:10.1109/ observations."
+15,"hydrometeor., 10, 1534–1547, doi:10.1175/ jproc.2010.2043918."
+15,2009jhm1134.1.
+15,"fritz, s., r."
+15,"scholes, m."
+15,"obsersteiner, j."
+15,"bouma, and b."
+15,"reyes, ——, ——, k."
+15,"harrison, c."
+15,"peters-lidard, s."
+15,"yatheendradas, and 2008: a conceptual framework for assessing the benefits of j."
+15,"santanello, 2012: a comparison of methods for a priori bias a global earth observation system of systems."
+15,ieee syst.
+15,"j., 2, correction soil moisture data assimilation."
+15,water resour.
+15,"res., 338–348, doi:10.1109/jsyst.2008.926688."
+15,"48, w03515, doi:10.1029/2010wr010261."
+15,unauthenticated | downloaded 11/23/24 06:06 pm utc
+16,"december 2014 kumar et al. 2155 ——, and coauthors, 2014: assimilation of remotely sensed soil 130, 103–114, doi:10.1175/1520-0493(2002)130,0103: moisture and snow depth retrievals for drought estimation."
+16,hdawte.2.0.
+16,"hydrometeor., doi:10.1175/jhm-d-13-0132.1, in press. ——, r."
+16,"koster, p."
+16,"liu, s."
+16,"mahanama, e."
+16,"njoku, and lee, m., r."
+16,"weidner, z."
+16,"qu, k."
+16,"bowman, and a."
+16,"eldering, 2010: an m."
+16,"owe, 2007: comparison and assimilation of global soil atmospheric science observing system simulation experiment moisture retrievals from the advanced microwave scanning (osse) environment."
+16,"earth science technology forum, ar- radiometer for the earth observing system (amsr-e) lington, va, nasa, 7 pp."
+16,[available online at http://trs-new. and the scanning multichannel microwave radiometer jpl.nasa.gov/dspace/bitstream/2014/41601/1/10-1804.pdf.]
+16,(smmr).
+16,geophys.
+16,"res., 112, d09108, doi:10.1029/ liu, q., and coauthors, 2011: the contributions of precipitation 2006jd008033. and soil moisture observations to the skill of soil moisture ——, w."
+16,"crow, r."
+16,"koster, h."
+16,"sharif, and s."
+16,"mahanama, 2008: estimates in a land data assimilation system."
+16,"hydrometeor., contribution of soil moisture retrievals to land data assimi- 12, 750–765, doi:10.1175/jhm-d-10-05000.1. lation products."
+16,geophys.
+16,"lett., 35, l01404, doi:10.1029/ liu, y., c."
+16,"peters-lidard, s."
+16,"kumar, j."
+16,"foster, m."
+16,"shaw, y."
+16,"tian, 2007gl031986. and g."
+16,"fall, 2013: assimilating satellite-based snow depth ——, s."
+16,"kumar, s."
+16,"mahanama, r."
+16,"koster, and q."
+16,"liu, 2010: as- and snow cover products for improving snow predictions similation of satellite-derived skin temperature observations in alaska."
+16,"water resour., 54, 208–227, doi:10.1016/ into land surface models."
+16,"hydrometeor., 11, 1103–1122, j.advwatres.2013.02.005. doi:10.1175/2010jhm1262.1."
+16,"mccollor, d., and r."
+16,"stull, 2008: hydrometeorological short-range ——, r."
+16,"koster, g."
+16,"de lannoy, b."
+16,"forman, q."
+16,"liu, s."
+16,"mahanama, ensemble forecasts in complex terrain."
+16,part ii: economic and a.
+16,"toure, 2011: assessment and enhancement of merra evaluation."
+16,"forecasting, 23, 533–556, doi:10.1175/ land surface hydrology estimates."
+16,"climate, 24, 6322–6338, 2008waf2007063.1. doi:10.1175/jcli-d-10-05033.1."
+16,"mo, k., 2008: model-based drought indices over the united states."
+16,"richardson, d., 2001: measures of skill and value of ensemble j."
+16,"hydrometeor., 9, 1212–1230, doi:10.1175/2008jhm1002.1. prediction systems, their interrelationship and the effect of mullen, s., and r."
+16,"buizza, 2002: the impact of horizontal resolu- ensemble size."
+16,quart.
+16,meteor.
+16,"soc., 127, 2473–2489, tion and ensemble size on probabilistic forecasts of pre- doi:10.1002/qj.49712757715. cipitation by the ecmwf ensemble prediction system."
+16,"wea. ——, 2011: economic value and skill."
+16,"forecast verification: a prac- forecasting, 17, 173–191, doi:10.1175/1520-0434(2002)017,0173: titioner’s guide in atmospheric science, 2nd ed."
+16,jolliffe tiohra.2.0.
+16,co;2. and d.
+16,"stephenson, eds., john wiley & sons, 167–184, murphy, a., 1977: the value of climatological, categorical and doi:10.1002/9781119960003.ch9. probabilistic forecasts in the cost–loss ratio situation."
+16,"roulin, e., 2007: skill and relative economic value of medium wea."
+16,"rev., 105, 803–816, doi:10.1175/1520-0493(1977)105,0803: range hydrological ensemble predictions."
+16,hydrol.
+16,earth syst.
+16,tvocca.2.0.
+16,"sci., 11, 725–737, doi:10.5194/hess-11-725-2007."
+16,"njoku, e."
+16,"g., and d."
+16,"entekhabi, 1996: passive microwave remote seiler, r., m."
+16,"hayes, and l."
+16,"bressan, 2002: using the standardized sensing of soil moisture."
+16,"hydrol., 184, 101–130, doi:10.1016/ precipitation index for flood risk monitoring."
+16,"climatol., 0022-1694(95)02970-2. 22, 1365–1376, doi:10.1002/joc.799."
+16,"norbiato, d., m."
+16,"borga, s."
+16,"esposti, e."
+16,"gaume, and s."
+16,"anquetin, seneviratne, s., d."
+16,"lüthi, m."
+16,"litschi, and c."
+16,"schär, 2006: land– 1996: flash flood warning based on rainfall thresholds and atmosphere coupling and climate change in europe."
+16,"nature, soil moisture conditions: an assessment for gauged and un- 443, 205–209, doi:10.1038/nature05095. gauged basins."
+16,"hydrol., 362, 274–290, doi:10.1016/ sheffield, j., g."
+16,"goteti, f."
+16,"wen, and e."
+16,"wood, 2004: a simu- j.jhydrol.2008.08.023."
+16,"nrc, 2010: controlling cost growth of nasa earth and space lated soil moisture based drought analysis for the united science missions."
+16,"national academies press, 64 pp."
+16,states.
+16,geophys.
+16,"res., 109, d24108, doi:10.1029/ pagowski, m., and g."
+16,"grell, 2006: ensemble-based ozone forecasts: 2004jd005182."
+16,skill and economic value.
+16,geophys.
+16,"res., 111, d23s30, ——, y."
+16,"xia, l."
+16,"luo, e."
+16,"wood, m."
+16,"ek, and k."
+16,"mitchell, 2012: north doi:10.1029/2006jd007124."
+16,"american land data assimilation system (nldas): a palmer, t., 2002: the economic value of ensemble forecasts as framework for merging model and satellite data for improved a tool for risk assessment: from days to decades."
+16,quart.
+16,roy. drought monitoring.
+16,remote sensing of drought: innovative meteor.
+16,"soc., 128, 747–774, doi:10.1256/0035900021643593."
+16,"monitoring approaches, b."
+16,"wardlow, m."
+16,"anderson, and peters-lidard, c., s."
+16,"kumar, d."
+16,"mocko, and y."
+16,"tian, 2011: esti- j."
+16,"verdin, eds., taylor and francis, 227–260. mating evapotranspiration with land data assimilation sys- svoboda, m., and coauthors, 2002: the drought monitor."
+16,bull. tems.
+16,hydrol.
+16,"processes, 25, 3979–3992, doi:10.1002/hyp.8387."
+16,meteor.
+16,"soc., 83, 1181–1190."
+16,"piles, m., d."
+16,"entekhabi, and a."
+16,"camps, 2009: a change detection tanelli, s., and coauthors, 2012: integrated instrument simulator suites algorithm for retrieving high-resolution soil moisture from for earth science."
+16,"extended abstracts, 2012 asia–pacific remote smap radar and radiometer observations."
+16,ieee trans.
+16,geosci.
+16,"sensing, kyoto, japan, international society for optics and remote sens., 47, 4125–4131, doi:10.1109/tgrs.2009.2022088."
+16,"photonics, abstract 8529-13, 91."
+16,[available online at http://spie.
+16,"reichle, r., 2008: data assimilation methods in the earth org/documents/conferencesexhibitions/ae12-abstracts.pdf.] sciences."
+16,"water resour., 31, 1411–1418, doi:10.1016/ thornes, j., and d."
+16,"stephenson, 2001: how to judge the quality and j.advwatres.2008.01.001. value of weather forecast products."
+16,meteor.
+16,"appl., 8, 307–314, ——, and r."
+16,"koster, 2004: bias reduction in short records of sat- doi:10.1017/s1350482701003061. ellite soil moisture."
+16,geophys.
+16,"lett., 31, l19501, doi:10.1029/ wang, h., and k."
+16,"harrison, 2013: bayesian approach to contaminant 2004gl020938. source characterization in water distribution systems: adaptive ——, d."
+16,"mclaughlin, and d."
+16,"entekhabi, 2002: hydrologic data sampling framework."
+16,stochastic environ.
+16,"risk assess., 27, assimilation with the ensemble kalman filter."
+16,"rev., 1921–1928, doi:10.1007/s00477-013-0727-9."
+16,unauthenticated | downloaded 11/23/24 06:06 pm utc
+17,"2156 journal of hydrometeorology volume 15 xia, y., m."
+17,"ek, h."
+17,"wei, and j."
+17,"meng, 2012: comparative analysis yuan, h., s."
+17,"mullen, x."
+17,"gao, s."
+17,"sorooshian, j."
+17,"du, and h.-m. of relationships between nldas-2 forcings and model juang, 2005: verification of probabilistic quantitative pre- outputs."
+17,hydrol.
+17,"processes, 26, 467–474, doi:10.1002/ cipitation forecasts over the southwest united states during hyp.8240. winter 2002/03 by the rsm ensemble system."
+17,"rev., ——, ——, c."
+17,"peters-lidard, d."
+17,"mocko, m."
+17,"svoboda, j."
+17,"sheffield, 133, 279–294, doi:10.1175/mwr-2858.1. and e."
+17,"wood, 2014: application of usdm statistics in zhang, q., c.-y."
+17,"xu, and z."
+17,"zhang, 2009: observed changes of nldas-2: optimal blended nldas drought index over the drought/wetness episodes in the pearl river basin, china, using continental united states."
+17,geophys.
+17,"atmos., 119, 2947– the standardized precipitation index and aridity index."
+17,"theor. 2965, doi:10.1002/2013jd020994."
+17,"climatol., 98, 89–99, doi:10.1007/s00704-008-0095-4."
+17,unauthenticated | downloaded 11/23/24 06:06 pm utc

@@ -1,0 +1,750 @@
+page,p
+1,november 2021 shrestha et al.
+1,"1591 overview and applications of the new york state mesonet profiler network bhupal shrestha,a,b j."
+1,"brotzge,b j."
+1,"wang,b,c n."
+1,"bain,b c."
+1,"thorncroft,a,b,c e."
+1,"joseph,a,d j."
+1,"freedman,a and s."
+1,"perezb a atmospheric sciences research center, university at albany, state university of new york, albany, new york b new york state mesonet, university at albany, state university of new york, albany, new york c department of atmospheric and environmental sciences, university at albany, state university of new york, albany, new york d national center for atmospheric research, boulder, colorado (manuscript received 2 june 2021, in ﬁnal form 1 october 2021) abstract: vertical proﬁles of atmospheric temperature, moisture, wind, and aerosols are essential information for weather monitoring and prediction."
+1,"their availability, however, is limited in space and time because of the signiﬁcant resources required to observe them."
+1,"to ﬁll this gap, the new york state mesonet (nysm) proﬁler network has been deployed as a national testbed to facilitate the research, development, and evaluation of ground-based proﬁling technologies and applications."
+1,"the testbed comprises 17 proﬁler stations across the state, forming a long-term regional observational network."
+1,"each proﬁler station comprises a ground-based doppler lidar, a microwave radiometer (mwr), and an environmental sky imager–radiometer (esir)."
+1,"thermodynamic proﬁles (temperature and humidity) from the mwr, wind and aerosol proﬁles from the doppler lidar, and solar radiance and optical depth parameters from the esir are collected, processed, disseminated, and archived every 10 min."
+1,"this paper introduces the nysm proﬁler network and reviews the network design and siting, instrumentation, network operations and maintenance, data and products, and some example applications that highlight the beneﬁts of the network."
+1,"some sample applications include improved situational awareness and monitoring of the sea–land breeze, long-range wildﬁre smoke transport, air quality (pm2.5 and aerosol optical depth) and boundary layer height."
+1,"ground-based proﬁling systems promise a path forward for ﬁlling a critical gap in the u.s. observing system with the potential to improve analysis and predic- tion for many weather-sensitive sectors, such as aviation, ground transportation, health, and wind energy."
+1,significance statement: the new york state mesonet (nysm) proﬁler network enables routine measure- ment of aboveground weather data and products to monitor weather and air quality across the state at high resolutions.
+1,"the nysm proﬁler network provides real-time vertical proﬁle information to users across the emergency management, avia- tion, utility, and public health sectors, including noaa and nasa, for operations and research, ﬁlling a critical gap in mon- itoring the low-level atmosphere."
+1,"these data have been used to improve situational awareness and monitor boundary layer dynamics, sea-land breeze development, precipitation type, and air quality."
+1,"most important, the nysm proﬁler network provides a national testbed for the creation and evaluation of new ground-based proﬁling instrumentation and products."
+1,"keywords: instrumentation/sensors; lidars/lidar observations; microwave observations; proﬁlers, atmospheric; remote sensing; air quality; boundary layer 1."
+1,"introduction whereas surface networks are common across the united states and europe, they fail to capture aboveground thermodynamic thorough monitoring of the atmospheric column is an essen- and transport processes that are critical for understanding tial element in reproducing accurate weather analysis and fore- pbl dynamics and nwp."
+1,"because of their relatively high cost, casts."
+1,"the world meteorological organization (wmo) has real-time observations of atmospheric proﬁles remain sparse, identiﬁed the vertical proﬁles of winds, temperature, humidity, although they are an increasingly important component of nwp and aerosols at high spatial and temporal resolution as critical initialization (illingworth et al."
+1,2019).
+1,"satellites provide global atmospheric variables for high-resolution numerical weather pre- coverage, but the temporal and spatial resolutions of such meas- diction (nwp) models (wmo 2018)."
+1,"yet few sensing systems urements are coarse, and routine satellite monitoring of the pbl can provide these much-needed data regularly."
+1,despite their rel- is impeded by cloud cover.
+1,"the national weather service ative sparsity, radiosondes collect such vertical proﬁle data and (nws) radiosonde network provides proﬁles of temperature, thus are found to be among the most valuable inputs to nwp humidity, and wind speed and direction at high resolutions in the model assimilation systems (laroche and sarrazin 2013)."
+1,"air vertical, but because they are routinely launched only 2 times per quality monitoring, wind energy production, aviation hazard day and are spaced hundreds of kilometers apart, they are not avoidance, and weather warning operations are especially sensi- suitable for the continuous and dense proﬁling necessary for tive to the accuracy and resolution of the aboveground weather most nwp and other atmospheric modeling applications. data, and particularly so from within the planetary boundary in 2009, a national research council (2009) report recom- layer (pbl; the lowest few kilometers above the surface). mended, “as a high infrastructure priority, federal agencies and their partners should deploy lidars and radio frequency proﬁlers nationwide at approximately 400 sites to continually corresponding author: bhupal shrestha, bshrestha@albany.edu doi: 10.1175/jamc-d-21-0104.1 ó 2021 american meteorological society."
+1,"for information regarding reuse of this content and general copyright information, consult the ams copyright policy (www.ametsoc.org/pubsreuselicenses)."
+1,unauthenticated | downloaded 11/23/24 06:09 pm utc
+2,1592 journal of applied meteorology and climatology volume 60 monitor lower tropospheric conditions.”
+2,"a decade later, the their period of record, spatial coverage and the number of sen- nasa earth science and applications decadal survey (nasa sors deployed, often due to the relatively high purchase and 2019) identiﬁed “aerosol properties, aerosol vertical proﬁles, and operations and maintenance costs."
+2,"for example, the annualized cloud properties,” “3d winds in the troposphere/pbl,” and cost for the noaa proﬁler network (installation began in 1988) “diurnal 3d thermodynamic properties and 2d pbl structure” was close to $4 million at the time (schlatter 2004), and the pro- as observing system priorities for the decade ahead."
+2,improved gram was discontinued in 2014.
+2,"to move forward, a dedicated, sampling of the low-level vertical structure of the atmosphere is regional-scale testbed is needed to properly evaluate the robust- a repeated refrain from the environmental science community. ness of proﬁling technologies and to better deﬁne the applica- the last few decades have seen a rapid development of com- tions for such data before these technologies can be fully mercially viable sensors for collecting automated vertical proﬁles, integrated into the u.s. weather observing enterprise. including active sensors such as lidars (doppler, raman, differ- to ﬁll this critical observational gap and address the needs ential absorption), radars, sodars, and ceilometers and passive of nwp, operational forecasters, and researchers, the new sensors such as microwave radiometers (wilczak et al."
+2,1996; york state mesonet (nysm) proﬁler network was devel- g€uldner and sp€ankuch 2001; munkel 2006; cimini et al. 2011; oped.
+2,the nysm proﬁler network (http://nysmesonet.org/ lee et al.
+2,2019).
+2,"such proven technology is now hardened for networks/proﬁler) comprises 17 proﬁler stations deployed long-term, remote deployment and can provide automated, rou- statewide (fig."
+2,"each nysm proﬁler station operates a tine proﬁles of temperature, humidity, winds, aerosols, and ground-based doppler lidar, a microwave radiometer, and an clouds in the troposphere throughout the day and night at high environmental sky imager–radiometer."
+2,the proﬁler system vertical and temporal resolution.
+2,"to research and develop these was developed with the following objectives: technologies, several proﬁler networks have been deployed."
+2,"table 1 provides a summary of proﬁler networks from around 1) measure and provide continuous real-time, high-quality ver- the world."
+2,"nevertheless, many of these networks are limited in tical proﬁles of atmospheric data—wind, aerosol backscatter, table 1."
+2,list of proﬁler networks around the world.
+2,name location stations sensors measurements colorado wind proﬁling colorado 5 wind-proﬁling radar wind proﬁle network (strauch et al.
+2,"1983) arm radar networka around the world over 20 doppler, cloud, and wind proﬁle, cloud, and (north et al. 2017; precipitation radar precipitation kollias et al."
+2,"2020) the helsinki testbedb southern finland ceilometer, doppler radar, wind, aerosol backscatter, (koskinen et al. 2011) radiosonde, wind proﬁler temperature, and with rass moisture proﬁle dwd ceilometer network germany 52 ceilometer backscatter proﬁle (flentje et al."
+2,"2010) space science and mobile integrated proﬁling atmospheric emitted temperature, water vapor, engineering center system radiance interferometer wind, and aerosol (ssec) portable (aeri), doppler lidar, backscatter proﬁle atmospheric research high-spectral-resolution center (sparc) and lidar (hsrl), the collaborative lower microwave radiometer, atmosphere proﬁling and radiosonde system (clamps) (wagner et al."
+2,2019) wind proﬁling radars on along the u.s.
+2,west coast 7 doppler radar wind proﬁle the u.s.
+2,west coast (flaherty et al.
+2,2016) uniﬁed ceilometer united states and canada 32 ceilometer backscatter proﬁle network (delgado et al.
+2,"2020) european meteorological european union nations over 265 automatic lidar and aerosol backscatter, wind, network (eumetnet) ceilometer, radar wind temperature, and proﬁling system (e- proﬁler, doppler wind moisture proﬁle profile) (illingworth lidar, and microwave et al. 2019) radiometer a arm southern great plains sites have four extended facilities with interferometer, microwave radiometer, and doppler lidar. b only proﬁler sensors are considered."
+2,the testbed also has 311 surface weather stations and 44 cellular-telephone base-station masts.
+2,unauthenticated | downloaded 11/23/24 06:09 pm utc
+3,november 2021 shrestha et al.
+3,1593 fig.
+3,the nysm proﬁler network (red dots) and flux network (green dots).
+3,"blue circles represent nws radiosonde stations. temperature, and humidity along with spectral solar radiance monitoring and to study predictability and improve nwp (fig."
+3,1). and optical depth—from across new york for use in opera- hardware costs limited the number of stations to 17.
+3,"eleven sites tions by multiple users, including emergency management, were deployed around the perimeter of upstate new york to aviation, utilities, and researchers. facilitate nwp model initialization by monitoring the airﬂow 2) create a high-quality, multiyear archive of vertical proﬁle, entering and exiting the state, and they were evenly distributed to ﬂux, and atmospheric measurements for satellite remote maximize areal coverage."
+3,"several sites were deployed along major sensing and nwp model improvement, validation, research, transportation corridors (interstate highways 90 and 87) or near and development. major metropolitan areas (e.g., new york city, buffalo, syracuse, 3) engage a broad-based user community who can beneﬁt and albany)."
+3,"three sites are located near the three nws radio- from output produced by such a network. sonde sites in new york (buffalo, albany, and upton; fig."
+3,"4) develop value-added products to expand the utility and three sites were placed on long island largely to monitor tropical value of the network. systems and northeasters, and another three sites were triangu- 5) evaluate the economic viability of a large-scale proﬁler lated around new york city (nyc) in the bronx, staten island, network for use in operations."
+3,"speciﬁcally, develop and and queens for overlapping radar/lidar coverage to facilitate dis- implement a user-based model for ﬁnancing and operat- persion modeling."
+3,"two proﬁler sites are located just to the north ing a stand-alone proﬁler network that is shared by the (suffern) and south (wantagh) of the nyc sites for additional commercial, government, and academic communities. upwind/downwind coverage."
+3,"most of the proﬁler sites (except albany, east hampton, and webster) are within 0.5 km of the this paper provides an overview of the nysm proﬁler net- nysm standard site (brotzge et al. 2020) that provides near-sur- work and is organized as follows."
+3,the nysm proﬁler network face atmospheric and soil measurements.
+3,"similarly, 6 of the 17 design and siting are discussed in section 2."
+3,"instrumentation is sites (belleville, chazy, owego, queens, red hook, and staten described in section 3."
+3,network operations and maintenance island) are collocated with (or very near) surface energy budget are presented in section 4.
+3,"data and available products are (ﬂux) sites (fig. 1), and they are referred to as “supersites.”"
+3,these presented in section 5.
+3,"a few example applications highlight- sites are used to study land surface and atmospheric interactions. ing the beneﬁt of the network are discussed in section 6, with a of the 17 sites, all but one (albany) were placed on build- summary and conclusions presented in section 7. ing rooftops."
+3,"this provides additional security and access to utility power and communications (i.e., ethernet)."
+3,cranes were used to lift the equipment onto the roofs.
+3,site hosts pro- 2.
+3,"nysm profiler network design and siting vide ready access to station equipment for regular operations the nysm proﬁler network was conﬁgured in a way to and maintenance, and they receive free use of the data col- best satisfy mesoscale measurement needs for both operational lected from each site."
+3,a long-term agreement was signed unauthenticated | downloaded 11/23/24 06:09 pm utc
+4,1594 journal of applied meteorology and climatology volume 60 between the university at albany and the site hosts to aim at molecular extinction.
+4,"in general, the doppler lidar emits short operating and maintaining the network for many years ahead laser pulses and records a small fraction of the doppler-shifted for both weather and climate research in contrast to the short backscattered signal from aerosols and cloud particles along the lifetime of past networks listed in table 1."
+4,most site hosts are line of sight (los).
+4,"such backscattered signal is detected by a k–12 schools (7) or universities (5); the remainder include a highly sensitive heterodyne technique (boquet et al. 2016) to research institution, two wastewater treatment centers, a nat- generate range resolved radial wind speed and carrier-to-noise ural gas storage facility, and an airport."
+4,site equipment was ratio (cnr). placed in a way that allowed as close to a full sky view as pos- the cnr is a modulated signal for a signal-to-noise ratio sible from each sensor.
+4,"[detailed metadata and photographs (snr), proportional to the backscatter signal (boquet et al. are available for each proﬁler site (http://nysmesonet.org/ 2016)."
+4,"to maximize the detection range, the emitted beam of networks/proﬁler).] the lidar focuses on a range that is equal to the focal length of the telescope, and hence a peak can be observed in the cnr proﬁles due to its focal effect."
+4,since the lidar beam has a sensitivity that 3.
+4,"instrumentation follows a lorentzian function (hill 2018; yang et al. 2020), the each of the 17 proﬁler sites has a collocated doppler lidar, focal effect in cnr proﬁles can be easily corrected."
+4,"during a microwave radiometer, and an environmental sky imager– period with a well-mixed, relatively homogenous aerosol environ- radiometer (commonly referenced as a sun photometer)."
+4,"as an ment, low elevation scans are performed to estimate the ﬁtting example, the proﬁler site located at albany is shown in fig."
+4,2. parameters for instrumental/telescope function using the four parameter lorentzian function.
+4,the cnr data are then cali- a.
+4,windcube 100s doppler lidar brated to retrieve attenuated relative backscatter brel.
+4,the details the windcube 100s doppler lidar is an active remote about the retrieval of brel can be found in yang et al.
+4,(2020).
+4,"the sensing, commercial lidar manufactured by leosphere (now brel depends upon aerosol type and concentration and is used for owned by vaisala, inc.; for speciﬁcations, see table 2)."
+4,"this aerosol and cloud observations in the atmosphere (royer et al. system is based on the windcube technology of ﬁbered archi- 2016) and is used for applications discussed in section 6. tecture, ﬁbered ampliﬁcation, and coherent detection (cariou for 3d wind measurements, the nysm proﬁler network et al."
+4,2018).
+4,the ﬂexible architecture of the system allows doppler lidars are conﬁgured to run in doppler beam swinging the user to adjust the pulse repetition frequency and pulse (dbs) scan mode.
+4,this scan can be quickly reconﬁgured to cap- length to the desired measurement range and spatial resolu- ture opportunistic (research) or potential severe weather events tion.
+4,"a master oscillator power ampliﬁer (mopa) is used (e.g., high winds) that demand other scanning conﬁgurations as a transmitter with a laser at near-infrared wavelength of including ﬁxed los or adjusting range–height indicator (rhi), 1540 nm."
+4,"at this wavelength, the laser is eye safe, and transmis- plan position indicator (ppi), or a combination sequence of sion through the atmosphere is efﬁcient because of negligible scans."
+4,"in dbs scan mode, the lidar makes four los scans at fig."
+4,"the nysm proﬁler site located at albany, showing microwave radiometer, doppler lidar, and sun photometer."
+4,unauthenticated | downloaded 11/23/24 06:09 pm utc
+5,november 2021 shrestha et al.
+5,1595 table 2.
+5,the speciﬁcations of the windcube doppler lidar 100s.
+5,table 3.
+5,the speciﬁcations of the microwave radiometer mp-3000.
+5,"variable specification variable specification wavelength 1540 nm pulse energy 25 mj brightness temperature accuracy 0.2 k pulse repetition frequency 20 khz brightness temperature range 0–400 k pulse length 50 m std calibrated channels 35 accumulation time 1s surface sensor accuracy measurement range 100–7000 m temperature (from 250° to 160°c) 0.5°c at 25°c radial wind speed range from 230 to 130 m s21 relative humidity 2% wind speed accuracy 0.5 m s21 calibration types tip and liquid nitrogen wind direction accuracy 2° measurement range 0–10 km cnr accuracy 2 db temporal resolution 2 min scan conﬁguration dbs with a cycle of 20 s dimensions (l 3 w 3 h) 31 cm 3 53 cm 3 86 cm dimensions (l 3 w 3 h) 9.95 cm 3 8.10 cm 3 14.10 cm mass 27 kg mass 232 kg operating condition operating condition temperature from 240° to 145°c temperature from 225° to 45°c relative humidity 0%–100% humidity 10%–100% altitude from 2300 to 3000 m wind (operational/survival) 30/60 m s21 north, east, south, and west directions at an elevation angle of 75° and one los scan vertically, with a total scan duration of the microwave radiometer (mwr) measures the microwave approximately 20 s."
+5,these ﬁve los scans are then combined to emissions from within the vertical column; each microwave fre- retrieve 3d wind vectors.
+5,"details of the retrieval using the dbs quency corresponds to a brightness temperature using planck’s scan mode can be found in newman et al. (2016) and suomi radiation equation, which are then converted collectively to a et al."
+5,(2017). single thermodynamic proﬁle.
+5,"there are 35 standard calibrated the performance of the doppler lidar (data availability channels that measure the brightness temperature (0–400 k) and maximum measurement range) depends upon the aero- within the 22–30-ghz water vapor band (k band; 21 channels) sol type and concentration, atmospheric refractive turbu- and the 51–59-ghz oxygen band (v band; 14 channels)."
+5,"the lence, humidity, and precipitation (aitken et al."
+5,2012).
+5,"the accuracy of the brightness temperatures measurement is key accuracy and validity of the lidar data has been tested by and that depends on the quality and stability of the hardware, several studies (e.g., kumer et al."
+5,2014; aitken et al. 2012; the accuracy and precision of the tip curve calibration and suomi et al.
+5,"2017). liquid nitrogen calibration, thermal stability, and noise level (liljegren 2002; kucher et al."
+5,2016).
+5,the calibrated brightness b.
+5,"microwave radiometer temperature accuracy is around 0.2 k with long term stability a multichannel, passive remote sensing microwave radiome- of ,1.0 k yr21 (radiometrics 2013). ter, the mp-3000, manufactured by radiometrics, is deployed the mwr observes atmospheric brightness temperatures at each nysm proﬁler site (speciﬁcation listed in table 3). at zenith and at an elevation angle of 20° above the horizon table 4."
+5,the speciﬁcations of the environmental sky imager–radiometer (sun photometer).
+5,"observation variable specification irradiance measurement channels 415, 500, 610, 670, 870, 940, and 1020 nm accuracy absolute calibration accuracy: 4% calibration based on langley regression: 2% shadow band parameters blocking angle 2° angular resolution 0.067° sky image field of view 180° environmental measurement air temperature 60.1°c humidity 62% air pressure 60.12 hpa gps location position accuracy ,3 m measurement temporal resolution 5 min instrument l3w3h 67.6 cm 3 30 cm 3 24 cm shadow band radius 28 cm mass 22 kg operating condition temperature from 230° to 50°c humidity 0%–100% unauthenticated | downloaded 11/23/24 06:09 pm utc"
+6,1596 journal of applied meteorology and climatology volume 60 fig.
+6,"doppler lidar four-panel time–height cross-section plot for (a) cnr (db), (b) horizontal wind speed (kt), (c) vertical wind speed (kt), and (d) wind direction (by sector) from queens for 24 h starting at 0700 lt 4 aug 2020. as nominal and secondary directions."
+6,"at most of the nysm additional information about the instrument and retrieval proﬁler sites, mwrs are oriented in such a way that the algorithm can be found in liljegren (2002), liljegren et al. nominal direction is north, and the secondary direction is (2001), hewison and gaffard (2003), bianco et al. (2017), south."
+6,"proﬁles of temperature, relative humidity, liquid den- knupp et al. (2008), and radiometrics (2013). sity, and vapor density up to 10 km agl are retrieved from c. esir (sun photometer) the brightness temperatures at those elevation angles using the radiative transfer equation (schroeder and westwater referred to as an environmental sky imager–radiometer 1991); however, the conversion step from brightness tem- (esir), this multichannel remote sensing system (speciﬁca- peratures to proﬁle is inexact due to the limited degrees of tions listed in table 4) provides estimates of direct and diffuse freedom within the vertical column measurement."
+6,to com- radiation together with ﬁsh-eye imagery.
+6,"the esirs were pute the proﬁles from the brightness temperatures, the ven- built in house by research scientists in the new york state dor applies a neural network trained with radiosonde data mesonet and atmospheric sciences research center from a location with similar altitude and climatology to the (asrc). radiometer site (solheim et al."
+6,1998).
+6,"prior studies sug- the esir comprises two modules: a multiﬁlter rotating gested that the 1d variational (1dvar) technique outper- shadow-band radiometer (mfrsr), and a shaded sky formed the neutral network method (hewison 2007; cimini imager–sun photometer."
+6,both modules share a scanning et al.
+6,2011).
+6,"in the future, the nysm also plans to test shadow band that tracks the path of the sun throughout the 1dvar retrieval algorithm to the mwr measurements. day."
+6,the radiometer module has seven wavelength channels unauthenticated | downloaded 11/23/24 06:09 pm utc
+7,november 2021 shrestha et al.
+7,1597 fig.
+7,"microwave radiometer four-panel time–height cross-section plot for (a) temperature (°c), (b) liquid density (g m23), (c) vapor den- sity (g m23), and (d) relative humidity (%) from queens for 24 h starting at 0700 lt 4 aug 2020. (415, 500, 610, 670, 870, 940, and 1020 nm) and uses an auto- to measure the atmospheric aerosol properties, spectral mated shadow-banding technique to measure narrowband aerosol optical depth (aod) is retrieved using the spectral spectral direct and diffuse irradiance (yin et al."
+7,2015).
+7,multi- direct normal irradiances measured by the esir.
+7,as described channel spectral irradiances are useful in the retrieval of the in koontz et al.
+7,"(2013), aod is estimated using the beer–- optical properties of aerosol, cloud, and trace gases such as lambert–bouguer law and langley regression."
+7,"the contrib- ozone, water vapor, and nitrogen dioxide in the atmo- uting optical depth due to rayleigh scattering and wavelength sphere (alexandrov et al."
+7,"2001; kassianov et al. 2005; dependency on water vapor, ozone, and trace gases such as alexandrov et al."
+7,2008; turner et al.
+7,2014; patadia et al.
+7,"no2, co2, ch4, and so on are considered while calculating 2018)."
+7,the sky imager module takes ﬁsh-eye sky images; a aod (hansen and travis 1974; koontz et al.
+7,2013; patadia shadow band blocks the direct beam of the sun to minimize et al.
+7,2018).
+7,since aod represents the measure of aerosols in glare in sunny conditions.
+7,"in addition, the esir also has the atmospheric vertical column, it is often used as a proxy to embedded meteorological sensors that track temperature, estimate surface pm2.5 (gupta and christopher 2008; schaap humidity, and pressure and a gps sensor to record the pre- et al."
+7,2009; hu et al.
+7,2013; chudnovsky et al.
+7,"2014; hua cise time and position (latitude, longitude, and elevation). et al. 2019), particularly during well-mixed condition."
+7,the all measurements are taken every 5 min during daylight ångstrom exponent (a; ångstr€ om 1929) can also be derived hours.
+7,"when the solar zenith angle is greater than 85° and from the aod and is an indicator of aerosol particle size pre- during nighttime, the shadow band stops its sweeping sent in the atmosphere: a # 1 represents coarse mode aero- motion and sky images are not recorded. sols with radius $0.5 mm such as dust and sea salt, and a $ 2 unauthenticated | downloaded 11/23/24 06:09 pm utc"
+8,1598 journal of applied meteorology and climatology volume 60 fig.
+8,skew t plot generated from doppler lidar and mwr data from queens at (a) 1200 and (b) 1600 lt 4 aug 2020. represents ﬁne mode aerosols with radius #0.5 mm such as an in-person liquid nitrogen calibration is required for the urban pollution and biomass burning (schuster et al.
+8,2006; v band every 6 months.
+8,liquid nitrogen is poured into a eck et al.
+8,1999).
+8,a cloud-screening technique developed by polystyrene box and placed on top of the radiometer; data alexandrov et al. (2004) is implemented to distinguish between are collected for 30–60 min to extract a stabilized noise clear-sky and cloudy data. diode brightness temperature.
+8,kucher et al. (2016) deter- mined mwr calibrations are accurate within 60.5 k.
+8,the esir requires instrumental recalibration about every 4.
+8,network operations and maintenance 2 years.
+8,a ﬁeld technician is assigned full-time to the ongoing maintenance and calibration of the nysm proﬁler net- 5.
+8,data and products work.
+8,"the technician oversees the communications, power, and sensors at each site and responds (on site or remotely) data are collected from the proﬁler sites across the state to problems as needed."
+8,"while built for remote and auto- and transmitted to servers located at the university at mated operation, each sensor still requires some limited but albany, where the data are then quality controlled, archived, regular maintenance."
+8,the lidar laser degrades over about a and disseminated in real time every 10 min.
+8,"extensive net- 10-yr period, and the lidar scanning head incurs signiﬁcant work, station, and sensor metadata are readily available and wear and tear with time, requiring replacement after about accessible to users through the nysm website."
+8,the primary ﬁve years of continuous use.
+8,"the mwr has several degrad- data available from the nysm proﬁler network are proﬁles able components that require regular replacement, includ- of the u, y, and w components of wind speed and wind direc- ing a radome, fans, and an infrared thermometer."
+8,"for major tion and cnr from the doppler lidar; proﬁles of tempera- sensor repairs, the mwrs are returned to the vendor, ture, relative humidity, liquid, and vapor density from the whereas a contracted technician visits the lidar for onsite mwr; and spectral direct, diffuse, and total radiation, sky repairs; the lidar’s weight (.200 kg) and rooftop location images, surface temperature, relative humidity, and atmo- make it cost prohibitive for returning it to the vendor unless spheric pressure from the esir."
+8,"the combination of doppler major repairs are needed. lidar and mwr data provides continuous proﬁles of winds, the mwr and esir require regular calibration."
+8,"the tech- temperature, and moisture similar to that available from the nician visits each site every 4–6 months to calibrate the nws radiosonde network, but with much higher temporal mwr."
+8,the mwr requires two types of calibrations; the cali- resolution (every 2 min vs twice daily).
+8,"the vertical resolution bration resets the brightness temperatures of the noise diodes of the lidar data is 25 m from 100 to 1000 m and 50 m from for the k-band and v-band channels and hence, the quality of 1000 to 7000 m with a temporal resolution of approximately data depends on precision and accuracy of the calibration."
+8,a 20 s for a full dbs scan.
+8,"the vertical resolution of mwr data tip calibration is done remotely in the nysm operations cen- is 50 m from the surface to 500 m, 100 m from 500 to 2000 m, ter every two weeks to reset the k band."
+8,"the brightness tem- and 250 m from 2000 to 10000 m with a temporal resolution perature is measured at several elevation angles, and then a of approximately 2 min."
+8,"the esir collects data over 5-min ﬁtting function is applied to estimate an updated, “corrected” periods during daylight hours."
+8,these data are archived in zenith brightness temperature (hewison and gaffard 2003).
+8,"netcdf and comma-separated-values (csv) format, and sky unauthenticated | downloaded 11/23/24 06:09 pm utc"
+9,november 2021 shrestha et al.
+9,1599 fig.
+9,sun photometer two-panel time series plot for (a) total radiation (w m22 nm21) and (b) direct normal radi- ation (w m22 nm21) from queens for the daylight hours on 4 aug 2020 along with the ﬁsh-eye images at (c) 1200 lt and (d) 1600 lt. images are provided in “.jpg” format.
+9,"data are available to the doppler lidar and mwr at queens, new york are shown users upon request at cost in accordance with nysm data in figs. 3 and 4 doppler lidar data are shown up to 3 km policy (http://www.nysmesonet.org/weather/requestdata)."
+9,a agl.
+9,"the skew t plots generated using the doppler lidar “readme” ﬁle explains the data ﬁle format, variables, and and mwr data are shown in fig."
+9,the esir spectral total their units along with site and sensor information.
+9,a detailed and direct normal radiation time series plots for daylight evaluation of the proﬁler network measurement data bias hours along with ﬁsh-eye sky images are shown in fig.
+9,the with reference measurements (radiosonde and sun photome- combination of three measurement data shown in figs. 3–6 ter) is presented in b.
+9,shrestha and e.
+9,"joseph (2021, unpub- demonstrate the value of the nysm proﬁler network in lished manuscript). monitoring tropical storm isaias and are discussed in detail a real-time display showing the data collected during the in section 6a."
+9,"additional real-time display of derived products last 24 h is available online (http://www.nysmesonet.org/ such as pbl height, air quality indicator (pm2.5, aod, and networks/proﬁler) and is updated every 10 min."
+9,"as an exam- ångstrom exponent), forecast, and stability indices are cur- ple, the 24-h four-panel time–height cross-section plots from rently under development."
+9,unauthenticated | downloaded 11/23/24 06:09 pm utc
+10,1600 journal of applied meteorology and climatology volume 60 fig.
+10,"skew t plots for nws radiosonde data on 27 mar 2018: (a) albany at 0000 utc, (b) albany at 1200 utc, (c) buffalo at 0000 utc, and (d) buffalo at 1200 utc, retrieved from the university at wyoming."
+10,example applications a.
+10,"improved situational awareness: high-temporal sampling as discussed in section 1, vertical proﬁling technology ﬁlls a the high-temporal-resolution data of the nysm proﬁler noted gap in atmospheric sensing with the expectation that network can provide critical insight for emergency manage- such data will improve nwp and enhance situational aware- ment operations."
+10,"on 4 august 2020, the nws issued a tor- ness for operations by supplementing the nws radiosonde nado watch that included new york city effective from 1100 network with much greater temporal and spatial sampling."
+10,"as until 1600 local time (lt) as tropical storm isaias a participant of the national mesonet program, the nysm approached from the south."
+10,figures 3 and 4 show the data makes proﬁler data available to the nws in real time.
+10,since from the doppler lidar and mwr at queens.
+10,"winds . 40 kt the feed was established in 2018, the proﬁler data have been (1 kt  0.51 m s21) were observed between 1100 and 1500 lt used by regional nws forecast ofﬁces to improve short-term (fig. 3b)."
+10,"easterly to southeasterly winds were dominant until forecasts of low-level wind, temperature, fog and cloud devel- about 1500 lt as the tropical storm approached from the opment and erosion, convective instability, precipitation onset atlantic ocean, followed by weak westerly winds as the storm and type."
+10,"however, the integration of multiple, collocated moved past and weakened (fig. 3d)."
+10,"precipitation was proﬁling sensors—the lidar, microwave radiometer, and sun observed during the period as indicated by the negative verti- photometer—has expanded the versatility and utility of the cal wind speed (fig. 3c), the relatively high liquid density and network as well."
+10,"several examples below demonstrate some relative humidity (figs. 4b,d), and skew t plot indicating satu- of the beneﬁts and products that such a network can offer. ration up to 500 hpa at 1200 lt (fig. 5a)."
+10,"by late afternoon, unauthenticated | downloaded 11/23/24 06:09 pm utc"
+11,november 2021 shrestha et al.
+11,1601 fig.
+11,8. (a) surface analysis map at 0600 utc 27 mar 2018 retrieved from the nws weather prediction center and (b) 700-hpa map at 1200 utc 27 mar 2018 retrieved from the university at wyoming.
+11,red-outlined ovals show the new york region and its surroundings. the sun returned with partly cloudy skies as can be seen from storm at 1200 lt (fig. 6c) and poststorm at 1600 lt (fig. 6d). the increased total (fig. 6a) and direct normal radiation (fig.
+11,the skew t plot at 1600 (fig. 5b) also provides evidence for 6b) from the esir along with the ﬁsh-eye images during the the presence of clouds at around 900–800 hpa.
+11,as the sun unauthenticated | downloaded 11/23/24 06:09 pm utc
+12,1602 journal of applied meteorology and climatology volume 60 fig.
+12,"doppler lidar four-panel time–height cross-section plot for (top) cnr (db), (top middle) horizontal wind speed (kt), (bottom middle) vertical wind speed (kt), and (bottom) wind direction (by sector) from (a) buffalo, (b) belleville, and (c) chazy during 26–27 mar 2018 (in local time). returned, vertical mixing increased as indicated by the positive 1500 m or below 800 hpa) on 27 march 2018 (figs. 7a–d and negative vertical wind speeds measured from the doppler retrieved from http://weather.uwyo.edu/upperair/sounding.html). lidar (fig. 3c)."
+12,"the vertical wind speed can be used as a proxy the surface analysis map at 0600 utc (fig. 8a, retrieved to estimate mixed-layer height (e.g., thermals connected to the from https://www.wpc.ncep.noaa.gov/archives/web_pages/sfc/ surface indicated by positive vertical wind speed)."
+12,"low-level sfc_archive.php) shows a strong high pressure system over (boundary layer cumulus) clouds can be seen throughout the the northeastern united states, whereas the 700-hpa map day as indicated by the higher cnr values in the pink and red (fig. 8b, retrieved from http://weather.uwyo.edu/upperair/ colors (fig. 3a)."
+12,the high-temporal sampling of the network uamap.shtml) shows an unusually long southwesterly fetch of provides emergency managers with much-improved under- air from baja california to western new york. standing of rapidly evolving high-impact events.
+12,this mostly quiescent upper-air disturbance was tracked across the state by the nysm proﬁler network.
+12,figure 9 b.
+12,"improved situational awareness: greater spatial sampling shows doppler lidar data from a west-to-east transection in the nws radiosonde network has only three sites across the north from buffalo, belleville, and chazy, and fig."
+12,"10 new york, leaving large gaps in spatial coverage across the shows a west-to-east transection in the south from clymer, state."
+12,"a network of proﬁling sensors can help ﬁll these spatial owego, and staten island (locations of these sites are shown gaps."
+12,a simple event from 26 to 27 march 2018 shows the in fig.
+12,"lidar plots from each site location are very similar, value of such a network for its ability to track individual fea- showing the air aloft gradually mixing down to the surface, tures in space and time."
+12,"in this case, a dry upper-air distur- but data from multiple sites can track the rapid transport of bance moved quickly from west to east across the state, with the boundary."
+12,"roughly in about 9 h, the bubble of dirtier air gradual subsidence associated with the strong high pressure sys- from the west reaches to the east (in our case: from buffalo to tem."
+12,the nws radiosonde data from albany (alb) and buf- chazy and from clymer to staten island) with approximate falo (buf) show extremely dry air aloft (approximately above speed of 18 m s21 (about 35 kt).
+12,the west-to-east movement unauthenticated | downloaded 11/23/24 06:09 pm utc
+13,november 2021 shrestha et al.
+13,1603 fig.
+13,"as in fig. 9, but from (a) clymer, (b) owego, and (c) staten island. of the feature is consistent with the westerly winds aloft while sites at wantagh, east hampton, and queens, which are the weakening of the boundary (ﬂow becomes diluent) as it approximately 58 km southwest, 93 km southeast, and 75 km traveled easterly is consistent with subsidence."
+13,"as demon- west from the flax pond, respectively."
+13,"after 1000 lt, an strated, large-scale networks are necessary for tracking such a abrupt shift in wind direction from offshore (west to north- feature across regional scales in real time. west) to onshore (southerly) accompanied by an increase in wind speeds (from 5 to 10–20 kt) within a few hundred meters c."
+13,ability to monitor local features agl can be observed at wantagh and east hampton.
+13,a sim- ilar trend can be observed at queens shortly after 1200 lt.
+13,"the nysm proﬁler network has proven beneﬁcial for further analysis on the identiﬁcation of the sea-breeze circu- monitoring rapidly changing conditions, such as presented by lation and its inﬂuence on ozone concentration are presented the sea-breeze circulation along the long island (li) coastal in joseph et al. (2018) and zhang et al."
+13,(2020). region in new york.
+13,several studies (loughner et al.
+13,2014; blaylock et al. 2017a; zhang et al. 2020) have shown the con- d.
+13,"ability to monitor wildfire smoke transport tribution of sea-breeze circulation to poor air quality by increasing surface ozone concentrations in short periods the nysm proﬁler network has also demonstrated an around coastal areas, particularly in the summer."
+13,the six ability to monitor long-range-transport smoke events.
+13,despite nysm proﬁler stations located across nyc and li provide a a long-term downward trend in pm2.5 and an improvement in means to monitor the sea-breeze circulation and its inﬂuence air quality across new york (emami et al.
+13,2018; rattigan et al. on air quality around the region.
+13,"for example, on 10 july 2015) and the united states (black et al. 2017), episodic 2018, ozone concentration increased from 80 ppb to over 120 events such as smoke from wildﬁres can cause periodic rises ppb below 1.5 km within a 3-h period (1300–1600 lt), as and adverse effects on human health."
+13,"occasionally, wildﬁre measured at flax pond, li (joseph et al."
+13,2018).
+13,figure 11 smoke from as far away as the western united states and shows the wind speed and direction from the nysm proﬁler canada can affect local air quality in new york by increasing unauthenticated | downloaded 11/23/24 06:09 pm utc
+14,1604 journal of applied meteorology and climatology volume 60 fig.
+14,"doppler lidar wind speed (kt) data overlaid with 10-min-averaged wind barbs from (a) wantagh, (b) east hampton, and (c) queens for 10 jul 2018 (in local time). the surface pm2.5 concentration through boundary layer one such smoke episode occurred across new york from entrainment and the vertical mixing process (wu et al. 2018; 13 to 17 august 2018."
+14,time series of surface pm2.5 from rogers et al.
+14,2020; hung et al.
+14,2020).
+14,"it has been speculated buffalo, albany, and queens, as monitored by the new york that the primary source of surface pm2.5 increases in the state department of environmental conservation (nys- future could be due to wildﬁre smoke rather than anthropo- dec) are shown (fig."
+14,the time series plot shows a nota- genic emissions (ford et al.
+14,2018; black et al.
+14,2017; liu et al. ble increase of pm2.5 with values rising at buffalo beginning 2016).
+14,"therefore, being able to monitor long-range smoke on 14 august, followed by rises at albany and queens transport is important for accurate air quality monitoring, 24 h later."
+14,"such a coincident but delayed enhancement of forecasting, and regulation."
+14,pm2.5 at albany and queens indicates that the increases in unauthenticated | downloaded 11/23/24 06:09 pm utc
+15,november 2021 shrestha et al.
+15,1605 fig.
+15,"surface pm2.5 data collected at buffalo, albany, and queens by the nysdec during 13–17 aug 2018 (in local time)."
+15,the black line represents the average of three sites.
+15,pm2.5 values are not caused by local sources but are most this nonlinear regression model is applied to data during likely due to long-range transport of smoke entering the state the warm months from may to september of the years from the west.
+15,"the smoke can be observed directly by the 2017–20 from queens, new york."
+15,"data from the years lidar’s relative attenuated backscatter from the three nysm 2017–19 are used for ﬁtting the model, and then tested on proﬁler sites during the period of elevated pm2.5 (fig."
+15,13). data from 2020.
+15,"relative backscatter data are obtained from the strong backscatter signal of red and dark red colors rep- the nysm doppler lidar; temperature, relative humidity resents clouds, and they are observed at all three sites during and wind speed data are collected from the coincident different parts of the day."
+15,the lidar shows a backscatter signal nysm standard site—both located at queens and pm2.5 of 1027–1025 m21 sr21 near the surface and up to 2 km at all data are obtained from the nys dec air quality monitoring three sites.
+15,"at buffalo, aerosols are seen aloft between 2 and site at queens college."
+15,the nysm site is about 1 km away 5 km starting the night of 14 august until the afternoon of 16 from the nys dec site.
+15,all data are averaged hourly and august.
+15,"similarly, aerosols are seen around 2 km on 15–16 are selected based on the availability of doppler lidar data."
+15,august at albany and between 2 and 4 km on 15–17 august values retrieved from the nonlinear model are compared at queens.
+15,the aerosols at albany and queens are seen with the surface measured pm2.5 (fig.
+15,the slope and y approximately 12–16 h later than at buffalo.
+15,"these layers of intercept are 0.84 and 1.32, respectively."
+15,"the coefﬁcient of aerosols encountered subsidence and mixed into the pbl. determination r2 and root-mean-square error (rmse) are the pbl processes of entrainment and vertical mixing pro- found to be 0.70 and 2.30 mg m23, respectively."
+15,"applying an vided favorable conditions to bring them down slowly to the f test, the p value is below 0.05 (standard signiﬁcance level) ground causing the enhancement of pm2.5 seen in the nys- yielding a corresponding conﬁdence level of 95%."
+15,the non- dec time series in fig.
+15,"12. linear model continues to be evaluated at other sites along smoke can also be identiﬁed using the esir; here, the with its application on vertical proﬁling of pm2.5."
+15,"aod at 500, 670, and 870 nm and ångstrom exponent (based on 500 and 870 nm) were derived using the esirs at buffalo f."
+15,ability to monitor pbl height and queens (fig. 14; the esir at albany was not active at the nysm proﬁler network can be used to monitor pbl that time).
+15,"for all three channels, aod values greater than height."
+15,"the lidar has become a powerful tool in the detection 0.2 and ångstrom exponents in the range of 1.5–2 provide evi- of pbl height due to its continuous measurement, broad dence for the presence of ﬁne mode aerosols such as pollution measurement range, and high vertical and temporal resolu- or smoke."
+15,"however, since urban pollution is typically found tion."
+15,"several lidar techniques have been developed for esti- within the boundary layer, aerosols as seen from lidar back- mating pbl height; three common approaches include the scatter above 2 km can be classiﬁed as smoke plumes."
+15,"such gradient, variance, and wavelet covariance transform (wct) aloft aerosols are also evident overnight and in early morning, methods."
+15,the gradient and variance methods assume the pbl which therefore provide additional evidence for the smoke height corresponds to the minimum gradient and maximum plume.
+15,"further evidence for the smoke plumes, their source, variance in the relative attenuated backscatter."
+15,"the wct trajectories of transport, and detailed analysis of this smoke method (brooks 2003; baars et al."
+15,2008; granados-munoz episode and its effect on air quality are presented in hung et al. 2012) assumes a higher concentration of aerosols within et al.
+15,(2020). the pbl with a steep decrease in concentration in the free tro- posphere above.
+15,the sharp transition zone (largest gradient) e.
+15,"ability to monitor air quality of the lidar signal change is considered to be the pbl height, a ﬁfth example demonstrates the value of the nysm pro- usually near the center of the entrainment layer."
+15,"using these ﬁler network for the estimation of aerosol mass concentra- three techniques, pbl heights are retrieved from doppler tion, in terms of pm2.5."
+15,a remote sensing technique can be lidar and are compared with pbl heights estimated from a used to combine the aerosol backscatter with meteorological nearby nws radiosonde using the heffter method (heffter data (b.
+15,shrestha and e.
+15,"joseph 2021, unpublished manuscript)."
+15,1980; sivaraman et al. 2013) and from the high-resolution unauthenticated | downloaded 11/23/24 06:09 pm utc
+16,1606 journal of applied meteorology and climatology volume 60 fig.
+16,"doppler lidar relative attenuated backscatter data from (a) buffalo, (b) albany, and (c) queens during 14–17 aug 2018 (in local time)."
+16,"rapid refresh (hrrr; blaylock et al. 2017b, https:// agreement with each other for most of the day."
+16,"the wct also rapidrefresh.noaa.gov/hrrr/) model, shown in fig."
+16,16. shows good agreement with the radiosonde at both launch retrieved pbl heights for 22 june 2020 are plotted for times.
+16,"at albany, (fig. 16b), all three lidar methods show good buffalo (fig. 16a), albany (fig. 16b), and queens (fig. 16c)."
+16,"at agreement throughout the day except during 0600–0900 lt buffalo (fig. 16a), the variance and gradient method fail to when the gradient and variance method are affected by the pres- detect pbl height in the presence of complex aerosol layers ence of the residual layer."
+16,the wct and hrrr model are con- between 0600 and 1200 lt and after 1700 lt when the residual sistent in capturing the growth of the pbl during 0800–1300 lt layer starts to develop.
+16,the wct and hrrr model show good but show signiﬁcant differences after 1300 lt.
+16,since the hrrr unauthenticated | downloaded 11/23/24 06:09 pm utc
+17,november 2021 shrestha et al.
+17,1607 fig.
+17,"optical depth and ångstrom exponent from esir at (a) buffalo for 15 aug and (b) queens for 16 aug 2018 (in local time) for three channels: 500, 670, and 870 nm."
+17,"bold color rep- resents aod, and light color represents cloud-contaminated optical depth. model is based on potential temperature and sensible heat ﬂux 1000 lt and after 1600 lt due to the presence of multiple aloft while the lidar method is based on aerosol backscatter, the dis- aerosol layers."
+17,the wct and hrrr show consistency in the crepancies could be due to the different input parameters and pbl structure throughout the day.
+17,the hrrr model and scale.
+17,"however, it is most likely that the hrrr overestimated radiosonde agree with each other at 0700 lt while all three lidar the pbl height as all three lidar methods agree with one methods, the hrrr model and the radiosonde agree very well another and they closely match the radiosonde at 1900 lt."
+17,simi- at 1900 lt.
+17,"as demonstrated above, a proﬁler network provides lar to that at buffalo, the gradient and variance methods at an opportunity for accurate spatiotemporal monitoring of the queens (fig. 16c) fail to detect pbl height correctly before pbl height across a large-scale region."
+17,summary and conclusions the nysm proﬁler network is a unique statewide obser- vational network of 17 ground-based proﬁling stations.
+17,"with a doppler lidar, mwr and esir deployed at each site, atmospheric proﬁle data (wind speed and direction, cnr, temperature, relative humidity, liquid, and vapor density) along with spectral direct, diffuse, and total radiation and ﬁsh-eye sky images are collected, archived, and dissemi- nated every 10 min with the real-time graphics displayed at nysm proﬁler network web page."
+17,"the proximity of the nysm standard and flux network with the nysm proﬁler network provides additional surface, soil, and energy bud- get data."
+17,"collectively, these real-time measurements yield valuable opportunities for monitoring and understanding key atmospheric exchange processes within the boundary layer and lower atmosphere."
+17,the network’s high-spatial-res- olution and high-temporal-resolution data within the pbl provide an important aid in understanding local heterogene- ities across the state.
+17,"speciﬁcally, the nysm proﬁler net- work allows for real-time monitoring of the sea breeze, long-range wildﬁre smoke transport, pbl height, and pollu- fig."
+17,comparison of measured observations and nonlinear tants such as pm2.5 that play important roles in local and model–retrieved pm2.5 at queens during may–september 2020. regional weather and climate and air quality.
+17,unauthenticated | downloaded 11/23/24 06:09 pm utc
+18,1608 journal of applied meteorology and climatology volume 60 fig.
+18,"the pbl retrieved from doppler lidar at (a) buffalo, (b) albany, and (c) queens along with data from the coincident nws radiosonde and the hrrr model for 22 jun 2020 (in local time)."
+18,the nysm proﬁler network is foremost a research plat- experiments (ose) are currently under way to evaluate the form designed to address research questions through the beneﬁt of assimilating ground-based proﬁler sensors data into assessment of proﬁles of kinematics and thermodynamics and numerical models.
+18,the monitoring of forecasting indices dur- optical depth variables with high temporal and spatial resolu- ing high impact weather events has been demonstrated in tions.
+18,"for example, what is the optimal network density?"
+18,shrestha and e.
+18,"joseph (2021, unpublished manuscript)."
+18,"what temporal resolution and conﬁguration of sensors pro- the nysm proﬁler network is now fully operational, dis- vides the greatest beneﬁt?"
+18,what value does such a system tributing data to forecasters and researchers from across the bring to nwp or weather operations?
+18,observing system state and to agencies such as the nws and nasa.
+18,such a unauthenticated | downloaded 11/23/24 06:09 pm utc
+19,november 2021 shrestha et al. 1609 large-scale network offers a long-term and reliable platform sounding systems for wind energy applications.
+19,atmos.
+19,"meas. for operations and research, bringing potential beneﬁts to the tech., 10, 1707–1721, https://doi.org/10.5194/amt-10-1707- weather, water, and climate enterprise for a wide variety of 2017. applications, including emergency management, renewable black, c., y."
+19,"tesfaigzi, j."
+19,"bassein, and l."
+19,"miller, 2017: energy, aviation, and health."
+19,wildﬁre smoke exposure and human health: signiﬁcant gaps in research for a growing public health issue.
+19,environ.
+19,toxi- col.
+19,"pharmacol., 55, 186–195, https://doi.org/10.1016/j.etap."
+19,acknowledgments.
+19,this research is made possible by the 2017.08.022.
+19,new york state mesonet (nysm).
+19,"original funding for the blaylock, b."
+19,"k., j."
+19,"horel, and e."
+19,"crosman, 2017a: impact of nysm was provided by federal emergency management lake breezes on summer ozone concentrations in the salt agency grant fema-4085-dr-ny, with the continued lake valley."
+19,meteor.
+19,"climatol., 56, 353–370, https:// support of the nys division of homeland security and doi.org/10.1175/jamc-d-16-0216.1."
+19,"emergency services; the state of new york; the research }}, }}, and s."
+19,"liston, 2017b: cloud archiving and data foundation for the state university of new york (suny); mining of high-resolution rapid refresh forecast model the university at albany, suny; the atmospheric sciences output."
+19,comput.
+19,"geosci., 109, 43–50, https://doi.org/10.1016/j."
+19,research center (asrc) at suny albany; and the cageo.2017.08.005.
+19,"department of atmospheric and environmental sciences boquet, m., p."
+19,"royer, j."
+19,"cariou, and m."
+19,"machta, 2016: simula- (daes) at suny albany."
+19,the national center for atmo- tion of doppler lidar measurement range and data availabil- spheric research is sponsored by the national science ity.
+19,atmos.
+19,"oceanic technol., 33, 977–987, https://doi.org/ foundation."
+19,"thanks are given to the university of wyo- ming department of atmospheric science for nws radio- 10.1175/jtech-d-15-0057.1. sonde data, skew t plots, and upper-air maps; nws brooks, i."
+19,"m., 2003: finding boundary layer top: application of a weather prediction center for the surface analysis map; wavelet covariance transform to lidar backscatter proﬁles."
+19,new york state department of environmental conserva- atmos.
+19,"oceanic technol., 20, 1092–1105, https://doi.org/10. tion (nys dec) for pm2.5 data; and university of utah 1175/1520-0426(2003)020,1092:fbltao.2.0."
+19,co;2. for hrrr archive data.
+19,"the authors declare that they have brotzge, j."
+19,"a., and coauthors, 2020: a technical overview of the no real or perceived ﬁnancial conﬂicts of interests."
+19,new york state mesonet standard network.
+19,atmos.
+19,"oce- anic technol., 37, 1827–1845, https://doi.org/10.1175/jtech- data availability statement."
+19,the nysm proﬁler network d-19-0220.1.
+19,"cariou, j."
+19,"p., l."
+19,"thobois, and p."
+19,"spencer, 2018: from wind- data are available online (http://www.nysmesonet.org/weather/ cue#0001 to windcube#1000: doppler lidar as a mature tech- requestdata) subject to the nysm data policy stated in the nology. 19th coherent laser radar conf., okinawa, japan, web page."
+19,"th14, http://clrccires.colorado.edu/data/paper/th14.pdf."
+19,"chudnovsky, a., a."
+19,"lyapustin, y."
+19,"wang, c."
+19,"tang, j."
+19,"schwartz, and p."
+19,"koutrakis, 2014: high resolution aerosol data from references modis satellite for urban air quality studies."
+19,"aitken, m."
+19,"l., m."
+19,"rhodes, and j."
+19,"lundquist, 2012: perfor- geosci., 6, 17–26, https://doi.org/10.2478/s13533-012-0145-4. mance of a wind-proﬁling lidar in the region of wind turbine cimini, d., and coauthors, 2011: thermodynamic atmospheric rotor disks."
+19,atmos.
+19,"oceanic technol., 29, 347–355, https:// proﬁling during the 2010 winter olympics using ground-based doi.org/10.1175/jtech-d-11-00033.1. microwave radiometry."
+19,ieee trans.
+19,geosci.
+19,"remote sens., alexandrov, m."
+19,"d., a."
+19,"lacis, b."
+19,"carlson, and b."
+19,"cairns, 49, 4959–4969, https://doi.org/10.1109/tgrs.2011.2154337."
+19,"2001: remote sensing of atmospheric aerosols and trace gases delgado, r., and coauthors, 2020: uniﬁed ceilometer network. by means of multiﬁlter rotating shadowband radiometer."
+19,"marama air monitoring training committee workshop, part ii: climatological applications."
+19,atmos.
+19,"sci., 59, 544–566, mid atlantic regional air management association, https:// https://doi.org/10.1175/1520-0469(2002)059,0544:rsoaaa.2. alg.umbc.edu/wp-content/uploads/2020/12/delgado_ceilometer_ 0."
+19,network_update_marama_2020_v2.pdf.
+19,"}}, a."
+19,"marshak, b."
+19,"cairns, a."
+19,"lacis, and b."
+19,"carlson, eck, t."
+19,"f., b."
+19,"holben, j."
+19,"reid, o."
+19,"dubovik, a."
+19,"smirnov, 2004: automated cloud screening algorithm for mfrsr n."
+19,"o’neill, i."
+19,"slutsker, and s."
+19,"kinne, 1999: wavelength data."
+19,geophys.
+19,"lett., 31, l04118, https://doi.org/10.1029/ dependence of the optical depth of biomass burning, urban 2003gl019105. and desert dust aerosols."
+19,geophys.
+19,"res., 104, 31 333– }}, a."
+19,"lacis, b."
+19,"carlson, and b."
+19,"cairns, 2008: characteri- 31 349, https://doi.org/10.1029/1999jd900923. zation of atmospheric aerosols using mfrsr measurements."
+19,"emami, f., m."
+19,"masiol, and p."
+19,"hopke, 2018: air pollution at j."
+19,geophys.
+19,"res., 113, d08204, https://doi.org/10.1029/ rochester, ny: long-term trends and multivariate analysis 2007jd009388. of upwind so2 source impacts."
+19,"total environ., 612, ångstr€om, a., 1929: on the transmission of sun radiation and on 1506–1515, https://doi.org/10.1016/j.scitotenv.2017.09.026. dust in the air."
+19,geogr.
+19,"ann., 2, 156–166."
+19,"flaherty, j."
+19,"e., w."
+19,"shaw, j."
+19,"wilczak, a."
+19,"white, c."
+19,"baars, h., a."
+19,"ansmann, r."
+19,"engelmann, and d."
+19,"althausen, 2008: king, and t."
+19,"ayers, 2016: doe’s 449 mhz wind proﬁling continuous monitoring of the boundary layer top with lidar. radars on the u.s."
+19,west coast: annual summary for ﬁscal atmos.
+19,"phys., 8, 7281–7296, https://doi.org/10.5194/ year 2016."
+19,doe rep.
+19,"pnnl-25925, 30 pp., https://www. acp-8-7281-2008. pnnl.gov/main/publications/external/technical_reports/pnnl- bianco, l., k."
+19,"friedrich, j."
+19,"wilczak, d."
+19,"hazen, d."
+19,"wolfe, r."
+19,25925.pdf.
+19,"delgado, s."
+19,"oncley, and j."
+19,"lundquist, 2017: assessing flentje, h., b."
+19,"heese, j."
+19,"reichardt, and w."
+19,"thomas, 2010: aerosol the accuracy of microwave radiometers and radio acoustic proﬁling using the ceilometer network of the german unauthenticated | downloaded 11/23/24 06:09 pm utc"
+20,1610 journal of applied meteorology and climatology volume 60 meteorological service.
+20,atmos.
+20,"tech., 3, 3643–3673, data: modeling and observations."
+20,geophys.
+20,"res., 110, https://doi.org/10.5194/amtd-3-3643-2010."
+20,"d09201, https://doi.org/10.1029/2004jd005337."
+20,"ford, b., m."
+20,"val martin, s."
+20,"zelasky, e."
+20,"fischer, s."
+20,"knupp, k."
+20,"r., r."
+20,"ware, d."
+20,"cimini, f."
+20,"vandenberghe, j."
+20,"viveka- anenberg, c."
+20,"heald, and j."
+20,"pierce, 2018: future ﬁre nandan, e."
+20,"westwater, t."
+20,"coleman, and d."
+20,"phillips, 2008: impacts on smoke concentrations, visibility, and health in the ground-based passive microwave proﬁling during dynamic contiguous united states."
+20,"geohealth, 2, 229–247, https://doi. weather conditions."
+20,atmos.
+20,"oceanic technol., 26, 1057– org/10.1029/2018gh000144. 1073, https://doi.org/10.1175/2008jtecha1150.1."
+20,"granados-munoz, m."
+20,"j., f."
+20,"navas-guzman, j."
+20,"bravo-aranda, kollias, p., and coauthors, 2020: the arm radar network: at j."
+20,"guerrero-rascado, h."
+20,"lyamani, j."
+20,"fernandez-galvez, the leading edge of cloud and precipitation observations. and l."
+20,"albados-arboledas, 2012: automatic determination bull."
+20,meteor.
+20,"soc., 101, e588–e607, https://doi.org/10. of the planetary boundary layer height using lidar: one-year 1175/bams-d-18-0288.1. analysis over southeastern spain."
+20,geophys.
+20,"res., 117, koontz, a., g."
+20,"hodges, j."
+20,"barnard, c."
+20,"flynn, and j."
+20,"michalsky, d18208, https://doi.org/10.1029/2012jd017524."
+20,2013: aerosol optical depth value-added product.
+20,"g€ uldner, j., and d."
+20,"sp€ankuch, 2001: remote sensing of the ther- doe rep."
+20,"doe/sc-arm/tr-129, 32 pp., https://www.arm. modynamic state of the atmospheric boundary layer by gov/publications/tech_reports/doe-sc-arm-tr-129.pdf. ground-based microwave radiometry."
+20,atmos.
+20,"oceanic koskinen, j."
+20,"t., and coauthors, 2011: the helsinki testbed: a technol., 18, 925–933, https://doi.org/10.1175/1520-0426(2001) mesoscale measurement, research and service platform."
+20,"018,0925:rsotts.2.0."
+20,meteor.
+20,"soc., 92, 325–342, https://doi.org/10.1175/ gupta, p., and s."
+20,"christopher, 2008: seven year particulate 2010bams2878.1. matter air quality assessment from surface and satellite meas- kucher, n., d."
+20,"turner, u."
+20,"lohnert, and s."
+20,"crewell, 2016: cali- urements."
+20,atmos.
+20,"phys., 8, 3311–3324, https://doi.org/ brating ground-based microwave radiometer: uncertainty 10.5194/acp-8-3311-2008. and drifts."
+20,"radio sci., 51, 311–327, https://doi.org/10.1002/ hansen, j."
+20,"e., and l."
+20,"travis, 1974: light scattering in planetary 2015rs005826. atmospheres."
+20,space sci.
+20,"rev., 16, 527–610, https://doi.org/10."
+20,"kumer, v."
+20,"m., j."
+20,"reuder, and b."
+20,"furevik, 2014: a comparison 1007/bf00168069. of lidar and radiosonde wind measurements."
+20,"energy pro- heffter, j."
+20,"l., 1980: transport layer depth calculations."
+20,"second cedia, 53, 214–220, https://doi.org/10.1016/j.egypro.2014.07."
+20,"joint conf. on applications of air pollution meteorology, 230."
+20,"new orleans, la, amer."
+20,meteor.
+20,"soc., 787–791."
+20,"laroche, s., and r."
+20,"sarrazin, 2013: impact of radiosonde balloon hewison, t., 2007: 1d-var retrievals of temperature and humid- drift on numerical weather prediction and veriﬁcation."
+20,wea. ity proﬁles from a ground-based microwave radiometer.
+20,"forecasting, 28, 772–782, https://doi.org/10.1175/waf-d-12- ieee trans."
+20,geosci.
+20,"remote sens., 45, 2163–2168, https://doi."
+20,00114.1. org/10.1109/tgrs.2007.898091.
+20,"lee, j., and coauthors, 2019: ceilometer monitoring of boundary- }}, and c."
+20,"gaffard, 2003: radiometrics mp3000 microwave layer height and its application in evaluating the dilution radiometer performance assessment version 1.0."
+20,met ofﬁce effect on air pollution.
+20,"bound.-layer meteor., 172, 435–455, observations development tech."
+20,"rep.-tr29, 43 pp., http:// https://doi.org/10.1007/s10546-019-00452-5. tim.hewison.org/tr29.pdf."
+20,"liljegren, j."
+20,"c., 2002: evaluation of a new multi-frequency micro- hill, c., 2018: coherent focused lidars for doppler sensing of wave radiometer for measuring the vertical distribution of aerosols and wind."
+20,"remote sens., 10, 466, https://doi.org/10. temperature, water vapor, and cloud liquid water."
+20,doe 3390/rs10030466.
+20,arm program tech.
+20,"rep., 67 pp."
+20,"hu, x., and coauthors, 2013: estimating ground-level pm2.5 con- }}, b."
+20,"lesht, s."
+20,"kato, and e."
+20,"clothiaux, 2001: initial eval- centrations in the southeastern u.s. using geographically uation of proﬁles of temperature, water vapor and cloud liq- weighted regression."
+20,environ.
+20,"res., 121, 1–10, https://doi.org/ uid water from a new microwave radiometer. 11th arm sci- 10.1016/j.envres.2012.11.003. ence team meeting proc., atlanta, ga, u.s."
+20,"department of hua, z., w."
+20,"sun, g."
+20,"yang, and q."
+20,"du, 2019: a full coverage daily energy, https://www.arm.gov/publications/proceedings/conf11/ average pm2.5 retrieval method with two stage ivw fused extended_abs/liljegren_jc.pdf."
+20,modis c6 aod and two stage gam model.
+20,"remote sens., liu, j."
+20,"c., and coauthors, 2016: particulate air pollution from 11, 1558, https://doi.org/10.3390/rs11131558. wildﬁres in the western us under climate change."
+20,"climatic hung, w.-t., and coauthors, 2020: the impacts of transported change, 138, 655–666, https://doi.org/10.1007/s10584-016-1762-6. wildﬁre smoke aerosols on surface air quality in new york loughner, c."
+20,"p., and coauthors, 2014: impact of bay-breeze circu- state: a case study in summer 2018."
+20,atmos.
+20,"environ., 227, lations on surface air quality and boundary layer export."
+20,"j. 117415, https://doi.org/10.1016/j.atmosenv.2020.117415."
+20,meteor.
+20,"climatol., 53, 1697–1713, https://doi.org/10."
+20,"illingworth, a."
+20,"j., and coauthors, 2019: how can existing ground- 1175/jamc-d-13-0323.1. based proﬁling instruments improve european weather fore- munkel, c., 2006: boundary layer and air quality monitoring with casts?"
+20,meteor.
+20,"soc., 100, 605–619, https://doi.org/ a commercial lidar ceilometer."
+20,"spie, 6367, 63670q, 10.1175/bams-d-17-0231.1. https://doi.org/10.1117/12.689775."
+20,"joseph, e., b."
+20,"shrestha, c."
+20,"conover, b."
+20,"stutsrim, m."
+20,"schwab, nasa, 2019: earth science and applications decadal survey."
+20,"nasa, j."
+20,"schwab, and j."
+20,"zhang, 2018: ozone sonde measurements 47 pp., https://science.nasa.gov/science-red/s3fs-public/atoms/ﬁles/ from flax pond, long island during the 2018 listos field esd community forum - march 4 2019 - final.pdf."
+20,intensive.
+20,"agu fall meeting, washington, dc, amer."
+20,"geo- national research council, 2009: observing weather and climate phys."
+20,"union, abstract a51n-2402. from the ground up: a nationwide network of networks."
+20,"kassianov, e."
+20,"i., j."
+20,"barnard, and t."
+20,"ackerman, 2005: national academies press, https://doi.org/10.17226/12540."
+20,"retrieval of aerosol microphysical properties using surface newman, j."
+20,"f., p."
+20,"klein, s."
+20,"wharton, a."
+20,"sathe, t."
+20,"bonin, multifilter rotating shadowband radiometer (mfrsr) p."
+20,"chilson, and a."
+20,"muschinski, 2016: evaluation of three unauthenticated | downloaded 11/23/24 06:09 pm utc"
+21,november 2021 shrestha et al. 1611 lidar scanning strategies for turbulence measurements. https://www.arm.gov/publications/tech_reports/doe-sc-arm-tr- atmos.
+21,"tech., 9, 1993–2013, https://doi.org/10.5194/amt- 132.pdf."
+21,9-1993-2016.
+21,"solheim, f., j."
+21,"godwin, e."
+21,"westwater, y."
+21,"han, s."
+21,"keihm, k."
+21,"north, k."
+21,"w., m."
+21,"oue, p."
+21,"kollias, s."
+21,"giangrande, s."
+21,"collis, marsh, and r."
+21,"ware, 1998: radiometric proﬁling of tempera- and c."
+21,"potvin, 2017: vertical air motion retrievals in deep ture, water vapor, and cloud liquid water using various inver- convective clouds using the arm scanning radar network in sion methods."
+21,"radio sci., 33, 393–404, https://doi.org/10.1029/ oklahoma during mc3e."
+21,atmos.
+21,"tech., 10, 2785–2806, 97rs03656. https://doi.org/10.5194/amt-10-2785-2017."
+21,"strauch, r."
+21,"g., d."
+21,"merritt, k."
+21,"moran, k."
+21,"earnshaw, and patadia, f., r."
+21,"levy, and s."
+21,"mattoo, 2018: correcting for trace d."
+21,"kamp, 1983: the colorado wind proﬁling network."
+21,j. gas absorption when retrieving aerosol optical depth from atmos.
+21,"oceanic technol., 1, 37–49, https://doi.org/10.1175/ satellite observations of reﬂected shortwave radiation."
+21,atmos.
+21,"1520-0426(1984)001,0037:tcwpn.2.0."
+21,"tech., 11, 3205–3219, https://doi.org/10.5194/amt-11- suomi, i., s."
+21,"gryning, e."
+21,"o’connor, and t."
+21,"vihma, 2017: 3205-2018."
+21,methodology for obtaining wind gusts using doppler lidar.
+21,"radiometrics, 2013: proﬁler operator’s manual."
+21,radiometrics cor- quart.
+21,meteor.
+21,"soc., 143, 2061–2072, https://doi.org/10. poration doc., 197 pp., http://radiometrics.com/data/uploads/ 1002/qj.3059."
+21,2014/08/mp-3000a-operator-manual-revg.pdf.
+21,"turner, d."
+21,"d., s."
+21,"mcfarlane, l."
+21,"riihimaki, y."
+21,"shi, c."
+21,"lo, and rattigan, o."
+21,"v., k."
+21,"civerolo, h."
+21,"felton, j."
+21,"schwab, and q."
+21,"min, 2014: cloud optical properties from the multiﬁlter k."
+21,"demerjian, 2015: long term trends in new york: shadowband radiometer (mfrsrcldod): an arm pm2.5 mass and particle components."
+21,aerosol air qual.
+21,"res., value-added product."
+21,doe tech.
+21,"doe/sc-arm/ tr-139, 29 pp., https://www.osti.gov/servlets/purl/1237958. 16, 1191–1205, https://doi.org/10.4209/aaqr.2015.05.0319."
+21,"wagner, t."
+21,"j., p."
+21,"klein, and d."
+21,"turner, 2019: a new gener- rogers, h."
+21,"m., j."
+21,"ditto, and d."
+21,"gentner, 2020: evidence for ation of ground based mobile platforms for active and passive impacts on surface level air quality in northeastern us from proﬁling of the boundary layer."
+21,meteor.
+21,"soc., long-distance transport of smoke from north american ﬁres 100, 137–153, https://doi.org/10.1175/bams-d-17-0165.1. during the long island sound tropospheric ozone study wilczak, j."
+21,"m., e."
+21,"gossard, w."
+21,"neff, and w."
+21,"eebrehard, (listos) 2018."
+21,atmos.
+21,"phys., 20, 671–682, https://doi."
+21,1996: ground based remote sensing of the atmospheric org/10.5194/acp-20-671-2020. boundary layer: 25 years of progress.
+21,"bound.-layer meteor., royer, p., m."
+21,"boquet, j.-p."
+21,"cariou, l."
+21,"sauvage, and r."
+21,"parment- 71, 277–296, https://doi.org/10.1007/978-94-017-0944-6_14. ier, 2016: aerosol/cloud measurements using coherent wind wmo, 2018: statement of guidance for high-resolution numerical doppler lidars."
+21,"epj web conf., 119, 11002, https://doi.org/10. weather prediction (nwp)."
+21,"wmo rep., 12 pp., http://www. 1051/epjconf/201611911002. wmo.int/pages/prog/www/osy/sog/sog-highres-nwp.pdf."
+21,"schaap, m., a."
+21,"apituley, r."
+21,"timmermans, r."
+21,"koele- wu, y., a."
+21,"arapi, j."
+21,"huang, b."
+21,"gross, and f."
+21,"moshary, 2018: meijer, and g. de."
+21,"leeuw, 2009: exploring the relationship intra-continental wildﬁre smoke transport and impact on between aerosol optical depth and pm2.5 at cabauw, the local air quality observed by ground-based and satellite netherlands."
+21,atmos.
+21,"phys., 9, 909–925, https://doi.org/ remote sensing in new york city."
+21,atmos.
+21,"environ., 187, 10.5194/acp-9-909-2009. 266–281, https://doi.org/10.1016/j.atmosenv.2018.06.006."
+21,"schlatter, t., 2004: cost and operational effectiveness analysis for yang, s., j."
+21,"preißler, m."
+21,"wiegner, s."
+21,"l€ owis, g."
+21,"petersen, m."
+21,m. the noaa proﬁler network.
+21,noaa tech.
+21,"oar parks, and d."
+21,"finger, 2020: monitoring dust events using gsd-56, 108 pp., https://doi.org/10.7289/v5/tm-oar-gsd-56."
+21,doppler lidar and ceilometer in iceland.
+21,"atmosphere, 11, schroeder, j., and e."
+21,"westwater, 1991: user’s guide to wpl 1294, https://doi.org/10.3390/atmos11121294. microwave radiative transfer software."
+21,noaa tech.
+21,"yin, b., q."
+21,"min, and e."
+21,"joseph, 2015: retrievals and uncertainty erl wpl-213, 84 pp. analysis of aerosol single scattering albedo from mfrsr schuster, g."
+21,"l., o."
+21,"dubovik, and b."
+21,"holben, 2006: angstrom measurements."
+21,quant.
+21,spectrosc.
+21,radiat.
+21,"transfer, 150, 95– exponent and bimodal aerosol size distributions."
+21,"geophys. 106, https://doi.org/10.1016/j.jqsrt.2014.08.012."
+21,"res., 111, d07207, https://doi.org/10.1029/2005jd006328."
+21,"zhang, j., m."
+21,"ninneman, e."
+21,"joseph, m."
+21,"schwab, b."
+21,"shrestha, sivaraman, c., s."
+21,"mcfarlane, e."
+21,"chapman, m."
+21,"jensen, t."
+21,"toto, s. and j."
+21,"schwab, 2020: mobile laboratory measurements of high liu, and m."
+21,"fischer, 2013: planetary boundary layer height surface ozone levels and spatial heterogeneity during listos (pbl) value added product (vap): radiosonde retrievals."
+21,2018: evidence for sea breeze inﬂuence.
+21,geophys.
+21,"atmos., u.s."
+21,doe tech.
+21,"doe/sc-arm/tr-132, 36 pp., 125, e2019jd031961, https://doi.org/10.1029/2019jd031961."
+21,unauthenticated | downloaded 11/23/24 06:09 pm utc

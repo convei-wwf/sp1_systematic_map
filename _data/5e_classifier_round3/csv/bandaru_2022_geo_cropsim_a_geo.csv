@@ -1,0 +1,720 @@
+page,p
+1,"isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 contents lists available at sciencedirect isprs journal of photogrammetry and remote sensing journal homepage: www.elsevier.com/locate/isprsjprs geo-cropsim: a geo-spatial crop simulation modeling framework for regional scale crop yield and water use assessment varaprasad bandaru a, *, raghu yaramasu a, curtis jones a, r."
+1,"césar izaurralde a, ashwan reddy a, fernando sedano a, craig s.t."
+1,"daughtry b, inbal becker-reshef a, chris justice a a department of geographical sciences, university of maryland, college park, md 20740, usa b usda, agricultural research service, beltsville agricultural research center, hydrology and remote sensing laboratory, 10300 baltimore avenue, beltsville, md 20705, usa a r t i c l e i n f o a b s t r a c t keywords: remote sensing derived datasets (e.g."
+1,leaf area index (lai)) are increasingly being used in process based crop yields cropping system models to improve the prediction skill of the simulations when implementing operationally at evapotranspiration regional scale.
+1,"however, challenges such as inadequate quality of the available remote sensing data products and lai high reliance of models on climate variables and their uncertainties still exist."
+1,"to address these challenges, we emergence dates developed geo-cropsim, a spatial modeling framework to use high quality remote sensing products in the crop model epic environmental policy integrated climate (epic) agroecosystem model to regulate simulated processes and corn improve predictions of crop yield and evapotranspiration."
+1,geo-cropsim comprises three main features 1) pixel and soybean level model initialization using crop emergence dates; 2) ability of the epic model to read in the prosail (i.e. combined prospect leaf optical properties model and sail canopy bidirectional reflectance model) inversion- based crop type lai; and 3) a stress adjustment function to regulate simulated stress using lai anomalies.
+1,"to understand its performance, we implemented it over the state of nebraska to estimate corn (zea mays l.) and soybean (glycine max [merr.]) yields and evapotranspiration (et) for 2012 (drought year) and 2015 (normal year) at 500-m resolution."
+1,results showed that emergence dates and seasonal lai captured spatial and temporal differences in crop progression (e.g. delayed planting in 2015) and growth (e.g. declined lai in 2012) driven by regional differences in crop management and weather conditions very well.
+1,"these differences were reflected in geo-cropsim yield estimates, and showed improved spatial and temporal details compared over those from epic simulations obtained without using remote sensing derived emergence and lai."
+1,"results revealed that mean absolute percentage error (mape) and root mean square error (rmse) of geo-cropsim yield estimates, computed based on usda-nass reported yields, were 18.85% and 1.22 mg ha− 1 for corn, and 17.90% and 0.46 mg ha− 1 for soybeans, respectively, which are substantially lower than those of original epic estimates (mape = 33.74% and rmse = 2.18 mg ha− 1 for corn; and mape = 40.71% and rmse = 0.98 mg ha− 1 for soybeans)."
+1,"further, geo-cropsim was able to capture et and transpiration dynamics reasonably well (e.g. 10–12 % lower values for soybeans compared to corn values), and showed good agreement with flux measurements (i.e."
+1,"r2 values of 0.63 and 0.72, rmse values of 29.88 and 33.41 mm, and mape values of 5.0% and 6.8% for corn and soybean, respectively)."
+1,"overall, this study demonstrated that geo-cropsim has considerable potential to serve as a reliable operational tool to assess crop yields and water use under various cropping systems and to help in regional yield monitoring and water resource management."
+1,"introduction rosegrant et al., 2009)."
+1,"in addition, global water resources have been decreasing while frequent occurrence of extreme weather events (e.g."
+1,a major challenge facing humanity is meeting future food demands droughts) are being witnessed under a changing climate.
+1,"for instance, under the increasingly resource constrained environment."
+1,"the pressure recent droughts in the united states (2012), australia (2006–2007, on agroecosystems is increasing with the growing world population and 2007–2008, 2017–2018) and russia and ukraine (2010–2011) led to its associated food and energy needs (bruinsma, 2009; sills et al., 2010; record low levels of agricultural production, steep rises in food prices, * corresponding author. https://doi.org/10.1016/j.isprsjprs.2021.10.024 received 9 july 2021; received in revised form 21 october 2021; accepted 29 october 2021 available online 11 november 2021 0924-2716/© 2021 international society for photogrammetry and remote sensing, inc."
+1,(isprs).
+1,published by elsevier b.v.
+1,all rights reserved.
+2,bandaru et al.
+2,"isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 and civil unrest, particularly in import-dependent countries (fao, 2007; 2018; johnson, 2014; kamir et al., 2020)."
+2,"these approaches have been fao, 2010; fao, 2012)."
+2,"under these circumstances, to meet the pro­ widely used because they are easier and faster to implement over large duction demands and use resources efficiently, it is critical to identify geographical areas compared to physical based process models and the 1) vulnerable areas most sensitive to changing climatic conditions; generally require much fewer inputs than process based crop models. 2) potential areas to improve production and reduce yield gaps; and 3) however, a major limitation reported in earlier studies with these ap­ efficient cropping systems that can maximize the water use efficiency proaches is transferability."
+2,"due to their empirical nature, these ap­ and are resilient to extreme conditions (cassman, 2007; foley et al., proaches provide reliable estimates only for specific crop cultivars and 2011; schmidhuber and tubiello, 2007; vermeulen et al., 2012)."
+2,"for geographical regions, and under certain climatic conditions considered this, accurate assessment of yields and water use under various cropping in their development (doraiswamy et al., 2003; fang et al., 2011). systems, soils and climatic conditions is a prerequisite."
+2,"remote sensing-based evapotranspiration methods have been developed crop yield, defined as the fraction of total crop harvested (e.g. grain) using a range of empirical and physically based modules (courault et al., to the harvested land area, is a fundamental metric of crop productivity 2005, gowda et al., 2007; laipelt et al., 2021; mokhtari et al., 2019)."
+2,"(azzari et al., 2017)."
+2,"reliable estimates of yields at various spatial scales some methods use empirical relationships between thermal infrared will help assess the productivity potential under various environmental remote sensing retrieved variables (e.g. surface temperature), vegetative conditions, and determine the yield gaps, which further assist in indices and meteorological data with et (seguin & itier, 1983; developing improved farm level management strategies to increase or lagouarde, & macaneney, 1992)."
+2,"other methods compute a reduction maintain the yields (lobell, 2013; mulla, 2013; van ittersumet al., parameter such as crop coefficient (kc) using empirical relationships 2013)."
+2,"yield estimates also support crop insurance or land rental de­ with spectral indices, and estimate actual evapotranspiration from po­ cisions (sherrick et al., 2014), informing and developing agricultural tential or reference evapotranspiration (anderson et al., 2017)."
+2,"deter­ policies, analyzing global trade trends and stabilizing markets (justice ministic physically based methods (e.g."
+2,"atmosphere land-exchange and becker-reshef, 2007)."
+2,"evapotranspiration (et), which is the rate of (alexi) model (anderson et al., 1997)) compute elements of the energy water vapor exchange between the land surface and the atmosphere, budget, for which various remote sensing derived datasets (e.g. albedo, including evaporation from soil and other surfaces and plant transpi­ lai, land surface temperature) are used at different modeling levels, ration, is used as a primary metric to assess the water consumption in either as input parameters or in assimilation procedures (courault et al., croplands (pereira et al., 1999)."
+2,accurate and spatially explicit et es­ 2005).
+2,empirical et methods were found to have the same trans­ timates are needed to monitor water use under various cropping systems ferability issue as empirical yield models.
+2,"even though deterministic and to optimize water management practices (anderson et al., 2019). methods have been reported to provide reasonable daily et estimates, crop yield and evapotranspiration are estimated using a wide range uncertainty with scaling of estimated instantaneous et at the time of of approaches."
+2,"most widely used approaches include process-oriented satellite overpass to daily et has often been a concern along with other crop simulation models, remote sensing-based parametric and non- challenges (e.g. spatial and temporal resolution of remote sensing parametric empirical and physically based approaches, and hybrid ap­ products) (colaizzi et al., 2006; ryu et al., 2012). proaches utilizing a combination of crop modeling and remote sensing hybrid approaches that use remote sensing derived datasets and crop (schauberger et al., 2020)."
+2,process-oriented crop simulation models (e. simulation models have recently received wide attention.
+2,remote g.
+2,"environmental policy integrated climate (epic), decision support sensing derived input parameters (e.g. crop growth stages) and bio­ system for agrotechnology transfer (dssat), agricultural production physical variables (e.g."
+2,"lai, fapar) have been reported to improve the systems simulator (apsim)) employ biophysical and biogeochemical prediction skill of crop simulation models through improving model principles coupled with crop management, climate and soils to simulate initialization and crop parameterization, and reducing uncertainties a number of system scale attributes depending on the complexity and associated with biases in climate variables (moulin et al., 1998; dor­ algorithms included (archontoulis et al., 2014; bandaru et al., 2013a; aiswamy et al., 2005; jin et al., 2017; ovando et al., 2018)."
+2,"crop thorp et al., 2008; jin et al., 2017;)."
+2,"some of these attributes include simulation models generally use remote sensing-based datasets either as: biomass, crop yield, evapotranspiration, soil water, carbon dynamics, 1) a forcing variable to replace intermediate state variables (e.g."
+2,lai) nitrogen and other nutrient fluxes.
+2,"because of their ability to simulate simulated by models or 2) a simulation rectifier to update model responses of plant and soil processes under various climate, land use and simulated state variables or adjust model parameters to reduce the gap management, and soil conditions, process-based models have been between model predictions and observations (jin et al., 2018). viewed as robust tools to assess crop yields and water use of various the performance of hybrid approaches varies considerably depend­ cropping systems characterized with simple to complex management ing on a number of factors (e.g. what remote sensing variables are used practices across a wide range of scales and geographic locations (jones in the model and the quality of the remote sensing products)."
+2,"for et al., 2017)."
+2,"however, challenges in acquiring representative spatially instance, several studies have integrated or assimilated seasonal lai distributed crop parameters and uncertainties in the spatial input retrieved from remote sensing (de wit & van diepen, 2007; huang et al., datasets undermine the confidence in adopting simulation models 2015; huang et al., 2016; huang et al., 2019)."
+2,lai is a key state variable widely for yield and water use analyses at large spatial scales.
+2,"for in process-based crop simulation models, and it influences the simula­ instance, recent studies reported a significant bias in gridded climate tion of many biophysical processes (e.g. biomass)."
+2,"however, integration datasets and a resulting high level of uncertainty in model simulations of lai alone may not improve yield and et simulations (ines et al., 2013) (bandaru et al., 2017; van wart et al., 2013). because yield and et are influenced by additional factors."
+2,"for instance, remote sensing observations provide spatially explicit crop spectral sowing dates have significant influence on simulations of crop growth properties, which are used to determine spectral indices (e.g."
+2,"normal­ and development, since models initialize the simulations from either ized difference vegetation index, ndvi) and estimate various crop sowing or emergence dates."
+2,misrepresentation of sowing dates may set biophysical attributes using parametric and non-parametric empirical incorrect growing season windows and introduce biases in model sim­ and physically based approaches (e.g.
+2,"leaf area index, (lai); fraction of ulations (doraiswami et al., 2005)."
+2,"further, the quality of remote absorbed photosynthetically active radiation (fapar); albedo) sensing datasets has considerable impact on the simulations."
+2,"for (schauberger et al., 2020; danner et al., 2021; dong et al., 2020). instance, studies often rely on empirical relationships based on spectral spectral indices and biophysical attributes are further used to assess indices to estimate state variables, which may have significant levels of crop condition and development, and estimate crop yields and evapo­ uncertainty depending on crop, landscape and climatic conditions, and transpiration."
+2,remote sensing-based yield models are generally based on introduce errors into model simulations.
+2,"also, studies often use satellite parametric and non-parametric empirical approaches (balaghi et al., products that do not have enough spatial resolution to capture intrinsic 2008; becker-reshef et al., 2010; franch et al., 2017; holzman et al., crop characteristics."
+2,"for example, publicly available lai products such 35"
+3,bandaru et al.
+3,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+3,schematic showing processing steps and work flow of geo-cropsim modeling framework.
+3,"rectangle boxes show input and output variables while ellipses represent processing steps and algorithms. as modis lai (1-km) have been widely chosen to integrate or assimilate comprehensive process-based crop simulation model which includes into simulation models (ines et al., 2013)."
+3,"however, these products subroutines representing various biophysical and biogeochemical pro­ designed for global biome lai estimation, were reported to perform cesses."
+3,"the epic model is capable of simulating various plant and soil poorly at capturing crop type lai dynamics because they lack finer scale variables such as crop growth, biomass, yield, soil erosion, water, carbon resolution and generally consider all agricultural crops as a single biome and nutrient cycling under various climate, landscape, soil and man­ (li et al., 2015)."
+3,"given the heterogeneity in agricultural landscapes, agement conditions."
+3,"epic operates on a daily time step, and it can be earth observations characterized with high spatial and temporal reso­ utilized for assessments ranging from short-term seasonal to long-term lution are required for determining individual crop characteristics. (i.e. decades to centuries) time scales."
+3,"the crop growth module was this study presents a high-resolution satellite-based geospatial crop built based on monteith’s radiation use efficiency concept (monteith simulation modeling framework, named geo-cropsim, developed using et al., 1977), and it predicts daily potential biomass growth as a function the environmental policy integrated climate (epic) crop simulation of absorbed photosynthetically active radiation determined using beer’s model and high-resolution satellite-based datasets to address some law equation (lemeur and blad, 1974) and radiation use efficiency. known limitations in existing hybrid approaches."
+3,"the geo-cropsim potential biomass growth is constrained by different stresses (i.e. tem­ framework uses 30 m spatially explicit estimates of crop emergence perature, water, nutrient and aeration stresses), co2 concentration, and dates and seasonal lai produced using 30 m, 8-day fused reflectance management practices (e.g. row spacing) to estimate actual biomass. time series data produced using kalman filter recursive algorithm."
+3,"further, actual biomass is converted to crop yield according to a harvest further, to test the performance of geo-cropsim, it was employed to index, which is adjusted non-linearly from zero at planting to its opti­ estimate crop yield and evapotranspiration for corn and soybeans at 500 mum value at the maturity based on accumulated heat units, and it is m cultivated in the state of nebraska for 2012 (drought year) and 2015 also constrained by water stress. (normal year)."
+3,"the estimates were validated using usda-nass county similar to most of the crop models, epic simulates potential reported yields and et observations at three experimental sites in evapotranspiration which is defined as the rate of evapotranspiration eastern nebraska. when soil moisture is unlimited under actual weather and vegetation conditions (kimball et al., 2019)."
+3,"further, potential evapotranspiration 2."
+3,"overview of the geo-cropsim is adjusted to estimate actual evapotranspiration by computing evapo­ ration from soils and transpiration from plants separately using ritchie as depicted in fig. 1, the geo-cropsim framework include six ele­ equations (ritchie, 1972)."
+3,"soil evaporation is calculated using potential ments: 1) epic crop model 2) a downscaling algorithm to generate 8-day evapotranspiration, soil depth, soil water content and lai."
+3,"plant tran­ 30 m fused reflectance time series data; 3) phenocrop, a satellite remote spiration is modeled as a linear function of potential evapotranspiration sensing-based algorithm to estimate crop emergence dates; 4) prosail and lai."
+3,"epic offers five approaches for estimating potential evapo­ inversion algorithm to retrieve crop type seasonal lai; 5) a stress transpiration: 1) penman (1948); 2) penman-monteith (monteith, adjustment function; and 6) data integration and model implementa­ 1965); 3) baier-robertson (1965); 4) priestley-taylor (1972); and 5) tion."
+3,each component is described in detail below.
+3,hargreaves and samani (1985).
+3,the selection of method generally de­ pends on the number of available climate variables and local climatic conditions.
+3,"for instance, the penman and penman-monteith methods 2.1."
+3,"the epic crop model are more physically based approaches and require air temperature, solar radiation, wind speed, and relative humidity, whereas the other three geo-cropsim uses the epic model (williams, 1989), a 36"
+4,bandaru et al.
+4,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 table 1 parametric settings for prosail model in this study.
+4,model parameters abbr.
+4,"units ranges distribution prospect leaf structure index n unitless 1 – 2.5 uniform leaf chlorophyll content cab μg/cm2 10–80 gaussian (μ:45, σ:20) leaf dry matter content cm g/cm2 0.001 – 0.03 uniform leaf water content cw cm 0.002 – 0.05 uniform brown pigments content cbp unitless 0–2 uniform leaf carotenoid content car μg/cm2 0 – 16 uniform sailh leaf area index lai m2/m2 0.1 – 7 gaussian hot spot parameter sl unitless 0.05 – 1 uniform soil reflectance factor ρs unitless 0–1 uniform solar zenith angle θs degree based on landsat data acquisition conditions view zenith angle θv degree solar-sensor azimuth angle φsv degree fig."
+4,a) the rate of rs lai change (dlai) per husc vs husc (left).
+4,"the red line represents the polynomial fit; b) the str probability distribution using a gamma distribution with adjustment factors (m) of 0.1, 1, 2 and 10 (right)."
+4,"(for interpretation of the references to colour in this figure legend, the reader is referred to the web version of this article.)"
+4,"table 2 outperforms in areas with high wind fluctuations (grace & quick, 1988)."
+4,parameters selected for calibration.
+4,"similarly, the baier-robertson method developed in canada is reported parameter parameter definition min."
+4,"calibrated to perform well in cold climates even though it needs only air temper­ corn wa corn radiation use efficiency 35 50 35 ature as an input (dejong and tugwood, 1987)."
+4,"corn hi corn harvest index 0.50 0.60 0.53 as part of the geo-cropsim development, we introduced an option in corn dmla corn maximum lai 5 10 6 the model to read in lai from an outside source to bypass model soyb wa soybean radiation use efficiency 20 30 25 simulated lai, which is dependent on weather drivers."
+4,"similarly, geo- soyb hi soybean harvest index 0.3 0.4 0.3 cropsim uses emergence dates directly instead of estimating using soyb dmla soybean maximum lai 4 8 7 m fit parameter 0.1 10.0 1.25 growing degree days and planting dates."
+4,"also, we introduced a stress adjustment factor, which is computed using remote sensing-based lai and used in the calibration to optimize simulated stresses. methods are more empirically based approaches requiring fewer mete­ orological variables."
+4,only air temperature is required for the baier- robertson and hargreaves and samani methods while for the 2.2.
+4,"downscaling algorithm priestley-taylor method, air temperature and solar radiation are needed."
+4,"previous studies have reported varied performance of these geo-cropsim uses remote sensing derived state variables and crop methods depending on local climatic conditions (guo et al., 2017; inputs."
+4,"given that croplands are heterogeneous landscapes, frequent and paparrizos et al., 2017)."
+4,"for example, the penman-monteith approach sufficiently high/moderate resolution satellite observations are required table 3 model performance assessment with default and calibrated parameter sets as tested against usda-nass historical yields."
+4,default calibrated crop measure r2 nse rmse bias (%) r2 nse rmse bias (%) rmse change (%) corn yield 0.06 − 0.13 1.82 − 8.0 0.14 − 0.18 1.85 − 10.0 1.85 soybean yield 0.58 − 0.99 0.56 − 14.3 0.73 − 0.66 0.51 − 8.4 − 8.88 37
+5,bandaru et al.
+5,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig 3.
+5,"estimated emergence dates for corn and soybeans for 2012 and for 2015 at 30 m spatial resolution. to retrieve crop specific variables related to growth and development. not same as crop physiological growth stages (e.g. emergence) used in even though us croplands are characterized by large field sizes, earlier the crop models (liu et al., 2018)."
+5,"crop models uses temperature and studies have reported the issue of mixed pixels when using course res­ photoperiod, key factors driving crop development rates (zeng et al., olution observations such as modis 250-m reflectance data (bandaru 2016) to simulate different crop growth stages using weather datasets. et al., 2013a,b; gao et al., 2017)."
+5,"therefore, geo-cropsim uses the remote sensing metrics can be linked with crop growth stages using kalman filter recursive downscaling (kfr) algorithm and downscaling photothermal time to reduce dependency on weather datasets and es­ approach to generate 8-day 30 m fused reflectance time series data. timate less biased crop growth stages compared to those simulated using the geo-cropsim framework uses the kfr algorithm to combine crop models. reflectance data characterized with different resolutions (e.g."
+5,"modis the phenocrop algorithm uses remote sensing phenological metrics and landsat), to generate high spatial and temporal reflectance obser­ to determine crop growth stages using the wang and egle (we) vations."
+5,"the kfr employs a recursive kalman filter approach (kalman, phenological development model (wang and egle, 1995)."
+5,"the algorithm 1960), which combines observations, model estimates and uncertainties comprises mainly two steps: 1) retrieval of phenological metrics, and 2) to estimate the state of a process while minimizing the uncertainties conversion of phenological metrics to crop growth stages."
+5,"it retrieves the (welch & bishop, 2006)."
+5,the algorithm consists of two major steps.
+5,"step phenological metrics from the derivatives of double logistic fitted one uses a linear state-transition model and propagates the estimate and growing season remote sensing ndvi profiles, and estimates the closest uncertainty at the previous state to provide prior estimate and uncer­ crop growth stage to phenological metrics using accumulated photo­ tainty of the present state."
+5,the state-transition model utilizes piecewise thermal time (aptt).
+5,a detailed description of the approach can be regressions to determine relationship between modis and landsat found in bandaru et al.
+5,"(2020). pixels to provide constraints for the generated temporal trajectories and further, it updates the prior estimate and uncertainty at the current state with new observations."
+5,detailed description of the steps is provided in 2.4.
+5,prosail inversion algorithm the sedano et al.
+5,(2014).
+5,"lai is a key biophysical intermediate state variable simulated in crop models to determine a) crop interception of solar radiation, which in 2.3."
+5,"phenocrop algorithm turn influences potential biomass, and b) evapotranspiration, which influences soil–water and nutrient fluxes and consequently crop water crop planting or emergence dates are required for the initialization and nutrient stresses (williams et al., 1990)."
+5,seasonal crop lai simu­ of crop model simulations and for the determination of growing season lated by crop models are often found to have considerable uncertainty windows for each model run.
+5,"to estimate spatially variable crop emer­ due to coarser spatial resolution and biases in climate data driving the gence dates, geo-cropsim uses the phenocrop algorithm, which is models (ines et al., 2013)."
+5,"as such, geo-cropsim uses seasonal lai designed to produce crop growth stages using remote sensing pheno­ retrieved from downscaled reflectance using the prosail inversion logical metrics (bandaru et al., 2020)."
+5,the remote sensing-based approach.
+5,"coupling prospect, a radiative transfer model and sail phenology metrics such as greenup, peak growth and senescence are (scattering by arbitrary inclined leaves) reflectance model, prosail 38"
+6,bandaru et al.
+6,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+6,estimated corn leaf area index (lai) for four dates (i.e.
+6,"doy 170, 190, 210 and 230) in 2012 (left) and 2015 (right) at 30 m spatial resolution. has the capability to physically describe the spectral and directional for each pixel from the lut."
+6,"the cost function is defined using the properties of vegetation canopies in terms of leaf biochemistry charac­ following equation: teristics and canopy architecture (jacquemoud et al., 2009)."
+6,"it has been √̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅ nλ widely utilized in retrieving bidirectional surface reflectance spectra of 1 ∑ ( )2 rmse = ρi − ρilut (1) multiple crop types for effective estimation of crop lai (atzberger & nλ i=1 measure richter, 2012; liang et al., 2015; richter et al., 2011; thorp et al., 2012)."
+6,"to avoid the ill-posed issue in the inversion of radiative transfer thus, the prosail model was adopted to generate simulated look-up models, the algorithm determines the final lai value for a certain pixel tables (lut) to retrieve lai."
+6,"we first generated crop canopy re­ by averaging the top 10% of the lai values ordered by the lowest to alizations for each crop type using luts with 100,000 combinations of highest rmse values. canopy variable as suggested by richter et al."
+6,(2011).
+6,we defined the range and distribution of the major parameters for prospect and sail models to establish the luts based on previous studies (table 1).
+6,pa­ 2.5.
+6,"stress regulation factor rameters describing the solar and sensor positions in the sailh model, including solar zenith angle, view zenith angle and solar-sensor azimuth crop models account for different stresses to regulate the potential angle, were determined based on the metadata file of landsat or modis growth of the plant."
+6,"epic simulates five different stresses (water, ni­ tiles covering the study region depending on their availability. trogen, phosphorus, temperature and aeration) and adjusts daily po­ the algorithm implements a widely used cost function that calculates tential biomass using the minimum of all stresses."
+6,"due to reliance on the root mean square error (rmse) between the satellite observations weather variables to simulate stresses, models often overestimate or and simulated reflectance for all surface reflectance bands (duan et al., underestimate the stresses depending on uncertainty in weather vari­ 2014; richter et al., 2011; rivera et al., 2013) to retrieve the lai values ables."
+6,"lai integration in geo-cropsim is helpful to improve, to some 39"
+7,bandaru et al.
+7,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+7,estimated soybeans leaf area index (lai) for four dates (i.e.
+7,"doy 170, 190, 210 and 230) in 2012 (left) and 2015 (right) at 30 m spatial resolution. extent, evapotranspiration prediction which determines water stress and still uncertainty exist due to model dependency on temperature and solar radiation for calculation of potential evapotranspiration, and precipitation on soil water balance."
+7,"also, other stresses such as tem­ perature stress depends on temperature variables."
+7,"to address this issue, we developed a noval approach to reduce reliance on uncertain weather and soil data, similar to existing remote sensing assimilation approaches (ines et al., 2013; vazifedoust et al., 2009; wagner et al., 2020) but instead introducing a stress regulation (str) factor into the epic model to adjust the simulated stress based on remote sensing lai."
+7,"first, the remote sensing-based lai values are paired with the crop-specific maturity progress, referred as heat unit schedule (husc) in the epic model, to consider lai as a function of thermal rather than calendar time."
+7,the husc is calculated from germination to maturity according to williams et al. (1989) and represents the portion of the crop maturity cycle that has been completed.
+7,"next, the rate of change in lai (dlai) fig."
+7,state averaged leaf area index (lai) for corn and soybean cultivated in with husc is calculated.
+7,"then, a polynomial curve is fitted to the data 2012 and 2015. points such that a rate of change anomaly can be calculated as the dif­ ference between dlai at a particular husc and the fit at that husc 40"
+8,bandaru et al.
+8,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+8,"comparison of a) prosail based lai and b) epic simulated lai with observed dates at flux tower sites, mead, nebraska."
+8,geo-cropsim estimated yields for non-irrigated and irrigated corn for 2015 (normal year) and for 2012 (drought year) at 500 m spatial resolution.
+8,"(fig. 2a), with positive anomalies indicating vigorous growth and hence the m parameter adjusts the gamma function relating str and the lai limited stress conditions."
+8,"the polynomial fit of dlai vs husc was anomaly, with larger values of m creating more negative skew and hence derived for soybean and maize crops individually, with modis-based reducing stresses more conservatively such that more positive lai lai records available from 2002 to 2015."
+8,"next, a gamma distribution anomalies are required in order to reduce stresses simulated by epic."
+8,an is used to translate the degree of lai anomaly to a stress regulation (str) m value of 1.25 was found to be most appropriate for the region and factor (fig. 2b).
+8,"the str factor can range from 0 to 1, and the str crops under study. calculated on a particular day sets a constrain on the stress, which the incurred stress caclulated as the maximum of str and the minimum modeled stress factor."
+8,"hence, str value of zero allows the full daily 2.6."
+8,data integration and model implementation stress penalty calculated by epic to be incurred while a one values eliminates any stresses simulated by epic.
+8,the gamma function is geo-cropsim uses a geospatial computational system (gcs) built implemented with rate and scale parameters fixed at 1 and the shape using custom r scripts.
+8,this system is constituted of three features: 1) parameter varying proportionally according to an m-parameter.
+8,"thus, processing spatial data layers to create input files required to run the epic simulations; 2) deploying the model on multiple cores in parallel; 41"
+9,bandaru et al.
+9,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+9,geo-cropsim estimated yields for non-irrigated and irrigated soybeans for 2015 (normal year) and for 2012 (drought year) at 500 m spatial resolution.
+9,table 4 usda-nass state yields and geo-cropsim and epic simulated state averaged yields (standard deviations in brackets) for non-irrigated and irrigated corn and soybeans cultivated in 2015 and 2012.
+9,non-irrigated corn irrigated corn non-irrigated soybeans irrigated soybeans 2015 2012 2015 2012 2015 2012 2015 2012 geo-cropsim 8.64 2.83 (0.93) 12.01 (0.46) 9.74 (0.70) 3.32 (0.63) 1.24 3.75 (0.07) 3.53 (0.16) (2.85) (0.38) 1.61 (0.53) 10.48 (0.81) 5.57 2.28 3.17 (0.21) 1.66 (0.14) epic 6.19 (2.18) (0.60) (0.82) 0.25 (0.11) 3.19 11.53 3.96 3.67 8.39 10.37 3.10 1.51 usda-nass and 3) post-processing epic output to create spatial output layers.
+9,the epic model is a point scale model and thus runs on individual fields or grid cells.
+9,"further, since the model was built using the fortran pro­ gramming language, it requires inputs in flat text files."
+9,"the gcs uses spatial land cover data to extract grid cells associated with a crop of interest, and uses them as modeling units."
+9,"for each modeling unit, corresponding lai, emergence dates, soil, weather and management information are extracted through processing of spatial data layers and text files are created to feed inputs into the model."
+9,"at the regional scale, depending on grid cell size, there will be a large number of modeling units."
+9,"for instance, in the state of nebraska, there were 45 million 30-m corn grid cells."
+9,"to run the model for such a large number of pixels, gcs uses custom r scrips to implement the model parallelly on multiple cores."
+9,"further, the system converts output text files into spatial layers."
+9,application of geo-cropsim framework fig.
+9,"state averaged percent yield decline in 2012 with relative to 2015 to understand the performance of the geo-cropsim, it was employed yields for non-irrigated and irrigated corn and soybean. to estimate crop yields and evapotranspiration for corn and soybean 42"
+10,bandaru et al.
+10,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 advanced wide field sensor (awifs) onboard the indian remote sensing resources which was used for the cdl mapping.
+10,"to be consistent, 2006 and 2007 crop covers were regridded to 30-m using the nearest neighbor method."
+10,3.1.2.
+10,"satellite remote sensing data to estimate crop emergence dates and seasonal lai, fused modis- landsat data were used."
+10,"to produce 8-day 30-m fused reflectance data, we used the landsat and modis reflectance time series data for nebraska from 2007 to 2011, 2012 and 2015."
+10,"data from 2007 to 2011 were required for historical seasonal lai estimation to enable the rstrs calculation, while 2012 and 2015 data were needed to provide emer­ gence dates and seasonal lai."
+10,"we downloaded landsat 7 etm + and landsat 8 oli level-2 surface reflectance data (total 20 tiles, paths 27–33 and rows 30–32)."
+10,"the level-2 data for landsat 7 and 8 processed with the landsat ecosystem disturbance adaptive processing system (ledaps) and landsat 8 surface reflectance code (lasrc), respec­ tively."
+10,we used quality assessment (qa) band to filter out landsat data with cloud cover of greater than 80%.
+10,"further, fmask algorithm (zhu & woodcock, 2012) was used to mask out the cloud and cloud shadow pixels, and implemented a gap filling algorithm (yan & roy, 2018) to get reflectance data for pixels with clouds, cloud shadows or scan line corrector (slc) failure."
+10,"the modis 8-day, 250-m (mod09q1) data (h10 v4 tile) were ac­ quired for 2007 to 2011, 2012 and 2015 (vermote et al., 2015)."
+10,"further data was corrected for brdf effects using the vjb method (vermote et al., 2009) as described in bandaru et al."
+10,(2020).
+10,fused modis-landsat reflectance data was produced through implementing kfr downscaling algorithm.
+10,corn and soybean pixels extracted from the cdl were used to develop crop transition models needed by the kfr algorithm.
+10,the kfr algorithm used all the cloud free pixels of individual landsat tiles and corresponding modis pixels to develop piecewise regressions.
+10,"further, for each landsat tile, fused modis-landsat data were produced using cloud free and gap-filled landsat 7 and 8 and modis 8-day 250-m images."
+10,"finally, a linear fig."
+10,"comparison of daily average air temperature (◦ c) and precipitation normalization method was used to merge all the downscaled landsat (mm) variables of daymet data with measured observations at flux tower sites, path/row scenes and generated 8-day 30-m reflectance data for corn and mead, ne."
+10,"both temperature and precipitation values represent averaged values over three field experimental sites (us-ne1: 41◦ 09′ 54.2′′ n, 96◦ 28′ 35.9′′ w; us- soybean."
+10,"ne2: 41◦ 09′ 53.6′′ n, 96◦ 28′ 07.5′′ w; and us-ne3: 41◦ 10′ 46.8′′ n, 96◦ 26′ to estimate crop emergence dates, the rs-phenology algorithm of 22.7′′ w) that are part of the ameriflux network (https://ameriflux.lbl.gov/). the phenocrop framework was employed to determine active green-up dates."
+10,"subsequently, using the conversion algorithm, corn and soy­ cultivated in 2012 and 2015 in the state of nebraska."
+10,we selected 2012 bean emergence dates at 30-m resolution were estimated for 2012 and and 2015 as they represent contrasting years (2012 - drought year and 2015 using pre-calculated required aptt and active green-up dates 2015 – normal year).
+10,"(bandaru et al., 2020)."
+10,"further, seasonal lai for historical years (2007–2011) and years of interest (2012 and 2015) were estimated using the prosail inversion algorithm and fused modis-landsat time 3.1."
+10,data preparation series data.
+10,geo-cropsim requires various spatial datasets including crop type 3.1.3.
+10,"climate data map, crop emergence dates, seasonal lai, soil, topography, climate and daily climate data (daymet) was used for model calibration crop management practices."
+10,details of various datasets (i.e. remote (1980–2011) and 2012 and 2015 simulations.
+10,"daymet interpolates daily sensing, climate and soil datasets) produced or used from other sources weather station observations, including daily minimum (tmin) and are described below. maximum (tmax) temperature and precipitation, based on gridded elevation data using a spatial convolution of a truncated gaussian filter 3.1.1."
+10,"usda-nass cropland data layer (cdl) interpolation method (thornton et al., 1997), and produces daily grid­ land use/land cover data is required for creating spatial modeling ded data at 1 km resolution."
+10,"further, downward shortwave radiation is units to employ the epic model and to extract crop specific character­ simulated using mtclim algorithm. istics from remote sensing observations in order to estimate crop emergence dates and seasonal lai development."
+10,we used cropland data 3.1.4.
+10,"soil data layer released by usda nass each year produced based on satellite soil properties required for the epic model (e.g. bulk density; observations, which was reported to have accuracy more than 95% for percent organic c and total n; slope gradient and length; number of soil corn and soybean crops in the states dominated with agricultural lands layers; and layer depth) were extracted from soil survey geographic (johnson and mueller, 2010)."
+10,"the cdl for historical years (2007–2011), database (ssurgo)."
+10,ssurgo vector maps obtained from the usda- 2012 and 2015 were used to extract corn and soybean pixels.
+10,"for all nrcs geospatial data gateway (datagateway.nrcs.usda.gov) were years, the cdl spatial resolution is 30-m except 2006 and 2007, for converted to 30-m raster layer, consistent with the cropland data layer which the resolution is 56-m, associated with the resolution of the (cdl)."
+11,bandaru et al.
+11,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+11,comparison of geo-cropsim estimated county aggregated corn yields with usda-nass county statistical yields a) non-irrigated corn yields for 2015; b) irrigated corn yields for 2015; c) non-irrigated corn yields for 2012; and d) irrigated corn yields for 2012.
+11,3.1.5.
+11,crop management data and slope (figure s1).
+11,"we obtained goodness-of-fit measures (r2) of 0.40 to implement geo-cropsim on irrigated and non-irrigated lands, we and 0.28 for corn and soybean, respectively, for conservation tillage used usgs irrigated maps (brown & pervez, 2014) to delineate irrigated activities. and non-irrigated corn and soybean lands based on the cdl."
+11,"usgs to estimate fertilizer application rates at a sub-state level, we con­ produces irrigated maps for every five years starting from 2002 at 250-m ducted surveys with state extension agents to gather information on spatial resolution for the conterminous united states."
+11,it uses a geospatial local fertilizer application rates and farmer’s considerations.
+11,"applica­ modeling framework that assimilates usda nass county irrigation tion rates are typically based on yield goals, with rates adjusted ac­ statistics with modis 250-m ndvi product (mod13q1) and usgs na­ cording to the productivity."
+11,"specifically, nitrogen fertilizer rate tional land cover database (nlcd) (brown & pervez, 2014)."
+11,"we used recommendations averaged 19.92 kg n/mg yield for corn, while phos­ 2012 and 2017 (closest year to 2015) irrigation maps for 2012 and 2015 phorus fertilizer rates averaged 3.08, and 6.57 kg p/mg yield for corn, yield simulations, respectively."
+11,"irrigation maps provide the fraction of and soybean, respectively."
+11,"to convert this information into average the area under irrigation within the 250-m pixel (ranging from 0 to 1, 1 county-level application rates, the nass county-level yields were used being 100% of the area under irrigation)."
+11,we used the cdl and labeled to determine expected nitrogen (n) and phosphorus (p) rates.
+11,"further, irrigated lands and non-irrigated lands depending on the crop fraction nccpi values were used to account for the sub-county level variation in within the 250-m irrigated map, and fraction of the irrigated area."
+11,"for the land productivity and downscaled county fertilizer rates to the pixel instance, if crop fraction and irrigated fraction within the 250-m pixel is level (figure s2)."
+11,"we compared estimated 2012 application amounts the same, then all the 30-m pixels within the 250-m pixel were labeled as with usgs county-level fertilizer data, which is available up to 2012 irrigated pixels."
+11,"(brakebilland gronberg, 2017)."
+11,"overall, the product performed for pixel level tillage information, we distributed county level con­ reasonably well, estimating county-level fertilizer application amounts servation tillage information center (ctic) data to individual pixels with an average r2 of 0.62 and nash–sutcliffe model efficiency coeffi­ using random forests."
+11,"we used landscape slope, county pesticide and cient (nse) of 0.50. herbicide application and national commodity crop productivity index (nccpi) as inputs."
+11,the primary intent of this approach is to develop a tillage map that matches county scale tillage totals reported in the ctic database while following sub-county scale patterns for soil productivity 44
+12,bandaru et al.
+12,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+12,comparison of epic estimated county aggregated corn yields with usda-nass county statistical yields a) non-irrigated corn yields for 2015; b) irrigated corn yields for 2015; c) non-irrigated corn yields for 2012; and d) irrigated corn yields for 2012.
+12,implementation of modeling framework (table 3) demonstrated improvements in model performance following calibration.
+12,best performing calibration settings at county scale were 3.2.1.
+12,integration of spatial data layers used for pixel level simulations.
+12,"for evapotranspiration, separate cali­ spatial modeling units, at 500 m spatial resolution, for corn and bration was not performed because there is limited observational et soybean were produced separately based on corn and soybean pixels data, which was used in the validation. extracted using 2012 and 2015 cdl."
+12,"firstly, empty rasters with 500 m grid cells covering the state of nebraska were created, and then the 3.2.3."
+12,implementation fraction of a given crop (i.e. corn or soybean) covering each 500 m grid simulations were performed using a parallel computing system.
+12,the cell was calculated based on 30-m pixels in the cdl.
+12,"finally, grid cells total modeling units for corn and soybeans were approximately one for which a given crop occupied at least 10% of the area were selected as million, which requires 2777.8 h or 115.74 days if simulations imple­ modeling units."
+12,"to generate epic input files for each modeling unit, all mented serially."
+12,the parallel computing system completed entire sim­ spatial datasets were re-gridded to 500 m spatial resolution and data was ulations approximately in 12 h.
+12,"the architecture of the parallel extracted for each modeling unit. computing system is similar to that described by nichols et al. (2011), except that our system was built based on r packages (i.e. parallel, 3.2.2."
+12,"model calibration dplyr, dosnow, r.utils)."
+12,"custom spatial processing scripts were used to to calibrate the epic model, simulations were conducted at the post process output text files and produce output raster files, which were county level for historical years."
+12,"epic inputs (e.g. soil characteristics, subsequently used for analysis and visualization. climate variables, emergence dates and lai) were generated by aggre­ gating pixel data to county level."
+12,"the method of morris (morris, 1991) was used to estimate the sensitivity of yields to each parameter on a 3.3."
+12,validation of crop yield and evapotranspiration estimates crop-specific basis.
+12,"following this sensitivity analysis, a subset of influential parameters was selected for calibration (table 2)."
+12,"calibration to understand the relative performance of the geo-cropsim frame­ of the selected parameters was conducted using the adaptive differential work for yield estimation, we implemented the epic framework without evolution adaptive metropolis (dream; vrugt et al., 2008) algorithm. using remote sensing derived emergence dates, seasonal lai and stress the performance of the epic model for simulating county yields adjustment, and compared the yield estimates of geo-cropsim and epic against usda-nass reported county yields."
+12,pixel-level yields were 45
+13,bandaru et al.
+13,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+13,"comparison of geo-cropsim estimated county aggregated soybeans yields with usda-nass statistical county yields a) non-irrigated soybeans yields for 2015; b) irrigated soybeans yields for 2015; c) non-irrigated soybeans yields for 2012; and d) irrigated soybeans yields for 2012. aggregated to county scale and accuracy indicators were computed such rmse, mape and r2. as root mean square error (rmse), mean absolute percentage error (mape) and coefficient of determination (r2)."
+13,results and discussion 1∑n |(wg − wo )| mape = % (2) 4.1.
+13,estimates of crop emergence dates n i=1 wg where mape = mean absolute percentage error fig. 3 shows the estimated pixel level emergence dates for corn and n = crop pixels used in simulations soybeans cultivated in 2012 and 2015.
+13,"in general, corn is emerged 2–3 i = index for individual pixels, year and crop combination weeks earlier compared to soybeans reflecting differences in planting wg = simulated values dates (bandaru et al., 2013a,b)."
+13,"this was evident in estimated emer­ wo = usda-nass reported values gence dates, irrespective of the year."
+13,"further, estimates showed spatial to evaluate the performance of geo-cropsim for et estimation, we trends that typically occur across the state of nebraska."
+13,"the summer used eddy covariance flux measurements at three field experimental growing season starts earlier in the southeast of the state compared to sites (us-ne1, us-ne2 and us-ne3) located near mead, nebraska the north-west, following a typical latitudinal temperature gradient."
+13,"the (suyker and verma, 2012)."
+13,"the us-ne1 (41◦ 09′ 54.2′′ n, 96◦ 28′ 35.9′′ w) temperatures are warmer in the south and eastward parts of nebraska and us-ne2 (41◦ 09′ 53.6′′ n, 96◦ 28′ 07.5′′ w) are irrigated sites equipped with a 2–3 weeks earlier in the start of the growing season compared to with a center-pivot irrigation system, while us-ne3 (41◦ 10′ 46.8′′ n, 96◦ the northwestern region."
+13,these trends were reflected in the estimated 26′ 22.7′′ w) is a rainfed site.
+13,"the us-ne1 has been under continuous emergence dates, exhibiting 10–19 days earlier emergence dates in the corn rotation since 2001 while us-ne2 and us-ne3 have generally been southeast region compared to the northwest and southwest regions under corn and soybean rotation."
+13,since regional simulations were per­ depending on crop and year (figure s3).
+13,"further, estimates also repre­ formed for only two years (2012 and 2015), there were limited obser­ sented temporal differences in emergence dates in 2012 and 2015."
+13,the vations to compare with total growing season et values (total of two summer planting season in 2012 started 8–12 days ahead of the his­ observations for corn and one observation for soybeans).
+13,"therefore, we torical average due to well above normal early spring temperatures performed geo-cropsim simulations over pixels covering experimental (usda, 2012)."
+13,"in contrast, due to wet soil conditions during early may sites to estimate daily and growing season et estimates for other years 2015, planting progress across nebraska was slowed, which delayed the (2002–2011), and compared them against measured et values using summer growing season."
+13,"our estimates showed, on average, an 18–23 46"
+14,bandaru et al.
+14,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+14,"comparison of epic estimated county aggregated soybeans yields with usda-nass county statistical yields a) non-irrigated soybeans yields for 2015; b) irrigated soybeans yields for 2015; c) non-irrigated soybeans yields for 2012; and d) irrigated soybeans yields for 2012. day delay in emergence of corn and soybeans in 2015, as compared to to the eastern part of nebraska irrespective of crop and year, averaging 2012. 10–45% lower depending on the year and timing within that year."
+14,"this to understand the uncertainty in the estimated emergence dates, pattern follows typical differences in growing season progression pat­ comparisons were made against observations collected at three field terns and east–west precipitation gradient."
+14,"growing season starts later sites located in mead, ne and state level emergence dates in crop in the western part as indicated in the emergence dates, which results in progress reports (usda-nass, 2012-2016) were used as reference data. delayed lai progression."
+14,"due to this delay, when comparing lai for the to compare with usda-nass state level crop progress dates when 50% same day, values are lower in the west part during the beginning of the of the crop reaches the emergence stage, state median emergence dates season."
+14,"similarly, annual precipitation decreases by 1-mm for every from pixel level estimates were computed."
+14,"since there were very limited 1.59-km moving from east to west in nebraska (nielsen, 2018), indi­ reference data for 2012 and 2015 (i.e. a total of seven values), we cating a drier climate in the western part of nebraska."
+14,"the drier climate extended implementation of phenocrop to other years (i.e. 2013, 2014, contributed to lower lai values in the west compared to those in the and 2016) to provide additional estimates."
+14,"overall, the estimated eastern nebraska."
+14,"in irrigated regions, lai was higher than in non- emergence dates showed reasonable agreement with both field obser­ irrigated regions, as expected."
+14,"for instance, in south-central nebraska vations and state-level usda reported values."
+14,"for pixel level compari­ along the platte river, where corn and soybeans are predominantly sons, the rmse and r2 (in brackets) values are 3.36 days (0.92) and under irrigation management, lai values were higher throughout the 6.24 days (0.52) for corn and soybean, respectively, while for state-level growing season. comparisons, the rmse and r2 (in brackets) values are 4.21 days (0.93) seasonal lai values also represented interannual variations."
+14,"the and 7.89 days (0.96) for corn and soybean, respectively."
+14,"the mean ab­ 2012 growing season started normal with favorable planting conditions, solute errors for both crops were less than 8 days, indicating reasonable however drought conditions prevailed later in the growing season, accuracy in the estimates. which affected growth of both corn and soybeans."
+14,"in contrast, the 2015 growing season started late with wet conditions early in the year fol­ lowed by normal growing conditions that favoured crop growth during 4.2."
+14,estimated seasonal leaf area index the season.
+14,these trends were reflected in the lai estimates (fig.
+14,"state averaged lai profiles showed that during the beginning of the figs. 4 and 5 illustrate spatiotemporal differences in timing and season, lai values were significantly higher (p less than 0.001) for both magnitude of lai progression across nebraska for corn and soybeans. corn and soybean in 2012 but the magnitude decreased rapidly and the lai values were consistently lower in the western region compared 47"
+15,bandaru et al.
+15,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+15,geo-cropsim estimated evapotranspiration for non-irrigated and irrigated corn for 2015 (normal year) and for 2012 (drought year) at 500 m spatial resolution.
+15,geo-cropsim estimated evapotranspiration for non-irrigated and irrigated soybeans for 2015 (normal year) and for 2012 (drought year) at 500 m spatial resolution.
+16,bandaru et al.
+16,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 fig.
+16,"state averaged non-growing season evapotranspiration, growing season evapotranspiration and transpiration under non-irrigated and irrigated corn and soybeans for 2015 and 2012."
+16,"comparison of geo-crosim growing evapotranspiration (et) estimates of corn and soybean with observed growing et values at field sites, mead, ne."
+16,"due to limited sites, geo-cropsim was implemented for 2002–2012 to have adequate number of estimates for comparison. became significantly lower than the 2015 lai."
+16,"irrespective of year, lai averaged planting dates and the impact of temperature biases from values were lower for soybean compared to corn due to genetic differ­ gridded weather datasets on the crop growth and development."
+16,"for ences in canopy development (bandaru et al., 2013a,b). instance, as shown in fig."
+16,"s4 at a non-irrigated field site, epic lai es­ since lai is a key input in the geo-cropsim framework, uncertainty timates were shifted to earlier in the year due to an incorrectly early in the lai estimates impact model simulations considerably."
+16,"therefore, planting date and also matured very quickly because of positive bias to understand the relative accuracy of prosail based lai values (overestimation) in daymet temperature."
+16,"further, epic simulated lai compared to epic simulated lai, we performed epic simulations for the values close to zero even though observed values higher than 1 (fig."
+16,"7) mead field site, and compared epic simulated lai and prosail based and this could be because of emergence days of the crops at field sites are lai against measured lai at mead field sites (fig."
+16,"the prosail es­ earlier than reported state level emergence dates. timates showed better agreement with field observations compared to the ability of both emergence and lai estimates to capture spatial epic simulated lai values as indicated by rmse, r2 values and mape and temporal regional dynamics and close agreement with field obser­ values (fig."
+16,the prosail estimates have lower rmse (0.67) and vations can be partly attributed to quality of remote sensing data used. higher r2 (0.88) relative to the epic estimates (rmse = 1.15 and r2 = the utilization of brdf adjusted modis-landsat fused 30-m reflectance 0.73).
+16,"further, the mean absolute percentage error (mape) for the enabled geo-cropsim to produce crop specific estimates and made prosail estimates was 19.51%, which is substantially lower than possible to represent local heterogeneity in emergence and lai mape of epic lai estimates (46.06%) indicating lower uncertainty in progression."
+16,prosail values.
+16,the discrepancies in epic simulated values can be in part attributed to the incorrect initialization of the model due to state 49
+17,bandaru et al.
+17,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 4.3.
+17,simulated crop yields and epic against usda-nass county yields were shown in figs.
+17,12- 15.
+17,"even though there was considerable difference in the performance, pixel level simulated yields using geo-cropsim and epic for non- both models were able to capture the yield variability reported in the irrigated and irrigated corn and soybeans cultivated in 2012 and 2015 usda-nass yields adequately with r2 values ranging from 0.20 to 0.71. are shown in figs."
+17,"8, 9, s5 and s6."
+17,"estimates from both simulations the geo-cropsim outperformed epic, and its yield estimates showed a captured a gradient of decreased yields from southeast to northwest, better agreement, irrespective of year, crop and management, as indi­ which is typical for nebraska, irrespective of crop and year, reflecting cated by lower rmse and mape values."
+17,the average rmse and mape differences in climatic and soil conditions.
+17,"however, geo-cropsim es­ values (averaged over years and irrigation management) of geo- timates exhibited higher granularity as indicated by higher standard cropsim estimates (corn yields’ rmse and mape: 1.22 and 18.85%; deviation (sd), more conspicuously for non-irrigated yields, compared soybeans yields’ rmse and mape = 0.46 and 17.90%) were substan­ to epic estimates, suggesting that geo-cropsim predicted local scale tially lower than those of epic estimates (corn yields’ rmse and mape yield variations better than epic."
+17,the sd values (averaged over years = 2.18 and 33.74%; soybeans yields’ rmse and mape = 0.98 and and irrigation management) for the geo-cropsim estimates for corn and 40.71%).
+17,"there was not any systematic difference in the performance of soybean were 1.44 mg/ha and 0.36 mg/ha, respectively, while epic the models for corn and soybeans. simulated yields for corn and soybean have averaged sd values of 0.90 both modeling frameworks performed better in 2015 compared to mg/ha and 0.27 mg/ha, respectively (table 4)."
+17,the lower spatial vari­ 2012 with geo-cropsim estimates matching more closely with usda- ability in the epic estimates can primarily be attributed to the course nass yields.
+17,"the average mape values (averaged over crop and man­ resolution of weather and soil inputs, which introduced homogeneity in agement) for geo-cropsim and epic estimates were 11.42% and 17.57 simulated intermediate state variables (e.g."
+17,"lai and evapotranspiration) % for 2015, respectively, while they were 25.33% and 53.89 % for 2012, and final yields."
+17,"however, initialization of the model on different dates respectively."
+17,"poor performance in 2012 indicated that the model is very for individual pixels using spatially resolved emergence dates and sensitive to stress factors during dry conditions, and small degrees of integration of high-resolution crop-specific lai, was able to break down uncertainty in temperature and weather variables can have a great the homogeneity driven by other inputs, to some extent, and improve impact on yield simulations (cabelguenne et al., 1999)."
+17,"with adjustment the granularity in the yield estimates. of stress using remote sensing lai, geo-cropsim was able to reduce the similar to spatial trends, both geo-cropsim and epic estimates mape value in yield estimates by 28.56%."
+17,"further, averaged mape for exhibited expected yield differences between 2012 and 2015, irre­ 2015 yield estimates of geo-cropsim was less than epic estimates, spective of crop and irrigation management."
+17,as shown in fig.
+17,"10, usda- which could be attributed to finer spatial details captured through use of nass reported approximately 62 and 11% (averaged over corn and spatially resolved emergence dates and crop type lai. soybeans) declines in state averaged yields under non-irrigated and irrigated conditions, respectively, for 2012 compared to 2015 due to 4.4."
+17,simulated evapotranspiration and transpiration drought conditions prevailing during the 2012 summer growing season.
+17,"while this trend was evident in both estimates, geo-cropsim performed figs. 16 and 17 show geo-cropsim simulated pixel level growing better than epic in terms of capturing the yield trends of usda statistics. season evapotranspiration under irrigated and non-irrigated corn and estimated percent yield decline in 2012 by the geo-cropsim framework soybeans for 2012 and 2015."
+17,"since patterns in et estimates of geo- under irrigated and non-irrigated conditions was around 69 and 20% cropsim and epic in terms of spatial details resembled yield patterns, (averaged over state and crop), respectively, which are in better here we only presented geo-cropsim estimates."
+17,"similar to simulated agreement with usda-nass reported trends compared to epic simu­ yields, et estimates showed a decreasing trend from southeast to lated yield decline (84 and 50% under irrigated and non-irrigation re­ northwest and significantly lower et values in the 2012 drought year gimes, respectively)."
+17,these results suggested that epic predicted except under irrigation management.
+17,"growing season et in some parts substantially lower yields in 2012 compared to geo-cropsim, leading to of the state (e.g. southeast) were higher in 2012, under irrigation higher yield declines."
+17,"this could be primarily explained by uncertainties management irrespective of the crop, yielding 10% higher state aver­ in weather variables."
+17,the comparison of daymet daily air temperature aged et compared to 2015.
+17,"previous studies reported the increase in and precipitation values against observed values at three experimental frequency of irrigation by farmers in the eastern part of nebraska during sites in mead, ne over the 2012 summer growing season showed that 2012 in response to drought conditions and higher evaporative demand daymet temperature values were significantly higher (on average, 3.8 (carr et al., 2016; yang et al., 2018), which led to higher rates of (◦ c) or 28% higher) than observed values (fig."
+17,"further, daymet evapotranspiration."
+17,"in contrast to higher evapotranspiration, 2012 corn total precipitation was ~ 150 mm less than observed precipitation. and soybean yields under irrigation management were lower than 2015 these errors led the model to overestimate water and temperature yields, indicating factors (e.g. temperature stress) other than evapo­ stresses during the 2012 growing season, subsequently resulting in over transpiration influenced crop yields. prediction of yield stressors."
+17,"further, along with biases in weather var­ similar to observations in previous studies (suyker and verma, 2009; iables, possible caveats (e.g. model sensitivity to water and temperature hernandez-ramirez et al., 2010), growing season et and transpiration stresses) in model structure could have impacted simulations to some (t) values were higher for corn (state averaged et and t = 552 and 378) extent under 2012 drought (glotter et al., 2016)."
+17,"the epic estimated compared to those for soybeans (state averaged et and t = 430 and state-averaged cumulative days of water stress over the growing season 257), on average, 22 and 31% (et and t) higher, respectively."
+17,"these that constrained biomass growth and yield for 2012 non-irrigated and variations can be primarily attributed to differences in plant biophysical irrigated corn was 59.83 and 3.90 days, respectively while days of characteristics."
+17,"for instance, variation in lai and length of the growing temperature stress was 5.27 and 26.61 days for non-irrigated and irri­ season strongly influence the magnitude of growing season et."
+17,"soybean gated corn, respectively."
+17,"patterns of cumulative stresses for soybeans maximum lai is considerably (15–25%) less than corn maximum lai and corn were similar, but differences in magnitude of stresses."
+17,"the under optimum conditions (doraiswamy et al., 2005), and growing stress adjustment function of geo-cropsim was able to adjust the season length is approximately 20 days shorter in soybeans (corn = 160 stresses during the 2012 growing season, and reduced total cumulative and soybeans = 140 days) (usda nass, 2012). water and temperature stresses by 20–65% depending on crop, stress further, because of the shorter growing season, non-growing season type and irrigation management."
+17,"this adjustment of stresses reduced the et is higher under soybean cropping systems (state averaged non- impact of temperature and precipitation biases, to some extent, and growing season et – 249 mm), compared to that under corn systems improved prediction of interannual temporal trends. (state averaged non-growing season et – 196 mm) (fig."
+17,"under comparison of county aggregated yield estimates of geo-cropsim soybean systems, non-growing season et contributes 38% of total 50"
+18,bandaru et al.
+18,"isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 annual evapotranspiration, whereas it was 29% under corn system. under drought conditions."
+18,"as such, future work will focus on improving under irrigation management, the non-growing season et fraction of the methods to estimate pixel-level tillage practices and fertilizer rates. the total et was reduced significantly (28% and 40% under irrigation also, model functions (e.g. temperature response functions) will be and non-irrigation managements, respectively)."
+18,"the differences in non- investigated to improve the stress simulations. growing season et between irrigation and non-irrigation management overall, this study demonstrated the robustness and ability of the are insignificant when compared to the differences in growing season geo-cropsim framework to reduce the uncertainties associated with et."
+18,this indicates that non-growing season et fractions are primarily climate datasets and provide accurate and spatially representative crop dictated by differences in growing season et for a given crop. yield and evapotranspiration estimates at field scale resolution.
+18,"as such, the transpiration fraction of the total growing season et determines geo-cropsim is expected to be a robust operational tool to evaluate crop the amount of productive water use, and it is a good measure of water yields and water use under various cropping systems, and help in productivity (kool et al., 2014)."
+18,"results showed that transpiration, on regional yield monitoring and water resource management."
+18,"future work average, accounted for 55–75% and 48–66% of the total growing season will focus on testing this framework for other crops and implementing it evapotranspiration in corn and soybeans systems, respectively, over other regions. depending on management and weather conditions (fig."
+18,"in 2015, transpiration fractions were, on average, 68% and 60% in corn and soybeans, respectively, and these fractions were reduced to 64% and declaration of competing interest 55% due to drought in 2012."
+18,"further, differences in transpiration frac­ tions between irrigation and non-irrigation management were signifi­ the authors declare that they have no known competing financial cantly higher in 2012 drought (26%) compared to difference in 2015 interests or personal relationships that could have appeared to influence (10%)."
+18,"during drought, reduced soil water availability and decline in the work reported in this paper. the leaf surface area negatively affect growing season transpiration under non-irrigation management, which can to some extent be offset by acknowledgements irrigation management (weisz et al., 1994; messina et al., 2015)."
+18,these results suggested that geo-cropsim framework captured general pat­ the authors acknowledge the help of dr.
+18,"ritvik sahajpal with tillage terns in transpiration fractions under drought conditions and varying mapping, and dr."
+18,eric vermote and dr.
+18,sergii skakun for their help with management.
+18,"brdf correction, and dr."
+18,jiaying he for her help with lai estimation.
+18,"as shown in fig. 19, simulated growing season et values were in this research is partly funded by nasa carbon monitoring system pro­ good agreement with flux-tower measurements and captured interan­ gram (grant no: nnx16ap25g), nasa harvest program (grant no: nual variability within the measurements."
+18,"simulated growing season et nnx16ap16g), usda-nifa afri sustainable agriculture systems values for corn and soybeans achieved r2 values of 0.63 and 0.72, and (sas) program (grant no: 2019–68012-29888), and u.s."
+18,"department of rmse values of 29.88 and 33.41 mm/growing season, respectively."
+18,"the agriculture, agricultural research service."
+18,"usda is an equal opportu­ mape values for both corn and soybeans were below 7% (mape values nity provider and employer. for corn and soybean = 5.0 and 6.8, respectively)."
+18,appendix a.
+18,supplementary data 5.
+18,conclusions supplementary data to this article can be found online at https://doi.
+18,"this study presents the geo-cropsim framework, a spatial crop org/10.1016/j.isprsjprs.2021.10.024. simulation modeling framework to estimate crop yields and evapo­ transpiration at regional scale."
+18,"the geo-cropsim framework has three references important features to improve prediction skill of the epic model simu­ lations: 1) model initialization using spatially resolved crop emergence anderson, m., diak, g., gao, f., knipper, k., hain, c., eichelmann, e., hemes, k., baldocchi, d., kustas, w., yang, y., 2019."
+18,impact of insolation data source on remote dates; 2) forcing model to use remote sensing-based crop specific lai to sensing retrievals of evapotranspiration over the california delta.
+18,"remote sensing. simulate other crop variables (e.g. potential biomass and growing season 11 (3), 216. https://doi.org/10.3390/rs11030216. transpiration); and 3) stress adjustment function to regulate simulated anderson, r.g., alfieri, j.g., tirado-corbalá, r., gartung, j., mckee, l.g., prueger, j.h., wang, d., ayars, j.e., kustas, w.p., 2017."
+18,assessing fao-56 dual crop coefficients stress using remote sensing based lai anomalies. using eddy covariance flux partitioning.
+18,"agricultural water management 179, the quality of remote sensing datasets determines the magnitude of 92–102. the impact of using remote sensing products in crop models."
+18,"the utili­ anderson, m.c., norman, j.m., diak, g.r., kustas, w.p., mecikalski, j.r., 1997."
+18,a two- zation of brdf adjusted modis-landsat fused reflectance data enabled source time-integrated model for estimating surface fluxes using thermal infrared remote sensing.
+18,remote sens.
+18,environ.
+18,"60 (2), 195–216."
+18,"geo-cropsim to estimate crop specific emergence and lai with high archontoulis, s.v., miguez, f.e., moore, k.j., 2014."
+18,"evaluating apsim maize, soil water, quality, which subsequently helped to improve the estimates of crop soil nitrogen, manure, and soil temperature modules in the midwestern united yields and growing season evapotranspiration."
+18,"further, stress adjust­ states."
+18,agron.
+18,"106 (3), 1025–1040."
+18,"atzberger, c., richter, k., 2012."
+18,spatially constrained inversion of radiative transfer ment function helped reduce the uncertainties in epic simulated stress models for improved lai mapping from future sentinel-2 imagery.
+18,"remote sens. under 2012 drought conditions, caused by biases in temperature environ."
+18,"120, 208–218. variables."
+18,"azzari, g., jain, m., lobell, d.b., 2017."
+18,towards fine resolution global maps of crop yields: testing multiple methods and satellites in three countries.
+18,remote sens.
+18,even though geo-cropsim reduced uncertainties in model simula­ environ.
+18,"202, 129–141. tions significantly, still some degree of uncertainty remains."
+18,"some balaghi, r., tychon, b., eerens, h., jlibene, m., 2008."
+18,"empirical regression models using spatial data products used in the geo-cropsim are characterized with ndvi, rainfall and temperature data for the early prediction of wheat grain yields in morocco."
+18,earth obs.
+18,geoinf.
+18,"10 (4), 438–452. some level of biases which introduced uncertainty in the model esti­ bandaru, v., izaurralde, r.c., manowitz, d., link, r., zhang, x., post, w.m., 2013a."
+18,soil mates.
+18,"for example, estimated pixel level tillage practices and fertilizer carbon and net energy associated with biofuel production on marginal lands; a amounts showed relatively lower agreement with observed and reported regional modeling perspective."
+18,environ.
+18,"42, 1802–1814."
+18,"bandaru, v., west, t.o., ricciuto, d., izaurralde, r.c., 2013b."
+18,"estimating crop net values, when compared to remote sensing derived products such as crop primary production using inventory data and modis derived parameters."
+18,isprs emergence and lai estimates.
+18,"further, model overestimated stresses journal of photogrammetry and remote sensing."
+18,"80, 61–71. under 2012 drought conditions."
+18,"even though stress adjustment function bandaru, v., pei, y.u., hart, q., jenkins, b.m., 2017."
+18,"impact of biases in gridded weather was able to improve the model predictions, accuracy in the 2012 sim­ datasets on biomass estimates of short rotation woody cropping systems."
+18,agricultural and forest meteorology.
+18,"233, 71–79. ulations was still not on par with 2015 model estimates’ accuracy, bandaru, v., yaramasu, r., koutilya, p., he, j., fernando, s., sahajpal, r., wardlow, b., indicating caveats in model structure with respect to stress simulation suyker, a., justice, c., 2020."
+18,phenocrop: an integrated satellite-based framework to 51
+19,bandaru et al.
+19,isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 estimate physiological growth stages of corn and soybeans.
+19,"international journal of holzman, m.e., carmona, f., rivas, r., niclòs, r., 2018."
+19,early assessment of crop yield applied earth observation and geoinformation 92. from remotely sensed water stress and solar radiation data.
+19,"isprs journal of becker-reshef, i., vermote, e., lindeman, m., justice, c., 2010."
+19,"a generalized regression- photogrammetry and remote sensing 145, 297–308. based model for forecasting winter wheat yields in kansas and ukraine using modis huang, j., gómez-dans, j.l., huang, h., ma, h., wu, q., lewis, p.e., liang, s., chen, z., data."
+19,remote sens.
+19,environ.
+19,"114 (6), 1312–1323."
+19,"xue, j.-h., wu, y., zhao, f., wang, j., xie, x., 2019."
+19,"assimilation of remote sensing brakebill, j.w. and gronberg, j.m."
+19,(2017).
+19,county-level estimates of nitrogen and into crop growth models: current status and perspectives.
+19,"agricultural and forest phosphorus from commercial fertilizer for the conterminous united states, 1987- meteorology 276-277, 107609. https://doi.org/10.1016/j.agrformet.2019.06.008."
+19,2012: u.s.
+19,"geological survey data release, https://doi.org/10.5066/f7h41pkx."
+19,"huang, j., sedano, f., huang, y., ma, h., li, x., liang, s., tian, l., zhang, x., fan, j., brown, j.f., pervez, m.s., 2014."
+19,"merging remote sensing data and national agricultural wu, w., 2016."
+19,assimilating a synthetic kalman filter leaf area index series into the statistics to model change in irrigated agriculture.
+19,"agricultural systems 127, 28–40."
+19,wofost model to improve regional winter wheat yield estimation.
+19,"agricultural and bruinsma, j., 2009."
+19,"the resource outlook to 2050: by how much do land, water use forest meteorology."
+19,"216, 188–202. and crop yields need to increase by 2050."
+19,"fao and esdd, rome."
+19,"huang, j., tian, l., liang, s., ma, h., becker-reshef, i., huang, y., su, w., zhang, x., cabelguenne, m., debaeke, p., bouniols, a., 1999."
+19,"epicphase, a version of the epic zhu, d., wu, w., 2015."
+19,"improving winter wheat yield estimation by assimilation of model simulating the effects of water and nitrogen stress on biomass and yield, the leaf area index from landsat tm and modis data into the wofost model. taking account of developmental stages: validation on maize, sunflower, sorghum, agricultural and forest meteorology 204, 106–121. soybean and winter wheat."
+19,"agricultural systems 60 (3), 175–196."
+19,"ines, a.v.m., das, n.n., hansen, j.w., njoku, e.g., 2013."
+19,"assimilation of remotely sensed carr, t., yang, h., ray, c."
+19,(2016).
+19,temporal variations of water productivity in soil moisture and vegetation with a crop simulation model for maize yield irrigatedcorn: an analysis of factors influencing yield and water use across central prediction.
+19,"remote sensing of environment 138, 149–164."
+19,"nebraska.plos one 11, 1–17."
+19,"jacquemoud, s., verhoef, w., baret, f., bacour, c., zarco-tejada, p.j., asner, g.p., cassman, k.g., 2007."
+19,"climate change, biofuels, and global food security."
+19,environ.
+19,"françois, c., ustin, s.l., 2009."
+19,prospect + sail models: a review of use for lett.
+19,"2 (1), 011002. https://doi.org/10.1088/1748-9326/2/1/011002. vegetation characterization."
+19,remote sens.
+19,environ.
+19,"113, s56–s66."
+19,"colaizzi, p., evett, s., howell, t., tolk, j., 2006."
+19,"comparison of five models to scale daily jin, x., li, z., yang, g., yang, h., feng, h., xu, x., wang, j., li, x., luo, j., 2017."
+19,winter evapotranspiration from one-time-of-day measurements.
+19,"transactions of the asabe wheat yield estimation based on multi-source medium resolution optical and radar 49, 1409–1417. imaging data and the aquacrop model using the particle swarm optimization courault, d., seguin, b., olioso, a., 2005."
+19,review on estimation of evapotranspiration algorithm.
+19,"isprs journal of photogrammetry and remote sensing 126, 24–37. from remote sensing data: from empirical to numerical modeling approaches 19 (3- jin, x., kumar, l., li, z., feng, h., xu, x., yang, g., wang, j., 2018."
+19,"a review of data 4), 223–249. assimilation of remote sensing and crop models."
+19,"european journal of agronomy 92, danner, m., berger, k., wocher, m., mauser, w., hank, t., 2021."
+19,"efficient rtm-based 141–152. training of machine learning regression algorithms to quantify biophysical & johnson, d.m., 2014."
+19,an assessment of pre- and within-season remotely sensed variables biochemical traits of agricultural crops.
+19,isprs journal of photogrammetry and for forecasting corn and soybean yields in the united states.
+19,remote sens.
+19,environ.
+19,"remote sensing 173, 278–296."
+19,"141, 116–128. de wit, a.j.w., van diepen, c.a., 2007."
+19,"crop model data assimilation with the ensemble johnson, d.m., mueller, r., 2010."
+19,the 2009 cropland data layer.
+19,photogrammetri.
+19,kalman filter for improving regional crop yield forecasts.
+19,agricultural and forest remote sens.
+19,"76, 1201–1205."
+19,"meteorology 146 (1-2), 38–56."
+19,"jones, j.w., antle, j.m., basso, b., boote, k.j., conant, r.t., foster, i., godfray, h.c.j., dejong, r., tugwood, p., 1987."
+19,"comparison of potential evapotranspiration models and herrero, m., howitt, r.e., janssen, s., keating, b.a., munoz-carpena, r., porter, c. some applications in soil-water modeling."
+19,"canadian agricultural engineering 29, h., rosenzweig, c., wheeler, t.r., 2017."
+19,brief history of agricultural systems 15–20. modeling.
+19,"agricultural systems 155, 240–254."
+19,"dong, t., liu, j., qian, b., he, l., liu, j., wang, r., jing, q.i., champagne, c., justice, c."
+19,"o., & becker-reshef, i."
+19,(2007).
+19,"report from the workshop on developing a mcnairn, h., powers, j., shi, y., chen, j.m., shang, j., 2020."
+19,estimating crop strategy for global agricultural monitoring in the framework of group on earth biomass using leaf area index derived from landsat 8 and sentinel-2 data.
+19,isprs observations (geo) (pp.
+19,1− 67).
+19,"journal of photogrammetry and remote sensing 168, 236–250."
+19,"kalman, r."
+19,(1960).
+19,a new approach to linear filtering and prediction problems 1.
+19,"doraiswamy, p.c., moulin, s., cook, p.w., stern, a., 2003."
+19,"crop yield assessment from journal of basic engineering, 82(series d), 35–45. remote sensing."
+19,"photogrammetric engineering and remote sensing 69 (6), 665–674."
+19,"kamir, e., waldner, f., hochman, z., 2020."
+19,"estimating wheat yields in australia using doraiswamy, p.c., sinclair, t.r., hollinger, s., akhmedov, b., stern, a., prueger, j., climate records, satellite image time series and machine learning methods."
+19,isprs 2005.
+19,application of modis derived parameters for regional crop yield assessment.
+19,"journal of photogrammetry and remote sensing 160, 124-135."
+19,"remote sensing of environment 97 (2), 192–202."
+19,"kool, d., agam, n., lazarovitch, n., heitman, j.l., sauer, t.j., ben-gal, a., 2014."
+19,"duan, s.-b., li, z.-l., wu, h., tang, b.-h., ma, l., zhao, e., li, c., 2014."
+19,inversion of the a review of approaches for evapotranspiration partitioning.
+19,"agricultural and forest prosail model to estimate leaf area index of maize, potato, and sunflower fields meteorology 184, 56–70. from unmanned aerial vehicle hyperspectral data."
+19,earth obs.
+19,geoinf.
+19,"26, lagouarde, j.-p., mcaneney, k.j., 1992."
+19,daily sensible heat flux estimation from a single 12–20. measurement of surface temperature and maximum air temperature.
+19,"boundary- fang, h., liang, s., hoogenboom, g., 2011."
+19,"integration of modis lai and vegetation layer meteorol 59 (4), 341–362. index products with the csm-ceres-maize model for corn yield estimation."
+19,"laipelt, l., henrique bloedow kayser, r., santos fleischmann, a., ruhoff, a., remote sens."
+19,"32 (4), 1039–1065."
+19,"bastiaanssen, w., erickson, t.a., melton, f., 2021."
+19,"long-term monitoring of fao, 2007."
+19,"faostat, fao statistical databases. http://www.fao.org/faostat/en/ evapotranspiration using the sebal algorithm and google earth engine cloud #data/qc (last accessed march 30, 2021). computing."
+19,"isprs journal of photogrammetry and remote sensing 178, 81–96."
+19,"fao, 2010."
+19,"faostat, fao statistical databases. http://www.fao.org/faostat/en/ lemeur, r., blad, b.l., stone, j.f., 1975."
+19,"a critical review of light models for estimating #data/qc (last accessed march 30, 2021). the shortwave radiation regime of plant canopies* *published as paper."
+19,"in: journal fao, 2012."
+19,"faostat, fao statistical databases. http://www.fao.org/faostat/en/ series, nebraska agricultural experiment station."
+19,"plant modification for more #data/qc (last accessed march 30, 2021)."
+19,"efficient water use, no."
+19,"elsevier, pp."
+19,255–286.
+19,"foley, j.a., ramankutty, n., brauman, k.a., cassidy, e.s., gerber, j.s., johnston, m., li, z., tang, h., zhang, b., yang, g., xin, x., 2015."
+19,"evaluation and intercomparison of mueller, n.d., o’connell, c., ray, d.k., west, p.c., balzer, c., bennett, e.m., modis and geov1 global leaf area index products over four sites in north china."
+19,"carpenter, s.r., hill, j., monfreda, c., polasky, s., rockström, j., sheehan, j., sensors 15 (3), 6196–6216."
+19,"siebert, s., tilman, d., zaks, d.p.m., 2011."
+19,solutions for a cultivated planet.
+19,"nature liang, l., di, l., zhang, l., deng, m., qin, z., zhao, s., lin, h., 2015."
+19,"estimation of crop 478 (7369), 337–342."
+19,lai using hyperspectral vegetation indices and a hybrid inversion method.
+19,"remote franch, b., vermote, e., roger, j.-c., murphy, e., becker-reshef, i., justice, c., sens."
+19,environ.
+19,"165, 123–134."
+19,"claverie, m., nagol, j., csiszar, i., meyer, d., baret, f., masuoka, e., wolfe, r., liu, l., zhang, x., yu, y., gao, f., yang, z., 2018."
+19,"real-time monitoring of crop devadiga, s., 2017."
+19,a 30+ year avhrr land surface reflectance climate data phenology in the midwestern united states using viirs observations.
+19,remote record and its application to wheat yield monitoring.
+19,"remote sensing 9 (3), 296."
+19,"sensing 10 (10), 1540. https://doi.org/10.3390/rs10101540. https://doi.org/10.3390/rs9030296."
+19,"lobell, d.b., hammer, g.l., mclean, g., messina, c., roberts, m.j., schlenker, w., 2013."
+19,"gao, f., anderson, m.c., zhang, x., yang, z., alfieri, j.g., kustas, w.p., mueller, r., the critical role of extreme heat for maize production in the united states."
+19,"johnson, d.m., prueger, j.h., 2017."
+19,toward mapping crop progress at field scales chang.
+19,"3 (5), 497–501. through fusion of landsat and modis imagery."
+19,"remote sensing of environment 188, messina, c.d., sinclair, t.r., hammer, g.l., curan, d., thompson, j., oler, z., gho, c., 9–25."
+19,"cooper, m., 2015."
+19,"limited-transpiration trait may increase maize drought gowda, p., chavez, j., colaizzi, p., evett, s., howell, t., tolk, j., 2007."
+19,remote sensing tolerance in the us corn belt.
+19,"agronomy journal 107 (6), 1978–1986. based energy balance algorithms for mapping et: current status and future mokhtari, a., noory, h., pourshakouri, f., haghighatmehr, p., afrasiabian, y., challenges."
+19,"transactions of the asabe 50, 1639–1644."
+19,"razavi, m., fereydooni, f., sadeghi naeni, a., 2019."
+19,"calculating potential grace, b., quick, b., 1988."
+19,a comparison of methods for the calculation of potential evapotranspiration and single crop coefficient based on energy balance equation evapotranspiration under the windy semi-arid conditions of southern alberta. using landsat 8 and sentinel-2.
+19,"isprs journal of photogrammetry and remote canadian water resources journal / revue canadienne des ressources hydriques 13 sensing 154, 231–245."
+19,"(1), 9–19."
+19,"monteith, j.l., 1965."
+19,evaporation and environment.
+19,"symposia of the society for guo, d., westra, s., maier, h.r., 2017."
+19,"sensitivity of potential evapotranspiration to experimental biology 19, 205–234. changes in climate variables for different australian climatic zones."
+19,"hydrology and monteith, j.l., moss, c.j., cooke, g.w., pirie, n.w., bell, g.d.h., 1977."
+19,"climate and the earth system sciences 21 (4), 2107–2126. efficiency of crop production in britain."
+19,"philosophical transactions of the royal hernandez-ramirez, g., hatfield, j.l., prueger, j.h., sauer, t.j., 2010."
+19,energy balance society of london.
+19,"b, biological sciences 281, 277–294. and turbulent flux partitioning in a corn-soybean rotation in the midwestern us."
+19,"morris, m.d., 1991."
+19,factorial sampling plans for preliminary computational experiments.
+19,"theoretical and applied climatology 100 (1-2), 79–92."
+19,"technometrics 33, 161–174."
+20,bandaru et al.
+20,"isprs journal of photogrammetry and remote sensing 183 (2022) 34–53 moulin, s., bondeau, a., delecolle, r., 1998."
+20,"combining agricultural crop models and thorp, k.r., dejonge, k.c., kaleita, a.l., batchelor, w.d., paz, j.o., 2008."
+20,methodology satellite observations: from field to regional scales.
+20,international journal of remote for the use of dssat models for precision agriculture decision support.
+20,comput.
+20,"sensing 19 (6), 1021–1036."
+20,electron.
+20,agric.
+20,"64 (2), 276–285."
+20,"mulla, d.j., 2013."
+20,"twenty five years of remote sensing in precision agriculture: key thorp, k.r., wang, g., west, a.l., moran, m.s., bronson, k.f., white, j.w., mon, j., advances and remaining knowledge gaps."
+20,biosyst.
+20,"114 (4), 358–371."
+20,"estimating crop biophysical properties from remote sensing data by inverting nichols, j., kang, s., post, w., wang, d., bandaru, v., manowitz, d., zhang, x., linked radiative transfer and ecophysiological models."
+20,remote sens.
+20,environ.
+20,"124, izaurralde, r., 2011."
+20,hpc-epic for high resolution simulations of environmental and 224–233. sustainability assessment.
+20,"computers and electronics in agriculture 79 (2), 112–115."
+20,"usda-nass, (2012). http://www.nass.usda.gov/publications/national_crop_progress/ nielsen, d.c., 2018."
+20,"influence of latitude on the us great plains east-west precipitation (last accessed november 18, 2020)."
+20,gradient.
+20,"agricultural & environmental letters 3 (1), 170040. https://doi.org/ van ittersum, m.k., cassman, k.g., grassini, p., wolf, j., tittonell, p., hochman, z., 10.2134/ael2017.11.0040."
+20,yield gap analysis with local to global relevance-a review.
+20,field crop res.
+20,"143, ovando, g., sayago, s., bocco, m., 2018."
+20,evaluating accuracy of dssat model for 4–17. soybean yield estimation using satellite weather data.
+20,"isprs journal of van wart, j., grassini, p., cassman, k.g., 2013."
+20,"impact of derived global weather data on photogrammetry and remote sensing 138, 208–217. simulated crop yields."
+20,"global change biology 19 (12), 3822–3834."
+20,"paparrizos, s., maris, f., matzarakis, a., 2017."
+20,"sensitivity analysis and comparison of vazifedoust, m., van dam, j.c., bastiaanssen, w.g.m., feddes, r.a., 2009."
+20,assimilation various potential evapotranspiration formulae for selected greek areas with different of satellite data into agrohydrological models to improve crop yield forecasts. climate conditions.
+20,"theoretical and applied climatology 128 (3-4), 745–759."
+20,"international journal of remote sensing 30 (10), 2523–2545."
+20,"pereira, l.s., perrier, a., allen, r.g., alves, i., 1999."
+20,"evapotranspiration: concepts and vermeulen, s.j., aggarwal, p.k., ainslie, a., angelone, c., campbell, b.m., challinor, a. future trends."
+20,"journal of irrigation and drainage engineering 125 (2), 45–51."
+20,"j., hansen, j.w., ingram, j.s.i., jarvis, a., kristjanson, p., lau, c., nelson, g.c., sills, j., porter, j.r., challinor, a., ewert, f., falloon, p., fischer, t., gregory, p., van thornton, p.k., wollenberg, e., 2012."
+20,"options for support to agriculture and food ittersum, m.k., olesen, j.e., moore, k.j., rosenzweig, c., smith, p., 2010."
+20,food security under climate change.
+20,environ.
+20,"policy 15 (1), 136–144. security: focus on agriculture."
+20,"science 328 (5975), 172–173."
+20,"vermote, e., justice, c.o., breon, f.-m., 2009."
+20,"towards a generalized approach for richter, k., atzberger, c., vuolo, f., d’urso, g., 2011."
+20,evaluation of sentinel-2 spectral correction of the brdf effect in modis directional reflectances.
+20,"ieee transactions sampling for radiative transfer model based lai estimation of wheat, sugar beet, on geoscience and remote sensing 47 (3), 898–908. and maize."
+20,ieee j.
+20,earth obs.
+20,remote sens.
+20,"4 (2), 458–464."
+20,"vermote, e."
+20,"f., roger, j.-c., & ray, j."
+20,"(may, 2015)."
+20,"modis surface reflectance user’s rivera, j., verrelst, j., leonenko, g., moreno, j., 2013."
+20,multiple cost functions and guide.
+20,collection 6.
+20,retrieved from http://modis-sr.ltdri.org/guide/mod09_ regularization options for improved retrieval of leaf chlorophyll content and lai userguide_v1.4.pdf. through inversion of the prosail model.
+20,remote sens.
+20,"5 (7), 3280–3304."
+20,"vrugt, j.a., ter braak, c.j.f., clark, m.p., hyman, j.m., robinson, b.a., 2008."
+20,"treatment rosegrant, mr., ringler, c., sulser, t.b., ewing, m., palazzo, a., zhu, t., nelson, g.c, of input uncertainty in hydrologic modeling: doing hydrology backward with koo j, robertson, r, msangi s, batka, m."
+20,(2009).
+20,agriculture and food security markov chain monte carlo simulation.
+20,"water resources research 44, w00b09. under global change: prospects for 2025/2050."
+20,background note for supporting the https://doi.org/10.1029/2007wr006720. development of cgiar strategy and results framework.
+20,"international food policy wagner, m.p., slawig, t., taravat, a., oppelt, n., 2020."
+20,remote sensing data assimilation res.
+20,"institute: washington, d.c. in dynamic crop models using particle swarm optimization."
+20,"isprs international ryu, y., baldocchi, d.d., black, t.a., detto, m., law, b.e., leuning, r., miyata, a., journal of geo-information 9 (2), 105."
+20,"reichstein, m., vargas, r., ammann, c., beringer, j., flanagan, l.b., gu, l., wang, e., engel, t., 1998."
+20,simulation of phenological development of wheat crops.
+20,"hutley, l.b., kim, j., mccaughey, h., moors, e.j., rambal, s., vesala, t., 2012."
+20,"on agricultural systems 58 (1), 1–24. the temporal upscaling of evapotranspiration from instantaneous remote sensing weisz, r., kaminski, j., smilowitz, z., 1994. water-deficit effects on potato leaf growth measurements to 8-day mean daily-sums."
+20,"agricultural and forest meteorology 152, and transpiration - utilizing fraction extractable soil-water for comparison with other 212–222. crops."
+20,"american potato journal 71 (12), 829–840."
+20,"schauberger, b., jägermeyr, j., gornott, c., 2020."
+20,"a systematic review of local to welch, g., & bishop, g."
+20,(2001).
+20,an introduction to the kalman filter.
+20,university of north regional yield forecasting approaches and frequently used data resources.
+20,"carolina, department of computer science, technical report tr 95-041."
+20,agron.
+20,"120, 126153."
+20,"williams, j., jones, c., kiniry, j., spanel, d., 1989. the epic crop growth-model."
+20,"schmidhuber, j., tubiello, f.n., 2007."
+20,global food security under climate change.
+20,"transactions of the asae 32, 497–511."
+20,u.s.a.
+20,"104 (50), 19703–19708."
+20,"williams, j.r., greenwood, d.j., nye, p.h., walker, a., 1990."
+20,"the erosion-productivity sedano, f., kempeneers, p., hurtt, g.a., 2014."
+20,kalman filter-based method to generate impact calculator (epic) model: a case history.
+20,philosophical transactions of the continuous time series of medium-resolution ndvi images.
+20,"remote sensing 6, royal society of london."
+20,"series b: biological sciences 329, 421–428."
+20,12381–12408.
+20,"yan, l., roy, d.p., 2018."
+20,"large-area gap filling of landsat reflectance time series by seguin, b., itier, b., 1983. using midday surface-temperature to estimate daily spectral-angle-mapper based spatio-temporal similarity (samsts)."
+20,remote evaporation from satellite thermal ir data.
+20,"international journal of remote sensing 4 sensing 10 (4), 609."
+20,"(2), 371–383."
+20,"yang, y., anderson, m.c., gao, f., wardlow, b., hain, c.r., otkin, j.a., alfieri, j., sherrick, b.j., lanoue, c.a., woodard, j., schnitkey, g.d., paulson, n.d., 2014."
+20,"crop yang, y., sun, l., dulaney, w., 2018."
+20,"field-scale mapping of evaporative stress yield distributions: fit, efficiency, and performance."
+20,agric.
+20,"finance rev. 74 (3), indicators of crop yield: an application over mead, ne, usa."
+20,remote sensing of 348–363.
+20,"environment 210, 387–402."
+20,"suyker, a.e., verma, s.b., 2009."
+20,"evapotranspiration of irrigated and rainfed zeng, l., wardlow, b.d., wang, r., shan, j., tadesse, t., hayes, m.j., li, d., 2016. maize–soybean cropping systems."
+20,agric.
+20,meteorol.
+20,"149, 443–452."
+20,"a hybrid approach for detecting corn and soybean phenology with time-series suyker, a.e., verma, s.b., 2012."
+20,gross primary production and ecosystem respiration of modis data.
+20,"remote sensing of environment 181, 237–250. irrigated and rainfed maize–soybean cropping systems over 8 years."
+20,"agricultural and zhu, z., woodcock, c.e., 2012."
+20,"object-based cloud and cloud shadow detection in forest meteorology 165, 12–24."
+20,landsat imagery.
+20,"remote sensing of environment 118, 83–94."
+20,"thornton, p.e., running, s.w., white, m.a., 1997."
+20,generating surfaces of daily meteorological variables over large regions of complex terrain.
+20,"journal of hydrology 190 (3-4), 214–251."

@@ -1,0 +1,1097 @@
+page,p
+1,system modelling of very low earth orbit satellites for earth observation n.h.
+1,"crispa,∗, p.c.e."
+1,"robertsa , f."
+1,"romanod , k.l."
+1,"smitha , v.t.a."
+1,"oikoa , v."
+1,"sulliotti-linnerb , v."
+1,"hanessianc , g.h."
+1,"herdrichd , d."
+1,"garcı́a-almiñanae , d."
+1,"katariaf , s."
+1,"seminarig a the university of manchester, oxford road, manchester, m13 9pl, united kingdom b elecnor deimos satellite systems, calle francia 9, 13500 puertollano, spain c gomspace a/s, langagervej 6, 9220 aalborg east, denmark d institute of space systems (irs), university of stuttgart, pfaffenwaldring 29, 70569 stuttgart, germany e upc-barcelonatech, carrer de colom 11, 08222 terrassa, barcelona, spain f mullard space science laboratory, university college london, holmbury st."
+1,"mary, dorking, rh5 6nt, united kingdom g euroconsult, 86 boulevard de sébastopol, 75003 paris, france arxiv:2108.01945v2 [physics.space-ph] 5 aug 2021 abstract the operation of satellites in very low earth orbit (vleo) has been linked to a variety of benefits to both the spacecraft platform and mission design."
+1,"critically, for earth observation (eo) missions a reduction in altitude can enable smaller and less powerful payloads to achieve the same performance as larger instruments or sensors at higher altitude, with significant benefits to the spacecraft design."
+1,"as a result, renewed interest in the exploitation of these orbits has spurred the development of new technologies that have the potential to enable sustainable operations in this lower altitude range."
+1,"in this paper, system models are developed for (i) novel materials that improve aerodynamic performance enabling reduced drag or increased lift production and resistance to atomic oxygen erosion and (ii) atmosphere-breathing electric propulsion (abep) for sustained drag compensation or mitigation in vleo."
+1,attitude and orbit control methods that can take advantage of the aerodynamic forces and torques in vleo are also discussed.
+1,these system models are integrated into a framework for concept-level satellite design and this approach is used to explore the system-level trade-offs for future eo spacecraft enabled by these new technologies.
+1,a case-study presented for an optical very-high resolution spacecraft demonstrates the significant potential of reducing orbital altitude using these technologies and indicates possible savings of up to 75 % in system mass and over 50 % in development and manufacturing costs in comparison to current state-of-the-art missions.
+1,"for a synthetic aperture radar (sar) satellite, the reduction in mass and cost with altitude were shown to be smaller, though it was noted that currently available cost models do not capture recent commercial advancements in this segment."
+1,these results account for the additional propulsive and power requirements needed to sustain operations in vleo and indicate that future eo missions could benefit significantly by operating in this altitude range.
+1,"furthermore, it is shown that only modest advancements in technologies already under development may begin to enable exploitation of this lower altitude range."
+1,"in addition to the upstream benefits of reduced capital expense and a faster return on investment, lower costs and increased access to high quality observational data may also be passed to the downstream eo industry, with impact across a wide range of commercial, societal, and environmental application areas."
+1,keywords: very low earth orbit (vleo); atmosphere-breathing electric propulsion (abep); aerodynamic control; very-high resolution; synthetic aperture radar (sar); earth observation (eo).
+1,"introduction food security, and disaster management and response [1]."
+1,"the commercial market for satellite-based eo data prod- satellite-based earth observation (eo) and remote sens- ucts has also grown considerably, principally serving sec- ing has evolved considerably in the six decades since its tors such as defence and security, infrastructure monitor- introduction and has become increasingly important as a ing, land management and precision agriculture, and man- field with global scientific significance, economic impact, agement of energy and mining activities."
+1,revenue from and commercial value.
+1,"in addition to improving our un- these products is projected to increase from $1.5 billion to derstanding of the earth and its natural systems, key ap- $2.4 billion in the decade to 2028 with increasing demand plications with societal and environmental impact include for higher resolution imagery [2]."
+1,"constellations of smaller climate change and ecological monitoring, agriculture and satellites for eo have recently enabled and global coverage and more frequent revisit, contributing to increased avail- ∗ corresponding author. ability and a reduction in price of medium and high reso- email address: nicholas.crisp@manchester.ac.uk lution satellite imagery and resulting in significant growth (n.h."
+1,crisp) preprint submitted to acta astronautica
+2,©2020.
+2,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ in downstream value-added services and analytics market international space station (iss), scientific satellites (e.g. segments."
+2,"further economic upside has been projected goce and grace), and small educational and technology based on the development and growth of new application development satellites (e.g."
+2,cubesats).
+2,"early satellites areas, for example in change-detection analytics serving of the planet labs flock and spire lemur constellations the financial sector and the development of new location- were also deployed into the vleo altitude range from the based services [2]."
+2,"however, more recent operations have generally seen operating satellites at lower orbital altitude has been replacements launched into higher altitude orbits."
+2,"the proposed as a means to support the growth in this mar- reason for this sparse usage of vleo, particularly for com- ket by reducing both the cost of satellite development and mercial operations, is largely due to the challenges of the launch and through the generation of higher resolution im- environment that can significantly reduce the mission per- agery [3–6]."
+2,reducing orbital altitude below those conven- formance.
+2,"principally, the increased atmospheric density tionally used offers a number of individual benefits that increases aerodynamic drag and causes a significant reduc- together can significantly improve the design and perfor- tion in orbital lifetime without the use of propulsion."
+2,"the mance of satellites, particularly for remote sensing and eo presence of atomic oxygen further reduces aerodynamic applications."
+2,these benefits can be summarised as follows performance and can erode and damage the external sur- [7]: faces of spacecraft.
+2,the recent development of a number of new technolo- • optical payloads increase in resolution or can reduce gies aims to address these challenges to enable the sustain- in aperture size resulting in either improved perfor- able operation of spacecraft in vleo.
+2,"these technologies mance or smaller size and mass. principally include: i) novel materials that reduce aero- • radiometric performance also improves with reduc- dynamic drag and are resistant to atomic oxygen erosion, ing distance to the target or ground, allowing im- ii) atmosphere-breathing electric propulsion (abep) for provement of signal-to-noise ratio or reduced instru- drag compensation or mitigation in vleo, and iii) aero- ment sensitivity."
+2,"this also applies to radar and com- dynamic attitude and orbit control methods. munications payloads leading to improved link bud- this paper aims to explore the use of these novel tech- gets, reduction in power, and smaller antenna areas. nologies being developed to enable operations at reduced orbital altitude and their impact on the design of future • lower altitude orbits are naturally resilient to a build- vleo spacecraft for eo missions."
+2,"to perform this inves- up in debris due to the effects of drag and therefore tigation, system models incorporating vleo technologies have a lower risk of on-orbit collision. have been developed and integrated into a design frame- work for concept-level spacecraft design."
+2,"using the devel- • the same effect of drag ensures that spacecraft are oped scheme, the system-level trade-offs associated with naturally disposed of quickly after their mission is these technologies can be illustrated and their variation complete or if they suffer a catastrophic failure."
+2,ad- with orbital altitude understood.
+2,"the effect of assumed ditional deorbit devices are therefore not required, performance on the system-level design can also be demon- reducing system mass and complexity. strated, leading to insight into the requirements of these • launch vehicles can deliver a larger mass into lower technologies for improving spacecraft design for vleo. altitude orbits, reducing the specific (per unit mass) the results of these investigations will be used to inform launch cost and possibly providing greater versatility the ongoing research in this area and the development in launch options. of these technologies and future spacecraft operating in vleo."
+2,"• mapping errors as a result of attitude determination and pointing accuracy are reduced at lower altitude, 1.1."
+2,the very low earth orbit (vleo) environment improving the geospatial accuracy of ground imagery as altitude in low earth orbit (leo) is reduced the and location-based services. density of the residual atmosphere increases due to the • use of commercial off-the-shelf (cots) electronics effect of gravity and hydrostatic pressure as shown in fig- components may be enabled as a result of reduced ure 1.
+2,"the aerodynamic drag force experienced by ob- radiation exposure and dosing in the denser atmo- jects in lower altitude orbits therefore increases, causing sphere, reducing cost and the need for redundancy. faster orbital decay and eventually atmospheric re-entry and demise."
+2,"without the use of a propulsion system that however, despite these benefits, altitudes below 450 km, can compensate for or mitigate the experienced drag, this known as very low earth orbit (vleo), have not been causes spacecraft at very low altitude to have significantly frequently utilised for commercial eo operations."
+2,"some shorter orbital lifetimes compared to higher altitude or- military satellites, for example in the keyhole program, bits."
+2,"however, in order to perform drag compensation or have been reported to use eccentric orbits with very-low mitigation the spacecraft must be launched with or re- perigees to obtain high resolution surveillance imagery [8]. supplied with sufficient propellant."
+2,"notable examples in- in recent times, vleo has also been populated by the clude the iss, which maintains an approximately 400 km 2"
+3,©2020.
+3,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ orbit through propellant provided by frequent resupply pointing and stability requirements, highly capable atti- missions, and goce that was able to sustain its orbit tude actuators may be needed to compensate for these for over 4 years at altitudes below 280 km and as low as effects and ensure the ability to accurately point towards, 229 km using an highly capable ion propulsion system [9]. track, and capture a given target."
+3,"despite this increase in atmospheric density, the resid- ual atmosphere in vleo is still highly rarefied."
+3,above 1.2.
+3,emerging technologies for vleo altitudes of approximately 150 km the flow condition for a range of fundamental research and technology de- orbiting spacecraft of typical length scale (∼1 m) is con- velopment is underway to address these critical challenges sidered to be free molecular (kn  10) [11].
+3,in the free associated with the environment and enable sustained op- molecular flow (fmf) regime aerodynamic forces are prin- erations in vleo. cipally generated by the direct interaction between the research into novel materials for orbital aerodynamics particles in the flow and the external spacecraft surfaces is aiming to identify those that are resistant to the detri- as interactions between the constituent particles are in- mental effects of atomic oxygen and demonstrate spec- frequent by comparison and can therefore be neglected. ular or quasi-specular gsi properties.
+3,"when combined these gas-surface interactions (gsis) are dependent on with the design of the spacecraft external geometry (i.e. the energy and momentum exchange that occurs between forward-facing surfaces oriented at shallow angles to the the incoming particle and the surface, and are known to oncoming flow), materials with these properties would ex- vary depending on the properties of the incoming particles perience lower drag in orbit and would therefore increase (mass, velocity, angle, temperature) surface characteristics the orbit lifetime."
+3,"alternatively, if oriented towards the (roughness, contamination, composition, and morphology) normal to the oncoming flow, these materials increase the [12]."
+3,the estimation of aerodynamic forces under these experienced drag and can be applied to the design of im- conditions can be calculated using a range of different gsi proved deorbit devices.
+3,"these materials would also be models, reviews of which are provided by mostaza-prieto able to generate lift forces of increased magnitude enabling et al. [13] and livadiotti et al."
+3,[14]. novel methods of aerodynamic attitude and orbit control.
+3,"in combination with the increasing density and orbital the ongoing development of space propulsion systems velocity, the prevalence of highly-reactive atomic oxygen at is highly relevant to vleo spacecraft."
+3,"efficiency increases these altitudes, shown in figure 1, can also damage and of electric propulsion (ep) systems will reduce the power erode materials on the external surfaces of spacecraft, de- and propellant requirements for drag compensation or mit- grading both the aerodynamic performance and affecting igation."
+3,"beyond this, the development of novel atmosphere- optical sensors, thermal coatings, and solar-cell cover-glass breathing electric propulsion (abep) systems would en- [15]."
+3,"in addition to this erosive damage, atomic oxygen able theoretically sustainable operation in vleo, limited also adsorbs to the external spacecraft surfaces causing only by component lifetime."
+3,such concepts propose the use surface contamination and further affecting the gsi pa- of a forward-facing intake that collects propellant from the rameters.
+3,"for typical materials in the vleo environment, residual atmosphere and can subsequently be used by an diffuse reflection with complete thermal accommodation is electric thruster, eliminating the need for the spacecraft generally assumed, primarily as a result of atomic oxygen to carry or be launched with any propellant."
+3,the devel- erosion and surface adsorption [16].
+3,"as a result of this opment of abep systems is currently focused on the de- energy and momentum exchange, the main aerodynamic sign of intakes that can efficiently collect the required pro- force generated is drag and is principally dependent the pellant from the atmosphere under the fmf conditions projected cross-sectional area rather than the more de- in vleo [19] and the development of electric thrusters tailed spacecraft geometry."
+3,"however, at higher altitude that can flexibly utilise the range of different atmospheric reduced atomic oxygen adsorption has been observed and gas constituents at varying density that will be collected, incomplete energy accommodation and quasi-specular par- whilst remaining resilient to erosion or degradation by ag- ticle re-emission can be considered [12, 17]. gressive atmospheric species [20]."
+3,"electrodeless and grid- the atmospheric density experienced at a given al- less thruster concepts that do not require direct contact titude can also vary considerably, principally with geo- with the atmospheric gas therefore demonstrate good po- graphic position (e.g. latitude and longitude), the day- tential for use in vleo, for example the rf helicon-based night cycle, and the approximately 11-year cycle of solar inductive plasma thruster [21]."
+3,such a design benefits from intensity [18].
+3,this variation from high to low solar ac- the quasi-neutral plasma flow that eliminates the need for tivity level is shown in figure 1 and can be seen to span a neutralizer.
+3,"for non-quasi-neutral thrusters, operation several orders of magnitude above approximately 100 km. with the residual constituents of the atmosphere has not similarly, the direction of the oncoming flow can vary yet been solved. as a result of atmospheric co-rotation and thermospheric the development of abep may also facilitate the use winds."
+3,"when combined with the external spacecraft geom- of novel orbit control methods that may help to overcome etry and configuration, these effects can generate disturb- the drawbacks of vleo with regards to increased revisit ing forces and torques that can effect the satellite stabil- time and generally poor coverage properties."
+3,methods for ity and pointing capability.
+3,for eo satellites with strict low-thrust trajectory design have been developed to reduce 3
+4,©2020.
+4,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ n ar figure 1: representative variation of atmospheric density and composition with solar activity level and altitude in leo, calculated using the nrlmsise-00 model [10]. the overflight or revisit time of a set of given ground targets in the form of trim and momentum management has only from low altitude orbits guelman and kogan [22], co and been demonstrated on magsat [42, 43])."
+4,"this is princi- black [23], guelman and shiryaev [24]."
+4,"with abep, the pally due to the low lift-to-drag ratio that is achievable constraint of limited propellant can be removed, and such with current materials and the high uncertainties associ- control may be extended to include small out-of-plane ma- ated with knowledge of the oncoming flow density and ve- noeuvres and applied throughout the entirety of a mission. locity, leading to low expectations on control performance."
+4,"progress towards methods for autonomous and real-time without further generalised study, implementation, and control may further facilitate their use in the operation of demonstration of such control methods, modelling of their future vleo constellations. system-level requirements, trade-offs, and effects with re- new methods of attitude and orbit control that utilise spect to conceptual designs is difficult and is beyond the aerodynamic forces and torques are also being developed. scope of this current study."
+4,"as development continues proposals for orbit control include constellation deploy- and initial on-orbit demonstrations are performed, con- ment [25], formation keeping [26, 27], rendezvous [28, 29], cepts and methods of aerodynamic control can be inte- inclination correction for sun-synchronous orbits [30], and grated into future studies of vleo platform design."
+4,"key atmospheric re-entry interface targeting [31, 32]."
+4,"aerody- trade-offs associated with the implementation of aerody- namics attitude control has also been proposed for point- namic control are expected to include actuator size, mass, ing and momentum management manoeuvres that assist and configuration, pointing performance and momentum and reduce the requirements on traditional attitude ac- control/dumping capability, and power requirements."
+4,"in tuators [33–36], with the potential for reducing system the wider system design, the corresponding reduction in mass."
+4,"aerodynamic trim manoeuvres can also be consid- traditional attitude or orbit control actuator requirements ered to directly reject external disturbances, for example and the drag increment associated with the aerodynamic as a result of variations in the oncoming flow direction, control implementation should also be considered. solar radiation pressure, and residual magnetic dipole in- teractions."
+4,such control may be particularly relevant at 2.
+4,system modelling for reducing altitude in leo very low altitude where aerodynamic torques may cause the rapid saturation of momentum-based actuators.
+4,"how- system modelling for satellites and orbital space sys- ever, at present only orbit control methods utilising dif- tems has been developed over a number of years, the ba- ferential drag for collision avoidance [37, 38] and constel- sics of which are well established in texts such as wertz lation deployment/maintenance [39–41] have been demon- and larson [44], wertz et al. [45], and fortescue et al. strated in-orbit."
+4,"similarly, aerodynamic attitude control [46]."
+4,these system models allow engineers to investigate 4
+5,©2020.
+5,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ different designs and synthesise solutions in the early de- in vleo. sign process.
+5,"exploration of the design- and trade-spaces, concept missions for vleo have also developed by de- often by parametric or optimisation processes, can also sign teams at cranfield university [63]."
+5,"a satellite based be performed to improve knowledge of the trade-offs be- on the sstl-300 platform operating between 300 km to tween different input variables, subsystem specifications, 500 km was designed to be implemented in the near-term, and output parameters."
+5,this exploration can also facili- providing enhanced resolution predominantly by reducing tate the identification and selection of promising or opti- the orbital altitude of operation.
+5,different propulsion sys- mal solutions that can subsequently be taken forward for tems were chosen depending on the selected altitude to further investigation and into more detailed design phases. provide a mission lifetime of 5 years.
+5,"a more ambitious the selection, integration, and configuration of the sys- spacecraft called thor (thermospheric orbital recon- tem/subsystem models is specific to the mission, concept naissance) was also developed to operate in a 227 km sun- of operations, and application area of the system of inter- synchronous orbit (sso) and provide 0.15 m resolution est."
+5,"however, general approaches to complex and multi- optical imagery."
+5,drag-compensation was provided by an disciplinary systems engineering can be used to inform the ep system and the geometry was designed to reduce drag development of an appropriate framework and the organ- and provide natural aerostability.
+5,internal steerable optics isation of the contributing models [47].
+5,"within the disci- were considered to provide some off-nadir pointing perfor- pline of space systems, application of such system mod- mance. elling is widespread with differing levels of integration and the “skimsat” has been proposed by thales alenia scope, e.g. at system level [48–52], constellation design space [64]."
+5,"this concept is designed to be deployed into [53, 54] and deployment [55, 56], propulsion systems [57– eo constellations in vleo as low as 160 km in altitude, 59], and communications architecture [60]."
+5,"however, given benefiting from the reduction in payload size and mass the challenges of operating spacecraft in low altitude or- with altitude."
+5,"the spacecraft geometry suggests that it bits, to date only a limited number of studies have ap- has been designed for operation in the aerodynamic en- proached the system modelling of spacecraft intended for vironment of vleo and remarks are made regarding use operation in vleo. of abep for drag compensation."
+5,"however, whilst some the design of remote-sensing satellites operating in discussion of the key system trade-offs is provided, de- lower altitude orbits was studied by fearn [61] with a par- tails of the underlying system design has not yet been ticular focus on drag compensation using ep."
+5,the system- presented.
+5,"similar concepts are also being developed by level trades in propulsive, power system, and payload de- emerging companies such as earthobservant and skeyeon sign with altitude were principally considered for a mission demonstrating a growing interest from industry in vleo with a 5 year lifetime."
+5,the design of a concept spacecraft operations. providing 1 m resolution imaging was presented with an mccreary [65] presents a traditional systems engineer- operational altitude between 250 km to 280 km and wet ing approach to the development of a satellite mission con- mass of less than 300 kg.
+5,"whilst the presented design sug- cept for operation in the high drag environment of vleo. gested the near-term feasibility of such a concept, chal- the initial needs analysis is performed principally for us lenges such as the required solar array performance and scientific, military, and academic stakeholders and used to sensitivity to on-orbit solar illumination were noted. develop a sample set of system requirements."
+5,the use of a review of the benefits of moderately-elliptical very- both a fight-proven ep system with stored propellant and low orbits (mevlos) was provided by wertz et al.
+5,[3]. an abep system are considered to provide redundancy in this work the propellant required to maintain differ- and allow for initial operational learning at the beginning ent low-perigee orbits was explored for the purpose of en- of the mission before the abep system is given full re- abling high-resolution imaging from a smaller and cheaper sponsibility for drag-compensation.
+5,a maximum cross- satellite platform.
+5,"a basic concept spacecraft called na- sectional area of 1.5 m2 and characteristically high drag noeye was proposed with a wedge-shaped front geometry coefficient of 2.7 are selected, but only solar minimum to reduce drag and a propulsion system to provide orbit conditions are assumed for the estimation of atmospheric maintenance and tasking capabilities. density."
+5,the solar arrays also do not appear to be in- a later study by shao et al. [62] focused on more clas- cluded in the calculation of the aerodynamic drag.
+5,"a fixed sical circular orbits and applied a performance-based cost power efficiency of 40 mn kw−1 is assumed for both the modelling approach to investigate the trade-off between to- ep and abep systems and is not connected to the op- tal system cost for an eo constellation and the operational erational altitude, atmospheric intake characteristics, or orbit altitude."
+5,this study indicated that significant cost thruster performance.
+5,system models from space mission savings could be made for equivalent system performance analysis and design [44] are used to perform the initial (resolution and coverage) by reducing the orbital altitude spacecraft sizing (wet mass of 1138 kg and solar array area below 500 km.
+5,"however, the modelling approach consid- of 41.1 m2 ) and to generate an initial 3d model for the ered only conventional spacecraft designs and did not ex- proposed spacecraft. plore the impact of novel technologies that are currently the use of ep to enable new eo systems in at lower being developed and are applicable to satellites operating altitude has also recently been considered by bertolucci 5"
+6,©2020.
+6,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ et al.
+6,"in this work, the performance parameters and this study that for the atmospheric intakes considered, a operational considerations for different conventional ep design loop is present between the intake area, thruster systems are analysed for reducing orbital altitude."
+6,"ba- inlet area, mass-flow rate, and intake efficiency, such that sic system models are also used estimate the remaining the mass-flow rate and intake efficiency cannot be simul- spacecraft size and mass at different altitude."
+6,"a nominal taneously maximised [71–73]. drag coefficient of 2.2 is adopted and the associated cross- in these previous studies, the simplification of the aero- sectional area is determined only from the total mass and dynamic modelling provides an optimistic representation an assumed spacecraft density."
+6,the authors conclude that of the satellite drag.
+6,"surface area parallel to the nomi- present ep systems could be used to perform drag com- nal oncoming flow has generally been neglected, despite pensation in the upper range of vleo, resulting in satel- being known to contribute to the aerodynamic drag."
+6,"if so- lite masses of between two and six times less for the same lar arrays are required to generate the required power for resolution as equivalent systems operating at a higher al- the spacecraft, this can result in a design loop where the titude."
+6,"at lower altitude, it is noted that the propulsion area for generating the required power also influences the system performance (i.e. specific impulse) becomes much propulsion system requirements (thrust, efficiency, mass- more critical to successful operations. flow rate, and associated power)."
+6,"furthermore, the vari- ation of the oncoming flow direction and satellite atti- 2.1."
+6,atmosphere-breathing electric propulsion concepts tude has generally not been considered in these studies.
+6,work towards the development of abep systems has in inclined orbits the direction of the oncoming flow vec- also often been accompanied by analysis of the perfor- tor varies periodically during the orbit period due to the mance of a combined intake and thruster with altitude. direction of the atmospheric co-rotation with the earth.
+6,concepts for the spacecraft that they may be initially the contribution of thermospheric winds also provides fur- demonstrated on are sometimes also presented.
+6,"however, ther and less predictable variations in the true flow vector. in most cases these designs are aimed only at technology thus, unless the spacecraft can always align itself precisely demonstration and therefore do not feature payloads that with the true oncoming flow vector, the drag generated will would be required by commercially-focused satellites. generally be greater than in an idealised attitude."
+6,"this is the air breathing ion engine (abie) concept [67, 68] further complicated if off-axis pointing is required to per- is presented as an additional propulsion module that can form mission operations, tracking of the sun vector is re- be attached to the tail end of a long slender spacecraft quired by external solar arrays, or if moving aerodynamic where the atmospheric intake is mounted in an external control surfaces are considered. concentric ring."
+6,the system design considers the variation of inlet-to-thruster area ratio and power that is needed 3.
+6,system modelling formulation to provide drag-compensation at different altitude.
+6,"how- ever, whilst solar electric power is assumed, the studies this work builds on the foundations of system mod- do not address the generation of this power (e.g. body- elling for conventional satellites by incorporating the emerg- mounted or external arrays)."
+6,a static drag coefficient of ing technologies that are being developed to enable sus- 2.0 is assumed and the cross-sectional area of the intake is tained operations vleo.
+6,"through design- and trade-space neglected in the calculation of aerodynamic drag. exploration, the benefits provided by the emerging tech- the esa ram-ep study [69] provides the first investi- nologies can also be analysed, minimum requirements iden- gation of different thrusting strategies for drag-compensation tified, and their effect on the system-level spacecraft de- (continuous or periodic) and analyses the system perfor- sign observed."
+6,"in comparison to previous studies for satel- mance at varying altitude and under different solar activity lites operating in reduced altitude, this work also seeks to conditions."
+6,the study also proposes a mission to demon- provide a generalised and flexible approach to the system strate the performance of the propulsion system and to modelling for these technologies that can be applied to the perform eo using a lidar payload.
+6,a mass of 1000 kg is development and study of a wide range of system concepts. targeted and a total cross-sectional area of 1 m2 is assumed a system modelling framework for vleo satellite de- with an intake-area of 0.6 m2 .
+6,a fixed drag coefficient of sign is first needed that can be integrated with new models 2.0 is stated and the total required area of solar arrays that represent the critical design parameters of the novel calculated as 19.7 m2 .
+6,"however, it is not established if the technologies."
+6,"the conceptual design of vleo satellites deployed solar arrays are considered in the calculation of can then be explored for different mission profiles, ap- the aerodynamic drag and therefore the required power. plications, and assumptions of technology development."
+6,"system analysis for abep concepts is also presented these concepts can subsequently be investigated in co- by schönherr et al. [20] and romano et al. [70] in order to operation with market analysis, stakeholder identification, inform the development of the rf helicon-based ipt [21]. and business modelling work to establish those that pro- a cross-sectional area of 1 m2 and a fixed drag coefficient vide promising economic viability."
+6,these results can also of 2.2 were selected and it was assumed that the drag con- be used to influence the development of the novel tech- tribution of solar arrays could be neglected as they would nologies for use in future vleo platforms. be fixed parallel to the oncoming flow.
+6,it is also noted in 6
+7,©2020.
+7,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ 3.1.
+7,multidisciplinary analysis framework also specifically considered as it provides critical infras- the developed framework is shown in figure 2 in the tructure for the spacecraft and is affected considerably form of an extended design structure matrix (xdsm) lambe by the propulsion specification and aerodynamic design. and martins [47].
+7,a sequential gauss-seidel multidisci- these fundamental relationships and system models are plinary analysis (mda) process is implemented to resolve detailed in section 3.4.
+7,"however, for much of the remain- co-dependencies that exist between some of the individ- ing systems design, relationships and methods for the con- ual analysis functions."
+7,in this process each disciplinary ceptual and preliminary design of conventional satellites analysis block is executed in sequence using the external can be adopted from existing literature.
+7,a summary of design variables (inputs) and the most recent information the resources used in this work is provided in table 1. from the preceding modules.
+7,this process is iterated until the state variables have converged.
+7,in the xdsm diagram 3.2.
+7,"vleo spacecraft concepts and configurations (figure 2), the thick grey lines represent possible data con- the basic configuration and geometric design of a space- nections whilst the thinner black lines represent the pro- craft is principally driven by the requirements of the pay- cess connections."
+7,the mda block (i = 0) distributes the load and the mission it is designed to perform.
+7,for eo information to the different subsystem analysis functions spacecraft this typically involves specific pointing require- (i = 1 − 7) and the system-level analysis (i = 8) in the it- ments and may include stability or agility requirements. erative scheme and checks for convergence of the process.
+7,"for vleo spacecraft the stability in the presence of aero- the set of input design variables for each analysis is given dynamic forces and torques and the option of performing by xi and output parameters from each analysis function drag compensation are also critical considerations at the given by yi , both reported in figure 2."
+7,parameters iden- conceptual design level. tified by yit are target coupling variables (i.e. analysis in- the concept matrix given in table 2 can be used to puts that are derived from prior outputs of the iterative generate different concepts for vleo platforms.
+7,"combi- scheme). nations of the different options in each row will produce by varying the input parameters to this mda process conceptual spacecraft designs, some of which will be con- and the internal analyses, parametric design space explo- siderably different to each other."
+7,"other combinations may ration can be performed, allowing investigation and iden- be infeasible or irrational due to incompatibilities between tification of the trade-offs associated with different system the selected options, for example a tumbling spacecraft requirements, environmental conditions, design decisions, with a continuously-thrusting propulsion system for drag or technological capabilities and performance."
+7,"whilst not compensation. implemented in the current study, this approach has also in vleo a propulsion system may be required to pro- been developed to be compatible with multi-disciplinary vide a useful lifetime."
+7,"if the aerodynamic drag is to be optimisation processes, including both single- and multi- compensated for, thrust should be provided opposite to objective methods, enabling directed or “intelligent” search the velocity vector with associated constraints on the plat- for an optimal design or sets of optimal designs based on form configuration."
+7,"furthermore, if an abep system is to defined ranges and/or constraints for different input vari- be used to enable sustained operations, the intake should ables. face the oncoming flow direction to provide maximum ef- for vleo platforms, new analysis components are prin- ficiency. cipally required within i) the propulsion module to incor- a surface area for power raising using solar cells is porate the novel abep concepts, ii) the geometry, struc- necessary to provide sustained operational performance. ture, and mechanisms module to account for the aerody- body-mounted solar cells are preferred to avoid increment namic performance of the external spacecraft configura- in the experienced drag but deployed solar arrays may be tion, and iii) the guidance, navigation, and control module required to meet increased power demands, particularly if aerodynamic control manoeuvres are to be considered. if ep or abep systems are to be used."
+7,"furthermore, this paper aims to exploring the platform trade-offs the orientation of the sun with respect to the orbit and associated with the development and integration of new satellite may mean that body mounted solar cells may technologies that can enable sustained operations at lower not all be simultaneously illuminated or operating at their altitude."
+7,"as such, the developed analyses are focused on full efficiency."
+7,the orientation of non-body-mounted solar the use of circular or near-circular orbits in vleo.
+7,"the arrays therefore requires careful consideration to balance design of multi-satellite systems or constellation configu- their power generation capability with their contribution rations to achieve a given performance with respect to re- to aerodynamic drag. visit time or coverage is also not be treated in the present the centre of mass of the spacecraft and relative loca- work. tion of any deployable or extended surfaces also requires given the benefits of operating in vleo for eo mis- careful consideration to ensure stability and control of the sions, the design of the payload, attitude determination platform, particularly in the presence of potentially dis- and control system (adcs), and communications subsys- turbing aerodynamic and solar radiation perturbations."
+7,"in tem are of interest and require some adaptation for plat- vleo, the geometric design of the satellite can be used to form design in lower altitude orbits."
+7,the power system is provide aerostability.
+7,"however, this may simultaneously 7"
+8,©2020.
+8,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ figure 2: xdsm representation of the multidisciplinary analysis (mda) framework for vleo satellite design. yt x1 x2 x3 x4 x5 x6 x7 0, 9 → 1: 1 : yt2 3 : yt4-8 mda 1: y1 9 : y1 mission 4 : y1 5 : y1 6 : y1 7 : y1 8 : y1 & constellation y2 9 : y2 2: 3 : y2 4 : y2 7 : y2 8 : y2 payload 3: y3 9 : y3 geometry, 5 : y3 6 : y3 8 : y3 structure, and mechanisms y4 9 : y4 4: 7 : y4 8 : y4 communications 5: y5 9 : y5 guidence, 7: y5 8 : y5 navigation, and control y6 9 : y6 6: 7: y6 8 : y6 propulsion 7: y7 9 : y7 electrical power 8 : y7 system y8 9 : y8 8: system-level input variables output parameters x1 orbit type, lifetime y1 altitude, revisit, eclipse period resolution(s), wavelength, pixel size, quality payload dimensions, payload power, payload y2 factor, quantization, payload duty cycle, mass, downlink rate x2 compression ratio, off-nadir pointing, boresight moments of inertia, centre of mass, angle y3 aerodynamic reference area, srp reference material properties, safety factors, vibration area, drag coefficient, structure mass x3 profile, load factors communications mass, communications y4 architecture, minimum elevation, latitude, power, antenna size x4 frequency, snr, downlink rate, bandwidth y5 gnc power, gnc mass pointing accuracy, pointing knowledge, slew thruster power, thruster mass, intake x5 y6 rate, slew time size/mass2 propulsion system type, thruster mode, y7 solar array area/mass, battery mass x6 thruster efficiency, specific impulse, intake area ratio1 , intake duct ratio1 , intake back ratio1 total system mass, total system power, y8 total system cost array efficiency, array specific performance, x7 eclipse efficiency, sunlit efficiency, depth of discharge, specific energy density 1 defined if abep is specified for design."
+9,©2020.
+9,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ table 1: summary of conventional system modelling resources.
+9,"module calculation references coverage [45] 1: mission and constellation revisit [74] eclipse [75] 2: payload field of view [45, 75] 3: geometry, structure and mechanisms structural mass [45] 4: communications link budget [45] disturbance torques [45] 5: guidance, navigation and control actuator sizing [45, 76] 6: propulsion propellant tank sizing [77, 78] 7: power battery and array sizing [45] 8: system cost-estimating relationships [45, 79] table 2: vleo satellite concept development matrix."
+9,options propulsion chemical electric abep none drag compensation continuous periodic none material gsi current (diffuse) novel (quasi-specular) stability three-axis aerostable spinning tumbling control internal actuators control surfaces mixed payload static steerable hybrid end of life none additional/existing device reduce the agility of the satellite and the ability to point drag [80].
+9,"the magnitude of this potential reduction is away from the oncoming flow direction, for example if pay- dependent on the angle with respect to the flow and the load pointing is required away from the nominal aerostable gsi properties of the materials on the external spacecraft attitude."
+9,alternative approaches to payload design may surfaces.
+9,"the useful internal volume of such geometric be able to compensate for such designs, for example us- configurations, the corresponding effect on stability, also ing steerable optical assemblies that reduce the need for and whether the forward and aft facing surfaces are re- attitude control manoeuvres to perform off-axis target ac- quired for other purposes (e.g. thrusters and atmospheric quisition. intakes) also requires consideration."
+9,"a key aim of most geometric designs for vleo is to in vleo, end of life deorbit is naturally enabled and reduce the aerodynamic drag experienced by the satel- quickly realised as a result of the increased aerodynamic lite."
+9,slender spacecraft configurations are therefore recom- drag.
+9,"however, if very low-drag platforms are realised us- mended as the projected area (i.e. cross-sectional to the ing novel aerodynamic materials, active methods of deor- flow) is minimised and the remaining area is parallel to or bit may still be needed to avoid unnecessary occupation shielded from the flow, reducing drag."
+9,such configurations of orbits by non-operational spacecraft that could con- are also suited to providing natural aerostability.
+9,"however, tribute to an increased risk of collision."
+9,"targeted re-entry alternative configurations can also be considered, including may also be necessary for very large vleo spacecraft that those that use attitude actuators to provide conventional are challenging to “design-for-demise” and may not com- three-axis control, make use of neutral stability providing pletely disintegrate during re-entry, presenting a risk of high agility, or are equipped with external control surfaces casualty or damage at ground level. that can enable aerodynamic orbit and attitude control."
+9,the use of surfaces that are angled with respect to 3.3.
+9,conceptual vleo satellite configuration the nominal oncoming flow may be used to mitigate the conceptual configurations of satellite platforms can be effects of aerodynamic forces and reduce the experienced useful in informing the development and implementation 9
+10,©2020.
+10,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ angle of the sun with respect to the spacecraft.
+10,system models for vleo spacecraft system models with a significant dependence on orbital altitude or that are of particular interest in the vleo altitude range are outlined in the following subsections.
+10,models for the state-of-the-art and emerging technologies that may contribute to the development of novel vleo platforms are also described.
+10,3.4.1.
+10,eo payload sizing the basic payload design relationships for eo plat- forms operating in vleo do not differ substantially to those of conventional eo satellites in principle.
+10,"however, figure 3: representative concept geometry for a slender “arrow-like” spacecraft. the configuration, orientation, and compactness of the pay- load with respect to the spacecraft geometry may be a lim- iting factor on the aerodynamic performance."
+10,"for a typical of the new system models and analyses for vleo tech- optical payload, the minimum aperture diameter d to pro- nologies."
+10,"a slender “arrow-like” configuration, shown in vide a given diffraction limited ground resolution distance figure 3, has been adopted in this work."
+10,"an analogous grd can be approximated by considering the range r to configuration was used operationally in vleo previously the target and the wavelength λ of interest. by the goce spacecraft, albeit without the abep intake."
+10,the proposed “skimsat” platform also exhibits features of λr d ≈ 1.22 (1) this basic configuration [64].
+10,grd this geometry is designed to be nominally aligned length- the required focal length f can similarly be calculated wise with the velocity vector and therefore close to the from the altitude hφ and the physical size of the detector direction of the oncoming flow.
+10,"as a result, this configu- elements x. ration has a relatively low cross-sectional area with the aim r2 x f= (2) of reducing the experienced drag."
+10,"given this nominal at- grd hφ titude, this configuration is also generally compatible with a range of different configurations for optical assem- both ep and abep systems as the thruster can be ap- blies can be considered that have various advantages and propriately aligned with the oncoming flow direction."
+10,"the characteristics for high resolution imaging, e.g. number of front (ram) facing surfaces of the spacecraft can also be mirrors, mechanical tolerances, compactness, and stabil- used to accommodate an atmospheric intake, if required, ity."
+10,"examples include korsch, three mirror anastigmatic or tapered to further reduce the aerodynamic drag if per- (tma), and catadioptric designs [81, 82]."
+10,"to capture the mitted by the material gsis. compactness of these different assembly types, a geomet- extended surfaces, oriented parallel to the length of ric reduction factor can be used, avoiding the need to de- the satellite body, can be utilised for power raising pur- velop a complete telescope design to estimate the axial di- poses whilst minimising the increment in drag force."
+10,"when mension and volume of the payload from the focal length located behind the centre of gravity, these surfaces can and diameter."
+10,the mass of an optical payload can sub- also contribute to natural aerodynamic stabilisation of the sequently be estimated heuristically by using sizing rela- spacecraft.
+10,active control surfaces may also be considered tionships (i.e. mass density) informed by existing satellite for the purpose of aerodynamics-based attitude and orbit imaging systems.
+10,"the corresponding power required by control manoeuvres. such a payload can either be estimated similarly from ex- to achieve the best propulsive efficiency, pointing of isting systems using a power density relationship or can the spacecraft away from the velocity vector in pitch and be set a priori based on knowledge of the required perfor- yaw should be avoided."
+10,"payloads that can be operated in a mance of the payload (e.g. spectral capability or on-board fixed orientation are therefore most suitable, though point- data processing and storage). ing in roll can be permitted without increasing drag or for a sar instrument the minimum required antenna compromising the propulsive performance."
+10,"alternatively, area and maximum antenna length can be calculated prin- the use of steerable optical or radar payloads can be con- cipally from resolution requirements and ambiguity con- sidered to provide more flexible observational performance. straints [83, 84]."
+10,"the minimum width of the antenna a similar compromise for any extended solar arrays exists can subsequently be determined, though a larger area and between the increase in drag and alignment with the solar width may be desired to provide a design margin."
+10,the vector for maximum power-raising performance.
+10,this is average power required by the sar antenna psar can be principally dependent on the orbit geometry and relative calculated using equation (3) from the range resolution 10
+11,©2020.
+11,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ 0 δr , range r, antenna area aant , and sensitivity σne given efficiency solar cells help to reduce the solar array area as the noise-equivalent sigma-zero (nesz): and therefore reduce contributions to aerodynamic drag and the thrust requirement."
+11,high specific power of solar 8πkb tr nf r3 v λls psar = (3) arrays and increased energy density of batteries will also 2 δ σ0 a2ant ηant r ne contribute to a reduction in system mass. where kb is boltzmann’s constant and v is the satellite orbital velocity.
+11,in the early design phase assumption of 3.4.3.
+11,"aerodynamic performance the antenna efficiency ηant , noise factor nf , receiver noise estimation of the satellite aerodynamic performance is temperature tr , and system losses ls are also generally critical in vleo as it is required to either determine the necessary. lifetime of the spacecraft before deorbit, the propulsive and the mass of the sar instrument can be approximated power requirements to mitigate or compensate the drag using a value of area density determined from similar in- and extend or sustain the mission, or to determine the struments."
+11,"however, the instrument design and mass are capability of the satellite to perform aerodynamic attitude related to a number of other performance factors, for ex- and orbit control manoeuvres. ample number of image acquisition modes and need for aerodynamic forces fa in three dimensions can be cal- polarisation diversity [85]."
+11,"the use of a given antenna culated using equation (5) from the atmospheric density ρ, area density will therefore only reflect a small range of the relative velocity vrel (with respect to the oncoming flow), sar instrument configurations or antenna types and will reference area aref , and set of aerodynamic force coeffi- be specific to a given set of mission requirements. cients cf that are defined in axes that correspond to the output force."
+11,3.4.2.
+11,"electrical power system electrical power system (eps) architecture for vleo 1 2 fa = ρkvrel k aref cf (5) satellites is likely to be similar to that of conventional or- 2 biting platforms, using solar arrays as the primary power the drag force fd is considered as the component that source with supporting batteries to enable operations dur- is aligned with the orbital velocity vector of the satellite ing eclipse periods."
+11,"however, for vleo satellites with and is therefore usually closely aligned with the direction of abep or ep for drag compensation or mitigation, power the oncoming flow."
+11,mutually perpendicular forces (herein requirements are likely to be significantly increased.
+11,fur- termed lift) can also be considered.
+11,"however, the predom- thermore, eclipse conditions in vleo also increase slightly inant gsi characteristics of typical spacecraft materials in in duration with reducing altitude."
+11,"even in dawn-dusk vleo are diffuse and the lift forces generated are typically or similar ssos, often considered due to their favourable an order of magnitude smaller than the drag force."
+11,"if spec- on-orbit illumination conditions, the length of the eclipse ularly reflecting gsi performance is considered the mag- seasons also increases with reducing altitude [61]. nitude of these forces can increase significantly depending for solar-based power the implication on spacecraft on the angle of the surfaces with respect to the flow. aerodynamics (principally drag) and stability due to the aerodynamic torques ta can also be produced by in- presence of extensive solar arrays must be carefully consid- teraction of the satellite body with the atmospheric flow. ered and captured in the aerodynamic models."
+11,"if the solar these aerodynamic torques can be calculated from the arrays are expected to remain aligned parallel with the aerodynamic force and associated moment arms ` or in direction of the flow to minimise drag, the loss in power- a similar manner to equation (5) by considering the set raising performance associated non-alignment of the arrays of aerodynamic moment coefficients cm of the satellite with the sun vector must also be incorporated into the geometry and a reference length lref . power system and sizing calculations to ensure that suffi- cient power is available throughout the orbit."
+11,"dawn-dusk 1 2 ta = ` × fa = kvrel k aref lref cm (6) ssos allow flow-aligned solar arrays to remain approxi- 2 mately normal to the solar vector, minimising the cosine the sets of aerodynamic force and moment coefficients loss and maximising power-raising performance."
+11,"for gen- of a body in vleo are dependent on the external ge- eralised inclined orbits, the worst-case condition will exist ometry of the spacecraft, the orientation of the spacecraft when the beta angle is 0°."
+11,"for fixed solar arrays oriented with respect to the flow, the oncoming flow conditions, and in the local horizontal plane under this condition, where the gsi characteristics between the surface materials and θ is the angle between the solar array normal and the so- the atmospheric flow."
+11,"in this study maxwell’s model [86] lar vector, the cosine loss can be approximated over the has been selected to explore the effect of different materi- period of an orbit. als on the aerodynamic performance in vleo."
+11,"this gsi z π model combines diffuse and specular particle interactions 1 2 | cos θ| dθ = ≈ 0.637 (4) using an accommodation coefficient (α) that defines the 2π −π π proportion of particles that are fully accommodated and given the challenges and high requirements for eps re-emitted thermally and diffusely whilst the remaining design in vleo, the system performance is critical."
+11,high 11
+12,©2020.
+12,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ proportion are reflected elastically and specularly.
+12,"how- compensation of the aerodynamic drag to extend or sus- ever, whilst capable of describing the effect of some spec- tain operations."
+12,"however, if appropriately specified and ular reflection qualities, maxwell’s model is not able to designed a propulsion system may also be used to perform adequately describe the more complex petal-like shaped orbit-raising or lowering procedures, constellation main- distribution of materials with a predominant specular or tenance, out-of-plane manoeuvres, contribute to attitude quasi-specular component that has been observed experi- control, or support a controlled/targeted re-entry as re- mentally [14]. quired by different mission concepts."
+12,"a range of alternative gsi models have been developed for both conventional ep systems (for example demon- with different assumptions, limitations, and level of com- strated by goce) and novel abep systems in vleo, the plexity."
+12,"however, significant uncertainty remains associ- thrust required for continuous drag compensation must be ated with the aerodynamic performance of even commonly equal the drag force that will be experienced over the ex- used materials in the vleo environment, not to mention pected lifetime in orbit."
+12,"however, alternative thrusting the possible characteristics of novel atomic oxygen resis- strategies can be considered that may reduce the power tant materials that are currently being sought to reduce required during eclipse, for example periodic thruster op- drag in vleo."
+12,"as knowledge of these materials improves eration either only during sunlit conditions or at another and their gsi properties become more fully characterised, chosen ratio [69]."
+12,"under such strategies, the thruster must models that more appropriately reflect these behaviours provide sufficient thrust to ensure that the effect of the can be incorporated into future studies. drag over an orbit period (or similar time scale) is compen- the density at a given orbit altitude can be estimated sated for and a mean altitude is maintained."
+12,the required using an atmosphere model.
+12,"different atmosphere mod- thrust force ft can be approximated by considering the els of varying complexity and fidelity can be used with accumulated drag force over a given orbit divided by the possible inputs dependent on geographic position, time, period of the orbit that the thruster will be operated for. and space weather [87]."
+12,"however, for conceptual design purposes the fine detail of the atmospheric density is not fd tperiod ft ≈ (8) necessary and uncertainties in estimating the future space tthrust weather indices are considerable."
+12,a characteristically high periodic thrusting strategies may also be considered if or averaged value of the density at a given altitude can off-axis pointing performance is required in either the pitch therefore be used as a conservative estimate.
+12,"the nrlmsise- (or less commonly yaw) axis, causing a significant mis- 00 [10] model is commonly used and openly available and alignment of the spacecraft from the desired thrust vector. has therefore been used in this study in conjunction with such strategies would allow periods of agile eo operation input parameters as recommended in iso 14222:2013 [88]. whilst compatibility with a drag-compensating propulsion for simple spacecraft configurations, the overall aero- system is maintained."
+12,"however, it is likely that this imag- dynamic drag coefficient and associated reference area can ing would take place during sunlit conditions and there- be calculated by the panel method, i.e. by summing the fore conflicts with the optimal drag-compensation phase contribution of a set of simple flat panels that provide a and power availability."
+12,"the impact on the overall system basic representation of the spacecraft geometry. performance will therefore be of greater consequence. n x {cd aref }t = cd,i ai (7) conventional electric propulsion. i=1 a conventional ep system comprises primarily of a thruster, power supply hardware, a propellant feeding system, and this basic method can be extended and applied to the required propellant that is typically stored within a cad or mesh-based geometries for more complex satellite pressurised tank."
+12,"for spacecraft operating in vleo, a representations."
+12,"the panel method tool adbsat [89, 90] high specific impulse is typically desired to minimise the has been used in this study and has been shown to demon- mass of propellant required. strate good agreement with more complex simulations (e.g."
+12,under the assumption that the propulsion system op- direct simulation monte carlo) whilst remaining easy to erates continuously to compensate the aerodynamic drag implement for use in preliminary design studies.
+12,"further- force most efficiently for the total length of the mission tl , more, this tool can be adapted for use with different gsi the mass of propellant can be estimated from the specific models under the general assumptions that the geome- impulse isp ."
+12,a mass usage efficiency of the thruster ηm try used is generally convex (i.e. does not have surfaces can also be introduced. that can experience secondary reflections) and the flow is strictly free-molecular.
+12,fd mp = tl (9) isp g0 ηm 3.4.4.
+12,"propulsion the power required by the thruster can be calculated for vleo spacecraft, the principal function of a propul- from the required thrust ft , propellant mass flow rate sion system is to perform either mitigation or complete ṁp , and total thruster efficiency (ηt = γ 2 ηm ηe ), where ηe 12"
+13,©2020.
+13,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ is the electrical efficiency of the thruster and γ is a thrust ion thrusters can be considered to provide an estimate of correction factor (accounting for multiply charged ions and the mass of a notional abep thruster. beam divergence) [91].
+13,a number of designs for rarefied intakes have been pre- sented in the literature [19].
+13,"however, many of these de- ft2 signs are given for a specific set of mission or platform pt = (10) 2ṁp ηt design parameters and cannot be simply scaled for alter- native scenarios."
+13,"studies of parametrised abep intakes for ep, a trade-off between thrust, input power, and allow scaling based on frontal area and thruster specifi- specific impulse results."
+13,"for a given thrust requirement, cation using a set of geometric design factors (e.g. inlet- increasing isp can reduce the necessary propellant mass outlet area ratio and length-radius ratios for internal fea- (see equation (9)), but requires a corresponding increase tures)."
+13,"the collection efficiency ηc can be calculated using in input power. a balance model and transmittance probabilities for rar- 2ηt pt ft = (11) efied flows, but such methods can only be applied to dif- g0 isp fusely re-emitting surfaces [71–73]."
+13,"these analytical mod- given the required thrust magnitude, mass of propel- els have been compared to simulations using direct simula- lant, and power consumption, the basic propulsion system tion monte carlo and particle-in-cell methods."
+13,"deviations mass can be estimated using simple sizing relationships were found the range of 5 % to 8 %, demonstrating good and historical database of actual system parameters and agreement and their suitability particularly for prelimi- simple regression methods [77, 78]."
+13,typical efficiencies for nary design studies.
+13,"the maximum efficiency of these dif- hall electric thrusters (hets) and gridded ion engines fuse intakes has been shown to range up to approximately (gies) range from 0.20 to 0.90, whilst specific impulses 0.60 [73]."
+13,"if specular reflecting materials can be identi- can range from 600 s to 10 000 s [92]. fied and integrated for use in the orbital environment then alternative intake designs can be developed, and higher atmosphere-breathing electric propulsion (abep). intake efficiencies (up to 0.70 for hybrid designs and 0.94 in contrast to conventional ep, on-board propellant is not for pure-specular reflections) can be theoretically achieved required for an abep system as the reaction mass is col- [95]."
+13,"however, flexible design and optimisation methods lected by the spacecraft from the surrounding atmosphere for such intakes are currently lacking and computation- using an intake."
+13,"for conceptual and preliminary design ally expensive monte carlo simulations are required to es- purposes, the abep system can be considered simply as tablish their performance."
+13,"for such intakes, the mass of two discrete components, the intake and the thruster. the assembly can be estimated from the geometric prop- given the magnitude of the required thrust ft , the erties, a structural wall thickness, and selected material power required by the abep thruster pt can be calculated properties."
+13,"in the presence of significant uncertainty as- from the external mass flow rate into the intake (ṁc = sociated with the knowledge of material gsi performance ρac v), the intake collection efficiency ηc , and the thruster and abep intake performance a priori values of intake effi- efficiency ηt . ciency can be used for simplicity and to explore the design ft2 space as this area of system design and modelling matures."
+13,pt = (12) 2ṁc ηc ηt the use of abep can present a significant challenge in critical considerations for abep thruster development system design convergence and optimisation.
+13,"the thruster include compatibility and performance under the condi- power requirement is simultaneously dependent on the in- tions of changing atmospheric density and composition, take efficiency, thrust requirement, and available mass flow for example with the solar cycle or smaller short-term rate."
+13,"meanwhile, the intake efficiency is principally depen- variations."
+13,the technical challenges of thruster design dent on the inlet-outlet ratio that also affects the mass flow for operation with variable and mixed atmospheric pro- rate to the thruster.
+13,"at low altitude, the power require- pellant must also be considered."
+13,component degradation ment needed for drag compensation increases due to the (e.g. electrode erosion principally by atomic oxygen) must increased atmospheric density and therefore experienced also be avoided to ensure long-term operation and has re- drag.
+13,"this increases the area required for power raising sulted in increasing interest in electrodeless and contactless (assuming the use of solar arrays), which in turn simul- thruster designs that utilise radio-frequency (rf) plasma taneously increases the drag and the power requirement. discharges."
+13,"owing to the relative immaturity of these tech- to reduce the power requirement, a larger mass flow to nologies, the efficiency of rf helicon thrusters is currently the thruster is desired, requiring either a more efficient lower than that of established ep types, and has currently intake or a larger intake area that would once again in- demonstrated maximum thruster efficiencies of 0.2 to 0.25 crease the drag and the power."
+13,"a circular dependency [93, 94]."
+13,"given the novelty of abep thrusters, relation- that can cause non-convergence is therefore present in the ships between their mass for different power or thrust re- design and a trade-off between these characteristics has to quirements cannot yet be developed."
+13,"however, given the be matched to ensure sustained operation at lower alti- similarity in technology, an analogous relationship to rf tude [72]."
+13,"at higher altitude where the thrust and mass flow rate requirements are lower, it may be advantageous 13"
+14,©2020.
+14,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ to consider intake designs that only cover a fraction of table 3: optical vhr mission and system input parameters. the cross-sectional area, reducing the mass of the intake."
+14,"furthermore, if specular reflecting materials are identified, parameter value the remaining forward-facing surfaces can be angled with design lifetime [years] 5 respect to the flow, reducing the overall drag of the satel- grd (nadir) [m] 0.3 lite, and therefore reducing the power requirement of the vhr eo payload density [kg m−3 ] 61.5 propulsion system."
+14,payload power [w] 400 orbit sso 3.4.5.
+14,system cost ltan 10:00h parametric cost models can be used to estimate the de- maximum off-nadir pointing angle [°] 30 velopment and manufacturing costs for future space sys- maximum slew rate [° s−1 ] 4.5 tems during the early design phases.
+14,these models typi- cally utilise a set of cost-estimating relationships (cers) that express system or subsystem costs as a function of given the inherent cost model uncertainties and addi- different performance parameters.
+14,"these cers are gen- tional issues with cost modelling for vleo systems de- erally developed from databases of historic satellites us- scribed above, it is recommended that the output system ing regression-based analysis [45]."
+14,the unmanned sys- costs presented in the following section are used only to tem cost model (uscm) and the small satellite cost identify rough system-level trends and to compare differ- model (sscm) are publicly available and widely used.
+14,the ent designs in a relative and not absolute sense.
+14,nasa instrument cost model (nicm) can also be used to provide estimations for specific payload costs [96].
+14,"the uscm and sscm also provide estimation of model errors, 4."
+14,system case studies allowing for some measure of the uncertainty in the cost using the described system design framework and de- estimation process.
+14,"the cers contained in the uscm8 veloped system models, it is possible to investigate the [45], sscm19 [79], and nicm version iiic [45] have been system-level design of vleo spacecraft and the trade-offs used in this work. associated with the emerging technologies of interest."
+14,"two whilst these models can provide some representation case-studies will be considered; the first a very-high reso- of cost for the system development and production, they lution (vhr) optical imaging satellite, and the second a currently lack proper compatibility with vleo platform synthetic aperture radar (sar) satellite."
+14,"sets of input designs that may incorporate novel technologies, for ex- parameters are presented for each case to explore the dif- ample abep and aerodynamic surface coatings."
+14,"further- ferent vleo-specific technologies and to represent their more, given the low technology readiness level (trl) of near-term expected performance and longer-term specula- these technologies, there is currently insufficient data to tive properties."
+14,"in both case studies, the current state-of- produce new regressions that can provide reliable cost es- practice and improvements to the supporting technologies timates."
+14,"in the absence of suitable cers, the cost of the will also be considered, notably solar array efficiency and abep system will be estimated analogously; the intake specific power, and battery specific energy density. will be associated with the structural subsystem whilst the thruster and supporting systems are considered as compo- 4.1."
+14,optical very high resolution (vhr) nents of a conventional propulsion system.
+14,"at present, the cost-implications of aerodynamic surface coatings are the reduced altitude of vleo lends itself to vhr im- largely unknown and will not be considered. agery as the distance to the target is reduced and thus it should also be noted that each cost model and the the payload requirements for a given resolution reduce."
+14,"in associated cers are limited in their range of application combination with vhr, a high-performance eo satellite and inputs (e.g. total system and individual subsystem would require the high image stability and quality, pre- masses) as a result of the underlying data used in their cise geolocation, and flexible tasking and pointing perfor- development."
+14,"for example, the sscm does not provide a mance."
+14,"if deployed in a distributed system or constella- cer for propulsion systems for spacecraft with a wet mass tion, daily or sub-daily revisit would likely be desired. below 100 kg."
+14,discontinuities will therefore be present existing systems in this segment include worldview- across the transitions between the different models.
+14,"1/2/3/4, pleiades-1a/1b, and kompsat-3/3a that serve when the development of multiple spacecraft is con- principal application areas of defence monitoring and mis- sidered, for example in constellations, learning curves can sion planning, construction and infrastructure monitoring, be incorporated to account for the reduction in recurring and urban development."
+14,a satellite with the aim of re- production costs that can be achieved.
+14,further economic placing such systems would require a gsd of 0.3 m and considerations such as adjustments for inflation and amor- operate for at least 5 years.
+14,the principal mission design tisation for projects lasting multiple years can also be in- parameters for a notional satellite of this class are given cluded but have been neglected at present. in table 3.
+15,©2020.
+15,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ worldview-3 (0.31m) worldview-2 (0.46m) worldview-1 ( 0.5m) worldview-4 (0.31m) geoeye-1 (0.41m) kompsat-3a (0.55m) pleiades-1a/b (0.69m) kompsat-3 (0.69m) figure 4: variation of system mass with altitude for different optical vhr satellite designs (0.3 m gsd).
+15,the point of minimum mass for each case is marked with by an ’x’.
+15,previous optical vhr satellite designs (with varying gsd noted) are shown for comparison.
+15,table 4: optical vhr satellite design input and output parameters.
+15,"case parameter vhr-1 vhr-2 vhr-3 vhr-4 inputs propulsion type ep ep abep abep thruster efficiency, ηt [-] 0.60 0.80 0.30 0.60 specific impulse, isp [s] 2500 4000 - - intake efficiency, ηc [-] - - 0.40 0.94 acc."
+15,"coefficient, α [-] 1.00 0.50 1.00 0.50 solar array efficiency [-] 0.30 0.40 0.30 0.40 solar array specific power [w kg−1 ] 60 100 60 100 battery energy density [w h kg−1 ] 125 200 125 200 outputs altitude [km] 420 330 330 220 mass [kg] 561 296 618 225 solar array area [m2 ] 14.3 7.1 25.2 11.1 aperture diameter [m] 0.85 0.67 0.67 0.45 body diameter [m] 2.7 2.1 2.1 1.4 unit cost [$m] 347 274 292 201 15"
+16,©2020.
+16,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ figure 5: variation of subsystem mass and power with altitude for different optical vhr satellite designs (vhr-2 and vhr-4).
+16,"using the previously described system modelling frame- when operating in vleo, a satellite with a conven- work, system designs can be generated for sets of differ- tional ep system and assuming traditional materials (case ent input options and parameters."
+16,"four different cases vhr-1) is shown to achieve the desired imaging perfor- are defined (see table 4), illustrating the current and fu- mance at a lower total (wet) mass than existing systems, ture expected performance of ep and abep enabled sys- particularly those matching the high-resolution require- tems."
+16,"for each case, the variation of modelled spacecraft ment."
+16,"this result is consistent with the success of the mass with reducing altitude is shown in figure 4 along- goce spacecraft that had a payload mass of approxi- side some recent examples of commercial vhr satellites. mately 200 kg and was able to operate for a period of over whilst these existing systems are provided for high-level 4 years at altitudes below 280 km using a drag-compensating comparison, it should be noted that the systems mod- propulsion system."
+16,"as the altitude is reduced below 400 km elling approach and inputs will not directly correspond to the propulsive and power requirements begin to increase the specification, configuration, and performance of any of and the mass correspondingly grows rapidly."
+16,when the po- these spacecraft individually.
+16,"output design parameters of tential of drag-reducing materials is incorporated into the interest are reported in table 4, corresponding to the low- design and propulsive and eps performance is increased est mass system reported for each set of input parameters."
+16,"(case vhr-2), operation at lower altitude can be achieved the breakdown of mass and power by subsystem is also before the spacecraft mass begins to increase rapidly."
+16,"this given in figure 5 for cases vhr-2 and vhr-4, providing mass increase is shown in figure 5, as expected, to be due further insight into the system trade-offs associated with to the propulsion system."
+16,"at higher altitude the mass of the selection and performance of the different technologies. these two cases (vhr-1 and vhr-2) almost converge as a at an altitude of 300 km, the optical payload to pro- result of the diminishing requirement for drag compensa- duce 0.3 m resolution is estimated using the payload sizing tion. method to have a mass of approximately 60 kg."
+16,"in compar- designs with abep and lower performance input pa- ison, at 600 km altitude such a payload would need to be rameters (case vhr-3) are shown to generally have a approximately 500 kg, similar to that of the worldview-4 greater mass than an equivalent spacecraft with ep above satellite that has a 550 kg instrument and operates at an approximately 350 km."
+16,"however, designs using these pa- altitude of 617 km. rameters are not found to converge for altitudes below 16"
+17,©2020.
+17,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ 300 km as a result of the assumed propulsive efficiency, on the propulsive and power requirements and an associ- power requirement, and material performance available at ated reduction in total mass."
+17,this suggests that there may the current state-of-the-art.
+17,"the power requirement of be scope to further develop and optimise such platforms these systems is also high, indicated by the large solar ar- for operation in vleo with benefits to the overall system ray area required."
+17,"however, when operating below 500 km, design. these systems are still expected to be able to achieve a mass the presented results also demonstrate that the cost of at least half that of the most modern existing systems of high performance optical vhr platforms generally re- operating at higher altitude with a similar resolution (e.g. duces with orbital altitude, principally as a result of the worldview-4)."
+17,"when improved propulsive, intake, and reducing spacecraft size and mass."
+17,"the cost of spacecraft aerodynamic material performance is incorporated (case operating in vleo may therefore be significantly lower vhr-4), the total system mass reduces considerably and than comparable existing spacecraft that operate at higher feasible designs are indicated at altitudes down to 180 km. altitude that have reported costs in the range of $305 m in figure 5 the significant increase in power requirement of to $470 m."
+17,"however, this comparison to existing systems the propulsion system can be seen."
+17,"below approximately is only indicative and it should be noted that the cers 300 km, these designs are shown to have a mass lower than utilised should be used primarily for relative rather than that of conventional ep systems despite lower thruster ef- absolute analysis."
+17,"further cost savings associated with the ficiency, demonstrating the significant potential of abep use of lower altitude orbits not captured by this current systems for sustained low-altitude operations in the future. analysis may however also be realised, for example due to the altitudes identified for the designs of lowest mass the reduction in launch mass. with abep are somewhat higher than reflected in previ- it should also be noted that systems operating at higher ous studies, which in some cases have suggested altitudes orbital altitude are likely to have larger access areas, greater significantly lower than 200 km."
+17,"this is largely due to the overall coverage, and shorter revisit periods."
+17,"spacecraft geometric and aerodynamic models adopted in this work. operating at lower altitude, whilst individually smaller and notably, both the core spacecraft body dimensions and the cheaper, may therefore need to be operated in constella- area of deployable solar arrays are included in the calcu- tions to achieve the same total imaging output and perfor- lation of drag."
+17,"furthermore, the use of a gsi model that mance."
+17,"a further trade-off between the constellation de- accounts for the interactions of surfaces that are nominally sign, performance, and total system costs therefore exists aligned with the oncoming flow also increases the expected and requires exploration to understand the associated rev- drag."
+17,the result is such that the designs identified in this enue and costs.
+17,"additional considerations in this trade-off work, particularly at lower altitude, are slightly less opti- may include aspects such as launch manifesting, constella- mistic. tion deployment, recurring and non-recurring engineering many of the previous and existing systems in orbit costs, and learning-curves. have been operated for a number of years beyond their initial planned lifetime (e.g."
+17,worldview-1/2).
+17,"however, 4.2."
+17,"synthetic aperture radar (sar) as the orbital altitude is lowered, the possibility for ex- interest in synthetic aperture radar (sar) systems con- tending operations also reduces for systems using ep for tinues to grow due to their ability to provide novel eo drag compensation as additional propellant is required to data products such as digital elevation mapping (dem) further delay orbital decay and re-entry."
+17,"in comparison, and interferometric products that can provide detail infor- for a longer initial lifetime requirement or extension of op- mation on geographical processes (e.g. terrain changes). erations once in orbit, abep does not require additional sar is also much less dependent on lighting conditions and propellant, though this does assume that the challenges of cloud-cover and can therefore be used to provide imagery thruster development for long-term operations with atmo- during night and poor weather."
+17,"sar is currently used spheric propellants have been addressed. predominantly in the defence and maritime sectors, but if table 4 also outlines some further top-level output pa- made available at a lower cost would be attractive for a rameters for the different cases and identified lowest-mass range of commercial applications such as construction and designs."
+17,"it can be noted that the spacecraft body diameter infrastructure monitoring, forestry surveying, agriculture, for each case is significantly larger than the telescope aper- and disaster response [2]."
+17,operation of a sar satellite in ture diameter required to achieve the target grd.
+17,this vleo may be advantageous due to the desired orientation is due to the assumed use of existing telescope designs as of the sar antenna.
+17,these payloads are typically aligned a baseline for the system modelling process.
+17,"the space- parallel to the direction of travel and therefore close to the craft body diameter is therefore related to the telescope direction of the oncoming flow, allowing a slender space- length."
+17,"however, a telescope for a slender spacecraft may craft geometry with a lower drag profile. be able to be designed specifically to minimise the cross- the principal mission and system parameters are pro- sectional area (with respect to the flow) through folding of vided in table 5."
+17,"a sar satellite providing resolution the optical path, allowing configuration of the optical as- comparative to current emerging market competitors (ic- sembly along the length of the satellite body."
+17,this would eye and capella space) is envisaged.
+17,the input sar an- first result in a reduction in drag with subsequent effect 17
+18,©2020.
+18,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ table 5: sar mission and system input parameters. forming to traditional design principles.
+18,"however, more recent designs have considered more radical slender con- parameter value figurations (e.g."
+18,iceye x2 and novasar) or alternative design lifetime [years] 5 deployable antenna designs (e.g.
+18,capella space sequoia) azimuth resolution (strip-map) [m] 1.5 that may further reduce the projected area of the space- range resolution [m] 0.25 craft with respect to the flow.
+18,"the approximately cylin- wavelength [mm] 31.1 (x-band) drical geometry adopted for this study may therefore be a duty cycle [-] 0.25 disadvantage and alternative configurations could be con- nesz [db] -20 sidered that can further benefit the overall system design, sar antenna area density [kg m−2 ] 10 particularly if novel aerodynamic materials become avail- orbit sso able."
+18,"ltan 15:00h whilst the reported cost estimates suggest a general re- duction in cost of operating at lower altitude, they remain significantly higher than that of the emerging competi- tenna area density corresponds to the capability of modern tors, for example iceye ($7m), capella space ($8m), and smallsat sar concepts [96]. even that of terrasar-x/tandem-x ($117m)."
+18,"they are for the additional parameters described in table 6, however commensurate with the earlier monolithic sar output designs for sar spacecraft for varying altitude spacecraft, e.g."
+18,radarsat-2 ($433m) and cosmo-skymed have been generated and are shown in figure 6.
+18,com- ($364m).
+18,"this is principally attributed to the use of the pared to an optical payload, the mass of sar instruments nasa instrument cost model that significantly overesti- are less sensitive to increases in altitude and scale approxi- mates the sar payload cost in comparison to modern mately linearly, from 172 kg at 300 km to 344 kg at 600 km commercial instruments and accounts for 50 % to 70 % of for the given input requirements."
+18,"however, the required the total spacecraft cost."
+18,"the cost of telemetry, tracking, power for the sar instrument also increases considerably control, and data handling from the sscm accounts for with range and therefore contributes to the increase in a further 15 % to 30 % of the total."
+18,these results sug- system mass at higher altitude despite the reduction in gest that the available cers do not capture the recent propulsive requirement.
+18,"this is particularly notable for advancements in this market segment to reflect the mod- case sar-1 and sar-3 that have lower input eps per- ern design and development principles of commercial small formance parameters. satellites, particularly with sar payloads."
+18,"this further in general, the total mass presented for the designed suggests that in this context the use of cost models and systems is lower than the majority of previous high per- cers should be used carefully and for relative rather than forming sar satellites and similar to that of the modern absolute indication of expected costs. small sar satellites such as iceye and capella space [2]."
+18,this is principally due to the low antenna area density 5.
+18,conclusions value provided as input that corresponds to fewer imag- ing modes and therefore results in lower mass solutions.
+18,new engineering system models for emerging vleo this is consistent with the trend identified by paek et al. technologies have been developed and applied to the con- [97] of moving away from conventional design principles of ceptual design of spacecraft for eo applications.
+18,"through large monolithic spacecraft with dedicated service to spe- integration with conventional system models for spacecraft cific customer segments towards constellations of smaller design, the trends and trade-offs associated with the use satellites aimed at wider commercial markets. of these technologies for sustained operations at reducing at lower altitude, the total system mass is shown to orbital altitude can be explored. increase significantly as the propulsive requirements asso- the use of both conventional ep and novel abep for ciated with maintaining the mission orbit for the desired drag compensation were shown to enable operations at lifetime increase."
+18,"for the presented inputs, the abep sys- significantly lower altitude than current commercial eo tem with drag-reducing materials (case sar-4) provides spacecraft."
+18,"the benefit to payload design at lower alti- the lowest mass solution at an altitude of 250 km, though tude was shown to result in a significant reduction in the the sensitivity of the different solutions to altitude is much total system mass, though this was bounded at very low smaller than the previous case study for the vhr optical altitudes by the increasing atmospheric density and drag. payload."
+18,"in this case the abep solutions are shown to the use of drag-reducing materials, enhanced electrical be unable to converge for altitudes below approximately power systems, and higher thruster efficiency were shown 425 km (case sar-3) and 275 km (case sar-4). to further increase the system performance and enable fur- some previous sar systems have utilised hexagonal ther reductions in orbital altitude, resulting in spacecraft body configurations (e.g."
+18,"terrasar-x and tandem-x) of even lower system mass. that exploit the shape and required orientation of the an- the results of two case-studies, an optical vhr satel- tenna to generally reduce the experienced drag whilst con- lite and a sar satellite, demonstrated the reduction in the size and mass of eo spacecraft that could be achieved 18"
+19,©2020.
+19,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ csg alos-2 cosmo-skymed tandem-x kompsat-5 terrasar-x sarlupe novasar-1 risat-2 iceye x2 capella 2 sequoia figure 6: variation of system mass with altitude for different sar satellite designs.
+19,the point of minimum mass for each case is marked with by an ’x’.
+19,previous sar satellite designs are shown for comparison.
+19,table 6: sar satellite design input and output parameters.
+19,"case parameter sar-1 sar-2 sar-3 sar-4 inputs propulsion type ep ep abep abep thrust efficiency, ηt [-] 0.60 0.80 0.30 0.60 specific impulse, isp [s] 2500 4000 - - intake efficiency, ηc [-] - - 0.40 0.94 acc."
+19,"coefficient, α [-] 1.00 0.50 1.00 0.50 solar array efficiency [-] 0.30 0.40 0.30 0.40 solar array specific power [w kg−1 ] 60 100 60 100 battery energy density [w h kg−1 ] 125 200 125 200 outputs altitude [km] 440 370 390 250 mass [kg] 336 217 420 206 sar antenna area [m2 ] 4.09 3.44 3.62 2.32 solar array area [m2 ] 17.4 11.9 21.1 10.9 unit cost [$m] 345 314 334 269 19"
+20,©2020.
+20,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ by designing for operations in lower altitude orbits whilst [3] j.
+20,"wertz, n."
+20,"sarzi-amadé, a."
+20,"shao, c."
+20,"taylor, r."
+20,van maintaining or improving observational performance.
+20,"it allen, moderately elliptical very low orbits (mevlos) as a long-term solution to orbital debris, 26th annual aiaa/usu was also indicated, using available cost models, that sub- conference on small satellites, logan, ut (2012). stantial savings in system development and manufacture [4] p."
+20,"roberts, n."
+20,"crisp, s."
+20,"edmondson, s."
+20,"haigh, r."
+20,"e. cost could be achieved for a notional optical vhr satel- lyons, v."
+20,"oiko, a."
+20,"macario-rojas, k."
+20,"smith, j."
+20,be- lite.
+20,"in contrast, cost savings of this magnitude were not cedas, g."
+20,"gonzález, i."
+20,"vázquez, á."
+20,"braña, k."
+20,"antonini, k."
+20,"bay, l."
+20,"ghizoni, v."
+20,"jungnell, j."
+20,"morsbøl, t."
+20,"binder, a."
+20,"boxberger, observed for the sar satellite, though this result was g."
+20,"herdrich, f."
+20,"romano, s."
+20,"fasoulas, d."
+20,"garcia-almiñana, largely attributed to the use of cers that do not reflect s."
+20,"rodriguez-donaire, d."
+20,"kataria, m."
+20,"davidson, r."
+20,"outlaw, the modern development of commercial sar instruments b."
+20,"belkouchi, a."
+20,"conte, j."
+20,"perez, r."
+20,"villain, b."
+20,"heißerer, and small satellites."
+20,"schwalber, discoverer – radical redesign of earth observation satellites for sustained operation at significantly the presented results demonstrate the significant po- lower altitudes, in: 68th international astronautical congress, tential of vleo, particularly for the development of eo september, international astronautical federation (iaf), ade- missions with increasing performance requirements."
+20,"a laide, australia, 2017, pp."
+20,1–9. range of further benefits of operating at lower orbital alti- [5] p.
+20,"roberts, n."
+20,"crisp, f."
+20,"romano, g."
+20,"herdrich, v."
+20,"oiko, s."
+20,"edmondson, s."
+20,"haigh, c."
+20,"huyton, s."
+20,"liva- tude exist that are yet to be accounted for in the system diotti, r."
+20,"lyons, k."
+20,"smith, l."
+20,"sinpetru, a."
+20,"straker, modelling framework, for example increased launch vehicle s."
+20,"worrall, j."
+20,"becedas, r."
+20,"domı́nguez, d."
+20,"gonzález, capability, reduced radiation exposure, and lower collision v."
+20,"cañas, v."
+20,"hanessian, a."
+20,"mølgaard, j."
+20,"nielsen, m."
+20,"bisgaard, a."
+20,"boxberger, y.-a."
+20,"chan, s."
+20,"fasoulas, c."
+20,"traub, d."
+20,garcia- risk.
+20,"further mission and system design explorations are almiñana, s."
+20,"rodriguez-donaire, m."
+20,"sureda, d."
+20,"kataria, also required to investigate the trade-offs associated with r."
+20,"outlaw, b."
+20,"belkouchi, a."
+20,"conte, j."
+20,"perez, r."
+20,"villain, the design and performance of constellations of eo space- b."
+20,"heißerer, a."
+20,"schwalber, discoverer – making commer- craft operating in vleo."
+20,"the use of elliptical orbits with a cial satellite operations in very low earth orbit a reality, in: 70th international astronautical congress, international astro- low perigee altitude may also be considered in these explo- nautical federation (iaf), washington, dc, 2019, pp."
+20,1–9. rations to provide improved regional coverage whilst also [6] p.
+20,"roberts, n."
+20,"crisp, s."
+20,"edmondson, s."
+20,"haigh, benefiting from reduced propulsive requirements."
+20,"holmes, s."
+20,"livadiotti, a."
+20,"macario-rojas, v."
+20,"oiko, the development of this systems modelling framework k."
+20,"smith, l."
+20,"sinpetru, j."
+20,"becedas, r."
+20,"domı́nguez, v."
+20,"sulliotti-linner, s."
+20,"christensen, t."
+20,"jensen, j."
+20,"nielsen, has demonstrated the need for a more holistic approach to m."
+20,"bisgaard, y.-a."
+20,"chan, g."
+20,"herdrich, f."
+20,"romano, s."
+20,"fa- conceptual spacecraft design for vleo that can capture soulas, c."
+20,"traub, d."
+20,"garcia-almiñana, m."
+20,"garcia-berenguer, the complex interactions involved, particularly when the s."
+20,"rodriguez-donaire, m."
+20,"sureda, d."
+20,"kataria, b."
+20,"belkouchi, effect of novel technologies are are being considered."
+20,"conte, s."
+20,"seminari, r."
+20,"villain, a."
+20,"schwalber, discov- erer: developing technologies to enable commercial satellite they are still in development, significant uncertainty re- operations in very low earth orbit, in: 71st international as- mains in the performance estimation and route to imple- tronautical congress – the cyberspace edition, international mentation of these enabling technologies for vleo."
+20,"the astronautical federation (iaf), 2020. approach to system modelling presented in this paper lays [7] n."
+20,"crisp, p."
+20,"roberts, s."
+20,"livadiotti, v."
+20,"oiko, s."
+20,"edmondson, s."
+20,"haigh, c."
+20,"huyton, l."
+20,"sinpetru, k."
+20,"smith, s."
+20,"worrall, j."
+20,"be- out the means to explore the impact of these technolo- cedas, r."
+20,"domı́nguez, d."
+20,"gonzález, v."
+20,"hanessian, a."
+20,"mølgaard, gies on the spacecraft design, set requirements for their j."
+20,"nielsen, m."
+20,"bisgaard, y.-a."
+20,"chan, s."
+20,"fasoulas, g."
+20,"herdrich, development, and inform their ongoing testing and imple- f."
+20,"romano, c."
+20,"traub, d."
+20,"garcı́a-almiñana, s."
+20,"rodrı́guez- donaire, m."
+20,"sureda, d."
+20,"kataria, r."
+20,"outlaw, b."
+20,"belkouchi, mentation towards enabling sustainable vleo spacecraft a."
+20,"conte, j."
+20,"perez, r."
+20,"villain, b."
+20,"heißerer, a."
+20,"schwalber, in the future."
+20,"the benefits of very low earth orbit for earth observation missions, progress in aerospace sciences 117 (2020) 100619."
+20,url: https://linkinghub.elsevier.com/retrieve/pii/ acknowledgements s0376042120300312. doi:10.1016/j.paerosci.2020.100619.
+20,[8] j.
+20,"richelson, the keyhole satellite program, journal of this project has received funding from the european strategic studies 7 (1984) 121–153."
+20,url: http://www.
+20,union’s horizon 2020 research and innovation programme tandfonline.com/doi/abs/10.1080/01402398408437182. doi:10.1080/01402398408437182. under grant agreement no 737183.
+20,this publication re- [9] c.
+20,"steiger, m."
+20,"romanazzo, p."
+20,"emanuelli, r."
+20,flobergha- flects only the view of the authors.
+20,"the european com- gen, m."
+20,"fehringer, the deorbiting of esa’s gravity mis- mission is not responsible for any use that may be made sion goce - spacecraft operations in extreme drag condi- tions, in: spaceops 2014 conference, may, american institute of the information it contains. of aeronautics and astronautics, reston, virginia, 2014, pp."
+20,url: http://arc.aiaa.org/doi/10.2514/6.2014-1934. doi:10.2514/6.2014-1934.
+20,references [10] j.
+20,"picone, a."
+20,"hedin, d."
+20,"drob, a."
+20,"aikin, nrlmsise-00 em- pirical model of the atmosphere: statistical comparisons and [1] p."
+20,"kansakar, f."
+20,"hossain, a review of applications of satel- scientific issues, journal of geophysical research 107 (2002). lite earth observation data for global societal benefit and doi:10.1029/2002ja009430. stewardship of planet earth, space policy 36 (2016) 46– [11] l."
+20,"sentman, free molecule flow theory and its application 54."
+20,"url: http://dx.doi.org/10.1016/j.spacepol.2016.05. to the determination of aerodynamic forces, technical report, 005. doi:10.1016/j.spacepol.2016.05.005."
+20,"lockheed missiles & space company, sunnyvale, ca, 1961."
+20,"[2] euroconsult, satellite-based earth observation market [12] k."
+20,"moe, m."
+20,"moe, s."
+20,"wallace, improved satellite drag co- prospects to 2028, technical report, paris, france, 2019. efficient calculations from orbital measurements of energy ac- 20"
+21,©2020.
+21,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ commodation, journal of spacecraft and rockets 35 (1998) 266– a34134. doi:10.2514/1."
+21,a34134.
+21,url: http://arc.aiaa.org/doi/10.2514/2.3350. doi:10.
+21,[25] h.
+21,"leppinen, deploying a single-launch nanosatellite constella- 2514/2.3350. tion to several orbital planes using drag maneuvers, acta astro- [13] d."
+21,"mostaza-prieto, b."
+21,"graziano, p."
+21,"roberts, space- nautica 121 (2016) 23–28. doi:10.1016/j.actaastro.2015.12. craft drag modelling, progress in aerospace sciences 64 036."
+21,(2014) 56–65.
+21,url: http://dx.doi.org/10.1016/j.paerosci.
+21,[26] c.
+21,"leonard, w."
+21,"hollister, e."
+21,"bergmann, orbital formation- 2013.09.001. doi:10.1016/j.paerosci.2013.09.001. keeping with differential drag, journal of guidance, control, [14] s."
+21,"livadiotti, n."
+21,"crisp, p."
+21,"roberts, s."
+21,"worrall, and dynamics 12 (1989) 108–113. doi:10.2514/3.20374."
+21,"oiko, s."
+21,"edmondson, s."
+21,"haigh, c."
+21,"huyton, k."
+21,[27] c.
+21,"traub, f."
+21,"romano, t."
+21,"binder, a."
+21,"boxberger, g."
+21,"her- smith, l."
+21,"sinpetru, b."
+21,"holmes, j."
+21,"becedas, r."
+21,"m. drich, s."
+21,"fasoulas, p."
+21,"roberts, k."
+21,"smith, s."
+21,"ed- domı́nguez, v."
+21,"cañas, s."
+21,"christensen, a."
+21,"mølgaard, j."
+21,"nielsen, mondson, s."
+21,"haigh, n."
+21,"crisp, v."
+21,"oiko, r."
+21,"bisgaard, y.-a."
+21,"chan, g."
+21,"herdrich, f."
+21,"romano, s."
+21,"fa- lyons, s."
+21,"worrall, s."
+21,"livadiotti, j."
+21,"becedas, g."
+21,"gonzález, soulas, c."
+21,"traub, d."
+21,"garcia-almiñana, s."
+21,"rodriguez-donaire, r."
+21,"dominguez, d."
+21,"gonzález, l."
+21,"ghizoni, v."
+21,"jungnell, m."
+21,"sureda, d."
+21,"kataria, b."
+21,"belkouchi, a."
+21,"conte, j."
+21,"perez, k."
+21,"bay, j."
+21,"morsbøl, d."
+21,"garcia-almiñana, s."
+21,"rodriguez-donaire, r."
+21,"villain, r."
+21,"outlaw, a review of gas-surface interaction m."
+21,"sureda, d."
+21,"kataria, r."
+21,"outlaw, r."
+21,"villain, j."
+21,"perez, models for orbital aerodynamics applications, progress a."
+21,"conte, b."
+21,"belkouchi, a."
+21,"schwalber, b."
+21,"heißerer, on the in aerospace sciences 119 (2020) 100675."
+21,"url: https:// exploitation of differential aerodynamic lift and drag as a linkinghub.elsevier.com/retrieve/pii/s0376042120300877. means to control satellite formation flight, ceas space jour- doi:10.1016/j.paerosci.2020.100675. nal (2019)."
+21,url: http://link.springer.com/10.1007/s12567- [15] b.
+21,"banks, s."
+21,"miller, k. de groh, low earth orbital 019-00254-y. doi:10.1007/s12567-019-00254-y."
+21,"atomic oxygen interactions with materials, in: 2nd inter- [28] r."
+21,"bevilacqua, m."
+21,"romano, rendezvous maneuvers of multi- national energy conversion engineering conference, ameri- ple spacecraft using differential drag under j2 perturbation, can institute of aeronautics and astronautics, providence, ri, journal of guidance, control, and dynamics 31 (2008) 1595– 2004."
+21,url: http://arc.aiaa.org/doi/10.2514/6.2004-5638.
+21,1607. doi:10.2514/1.36362. doi:10.2514/6.2004-5638.
+21,[29] l.
+21,"dell’elce, g."
+21,"kerschen, optimal propellantless rendez-vous [16] c."
+21,"pardini, l."
+21,"anselmo, k."
+21,"moe, m."
+21,"moe, drag and en- using differential drag, acta astronautica 109 (2015) 112–123. ergy accommodation coefficients during sunspot maximum, ad- url: http://dx.doi.org/10.1016/j.actaastro.2015.01.011. vances in space research 45 (2010) 638–650."
+21,url: http:// doi:10.1016/j.actaastro.2015.01.011. dx.doi.org/10.1016/j.asr.2009.08.034. doi:10.1016/j.asr.
+21,[30] j.
+21,"virgili llop, p."
+21,"roberts, k."
+21,"palmer, s."
+21,"hobbs, 2009.08.034."
+21,"kingston, descending sun-synchronous orbits with aero- [17] a."
+21,"macario-rojas, k."
+21,"smith, n."
+21,"crisp, p."
+21,"roberts, dynamic inclination correction, journal of guidance, control, atmospheric interaction with nanosatellites from observed or- and dynamics 38 (2015) 831–842."
+21,"url: http://arc.aiaa.org/ bital decay, advances in space research 61 (2018) 2972–2982. doi/10.2514/1."
+21,g000183. doi:10.2514/1.
+21,g000183. doi:10.1016/j.asr.2018.02.022.
+21,[31] j.
+21,"virgili llop, p."
+21,"roberts, n."
+21,"hara, atmospheric inter- [18] j."
+21,"emmert, thermospheric mass density: a review, ad- face reentry point targeting using aerodynamic drag control, vances in space research 56 (2015) 773–824."
+21,"url: http:// journal of guidance, control, and dynamics 38 (2015) 403– dx.doi.org/10.1016/j.asr.2015.05.038. doi:10.1016/j.asr."
+21,url: http://arc.aiaa.org/doi/abs/10.2514/1.
+21,g000884.
+21,2015.05.038. doi:10.2514/1.
+21,g000884.
+21,[19] l.
+21,"singh, m."
+21,"walker, a review of research [32] s."
+21,"omar, r."
+21,"bevilacqua, guidance, navigation, and control in low earth orbit propellant collection, progress solutions for spacecraft re-entry point targeting using aero- in aerospace sciences 75 (2015) 15–25."
+21,"url: http: dynamic drag, acta astronautica 155 (2019) 389–405."
+21,url: //dx.doi.org/10.1016/j.paerosci.2015.03.001https:// https://doi.org/10.1016/j.actaastro.2018.10.016https:// linkinghub.elsevier.com/retrieve/pii/s0376042115000226. linkinghub.elsevier.com/retrieve/pii/s0094576518302893. doi:10.1016/j.paerosci.2015.03.001. doi:10.1016/j.actaastro.2018.10.016.
+21,[20] t.
+21,"schönherr, k."
+21,"komurasaki, f."
+21,"romano, b."
+21,massuti- [33] m.
+21,"gargasz, optimal spacecraft attitude control using ballester, g."
+21,"herdrich, analysis of atmosphere-breathing aerodynamic torques, msc thesis, air force institute of tech- electric propulsion, ieee transactions on plasma science 43 nology, 2007."
+21,(2015) 287–294. doi:10.1109/tps.2014.2364053.
+21,[34] j.
+21,"auret, w."
+21,"steyn, design of an aerodynamic attitude [21] f."
+21,"romano, y.-a."
+21,"chan, g."
+21,"herdrich, c."
+21,"traub, s."
+21,"fa- control system for a cubesat, in: 62nd international astro- soulas, p."
+21,"roberts, k."
+21,"smith, s."
+21,"edmondson, s."
+21,"haigh, nautical congress, cape town, south africa, 2011."
+21,"crisp, v."
+21,"oiko, s."
+21,"worrall, s."
+21,"livadiotti, c."
+21,huy- [35] d.
+21,"mostaza-prieto, p."
+21,"roberts, perigee attitude maneu- ton, l."
+21,"sinpetru, a."
+21,"straker, j."
+21,"becedas, r."
+21,"domı́nguez, vers of geostationary satellites during electric orbit rais- d."
+21,"gonzález, v."
+21,"cañas, v."
+21,"sulliotti-linner, v."
+21,"hanessian, ing, journal of guidance, control, and dynamics (2017) 1–12."
+21,"mølgaard, j."
+21,"nielsen, m."
+21,"bisgaard, d."
+21,"garcia-almiñana, url: https://arc.aiaa.org/doi/10.2514/1."
+21,g002370. doi:10.
+21,"rodriguez-donaire, m."
+21,"sureda, d."
+21,"kataria, r."
+21,"outlaw, 2514/1."
+21,g002370.
+21,"villain, j."
+21,"perez, a."
+21,"conte, b."
+21,"belkouchi, a."
+21,"schwalber, [36] s."
+21,"livadiotti, n."
+21,"crisp, p."
+21,"roberts, v."
+21,"oiko, s."
+21,"christensen, b."
+21,"heißerer, rf helicon-based inductive plasma thruster r."
+21,"dominguez, g."
+21,"herdrich, uncertainties and design of (ipt) design for an atmosphere-breathing electric propul- active aerodynamic attitude control in very low earth orbit, sion system (abep), acta astronautica 176 (2020) 476– journal of guidance, control, and dynamics (under review) 483."
+21,url: https://linkinghub.elsevier.com/retrieve/pii/ (2021).
+21,s0094576520304264. doi:10.1016/j.actaastro.2020.07.008.
+21,[37] d.
+21,"mishne, e."
+21,"edlerman, collision-avoidance maneuver of [22] m."
+21,"guelman, a."
+21,"kogan, electric propulsion for remote sensing satellites using drag and solar radiation pressure, journal of from low orbits, journal of guidance, control, and dynamics guidance, control, and dynamics 40 (2017) 1191–1205."
+21,url: 22 (1999) 313–321.
+21,url: https://arc.aiaa.org/doi/10.2514/ https://arc.aiaa.org/doi/10.2514/1.
+21,g002376. doi:10.2514/ 2.4380. doi:10.2514/2.4380.
+21,g002376.
+21,[23] t.
+21,"co, j."
+21,"black, responsiveness in low orbits using elec- [38] x."
+21,"huang, y."
+21,"yan, y."
+21,"zhou, underactuated space- tric propulsion, journal of spacecraft and rockets 51 (2014) craft formation reconfiguration with collision avoidance, 938–945. doi:10.2514/1."
+21,a32405.
+21,acta astronautica 131 (2017) 166–181.
+21,url: http:// [24] m.
+21,"guelman, a."
+21,"shiryaev, closed-loop control of earth dx.doi.org/10.1016/j.actaastro.2016.11.037. doi:10.1016/ observation satellites, journal of spacecraft and rockets j.actaastro.2016.11.037."
+21,56 (2019) 82–90.
+21,url: https://arc.aiaa.org/doi/10.2514/1.
+21,[39] t.
+21,"maclay, c."
+21,"tuttle, satellite stationkeeping of the orb- 21"
+22,©2020.
+22,"this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ comm constellation via active control of atmospheric drag: design methodology for the deployment of constellations operations, constraints, and performance, advances in the of small satellites, the aeronautical journal 123 (2019) astronautical sciences 120 (2005)."
+22,1193–1215.
+22,url: https://www.cambridge.org/core/product/ [40] j.
+22,"gangestad, b."
+22,"hardy, d."
+22,"hinkley, operations, identifier/s0001924019000575/type/journal{_}article."
+22,"orbit determination, and formation control of the aerocube- doi:10.1017/aer.2019.57."
+22,"4 cubesats, in: 27th annual aiaa/usu conference on small [57] s."
+22,"spangelo, b."
+22,"longmier, small spacecraft system- satellites, american institute of aeronautics and astronautics level design and optimization for interplanetary trajectories, (aiaa), logan, ut, 2013. in: aiaa/aas astrodynamics specialist conference, august, [41] c."
+22,"foster, j."
+22,"mason, v."
+22,"vittaldev, l."
+22,"leung, v."
+22,"beukelaers, american institute of aeronautics and astronautics, san diego, l."
+22,"stepan, r."
+22,"zimmerman, constellation phasing with differ- ca, 2014, pp."
+22,"url: http://arc.aiaa.org/doi/10.2514/ ential drag on planet labs satellites, journal of spacecraft and 6.2014-4125. doi:10.2514/6.2014-4125."
+22,rockets 55 (2018) 473–483. doi:10.2514/1.
+22,a33927.
+22,[58] a.
+22,"dono, l."
+22,"plice, j."
+22,"mueting, t."
+22,"conn, m."
+22,"ho, propulsion [42] b."
+22,"tossman, f."
+22,"mobley, g."
+22,"fountain, k."
+22,"heffernan, j."
+22,"ray, trade studies for spacecraft swarm mission design, in: 2018 c."
+22,"williams, magsat attitude control system design and per- ieee aerospace conference, ieee, big sky, mt, 2018, pp. 1– formance, in: guidance and control conference, american in- 12."
+22,"url: https://ieeexplore.ieee.org/document/8396492/. stitute of aeronautics and astronautics (aiaa), danvers, ma, doi:10.1109/aero.2018.8396492. 1980, pp."
+22,95–104.
+22,url: http://arc.aiaa.org/doi/10.2514/6.
+22,[59] d.
+22,"krejci, p."
+22,"lozano, space propulsion technology for 1980-1730. doi:10.2514/6.1980-1730."
+22,"small spacecraft, proceedings of the ieee 106 (2018) 362– [43] t."
+22,"stengle, magsat attitude dynamics and control: some 378."
+22,url: http://ieeexplore.ieee.org/document/8252908/.
+22,"observations and explanations, in: j."
+22,"teles (ed.), fiifth an- doi:10.1109/jproc.2017.2778747. nual flight mechanics/estimation theory symposium, green- [60] o."
+22,"l. de weck, d."
+22,"chang, architecture trade methodology belt, md, 1980, pp."
+22,"1–30. for leo personal communication systems, in: 20th interna- [44] j."
+22,"wertz, w."
+22,"larson (eds.), space mission analysis and tional communicatuions satellite systems conference, amer- design, 3 ed., microcosm press/kluwer academic publishers, ican institute of aeronautics and astronautics (aiaa), mon- el segundo, ca, 1999. treal, canada, 2002. doi:10.2514/6.2002-1866."
+22,[45] j.
+22,"wertz, d."
+22,"everett, j."
+22,"puschell (eds.), space mis- [61] d."
+22,"fearn, economical remote sensing from a low alti- sion engineering: the new smad, 1 ed., microcosm press, tude with continuous drag compensation, acta astronautica hawthorne, ca, 2011."
+22,56 (2005) 555–572.
+22,url: https://linkinghub.elsevier.com/ [46] p.
+22,"fortescue, g."
+22,"swinerd, j."
+22,"stark (eds.), spacecraft systems retrieve/pii/s0094576504003704. doi:10.1016/j.actaastro."
+22,"engineering, 4 ed., john wiley & sons, ltd., chichester, uk, 2004.09.052."
+22,[62] a.
+22,"shao, a."
+22,"madni, j."
+22,"wertz, quantifying the effect [47] a."
+22,"lambe, j."
+22,"martins, extensions to the of orbit altitude on mission cost for earth observation satel- design structure matrix for the description of multidisci- lites, in: 54th aiaa aerospace sciences meeting, january, plinary design, analysis, and optimization processes, struc- american institute of aeronautics and astronautics, reston, tural and multidisciplinary optimization 46 (2012) 273–284."
+22,"virginia, 2016, pp."
+22,url: http://arc.aiaa.org/doi/10.
+22,url: http://link.springer.com/10.1007/s00158-012-0763- 2514/6.2016-0974. doi:10.2514/6.2016-0974. y. doi:10.1007/s00158-012-0763-y.
+22,[63] j.
+22,"virgili llop, p."
+22,"roberts, z."
+22,"hao, l."
+22,"ramio tomas, v."
+22,beau- [48] t.
+22,"mosher, conceptual spacecraft design using a genetic al- plet, very low earth orbit mission concepts for earth obser- gorithm trade selection process, journal of aircraft 36 (1999) vation: benefits and challenges, in: 12th reinventing space 200–208. doi:10.2514/2.2426."
+22,"conference, london, uk, 2014."
+22,[49] a.
+22,"fukunaga, s."
+22,"chien, d."
+22,"mutz, r."
+22,"sherwood, a."
+22,[64] a.
+22,"bacon, b."
+22,"olivier, skimsats: bringing down the cost stechert, automating the process of optimization in spacecraft of earth observation, in: s."
+22,"hatton (ed.), proceedings design, ieee aerospace applications conference proceedings of the 12th reinventing space conference, springer interna- 4 (1997) 411–427. doi:10.1109/aero.1997.577524. tional publishing, cham, 2017, pp."
+22,url: http://link.
+22,[50] d.
+22,"barnhart, t."
+22,"kichkaylo, l."
+22,"hoag, spidr: integrated springer.com/10.1007/978-3-319-34024-1{_}1. doi:10.1007/ systems engineering design-to-simulation software for satel- 978-3-319-34024-1_1. lite build, in: proceedings of the conference on systems engi- [65] l."
+22,"mccreary, a satellite mission concept for high drag en- neering research (cser), loughborough, uk, 2009. vironments, aerospace science and technology 92 (2019) [51] c."
+22,"lowe, m."
+22,"macdonald, rapid model-based inter-disciplinary 972–989."
+22,"url: https://doi.org/10.1016/j.ast.2019.06.033. design of a cubesat mission, acta astronautica 105 (2014) 321– doi:10.1016/j.ast.2019.06.033."
+22,url: https://linkinghub.elsevier.com/retrieve/pii/ [66] g.
+22,"bertolucci, f."
+22,"barato, e."
+22,"toson, d."
+22,"pavarin, impact s0094576514003695. doi:10.1016/j.actaastro.2014.10.002. of propulsion system characteristics on the potential for [52] j."
+22,"hwang, d."
+22,"lee, j."
+22,"cutler, j."
+22,"martins, large-scale cost reduction of earth observation missions at very low multidisciplinary optimization of a small satellite’s design and altitudes, acta astronautica 176 (2020) 173–191."
+22,"url: operation, journal of spacecraft and rockets 51 (2014) 1648– https://doi.org/10.1016/j.actaastro.2020.06.018https:// 1663. doi:10.2514/1."
+22,a32751. linkinghub.elsevier.com/retrieve/pii/s0094576520303854.
+22,[53] j.
+22,"le moigne, p."
+22,"dabney, o."
+22,"l. de weck, v."
+22,"foreman, p."
+22,"gro- doi:10.1016/j.actaastro.2020.06.018. gan, m."
+22,"holland, s."
+22,"hughes, s."
+22,"nag, tradespace analysis [67] k."
+22,"nishiyama, air breathing ion engine concept, in: tool for designing constellations (tat-c), in: ieee interna- 54th international astronautical congress, american insti- tional geoscience and remote sensing symposium (igarss), tute of aeronautics and astronautics (aiaa), bremen, ger- ieee, fort worth, tx, 2017."
+22,"url: http://ieeexplore.ieee. many, 2003."
+22,url: http://arc.aiaa.org/doi/10.2514/6.
+22,iac- org/document/8127168/. doi:10.1109/igarss.2017.8127168.
+22,03-s.4.02. doi:10.2514/6.
+22,iac-03-s.4.02.
+22,[54] m.
+22,"ferringer, d."
+22,"spencer, satellite constellation design [68] y."
+22,"hisamoto, k."
+22,"nishiyama, h."
+22,"kunninaka, design of air intake tradeoffs using multiple-objective evolutionary computation, for air breathing ion engine, in: 63rd international astronau- journal of spacecraft and rockets 43 (2006) 1404–1411. doi:10. tical congress, international astronautical federation (iaf), 2514/1.18788."
+22,"naples, italy, 2012."
+22,[55] o.
+22,"l. de weck, r. de neufville, m."
+22,"chaize, staged deployment [69] d."
+22,"di cara, j."
+22,"gonzalez del amo, a."
+22,"santovicenzo, b."
+22,"carnicero of communications satellite constellations in low earth orbit, dominguez, m."
+22,"arcioni, a."
+22,"caldwell, i."
+22,"roma, ram electric journal of aerospace computing, information, and communi- propulsion for low earth orbit operation: an esa study, in: cation 1 (2004) 119–136. doi:10.2514/1.6346. 30th iepc - international electric propulsion conference, flo- [56] n."
+22,"crisp, k."
+22,"smith, p."
+22,"hollingsworth, an integrated rence, italy, 2007, pp."
+23,©2020.
+23,this manuscript version is made available under the cc-by-nc-nd 4.0 license http://creativecommons.org/licenses/by-nc-nd/4.0/ [70] f.
+23,"romano, b."
+23,"massuti-ballester, t."
+23,"binder, g."
+23,"h. ing from inequalities of temperature, proceedings of the herdrich, s."
+23,"fasoulas, t."
+23,"schönherr, system anal- royal society of london 27 (1878) 304–308."
+23,"url: https:// ysis and test-bed for an atmosphere-breathing elec- royalsocietypublishing.org/doi/10.1098/rspl.1878.0052. tric propulsion system using an inductive plasma doi:10.1098/rspl.1878.0052. thruster, acta astronautica 147 (2018) 114–126."
+23,"url: [87] aiaa atmospheric and space environments comimittee on https://doi.org/10.1016/j.actaastro.2018.03.031https:// standards, guide to reference and standard atmosphere mod- linkinghub.elsevier.com/retrieve/pii/s009457651730406x. els, aiaa g-003c-2010(2016), american institude of aeronau- doi:10.1016/j.actaastro.2018.03.031. tics and astronautics, reston, va, 2010."
+23,[71] f.
+23,"romano, t."
+23,"binder, g."
+23,"herdrich, s."
+23,"fasoulas, [88] iso/tc 20/sc 14 space systems and operations, iso t."
+23,"schönherr, air-intake design investigation for an air- 14222:2013 space environment (natural and artificial) — earth breathing, in: 34th iepc - international electric propulsion upper atmosphere, standard, international organisation for conference, kobe, japan, 2015, pp."
+23,"standardization, geneva, switzerland, 2013."
+23,[72] f.
+23,"romano, t."
+23,"binder, g."
+23,"herdrich, s."
+23,"fasoulas, [89] d."
+23,"mostaza-prieto, characterisation and applications of aero- t."
+23,"schönherr, intake design for an atmosphere-breathing elec- dynamic torques on satellites, phd thesis, the university of tric propulsion system, in: space propulsion, may, rome, italy, manchester, 2017."
+23,[90] l.
+23,"sinpetru, n."
+23,"crisp, d."
+23,"mostaza-prieto, s."
+23,"livadiotti, [73] t."
+23,"binder, p."
+23,"boldini, f."
+23,"romano, g."
+23,"herdrich, s."
+23,"fasoulas, p."
+23,"roberts, adbsat: methodology of a novel panel transmission probabilities of rarefied flows in the application of method tool for aerodynamic analysis of satellites, submit- atmosphere-breathing electric propulsion, in: aip conference ted to computer physics communications (2021)."
+23,"url: http: proceedings, volume 1786, 2016."
+23,url: http://aip.scitation. //arxiv.org/abs/2104.05543. arxiv:2104.05543. org/doi/abs/10.1063/1.4967689. doi:10.1063/1.4967689.
+23,[91] d.
+23,"goebel, i."
+23,"katz, fundamentals of electric propulsion: [74] n."
+23,"crisp, s."
+23,"livadiotti, p."
+23,"roberts, a semi-analytical ion and hall thrusters, john wiley & sons, inc., hobo- method for calculating revisit time for satellite constella- ken, nj, usa, 2008."
+23,"url: http://doi.wiley.com/10.1002/ tions with discontinuous coverage, arxiv e-prints (2018)."
+23,url: 9780470436448. doi:10.1002/9780470436448. http://arxiv.org/abs/1807.02021. arxiv:1807.02021.
+23,[92] k.
+23,"holste, p."
+23,"dietz, s."
+23,"scharmann, k."
+23,"keil, t."
+23,"henning, [75] d."
+23,"vallado, fundamentals of astrodynamics and applica- d."
+23,"zschätzsch, m."
+23,"reitemeyer, b."
+23,"nauschütt, f."
+23,"kiefer, tions, 4 ed., microcosm press/springer, hawthorne, ca, 2013."
+23,"kunze, j."
+23,"zorn, c."
+23,"heiliger, n."
+23,"joshi, u."
+23,"probst, [76] r."
+23,"votel, d."
+23,"sinclair, comparison of control moment gyros and r."
+23,"thüringer, c."
+23,"volkmar, d."
+23,"packan, s."
+23,"peterschmitt, k."
+23,"reaction wheels for small earth-observing satellites, in: 26th brinkmann, h.-g."
+23,"zaunick, m."
+23,"thoma, m."
+23,"kretschmer, h."
+23,"annual aiaa/usu conference on small satellites, american leiter, s."
+23,"schippers, k."
+23,"hannemann, p."
+23,"klar, ion thrusters institute of aeronautics and astronautics (aiaa), logan, ut, for electric propulsion: scientific issues developing a niche tech- 2012. nology into a game changer, review of scientific instruments [77] r."
+23,"humble, g."
+23,"henry, w."
+23,"larson (eds.), space propul- 91 (2020) 061101."
+23,"url: http://aip.scitation.org/doi/10. sion analysis and design, 1 ed., mcgraw-hill, new york, ny, 1063/5.0010134. doi:10.1063/5.0010134."
+23,[93] k.
+23,"hohman, atmospheric breathing electric thruster for plane- [78] t."
+23,"chiasson, p."
+23,"lozano, modeling the characteristics of tary exploration, in: niac spring symposium, pasadena, ca, propulsion systems providing less than 10 n thrust, msc., 2012."
+23,"massachusetts institute of technology, 2012."
+23,[94] k.
+23,"takahashi, helicon-type radiofrequency plasma thrusters [79] e."
+23,"mahr, a."
+23,"tu, a."
+23,"gupta, development of the small and magnetic plasma nozzles, reviews of modern plasma satellite cost model 2019 (sscm19), in: 2020 ieee physics 3 (2019) 3."
+23,"url: https://doi.org/10.1007/s41614- aerospace conference, ieee, big sky, mt, 2020, pp. 1– 019-0024-2http://link.springer.com/10.1007/s41614-019- 12."
+23,url: https://ieeexplore.ieee.org/document/9172374/.
+23,0024-2. doi:10.1007/s41614-019-0024-2. doi:10.1109/aero47225.2020.9172374.
+23,[95] f.
+23,"romano, j."
+23,"espinosa-orozco, g."
+23,"herdrich, n."
+23,"crisp, [80] j."
+23,"walsh, l."
+23,"berthoud, c."
+23,"allen, drag reduction through shape p."
+23,"roberts, b."
+23,"holmes, s."
+23,"edmondson, s."
+23,"haigh, s."
+23,"li- optimisation for satellites in very low earth orbit, acta as- vadiotti, a."
+23,"macario-rojas, v."
+23,"oiko, l."
+23,"sinpetru, k."
+23,"smith, tronautica (2020)."
+23,url: https://linkinghub.elsevier.com/ j.
+23,"becedas, v."
+23,"sulliotti-linner, m."
+23,"bisgaard, s."
+23,"christensen, retrieve/pii/s0094576520305579. doi:10.1016/j.actaastro."
+23,"hanessian, t."
+23,"jensen, j."
+23,"nielsen, y.-a."
+23,"chan, s."
+23,"fa- 2020.09.018. soulas, c."
+23,"traub, d."
+23,"garcia-almiñana, s."
+23,"rodrı́guez-donaire, [81] v."
+23,"costes, g."
+23,"cassar, l."
+23,"escarrat, optical design of m."
+23,"sureda, d."
+23,"kataria, b."
+23,"belkouchi, a."
+23,"conte, s."
+23,"seminari, a compact telescope for the next generation earth ob- r."
+23,"villain, intake design for an atmosphere-breathing electric servation system, in: international conference on propulsion system (abep), acta astronautica (under review) space optics — icso, volume 10564, spie, 2012."
+23,(2021).
+23,url: https://www.spiedigitallibrary.org/conference- [96] v.
+23,"foreman, j."
+23,"le moigne, o."
+23,"de weck, a survey of proceedings-of-spie/10564/2309055/optical-design-of-a- cost estimating methodologies for distributed spacecraft mis- compact-telescope-for-the-next-generation/10.1117/12. sions, in: aiaa space 2016, american institute of aero- 2309055.full. doi:10.1117/12.2309055. nautics and astronautics (aiaa), long beach, ca, 2016, pp."
+23,[82] m.
+23,"metwally, t."
+23,"bazan, f."
+23,"eltohamy, design of very 1–15."
+23,url: http://arc.aiaa.org/doi/10.2514/6.2016-5245.
+23,"high-resolution satellite telescopes part i: optical system de- doi:10.2514/6.2016-5245. sign, ieee transactions on aerospace and electronic sys- [97] s."
+23,"paek, s."
+23,"balasubramanian, s."
+23,"kim, o. de weck, small- tems 56 (2020) 1202–1208."
+23,url: https://ieeexplore.ieee.
+23,"satellite synthetic aperture radar for continuous global bio- org/document/8768011/. doi:10.1109/taes.2019.2929969. spheric monitoring: a review, remote sensing 12 (2020) 2546."
+23,[83] k.
+23,"tomiyasu, tutorial review of synthetic-aperture radar url: https://www.mdpi.com/2072-4292/12/16/2546. doi:10."
+23,"(sar) with applications to imaging of the ocean surface, pro- 3390/rs12162546. ceedings of the ieee 66 (1978) 563–583. doi:10.1109/proc."
+23,1978.10961.
+23,[84] l.
+23,"cutrona, synthetic aperture radar, in: m."
+23,"skolnik (ed.), radar handbook, 2 ed., mcgraw-hill, new york, ny, 1990."
+23,[85] a.
+23,"freeman, design principles for smallsat sars, in: 32nd annual aiaa/usu conference on small satellites, logan, ut, 2018."
+23,[86] j.
+23,"maxwell, iii."
+23,on stresses in rarefied gases aris- 23

@@ -1,0 +1,775 @@
+page,p
+1,"international journal of digital earth issn: (print) (online) journal homepage: www.tandfonline.com/journals/tjde20 evapotranspiration estimation using sebal algorithm integrated with remote sensing and experimental methods nazila shamloo, mohammad taghi sattari, halit apaydin, khalil valizadeh kamran & ramendra prasad to cite this article: nazila shamloo, mohammad taghi sattari, halit apaydin, khalil valizadeh kamran & ramendra prasad (2021) evapotranspiration estimation using sebal algorithm integrated with remote sensing and experimental methods, international journal of digital earth, 14:11, 1638-1658, doi: 10.1080/17538947.2021.1962996 to link to this article: https://doi.org/10.1080/17538947.2021.1962996 published online: 18 aug 2021."
+1,submit your article to this journal article views: 5628 view related articles view crossmark data citing articles: 8 view citing articles full terms & conditions of access and use can be found at https://www.tandfonline.com/action/journalinformation?
+1,journalcode=tjde20
+2,"international journal of digital earth 2021, vol."
+2,"14, no. 11, 1638–1658 https://doi.org/10.1080/17538947.2021.1962996 evapotranspiration estimation using sebal algorithm integrated with remote sensing and experimental methods nazila shamloo a, mohammad taghi sattari a,b, halit apaydin b , khalil valizadeh kamran c and ramendra prasad d a department of water engineering, agriculture faculty, university of tabriz, tabriz 5166616471, iran; bdepartment of agricultural engineering, faculty of agriculture, ankara university, ankara 06110 turkey; cdepartment of remote sensing and gis, university of tabriz, tabriz 5166616471, iran; ddepartment of science, school of science and technology, the university of fiji, fiji abstract article history evapotranspiration is one of the most important elements of the received 27 april 2021 hydrological cycle."
+2,"estimation of evapotranspiration is imperative for accepted 22 july 2021 eﬀective forest, irrigation, rangeland and water resources management keywords as well as to increase yields and for better crop management."
+2,"this actual evapotranspiration; study aims to evaluate the eﬀectiveness of the surface energy balance crop coeﬃcient; corn; sebal; algorithm for land (sebal) in estimating evapotranspiration and crop landsat 8; adana coeﬃcient of corn in the mediterranean region of adana province, turkey."
+2,the landsat 8 satellite images from march to september 2018 were used to acquire the coeﬃcients of the respective bands.
+2,"then, the net radiation ﬂux on the earth’s surface and the earth’s heat ﬂux is obtained using incoming-outgoing radiation ﬂuxes from albedo, surface emissivity coeﬃcients, land surface temperature, and plant indicators."
+2,"next, the sensible heat ﬂux is calculated by determining the hot and cold pixels under consideration via the atmospheric stability conditions."
+2,"finally, evapotranspiration maps are plotted."
+2,the crop coeﬃcient of corn is also estimated with the respected maps being plotted.
+2,"to validate the outcomes from the sebal algorithm, experimental methods were employed to calculate the evapotranspiration values and evaluated using suitable performance metrics."
+2,the results showed that the sebal generated evapotranspiration values are in high agreement with the fao penman-monteith method registering the highest correlation (r = 0.91) and the lowest error (rmse = 1.14).
+2,"in addition, the sebal method registered the highest correlation values of 0.89, 0.87 and 0.68 with turk, makkink and hargreaves experimental methods, respectively."
+2,"moreover, the crop coeﬃcients estimated using sebal also manifested an acceptable correlation with all methods."
+2,the highest correlation value registered was with the fao penman-monteith method (r = 0.98).
+2,"the outcomes show that since the performance of the sebal algorithm in estimating the actual evapotranspiration and crop coeﬃcient using landsat 8 satellite images is acceptable, the sebal algorithm could be a very convenient method."
+2,"moreover, it could easily be assimilated into farming management systems and precision agriculture for better decision-making and higher yield."
+2,"contact mohammad taghi sattari mtsattar@gmail.com, mtsattar@tabrizu.ac.ir © 2021 informa uk limited, trading as taylor & francis group."
+2,the international journal of digital earth is an oﬃcial journal of the international society for digital earth
+3,international journal of digital earth 1639 1.
+3,introduction evapotranspiration is one of the most important factors in the hydrological cycle and is a key deter- minant of energy equations on the earth’s surface.
+3,evapotranspiration is a combination of two pro- cesses responsible for water losses that include evaporation (directly from the soil) and transpiration (from the plants).
+3,it is diﬃcult to consider these two processes separately since they occur almost simultaneously at varied rates with high spatial variability (allen et al. 1998b).
+3,"as a result, evapotranspiration estimates are important for hydrology, irrigation, forest and range- land, and water resources management."
+3,the evapotranspiration drives the soil water-energy bal- ance which is largely used in general circulation models and climate modelling.
+3,"consequently, river water ﬂow forecasting, crop yield forecasting, irrigation management systems, river/ lake water quality are all dependent on evapotranspiration levels (ozturk and apaydin 1998; bastiaans- sen et al."
+3,2005; razaji et al.
+3,2020; yamaç 2021).
+3,"for this reason, it is essential to accurately estimate the water budget (goyal and harmsen 2013; shabani et al."
+3,2020).
+3,better and accurate evapotran- spiration estimates would allow for eﬀective irrigation planning and optimal water usage for other agricultural purposes (sattari et al. 2020a).
+3,"the evapotranspiration rate depends on many factors such as temperature, solar radiation, humidity, wind and vegetation (allen et al. 1998b)."
+3,"essentially, the reference evapotranspiration (et0) is calculated using techniques such as fao penman and hargreaves methods or measured directly using a lysimeter (valayamkunnath et al."
+3,2018).
+3,"so far, various methods have been devel- oped including direct/ﬁeld measurements and empirical equations for estimating evapotranspira- tion."
+3,"however, et0 consists of a complex and nonlinear structure requiring multiple parameters for estimation (sattari et al."
+3,2021).
+3,"this nonlinear and multi-parameter nature makes estimation methods tedious and time-consuming (sattari, apaydin, and shamshirband 2020b)."
+3,the disadvan- tage of the conventional method is that it can only provide accurate evapotranspiration assessments of a homogeneous region provided a meteorological gauge station is in the vicinity.
+3,another draw- back is that et0 cannot be extrapolated to diﬀerent sites.
+3,"consequently, surface observation networks have been developed, yet it is not possible to make meteorological measurements at all places covering large areas."
+3,the meteorological observations do not provide true spatial evapotranspiration of an area (bastiaanssen et al.
+3,1997; liu et al.
+3,2011; antonopoulos and antonopoulos 2017).
+3,"on the other hand, remote sensing techniques allow for ﬁlling in the gap in providing the much-needed spatially observed data (rawat et al."
+3,2019).
+3,the advancements in remote sensing techniques in recent years together with the accessibility to satel- lite images have allowed for alternative and reliable methods for evapotranspiration estimations at regional scales (mao and wang 2017).
+3,evapotranspiration models based on remote sensing provide relatively accurate estimations of evapotranspiration in large areas with minimal use of terrestrial data (bastiaanssen and chandrapala 2003).
+3,numerous models have been developed to estimate evapotranspiration using remote sensing methods.
+3,"out of all the proposed models for estimating evapotranspiration (allen, tasumi, and trezza 2007), the surface energy balance algorithm for land (sebal) model has proven to be the most widely used amongst researchers in over 30 countries."
+3,this model was developed by bas- tiaanssen and improved by allen (bastiaanssen et al.
+3,1998).
+3,the sebal model has proven to esti- mate evapotranspiration with better accuracy.
+3,its registered accuracies of 85% at a farm-scale while more than 95% accuracy has been recorded on a regional scale (seneviratne et al.
+3,2006).
+3,"the sebal evapotranspiration estimates have been compared to the lysimeter data in wheat, sorghum, and cotton farms in the gezira wetland area, sudan (bashir et al. 2008) whereby high accuracy and good performance was noted."
+3,"another comparison with lysimeter measurements and the fao penman-monteith method was conducted by ramos et al. (2009) in the flumen region of the ebro plain, spain."
+3,"the results showed that the sebal evapotranspiration over grass diﬀered only by 0.3 and 0.36 mm per day in comparison to lysimeter measurements and the fao pen- man-monteith method, respectively."
+3,while the evapotranspiration of wheat and corn diﬀered by
+4,1640 n.
+4,shamloo et al. a mere 0.6 mm per day.
+4,"a study by rawat et al. (2017) also evaluated the actual evapotranspiration estimations of wheat in the haryana region, india using sebal, lysimeter data, and fao penman- monteith."
+4,results exhibited a good correlation of sebal with the lysimeter data (r=0.85) and low error with the fao penman-monteith technique (rmse = 0.56).
+4,"these evaluations, however, com- pared the empirical calculation methods with the sebal algorithm."
+4,"with the advancements in satellite technology, newer satellite imagery technologies have been developed and the models need to be properly evaluated with newer data."
+4,"as such zhang et al. (2011) used the sebal model and modis satellite images to estimate the evapotranspiration in the haihe basin, china, and compared it with the tasumi technique (tasumi et al."
+4,2003).
+4,the researchers applied the model to large areas (basins) and found that evapotranspiration of wide areas of a plain can be calculated using the sebal model.
+4,"similarly, omidvar et al. (2013) compared the sebal and mapping evapotranspiration at high resolution with internalized calibration (metric) algorithms to assess evapotranspiration using aster satellite (the advanced spaceborne thermal emission and reﬂection radiometer) images for the mashhad region, iran."
+4,their results showed that both the algorithms estimated evapotranspiration values properly and their spatial and temporal distributions were consistent with the topographic and vegetation conditions.
+4,"by down- scaling and combining landsat and modis images for the colorado basin, usa, singh et al. (2014) created the actual monthly evapotranspiration map."
+4,the study used images over 3 days from the modis thermal band and 823 landsat images.
+4,monthly evapotranspiration acquired by this approach showed a good match with the monthly evapotranspiration acquired from the eddy approach.
+4,"in addition, bala et al. (2016) obtained daily evapotranspiration utilizing a combination of landsat 7 images and sebal algorithm."
+4,"subsequently, sebal evapotranspiration was evaluated against the lysimetric data on agricultural lands of the indian agricultural research institute, india."
+4,"their ﬁndings exhibited a root mean square error (rmse) value of 0.51 mm per day and the mean absolute error value of 0.19, indicating the high accuracy of the sebal algorithm."
+4,"losgedaragh and rahimzadegan (2018) evaluated the sebal, surface energy balance system (sebs) and metric algorithms to estimate evapotranspiration from the surface of amirkabir dam lake, iran."
+4,"better performances of the sebs and metric algorithms in evapotranspiration estimates were registered, showing that sebal may not be the best algorithm to estimate evapotranspiration above water bodies."
+4,the landsat8 satellite is one of the advanced ones for remotely monitoring atmospheric parameters.
+4,"hence, in recent studies, rahimzadegan and janani (2019) evaluated the evapotran- spiration of pistachio plants using 29 images taken by landsat 8 oli (operational land imager) during 2013–2017 in semnan province, iran."
+4,"a comparison of sebal evapotranspiration results with imetos-pessl, a smart meteorological device, under standard conditions showed that the coeﬃ- cient of determination and rmse were 0.8 and 2.5 mm per day, respectively."
+4,this indicates a better accuracy of the sebal algorithm.
+4,"zhang et al. (2020) examined the eﬀect of mulch drip irrigation and mulch strip irrigation on farm-scale evapotranspiration computed using sebal algorithm with data acquired from landsat satellite images for the sangung river basin, china."
+4,the results showed that daily evapotranspiration in mulch drip-irrigated farms were higher than that of strip irrigation (0.2 to 1 mm) per day.
+4,"in another study, ghaderi et al. (2020) estimated evapotranspiration using landsat satellite images and the sebal algorithm in ilam province, iran, and compared it to the fao penman-monteith method."
+4,the results showed that the sebal method was eﬀective in esti- mating evapotranspiration.
+4,"similarly, fawzy et al. (2021) studied daily evapotranspiration using landsat satellite imagery and sebal algorithm in nile delta, egypt and found that the sebal algorithm estimated the transpiration evaporation of the region with acceptable accuracy."
+4,"all these studies prove the eﬃciency and accuracy of the sebal method in estimating evapo- transpiration across diﬀerent geographical areas, climates, and land cover conditions."
+4,the sebal model has a lot of merits making it useful for such applications.
+4,it uses a linear relationship between the earth’s surface temperature and near-surface vertical temperature gradients selected by cold and dry pixels (bastiaanssen et al.
+4,2005).
+4,"more importantly, the sebal algorithm needs little information from the incoming terrestrial data to calculate the actual evapotranspiration in each"
+5,international journal of digital earth 1641 pixel and can further estimate evapotranspiration for large areas (bashir et al. 2008) making it advantageous for real-life farm-based applications.
+5,"despite a number of studies being performed with sebal algorithms in evapotranspiration, improvements in accuracy are required for better results."
+5,"in addition, the sebal method has a lower sensitivity to meteorological inputs and could easily be used in areas with fewer meteorological stations."
+5,"according to studies done so far, it is necessary to evaluate and verify evapotranspiration estimates for each environmental con- dition and agricultural ﬁeld since limited research has been carried out in the area of satellite esti- mates of evapotranspiration for corn crops."
+5,"moreover, the spatial distribution of crop coeﬃcient is another essential element for irrigation planning."
+5,"however, due to the experimental nature of its calculation methods and uncertainty in computations, signiﬁcant errors emerge in estimating the plant water requirements (gontia and tiwari 2010)."
+5,"on the other hand, the remote sensing methods have the potential to accurately esti- mate the crop coeﬃcient (rawat et al."
+5,2019).
+5,a study by singh and irmak (2009) presented a modiﬁed approach to estimating crop coeﬃcient (kc) values from remotely sensed data.
+5,"additionally, costa et al. (2019) used oli and tirs sensors and sebal algorithm to estimate et0 and crop coeﬃcient of coﬀee."
+5,"the result showed that this sebal model has huge potential in estimating et and kc at diﬀerent stages of a coﬀee plantation in minas gerais, brazil."
+5,"more recently, salgado and mateos (2021) evaluated the fao56 method derived crop coeﬃcients with vegetation index and the metric model derived ones."
+5,they found energy balance-based crop coeﬃcients gave errors in etc estimations when satellite overpass frequency is greater than one week and the water deﬁcit is mild.
+5,"in water deﬁcit conditions, the vegetation index-based approach systematically overestimated evapotranspira- tion."
+5,"however, very few studies have been performed to estimate the regional distribution of plant coeﬃcients with this method."
+5,"in addition, studies on spatially distributed crop coeﬃcient estimations have also not been performed widely, which is another important factor for irrigation planning."
+5,"the above-mentioned studies have been performed in other countries, however, no studies have been performed in the adana region, turkey, particularly for corn crop estimates."
+5,this is one of the most important agricultural products of turkey.
+5,"moreover, either in-situ or remotely sensed eva- potranspiration estimation methods face problems such as maintenance issues, inaccurate extrapol- ation of data observed at a single point, and ineﬀective computing complex hydrological processes."
+5,therefore it is important to develop and evaluate the eﬀectiveness of better remote sensing data such as from landsat8 with sebal algorithm in estimating spatial evapotranspiration.
+5,another important factor missing in the above studies is that the estimations were not performed at diﬀerent stages of the growth period since the hydro-meteorological parameters driving evapotranspiration would change as the plants are at diﬀerent stages of maturity.
+5,"hence, the objective of the study is to examine the eﬀectiveness of the sebal algorithm in estimating evapotranspiration and crop coeﬃ- cients using operational land imager (oli) and thermal infrared sensor (tirs) sensors onboard the landsat 8 satellite."
+5,"the speciﬁc aims of this study are to use landsat 8 images to; i) estimate the evapotranspiration and crop coeﬃcient of corn in adana, turkey with the sebal algorithm."
+5,"spatial maps of evapotranspiration and crop coeﬃcient estimates for the study area are created; ii) compare and validate the sebal evapotranspiration and crop coeﬃcient estimates with the experimental estimates from penman, fao, kimberly-penman, fao penman-monteith, priest- ley-taylor, debriun-keijman, makkink, turk, and hargreaves and mccloud methods; iii) examine the evapotranspiration and crop coeﬃcient during diﬀerent stages of crop growth."
+5,"the next parts of this paper are organized into the following sections: section 2, presents the materials and methods followed by results in sections 3, and section 4 presents the conclusion of the paper."
+5,materials and methods 2.1 study area the study area is located in adana province on the eastern shores of the mediterranean sea in tur- key.
+5,adana is the ﬁfth largest city in turkey with a population of 2.2 million encompassing an area
+6,1642 n.
+6,shamloo et al.
+6,figure 1.
+6,location of the study area. of 14 045 km2.
+6,"among the turkish provinces, this region has high agricultural production due to the favorable climatic and soil conditions."
+6,the agricultural area of the province is 4 985 km2.
+6,"from this region alone 16.9% of turkey’s corn production, 60.6% of soybean, 57.5% of peanut, 34.6% of citrus, 18.7% of watermelon and 6.5% of wheat are produced (anonymous 2018)."
+6,"the corn farm studied in this paper is located in the yuregir district of adana province (37.00on latitude and 35.33oe longitude, utm zone 36n-wgs 84)."
+6,figure 1 shows the location of the study area.
+6,yuregir is bounded by deltas of the north with seyhan mountains on one side and the ceyhan rivers on the other.
+6,yuregir is turkey’s largest delta plains encompassing 125 000 ha having ﬁne- textured soil.
+6,its slope is below 5% and the highest point is 50 m.
+6,the study area has a typical med- iterranean climate with rain during winter while the summer is hot and dry.
+6,the region has an aver- age precipitation of 625 mm with about 74 rainy days in a year.
+6,"the average relative humidity is around 66%, however, higher than 90% is recorded during summer."
+6,the average temperature in the region is ∼18.7°c with january being the coldest month having an average temperature of 9° c while the warmest month is august with an average temperature of 28°c.
+6,"crops including wheat, barley, oats and rice are mostly grown among the other grains in yuregir district."
+6,"yet, cotton is cultivated at an industrial scale following that is cotton seeds and peanuts for oil."
+6,citrus cultiva- tion is also a common agricultural activity.
+6,the research area has a nearly ﬂat slope and its average height from the sea is 20 m.
+6,it has limestone formations and red mediterranean soil deposited by the seyhan river.
+6,it is located in the area where the old seyhan river constantly changes its beds and the groundwater level is very high (anonymous 2020).
+6,"2.2 meteorological data in this study, daily and hourly meteorological data from 2018 to 2019 were used."
+6,"the data included minimum and maximum temperature, minimum and maximum humidity, average wind speed, sun hours, and dew point."
+6,table 1 shows the statistical characteristics of meteorological variables on imaged days.
+6,"data pre-processing was carried out using statistical tests such as runs-test,"
+7,international journal of digital earth 1643 table 1.
+7,statistical characteristics of meteorological variables on imaging days.
+7,"min max temp temp mean mean wind max rh min rh mean rh sunshine vapour date (°c) (°c) temp (°c) speed (m/s) (%) (%) (%) duration (h) pressure (hpa) 2018.03.03 10.5 21.3 14.6 0.8 99 36 79.4 5.2 12.2 2018.03.19 13.7 27.4 19.4 1.4 87 23 58.2 6.5 11.7 2018.04.04 11.5 27.3 19.2 2.0 63 8 28.2 10.2 5.7 2018.06.07 22.0 37.7 29.0 1.1 100 20 61.2 11.9 21.9 2018.06.23 22.4 31.3 26.7 1.5 100 44 69.0 7.6 23.1 2018.07.25 27.0 33.1 29.6 2.3 95 52 71.9 8.1 28.6 2018.08.10 24.4 37.5 30.5 1.5 99 26 55.2 10.8 21.9 2018.09.11 20.8 34.0 26.4 1.1 86 26 57.3 9.9 18.0 2018.09.27 20.6 35.2 27.6 1.0 78 22 46.9 9.4 16.0 2018.10.13 17.9 30.6 23.2 1.2 95 28 62.5 7.7 16.5 2018.10.29 11.1 27.8 17.9 0.9 91 17 59.0 7.8 10.7 2018.11.14 14.7 23.2 18.1 2.0 79 20 43.0 7.5 8.5 homogeneity, and grubbs-beck test for outliers to ensure quality and completeness."
+7,proper data pre-processing also warrant reliable results being obtained from the complex statistical analysis.
+7,"2.3 satellite data and images used to study the applicability of the sebal model, landsat 8 images for vegetation growth were acquired from march 1 till the end of december 2018."
+7,these landsat 8satellite images are obtained by the operational land imager (oli) and thermal infrared sensor (tirs) onboard the satellites and are widely used for water resource applications.
+7,the oli sensor has 9 bands and the tirs has two bands (10th and 11th are the thermal bands).
+7,landsat images are at intervals of 16-days with a spatial resolution of 30 m.
+7,"in all images, the imaging time was 8:15:22 utc."
+7,the selected images were acquired from the united states geological survey website (http://glovis. usgs.gov).
+7,"2.4 surface energy balance algorithm for land (sebal) model in this study, sebal was used to estimate the evapotranspiration of the cornﬁeld using landsat satellite-based digital images."
+7,"these images were taken by onboard sensors that receive signals in diﬀerent ranges including; visible, near-infrared, or thermal wavelengths."
+7,the ﬂowchart of the sebal algorithm is illustrated in figure 2.
+7,"using this algorithm, the values of evapotranspiration during satellite transit time are computed for each pixel."
+7,the energy balance equation as in eq. (1) was used to calculate the level of evapotranspiration (allen et al. 1998a).
+7,"consequently, the rn in each pixel was calculated using eq."
+7,(2). let = rn − g − h (1) rn = (1 − a)rs + rl − rl − (1 − 10 )rl (2) where let is the latent heat w/m2; rn is the net radiation ﬂux w/m2; g is the soil heat ﬂux w/ m2; and h is the sensible heat w/m2 and in eq. (2) α is the surface albedo (dimensionless); rs is the incoming shortwave radiation; rl is incoming longwave radiation; rl is the outgoing long- wave radiation; and εo is the broadband surface emissivity (a dimensionless quantity) (sun et al.
+7,2011).
+7,the surface albedo α was calculated using the corrected irradiance from the satellite images.
+7,"the broadband surface emissivity, εo was calculated using normalized diﬀerences of vegetation index (ndvi), soil adjusted vegetation index (svai), and leaf area index (lai)."
+7,then near-surface temperature (ts) and the rl↑ were estimated based on εo (waters et al.
+8,1644 n.
+8,shamloo et al.
+8,figure 2.
+8,flowchart illustrating the sebal algorithm (bezerra et al.
+8,2015).
+8,"after that, the soil heat ﬂux (g) was calculated using eq."
+8,"(3) g (ts − 273.15) = (3) rn a(0.0038a + 0.0074a2 )(1 − 0.98ndvi 4 ) where, α is the albedo of the surface, ts is the surface temperature in kelvin."
+8,"if the ndvi value is less than zero, the surface is considered to be water and the g/rn ratio is considered to be 0.5."
+8,also in areas where ts is less than 4°c are considered as snow-covered areas where albedo is more than 0.45 and the g/rn ratio is considered to be 0.5.
+9,"international journal of digital earth 1645 the sensible heat ﬂux is the heat transferred to the air by the molecular transfer of heat as a result of the temperature diﬀerence between air and surface, as given in eq."
+9,"4 (bastiaanssen 2000): r × cp × dt h= (4) rah where r is the air density (kg/m3), cp is the speciﬁc heat of the air (1004 j/kg/k), dt is the temp- erature diﬀerence between z1 and z2 and rah is the aerodynamic resistance to heat transfer (s/m)."
+9,"the parameters in the above equations are a function of the temperature gradient, surface rough- ness, and wind speed."
+9,"since there are two unknown parameters in the above equation, i.e. rah and dt, it would be diﬃcult to solve the equation."
+9,the sebal algorithm uses two hot and cold pixels and wind speeds at a certain height to overcome this problem whilst simplifying calculations.
+9,a combination of aerodynamic resistance with the maximum and minimum temperature ﬂuctuations over specially selected surfaces of the earth (cold pixels and hot pixels) makes it possible to evaluate the range of air temperature diﬀerences near the surface.
+9,"then, reliable values of h were calculated, assuming a linear relationship between the surface temperature and the heat transfer slopes in the above two pixels."
+9,"subsequently, dt values in these two pixels were estimated."
+9,"since net radiation ﬂux rn, sensible heat ﬂux h, and the earth’s temperature ﬂux g are instan- taneous values at the satellite’s transit point-in-time, the latent heat ﬂux values are also instan- taneous."
+9,the subsequent latent heat ﬂux values are acquired from satellite images.
+9,the actual evapotranspiration rates at the moment of satellite transit (etinst) were obtained in mm per day using eq.
+9,"5 (waters et al. 2002): let etinst = 3600 × (5) l in the above equation, etinst is the instantaneous evapotranspiration in mm/day, λ is the latent heat of steam in j/kg, and the constant 3600 is the time conversion factor (i.e. second in an hour)."
+9,the λ was calculated using eq.
+9,6 (allen et al. 2011): l = [2.501 − 0.00236(ts − 273)] × 106 (6) the daily evapotranspiration values were calculated using the reference evapotranspiration frac- tion (etrf) and reference plant evapotranspiration (etr) magnitudes.
+9,etrf is the ratio of the etinst calculated for each pixel to reference et (i.e.
+9,etr) obtained from the meteorological data (eq.
+9,7) (allen et al.
+9,2011): etinst etr f = (7) etr the etrf was used to calculate the 24-hour evapotranspiration values and considered as ‘0’ for hot pixels and ‘1’ for cold pixels (allen et al.
+9,2000).
+9,a similar approach was used for the crop coeﬃ- cient kc estimations.
+9,the daily values of evapotranspiration (et24) are often more practical than the instantaneous values of the etinst.
+9,the daily evapotranspiration values were calculated as follows.
+9,"et24 = etr f × etr−24 (8) where etr-24 represents the cumulative evapotranspiration for imaging day obtained by adding the hourly values for that day 2.5 experimental methods for estimating evapotranspiration the methods for estimating evapotranspiration are divided into approaches: i) temperature-based, ii) radiation-based and iii) combined methods."
+9,ten experimental models (table 2) have been developed to
+10,1646 n.
+10,shamloo et al. estimate the evapotranspiration and compared with the evapotranspiration values obtained from sebal algorithm.
+10,models were selected based on simplicity and the need for fewer inputs.
+10,"in many previous studies, it has been well established that in the case of lack of lysimeter data, actual evapotran- spiration can be estimated through the penman-monteith model (trajkovic 2007), hence this has also been included in this study."
+10,table 2 shows the methods and equations used.
+10,results and discussion.
+10,"as shown in table 3, twelve images from march to december (normal plant growing period) 2018 were used."
+10,the values of the parameters obtained by the sebal algorithm for the cornﬁeld are pre- sented here.
+10,"according to the table, images 2018.07.25, 2018.08.10 and 2018.09.11 have higher eva- potranspiration rates, which fall in the middle of the growing period or development representing the greening stage of corn (allen et al. 1998a)."
+10,"in addition, the surface albedo is noted to be rela- tively low for these days with the high ndvi values indicating high absorption of radiation by the vegetation during this period."
+10,"according to allen et al. (2000), the net radiation values should range between 100 and 700 w/ m2."
+10,the results obtained in table 3 concur with this range with the minimum being 441.8 w/m2 and the maximum is 671.6 w/m2.
+10,"net solar radiation is directly contingent upon the incoming longwave and shortwave radiations, both of which directly inﬂuence the surface temperature."
+10,"therefore, areas with higher surface temperatures have higher net solar radiation."
+10,"the net radiation ﬂux has a direct relationship with ndvi, greenness, and wetness parameters and is inversely related to albedo, brightness, and ts which is consistent with the results from other studies (firoz- jaei et al."
+10,2019).
+10,the vegetative moisture and sensible heat ﬂux are higher on days with high ndvi.
+10,"after calculating all the required parameters using the sebal algorithm, 24-hour evapotranspira- tion (et24) was estimated."
+10,"higher ndvi values are an indication of an increase in vegetation greenness, therefore essen- tially an increase in evapotranspiration is expected to be observed."
+10,figure 3 illustrates the changes in daily evapotranspiration with ndvi values.
+10,"it clearly shows that at the beginning of the growth season (2018.06.23), when vegetation cover and ndvi are low, etrf and et24 are also low."
+10,"as the vegetation density increases, so did the daily evapotranspiration reaching its peak on 2018.08.10."
+10,"to further aﬃrm the outcomes, a comparison of vegetation index, soil heat ﬂux, land surface temperature and sensible heat ﬂux for 2018.08.10 was also performed as in figure 4."
+10,this day falls in the middle of the growing period.
+10,"in agreement with the above results, figure 4 further shows that the areas with high ndvi values (indicating more vegetation density) registered lower soil heat ﬂux (g) values."
+10,"consequently, in areas with low ndvi, such as northern areas near adana city, the soil heat ﬂux values were higher."
+10,"in addition, surface temperature (ts) is inver- sely proportional to vegetation density."
+10,"so as the ndvi index increased, the evapotranspiration in that area increased, which decreased the surface temperature."
+10,this is also clearly visible in figure 4.
+10,"3.1 spatial and temporal changes in daily evapotranspiration the actual daily evapotranspiration is the most important parameter, which indicates the inter- actions of surface water and energy balance (sellers et al."
+10,1996).
+10,understanding the temporal and spatial changes in evapotranspiration is essential for the optimal management of scarce water resources.
+10,"therefore, in this study, after performing the required calculations using the sebal algorithm, actual evapotranspiration maps were prepared to study the spatiotemporal changes."
+10,figure 5 shows the spatiotemporal variations in the daily evapotranspiration magnitudes.
+10,"in order to better reveal the diﬀerence between evapotranspiration at diﬀerent times, the violin plots as in figure 6 were also plotted."
+10,"the et variability in terms of minimum, maximum, median, and distribution on six diﬀerent dates can be seen clearly and the violin plot."
+10,"figure 6 shows that on all days in this study, the evapotranspiration values were mostly clustered around the median."
+11,table 2.
+11,experimental methods used for calculating the evapotranspiration.
+11,"type no name reference equation combination 1 penman (1963) (pen63) penman (1963)   d g aw=1, bw=0.537 leto = (rn − g) + 6.43 (aw + bw u2 )(es − ea ) d+g d+g   d g 2 fao24 penman (fao-24pen) (allen and pruitt (1991 c=1 leto = c (rn − g) + 2.7 (1 + 0.864u2 )(es − ea ) d+g d+g   d g 3 kimberly penman (kp) (wright and jensen (1972 leto = c (rn − g) + 6.43 (aw + bw u2 )(es − ea ) d+g d+g   2  j − 170 aw = 0.3 + 0.58exp − 45    j − 228 2 bw = 0.32 + 0.54exp − 67 900 0.408d(rn − g) + g u2 (es − ea ) 4 fao56 penman-monteith (fao-56pm) allen et al."
+11,(1994) eto = t + 273 d + g(1 + 0.34u2 ) international journal of digital earth d radiation 5 priestley-taylor (pt) (priestley and taylor (1972 leto = a (rn − g) α=1.26 d+g d 6 de bruin-keijman (dk) (de bruin and keijman (1979 leto = (rn − g) 0.85d + 0.63g d 7 makkink (mak) makkink (1957) leto = 0.63 (rn ) d+g t 8 turk turc (1961) eto = 0.31 (rs + 2.09) t + 15 √ temperature 9 hargreaves (har) hargreaves and samani (1985) eto = 0.0023(t + 17.8) tx − tn ra 10 mcloud (mcl) mccloud (1955) eto = 0.254 × 1.071.8t note.
+11,"et0–reference crop evapotranspiration (mm d ); rn–net radiation (mj m d ); g–soil heat ﬂux (mj m d ); slope of the saturation vapor pressure curve (kpa °c-1); psychrometric constant (kpa -1 -2 -1 -2 -1 °c-1); aw, bw–coeﬃcient of wind function; u2–wind speed at 2 m (m s-1); es, ea–saturated and actual vapor pressure (kpa); vaporizing latent of water (mj kg-1); t–diﬀerence between maximum and minimum air temperature (°c); j–day of year; t–mean air temperature (°c); rs–total radiation (mj m-2 d-1); rh, rhn–mean and minimum air relative humidity (%); tx, tn–maximum and minimum air temperature (oc); ra–extraterrestrial solar radiation (mm d-1); h–elevation (m); e2, e1–saturated vapor pressure corresponding to tx and tn, respectively(kpa); n–actual sunshine hours (h); n– 1647 theoretical sunshine duration (h); p–the percentage of annual daylight hours for any day of the year; ud – daytime wind speed (m s-1)."
+12,1648 n.
+12,shamloo et al.
+12,table 3.
+12,values obtained by sebal in pixel representative (corn farm) in 2018 imaging date ndvi albedo % ts (k) rn (w/m2) h (w/m2) g (w/m2) λet (w/m2) etrf et24 (mm/day) 2018.03.03 0.736 0.203 288.814 441.778 310.390 26.152 105.236 1.045 1.893 2018.03.19 0.773 0.199 295.282 497.448 339.748 37.703 119.997 0.964 2.988 2018.04.04 0.818 0.168 297.370 573.342 390.322 39.338 143.682 1.096 4.068 2018.06.07 0.181 0.196 313.338 581.296 361.999 122.571 96.726 0.723 2.568 2018.06.23 0.225 0.268 308.472 530.100 359.795 108.017 62.289 0.339 1.226 2018.07.25 0.783 0.248 302.711 562.507 332.257 59.151 171.099 0.723 3.373 2018.08.10 0.842 0.179 305.182 671.587 426.906 56.067 188.614 0.866 3.865 2018.09.11 0.684 0.157 302.301 563.165 349.147 64.041 149.977 0.952 3.191 2018.09.27 0.286 0.144 307.934 502.703 294.669 84.541 123.493 0.887 3.045 2018.10.13 0.181 0.156 298.629 466.809 344.824 58.871 63.114 0.620 1.452 2018.10.29 0.137 0.182 296.821 398.581 216.472 48.562 133.547 0.983 2.270 2018.11.14 0.128 0.159 294.175 356.156 174.566 37.287 144.303 0.723 3.956 figure 3.
+12,"changes in 24-hour evapotranspiration (et24), reference evapotranspiration fraction (etrf), ndvi, and albedo in the pixel representative of the cornﬁeld during 2018. mentioned earlier, there was a gradual increase in daily evapotranspiration at the beginning of the growth period from april to august and then a gradual decrease at the end of the growth period is noted."
+12,it concurs with the growing period since the median value in the violin diagram is low at beginning of the growth (2018.03.19) owing to lower daily evapotranspiration rates.
+12,"consequently, an increase in the median value is noted at the end of the growth period (2018.06.07) when the eva- potranspiration rate decreases."
+12,"interestingly, on 2018.06.07 the violin plot bulges out the highest around the median showing that more values for this day are concentrated around the median eva- potranspiration rate."
+12,figure 7 presents the percentage of the area experiencing respective evapora- tive rates.
+12,the pixel-to-pixel evapotranspiration estimation was done by the sebal model based on landsat 8satellite images.
+12,"over 50% of the regions have evaporative rates lower than 3 mm/day, while approximately 87.7% of the regions recorded evaporative rates lower than 5 mm/day."
+12,"an interesting feature was noted on the following days: 2018.03.03, 2018.10.13, and 2018.11.14 (figure 7), whereby a higher percentage of area registered more than 5 mm per day evapotranspiration rates."
+12,this fundamentally is very high for these regions and the overestimation could have been due to cloudiness (thin layer of cloud) in some parts of the study area interfering with outgoing longwave radiation.
+12,"due to thick cloud cover on some days and in some areas, the satellite’s onboard sensors have not been able to receive reﬂective signals from the earth’s surface resulting in inadequate data for the sebal algorithm to estimate the evapotranspiration values."
+12,"as shown in figures 5 and 7, there is little evapotranspiration recorded on 2018.03.19 throughout the region."
+12,it could mainly be due to
+13,international journal of digital earth 1649 figure 4.
+13,"spatial changes of vegetation index (ndvi), soil heat ﬂux (g), surface temperature (ts) and sensible heat (h) in the study area on 2018.08.10. a lack of vegetation at the beginning of the growing season (bastiaanssen, pelgrum, and wimink 2009)."
+13,"during the middle of the corn plant growing period, from 2018.08.10 to 2018.09.11, the rate of evapotranspiration is higher than on other days during the growing period."
+13,"as expected, the rate of daily evapotranspiration in the southern and central parts of the study area, which is mostly cultivated, is higher than that of the northern part, which is an urban area."
+13,"these results are consistent with the study by elkatoury, alazba, and abdelbary (2020)."
+13,"in addition, evapotran- spiration maps conﬁrm that the spatial and temporal variations are contingent upon the meteoro- logical elements and respective plant characteristics during the growing period."
+13,these results are in line with the ﬁndings of kamali and nazari (2018) who examined the consumption of corn water in northern iran using the sebal algorithm.
+13,they found that the variability of spatial distribution was in accordance with the plant growth period.
+13,"3.2 comparison and validation of remotely sensed sebal-based potential evapotranspiration with empirical methods to compare and validate the outcomes of evapotranspiration estimations, a combination of meteor- ological data-based methods and remote sensing methods are commonly used (nouri et al."
+13,2016).
+13,daily potential evapotranspiration was calculated using penman-monteith and other experimental methods as outlined in table 4.
+13,"subsequently, using the crop coeﬃcient and actual evapotranspira- tion obtained from the landsat images, the sebal algorithm was utilized to convert it to evapo- transpiration rates."
+13,the outcomes of the sebal algorithm were compared and validated with the evapotranspiration rates computed from the respective empirical formulae.
+13,table 4 shows the respective evapotranspiration values and the error parameters.
+13,"since the growing period of corn starts in mid-june and grows up to 125-days, the images of 2018.06.23 to 2018.10.13 were selected for comparison."
+13,this allowed the results to be validated at diﬀerent stages of the growth period.
+13,two images were excluded due to the high cloudiness of the area.
+14,1650 n.
+14,shamloo et al.
+14,figure 5.
+14,spatial and temporal changes in daily evapotranspiration during 2018 (the legend displays evapotranspiration rates in mm).
+14,the sebal algorithm showed a good correlation with all the comparative methods.
+14,"in terms of correlation coeﬃcient (r), the minimum value was registered with hargreaves (har) method (r = 0.680) and the maximum correlation was registered with penmanpen63 (r = 0.920) method."
+14,"simi- larly, the minimum rmse value noted was 0.442 with the turk method while the maximum error value was registered with mcloud (mcl) (rmse = 3.756) method."
+14,the penmanpen63 model regis- tered the highest correlation (r = 0.920) and the corresponding rmse was also low (rmse = 1.383).
+14,the low error values (rmse ≤ 3.756) and r ≥ 0.680 are a testament of the eﬀectiveness of the sebal algorithm in remotely sensing the evapotranspiration values.
+14,"since the penman-monteith method has been introduced as one of the most reliable reference methods in evapotranspiration calculations, validation with this method is important."
+14,the sebal algorithm had a second highest correlation with the penman-monteith method (r = 0.916) and the corresponding rmse was 1.203.
+14,this high correlation and low rmse indicates the appropriateness of the sebal algorithm showing high accuracy of the algorithm in estimating the evapotranspira- tion rates.
+14,this is in line with previous studies that have shown low error values when comparing the evapotranspiration values acquired from remote sensing techniques and observational data
+15,international journal of digital earth 1651 figure 6.
+15,daily evapotranspiration variability during the growing season.
+15,(carrasco-benavides et al.
+15,2012).
+15,studies by abrishamkar and ahmadi (2017) and rawat et al. (2019) revealed that evapotranspiration calculations from the makkink method correspond very well with the penman-monteith method.
+15,their studies further showed the correlation of the sebal model with the experimental methods of penman-monteith and makkink showed good results with high correlations and the least error.
+15,"similarly, soheilifar et al. (2013) obtained the water requirement of the sugarcane plants using onboard modis sensor data and found an figure 7."
+15,percentage of the area in respective evaporative classes.
+16,1652 n.
+16,shamloo et al.
+16,table 4.
+16,evaluation of evapotranspiration estimations using sebal algorithm of the cornﬁeld.
+16,imaging sebal fao56 penman- fao24 penman kimberly de bruin- priestley- mcloud makkink hargreaves date (mm/day) monteith (fao-56pm) (fao-24pen) penmanpen63 penman (kp) keijman (dk) taylor (pt) (mcl) turk (mak) (har) 2018.06.23 4.88 5.43 5.50 5.67 6.37 6.35 6.68 6.56 4.19 4.41 5.22 2018.07.25 4.82 5.61 5.67 5.90 6.19 6.45 6.78 9.34 3.92 4.48 4.42 2018.10.08 4.55 6.40 6.43 6.67 6.67 7.34 7.75 10.42 4.47 5.12 6.27 2018.09.11 2.66 4.87 4.90 5.07 4.93 5.64 5.95 6.33 3.66 4.30 4.87 2018.09.27 3.81 4.30 4.30 4.49 4.30 4.92 5.18 7.32 3.35 3.81 4.66 2018.10.13 2.42 3.03 3.02 3.15 3.01 3.43 3.62 4.28 2.58 3.03 3.41 r 1 0.914 0.916 0.920 0.908 0.909 0.908 0.911 0.895 0.874 0.680 rmse 0 1.171 1.203 1.383 1.533 1.923 2.235 3.756 0.442 0.496 1.145 table 5.
+16,comparison of sebal derived crop coeﬃcient (kc) of corn with other techniques.
+16,imaging fao56 penman- fao24 penman kimberly de bruin- priestley- mcloud makkink hargreaves date fao sebal monteith (fao-56pm) (fao-24pen) penmanpen63 penman (kp) keijman (dk) taylor (pt) (mcl) turk (mak) (har) 2018.06.23 0.3 0.339 0.225 0.223 0.216 0.192 0.277 0.193 0.339 0.234 0.326 0.186 2018.07.25 0.7 0.723 0.601 0.595 0.572 0.544 0.752 0.522 0.723 0.763 0.860 0.361 2018.10.08 0.85 0.866 0.604 0.601 0.579 0.579 0.756 0.526 0.866 0.616 0.865 0.370 2018.09.11 1 0.952 0.654 0.650 0.629 0.647 0.742 0.565 0.952 0.655 0.870 0.504 2018.09.27 1 0.887 0.708 0.707 0.678 0.707 0.798 0.621 0.887 0.653 0.908 0.4159 2018.10.13 0.6 0.620 0.4791 0.480 0.460 0.482 0.479 0.422 0.620 0.426 0.562 0.338 r - 0.986 0.960 0.960 0.962 0.971 0.916 0.956 0.986 0.805 0.925 0.942 rmse - 0.05 0.22 0.22 0.24 0.24 0.15 0.29 0.05 0.24 0.09 0.41
+17,international journal of digital earth 1653 figure 8.
+17,changes in the crop coeﬃcient of corn crop during the growing season as obtained by respective methods. error of 0.66 mm per day when compared to the fao penman-monteith method.
+17,"in another study, kong et al. (2019) showed that when the daily evapotranspiration estimated by the sebal model was validated against the fao penman-monteith model, reasonably low mean relative error resulted (mre = 19.5%)."
+17,"therefore, the results of this section establish that the application of the sebal algorithm using oli-based remotely sensed images has a good capability in estimating the actual evapotranspiration in the study area."
+17,the remote sensing data-based sebal model can be applied to robustly estimate evapotranspiration rates for diﬀerent regions at spatial and tem- poral scales which is the most important ﬁnding of this study.
+17,3.3 crop coeﬃcient estimations estimation of actual evapotranspiration based on crop coeﬃcient is another important consideration for eﬀective water resources management.
+17,"in this study, the potential evapotranspiration from respect- ive methods was used to calculate the corresponding crop coeﬃcient values."
+17,"since etrf is considered to be approximately equal to the crop coeﬃcient in the sebal algorithm, the actual evapotranspiration obtained from sebal algorithm was used to acquire the etrf values."
+17,the crop coeﬃcients obtained from the sebal algorithm and the coeﬃcients from the comparative methods are shown in table 5.
+17,"the results presented are also a comparison of crop coeﬃcients at diﬀerent growth stages obtained through fao techniques, sebal algorithm and other experimental techniques."
+17,"according to table 5, sebal method and the fao methods were again in agreement with the correlation coeﬃcients and the root-mean-square error obtained were 0.98 and 0.05, respectively."
+17,the correlation (r) of fao with the other methods ranged between 0.805 (turk) and 0.986 (mcloud (mcl)).
+17,"therefore, with a small error, sebal method can be used for calculating the crop coeﬃcient with higher accuracy."
+17,"the fao method also showed a very good correlation with the widely used fao penman-monteith experimental method and registered r and rmse of 0.96 and 0. 22, respectively."
+17,the crop coeﬃcient (kc) changes in the growing season are clearly shown in figure 8.
+17,"all methods showed a similar trend, with maximum values during the middle of plant growth, and minimum values in the initial and ﬁnal stages."
+17,these indeed are consistent with the results of kamali and nazari (2018).
+17,small discrepancies in kc values between fao and sebal algorithm
+18,1654 n.
+18,shamloo et al.
+18,figure 9.
+18,"spatial and temporal changes of crop coeﬃcient in the study area. can be attributed to inherent changes in the date of planting, land management, rainfall, surface index and weather conditions such as air temperature, wind speed and lack of steam pressure (kam- ble, kilic, and hubbard 2013)."
+18,the crop might have shown diﬀering responses to distinct weather conditions and distinctive soil characteristics which needs further studies of similar nature.
+18,"given the high correlation of kc obtained from sebal model and fao coeﬃcients, etrf maps were further plotted as in figure 9."
+18,this shows the spatial and temporal changes in crop coeﬃcients in the study area during the growing period.
+18,"as stated earlier, the dominant cultivation crop in the area is corn."
+18,the crop coeﬃcient of this cornﬁeld gradually increased during the growing season and then decreased in the ﬁnal days in concurrence with the growth period of the corn crop.
+18,the results of the remote sensing technique in combination with the sebal algorithm showed a high correlation with the fao 56 values.
+18,"conclusion due to an increase in population and shortage of water resources, especially in the agricultural sector, researchers are looking for ways to better manage the available water resources."
+18,evapo- transpiration rate is one of the most important components of the global hydrologic cycle and
+19,international journal of digital earth 1655 has a signiﬁcant inﬂuence on energy balance and climate.
+19,this study presents an analysis of daily evapotranspiration estimations using the sebal model with landsat 8 images for the corn crop in the southern part of adana province.
+19,the estimated evapotranspiration values showed the highest correlation (r = 0.91) and the lowest error (rmse = 1.14) with the com- monly used fao penman-monteith method and registered an acceptable correlation with other comparative methods.
+19,"in addition, the crop coeﬃcient values were acquired by combining the sebal algorithm gen- erated etrf and experimental methods."
+19,"a comparison of sebal algorithm generated crop coeﬃ- cients with the fao method generated ones were in agreement, recording a high correlation coeﬃcient (r = 0.98) and very low root-mean-square error value (rmse=0.05)."
+19,"the high accuracy and low error indicate that the sebal method could be aptly used to estimate the crop coeﬃcient on a regional scale, in the respective time range."
+19,the results obtained from the sebal method assisted in understanding the spatial and temporal changes in diﬀerent stages of plant growth.
+19,"the outcomes clearly suggested that it is possible to eﬀectively calculate actual evapotranspiration, crop coeﬃcient and water requirement of diﬀerent plants on a regional scale using the sebal model in combination with remotely sensed data."
+19,"therefore, remote sensing has a high potential to improve water resource management in very large areas with the use of algorithms like sebal to estimate evapotranspiration rate minimizing the development of expensive terrestrial stations."
+19,one of the limitations of the sebal model is that some experimental relations during the esti- mation of evapotranspiration may induce errors.
+19,"hence, it is necessary to correct the coeﬃcients for each region during data pre-processing."
+19,another limitation of this model is the need for clear and cloudless skies in the area because even a thin cloud layer can reduce the calculated heat radiation energy resulting in a signiﬁcant error.
+19,"despite the limitations, the satellite-based remotely sensed data in combination with the sebal algorithm is a promising tool for evapotranspiration esti- mations at diﬀerent ranges of temporal and spatial scales."
+19,applications of this method include the preparation of evapotranspiration maps and plant coeﬃcient maps at regional scales to conjec- ture water requirements and irrigation planning.
+19,"this can be applied for cropping, agricultural and water management together with precision agricultural applications."
+19,"generally, diﬀerent remote sensing models have been developed to estimate evapotranspiration so far; however, uncertainties in models still require consideration."
+19,the eﬃciency of combining deep learning and hybrid methods with remote sensing can be used in future studies.
+19,this would allow for a more accurate assessment of evapotranspiration rates and to prepare crop coeﬃ- cient maps of diﬀerent regions.
+19,this precise estimate of plant water requirements would enable bet- ter and eﬃcient agricultural water and plant health management.
+19,disclosure statement no potential conﬂict of interest was reported by the author(s).
+19,data availability data are available on request due to privacy or other restrictions.
+19,orcid nazila shamloo http://orcid.org/0000-0002-3153-6807 mohammad taghi sattari http://orcid.org/0000-0002-5139-2118 halit apaydin http://orcid.org/0000-0002-9875-7321 khalil valizadeh kamran http://orcid.org/0000-0003-4648-842x ramendra prasad http://orcid.org/0000-0003-3941-5839
+20,1656 n.
+20,shamloo et al.
+20,"references abrishamkar, m., and a."
+20,ahmadi.
+20,““evapotranspiration estimation using remote sensing technology based on sebal algorithm.”
+20,iranian journal of science and technology.”
+20,transactions of civil engineering 41 (1): 65– 76.
+20,"allen, r."
+20,“using the fao-56 dual crop coeﬃcient method over an irrigated region as part of an evapotranspiration intercomparison study.”
+20,journal of hydrology 229 (1-2): 27–41.
+20,"allen, r."
+20,"g., w."
+20,"bastiaanssen, m."
+20,"tasumi, and a."
+20,morse. 1998a.
+20,“evapotranspiration on the watershed scale using the sebal model and landsat images”.
+20,"asae annual meeting, american society of agricultural and biological engineers."
+20,"allen, r., a."
+20,"irmak, r."
+20,"trezza, j."
+20,"hendrickx, w."
+20,"bastiaanssen, and j."
+20,kjaersgaard.
+20,“satellite-based et estimation in agriculture using sebal and metric.”
+20,hydrological processes 25 (26): 4011–4027.
+20,"allen, r."
+20,"g., l."
+20,"pereira, d."
+20,"raes, and m."
+20,smith. 1998b.
+20,crop evapotranspiration-guidelines for computing crop water requirements-fao irrigation and drainage paper 56.
+20,rome: fao.
+20,"allen, r."
+20,"g., and w."
+20,pruitt.
+20,“fao-24 reference evapotranspiration factors.”
+20,journal of irrigation and drainage engineering 117 (5): 758–773.
+20,"allen, r., m."
+20,"smith, a."
+20,"perrier, and l."
+20,pereira.
+20,“an update for the deﬁnition of reference evapotranspiration.”
+20,icid bulletin 43 (2): 1–34.
+20,"allen, r."
+20,"g., m."
+20,"tasumi, and r."
+20,trezza.
+20,“satellite-based energy balance for mapping evapotranspiration with internalized calibration (metric)—model.”
+20,journal of irrigation and drainage engineering 133 (4): 380–394. doi:10.1061/(asce)0733-9437(2007)133:4(380).
+20,anonymous.
+20,adana province agricultural investment guide.
+20,"ministry of food, agriculture and livestock, strategy development."
+20,anonymous.
+20,yuregir municipialty web site.
+20,accessed 20 april 2020. http://www.yuregir.bel.tr.
+20,"antonopoulos, v."
+20,"z., and a."
+20,antonopoulos.
+20,“daily reference evapotranspiration estimates by artiﬁcial neural networks technique and empirical equations using limited input climate variables.”
+20,computers and electronics in agriculture 132: 86–96.
+20,"bala, a., k."
+20,"rawat, a."
+20,"misra, and a."
+20,srivastava.
+20,"“assessment and validation of evapotranspiration using sebal algorithm and lysimeter data of iari agricultural farm, india.”"
+20,geocarto international 31 (7): 739–764. doi:10.1080/10106049.2015.1076062.
+20,"bashir, m., t."
+20,"hata, h."
+20,"tanakamaru, a."
+20,"abdelhadi, and a."
+20,"“satellite-based energy balance model to estimate seasonal evapotranspiration for irrigated sorghum: a case study from the gezira scheme, sudan.”"
+20,hydrology and earth system sciences 12 (4): 1129–1139.
+20,"bastiaanssen, w."
+20,"“sebal-based sensible and latent heat fluxes in the irrigated gediz basin, turkey.”"
+20,journal of hydrology 229 (1-2): 87–100.
+20,"bastiaanssen, w."
+20,"g., and l."
+20,chandrapala.
+20,“water balance variability across sri lanka for assessing agricultural and environmental water use.”
+20,agricultural water management 58 (2): 171–192.
+20,"bastiaanssen, w., e."
+20,"noordman, h."
+20,"pelgrum, g."
+20,"davids, b."
+20,"thoreson, and r."
+20,allen.
+20,“sebal model with remotely sensed data to improve water-resources management under actual field conditions.”
+20,journal of irrigation and drainage engineering 131 (1): 85–93.
+20,"bastiaanssen, w."
+20,"g., h."
+20,"pelgrum, p."
+20,"droogers, h."
+20,"de bruin, and m."
+20,menenti.
+20,"“area-average estimates of evaporation, wetness indicators and top soil moisture during two golden days in efeda.”"
+20,agricultural and forest meteorology 87 (2-3): 119–137.
+20,"bastiaanssen, w., h."
+20,"pelgrum, j."
+20,"wang, y."
+20,"ma, j."
+20,"moreno, and g."
+20,roerink.
+20,"1998. “van der, wt a surface energy balance algorithm for land (sebal): part 2 validation.”"
+20,journal of hydrology 212-213: 213–229.
+20,"bastiaanssen, w., h."
+20,"pelgrum, and s."
+20,wimink.
+20,“remote sensing study for impact monitoring of the integrated irrigation improvement and management project.”
+20,draft report.
+20,"bezerra, b."
+20,"g., b."
+20,"b. da silva, c."
+20,"a. dos santos, and j."
+20,bezerra.
+20,“actual evapotranspiration estimation using remote sensing: comparison of sebal and sseb approaches.”
+20,advances in remote sensing 04 (03): 234–247.
+20,"carrasco-benavides, m., s."
+20,"ortega-farías, l."
+20,"lagos, j."
+20,"kleissl, l."
+20,"morales, c."
+20,"poblete-echeverría, and r."
+20,allen.
+20,“crop coeﬃcients and actual evapotranspiration of a drip-irrigated merlot vineyard using multispectral satellite images.”
+20,irrigation science 30 (6): 485–497.
+20,"costa, j."
+20,"o., r."
+20,"coelho, w."
+20,"wolﬀ, j."
+20,"josé, m."
+20,"folegatti, and s."
+20,ferraz.
+20,“spatial variability of coﬀee plant water consumption based on the sebal algorithm.”
+20,scientia agricola 76 (2): 93–101.
+20,"de bruin, h., and j."
+20,keijman.
+20,"“the priestley-taylor evaporation model applied to a large, shallow lake in the netherlands.”"
+20,journal of applied meteorology 18 (7): 898–903.
+20,"elkatoury, a., a."
+20,"alazba, and a."
+20,abdelbary.
+20,“evaluating the performance of two seb models for estimating et based on satellite images in arid regions.”
+20,arabian journal of geosciences 13 (2): 1–19.
+20,"fawzy, h."
+20,"e.-d., a."
+20,"sakr, m."
+20,"el-enany, and h."
+20,moghazy.
+20,"“spatiotemporal assessment of actual evapotranspiration using satellite remote sensing technique in the nile delta, egypt.”"
+20,alexandria engineering journal 60 (1): 1421–1432.
+21,"international journal of digital earth 1657 firozjaei, m."
+21,"k., m."
+21,"kiavarz, o."
+21,"nematollahi, m."
+21,"karimpour reihan, and s."
+21,alavipanah.
+21,"“an evaluation of energy balance parameters, and the relations between topographical and biophysical characteristics using the mountainous surface energy balance algorithm for land (sebal).”"
+21,international journal of remote sensing 40 (13): 5230–5260.
+21,"ghaderi, a., m."
+21,"dasineh, m."
+21,"shokri, and j."
+21,abraham.
+21,"“estimation of actual evapotranspiration using the remote sensing method and sebal algorithm: a case study in ein khosh plain, iran.”"
+21,hydrology 7 (2): 1– 14. doi:10.3390/hydrology7020036.
+21,"gontia, n."
+21,"k., and k."
+21,tiwari.
+21,“estimation of crop coeﬃcient and evapotranspiration of wheat (triticum aestivum) in an irrigation command using remote sensing and gis.”
+21,water resources management 24 (7): 1399–1414.
+21,"goyal, m."
+21,"r., and e."
+21,harmsen.
+21,evapotranspiration: principles and applications for water management.
+21,london: crc press.
+21,"hargreaves, g."
+21,"h., and z."
+21,samani.
+21,“reference crop evapotranspiration from temperature.”
+21,applied engineering in agriculture 1 (2): 96–99.
+21,"kamali, m."
+21,"i., and r."
+21,nazari.
+21,“determination of maize water requirement using remote sensing data and sebal algorithm.”
+21,agricultural water management 209: 197–205.
+21,"kamble, b., a."
+21,"kilic, and k."
+21,hubbard.
+21,“estimating crop coeﬃcients using remote sensing-based vegetation index.”
+21,remote sensing 5 (4): 1588–1602.
+21,"kong, j., y."
+21,"hu, l."
+21,"yang, z."
+21,"shan, and y."
+21,“estimation of evapotranspiration for the blown-sand region in the ordos basin based on the sebal model.”
+21,international journal of remote sensing 40 (5-6): 1945–1965.
+21,"liu, s."
+21,"m., z."
+21,"xu, w."
+21,"wang, z."
+21,"jia, m."
+21,"zhu, j."
+21,"bai, and j."
+21,“a comparison of eddy-covariance and large aperture scintillometer measurements with respect to the energy balance closure problem.”
+21,hydrology and earth system sciences 15 (4): 1291–1306.
+21,"losgedaragh, s."
+21,"z., and m."
+21,rahimzadegan.
+21,"“evaluation of sebs, sebal, and metric models in estimation of the evaporation from the freshwater lakes (case study: amirkabir dam, iran).”"
+21,journal of hydrology 561: 523–531.
+21,"makkink, g."
+21,“testing the penman formula by means of lysimeters.”
+21,journal of the institution of water engineerrs 11: 277–288.
+21,"mao, y., and k."
+21,"“comparison of evapotranspiration estimates based on the surface water balance, modiﬁed penman-monteith model, and reanalysis data sets for continental china.”"
+21,journal of geophysical research: atmospheres 122 (6): 3228–3244.
+21,"mccloud, d."
+21,“water requirements of field crops in florida as inﬂuenced by climate.”
+21,soil sci.
+21,fla 15: 165–172.
+21,"nouri, h., e."
+21,"glenn, s."
+21,"beecham, s."
+21,"chavoshi boroujeni, p."
+21,"sutton, s."
+21,"alaghmand, b."
+21,"noori, and p."
+21,nagler.
+21,"“comparing three approaches of evapotranspiration estimation in mixed urban vegetation: field-based, remote sensing-based and observational-based methods.”"
+21,remote sensing 8 (6): 492. doi:10.3390/rs8060492.
+21,"omidvar, j., s."
+21,"noori, k."
+21,"davari, and a."
+21,farid hosseini.
+21,“estimation of actual evapotranspiration based on satellite images using two algorithms sebal and metric.”
+21,irrigation and water engineering 3 (4): 11–22.
+21,"ozturk, f., and h."
+21,apaydin.
+21,“estimating pan evaporation from limited meteorological observations from turkey.”
+21,water international 23 (3): 184–189.
+21,"penman, h."
+21,“vegetation and hydrology.”
+21,soil science 96 (5): 357. doi:10.1097/00010694-196311000-00014.
+21,"priestley, c."
+21,"b., and r."
+21,taylor.
+21,“on the assessment of surface heat flux and evaporation using large- scale parameters.”
+21,monthly weather review 100 (2): 81–92.
+21,"rahimzadegan, m., and a."
+21,janani.
+21,“estimating evapotranspiration of pistachio crop based on sebal algorithm using landsat 8 satellite imagery.”
+21,agricultural water management 217: 383–390.
+21,"ramos, j."
+21,"g., c."
+21,"cratchley, j."
+21,"kay, m."
+21,"casterad, a."
+21,"martínez-cob, and r."
+21,dominguez.
+21,“evaluation of satellite evapotranspiration estimates using ground-meteorological data available for the flumen district into the ebro valley of ne spain.”
+21,agricultural water management 96 (4): 638–652.
+21,"rawat, k."
+21,"s., a."
+21,"bala, s."
+21,"singh, and r."
+21,"“quantiﬁcation of wheat crop evapotranspiration and mapping: a case study from bhiwani district of haryana, india.”"
+21,agricultural water management 187: 200–209.
+21,"rawat, k."
+21,"s., s."
+21,"singh, a."
+21,"bala, and s."
+21,szabó.
+21,“estimation of crop evapotranspiration through spatial distributed crop coeﬃcient in a semi-arid environment.”
+21,agricultural water management 213: 922–933.
+21,"razaji, a., f."
+21,"paknejad, m."
+21,"moareﬁ, a."
+21,"mahdavi damghani, and m."
+21,ilkaee.
+21,“meta-analysis of the eﬀects of salinity stress on cotton (gossypium spp.)
+21,growth and yield in iran.”
+21,journal of agricultural sciences 26 (1): 94–103..
+21,"salgado, r., and l."
+21,mateos.
+21,“evaluation of diﬀerent methods of estimating et for the performance assessment of irrigation schemes.”
+21,agricultural water management 243: 106450. doi:10.1016/j.agwat.2020.106450.
+21,"sattari, m."
+21,"t., v."
+21,"ahmadifar, r."
+21,"delirhasannia, and h."
+21,apaydin. 2020a.
+21,“estimation of pan evaporation coeﬃcient in cold and dry climate conditions with a decision-tree model..”
+21,atmosfera 34 (3): 289–300. doi:10.20937/atm.
+21,52777.
+22,1658 n.
+22,shamloo et al.
+22,"sattari, m."
+22,"t., h."
+22,"apaydin, s."
+22,"band, a."
+22,"mosavi, and r."
+22,prasad.
+22,“comparative analysis of kernel-based versus ann and deep learning methods in monthly reference evapotranspiration estimation.”
+22,hydrology and earth system sciences 25 (2): 603–618.
+22,"sattari, m."
+22,"t., h."
+22,"apaydin, and s."
+22,shamshirband. 2020b.
+22,“performance evaluation of deep learning-based gated recurrent units (grus) and tree-based models for estimating eto by using limited meteorological variables.”
+22,mathematics 8 (6): 972–989. doi:10.3390/math8060972.
+22,"sellers, p., d."
+22,"randall, g."
+22,"collatz, j."
+22,"berry, c."
+22,"field, d."
+22,"dazlich, c."
+22,"zhang, g."
+22,"collelo, and l."
+22,bounoua.
+22,“a revised land surface parameterization (sib2) for atmospheric gcms.
+22,part i: model formulation.”
+22,journal of climate 9 (4): 676–705.
+22,"seneviratne, s."
+22,"i., r."
+22,"koster, z."
+22,"guo, p."
+22,"dirmeyer, e."
+22,"kowalczyk, d."
+22,"lawrence, p."
+22,"liu, d."
+22,"mocko, c.-h."
+22,"lu, and k."
+22,oleson.
+22,“soil moisture memory in agcm simulations: analysis of global land–atmosphere coupling experiment (glace) data.”
+22,journal of hydrometeorology 7 (5): 1090–1112.
+22,"shabani, s., s."
+22,"samadianfard, m."
+22,"sattari, a."
+22,"mosavi, s."
+22,"shamshirband, t."
+22,"kmet, and a."
+22,várkonyi-kóczy.
+22,“modeling pan evaporation using gaussian process regression k-nearest neighbors random forest and support vector machines; comparative analysis.”
+22,atmosphere 11 (1): 66. doi:10.3390/atmos11010066.
+22,"singh, r."
+22,"k., and a."
+22,irmak.
+22,“estimation of crop coeﬃcients using satellite remote sensing.”
+22,journal of irrigation and drainage engineering 135 (5): 597–608.
+22,"singh, r."
+22,"k., g."
+22,"senay, n."
+22,"velpuri, s."
+22,"bohms, and j."
+22,verdin.
+22,“on the downscaling of actual evapotranspiration maps based on combination of modis and landsat-based actual evapotranspiration estimates.”
+22,remote sensing 6 (11): 10483–10509.
+22,"soheilifar, z., s."
+22,"mirlatiﬁ, a."
+22,"naseri, and m."
+22,assari.
+22,“estimating actual evapotranspiration of sugarcane by remote sensing.(
+22,a case study: mirza kochakkhan sugarcane agro-industry company farms).”
+22,water and soil science 23 (1): 151–163.
+22,"sun, z., b."
+22,"wei, w."
+22,"su, w."
+22,"shen, c."
+22,"wang, d."
+22,"you, and z."
+22,“evapotranspiration estimation based on the sebal model in the nansi lake wetland of china.”
+22,mathematical and computer modelling 54 (3-4): 1086–1092.
+22,"tasumi, m., r."
+22,"trezza, r."
+22,"allen, and j."
+22,wright.
+22,“us validation tests on the sebal model for evapotran- spiration via satellite”.
+22,2003 icid workshop on remote sensing of et for large regions.
+22,"trajkovic, s."
+22,“hargreaves versus penman-monteith under humid conditions.”
+22,journal of irrigation and drainage engineering 133 (1): 38–42.
+22,"turc, l."
+22,"“evaluation des besoins en eau d’irrigation, évapotranspiration potentielle.”"
+22,agron 12: 13–49.
+22,"valayamkunnath, p., v."
+22,"sridhar, w."
+22,"zhao, and r."
+22,allen.
+22,"“intercomparison of surface energy fluxes, soil moisture, and evapotranspiration from eddy covariance, large-aperture scintillometer, and modeling across three ecosystems in a semiarid climate.”"
+22,agricultural and forest meteorology 248: 22–47.
+22,"waters, r., r."
+22,"allen, w."
+22,"bastiaanssen, m."
+22,"tasumi, and r."
+22,trezza.
+22,"""sebal."""
+22,surface energy balance algorithms for land.
+22,idaho implementation.
+22,idaho: advanced training and users manual.
+22,"wright, j."
+22,"l., and m."
+22,jensen.
+22,““peak water requirements of crops in southern idaho.”
+22,proceedings of the american society of civil engineers.”
+22,journal of the irrigation and drainage division 98 (ir2): 193–201.
+22,"yamaç, s."
+22,“reference evapotranspiration estimation with knn and ann models using diﬀerent climate input combinations in the semi-arid environment.”
+22,journal of agricultural sciences 27 (2): 129–137. doi:10. 15832/ankutbd.630303.
+22,"zhang, z., x."
+22,"li, l."
+22,"liu, y."
+22,"wang, and y."
+22,“inﬂuence of mulched drip irrigation on landscape scale evapotranspiration from farmland in an arid area.”
+22,agricultural water management 230: 105953. doi:10. 1016/j.agwat.2019.105953.
+22,"zhang, x.-c., j.-w."
+22,"wu, h.-y."
+22,"wu, and y."
+22,“simpliﬁed sebal method for estimating vast areal evapotranspiration with modis data.”
+22,water science and engineering 4 (1): 24–35.

@@ -1,0 +1,754 @@
+page,p
+1,"catena 201 (2021) 105190 contents lists available at sciencedirect catena journal homepage: www.elsevier.com/locate/catena characterization of field-scale soil variation using a stepwise multi-sensor fusion approach and a cost-benefit analysis sumanta chatterjee a, b, alfred e."
+1,"hartemink a, john triantafilis c, ankur r."
+1,"desai d, doug soldat a, jun zhu e, philip a."
+1,"townsend f, yakun zhang a, jingyi huang a, * a department of soil science, university of wisconsin-madison, madison, wi 53706, usa b icar-national rice research institute, cuttack 753006, india c school of biological, earth and environmental sciences, unsw sydney, kensington, nsw 2033, australia d department of atmospheric and oceanic sciences, university of wisconsin-madison, madison, wi 53706, usa e departments of statistics and entomology, university of wisconsin-madison, madison, wi 53706, usa f department of forest and wildlife ecology, university of wisconsin-madison, madison, wi 53706, usa a r t i c l e i n f o a b s t r a c t keywords: the potential of a stepwise fusion of proximally sensed portable x-ray fluorescence (pxrf) spectra and elec­ digital soil mapping tromagnetic induction (emi) with remote sentinel-2 bands and a digital elevation model (dem) was investigated pxrf spectroscopy for predicting soil physicochemical properties in pedons and across a heterogeneous 80-ha crop field in wis­ electromagnetic induction consin, usa."
+1,"we found that pxrf spectra with partial least squares regression (plsr) models can predict sand, sentinel-2 management zones total nitrogen (tn), organic carbon (oc), silt contents, and clay with validation r2 of 0.81, 0.74, 0.73, 0.68, and plsr 0.64 at the pedon scale but performed less well for soil ph (r2 = 0.51)."
+1,"a combination of emi, sentinel-2, and dem data showed promise in mapping sand, silt contents, and tn at two depths and ap horizon thickness and soil depth across the field."
+1,a clustering analysis using combinations of mapped soil properties or proximal and remote sensing data suggested that data fusion improved the characterization of field-scale variability of soil properties.
+1,the cost-benefit analysis showed that the most accurate management zones (mzs) for topsoil can be generated only using estimated soil property maps while it was the most costly as compared to other data sources.
+1,"for an intermediate-high (for topsoil) and high (subsoil) accuracy and a moderate economic budget, the combination of sensors (proximal + remote sensing + dem) might be a better approach for effective mzs generation than collecting soil samples for laboratory analysis while the latter produced the most accurate maps for topsoil."
+1,"it can be concluded that pxrf spectra can be useful for predicting key soil properties (e.g., sand, tn, oc, silt, clay) at different soil depths, and a combination of proximal and remote sensing provides an effective way to delineate soil mzs that are useful for decision-making."
+1,"introduction bhaduri et al., 2018; zhang and hartemink, 2019)."
+1,"traditionally, soil mapping relies on labor-intensive field surveys understanding the spatial variability of soil is a prerequisite for and, time-consuming, costly laboratory analyses (minasny and effective management of agricultural resources and environmental mcbratney, 2016)."
+1,"the polygon-based soil maps can provide qualitative monitoring (minasny and mcbratney, 2016)."
+1,"among all the physi­ information at a coarse-scale but are not suitable for location-specific ochemical properties, soil organic carbon (soc), salinity, clay, sand, nutrients and water management (castaldi et al., 2016)."
+1,"in addition, bulk density, cation exchange capacity (cec), ph, nitrogen (n), phos­ regional and national legacy soil survey maps such as soil survey phorus (p), potassium (k), soil moisture (sm), depths of soil and ap geographic database (ssurgo) often consist of artificial boundaries horizon are essential, as they control plant growth and water and that do not account for continuous variation of soil properties nutrient movement (chatterjee et al., 2017, 2018; chen et al., 2018; (mcbratney et al., 2003)."
+1,"gholizadeh et al., 2018; mohanty et al., 2011; pradhan et al., 2017; recent progress in proximal soil sensing and remote sensing * corresponding author at: university of wisconsin-madison, department of soil science, 1525 observatory drive, madison, wi 53706, usa."
+1,e-mail address: jhuang426@wisc.edu (j.
+1,huang). https://doi.org/10.1016/j.catena.2021.105190 received 20 july 2020; received in revised form 15 january 2021; accepted 18 january 2021 available online 7 february 2021 0341-8162/© 2021 elsevier b.v.
+1,all rights reserved.
+2,chatterjee et al.
+2,"catena 201 (2021) 105190 technologies has proven to be an effective way for predictive mapping of et al., 2018; loiseau et al., 2019; paul et al., 2020)."
+2,"hyperspectral different soil physicochemical properties with high accuracies at a finer remote sensing data (e.g., hyperion sensor onboard the eo-1 satellite) resolution (mcbratney et al., 2003; hartemink and minasny, 2014; was used to estimate soil moisture, lulc, soc, clay, and soil texture heung et al., 2016; liang et al., 2019)."
+2,"the development of soil and plant (folkman et al., 2001; gomez et al., 2008; gholizadeh et al., 2018; sensors and machine learning tools along with increased availability of castaldi et al., 2016)."
+2,"microwave backscatter data from sentinel-1 and spatial geo-referenced data and computing power had steered the suc­ smap mission have been used for estimating soil moisture dynamics cess of digital soil mapping in recent decades (minasny and mcbratney, (das et al., 2019; chatterjee et al., 2019, 2020)."
+2,"besides, high-resolution 2016; ma et al., 2019). digital elevation models (dems) have been created recently using light a brief description of different proximal and remote sensing sensors detection and ranging (lidar) sensor data (fink and drohan, 2016) are described in table 1."
+2,"different proximal soil sensing techniques, such that provide useful topographic information about soil variations. as visible near-infrared (vis-nir, 350–2500 nm), portable x-ray fluo­ advances in machine learning and sensor data fusion in recent de­ rescence (pxrf) spectroscopy, and electromagnetic induction imaging cades have facilitated a better understanding of the dynamics and pre­ (emi) are increasingly being used to predict soil properties and to build diction of different soil properties in space by merging information from digital soil maps at the field scale (viscarra rossel et al., 2016). vis–nir environmental covariates and predictions from different predictive soil reflectance spectra can be useful for characterizing many soil models (errico et al., 2015; chatterjee et al., 2020)."
+2,"sensor fusion theory physicochemical and mineralogical properties such as soc, clay, sand, makes use of complementary information from different sensors which bulk density, total nitrogen (tn), cec, ph, carbonate content, and soil can improve the prediction accuracy of the predictive models and esti­ horizon delineation (stenberg et al., 2010; viscarra rosel et al., 2016; mate soil properties at depths (mouazen et al., 2014; xu et al., 2019)."
+2,"minasny and mcbratney, 2016; padarian et al., 2019; zhang and har­ except for a few studies that combine proximal and remote sensing to temink, 2019; xu et al., 2020)."
+2,"the pxrf spectroscopy is related to the map soil salinity (huang et al., 2017) and moisture (babaeian et al., energy status of the elements and has been used to detect soil heavy 2019) at multiple depths, few studies have shown the potential to metals (mclaren et al., 2012; minasny and mcbratney, 2016; stockman combine proximal and remote sensing to map key soil physiochemical et al., 2016) and to predict several soil physicochemical properties (e.g., properties at a high spatial resolution (e.g. < 30 m). sand, silt, and clay content, ph, cec and base saturation percentage, soil physicochemical properties vary at the field scale, creating dif­ soc) due to the correlation of pxrf spectra or elemental data with these ficulty in allocating crucial inputs for precision agriculture management soil properties (zhu et al., 2011; sharma et al., 2015; wang et al., 2015; (goovaerts, 1998; brejda et al., 2000; ferguson et al., 2002)."
+2,"delineation weindorf et al., 2016; chakraborty et al., 2015; rawal et al., 2019; of soil management zones (mzs) proved as one of the most promising zhang and hartemink, 2019)."
+2,"the non-invasive emi instruments, approaches to address the spatial heterogeneity within a field by designed to measure soil apparent electrical conductivity (eca), are dividing the field into different zones having homogeneous physico­ increasingly being used to map soil moisture, exchangeable sodium chemical and terrain features (moral et al., 2010)."
+2,"previously, re­ percentage (esp), clay content, and salinity (corwin et al., 2003; tri­ searchers used crop yield (vrindts et al., 2005), soil survey and antafilis and monteiro santos, 2010; doolittle and brevik, 2014)."
+2,"to topographic maps (fraisse et al., 2001; franzen et al., 2002), and soil summarize, vis-nir and pxrf technologies are often used to estimate properties (oldoni et al., 2019) with clustering methods (cambouris soil properties from individual soil samples collected at the profile scale et al., 2006) and fuzzy logic techniques (molin and castro, 2008) for at different depths while emi can delineate depth-specific variations in creating mzs."
+2,"however, only a few studies have used a combination of soil properties and map soil properties across the field (huang et al., proximally and remotely sensed data in delimiting mzs at the field scale 2014; zare et al., 2015). (e.g."
+2,"zare et al., 2018)."
+2,"furthermore, little research has evaluated the compared to proximal soil sensing that can be used to map soil cost-benefit of combining multiple sensor datasets for creating the mzs. properties at the profile to field scale, remote sensing data from different in this study, laboratory-measured soil properties, proximally sensed satellites have been mainly utilized for characterizing surface soil pxrf soil spectra and emi data from a dualem-1hs sensor, remotely physicochemical properties across large spatial extents (field to global sensed dem and sentinel-2 bands were combined to map several key soil scales)."
+2,optical band sensors such as landsat 8 and sentinel-2 have been physicochemical properties across an 80-ha crop field at different depths widely used for land use and land cover (lulc) mapping and recently be using a stepwise multi-sensor fusion technique.
+2,"the objectives of the applied for estimating soil mineralogy (forkuor et al., 2018; van der study are two-fold."
+2,"werff and van der meer, 2016), soc, and clay contents (gholizadeh table 1 proximal and remote sensing sensors for soil properties measurements."
+2,"sensor types of sensors measuring properties spatial depth of references categories resolutions measurements proximal visible-near infrared soil organic carbon (soc), clay, sand, bulk density, – depending on stenberg et al."
+2,"(2010), viscarra rossel soil (vis-nir) spectrometer total carbon (tc), total nitrogen (tn), cation soil samples et al."
+2,"(2016), minasny and mcbratney sensors exchange capacity (cec), ph, phosphorus (p), (2016), padarian et al."
+2,"(2019), zhang potassium (k), soil moisture (sm) and hartemink (2019)) portable x-ray cec, base saturation percentage (bsp), tc, tn, soil – depending on sharma et al."
+2,"(2015), wang et al. (2015), fluorescence (pxrf) texture soil samples weindorf et al."
+2,"(2016), rawal et al. spectrometer (2019) electromagnetic sm, apparent electrical conductivity (eca), soil ~5 m, 0–6 m huang et al."
+2,"(2017), hu et al."
+2,"(2019) induction (emi) salinity depending on surveys remote optical (landsat 8, land-use and land-cover (lulc), soil mineralogy, 10–60 m surface forkuor et al."
+2,"(2018), van der werff and sensing sentinel-2) soc, clay van der meer (2016), paul et al."
+2,"(2020) sensors hyperspectral (eo-1/ sm, lulc mapping, soc, clay, soil texture 10–60 m surface folkman et al."
+2,"(2001), gholizadeh et al."
+2,"hyperion) (2018), castaldi et al."
+2,"(2016) microwave (sentinel-1, backscatter, roughness, sm 10–20 m; 36 surface das et al."
+2,"(2019), chatterjee et al."
+2,"(2019, smap) km 2020) light detection and digital elevation model 1–30 m surface fink and drohan (2016) ranging (lidar) 2"
+3,chatterjee et al.
+3,catena 201 (2021) 105190 (1).
+3,"to explore the potential to map key soil properties at different from all the six depths (total 288 sub-samples) were then air-dried, depths at the profile and field scales using a stepwise sensor- ground, and sieved through a 2-mm sieve for further analysis."
+3,"soil fusion model with laboratory-measured soil properties and texture analysis (sand, silt, and clay fractions) were performed by the proximal and remotely sensed data. hydrometer method (gee and bauder, 1979)."
+3,organic carbon (oc) (2).
+3,"to evaluate different methods of generating management zones (nelson and sommers, 1996) and total nitrogen (tn) (bremner, 1996) and assessing accuracy and cost for mapping soil properties at were measured using a flash ea 1112 nc soil analyser by the dry two depths using a clustering analysis with a) maps of soil combustion method (soil survey staff, 2014)."
+3,"soil ph was measured properties produced with all proximal and remote sensing data, using an oakton ph/con 510 series meter in a 1:1 soil water suspension b) proximal, remote sensing data, and dem data without soil (soil survey staff, 2014)."
+3,"the soil spectra were derived by scanning the laboratory data, c) remote sensing and dem data without prox­ air-dried and ground samples using a pxrf spectrometer (olympus imal soil sensors, d) only remote sensing data, e) only dem data, scientific solutions americas inc., waltham, ma, usa). f) only proximal soil sensor data, and g) a legacy soil map."
+3,the diagnosis of soil genetic horizons was done based on the 50 soil cores that were collected from the study area.
+3,soil profiles were manu­ two hypotheses will be tested in the study: 1) can proximal and ally wetted in the lab to delineate diagnostic horizons.
+3,the depth to the remote sensing data be fused to map key soil properties at different bedrock was considered as soil depth.
+3,we used official soil series de­ depths from the profile to field scales?
+3,2) does a combination of multiple scriptions (osds) as guidance to classify the soil horizons based on the sensors always outperform the use of a single sensor in terms of accu­ sampled 90-cm deep soil cores. racies and cost of delineating soil properties at depths?
+3,"for understanding the distribution of soil properties of the 50 sam­ ples, the boxplots and the usda soil textural triangle were plotted using 2."
+3,"materials and methods “ggplot2” and “soiltexture” packages in r version 3.6.1 (r core team, 2019)."
+3,"study area, sample collection, and analysis 2.2."
+3,"ancillary datasets the hughes farm is located in rock county, wisconsin, usa (42.6828◦ n, 89.0187◦ w)."
+3,"the soils in this region are formed due to in this study, soil properties were mapped using empirical models glacial outwash plain and sediments of the johnson end moraine and established between the laboratory-measured soil properties (used as have been cultivated since about the 1850 s and are presently under a the model response) and various ancillary data (e.g., pxrf soil spectra, corn-soybean rotation."
+3,"our study area is approximately 80-ha in which emi, dem, and sentinel-2) used as covariates."
+3,a detailed description of corn and soybean are mainly produced in rotation.
+3,the most common all the proximal and remote sensing data set used in this study has been soil orders observed are mollisols and alfisols and the main textural depicted in table 3.
+3,we describe these in the order of their measuring classes are silty loam and sandy loam.
+3,the annual average precipitation support/spatial resolution and from the pedon scale to field scale is 226.7 mm with a monthly average maximum and minimum temper­ (fig.
+3,"1). atures of 22 ◦ c (july) and − 6 ◦ c (january), respectively."
+3,"soil samples were collected from different locations across the study 2.2.1. pxrf spectra collection and preprocessing field representing five soil series (ssurgo database, a delta premium pxrf spectrometer (olympus scientific solutions https://websoilsurvey.nrcs.usda.gov/) (table 2)."
+3,"in total, fifty points americas inc., waltham, ma, usa) was used to scan all the soil samples that represent the within-field variability of different soil series were in geochem mode."
+3,the pxrf spectrometer was calibrated before scan­ chosen for sampling.
+3,a conditioned latin hypercube sampling (clhs) ning using a 316 stainless steel calibration reference check.
+3,"the geo­ design was used to determine the sampling points based on ancillary chem mode operates in a two-beam configuration (40 and 10 kev) for a data from dualem-1hs, dem data, and normalized difference vege­ duration of 60 s."
+3,"beam-1 operates at the energy range of 0–40 kev and, tation index (ndvi) data from sentinel-2 across the field (see following can detect various heavy elements, such as v, cr, fe, co, as, se, pb, ni, sections for details)."
+3,"the “clhs” function from the “clhs” package cu, zn, ta, w, hg, bi, rb, u, sr, y, zr, th, ag, cd, nb, mo, le, sn, and sb."
+3,"(roudier, 2011) in r version 3.6.1 (r core team, 2019) was used to beam-2 operates at the energy range of 0–10 kev and, can detect lighter carry out the clhs sampling design. elements, including mg, ca, al, mn, si, p, s, cl, and ti."
+3,"the elemental soil cores were collected from the selected 50 points (3-cm in concentrations were calculated from the spectra based on an internal diameter, 90-cm depth) using an environmentalist’s sub-soil probe soil calibration procedure (compton normalization method)."
+3,"the concen­ sampler (jmc soil samplers, clements associates inc., newton, ia, trations of ca, mg, al, si, fe, zn, ti, mn, rb, sr, and zr and soil spectra usa)."
+3,the 50 soil cores (pedons) were brought to the soil laboratory and were detected from all the samples collected from the hughes field.
+3,"the sub-sampled successively at a 10-cm depth interval to six depths (e.g., pxrf spectra along with the measured soil properties data were used for 0–10, 10–20, 20–30, 30–40, 40–50, and 50–60 cm)."
+3,"all the soil samples predicting soil physicochemical properties (sand, silt, clay, oc, tn) at table 2 summary of 50 pedons sampled for this study followed by usda soil taxonomy."
+3,"soil soil series map unit taxonomic class horizons descriptions number of order symbol pedons mollisol rockton loam rpb fine-loamy, mixed, superactive, mesic typic ap (0–25 cm) ab (25–38 cm) bt1 (38–53 cm) bt2 (53–66 cm) 2bt3 12 argiudolls (66–79 cm) 2r (79 cm) winnebago silt wnb2 fine-loamy, mixed, superactive, mesic typic ap (0–25 cm) a (25–38 cm) 2ba(38–53 cm) 2bt1 (53–86 cm) 2bt2 26 loam argiudolls (86–127 cm) 2bc1 (127–168 cm) 2bc2 (168–188 cm) whalan silt wlc2 fine-loamy, mixed, superactive, mesic typic a1 (0–10.16 cm) a2 (10.16–22.86 cm) b1(22.86–30.48 cm) b21t 4 loam argiudolls (30.48–43.18 cm) b22t (43.18–55.88 cm) iib23t (55.88–60.96 cm) ii kane silt loam kaa fine-loamy over sandy or sandy-skeletal, ap (0–13 cm) a(13–30 cm) bt1 (30–41 cm) bt2 (41–56 cm) 2bt3 1 mixed, superactive, mesic aquic argiudolls (56–74 cm) 3c (74–152 cm) alfisol locke fine sandy lka fine-loamy, mixed, superactive, mesic ap (0–23 cm) bt1 (23–36 cm) bt2 (36–61 cm) btk (61–94 cm) c 7 loam aquollic hapludalfs (94–152 cm) abbreviation: usda-nrcs, united states department of agriculture–natural resources conservation service 3"
+4,chatterjee et al.
+4,catena 201 (2021) 105190 table 3 proximal and remote sensing data used to predict soil properties.
+4,"sensor bands/arrays description spatial wavelength resolution pxrf beam-1 (0–40 kev), beam-2 (0–10 kev) soil spectra – – dualem- prp_half, hcp_half, prp_1m, hcp_1m apparent electrical conductivity (eca, ms m− 1) – – 1hs sentinel-2 b2, b3, b4, b5, b6, b7, b8, b8a, b11, b12 blue, green, red, red edge 1, red edge 2, red edge 3, 10 m–20 m 490 near infrared, red edge 4, short wave infrared-1, nm–2,200 nm short wave infrared-2 lidar elevation, analytical hill shading, slope, aspect, planiform curvature, digital elevation models (dems) ~2 m – profile curvature, convergent index, topographic wetness index, ls- factor, channel network base level, channel network distance, valley depth, relative slope position half of the sample locations using a partial least squares regression analysis."
+4,"two types of pc combinations were compared for the plsr (plsr) model. model built for sand, silt, clay, oc, and tn: (a) 40 pcs from the spectra of the pxrf spectra were preprocessed as follows: (a) smoothing and pxrf beam 1 (xrf40), (b) 13 pcs from the spectra of pxrf beam 2 (b) background removal and peak search."
+4,for smoothing savitzky and (xrf10).
+4,"a separate plsr model was built for ph which used 54 pcs golay (sg) polynomial filter was used (savitzky and golay, 1964)."
+4,"the from the spectra of pxrf beam 1 (xrf40), and 13 pcs from the spectra sg filter fits a local polynomial regression curve on the pxrf signal with of pxrf beam 2 (xrf10)."
+4,the use of pcs is very common in building soil specified window size and order of polynomial regression.
+4,"the pxrf spectroscopic models and selecting the most useful information from spectra of beam 1 (xrf40) were smoothed with a polynomial order of 2 sensor data (zhang and hartemink, 2019; ji et al., 2019). and a window size of 11 nm."
+4,the pxrf spectra of beam 2 (xrf10) were smoothed with a polynomial order of 2 and a window size of 7 nm.
+4,the 2.2.2.
+4,"electromagnetic induction (emi) savitzky golay function in the “prospectr” package (stevens et al., 2013) the apparent electrical conductivity (eca, ms m− 1) was obtained at was used in r version 3.6.1 (r core team, 2019). four different depths along the transect (fig. 4g, h) with a dualem-1hs the processed pxrf spectra (xrf40 and xrf10) were scaled to zero instrument (dualem inc., milton, on, canada)."
+4,it has four coil arrays sample mean and one sample standard deviation individually.
+4,"then a (0.5 m hcp, 1.0 m hcp, 0.5 m prp, and 1.0 m prp) provided by two coil principal component analysis (pca) was applied to extract the most spacing – approximately 0.5 and 1.0 m, along with two coil geometrics – important principal components (pcs) of each type of spectra which horizontal coplanar (hcp) and perpendicular (prp) at each spacing."
+4,the explained most of the variation (~90%) in the data.
+4,"the “prcomp” notations of hcp_half, hcp_1m, prp_half, and prp_1m represent eca function in r version 3.6.1 (r core team, 2019) was used for the pca measurements by different arrays and correspond to depths of fig."
+4,flowchart of the method used in this study.
+5,chatterjee et al.
+5,"catena 201 (2021) 105190 exploration (doe) of 0.8, 1.6, 0.3, and 0.5 m, respectively. 1∑n mae = |pi − oi | (2) n i=1 2.2.3."
+5,"sentinel-2 bands sentinel-2 is a wide-swath, high-resolution, multi-spectral imaging √̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅ ∑n (pi − oi )2 mission of the european union supporting the copernicus program for rmse = (3) monitoring land surfaces, including vegetation, soil, and water cover, i=1 n inland waterways, and coastal areas."
+5,it comprises two satel­ ⎡ ⎤2 lites–sentinel-2a (s2a) and sentinel-2b (s2b).
+5,"the level-1c products ∑n ( )( ) ⎢ o − o p − p ⎥ from sentinel-2 multi-spectral imager (msi) including several bands i=1 i i r2 = ⎢ )2 √̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅ ⎣√̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅ )2̅ ⎦ ⎥ (4) and ndvi for two years (2018–19) were computed at 10-m resolution ∑n ( ∑n ( o − o p − p from google earth engine (gee, gorelick et al., 2017) using the i=1 i i=1 i “copernicus/s2” image collection."
+5,the level-1c products included ⎡ ⎤ cloud masks to acquire cloud-free images.
+5,"the images were collected ∑n 2 ⎢ i=1 (pi − oi ) ⎥ during september in both the years of observations coinciding with the nse = 1 − ⎣∑ ( )2 ⎦, − ∞ ≤ nse ≤ 1 (5) n end of the growing season of maize in the study area."
+5,"remote sensing i=1 oi − o data were used previously for retrieving soil properties and mapping at different scales across the globe (gholizadeh et al., 2018; castaldi et al., where, pi and oi are model predicted values and observed values, 2016; paul et al., 2020). respectively, and ō and p‾ are the mean of the observed values and mean of n predicted values, respectively."
+5,2.2.4.
+5,"digital elevation models and terrain parameters in this study, we did not select the calibration and validation samples the dem of the study area was collected from the wisconsin based on the entire soil cores suggested by others (e.g."
+5,"chen et al., 2020)."
+5,department of natural resources with an approximately 2-m spatial this was mainly due to two reasons.
+5,"first, the soil of the study area was resolution (http://relief.ersc.wisc.edu/wisconsinview/form.php). heterogeneous in horizontal as well as in vertical directions (e.g. varying terrain parameters were calculated from the dem using saga gis, clay content between a and bt horizons)."
+5,"as such, selection of calibra­ including analytical hill shading, slope, aspect, planiform curvature, tion and validation datasets randomly would not necessarily lead to an profile curvature, convergent index, topographic wetness index, ls- over-estimation of model performance compared to that generated using factor, channel network base level, channel network distance, valley the entire profiles as calibration and validation datasets."
+5,"secondly, it depth, relative slope position."
+5,these terrain parameters were utilized was not the aim of this study to evaluate the spectral model uncertainty previously for producing digital soil maps at different scales across the across the field and with depth.
+5,"in this study, we would like to explore globe (behrens et al., 2014; schillaci et al., 2017; lacoste et al., 2014). how to combine remote sensing and proximal sensing data to map soil all the ancillary data (e.g."
+5,"dualem-1hs eca, terrain parameters, properties across the field."
+5,"as such, we would like to make sure the and sentinel-2) were interpolated to a 5 × 5 m grid using ordinary predicted soil properties at 50 sample locations from the pxrf were as kriging with local exponential variograms with a neighbor of 20–30 accurate as possible to be used for the following mapping process. points."
+5,"the kriging was done using vesper software (minasny et al., 2006)."
+5,we used the local ordinary kriging method to interpolate all the 2.4.
+5,predictions of soil properties at the field scale using proximal and ancillary covariates onto the same grid to make it more consistent and remote sensing data easy to interpret.
+5,"once the plsr models were established for 25 cores, soil properties 2.3."
+5,estimation of soil properties at the profile scale using pxrf spectra were predicted onto all the 50 sampling locations at different depths using multiple linear regression (mlr).
+5,"the established soil properties half of the samples (144 samples at 25 profiles) were analyzed for (except ph) were used to establish mlr models to predict soil properties sand, silt, clay, oc, and tn."
+5,all the samples were analyzed for ph.
+5,"a from the 50 locations across the whole field for decision-making. partial least squares regression (plsr) model was used to predict all the backward elimination was used to select the covariates from emi, soil properties from different combinations of principal components sentinel-2, terrain parameters, and soil depth until all the remaining (pcs) of pxrf spectra (40 kev + 10 kev)."
+5,all the samples were randomly covariates had a probability < 0.05.
+5,"the performance of the selected divided into training (75%) and validation (25%) datasets. 108 and 36 mlr model was then evaluated using leave-one-out cross-validation samples were used as training and validation datasets for modeling sand, using the “lm” function in r version 3.6.1 (r core team, 2019)."
+5,"the r2, silt, clay, oc, and tn, while 216 and 72 samples were used as training rmse, and me including mae, and nse were calculated for both the and validation datasets for estimating soil ph."
+5,the plsr models were calibration and validation processes.
+5,"once the mlr models were built using “pls” package in r version 3.6.1 (r core team, 2019)."
+5,"the established for all the six depths, soil properties (ph, sand, silt, tn, soil model was fitted with the “train” function and “pls” method in the caret depth, ap depth) were mapped across the whole field at two depths package (kuhn, 2008)."
+5,the training procedure was conducted on the (0–10 cm and 50–60 cm) with their standard errors (se) to emphasize calibration dataset and the performance was controlled by 10-fold cross- the top and sub-soil depths. validation and was repeated 10 times.
+5,the maximum number of pls latent vectors was set to be 30 and the best number of components was 2.5.
+5,delineation of management zones (mzs) selected by the smallest root mean squared error (rmse).
+5,"the coefficient of determination (r2), rmse, mean error (me), mean absolute error the maps of soil properties established from mlr models, remote (mae), and nash-sutcliffe efficiency (nse) were calculated for both the sensing products, terrain properties, and proximal sensed data were training and validation datasets to assess the performance of the plsr used for cluster analysis using jmp software (sas, 2020)."
+5,"k-means (km) models. clustering is a nonparametric and unsupervised classification technique, the equations of all the model performance indicators are given which is widely used for creating soil management zones (mzs) (tou and below: gonzalez, 1974; cambouris et al., 2006)."
+5,"to perform km clustering, euclidean distance was used as a distance matrix (bezdek, 1981)."
+5,"the 1∑n traditional ssurgo soil series map (fig. 4b) with 4 (k = 4) distinct soil me = (pi − oi ) (1) n i=1 series classes were compared with maps of mzs created using different combinations of proximal, remote sensing, and dem data."
+5,we tested 5
+6,chatterjee et al.
+6,"catena 201 (2021) 105190 seven approaches of cluster formation a) clustering using maps of soil divided into three categories: hardware/rental cost, preprocessing/ properties produced with all ancillary data (e.g., pfrf predicted data, analysis cost, and modeling/mapping cost."
+6,"the cost of laboratory anal­ sentinel-2 bands, emi, lidar-dem), b) clustering using proximal, ysis for each sample and labor charges was around 40 and 500 us dollars remote sensing data, and dem data (pss + rs + dem) without soil ($), respectively."
+6,"hence, for six depths and different soil properties (e.g., laboratory and pxrf data, c) clustering using remote sensing and dem ph, texture, oc, tn) it cost around $6,500 (25 locations × 6 depths × $ data (rs + dem) without proximal soil sensors, d) clustering using only 40 per sample + $500 = $6,500)."
+6,"the cost of the jmc soil sampling remote sensing (rs) data, e) clustering using only dem data, f) clus­ tubes with caps was $296."
+6,"the modeling cost was estimated to be $480. tering using only proximal soil sensors data (pss) came from emi sensor, therefore, the total cost incurred for this scenario was around $7,276. and g) clustering using a legacy soil map (ssurgo)."
+6,"the cost for proximal sensors (e.g., dualem-1hs, pxrf) hire, surveys, we compared dem from lidar and rs data from sentinel-2 sepa­ and analysis cost was around $1,400, whereas, ssurgo maps and rately and combined it with the pss because the lidar dem data are not remote sensing analyses costs were $214 and $200, respectively."
+6,the easily available.
+6,"multispectral remote sensing data such as sentinel-2 lidar-dem survey was done by the department of natural resources, are easily available and are related to many soil properties such as soil wisconsin, usa with the help of a manned aircraft, and the approximate organic carbon, soil mineralogy, and clay content (forkuor et al., 2018; cost to survey the 80-ha field was $1,400."
+6,"the hourly charges for un­ van der werff and van der meer, 2016; paul et al., 2020)."
+6,that is why we dergraduate and skilled graduate student hire were approximately $16 incorporated rs data with the pss and dem data (scenario b).
+6,"adding and $40, respectively."
+6,the detail of cost partitioning including the time the extra dataset (e.g.
+6,"rs from sentinel-2) would not involve significant taken (in man-hours) to complete each scenario has been presented in processing effort and cost, which will be compared with other scenarios table 8. for the cost-benefit analysis."
+6,we then compared all the approaches of clustering to evaluate the 3.
+6,results best approach of clustering in this site based on the sum of the within- class variance of different topsoil and subsoil properties of the avail­ 3.1.
+6,exploratory analysis of soil properties able soil samples in each mz and the costs of generating the mzs (see below).
+6,"in this study, the optimal number of mzs was set to 4 to be the dominant soil order of the experimental farm was mollisol and consistent with the major soil series from the legacy soil map."
+6,it should 43 pedons fell under this order and the main textural classes were silt be noted that methods exist to determine the optimal numbers of mzs loam and sandy loam (table 2).
+6,the major soil series was winnebago silt based on feature space (e.g.
+6,"hartigan and wong, 1979; mcbratney and loam (wnb2) (fig. 4b)."
+6,"the summary statistics of various soil properties moore, 1985) or soil properties from collected samples (e.g."
+6,huang measured at the sampling locations are shown in table 4.
+6,"the percent et al., 2014)."
+6,"as this was beyond the scope of this study, we would not sand, silt, and clay varied from 24.2 to 82.7, 4.7–49.2, and 0.8–39.7, evaluate the effect of cluster numbers on the results. with a mean value of 56.9, 25.8, and 18.1%, and a standard deviation (sd) of 12.6, 9.1, and 6.3, and coefficient of variation (cv) of 0.22, 0.35, and 0.36%, respectively."
+6,"soil ph across the farm ranged from 4.7 to 8.4, 2.6."
+6,"costs of surveys/sensors/measurements with a mean, sd, and cv (%) of 6.6, 0.8, and 12, respectively."
+6,"the organic carbon (oc) and total nitrogen (tn) varied between 0.1 and 8.7 the cost of analyses was estimated empirically: field soil sampling and 0.03–0.26%, with a mean value of 1.12 and 0.11%, sd of 1.11 and and laboratory measurements > proximal and remote sensing surveys > 0.06, and cv (%) value of 1 and 0.5, respectively."
+6,the a horizon (ap) remote sensing measurement > ssurgo maps.
+6,"out of the total profile depth, which is the most important soil horizon for crop growth and samples (~50 pedons), half of the profiles (~25 pedons) samples were influence soil physicochemical properties substantially, varied from 10 analyzed in the laboratory for six depths (e.g., 0–10, 10–20, 20–30, to 55 cm, with a mean, sd, and cv(%) value of 26.6, 9.3, and 34.9, 30–40, 40–50, and 50–60 cm)."
+6,the cost for different scenarios was fig.
+6,"soil properties measured at 25 locations and pxrf predicted soil properties at another 25 locations (a), and the particle size classes (usda) of the measured 144 samples (at 25 locations) used in this study (b)."
+6,"oc, organic carbon; tn, total nitrogen."
+7,chatterjee et al.
+7,catena 201 (2021) 105190 respectively.
+7,"total soil depth till bedrock was also measured which performance of the mlr model is presented in table 6 based on the ranged from 22 to 87 cm, with a mean, sd, and cv (%) value of 69.2, leave-one-out cross-validation approach."
+7,"as shown in table 6, the 15.9, and 23, respectively. covariates selected in the mlr model can be divided into three cate­ the details of pearson correlation coefficients of measured soil gories, including apparent eca data from the emi sensor (dualem 1- properties and ancillary covariates for topsoil and subsoil are presented hs) at four different channels (prp_half, hcp_half, prp_1m, in appendix tables a and b, and the heat maps of pearson correlation hcp_1m), terrain parameters from digital elevation models (slope, coefficients are illustrated in fig."
+7,"from appendix table a it can be elevation, aspect, hillshade, planc, profc, twi, lsf, cnbl, cnd, rsp, shown that there were significant (p < 0.001) correlations between sand ci, vd), sentinel-2 bands (b2, b3, b4, b5, b6, b7, b8, b8a, b11, b12, and and silt (r = − 0.92), sand and clay (r = − 0.91), sand and oc (r = − 0.75), ndvi)."
+7,a detailed description of the covariates is depicted in table 3. and sand and tn (r = − 0.80) for the topsoil (~0–10 cm).
+7,"for subsoil table 6 shows that the mlr model was able to map six soil properties (~50–60 cm) significant correlation (p < 0.001) were found between at different depths, however performed the best for topsoil depth (0–10 sand and silt (r = − 0.53), sand and clay (r = − 0.67), sand and tn (r = cm)."
+7,"for topsoil depth (0–10 cm) the r2 and rmse values for mlr − 0.74), sand and ap depth (r = − 0.51), silt and oc (r = 0.75), silt and predicted soil properties were ph (r2 = 0.47, rmse = 0.60), sand (r2 = tn (r = 0.84), clay and oc (r = − 0.55), and oc and tn (r = 0.58)."
+7,"0.67, rmse = 6.10%), silt (r2 = 0.56, rmse = 4.10%), tn (r2 = 0.66, rmse = 0.02%), soil depth (r2 = 0.55, rmse = 28.95 cm) and ap depth 3.2."
+7,"prediction of soil properties at the profile scale using pxrf spectra (r2 = 0.73, rmse = 5.81 cm)."
+7,"for subsoil depth (50–60 cm) the r2 and rmse values for mlr predicted soil properties were – ph (r2 = 0.52, out of 50 pedon samples that were collected from different locations rmse = 0.59), sand (r2 = 0.35, rmse = 9.05%), silt (r2 = 0.35, rmse across the field by using clhs scheme, about half of the samples were = 7.26%), tn (r2 = 0.22, rmse = 0.03%), soil depth (r2 = 0.55, rmse analyzed in the lab and the rest were predicted at the profile scale using = 28.88 cm) and ap depth (r2 = 0.73, rmse = 5.67 cm)."
+7,the overall preprocessed pxrf soil spectra with plsr technique.
+7,"the soil properties mlr performance for all the six depth– ph (r2 = 0.52, rmse = 0.54), that were predicted using a plsr model, are sand, silt, clay, oc, and tn, sand (r2 = 0.60, rmse = 6.77%), silt (r2 = 0.48, rmse = 5.29%), tn and the pxrf spectra were used as covariates."
+7,"the performance of the (r2 = 0.56, rmse = 0.03%), soil depth (r2 = 0.55, rmse = 28.79 cm) plsr models established to predict soil properties using the pxrf and ap depth (r2 = 0.72, rmse = 5.81 cm)."
+7,the respective maps of spectra is presented in table 5.
+7,"the plsr model performed with higher different covariates (e.g., ndvi, slope, elevation, profile curvature, accuracy for all the soil properties, e.g., sand (r2 = 0.85, rmse = planform curvature, apparent eca, and twi), the predicted soil prop­ 4.80%), tn (r2 = 0.82, rmse = 0.02%), oc (r2 = 0.82, rmse = erties at two different depths including their standard error maps are 0.43%), clay (r2 = 0.79, rmse = 2.89%), ph (r2 = 0.69, rmse = 0.45), illustrated in figs."
+7,"4–7. and silt (r2 = 0.67, rmse = 5.05%) for calibration dataset."
+7,"in terms of validation datasets, the plsr model showed a good performance, e.g., 3.4."
+7,"delineation of zones and cost-benefit analysis sand (r2 = 0.81, rmse = 5.83%), clay (r2 = 0.64, rmse = 3.74%), tn (r2 = 0.74, rmse = 0.03%), oc (r2 = 0.73, rmse = 0.71%), silt (r2 = fig. 8 shows the seven cluster maps (k = 4) that were identified in the 0.68, rmse = 5.57%), clay (r2 = 0.64, rmse = 3.74%), and ph (r2 = experimental field for the delineation of management zones (mzs)."
+7,"0.51, rmse = 5)."
+7,"for both the calibration and validation datasets, the different suites of sensor data were used to assess the efficacy of creating nse values for all the soil properties were > 0.60 except for soil ph (nse mzs."
+7,the sum of within-class variance (σ2w) for predicting various soil < 0.60) for the validation dataset. properties using cluster maps is presented in table 7.
+7,"a small σ2w in­ hence, it can be interpreted that pxrf spectra can be used for dicates the presence of overall more homogenous soil properties within building predictive models (e.g., plsr) for predicting some key soil each mz for the cluster map."
+7,it can be interpreted from table 7 that σ2w properties.
+7,we used this approach to gap-fill our unmeasured dataset differed significantly given the choice of sensor combination.
+7,it was and applied them to the measured datasets for consistency in the observed that only measured soil properties alone could be used effec­ following analysis.
+7,"the distribution of different soil properties measured tively for delineating the mzs for topsoil (~0–10 cm) as the σ2w for and predicted by plsr is illustrated in fig. 2 including the usda soil different soil properties (e.g. sand, silt, tn) is the smallest (σ2w sand = textural triangle for the measured soil samples."
+7,255.9 %2; σ2w silt = 99.4 %2; σ2w tn = 3.6 × 10− 3 %2) compared to other combinations of sensors.
+7,"whereas, the combination of proximal 3.3."
+7,"prediction of soil properties across the field using proximal and sensor, remote sensing, and dem data (pss + rs + dem) could be remote sensing data effective for subsoil (~50–60 cm) as the σ2w values were the smallest as compared to other combinations of sensors at the same depth, suggest­ once soil properties were predicted onto all the 50 profiles, we used ing that this combination is effective for creating mzs for some subsoil other covariates from proximal (emi) and remote sensing (sentinel-2 properties (e.g., ph, silt, and tn). bands and dem) to build multiple linear regression (mlr) models to table 7 shows that the ssurgo map is not enough to effectively predict all the soil properties (e.g. ph, sand, silt, tn at different profile delineate the mzs in the study area, suggesting the importance of using depths and soil depth, ap depth) across the entire 80-ha field."
+7,"the other data sources that are easy to collect (e.g., remote sensing and dem table 4 summary statistics of soil properties measured at different depths across the field."
+7,soil properties n min.
+7,mean median max.
+7,"sem cv (%) skewness kurtosis ph 288 4.7 6.6 6.4 8.4 0.8 0.1 12 0.36 − 0.41 sand (%) 135 24.2 56.9 57.9 82.7 12.6 1.1 0.2 − 0.42 − 0.17 silt (%) 135 4.7 25.8 25.8 49.2 9.1 0.8 0.4 0.13 − 0.04 clay (%) 135 0.8 17.3 18.1 39.7 6.3 0.5 0.4 0.13 1.09 oc (%) 144 0.1 1.1 0.8 8.7 1.1 0.1 1 3.90 21.38 tn (%) 72 0.03 0.1 0.1 0.3 0.1 0 0.5 0.51 − 0.32 soil depth (cm) 50 22 69.2 74 87 15.9 2.3 23 − 0.91 0.34 ap depth (cm) 50 10 26.6 25.5 55 9.3 1.3 35 0.58 0.58 abbreviations: n, number of soil samples measured; oc, organic carbon; tn, total nitrogen; min., minimum; max., maximum; std."
+7,"dev., standard deviation; sem, standard error of mean; cv, coefficient of variation."
+8,chatterjee et al.
+8,catena 201 (2021) 105190 fig.
+8,"heat maps showing pearson correlation coefficients among measured soil properties and ancillary covariates for 0–10 cm soil depth (a), and 50–60 cm soil depth (b)."
+8,"for abbreviations of the covariates, refer to tables 3 and 4."
+8,"maps of different land surface features including dualem transect and field boundary (a), soil series with sampling location (b), mean normalized difference vegetation index (ndvi) of 2018 and 2019 (c), slope (d), profile curvature (e), elevation of the field (f), dualem 1.0 prp (g), and dualem 1.0 hcp (h), topographic wetness index (twi) (i), and planform curvature (j). data)."
+8,"however, collecting soil samples and using proximal sensors can soil maps at two different soil depths."
+8,"for topsoil, the highest accuracy of incur an additional cost that could be weighed when comparing the cost- cluster maps is associated with measured soil properties from a labo­ benefit analysis."
+8,table 8 shows the cost of the sensors and surveys for ratory and the ssurgo maps produced the least accurate cluster maps measurements of soil properties at laboratory and field surveys.
+8,the (fig.
+8,"when lab-based soil data were not available, the combination of highest cost of analysis was for field soil sampling and laboratory pss, rs, and dem still performed better than the use of rs + dem and analysis (~$7,276), followed by pss + rs + dem data (~$3,000), rs + legacy soil maps (ssurgo)."
+8,"when single sensor data were considered, dem ($1,600), dem ($1,400), pss ($1,400), ssurgo maps (~$214), rs and dem performed better than pss and ssurgo data."
+8,"this high­ and rs data ($200). lights the importance of performing ground-based pss surveys, partic­ fig. 9 illustrates the costs of different surveys and accuracies of ularly when soil sampling is not affordable. cluster maps for different combinations of sensors including ssurgo however, for subsoil, the highest accuracy in cluster maps was 8"
+9,chatterjee et al.
+9,catena 201 (2021) 105190 table 5 performance of the partial least squares regression (plsr) models established to predict soil properties using the pxrf spectra.
+9,"validation soil properties no. elem. n r2 me mae rmse nse n r2 me mae rmse nse ph 4 202 0.69 0.00 0.36 0.45 0.69 86 0.51 0.08 0.43 0.54 0.48 sand 4 96 0.85 0.00 3.43 4.80 0.85 39 0.81 − 0.56 4.37 5.83 0.80 silt 3 96 0.67 0.00 3.75 5.05 0.67 39 0.68 0.49 4.26 5.57 0.67 clay 4 96 0.79 0.00 2.16 2.89 0.79 39 0.64 0.28 3.16 3.74 0.61 oc 5 102 0.82 0.00 0.32 0.43 0.82 42 0.73 0.03 0.44 0.71 0.70 tn 4 51 0.82 0.00 0.02 0.02 0.82 21 0.74 − 0.00 0.02 0.03 0.73 abbreviations: no. elem., number of elements used in the optimal partial least squared regression; n, number of samples; r2, coefficient of determination; rmse, root mean square error; me, mean error; mae, mean absolute error; nse, nash-sutcliffe efficiency (-inf <= nse <= 1)."
+9,"table 6 leave-one-out cross-validation results for the multiple linear regression (mlr) models built to predict various soil properties at all six depths (0–60 cm), topsoil (0–10 cm) and subsoil (50–60 cm)."
+9,for abbreviations of the covariates used in mlr models refer to table 3.
+9,"soil equation all six depths 0–10 cm 50–60 cm properties all six depths r2 me rmse r2 me rmse r2 me rmse ph ph = 1557.35–0.89 × depth + 0.07 × h_half − 0.63 × p_half − 0.15 × h_1 + 0.52 0.02 0.54 0.47 0.13 0.60 0.52 0.12 0.59 0.22 × p_1 − 214.97 × elev − 999.46 × slope − 0.52 × twi + 0.74 × lsf + 214.98 × cnbl + 214.93 × cnd + 0.007 × s2_b1 sand sand = 131.28–11.14 × depth + 1.18 × h_half − 10.08 × p_half − 1.19 × h_1 0.60 − 0.05 6.77 0.67 − 1.90 6.10 0.35 − 1.67 9.05 − 3209.47 × elev + 0.55 × aspect − 0.28 × ci − 1.25 × twi + 3208.97 × cnbl + 3208.34 × cnd + 3.43 × vd + 65.90 × rsp − 0.04 × s2_b3 + 0.013 × s2_b4 + 0.02 × s2_b5 − 0.019 × s2_b7 + 0.02 × s2_b9 silt silt = -132.83 + 2.51 × depth − 0.89 × h_half + 15.96 × p_half + 1.66 × h_1 − 0.48 0.00 5.29 0.56 0.30 4.10 0.35 0.21 7.26 2.40 × p_1 + 0.50 × elev − 0.32 × aspect + 1.4 × 10− 7 × planc − 1.93 × twi + 6.17 × lsf − 4.52 × vd − 66.66 × rsp + 0.03 × s2_b1 + 0.004 × s2_b7 total n tn = -0.16 + 0.10 × depth − 0.006 × h_half + 0.04 × p_half + 0.004 × h_1 + 0.56 0.00 0.03 0.66 0.00 0.02 0.22 − 0.00 0.03 3.4 × 10− 10 × profc + 0.006 × lsf + 8 × 10− 4 × cnbl − 6 × 10− 5 × s2_b5 − 3 × 10− 5 × s2_b6 + 8.09 × 10− 5 × s2_b7 soil depth soil depth = -792.51 + 3.36 × h_half − 125.90 × p_half − 6.54 × h_1 + 28.43 0.55 − 0.12 28.79 0.55 0.71 28.95 0.55 − 2.35 28.88 × p_1 + 30.21 × hillshade + 23 × 10− 6 × planc − 4.95 × ci − 24.30 × vd − 397.45 × rsp + 2301.64 × ndvi − 1.25 × s2_b2 + 2.89 × s2_b3 − 0.92 × s2_b4 + 0.66 × s2_b5 − 0.12 × s2_b7 − 0.37 × s2_b8 ap depth ap depth = -9356.31–0.50 × p_1- 0.89 × elev − 2.52 × hillshade + 6138.69 × 0.72 0.01 5.81 0.73 0.12 5.81 0.73 − 0.34 5.67 slope + 8 × 10− 7 × planc − 2 × 10− 7 × profc − 3.69 × ci − 5.02 × lsf − 0.04 × s2_b1 − 0.28 × s2_b2 + 0.10 × s2_b3 + 0.11 × s2_b4 + 0.04 × s2_b5 + 0.003 × s2_b6 + 0.084 × s2_b7 − 0.08 × s2_b8 − 0.10 × s2_b9 + 0.20 × s2_b10 observed when a combination of proximal and remote sensing data and 0.85 and rmse of 0.22 and 0.02% for total c and tn, respectively, using dem (~pss + rs + dem) data were considered and the least accurate pxrf spectra with a random forest model, whereas, o’rourke et al. cluster maps were produced when only dem data was used."
+9,"this sug­ (2016) found pxrf spectra effective for prediction of tc (r2 = 0.76, gests that for delineation of subsoil properties a combination of proximal rmse = 0.52 g/kg), clay (r2 = 0.77, rmse = 7.71 g/kg), sand (r2 = and remote sensing and terrain (dem) data could be useful in places 0.79, rmse = 7.96 g/kg), and ph (r2 = 0.43, rmse = 0.65) with a compared to legacy soil maps (ssurgo) and the use of rs and dem data cubist model for validation dataset. only."
+9,"when single sensor data were considered, pss performed better plsr is one of the most popular methods that is widely used for than rs, dem, rs + dem, and ssurgo data for subsoil."
+9,"hence, pss data spectral calibration and prediction of soil physicochemical properties (from the emi survey) could be useful for delineation of subsoil prop­ with a high degree of accuracy and precision (wold et al., 1983; soriano- erties as it had a larger depth of exploration."
+9,"however, the combination disla et al., 2014) and was used in this study."
+9,"in our study, the pxrf of pss and rs + dem outperformed the mzs generated with lab-based performed well in predicting sand (r2 = 0.81), silt (r2 = 0.68), and clay soil data."
+9,this indicates that mlr models of subsoil may not be content (r2 = 0.64) in the validation dataset (table 5).
+9,"soil texture or required when their errors were large and that the unsupervised clus­ particle size distribution characterizes a unique combination of primary tering of pss + rs + dem may be adequate to delineate subsoil and secondary minerals, reflecting the elemental composition of the soil variations. which in turn influences the pxrf spectral composition (zhu et al., 2011; o’rourke et al., 2016)."
+9,"in a similar study, stockmann et al."
+9,(2016) 4.
+9,discussion showed that pxrf spectra can be used for predicting sand (r2 = 0.79) and clay content (r2 = 0.77).
+9,the moderate performance for clay and silt 4.1.
+9,use of pxrf for predicting soil properties may be attributed to the masking effect due to the large particle size distribution for sand content in this particular study.
+9,"however, the pxrf the pxrf showed potential in rapid prediction of sand, tn, oc, silt, sensor may not accurately detect smaller variations within each specific clay, and soil ph with moderate accuracies."
+9,previous studies have textural class.
+9,"for more accuracy in soil texture prediction, other labo­ employed pxrf spectra for predicting soil physical (clay, sand, and silt) ratory methods (e.g., pipette or hydrometer methods) or laser scanning and chemical properties (ph, total c, and tn, cec, and gypsum content) can be employed."
+9,"(sharma et al., 2015; wang et al., 2015; weindorf et al., 2016; zhang similarly, organic carbon (oc) and total nitrogen (tn) also have and hartemink, 2019)."
+9,"for example, wang et al. (2015) reported r2 of been well predicted from pxrf spectra."
+9,this might be due to spectral 9
+10,chatterjee et al.
+10,catena 201 (2021) 105190 fig.
+10,"maps of different soil properties and their standard error at two depths including sand content at 0–10 and 50–60 cm (a, b), standard error of sand content at 0–10 and 50–60 cm (c, d), silt content at 0–10 and 50–60 cm (d, e), standard error of silt content at 0–10 and 50–60 cm (g, h). sensitivity due to carbon and nitrogen content in the soil."
+10,"the prediction approach, which could also improve the overall model performance accuracy for carbon and nitrogen can be improved by combining pxrf (o’rourke et al., 2016)."
+10,"it is also imperative to include different other with other sensors such as mid-infrared (mir) which has more absorp­ soil-forming factors (e.g. terrain parameters, parent materials, and soil tion features due to fundamental vibrations of molecules (viscarra depth) into the predictive model as these factors influence soil ph rossel et al., 2006)."
+10,"similar observations were also reported by wang significantly (teixeira et al., 2020)."
+10,in this study the pattern of ph at et al.
+10,"(2015), o’rourke et al. (2016), and zhang and hartemink (2019). topsoil and subsoil mostly attributed to patterns of terrain parameters (e."
+10,"only a few promising results were reported for the prediction of soil g. slope, twi, and elevation) and soil pedological properties (e.g. soil ph due to its indirect relationship with the pxrf spectra but the cor­ depth, ap thickness) which we discussed in section 4.2 in detail and can relation with other properties (stenberg et al., 2010)."
+10,"in our study, the be found in appendix table a and b."
+10,we also observed a narrow range of soil ph was poorly predicted with pxrf spectra (validation r2 = 0.51). soil ph in the study area which may be attributed to the poor perfor­ the weaker prediction accuracy with soil ph may be attributed to the mance of the spectrum model.
+10,"for better accuracy in soil ph estimation complex nature of the dissociated h+ ion concentration/activity traditional laboratory methods (e.g., ion-selective electrodes, ion- attributed to the expression of ph."
+10,the poor performance of the pxrf sensitive field-effect transistors) can be used. spectra for the prediction of soil ph has been reported by some re­ one significance of this study is the ability to predict depths of ap searchers (e.g.
+10,"o’rourke et al., 2016; teixeira et al., 2018; teixeira horizons and soil using a combination of proximal and remote sensing et al., 2020)."
+10,"however, many researchers used pxrf elemental data to data."
+10,similar studies were identified with the use of emi data along a predict soil ph.
+10,"for example, sharma et al. (2014) used pxrf elemental hillslope for estimating soil erosion (e.g."
+10,"brus et al., 1992; doolittle data in geochem mode to predict ph with reasonable accuracy (r2 = et al., 1994; sudduth et al., 1995)."
+10,"however, it is still worth further 0.77, rmse = 0.68), however in our case the elemental data performed investigating the potential of using emi, remote sensing, and/or dem for poorly than the spectra data."
+10,similar observations were reported by ap horizon and soil depth delineation given the importance of these zhang and hartemink (2019) who found the poor performance of pxrf variables in soil fertility and hydrological modeling. elemental data for ph prediction (r2 = 0.12 and rmse = 0.62 for validation dataset).
+10,"in another study, teixeira et al. (2018) used pxrf spectra to predict soil ph with an r2 of 0.85."
+10,"similarly, o’rourke et al."
+10,mapping depth-specific soil physiochemical properties at the field (2016) predicted soil ph (r2 = 0.60 and 0.43 for two datasets) with scale using proximal and remote sensing data pxrf spectra.
+10,"this performance of the prediction accuracy for soil ph can be improved if other auxiliary predictor variables are included in the the maps of soil physical properties (e.g., sand and silt content) at predictive model."
+10,"for example, sharma et al. (2015) included soil two different depths (e.g., 0–10, and 50–60 cm) and the standard error organic matter as a predictor for soil ph."
+10,sensor data fusion is another (se) are depicted in fig.
+10,"sand content varied significantly throughout the field; however, the northeast and south portion of the field 10"
+11,chatterjee et al.
+11,catena 201 (2021) 105190 fig.
+11,"maps of different soil properties and their standard error at two depths including total ph at 0–10 and 50–60 cm (a, b), standard error of ph at 0–10 and 50–60 cm (c, d), percent total nitrogen at 0–10 and 50–60 cm (d, e), standard error of percent total nitrogen at 0–10 and 50–60 cm (g, h). contained < 45% sand at both depths of interest."
+11,"the se maps of sand ap horizon depth, and ndvi (appendix table a)."
+11,"at the subsoil depth, content at both depths showed a different trend where maximum se soil ph was negatively correlated with clay content, soil depth, ndvi, (>2.4%) was observed in the grass waterways or less elevated areas used terrain parameters (e.g., twi, vd), and positively correlated with oc, as drainage passage."
+11,"the distribution of sand across the field depends on and some terrain parameters (e.g., slope, elevation, cnd, and rsp) many factors such as silt and clay content, elevation, slope, soil depth (appendix table b)."
+11,"the pattern of ph and se of ph at both the soil and ap horizon depth, vegetation, the curvature of land (planiform and depths are mostly attributed to patterns of terrain parameters (e.g., profile curvature) which can be visualized from fig."
+11,"from appendix slope, twi, and elevation) and soil pedological properties (e.g., soil table a and fig. 3, it can be seen that sand content of topsoil was depth, ap thickness)."
+11,"the se of soil ph was larger in grass ways strips significantly negatively correlated with silt, clay, oc, tn, and apparent and low elevated areas which follows the same pattern of some terrain eca data, and positively correlated with slope, cnd, vd, and rsp."
+11,"at the parameters (e.g., elevation, slope, twi)."
+11,"similar observations were subsoil depth, the percent sand content was significantly negatively recorded with the maps of tn and se of tn at both the soil depths."
+11,"the correlated with silt, clay, oc, tn, ap horizon depth, apparent eca data, higher ph at the elevated locations might be attributed to the effects of twi, and lsf (appendix table b)."
+11,"the larger se values of sand in the irrigation and rainfall washing away the acid cations from upslope to the grass ways (fig. 5) for both the depths may be attributed to the similar downslope region which is supported by larger twi, soil depth, and ap patterns of terrain parameters (e.g., twi, slope) which played a major thickness at the strips of grass ways."
+11,"previous studies have shown that in role in the distribution of sand content across uneven terrain (krav­ depressed terrain features (e.g., valley bottom and grass ways) soils are chenko and bullock, 2000)."
+11,similar patterns were observed with the silt richer with nutrients and water than on slopes and upland features content and se maps of silt at both depths (fig.
+11,"multiple studies have (hook and burke, 2000). demonstrated that the soil particle size fractions (e.g., sand and silt pedological properties (e.g., soil depth, ap horizon thickness) also content) have a strong relationship with the topographic features such as showed a distinct pattern at the study area which can be visualized from slope, elevation, and surface curvature (kreznor et al., 1989; seibert the maps of soil depth and ap depth including their se maps in fig."
+11,"it et al., 2007; laganiere et al., 2010; nie et al., 2019)."
+11,"correlations be­ can be shown that the ap depth was higher in the grass ways and strips tween soil particle size fractions and topography can also be caused by and areas with lower elevation (e.g., northeast side of the field)."
+11,"from the management practices (e.g., mulching, irrigation, and fertilizer appendix table a, it can be shown that the ap horizon depth was application) that have important roles in the distribution of soil water, positively correlated with twi, lsf, and vd and negatively correlated oc, and tn in crop fields (chatterjee, 2014; chatterjee et al., 2016). with slope, elevation, cnd, and rsp."
+11,"the thickness of the ap horizon maps of soil chemical properties (e.g., ph and tn) including their se corresponds to the history of soil formation and management in this maps are illustrated in fig."
+11,"the pattern of soil ph at topsoil showed a study area, in which many pedologic and tillage processes (e.g., illuvi­ significant positive correlation with some terrain parameters (e.g., ation, eluviation, erosion, tillage, vegetation) might be attributed to elevation, slope, and cnbl) and a negative correlation with soil depth, such patterns."
+11,"in general, the terrain properties (e.g., slope, elevation, 11"
+12,chatterjee et al.
+12,catena 201 (2021) 105190 fig.
+12,"maps of ap horizon depth (a) and standard error of ap horizon depth (b), soil depth (c), and standard error of soil depth (d)."
+12,"twi, vd) played a major role in determining the thickness of the ap calculated the sum of within-class variance (σ2w) for different sources of horizon."
+12,similar observations were made in the case of total soil depth covariates (table 7).
+12,we found that the σ2w for predicting various soil (till bedrock) which has a significant positive correlation with ap ho­ properties using clustering maps generated with a different combination rizon depth.
+12,the larger se of ap and soil depth maps in the strips and of input data varied for different soil properties and on the choice of grass ways may be attributed to higher values of those covariates and sensor.
+12,"this could be attributed to errors that might be introduced and terrain parameters (e.g., slope and twi) in those regions."
+12,previous propagated with covariates usage during the clustering process which studies have shown that soil depth is mostly conditioned by geomor­ resulted in some uncertainty in the cluster maps.
+12,"each time a new source phological and topographical features such as slope (delmonaco et al., of secondary data are used for clustering there is a chance of some errors 2003; chan et al., 2019), hillshade (marques and mora, 1992), twi (lee introduced along the clustering process. and ho, 2009), elevation (saulnier et al., 1997), and curvature (heim­ errors in digital maps are mostly originated from the choice of sath et al., 1997). models, covariates, laboratory analysis, and position errors due to gps (heuvelink et al., 2007; nelson et al., 2011)."
+12,in similar studies with error analysis various sources of errors were reported for using emi survey 4.3.
+12,"cost-benefit analysis (wilson et al., 2005; sudduth et al., 2001; huang et al., 2015), dem and terrain characteristics (skidmore, 1989; chaplot et al., 2006; bishop to understand the accuracy of soil management zones (mzs), we 12"
+13,chatterjee et al.
+13,catena 201 (2021) 105190 fig.
+13,"cluster maps using soil properties maps (a), pss + rs + dem (b), rs + dem (c), only rs (d), only pss (e), only dem (f), and ssurgo database (g)."
+13,"table 7 sum of within-class variance for predicting various soil properties using clustering maps generated with different combination of input data, including topsoil and subsoil property maps, proximal soil sensing (pss), remote sensing (rs), and digital elevation model (dem), as well as the ssurgo soil map."
+13,soil 0–10 cm 50–60 cm properties soil pss + rs + rs dem pss ssurgo soil pss + rs + rs dem pss ssurgo \input data properties rs + dem properties rs + dem dem dem ph 1.64 1.59 2.09 2.16 2.76 2.81 2.54 2.14 1.79 2.16 2.33 3.00 3.21 2.91 sand (%2) 255.9 456.7 434.4 347.4 523.7 314.3 475.2 290.6 378.8 453.2 368.8 586.6 367.9 452.7 silt (%2) 99.4 156.3 178.0 131.7 168.9 138.8 170.3 350.9 279.4 364.6 413.7 226.8 245.5 283.2 tn (%2) 3.6 £ 5.5 × 4.9 × 5.0 £ 6.2 £ 4.7 £ 5.5 × 5.0 × 4.2 × 5.3 × 6.5 £ 4.0 × 4.0 £ 4.3 × 10¡3 10− 3 10− 3 10− 3 10− 3 10− 3 10− 3 10− 3 10− 3 10− 3 10− 3 10− 3 10¡3 10− 3 soil depth 7411.6 11117.9 6878.7 7008.5 5922.9 9670.1 6692.2 – – – – – – – (cm2) ap depth 421.7 433.9 481.3 418.7 1045.5 573.2 446.5 – – – – – – – (cm2) count (n) 3 1 0 1 1 0 0 1 2 0 0 0 1 0 note: the bold numbers indicate the minimum sum of within-class variance across different combinations of sensor data.
+13,"count (n) = number of times the sum of within-class variance recorded minimum for different soil properties and combination of sensor and surveys. et al., 2006), interpolation methods (carrara et al., 1997; xie et al., γ-ray spectrometry data) followed by modeling error."
+13,"each sensor has its 2011), and remote sensing data (bishop and mcbratney, 2001; latifovic sensitivity and calibration errors."
+13,"remotely sensed data are more error- and olthof, 2004). prone than proximally sensed data."
+13,"nevertheless, empirical methods a trade-off exists between the accuracy of maps and the cost of (spectral models) used in digital soil mapping purposes also have errors, collecting data."
+13,"there is uncertainty associated with every approach to which can be quantified by using different matrices (e.g., rmse, mae, building models that propagate through the maps of soil properties."
+13,the and me).
+13,"the larger errors in spectral models may be attributed to the laboratory measured soil properties maps are more accurate as lack of data; therefore, collecting more pxrf spectra data from a diverse compared to sensor derived (e.g., emi, rs, dem) maps as they are less set of soil samples will improve the model performance."
+13,"therefore, prone to errors."
+13,"for example, huang et al. (2015) analyzed the error future work is required to further address the uncertainty and errors budget for soil salinity mapping using various ancillary covariates and associated with each sensor data, sampling schemes, and modeling found that larger errors were attributed to the input errors (e.g., dem, methods for building predictive models and subsequent map-making 13"
+14,chatterjee et al.
+14,table 8 cost of the sensor and surveys for measurements of soil properties at laboratory and field surveys.
+14,"scenarios hardware /rental preprocessing modeling total time accuracy of cluster maps advantages disadvantages cost /analysis cost cost cost us dollars ($) man 0–10 cm 50–60 cm hrs soil properties 296 6,500 480 7,276 66 high intermediate i) very accurate, detail, and have high i) too costly, labor-intensive, time- high resolution consuming ii) can delineate subsoil properties ii) need site-specific calibration effectively pss + rs + 1,500 1000 500 3,000 60 intermediate high i) no need for local calibration i) relatively costly to implement dem high ii) can delineate subsoil properties ii) associated with higher error rs + dem 500 500 600 1,600 44 low low i) cost effective i) cannot delineate subsoil properties, ii) ii) no need of local calibration larger error rs 100 100 200 4 intermediate low i) no need for local calibration i) coarse resolution 14 – high ii) allows repetitive coverage for a large ii) associated with higher error area ii) cannot delineate subsoil properties iii) relatively cheap dem 500 400 500 1,400 40 intermediate low i) high-resolution data i) relatively expensive high ii) can delineate terrain features of the ii) associated with larger error landscape pss 500 600 300 1,400 16 low intermediate i) allows a larger number of measurements i) relatively costly to implement, high ii) can delineate subsoil properties ii) sensor calibration issue iii) data collection is relatively easy, rapid iii) results are indirect, semi-quantitative, and noninvasive and site-specific ssurgo – 64 150 214 4 low low i) cost effective i) higher uncertainty, can lead to large ii) fast and easy to implement errors ii) include subjective boundaries, iii) low accuracy note: the dualem and pxrf sensor rental costs ($) was considered in the cost of the survey, not the actual costs of the sensors."
+14,catena 201 (2021) 105190
+15,chatterjee et al.
+15,catena 201 (2021) 105190 fig.
+15,"schematic diagram of costs of different surveys and respective accuracies of cluster maps generated using a different combination of proximal and remote sensors or legacy soil maps (ssurgo) for soil mapping at 0–10 cm (a), and 50–60 cm (b) depths."
+15,"for the magnitude of cost and accuracy, refer to table 8."
+15,"(heuvelink et al., 2007; malone et al., 2011; huang et al., 2015). laboratory measurements of soil properties provided the highest accu­ from table 8 and fig. 9 it can be observed that the most accurate racy of the mzs maps, however, the cost of measurements was also the cluster maps (mzs) for topsoil can be generated only using measured soil highest."
+15,"contrastingly, for the lower depth, the combination of proximal property maps, however, it is the most costly way as compared to other sensors, dems, and remote sensing data provided the highest accuracy data sources."
+15,"in areas where the laboratory measurements are not viable of the mzs cluster maps with a moderate cost of surveys. economically, the other cheap ancillary data can also be used for similar it can be concluded that pxrf spectra can be useful for effective exercises, however, it has a trade-off in accuracy level and errors of prediction of key soil properties (e.g., sand, tn, oc, silt, clay) at maps."
+15,"in this study, it is observed that for subsoil depth the combination different soil depths, and a combination of the different sensors provides of proximal and remote sensing data including dem data produced an effective way to delineate soil management zones that are useful for minimum σ2w and maximum accuracy as compared to other ways of decision-making, resource management, and ecological monitoring and cluster analysis."
+15,"hence, if end-users want affordable soil surveys then modeling."
+15,"further research work is needed for understanding error they may use these maps with some cautions. propagation in multi-sensor data fusion to improve the prediction ac­ error quantification and uncertainty analysis are important for all curacy for important soil properties at the field scale. possible ways of generating cluster maps, nevertheless, the decision depending on the purpose of such maps and perspectives of mapmakers and end-users (malone et al., 2011)."
+15,"in this study, we found that the declaration of competing interest ssurgo maps are cheaper but their accuracy is inferior among all the other approaches (table 7)."
+15,"from table 8 it can be claimed that for an the authors declare that they have no known competing financial intermediate-high (for topsoil) and high accuracy (subsoil) and a mod­ interests or personal relationships that could have appeared to influence erate economic budget, the combination of sensors (pss + rs + dem) the work reported in this paper. might be a better approach for effective mzs generation, however, laboratory-measured soil properties produced the most accurate maps for topsoil."
+15,acknowledgements 5.
+15,"conclusions we acknowledge the united states department of agriculture hatch w4188 multi-state research formula fund for providing support for the in this study, pxrf spectra measured in lab conditions were project."
+15,"we would like to thank sean sunduk yun, sam steen, maggie employed to predict different soil properties (i.e., ph, clay, sand, silt philips, and jenifer yost from the university of wisconsin-madison and contents, organic carbon, and total nitrogen) with a partial least squares ehsan zare from the university of new south wales for their assistance regression (plsr) method."
+15,"other ancillary datasets (e.g., emi, dems, in the field surveys and laboratory analysis of soil samples."
+15,"the first and sentinel-2 data) were explored for generating high resolution (~5 author acknowledges the indian council of agricultural research for m × 5 m) soil property maps for different soil depths at field-scale and providing study leave and financial support for his ph.d. studies at the creating effective soil management zones (mzs) and a cost-benefit university of wisconsin-madison, usa. analysis. pxrf spectroscopy with an appropriate modeling method proves to be a good technique for a quick and non-destructive inex­ pensive way to delineate soil properties at the profile scale."
+15,"we found data availability statement that pxrf spectra can be effectively used for the prediction of soil texture, organic carbon, and total nitrogen."
+15,soil ph was poorly predicted the data for this research work are available from the corresponding from pxrf spectra due to its complex relationship with pxrf spectra. author upon reasonable request.
+15,our results show that effective mzs can be delineated using a combi­ nation of proximal and remote sensing datasets coupled with laboratory measurements of important soil properties.
+15,appendix a.
+15,supplementary material depending upon the choice of sensor or surveys there is a trade-off between cost and accuracy of mzs cluster maps.
+15,"for surface soil, supplementary data to this article can be found online at https://doi. org/10.1016/j.catena.2021.105190."
+16,chatterjee et al.
+16,"catena 201 (2021) 105190 references doolittle, j.a., sudduth, k.a., kitchen, n.r., indorante, s.j., 1994."
+16,estimating depths to claypans using electromagnetic induction methods.
+16,soil and water conserv.
+16,"49 (6), 572–575."
+16,"behrens, t., schmidt, k., ramirez-lopez, l., gallant, j., zhu, a.x., scholten, t., 2014."
+16,"doolittle, j.a., brevik, e.c., 2014."
+16,the use of electromagnetic induction techniques in hyper-scale digital soil mapping and soil formation analysis.
+16,"geoderma 213, soils studies."
+16,"geoderma 223, 33–45."
+16,578–588.
+16,"errico, a., angelino, c.v., cicala, l., persechino, g., ferrara, c., lega, m., vallario, a., babaeian, e., sadeghi, m., jones, s.b., montzka, c., vereecken, h., tuller, m., 2019."
+16,"parente, c., masi, g., gaetano, r., scarpa, g., amitrano, d., ruello, g., verdoliva, l., ground, proximal, and satellite remote sensing of soil moisture."
+16,geophys.
+16,"57 poggi, g., 2015."
+16,"detection of environmental hazards through the feature-based (2), 530–616. fusion of optical and sar data: a case study in southern italy."
+16,remote sens.
+16,"36 bezdek, j.c., 1981."
+16,pattern recognition with fuzzy objective function algorithms.
+16,"plenum (13), 3345–3367."
+16,"press, new york."
+16,"ferguson, r.b., hergert, g.w., schepers, j.s., gotway, c.a., cahoon, j.e., peterson, t.a., bhaduri, d., chatterjee, d., chakraborty, k., chatterjee, s., saha, a., 2018."
+16,bioindicators 2002.
+16,site specific nitrogen management of irrigated maize: yield and soil residual of degraded soils.
+16,in sustainable agriculture reviews 33 (pp.
+16,231-257).
+16,"springer, nitrate effects."
+16,soil sci.
+16,"66, 544–553."
+16,"fink, c.m., drohan, p.j., 2016."
+16,"high resolution hydric soil mapping using lidar digital bishop, t.f.a., mcbratney, a.b., 2001."
+16,a comparison of prediction methods for the terrain modeling.
+16,soil sci.
+16,"80 (2), 355–363. creation of field-extent soil property maps."
+16,"geoderma 103 (1–2), 149–160."
+16,"folkman, m.a., pearlman, j., liao, l.b., jarecke, p.j., 2001."
+16,february.
+16,"eo-1/hyperion bishop, t.f., minasny, b., mcbratney, a.b., 2006."
+16,"uncertainty analysis for soil-terrain hyperspectral imager design, development, characterization, and calibration."
+16,in: models.
+16,information sci.
+16,"20 (2), 117–134. https://doi.org/10.1080/ hyperspectral remote sensing of the land and atmosphere, vol."
+16,13658810500287073.
+16,"optics and photonics, pp."
+16,40–51.
+16,"brejda, j., moorman, j., smith, t.b., karlen, j.l., allan, d.l., dao, t.h., 2000."
+16,"forkuor, g., dimobe, k., serme, i., tondoh, j.e., 2018."
+16,landsat-8 vs.
+16,sentinel-2: distribution and variability of surface soil properties at a regional scale.
+16,soil sci.
+16,soc. examining the added value of sentinel-2’s red-edge bands to land-use and land-cover am.
+16,"64, 974–982. mapping in burkina faso."
+16,giscience & remote sens.
+16,"55 (3), 331–354."
+16,"bremner, j.m., 1996."
+16,nitrogen-total.
+16,"methods of soil analysis: part 3 chemical methods, fraisse, c.w., sudduth, k.a., kitchen, n.r., 2001."
+16,"delineation of site-specific 5, 1085-1121. management zones by unsupervised classification of topographic attributes and soil brus, d.j., knotters, m., van dooremolen, w.a., van kernebeek, p., van seeters, r.j.m., electrical conductivity."
+16,trans.
+16,"asae 44 (1), 155."
+16,"the use of electromagnetic measurements of apparent soil electrical franzen, d.w., hopkins, d.h., sweeney, m.d., ulmer, m.k., halvorson, a.d., 2002. conductivity to predict the boulder clay depth."
+16,"geoderma 55 (1–2), 79–93."
+16,"evaluation of soil survey scale for zone development of site-specific nitrogen cambouris, a.n., nolin, m.c., zebarth, b.j., laverdière, m.r., 2006."
+16,soil management management.
+16,agron.
+16,"94 (2), 381–389. zones delineated by electrical conductivity to characterize spatial and temporal gee, g.w., bauder, j.w., 1979."
+16,particle size analysis by hydrometer: a simplified method variations in potato yield and in soil properties.
+16,potato res.
+16,"83 (5), 381–395. for routine textural analysis and a sensitivity test of measurement parameters."
+16,soil https://doi.org/10.1007/bf02872015.
+16,"43 (5), 1004–1007."
+16,"carrara, a., bitelli, g., carla, r., 1997."
+16,"comparison of techniques for generating digital gholizadeh, a., žižala, d., saberioon, m., borůvka, l., 2018."
+16,soil organic carbon and terrain models from contour lines.
+16,information sci.
+16,"11 (5), 451–473. texture retrieving and mapping using proximal, airborne and sentinel-2 spectral castaldi, f., palombo, a., santini, f., pascucci, s., pignatti, s., casa, r., 2016."
+16,evaluation imaging.
+16,remote sens.
+16,environ.
+16,"218, 89–103. of the potential of the current and forthcoming multispectral and hyperspectral gorelick, n., hancher, m., dixon, m., ilyushchenko, s., thau, d., moore, r., 2017. imagers to estimate soil texture and organic carbon."
+16,remote sens.
+16,environ.
+16,"179, google earth engine: planetary-scale geospatial analysis for everyone."
+16,remote sens.
+16,54–65.
+16,environ.
+16,"202, 18–27."
+16,"chakraborty, s., weindorf, d.c., li, b., aldabaa, a.a.a., ghosh, r.k., paul, s., ali, m.n., gomez, c., rossel, r.a.v., mcbratney, a.b., 2008."
+16,soil organic carbon prediction by 2015.
+16,"development of a hybrid proximal sensing method for rapid identification o, f hyperspectral remote sensing and field vis-nir spectroscopy: an australian case petroleum contaminated soils."
+16,environ.
+16,"514, 399–408. study."
+16,"geoderma 146 (3–4), 403–411. https://doi.org/10.1016/j."
+16,"chan, h.c., chang, c.c., chen, p.a., lee, j.t., 2019."
+16,using multinomial logistic geoderma.2008.06.011. regression for prediction of soil depth in an area of complex topography in taiwan.
+16,"goovaerts, p., 1998."
+16,"geostatistical tools for characterizing the spatial variability of micro catena 176, 419–429. biological and physico-chemical soil properties."
+16,fertil.
+16,"soils 27, 315–334."
+16,"chaplot, v., darboux, f., bourennane, h., leguédois, s., silvera, n., phachomphon, k., hartemink, a.e., minasny, b., 2014."
+16,towards digital soil morphometrics.
+16,"geoderma 230, 2006."
+16,accuracy of interpolation techniques for the derivation of digital elevation 305–317. models in relation to landform types and data density.
+16,geomorph.
+16,"77 (1–2), hartigan, j.a., wong, m.a., 1979."
+16,algorithm as 136: a k-means clustering algorithm.
+16,126–141. https://doi.org/10.1016/j.geomorph.
+16,2005.12.010.
+16,royal statistical soc.
+16,"series s (applied statistics) 28 (1), 100–108."
+16,"chatterjee, s., 2014."
+16,"effects of irrigation, mulch and nitrogen on soil structure, carbon heimsath, a.m., dietrich, w.e., nishiizumi, k., finkel, r.c., 1997."
+16,the soil production pools and input use efficiency in maize (zea mays l.)
+16,"(master’s dissertation, and landscape equilibrium."
+16,"nature 388, 358–361."
+16,"division of agricultural physics, indian agricultural research institute, new delhi)."
+16,"heung, b., ho, h.c., zhang, j., knudby, a., bulmer, c.e., schmidt, m.g., 2016."
+16,"an doi: 10.13140/rg.2.2.29898.39369. overview and comparison of machine-learning techniques for classification purposes chatterjee, s., bandyopadhyay, k.k., pradhan, s., singh, r., datta, s.p., 2016."
+16,influence in digital soil mapping.
+16,"geoderma 265, 62–77. of irrigation, crop residue mulch and nitrogen management practices on soil physical heuvelink, g.b., brown, j.d., van loon, e.e., 2007."
+16,a probabilistic framework for quality.
+16,indian soc.
+16,soil sci.
+16,"64 (4), 351–367. https://doi.org/10.5958/0974- representing and simulating uncertain environmental variables."
+16,0228.2016.00048.7.
+16,information sci.
+16,"21 (5), 497–513. https://doi.org/10.1080/13658810601063951."
+16,"chatterjee, s., bandyopadhyay, k.k., singh, r., pradhan, s., datta, s.p., 2017."
+16,"yield and hook, p.b., burke, i.c., 2000."
+16,"biogeochemistry in a shortgrass landscape: control by input use efficiency of maize (zea mays l.) as influenced by crop residue mulch, topography, soil texture, and microclimate."
+16,"ecology 81, 2686–2703. irrigation and nitrogen management."
+16,indian soc.
+16,soil sci.
+16,"65 (2), 199–209."
+16,"huang, j., lark, r.m., robinson, d.a., lebron, i., keith, a.m., rawlins, b., tye, a., https://doi.org/10.5958/0974-0228.2017.00023.8."
+16,"kuras, o., raines, m., triantafilis, j., 2014."
+16,"scope to predict soil properties at within- chatterjee, s., bandyopadhyay, k.k., pradhan, s., singh, r., datta, s.p., 2018."
+16,"effects of field scale from small samples using proximally sensed γ-ray spectrometer and em irrigation, crop residue mulch and nitrogen management in maize (zea mays l.) on induction data."
+16,"geoderma 232, 69–80. soil carbon pools in a sandy loam soil of indo-gangetic plain region."
+16,"catena 165, huang, j., zare, e., malik, r.s., triantafilis, j., 2015."
+16,an error budget for soil salinity 207–216. https://doi.org/10.1016/j.catena.2018.02.005. mapping using different ancillary data.
+16,soil res.
+16,"53 (5), 561–575."
+16,"chatterjee, s., huang, j., hartemink, a.e., 2019."
+16,"mapping surface soil moisture at the 30- huang, j., mcbratney, a.b., minasny, b., triantafilis, j., 2017."
+16,monitoring and modelling m resolution at the us climate reference network stations using sentinel-1 and soil water dynamics using electromagnetic conductivity imaging and the ensemble ancillary data.
+16,"agufm 2019, h51u–h1816."
+16,kalman filter.
+16,"geoderma 285, 76–93."
+16,"chatterjee, s., huang, j., hartemink, a.e., 2020."
+16,"establishing an empirical model for hu, j., peng, j., zhou, y., xu, d., zhao, r., jiang, q., fu, t., wang, f., shi, z., 2019. surface soil moisture retrieval at the us climate reference network using sentinel-1 quantitative estimation of soil salinity using uav-borne hyperspectral and satellite backscatter and ancillary data."
+16,remote sens.
+16,"12 (8), 1242. https://doi.org/10.3390/ multispectral images."
+16,remote sens.
+16,"11 (7), 736. rs12081242."
+16,"ji, w., adamchuk, v.i., chen, s., su, a.s.m., ismail, a., gan, q., shi, z., biswas, a., 2019."
+16,"chen, s., martin, m.p., saby, n.p., walter, c., angers, d.a., arrouays, d., 2018."
+16,fine simultaneous measurement of multiple soil properties through proximal sensor data resolution map of top-and subsoil carbon sequestration potential in france.
+16,total fusion: a case study.
+16,"geoderma 341, 111–128."
+16,environ.
+16,"630, 389–400."
+16,"kravchenko, a.n., bullock, d.g., 2000."
+16,"correlation of corn and soybean grain yield with chen, s., xu, d., li, s., ji, w., yang, m., zhou, y., hu, b., xu, h., shi, z., 2020."
+16,monitoring topography and soil properties.
+16,agron j.
+16,"92 (1), 75–83. https://doi.org/10.2134/ soil organic carbon in alpine soils using in situ vis-nir spectroscopy and a multilayer agronj2000.92175x. perceptron."
+16,land degrad.
+16,"31 (8), 1026–1038."
+16,"kreznor, w.r., olson, k.r., banwart, w.l., johnson, d.l., 1989."
+16,"soil, landscape, and corwin, d.l., kaffka, s.r., hopmans, j.w., mori, y., van groenigen, j.w., van kessel, c., erosion relationships in a northwest illinois watershed."
+16,soil sci.
+16,"53 (6), lesch, s.m., oster, j.d., 2003."
+16,assessment and field-scale mapping of soil quality 1763–1771. properties of a saline-sodic soil.
+16,"geoderma 114 (3), 231–259."
+16,"kuhn, m., 2008."
+16,building predictive models in r using the caret package.
+16,softw.
+16,"das, n.n., entekhabi, d., dunbar, r.s., chaubell, m.j., colliander, a., yueh, s., 28 (5), 1–26."
+16,"jagdhuber, t., chen, f., crow, w., o’neill, p.e., walker, j.p., 2019."
+16,"the smap and lacoste, m., minasny, b., mcbratney, a., michot, d., viaud, v., walter, c., 2014."
+16,high copernicus sentinel 1a/b microwave active-passive high resolution surface soil resolution 3d mapping of soil organic carbon in a heterogeneous agricultural moisture product.
+16,remote sens.
+16,environ.
+16,"233, 111380. landscape."
+16,"geoderma 213, 296–311. https://doi.org/10.1016/j."
+16,"delmonaco, g., leoni, g., margottini, c., puglisi, c., spizzichino, d., 2003."
+16,large scale geoderma.2013.07.002. debris-flow hazard assessment: a geotechnical approach and gis modelling.
+16,"laganière, j., angers, d.a., paré, d., 2010."
+16,carbon accumulation in agricultural soils hazards earth syst.
+16,"3, 443–455. after afforestation: a meta-analysis."
+16,change biol.
+16,"bioenergy 16, 439–453."
+17,chatterjee et al.
+17,"catena 201 (2021) 105190 latifovic, r., olthof, i., 2004."
+17,"accuracy assessment using sub-pixel fractional error schillaci, c., acutis, m., lombardo, l., lipani, a., fantappiè, m., märker, m., saia, s., matrices of global land cover products derived from satellite data."
+17,remote sens.
+17,spatio-temporal topsoil organic carbon mapping of a semi-arid mediterranean environ.
+17,"90 (2), 153–165. region: the role of land use, soil texture, topographic indices and the influence of lee, k.t., ho, j.y., 2009."
+17,prediction of landslide occurrence based on slope-instability remote sensing data to modelling.
+17,environ.
+17,"601–602, 821–832. https://doi. analysis and hydrological model simulation."
+17,hydrol.
+17,"375, 489–497. org/10.1016/j.scitotenv.2017.05.239."
+17,"liang, z., chen, s., yang, y., zhou, y., shi, z., 2019."
+17,"high-resolution three-dimensional seibert, j., stendahl, j., sørensen, r., 2007."
+17,topographical influences on soil properties mapping of soil organic carbon in china: effects of soilgrids products on national in boreal forests.
+17,"geoderma 141, 139–148. modeling."
+17,total environ.
+17,"685, 480–489."
+17,"sharma, a., weindorf, d.c., man, t., aldabaa, a.a.a., chakraborty, s., 2014."
+17,"loiseau, t., chen, s., mulder, v.l., dobarco, m.r., richer-de-forges, a.c., lehmann, s., characterizing soils via portable x-ray fluorescence spectrometer: 3."
+17,"soil reaction bourennane, h., saby, n.p., martin, m.p., vaudour, e., gomez, c., 2019."
+17,satellite (ph).
+17,"geoderma 232, 141–147. data integration for soil clay content modelling at a national scale."
+17,"earth sharma, a., weindorf, d.c., wang, d., chakraborty, s., 2015."
+17,"characterizing soils via observation geoinformation 82, 101905. portable x-ray fluorescence spectrometer: 4."
+17,cation exchange capacity (cec).
+17,"ma, y., minasny, b., malone, b.p., mcbratney, a.b., 2019."
+17,"pedology and digital soil geoderma 239–240, 130–134. mapping (dsm)."
+17,soil sci.
+17,"70 (2), 216–235."
+17,"skidmore, a.k., 1989."
+17,"a comparison of techniques for calculating gradient and aspect malone, b.p., de gruijter, j.j., mcbratney, a.b., minasny, b., brus, d.j., 2011."
+17,using from a gridded digital elevation model.
+17,information sys.
+17,"3 (4), 323–334. additional criteria for measuring the quality of predictions and their uncertainties in https://doi.org/10.1080/026 93798908941519. a digital soil mapping framework."
+17,soil sci.
+17,"75 (3), 1032–1043. https:// soil survey staff., 2014."
+17,kellogg soil survey laboratory methods manual.
+17,soil survey doi.org/10.2136/sssaj2010.0280.
+17,investigations report no.
+17,"42, version 5.0."
+17,burt and soil survey staff (ed.).
+17,"marques, m.a., mora, e., 1992."
+17,"the influence of aspect on runoff and soil loss in a lincoln, ne: u.s."
+17,"department of agriculture, natural resources conservation mediterranean burnt forest (spain)."
+17,"catena 19, 333–344."
+17,service.
+17,"mcbratney, a.b., moore, a.w., 1985."
+17,application of fuzzy sets to climatic classification.
+17,"soriano-disla, j.m., janik, l.j., viscarra rossel, r.a., macdonald, l.m., mclaughlin, m."
+17,"35 (1–4), 165–185."
+17,"j., 2014."
+17,"the performance of visible, near-, and mid-infrared reflectance mcbratney, a.b., santos, m.m., minasny, b., 2003."
+17,on digital soil mapping.
+17,"geoderma spectroscopy for prediction of soil physical, chemical, and biological properties."
+17,"117 (1–2), 3–52."
+17,spectroscopy rev.
+17,"49 (2), 139–186."
+17,"mclaren, t.i., guppy, c.n., tighe, m.k., forster, n., grave, p., lisle, l.m., bennett, j.w., stenberg, b., rossel, r.a.v., mouazen, a., wetterlind, j., 2010."
+17,visible and near infrared 2012.
+17,"rapid, nondestructive total elemental analysis of vertisol soils using portable spectroscopy in soil science."
+17,"in: sparks, d.l."
+17,"(ed.), advances in agronomy, vol."
+17,x-ray fluorescence.
+17,soil sci.
+17,"76 (4), 1436–1445."
+17,"academic press, burlington, ma, pp."
+17,163–215.
+17,"minasny, b., mcbratney, a.b. and whelan, m., 2006."
+17,vesper.
+17,version 1.6.
+17,"australian stevens, a., ramirez-lopez, l., stevens, m.a., and rcpp, l., 2013."
+17,pros pectr: centre for precision agriculture.
+17,mcmilan building.
+17,the university of sidney.
+17,"miscellaneous functions for processing and sample selection of vis-nir diffuse minasny, b., mcbratney, a.b., 2016."
+17,digital soil mapping: a brief history and some reflectance data.
+17,r package version 0.
+17,retrieved from https://cran.r- lessons.
+17,"geoderma 264, 301–311. https://doi.org/10.1016/j. project.org/web/packages/prospectr/ index.html. geoderma.2015.07.017."
+17,"stockmann, u., cattle, s.r., minasny, b., mcbratney, a.b., 2016."
+17,"utilizing portable x-ray mohanty, m., reddy, k.s., probert, m.e., dalal, r.c., rao, a.s., menzies, n.w., 2011. fluorescence spectrometry for in-field investigation of pedogenesis."
+17,"catena 139, modelling n mineralization from green manure and farmyard manure from a 220–231. laboratory incubation study."
+17,"modelling 222 (3), 719–726."
+17,"sudduth, k.a., kitchen, n.r., hughes, d.f., drummond, s.t., 1995."
+17,september.
+17,"molin, j.p., castro, c.n.d., 2008."
+17,establishing management zones using soil electrical electromagnetic induction sensing as an indicator of productivity on claypan soils. conductivity and other soil properties by the fuzzy clustering technique.
+17,scientia in: site-specific management for agricultural systems.
+17,"american society of agricola 65 (6), 567–573."
+17,"agronomy, crop science society of america, soil science society of america, moral, f.j., terrón, j.m., da silva, j.m., 2010."
+17,"delineation of management zones using madison, wi, usa, pp."
+17,"671–681. mobile measurements of soil apparent electrical conductivity and multivariate sudduth, k.a., drummond, s.t., kitchen, n.r., 2001."
+17,accuracy issues in electromagnetic geostatistical techniques.
+17,soil till.
+17,"106 (2), 335–343. induction sensing of soil electrical conductivity for precision agriculture."
+17,comput.
+17,"mouazen, a.m., alhwaimel, s.a., kuang, b., waine, t., 2014."
+17,multiple on-line soil electron.
+17,agric.
+17,"31 (3), 239–264. https://doi.org/10.1016/s0168-1699(00)00185-x. sensors and data fusion approach for delineation of water holding capacity zones for teixeira, a.f.d.s., weindorf, d.c., silva, s.h.g., guilherme, l.r.g., curi, n., 2018. site specific irrigation."
+17,soil till.
+17,"143, 95–105."
+17,"portable x-ray fluorescence (pxrf) spectrometry applied to the prediction of nelson, d.w., sommers, l.e., 1996."
+17,"total carbon, organic carbon, and organic matter. chemical attributes in inceptisols under different land uses."
+17,"ciência e agrotecnologia methods of soil analysis: part 3 chemical methods 5, 961–1010."
+17,"42 (5), 501–512."
+17,"nelson, m.a., bishop, t.f.a., triantafilis, j., odeh, i.o.a., 2011."
+17,"an error budget for teixeira, a.f.d.s., pelegrino, m.h.p., faria, w.m., silva, s.h.g., gonçalves, m.g.m., different sources of error in digital soil mapping."
+17,european j.
+17,soil sci.
+17,"62 (3), júnior, f.w.a., gomide, l.r., júnior, a.l.p., de souza, i.a., chakraborty, s., 417–430. https://doi.org/10.1111/j.1365-2389.2011.01365.x."
+17,"weindorf, d.c., 2020."
+17,"tropical soil ph and sorption complex prediction via portable nie, x., guo, w., huang, b., zhuo, m., li, d., li, z., yuan, z., 2019."
+17,effects of soil x-ray fluorescence spectrometry.
+17,"geoderma 361, 114132. properties, topography and landform on the understory biomass of a pine forest in a tou, j.t., gonzalez, r.c., 1974."
+17,pattern recognition principles.
+17,addison-wesleypubl. subtropical hilly region.
+17,"catena 176, 104–111."
+17,"comp, massachusetts."
+17,"oldoni, h., terra, v.s.s., timm, l.c., júnior, c.r., monteiro, a.b., 2019."
+17,"delineation of triantafilis, j., monteiro santos, f.a., 2010."
+17,resolving the spatial distribution of the true management zones in a peach orchard using multivariate and geostatistical analyses. electrical conductivity with depth using em38 and em31 signal data and a laterally soil till.
+17,"191, 1–10. constrained inversion model."
+17,soil res.
+17,"48 (5), 434–446."
+17,"o’rourke, s.m., stockmann, u., holden, n.m., mcbratney, a.b., minasny, b., 2016."
+17,"an van der werff, h., van der meer, f., 2016."
+17,sentinel-2a msi and landsat 8 oli provide assessment of model averaging to improve predictive power of portable vis-nir and data continuity for geological remote sensing.
+17,remote sens.
+17,"8 (11), 883."
+17,xrf for the determination of agronomic soil properties.
+17,"geoderma 279, 31–44."
+17,"vrindts, e., mouazen, a.m., reyniers, m., maertens, k., maleki, m.r., ramon, h., de padarian, j., minasny, b., mcbratney, a.b., 2019."
+17,"using deep learning to predict soil baerdemaeker, j., 2005."
+17,management zones based on correlation between soil properties from regional spectral data.
+17,"geoderma regional 16, e00198. compaction, yield and crop data."
+17,biosys.
+17,"92 (4), 419–428."
+17,"paul, s.s., coops, n.c., johnson, m.s., krzic, m., chandna, a., smukler, s.m., 2020."
+17,"viscarra rossel, r.a., walvoort, d.j.j., mcbratney, a.b., janik, l.j., skjemstad, j.o., mapping soil organic carbon and clay using remote sensing to predict soil 2006."
+17,"visible, near infrared, mid infrared or combined diffuse reflectance workability for enhanced climate change adaptation."
+17,"geoderma 363, 114177. spectroscopy for simultaneous assessment of various soil properties."
+17,"geoderma 131 pradhan, s., bandyopadhyay, k., chopra, u.k., krishnan, p., jain, a.k., singh, r., (1–2), 59–75."
+17,"chand, i., 2017."
+17,"yield, grain protein content and input use efficiency in wheat as viscarra rossel, r.a., behrens, t., ben-dor, e., brown, d.j., demattê, j.a.m., influenced by irrigation and nitrogen levels in a semi-arid region."
+17,indian soc.
+17,"soil shepherd, k.d., shi, z., stenberg, b., stevens, a., adamchuk, v., aïchi, h., 2016."
+17,"65 (4), 410–422."
+17,a global spectral library to characterize the world’s soil.
+17,earth sci.
+17,"155, rawal, a., chakraborty, s., li, b., lewis, k., godoy, m., paulette, l., weindorf, d.c., 198–230."
+17,"determination of base saturation percentage in agricultural soils via portable xie, y., chen, t.b., lei, m., yang, j., guo, q.j., song, b., zhou, x.y., 2011."
+17,spatial x-ray fluorescence spectrometer.
+17,"geoderma 338, 375–382. distribution of soil heavy metal pollution estimated by different interpolation r core team."
+17,r version 3.6.1: a language and environment for statistical methods: accuracy and uncertainty analysis.
+17,"chemosphere 82 (3), 468–476. computing."
+17,"r foundation for statistical computing, vienna, austria."
+17,"url https:// xu, d., zhao, r., li, s., chen, s., jiang, q., zhou, l., shi, z., 2019."
+17,multi-sensor fusion for www.
+17,"r-project. org. the determination of several soil properties in the yangtze river delta, china."
+17,"roudier, p., 2011. clhs: a r package for conditioned latin hypercube sampling."
+17,accessed soil sci.
+17,"70 (1), 162–173. from. https://cran.r-project.org/web/packages/clhs/index.html."
+17,"xu, d., chen, s., xu, h., wang, n., zhou, y., shi, z., 2020."
+17,"data fusion for the saulnier, g.m., beven, k., obled, c., 1997."
+17,including spatially variable effective soil measurement of potentially toxic elements in soil using portable spectrometers. depths in topmodel.
+17,hydrol.
+17,"202, 158–172."
+17,environ.
+17,pollut.
+17,114649.
+17,"savitzky, a., golay, m.j., 1964."
+17,smoothing and differentiation of data by simplified least squares procedures.
+17,analytical chem.
+17,"36, 1627–1639."
+18,chatterjee et al.
+18,"catena 201 (2021) 105190 wang, d., chakraborty, s., weindorf, d.c., li, b., sharma, a., paul, s., ali, m.n., 2015."
+18,"zare, e., huang, j., monteiro santos, f.a., triantafilis, j., 2015."
+18,mapping salinity in three synthesized use of visnir drs and pxrf for soil characterization: total carbon and dimensions using a dualem-421 and electromagnetic inversion software.
+18,soil sci. total nitrogen.
+18,"geoderma 243, 157–167."
+18,"79 (6), 1729–1740."
+18,"weindorf, d.c., chakraborty, s., herrero, j., li, b., castañeda, c., choudhury, a., 2016."
+18,"zare, e., ahmed, m.f., malik, r.s., subasinghe, r., huang, j., triantafilis, j., 2018."
+18,simultaneous assessment of key properties of arid soil by combined pxrf and v comparing traditional and digital soil mapping at a district scale using residual is–nir data.
+18,soil sci.
+18,"67 (2), 173–183. maximum likelihood analysis."
+18,soil res.
+18,"56 (5), 535–547."
+18,"wold, s., martens, h., wold, h., 1983."
+18,"the multivariate calibration problem in chemistry zhang, y., hartemink, a.e., 2019."
+18,data fusion of vis–nir and pxrf spectra to predict soil solved by the pls method.
+18,in: matrix pencils.
+18,"springer, berlin, heidelberg, physical and chemical properties."
+18,soil sci.
+18,"71 (3), 316–333. pp."
+18,286–293.
+18,"zhu, y., weindorf, d.c., zhang, w., 2011."
+18,"characterizing soils using a portable x-ray wilson, r.c., freeland, r.s., wilkerson, j.b., hart, w.e., 2005."
+18,interpolation and data fluorescence spectrometer: 1.
+18,soil texture.
+18,"geoderma 167, 167–177. collection error sources for electromagnetic induction–soil electrical conductivity mapping."
+18,agric.
+18,"21 (2), 277–283."

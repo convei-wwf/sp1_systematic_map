@@ -1,0 +1,670 @@
+page,p
+1,"remote sensing of environment 127 (2012) 194–209 contents lists available at sciverse sciencedirect remote sensing of environment journal homepage: www.elsevier.com/locate/rse on timeliness and accuracy of wildﬁre detection by the goes wf-abba algorithm over california during the 2006 ﬁre season alexander koltunov a,⁎, susan l."
+1,"ustin a, elaine m."
+1,"prins b a center for spatial technologies and remote sensing, department of land, air, and water resources, university of california, davis, veihmeyer hall, one shields avenue, davis, ca 95616, usa b university of wisconsin-madison space science and engineering center (ssec), cooperative institute for meteorological satellite studies (cimss)—consultant, 1225 west dayton street, madison, wi 53706, usa a r t i c l e i n f o a b s t r a c t article history: the wildﬁre automated biomass burning algorithm (wf-abba) is a state-of-the-art algorithm for received 21 june 2011 geostationary wildﬁre detection whose results have been increasingly used in a range of environmental received in revised form 29 august 2012 applications."
+1,"at present, the wf-abba validation activities and, in general, ﬁre product validation methodol- accepted 7 september 2012 ogies are at a markedly less advanced stage than the algorithm itself."
+1,"particularly, little is known about available online 29 september 2012 detection timeliness, despite the value of such information for assessing the potential of geostationary obser- keywords: vations to improve tactical decision making of ﬁrst responders."
+1,this paper contributes to reducing this gap in geostationary wildﬁre detection two ways.
+1,"firstly, we describe a new methodology that is suitable for evaluating geostationary satellite wild- wf-abba ﬁre detection in terms of incidents with regard to both timeliness and reliability."
+1,this methodology utilizes validation available ofﬁcial multi-agency wildﬁre reporting information and multitemporal landsat imagery.
+1,"secondly, early wildﬁre detection we apply the proposed validation method to temporally ﬁltered goes-west wf-abba (ver."
+1,6.1) detections detection timeliness for the 2006 ﬁre season over the state of california and present incident-wise and pixel-wise performance remote sensing information.
+1,"the results indicate highly reliable pixel-wise performance of wf-abba, with about 75% of goes landsat tm/etm+ ﬁre pixels (or more) corresponding to actual recorded active wildﬁres."
+1,"a substantial portion of wildﬁres burn scar detection were detected during their ﬁrst hour of activity, and a few incidents—even before the initial reports from conventional sources."
+1,"although the wf-abba performs best at what it was designed for: consistently re-detecting (monitoring) active ﬁres, we believe there is an additional potential for automated detection from current geostationary data to reduce wildﬁre ignition latencies in the western u.s."
+1,our results can serve as a guideline for algorithm developers and users of the wf-abba ﬁre product.
+1,© 2012 elsevier inc.
+1,all rights reserved.
+1,introduction and background validation methodologies is still far from complete.
+1,the objective difﬁculty of ﬁre detection from geostationary platforms implies that although the geostationary operational environmental satellite satellite detections should not be considered the only source of infor- (goes) series have been used to monitor ﬁre activity in the western mation about wildﬁres.
+1,"to this end, diverse and complete perfor- hemisphere for more than two decades, the goes-east automated mance information is also necessary to ﬁnd the appropriate place biomass burning algorithm (abba) was ﬁrst routinely applied in for satellite-derived ﬁre products in diverse user toolboxes."
+1,"south america in 1995 to monitor spatial, diurnal and interannual trends in ﬁre activity associated with deforestation and agricultural 1.1."
+1,active ﬁre detection by the goes wf-abba algorithm (version 6.1) practices.
+1,in the year 2000 the modiﬁed goes-e/-w wf-abba was implemented to provide near real time diurnal ﬁre monitoring the goes-e/-w wf-abba processing system was developed as a throughout the western hemisphere with increased value for opera- collaborative effort between the national oceanic and atmospheric tional agencies and scientiﬁc communities.
+1,"conﬁdent and informed administration (noaa) center for satellite application and research use of the satellite detections, however, necessitates something that (formerly, ofﬁce of research and applications) and the university of has been often offset to the margins of the product development wisconsin-madison cooperative institute for meteorological satellite budgets—algorithm validation efforts over a broad range of environ- studies (cimss)."
+1,"the wf-abba is a dynamic multispectral thresholding mental conditions and geographic regions and with respect to appro- contextual algorithm that uses the visible (when available), 3.9 μm, and priate performance measures."
+1,"furthermore, development of product 10.7 μm infrared bands to locate and characterize hot spot pixels."
+1,"when available, the 12 μm band is used in conjunction with the other bands to ⁎ corresponding author."
+1,tel.: +1 530 752 5092; fax: +1 530 752 5262. assist in identifying opaque clouds.
+1,the wf-abba algorithm is based on e-mail address: akoltunov@ucdavis.edu (a.
+1,koltunov). the sensitivity of the 3.9 μm band to high temperature subpixel 0034-4257/$ – see front matter © 2012 elsevier inc.
+1,all rights reserved. http://dx.doi.org/10.1016/j.rse.2012.09.001
+2,koltunov et al.
+2,"/ remote sensing of environment 127 (2012) 194–209 195 anomalies and is derived from a technique originally developed by (al-saadi et al., 2005; freitas et al., 2007; longo et al., 2010; reid matson and dozier (1981) for noaa advanced very high resolution et al., 2009, 2004; wang, et al., 2006)."
+2,wf-abba detections and subse- radiometer (avhrr) data.
+2,"once the wf-abba locates a hot spot quent ﬂux estimates have been assimilated under the flambe project pixel, it incorporates ancillary data to reduce false positives and correct into the naval research laboratory aerosol analysis and prediction for water vapor attenuation, surface emissivity, solar reﬂectivity, dif- system (naaps) aerosol transport forecast model since the year 2000 fraction, and semi-transparent clouds."
+2,the avhrr derived global (http://www.nrlmry.navy.mil/aerosol/).
+2,version 6.1 of the wf-abba land cover characteristics (glcc) data base (version 2.0) is used to software was transitioned to the noaa national environmental assign surface emissivity and to screen for false positives.
+2,"the national satellite data and information service (nesdis) operations in 2002 centers for environmental prediction (ncep) aviation model total and incorporated into the hazard mapping system (mcnamara et al., column precipitable water products are utilized to correct for water 2004). vapor attenuation."
+2,"numerical techniques are used to determine instan- another potentially attractive application of a ﬁre detection taneous estimates of subpixel ﬁre size and average temperature. algorithm is to assist in earlier identiﬁcation of ignitions, with the the goes imager oversamples the infrared band instantaneous ultimate objective to minimize the time to initial detection."
+2,earlier ground ﬁeld of views (igfov) along a scan line by a factor of 1.75. identiﬁcation of wildﬁres increases situational awareness and deci- the impulse response is smeared over three samples and can result sion making conﬁdence of ﬁre management agencies and may im- in 3 ﬁre detections for the same ﬁre pixel.
+2,the wf-abba evaluates prove their response times and resource allocation.
+2,it is important adjacent ﬁre pixels along a scan line and ﬁlters out multiple detections to emphasize that the wf-abba was not speciﬁcally designed as an of the same ﬁre.
+2,"if multiple detections occur, ﬁre pixels are ﬁltered early warning tool, but for monitoring active ﬁres."
+2,"however, with a according to conﬁdence classiﬁcation with the 3.9 μm brightness tem- steep increase in the wildﬁre activity in the continental u.s. in recent perature used in case of a tie (highest temperature ﬁre pixel is retained). decades (nicc, 2007) and unsustainable costs of managing wildﬁres an in-line temporal ﬁlter is applied to reduce false positives associated to operational agencies (usfs, 2007), one should explore every oppor- with noise in the imagery and cloud edge issues."
+2,the temporal ﬁltering tunity to maximize utilization of currently available operational satellite technique uses a time series of goes ﬁre products from previous hours ﬁre detection assets.
+2,"furthermore, individual case studies (e.g."
+2,feltz to compare with the current ﬁre product.
+2,"a ﬁre pixel must appear at et al., 2003; weaver et al., 2004) suggested the potential for geostation- least twice (within 0.1°) within the past 12 h in order to be retained ary satellites to provide early alarms about new ignitions."
+2,given that in the ﬁnal ﬁltered ﬁre product.
+2,"the buffer of 0.1° compensates for modis (moderate resolution imaging spectroradiometer) (giglio, geolocation inaccuracies of goes pixels, which may reach several 2010; giglio et al., 2003) and next generation viirs (visible infrared kilometers, due to satellite navigation errors."
+2,"the ﬁltered ﬁre product imager and radiometer suite (viirs) ﬁre products from polar-orbiting can result in delayed identiﬁcation of a ﬁre start time and may eliminate satellites are available only twice a day in mid-latitudes, there is no short-lived agricultural management ﬁres."
+2,"for more information on the alternative to using goes for routinely providing much needed high algorithm and the determination of subpixel ﬁre characteristics, refer to temporal ﬁre information at consistently low cost during the ﬁrst prins and menzel (1992, 1994) and prins et al."
+2,"(1998, 2001, 2003). hours of ﬁre activity."
+2,"since the year 2000 the wf-abba has been executed at a mini- mum of every half-hour for both goes-e and goes-w, detecting 1.2."
+2,wf-abba product validation status and methodologies ﬁres within a satellite zenith angle of 80° (covering the better part of the visible hemisphere).
+2,"for over 10 years both temporally ﬁltered assessment of the quality of satellite wildﬁre detection products and non-ﬁltered ﬁre product ascii ﬁles have been made available to depends on numerous factors, including the study period and region, the user community via anonymous ftp at uw-madison cimss and which determine the ﬁre regime, satellite observation characteristics, the u.s."
+2,"navy's fire locating and modeling of burning emissions dominant land cover type, climate, etc."
+2,"therefore, ﬁre products must (flambe) project web site (http://www.nrlmry.navy.mil/ﬂambe/, be validated for different geographic regions and seasons. decommissioned on october 31, 2011)."
+2,for each processed goes frame (i.e. one of the many multispectral images composing the 1.2.1.
+2,"performance measures goes image sequence), the wf-abba (version 6.1) ﬁre product whether a detection should be deemed true or false is deﬁned by ascii ﬁles contain information about the detected ﬁre pixels including an important parameter: the maximal acceptable geolocation error, location, observed 3.9 and 10.7 μm brightness temperatures, estimates εg."
+2,"it is set by the end user of a ﬁre product regardless of actual (and of instantaneous sub-pixel ﬁre size and temperature, ecosystem type, never known) geolocation error of the ﬁre product."
+2,"for example, a and ﬁre conﬁdence ﬂag."
+2,"the ﬁre conﬁdence ﬂags consist of processed hypothetical user for which geolocation error of more than 10 meters (“0”), saturated (“1”), cloudy (“2”), high (“3”), medium (“4”), and low renders a ﬁre detection useless should consider nearly every geosta- possibility (“5”) ﬁre pixels."
+2,the latter category represents the largest tionary detection as a false detection.
+2,"in practice, however, geosta- number of false detections as it has the least stringent requirements tionary detections mislocated by several kilometers are still very for ﬁre identiﬁcation and were not used in this study. valuable for many applications mentioned in section 1.1.1."
+2,"in general, a validation study which presents algorithm performance informa- 1.1.1."
+2,wf-abba intended and extended use tion for different choices of εg addresses needs of a broader spectrum the south american abba and next generation wf-abba algorithm of potential users. pioneered ﬁre monitoring from geostationary platforms.
+2,"to date, the furthermore, the performance of a detection algorithm is a combi- goes wf-abba ﬁre product has been successfully utilized by a broad nation of two mutually related metrics: the number of true positive user community, including applications in ﬁre weather analysis and objects and the number of false positive objects."
+2,"neither one is fully forecasting, climate change research, land-use/land-cover change informative without the other."
+2,"it is also important to remember that studies, resource management, biomass burning emissions modeling, the objects used in the above two dual metrics must be the same diagnostic and prognostic aerosol and trace gas modeling, and policy objects, unless the application explicitly deﬁnes customized detection and decision making (brioude et al., 2009; cardoso et al., 2003; freitas quality statistics."
+2,"users or applications requiring maximization of the et al., 2007; mcnamara et al., 2004; nepstad et al., 2001, 2006; schmidt number of true positive pixels are also interested in minimizing the & prins, 2003; wang et al., 2006; weaver et al., 2004)."
+2,applications of number of false positive pixels.
+2,"in turn, when the number of detected the goes wf-abba in model data assimilation studies have demon- actual wildﬁre incidents is of interest, this information should be strated the utility of integrating diurnal ﬁre products in aerosol trans- accompanied by the information about falsely detected incidents port and air quality models to locate and predict air pollution (not merely pixels)."
+2,"for example, when detection output is used for"
+3,196 a.
+3,koltunov et al.
+3,"/ remote sensing of environment 127 (2012) 194–209 early warning, false positive ﬁre pixels may have very different costs continental u.s. during four years (2003 to 2006), but were able to ver- to a user and therefore should not equally contribute to the overall ify only 103 wf-abba ﬁre pixels (not incidents)."
+3,"in general, it is not quality statistic."
+3,"for example, detections identiﬁed in locations always obvious how well the available high-resolution images repre- where conﬁrmed false positives have been recently observed may sent the diversity of environmental and other conditions (section 1.2) be assigned a low priority for veriﬁcation or simply ignored at low inﬂuencing ﬁre detection (csiszar et al., 2006). risk."
+3,detections could also be given to a human analyst to assess.
+3,"the to date, performance of wf-abba has been primarily assessed value of this validation method is not yet obvious, because the proce- with respect to the following conventional metrics: dures, rules, and auxiliary information sources that analysts use to accept or reject detections have not been clearly deﬁned and are - pixel-wise true positive and false positive rates or, equivalently, not complete (schroeder et al., 2008b). pixel-wise omission and commission errors (feltz et al., 2003; comparison with ofﬁcial ﬁre reporting information is a validation schroeder et al., 2008a, 2008b; soja et al., 2009); method that is truly independent of the satellite-based ﬁre detection, - percent of detected actual wildﬁre incidents (feltz et al., 2003). although it has limitations and is dependent on the reporting meth- odologies, diligence, and completeness of the reporting agencies."
+3,"we could not ﬁnd any published information on the number of using reasonably consistent geo-databases of ﬁre ignition reports false positive incidents produced by any ﬁre detection algorithm. provides a large sample for analysis and is necessary to estimate time- one of the objective reasons is that current operational ﬁre detection liness of incident detection, because many records include incident algorithms do not output possible ﬁre incidents, only ﬁre pixels. initial report times."
+3,"however, ﬁre information is often divided between therefore, additional non-trivial analysis is needed to aggregate ﬁre different databases, reports, and other sources, with differences in pixels across time and space into incident-candidates."
+3,"as part of the reporting protocol and entails considerable effort to combine this overall focus to address the timeliness and ﬁdelity of wf-abba wild- information (soja et al., 2009)."
+3,"also, the geo-databases may be lacking ﬁre detection in california, this paper presents a method (section 3.3) information about certain types of ﬁres (e.g. urban or agricultural for extracting incident-candidates and interval estimation of the ﬁres, controlled burns), and possibly other omitted ﬁres (schroeder number of false positive incidents. et al., 2008b)."
+3,"therefore, performance estimates obtained from also, it is important to be clear about the actual meaning of words matching satellite detections to geodatabases apply only to those “detected ﬁre”."
+3,"for a given validation study, this meaning is a direct types of incidents that are actually represented in the databases, e.g. implication of the validation procedure used."
+3,"in the cited studies, wildland ﬁres, whereas the other types of detected ignitions, such as the statement “a ﬁre [incident] is detected” meant: “a ﬁre incident managed agricultural burns, are regarded as false positives."
+3,"further- is detected eventually, i.e. at some time during the burning period more, the geo-databases sometimes omit incidents of type “wildﬁre”, (plus margins)”."
+3,the percentage of ﬁres eventually detected from which is the type of incidents addressed in this paper.
+3,"in this case, the space is helpful for assessing, for example, ﬁre geographic and sea- obtained performance statistics are actually lower bounds on method sonal distributions and their dynamics (prins & menzel, 1994; prins quality."
+3,"particularly, the false positive rates are overestimated signiﬁ- et al., 2003)."
+3,"although there are uncertainties regarding the periods cantly, when the validation databases miss a large fraction of wildﬁre of ﬁre activity and total emissions, satellite derived ﬁre products incidents of substantial duration, which are also not under cloud offer improvements over traditional emissions data bases and have cover, and whose intensity of burning is high enough to produce a been used for emissions modeling and in diagnostic and prognostic large magnitude thermal anomaly at satellite pixel scales (~15 km2 aerosol and trace gas modeling efforts for over 10 years (al-saadi for goes imager over california)."
+3,"how likely this combination of cir- et al., 2005; freitas et al., 2007; longo et al., 2010; reid et al., 2009, cumstances is, depends in particular on a speciﬁc validation database."
+3,"2004; wang et al., 2006; zhang et al., 2008)."
+3,"additional issues include uncertainties about ﬁres, such as actual end quite obviously, these measures do not allow one to reasonably times, especially for large incidents."
+3,"for example, a false detection assess how soon after ignition or initial report the ﬁres are detected, may be counted as correct when the incident actually ended earlier which is the central focus of this paper."
+3,besides interesting but occa- than the ﬁre reporting information indicates.
+3,"previous studies showed, sional case studies (feltz et al., 2003; prins et al., 2003; weaver et al., however, that the opposite situation is more common: a ﬁre is still 2004), the vacuum of information on this aspect of wf-abba perfor- burning after the recorded end time (sometimes this is the containment mance was somewhat addressed by feltz et al., 2003."
+3,"they have time, other times − control time)."
+3,"addressing this problem, the analyzed a large number of recorded wildﬁre incidents that occurred recorded end time is extended for validation purposes, e.g. by 5 days in acre (brazil) during three summer months of 2002 and found that (soja et al., 2009) or by 1 day (feltz et al., 2003). the unﬁltered wf-abba identiﬁed 58 of 88 incidents within 6 h of it is clear that each method of ﬁre product validation has its own activity."
+3,temporally ﬁltered wf-abba (section 1.1) detected 76 inci- advantages and limitations depending on the intended detection dents within a window ±1 day.
+3,"the number of false positive inci- performance measures, and that validation activities should include dents was not provided. both comparisons with higher resolution satellite or airborne data and ﬁre reporting information."
+3,this is the methodology proposed in 1.2.2.
+3,truth data sources this paper (section 3).
+3,"we also emphasize again, that using ofﬁcial most intensive validation activities of the wf-abba have focused ﬁre reporting information is necessary for statistically assessing time- on matching its detections against active ﬁres observed in coincident liness of incident detection. higher resolution remote sensing imagery, e.g."
+3,"aster and etm+ (schroeder et al., 2008a, 2008b)."
+3,this approach is suitable for estimat- 1.3.
+3,study objectives ing the probability that a goes ﬁre pixel is a true positive and has been used primarily due to the lack of consistent and complete motivated by substantial gaps in the information on wildﬁre ground truth reporting procedures and documentation.
+3,"cross-sensor detection quality with respect to spatial and temporal coverage and matching is not informative to assess ﬁre detection timeliness, performance metrics, this study is aimed at the following objectives: because the most critical information—the actual ﬁre start or initial report times—is not available from infrequent high resolution imagery."
+3,propose a validation methodology in which ﬁre geodatabases another limitation of this method is that only a tiny fraction of detected and high-resolution imagery are combined to compute detection ﬁre pixels can be analyzed.
+3,"for example, schroeder et al. (2008b) performance measures that are appropriate for early warning processed as many as 115 aster scenes acquired across the entire applications."
+4,koltunov et al.
+4,/ remote sensing of environment 127 (2012) 194–209 197 2.
+4,assess the timeliness and reliability of detection of wildland ﬁre characteristics closely resembling those of wildﬁres.
+4,all these circum- incidents for the state of california during the 2006 ﬁre season. stances create substantial challenges to the multispectral ﬁre detection 3.
+4,validate geostationary satellite wf-abba detections of wildﬁres approach used by the wf-abba.
+4,"finally, the study area is one of the over the state of california during the 2006 ﬁre season with most densely populated regions in the continental u.s."
+4,"in the mobile respect to pixel-wise metrics. phone era, california ﬁres are normally reported shortly after they start."
+4,"therefore, only for a small fraction of wildﬁres can satellite obser- the ﬁrst two objectives will contribute to addressing the question: vation provide the earliest alarm for this region."
+4,"what is the potential of current operational geostationary ﬁre detec- our analysis included the goes wf-abba (version 6.1) temporally tion utilizing the goes imager to contribute to reducing latency of ﬁre ﬁltered ﬁre product (conﬁdence ﬂags 0–4, excluding low possibility detections?"
+4,understanding the timeliness of detected ﬁre incidents ﬁre pixels) available from flambe.
+4,"we utilized the wf-abba processed during periods of substantial wildﬁre activity is the ﬁrst step necessary data for 8486 half-hourly frames acquired by goes-west during the test to assess the potential and increase the informed use of geostationary period: april 30, 2006 through october 31, 2006."
+4,"fig. 2 shows fragments ﬁre detection, determine the research needs and suggest ways of of sample goes-west visible and tir 3.9 μm band images with a clearly improvements in algorithmic and data acquisition/delivery aspects."
+4,"we observable “day” ﬁre—one of the largest wildﬁre incidents in california hope that the developments, results, and discussion presented below history."
+4,"the ground pixel size for the study area varies from pixel to in this paper, will be valuable not only for the ﬁre scientiﬁc community, pixel up to 6 km in the north–south direction for the 3.9 μm, 10.7 μm, but also for operational ﬁre management agencies who recognize that and 12 μm thermal bands. timely information about ignitions facilitates rapid and prioritized response, leading to reduction of societal losses due to wildﬁres."
+4,validation methodology 2.
+4,datasets 3.0.
+4,outline and performance metrics 2.1.
+4,"study area, test period, and wf-abba detections in the proposed methodology, wf-abba ﬁre pixels are matched in space and time (section 3.2) to records in geo-spatial databases of our study area, the entire state of california (fig. 1), represents a ofﬁcial wildﬁre incident reports (section 3.1) and aggregated into broad range of ecosystems, ranging from semiarid shrublands, conifer incident-candidates that we term events (section 3.3)."
+4,"furthermore, dominated forests, annual grasslands, intensive agriculture, to wetland the unmatched events are additionally cross-checked against new ecosystems (in order of approximate water availability)."
+4,"this diversity, burn scars in landsat imagery."
+4,"the resulting information about time- small-scale mosaic of ecosystems, and signiﬁcant elevation differences liness and accuracy of detecting wildﬁre incidents (not pixels) is often result in high thermal contrasts, preventing actual ﬁres from presented using the following metrics: standing out from the natural background and causing some back- ground pixels to appear as hot spots in the shortwave thermal infrared – relative detection latency of incidents with respect to their initial (tir—3.9 μm) imagery."
+4,"in addition, fog and low-altitude reﬂective report times; clouds, regularly appearing, especially in paciﬁc coastal and sierra – estimated lower bound on the number of correctly detected wild- nevada mountain areas shortly after sunrise, can present spectral ﬁre incidents; and fig."
+4,study area and wildﬁres in california during the 2006 wildﬁre season.
+4,"study area and the 310 california wildﬁres (white polygons approximating burned areas) reported during the test period: april 30, 2006 through october 31, 2006."
+5,198 a.
+5,koltunov et al.
+5,/ remote sensing of environment 127 (2012) 194–209 fig.
+5,goes-west image example.
+5,examples of goes-west visible and thermal infrared (3.9 μm) intensity images that show the study area—the state of california.
+5,goes ground pixel size is variable (up to 6 km in north-west direction in the thermal image).
+5,the day fire shown in the box inset was the largest california wildﬁre incident in 2006.
+5,"the day fire escaped out of control and over two months burned nearly 66,000 ha, with the estimated costs exceeding $75,000,000. – estimated lower and upper bounds on the number of events that respective ﬁnal size polygons are denoted by pk, where k is an enu- are not wildﬁre incidents. merating subscript."
+5,"according to the merged geodatabase, 402 ﬁres were active during the pixel-wise performance metrics that our method computes the test period, of which 354 ﬁres were initially reported during the test include: period."
+5,which of these ﬁres should be included in the sample to test detection performance?
+5,the correct answer depends on what perfor- - an estimated lower bound on the number of correctly detected mance measure is being evaluated.
+5,"in the case of pixel-wise metrics wildﬁre pixels; and (section 3.0), all 402 wildﬁres that were active during the test period - an estimated upper bound on the number of detected pixels that can be included."
+5,"in contrast, the incident-wise metrics require a more are not wildﬁres. delicate approach."
+5,"indeed, two or more wildﬁres may overlap in time and also be geographically close enough to cause ambiguity in 3.1."
+5,"wildﬁre geospatial records and test samples wf-abba detection attribution, if all the co-occurring incidents are included in the sample."
+5,"therefore, we analyzed incident co-occurrence we merged two separate multiagency wildﬁre databases for the and excluded some of the co-occurring incidents."
+5,the deatiled descrip- 2006 wildﬁre season in california: a ﬁre perimeter polygon database tion of this procedure is given below in section 3.2.2 after we deﬁne the compiled by the california department of forestry and fire protection rules for determining ﬁre activity periods in section 3.2.1.
+5,"as a result, we (cal fire) and point and polygon databases created by the geospatial have selected 310 of the 354 ﬁres reported during the test period."
+5,multi-agency coordination (geomac) group.
+5,"both databases are furthermore, of these 310 non-overlapping ﬁres, the initial report based on the individual incident report data from multiple u.s. time (in addition to the date) was available only for 164 ﬁres."
+5,"obviously, agencies, including cal fire, us forest service, the bureau of land only these 164 ﬁres can be used for measuring detection timeliness with management, national park service, and other federal and local a precision of minutes."
+5,"thus, the two test sub-samples selected for agencies and departments."
+5,"the incidents in these databases are assessing incident detection timeliness included: limited to wildland ﬁres, i.e. they do not include agricultural or urban ﬁres."
+5,"for ﬁres represented only by geolocated points in the 1. 164 ﬁres reported during the test period and for which the initial geomac database we created pseudo-perimeter polygons as circular report hour was recorded, and buffers with the area equal to the recorded ﬁnal ﬁre size which is the 2. 310 ﬁres (including the above 164 ﬁres) that were reported during cumulatively burned area."
+5,"in the course of merging the databases, we the test period; these are shown in fig."
+5,"1. carefully eliminated instances of duplicate records of the same inci- dent (e.g. different spellings, agency coding conventions), thereby fires in these samples widely vary by their ﬁnal size (fig."
+5,3a) and making the commission error negligible and ensuring that the activity period durations (fig.
+5,"in fig. 3, the abscissa axes are merged database is biased toward incident omission."
+5,this step was binned into seven intervals.
+5,"the burned area intervals are: b5 ha, important for constructing intervals for detection performance, as 5–20 ha, 20–100 ha, 100–500 ha, 500–1000 ha, 1000–5000 ha, and will be further discussed in this paper. >5000 ha."
+5,the incident duration intervals (fig.
+5,"3b) are: b6 h, 6–12 h, 12–24 h, 1–2 days, 2–7 days, 7–30 days, and >30 days."
+5,3.1.1.
+5,"selection of test samples furthermore, the 164 wildﬁres with a recorded report hour do not the national interagency coordination center (nicc) deﬁnes form a completely random subset of the 310 ﬁres."
+5,"indeed, as can be signiﬁcant ﬁres primarily as those exceeding 40 ha in timber fuel seen in fig."
+5,"3a, incidents with a greater ﬁnal burned area are also types and 120 ha in grass and brush fuel types (details are available more likely to have a record about the initial report hour."
+5,"because in ilwdp, 2008)."
+5,"we limited our analysis to wildﬁres with ﬁnal size larger incidents are generally easier to detect from space, the sample exceeding 2 ha, assuming that it is not reasonable to expect detection with 310 ﬁres yields better results for some statistics (e.g. the frac- of wildﬁres from geostationary satellites that did not burn more than tions of never detected ﬁres or ﬁres detected during the ﬁrst 24 h of 2 ha over their lifetime (cf."
+5,"hawbaker et al., 2008 who used a thresh- activity)."
+5,fig. 4 displays the joint distribution for recorded time of old of 18 ha).
+5,"in the following, these ﬁres are denoted by fk and their the day for initial reports versus the ﬁre ﬁnal size for the 164 wildﬁre"
+6,koltunov et al.
+6,"/ remote sensing of environment 127 (2012) 194–209 199 periods δtk were determined differently, depending on availability of the ﬁre initial report time (irt) in the geodatabase: - for a ﬁre with irt available: δtk = [irt—3 h, date of containment+ 2 days]; - for other ﬁres: δtk = [initial alarm date at 12 am, date of containment+ 2 days]."
+6,"the ﬁre start and end times are deﬁned as the left and the right ends of the estimated ﬁre activity intervals, respectively."
+6,"adding the above margins to the recorded ﬁre activity periods was meant to compensate for possible delays in initial report and for possible resid- ual burning after containment, similar to previous studies (feltz et al., 2003; soja et al., 2009)."
+6,"given the high population density in the study region, we believe that further increasing the ﬁre start margin is not justiﬁed."
+6,keeping these margins on a conservative side also reduces the chance of a false match of a detection to an incident record.
+6,below in section 3.3 we discuss that conservative (smaller) margins are preferable for incident-wise analyses.
+6,3.2.2.
+6,"spatio-temporal matching of ﬁre pixels spatial matching of wf-abba ﬁre pixels to geo-polygons is some- what less than completely straightforward, due to a number of reasons."
+6,a ﬁre polygon can be arbitrarily intersecting a perfectly geolocated fig.
+6,final size and recorded incident duration distributions for tested ﬁres.
+6,histograms pixel or even lie outside.
+6,"furthermore, goes pixels are not perfectly of the ﬁnal size distribution (a) and recorded incident duration distribution (b) for all 310 geolocated due to satellite position drifts, leading to an unknown and tested active ﬁres and for 164 active ﬁres with known initial report time."
+6,both ﬁre area and duration are binned into 7 groups each (see section 3.1.1).
+6,the bar locations (or widths) spatially and temporally varying error of geographic coordinates for on the area and duration axes represent group membership and not a within-group wf-abba detections.
+6,a simple approach to compensate for these uncer- mean (or range). tainties is to use a single large spatial buffer.
+6,"however, as in the case of using overly wide temporal margins (section 3.2.1), this approach may incidents."
+6,"according to these data, most incidents were reported positively bias detection quality estimates, and shift geo-location accu- between noon and 5 p.m. local time, and not a single one—between racy beyond what is practically useful (see our discussion of geolocation 3 a.m. and 6.a.m."
+6,these data are consistent with the premise that error in section 1.2.1).
+6,"another problem with selecting an overly large wildﬁres in california tend to start in the afternoon (the hottest part buffer is that a goes ﬁre pixel may coincide in time and be spatially of the day) when more people are active and available to observe close enough to more than one ﬁre incident, making unclear which them, and so they are reported soon after ignition. incidents are actually “responsible” for the ﬁre pixel."
+6,"therefore, a new ignition within the buffer distance of an older active ﬁre is more likely to be “detected” earlier than it actually started."
+6,"spatio-temporal matching of geospatial wildﬁre records against we address these issues by 1) analyzing groups of co-occurring wf-abba detections incidents, 2) using a two-buffer pixel-to-ﬁre matching rule, and 3) tracking dynamic detected events, as discussed just below and 3.2.1."
+6,fire activity period also in section 3.3.
+6,"matching a ﬁre pixel in space and time is based on the two or more ﬁre incidents are considered co-occurring at the spatio-temporal proximity of the pixel to ﬁnal size polygons {pk}, spatial scale of the goes pixel if their activity periods overlap and k = 1,…, 402, of active ﬁres."
+6,"for a k-th ﬁre, its estimated activity their ﬁnal perimeter polygons pk are less than 6 km (approximately one goes-w tir pixel over california) apart."
+6,the co-occurrence anal- ysis is facilitated by extracting the following categories from the 354 active ﬁre incidents that started during the test period: a.
+6,"fires co-occurring with one or more active wildﬁre incidents that started earlier, according to the estimated activity periods (section 3.2.1). b."
+6,fires not in category a) that co-occur with a larger ﬁre started at the same (up to 10 min) time.
+6,fires falling in categories a) or b) are excluded from the test sample for assessing detection timeliness.
+6,"this leads to a conservative assessment of detection timeliness, because if a ﬁre pixel matches to a group of co-occurring ﬁres, then only one (the older or larger) ﬁre is assumed detected."
+6,"however, all 402 ﬁres are included in the pixel-wise true/false positive analysis."
+6,"thus, the test sample for assessing detection timeliness included 310 of the 354 ﬁres reported during the test period of which the initial report time was recorded for 164 ﬁres, as was mentioned above in section 3.1.1."
+6,the pixel-to-ﬁre matching rule uses two distance thresholds b1 fig.
+6,report time vs. ﬁnal size.
+6,"scatter plot of the report time and ﬁnal size distribution and b2, where b1 b b2, for example b1 = 5.6 km, b2 = 11.2 km."
+6,below (on a logarithmic scale) for wildﬁres with known report time. in section 4.1 we discuss in detail different choices of validation
+7,200 a.
+7,koltunov et al.
+7,/ remote sensing of environment 127 (2012) 194–209 control parameters and their implications for the validation results.
+7,a false alarm).
+7,"in practice, different users would choose different ﬁre pixel (x, tdet) centered at a spatial location x detected in a frame balances between these two types of error."
+7,"in the next section we acquired at detection time tdet matches ﬁre fk , if and only if fk is active provide what we believe is a reasonable example of an event analysis at tdet, and at least one of the following conditions holds: procedure, that we call an event tracker. - x is within a buffer distance b1 from the ﬁnal ﬁre perimeter polygon 3.3.2."
+7,"event tracker pk; our automated algorithm for extracting and tracking events across - x is within a buffer distance b2 from the ﬁnal ﬁre perimeter polygon time is based on analyzing the temporal evolution of spatially pk , and ﬁre fk is the closest active ﬁre to the ﬁre pixel (x, tdet). connected components (c.c.) formed by wf-abba ﬁre pixels in the goes image coordinate system."
+7,a connected component is conven- 3.3.
+7,tracking and validating detected events tionally deﬁned as a spatially connected group of pixels in the image.
+7,"the algorithm has a control parameter which we call the this section discusses the rationale and procedure for aggregating history length h, which speciﬁes the size of a temporal window wf-abba pixel-wise detections in space and time into objects that during which spatially overlapping (up to the buffer distance b2 we term events. deﬁned in section 3.2.2) connected components are considered the same event."
+7,"for a frame collected at detection time tdet, the algorithm 3.3.1."
+7,"events proceeds by the following steps: let a detected event (or simply an event, hereafter) be deﬁned as a set of wf-abba designated ﬁre pixels that are considered by the user 1."
+7,partition ﬁre pixels into connected components. as a possible single ﬁre incident.
+7,"as the deﬁnition suggests, a detected 2."
+7,"initially, when past wf-abba detections are not available, each c.c. event may or may not correspond to an actual wildﬁre."
+7,"similar to is considered a new event. actual ﬁre incidents, detected events are dynamic objects: they may 3."
+7,"when past wf-abba detections are available, for each ﬁre pixel be identiﬁed in multiple (not necessarily continuous) frames and rep- (x, tdet) ﬁnd the nearest location yx that was ﬂagged as a ﬁre resented by one or more pixel locations per frame."
+7,we also postulate pixel at least once during last h hours.
+7,"if (x − yx( b b2, then pixel that every pixel that is ﬂagged as a ﬁre pixel by the wf-abba is a (x, tdet) is termed a re-detected ﬁre pixel."
+7,let e(yx) denote the member of exactly one event.
+7,it is also understood from the above event corresponding to yx.
+7,"because e(yx) was detected before tdet, deﬁnition that pixel-members of an event should have similar spatial it is considered an existing event at time tdet. and temporal properties."
+7,"at any given time, an event can be of one of the following two types: the following steps assign pixels to existing or new events."
+7,"these steps are illustrated in fig. 5, where re-detected pixels are light grey a. an existing event, i.e. an event that was already detected by the and other pixels are dark grey."
+7,the text inside each pixel denotes algorithm in previous images and therefore assumed to have the event to which the pixel will be assigned by steps 4 and 5 below. been reported to ﬁrst responders; or b. a new event.
+7,"connected components with no re-detected pixels become new events (fig. 5a) that, as was discussed earlier, may or may not to adequately evaluate and represent algorithm performance with match true ﬁre incidents. respect to the number or timeliness of detecting wildﬁre incidents, a 5."
+7,for connected components that do include re-detected pixels validation analysis should primarily focus on validating only new (fig. 5b–h) the analysis is slightly more complex: events.
+7,"indeed, a repeat detection of an existing event is expected to a) first, each re-detected pixel-member (x, tdet) is assigned to be acted upon by the user rather differently from detection of a new its corresponding existing event e(yx) determined by step 3 event."
+7,"for example, a new event may be assigned a higher priority (i.e. all light-grey pixels in fig. 5b–h are assigned a label). for veriﬁcation and response."
+7,"if an event is veriﬁed and ﬂagged false positive, its re-detection (i.e. repeat detection) in subsequent images may not be as costly as its ﬁrst appearance."
+7,"if it is ﬂagged true positive, its re-detection in subsequent frames may be of little infor- mational value, as far as timeliness is concerned."
+7,"in any case, a re-detection of an existing event could often be safely ignored by users interested primarily in maximizing timeliness of detection."
+7,"also, when an actual ﬁre incident results in multiple ﬁre pixels forming the same new event, the value of the detection information may not be directly proportional to the number of ﬁre pixels matching this incident."
+7,"likewise, the user cost due to false information, i.e. a false positive new event, is not simply a multiple of the number of pixel-members of the event."
+7,"since tactical operational decisions are generally made on a per-event basis and in near real time, it is helpful to imagine a simpli- ﬁed scenario in which an analyst is to make decisions about alerting ﬁrst responders, solely based on wf-abba outputs."
+7,"the analyst issues an alarm only if (s)he decides it is a new event, i.e. it will not be a repeat alert about the same possible wildﬁre."
+7,what should be the criteria for deciding whether this is a new event or an existing one?
+7,"obviously, the events analysis should be based only on the informa- fig."
+7,event tracking: assignment of pixels to events.
+7,event tracking: an illustration for tion that is available at the time of decision making.
+7,"ideally, one assignment of wf-abba ﬁre pixels (light grey and dark grey square patches) to existing events (e1, e2, …) or new events (enew, enew1, enew2, …), depending on wants to simultaneously minimize the chance of ignoring a recurring the pixel spatial connectivity and proximity to recent historic wf-abba ﬁre pixels. or a new ignition and the chance of repeatedly announcing an alarm the text inside each square denotes the event to which this pixel is being assigned regarding the same phenomenon (whether an actual wildﬁre or a by steps 4 and 5 described in section 3.3.2."
+8,koltunov et al.
+8,"/ remote sensing of environment 127 (2012) 194–209 201 b) next, pixel-members that are not re-detected pixels (dark obviously, the probability ℙ(u|e) is easily approximated by the pixels in fig. 5) are assigned depending on the set of events fraction of new events detected by wf-abba that did not match any to which re-detected pixel-members (light grey pixels) of wildﬁre incident records."
+8,"thus, the problem of ﬁnding a non-trivial this c.c. have been assigned by rule a) above."
+8,"speciﬁcally, (i.e. non-zero) lower bound for the number of false positive new i. if all re-detected pixel-members of this c.c. are assigned to events is essentially reduced to the problem of ﬁnding a non-trivial the same event, then so are all other pixel-members of this lower bound for ℙ(f|u), or equivalently, a value of q that is between c.c. (i.e. dark pixels of the connected components shown in 0 and 1."
+8,"our proposed approach to addressing this problem is to use fig. 5d–f are labeled with the same label as the neighboring temporal difference in the high resolution landsat tm/etm+ imagery light-grey pixels); to assess the likelihood that a new wild land burn scar appeared some ii. otherwise, all pixel-members of this c.c. that are not time during the period between the chosen landsat images before re-detected pixels (dark pixels) are assigned to new events, and after the wf-abba detected a new event."
+8,"in mathematical terms, one event per pixel (as illustrated in fig. 5g and h). this can be written as: an alternative option to ii) is to assign all of these pixels to one of pðfjuþ ¼ pðfjnew burnþpðnew burnjuþ the existing events to which the re-detected pixels were assigned by ð3þ rule a): for example, in fig. 5h all three dark grey pixels would be þpðfjno new burnþpðno new burnjuþ: labeled with the same label, say “e2”."
+8,these two options represent two opposite extreme choices allowing one to assess stability of the a chosen procedure that detects possible new burns should mini- analysis results.
+8,"indeed, following the former option, as we did, mize the chance of omitting wildﬁre burns that are detectable by produces a greater number of new events, thereby potentially biasing wf-abba, in which case the probability ℙ(f | no new burn) ≈ 1 (see estimated performance toward more true positives, more timely section 4.1), and therefore: detection, and more false positives."
+8,"in turn, the latter option poten- tially increases incident detection latency and omission rate while pðfjuþ≈pðfjnew burnþpðnew burnjuþ potentially reducing the number of false positive new events (see ð4þ section 4.1 further discussing validation parameter choice). þpðno new burnjuþ≥pðno new burnjuþ: the event-to-ﬁre matching rule is based on the pixel-to-ﬁre matching rule described in section 3.2.2."
+8,"speciﬁcally, an event e it follows from eq. (4) that one can use q = ℙ(new burn|u) in matches ﬁre fk if at least one pixel assigned to e by the event tracker eq. (2), leading to the following bounds: matches fk."
+8,"the event tracker assigns a ﬁre pixel to a new or existing event based pðfjeþ≥1−pðnew burnjuþ ða lower boundþ ð5þ on the recent (up to h hours back in time) history of wf-abba detec- tions at adjacent pixel locations, which makes the event-wise perfor- pðfjeþ≤pðujeþ: ðan upper boundþ ð6þ mance measures less sensitive to the end time uncertainty than pixel-wise metrics."
+8,"for example, without event tracking, if the beyond- in practice, we implemented ℙ(new burn|u) estimation as follows. containment margin (deﬁned in section 3.2.1) is too small for incident we selected a random sample {en}, n = 1,…,n of new events detected fk and wf-abba keeps detecting ﬁre pixels after δtk, these detections by wf-abba that were not matched by incidents in the geodatabase. will be deemed false positives."
+8,"in contrast, the event tracker may assign figs. 6, 7, and 8 illustrate our approach."
+8,fig. 6 shows the locations of these pixels to an existing (i.e. previously detected) event that was suspected wf-abba false positive new events {en} and the footprints matched to fk by the above event-to-ﬁre matching rule.
+8,in this case of the landsat scenes used to evaluate them.
+8,"for each of these events these pixels are not considered positives, and thus obviously not false we deﬁned a region of interest (roi) that is a circular buffer of radius positives."
+8,"on the other hand, the event tracker assumes that the proba- b2 around the wf-abba event being tested."
+8,"without loss of generality, bility that a true positive new event (i.e. a new wildﬁre incident) is fig. 7 displays rectangular rois centered at events e1 and e2."
+8,"in each roi, detected within h hours after a false positive was committed within we computed an adjusted difference in the scaled normalized burn the buffer distance b2 is negligibly small."
+8,"therefore, when such a coinci- ratio index (dnbr, van wagtendonk et al., 2004; key & benson, 1999) dence happens, the event tracker will fail to recognize a new event. between the chosen landsat images before and after the wf-abba detected the new event."
+8,the algorithm for computing the adjusted 3.3.3.
+8,"interval estimation of false positive rates by matching with normalized burn ratio difference (dnbra) is described in the appendix. geo-spatial wildﬁre records and burn scar detection the dnbra retains high sensitivity of dnbr to actual burns, and mark- the interval estimation for the ℙ(f|e), which denotes the condi- edly reduces the number of falsely detected burns by dnbr over various tional probability that a new event e is a false positive, is based on surfaces (figs. 7 and 8), which we found helpful for subsequent visual the complete probability formula: interpretation."
+8,"areas with dnbra> 100 (brighter areas in dnbra images in figs. 7 and 8) were candidates for new scars and were subject pðfjeþ ¼ pðfjuþpðujeþ þ pðfjmþpðmjeþ; ð1þ to additional visual inspection in both pre-event and post-event rgb- composite images of tm/etm+ band combinations 7,4,3 (fig."
+8,"the where “m” and “u” abbreviate “matched” and “unmatched”, respec- new burn scar-candidates with area less than amin hectares were tively, and denote outcomes of the event-to-ﬁre matching according rejected as unlikely to have caused the wf-abba detection being to the rule deﬁned in section 3.3.2."
+8,"for example, ℙ(m|e) is the prob- validated (see section 4.1 discussion of speciﬁc values of amin ability that a randomly chosen wf-abba event is matched to a wild- and other parameters)."
+8,"otherwise, the burn scar-candidates were con- ﬁre incident record in the geodatabase."
+8,the probability ℙ(f|m) is sidered new burns.
+8,"if a new active ﬁre was observed in the post-en assumed to be negligibly small, given that the database is compiled landsat image, it was also considered a new burn for the purpose of from ofﬁcial incident records and the ﬁre activity period margins this section. and spatial match buffers are narrow (section 3.2.1)."
+8,"thus, ignoring initially, the criteria for selecting a landsat image pair for an the second term on the right-hand side of eq. (1), we obtain that for unmatched wf-abba event en detected at time tn were the following: any number q, such that ℙ(f|u) ≥ 1-q, the following inequality holds: - landsat 5, and ð1−qþpðujeþ≤pðfjeþ≤pðujeþ: ð2þ - 8 to 64 days between acquisitions, and"
+9,202 a.
+9,koltunov et al.
+9,/ remote sensing of environment 127 (2012) 194–209 fig.
+9,unmatched events and landsat tiles.
+9,locations of the suspected false positive new events (white circles) that were veriﬁed using landsat images (see section 3.3.3 for details).
+9,"labeled rectangles show the geographic coverage and the path-row numbers of the landsat multitemporal scenes used for veriﬁcation. - tn is no less than two days apart from the image acquisition dates, and among these parameters, b1, b2, and h were found the most inﬂu- - low-to-none cloud cover over the corresponding roi. ential."
+9,"the minimal values for b1 and b2 can easily be suggested as approximately half a pixel and one pixel linear size, respectively."
+9,"when no new burns were detected anywhere in the roi for the the buffer size indirectly indicates the maximal acceptable error of initial landsat image pair but a portion of the roi was under cloud geolocation for wf-abba detections (section 1.2.1), with smaller cover, that portion was additionally checked with an alternative values leading to more conservative estimates of detection quality landsat pair or pairs, including landsat 7."
+9,any new burns detected but implying more accurate geolocation of true positives.
+9,"increasing in an image pair spaced by more than 32 days, were checked with history length for event tracking essentially turns off alarms over lon- alternative images, where available, for evidence that these new ger periods, biasing the results toward fewer false alarms and fewer burns appeared more than one day before or after en was detected, detected actual wildﬁre incidents."
+9,"in the following, the performance in which case that new burn was rejected."
+9,events for which insufﬁ- statistics are presented for the six options given below: cient cloud-free landsat data were considered unveriﬁed and removed from the sample.
+9,"missing values in landsat images, e.g. due to scan line 1) b1 = 3.4 km, b2 = 6.8 km, h = 48 h."
+9,"the distance of 3.4 km is correction failure in landsat 7, were treated as clouds."
+9,"section 4.1 pro- approximately 0.6 times the linear size (in the north–south direc- vides additional information on the interval estimation implementation. tion) of the largest goes-w tir pixel in california. 2) b1 = 3.4 km, b2 = 6.8 km, h = 72 h."
+9,"results and discussion 3) b1 = 5.6 km, b2 = 11.2 km, h = 48 h; 4) b1 = 5.6 km, b2 = 11.2 km, h = 72 h; 4.1."
+9,"validation experiment parameters 5) b1 = 7.5 km, b2 = 15.0 km, h = 48 h; 6) b1 = 7.5 km, b2 = 15.0 km, h = 72 h; we feel it is important to mention up-front that the validation results presented and discussed in the following sections, ﬁgures, incident detection latency distributions (fig. 9) and ﬁre ﬁnal size and tables, are stable with respect to the choice for free parameters and duration distributions for detection timeliness groups (figs. 10 in our validation experiments: and 11) are presented for b1 = 5.6 km, b2 = 11.2 km, and h = 72 h."
+9,"we will discuss these results below in section 4.3. - buffers b1 and b2 used for spatial match, event tracking, and false given one of the above six choices for b1, b2, and h, different rea- positive rate correction; sonable combinations of other validation parameters do not change - assumed margins for the recorded ﬁre activity period (section 3.2.1); any of the presented statistics by more than 3% of their respective ab- - history length, h, for tracking detected events (section 3.2.2); solute values."
+9,"for example, when we use the alternative version of - the choice between rules for assigning pixels to events in step 5.b).ii) rule 5.b).ii) in section 3.3.2 for assigning pixels to events, the upper in section 3.3.2. bound for the average number of false positive new events per 24 h"
+10,koltunov et al.
+10,/ remote sensing of environment 127 (2012) 194–209 203 fig.
+10,new burn analysis illustration.
+10,"conceptual illustration of new burn analysis for two suspected false positive new wf-abba events, e1 and e2, using pre- and post-event landsat images (see section 3.3.3 and appendix for details)."
+10,the red outlined polygon represents an actual new burn.
+10,"the color rgb-composite images use landsat bands 7, 4, and 3, respectively."
+10,8. dnbra vs. dnbr.
+10,new burn pre-screening with dnbra vs. dnbr in a landsat scene (path-row 43-34).
+10,red outlined polygons represent actual burned areas.
+10,nearly all other high values in both dnbr and dnbra images are not burns.
+10,"the color rgb-composite image on the left uses landsat bands 7, 4, and 3, respectively"
+11,204 a.
+11,koltunov et al.
+11,/ remote sensing of environment 127 (2012) 194–209 (fig.
+11,"we applied our analysis to false positive events obtained with the values of b1, b2, and h, as listed in options 2) and 4) above."
+11,"furthermore, the assumption that ℙ(f|no new burn) ≈ 1, which justiﬁes the validity of the bounds (5)-(6), was experimentally con- ﬁrmed based on an ancillary experiment with 30 randomly chosen known actual wildﬁre incidents using 19 bi-temporal landsat images."
+11,"in this experiment, the new burns were clearly visible for 96.7% of the incidents."
+11,"the probability ℙ(f|no new burn) is even greater, which can be established via bayes' theorem using the fact that both new burns and wildﬁres are rare events (further details omitted)."
+11,pixel-wise statistics the pixel-wise performance statistics are summarized in the fig.
+11,incident detection latency relative to initial report.
+11,wf-abba detection latency ﬁrst two blocks of rows in table 1.
+11,these pixel-wise statistics were relative to recorded initial reports (the difference between wf-abba ﬁrst alarm time obtained without event tracking.
+11,the last two blocks of rows show the and the initial report time) for new events detection.
+11,incidents included in the sample are 164 tested incidents with known report times (sections 3.1.1 and 3.2.2).
+11,the top event-wise statistics.
+11,these data are presented for different choices of graph displays a histogram of the relative latency distribution.
+11,"in the bottom graph, the validation parameters and wf-abba ﬁre conﬁdence levels."
+11,"dividing for each latency value, δτ, the value of the cumulative distribution function represents a lower bound for the number of true positive pixels in this table by the the estimated proportion of incidents detected earlier than δτ minutes since the initial total number of detections (e.g."
+11,40.75/(40.75+ 15.08)) shows that 73% report. to 74% of ﬁre pixels detected at all conﬁdence levels are matched in the recorded wildﬁre incidents.
+11,"the actual pixel-wise performance is expected to be higher, because, as we discussed in several places above, some of the unmatched and therefore deemed false positive (table 1) changes from 5.26 to 5.2596, and all other results presented pixels may actually represent wildﬁres omitted in the incident report in the ﬁgures and tables remain the same."
+11,"similarly, a bounding box database we used."
+11,"additionally, unmatched detections may include, (a minimal bounding rectangle) was used as a computationally efﬁ- for example, agricultural ﬁres and controlled burns. cient surrogate for ﬁre perimeter polygons."
+11,"because a ﬁre perimeter can be a very irregular shape, such a simpliﬁcation could potentially 4.3."
+11,incident detection and its timeliness affect our validation results.
+11,"it turns out it did not: neither for pixels nor for events, as it is very rare that a buffered area of a goes ﬁre for presentation purposes, we deﬁned six non-exclusive groups of pixel overlaps with the bounding box but does not overlap with the ﬁre incidents: perimeter itself."
+11,for interval estimation of the false positive rates with landsat 1.
+11,"never detected ﬁres. imagery (section 3.3.3), we randomly selected n = 122 (~14%) of 2."
+11,"eventually detected ﬁres. suspected false positive events, and the burned area threshold 3."
+11,"detected on the same date (if the irt is unknown) or in less than amin = 2 ha, 5 ha, and 10 ha."
+11,"based on landsat data availability, as 12 h (if irt is known). discussed in section 3.3.3, we were able to verify 99 of 122 events 4."
+11,detected in less than 2 h after the initial report.
+11,fire ﬁnal size distribution for detection timeliness groups.
+11,new event detection by wf-abba: histograms of ﬁnal size distributions (dark blue bars) for undetected ﬁres (a) and for ﬁres in ﬁve (b)–(f) detection timeliness categories.
+11,"white bars in all plots display all tested active ﬁres, and beige color bars depict tested ﬁres with known initial report time."
+11,fire area is binned into 7 groups (see section 3.1.1).
+11,the bar locations (or widths) on the area axis represent area group membership and not a within-group mean (or range).
+12,koltunov et al.
+12,/ remote sensing of environment 127 (2012) 194–209 205 fig.
+12,recorded incident duration distribution for detection timeliness groups.
+12,new event detection by wf-abba: histograms of the recorded incident duration distributions (black bars) for undetected ﬁres (a) and for ﬁres in ﬁve (b)–(f) detection timeliness categories.
+12,"white bars in all plots display distributions of all analyzed ﬁres, as detailed in the respective plot legends."
+12,fire duration is binned into 7 groups (see section 3.1).
+12,the bar locations (or widths) on the area axis represent group membership and not a within-group mean (or range).
+12,detected in less than 1 h after the initial report. data delivery and processing time.
+12,included in the sample are 164 tested 6.
+12,detected before the initial report. incidents with known report times (sections 3.1.1 and 3.2.2).
+12,"as was discussed in section 3.1.1, this sample does not appear to be an entirely the statistics for these detection timeliness groups are presented random subset of the 310 recorded ﬁres."
+12,in particular (fig.
+12,"3a), smaller in figs. 9 through 11, summarized in table 2, and discussed below incidents are underrepresented in the 164-ﬁre sample."
+12,"therefore, we in this subsection. also present the timeliness information in a stratiﬁed form in figs."
+12,"10 detailed information on detection timeliness is presented in fig. 9, and 11."
+12,"figs. 10 and 11 display burned area and incident duration distri- which shows a histogram of the wf-abba detection latency relative bution histograms for the above six groups, respectively."
+12,the area and to the initial report from conventional sources.
+12,the relative latency is duration axes are binned into the same seven intervals as histograms in deﬁned as the difference between the time of the ﬁrst alarm from tem- fig. 3 (see section 3.1 for details).
+12,"overall, wf-abba detected ~30% of porally ﬁltered wf-abba products and the recorded time of initial the ﬁres within 2 h of the initial report time (see table 2)."
+12,it took the reports.
+12,"for example, negative values of latency indicate wf-abba operational agencies and ﬁreﬁghters from 6 h to more than a month to detection prior to initial report."
+12,the latency does not account for goes contain these ﬁres (fig.
+12,11d) that burned from less than 20 ha to more table 1 pixel-wise and event-wise detection statistics.
+12,pixel-wise and event-wise detection statistics under different choices of validation parameters (see section 4.1).
+12,event tracking history length h = 0 stands for “no event tracking”.
+12,"performance statistic buffer sizes and events tracking values of the performance statistics per wf-abba ﬁre detection conﬁdence history length (b1, b2, h) class medium high partly clouded saturated processed all ﬁre classes ﬂag = 4 ﬂag = 3 ﬂag = 2 ﬂag = 1 ﬂag = 0 with ﬂags: 0–4 pixel-wise: 3.4 km, 6.8 km, 0 h 1.10 6.17 9.95 0.32 23.22 40.75 lower bound for mean true positive pixels per 24 h 5.6 km, 11.2 km, 0 h 1.13 6.22 9.98 0.33 23.44 41.10 7.5 km 15.0 km, 0 h 1.13 6.24 10.06 0.34 23.58 41.35 pixel-wise: 3.4 km, 6.8 km, 0 h 0.51 1.08 2.09 0.83 10.58 15.08 upper bound for mean false positive pixels per 24 h 5.6 km, 11.2 km, 0 h 0.49 1.03 2.05 0.81 10.36 14.73 7.5 km 15.0 km, 0 h 0.48 1.00 1.97 0.81 10.21 14.48 event-wise: 3.4 km, 6.8 km, 48 h 0.062 0.096 0.317 0.034 0.600 1.11 lower bound for mean true positive new events per 24 h 3.4 km, 6.8 km, 72 h 0.050 0.079 0.300 0.034 0.533 1.00 5.6 km, 11.2 km, 48 h 0.062 0.096 0.329 0.050 0.634 1.17 5.6 km, 11.2 km, 72 h 0.050 0.079 0.312 0.050 0.566 1.06 7.5 km 15.0 km, 48 h 0.062 0.101 0.355 0.058 0.679 1.26 7.5 km 15.0 km, 72 h 0.050 0.084 0.338 0.058 0.605 1.14 event-wise: 3.4 km, 6.8 km, 48 h 0.242 0.566 1.046 0.492 2.909 5.26 upper bound for mean false positive new events per 24 h 3.4 km, 6.8 km, 72 h 0.233 0.566 1.001 0.457 2.614 4.89 5.6 km, 11.2 km, 48 h 0.242 0.566 1.034 0.475 2.873 5.19 5.6 km, 11.2 km, 72 h 0.233 0.566 0.989 0.458 2.580 4.83 7.5 km 15.0 km, 48 h 0.242 0.559 1.008 0.470 2.830 5.11 7.5 km 15.0 km,72 h 0.233 0.559 0.962 0.454 2.539 4.75"
+13,206 a.
+13,koltunov et al.
+13,/ remote sensing of environment 127 (2012) 194–209 table 2 detection timeliness summary.
+13,fire detection timeliness summary statistics under different choices of validation parameters (see sections 4.1 and 4.3).
+13,"detection timelines group number of buffer sizes and events tracking when detecting by pixels when detecting by new events only tested ﬁres history length (b1, b2, h) fires in group % of tested ﬁres in group fires in group % of tested ﬁres in group eventually detected 310 3.4 km, 6.8 km, 48 h 123 39.7% 119 38.4% 3.4 km, 6.8 km, 72 h – – 117 37.7% 5.6 km, 11.2 km, 48 h 131 42.3% 126 40.7% 5.6 km, 11.2 km, 72 h – – 124 40.0% 7.5 km 15.0 km, 48 h 138 44.5% 130 41.9% 7.5 km 15.0 km, 72 h – – 128 41.3% detected same day or in less than 12 h 310 3.4 km, 6.8 km, 48 h 93 30.0% 92 29.7% 3.4 km, 6.8 km, 72 h – – 91 29.4% 5.6 km, 11.2 km, 48 h 96 31.0% 95 30.7% 5.6 km, 11.2 km, 72 h – – 94 30.3% 7.5 km 15.0 km, 48 h 100 32.3% 98 31.6% 7.5 km 15.0 km, 72 h – – 97 31.3% detected in less than 2 h 164 3.4 km, 6.8 km, 48 h 52 31.7% 51 31.1% 3.4 km, 6.8 km, 72 h – – 50 30.5% 5.6 km, 11.2 km, 48 h 52 31.7% 51 31.1% 5.6 km, 11.2 km, 72 h – – 50 30.5% 7.5 km 15.0 km, 48 h 52 31.7% 52 31.7% 7.5 km 15.0 km, 72 h – – 51 31.1% detected in less than 1 h 164 3.4 km, 6.8 km, 48 h 22 13.4% 22 13.4% 3.4 km, 6.8 km, 72 h – – 22 13.4% 5.6 km, 11.2 km, 48 h 22 13.4% 22 13.4% 5.6 km, 11.2 km, 72 h – – 22 13.4% 7.5 km 15.0 km, 48 h 22 13.4% 22 13.4% 7.5 km 15.0 km, 72 h – – 22 13.4% detected before initial report 164 3.4 km, 6.8 km, 48 h 5 3.1% 5 3.1% 3.4 km, 6.8 km, 72 h – – 5 3.1% 5.6 km, 11.2 km, 48 h 5 3.1% 5 3.1% 5.6 km, 11.2 km, 72 h – – 5 3.1% 7.5 km 15.0 km, 48 h 5 3.1% 5 3.1% 7.5 km 15.0 km, 72 h – – 5 3.1% than 5000 ha each (fig."
+13,"a substantial number of ﬁres, ~13% of the the incident occurs within h hours after the same or an adjacent tested ﬁres, were detected in less than 1 h after the initial report pixel location was ﬂagged as a ﬁre by the wf-abba."
+13,table 2 demon- (table 2).
+13,"remarkably, a few ﬁres were detected even before the initial re- strates that this omission error (i.e. the difference between columns port."
+13,"these include ﬁres named: “bassets”, “butte 2”, “marysville”, 4 and 6) is very small for our dataset."
+13,"‘rollins”, “skyway”."
+13,10f and 11f show ﬁnal size and duration distri- substantial differences between pixel-wise and event-wise per- butions for these incidents.
+13,as might be expected and is demonstrated in formance statistics in table 1 suggest that the wf-abba is better at fig.
+13,"11a, the highest fraction of undetected ﬁres are short-lived ﬁres, with re-detecting active ﬁres than at initial detection."
+13,"by its design, the less than 24 h activity period, comprising ~44% of never detected ﬁres. event tracker eliminates many re-detected false positive pixels and we observe in fig."
+13,11b that the fraction of eventually detected ﬁres counts multi-pixel false positives only once per event.
+13,"thus, many increases with ﬁre duration."
+13,"furthermore, 80% of never detected ﬁres of the remaining false positive new events (last row and last column are ﬁres with ﬁnal size under 100 ha (fig."
+13,"analogously, as illus- in table 1) are represented by a small number of wf-abba ﬁre pixels trated in fig."
+13,"10b, wf-abba eventually detects larger ﬁres with a high each, and they tend to recur after more than 3 days, if ever."
+13,"the probability: 80% of ﬁres with ﬁnal size exceeding 500 ha were detected event-wise performance of wf-abba could be improved, by using a in our experiment."
+13,"the smallest ﬁre eventually detected by wf-abba more advanced event tracking algorithm to take into account detec- was 2.1 ha (“beauty”), and the smallest ﬁre detected before the initial tion black-out periods due to e.g. cloud cover."
+13,this could be a subject report burned 12.1 ha (“rollins”). for future research.
+13,"as mentioned at the end of section 3.3.1, more than one wf-abba table 3 presents the estimated lower and upper bounds for false event can match a wildﬁre incident, depending on the chosen algo- positive new events."
+13,these bounds were obtained by combining wild- rithm for extracting events from pixel-wise detections.
+13,"on average, ﬁre ofﬁcial reporting information and multitemporal landsat images our event tracking algorithm identiﬁed 1.65 new events per eventual- (section 3.3.3) under different choices for the validation control ly detected incident (under b1 = 5.6 km, b2 = 11.2 km, h = 72 h). parameters discussed in section 4.1."
+13,"the width of these intervals however, protracted incidents tended to be detected as new events and their variability with respect to control parameters reﬂect the more often due to temporal gaps in detection of these ﬁres (we various uncertainties in the validation process and datasets."
+13,"the sec- believe, mainly from variable cloud cover, not accounted for in this ond column of table 3 shows that an estimated 14% to 33% of the new paper, and ﬁre regime dynamics) and when detected pixels for an events detected by wf-abba but unmatched by the incident reports, incident do not form a connected component."
+13,"for instance, the were not conﬁrmed to be false positive wildﬁres."
+13,"in other words, for “perkins” ﬁre resulted in 5 new wf-abba events during one month this fraction of wf-abba events the results of landsat multitemporal of its activity, and the “cottonwood” incident of august 5, 2006 was analysis were not inconsistent with the possibility that wf-abba had matched by two simultaneously detected new events, because the correctly detected a wildﬁre omitted in the incident geodatabase. corresponding wf-abba detections did not represent adjacent pixels following the proposed validation methodology, narrower intervals in the goes image. could be obtained with additional time investment into landsat furthermore, the tracking algorithm may ignore an actual wildﬁre image analysis and compilation of ﬁre reporting information. incident that can be successfully detected by pixel-to-wildﬁre we acknowledge the fact that ofﬁcial incident reporting information matching (section 3.2.2)."
+13,"this happens when the ﬁrst detection of may never be a perfect truth dataset, including systematic biases and"
+14,koltunov et al.
+14,/ remote sensing of environment 127 (2012) 194–209 207 table 3 and a new channel centered at 10.3 μm.
+14,the elevated saturation tem- interval estimation of incident-wise false positive rates.
+14,"interval estimation of the aver- perature of 400 k in the 3.9 μm band will limit the number of age number of false positive new events per 24 h, based on veriﬁcation of 99 randomly chosen suspected false positive new events, using multitemporal landsat images (see saturated ﬁre pixels to less than 5% of all observed ﬁres."
+14,"the enhanced also sections 3.3.3, 4.1, and 4.3). capabilities of goes-r are expected to signiﬁcantly improve the timeli- ness and reliability of geostationary wildﬁre detection."
+14,"buffer sizes, events tracking unmatched new events mean false positive history length, and minimal for which a new burn new events per 24 h new burn area threshold was found after landsat 5."
+14,"summary and conclusions lower upper bound (b1, b2, h, amin) image analysis (q) bound (from table 1) the main contributions of the present paper include: 3.4 km, 6.8 km, 72 h, 2 ha 17 of 99 = 17% 4.06 4.89 3.4 km, 6.8 km, 72 h, 5 ha 16 of 99 = 16% 4.11 4.89 1) a new methodology for validating a geostationary ﬁre product 3.4 km, 6.8 km, 72 h, 10 ha 14 of 99 = 14% 4.21 4.89 5.6 km, 11.2 km, 72 h, 2 ha 33 of 99 = 33% 3.24 4.83 with respect to detection timeliness, including the following new 5.6 km, 11.2 km, 72 h, 5 ha 27 of 99 = 27% 3.53 4.83 features: 5.6 km, 11.2 km, 72 h, 10 ha 20 of 99 = 20% 3.86 4.83 - evaluating incident detection timeliness and reliability by combining geospatial ﬁre records from operational agencies and multitemporal landsat image analysis to identify new burn scars; which enables random errors."
+14,"importantly, our proposed validation methodology is detection timeliness analysis with minute accuracy, makes validation consistent with this reality."
+14,"in addition, we have recognized that while independent of the satellite active ﬁre detection products, provides any kind of error in the database is possible, not all kinds of errors are large test samples for estimating true positive rates, and most impor- equally probable."
+14,"furthermore, after proper preprocessing steps, we tantly, yields reliable intervals (lower and upper bounds) for the often can make reasonable assumptions about the statistical direction number of false positive incidents; of the remaining major sources of error (e.g. underestimation bias or - an automatic algorithm for extracting potential new ignitions overestimation bias) and also about the types of errors the probability (event tracking) from wf-abba ﬁre pixels; of which is negligibly small."
+14,"in this way, we have been able to derive 2) systematic validation of wf-abba ver."
+14,"6.1 temporally ﬁltered performance measures that are both useful and reliable, even though product with respect to detection timeliness, incident-wise metrics, the wildﬁre report database is not to be completely trusted."
+14,we want and conventional performance measures over a large region in to emphasize again that our method is speciﬁcally designed to evaluate western united states with signiﬁcant ﬁre activity and a wide timeliness and reliability of wildﬁre incidents.
+14,"having said that, we also range of biophysical conditions; and result interpretation; believe that some of these ideas can be productive for validation of 3) results stability information and analysis under different choices active ﬁre products with respect to pixel-wise metrics. of the validation parameters."
+14,we conclude this section by several additional remarks regarding our analyses and the presented results.
+14,"analysis of reasons for ﬁre our test site, the state of california represents a densely populated omission by wf-abba during the test period is beyond the scope of and well-monitored region, in which conventional ﬁre identiﬁcation this paper."
+14,these reasons may include the lack of wf-abba or goes normally comes before satellite detection.
+14,"nevertheless, our results imager sensitivity, cloud cover or topography preventing the thermal suggest that even though wf-abba was not speciﬁcally designed to signal from reaching the sensor, low instantaneous ﬁre signal, or minimize the time to initial detection of a wildﬁre, a substantial frac- other reasons."
+14,"examples of other interesting questions that future tion of wildﬁre incidents were detected within 1 h after the ﬁrst follow-up studies could address include: performance of the temporally initial report from conventional sources and on a few occasions— unﬁltered wf-abba product, the effect of including low-possibility ﬁre even before the recorded initial reports. pixels, performance evaluation that is conditional on availability of in the next few years we expect a substantial increase in the cloud-free observations, and studying other potentially complex feed- utilization of geostationary ﬁre products over the continental u.s. backs between cloud cover and wf-abba performance."
+14,consistent and around the world.
+14,"in particular, the wf-abba has undergone with its emphasis on detection timeliness, this paper has analyzed signiﬁcant upgrades with the release and implementation of the wf-abba performance over a season of substantial wildﬁre activity global geostationary wf-abba (version 6.5.006) in 2010 (prins et al., and danger in the study area."
+14,"furthermore, quite obviously, timeliness 2010)."
+14,improvements include the following: of wildﬁre identiﬁcation from goes beneﬁts from high frequency of algorithm applications.
+14,"however, for version 6.1, the wf-abba was 1) opaque cloud product indicating where ﬁre detection is not only applied to goes imagery acquired every 30 min, which contrib- possible. utes to delays in detection with respect to initial on-site reports."
+14,"if a 2) fire radiative power and dozier instantaneous estimates of ﬁre ﬁre is immediately detected by wf-abba after the ignition, the minimal size and temperature. latency is 30 min + data delivery lag+ processing time."
+14,"finally, a rela- 3) meta data on processing region; opaque cloud coverage; block-out tively high number of false positive new events (table 3) suggests zones due to solar reﬂectance, clouds, extreme view angles, biome that geostationary detections should not be expected to replace other type, etc. means of rapid wildﬁre identiﬁcation but used as a complementary tool."
+14,4) fire/meta data mask.
+14,5) revised ascii ﬁre product output: latitude; longitude; satellite 4.4.
+14,"goes-r prospect view angle; pixel size; observed 4 and 11 μm brightness tempera- tures; instantaneous estimates of ﬁre size, temperature, and frp; the next generation of geostationary satellites will offer signiﬁcant biome type; ﬁre conﬁdence ﬂag. advancements in ﬁre detection and monitoring (schmidt et al., 2010)."
+14,"6) processing of all available goes-e/-w imagery including rapid the goes-r platform is scheduled for launch during the fourth quarter scan and super rapid scan mode when imagery is available as of 2015 and will include the advanced baseline imager (abi) offering frequent as every minute over select regions of the continental u.s. improved temporal, spatial, spectral, and geolocation capabilities."
+14,"enhanced temporal resolution will include full disk coverage every furthermore, complementary to that effort, new approaches 15 min and conus coverage every 5 min to capture short-lived ﬁre for earlier ﬁre detection are being actively developed (koltunov & activity."
+14,"the abi will have improved spatial resolution (2 km) in the ustin, 2007; koltunov et al., 2009)."
+14,"the improved information from short and long-wave infrared window bands (3.9, 10.8, and 11.2 μm) wf-abba and the future new complementary systems that are"
+15,208 a.
+15,koltunov et al.
+15,"/ remote sensing of environment 127 (2012) 194–209 post post post post optimized speciﬁcally toward achieving the earliest alarm, will have a b3 > b4 and b3 > b7 : ð13þ greater impact for the user communities."
+15,"finally, with the scheduled in this way, according to our preliminary experiment using 50 launch of goes-r in 2015, we expect to see major improvements in new wildland burns that occurred between may and november geostationary ﬁre detection and monitoring, including more rapid 2006, dnbra allows one to detect 96% of the actual burns detectable detection. by dnbr, and drastically (by several orders of magnitude) reduces the our work emphasizes the potential of geostationary imagery for number of falsely detected burns by dnbr over clouds, bright soils, reducing the latency of wildﬁres in the western u.s. and the impor- urban areas, areas of phenological change (e.g. dry-out of grasslands), tance of timely delivery of the images to the processing centers."
+15,"we agricultural ﬁelds (e.g. harvest), and other land cover changes (figs. 7 hope that the presented methodology, results, and discussion will and 8)."
+15,"small size forest ﬁres where only understory is burning while increase wf-abba users’ conﬁdence, encourage much needed future canopies are not affected are likely to be missed by both dnbr and validation efforts over different regions, and support expansion of dnbra."
+15,the remaining false detections by dnbra are primarily due remote sensing ﬁre monitoring activities and applications. to misregistration and certain types of land cover changes.
+15,the dnbra values are interpreted in the same way as those of scaled acknowledgments dnbr.
+15,"we wish to acknowledge usda fs and uc davis support under references contract # 0-ia-1l130400-009, “evaluating operational potential of geo-stationary early fire detection capabilities at regional level”."
+15,"al-saadi, j., szykman, j., pierce, r."
+15,"b., kittaka, c., neil, d., chu, d."
+15,"a., et al."
+15,(2005).
+15,we especially thank mr.
+15,brian schwind and mr.
+15,brad quayle from improving national air quality forecasts with satellite aerosol observations.
+15,"bulletin of the american meteorological society, 86, 1249–1261."
+15,"usda fs remote sensing application center (rsac) for their valuable brioude, j., cooper, o."
+15,"r., feingold, g., trainer, m., freitas, s."
+15,"r., kowal, d., et al."
+15,"(2009). support, information, and insightful discussions."
+15,we are grateful to effect of biomass burning on marine stratocumulus clouds off the california coast.
+15,"mui lay (uc davis) for help with landsat image processing and atmospheric chemistry and physics, 9, 8841–8856."
+15,"cardoso, m."
+15,"f., hurtt, g."
+15,"c., moore, b."
+15,"i., nobre, c."
+15,"a., & prins, e."
+15,(2003).
+15,projecting analysis.
+15,we thank mr.
+15,george scheer (uc davis) for hardware and future ﬁre activity in amazonia.
+15,"global change biology, 9, 656–669. system administration and other computation support that enabled csiszar, i."
+15,"a., morisette, j."
+15,"t., & giglio, l."
+15,(2006).
+15,validation of active ﬁre detection from us to analyze these data.
+15,we are thankful to mr.
+15,mark rosenberg moderate-resolution satellite sensors: the modis example in northern eurasia.
+15,"ieee transactions on geoscience and remote sensing, 44, 1746–1757."
+15,"(cal fire, sacramento, ca) for kindly providing us with geospatial feltz, j."
+15,"m., moreau, m., prins, e."
+15,"m., mcclaid-cook, k., & brown, i."
+15,(2003).
+15,recent ﬁre perimeter databases and other information related to incident validation studies of the goes wildﬁre automated biomass burning algorithm reporting.
+15,(wf_abba) in north and south america.
+15,"proceedings of the 2nd international wildland fire ecology and fire management congress and ams 5th symposium on fire and forest meteorology, orlando, florida, november 16–20, 2003 6 pp."
+15,appendix a.
+15,"new burn scar detection in landsat imagery with the freitas, s."
+15,"r., longo, k."
+15,"m., chatﬁeld, r., latham, d., silva dias, m."
+15,"f., andreae, m."
+15,"o., adjusted normalized burn ratio difference (dnbra) et al."
+15,(2007).
+15,including the sub-grid scale plume rise of vegetation ﬁres in low resolution atmospheric transport models.
+15,"atmospheric chemistry and physics, 7, 3385–3398."
+15,"the nbr difference index (dnbr, van wagtendonk et al., 2004) french, n."
+15,"f., kasischke, e."
+15,"s., hall, r."
+15,"j., murphy, k."
+15,"a., verbyla, d."
+15,"l., hoy, e."
+15,"e., et al. has been extensively used by the wildﬁre community, primarily for (2008)."
+15,"using landsat data to assess ﬁre and burn severity in north american assessing burn severity and regeneration (french et al., 2008; key & boreal forest region: an overview and summary of results."
+15,"international journal of wildland fire, 17(2008), 443–462."
+15,"benson, 2006)."
+15,"its scaled version is deﬁned by giglio, l."
+15,(2010).
+15,"modis collection5 active fire product user's guide, version 2.4."
+15,"  available at: http://modis-ﬁre.umd.edu/documents/modis_fire_users_guide_2. dnbr ¼ 1000  nbrprefire –nbrpostfire ; ð7þ 4.pdf giglio, l., descloitres, j., justice, c."
+15,"o., & kaufman, y."
+15,(2003).
+15,an enhanced contextual ﬁre detection algorithm for modis.
+15,"remote sensing of environment, 87, 273–282. where nbr is the normalized burn ratio index (key & benson, 1999) hawbaker, t."
+15,"j., radeloff, v."
+15,"c., syrphard, a."
+15,"d., zhu, z., & stewart, s."
+15,(2008).
+15,detection rates of the modis active ﬁre product in the united states.
+15,"remote sensing of computed from landsat tm/etm+ reﬂectance bands 4 and 7 by the environment, 112(5), 2656–2664. following formula: ilwdp (2008)."
+15,assessing progress towards an integrated risk and cost ﬁre management strategy.
+15,independent large wildﬁre cost panel (ilwdp).
+15,usda 70 pp.
+15,"b4−b7 key, c."
+15,"h., & benson, n."
+15,(1999).
+15,measuring and remote sensing of burn severity.
+15,"nbr ¼ : ð8þ neuenschwander, & k."
+15,"ryan (eds.), proceedings joint fire science conference and b4 þ b7 workshop, vol."
+15,ii. (pp.
+15,"284)moscow, id: university of idaho and international associ- ation of wildland fire."
+15,"to rapidly detect candidates for new burn scars in tm/etm+ key, c."
+15,"h., & benson, n."
+15,(2006).
+15,landscape assessment: sampling and analysis methods.
+15,usda forest service gen tech.
+15,"rep rmrs-gtr-164-cd. imagery, we propose an adjusted normalized burn ratio difference koltunov, a., ben-dor, e., & ustin, s."
+15,(2009).
+15,image construction using multitemporal (dnbra) that is obtained by combining the radiance-based scaled observations and dynamic detection models.
+15,"international journal of remote dnbr (7) with additional ﬁlters to eliminate false scar detections as sensing, 30(1), 57–83."
+15,"koltunov, a., & ustin, s."
+15,(2007).
+15,early ﬁre detection using non-linear multitemporal described below.
+15,in the eqs. (9) through (13) we are using scaled prediction of thermal imagery.
+15,"remote sensing of environment, 110(1), 18–28. radiance values (in the range of [1, 255].) of landsat tm/etm+ bands."
+15,"longo, k."
+15,"m., freitas, s."
+15,"r., andreae, m."
+15,"o., setzer, a., prins, e., & artaxo, p."
+15,(2010).
+15,"the coupled aerosol and tracer transport model to the brazilian developments on the 1. dnbra = scaled dnbr, regional atmospheric modeling system (catt-brams)—part 2: model sensitivity to the biomass burning inventories."
+15,"atmospheric chemistry and physics, 10, 5785–5795."
+15,"2. dnbra = 0, if any of the conditions (9) through (13) hold: matson, m., & dozier, j."
+15,(1981).
+15,identiﬁcation of subresolution high temperature sources using the thermal ir.
+15,"photogrammetric engineering and remote sensing, post post 47, 1311–1318."
+15,"b4 −b7 > 1; ð9þ mcnamara, d., stephens, g., & ruminski, m."
+15,(2004).
+15,the hazard mapping system (hms)—noaa multi-sensor ﬁre and smoke detection program using environmental satellites.
+15,"preprints, 13th conf. on satellite meteorology and oceanography."
+15,"norfolk, b1 post b1 pre − b0:01; ð10þ va: amer."
+15,meteor.
+15,"soc cd-rom, 4.3."
+15,"b2 post þ b3 post b2 pre þ b3 pre nepstad, d., carvalho, g., barros, a., alencar, a., capobianco, j., bishop, j., et al."
+15,(2001).
+15,"road paving, ﬁre regime feedbacks, and the future of amazon forests."
+15,"forest ecology and management, 154, 395–407."
+15,"b4 pre b pre > 1:5 and 3 pre > 1:5; ð11þ nepstad, d., schwartzman, s., bamberger, b., santilli, m., ray, d., schlesinger, p., et al."
+15,b7 pre b7 (2006).
+15,inhibition of amazon deforestation and ﬁre by parks and indigenous lands.
+15,"conservation biology, 20, 65–73. pre pre pre pre nicc (2007)."
+15,wildland ﬁres and acres.
+15,national interagency coordination center (nicc) b3 > b4 and b3 > b7 ð12þ available at http://www.nifc.gov/ﬁre_info/ﬁres_acres.htm
+16,koltunov et al.
+16,"/ remote sensing of environment 127 (2012) 194–209 209 prins, e."
+16,"m., feltz, j."
+16,"m., menzel, w."
+16,"p., & ward, d."
+16,(1998).
+16,"an overview of goes-8 schmidt, c."
+16,"s., hoffman, j., & prins, e."
+16,(september 27).
+16,goes-r advanced baseline imager diurnal ﬁre and smoke results for scar-b and 1995 ﬁre season in south america.
+16,"(abi) algorithm theoretical basis document for ﬁre/hot spot characterization, version journal of geophysical research, 103(d24), 31.821–31.835."
+16,noaa nesdis center for satellite applications and research.
+16,"prins, e."
+16,"m., & menzel, w."
+16,(1992).
+16,"geostationary satellite detection of biomass burning schmidt, c."
+16,"s., & prins, e."
+16,(2003).
+16,goes wildﬁre applications in the western in south america.
+16,"international journal of remote sensing, 13, 2783–2799. hemisphere."
+16,"proceedings of the 2nd international wildland fire ecology and fire prins, e."
+16,"m., & menzel, w."
+16,(1994).
+16,"trends in south american biomass burning management congress and ams 5th symposium on fire and forest meteorology, detected with the goes visible infrared spin scan radiometer atmospheric sounder orlando, florida, november 16–20, 2003 4 pp. from 1983 to 1991."
+16,"journal of geophysical research, 99, 16719–16735."
+16,"schroeder, w., prins, e."
+16,"m., giglio, l., csiszar, i., schmidt, c., morisette, j., et al. (2008a)."
+16,"prins, e., schmetz, j., flynn, l., hillger, d., & feltz, j."
+16,(2001).
+16,overview of current and validation of goes and modis active ﬁre detection products using aster and etm future diurnal active ﬁre monitoring using a suite of international geostationary plus data.
+16,"remote sensing of environment, 112(5), 2711–2726. satellites."
+16,"ahern, j."
+16,"goldammer, & c."
+16,"justice (eds.), global and regional schroeder, w., ruminski, m., csiszar, i., giglio, l., prins, e., schmidt, c., et al. (2008b). wildﬁre monitoring: current status and future plans (pp."
+16,145–170).
+16,"the hague, validation analyses of an operational ﬁre monitoring product: the hazard netherlands: spb academic publishing."
+16,mapping system.
+16,"international journal of remote sensing, 29(20), 6059–6066."
+16,"prins, e."
+16,"m., schmidt, c."
+16,"c., brunner, j."
+16,"c., hoffman, j."
+16,"p., lindstrom, s."
+16,"s., & feltz, j."
+16,"soja, a."
+16,"j., al-saadi, j., giglio, l., randall, d., kittaka, c., pouliot, g., et al."
+16,(2009).
+16,(2010).
+16,the global geostationary wildﬁre abba ﬁre monitoring network. 17th assessing satellite-based ﬁre data for use in the national emission inventory.
+16,"journal conference on satellite meteorology and oceanography, annapolis, md, september of applied remote sensing, 3, 1–29."
+16,meteor.
+16,soc p9.13.
+16,usfs (2007).
+16,"fy2008 forest service budget overview, usda forest service."
+16,"available prins, e."
+16,"m., schmidt, c."
+16,"c., feltz, j."
+16,"m., reid, j."
+16,"s., westphal, d."
+16,"l., & richardson, k. at http://www.fs.fed.us/publications/budget-2008/fy2008-forest-service-budget- (2003)."
+16,"a two-year analysis of ﬁre activity in the western hemisphere as observed overview.pdf with the goes wildﬁre automated biomass burning algorithm. 12-th conference van wagtendonk, j."
+16,"w., root, r., & key, c."
+16,(2004).
+16,"comparison of aviris and landsat on satellite meteorology and oceanography, cd-rom: combined preprints. 83rd etm+ detection capabilities for burn severity."
+16,"remote sensing of environment, 92, ams annual meeting, paper p2.28., long beach, ca, february 9–13, 2003."
+16,397–408.
+16,"reid, j."
+16,"s., hyer, e."
+16,"j., prins, e."
+16,"m., westphal, d."
+16,"l., zhang, j., wang, j., et al."
+16,(2009).
+16,"global wang, j., christopher, s."
+16,"a., nair, u."
+16,"s., beid, j."
+16,"s., prins, e."
+16,"m., szykman, j., et al."
+16,(2006). monitoring and forecasting of biomass-burning smoke: description of and lessons mesoscale modeling of central american smoke transport to the united states.
+16,i. from the fire locating and modeling of burning emissions (flambe) program.
+16,"ieee ""top-down"" assessment of emission strength and diurnal variation impacts."
+16,"journal of selected topics in applied earth observations and remote sensing, 2(3), journal of geophysical research, 111, http://dx.doi.org/10.1029/2005jd006416."
+16,144–162.
+16,"weaver, j."
+16,"f., lindsey, d., bikos, d., schmidt, c."
+16,"c., & prins, e."
+16,(2004).
+16,"fire detection using reid, j."
+16,"s., prins, e."
+16,"m., westphal, d."
+16,"l., schmidt, c."
+16,"c., richardson, k."
+16,"a., christopher, s."
+16,"a., goes rapid scan imagery."
+16,"weather and forecasting, 19, 496–510. et al."
+16,(2004).
+16,"real-time monitoring of south american smoke particle emissions zhang, x., kondragunta, s., schmidt, c., & kogan, f."
+16,(2008).
+16,near real time monitoring and transport using a coupled remote sensing/box-model approach.
+16,"geophysical of biomass burning particulate emissions (pm2.5) across contiguous united states research letters, 31(6). using multiple satellite instruments."
+16,"atmospheric environment, 42."
