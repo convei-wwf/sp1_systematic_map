@@ -29,7 +29,7 @@ This script will ingest the documents listed in the USGS Societal Benefits repos
 Read in the records, explore, clean/standardize to something like our existing format, and export as .ris
 
 ```{r}
-sb_df <- read_csv(here('_data/1_refs_raw/sbr_repo_240423.csv')) %>%
+sb_df <- read_csv(here('_data/1a_refs_raw/sbr_repo_240423.csv')) %>%
   janitor::clean_names() %>%
   mutate(across(where(is.character), str_squish))
 ```
@@ -90,7 +90,7 @@ sb_out <- sb_fixed_df %>%
                             TRUE ~ author))
 
 write_refs(sb_out, format = 'ris',
-           file = here('_data/2_refs_preprocessed/societal_benefits_240423.ris'))
+           file = here('_data/1b_refs_preprocessed/societal_benefits_240423.ris'))
 ```
 
 ## Exploratory plots
@@ -116,7 +116,7 @@ sb_area_approach_cleaned <- sb_area_approach %>%
   mutate(across(c(sba, vi, ea), ~ ifelse(.x == 'NA', NA, .x))) %>%
   left_join(sb_out, by = 'title')
 
-write_csv(sb_area_approach_cleaned, here('_data/3_refs_clean/sbr_repo_cleaned_240423.csv'))
+write_csv(sb_area_approach_cleaned, here('_data/1c_refs_clean/sbr_repo_cleaned_240423.csv'))
 ```
 
 ```{r}

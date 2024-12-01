@@ -106,6 +106,12 @@ check <- sbr_out_df %>%
 # write_csv(sbr_out_df, here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
 
 sbr_out_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+
+sbr_to_zotero <- sbr_out_df %>%
+  filter(screening_status == 'included') %>%
+  select(source_type, author, year, title, abstract, doi, notes = key) %>%
+  as.data.frame()
+write_refs(sbr_to_zotero, format = 'bib', file = here('_data/5_bib_to_zotero', '1_bib_to_zotero_sbr.bib'))
 ```
 
 ## Examine inclusion/exclusion vs. tags

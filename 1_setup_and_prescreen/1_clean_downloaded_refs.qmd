@@ -32,12 +32,12 @@ This script will ingest Bibtex and RIS files of records and:
 This is already pretty clean... no real processing required!
 
 ```{r clean bibtex from zotero library}
-bib_raw_fs <- list.files(here('_data/1_refs_raw'), pattern = 'zot.+.bib$', full.names = TRUE)
+bib_raw_fs <- list.files(here('_data/1a_refs_raw'), pattern = 'zot.+.bib$', full.names = TRUE)
 for(f in bib_raw_fs) {
   # f <- bib_raw_fs[1]
   bib_raw <- read_file(f)
   bib_clean <- str_replace_all(bib_raw, '(\\r)?\\n   ', ' ')
-  f_out <- str_replace(f, '1_refs_raw', '2_refs_preprocessed')
+  f_out <- str_replace(f, '1a_refs_raw', '1b_refs_preprocessed')
   write_file(bib_clean, f_out)
 }
 ```
@@ -52,7 +52,7 @@ Also, fix titles with oddball quotes, e.g., ``` ``land cover classification syst
 
 
 ```{r clean bibtex from web of science full search}
-wos_raw_fs <- list.files(here('_data/1_refs_raw'), pattern = 'wos_.+.bib$', full.names = TRUE)
+wos_raw_fs <- list.files(here('_data/1a_refs_raw'), pattern = 'wos_.+.bib$', full.names = TRUE)
 wos_date <- basename(wos_raw_fs[1]) %>% str_extract('[0-9]{6}')
 
 if(is.na(wos_date)) stop('Whoops, check the date flag on the raw Bibtex exports from Web of Science!')
@@ -65,7 +65,7 @@ wos_clean <- lapply(wos_raw_fs,
                   str_replace_all('`', "'")
               }) %>%
   paste0(collapse = '\\n\\n')
-# f_out <- here('_data/2_refs_preprocessed', sprintf('wos_%s.bib', wos_date))
+# f_out <- here('_data/1b_refs_preprocessed', sprintf('wos_%s.bib', wos_date))
 # write_file(wos_clean, f_out)
 ```
 
@@ -94,7 +94,7 @@ for(i in 1:n_chunks) {
             end   = art_chunk_df$chunk_end[i])
   wos_out <- paste0(wos_tmp, '\n')
 
-  f_out <- here('_data/2_refs_preprocessed', sprintf('wos_%s_%s.bib', i, wos_date))
+  f_out <- here('_data/1b_refs_preprocessed', sprintf('wos_%s_%s.bib', i, wos_date))
   write_file(wos_out, f_out)
 }
 ```
@@ -136,7 +136,7 @@ In a [bug issue dated May 25, 2020 on the revtools Github repo](https://github.c
 
 
 ```{r break up giant ris from scopus}
-ris_raw_fs <- list.files(here('_data/1_refs_raw'), 
+ris_raw_fs <- list.files(here('_data/1a_refs_raw'), 
                          pattern = 'scop.+.ris$', full.names = TRUE)
 scopus_date <- basename(ris_raw_fs[1]) %>% str_extract('[0-9]{6}')
 
@@ -157,7 +157,7 @@ ris_index_df <- data.frame(
   mutate(doc_id = 1:n()) %>%
   mutate(chunk = ntile(doc_id, n_chunks))
 
-out_fstem <- here('_data/2_refs_preprocessed/scopus_%s_%s.ris')
+out_fstem <- here('_data/1b_refs_preprocessed/scopus_%s_%s.ris')
 for(i in 1:n_chunks) {
   ### i <- 1
   out_f <- sprintf(out_fstem, i, scopus_date)

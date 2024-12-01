@@ -33,7 +33,7 @@ This script will ingest Bibtex files of records and:
 Pull in all preprocessed citation data.  Identify duplicates by first author and title.  Save only one version (Societal Benefits $\succ$ Web of Science $\succ$ Scopus).
 
 ```{r read in the preprocessed WoS citations}
-wos_fs <- list.files(here('_data/2_refs_preprocessed'), pattern = 'wos_', full.names = TRUE)
+wos_fs <- list.files(here('_data/1b_refs_preprocessed'), pattern = 'wos_', full.names = TRUE)
 wos_all <- parallel::mclapply(wos_fs, read_refs, mc.cores = 1) %>% 
   bind_rows() %>% 
   mutate(src = 'wos') 
@@ -49,7 +49,7 @@ wos_distinct <- wos_all %>%
 ```
 
 ```{r read in the preprocessed Scopus references}
-scopus_fs <- list.files(here('_data/2_refs_preprocessed'), pattern = 'scopus_', full.names = TRUE)
+scopus_fs <- list.files(here('_data/1b_refs_preprocessed'), pattern = 'scopus_', full.names = TRUE)
 
 scopus_date <- str_extract(basename(scopus_fs), '[0-9]{6}') %>% unique()
 
@@ -69,7 +69,7 @@ scopus_distinct <- scopus_all %>%
 ```
 
 ```{r read in the preprocessed Soc Benefits Repo references}
-sbr_fs <- list.files(here('_data/2_refs_preprocessed'), pattern = 'societal_benefits_', full.names = TRUE)
+sbr_fs <- list.files(here('_data/1b_refs_preprocessed'), pattern = 'societal_benefits_', full.names = TRUE)
 
 sbr_date <- str_extract(basename(sbr_fs), '[0-9]{6}') %>% unique()
 
@@ -84,7 +84,7 @@ sbr_distinct <- sbr_all %>%
 
 
 ```{r read in benchmark citations}
-benchmark_all <- read_refs(here('_data/2_refs_preprocessed/zot_benchmark_a.bib')) %>%
+benchmark_all <- read_refs(here('_data/1b_refs_preprocessed/zot_benchmark_a.bib')) %>%
   mutate(src = 'benchmark') %>%
   mutate(title = str_remove_all(title, '\\{\\{|\\}\\}')) %>%
   select(source_type = type, src, author, 
@@ -384,16 +384,16 @@ clean_sbr <- refs_ready %>%
   as.data.frame() %>%
   select(where(~ any(!is.na(.))))
 
-write_csv(refs_lookup, here('_data/3_refs_clean/ref_key_lookup.csv'))
+write_csv(refs_lookup, here('_data/1c_refs_clean/ref_key_lookup.csv'))
 
 write_refs(clean_scopus, format = 'ris',
-           file = sprintf(here('_data/3_refs_clean/scopus_clean_%s.ris'), 
+           file = sprintf(here('_data/1c_refs_clean/scopus_clean_%s.ris'), 
                           scopus_date))
 write_refs(clean_wos,    format = 'ris',  
-           file = sprintf(here('_data/3_refs_clean/wos_clean_%s.ris'), 
+           file = sprintf(here('_data/1c_refs_clean/wos_clean_%s.ris'), 
                           wos_date))
 write_refs(clean_sbr,    format = 'ris',  
-           file = sprintf(here('_data/3_refs_clean/sbr_clean_%s.ris'), 
+           file = sprintf(here('_data/1c_refs_clean/sbr_clean_%s.ris'), 
                           sbr_date))
 ``` 
  
@@ -402,7 +402,7 @@ write_refs(clean_sbr,    format = 'ris',
 This sample excludes benchmarks and societal benefits repo papers.
 
 ```{r}
-sample_f <- here('_data/3_refs_clean/sample/sample_1000_240708.ris')
+sample_f <- here('_data/1c_refs_clean/sample/sample_1000_240708.ris')
 
 if(!file.exists(sample_f)) {
   set.seed(2001)
