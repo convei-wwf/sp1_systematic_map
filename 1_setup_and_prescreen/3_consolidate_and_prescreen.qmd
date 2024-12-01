@@ -335,8 +335,7 @@ refs_almost_ready <- spurious_dropped %>%
   mutate(author = str_remove(author, '\\[.+\\]'))
 
 refs_lookup <- refs_almost_ready %>%
-  select(author, title, journal, year, doi) %>%
-  unique() %>%
+  select(author, title, journal, year, doi, src) %>%
   mutate(auth_short = author %>% 
            stri_trans_general('Latin-ASCII') %>% 
            tolower() %>%
@@ -344,11 +343,15 @@ refs_lookup <- refs_almost_ready %>%
            str_remove_all('[^a-z]')) %>%
   unnest_tokens(output = title_words, input = title, token = 'words', drop = FALSE) %>%
   anti_join(stop_words, by = c('title_words' = 'word')) %>%
-  group_by(author, auth_short, title, journal, year, doi) %>%
+  group_by(author, auth_short, title, journal, year, doi, src) %>%
   slice(1:4) %>%
   summarize(title_short = paste(title_words, collapse = ''), .groups = 'drop') %>%
   mutate(key = paste(auth_short, title_short, year, sep = '_')) %>%
-  select(key, author, title, journal, year, doi)
+  select(key, author, title, journal, year, doi, src) %>%
+  group_by(key) %>%
+  arrange(src) %>%
+  slice(1) %>%
+  ungroup()
 
 still_dupes <- janitor::get_dupes(refs_lookup, key)
 ### these all look like true dupes due to mismatches in title 

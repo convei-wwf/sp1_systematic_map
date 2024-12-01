@@ -84,7 +84,10 @@ sb_out <- sb_fixed_df %>%
   filter(!is.na(abstract)) %>%
   as.data.frame() %>%
   select(source_type, everything()) %>%
-  mutate(across(where(is.character), str_squish))
+  mutate(across(where(is.character), str_squish)) %>%
+  ### manually fix missing name
+  mutate(author = case_when(tolower(title) == 'the effects of weather on retail sales' ~ 'Starr-McCluer, Martha',
+                            TRUE ~ author))
 
 write_refs(sb_out, format = 'ris',
            file = here('_data/2_refs_preprocessed/societal_benefits_240423.ris'))
