@@ -1,0 +1,75 @@
+---
+title: "Pull 200-citation sample from round 1 of classifier"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script reads in the classifier model's results from round 1 and saves out a `.ris` of sampled citations for import into Colandr for citation screening, and then from these to fulltext screening.  
+
+This `.ris` will sample 100 "includes" and 100 "excludes" from the 12932 remaining citations.
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+## Load prediction results
+
+```{r}
+pred_df <- read_csv(here('_data/classifier_results', 
+                         'predicted_classifier_round1_set.csv')) 
+set.seed(42)
+sample_df <- pred_df %>%
+  group_by(classification_prediction) %>%
+  slice_sample(n = 100) %>%
+  ungroup() %>%
+  rename(notes = key)
+
+# sum(pred_df$classification_prediction) / nrow(pred_df) ### 16.5% hit rate far higher than likely
+```
+
+## Compare predictions to training set
+
+```{r}
+train_df <- read_csv(here('_data/4_screen_classifier_round1', 
+                          'predicted_training_set_2024_08_26.csv')) %>%
+  select(include, pred = classification_prediction) %>%
+  mutate(pred = as.logical(pred))
+
+table(train_df)
+```
+
+## Attach doi if available
+
+Read in the full citations, grab the doi, and attach to the sampled citations.  Shuffle the citations out to avoid unintentional bias
+
+```{r}
+scopus_df <- read_refs(here('_data/1c_refs_clean/scopus_clean_240204.ris'))
+wos_df <- read_refs(here('_data/1c_refs_clean/wos_clean_240126.ris'))
+refs_df <- bind_rows(scopus_df, wos_df) %>%
+  select(notes, doi)
+
+set.seed(451)
+
+sample_out_df <- sample_df %>%
+  mutate(source_type = 'article') %>%
+  inner_join(refs_df, by = 'notes') %>%
+  select(source_type, title, abstract, doi, notes) %>%
+  slice_sample(prop = 1) %>%
+  as.data.frame()
+
+write_refs(sample_out_df, format = 'ris', 
+           file = here('_data/4_screen_classifier_round1',
+                       'ris_to_colandr_classifier_round1_sample_200.ris'))
+```
+
+

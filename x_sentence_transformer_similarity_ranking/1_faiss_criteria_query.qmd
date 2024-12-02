@@ -1,0 +1,214 @@
+---
+title: "Test FAISS to assist screening"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script takes the interactive prototype developed by Rich Sharp and modifies it to assist with screening.  That Python script will be used to embed/encode the corpus into a FAISS index.
+
+1. The corpus of title/abstracts is embedded and encoded
+```{python import}
+# import chardet
+# import datetime
+import glob
+# import hashlib
+# import logging
+import os
+import pickle
+import re
+
+import faiss
+# import spacy
+# import tiktoken
+import torch
+import pandas as pd
+```
+
+```{python}
+# spacy.require_gpu()
+# nlp = spacy.load("en_core_web_sm")
+
+# GPT_MODEL, MAX_TOKENS, MAX_RESPONSE_TOKENS = 'gpt-4o', 20000, 4000
+# ENCODING = tiktoken.encoding_for_model(GPT_MODEL)
+
+```
+
+
+```{python open faiss files}
+
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format=(
+#         '%(asctime)s (%(relativeCreated)d) %(levelname)s %(name)s'
+#         ' [%(funcName)s:%(lineno)d] %(message)s'))
+#         
+# logging.getLogger('sentence_transformers').setLevel(logging.WARN)
+# 
+# LOGGER = logging.getLogger(__name__)
+
+# BODY_TAG = 'body'
+# CITATION_TAG = 'citation'
+
+from sentence_transformers import SentenceTransformer
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+embedding_model = SentenceTransformer(
+    'sentence-transformers/all-MiniLM-L6-v2').to(device)
+
+### Quarto interprets script location as root; set back one level
+CACHE_DIR = '../llm_cache'
+
+parsed_path = glob.glob(os.path.join(CACHE_DIR, '*.pkl'))
+faiss_path = glob.glob(os.path.join(CACHE_DIR, '*.faiss'))
+
+if len(parsed_path) > 1:
+    exit('Too many cache files! discard old versions')
+if len(parsed_path) == 0:
+    exit('No cache files! run processing script')
+    
+### open the pickle file and assign to objects abstract_list and citation_list
+with open(parsed_path[0], 'rb') as file:
+    (abstract_list, citation_list) = pickle.load(file)
+    
+### read in the document distance index from the faiss file
+document_distance_index = faiss.read_index(faiss_path[0])
+
+```
+
+Having read in the indexed articles, let's process the distance for each criteria phrase across the entire corpus.  Because each abstract is divided by sentence, take the sentence with the highest quality match and assign its distance score to the entire abstract.  Finally, save out as .csv with article info and distance.
+
+
+```{python define rank_articles function}
+def rank_articles(question):
+    question_embedding = embedding_model.encode(
+        question, convert_to_tensor=True).cpu().numpy()
+
+    # Ensure the question_embedding is 2D
+    if len(question_embedding.shape) == 1:
+        question_embedding = question_embedding.reshape(1, -1)
+
+    ### distances and indices are determined from the search;
+    ### distances are from low to high, indices are used to retrieve the 
+    ### appropriate citations
+    n_articles = len(abstract_list)
+    distances, indices = document_distance_index.search(
+        question_embedding, n_articles)
+
+    retrieved_citations = [
+        citation_list[idx] for idx in
+        indices[:, 0:n_articles].flatten()]
+        
+    ### Assemble distances and citations into a dataframe
+    dist_series = pd.Series(distances[0])
+    cit_series  = pd.Series(retrieved_citations)
+    
+    dist_cit_df = pd.DataFrame({'dist': dist_series, 'citation': cit_series})
+    
+    return dist_cit_df
+```
+
+## Queries for each criterion group
+
+For each criterion, try a few queries.  When processing, perhaps summarize each criterion group of queries by selecting the minimum value.  For example, "Earth observation" might indicate high similarity, even if the paper does not mention satellite data (e.g., mentions Landsat instead) - so base the similarity on the most-similar term in the group.  If a paper is not similar on any metric, then even the most similar will be far afield.
+
+### Criterion A: earth observation/satellite data
+
+Include a letter indicating criterion group in the file name, for easy access later
+
+```{python run earth observation terms}
+term_list = ['remote sensing', 'earth observation', 'satellite data', 'climate forecast']
+
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_a_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+
+### Second criterion: societal benefits
+
+```{python run societal benefits terms}
+# term_list = ['societal benefits', 'capacity building', 'disaster response', 'water resources', 'agriculture', 'climate resilience', 'health and air quality', 'ecological conservation', 'wildland fires']
+term_list = ['societal benefits', 'sustainable development', 'environmental resilience', 'resource management']
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_b_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+
+### Third criterion: valuation methodology
+
+```{python run valuation methodology terms}
+term_list = ['valuation of information', 'decision analysis', 'cost benefit analysis', 'stated preference']
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_c_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+
+### Combined criteria?
+
+```{python run combo queries}
+term_list = ['value of satellite earth observation data to improve societal benefits',
+             'costs and benefits of remotely sensed data for human well being',
+             'how do people apply satellite visual imagery to improve decisions that benefit society']
+OUT_DIR = 'faiss_out'
+
+for term in term_list:
+    ### term = term_list[0]
+    
+    ### Apply the rank_articles function for each term in the list
+    x = rank_articles(term)
+    
+    ### use groupby and aggregate to keep the min distance per citation
+    y = x.groupby('citation').agg({'dist': 'min'})
+    # z = x.groupby('citation').agg({'dist': 'max'})
+    
+    ### create file path and write out y as a csv
+    f = os.path.join(OUT_DIR, 'faiss_min_d_' + term.replace(' ', '_') + '.csv')
+    y.to_csv(f)
+
+```
+
