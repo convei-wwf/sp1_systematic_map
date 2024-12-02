@@ -1,0 +1,49 @@
+---
+title: "Assemble citation set for round 1 of classifier"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script gathers the citations and appends screening decisions to create a set of citations ready for the first round of the classifier.  
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+
+## Load all citations
+
+Load the training set for the first pass of the classifier, and the remaining unscreened citations from Scopus and the Web of Science.
+
+```{r}
+training_df <- read_csv(here('int/classifier_training_set.csv'))
+
+scopus_df <- read_refs(here('_data/3_refs_clean/scopus_clean_240204.ris')) %>%
+  rename(key = notes)
+wos_df <- read_refs(here('_data/3_refs_clean/wos_clean_240126.ris')) %>%
+  rename(key = notes)
+```
+
+Bind the two datasets, and filter out any instances that appear in the `training_df`, using the key column.
+
+```{r}
+refs_df <- bind_rows(scopus_df, wos_df) %>%
+  anti_join(training_df, by = 'key') %>%
+  select(title, abstract, key)
+
+write_csv(refs_df, here('int/classifier_round1_set.csv'))
+
+### status 127 - can't find function `zip` on Windows - install RTools (outside of R)
+zip(zipfile = here('int/classifier_round1_set.zip'), files = here('int/classifier_round1_set.csv'))
+```
+

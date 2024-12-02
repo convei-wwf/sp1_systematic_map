@@ -1,0 +1,58 @@
+---
+title: "Examine results for round 2 of classifier"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script reads in the classifier model's results from round 2 and saves out a `.ris` of sampled citations for import into Colandr for citation screening, and then from these to fulltext screening.
+
+This `.ris` will include all the predicted "includes".
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+## Load prediction results
+
+```{r}
+pred_df <- read_csv(here('_data/5d_classifier_round2', 
+                         'predicted_classifier_round2_set.csv')) 
+set.seed(42)
+includes_df <- pred_df %>%
+  filter(classification_prediction == 1) %>%
+  rename(notes = key)
+
+# sum(pred_df$classification_prediction) / nrow(pred_df) ### 16.5% hit rate far higher than likely
+```
+
+## Attach doi if available
+
+Read in the full citations, grab the doi, and attach to the sampled citations. Shuffle the citations out to avoid unintentional bias
+
+```{r}
+scopus_df <- read_refs(here('_data/3_refs_clean/scopus_clean_240204.ris'))
+wos_df <- read_refs(here('_data/3_refs_clean/wos_clean_240126.ris'))
+refs_df <- bind_rows(scopus_df, wos_df) %>%
+  select(notes, doi)
+
+includes_out_df <- includes_df %>%
+  mutate(source_type = 'article') %>%
+  inner_join(refs_df, by = 'notes') %>%
+  select(source_type, title, abstract, doi, notes) %>%
+  slice_sample(prop = 1) %>%
+  as.data.frame()
+
+write_refs(includes_out_df, format = 'ris', 
+           file = here('_data/5d_classifier_round2',
+                       'predicted_classifier_round2_includes.ris'))
+```

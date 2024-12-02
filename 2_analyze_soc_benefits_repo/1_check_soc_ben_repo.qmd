@@ -41,7 +41,7 @@ make_short_title <- function(title) {
   title %>% tolower() %>% str_replace_all('[^a-z0-9 ]', ' ') %>% str_squish() %>% str_sub(1, 40)
 }
 
-sbr_df <- read_csv(here('_data/3_refs_clean/sbr_repo_cleaned_240423.csv')) %>%
+sbr_df <- read_csv(here('_data/1c_refs_clean/sbr_repo_cleaned_240423.csv')) %>%
   janitor::clean_names() %>%
   select(-keywords) %>%
   mutate(title = str_to_title(title) %>% stringi::stri_trans_general('Latin-ASCII'),
@@ -64,8 +64,8 @@ sbr_key <- sbr_df %>%
   mutate(key = paste(auth_short, title_cut, year, sep = '_')) %>%
   select(key, author, title_short, journal, year)
 
-sbr_results_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_240429.csv')) %>%
-  bind_rows(read_csv(here('_data/4_colandr_screened/colandr_companion_excl_240429.csv'))) %>%
+sbr_results_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_240429.csv')) %>%
+  bind_rows(read_csv(here('_data/screened_colandr/colandr_companion_excl_240429.csv'))) %>%
   mutate(title = str_to_title(title) %>% stringi::stri_trans_general('Latin-ASCII'),
          across(where(is.character), str_squish)) %>%
   select(-id, -authors, year = publication_year, 
@@ -98,20 +98,20 @@ sbr_incl_df <- sbr_out_df %>%
   filter(screening_status == 'included') %>%
   select(-vi, -sba, -ea, -screening_status, -excl_reasons)
 
-sbr_key2 <- read_csv(here('_data/3_refs_clean/ref_key_lookup.csv'))
+sbr_key2 <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'))
 check <- sbr_out_df %>%
   filter(!key %in% sbr_key2$key)
 
 ### NOTE: some manual edits were made to this file - overwrite at your peril!
-# write_csv(sbr_out_df, here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+# write_csv(sbr_out_df, here('_data/2_societal_benefits/sbr_screened_results_240429.csv'))
 
-sbr_out_df <- read_csv(here('_data/5a_societal_benefits/sbr_screened_results_240429.csv'))
+sbr_out_df <- read_csv(here('_data/2_societal_benefits/sbr_screened_results_240429.csv'))
 
 sbr_to_zotero <- sbr_out_df %>%
   filter(screening_status == 'included') %>%
   select(source_type, author, year, title, abstract, doi, notes = key) %>%
   as.data.frame()
-write_refs(sbr_to_zotero, format = 'bib', file = here('_data/5_bib_to_zotero', '1_bib_to_zotero_sbr.bib'))
+write_refs(sbr_to_zotero, format = 'bib', file = here('_data/2_societal_benefits', 'bib_to_zotero_sbr.bib'))
 ```
 
 ## Examine inclusion/exclusion vs. tags
