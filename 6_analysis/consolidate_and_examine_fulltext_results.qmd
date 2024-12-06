@@ -1,0 +1,236 @@
+---
+title: "Gather full text results and crunch"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+```
+
+# Summary
+
+After all fulltext screening is complete, pull in the various fulltext results, consolidate, and analyze patterns
+
+# Methods
+
+## Consolidate fulltext results
+
+```{r}
+fs <- list.files(here('_data/screened_fulltext'), pattern = '^[0-9]_fulltext_.+.csv$', full.names = TRUE)
+
+phases <- str_remove_all(basename(fs), '[0-9]_fulltext_|.csv')
+
+df_all <- lapply(fs, read_csv, show_col_types = FALSE) %>% 
+  setNames(phases) %>%
+  bind_rows(.id = 'phase') 
+
+df <- df_all %>%
+  filter(screening_decision == 'include') %>%
+  select(-screening_decision, -reason_for_exclusion, -revisited)
+
+write_csv(df, here('_data/screened_fulltext/ft_consolidated.csv'))
+```
+
+## Plots
+
+### Year of publication
+
+```{r}
+year_df <- df %>%
+  filter(!is.na(year)) %>%
+  group_by(year) %>%
+  summarize(n = n())
+
+ggplot(year_df, aes(x = year, y = n)) +
+  geom_col()
+```
+
+### Econ method
+
+note, change to "social science method" for more inclusion
+
+```{r}
+method_df <- df %>%
+  mutate(method = str_split(econ_method, ';|,|/')) %>%
+  unnest(method) %>%
+  filter(method != 'model') %>%
+  mutate(method = case_when(str_detect(method, 'voi|value of infor') ~ 'value of information',
+                            str_detect(method, 'cost.benefit') ~ 'cost-benefit analysis', 
+                            str_detect(method, 'survey|interview') ~ 'survey/interview',
+                            str_detect(method, 'option') ~ 'real options value',
+                            str_detect(method, 'chain') ~ 'benefits chain',
+                            str_detect(method, 'stochastic|dynamic mod|bioeconomic|simulation') ~ 'dynamic model',
+                            str_detect(method, 'expert') ~ 'expert elicitation',
+                            str_detect(method, 'regression') ~ 'regression',
+                            TRUE ~ method),
+         method = str_squish(method)) %>%
+  filter(!is.na(method)) %>%
+  group_by(method) %>%
+  mutate(method = ifelse(n() < 6, 'other', method)) %>%
+  group_by(method) %>%
+  summarize(n = n()) %>%
+  mutate(method = fct_reorder(method, n),
+         method = fct_relevel(method, 'other', after = 0),
+         method = fct_rev(method)) %>%
+  arrange(method) %>%
+  mutate(pct = n / sum(n),
+         pct_cum = cumsum(pct),
+         lbl_y = 1 - (pct/2 + lag(pct_cum, default = 0)),
+         lbl_angle = ifelse(lbl_y > .5, -lbl_y * 360 - 90, -lbl_y * 360 + 90),
+         lbl_color = lbl_y > .35)
+
+ggplot(method_df, aes(x = 1, y = pct, fill = method)) +
+  geom_bar(stat = 'identity', width = 1, alpha = .7) +
+  geom_text(aes(label = method, y = lbl_y, angle = lbl_angle, color = lbl_color),
+            x = 1.1) +
+  coord_polar('y', start = 0) +
+  scale_fill_manual(values = c(rev(hcl.colors(8)), 'grey50')) +
+  scale_color_manual(values = c('white', 'black')) +
+  theme_void() +
+  theme(legend.position = 'none')
+
+ggsave('methods_pie.png', height = 5, width = 5, dpi = 300)
+```
+
+
+
+### Applied science theme
+
+```{r}
+theme_df <- df %>%
+  mutate(theme = str_split(applied_science_theme, ';|,|/')) %>%
+  unnest(theme) %>%
+  mutate(theme = case_when(str_detect(theme, 'wildfire|forest') ~ 'wildfire/forestry', 
+                           str_detect(theme, 'water resource') ~ 'water resource mgmt',
+                           str_detect(theme, 'conservation') ~ 'conservation',
+                           str_detect(theme, 'disaster') ~ 'disaster response',
+                           str_detect(theme, 'climate|weather|drought') ~ 'climate/drought/flood',
+                           str_detect(theme, 'health|air quality') ~ 'human health',
+                           str_detect(theme, 'justice|equity|indigen|poverty|development') ~ 'justice/equity/indigenous',
+                           str_detect(theme, 'various') ~ 'other/various',
+                           TRUE ~ theme),
+         theme = str_squish(theme)) %>%
+  filter(!is.na(theme)) %>%
+  group_by(theme) %>%
+  mutate(theme = ifelse(n() < 5, 'other/various', theme)) %>%
+  group_by(theme) %>%
+  summarize(n = n()) %>%
+  mutate(theme = fct_reorder(theme, n),
+         theme = fct_relevel(theme, 'other/various', after = 0),
+         theme = fct_rev(theme)) %>%
+  arrange(theme) %>%
+  mutate(pct = n / sum(n),
+         pct_cum = cumsum(pct),
+         lbl_y = 1 - (pct/2 + lag(pct_cum, default = 0)),
+         lbl_angle = ifelse(lbl_y > .5, -lbl_y * 360 - 90, -lbl_y * 360 + 90),
+         lbl_color = lbl_y > .45)
+
+ggplot(theme_df, aes(x = 1, y = pct, fill = theme)) +
+  geom_bar(stat = 'identity', width = 1, alpha = .7) +
+  geom_text(aes(label = theme, y = lbl_y, angle = lbl_angle, color = lbl_color),
+            x = 1.1) +
+  coord_polar('y', start = 0) +
+  scale_fill_manual(values = c(rev(hcl.colors(8)), 'grey50')) +
+  scale_color_manual(values = c('white', 'black')) +
+  theme_void() +
+  theme(legend.position = 'none')
+
+ggsave('themes_pie.png', height = 5, width = 5, dpi = 300)
+```
+
+
+### Value units
+
+```{r}
+units_df <- df %>%
+  mutate(units = str_split(value_units, ';|,|/')) %>%
+  unnest(units) %>%
+  mutate(units = case_when(str_detect(units, 'wildfire') ~ 'wildfire', 
+                           str_detect(units, 'forest') ~ 'forestry',
+                           str_detect(units, 'water resource') ~ 'water resource mgmt',
+                           str_detect(units, 'conservation') ~ 'conservation',
+                           str_detect(units, 'disaster') ~ 'disaster response',
+                           str_detect(units, 'health|air quality') ~ 'human health',
+                           str_detect(units, 'justice|equity|indigen|poverty|development') ~ 'justice/equity/indigenous',
+                           TRUE ~ units),
+         units = str_squish(units)) %>%
+  filter(!is.na(units)) %>%
+  group_by(units) %>%
+  summarize(n = n()) %>%
+  mutate(units = fct_reorder(units, n))
+
+ggplot(units_df %>% filter(n > 1), aes(x = n, y = units)) +
+  geom_col() +
+  labs(title = 'units showing up more than once')
+
+ggplot(units_df %>% filter(n == 1), aes(x = n, y = units)) +
+  geom_col() +
+  labs(title = 'One-shot units')
+```
+
+### Heat map
+
+```{r}
+method_sba_df <- df %>%
+  mutate(method = str_split(econ_method, ';|,|/')) %>%
+  unnest(method) %>%
+  filter(method != 'model') %>%
+  mutate(method = case_when(str_detect(method, 'voi|value of infor') ~ 'value of information',
+                            str_detect(method, 'cost.benefit') ~ 'cost-benefit analysis', 
+                            str_detect(method, 'survey|interview') ~ 'survey/interview',
+                            str_detect(method, 'option') ~ 'real options value',
+                            str_detect(method, 'chain') ~ 'benefits chain',
+                            str_detect(method, 'stochastic|dynamic mod|bioeconomic|simulation') ~ 'dynamic model',
+                            str_detect(method, 'expert') ~ 'expert elicitation',
+                            str_detect(method, 'regression') ~ 'regression',
+                            TRUE ~ method),
+         method = str_squish(method)) %>%
+  filter(!is.na(method)) %>%
+  group_by(method) %>%
+  mutate(method = ifelse(n() < 6, 'other', method)) %>%
+  mutate(theme = str_split(applied_science_theme, ';|,|/')) %>%
+  unnest(theme) %>%
+  mutate(theme = case_when(str_detect(theme, 'wildfire|forest') ~ 'wildfire/forestry', 
+                           str_detect(theme, 'water resource') ~ 'water resource mgmt',
+                           str_detect(theme, 'conservation') ~ 'conservation',
+                           str_detect(theme, 'disaster') ~ 'disaster response',
+                           str_detect(theme, 'climate|weather|drought') ~ 'climate/drought/flood',
+                           str_detect(theme, 'health|air quality') ~ 'human health',
+                           str_detect(theme, 'justice|equity|indigen|poverty|development') ~ 'justice/equity/indigenous',
+                           str_detect(theme, 'various') ~ 'other/various',
+                           TRUE ~ theme),
+         theme = str_squish(theme)) %>%
+  filter(!is.na(theme)) %>%
+  group_by(theme) %>%
+  mutate(theme = ifelse(n() < 5, 'other/various', theme)) %>%
+  group_by(method, theme) %>%
+  summarize(n = n(), .groups = 'drop') %>%
+  mutate(method = factor(method, levels = levels(method_df$method)),
+         theme = factor(theme, levels = rev(levels(theme_df$theme)))) %>%
+  complete(method, theme)
+
+ggplot(method_sba_df, aes(x = method, y = theme, fill = n)) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  coord_fixed() +
+  labs(fill = '# Docs') +
+  theme_minimal() +
+  theme(panel.background = element_blank(),
+        panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_text(size = 10, color = 'black'),
+        axis.text.x = element_text(angle = 30, hjust = 1))
+
+ggsave('heatmap.png', height = 5, width = 7, dpi = 300)
+```
+
