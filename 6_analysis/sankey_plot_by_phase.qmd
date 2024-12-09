@@ -71,19 +71,19 @@ ft_ct <- sum(ft_df$n)
 ```{r}
 links <- tribble(
   ~source,            ~target,            ~value,
-  'Soc Benefit Repo (n = 260)',     'Colandr includes (n = 541)',   131,
-  'Soc Benefit Repo (n = 260)',     'Colandr excludes (n = 1505)',  129,
-  'Training set (n = 1077)',        'Colandr includes (n = 541)',   147,
-  'Training set (n = 1077)',        'Colandr excludes (n = 1505)',  930,
-  'Predicted includes (n = 2148)',  'Colandr includes (n = 541)',   284,
-  'Predicted includes (n = 2148)',  'Colandr excludes (n = 1505)',  446,
-  'Predicted includes (n = 2148)',  'Colandr TBD (n= 2418)',       1418,
+  'Soc Benefit Repo (n = 260)',     'Title/abstract includes (n = 541)',   131,
+  'Soc Benefit Repo (n = 260)',     'Title/abstract excludes (n = 1505)',  129,
+  'Training set (n = 1077)',        'Title/abstract includes (n = 541)',   147,
+  'Training set (n = 1077)',        'Title/abstract excludes (n = 1505)',  930,
+  'Predicted includes (n = 2148)',  'Title/abstract includes (n = 541)',   284,
+  'Predicted includes (n = 2148)',  'Title/abstract excludes (n = 1505)',  446,
+  'Predicted includes (n = 2148)',  'Title/abstract to be screened (n= 2418)',       1418,
   'Predicted excludes (n = 10384)', 'Not screened (n = 9384)',     9384,
-  'Predicted excludes (n = 10384)', 'Colandr TBD (n= 2418)',       1000,
-  'Colandr includes (n = 541)',     'Fulltext includes (n = 174)',  174,
-  'Colandr includes (n = 541)',     'Fulltext excludes (n = 367)',  367,
-  'Colandr TBD (n= 2418)',          'Expected includes (n = 99)',   99,
-  'Colandr TBD (n= 2418)',          'Expected excludes (n = 2319)', 2319) %>%
+  'Predicted excludes (n = 10384)', 'Title/abstract to be screened (n= 2418)',       1000,
+  'Title/abstract includes (n = 541)',     'Fulltext includes (n = 174)',  174,
+  'Title/abstract includes (n = 541)',     'Fulltext excludes (n = 367)',  367,
+  'Title/abstract to be screened (n= 2418)',          'Expected includes (n = 99)',   99,
+  'Title/abstract to be screened (n= 2418)',          'Expected excludes (n = 2319)', 2319) %>%
   arrange(value) %>%
   mutate(source = fct_inorder(source)) %>%
   group_by(source) %>%
