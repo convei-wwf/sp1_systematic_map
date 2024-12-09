@@ -80,8 +80,7 @@ method_df <- df %>%
   group_by(method) %>%
   summarize(n = n()) %>%
   mutate(method = fct_reorder(method, n),
-         method = fct_relevel(method, 'other', after = 0),
-         method = fct_rev(method)) %>%
+         method = fct_relevel(method, 'other', after = 0)) %>%
   arrange(method) %>%
   mutate(pct = n / sum(n),
          pct_cum = cumsum(pct),
@@ -89,17 +88,16 @@ method_df <- df %>%
          lbl_angle = ifelse(lbl_y > .5, -lbl_y * 360 - 90, -lbl_y * 360 + 90),
          lbl_color = lbl_y > .35)
 
-ggplot(method_df, aes(x = 1, y = pct, fill = method)) +
-  geom_bar(stat = 'identity', width = 1, alpha = .7) +
-  geom_text(aes(label = method, y = lbl_y, angle = lbl_angle, color = lbl_color),
-            x = 1.1) +
-  coord_polar('y', start = 0) +
+ggplot(method_df, aes(y = method, x = n)) +
+  geom_col(alpha = .7) +
+  geom_text(aes(label = n), hjust = 1, nudge_x = -.5, color = 'white', size = 3) +
   scale_fill_manual(values = c(rev(hcl.colors(8)), 'grey50')) +
-  scale_color_manual(values = c('white', 'black')) +
-  theme_void() +
-  theme(legend.position = 'none')
+  theme_minimal() +
+  theme(legend.position = 'none', 
+        axis.title = element_blank(),
+        panel.grid = element_blank())
 
-ggsave('methods_pie.png', height = 5, width = 5, dpi = 300)
+ggsave('methods_bar.png', height = 3, width = 5, dpi = 300)
 ```
 
 
@@ -126,8 +124,7 @@ theme_df <- df %>%
   group_by(theme) %>%
   summarize(n = n()) %>%
   mutate(theme = fct_reorder(theme, n),
-         theme = fct_relevel(theme, 'other/various', after = 0),
-         theme = fct_rev(theme)) %>%
+         theme = fct_relevel(theme, 'other/various', after = 0)) %>%
   arrange(theme) %>%
   mutate(pct = n / sum(n),
          pct_cum = cumsum(pct),
@@ -135,17 +132,16 @@ theme_df <- df %>%
          lbl_angle = ifelse(lbl_y > .5, -lbl_y * 360 - 90, -lbl_y * 360 + 90),
          lbl_color = lbl_y > .45)
 
-ggplot(theme_df, aes(x = 1, y = pct, fill = theme)) +
-  geom_bar(stat = 'identity', width = 1, alpha = .7) +
-  geom_text(aes(label = theme, y = lbl_y, angle = lbl_angle, color = lbl_color),
-            x = 1.1) +
-  coord_polar('y', start = 0) +
+ggplot(theme_df, aes(y = theme, x = n)) +
+  geom_col(alpha = .7) +
+  geom_text(aes(label = n), hjust = 1, nudge_x = -.5, color = 'white', size = 3) +
   scale_fill_manual(values = c(rev(hcl.colors(8)), 'grey50')) +
-  scale_color_manual(values = c('white', 'black')) +
-  theme_void() +
-  theme(legend.position = 'none')
+  theme_minimal() +
+  theme(legend.position = 'none', 
+        axis.title = element_blank(),
+        panel.grid = element_blank())
 
-ggsave('themes_pie.png', height = 5, width = 5, dpi = 300)
+ggsave('themes_bar.png', height = 3, width = 5, dpi = 300)
 ```
 
 
@@ -216,16 +212,20 @@ method_sba_df <- df %>%
   group_by(method, theme) %>%
   summarize(n = n(), .groups = 'drop') %>%
   mutate(method = factor(method, levels = levels(method_df$method)),
-         theme = factor(theme, levels = rev(levels(theme_df$theme)))) %>%
+         theme = factor(theme, levels = rev(levels(theme_df$theme))),
+         lbl_color = n > 14) %>%
   complete(method, theme)
 
 ggplot(method_sba_df, aes(x = method, y = theme, fill = n)) +
   geom_tile() +
+  geom_text(aes(label = n, color = lbl_color)) +
   scale_fill_viridis_c() +
+  scale_color_manual(values = c('white', 'black')) +
   coord_fixed() +
   labs(fill = '# Docs') +
   theme_minimal() +
-  theme(panel.background = element_blank(),
+  theme(legend.position = 'none',
+        panel.background = element_blank(),
         panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_text(size = 10, color = 'black'),
