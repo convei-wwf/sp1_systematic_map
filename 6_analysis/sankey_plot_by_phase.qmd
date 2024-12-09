@@ -65,29 +65,30 @@ table(pred_round2$classification_prediction)
 total <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'))
 col_ct <- sum(col_df$n)
 ft_ct <- sum(ft_df$n)
-
-total - 
 ```
 
 
 ```{r}
 links <- tribble(
   ~source,            ~target,            ~value,
-  'Soc Benefit Repo',   'Colandr includes',  131,
-  'Soc Benefit Repo',   'Colandr excludes',  129,
-  'Training set',       'Colandr includes',  147,
-  'Training set',       'Colandr excludes',  930,
-  'Predicted includes', 'Colandr includes',  284,
-  'Predicted includes', 'Colandr excludes',  446,
-  'Predicted includes', 'Colandr TBD',      1418,
-  'Predicted excludes', 'Not screened',     9384,
-  'Predicted excludes', 'Colandr TBD',      1000,
-  'Colandr includes',   'Fulltext includes', 174,
-  'Colandr includes',   'Fulltext excludes', 367,
-  'Colandr TBD',        'Expected includes',  99,
-  'Colandr TBD',        'Expected excludes', 2319) %>%
+  'Soc Benefit Repo (n = 260)',     'Colandr includes (n = 541)',   131,
+  'Soc Benefit Repo (n = 260)',     'Colandr excludes (n = 1505)',  129,
+  'Training set (n = 1077)',        'Colandr includes (n = 541)',   147,
+  'Training set (n = 1077)',        'Colandr excludes (n = 1505)',  930,
+  'Predicted includes (n = 2148)',  'Colandr includes (n = 541)',   284,
+  'Predicted includes (n = 2148)',  'Colandr excludes (n = 1505)',  446,
+  'Predicted includes (n = 2148)',  'Colandr TBD (n= 2418)',       1418,
+  'Predicted excludes (n = 10384)', 'Not screened (n = 9384)',     9384,
+  'Predicted excludes (n = 10384)', 'Colandr TBD (n= 2418)',       1000,
+  'Colandr includes (n = 541)',     'Fulltext includes (n = 174)',  174,
+  'Colandr includes (n = 541)',     'Fulltext excludes (n = 367)',  367,
+  'Colandr TBD (n= 2418)',          'Expected includes (n = 99)',   99,
+  'Colandr TBD (n= 2418)',          'Expected excludes (n = 2319)', 2319) %>%
   arrange(value) %>%
-  mutate(source = fct_inorder(source))
+  mutate(source = fct_inorder(source)) %>%
+  group_by(source) %>%
+  mutate(n = sum(value)) %>%
+  ungroup()
  
 # From these flows we need to create a node data frame: it lists every entities involved in the flow
 nodes <- data.frame(
@@ -103,7 +104,7 @@ links$IDtarget <- match(links$target, nodes$name)-1
 p <- sankeyNetwork(Links = links, Nodes = nodes,
               Source = "IDsource", Target = "IDtarget",
               Value = "value", NodeID = "name", 
-              fontSize = 10, fontFamily = 'Arial',
+              fontSize = 14, fontFamily = 'Arial',
               sinksRight=FALSE)
 p
 
