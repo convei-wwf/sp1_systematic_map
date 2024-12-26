@@ -2,25 +2,54 @@ library(tidyverse)
 library(here)
 library(synthesisr)
 
-sbr_fix_key <- read_csv(here('_data/3_refs_clean/sbr_fix_lookup.csv'))
+sbr_fix_key <- read_csv(here('_data/1c_refs_clean/sbr_fix_lookup.csv'))
 
 ### As fed into Colandr
-sbr_fix_key <- read_csv(here('_data/3_refs_clean/sbr_fix_lookup.csv')) %>%
+sbr_fix_key <- read_csv(here('_data/1c_refs_clean/sbr_fix_lookup.csv')) %>%
   select(title, key)
-sample_refs <- read_refs(here('_data/3_refs_clean/sample/sample_1000_240708.ris')) %>%
+sample_refs <- read_refs(here('_data/1c_refs_clean/sample/sample_1000_240708.ris')) %>%
   rename(key = notes) %>% select(-year)
 round1_refs <- read_refs(here('_data/5c_classifier_round1/predicted_classifier_round1_sample_200.ris')) %>%
   rename(key = notes)
 round2_refs <- read_refs(here('_data/5d_classifier_round2/predicted_classifier_round2_includes.ris')) %>%
   rename(key = notes)
 
-results_df <- read_csv(here('_data/4_colandr_screened/colandr_companion_incl_2024-11-29.csv')) %>%
-  bind_rows(read_csv(here('_data/4_colandr_screened/colandr_companion_excl_2024-11-29.csv'))) %>%
+results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2024-12-25.csv')) %>%
+  bind_rows(read_csv(here('_data/screened_colandr/colandr_companion_excl_2024-12-25.csv'))) %>%
   janitor::clean_names() %>%
   mutate(date = as.Date(date_screened_t_a)) %>%
-  mutate(across(where(is.character), str_squish)) %>%
+  ### drop dupe IDs from initial screening
   group_by(id) %>%
-  filter(date == min(date)) %>%
+  filter(date == max(date)) %>%
+  ungroup() %>%
+  mutate(across(where(is.character), str_squish)) %>%
+  mutate(phase = case_when(is.na(date) ~ 'benchmark',
+                           date <= as.Date('2024-04-17') ~ 'early',
+                           date <= as.Date('2024-04-29') ~ 'soc ben repo',
+                           date <= as.Date('2024-08-02') ~ 'sample 1000',
+                           date <= as.Date('2024-10-04') ~ 'classifier round 1',
+                           date <= as.Date('2024-11-01') ~ 'classifier round 2',
+                           TRUE ~ 'classifier round 3')) %>%
+  mutate(t_a_status = case_when(is.na(t_a_status) & str_detect(tags, 'benchmark') ~ 'included',
+                                is.na(t_a_status) & !str_detect(tags, 'benchmark') ~ 'excluded',
+                                TRUE ~ t_a_status)) %>%
+  rename(year = publication_year, 
+         screening_status = t_a_status, 
+         excl_reasons = t_a_exclusion_reasons)
+
+table(results_all_df$phase)
+
+results_id_dupe <- results_all_df %>%
+  group_by(id) %>%
+  filter(n() > 1)
+
+results_title_dupe <- results_all_df %>%
+  mutate(title_lc = tolower(title)) %>%
+  janitor::get_dupes(title_lc)
+  
+  
+  
+  
   # ### keep only those after the date of previous download
   # filter(date_screened_t_a >= as.Date('2024-08-02')) %>%
   # ### exclude any after the Oct 4 results download
