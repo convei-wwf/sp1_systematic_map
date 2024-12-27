@@ -14,9 +14,7 @@ editor: source
 
 ```{r setup}
 library(tidyverse)
-library(tidytext)
 library(synthesisr)
-library(pdftools)
 library(here)
 ```
 
@@ -41,14 +39,16 @@ dates <- str_extract(basename(col_by_phase_fs), '[0-9]{4}-[0-9]{2}-[0-9]{2}') %>
 
 f <- col_by_phase_fs[dates == max(dates)]
                      
-results_df <- read_csv(f, show_col_types = FALSE) %>%
-  filter(phase == 'classifier round 2')
+results_all_df <- read_csv(f, show_col_types = FALSE)
+
+results_2a_df <- results_all_df %>%
+  filter(phase == 'classifier round 2a')
 
 ### fed into colandr
 cls_rd2_refs <- read_refs(here('_data/5_screen_classifier_round2/ris_to_colandr_classifier_round2.ris'))
 ```
 
-Note that we only screened `r nrow(results_df)` citations out of `r nrow(cls_rd2_refs)` for round 2.
+Note that we only screened `r nrow(results_2a_df)` citations out of `r nrow(cls_rd2_refs)` for round 2a.
 
 ## Isolate includes and save as .bib for Zotero
 
@@ -58,27 +58,26 @@ NOTES:
 
 * Colandr seems to fuck up the author order by alphabetizing when exporting...
 * Use VPN to log into UCSB account for more likely retrieval?
-* Here, we use the Colandr results to identify DOIs that are included.  We find the original cleaned sample refs and filter to the relevant DOIs and then save that out as a .bib.  
-* Note that this round of 2148 citations may include a few outside those uploaded to Colandr, since a few were left in the Colandr system after the 1000-sample screening.  So load both sets just in case! (turns out, not the case)
-
 
 ```{r}
-sample_refs <- read_refs(here('_data/1c_refs_clean/sample/sample_1000_240708.ris'))
+key_df <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'))
 
-incl_df <- results_df %>%
-  filter(screening_status == 'included' & !is.na(doi))
+incl_df <- results_2a_df %>%
+  filter(screening_status == 'included' & !is.na(doi)) %>% 
+  select(-screening_status, -year, -tags, -excl_reasons, -phase) %>% 
+  mutate(doi = str_remove(doi, ' and .+')) %>% 
+  left_join(key_df, by = c('title', 'doi')) %>% 
+  as.data.frame()
+  
 
-colandr_incl <- sample_refs %>% bind_rows(cls_rd2_refs) %>% filter(doi %in% incl_df$doi)
+to_zot_f <- here('_data/5_screen_classifier_round2/bib_to_zotero_cls_round2a.bib')
 
-# nrow(sample_incl %>% filter(notes %in% sample_refs$notes))
-### nope
-
-write_refs(colandr_incl, format = 'bib', 
-           file = here('_data/5_screen_classifier_round2/bib_to_zotero_cls_round2.bib'))
-
-
-# check <- read_refs(here('_data/5_screen_classifier_round2/incl_bib_to_zotero.bib'))
-# x <- anti_join(colandr_incl, check, by = 'doi') ### all good
+if(!file.exists(to_zot_f)) {
+  
+  write_refs(incl_df, format = 'bib', 
+             file = to_zot_f)
+}
+### to_zot_df <- read_refs(to_zot_f)
 ```
 
 
@@ -87,7 +86,7 @@ write_refs(colandr_incl, format = 'bib',
 Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
 
 ```{r}
-zot_check <- read_refs(here('_data/5_screen_classifier_round2/bib_from_zotero_cls_round2.bib')) %>%
+zot_check <- read_refs(here('_data/5_screen_classifier_round2/bib_from_zotero_cls_round2a.bib')) %>%
   mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
          doi = tolower(doi))
 
@@ -99,9 +98,9 @@ Out of `r nrow(incl_df)` included papers, `r nrow(zot_check)` have records in Zo
 ## Write out temp csv for full text screening
 
 ```{r}
-fulltext_df <- colandr_incl %>%
-  select(title, author, year, doi, notes) %>%
-  mutate(phase = 'classifier round 2',
+fulltext_df <- incl_df %>%
+  select(title, author, year, doi, key) %>%
+  mutate(phase = 'classifier round 2a',
          screening_decision = NA,
          reason_for_exclusion = NA,
          quick_notes = NA,
@@ -112,7 +111,7 @@ fulltext_df <- colandr_incl %>%
          applied_science_theme = NA,
          notes = NA)
 
-write_csv(fulltext_df, here('_data/screened_fulltext/4_tmp_classifier_round2.csv'))
+write_csv(fulltext_df, here('_data/screened_fulltext/4a_tmp_classifier_round2a.csv'))
 ```
 
 

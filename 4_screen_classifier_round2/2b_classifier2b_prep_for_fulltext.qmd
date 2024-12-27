@@ -1,5 +1,5 @@
 ---
-title: "Phase 4: gather and prepare full texts for included items in classifier set 2"
+title: "Phase 4: gather and prepare full texts for included items in classifier set 2b"
 author: "O'Hara"
 format: 
   html:
@@ -41,14 +41,14 @@ f <- col_by_phase_fs[dates == max(dates)]
                      
 results_all_df <- read_csv(f, show_col_types = FALSE)
 
-results_2_df <- results_all_df %>%
-  filter(phase == 'classifier round 2')
+results_2b_df <- results_all_df %>%
+  filter(phase == 'classifier round 2b')
 
 ### fed into colandr
 cls_rd2_refs <- read_refs(here('_data/5_screen_classifier_round2/ris_to_colandr_classifier_round2.ris'))
 ```
 
-Note that we only screened `r nrow(results_2_df)` citations out of `r nrow(cls_rd2_refs)` for round 2.
+Note that we only screened `r nrow(results_2b_df)` citations out of `r nrow(cls_rd2_refs)` for round 2a.
 
 ## Isolate includes and save as .bib for Zotero
 
@@ -62,7 +62,7 @@ NOTES:
 ```{r}
 key_df <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'))
 
-incl_df <- results_2_df %>%
+incl_df <- results_2b_df %>%
   filter(screening_status == 'included' & !is.na(doi)) %>% 
   select(-screening_status, -year, -tags, -excl_reasons, -phase) %>% 
   mutate(doi = str_remove(doi, ' and .+')) %>% 
@@ -70,7 +70,7 @@ incl_df <- results_2_df %>%
   as.data.frame()
   
 
-to_zot_f <- here('_data/5_screen_classifier_round2/bib_to_zotero_cls_round2.bib')
+to_zot_f <- here('_data/5_screen_classifier_round2/bib_to_zotero_cls_round2b.bib')
 
 if(!file.exists(to_zot_f)) {
   
@@ -86,7 +86,7 @@ if(!file.exists(to_zot_f)) {
 Pulling the DOI information from these papers, and importing into Zotero via the "add item(s) by identifier" option, downloads (where possible) the PDFs into a designated subcollection.  Checking the successfully downloaded DOIs against the full list, we can identify those references not found via DOI.
 
 ```{r}
-zot_check <- read_refs(here('_data/5_screen_classifier_round2/bib_from_zotero_cls_round2.bib')) %>%
+zot_check <- read_refs(here('_data/5_screen_classifier_round2/bib_from_zotero_cls_round2b.bib')) %>%
   mutate(title_check = str_remove_all(tolower(title), '[[:punct:]]') %>% str_squish(),
          doi = tolower(doi))
 
@@ -100,7 +100,7 @@ Out of `r nrow(incl_df)` included papers, `r nrow(zot_check)` have records in Zo
 ```{r}
 fulltext_df <- incl_df %>%
   select(title, author, year, doi, key) %>%
-  mutate(phase = 'classifier round 2',
+  mutate(phase = 'classifier round 2b',
          screening_decision = NA,
          reason_for_exclusion = NA,
          quick_notes = NA,
@@ -111,7 +111,7 @@ fulltext_df <- incl_df %>%
          applied_science_theme = NA,
          notes = NA)
 
-write_csv(fulltext_df, here('_data/screened_fulltext/4_tmp_classifier_round2.csv'))
+write_csv(fulltext_df, here('_data/screened_fulltext/4b_tmp_classifier_round2b.csv'))
 ```
 
 

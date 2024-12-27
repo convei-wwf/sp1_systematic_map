@@ -3143,14 +3143,14 @@ vertical-align: -.125em;
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                     </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>results_all_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>results_2_df <span class="ot">&lt;-</span> results_all_df <span class="sc">%&gt;%</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phase <span class="sc">==</span> <span class="st">&#39;classifier round 2&#39;</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>results_2a_df <span class="ot">&lt;-</span> results_all_df <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phase <span class="sc">==</span> <span class="st">&#39;classifier round 2a&#39;</span>)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">### fed into colandr</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>cls_rd2_refs <span class="ot">&lt;-</span> <span class="fu">read_refs</span>(<span class="fu">here</span>(<span class="st">&#39;_data/5_screen_classifier_round2/ris_to_colandr_classifier_round2.ris&#39;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Note that we only screened 313 citations out of 2148 for round 2.</p>
+<p>Note that we only screened 411 citations out of 2148 for round 2a.</p>
 </section>
 <section id="isolate-includes-and-save-as-.bib-for-zotero" class="level2">
 <h2 class="anchored" data-anchor-id="isolate-includes-and-save-as-.bib-for-zotero">Isolate includes and save as .bib for Zotero</h2>
@@ -3165,7 +3165,7 @@ vertical-align: -.125em;
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>key_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;_data/1c_refs_clean/ref_key_lookup.csv&#39;</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>incl_df <span class="ot">&lt;-</span> results_2_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>incl_df <span class="ot">&lt;-</span> results_2a_df <span class="sc">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(screening_status <span class="sc">==</span> <span class="st">&#39;included&#39;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(doi)) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>screening_status, <span class="sc">-</span>year, <span class="sc">-</span>tags, <span class="sc">-</span>excl_reasons, <span class="sc">-</span>phase) <span class="sc">%&gt;%</span> </span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doi =</span> <span class="fu">str_remove</span>(doi, <span class="st">&#39; and .+&#39;</span>)) <span class="sc">%&gt;%</span> </span>
@@ -3173,7 +3173,7 @@ vertical-align: -.125em;
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>to_zot_f <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&#39;_data/5_screen_classifier_round2/bib_to_zotero_cls_round2.bib&#39;</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>to_zot_f <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&#39;_data/5_screen_classifier_round2/bib_to_zotero_cls_round2a.bib&#39;</span>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(to_zot_f)) {</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -3190,14 +3190,14 @@ vertical-align: -.125em;
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>zot_check <span class="ot">&lt;-</span> <span class="fu">read_refs</span>(<span class="fu">here</span>(<span class="st">&#39;_data/5_screen_classifier_round2/bib_from_zotero_cls_round2.bib&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>zot_check <span class="ot">&lt;-</span> <span class="fu">read_refs</span>(<span class="fu">here</span>(<span class="st">&#39;_data/5_screen_classifier_round2/bib_from_zotero_cls_round2a.bib&#39;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title_check =</span> <span class="fu">str_remove_all</span>(<span class="fu">tolower</span>(title), <span class="st">&#39;[[:punct:]]&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">str_squish</span>(),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">doi =</span> <span class="fu">tolower</span>(doi))</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pdf_find <span class="ot">&lt;-</span> zot_check <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(file))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Out of 128 included papers, 128 have records in Zotero; of these, 7 do(es) not have a .pdf available.</p>
+<p>Out of 155 included papers, 155 have records in Zotero; of these, 6 do(es) not have a .pdf available.</p>
 </section>
 <section id="write-out-temp-csv-for-full-text-screening" class="level2">
 <h2 class="anchored" data-anchor-id="write-out-temp-csv-for-full-text-screening">Write out temp csv for full text screening</h2>
@@ -3206,7 +3206,7 @@ vertical-align: -.125em;
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fulltext_df <span class="ot">&lt;-</span> incl_df <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, author, year, doi, key) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phase =</span> <span class="st">&#39;classifier round 2&#39;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phase =</span> <span class="st">&#39;classifier round 2a&#39;</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">screening_decision =</span> <span class="cn">NA</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">reason_for_exclusion =</span> <span class="cn">NA</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">quick_notes =</span> <span class="cn">NA</span>,</span>
@@ -3217,7 +3217,7 @@ vertical-align: -.125em;
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">applied_science_theme =</span> <span class="cn">NA</span>,</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">notes =</span> <span class="cn">NA</span>)</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(fulltext_df, <span class="fu">here</span>(<span class="st">&#39;_data/screened_fulltext/4_tmp_classifier_round2.csv&#39;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(fulltext_df, <span class="fu">here</span>(<span class="st">&#39;_data/screened_fulltext/4_tmp_classifier_round2a.csv&#39;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>

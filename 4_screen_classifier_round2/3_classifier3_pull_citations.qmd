@@ -1,0 +1,37 @@
+---
+title: "Pull all citations from round 3 of classifier"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+This script reads in the classifier model's results from round 3 and saves out a `.ris` of sampled citations for import into Colandr for citation screening, and then from these to fulltext screening.
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(synthesisr)
+```
+
+## Load prediction results
+
+```{r}
+pred_df <- read_csv(here('_data/classifier_results', 
+                         'predicted_classifier_round3_set.csv')) %>%
+  rename(pred_round3 = 3, pred_round2 = 4)
+
+table(pred_df %>% select(pred_round3, pred_round2))
+
+incl_df <- pred_df %>% filter(pred_round3 == 1)
+
+# sum(pred_df$pred_round3) / nrow(pred_df) ### 5.7%
+```
+
+Because all citations flagged as predicted includes for round 3 were also flagged in round 2, all round 3 citations are already in Colandr - no need for uploading additional references.
