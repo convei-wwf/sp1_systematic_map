@@ -26,7 +26,7 @@ After all fulltext screening is complete, pull in the various fulltext results, 
 ## Consolidate fulltext results
 
 ```{r}
-fs <- list.files(here('_data/screened_fulltext'), pattern = '^[0-9]_fulltext_.+.csv$', full.names = TRUE)
+fs <- list.files(here('_data/screened_fulltext'), pattern = '^[0-9][a-z]?_fulltext_.+.csv$', full.names = TRUE)
 
 phases <- str_remove_all(basename(fs), '[0-9]_fulltext_|.csv')
 
