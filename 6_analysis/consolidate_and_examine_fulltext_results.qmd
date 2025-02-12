@@ -28,15 +28,22 @@ After all fulltext screening is complete, pull in the various fulltext results, 
 ```{r}
 fs <- list.files(here('_data/screened_fulltext'), pattern = '^[0-9][a-z]?_fulltext_.+.csv$', full.names = TRUE)
 
+key_df <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv')) %>%
+  mutate(title = tolower(title) %>% stringi::stri_trans_general('Latin-ASCII')) %>%
+  select(title_match = title, key2 = key)
+
 phases <- str_remove_all(basename(fs), '[0-9]_fulltext_|.csv')
 
 df_all <- lapply(fs, read_csv, show_col_types = FALSE) %>% 
   setNames(phases) %>%
-  bind_rows(.id = 'phase') 
+  bind_rows(.id = 'phase') %>%
+  mutate(title_match = tolower(title) %>% stringi::stri_trans_general('Latin-ASCII')) %>%
+  left_join(key_df, by = 'title_match')
 
 df <- df_all %>%
   filter(screening_decision == 'include') %>%
-  select(-screening_decision, -reason_for_exclusion, -revisited)
+  mutate(key = ifelse(is.na(key), key2, key)) %>%
+  select(-screening_decision, -reason_for_exclusion, -revisited, -title_match, -key2)
 
 write_csv(df, here('_data/screened_fulltext/ft_consolidated.csv'))
 ```
@@ -61,7 +68,7 @@ note, change to "social science method" for more inclusion
 
 ```{r}
 method_df <- df %>%
-  mutate(method = str_split(econ_method, ';|,|/')) %>%
+  mutate(method = str_split(soc_method, ';|,|/')) %>%
   unnest(method) %>%
   filter(method != 'model') %>%
   mutate(method = case_when(str_detect(method, 'voi|value of infor') ~ 'value of information',
@@ -178,7 +185,7 @@ ggplot(units_df %>% filter(n == 1), aes(x = n, y = units)) +
 
 ```{r}
 method_sba_df <- df %>%
-  mutate(method = str_split(econ_method, ';|,|/')) %>%
+  mutate(method = str_split(soc_method, ';|,|/')) %>%
   unnest(method) %>%
   filter(method != 'model') %>%
   mutate(method = case_when(str_detect(method, 'voi|value of infor') ~ 'value of information',
