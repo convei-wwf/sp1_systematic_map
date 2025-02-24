@@ -20,13 +20,13 @@ library(here)
 
 # Summary
 
-Select 60 or so included docs to review for refining a typology for the social science methods.
+Select 100 included docs to review for refining a typology for the social science methods, and assign to bins of 10
 
 ```{r}
 ft_df <- read_csv(here('_data/screened_fulltext/ft_consolidated.csv'))
 
 ft_by_method <- ft_df %>%
-  mutate(method = str_split(econ_method, ';|/| and |\\?|,| informed by ')) %>%
+  mutate(method = str_split(soc_method, ';|/| and |\\?|,| informed by ')) %>%
   unnest(method) %>%
   mutate(method = str_squish(method)) %>%
   mutate(method = case_when(str_detect(method, 'cost.benefit') ~ 'cost-benefit assessment',
@@ -37,7 +37,7 @@ ft_by_method <- ft_df %>%
 ft_sum <- ft_by_method %>%
   count(method)
 
-assign_vec <- c('SB', 'SG', 'SR', 'BG', 'BR', 'GR') %>% rep(10)
+assign_vec <- rep(1:10, times = 10)
 
 set.seed(42)
 ft_sample <- ft_by_method %>%
@@ -46,13 +46,10 @@ ft_sample <- ft_by_method %>%
   ungroup() %>%
   select(-method) %>%
   distinct() %>%
-  slice_sample(n = 60) %>%
-  mutate(assign = sample(assign_vec, replace = FALSE)) %>%
-  mutate(Sam =      ifelse(str_detect(assign, 'S'), 'X', ''),
-         Gillian =  ifelse(str_detect(assign, 'G'), 'X', ''),
-         Becky =    ifelse(str_detect(assign, 'B'), 'X', ''),
-         Rachelle = ifelse(str_detect(assign, 'R'), 'X', '')) %>%
-  select(-assign)
+  slice_sample(n = 100) %>%
+  mutate(group = sample(assign_vec, replace = FALSE)) %>%
+  arrange(group) %>%
+  select(title, author, year, key, group)
 
 write_csv(ft_sample, 'fulltext_sample_to_review.csv')
 ```

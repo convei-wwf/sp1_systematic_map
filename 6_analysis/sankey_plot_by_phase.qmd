@@ -36,7 +36,7 @@ Load refs at various phases.  Include:
 * Full text not done
 
 ```{r}
-col_df <- read_csv(here('_data/screened_colandr/colandr_by_phase_2024-12-01.csv')) %>%
+col_df <- read_csv(here('_data/screened_colandr/colandr_by_phase_2024-12-27.csv')) %>%
   mutate(phase = case_when(phase == 'classifier round 1' ~ 'training',
                            phase == 'early' ~ 'training',
                            phase == 'sample 1000' ~ 'training',
@@ -58,7 +58,7 @@ ft_df <- ft_fs %>%
   group_by(phase, screening_decision) %>%
   summarize(n = n(), .groups = 'drop')
 
-pred_round2 <- read_csv(here('_data/5_screen_classifier_round2',
+pred_round2 <- read_csv(here('_data/classifier_results',
                              'predicted_classifier_round2_set.csv'))
 table(pred_round2$classification_prediction)
 
@@ -71,19 +71,16 @@ ft_ct <- sum(ft_df$n)
 ```{r}
 links <- tribble(
   ~source,            ~target,            ~value,
-  'Soc Benefit Repo (n = 260)',     'Title/abstract includes (n = 541)',   131,
-  'Soc Benefit Repo (n = 260)',     'Title/abstract excludes (n = 1505)',  129,
-  'Training set (n = 1077)',        'Title/abstract includes (n = 541)',   147,
-  'Training set (n = 1077)',        'Title/abstract excludes (n = 1505)',  930,
-  'Predicted includes (n = 2148)',  'Title/abstract includes (n = 541)',   284,
-  'Predicted includes (n = 2148)',  'Title/abstract excludes (n = 1505)',  446,
-  'Predicted includes (n = 2148)',  'Title/abstract to be screened (n= 2418)',       1418,
-  'Predicted excludes (n = 10384)', 'Not screened (n = 9384)',     9384,
-  'Predicted excludes (n = 10384)', 'Title/abstract to be screened (n= 2418)',       1000,
-  'Title/abstract includes (n = 541)',     'Fulltext includes (n = 174)',  174,
-  'Title/abstract includes (n = 541)',     'Fulltext excludes (n = 367)',  367,
-  'Title/abstract to be screened (n= 2418)',          'Expected includes (n = 99)',   99,
-  'Title/abstract to be screened (n= 2418)',          'Expected excludes (n = 2319)', 2319) %>%
+  'Soc Benefit Repo (n = 260)',        'Title/abstract includes (n = 819)',     131,
+  'Soc Benefit Repo (n = 260)',        'Title/abstract excludes (n = 2857)',    129,
+  'Training set (n = 1077)',           'Title/abstract includes (n = 819)',     147,
+  'Training set (n = 1077)',           'Title/abstract excludes (n = 2857)',    930,
+  'Predicted includes (n = 2148)',     'Title/abstract includes (n = 819)',     489,
+  'Predicted includes (n = 2148)',     'Title/abstract excludes (n = 2857)',   1798,
+  'Predicted excludes (n = 10384)',    'Not screened (n = 9384)',              9884,
+  'Predicted excludes (n = 10384)',    'Title/abstract check screen (n = 500)', 500,
+  'Title/abstract includes (n = 819)',     'Fulltext includes (n = 208)',       208,
+  'Title/abstract includes (n = 819)',     'Fulltext excludes (n = 611)',       611) %>%
   arrange(value) %>%
   mutate(source = fct_inorder(source)) %>%
   group_by(source) %>%

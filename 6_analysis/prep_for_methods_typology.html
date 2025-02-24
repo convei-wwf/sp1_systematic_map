@@ -3120,14 +3120,14 @@ vertical-align: -.125em;
 </div>
 <section id="summary" class="level1">
 <h1>Summary</h1>
-<p>Select 60 or so included docs to review for refining a typology for the social science methods.</p>
+<p>Select 100 included docs to review for refining a typology for the social science methods, and assign to bins of 10</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ft_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;_data/screened_fulltext/ft_consolidated.csv&#39;</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ft_by_method <span class="ot">&lt;-</span> ft_df <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="fu">str_split</span>(econ_method, <span class="st">&#39;;|/| and |</span><span class="sc">\\</span><span class="st">?|,| informed by &#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="fu">str_split</span>(soc_method, <span class="st">&#39;;|/| and |</span><span class="sc">\\</span><span class="st">?|,| informed by &#39;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(method) <span class="sc">%&gt;%</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="fu">str_squish</span>(method)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(method, <span class="st">&#39;cost.benefit&#39;</span>) <span class="sc">~</span> <span class="st">&#39;cost-benefit assessment&#39;</span>,</span>
@@ -3138,7 +3138,7 @@ vertical-align: -.125em;
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ft_sum <span class="ot">&lt;-</span> ft_by_method <span class="sc">%&gt;%</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(method)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>assign_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;SB&#39;</span>, <span class="st">&#39;SG&#39;</span>, <span class="st">&#39;SR&#39;</span>, <span class="st">&#39;BG&#39;</span>, <span class="st">&#39;BR&#39;</span>, <span class="st">&#39;GR&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">rep</span>(<span class="dv">10</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>assign_vec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">times =</span> <span class="dv">10</span>)</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ft_sample <span class="ot">&lt;-</span> ft_by_method <span class="sc">%&gt;%</span></span>
@@ -3147,15 +3147,12 @@ vertical-align: -.125em;
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>method) <span class="sc">%&gt;%</span></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">60</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">assign =</span> <span class="fu">sample</span>(assign_vec, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sam =</span>      <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(assign, <span class="st">&#39;S&#39;</span>), <span class="st">&#39;X&#39;</span>, <span class="st">&#39;&#39;</span>),</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">Gillian =</span>  <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(assign, <span class="st">&#39;G&#39;</span>), <span class="st">&#39;X&#39;</span>, <span class="st">&#39;&#39;</span>),</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">Becky =</span>    <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(assign, <span class="st">&#39;B&#39;</span>), <span class="st">&#39;X&#39;</span>, <span class="st">&#39;&#39;</span>),</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">Rachelle =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(assign, <span class="st">&#39;R&#39;</span>), <span class="st">&#39;X&#39;</span>, <span class="st">&#39;&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>assign)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(ft_sample, <span class="st">&#39;fulltext_sample_to_review.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">sample</span>(assign_vec, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, author, year, key, group)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(ft_sample, <span class="st">&#39;fulltext_sample_to_review.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
