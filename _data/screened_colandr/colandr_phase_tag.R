@@ -14,8 +14,8 @@ round1_refs <- read_refs(here('_data/4_screen_classifier_round1/ris_to_colandr_c
 round2_refs <- read_refs(here('_data/5_screen_classifier_round2/ris_to_colandr_classifier_round2.ris')) %>%
   rename(key = notes) %>% mutate(year = as.integer(year))
 
-results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2024-12-25.csv')) %>%
-  bind_rows(read_csv(here('_data/screened_colandr/colandr_companion_excl_2024-12-25.csv'))) %>%
+results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2025-02-27.csv')) %>%
+  bind_rows(read_csv(here('_data/screened_colandr/colandr_companion_excl_2025-02-27.csv'))) %>%
   janitor::clean_names() %>%
   mutate(date = as.Date(date_screened_t_a)) %>%
   ### drop dupe IDs from initial screening
@@ -30,7 +30,8 @@ results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2
                            date <= as.Date('2024-10-04') ~ 'classifier round 1',
                            date <= as.Date('2024-11-01') ~ 'classifier round 2',
                            date <= as.Date('2024-11-23') ~ 'classifier round 2a',
-                           TRUE ~ 'classifier round 2b')) %>%
+                           date <= as.Date('2025-02-22') ~ 'classifier round 2b',
+                           TRUE ~ 'classifier excl sample')) %>%
   mutate(t_a_status = case_when(is.na(t_a_status) & str_detect(tags, 'benchmark') ~ 'included',
                                 is.na(t_a_status) & !str_detect(tags, 'benchmark') ~ 'excluded',
                                 TRUE ~ t_a_status)) %>%
