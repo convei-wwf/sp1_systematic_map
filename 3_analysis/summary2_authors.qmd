@@ -1,0 +1,91 @@
+---
+title: "Network plot of authorship"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(synthesisr)
+# library(ggnet2)
+
+```
+
+# Summary
+
+Read in the includes data, including full author lists, and create a network plot of authorship.
+
+# Methods
+
+## Access author fields for all "includes"
+
+Keep only title and author fields.  The `key` field is not complete for early fulltext screening.
+
+```{r}
+clean_text <- function(t) {
+  t %>%
+    str_replace_all('\\\\~n', 'ñ') %>%   ### replace "\~n" with ñ
+    str_replace_all("\\\\'a", 'á') %>%   ### replace "\~n" with ñ
+    str_remove('\\\\relax') %>%          ### remove "\relax"
+    str_remove_all('\\{|\\}') %>%        ### remove curly braces
+    str_squish()
+}
+
+refs_raw <- read_refs(here('_data/screened_fulltext/convei_includes.bib'))
+
+refs_clean <- refs_raw %>%
+  select(title, author) %>%
+  mutate(author = str_split(author, ' and ')) %>% 
+  unnest(author) %>%
+  ### establish first author status
+  group_by(title) %>%
+  mutate(first_author = author == first(author)) %>%
+  ungroup() %>%
+  ### clean title and author names
+  mutate(title_clean = clean_text(title)) %>%
+  mutate(author = clean_text(author)) %>%
+  ### separate name into last, first format
+  separate(author, into = c('last', 'first'), sep = ',') %>%
+  mutate(first = str_squish(first)) %>%
+  ### fix first names to include middle init where available, for consistency
+  mutate(first = case_when(last == 'Bernknopf' ~ 'Richard L',
+                           last == 'Bouma' ~ 'Jetske A',
+                           last == 'Dekker' ~ 'Arnold G',
+                           last == 'Kuik' ~ 'Onno J',
+                           last == 'Macauley' ~ 'Molly K',
+                           last == 'Brookshire' ~ 'David S',
+                           last == 'Podestá' ~ 'Guillermo P',
+                           last == 'Raunikar' ~ 'R P',
+                           last == 'Richardson' ~ 'Leslie A',
+                           last == 'Seelan' ~ 'SK',
+                           last == 'Solow' ~ 'Andrew R',
+                           last == 'Weiher' ~ 'Rodney F',
+                           last == 'Wilson' & first == 'J.' ~ 'James W',
+                           last == 'Koontz' & first == 'Steve' ~ 'Stephen R',
+                           last == 'Mishra' & first == 'Shruti' ~ 'Shruti K',
+                           last == 'McCarl' & first == 'Bruce' ~ 'Bruce A',
+                           last == "O'Brien" & first == 'James' ~ 'James J',
+                           last == 'Miller' & first == 'Holly' ~ 'Holly M',
+                           str_detect(title, 'Sydney 2000') & last == 'Roberts' ~ 'Rita D',
+                           TRUE ~ first)) %>%
+  mutate(first = str_remove_all(first, '[^A-Z]')) %>%
+  mutate(first_letter = str_sub(first, 1, 1)) %>%
+  ### if initial of first/middle name is unique, use only first initial
+  group_by(last, first_letter) %>%
+  mutate(n = n_distinct(first)) %>%
+  ungroup() %>%
+  mutate(first = ifelse(n == 1, first_letter, first)) %>%
+  ### recombine first and last names into author id
+  mutate(author = str_c(last, ', ', first)) %>%
+  select(title_clean, author, first_author)
+```
+
