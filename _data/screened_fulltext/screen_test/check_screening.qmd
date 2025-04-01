@@ -1,0 +1,101 @@
+---
+title: "Check group screening results"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+```
+
+# Summary
+
+Let's gather all the sample sets and mash them together to see how closely people agreed on coding.
+
+# Methods
+
+## Consolidate results
+
+```{r}
+
+screened_cco <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx')) %>%
+  mutate(year = as.numeric(year)) %>%
+  select(title, author, key, year, `method 1`, `method 2`, contains(c('GEOSS', 'NASA')), contains('societal benefit type'))
+
+fs <- list.files(here('_data/screened_fulltext/screen_test'), pattern = '.xlsx', full.names = TRUE)
+
+screened_others <- lapply(fs, readxl::read_excel) %>%
+  setNames(str_remove_all(basename(fs), '.+review_|.xlsx')) %>%
+  bind_rows(.id = 'source')
+
+screened_all <- screened_cco %>%
+  filter(key %in% screened_others$key) %>%
+  mutate(source = 'cco') %>%
+  bind_rows(screened_others)
+
+methods_all <- screened_all %>%
+  select(title, author, key, m1 = `method 1`, m2 = `method 2`) %>%
+  pivot_longer(cols = c(m1, m2), names_to = 'tmp', values_to = 'method') %>%
+  select(-tmp) %>%
+  filter(!is.na(method))
+
+methods_sum <- methods_all %>%
+  group_by(title, author, key, method) %>%
+  summarise(n = n()) %>%
+  group_by(title, author, key) %>%
+  arrange(desc(n)) %>%
+  summarize(methods = paste0(method, ' (', n, ')', collapse = ', '),
+            .groups = 'drop')
+
+DT::datatable(methods_sum %>% select(key, methods))
+```
+
+
+```{r}
+sba_all <- screened_all %>%
+  select(title, author, key, contains(c('GEOSS', 'NASA'))) %>%
+  pivot_longer(cols = -c(title, author, key), names_to = 'tmp', values_to = 'sba') %>%
+  select(-tmp) %>%
+  filter(!is.na(sba))
+
+sba_sum <- sba_all %>%
+  group_by(title, author, key, sba) %>%
+  summarise(n = n()) %>%
+  group_by(title, author, key) %>%
+  arrange(desc(n)) %>%
+  summarize(sba = paste0(sba, ' (', n, ')', collapse = ', '),
+            .groups = 'drop')
+
+DT::datatable(sba_sum %>% select(key, soc_benefit_area = sba))
+```
+
+```{r}
+val_all <- screened_all %>%
+  select(title, author, key, contains('societal benefit type')) %>%
+  pivot_longer(cols = -c(title, author, key), names_to = 'tmp', values_to = 'val') %>%
+  select(-tmp) %>%
+  filter(!is.na(val)) %>%
+  mutate(val = str_split(val, ';')) %>%
+  unnest(val) %>%
+  mutate(val = str_squish(val))
+
+val_sum <- val_all %>%
+  group_by(title, author, key, val) %>%
+  summarise(n = n()) %>%
+  group_by(title, author, key) %>%
+  arrange(desc(n)) %>%
+  summarize(val = paste0(val, ' (', n, ')', collapse = ', '),
+            .groups = 'drop')
+
+DT::datatable(val_sum %>% select(key, value_type = val))
+```
+

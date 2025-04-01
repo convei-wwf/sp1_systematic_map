@@ -16,26 +16,31 @@ editor: source
 library(tidyverse)
 library(here)
 library(synthesisr)
+library(igraph)
 # library(ggnet2)
 
 ```
 
 # Summary
 
-Read in the includes data, including full author lists, and create a network plot of authorship.
+Read in the includes data, including full author lists, and create a network plot of authorship.  This script follows tips from:
+
+> Ognyanova, K. (2024) Network visualization with R. Retrieved from www.kateto.net/network-visualization.
+
+
 
 # Methods
 
-## Access author fields for all "includes"
+## Read and clean author fields for all "includes"
 
-Keep only title and author fields.  The `key` field is not complete for early fulltext screening.
+Keep only title and author fields.  The `key` field is not complete for early fulltext screening, but title should be unique.  Author format will be last name, first initial except where first initial is not unique (e.g., Rita and Roland Roberts), in which case first and middle initials will be used.
 
 ```{r}
 clean_text <- function(t) {
   t %>%
     str_replace_all('\\\\~n', 'ñ') %>%   ### replace "\~n" with ñ
     str_replace_all("\\\\'a", 'á') %>%   ### replace "\~n" with ñ
-    str_remove('\\\\relax') %>%          ### remove "\relax"
+    str_remove('\\\\relax') %>%          ### remove "\relax" from some author names
     str_remove_all('\\{|\\}') %>%        ### remove curly braces
     str_squish()
 }
@@ -48,7 +53,7 @@ refs_clean <- refs_raw %>%
   unnest(author) %>%
   ### establish first author status
   group_by(title) %>%
-  mutate(first_author = author == first(author)) %>%
+  mutate(lead_author = author == first(author)) %>%
   ungroup() %>%
   ### clean title and author names
   mutate(title_clean = clean_text(title)) %>%
@@ -86,6 +91,72 @@ refs_clean <- refs_raw %>%
   mutate(first = ifelse(n == 1, first_letter, first)) %>%
   ### recombine first and last names into author id
   mutate(author = str_c(last, ', ', first)) %>%
-  select(title_clean, author, first_author)
+  select(title = title_clean, author, lead_author)
+
+### To simplify the plot, omit any papers where no authors have more than X papers,
+### i.e., at least one author has multiple papers
+refs_multi <- refs_clean %>%
+  group_by(author) %>%
+  mutate(n_papers = n_distinct(title)) %>%
+  group_by(title) %>%
+  filter(any(n_papers > 2)) %>%
+  ungroup()
+  
+```
+
+
+
+## Set up nodes and edges
+
+Nodes are authors; edges are co-authorship relationships.  The `lead` field indicates whether the author is a lead author on at least one publication.
+
+Annoyingly the ID columns are position-dependent not name dependent!
+
+```{r}
+nodes <- refs_multi %>%
+  group_by(author) %>%
+  summarize(lead = any(lead_author),
+            n_papers = n()) %>%
+  select(author, lead, n_papers) %>%
+  mutate(label = ifelse(n_papers > 2, author, NA))
+
+edges <- refs_multi %>%
+  left_join(refs_clean, by = 'title') %>%
+  ### discard same-author edges and reversed matches (e.g., A -> B and B -> A)
+  filter(author.x > author.y) %>%
+  select(from = author.x, to = author.y) %>%
+  group_by(from, to) %>%
+  summarize(weight = n())
+
+```
+
+Set up plot:
+
+* Node size based on number of papers (not number of connections)
+* Node color based on lead author status
+
+```{r}
+net <- graph_from_data_frame(d = edges, vertices = nodes, directed = FALSE) %>%
+  simplify(remove.multiple = F, remove.loops = T)
+
+### Set up vertex attributes
+V(net)$size <- nodes$n_papers * 2
+V(net)$color <- ifelse(nodes$lead, 'coral', 'gray80')
+V(net)$label <- nodes$label
+
+### set up edge attributes
+E(net)$width <- E(net)$weight^2 / 2
+# edge_pal <- c('grey95', 'grey90', 'grey85', 'grey80')
+# E(net)$color <- edge_pal[E(net)$weight]
+E(net)$color <- 'grey80'
+
+plot(net, edge.curved = 0.1,
+     vertex.label.family = 'sans', vertex.label.color = 'black', vertex.label.cex = 0.6,
+     # vertex.label.dist = 1.5, vertex.label.degree = 0,
+     vertex.frame.color = NA,
+     layout = layout_nicely)
+# legend(x="bottomleft", c("Lead author", "none"), pch=21,
+#        col=NA, pt.bg=c('coral', 'gray80'), pt.cex=2, cex=.8, bty="n", ncol=1)
+
 ```
 
