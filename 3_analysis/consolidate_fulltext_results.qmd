@@ -40,6 +40,11 @@ df_all <- lapply(fs, read_csv, show_col_types = FALSE) %>%
   mutate(title_match = tolower(title) %>% stringi::stri_trans_general('Latin-ASCII')) %>%
   left_join(key_df, by = 'title_match')
 
+### x <- df_all %>% filter(screening_decision == 'exclude')
+### table(x$reason_for_exclusion %>% str_split('; ?') %>% unlist())
+### x %>% filter(str_detect(reason_for_exclusion, 'calibration')) %>% .$phase %>% table()
+### 
+
 df <- df_all %>%
   filter(screening_decision == 'include') %>%
   mutate(key = ifelse(is.na(key), key2, key)) %>%
