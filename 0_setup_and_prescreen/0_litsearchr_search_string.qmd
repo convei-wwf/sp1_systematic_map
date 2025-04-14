@@ -46,7 +46,7 @@ Use the Rapid Automatic Keyword Extraction (RAKE) algorithm from `litsearchr::ex
 Read in the bibtex files from the naive preliminary search and bind into a data.frame. Those with a prefix 'wosnaive\_' are the first pass with the initial set of search terms into Web of Science.
 
 ```{r clean bibtex from web of science naive search}
-bib_raw_fs <- list.files(here('_data/refs_raw'), pattern = 'wosnaive_.+.bib$', full.names = TRUE)
+bib_raw_fs <- list.files(here('_data/1a_refs_raw'), pattern = 'wosnaive_.+.bib$', full.names = TRUE)
 bib_clean <- lapply(bib_raw_fs, 
               FUN = function(f) {
                 bib_raw <- read_file(f)
@@ -54,7 +54,7 @@ bib_clean <- lapply(bib_raw_fs,
               }) %>%
   paste0(collapse = '\\n\\n')
 
-clean_f_out <- here('_data/refs_clean', 'wosnaive.bib')
+clean_f_out <- here('_data/1c_refs_clean', 'wosnaive.bib')
 write_file(bib_clean, clean_f_out)
 ```
 

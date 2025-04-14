@@ -19,6 +19,10 @@ library(synthesisr)
 library(igraph)
 # library(ggnet2)
 
+library(GGally)
+library(network)
+library(sna)
+library(ggrepel)
 ```
 
 # Summary
@@ -39,20 +43,35 @@ Keep only title and author fields.  The `key` field is not complete for early fu
 clean_text <- function(t) {
   t %>%
     str_replace_all('\\\\~n', 'ñ') %>%   ### replace "\~n" with ñ
-    str_replace_all("\\\\'a", 'á') %>%   ### replace "\~n" with ñ
+    str_replace_all("\\\\'a", 'á') %>%   ### replace "\'a" with ñ
+    str_replace_all("‐", "-") %>%        ### replace hyphen with dash
     str_remove('\\\\relax') %>%          ### remove "\relax" from some author names
     str_remove_all('\\{|\\}') %>%        ### remove curly braces
+    str_remove_all('\\\\') %>%            ### remove backslashes
     str_squish()
+}
+
+make_short <- function(t) {
+  clean_text(t) %>% tolower() %>% str_sub(1, 50)
 }
 
 refs_raw <- read_refs(here('_data/screened_fulltext/convei_includes.bib'))
 
+ref_key_lookup <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv')) %>%
+  select(title, key2 = key) %>%
+  mutate(title_short = make_short(title)) %>%
+  mutate(title_short = str_replace(title_short, 'el nino', 'el niño')) %>%
+  select(-title)
+
+
 refs_clean <- refs_raw %>%
-  select(title, author) %>%
+  mutate(title_short = make_short(title)) %>%
+  inner_join(ref_key_lookup, by = 'title_short') %>%
+  select(title, author, key = key2) %>%
   mutate(author = str_split(author, ' and ')) %>% 
   unnest(author) %>%
   ### establish first author status
-  group_by(title) %>%
+  group_by(title, key) %>%
   mutate(lead_author = author == first(author)) %>%
   ungroup() %>%
   ### clean title and author names
@@ -60,7 +79,8 @@ refs_clean <- refs_raw %>%
   mutate(author = clean_text(author)) %>%
   ### separate name into last, first format
   separate(author, into = c('last', 'first'), sep = ',') %>%
-  mutate(first = str_squish(first)) %>%
+  mutate(last = ifelse(tolower(last) == 'mccarl', 'McCarl', last)) %>%
+  mutate(first = str_squish(first) %>% str_to_title()) %>%
   ### fix first names to include middle init where available, for consistency
   mutate(first = case_when(last == 'Bernknopf' ~ 'Richard L',
                            last == 'Bouma' ~ 'Jetske A',
@@ -91,7 +111,7 @@ refs_clean <- refs_raw %>%
   mutate(first = ifelse(n == 1, first_letter, first)) %>%
   ### recombine first and last names into author id
   mutate(author = str_c(last, ', ', first)) %>%
-  select(title = title_clean, author, lead_author)
+  select(title = title_clean, author, lead_author, key)
 
 ### To simplify the plot, omit any papers where no authors have more than X papers,
 ### i.e., at least one author has multiple papers
@@ -104,6 +124,12 @@ refs_multi <- refs_clean %>%
   
 ```
 
+Get methods to check clusters against paper methods.
+
+```{r}
+methods_df <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx')) %>%
+  filter(key %in% refs_multi$key)
+```
 
 
 ## Set up nodes and edges
@@ -160,3 +186,65 @@ plot(net, edge.curved = 0.1,
 
 ```
 
+## Inspect clusters for preferred methods and societal benefit areas:
+
+* Cluster 1: Bernknopf/Brookshire/Kuwuyama: (various)
+    * Bernknopf VOI/Bayesian
+    * Brookshire Bayesian
+    * Kuwuyama VOI/Bayesian
+* Cluster 2: Cooke: (climate, ag)
+    * Cooke VOI/Real Options
+* Cluster 3: Adams/Weiher/McCarl: (ENSO prediction for agriculture)
+    * Adams VOI/Bayesian
+    * Weiher Bayesian/VOI
+    * McCarl Bayesian/VOI
+* Cluster 4:Obersteiner/Bouma/Fritz/Dekker/Kuik: (various sba)
+    * Obersteiner VOI/CBA (wildland fires, disasters)
+    * Bouma Bayesian/surveys (conservation)
+    * Fritz CBA/surveys
+    * Dekker Bayesian/surveys (ag, ecosystems)
+    * Kuik Bayesian/surveys (ag, ecosystems)
+* Cluster 5: Diana: (agriculture, social values)
+    * Diana Focus groups/surveys/semi-structured interviews/econometric
+* Cluster 6: Gobakken/Naesset: (forest inventory)
+    * Gobakken VOI/CBA
+    * Naesset VOI/CBA
+
+## Try plotting with `ggnet2`
+
+```{r}
+set.seed(999)
+edges2 <- refs_multi %>%
+  left_join(refs_clean, by = 'title') %>%
+  ### discard reversed matches (e.g., A -> B and B -> A)
+  filter(author.x >= author.y) %>%
+  select(from = author.x, to = author.y) %>%
+  group_by(from, to) %>%
+  summarize(weight = n(), .groups = 'drop') %>%
+  mutate(weight = ifelse(from == to, 0, weight)) %>%
+  pivot_wider(names_from = to, values_from = weight, values_fill = 0) %>%
+  column_to_rownames('from') %>%
+  as.matrix()
+
+net2 <- edges2 %>%
+  network(matrix.type = "adjacency",
+          names.eval = "weights",
+          loops = FALSE, directed = FALSE)
+
+# vertex names
+network.vertex.names(net2) <- row.names(edges2)
+
+### set up attributes
+net2 %v% 'label' <- nodes$label
+net2 %v% 'lead' <- nodes$lead
+net2 %v% 'n_papers' <- nodes$n_papers
+
+ggnet2(net2, mode = 'kamadakawai',
+       color = "lead",
+       size  = "n_papers",
+       label = "label",
+       label.size = 4,
+       edge.color = 'grey80') +
+  scale_color_manual(values = c('grey80', 'coral')) +
+  theme(legend.position = 'none')
+```
