@@ -45,7 +45,8 @@ wos_distinct <- wos_all %>%
          title, journal, year, abstract, doi,
          contains('keywords'),
          research_areas, web_of_science_categories) %>%
-  distinct()
+  distinct() %>%
+  filter(!is.na(doi))
 ```
 
 ```{r read in the preprocessed Scopus references}
@@ -65,7 +66,8 @@ system.time({
 scopus_distinct <- scopus_all %>%
   select(source_type, src, author, title, journal = source, year, abstract, doi,
          contains('keywords')) %>%
-  distinct()
+  distinct() %>%
+  filter(!is.na(doi))
 ```
 
 ```{r read in the preprocessed Soc Benefits Repo references}
