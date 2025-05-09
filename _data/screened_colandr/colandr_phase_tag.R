@@ -24,7 +24,7 @@ results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2
   ungroup() %>%
   mutate(across(where(is.character), str_squish)) %>%
   mutate(phase = case_when(is.na(date) ~ 'benchmark',
-                           date <= as.Date('2024-04-17') ~ 'early',
+                           date <= as.Date('2024-04-18') ~ 'early',
                            date <= as.Date('2024-04-29') ~ 'soc ben repo',
                            date <= as.Date('2024-08-02') ~ 'sample 1000',
                            date <= as.Date('2024-10-04') ~ 'classifier round 1',
@@ -94,6 +94,5 @@ check_round2b <- results_df %>%
   ### mostly clean - all but three refs accounted for -
   ### again exceptions are due to malformed doi
 
-today <- Sys.Date()
-write_csv(results_df, sprintf(here('_data/screened_colandr/colandr_by_phase_%s.csv'), today))
+write_csv(results_df, here('_data/screened_colandr/colandr_by_phase.csv'))
 

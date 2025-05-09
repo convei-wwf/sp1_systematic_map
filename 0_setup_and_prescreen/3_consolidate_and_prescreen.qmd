@@ -46,7 +46,11 @@ wos_distinct <- wos_all %>%
          contains('keywords'),
          research_areas, web_of_science_categories) %>%
   distinct() %>%
-  filter(!is.na(doi))
+  filter(!is.na(author) & !is.na(title) & !is.na(abstract)) %>%
+  filter(!is.na(doi)) %>%
+  filter(!tolower(source_type) %in% c('conf', 'inproceedings'))
+
+wos_firststage_reject <- anti_join(wos_all, wos_distinct)
 ```
 
 ```{r read in the preprocessed Scopus references}
@@ -63,11 +67,18 @@ system.time({
 #    user  system elapsed 
 # 660.872   9.182 144.292
 
-scopus_distinct <- scopus_all %>%
+### conflicts in column names - just select the ones we want
+scopus_cols <- scopus_all %>%
   select(source_type, src, author, title, journal = source, year, abstract, doi,
          contains('keywords')) %>%
-  distinct() %>%
-  filter(!is.na(doi))
+  distinct()
+
+scopus_distinct <- scopus_cols %>%
+  filter(!is.na(author) & !is.na(title) & !is.na(abstract)) %>%
+  filter(!is.na(doi)) %>%
+  filter(!tolower(source_type) %in% c('conf', 'inproceedings'))
+
+scopus_firststage_reject <- anti_join(scopus_cols, scopus_distinct)
 ```
 
 ```{r read in the preprocessed Soc Benefits Repo references}
@@ -98,8 +109,7 @@ benchmark_all <- read_refs(here('_data/1b_refs_preprocessed/zot_benchmark_a.bib'
 
 ```{r combine and clean up some messy columns}
 all_docs <- bind_rows(scopus_distinct, wos_distinct, sbr_distinct, benchmark_all) %>%
-  filter(!is.na(author) & !is.na(title) & !is.na(abstract)) %>%
-  mutate(doc_id = 1:n()) 
+  mutate(doc_id = 1:n())
 
 all_docs_clean <- all_docs %>%
   mutate(first_author = str_remove(tolower(author), ' and .+') %>%
@@ -150,7 +160,6 @@ Here we discard duplicated references, keeping the most recent version (if multi
 
 ```{r}
 all_docs_distinct <- all_docs_clean %>%
-  filter(!source_type %in% c('conf', 'inproceedings')) %>%
   group_by(first_author, title_short, abstr_short) %>%
   ### flag any author/title combos that show up in the benchmark set,
   ### then drop those benchmark observations (keeping obs in other sources)

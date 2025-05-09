@@ -23,6 +23,7 @@ library(GGally)
 library(network)
 library(sna)
 library(ggrepel)
+library(cowplot)
 ```
 
 # Summary
@@ -124,12 +125,24 @@ refs_multi <- refs_clean %>%
   
 ```
 
+Check journals for ideas for where to submit manuscript?
+
+```{r}
+journals <- refs_raw %>%
+  select(key, title, journal) %>%
+  mutate(journal = str_to_title(journal)) %>%
+  group_by(journal) %>%
+  summarize(n = n())
+```
+
 Get methods to check clusters against paper methods.
 
 ```{r}
 methods_df <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx')) %>%
+  janitor::clean_names() %>%
   filter(key %in% refs_multi$key)
 ```
+
 
 
 ## Set up nodes and edges
@@ -162,6 +175,8 @@ Set up plot:
 * Node color based on lead author status
 
 ```{r}
+#| eval: false
+
 net <- graph_from_data_frame(d = edges, vertices = nodes, directed = FALSE) %>%
   simplify(remove.multiple = F, remove.loops = T)
 
@@ -239,7 +254,7 @@ net2 %v% 'label' <- nodes$label
 net2 %v% 'lead' <- nodes$lead
 net2 %v% 'n_papers' <- nodes$n_papers
 
-ggnet2(net2, mode = 'kamadakawai',
+net_p <- ggnet2(net2, mode = 'kamadakawai',
        color = "lead",
        size  = "n_papers",
        label = "label",
@@ -247,4 +262,87 @@ ggnet2(net2, mode = 'kamadakawai',
        edge.color = 'grey80') +
   scale_color_manual(values = c('grey80', 'coral')) +
   theme(legend.position = 'none')
+
+net_p
+p <- ggdraw() +
+  draw_plot(net_p) +
+  draw_plot_label(label = LETTERS[1:6],
+                  x = c(0.23, 0.70, 0.95, 0.94, 0.45, 0.10), y = c(0.93, 0.97, 0.71, 0.36, 0.15, 0.29),
+                  size = 14,
+                  color = 'black')
+p
+```
+
+## identify authors within clusters?
+
+```{r}
+x <- edges %>% 
+  select(-weight) %>% 
+  group_by(from) %>% mutate(min1 = min(to)) %>% 
+  group_by(to) %>% mutate(min2 = min(min1)) %>%
+  group_by(min1) %>% mutate(min3 = min(min2)) %>%
+  group_by(min2) %>% mutate(min4 = min(min3)) %>%
+  ungroup()
+
+# x %>% filter(min4 != min3) ### no matches
+
+y <- x %>% select(to, from, node = min3) %>%
+  distinct() %>%
+  mutate(node = factor(node),
+         node_num = as.integer(node)) %>%
+  pivot_longer(-node_num, names_to = "type", values_to = "author") %>%
+  left_join(refs_multi %>% select(author, n_papers) %>% distinct(), by = "author") %>%
+  group_by(node_num) %>%
+  mutate(node_author = author[which(n_papers == max(n_papers))[1]]) %>%
+  ungroup()
+
+papers_clusters <- refs_multi %>%
+  left_join(y, by = c('author' = 'author')) %>%
+  select(node_author, title, key, node_num) %>%
+  distinct() %>%
+  left_join(methods_df %>% select(-title), by = 'key')
+
+methods_by_cluster <- papers_clusters %>% 
+  pivot_longer(cols = c(method_1, method_2)) %>%
+  select(node_author, key, node_num, value) %>%
+  filter(!is.na(value)) %>%
+  group_by(node_num) %>%
+  mutate(n_papers = n_distinct(key)) %>%
+  group_by(node_num, node_author, n_papers, value) %>%
+  summarize(n = n(),
+            .groups = 'drop') %>%
+  mutate(pct = round(n / n_papers * 100))
+
+DT::datatable(methods_by_cluster)
+
+values_by_cluster <- papers_clusters %>% 
+  mutate(sba = str_split(societal_benefit_type, ';')) %>%
+  unnest(sba) %>%
+  select(key, node_num, node_author, sba) %>%
+  filter(!is.na(sba)) %>%
+  group_by(node_num) %>%
+  mutate(n_papers = n_distinct(key)) %>%
+  group_by(node_num, node_author, n_papers, sba) %>%
+  summarize(n = n(),
+            .groups = 'drop') %>%
+  mutate(pct = round(n / n_papers * 100))
+
+DT::datatable(values_by_cluster)
+
+sbas_by_cluster <- papers_clusters %>% 
+  pivot_longer(cols = contains(c('geoss', 'nasa'))) %>%
+  mutate(value = case_when(str_detect(tolower(value), 'fire') ~ 'Wildfire',
+                           str_detect(value, '^Eco') ~ 'Ecosystem',
+                           TRUE ~ str_remove(value, ' .+'))) %>%
+  select(node_author, key, node_num, value) %>%
+  distinct() %>%
+  filter(!is.na(value)) %>%
+  group_by(node_num) %>%
+  mutate(n_papers = n_distinct(key)) %>%
+  group_by(node_num, node_author, n_papers, value) %>%
+  summarize(n = n(),
+            .groups = 'drop') %>%
+  mutate(pct = round(n / n_papers * 100))
+
+DT::datatable(sbas_by_cluster)
 ```

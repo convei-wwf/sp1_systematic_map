@@ -34,7 +34,8 @@ For papers where two methods, societal benefit areas, or societal benefit types 
 Read in coded data of included papers.
 
 ```{r}
-includes_df <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx'))
+includes_df <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx')) %>%
+  janitor::clean_names()
 ```
 
 ## Single var plots
@@ -114,8 +115,7 @@ deliberative_vec <- c('Participatory rural appraisal; rapid rural appraisal',
 surveys_vec <- c('Surveys of preference assessments', 'Photo-elicitation surveys')
 
 method_df <- includes_df %>%
-  select(key, c('method 1', 'method 2')) %>%
-  # select(key, c('method 1')) %>%
+  select(key, c(method_1, method_2)) %>%
   pivot_longer(-key, names_to = 'tmp', values_to = 'method') %>%
   filter(!is.na(method)) %>%
   mutate(method = str_squish(method),
@@ -139,10 +139,7 @@ How much to consolidate GEOSS and NASA similar (but not identical) categories?
 
 ```{r}
 soc_ben_df <- includes_df %>%
-  select(key, starts_with(c('GEOSS', 'NASA'))) %>%
-  ### drop '(other)' if covered in another column
-  mutate(`NASA app sci` = ifelse(`GEOSS soc ben` == 'Weather' & `NASA app sci` == '(other)', NA, `NASA app sci`)) %>%
-  mutate(`GEOSS soc ben` = ifelse(`GEOSS soc ben` == '(other)' & `NASA app sci` != '(other)', NA, `GEOSS soc ben`)) %>%
+  select(key, starts_with(c('geoss', 'nasa'))) %>%
   pivot_longer(-key, names_to = 'tmp', values_to = 'sba') %>%
   filter(!is.na(sba)) %>%
   select(-tmp) %>%
@@ -153,7 +150,10 @@ soc_ben_df <- includes_df %>%
                          sba %in% c('Biodiversity', 'Ecosystems') ~ 'Ecological Conservation',
                          sba == 'Health' ~ 'Health & Air Quality',
                          TRUE ~ sba)) %>%
-  distinct()
+  distinct() %>%
+  group_by(key) %>%
+  filter(!(sba == '(other)' & any(sba != '(other)'))) %>%
+  ungroup()
 
 soc_ben_summary <- soc_ben_df %>%
   summarize_column('sba')
@@ -165,7 +165,7 @@ gen_plot(soc_ben_summary, 'sba', 'Societal benefit area')
 
 ```{r}
 val_type_df <- includes_df %>%
-  select(key, val_type = `societal benefit type`) %>%
+  select(key, val_type = societal_benefit_type) %>%
   mutate(val_type = str_split(val_type, '[^A-z]')) %>%
   unnest(val_type) %>%
   mutate(val_type = str_trim(val_type),
@@ -251,13 +251,31 @@ IDEA: color this in pie wedges by value type - maybe quarter wedges, radius by s
 ```{r}
 method_vec <- levels(method_summary$method) %>% rev()
   
+quant <- c('Value of Information', 'Cost-benefit analysis', 'Stated preference', 
+           'Bayesian Decision Analysis', 'Econometric analysis', 
+           'Real options analysis', 'Market price-based methods')
+
 multi_methods_df <- method_df %>%
   mutate(method = factor(method, levels = method_vec)) %>%
   arrange(key, method) %>%
   group_by(key) %>%
   filter(n() > 1) %>%
   mutate(x = c('x', 'y')) %>%
-  ungroup() %>%
+  ungroup() 
+
+method_types_sum <- multi_methods_df %>%
+  mutate(method_type = ifelse(method %in% quant, 'Quantitative',
+                              'Qualitative')) %>%
+  group_by(key) %>%
+  summarize(method = paste0(method, collapse = ';'),
+            combo = case_when(all(method_type == 'Quantitative') ~ 'Quantitative',
+                              all(method_type == 'Qualitative') ~ 'Qualitative',
+                              TRUE ~ 'Mixed'),
+                             .groups = 'drop') %>%
+  group_by(combo) %>%
+  summarize(n = n(), .groups = 'drop')
+
+multi_methods_summarized <- multi_methods_df %>%
   pivot_wider(names_from = x, values_from = method) %>%
   left_join(val_type_df, by = 'key') %>%
   mutate(tmp = 1) %>%
@@ -275,7 +293,7 @@ multi_methods_df <- method_df %>%
          y = factor(y, levels = method_vec) %>% fct_rev(),
          val_type = factor(val_type, levels = c('Instrumental', 'Eudaimonistic', 'Fundamental')))
 
-arcs_df <- multi_methods_df %>%
+arcs_df <- multi_methods_summarized %>%
   mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .8, ### radius based on # of value type
          start = (as.integer(val_type) - 2) * (pi/2),
          end   = (as.integer(val_type) - 1) * (pi/2)) %>%
@@ -284,19 +302,19 @@ arcs_df <- multi_methods_df %>%
   select(x, y, r, start, end, val_type) %>%
   distinct()
 
-diag_lbls <- multi_methods_df %>%
+diag_lbls <- multi_methods_summarized %>%
   filter(x == y) %>%
   select(x) %>%
   distinct()
 
-n_lbls <- multi_methods_df %>%
+n_lbls <- multi_methods_summarized %>%
   select(x, y, tot) %>%
   distinct()
 
 
 pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
-  geom_point(data = multi_methods_df, aes(x, y), size = 0, color = '#00000000') +
+  geom_point(data = multi_methods_summarized, aes(x, y), size = 0, color = '#00000000') +
   ### add grid lines
   geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 13.25 - as.integer(x)), color = 'grey90', linewidth = 1) +
   geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = 1) +
@@ -305,7 +323,7 @@ pnl <- ggplot() +
   geom_text(data = diag_lbls, aes(x = x, y = x, label = x),
             angle = 30, hjust = 0, vjust = 0, size = 3, nudge_y = .5, nudge_x = -.25) +
   ### then geom_point again to write on top of the grid lines
-  # geom_point(data = multi_methods_df, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
+  # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
   geom_arc_bar(data = arcs_df,
                aes(x0 = as.integer(x), y0 = as.integer(y),
@@ -330,7 +348,7 @@ pnl <- ggplot() +
         axis.text.x = element_blank())
 
 ### Legend
-legend_df <- multi_methods_df %>%
+legend_df <- multi_methods_summarized %>%
   group_by(val_type) %>%
   summarize(n = sum(n, na.rm = TRUE)) %>%
   mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .8, ### radius based on # of value type
@@ -389,7 +407,17 @@ method_by_sba_df <- method_df %>%
   ungroup() %>%
   mutate(method = fct_reorder(str_squish(method), n_tot),
          lbl = sprintf('%s (n = %s)', method, n_tot)) %>%
-  mutate(sba = fct_reorder(sba, n_tot) %>% fct_relevel(c('(various)', '(other)'), after = Inf))
+  mutate(sba = fct_reorder(sba, n_tot) %>% fct_relevel(c('(various)', '(other)'), after = Inf)) %>%
+  mutate(method_type = ifelse(method %in% quant, 'Quantitative',
+                              'Qualitative'))
+
+method_type_by_sba_df <- method_by_sba_df %>%
+  group_by(sba, method_type) %>%
+  summarize(n = sum(n)) %>%
+  group_by(sba) %>%
+  mutate(p = n / sum(n))
+  
+  
 
 ggplot(method_by_sba_df, aes(y = method, x = sba, fill = n)) +
   geom_tile() +
@@ -479,7 +507,7 @@ multi_sba_df <- soc_ben_df %>%
          val_type = factor(val_type, levels = c('Instrumental', 'Eudaimonistic', 'Fundamental')))
 
 arcs_df <- multi_sba_df %>%
-  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .8, ### radius based on # of value type
+  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .7, ### radius based on # of value type
          start = (as.integer(val_type) - 2) * (pi/2),
          end   = (as.integer(val_type) - 1) * (pi/2)) %>%
   filter(!is.na(n)) %>%
