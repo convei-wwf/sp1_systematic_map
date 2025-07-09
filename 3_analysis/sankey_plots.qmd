@@ -1,0 +1,356 @@
+---
+title: "Sankey diagram of includes/excludes by phase"
+author: "O'Hara"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: source
+---
+
+```{r setup}
+library(tidyverse)
+library(here)
+library(networkD3)
+library(ggsankey)
+```
+
+# Summary
+
+## Initial cleaning
+
+Sankey diagram of data access and cleaning prior to screening
+
+
+```{r}
+links <- tribble(
+  ~source,                          ~target,                     ~value,
+  'Soc Benefit Repo (n = 258)',  'Combined (n = 21,647)',           255,
+  'Scopus (n = 18,585)',         'Combined (n = 21,647)',         13250,
+  'Web of Science (n = 9,488)',  'Combined (n = 21,647)',          8139,
+  'Scopus (n = 18,585)',         'Missing info (n = 1,545)',       1226,
+  'Web of Science (n = 9,488)',  'Missing info (n = 1,545)',        319,
+  'Scopus (n = 18,585)',         'Conf abstr (n = 5,139)',         4109,
+  'Web of Science (n = 9,488)',  'Conf abstr (n = 5,139)',         1030,
+  'Combined (n = 21,647)',       'De-duplicated (n = 15,522)',    15519,
+  'Combined (n = 21,647)',       'Duplicates (n = 6,125)',         6125,
+  'De-duplicated (n = 15,522)',  'Analysis set (n = 13,823)',     13823,
+  'De-duplicated (n = 15,522)',  'Spurious matches (n = 1,699)',   1699) %>%
+  arrange(value) %>%
+  mutate(source = fct_inorder(source)) %>%
+  group_by(source) %>%
+  mutate(n = sum(value)) %>%
+  ungroup()
+ 
+# From these flows we need to create a node data frame: it lists every entities involved in the flow
+nodes <- data.frame(
+  name=c(as.character(links$source), 
+  as.character(links$target)) %>% unique()
+)
+ 
+# With networkD3, connection must be provided using id, not using real name like in the links dataframe.. So we need to reformat it.
+links$IDsource <- match(links$source, nodes$name)-1 
+links$IDtarget <- match(links$target, nodes$name)-1
+ 
+# Make the Network
+p <- sankeyNetwork(Links = links, Nodes = nodes,
+              Source = "IDsource", Target = "IDtarget",
+              Value = "value", NodeID = "name", 
+              fontSize = 14, fontFamily = 'Arial',
+              sinksRight=FALSE)
+p
+
+# save the widget
+# library(htmlwidgets)
+# saveWidget(p, file=paste0( getwd(), "/HtmlWidget/sankeyBasic1.html"))
+```
+
+### using ggsankey or ggalluvial
+
+Four axes for the initial retrieval and prep
+
+```{r}
+prep_df <- tribble(
+  ~src,          ~conf_miss,       ~dupes,         ~spurious,   ~n,
+  'sbl',          'include',    'include',         'include',  258,
+  'scopus',       'include',    'include',         'include', 6219,
+  'scopus',       'include',    'include',  'spurious match',  629,
+  'scopus',       'include', 'duplicates',                NA, 6402,
+  'scopus', 'conf abstract',           NA,                NA, 4109,
+  'scopus',  'missing info',           NA,                NA, 1226,
+  'wos',          'include',    'include',         'include', 7346,
+  'wos',          'include',    'include',  'spurious match',  355,
+  'wos',          'include', 'duplicates',                NA,  438,
+  'wos',    'conf abstract',           NA,                NA, 1030,
+  'wos',     'missing info',           NA,                NA,  319
+) %>%
+  uncount(n)
+```
+
+Funky stuff with node names.  The left hand side responds to factor recoding; the right hand side does not, and loses the connection (since the "next node" changes?).  Releveling the RHS causes the flow to cross over itself awkwardly, get order right ahead of time.  Use spaces to force level order on the RHS.
+```{r}
+links_long <- prep_df %>%
+  mutate(rhs = case_when(conf_miss != 'include' ~ conf_miss,
+                         dupes     != 'include' ~ dupes,
+                         spurious  != 'include' ~ spurious,
+                         TRUE ~ 'include')) %>%
+  mutate(rhs = case_when(str_detect(rhs, 'dupl') ~ 'Duplicates (n = 6,840)',
+                         str_detect(rhs, 'conf') ~ 'Conf abstracts (n = 5,139)',
+                         str_detect(rhs, 'miss') ~ 'Missing info (n = 1,545)',
+                         str_detect(rhs, 'spur') ~ 'Spurious match (n = 984)',
+                         TRUE                    ~ 'Include (n = 13,823)')) %>%
+  ### for "include" add a non-breaking space, which is alpha after regular space
+  mutate(rhs = ifelse(str_detect(tolower(rhs), 'include'), paste0(' \u00a0', rhs), paste0('  ', rhs))) %>%
+  mutate(rhs = str_replace(rhs, '\\(n', '\n  (n')) %>%
+  
+  ggsankey::make_long(src, rhs) %>%
+  mutate(node = factor(node),
+         ### put sbl on top (last level)
+         node = fct_relevel(node, 'sbl', after = Inf),
+         node = fct_recode(node, '  Societal Benefit\n  Library (n = 258)' = 'sbl', 
+                                 '  Scopus\n  (n = 18,585)' = 'scopus', 
+                                 '  Web of Science\n  (n = 9,488)' = 'wos'))
+
+x <- ggplot(data = links_long,
+       aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node)) +
+  geom_sankey(flow.alpha = 0.5, node.fill = 'black',
+              width = .015, show.legend = FALSE) +
+  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.5) +
+  scale_fill_viridis_d() +
+  theme_void()
+
+ggsave('sankey_prep.png', width = 6, height = 4, dpi = 300)
+
+knitr::include_graphics('sankey_prep.png')
+```
+
+## By screening phase
+
+Load refs at various phases.  Include:
+
+* SBR start
+* Training set start
+* Classification set start
+
+* Colandr includes
+* Colandr excludes
+* Colandr not loaded (deprioritized)
+
+* Full text includes
+* Full text excludes
+* Full text not done
+
+NOTE: some in the early stages were revisited after rejecting in Colandr for "not ESI" when we expanded the scope of ESI, and subsequently added to full text review.  Identify those and switch the Colandr screening status to "include" to resolve the dilemma.
+
+```{r}
+### define a function to clean titles of caps, diacritics, etc for easier matching
+clean_title <- function(t) {
+  tolower(t) %>%
+    stringi::stri_trans_general('Latin-ASCII') %>% ### drop diacritics
+    str_remove_all('[^a-z0-9 ]+') %>% ### drop punctuation
+    str_squish() %>%
+    str_sub(1, 60)
+}
+```
+
+```{r}
+ft_fs <- list.files(here('_data/screened_fulltext'), pattern = '_fulltext_', full.names = TRUE) 
+ft_df <- ft_fs %>%
+  lapply(read_csv) %>%
+  setNames(str_remove_all(basename(ft_fs), '._fulltext_|.csv')) %>%
+  bind_rows(.id = 'phase') 
+
+ft_sbr <- ft_df %>%
+  filter(phase == 'sbr') %>%
+  mutate(title2 = clean_title(title))
+
+col_df <- read_csv(here('_data/screened_colandr/colandr_by_phase.csv')) %>%
+  mutate(phase = case_when(phase == 'classifier round 1' ~ 'training',
+                           phase == 'early' ~ 'training',
+                           phase == 'sample 1000' ~ 'training',
+                           phase == 'classifier excl sample' ~ phase,
+                           str_detect(phase, 'class') ~ 'pred_incl',
+                           TRUE ~ phase)) %>%
+  mutate(fix = clean_title(title) %in% ft_sbr$title2 & 
+           screening_status == 'excluded') %>%
+  mutate(screening_status = ifelse(fix, 'included', screening_status)) %>%
+  select(-fix)
+
+col_totals_df <- col_df %>%
+  group_by(screening_status) %>%
+  summarize(n = n(), .groups = 'drop')
+
+col_phase_df <- col_df %>%
+  group_by(phase, screening_status) %>%
+  summarize(n = n(), .groups = 'drop')
+
+
+ft_totals_df <- ft_df %>%
+  group_by(screening_decision) %>%
+  summarize(n = n(), .groups = 'drop')
+
+ft_phase_df <- ft_df %>%
+  mutate(phase = case_when(phase == 'classifier_round1' ~ 'training',
+                           phase == 'sample1000' ~ 'training',
+                           phase == 'classifier excl sample' ~ phase,
+                           str_detect(phase, 'class') ~ 'pred_incl',
+                           TRUE ~ phase)) %>%
+  group_by(phase, screening_decision) %>%
+  summarize(n = n(), .groups = 'drop')
+
+
+pred_round2 <- read_csv(here('_data/classifier_results',
+                             'predicted_classifier_round2_set.csv'))
+table(pred_round2$classification_prediction)
+
+total <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'))
+col_ct <- sum(col_df$n)
+ft_ct <- sum(ft_df$n)
+```
+
+### Totals for Colandr
+
+* 3813 screened in Colandr
+  * 777 included
+    * 144 SBR
+    * 144 training
+    * 489 pred include
+    * (13 final check - drop these)
+  * 2837 excluded
+    * 111 SBR
+    * 928 training
+    * 1798 pred include
+    * (186 final check - drop these)
+
+Totals by phase
+
+* 255 SBR
+* 1072 training
+* 2287 predicted includes
+* 10,206 predicted excludes
+  * 200 screened to check
+  * 10,006 not screened
+
+### Totals for Full Text
+
+* 170 includes
+  * 73 SBR
+  * 13 training
+  * 84 predicted includes
+* 590 excluded
+  * 66 SBR
+  * 119 training
+  * 405 predicted includes
+
+
+```{r}
+links <- tribble(
+  ~source,            ~target,            ~value,
+  'Soc Benefit Repo (n = 255)',         'Title/abstract includes (n = 760)',      144,
+  'Soc Benefit Repo (n = 255)',         'Title/abstract excludes (n = 2,854)',    111,
+  'Training set (n = 1,072)',           'Title/abstract includes (n = 760)',      147,
+  'Training set (n = 1,072)',           'Title/abstract excludes (n = 2,854)',    930,
+  'Predicted includes (n = 2,287)',     'Title/abstract includes (n = 760)',      489,
+  'Predicted includes (n = 2,287)',     'Title/abstract excludes (n = 2,854)',   1798,
+  'Predicted excludes (n = 10,206)',    'Not screened (n = 10,006)',             9884,
+  'Predicted excludes (n = 10,206)',    'Title/abstract exclude check (n = 200)', 500,
+  'Title/abstract includes (n = 760)',     'Fulltext includes (n = 170)',         208,
+  'Title/abstract includes (n = 760)',     'Fulltext excludes (n = 590)',         649) %>%
+  arrange(value) %>%
+  mutate(source = fct_inorder(source)) %>%
+  group_by(source) %>%
+  mutate(n = sum(value)) %>%
+  ungroup()
+ 
+# From these flows we need to create a node data frame: it lists every entities involved in the flow
+nodes <- data.frame(
+  name=c(as.character(links$source), 
+  as.character(links$target)) %>% unique()
+)
+ 
+# With networkD3, connection must be provided using id, not using real name like in the links dataframe.. So we need to reformat it.
+links$IDsource <- match(links$source, nodes$name)-1 
+links$IDtarget <- match(links$target, nodes$name)-1
+ 
+# Make the Network
+p <- sankeyNetwork(Links = links, Nodes = nodes,
+              Source = "IDsource", Target = "IDtarget",
+              Value = "value", NodeID = "name", 
+              fontSize = 14, fontFamily = 'Arial',
+              sinksRight=FALSE)
+p
+
+# save the widget
+# library(htmlwidgets)
+# saveWidget(p, file=paste0( getwd(), "/HtmlWidget/sankeyBasic1.html"))
+```
+
+### using ggsankey or ggalluvial
+
+Four axes for the initial retrieval and prep
+
+```{r}
+screen_df <- tribble(
+  ~src,          ~colandr,   ~fulltext,    ~n,
+  'sbl',        'include',   'include',    73,
+  'sbl',        'include',   'exclude',    54,
+  'sbl',        'include',   'no retr',     3,
+  'sbl',        'exclude',          NA,   128,
+  'train',      'include',   'include',     7,
+  'train',      'include',   'exclude',   130,
+  'train',      'include',   'no retr',     7,
+  'train',      'exclude',          NA,   928,
+  'pred_incl',  'include',   'include',    84,
+  'pred_incl',  'include',   'exclude',   395,
+  'pred_incl',  'include',   'no retr',    10,
+  'pred_incl',  'exclude',          NA,  1798,
+  'pred_excl',    'check',          NA,   200,
+  'pred_excl', 'noscreen',          NA, 10006,
+) %>%
+  uncount(n)
+```
+
+Funky stuff with node names.  The left hand side responds to factor recoding; the right hand side does not, and loses the connection (since the "next node" changes?).  Releveling the RHS causes the flow to cross over itself awkwardly, get order right ahead of time.  Use spaces to force level order on the RHS.
+```{r}
+links_long <- screen_df %>%
+  mutate(colandr  = case_when(colandr == 'check' ~ 'Title/abstr exclude (n =  200)',
+                              colandr == 'include' ~ 'Title/abstr include (n =  770)',
+                              colandr == 'exclude' ~ 'Title/abstr exclude (n = 2,854)',
+                              TRUE ~ 'Not screened (n = 10,006)')) %>%
+  mutate(fulltext = case_when(fulltext == 'exclude' ~ 'Fulltext exclude (n = 580)',
+                              fulltext == 'include' ~ 'Fulltext include (n = 170)',
+                              fulltext == 'no retr' ~ 'Fulltext not retrievable (n = 20)',
+                              TRUE ~ 'a')) %>%
+  mutate(colandr  = paste0('  ', colandr),
+         fulltext = paste0('  ', fulltext)) %>%
+  mutate(colandr  = str_replace(colandr, '\\(n', '\n  (n'),
+         fulltext = str_replace(fulltext, '\\(n', '\n  (n')) %>%
+  ggsankey::make_long(src, colandr, fulltext) %>%
+  mutate(next_node = ifelse(next_node == '  a', NA, next_node)) %>%
+  filter(node != '  a') %>%
+  mutate(node = factor(node),
+         ### put sbl on top (last level)
+         node = fct_relevel(node, 'sbl', after = Inf),
+         node = fct_recode(node, '  Societal Benefit\n  Library (n = 258)' = 'sbl', 
+                                 '  Training set\n  (n = 1,072)' = 'train', 
+                                 '  Predicted includes\n  (n = 2,287)' = 'pred_incl', 
+                                 '  Predicted excludes\n  (n = 10,206)' = 'pred_excl'))
+
+
+x <- ggplot(data = links_long,
+       aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node)) +
+  geom_sankey(flow.alpha = 0.5, node.fill = 'black',
+              width = .015, show.legend = FALSE) +
+  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.5) +
+  scale_fill_viridis_d() +
+  theme_void()
+
+ggsave('sankey_screen.png', width = 6, height = 4, dpi = 300)
+
+knitr::include_graphics('sankey_screen.png')
+```
+

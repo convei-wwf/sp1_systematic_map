@@ -16,6 +16,7 @@ editor: source
 library(tidyverse)
 library(here)
 library(ggforce) ### for geom_arc_bar
+library(cowplot)
 ```
 
 # Summary
@@ -66,47 +67,7 @@ ggplot(year_sum_df, aes(x = year2, y = n)) +
   theme_minimal()
 ```
 
-### Summarize by valuation method
-
-```{r}
-summarize_column <- function(df, col) {
-  out_df <- df %>%
-    rename(tmp = !!sym(col)) %>%
-    mutate(tmp = str_squish(tmp)) %>%
-    group_by(tmp) %>%
-    summarize(n = n()) %>%
-    mutate(lbl = sprintf('%s (n = %s)', tmp, n),
-           tmp = fct_reorder(tmp, n)) %>%
-    rename(!!col := tmp)
-  return(out_df)
-}
-
-
-gen_plot <- function(df, col, varname, n_thresh = 0.5) {
-  df <- df %>%
-    rename(tmp = !!sym(col))
-  
-  ### high value labels on the bar; lower value to right of bar
-  df_hi <- df %>%
-    filter(n > max(n) * n_thresh)
-  df_lo <- df %>%
-    filter(n <= max(n) * n_thresh)
-  
-  p <- ggplot(df, aes(y = tmp, x = n)) +
-    geom_col() +
-    geom_text(data = df_hi, aes(label = lbl, x = n), color = 'white',
-              hjust = 1, size = 3, nudge_x = -1) +
-    geom_text(data = df_lo, aes(label = lbl, x = n), color = 'black', 
-              hjust = 0, size = 3, nudge_x = 1) +
-    scale_x_continuous(expand = c(0, .01)) +
-    labs(x = 'Number of papers',
-         y = varname) +
-    theme_minimal() +
-    theme(axis.text.y = element_blank())
-  
-  return(p)
-}
-```
+## Create plot dataframes
 
 
 ```{r}
@@ -118,26 +79,14 @@ method_df <- includes_df %>%
   select(key, c(method_1, method_2)) %>%
   pivot_longer(-key, names_to = 'tmp', values_to = 'method') %>%
   filter(!is.na(method)) %>%
-  mutate(method = str_squish(method),
-         method = case_when(method %in% deliberative_vec ~ 'Non-monetary valuation methods - deliberative',
+  mutate(method = str_squish(str_to_sentence(method)),
+         method = case_when(method %in% deliberative_vec ~ 'Non-monetary methods - deliberative',
                             method %in% surveys_vec ~ 'Surveys of preference assessments',
                             TRUE ~ method)) %>%
   select(-tmp) %>%
   distinct()
 
-method_summary <- method_df %>%
-  summarize_column('method')
 
-gen_plot(method_summary, 'method', 'Valuation method')
-```
-
-
-
-### Summarize by societal benefit area
-
-How much to consolidate GEOSS and NASA similar (but not identical) categories?
-
-```{r}
 soc_ben_df <- includes_df %>%
   select(key, starts_with(c('geoss', 'nasa'))) %>%
   pivot_longer(-key, names_to = 'tmp', values_to = 'sba') %>%
@@ -155,15 +104,7 @@ soc_ben_df <- includes_df %>%
   filter(!(sba == '(other)' & any(sba != '(other)'))) %>%
   ungroup()
 
-soc_ben_summary <- soc_ben_df %>%
-  summarize_column('sba')
 
-gen_plot(soc_ben_summary, 'sba', 'Societal benefit area')
-```
-
-### Summarize by value type
-
-```{r}
 val_type_df <- includes_df %>%
   select(key, val_type = societal_benefit_type) %>%
   mutate(val_type = str_split(val_type, '[^A-z]')) %>%
@@ -179,11 +120,6 @@ val_type_cooccur <- val_type_df %>%
             v2 = ifelse(n() == 1, NA, last(val_type))) %>%
   group_by(v1, v2) %>%
   summarize(n = n(), .groups = 'drop')
-
-val_type_summary <- val_type_df %>%
-  summarize_column('val_type')
-
-gen_plot(val_type_summary, 'val_type', 'Value type')
 ```
 
 
@@ -196,22 +132,23 @@ gen_plot(val_type_summary, 'val_type', 'Value type')
 method_by_value_df <- method_df %>%
   left_join(val_type_df, by = 'key') %>%
   group_by(key) %>%
-  mutate(val_wt = 1 / n_distinct(val_type)) %>%
+  mutate(val_wt = 1 / n_distinct(val_type),
+         method_wt = 1/n_distinct(method)) %>%
   group_by(method, val_type) %>%
-  summarize(n = sum(val_wt)) %>%
+  summarize(n = sum(val_wt * method_wt)) %>%
   group_by(method) %>%
   mutate(n_tot = sum(n)) %>%
   ungroup() %>%
   mutate(method = fct_reorder(str_squish(method), n_tot),
          lbl = sprintf('%s (n = %s)', method, n_tot)) %>%
-  mutate(val_type = factor(val_type, levels = c('Instrumental', 'Fundamental', 'Eudaimonistic')))
+  mutate(val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
 
 method_value_proportions <- method_by_value_df %>%
   mutate(prop = n / n_tot) 
 
 valtype_colors <- c('Instrumental'  = '#4B0055',
-                    'Fundamental'   = '#009B95', 
-                    'Eudaimonistic' = '#FDE333')
+                    'Intrinsic'   = '#009B95', 
+                    'Relational' = '#FDE333')
   
   
 ### high value labels on the bar; lower value to right of bar
@@ -244,15 +181,25 @@ ggplot(method_by_value_df, aes(y = method, x = n)) +
         legend.position = c(.75, .25))
 
 ```
+
+Summaries:
+
+```{r}
+method_by_value_df %>% group_by(val_type) %>% summarize(n = sum(n))
+
+
+```
+
+
 ### Method co occurrence
 
 IDEA: color this in pie wedges by value type - maybe quarter wedges, radius by size, with an empty bottom quadrant containing the total number.
 
 ```{r}
-method_vec <- levels(method_summary$method) %>% rev()
+method_vec <- levels(method_by_value_df$method) %>% rev()
   
-quant <- c('Value of Information', 'Cost-benefit analysis', 'Stated preference', 
-           'Bayesian Decision Analysis', 'Econometric analysis', 
+quant <- c('Value of information', 'Cost-benefit analysis', 'Stated preference', 
+           'Bayesian decision analysis', 'Econometric analysis', 
            'Real options analysis', 'Market price-based methods')
 
 multi_methods_df <- method_df %>%
@@ -283,20 +230,17 @@ multi_methods_summarized <- multi_methods_df %>%
   group_by(x, y) %>%
   summarize(tot = n(), .groups = 'drop',
             Instrumental = sum(Instrumental, na.rm = TRUE),
-            ### NO intrinsic values in multi-method data - easier!
-            # intr = sum(Intrinsic, na.rm = TRUE),
-            Fundamental = sum(Fundamental, na.rm = TRUE),
-            Eudaimonistic  = sum(Eudaimonistic, na.rm = TRUE)) %>%
+            Relational   = sum(Relational, na.rm = TRUE)) %>%
   complete(x = method_vec, y = method_vec, fill = list(n = NA)) %>%
-  pivot_longer(cols = c(Instrumental, Fundamental, Eudaimonistic), names_to = 'val_type', values_to = 'n') %>%
+  pivot_longer(cols = c(Instrumental, Relational), names_to = 'val_type', values_to = 'n') %>%
   mutate(x = factor(x, levels = method_vec),
          y = factor(y, levels = method_vec) %>% fct_rev(),
-         val_type = factor(val_type, levels = c('Instrumental', 'Eudaimonistic', 'Fundamental')))
+         val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
 
 arcs_df <- multi_methods_summarized %>%
-  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .8, ### radius based on # of value type
-         start = (as.integer(val_type) - 2) * (pi/2),
-         end   = (as.integer(val_type) - 1) * (pi/2)) %>%
+  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .7, ### radius based on # of value type
+         start = (as.integer(val_type) - 2) * (pi * .75) + pi/4,
+         end   = (as.integer(val_type) - 1) * (pi * .75) + pi/4) %>%
   filter(!is.na(n)) %>%
   filter(r > 0) %>%
   select(x, y, r, start, end, val_type) %>%
@@ -305,7 +249,12 @@ arcs_df <- multi_methods_summarized %>%
 diag_lbls <- multi_methods_summarized %>%
   filter(x == y) %>%
   select(x) %>%
-  distinct()
+  distinct() %>%
+  mutate(lbl = str_replace(x, 'Value of information', 'VOI') %>%
+           str_replace('Cost-benefit analysis', 'CBA') %>%
+           str_replace('Semi-structured and in-depth interviews', 'Interviews') %>%
+           str_replace('Surveys of preference assessments', 'Surveys')
+         )
 
 n_lbls <- multi_methods_summarized %>%
   select(x, y, tot) %>%
@@ -316,12 +265,13 @@ pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
   geom_point(data = multi_methods_summarized, aes(x, y), size = 0, color = '#00000000') +
   ### add grid lines
-  geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 13.25 - as.integer(x)), color = 'grey90', linewidth = 1) +
-  geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = 1) +
-  geom_segment(data = diag_lbls, x = 1, y = 12, yend = 1, xend = 12, color = 'grey90', linewidth = 1) +
+  geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 13 - as.integer(x)), 
+               color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, x = 1, y = 12, yend = 1, xend = 12, color = 'grey90', linewidth = .5) +
   ### add diagonal text
-  geom_text(data = diag_lbls, aes(x = x, y = x, label = x),
-            angle = 30, hjust = 0, vjust = 0, size = 3, nudge_y = .5, nudge_x = -.25) +
+  geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl),
+            angle = 45, hjust = 0, vjust = .5, size = 3, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
@@ -351,12 +301,12 @@ pnl <- ggplot() +
 legend_df <- multi_methods_summarized %>%
   group_by(val_type) %>%
   summarize(n = sum(n, na.rm = TRUE)) %>%
-  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .8, ### radius based on # of value type
+  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .6, ### radius based on # of value type
          lvl   = as.integer(val_type),
-         start = (lvl - 2) * (pi/2),
-         end   = (lvl - 1) * (pi/2)) %>%
-  mutate(lbl_x = 1 + c(-.1, .1, .1),
-         lbl_y = 1 + c(.1, .1, -.1),
+         start = (lvl - 2) * (pi * .75) + pi / 4,
+         end   = (lvl - 1) * (pi * .75) + pi / 4) %>%
+  mutate(lbl_x = 1 + c(-.1, .1),
+         lbl_y = 1 + c(.1, .1),
          hjust = ifelse(lbl_x < 1, 1, -1))
 
 
@@ -373,17 +323,14 @@ lgd <- ggplot() +
   coord_fixed() +
   theme_void()
 
-library(cowplot)
 ggdraw() +
   draw_plot(pnl) +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
   draw_label('n total', x = 0.845, y = 0.695, size = 8, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental', x = 0.80, y = 0.75, size = 8, 
+  draw_label('Instrumental\n(n = 54)', x = 0.80, y = 0.78, size = 8, 
              hjust = 1, vjust = 1) +
-  draw_label('Eudaimonistic', x = 0.86, y = 0.75, size = 8, 
-             hjust = 0, vjust = 1) +
-  draw_label('Fundamental',   x = 0.86, y = 0.65, size = 8, 
+  draw_label('Relational\n(n = 7)',   x = 0.875, y = 0.72, size = 8, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 10, fontface = 'bold',
              hjust = .5, vjust = 0)
@@ -400,8 +347,9 @@ method_by_sba_df <- method_df %>%
   left_join(soc_ben_df, by = 'key') %>%
   group_by(key) %>%
   mutate(sba_wt = 1 / n_distinct(sba)) %>%
+  mutate(method_wt = 1 / n_distinct(method)) %>%
   group_by(method, sba) %>%
-  summarize(n = sum(sba_wt)) %>%
+  summarize(n = sum(sba_wt * method_wt)) %>%
   group_by(method) %>%
   mutate(n_tot = sum(n)) %>%
   ungroup() %>%
@@ -438,15 +386,16 @@ ggsave('heatmap.png')
 sba_by_value_df <- soc_ben_df %>%
   left_join(val_type_df, by = 'key') %>%
   group_by(key) %>%
-  mutate(val_wt = 1 / n_distinct(val_type)) %>%
+  mutate(val_wt = 1 / n_distinct(val_type),
+         sba_wt = 1 / n_distinct(sba)) %>%
   group_by(sba, val_type) %>%
-  summarize(n = sum(val_wt)) %>%
+  summarize(n = sum(val_wt * sba_wt)) %>%
   group_by(sba) %>%
   mutate(n_tot = sum(n)) %>%
   ungroup() %>%
   mutate(sba = fct_reorder(str_squish(sba), n_tot),
          lbl = sprintf('%s (n = %s)', sba, n_tot)) %>%
-  mutate(val_type = factor(val_type, levels = c('Instrumental', 'Fundamental', 'Eudaimonistic')))
+  mutate(val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
   
 ### high value labels on the bar; lower value to right of bar
 df_hi <- sba_by_value_df %>%
@@ -484,7 +433,11 @@ ggplot(sba_by_value_df, aes(y = sba, x = n)) +
 IDEA: color this in pie wedges by value type - maybe quarter wedges, radius by size, with an empty bottom quadrant containing the total number.
 
 ```{r}
-sba_vec <- levels(soc_ben_summary$sba) %>% rev()
+sba_vec <- soc_ben_df %>%
+  group_by(sba) %>%
+  summarize(n = n()) %>%
+  mutate(sba = fct_reorder(sba, n)) %>%
+  .$sba %>% levels() %>% rev()
   
 multi_sba_df <- soc_ben_df %>%
   mutate(sba = factor(sba, levels = sba_vec)) %>%
@@ -500,18 +453,17 @@ multi_sba_df <- soc_ben_df %>%
   group_by(x, y) %>%
   summarize(tot = n(), .groups = 'drop',
             Instrumental = sum(Instrumental, na.rm = TRUE),
-            Fundamental = sum(Fundamental, na.rm = TRUE),
-            Eudaimonistic  = sum(Eudaimonistic, na.rm = TRUE)) %>%
+            Relational   = sum(Relational, na.rm = TRUE)) %>%
   complete(x = sba_vec, y = sba_vec, fill = list(n = NA)) %>%
-  pivot_longer(cols = c(Instrumental, Fundamental, Eudaimonistic), names_to = 'val_type', values_to = 'n') %>%
+  pivot_longer(cols = c(Instrumental, Relational), names_to = 'val_type', values_to = 'n') %>%
   mutate(x = factor(x, levels = sba_vec),
          y = factor(y, levels = sba_vec) %>% fct_rev(),
-         val_type = factor(val_type, levels = c('Instrumental', 'Eudaimonistic', 'Fundamental')))
+         val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
 
 arcs_df <- multi_sba_df %>%
-  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .7, ### radius based on # of value type
-         start = (as.integer(val_type) - 2) * (pi/2),
-         end   = (as.integer(val_type) - 1) * (pi/2)) %>%
+  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .6, ### radius based on # of value type
+         start = (as.integer(val_type) - 2) * (pi * .75) + pi/4,
+         end   = (as.integer(val_type) - 1) * (pi * .75) + pi/4) %>%
   filter(!is.na(n)) %>%
   filter(r > 0) %>%
   select(x, y, r, start, end, val_type) %>%
@@ -520,26 +472,27 @@ arcs_df <- multi_sba_df %>%
 diag_lbls <- multi_sba_df %>%
   filter(x == y) %>%
   select(x) %>%
-  mutate(val = as.integer(x)) %>%
-  distinct()
+  distinct() %>%
+  mutate(lbl = x)
 
 n_lbls <- multi_sba_df %>%
   select(x, y, tot) %>%
   distinct()
 
 
-pnl2 <- ggplot() +
+pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
   geom_point(data = multi_sba_df, aes(x, y), size = 0, color = '#00000000') +
   ### add grid lines
-  geom_segment(data = diag_lbls, aes(x = val, xend = val, y = 1, yend = 11.25 - val), color = 'grey90', linewidth = 1) +
-  geom_segment(data = diag_lbls, aes(y = val, yend = val, x = 0, xend = 11.25 - val), color = 'grey90', linewidth = 1) +
-  geom_segment(data = diag_lbls, x = 1, y = 10, yend = 1, xend = 10, color = 'grey90', linewidth = 1) +
+  geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 11 - as.integer(x)), 
+               color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, x = 1, y = 10, yend = 1, xend = 10, color = 'grey90', linewidth = .5) +
   ### add diagonal text
-  geom_text(data = diag_lbls, aes(x = x, y = x, label = x),
-            angle = 30, hjust = 0, vjust = 0, size = 3, nudge_y = .5, nudge_x = -.25) +
+  geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl),
+            angle = 45, hjust = 0, vjust = .5, size = 3, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
-  # geom_point(data = multi_methods_df, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
+  # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
   geom_arc_bar(data = arcs_df,
                aes(x0 = as.integer(x), y0 = as.integer(y),
@@ -550,8 +503,8 @@ pnl2 <- ggplot() +
             size = 2, hjust = 1, vjust = 1, nudge_x = -.05, nudge_y = -.05, color = 'black') +
   scale_fill_manual(values = valtype_colors) +
   scale_size(name = 'n', range = c(3, 10)) +
-  scale_x_discrete(expand = expansion(add = c(0, 1))) +
-  scale_y_discrete(expand = expansion(add = c(.5, 2))) +
+  scale_x_discrete(expand = expansion(add = c(0, 6))) +
+  scale_y_discrete(expand = expansion(add = c(.5, 3))) +
   ### to maintain equal spacing horiz and vert
   coord_fixed() +
   labs(x = 'Societal Benefit Area 1',
@@ -564,20 +517,20 @@ pnl2 <- ggplot() +
         axis.text.x = element_blank())
 
 ### Legend
-legend2_df <- multi_sba_df %>%
+legend_df <- multi_sba_df %>%
   group_by(val_type) %>%
   summarize(n = sum(n, na.rm = TRUE)) %>%
-  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .8, ### radius based on # of value type
+  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .6, ### radius based on # of value type
          lvl   = as.integer(val_type),
-         start = (lvl - 2) * (pi/2),
-         end   = (lvl - 1) * (pi/2)) %>%
-  mutate(lbl_x = 1 + c(-.1, .1, .1),
-         lbl_y = 1 + c(.1, .1, -.1),
+         start = (lvl - 2) * (pi * .75) + pi / 4,
+         end   = (lvl - 1) * (pi * .75) + pi / 4) %>%
+  mutate(lbl_x = 1 + c(-.1, .1),
+         lbl_y = 1 + c(.1, .1),
          hjust = ifelse(lbl_x < 1, 1, -1))
 
 
-lgd2 <- ggplot() +
-  geom_arc_bar(data = legend2_df,
+lgd <- ggplot() +
+  geom_arc_bar(data = legend_df,
                aes(x0 = 1, y0 = 1, r0 = 0, r = r, start = start, end = end, fill = val_type),
                color = NA, show.legend = FALSE) +
   geom_point(x = 1, y = 1, color = 'red', size = 5) +
@@ -589,17 +542,14 @@ lgd2 <- ggplot() +
   coord_fixed() +
   theme_void()
 
-library(cowplot)
 ggdraw() +
-  draw_plot(pnl2) +
-  draw_plot(lgd2, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
+  draw_plot(pnl) +
+  draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
   draw_label('n total', x = 0.845, y = 0.695, size = 8, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental', x = 0.80, y = 0.75, size = 8, 
+  draw_label('Instrumental\n(n = 44)', x = 0.80, y = 0.78, size = 8, 
              hjust = 1, vjust = 1) +
-  draw_label('Eudaimonistic', x = 0.86, y = 0.75, size = 8, 
-             hjust = 0, vjust = 1) +
-  draw_label('Fundamental',   x = 0.86, y = 0.65, size = 8, 
+  draw_label('Relational\n(n = 10)',   x = 0.875, y = 0.72, size = 8, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 10, fontface = 'bold',
              hjust = .5, vjust = 0)

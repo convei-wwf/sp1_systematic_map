@@ -432,3 +432,53 @@ if(!file.exists(sample_f)) {
 }
 ```
 
+## Examine first-stage rejections
+
+Any possible bias or cause of missing DOIs?
+
+```{r}
+x <- wos_firststage_reject %>% filter(!type %in% c('inproceedings'))
+y <- x %>% mutate(no_auth = is.na(author), no_title = is.na(title), no_doi = is.na(doi), no_abstr = is.na(abstract))
+z <- y %>% select(starts_with('no_')) %>% summarize(across(everything(), sum))
+
+xx <- scopus_firststage_reject %>% filter(!source_type %in% c('CONF'))
+yy <- xx %>% mutate(no_auth = is.na(author), no_title = is.na(title), no_doi = is.na(doi), no_abstr = is.na(abstract))
+zz <- yy %>% select(starts_with('no_')) %>% summarize(across(everything(), sum))
+
+xxx <- x %>% 
+  select(title, author, year, abstract, journal, doi) %>%
+  mutate(src = 'wos') %>%
+  bind_rows(xx %>% select(title, author, year, abstract, journal, doi) %>% mutate(src = 'scopus')) %>%
+  filter(is.na(doi)) %>%
+  filter(!is.na(abstract) & !is.na(title) & !is.na(author)) %>%
+  mutate(first_author = str_remove(tolower(author), ' and .+') %>%
+         stri_trans_general('Latin-ASCII') %>% ### drop diacritics
+         str_remove('(?<=(, [a-z])).+'),
+       title = str_to_title(title) %>%
+         str_remove_all('\\<.+?\\>'), ### drop HTML tags
+       title_short = tolower(title) %>% 
+         stri_trans_general('Latin-ASCII') %>% ### drop diacritics
+         str_remove_all('[^a-z0-9 ]+') %>% 
+         str_squish() %>% 
+         str_sub(1, 100),
+       abstr_short = tolower(abstract) %>% 
+         stri_trans_general('Latin-ASCII') %>% ### drop diacritics
+         str_remove_all('[^a-z0-9 ]+') %>% 
+         str_squish() %>% 
+         str_sub(1, 100),
+       journal = str_to_title(journal),
+       year = str_extract(year, '[0-9]{4}') %>% as.numeric())
+
+qwer <- janitor::get_dupes(xxx, title_short) ### 240 overlap by title, so 1039 distinct docs
+asdf <- xxx %>% filter(title_short %in% all_docs_clean$title_short) ### 44 made it to the screening
+
+journal_good <- all_docs_clean %>%
+  group_by(journal) %>%
+  summarize(n_good = n_distinct(title_short))
+journal_check <- xxx %>%
+  group_by(journal) %>%
+  summarize(n_dropped = n_distinct(title_short)) %>% 
+  left_join(journal_good)
+
+```
+

@@ -24,6 +24,8 @@ library(network)
 library(sna)
 library(ggrepel)
 library(cowplot)
+
+library(jsonlite) ### for CrossRef API
 ```
 
 # Summary
@@ -56,7 +58,8 @@ make_short <- function(t) {
   clean_text(t) %>% tolower() %>% str_sub(1, 50)
 }
 
-refs_raw <- read_refs(here('_data/screened_fulltext/convei_includes.bib'))
+refs_raw <- read_refs(here('_data/screened_fulltext/convei_includes.bib')) %>%
+  mutate(key = str_remove_all(key, '\\\\'))
 
 ref_key_lookup <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv')) %>%
   select(title, key2 = key) %>%
@@ -79,7 +82,8 @@ refs_clean <- refs_raw %>%
   mutate(title_clean = clean_text(title)) %>%
   mutate(author = clean_text(author)) %>%
   ### separate name into last, first format
-  separate(author, into = c('last', 'first'), sep = ',') %>%
+  separate(author, into = c('last', 'first'), sep = ',', remove = FALSE) %>%
+  rename(author_full = author) %>%
   mutate(last = ifelse(tolower(last) == 'mccarl', 'McCarl', last)) %>%
   mutate(first = str_squish(first) %>% str_to_title()) %>%
   ### fix first names to include middle init where available, for consistency
@@ -112,7 +116,7 @@ refs_clean <- refs_raw %>%
   mutate(first = ifelse(n == 1, first_letter, first)) %>%
   ### recombine first and last names into author id
   mutate(author = str_c(last, ', ', first)) %>%
-  select(title = title_clean, author, lead_author, key)
+  select(title = title_clean, author, author_full, lead_author, key, doi)
 
 ### To simplify the plot, omit any papers where no authors have more than X papers,
 ### i.e., at least one author has multiple papers
@@ -346,3 +350,99 @@ sbas_by_cluster <- papers_clusters %>%
 
 DT::datatable(sbas_by_cluster)
 ```
+
+
+## Gather Affiliations
+
+### Use CrossRef API to access author affiliations
+
+```{r}
+endpt_stem <- 'https://api.crossref.org/works/%s'
+
+doi_vec <- includes_doi$doi
+
+get_affil_crossref <- function(doi) {
+  ### doi <- doi_vec[14]
+  x <- tryCatch(fromJSON(sprintf(endpt_stem, doi))$message$author, 
+                error = function(e) {return(NA)})
+  if (!is.data.frame(x)) {
+    return(data.frame(doi = doi, error = 'try error'))
+  } else {
+    x <- x %>%
+      rowwise() %>%
+      mutate(affiliation = ifelse(length(affiliation) == 0, NA, affiliation)) %>%
+      ungroup() %>%
+      unnest(affiliation) %>%
+      mutate(doi = doi)
+    Sys.sleep(0.5)
+    return(x)
+  }
+}
+```
+
+```{r}
+key_doi_lookup <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv')) %>%
+  select(key, doi)
+clusters_doi <- papers_clusters %>% 
+  inner_join(key_doi_lookup, by = 'key')
+
+affil_cr_f <- here('3_analysis/author_affiliations_crossref.csv')
+
+if(!file.exists(affil_out_f)) {
+
+  affil_df_cr <- purrr::map_df(doi_vec, get_affil_crossref)
+  
+  write_csv(affil_df_cr, affil_cr_f)
+}
+
+affil_df_cr <- read_csv(affil_cr_f)
+
+x <- inner_join(affil_df_cr, clusters_doi, by = 'doi') %>% filter(!is.na(affiliation))
+x$title %>% n_distinct()
+```
+
+A bust - only five out of 36 papers in the clusters have author affiliation info.
+
+### Inclusion in the Web of Science search
+
+Web of Science results include affiliations!  But at the paper level, not the author level.  Note: the `wos_clean_240126.ris` file is post-de-duplication, which prioritizes databases in this order: SBR, WoS, Scopus.  So, let's go back to the full WoS results, pre-processed prior to de-duplication.  No affiliations in Scopus unless it's in a two-letter column (out of 327 variables)
+
+```{r read in the preprocessed WoS citations}
+wos_fs <- list.files(here('_data/1b_refs_preprocessed'), pattern = 'wos_', full.names = TRUE)
+wos_all <- parallel::mclapply(wos_fs, read_refs, mc.cores = 1) %>% 
+  bind_rows() %>% 
+  mutate(src = 'wos')
+
+includes_df <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx'))
+
+all_refs_doi <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv')) %>%
+  mutate(doi = str_remove(doi, '.+doi.org/|https?://'))
+
+includes_doi <- all_refs_doi %>%
+  filter(key %in% includes_df$key)
+
+# table(includes_doi$src)
+# scopus societal benefits repo                    wos 
+#     20                     73                     77 
+
+clusters_doi <- all_refs_doi %>%
+  filter(key %in% papers_clusters$key)
+# table(clusters_doi$src)
+# scopus societal benefits repo                    wos 
+#      7                     25                      4 
+
+wos_clean <- wos_all %>%
+  select(id = unique_id, author, affiliations, title, year, doi) %>%
+  distinct()
+
+wos_include <- wos_clean %>%
+  filter(doi %in% includes_doi$doi)
+### 76 of 77 'wos' source (plus however many duped in SBR), matched by doi alone
+
+wos_cluster <- wos_clean %>%
+  filter(doi %in% clusters_doi$doi)
+```
+
+```
+
+
