@@ -1,0 +1,157 @@
+---
+title: "Supporting Information for: Cumulative human impacts on global marine fauna highlight risk to biological and functional diversity"
+author: Casey C. O’Hara^1\*^, Melanie Frazier^2^,
+  Mireia Valle^2,3,4^, Nathalie Butt^5^, Kristin Kaschner^6^, Carissa Klein^5^, Benjamin S. Halpern^1,2^
+csl: refs/pnas.csl
+execute:
+  echo: false
+  warning: false
+  message: false
+format:
+  docx:
+    reference-doc: templates/msword_pnas.docx
+filters:
+  - refs/docx-landscape.lua
+bibliography: refs/sp1_ms_refs.bib
+---
+
+<!--
+To do: 
+* Format body text, first paragraph, headings 3 and 4 for spacing
+* Format tables: Arial 9 (S1, S2), Arial 8 (S3) - AFTER changing body text!
+* Format figure caption text (move to left margin)
+* Remove line numbers
+-->
+
+```{r}
+# library(flextable)
+library(tidyverse)
+library(here)
+source(here('spp_vuln_mapping/ms_fxns.R'))
+```
+
+## List of Supporting Materials
+
+### Figures S1 – S7
+### Tables S1 – S3
+### Supporting Methods
+### References (72-91)
+
+::: landscape
+# Supporting Figures
+
+![](s1_chi_methods_fig.png)
+
+> __Figure S1.__ Graphical conceptual summary of cumulative impact calculations.  (A) Stressors are mapped as intensity values on a 10 x 10 km grid, with values ranging from 0 to 1. (B) Each species is vulnerable, to different degrees, to each of the stressors, with vulnerability ranging from 0 to 1. (C) The distribution of each species is mapped as present/absent in each 10 x 10 km grid cell.  Note the colors represent different functional entities. (D) For each species x stressor combination, an impact map is generated as the product of species presence (C), species vulnerability to the stressor (B), and stressor intensity (A). (E) The cumulative impact to each species is the sum of impacts across all stressors. (F) For the species approach, a mean cumulative human impact is calculated as the average cumulative impact across all species present in each cell.  (G) For the functional entity approach, impact values are aggregated to the functional entity level by averaging impact values within each grid cell across all species associated with that functional entity. A functional vulnerability is calculated for each FE/grid cell combination, where a FE with few species is more vulnerable than a FE represented by many species. (H) For the functional entity approach, a mean cumulative human impact is calculated as the average cumulative impact across all functional entities present in each cell, weighted by functional vulnerability. (I) The functional entity impacts and species impacts are compared by taking the difference between the impacts predicted by each method for each grid cell.
+
+:::
+
+![](../../spp_vuln_mapping/5_ms_figs/figS2_spp_richness.png)
+
+> __Figure S2.__ Global pattern of species richness based on 21,159 species range maps included in this assessment.
+
+\pagebreak
+
+![](../../spp_vuln_mapping/5_ms_figs/figS3_combined_legend_w_pcts.png)
+
+> __Figure S3.__ Percent of cells falling into each impact quartile category. (A) Species method.  (B) Habitat method.  Note that a uniform distribution would result in a value of 6.3% in each impact quartile category.
+
+\pagebreak
+
+![](../../spp_vuln_mapping/5_ms_figs/figS4_mapping_impacts_hab.png)
+
+> __Figure S4.__ Distribution of modeled risk of impact based on vulnerability and exposure of ecosystem-representative habitats to anthropogenic stressors.  (A) Mean cumulative impact across all habitats in each cell, summing across all stressors.  (B) Mean cumulative impact across all habitats, summing across all climate-related stressors.  (C) Mean cumulative impact across all habitats, summing across all non-climate stressors.  (D) Bivariate comparison of distributions of climate impacts (orange) vs. non-climate impacts (purple) by quartile within each stressor group.
+
+\pagebreak
+
+![](../../spp_vuln_mapping/5_ms_figs/figS5_impacts_by_ecoregion_province.png)
+
+> __Figure S5.__ Comparison of cumulative, climate, and non-climate stressors by habitat and species methods across 10 km resolution cells within coastal ($Spp_c$, $Hab_c$) and oceanic ($Spp_o$, $Hab_o$) portions of 62 representative marine ecological provinces, transformed to percentile ranks relative to global distribution within each impact category. Filled point indicates median value; bars represent interquartile range (IQR, quartile Q1 to Q3); whiskers indicate observations 1.5x IQR below (above) Q1 (Q3) of bar.  Outliers omitted from plots for clarity.  A) Cumulative impacts by species and habitat cumulative impact methods.  B) Climate impacts by species and habitat cumulative impact methods.  C) Non-climate impacts by species and habitat cumulative impact methods.
+
+\pagebreak
+
+![](../../spp_vuln_mapping/5_ms_figs/figS6_sens_analysis.png)
+
+> __Figure S6.__ Sensitivity of functional vulnerability (FV) and cumulative human impact (CHI) to trait variation.  Each trait was resampled 1000 times, holding other traits constant, and change in functional vulnerability (A-D) and cumulative human impact (E-H) were recalculated according to the Functional Entity approach.  Functional vulnerability generally increased slightly (A-D, green tones), as resampling tends to create novel trait combinations not found in nature, leading to more low-membership (and thus high FV) functional entities.  The effects of these changes in functional vulnerability on the overall cumulative impact were quite low.
+
+\pagebreak
+
+![](../../spp_vuln_mapping/5_ms_figs/figS7_trait_imputation.png)
+
+> __Figure S7.__ Trait imputation. A) Missingness of traits for inclusion in functional entities, prior to MICE imputation.  Water column position (`wcol`), log(body length) (`log_l`), trophic level (`troph`), and adult mobility (`adult_mob`) were used to assign species to functional entities; dark boxes represent known values, yellow boxes represent missing values.  Two other traits highlighted in the red box, log(fecundity) (`log_f`) and age to maturity (`age_mat`) were used to assist in imputation where available; color scale represents proportional missingness of those traits for each combination of the other four.  B) After MICE imputation, an additional gapfill step using taxonomic relatives was used.  "None" represents proportion of species successfully imputed by MICE; "genus" represents proportion of species whose traits were gapfilled using the most common values of other species in its genus; and "family" represents the proportion filled using the most common values of other species in its family. 
+
+# Supporting Tables
+
+
+``` {r s1 species inclusion quarto}
+#| tbl-cap: "Table S1: Species inclusion by phylum and class. N total refers to the number of marine species in each class according to the World Register of Marine Species [28], N included refers to the number of species included in this assessment."
+#| tbl-cap-location: "top"
+#| tbl-colwidths: "[25,25,13,11,13,13]"
+
+spp_by_phylum_table <- read_csv(here('../spp_vuln_mapping/5_ms_figs', 
+                                     'tableS1_spp_by_phylum.csv')) %>%
+  mutate(phylum = str_to_sentence(phylum),
+         class = str_to_sentence(class)) %>%
+  setNames(c('Phylum', 'Class', 'N included', 'Subpops/ synonyms', 'N total', '% included'))
+
+knitr::kable(spp_by_phylum_table, align = 'llrcrr')
+
+```
+
+\pagebreak
+
+``` {r s2 species inclusion quarto}
+#| tbl-cap: "Table S2: Vertebrate species inclusion by class and order. N total refers to the number of marine species in each order according to the World Register of Marine Species [28], N included refers to the number of species included in this assessment."
+#| tbl-cap-location: "top"
+#| tbl-colwidths: "[20,30,13,11,13,13]"
+
+verts_by_class_table <- read_csv(here('../spp_vuln_mapping/5_ms_figs', 
+                                     'tableS2_spp_verts_by_class.csv')) %>%
+  select(-n_cls) %>%
+  mutate(order = str_to_sentence(order),
+         class = str_to_sentence(class)) %>%
+  setNames(c('Class', 'Order', 'N included', 'Subpops/ synonyms', 'N total', '% included'))
+
+knitr::kable(verts_by_class_table, align = 'llrcrr')
+
+```
+
+\pagebreak
+
+``` {r s3 traits for vuln quarto}
+#| tbl-cap: "Table S3: Traits used to calculate vulnerability to various stressors, according to sensitivity (S), specific adaptive capacity (A), general adaptive capacity (G), and binary exposure modifier (0/1) components.  Where marked, different values of that trait change the value of that component.  See [XXX] for full details and methodology.  Note that sensitivity to Biomass Removal and SST Rise stressors (noted with *) are set to 1 for all species, but vulnerability to these stressors is moderated by adaptive capacity and exposure modifier."
+#| tbl-cap-location: "top"
+#| tbl-colwidths: "[20,30,13,11,13,13]"
+
+traits_table <- readxl::read_excel(here('spp_vuln_mapping/S3_traits_table.xlsx')) %>%
+  mutate(across(-Component, .fns = ~case_when(.x == 'X' & Component == 'Sensitivity' ~ 'S',
+                                              .x == 'X' & Component == 'Specific Adaptive Capacity' ~ 'A',
+                                              .x == 'X' & Component == 'General Adaptive Capacity' ~ 'G',
+                                              TRUE ~ .x))) %>%
+  mutate(across(-Component, .fns = ~ifelse(is.na(.x), '', .x)))
+
+knitr::kable(traits_table, align = 'lllccccccccccc')
+
+```
+
+
+::: landscape
+<!-- <div id='startlandscape'></div> -->
+
+``` {r s4 stressor methods quarto}
+#| tbl-cap: "Table S4: Overview of methods and data sources to generate stressor distribution maps. All stressors projected to 10 km Mollweide coordinate reference system."
+#| tbl-cap-location: "top"
+#| tbl-colwidths: "[10,8,8,30,12,12,10,10]"
+
+str_methods_table <- readxl::read_excel(here('spp_vuln_mapping/s4_stressor_table.xlsx'))
+
+knitr::kable(str_methods_table)
+
+```
+:::
+<!-- <div id='endlandscape'></div> -->
+
+
+```{r}
+#| child: 'spp_vuln_mapping_SI_methods.qmd'
+```

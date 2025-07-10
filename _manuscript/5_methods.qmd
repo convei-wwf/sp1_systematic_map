@@ -1,0 +1,102 @@
+### Analysis grid
+
+All spatial analyses were calculated on a gridded global map using a Mollweide equal-area projection coordinate reference system (CRS), gridded to 10 km x 10 km resolution.  See SI Methods for additional details on preparing the analysis grid.
+
+### Species distributions
+
+The 21,159 species (including subpopulations) considered in this assessment are limited to those animal species with data on spatial distribution as well as sufficient trait data to estimate vulnerability and assign species to functional entities. These species represent only a small subset of the >240,000 marine species identified in the World Register of Marine Species (WoRMS, [@vandepitte_DecadeWorld_2018]); however, this subset includes most known marine mammals, marine reptiles, seabirds, and cartilaginous fishes, as well as about half of marine bony fishes and warm-water corals (S1 Table by class, S2 Table vertebrates by order). Together these species represent most top predators, many mid-trophic species, and ecologically critical habitat-forming species. Relatively fewer other invertebrates were included, as most lacked spatial data, trait data, or both.
+
+Species distribution data were taken from AquaMaps [@kaschner_AquaMapsPredicted_2019] (n = 18,480) and IUCN species distribution maps [@iucn_IUCNRed_2021; @bli_2018] (n = 2,679). For species appearing in both distribution map datasets, the AquaMaps distribution maps, based on transparent and repeatable algorithms using publicly available data, were preferred over IUCN range maps, which integrate data and expert knowledge but may include mapping decisions that are difficult to replicate.  For species represented by the AquaMaps dataset, presence was calculated as any 0.5° cell with a probability of occurrence of 0.5 or greater; the resulting cells were then reprojected to the 10 km Mollweide analysis grid.  For species represented by IUCN Red List rangemaps, the polygons were reprojected and rasterized to the resolution and CRS of the analysis grid.  See SI Methods for additional details on preparing species distributions.  See S2 Fig. for a map of species richness generated from these species distributions.
+
+### Vulnerability estimates
+
+Vulnerability weights, i.e., the relative effect of a given stressor on the fitness/health of a given species, were determined based on methods of Butt et al. [-@butt_TraitbasedFramework_2022].  Briefly, that study estimated vulnerability of species to each of a suite of stressors based on presence of certain traits that are likely to increase the species' physiological sensitivity (e.g., calcium external structures indicate higher sensitivity to ocean acidification), ability to adapt to or avoid that specific stressor (e.g., high mobility makes it easier to avoid localized stressors), and life history and population-level traits that affect the population's ability to adapt to or recover from disturbances in general (e.g., high fecundity suggests easier recovery from a disturbance).  A binary exposure multiplier (zero or one) prevents nonsensical results for certain stressors where exposure is limited to certain depths or ocean zones, e.g., ship strikes will not affect mesopelagic species. Trait values for species were gathered through expert elicitation and provided as ordinal or nominal categorical values.  Vulnerability weights range from 0 (a stressor does not affect a species) to 1 (a stressor imposes extreme adverse effects on a species).
+
+See SI Methods and S3 Table for details on traits and calculations.
+
+### Stressor layers for species-focused analysis
+
+For the species-focused analysis, the intensity of exposure to a stressor depends on the spatial distribution of the stressor relative to the spatial distribution of the species.  Spatial data for stressors is typically available as gridded data of some physical quantity related to anthropogenic activity, e.g., brightness of nighttime lights, tonnes of nutrient fertilizer runoff, population density within 25 km of coast, or value of aragonite saturation state.  For each stressor, a reference value was determined from the data (typically 99.9th percentile of observed values), a historic baseline (e.g., mean/standard deviation of sea surface temperature from 1985-2015), or ecologically relevant value (e.g., aragonite saturation state of 1) (S4 Table).  We calculated stressor distributions as a value from 0 (stressor not present) to 1 (stressor at reference point, indicating maximum intensity).  
+
+For most of the included stressors, a single map of relative stressor intensity was created from gridded data and applied to all species, although vulnerability to the stressor varied by species.  These stressors include sea surface temperature (SST) extremes, ocean acidification, ultraviolet radiation, sea level rise, nutrient pollution (runoff), direct human disturbance, light pollution, shipping (ship strikes), and habitat destruction driven by demersal destructive fishing and the footprint of benthic structures.
+
+However, there were also several stressors for which intensity (again ranging from 0 to 1) depends on species-specific information.  These stressors include bycatch (dependent on water column position, i.e., benthic, pelagic, or both), biomass removal (dependent on catch that is directly targeting that species), and increase in mean SST (dependent on species thermal tolerance).  For these stressors, individual maps were generated for each species (biomass removal, SST rise) or for each water-column position category (bycatch).
+
+See SI Methods and S4 Table for details on the data source, transformation, and reference point used for these stressor layers.
+
+### Stressor layers for habitat-focused analysis
+
+The habitat-focused analysis was similar to that for species, with the intensity of exposure to a stressor depending on the spatial distribution of the stressor relative to the distribution of the habitat.  For this approach, fisheries stressors were calculated using the same source as the species-level stressors, i.e., Watson [-@watson_DatabaseGlobal_2017], but aggregated by fishing gear, depth, and scale according to their effects on various habitat types as described in Halpern et al. [-@halpern_RecentPace_2019]: commercial pelagic and demersal low bycatch, commercial pelagic high bycatch, commercial demersal destructive, and artisanal/small scale fishing.  For SST extremes, ocean acidification, ultraviolet radiation, sea level rise, nutrient pollution (runoff), direct human disturbance, light pollution, shipping, benthic structures, and demersal destructive fishing, we used the identical stressor layers prepared for the species-level analysis.  The species-specific stress of increasing mean SST relative to their thermal tolerance was omitted, as it would not be feasible to determine an analogous habitat-level thermal tolerance.  See SI Methods and S4 Table for details on the data source, transformation, and reference point used for these stressor layers.
+
+### Cumulative human impacts: species method
+
+#### Estimating impact at species level per grid cell
+
+We modeled the impact on species $i$ of stressor $j \in 1:J$ in a given location (i.e., grid cell) as the product of stressor intensity $s_j$ and vulnerability of that species to that stressor $v_{ij}$:
+
+$$I_{i}^j = v_{ij} s_j$$
+
+Cumulative impact on species $i$ in a given location was determined by summing impacts across all stressors (or subset, e.g., climate vs. non-climate stressors) in that location:
+
+$$I_{i}^{cml} = \sum_{j=1}^J v_{ij} s_j$$
+
+Note that this additive model does not account for compound effects of multiple stressors acting in combination, i.e., synergistic or antagonistic effects. Meta-analyses examining two-stressor interactions [@crain_InteractiveCumulative_2008; @stockbridge_MetaanalysisMultiple_2020] have observed some non-additive stressor interactions, but additive effects were more commonly reported.  Additionally, an additive model requires fewer assumptions, is conceptually tractable, and likely results in more conservative results.
+
+#### Estimating species-level mean cumulative impact across species range
+
+For each species $i$, we calculated a cumulative impact score $X$ accounting for impacts across its entire range as an average of per-grid-cell impacts for all cells $c$ in the species' range $R_i$.  For a single stressor $j$:
+
+$$X_i^j = \frac{1}{R_i}\sum_{c \in R_i}I_{ic}^j$$
+Cumulative impact scores across multiple stressors (climate, non-climate, and total) were determined as the sum of single-stressor impact scores.
+
+#### Estimating impact across species per grid cell
+
+The species-mean method for calculating the impact score for stressor $j$ in a given cell was determined by taking an unweighted mean across all $N$ species present (or a taxonomic subset, e.g., all elasmobranchs):
+
+$$I^j_{spp} = \frac{1}{N}\sum_{i=1}^N v_{ij} s_j$$
+and the cumulative impact is the sum of impacts across all (or a subset of) stressors within that cell.
+
+### Cumulative human impacts: habitat method
+
+To compare the results of our species-based cumulative impact approach to those of a habitat-based approach (e.g., @halpern_GlobalMap_2008; @halpern_RecentPace_2019), we recreated habitat maps at the same resolution and projection as the species-based analysis, aggregating habitat presence maps at ~1 km resolution to determine proportional habitat representation within each 10 km grid cell.  Using these habitat maps, we applied habitat vulnerability weights from Halpern et al. [-@halpern_RecentPace_2019] to determine impacts based on largely the same stressor maps data sources used for the species-based assessment. 
+
+To identify vulnerability of each habitat to various stressors we used the matrix of habitat vulnerability from Halpern et al. [-@halpern_RecentPace_2019].
+
+Per-grid-cell habitat impact scores for each stressor $j$ were created as the product of habitat vulnerability for each habitat $h \in 1:H$ and intensity of stressor $j$, averaged over the proportional inclusion of that habitat $p_h$ in a given cell:
+
+$$I_{hab}^j = \sum_{h=1}^H p_h v_{hj}$$
+
+Cumulative impact per pixel is the sum of habitat-based impacts across all (or subset) of stressors.
+
+### Cumulative human impacts: functional entity method
+
+#### Functional entities
+
+To estimate cumulative impact on functional diversity, we first assigned species to functional entities based on categorical values of four traits (maximum body length, adult mobility, position in water column, and adult trophic level) that roughly determine a species’ ecological niche with regard to regulation of food webs and nutrient cycling, following Mouillot et al. [-@mouillot_FunctionalOverredundancy_2014].  Due to limited trait data available across a broad range of taxa, we relied on a smaller set of traits (those four noted previously) for assignment of functional entity than the six traits used in Mouillot et al. [-@mouillot_FunctionalOverredundancy_2014], resulting in fewer but more populous functional entities and therefore a more conservative estimate of functional vulnerability.
+
+Trait values were gleaned from [@butt_TraitbasedFramework_2022; @froese_FishBase_2022; @palomares_SeaLifeBase_2022]; missing values were imputed using Multiple Imputation by Chained Equation (MICE) in the R package `mice` [@vanbuuren_MiceMultivariate_2011] using all other traits plus fecundity (where available), generation time (where available), order, and family.  See SI Methods for details on the trait values used to assign functional entities, along with analyses to test sensitivity of functional vulnerability and cumulative impact to potential error in imputation of traits.
+
+#### Estimating impact at functional entity level per grid cell
+
+For each functional entity $k \in 1:K$ consisting of some subset of species in a particular location, the impact of stressor $j$ on the functional entity is the mean impact across all species in that functional entity in that location:
+
+$$I_k^j = \frac{1}{N_{FE}}\sum_{i=1}^{N_{FE}} I_i^j$$
+
+Cumulative impact of all stressors on this functional entity in this location is the sum of impacts across all stressors (or a subset).
+
+#### Estimating impact across functional entities per grid cell
+
+The functional entity method for calculating the impact score for stressor $j$ in a given location was determined by taking a weighted mean across all $K$ functional entities present.  Weighting for each functional entity was based on the functional vulnerability, _sensu_ Mouillot et al. [-@mouillot_FunctionalOverredundancy_2014] with a slight modification (see below).
+
+$$I^j_{FE} = \frac{1}{\sum_{k=1}^K FV_k}\sum_{k=1}^K FV_kI_k^j$$
+
+Mouillot et al. [-@mouillot_FunctionalOverredundancy_2014] scored vulnerability of a functional entity as 1 if that entity was represented by a single species and 0 otherwise.  Here we calculated functional vulnerability based on an inverse exponential of the number of species that represent that functional entity in that location, where functional vulnerability of entity $k$ was calculated as $FV_k = \left(\frac{1}{2}\right)^{N_k-1}$, accounting for low-membership entities but rapidly asymptotically approaching zero as membership increases.
+
+As for the species-based approach, the cumulative impact is the sum of impacts across all (or a subset of) stressors within that cell.
+
+### Code and packages
+
+All analysis was performed in R statistical software, version 4.0.4 [@rcoreteam_LanguageEnvironment_2022], relying primarily on packages `tidyverse` [@wickham_WelcomeTidyverse_2019], `terra` [@hijmans_TerraSpatial_2022], `sf` [@pebesma_SimpleFeatures_2018], `taxize` [@chamberlain_TaxizeTaxonomic_2013; @chamberlain_TaxizeTaxonomic_2020], `rfishbase` [@boettiger_RfishbaseExploring_2012].
+
+<!-- All data used as inputs for this assessment are freely available from original sources.  All original code and data resulting from this analysis has been deposited at [Figshare](https://figshare.com/) and is publicly available as of the date of publication. DOI:10.6084/m9.figshare.26454106.   A living version of the code and data can be found at [https://github.com/mapping-marine-spp-vuln/spp_vuln_mapping](https://github.com/mapping-marine-spp-vuln/spp_vuln_mapping). -->
+

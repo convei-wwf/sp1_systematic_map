@@ -135,7 +135,8 @@ method_by_value_df <- method_df %>%
   mutate(val_wt = 1 / n_distinct(val_type),
          method_wt = 1/n_distinct(method)) %>%
   group_by(method, val_type) %>%
-  summarize(n = sum(val_wt * method_wt)) %>%
+  summarize(n = sum(val_wt)) %>%
+  # summarize(n = sum(val_wt * method_wt)) %>%
   group_by(method) %>%
   mutate(n_tot = sum(n)) %>%
   ungroup() %>%
@@ -161,7 +162,7 @@ df_lo <- method_by_value_df %>%
   select(method, lbl, n_tot) %>%
   distinct()
 
-ggplot(method_by_value_df, aes(y = method, x = n)) +
+f1_plot <- ggplot(method_by_value_df, aes(y = method, x = n)) +
   geom_col(aes(fill = val_type)) +
   # guides(fill = guide_legend(reverse = TRUE)) +
   geom_text(data = df_hi, aes(label = lbl, x = n_tot), color = 'white',
@@ -180,7 +181,12 @@ ggplot(method_by_value_df, aes(y = method, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
+ggsave('fig1_method_by_value.png', height = 4, width = 6, dpi = 300)
+
+knitr::include_graphics('fig1_method_by_value.png')
 ```
+
+
 
 Summaries:
 
@@ -389,7 +395,8 @@ sba_by_value_df <- soc_ben_df %>%
   mutate(val_wt = 1 / n_distinct(val_type),
          sba_wt = 1 / n_distinct(sba)) %>%
   group_by(sba, val_type) %>%
-  summarize(n = sum(val_wt * sba_wt)) %>%
+  summarize(n = sum(val_wt)) %>%
+  # summarize(n = sum(val_wt * sba_wt)) %>%
   group_by(sba) %>%
   mutate(n_tot = sum(n)) %>%
   ungroup() %>%
@@ -407,7 +414,7 @@ df_lo <- sba_by_value_df %>%
   select(sba, lbl, n_tot) %>%
   distinct()
 
-ggplot(sba_by_value_df, aes(y = sba, x = n)) +
+f2_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
   geom_col(aes(fill = val_type)) +
   # guides(fill = guide_legend(reverse = TRUE)) +
   geom_text(data = df_hi, aes(label = lbl, x = n_tot), color = 'white',
@@ -425,6 +432,10 @@ ggplot(sba_by_value_df, aes(y = sba, x = n)) +
         axis.title.x = element_blank(),
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
+
+ggsave('fig2_sba_by_value.png', height = 4, width = 6, dpi = 300)
+
+knitr::include_graphics('fig2_sba_by_value.png')
 
 ```
 
