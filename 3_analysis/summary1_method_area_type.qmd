@@ -181,7 +181,7 @@ f1_plot <- ggplot(method_by_value_df, aes(y = method, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave('fig1_method_by_value.png', height = 4, width = 6, dpi = 300)
+ggsave('fig1_method_by_value.png', height = 3.5, width = 6, dpi = 300)
 
 knitr::include_graphics('fig1_method_by_value.png')
 ```
@@ -277,7 +277,7 @@ pnl <- ggplot() +
   geom_segment(data = diag_lbls, x = 1, y = 12, yend = 1, xend = 12, color = 'grey90', linewidth = .5) +
   ### add diagonal text
   geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl),
-            angle = 45, hjust = 0, vjust = .5, size = 3, nudge_y = .1, nudge_x = .1) +
+            angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
@@ -322,26 +322,29 @@ lgd <- ggplot() +
                color = NA, show.legend = FALSE) +
   geom_point(x = 1, y = 1, color = 'red', size = 5) +
   geom_text(label = 'N total', x = 1, y = 1, 
-            size = 3, hjust = 1, vjust = 1, nudge_y = -.05, nudge_x = -.05) +
+            size = 2.5, hjust = 1, vjust = 1, nudge_y = -.05, nudge_x = -.05) +
   scale_fill_manual(values = valtype_colors) +
   scale_x_continuous(limits = c(0, 2), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 2), expand = c(0, 0)) +
   coord_fixed() +
   theme_void()
 
-ggdraw() +
+f2_plot <- ggdraw() +
   draw_plot(pnl) +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n total', x = 0.845, y = 0.695, size = 8, 
+  draw_label('n total', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n(n = 54)', x = 0.80, y = 0.78, size = 8, 
+  draw_label('Instrumental\n(n = 54)', x = 0.80, y = 0.78, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Relational\n(n = 7)',   x = 0.875, y = 0.72, size = 8, 
+  draw_label('Relational\n(n = 7)',   x = 0.875, y = 0.72, size = 6, 
              hjust = 0, vjust = 1) +
-  draw_label('Value type',   x = 0.85, y = 0.8, size = 10, fontface = 'bold',
+  draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
   
-  
+ggsave('fig2_multimethod.png', height = 3.5, width = 6, dpi = 300)
+
+knitr::include_graphics('fig2_multimethod.png')
+
 ```
 
 
@@ -414,7 +417,7 @@ df_lo <- sba_by_value_df %>%
   select(sba, lbl, n_tot) %>%
   distinct()
 
-f2_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
+f3_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
   geom_col(aes(fill = val_type)) +
   # guides(fill = guide_legend(reverse = TRUE)) +
   geom_text(data = df_hi, aes(label = lbl, x = n_tot), color = 'white',
@@ -433,9 +436,9 @@ f2_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave('fig2_sba_by_value.png', height = 4, width = 6, dpi = 300)
+ggsave('fig3_sba_by_value.png', height = 3, width = 6, dpi = 300)
 
-knitr::include_graphics('fig2_sba_by_value.png')
+knitr::include_graphics('fig3_sba_by_value.png')
 
 ```
 
@@ -501,7 +504,7 @@ pnl <- ggplot() +
   geom_segment(data = diag_lbls, x = 1, y = 10, yend = 1, xend = 10, color = 'grey90', linewidth = .5) +
   ### add diagonal text
   geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl),
-            angle = 45, hjust = 0, vjust = .5, size = 3, nudge_y = .1, nudge_x = .1) +
+            angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
@@ -524,7 +527,7 @@ pnl <- ggplot() +
   theme_minimal() +
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
-        axis.text = element_text(size = 8),
+        axis.text = element_text(size = 7),
         axis.text.x = element_blank())
 
 ### Legend
@@ -546,24 +549,27 @@ lgd <- ggplot() +
                color = NA, show.legend = FALSE) +
   geom_point(x = 1, y = 1, color = 'red', size = 5) +
   geom_text(label = 'N total', x = 1, y = 1, 
-            size = 3, hjust = 1, vjust = 1, nudge_y = -.05, nudge_x = -.05) +
+            size = 2.5, hjust = 1, vjust = 1, nudge_y = -.05, nudge_x = -.05) +
   scale_fill_manual(values = valtype_colors) +
   scale_x_continuous(limits = c(0, 2), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 2), expand = c(0, 0)) +
   coord_fixed() +
   theme_void()
 
-ggdraw() +
+f4_plot <- ggdraw() +
   draw_plot(pnl) +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n total', x = 0.845, y = 0.695, size = 8, 
+  draw_label('n total', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n(n = 44)', x = 0.80, y = 0.78, size = 8, 
+  draw_label('Instrumental\n(n = 44)', x = 0.80, y = 0.78, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Relational\n(n = 10)',   x = 0.875, y = 0.72, size = 8, 
+  draw_label('Relational\n(n = 10)',   x = 0.875, y = 0.72, size = 6, 
              hjust = 0, vjust = 1) +
-  draw_label('Value type',   x = 0.85, y = 0.8, size = 10, fontface = 'bold',
+  draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
   
-  
+ggsave('fig4_multicontext.png', height = 3, width = 5, dpi = 300)
+
+knitr::include_graphics('fig4_multicontext.png')
+
 ```
