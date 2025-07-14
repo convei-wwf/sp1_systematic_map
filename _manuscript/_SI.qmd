@@ -1,5 +1,5 @@
 ---
-title: "Supporting Information for: Surveying the landscape of approaches to assessing societal benefits of Earth science information"
+title: "Supporting Information for: Surveying the landscape of approaches to assessing societal benefits of Earth science information: a systematic map"
 author: Casey C. O'Hara^1\\*^,
         Samantha Cheng^2^,
         Mabel Baez-Schon^2^,
@@ -24,7 +24,7 @@ execute:
   message: false
 format:
   docx: 
-    reference-doc: templates/msword_pnas.docx
+    reference-doc: templates/msword_pnas_template.docx
 filters:
   - refs/docx-landscape.lua
 bibliography: refs/sp1_ms_refs.bib
@@ -35,20 +35,18 @@ bibliography: refs/sp1_ms_refs.bib
 library(tidyverse)
 ```
 
-## List of Supporting Materials
+# List of Supporting Materials
 
-### Figures S1 – S7
-### Tables S1 – S3
+### Tables S1 - S2
+### Figures S1 – S2
 ### Supporting Methods
-### References (72-91)
 
+<!--..-->
 
 # Value domains 
 
-This table is inspired by the work of Himes et al. (2024) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes.
-
 ``` {r s1 value types}
-#| tbl-cap: "Table S1: This table is inspired by the work of Himes et al. (XXX) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
+#| tbl-cap: "Table S1. This table is inspired by the work of Himes et al. (XXX) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
 #| tbl-cap-location: "top"
 #| tbl-colwidths: "[15,30,30,25]"
 
@@ -60,11 +58,8 @@ knitr::kable(valtypes_table, align = 'llll')
 
 # Valuation methods
 
-Decision analysis methods from XXX. Preference elicitation methods are taken from Arias-Arevalo (20XX) and adapted to apply to Earth science information.
-
-
 ``` {r s2 valuation methods}
-#| tbl-cap: "Table S1: This table is inspired by the work of Himes et al. (XXX) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
+#| tbl-cap: "Table S2. Decision analysis methods from XXX (Casey's brain - anyone know of a good citeable source?). Preference elicitation methods are taken from Arias-Arevalo (2018) and adapted to apply to Earth science information."
 #| tbl-cap-location: "top"
 #| tbl-colwidths: "[12,25,25,20,18]"
 
@@ -75,9 +70,7 @@ knitr::kable(valtypes_table, align = 'lllll')
 ```
 
 
-
-
-# Methods details
+# Methods
 
 ## Search string
 
@@ -121,17 +114,20 @@ To eliminate some of the most common instances of these spurious matches, we ide
 ## Screening criteria
 
 Exclusion criteria used in the citation screening (title + abstract) and full text phases:
-ESI data are not used:
-No relation to Earth science information. For example, spurious matches related to health care remote observation.
-Related to satellites but not related to information about Earth’s systems. For example, documents relating to space weather, solar or lunar information, or communications/navigation satellites.
-Data are not valued
-ESI data are used to determine some scientific finding, but the scientific finding is not used to inform a specific societal decision or otherwise valued. For example, ESI data used to estimate changes in ecosystem service value over time, but the resulting ecosystem service value is not used to inform any management decisions within the paper.
-Valued data is not ESI
-Valuation methods are used in the paper, but applied to data or information other than the ESI. For example, a study that applies a new classification algorithm to the same underlying data; in this case, the additional value is attributable to the algorithm rather than the underlying data.
-Review/opinion
-Document is a review or opinion piece and does not provide new analysis or new frameworks for valuation.
-Conference abstract/proceedings
-Document is a conference abstract or proceeding describing presentations rather than published work
-Validation/calibration
-A special case of "Data is not valued" - ESI data are used to generate scientific information, and this information is compared to some reference to demonstrate scientific value; however, this scientific value is not then translated into societal benefit. For example, NDVI data is used to estimate land cover, and this result is compared to some alternate information source and shown to be an adequate or even superior proxy. However, the resulting information is not used to inform a management decision that would result in some societal benefit.
+
+* ESI data are not used:
+    * No relation to Earth science information. For example, spurious matches related to health care remote observation.
+    * Related to satellites but not related to information about Earth’s systems. For example, documents relating to space weather, solar or lunar information, or communications/navigation satellites.
+* Data are not valued
+    * ESI data are used to determine some scientific finding, but the scientific finding is not used to inform a specific societal decision or otherwise valued. 
+    * For example, ESI data used to estimate changes in ecosystem service value over time, but the resulting ecosystem service value is not used to inform any management decisions within the paper - i.e., the ESI measurement did not generate value.
+* Valued data is not ESI
+    * Valuation methods are used in the paper, but applied to data or information other than the ESI. For example, a study that applies a new classification algorithm to the same underlying data; in this case, the additional value is attributable to the algorithm rather than the underlying data.
+* Review/opinion
+    * Document is a review or opinion piece and does not provide new analysis or new frameworks for valuation.
+* Conference abstract/proceedings
+    * Document is a conference abstract or proceeding describing presentations rather than published work
+* Validation/calibration
+    * A special case of "Data is not valued" - ESI data are used to generate scientific information, and this information is compared to some reference to demonstrate scientific value; however, this scientific value is not then translated into societal benefit. 
+    * For example, NDVI data is used to estimate land cover, and this result is compared to some alternate information source and shown to be an adequate or even superior proxy, i.e., scientific merit. However, the resulting information is not used to inform a management decision that would translate to some societal benefit.
 
