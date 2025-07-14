@@ -17,6 +17,7 @@ round2_refs <- read_refs(here('_data/5_screen_classifier_round2/ris_to_colandr_c
 results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2025-02-27.csv')) %>%
   bind_rows(read_csv(here('_data/screened_colandr/colandr_companion_excl_2025-02-27.csv'))) %>%
   janitor::clean_names() %>%
+  filter(t_a_screened_by == 32501) %>%
   mutate(date = as.Date(date_screened_t_a)) %>%
   ### drop dupe IDs from initial screening
   group_by(id) %>%
@@ -38,6 +39,16 @@ results_all_df <- read_csv(here('_data/screened_colandr/colandr_companion_incl_2
   rename(year = publication_year, 
          screening_status = t_a_status, 
          excl_reasons = t_a_exclusion_reasons)
+
+x <- results_all_df %>%
+  janitor::get_dupes(title)
+### drop all these dupes, keeping most recent judgment
+
+results_all_df <- results_all_df %>%
+  group_by(title) %>%
+  arrange(desc(date_screened_t_a)) %>%
+  slice(1) %>%
+  ungroup()
 
 table(results_all_df$phase)
 

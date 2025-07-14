@@ -1,33 +1,38 @@
 ---
-title: "Supporting Information for: Cumulative human impacts on global marine fauna highlight risk to biological and functional diversity"
-author: Casey C. O’Hara^1\*^, Melanie Frazier^2^,
-  Mireia Valle^2,3,4^, Nathalie Butt^5^, Kristin Kaschner^6^, Carissa Klein^5^, Benjamin S. Halpern^1,2^
+title: "Supporting Information for: Surveying the landscape of approaches to assessing societal benefits of Earth science information"
+author: Casey C. O'Hara^1\\*^,
+        Samantha Cheng^2^,
+        Mabel Baez-Schon^2^,
+        Rebecca Chaplin-Kramer^2^,
+        Alejandra Echeverri^3^,
+        Gillian Galford^4,5^,
+        Rachelle K. Gould^4,5^,
+        Cristina Mancilla^1^,
+        Maura Muldoon^4,5^,
+        Gerald Singh^6^,
+        Priscilla Baltezar^7^
+        Yusuke Kuwayama^8^,
+        Stephen Polasky^9^,
+        Amanda D. Rodewald^10^,
+        Elizabeth Tennant^11^,
+        Jiaying Zhao^12^,
+        Benjamin S. Halpern - ^1,13^
 csl: refs/pnas.csl
 execute:
   echo: false
   warning: false
   message: false
 format:
-  docx:
+  docx: 
     reference-doc: templates/msword_pnas.docx
 filters:
   - refs/docx-landscape.lua
 bibliography: refs/sp1_ms_refs.bib
 ---
 
-<!--
-To do: 
-* Format body text, first paragraph, headings 3 and 4 for spacing
-* Format tables: Arial 9 (S1, S2), Arial 8 (S3) - AFTER changing body text!
-* Format figure caption text (move to left margin)
-* Remove line numbers
--->
-
 ```{r}
 # library(flextable)
 library(tidyverse)
-library(here)
-source(here('spp_vuln_mapping/ms_fxns.R'))
 ```
 
 ## List of Supporting Materials
@@ -37,121 +42,96 @@ source(here('spp_vuln_mapping/ms_fxns.R'))
 ### Supporting Methods
 ### References (72-91)
 
-::: landscape
-# Supporting Figures
 
-![](s1_chi_methods_fig.png)
+# Value domains 
 
-> __Figure S1.__ Graphical conceptual summary of cumulative impact calculations.  (A) Stressors are mapped as intensity values on a 10 x 10 km grid, with values ranging from 0 to 1. (B) Each species is vulnerable, to different degrees, to each of the stressors, with vulnerability ranging from 0 to 1. (C) The distribution of each species is mapped as present/absent in each 10 x 10 km grid cell.  Note the colors represent different functional entities. (D) For each species x stressor combination, an impact map is generated as the product of species presence (C), species vulnerability to the stressor (B), and stressor intensity (A). (E) The cumulative impact to each species is the sum of impacts across all stressors. (F) For the species approach, a mean cumulative human impact is calculated as the average cumulative impact across all species present in each cell.  (G) For the functional entity approach, impact values are aggregated to the functional entity level by averaging impact values within each grid cell across all species associated with that functional entity. A functional vulnerability is calculated for each FE/grid cell combination, where a FE with few species is more vulnerable than a FE represented by many species. (H) For the functional entity approach, a mean cumulative human impact is calculated as the average cumulative impact across all functional entities present in each cell, weighted by functional vulnerability. (I) The functional entity impacts and species impacts are compared by taking the difference between the impacts predicted by each method for each grid cell.
+This table is inspired by the work of Himes et al. (2024) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes.
 
-:::
-
-![](../../spp_vuln_mapping/5_ms_figs/figS2_spp_richness.png)
-
-> __Figure S2.__ Global pattern of species richness based on 21,159 species range maps included in this assessment.
-
-\pagebreak
-
-![](../../spp_vuln_mapping/5_ms_figs/figS3_combined_legend_w_pcts.png)
-
-> __Figure S3.__ Percent of cells falling into each impact quartile category. (A) Species method.  (B) Habitat method.  Note that a uniform distribution would result in a value of 6.3% in each impact quartile category.
-
-\pagebreak
-
-![](../../spp_vuln_mapping/5_ms_figs/figS4_mapping_impacts_hab.png)
-
-> __Figure S4.__ Distribution of modeled risk of impact based on vulnerability and exposure of ecosystem-representative habitats to anthropogenic stressors.  (A) Mean cumulative impact across all habitats in each cell, summing across all stressors.  (B) Mean cumulative impact across all habitats, summing across all climate-related stressors.  (C) Mean cumulative impact across all habitats, summing across all non-climate stressors.  (D) Bivariate comparison of distributions of climate impacts (orange) vs. non-climate impacts (purple) by quartile within each stressor group.
-
-\pagebreak
-
-![](../../spp_vuln_mapping/5_ms_figs/figS5_impacts_by_ecoregion_province.png)
-
-> __Figure S5.__ Comparison of cumulative, climate, and non-climate stressors by habitat and species methods across 10 km resolution cells within coastal ($Spp_c$, $Hab_c$) and oceanic ($Spp_o$, $Hab_o$) portions of 62 representative marine ecological provinces, transformed to percentile ranks relative to global distribution within each impact category. Filled point indicates median value; bars represent interquartile range (IQR, quartile Q1 to Q3); whiskers indicate observations 1.5x IQR below (above) Q1 (Q3) of bar.  Outliers omitted from plots for clarity.  A) Cumulative impacts by species and habitat cumulative impact methods.  B) Climate impacts by species and habitat cumulative impact methods.  C) Non-climate impacts by species and habitat cumulative impact methods.
-
-\pagebreak
-
-![](../../spp_vuln_mapping/5_ms_figs/figS6_sens_analysis.png)
-
-> __Figure S6.__ Sensitivity of functional vulnerability (FV) and cumulative human impact (CHI) to trait variation.  Each trait was resampled 1000 times, holding other traits constant, and change in functional vulnerability (A-D) and cumulative human impact (E-H) were recalculated according to the Functional Entity approach.  Functional vulnerability generally increased slightly (A-D, green tones), as resampling tends to create novel trait combinations not found in nature, leading to more low-membership (and thus high FV) functional entities.  The effects of these changes in functional vulnerability on the overall cumulative impact were quite low.
-
-\pagebreak
-
-![](../../spp_vuln_mapping/5_ms_figs/figS7_trait_imputation.png)
-
-> __Figure S7.__ Trait imputation. A) Missingness of traits for inclusion in functional entities, prior to MICE imputation.  Water column position (`wcol`), log(body length) (`log_l`), trophic level (`troph`), and adult mobility (`adult_mob`) were used to assign species to functional entities; dark boxes represent known values, yellow boxes represent missing values.  Two other traits highlighted in the red box, log(fecundity) (`log_f`) and age to maturity (`age_mat`) were used to assist in imputation where available; color scale represents proportional missingness of those traits for each combination of the other four.  B) After MICE imputation, an additional gapfill step using taxonomic relatives was used.  "None" represents proportion of species successfully imputed by MICE; "genus" represents proportion of species whose traits were gapfilled using the most common values of other species in its genus; and "family" represents the proportion filled using the most common values of other species in its family. 
-
-# Supporting Tables
-
-
-``` {r s1 species inclusion quarto}
-#| tbl-cap: "Table S1: Species inclusion by phylum and class. N total refers to the number of marine species in each class according to the World Register of Marine Species [28], N included refers to the number of species included in this assessment."
+``` {r s1 value types}
+#| tbl-cap: "Table S1: This table is inspired by the work of Himes et al. (XXX) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
 #| tbl-cap-location: "top"
-#| tbl-colwidths: "[25,25,13,11,13,13]"
+#| tbl-colwidths: "[15,30,30,25]"
 
-spp_by_phylum_table <- read_csv(here('../spp_vuln_mapping/5_ms_figs', 
-                                     'tableS1_spp_by_phylum.csv')) %>%
-  mutate(phylum = str_to_sentence(phylum),
-         class = str_to_sentence(class)) %>%
-  setNames(c('Phylum', 'Class', 'N included', 'Subpops/ synonyms', 'N total', '% included'))
+valtypes_table <- readxl::read_excel('s1_table_value_types.xlsx')
 
-knitr::kable(spp_by_phylum_table, align = 'llrcrr')
+knitr::kable(valtypes_table, align = 'llll')
 
 ```
 
-\pagebreak
+# Valuation methods
 
-``` {r s2 species inclusion quarto}
-#| tbl-cap: "Table S2: Vertebrate species inclusion by class and order. N total refers to the number of marine species in each order according to the World Register of Marine Species [28], N included refers to the number of species included in this assessment."
+Decision analysis methods from XXX. Preference elicitation methods are taken from Arias-Arevalo (20XX) and adapted to apply to Earth science information.
+
+
+``` {r s2 valuation methods}
+#| tbl-cap: "Table S1: This table is inspired by the work of Himes et al. (XXX) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
 #| tbl-cap-location: "top"
-#| tbl-colwidths: "[20,30,13,11,13,13]"
+#| tbl-colwidths: "[12,25,25,20,18]"
 
-verts_by_class_table <- read_csv(here('../spp_vuln_mapping/5_ms_figs', 
-                                     'tableS2_spp_verts_by_class.csv')) %>%
-  select(-n_cls) %>%
-  mutate(order = str_to_sentence(order),
-         class = str_to_sentence(class)) %>%
-  setNames(c('Class', 'Order', 'N included', 'Subpops/ synonyms', 'N total', '% included'))
+valtypes_table <- readxl::read_excel('s2_table_valuation_methods.xlsx')
 
-knitr::kable(verts_by_class_table, align = 'llrcrr')
-
-```
-
-\pagebreak
-
-``` {r s3 traits for vuln quarto}
-#| tbl-cap: "Table S3: Traits used to calculate vulnerability to various stressors, according to sensitivity (S), specific adaptive capacity (A), general adaptive capacity (G), and binary exposure modifier (0/1) components.  Where marked, different values of that trait change the value of that component.  See [XXX] for full details and methodology.  Note that sensitivity to Biomass Removal and SST Rise stressors (noted with *) are set to 1 for all species, but vulnerability to these stressors is moderated by adaptive capacity and exposure modifier."
-#| tbl-cap-location: "top"
-#| tbl-colwidths: "[20,30,13,11,13,13]"
-
-traits_table <- readxl::read_excel(here('spp_vuln_mapping/S3_traits_table.xlsx')) %>%
-  mutate(across(-Component, .fns = ~case_when(.x == 'X' & Component == 'Sensitivity' ~ 'S',
-                                              .x == 'X' & Component == 'Specific Adaptive Capacity' ~ 'A',
-                                              .x == 'X' & Component == 'General Adaptive Capacity' ~ 'G',
-                                              TRUE ~ .x))) %>%
-  mutate(across(-Component, .fns = ~ifelse(is.na(.x), '', .x)))
-
-knitr::kable(traits_table, align = 'lllccccccccccc')
+knitr::kable(valtypes_table, align = 'lllll')
 
 ```
 
 
-::: landscape
-<!-- <div id='startlandscape'></div> -->
-
-``` {r s4 stressor methods quarto}
-#| tbl-cap: "Table S4: Overview of methods and data sources to generate stressor distribution maps. All stressors projected to 10 km Mollweide coordinate reference system."
-#| tbl-cap-location: "top"
-#| tbl-colwidths: "[10,8,8,30,12,12,10,10]"
-
-str_methods_table <- readxl::read_excel(here('spp_vuln_mapping/s4_stressor_table.xlsx'))
-
-knitr::kable(str_methods_table)
-
-```
-:::
-<!-- <div id='endlandscape'></div> -->
 
 
-```{r}
-#| child: 'spp_vuln_mapping_SI_methods.qmd'
-```
+# Methods details
+
+## Search string
+
+Consolidated search term (January 26, 2024) included several broad topics: Earth science information; a decision context or value analysis; and some notion of societal benefit. Each of these broad topics was encoded as a collection of related terms joined by OR logic to maximize inclusivity within the topic; then the three topics were joined using AND logic to identify papers at the intersection of the three broad topics.
+
+![](venn.png)
+
+> Figure S1. Conceptual diagram of search string.
+
+Terms in italics are from the exploratory search on October 25, 2023; terms in bold were added following the use of `litsearchr` R package functionality [@grames_automatedapproach_2019]; terms in bold italics were added following discussion at the American Geophysical Union conference in December 2024.  The final Web of Science search was performed using these search strings on January 26, 2024; the final Scopus search was performed using these search strings on February 4, 2024.
+
+* Earth science information terms: 
+    * (_"satellite" OR "space-based" OR "remote observation" OR "remote sensing" OR "earth observation"_ OR __"remotely sens\*" OR "MODIS" OR "Landsat"__ OR ___"GRACE" OR "SRTM" OR "Sentinel" OR "VIIRS" OR "TERRA" OR "CLARREO"___)
+* Decision context terms: 
+    * (_"decision" OR "optimization" OR "risk analysis" OR "management" OR "policy"_ OR __"cost benefit analysis" OR "benefit cost analysis" OR "investment" OR "contingent valuation" OR "counterfactual"__ OR ___"value chain analysis" OR "multi* criteria analysis" OR "multi* criteria decision analysis" OR "planning" OR "governance" OR "prioritization" OR "impact assessment" OR "impact evaluation" OR "willingness to pay"___)
+* Societal benefit terms: 
+    * (_"value\*" OR "valuation" OR "benefit\*"_ OR __"utility"__) AND (_"social" OR "societal" OR "cultural" OR "\*economic"_ OR __"environmental" OR "ecosystem service" OR "sustainable development" OR "protected area" OR "heritage site" OR "non use value" OR "capacity building" OR "disaster" OR "water resource\*" OR "climate resilience" OR "air quality" OR "conservation" OR "wildland fire\*" OR "wildfire"__ OR ___"empower\*" OR "power structure\*" OR "justice" OR "equit\*" OR "financial" OR "monetary" OR "health" OR "well-being" OR "livelihood" OR "community-\*" OR "inspiration\*" OR "educat\*" OR "arts" OR "familial" OR "spiritual" OR "religious"___)
+
+## Screening process
+
+![](../prisma_roses_reporting/prisma_diagram.png)
+
+> Figure S2. PRISMA flow diagram.  Created using https://estech.shinyapps.io/prisma_flowdiagram/
+
+## Preliminary screening of spurious matches
+
+An early examination of search results showed that many of the ESI-focused terms resulted in spurious matches, since many of those terms on their own have alternate meanings unrelated to ESI. For example, "satellite" is used to describe sub-nodes in networks such as libraries or medical clinics; in medical research, "sentinel" (relating to the ESA’s Copernicus mission) can refer to lymph nodes and cells observed for early detection of cancers; and "terra" (relating to one of two satellites equipped with MODIS sensors) can be paired with "preta" to describe the carbon-rich black soil found in indigenous regions of the Amazon.
+To eliminate some of the most common instances of these spurious matches, we identified a set of terms to be excluded using regular expressions for flexibility; if these terms were removed from titles/abstracts and no other terms in the title or abstract matched other ESI-related terms, then that document would be excluded from further consideration.
+
+* "Satellite" terms:
+    * ‘satellite’ plus any of: 'account', 'office', 'laborator(y|ies)', 'campus', '([a-z]+.)?clinic', '([a-z]+.)?hospital', '([a-z]+.)?cent(er|re)', 'lesion', 'nodule', 'mass', 'h(a)?emodialysis'
+* "Sentinel" terms (relating to the Sentinel satellites of ESA’s Copernicus programme):
+    * 'sentinel' plus any of: 'study', '(lymph.)?node', 'site', '([a-z]+.)?surveillance', 'species', 'behavior', 'catalyst', 'event'
+* "Grace" terms (relating to NASA/JPL Gravity Recovery and Climate Experiment mission):
+    * 'grace.period'
+* "Terra" terms (relating to NASA’s Terra MODIS satellite):
+    * 'Terra' plus one of: 'preta', 'nova', 'firme', 'nullius'
+* Health terms that frequently showed up in spurious matches:
+    * Any of 'cancer’, ‘cardiac’, ‘cardio'
+
+## Screening criteria
+
+Exclusion criteria used in the citation screening (title + abstract) and full text phases:
+ESI data are not used:
+No relation to Earth science information. For example, spurious matches related to health care remote observation.
+Related to satellites but not related to information about Earth’s systems. For example, documents relating to space weather, solar or lunar information, or communications/navigation satellites.
+Data are not valued
+ESI data are used to determine some scientific finding, but the scientific finding is not used to inform a specific societal decision or otherwise valued. For example, ESI data used to estimate changes in ecosystem service value over time, but the resulting ecosystem service value is not used to inform any management decisions within the paper.
+Valued data is not ESI
+Valuation methods are used in the paper, but applied to data or information other than the ESI. For example, a study that applies a new classification algorithm to the same underlying data; in this case, the additional value is attributable to the algorithm rather than the underlying data.
+Review/opinion
+Document is a review or opinion piece and does not provide new analysis or new frameworks for valuation.
+Conference abstract/proceedings
+Document is a conference abstract or proceeding describing presentations rather than published work
+Validation/calibration
+A special case of "Data is not valued" - ESI data are used to generate scientific information, and this information is compared to some reference to demonstrate scientific value; however, this scientific value is not then translated into societal benefit. For example, NDVI data is used to estimate land cover, and this result is compared to some alternate information source and shown to be an adequate or even superior proxy. However, the resulting information is not used to inform a management decision that would result in some societal benefit.
+
