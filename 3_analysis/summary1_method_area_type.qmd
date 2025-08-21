@@ -37,35 +37,9 @@ Read in coded data of included papers.
 ```{r}
 includes_df <- readxl::read_excel(here('_data/screened_fulltext/ft_consolidated_coding.xlsx')) %>%
   janitor::clean_names()
+
 ```
 
-## Single var plots
-
-### Summarize by year
-
-```{r}
-year_df <- includes_df %>%
-  mutate(year2 = str_extract(key, '[0-9]{4}$') %>% as.numeric())
-
-year_sum_df <- year_df %>%
-  group_by(year2) %>%
-  summarize(n = n()) %>%
-  mutate(y = year2 - min(year2) + 1)
-
-log_year_lm <- lm(log(n) ~ y, data = year_sum_df)
-r <- coef(log_year_lm)[2]
-int <- exp(coef(log_year_lm)[1])
-
-year_sum_df <- year_sum_df %>%
-  mutate(pred = int + exp(r * y))
-
-ggplot(year_sum_df, aes(x = year2, y = n)) +
-  geom_col() +
-  # geom_line(aes(y = pred), color = 'red') +
-  labs(x = 'Year',
-       y = 'Number of papers') +
-  theme_minimal()
-```
 
 ## Create plot dataframes
 
@@ -106,20 +80,28 @@ soc_ben_df <- includes_df %>%
 
 
 val_type_df <- includes_df %>%
-  select(key, val_type = societal_benefit_type) %>%
-  mutate(val_type = str_split(val_type, '[^A-z]')) %>%
+  ### Start with Arias Arevalo categories to capture both monetary and non-monetary intrinsic;
+  ### replace "eudaimonistic" with combined "social-relational"
+  mutate(val_type = str_replace(value_type_arias_arevalo, 'eudaimonistic', 'social-relational')) %>%
+  ### then check Himes categories; if any "relational" append "social-relational" to val_type
+  mutate(val_type = ifelse(str_detect(value_type_himes, 'relational'),
+                           paste(val_type, 'social-relational', sep = ';'),
+                           val_type)) %>%
+  select(key, val_type) %>%
+  mutate(val_type = str_split(val_type, ';')) %>%
   unnest(val_type) %>%
   mutate(val_type = str_trim(val_type),
-         val_type = str_to_title(val_type)) %>%
-  distinct()
+         val_type = str_to_sentence(val_type)) %>%
+  distinct() %>%
+  mutate(val_type = case_when(val_type == 'Instrumental' ~ 'Instrumental (monetary)',
+                              val_type == 'Fundamental' ~ 'Instrumental (non-monetary)',
+                              TRUE ~ val_type))
 
-val_type_cooccur <- val_type_df %>%
-  arrange(val_type) %>%
-  group_by(key) %>%
-  summarize(v1 = first(val_type),
-            v2 = ifelse(n() == 1, NA, last(val_type))) %>%
-  group_by(v1, v2) %>%
-  summarize(n = n(), .groups = 'drop')
+val_type_vec <- val_type_df %>%
+  group_by(val_type) %>%
+  summarize(n = n()) %>%
+  arrange(-n) %>%
+  pull(val_type)
 ```
 
 
@@ -142,14 +124,13 @@ method_by_value_df <- method_df %>%
   ungroup() %>%
   mutate(method = fct_reorder(str_squish(method), n_tot),
          lbl = sprintf('%s (n = %s)', method, n_tot)) %>%
-  mutate(val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
+  mutate(val_type = factor(val_type, levels = val_type_vec))
 
 method_value_proportions <- method_by_value_df %>%
   mutate(prop = n / n_tot) 
 
-valtype_colors <- c('Instrumental'  = '#4B0055',
-                    'Intrinsic'   = '#009B95', 
-                    'Relational' = '#FDE333')
+valtype_colors <- hcl.colors(n = length(val_type_vec)) %>%
+  setNames(val_type_vec)
   
   
 ### high value labels on the bar; lower value to right of bar
@@ -192,8 +173,6 @@ Summaries:
 
 ```{r}
 method_by_value_df %>% group_by(val_type) %>% summarize(n = sum(n))
-
-
 ```
 
 
@@ -234,19 +213,18 @@ multi_methods_summarized <- multi_methods_df %>%
   mutate(tmp = 1) %>%
   pivot_wider(names_from = val_type, values_from = tmp) %>%
   group_by(x, y) %>%
-  summarize(tot = n(), .groups = 'drop',
-            Instrumental = sum(Instrumental, na.rm = TRUE),
-            Relational   = sum(Relational, na.rm = TRUE)) %>%
+  summarize(across(.cols = c(-key), .fns = ~sum(.x, na.rm = TRUE)),
+            tot = n(), .groups = 'drop') %>%
   complete(x = method_vec, y = method_vec, fill = list(n = NA)) %>%
-  pivot_longer(cols = c(Instrumental, Relational), names_to = 'val_type', values_to = 'n') %>%
+  pivot_longer(cols = c(-x, -y, -tot), names_to = 'val_type', values_to = 'n') %>%
   mutate(x = factor(x, levels = method_vec),
          y = factor(y, levels = method_vec) %>% fct_rev(),
-         val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
+         val_type = factor(val_type, levels = val_type_vec))
 
 arcs_df <- multi_methods_summarized %>%
   mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .7, ### radius based on # of value type
-         start = (as.integer(val_type) - 2) * (pi * .75) + pi/4,
-         end   = (as.integer(val_type) - 1) * (pi * .75) + pi/4) %>%
+         start = (as.integer(val_type) - 2) * (pi * .5),
+         end   = (as.integer(val_type) - 1) * (pi * .5)) %>%
   filter(!is.na(n)) %>%
   filter(r > 0) %>%
   select(x, y, r, start, end, val_type) %>%
@@ -266,6 +244,18 @@ n_lbls <- multi_methods_summarized %>%
   select(x, y, tot) %>%
   distinct()
 
+tots_by_val_type <- multi_methods_summarized %>% 
+  group_by(val_type) %>% 
+  summarize(n = sum(n, na.rm = TRUE))
+# # A tibble: 3 × 2
+#   val_type                        n
+#   <fct>                       <dbl>
+# 1 Instrumental (monetary)        48
+# 2 Instrumental (non-monetary)    24
+# 3 Social-relational               7
+```
+
+```{r generate plot}
 
 pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
@@ -276,7 +266,7 @@ pnl <- ggplot() +
   geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = .5) +
   geom_segment(data = diag_lbls, x = 1, y = 12, yend = 1, xend = 12, color = 'grey90', linewidth = .5) +
   ### add diagonal text
-  geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl),
+  geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl), color = 'grey25',
             angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
@@ -300,7 +290,7 @@ pnl <- ggplot() +
   theme_minimal() +
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
-        axis.text = element_text(size = 8),
+        axis.text = element_text(size = 7),
         axis.text.x = element_blank())
 
 ### Legend
@@ -309,10 +299,10 @@ legend_df <- multi_methods_summarized %>%
   summarize(n = sum(n, na.rm = TRUE)) %>%
   mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .6, ### radius based on # of value type
          lvl   = as.integer(val_type),
-         start = (lvl - 2) * (pi * .75) + pi / 4,
-         end   = (lvl - 1) * (pi * .75) + pi / 4) %>%
-  mutate(lbl_x = 1 + c(-.1, .1),
-         lbl_y = 1 + c(.1, .1),
+         start = (lvl - 2) * (pi * .5),
+         end   = (lvl - 1) * (pi * .5)) %>%
+  mutate(lbl_x = 1 + c(-.1, .1, .1),
+         lbl_y = 1 + c(.1, .1, -.1),
          hjust = ifelse(lbl_x < 1, 1, -1))
 
 
@@ -334,9 +324,11 @@ f2_plot <- ggdraw() +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
   draw_label('n total', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n(n = 54)', x = 0.80, y = 0.78, size = 6, 
-             hjust = 1, vjust = 1) +
-  draw_label('Relational\n(n = 7)',   x = 0.875, y = 0.72, size = 6, 
+  draw_label('Instrumental\n($) (n = 48)', x = 0.813, y = 0.72, size = 6, 
+             hjust = 1, vjust = 0) +
+  draw_label('Instrumental\n(non-$) (n = 24)', x = 0.8750, y = 0.72, size = 6, 
+             hjust = 0, vjust = 0) +
+  draw_label('Social-relational\n(n = 7)',   x = 0.875, y = 0.68, size = 6, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
@@ -405,7 +397,7 @@ sba_by_value_df <- soc_ben_df %>%
   ungroup() %>%
   mutate(sba = fct_reorder(str_squish(sba), n_tot),
          lbl = sprintf('%s (n = %s)', sba, n_tot)) %>%
-  mutate(val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
+  mutate(val_type = factor(val_type, levels = val_type_vec))
   
 ### high value labels on the bar; lower value to right of bar
 df_hi <- sba_by_value_df %>%
@@ -465,19 +457,18 @@ multi_sba_df <- soc_ben_df %>%
   mutate(tmp = 1) %>%
   pivot_wider(names_from = val_type, values_from = tmp) %>%
   group_by(x, y) %>%
-  summarize(tot = n(), .groups = 'drop',
-            Instrumental = sum(Instrumental, na.rm = TRUE),
-            Relational   = sum(Relational, na.rm = TRUE)) %>%
+  summarize(across(.cols = c(-key), .fns = ~sum(.x, na.rm = TRUE)),
+            tot = n(), .groups = 'drop') %>%
   complete(x = sba_vec, y = sba_vec, fill = list(n = NA)) %>%
-  pivot_longer(cols = c(Instrumental, Relational), names_to = 'val_type', values_to = 'n') %>%
+  pivot_longer(c(-x, -y, -tot), names_to = 'val_type', values_to = 'n') %>%
   mutate(x = factor(x, levels = sba_vec),
          y = factor(y, levels = sba_vec) %>% fct_rev(),
-         val_type = factor(val_type, levels = c('Instrumental', 'Relational')))
+         val_type = factor(val_type, levels = val_type_vec))
 
 arcs_df <- multi_sba_df %>%
-  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .6, ### radius based on # of value type
-         start = (as.integer(val_type) - 2) * (pi * .75) + pi/4,
-         end   = (as.integer(val_type) - 1) * (pi * .75) + pi/4) %>%
+  mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .7, ### radius based on # of value type
+         start = (as.integer(val_type) - 2) * (pi * .5),
+         end   = (as.integer(val_type) - 1) * (pi * .5)) %>%
   filter(!is.na(n)) %>%
   filter(r > 0) %>%
   select(x, y, r, start, end, val_type) %>%
@@ -493,6 +484,18 @@ n_lbls <- multi_sba_df %>%
   select(x, y, tot) %>%
   distinct()
 
+tots_by_val_type <- multi_sba_df %>% 
+  group_by(val_type) %>% 
+  summarize(n = sum(n, na.rm = TRUE))
+#   val_type                        n
+#   <fct>                       <dbl>
+# 1 Instrumental (monetary)        38
+# 2 Instrumental (non-monetary)    20
+# 3 Social-relational              10
+```
+
+```{r generate plot sba}
+
 
 pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
@@ -503,7 +506,7 @@ pnl <- ggplot() +
   geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = .5) +
   geom_segment(data = diag_lbls, x = 1, y = 10, yend = 1, xend = 10, color = 'grey90', linewidth = .5) +
   ### add diagonal text
-  geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl),
+  geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl), color = 'grey25',
             angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
@@ -525,7 +528,8 @@ pnl <- ggplot() +
        y = 'Societal Benefit Area 2',
        fill = 'Value type') +
   theme_minimal() +
-  theme(panel.grid = element_blank(),
+  theme(text = element_text(color = 'black'),
+        panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_text(size = 7),
         axis.text.x = element_blank())
@@ -536,10 +540,10 @@ legend_df <- multi_sba_df %>%
   summarize(n = sum(n, na.rm = TRUE)) %>%
   mutate(r = sqrt(n / max(n, na.rm = TRUE)) * .6, ### radius based on # of value type
          lvl   = as.integer(val_type),
-         start = (lvl - 2) * (pi * .75) + pi / 4,
-         end   = (lvl - 1) * (pi * .75) + pi / 4) %>%
-  mutate(lbl_x = 1 + c(-.1, .1),
-         lbl_y = 1 + c(.1, .1),
+         start = (lvl - 2) * (pi * .5),
+         end   = (lvl - 1) * (pi * .5)) %>%
+  mutate(lbl_x = 1 + c(-.1, .1, .1),
+         lbl_y = 1 + c(.1, .1, -.1),
          hjust = ifelse(lbl_x < 1, 1, -1))
 
 
@@ -561,9 +565,11 @@ f4_plot <- ggdraw() +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
   draw_label('n total', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n(n = 44)', x = 0.80, y = 0.78, size = 6, 
-             hjust = 1, vjust = 1) +
-  draw_label('Relational\n(n = 10)',   x = 0.875, y = 0.72, size = 6, 
+  draw_label('Instrumental\n($) (n = 38)', x = 0.813, y = 0.72, size = 6, 
+             hjust = 1, vjust = 0) +
+  draw_label('Instrumental\n(non-$) (n = 20)', x = 0.8750, y = 0.72, size = 6, 
+             hjust = 0, vjust = 0) +
+  draw_label('Social-relational\n(n = 10)',   x = 0.875, y = 0.68, size = 6, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)

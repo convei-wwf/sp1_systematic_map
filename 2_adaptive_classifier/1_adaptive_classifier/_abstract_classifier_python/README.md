@@ -38,6 +38,6 @@ Where,
 * `./models/convei_abstract_classifier_2024_10_22_19_07_91p` is the pre-trained NLP model used in this call (change if you have a different model)
 * `classifier_round3_set.csv` is a CSV table with at least the field `abstract`.
 
-The script will run which, after ~30s of self-organizing` will classify approximately two abstracts per second (tested on an RTX 4080 GPU).
+The script will run which, after ~30s of self-organizing, will classify approximately two abstracts per second (tested on an RTX 4080 GPU).
 
 The result will be in the same working directory and be named the same name as the input table with "predicted" prefixed to it; in the case above `predicted_classifier_round3_set.csv`.
