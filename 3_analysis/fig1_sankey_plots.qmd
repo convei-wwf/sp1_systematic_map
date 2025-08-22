@@ -17,57 +17,12 @@ library(tidyverse)
 library(here)
 library(networkD3)
 library(ggsankey)
+library(cowplot)
 ```
 
 # Summary
 
 ## Initial cleaning
-
-Sankey diagram of data access and cleaning prior to screening
-
-
-```{r}
-links <- tribble(
-  ~source,                          ~target,                     ~value,
-  'Soc Benefit Repo (n = 258)',  'Combined (n = 21,647)',           255,
-  'Scopus (n = 18,585)',         'Combined (n = 21,647)',         13250,
-  'Web of Science (n = 9,488)',  'Combined (n = 21,647)',          8139,
-  'Scopus (n = 18,585)',         'Missing info (n = 1,545)',       1226,
-  'Web of Science (n = 9,488)',  'Missing info (n = 1,545)',        319,
-  'Scopus (n = 18,585)',         'Conf abstr (n = 5,139)',         4109,
-  'Web of Science (n = 9,488)',  'Conf abstr (n = 5,139)',         1030,
-  'Combined (n = 21,647)',       'De-duplicated (n = 15,522)',    15519,
-  'Combined (n = 21,647)',       'Duplicates (n = 6,125)',         6125,
-  'De-duplicated (n = 15,522)',  'Analysis set (n = 13,823)',     13823,
-  'De-duplicated (n = 15,522)',  'Spurious matches (n = 1,699)',   1699) %>%
-  arrange(value) %>%
-  mutate(source = fct_inorder(source)) %>%
-  group_by(source) %>%
-  mutate(n = sum(value)) %>%
-  ungroup()
- 
-# From these flows we need to create a node data frame: it lists every entities involved in the flow
-nodes <- data.frame(
-  name=c(as.character(links$source), 
-  as.character(links$target)) %>% unique()
-)
- 
-# With networkD3, connection must be provided using id, not using real name like in the links dataframe.. So we need to reformat it.
-links$IDsource <- match(links$source, nodes$name)-1 
-links$IDtarget <- match(links$target, nodes$name)-1
- 
-# Make the Network
-p <- sankeyNetwork(Links = links, Nodes = nodes,
-              Source = "IDsource", Target = "IDtarget",
-              Value = "value", NodeID = "name", 
-              fontSize = 14, fontFamily = 'Arial',
-              sinksRight=FALSE)
-p
-
-# save the widget
-# library(htmlwidgets)
-# saveWidget(p, file=paste0( getwd(), "/HtmlWidget/sankeyBasic1.html"))
-```
 
 ### using ggsankey or ggalluvial
 
@@ -99,7 +54,7 @@ links_long <- prep_df %>%
                          spurious  != 'include' ~ spurious,
                          TRUE ~ 'include')) %>%
   mutate(rhs = case_when(str_detect(rhs, 'dupl') ~ 'Duplicates (n = 6,840)',
-                         str_detect(rhs, 'conf') ~ 'Conf abstracts (n = 5,139)',
+                         str_detect(rhs, 'conf') ~ 'Conference\n  abstracts (n = 5,139)',
                          str_detect(rhs, 'miss') ~ 'Missing info (n = 1,545)',
                          str_detect(rhs, 'spur') ~ 'Spurious match (n = 984)',
                          TRUE                    ~ 'Include (n = 13,823)')) %>%
@@ -115,17 +70,17 @@ links_long <- prep_df %>%
                                  '  Scopus\n  (n = 18,585)' = 'scopus', 
                                  '  Web of Science\n  (n = 9,488)' = 'wos'))
 
-x <- ggplot(data = links_long,
+sankey_prep_plot <- ggplot(data = links_long,
        aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node)) +
   geom_sankey(flow.alpha = 0.5, node.fill = 'black',
               width = .015, show.legend = FALSE) +
-  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.5) +
+  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.2) +
   scale_fill_viridis_d() +
   theme_void()
 
-ggsave('sankey_prep.png', width = 6, height = 4, dpi = 300)
-
-knitr::include_graphics('sankey_prep.png')
+# ggsave('fig1a_sankey_prep.png', width = 6, height = 4, dpi = 300)
+# 
+# knitr::include_graphics('fig1a_sankey_prep.png')
 ```
 
 ## By screening phase
@@ -160,7 +115,7 @@ clean_title <- function(t) {
 ```{r}
 ft_fs <- list.files(here('_data/screened_fulltext'), pattern = '_fulltext_', full.names = TRUE) 
 ft_df <- ft_fs %>%
-  lapply(read_csv) %>%
+  lapply(read_csv, show_col_types = FALSE) %>%
   setNames(str_remove_all(basename(ft_fs), '._fulltext_|.csv')) %>%
   bind_rows(.id = 'phase') 
 
@@ -168,7 +123,7 @@ ft_sbr <- ft_df %>%
   filter(phase == 'sbr') %>%
   mutate(title2 = clean_title(title))
 
-col_df <- read_csv(here('_data/screened_colandr/colandr_by_phase.csv')) %>%
+col_df <- read_csv(here('_data/screened_colandr/colandr_by_phase.csv'), show_col_types = FALSE) %>%
   mutate(phase = case_when(phase == 'classifier round 1' ~ 'training',
                            phase == 'early' ~ 'training',
                            phase == 'sample 1000' ~ 'training',
@@ -204,12 +159,14 @@ ft_phase_df <- ft_df %>%
 
 
 pred_round2 <- read_csv(here('_data/classifier_results',
-                             'predicted_classifier_round2_set.csv'))
+                             'predicted_classifier_round2_set.csv'),
+                        show_col_types = FALSE)
 table(pred_round2$classification_prediction)
 
-total <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'))
-col_ct <- sum(col_df$n)
-ft_ct <- sum(ft_df$n)
+total <- read_csv(here('_data/1c_refs_clean/ref_key_lookup.csv'),
+                  show_col_types = FALSE)
+# col_ct <- sum(col_df$n)
+# ft_ct <- sum(ft_df$n)
 ```
 
 ### Totals for Colandr
@@ -246,49 +203,6 @@ Totals by phase
   * 119 training
   * 405 predicted includes
 
-
-```{r}
-links <- tribble(
-  ~source,            ~target,            ~value,
-  'Soc Benefit Repo (n = 255)',         'Title/abstract includes (n = 760)',      144,
-  'Soc Benefit Repo (n = 255)',         'Title/abstract excludes (n = 2,854)',    111,
-  'Training set (n = 1,072)',           'Title/abstract includes (n = 760)',      147,
-  'Training set (n = 1,072)',           'Title/abstract excludes (n = 2,854)',    930,
-  'Predicted includes (n = 2,287)',     'Title/abstract includes (n = 760)',      489,
-  'Predicted includes (n = 2,287)',     'Title/abstract excludes (n = 2,854)',   1798,
-  'Predicted excludes (n = 10,206)',    'Not screened (n = 10,006)',             9884,
-  'Predicted excludes (n = 10,206)',    'Title/abstract exclude check (n = 200)', 500,
-  'Title/abstract includes (n = 760)',     'Fulltext includes (n = 170)',         208,
-  'Title/abstract includes (n = 760)',     'Fulltext excludes (n = 590)',         649) %>%
-  arrange(value) %>%
-  mutate(source = fct_inorder(source)) %>%
-  group_by(source) %>%
-  mutate(n = sum(value)) %>%
-  ungroup()
- 
-# From these flows we need to create a node data frame: it lists every entities involved in the flow
-nodes <- data.frame(
-  name=c(as.character(links$source), 
-  as.character(links$target)) %>% unique()
-)
- 
-# With networkD3, connection must be provided using id, not using real name like in the links dataframe.. So we need to reformat it.
-links$IDsource <- match(links$source, nodes$name)-1 
-links$IDtarget <- match(links$target, nodes$name)-1
- 
-# Make the Network
-p <- sankeyNetwork(Links = links, Nodes = nodes,
-              Source = "IDsource", Target = "IDtarget",
-              Value = "value", NodeID = "name", 
-              fontSize = 14, fontFamily = 'Arial',
-              sinksRight=FALSE)
-p
-
-# save the widget
-# library(htmlwidgets)
-# saveWidget(p, file=paste0( getwd(), "/HtmlWidget/sankeyBasic1.html"))
-```
-
 ### using ggsankey or ggalluvial
 
 Four axes for the initial retrieval and prep
@@ -317,13 +231,13 @@ screen_df <- tribble(
 Funky stuff with node names.  The left hand side responds to factor recoding; the right hand side does not, and loses the connection (since the "next node" changes?).  Releveling the RHS causes the flow to cross over itself awkwardly, get order right ahead of time.  Use spaces to force level order on the RHS.
 ```{r}
 links_long <- screen_df %>%
-  mutate(colandr  = case_when(colandr == 'check' ~ 'Title/abstr exclude (n =  200)',
-                              colandr == 'include' ~ 'Title/abstr include (n =  770)',
-                              colandr == 'exclude' ~ 'Title/abstr exclude (n = 2,854)',
+  mutate(colandr  = case_when(colandr == 'check' ~ 'Title/abstract\n  exclude (n =  200)',
+                              colandr == 'include' ~ 'Title/abstract\n  include (n =  770)',
+                              colandr == 'exclude' ~ 'Title/abstract\n  exclude (n = 2,854)',
                               TRUE ~ 'Not screened (n = 10,006)')) %>%
-  mutate(fulltext = case_when(fulltext == 'exclude' ~ 'Fulltext exclude (n = 580)',
-                              fulltext == 'include' ~ 'Fulltext include (n = 170)',
-                              fulltext == 'no retr' ~ 'Fulltext not retrievable (n = 20)',
+  mutate(fulltext = case_when(fulltext == 'exclude' ~ 'Full text exclude (n = 580)',
+                              fulltext == 'include' ~ 'Full text include (n = 170)',
+                              fulltext == 'no retr' ~ 'Not retrievable (n = 20)',
                               TRUE ~ 'a')) %>%
   mutate(colandr  = paste0('  ', colandr),
          fulltext = paste0('  ', fulltext)) %>%
@@ -337,20 +251,45 @@ links_long <- screen_df %>%
          node = fct_relevel(node, 'sbl', after = Inf),
          node = fct_recode(node, '  Societal Benefit\n  Library (n = 258)' = 'sbl', 
                                  '  Training set\n  (n = 1,072)' = 'train', 
-                                 '  Predicted includes\n  (n = 2,287)' = 'pred_incl', 
-                                 '  Predicted excludes\n  (n = 10,206)' = 'pred_excl'))
+                                 '  Predicted include\n  (n = 2,287)' = 'pred_incl', 
+                                 '  Predicted exclude\n  (n = 10,206)' = 'pred_excl'))
 
 
-x <- ggplot(data = links_long,
+sankey_screen_plot <- ggplot(data = links_long,
        aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node)) +
   geom_sankey(flow.alpha = 0.5, node.fill = 'black',
               width = .015, show.legend = FALSE) +
-  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.5) +
+  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.2) +
   scale_fill_viridis_d() +
   theme_void()
 
-ggsave('sankey_screen.png', width = 6, height = 4, dpi = 300)
+# ggsave('fig1b_sankey_screen.png', width = 6, height = 4, dpi = 300)
+# 
+# knitr::include_graphics('fig1b_sankey_screen.png')
+```
 
-knitr::include_graphics('sankey_screen.png')
+## Combine into two panel figure
+
+```{r}
+poly_df <- data.frame(
+  x = c(0.0, 1.0, 1.0, 0.0, 0.0),
+  y = c(1.0, 1.0, 0.0, 0.63, 1.0)
+)
+
+# Create a ggplot object and draw the polygon
+p1 <- ggplot(poly_df, aes(x, y)) +
+  geom_polygon(fill = "grey", alpha = 0.5) +
+  theme_void()
+
+two_panel <- ggdraw() +
+  draw_plot(p1, x = .292, y = 0, width = .145, height = 1) +
+  draw_plot(sankey_prep_plot, x = -.14, y = 0, width = .6, height = 1) +
+  draw_plot(sankey_screen_plot, x = .30, y = 0, width = .70, height = 1) +
+  draw_label('A', x = 0, y = .98, vjust = 1, hjust = 0, size = 10, fontface = 'bold') +
+  draw_label('B', x = .4, y = .98, vjust = 1, hjust = 0, size = 10, fontface = 'bold')
+  
+ggsave('fig1_sankey_prep_screen.png', width = 6, height = 4, dpi = 300)
+
+knitr::include_graphics('fig1_sankey_prep_screen.png')
 ```
 

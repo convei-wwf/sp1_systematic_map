@@ -72,10 +72,12 @@ soc_ben_df <- includes_df %>%
                          sba == 'Weather' ~ 'Climate & Resilience',
                          sba %in% c('Biodiversity', 'Ecosystems') ~ 'Ecological Conservation',
                          sba == 'Health' ~ 'Health & Air Quality',
+                         sba == '(various)' ~ 'Various',
+                         sba == '(other)' ~ 'Other',
                          TRUE ~ sba)) %>%
   distinct() %>%
   group_by(key) %>%
-  filter(!(sba == '(other)' & any(sba != '(other)'))) %>%
+  filter(!(sba == 'Other' & any(sba != 'Other'))) %>%
   ungroup()
 
 
@@ -162,9 +164,9 @@ f1_plot <- ggplot(method_by_value_df, aes(y = method, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave('fig1_method_by_value.png', height = 3.5, width = 6, dpi = 300)
+ggsave('fig2_method_by_value.png', height = 3.5, width = 6, dpi = 300)
 
-knitr::include_graphics('fig1_method_by_value.png')
+knitr::include_graphics('fig2_method_by_value.png')
 ```
 
 
@@ -333,9 +335,9 @@ f2_plot <- ggdraw() +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
   
-ggsave('fig2_multimethod.png', height = 3.5, width = 6, dpi = 300)
+ggsave('fig3_multimethod.png', height = 3.5, width = 6, dpi = 300)
 
-knitr::include_graphics('fig2_multimethod.png')
+knitr::include_graphics('fig3_multimethod.png')
 
 ```
 
@@ -356,7 +358,7 @@ method_by_sba_df <- method_df %>%
   ungroup() %>%
   mutate(method = fct_reorder(str_squish(method), n_tot),
          lbl = sprintf('%s (n = %s)', method, n_tot)) %>%
-  mutate(sba = fct_reorder(sba, n_tot) %>% fct_relevel(c('(various)', '(other)'), after = Inf)) %>%
+  mutate(sba = fct_reorder(sba, n_tot) %>% fct_relevel(c('Various', 'Other'), after = Inf)) %>%
   mutate(method_type = ifelse(method %in% quant, 'Quantitative',
                               'Qualitative'))
 
@@ -372,7 +374,7 @@ ggplot(method_by_sba_df, aes(y = method, x = sba, fill = n)) +
   geom_tile() +
   # geom_text(aes(label = n), color = 'white') +
   scale_fill_viridis_c() +
-  labs(x = 'Societal benefit area',
+  labs(x = 'Decision context',
        y = 'Valuation method',
        fill = 'Number of papers') +
   theme_minimal() +
@@ -419,7 +421,7 @@ f3_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
   scale_x_continuous(expand = c(0, .01)) +
   scale_fill_manual(values = valtype_colors) +
   labs(x = 'Number of papers',
-       y = 'Societal benefit area',
+       y = 'Decision context',
        fill = 'Value type') +
   theme_minimal() +
   theme(axis.text.y = element_blank(),
@@ -428,9 +430,9 @@ f3_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave('fig3_sba_by_value.png', height = 3, width = 6, dpi = 300)
+ggsave('fig4_sba_by_value.png', height = 3, width = 6, dpi = 300)
 
-knitr::include_graphics('fig3_sba_by_value.png')
+knitr::include_graphics('fig4_sba_by_value.png')
 
 ```
 
@@ -574,8 +576,8 @@ f4_plot <- ggdraw() +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
   
-ggsave('fig4_multicontext.png', height = 3, width = 5, dpi = 300)
+ggsave('fig5_multicontext.png', height = 3, width = 5, dpi = 300)
 
-knitr::include_graphics('fig4_multicontext.png')
+knitr::include_graphics('fig5_multicontext.png')
 
 ```
