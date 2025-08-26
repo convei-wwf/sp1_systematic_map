@@ -185,9 +185,11 @@ IDEA: color this in pie wedges by value type - maybe quarter wedges, radius by s
 ```{r}
 method_vec <- levels(method_by_value_df$method) %>% rev()
   
-quant <- c('Value of information', 'Cost-benefit analysis', 'Stated preference', 
-           'Bayesian decision analysis', 'Econometric analysis', 
-           'Real options analysis', 'Market price-based methods')
+decision <- c('Bayesian decision analysis',
+           'Value of information', 
+           'Cost-benefit analysis',
+           'Econometric analysis', 
+           'Real options analysis')
 
 multi_methods_df <- method_df %>%
   mutate(method = factor(method, levels = method_vec)) %>%
@@ -198,12 +200,12 @@ multi_methods_df <- method_df %>%
   ungroup() 
 
 method_types_sum <- multi_methods_df %>%
-  mutate(method_type = ifelse(method %in% quant, 'Quantitative',
-                              'Qualitative')) %>%
+  mutate(method_type = ifelse(method %in% decision, 'Decision Analysis',
+                              'Preference Elicitation')) %>%
   group_by(key) %>%
   summarize(method = paste0(method, collapse = ';'),
-            combo = case_when(all(method_type == 'Quantitative') ~ 'Quantitative',
-                              all(method_type == 'Qualitative') ~ 'Qualitative',
+            combo = case_when(all(method_type == 'Decision Analysis') ~ 'Decision Analysis',
+                              all(method_type == 'Preference Elicitation') ~ 'Preference Elicitation',
                               TRUE ~ 'Mixed'),
                              .groups = 'drop') %>%
   group_by(combo) %>%
@@ -324,13 +326,13 @@ lgd <- ggplot() +
 f2_plot <- ggdraw() +
   draw_plot(pnl) +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n total', x = 0.845, y = 0.695, size = 6, 
+  draw_label('n = 54', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n($) (n = 48)', x = 0.813, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(monetary)', x = 0.813, y = 0.72, size = 6, 
              hjust = 1, vjust = 0) +
-  draw_label('Instrumental\n(non-$) (n = 24)', x = 0.8750, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(non-monetary) ', x = 0.8750, y = 0.72, size = 6, 
              hjust = 0, vjust = 0) +
-  draw_label('Social-relational\n(n = 7)',   x = 0.875, y = 0.68, size = 6, 
+  draw_label('Social-relational',   x = 0.875, y = 0.68, size = 6, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
@@ -359,8 +361,8 @@ method_by_sba_df <- method_df %>%
   mutate(method = fct_reorder(str_squish(method), n_tot),
          lbl = sprintf('%s (n = %s)', method, n_tot)) %>%
   mutate(sba = fct_reorder(sba, n_tot) %>% fct_relevel(c('Various', 'Other'), after = Inf)) %>%
-  mutate(method_type = ifelse(method %in% quant, 'Quantitative',
-                              'Qualitative'))
+  mutate(method_type = ifelse(method %in% decision, 'Decision analysis',
+                              'Preference elicitation'))
 
 method_type_by_sba_df <- method_by_sba_df %>%
   group_by(sba, method_type) %>%
@@ -565,13 +567,13 @@ lgd <- ggplot() +
 f4_plot <- ggdraw() +
   draw_plot(pnl) +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n total', x = 0.845, y = 0.695, size = 6, 
+  draw_label('n = 45', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n($) (n = 38)', x = 0.813, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(monetary)', x = 0.813, y = 0.72, size = 6, 
              hjust = 1, vjust = 0) +
-  draw_label('Instrumental\n(non-$) (n = 20)', x = 0.8750, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(non-monetary)', x = 0.8750, y = 0.72, size = 6, 
              hjust = 0, vjust = 0) +
-  draw_label('Social-relational\n(n = 10)',   x = 0.875, y = 0.68, size = 6, 
+  draw_label('Social-relational',   x = 0.875, y = 0.68, size = 6, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
