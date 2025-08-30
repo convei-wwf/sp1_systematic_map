@@ -231,9 +231,9 @@ screen_df <- tribble(
 Funky stuff with node names.  The left hand side responds to factor recoding; the right hand side does not, and loses the connection (since the "next node" changes?).  Releveling the RHS causes the flow to cross over itself awkwardly, get order right ahead of time.  Use spaces to force level order on the RHS.
 ```{r}
 links_long <- screen_df %>%
-  mutate(colandr  = case_when(colandr == 'check' ~ 'Title/abstract\n  exclude (n =  200)',
-                              colandr == 'include' ~ 'Title/abstract\n  include (n =  770)',
-                              colandr == 'exclude' ~ 'Title/abstract\n  exclude (n = 2,854)',
+  mutate(colandr  = case_when(colandr == 'check' ~ 'Title/abstract exclude (n =  200)',
+                              colandr == 'include' ~ 'Title/abstract include (n =  770)',
+                              colandr == 'exclude' ~ 'Title/abstract exclude (n = 2,854)',
                               TRUE ~ 'Not screened (n = 10,006)')) %>%
   mutate(fulltext = case_when(fulltext == 'exclude' ~ 'Full text exclude (n = 580)',
                               fulltext == 'include' ~ 'Full text include (n = 170)',

@@ -1,22 +1,23 @@
 ---
-title: "Supporting Information for: Surveying the landscape of approaches to assessing societal benefits of Earth science information: a systematic map"
-author: Casey C. O'Hara^1\\*^,
-        Samantha Cheng^2^,
-        Mabel Baez-Schon^2^,
-        Rebecca Chaplin-Kramer^2^,
-        Alejandra Echeverri^3^,
-        Gillian Galford^4,5^,
-        Rachelle K. Gould^4,5^,
-        Cristina Mancilla^1^,
-        Maura Muldoon^4,5^,
-        Gerald Singh^6^,
-        Priscilla Baltezar^7^
-        Yusuke Kuwayama^8^,
-        Stephen Polasky^9^,
-        Amanda D. Rodewald^10^,
-        Elizabeth Tennant^11^,
-        Jiaying Zhao^12^,
-        Benjamin S. Halpern - ^1,13^
+title: "Supporting Information for: A Systematic Map of Methods for Assessing Societal Benefits of Earth Science Information"
+author: Casey C. O'Hara, 
+        Mabel Baez-Schon,
+        Rebecca Chaplin-Kramer,
+        Samantha Cheng,
+        Alejandra Echeverri,
+        Gillian L. Galford,
+        Rachelle K. Gould,
+        Cristina L. Mancilla,
+        Maura C. Muldoon,
+        Gerald Singh,
+        Priscilla Baltezar,
+        Yusuke Kuwayama,
+        Stephen Polasky,
+        Amanda D. Rodewald,
+        Richard P. Sharp,
+        Elizabeth Tennant,
+        Jiaying Zhao,
+        Benjamin S. Halpern
 csl: refs/pnas.csl
 execute:
   echo: false
@@ -41,7 +42,7 @@ library(tidyverse)
 ### Figures S1 – S2
 ### Supporting Methods
 
-<!--..-->
+::: landscape
 
 # Value domains 
 
@@ -59,7 +60,7 @@ knitr::kable(valtypes_table, align = 'llll')
 # Valuation methods
 
 ``` {r s2 valuation methods}
-#| tbl-cap: "Table S2. Decision analysis methods from XXX (Casey's brain - anyone know of a good citeable source?). Preference elicitation methods are taken from Arias-Arevalo (2018) and adapted to apply to Earth science information."
+#| tbl-cap: "Table S2. Valuation methods with potential application to valuing Earth science information.  Preference elicitation methods are defined in Arias-Arevalo (2018) and adapted to apply to Earth science information."
 #| tbl-cap-location: "top"
 #| tbl-colwidths: "[12,25,25,20,18]"
 
@@ -69,6 +70,20 @@ knitr::kable(valtypes_table, align = 'lllll')
 
 ```
 
+# Included papers
+
+``` {r s3 included papers}
+#| tbl-cap: "Table S3. Corpus of papers included in analysis."
+#| tbl-cap-location: "top"
+#| tbl-colwidths: "[40,15,15,15,15]"
+
+includes_table <- read_csv('s3_table_includes.csv')
+
+knitr::kable(includes_table, align = 'lllll')
+
+```
+
+:::
 
 # Methods
 

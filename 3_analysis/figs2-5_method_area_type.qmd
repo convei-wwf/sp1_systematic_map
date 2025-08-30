@@ -56,6 +56,7 @@ method_df <- includes_df %>%
   mutate(method = str_squish(str_to_sentence(method)),
          method = case_when(method %in% deliberative_vec ~ 'Non-monetary methods - deliberative',
                             method %in% surveys_vec ~ 'Surveys of preference assessments',
+                            str_detect(method, 'Market price|Market cost') ~ 'Market price/cost methods',
                             TRUE ~ method)) %>%
   select(-tmp) %>%
   distinct()
@@ -83,11 +84,11 @@ soc_ben_df <- includes_df %>%
 
 val_type_df <- includes_df %>%
   ### Start with Arias Arevalo categories to capture both monetary and non-monetary intrinsic;
-  ### replace "eudaimonistic" with combined "social-relational"
-  mutate(val_type = str_replace(value_type_arias_arevalo, 'eudaimonistic', 'social-relational')) %>%
-  ### then check Himes categories; if any "relational" append "social-relational" to val_type
+  ### replace "eudaimonistic" with "relational"
+  mutate(val_type = str_replace(value_type_arias_arevalo, 'eudaimonistic', 'relational')) %>%
+  ### then check Himes categories; if any "relational" append "relational" to val_type
   mutate(val_type = ifelse(str_detect(value_type_himes, 'relational'),
-                           paste(val_type, 'social-relational', sep = ';'),
+                           paste(val_type, 'relational', sep = ';'),
                            val_type)) %>%
   select(key, val_type) %>%
   mutate(val_type = str_split(val_type, ';')) %>%
@@ -256,7 +257,7 @@ tots_by_val_type <- multi_methods_summarized %>%
 #   <fct>                       <dbl>
 # 1 Instrumental (monetary)        48
 # 2 Instrumental (non-monetary)    24
-# 3 Social-relational               7
+# 3 Relational               7
 ```
 
 ```{r generate plot}
@@ -265,10 +266,10 @@ pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
   geom_point(data = multi_methods_summarized, aes(x, y), size = 0, color = '#00000000') +
   ### add grid lines
-  geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 13 - as.integer(x)), 
+  geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 14 - as.integer(x)), 
                color = 'grey90', linewidth = .5) +
   geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = .5) +
-  geom_segment(data = diag_lbls, x = 1, y = 12, yend = 1, xend = 12, color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, x = 1, y = 13, yend = 1, xend = 13, color = 'grey90', linewidth = .5) +
   ### add diagonal text
   geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl), color = 'grey25',
             angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
@@ -326,13 +327,13 @@ lgd <- ggplot() +
 f2_plot <- ggdraw() +
   draw_plot(pnl) +
   draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n = 54', x = 0.845, y = 0.695, size = 6, 
+  draw_label('n = 56', x = 0.845, y = 0.695, size = 6, 
              hjust = 1, vjust = 1) +
   draw_label('Instrumental\n(monetary)', x = 0.813, y = 0.72, size = 6, 
              hjust = 1, vjust = 0) +
   draw_label('Instrumental\n(non-monetary) ', x = 0.8750, y = 0.72, size = 6, 
              hjust = 0, vjust = 0) +
-  draw_label('Social-relational',   x = 0.875, y = 0.68, size = 6, 
+  draw_label('Relational',   x = 0.875, y = 0.68, size = 6, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
@@ -495,7 +496,7 @@ tots_by_val_type <- multi_sba_df %>%
 #   <fct>                       <dbl>
 # 1 Instrumental (monetary)        38
 # 2 Instrumental (non-monetary)    20
-# 3 Social-relational              10
+# 3 Relational              10
 ```
 
 ```{r generate plot sba}
@@ -573,7 +574,7 @@ f4_plot <- ggdraw() +
              hjust = 1, vjust = 0) +
   draw_label('Instrumental\n(non-monetary)', x = 0.8750, y = 0.72, size = 6, 
              hjust = 0, vjust = 0) +
-  draw_label('Social-relational',   x = 0.875, y = 0.68, size = 6, 
+  draw_label('Relational',   x = 0.875, y = 0.68, size = 6, 
              hjust = 0, vjust = 1) +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
