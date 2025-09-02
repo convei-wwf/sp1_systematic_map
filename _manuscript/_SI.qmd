@@ -38,7 +38,7 @@ library(tidyverse)
 
 # List of Supporting Materials
 
-### Tables S1 - S2
+### Tables S1 - S3
 ### Figures S1 – S2
 ### Supporting Methods
 
@@ -47,7 +47,7 @@ library(tidyverse)
 # Value domains 
 
 ``` {r s1 value types}
-#| tbl-cap: "Table S1. This table is inspired by the work of Himes et al. (XXX) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
+#| tbl-cap: "Table S1. This table is based on the work of Himes et al. (2024) on valuation of nature, and adapted to account for potential value derived from Earth science information. In nearly all cases, the value of ESI is based on the degree to which the expected outcome of a decision is improved by incorporating ESI into the decision. Where applicable, we have broadened ecosystems, biodiversity, and ecosystem services to include social and natural features and outcomes that are improved by incorporation of ESI into decision making processes."
 #| tbl-cap-location: "top"
 #| tbl-colwidths: "[15,30,30,25]"
 
@@ -57,12 +57,13 @@ knitr::kable(valtypes_table, align = 'llll')
 
 ```
 
+
 # Valuation methods
 
 ``` {r s2 valuation methods}
 #| tbl-cap: "Table S2. Valuation methods with potential application to valuing Earth science information.  Preference elicitation methods are defined in Arias-Arevalo (2018) and adapted to apply to Earth science information."
 #| tbl-cap-location: "top"
-#| tbl-colwidths: "[12,25,25,20,18]"
+#| tbl-colwidths: "[15,20,45,20]"
 
 valtypes_table <- readxl::read_excel('s2_table_valuation_methods.xlsx')
 
@@ -95,7 +96,7 @@ Consolidated search term (January 26, 2024) included several broad topics: Earth
 
 > Figure S1. Conceptual diagram of search string.
 
-Terms in italics are from the exploratory search on October 25, 2023; terms in bold were added following the use of `litsearchr` R package functionality [@grames_automatedapproach_2019]; terms in bold italics were added following discussion at the American Geophysical Union conference in December 2024.  The final Web of Science search was performed using these search strings on January 26, 2024; the final Scopus search was performed using these search strings on February 4, 2024.
+Terms in italics are from the exploratory search on October 25, 2023; terms in bold were added following the use of the `litsearchr` R package functionality (69); terms in bold italics were added following discussion at the American Geophysical Union conference in December 2024.  The final Web of Science search was performed using these search strings on January 26, 2024; the final Scopus search was performed using these search strings on February 4, 2024.
 
 * Earth science information terms: 
     * (_"satellite" OR "space-based" OR "remote observation" OR "remote sensing" OR "earth observation"_ OR __"remotely sens\*" OR "MODIS" OR "Landsat"__ OR ___"GRACE" OR "SRTM" OR "Sentinel" OR "VIIRS" OR "TERRA" OR "CLARREO"___)

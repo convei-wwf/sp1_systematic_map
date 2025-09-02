@@ -74,7 +74,7 @@ sankey_prep_plot <- ggplot(data = links_long,
        aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node)) +
   geom_sankey(flow.alpha = 0.5, node.fill = 'black',
               width = .015, show.legend = FALSE) +
-  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.2) +
+  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.5) +
   scale_fill_viridis_d() +
   theme_void()
 
@@ -259,7 +259,7 @@ sankey_screen_plot <- ggplot(data = links_long,
        aes(x = x, next_x = next_x, node = node, next_node = next_node, fill = node)) +
   geom_sankey(flow.alpha = 0.5, node.fill = 'black',
               width = .015, show.legend = FALSE) +
-  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.2) +
+  geom_sankey_text(aes(label = node), angle = 0, hjust = 0, size = 2.5) +
   scale_fill_viridis_d() +
   theme_void()
 

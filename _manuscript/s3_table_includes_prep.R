@@ -1,6 +1,7 @@
 library(tidyverse)
 x <- read_csv(here::here('_manuscript/s3_table_includes_raw.csv')) %>%
-  janitor::clean_names()
+  janitor::clean_names() %>%
+  mutate(reference = str_remove(reference, 'http.+'))
 
 
 soc_ben_df <- x %>%
@@ -68,4 +69,4 @@ y <- x %>%
   left_join(val_type_df, by = 'key') %>%
   select(-key, Reference = reference, `ESI source` = eo_data)
 
-write_csv(y, here('_manuscript/s3_table_includes.csv'))
+write_csv(y, here::here('_manuscript/s3_table_includes.csv'))
