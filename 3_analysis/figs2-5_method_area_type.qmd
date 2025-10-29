@@ -108,7 +108,6 @@ val_type_vec <- val_type_df %>%
 ```
 
 
-
 ## multi variable plots
 
 ### Method by value type: bar chart
@@ -165,9 +164,9 @@ f1_plot <- ggplot(method_by_value_df, aes(y = method, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave('fig2_method_by_value.png', height = 3.5, width = 6, dpi = 300)
+ggsave(here('3_analysis', 'fig2_method_by_value.png'), height = 3.5, width = 6, dpi = 300)
 
-knitr::include_graphics('fig2_method_by_value.png')
+knitr::include_graphics(here('3_analysis', 'fig2_method_by_value.png'))
 ```
 
 
@@ -338,9 +337,9 @@ f2_plot <- ggdraw() +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
   
-ggsave('fig3_multimethod.png', height = 3.5, width = 6, dpi = 300)
+ggsave(here('3_analysis', 'fig3_multimethod.png'), height = 3.5, width = 6, dpi = 300)
 
-knitr::include_graphics('fig3_multimethod.png')
+knitr::include_graphics(here('3_analysis', 'fig3_multimethod.png'))
 
 ```
 
@@ -383,7 +382,7 @@ ggplot(method_by_sba_df, aes(y = method, x = sba, fill = n)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-ggsave('heatmap.png')
+ggsave(here('3_analysis', 'heatmap.png'))
 ```
 
 ### Societal benefit by value type: bar chart
@@ -433,9 +432,9 @@ f3_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave('fig4_sba_by_value.png', height = 3, width = 6, dpi = 300)
+ggsave(here('3_analysis', 'fig4_sba_by_value.png'), height = 3, width = 6, dpi = 300)
 
-knitr::include_graphics('fig4_sba_by_value.png')
+knitr::include_graphics(here('3_analysis', 'fig4_sba_by_value.png'))
 
 ```
 
@@ -579,8 +578,40 @@ f4_plot <- ggdraw() +
   draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
              hjust = .5, vjust = 0)
   
-ggsave('fig5_multicontext.png', height = 3, width = 5, dpi = 300)
+ggsave(here('3_analysis', 'fig5_multicontext.png'), height = 3, width = 5, dpi = 300)
 
-knitr::include_graphics('fig5_multicontext.png')
+knitr::include_graphics(here('3_analysis', 'fig5_multicontext.png'))
 
+```
+
+## table
+
+```{r}
+method_sba_table <- method_df %>%
+  full_join(soc_ben_df, by = 'key') %>%
+  select(-key) %>%
+  mutate(method = factor(method, levels = method_vec),
+         sba = factor(sba, levels = sba_vec)) %>%
+  table() %>%
+  as.data.frame.matrix() %>%
+  mutate(method = rownames(.))
+
+write_csv(method_sba_table, 'method_by_sba_table.csv')
+
+method_sba_val_table <- method_df %>%
+  full_join(soc_ben_df, by = 'key') %>%
+  full_join(val_type_df, by = 'key') %>%
+  mutate(method = factor(method, levels = method_vec),
+         sba = factor(sba, levels = sba_vec),
+         val_type = factor(val_type, levels = val_type_vec)) %>%
+  group_by(method, sba, val_type) %>%
+  summarize(n = n_distinct(key), .groups = 'drop') %>%
+  group_by(method, sba) %>%
+  complete(val_type) %>%
+  mutate(n = ifelse(is.na(n), 0, n)) %>%
+  arrange(val_type) %>%
+  summarize(val_counts = paste(n, collapse = ' / ')) %>%
+  pivot_wider(names_from = 'sba', values_from = 'val_counts')
+
+write_csv(method_sba_val_table, 'method_sba_val_table.csv')
 ```
