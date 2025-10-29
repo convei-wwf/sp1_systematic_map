@@ -268,7 +268,8 @@ pnl <- ggplot() +
   ### add grid lines
   geom_segment(data = diag_lbls, aes(x = x, xend = x, y = 1, yend = 14 - as.integer(x)), 
                color = 'grey90', linewidth = .5) +
-  geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), 
+               color = 'grey90', linewidth = .5) +
   geom_segment(data = diag_lbls, x = 1, y = 13, yend = 1, xend = 13, color = 'grey90', linewidth = .5) +
   ### add diagonal text
   geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl), color = 'grey25',
