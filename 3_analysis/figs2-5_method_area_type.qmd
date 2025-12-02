@@ -154,26 +154,29 @@ df_lo <- method_by_value_df %>%
   select(method, lbl, n_tot) %>%
   distinct()
 
-f1_plot <- ggplot(method_by_value_df, aes(y = method, x = n)) +
+f2_plot <- ggplot(method_by_value_df, aes(y = method, x = n)) +
   geom_col(aes(fill = val_type)) +
   # guides(fill = guide_legend(reverse = TRUE)) +
   geom_text(data = df_hi, aes(label = lbl, x = n_tot), color = 'white',
-            hjust = 1, size = 3, nudge_x = -1) +
+            hjust = 1, size = 2, nudge_x = -1) +
   geom_text(data = df_lo, aes(label = lbl, x = n_tot), color = 'black', 
-            hjust = 0, size = 3, nudge_x = 1) +
+            hjust = 0, size = 2, nudge_x = 1) +
   scale_x_continuous(expand = c(0, .01)) +
   scale_fill_manual(values = valtype_colors) +
   labs(x = 'Number of papers',
        y = 'Valuation method',
        fill = 'Value type') +
-  theme_minimal() +
+  theme_minimal(base_size = 8) +
   theme(axis.text.y = element_blank(),
         axis.text.x = element_blank(),
         axis.title.x = element_blank(),
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave(here('3_analysis', 'fig2_method_by_value.png'), height = 3.5, width = 6, dpi = 300)
+ggsave(here('3_analysis', 'fig2_method_by_value.tif'), height = 6, width = 11, 
+       units = 'cm', dpi = 600)
+ggsave(here('3_analysis', 'fig2_method_by_value.png'), height = 6, width = 11, 
+       units = 'cm', dpi = 600)
 
 knitr::include_graphics(here('3_analysis', 'fig2_method_by_value.png'))
 ```
@@ -194,7 +197,6 @@ IDEA: color this in pie wedges by value type - maybe quarter wedges, radius by s
 ```{r}
 method_vec <- levels(method_by_value_df$method) %>% rev()
   
-
 multi_methods_df <- method_df %>%
   mutate(method = factor(method, levels = method_vec)) %>%
   arrange(key, method) %>%
@@ -214,6 +216,7 @@ method_types_sum <- multi_methods_df %>%
   summarize(n = n(), .groups = 'drop')
 
 multi_methods_summarized <- multi_methods_df %>%
+  select(-method_type) %>%
   pivot_wider(names_from = x, values_from = method) %>%
   left_join(val_type_df, by = 'key') %>%
   mutate(tmp = 1) %>%
@@ -271,10 +274,11 @@ pnl <- ggplot() +
                color = 'grey90', linewidth = .5) +
   geom_segment(data = diag_lbls, aes(y = x, yend = x, x = 0, xend = as.integer(x)), 
                color = 'grey90', linewidth = .5) +
-  geom_segment(data = diag_lbls, x = 1, y = 13, yend = 1, xend = 13, color = 'grey90', linewidth = .5) +
+  geom_segment(data = diag_lbls, x = 1, y = 13, yend = 1, xend = 13, 
+               color = 'grey90', linewidth = .5) +
   ### add diagonal text
   geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl), color = 'grey25',
-            angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
+            angle = 45, hjust = 0, vjust = .5, size = 2, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
@@ -284,7 +288,7 @@ pnl <- ggplot() +
                color = NA, show.legend = FALSE) +
   ### add number text
   geom_text(data = n_lbls, aes(x = x, y = y, label = tot),
-            size = 2, hjust = 1, vjust = 1, nudge_x = -.05, nudge_y = -.05, color = 'black') +
+            size = 1.5, hjust = 1, vjust = 1, nudge_x = -.05, nudge_y = -.05, color = 'black') +
   scale_fill_manual(values = valtype_colors) +
   scale_size(name = 'n', range = c(3, 10)) +
   scale_x_discrete(expand = expansion(add = c(0, 6))) +
@@ -294,10 +298,10 @@ pnl <- ggplot() +
   labs(x = 'Valuation method 1',
        y = 'Valuation method 2',
        fill = 'Value type') +
-  theme_minimal() +
+  theme_minimal(base_size = 6) +
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
-        axis.text = element_text(size = 7),
+        axis.text = element_text(size = 6),
         axis.text.x = element_blank())
 
 ### Legend
@@ -319,74 +323,38 @@ lgd <- ggplot() +
                color = NA, show.legend = FALSE) +
   geom_point(x = 1, y = 1, color = 'red', size = 5) +
   geom_text(label = 'N total', x = 1, y = 1, 
-            size = 2.5, hjust = 1, vjust = 1, nudge_y = -.05, nudge_x = -.05) +
+            size = 2, hjust = 1, vjust = 1, nudge_y = -.05, nudge_x = -.05) +
   scale_fill_manual(values = valtype_colors) +
   scale_x_continuous(limits = c(0, 2), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 2), expand = c(0, 0)) +
   coord_fixed() +
   theme_void()
 
-f2_plot <- ggdraw() +
-  draw_plot(pnl) +
-  draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n = 56', x = 0.845, y = 0.695, size = 6, 
+f3_plot <- ggdraw() +
+  draw_plot(pnl, x = 0, y = 0) +
+  draw_plot(lgd, x = 0.74, y = 0.7, width = 0.2, height = 0.2) +
+  draw_label('n = 56', x = 0.835, y = 0.795, size = 5, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n(monetary)', x = 0.813, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(monetary)', x = 0.800, y = 0.82, size = 5.5, 
              hjust = 1, vjust = 0) +
-  draw_label('Instrumental\n(non-monetary) ', x = 0.8750, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(non-monetary) ', x = 0.867, y = 0.82, size = 5.5, 
              hjust = 0, vjust = 0) +
-  draw_label('Relational',   x = 0.875, y = 0.68, size = 6, 
+  draw_label('Relational',   x = 0.867, y = 0.790, size = 5.5, 
              hjust = 0, vjust = 1) +
-  draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
-             hjust = .5, vjust = 0)
+  draw_label('Value type',   x = 0.84, y = 0.9, size = 7, fontface = 'bold',
+             hjust = .5, vjust = 0) +
+  theme(panel.background = element_rect(fill = 'white', color = 'white'))
   
-ggsave(here('3_analysis', 'fig3_multimethod.png'), height = 3.5, width = 6, dpi = 300)
+ggsave(here('3_analysis', 'fig3_multimethod.tif'), height = 6, width = 11,
+       units = 'cm', dpi = 600)
+ggsave(here('3_analysis', 'fig3_multimethod.png'), height = 6, width = 11,
+       units = 'cm', dpi = 600)
 
 knitr::include_graphics(here('3_analysis', 'fig3_multimethod.png'))
 
 ```
 
 
-
-### Method by societal benefit area: heat map
-
-```{r}
-method_by_sba_df <- method_df %>%
-  left_join(soc_ben_df, by = 'key') %>%
-  group_by(key) %>%
-  mutate(sba_wt = 1 / n_distinct(sba)) %>%
-  mutate(method_wt = 1 / n_distinct(method)) %>%
-  group_by(method, sba) %>%
-  summarize(n = sum(sba_wt * method_wt)) %>%
-  group_by(method) %>%
-  mutate(n_tot = sum(n)) %>%
-  ungroup() %>%
-  mutate(method = fct_reorder(str_squish(method), n_tot),
-         lbl = sprintf('%s (n = %s)', method, n_tot)) %>%
-  mutate(sba = fct_reorder(sba, n_tot) %>% fct_relevel(c('Various', 'Other'), after = Inf)) %>%
-  mutate(method_type = ifelse(method %in% decision, 'Decision analysis',
-                              'Preference elicitation'))
-
-method_type_by_sba_df <- method_by_sba_df %>%
-  group_by(sba, method_type) %>%
-  summarize(n = sum(n)) %>%
-  group_by(sba) %>%
-  mutate(p = n / sum(n))
-  
-  
-
-ggplot(method_by_sba_df, aes(y = method, x = sba, fill = n)) +
-  geom_tile() +
-  # geom_text(aes(label = n), color = 'white') +
-  scale_fill_viridis_c() +
-  labs(x = 'Decision context',
-       y = 'Valuation method',
-       fill = 'Number of papers') +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-ggsave(here('3_analysis', 'heatmap.png'))
-```
 
 ### Societal benefit by value type: bar chart
 
@@ -416,26 +384,29 @@ df_lo <- sba_by_value_df %>%
   select(sba, lbl, n_tot) %>%
   distinct()
 
-f3_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
+f4_plot <- ggplot(sba_by_value_df, aes(y = sba, x = n)) +
   geom_col(aes(fill = val_type)) +
   # guides(fill = guide_legend(reverse = TRUE)) +
   geom_text(data = df_hi, aes(label = lbl, x = n_tot), color = 'white',
-            hjust = 1, size = 3, nudge_x = -1) +
+            hjust = 1, size = 2, nudge_x = -1) +
   geom_text(data = df_lo, aes(label = lbl, x = n_tot), color = 'black', 
-            hjust = 0, size = 3, nudge_x = 1) +
+            hjust = 0, size = 2, nudge_x = 1) +
   scale_x_continuous(expand = c(0, .01)) +
   scale_fill_manual(values = valtype_colors) +
   labs(x = 'Number of papers',
        y = 'Decision context',
        fill = 'Value type') +
-  theme_minimal() +
+  theme_minimal(base_size = 8) +
   theme(axis.text.y = element_blank(),
         axis.text.x = element_blank(),
         axis.title.x = element_blank(),
         panel.grid = element_blank(),
         legend.position = c(.75, .25))
 
-ggsave(here('3_analysis', 'fig4_sba_by_value.png'), height = 3, width = 6, dpi = 300)
+ggsave(here('3_analysis', 'fig4_sba_by_value.tif'), height = 5, width = 11, 
+       units = 'cm', dpi = 600)
+ggsave(here('3_analysis', 'fig4_sba_by_value.png'), height = 5, width = 11, 
+       units = 'cm', dpi = 600)
 
 knitr::include_graphics(here('3_analysis', 'fig4_sba_by_value.png'))
 
@@ -503,7 +474,6 @@ tots_by_val_type <- multi_sba_df %>%
 
 ```{r generate plot sba}
 
-
 pnl <- ggplot() +
   ### geom_point to set up axis labels in order; color and size to render invisible
   geom_point(data = multi_sba_df, aes(x, y), size = 0, color = '#00000000') +
@@ -514,7 +484,7 @@ pnl <- ggplot() +
   geom_segment(data = diag_lbls, x = 1, y = 10, yend = 1, xend = 10, color = 'grey90', linewidth = .5) +
   ### add diagonal text
   geom_text(data = diag_lbls, aes(x = x, y = x, label = lbl), color = 'grey25',
-            angle = 45, hjust = 0, vjust = .5, size = 2.5, nudge_y = .1, nudge_x = .1) +
+            angle = 45, hjust = 0, vjust = .5, size = 2, nudge_y = .1, nudge_x = .1) +
   ### then geom_point again to write on top of the grid lines
   # geom_point(data = multi_methods_summarized, aes(x, y, color = tot, size = tot), show.legend = FALSE) +
   ### geom_arc_bar needs x and y in continuous - so convert categorical to integer
@@ -524,11 +494,11 @@ pnl <- ggplot() +
                color = NA, show.legend = FALSE) +
   ### add number text
   geom_text(data = n_lbls, aes(x = x, y = y, label = tot),
-            size = 2, hjust = 1, vjust = 1, nudge_x = -.05, nudge_y = -.05, color = 'black') +
+            size = 1.5, hjust = 1, vjust = 1, nudge_x = -.05, nudge_y = -.05, color = 'black') +
   scale_fill_manual(values = valtype_colors) +
   scale_size(name = 'n', range = c(3, 10)) +
-  scale_x_discrete(expand = expansion(add = c(0, 6))) +
-  scale_y_discrete(expand = expansion(add = c(.5, 3))) +
+  scale_x_discrete(expand = expansion(add = c(0, 4))) +
+  scale_y_discrete(expand = expansion(add = c(.5, 2))) +
   ### to maintain equal spacing horiz and vert
   coord_fixed() +
   labs(x = 'Societal Benefit Area 1',
@@ -538,7 +508,7 @@ pnl <- ggplot() +
   theme(text = element_text(color = 'black'),
         panel.grid = element_blank(),
         axis.title = element_blank(),
-        axis.text = element_text(size = 7),
+        axis.text = element_text(size = 6),
         axis.text.x = element_blank())
 
 ### Legend
@@ -567,21 +537,25 @@ lgd <- ggplot() +
   coord_fixed() +
   theme_void()
 
-f4_plot <- ggdraw() +
-  draw_plot(pnl) +
-  draw_plot(lgd, x = 0.75, y = 0.6, width = 0.2, height = 0.2) +
-  draw_label('n = 45', x = 0.845, y = 0.695, size = 6, 
+f5_plot <- ggdraw() +
+  draw_plot(pnl, x = 0, y = 0, width = .9, height = 1) +
+  draw_plot(lgd, x = 0.73, y = 0.6, width = 0.2, height = 0.2) +
+  draw_label('n = 45', x = 0.825, y = 0.695, size = 5, 
              hjust = 1, vjust = 1) +
-  draw_label('Instrumental\n(monetary)', x = 0.813, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(monetary)', x = 0.790, y = 0.72, size = 5.5, 
              hjust = 1, vjust = 0) +
-  draw_label('Instrumental\n(non-monetary)', x = 0.8750, y = 0.72, size = 6, 
+  draw_label('Instrumental\n(non-monetary)', x = 0.857, y = 0.72, size = 5.5, 
              hjust = 0, vjust = 0) +
-  draw_label('Relational',   x = 0.875, y = 0.68, size = 6, 
+  draw_label('Relational',   x = 0.857, y = 0.69, size = 5.5, 
              hjust = 0, vjust = 1) +
-  draw_label('Value type',   x = 0.85, y = 0.8, size = 8, fontface = 'bold',
-             hjust = .5, vjust = 0)
+  draw_label('Value type',   x = 0.830, y = 0.8, size = 7, fontface = 'bold',
+             hjust = .5, vjust = 0) +
+  theme(panel.background = element_rect(fill = 'white', color = 'white'))
   
-ggsave(here('3_analysis', 'fig5_multicontext.png'), height = 3, width = 5, dpi = 300)
+ggsave(here('3_analysis', 'fig5_multicontext.tif'), height = 5.5, width = 11, 
+       units = 'cm', dpi = 600)
+ggsave(here('3_analysis', 'fig5_multicontext.png'), height = 5.5, width = 11, 
+       units = 'cm', dpi = 600)
 
 knitr::include_graphics(here('3_analysis', 'fig5_multicontext.png'))
 
@@ -591,6 +565,7 @@ knitr::include_graphics(here('3_analysis', 'fig5_multicontext.png'))
 
 ```{r}
 method_sba_table <- method_df %>%
+  select(-method_type) %>%
   full_join(soc_ben_df, by = 'key') %>%
   select(-key) %>%
   mutate(method = factor(method, levels = method_vec),
